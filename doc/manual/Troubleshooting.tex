@@ -1,0 +1,53 @@
+\section{Trouble shooting\label{sec:trouble-shooting}}
+
+\subsection{Typical errors\label{sec:typical-errors}}
+
+\SPM\ is a complex system, providing many opportunities for error \textemdash either because your parameter files do not correctly specify your model, or because the model you tried to specify does not work as you expect. When in doubt, ask an experienced user. Debugging versions of \SPM\ can be compiled that help to track down cryptic errors.
+
+Common errors include;
+\begin{enumerate}
+\item Misspelt arguments
+Probably more likely to be picked up by \SPM\ than misspelt commands, but still a potential problem. Note that almost all arguments are case sensitive.
+
+\item Commented out command
+Commands that are commented out are ignored by \SPM. However, their subcommands will be assumed to be subcommands of the previous command. This will have unintended consequences. Either \SPM\ will error out, or it will run, but return an incorrect or nonsensical result. 
+
+\item No penalty on exceeding exploitation rate limits
+Unless you use penalties, there is nothing to stop \SPM\ from coming up with a parameter estimate under which there is not enough in the population to allow for the observed exploitation to be taken. You probably want to use a catch limit penalty for each fishery. 
+
+\item No penalty on year class strengths not averaging to 1
+If you estimate recruitment you may want to force year class strengths to average to 1. You need to use a vector average penalty to do this. If you don't, you may find that all your year class strengths are much more than 1 or much less than 1. 
+\end{enumerate}
+
+\subsection{Other errors}
+
+When \SPM\ generates an error and the error message makes no sense, please let the \SPM\ \authors\ know. Even if you manage to fix the problem yourself, we may be able to implement a more helpful error message and make life easier for the next person to encounter the problem. Guidelines for reporting an error are given below in Section \ref{sec:error-guidelines}.
+
+Some parameter values of functions or selectivities can result in either very large or very small numbers. These can, on occasion, generate internal numeric overflow errors within \SPM. This is the most common cause of an overflow error, and can result in parameter estimates of \texttt{NaN}. The work around to this type of error is to impose bounds on parameters that exclude the possibility of an overflow error.
+
+\subsection{Reporting errors\label{sec:reporting-errors}}
+
+If you wish to report a bug or problem with \SPM, then please send a bug report to the \authors, after reading the guidelines below. 
+
+Use the text \texttt{SPM:} as the start of the subject line in the email. Following these guidelines will assist the \SPM\ \authors\ identify, reproduce, and hopefully solve any reported bugs. It is helpful to be as specific as possible when describing the problem.
+
+Note that \SPM\ is distributed as unsupported software. We will not, as a rule, provide help for users of \SPM\ outside of NIWA \textemdash although we will usually endeavour to try. And, while we would appreciate being notified of any problems or errors in \SPM, please note that we may not be able to provide timely solutions.
+
+\subsection{Guidelines for reporting a bug in \SPM\label{sec:error-guidelines}}
+
+\begin{enumerate}
+\item Detail the version of \SPM\ are you using? e.g., "SPM v1.0-2008/11/21 Microsoft Windows executable"
+
+\item What operating system or environment are you using? e.g., "IBM-PC Intel CPU running Microsoft Windows XP Release 2".
+
+\item Give a brief one-line description of the problem, e.g., "a segmentation fault was reported".
+
+\item If the problem is reproducible, please list the exact steps required to cause it, remembering to include the relevant \SPM\ configuration file, other input files, and any out generated. You must also specify the exact command line arguments that were used, e.g., ``Using the command \texttt{SPM -e -q > logfile.out} reports a segmentation fault. The configuration files used are attached.''
+
+\item If the problem is not reproducible (only happened once, or occasionally for no apparent reason), please describe the circumstances in which it occurred and the symptoms observed (but note it is much harder to reproduce and hence fix non-reproducible bugs, but if several reports are made over time that relate to the same thing, then this may help to track down the problem), e.g., ``SPM crashed, but I cannot reproduce how I did it. It seemed to be related to a local network crash but I cannot be sure.''
+
+\item If the problem causes any error messages to appear, please give the exact text displayed, e.g., \texttt{``segmentation fault (core dumped)''}.
+
+\item Remember to attach all relevant input and output files so that the problem can be reproduced (it can helpful to compress these into a single file). Without these, it may not be possible to determine the cause of the problem.
+
+\end{enumerate}

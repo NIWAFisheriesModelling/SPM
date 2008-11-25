@@ -1,0 +1,45 @@
+\section{Introduction\label{sec:Introduction}}
+
+The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics and movement model. \SPM\ is designed to model population dynamics and movement for an age-structured population using a range of observations, including tagging, relative abundance, and age frequency data. \SPM\ implements an age-structured population within an arbitrary shaped spatial structure, which can have user defined categories of individuals (e.g., immature, mature, male, female, etc.), and age range. Movement can be either adjacent cell movements or global movements based on covariates. 
+
+This manual describes how to use \SPM, including how to run \SPM, how to set up a an \config. Further, we describe the population dynamics and estimation methods, and describe how to specify and interpret output. If you are new to \SPM, then a good place to start is by reading this manual and attempting to replicate the examples (Section \ref{sec:examples}).
+
+\subsection{Version}
+
+This document (modified \SourceControlDate \SourceControlTime\ UTC) details the usage of \SPM\ v\VER. The version number printed by \SPM\ is suffixed with a date/time in format \texttt{yyyy-mm-dd hh:mm:ss}, and is the last UTC date on which its source files were officially modified. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.
+
+\subsection{Citing \SPM}
+
+A suitable reference for \SPM\ and this document is: 
+
+\ManualRef
+
+\subsection{End user licence}
+
+This program and the accompanying materials are made available under the terms of the \href{http://www.opensource.org/licenses/cpl1.0.php}{Common Public License v1.0} which accompanies this distribution (Section \ref{sec:Common-Public-License}).
+
+Copyright \copyright 2008-\SourceControlYear, \href{http://www.niwa.co.nz}{\Organisation} and the \href{http://www.fish.govt.nz}{New Zealand Ministry of Fisheries}. All rights reserved. 
+
+\subsection{System requirements}
+
+\SPM\ is available for most IBM compatible machines running Linux and from the command prompt under most Microsoft Windows operating systems. 
+
+Several of \SPM s tasks are highly computer intensive and a fast, powerful processor is recommended. We recommend a minimum of 100 megabytes of free RAM (although, depending on the scope of the problem, you may need much more). The program itself requires less than 10 megabytes of hard-disk space but output files can consume large amounts of disk space. Depending on number and type of user output requests, the output could range from a few hundred kilobytes to several hundred megabytes. However, we note that, depending on the model implemented, some of \SPM s tasks can take considerable amount of time.
+
+\subsection{Necessary files}
+
+In Linux, only the executable file \texttt{spm} is required to run \SPM\ (but, depending on your system, you may need the either the 32- or 64-bit version). For Microsoft Windows, you need the executable file \texttt{SPM.exe}. There is no 64-bit version for Microsoft Windows.
+
+\subsection{Useful add-ons}
+
+No software other than the appropriate operating system or emulation package is required to run \SPM. However, as \SPM\ offers little in the way of  post-processing of the output, most users will wish to have a package available that allows tabulation and graphing of model outputs. We recommend the use of software packages such as \href{http://www.microsoft.com}{Microsoft Excel}, \href{http://www.insightful.com}{S-Plus}, or \href{http://www.r-project.org}{R} (R Development Core Team 2007). 
+
+\subsection{Getting help}
+
+\SPM\ is distributed as unsupported software. The authors do not, as a rule, provide help for users of \SPM. However, we may be able to offer limited assistance, and we would appreciate being notified of any problems or errors in \SPM. See Section \ref{sec:reporting-errors} for how to report errors to the \authors. Further information about \SPM\ can be obtained by contacting the \authors.
+
+\subsection{Technical details}
+
+\SPM\ is compiled on Linux using gcc, the C/C++ compiler developed by the \href{http://gcc.gnu.org}{GNU Project}. The 32-bit Linux version has been compiled using gcc version 4.1.2 20070115 (prerelease) (SuSE Linux), the 64-bit Linux version uses gcc version 4.1.0 (SuSE Linux). Note that \SPM\ is not supported for Linux kernel versions prior to 2.6. The Microsoft Windows version is compiled using Mingw32 GCC 3.4.5, and should run on most 32-bit WindowsXP and Windows Vista systems. There are no plans to port \SPM\ to Microsoft Windows 64-bit platforms. Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code for \SPM\ is available on request.
+
+The random number generator used by \SPM\ uses the random number generation packages implemented in \href{http://www.boost.org/}{BOOST} and uses the Lewis-Goodman-Miller algorithm with Marsaglia mixing. 

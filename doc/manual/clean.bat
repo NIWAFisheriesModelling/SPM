@@ -1,0 +1,9 @@
+rm -f *.log
+rm -f *.aux
+rm -f *.out
+rm -f *.dvi
+rm -f *.pdf
+rm -f *.ps
+rm -f *.toc
+rm -f *.blg
+rm -f *.bbl

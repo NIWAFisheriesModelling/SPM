@@ -1,0 +1,235 @@
+\section{Getting started\label{sec:Getting-started}}
+
+\subsection{Introduction}
+
+The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics movement model. 
+
+\SPM\ allows the implementation of population models suitable for the simulation and estimation of  parameters in models with a large number of areas. It implements a statistical catch-at-age population dynamics and movement model, using a discrete time-step state-space model that represents a cohort-based population age structure in a spatially explicit manner. A model implemented in \SPM\ can be parameterised by both population processes (for example, ageing, recruitment, and mortality), and movement processes. Movement is parameterised by either adjacent cell movements or by global movements parameterised as the product of a set of preference functions based on known attributes at each spatial location. \SPM\ is designed to be flexible and to allow for the estimation of both population and movement parameters based on both local or aggregated spatially explicit observations. 
+
+A model is implemented in \SPM\ using an \config\ file, which contains a complete description of the model structure (including the spatial and population processes), observations and estimation methods, and outputs requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, free parameters can be \emph{estimated} or \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
+
+This section gives a quick overview of the model, and how to use it. Detailed descriptions of the components of \SPM, the model structures, mathematical equations used, and command and subcommand arguments are given in the following sections.
+
+\subsection{Understanding how \SPM\ works}
+
+The underlying population structure of \SPM\ follows the usual population modelling conventions and is similar to those implemented in other population models, for example CASAL \citep{1388}. The model records the numbers of individuals by age and category (i.e., male, female), as well as the locations of these cohorts within a spatial grid. In general, cohorts are added via a recruitment event, are aged annually, and are removed from the population via various forms of mortality. The population is assumed to be closed (i.e., no immigration or emigration from the modelled area)
+
+The key underlying idea for movement in \SPM\ is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance moved. Here, we use the term \emph{preference function} to describe these underlying probability distributions. We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.
+
+The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
+
+\subsubsection{Layers}
+
+A key component of \SPM\ requires that we assign one or more attributes to each spatial location via the use of layers. A layer is typically defined as an $n \ldots m$ rectangular grid of values, where the value at each point represents a known (or calculated) quantity, for example layers may represent classifications, physical attributes, distances, or an abundance. 
+
+\subsection{Model specification}
+
+The model in \SPM\ is specified in three parts, population, estimation, and output. 
+
+\begin{enumerate}
+
+\item population: The population section defines the model of the movement and population dynamics. It describes the model spatial structure, defines the population and movement processes (e.g., recruitment, migration, natural mortality), defines the layers, and specifies the population parameters.
+
+\item estimation: The estimation section specifies the free parameters, estimation methods, observations, penalties and priors. Estimation is based on an objective function (e.g., negative log posterior). Depending on the run mode, the estimation section is used to find a point estimate (i.e., the set of parameter values that minimises the objective function), profiles, MCMC etc.
+
+\item output: The output section specifies to model outputs. It defines the quantities and model components to be output to external files or to the screen.
+
+\end{enumerate}
+
+\subsection{Population structure}
+
+The population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
+
+\subsection{Processes}
+
+\SPM\  has two types of processes, \emph{population} and \emph{movement} processes. \emph{Population} processes are those processes which modify, move or otherwise change the numbers of individuals \emph{within} a spatial cell, i.e., they do not affect the spatial location of a cohort. \emph{Movement} processes, on the other hand, move, shift or otherwise modify cohorts between spatial cells, but do not affect the age or category of the numbers in each cohort. 
+
+\subsubsection{Population processes}
+
+\SPM\ implements a range of population processes, including recruitment, ageing, natural mortality, fishing mortality and category transition processes (category transition processes are employed to mimic, for example, maturation, spawning, and/or tagging events). Each of these processes is carried out in a user-defined prescribed order for each year in the annual cycle.  
+
+\subsubsection{Movement processes}
+
+Movement processes are those processes that move individuals between cells but retain the their population state, and are defined such that,
+
+$element(i,j,k,l)\Leftarrow element(i,j,k,l) + p element(i',j',k,l)$,
+
+i.e., each element in cell$(i,j)$ is updated as the sum of itself and some proportion $p$ of a neighbouring element in cell$(i',j')$. To conserve abundance we also update element$(i',j',k,l)$ as,
+
+$element(i',j',k,l)\Leftarrow element(i',j',k,l) - p element(i',j',k,l)$
+
+\SPM\ assumes that each movement process occurs simultaneously over all cells (synchronous updating), i.e., all cell updates from each individual movement process are first evaluated for all cells, and then applied to all cells affected. The movement process (labelled directed movement in \SPM) allows movement from any $cell(a) \Rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. See Section \ref{sec:population-section} for detail.
+
+\subsection{Running \SPM}
+
+\SPM\ gets its information from input data files, the main one of which is the \config. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters, and the outputs requested. Section \ref{sec:syntax} describes how to construct the \SPM\ configuration file. By convention, the name of the \config\ file ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+
+Other input files can, in some circumstances, be supplied\textemdash to define the starting point for an estimation, define the parameters for a projection or to simulate observations.  
+
+Simple command line arguments are used to determine the actions or \emph{tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc. Hence, the \emph{command line arguments} define the \emph{task}. for example, \texttt{-r} is \emph{run}, \texttt{-e} is \emph{estimation}, and \texttt{-s} is the \emph{simulation} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
+
+\subsection{The \config\label{config-files}}
+
+The \config\ comprises of four parts (preamble, population, estimation, and output). All of these, except the preamble, are compulsory. \SPM\ will error out if one of the compulsory sections is missing.
+
+\begin{enumerate}
+\item \textbf{preamble}: 
+the preamble occurs at the start of the \config, before the three sections defined below. \SPM\ ignores any text within this section, and hence the preamble can be used to record comments or descriptions of the \config. 
+
+\item \textbf{population}: 
+the population section is defined in the \config\ by the text \texttt{[population]}. All commands and subcommands that follow the \texttt{[population]} header, until the \texttt{[estimation]} header is reached, are considered to be commands and subcommands the define the population structure of the model. The population section is described in Section \ref{sec:population-section}.
+
+\item \textbf{estimation}:
+the estimation section is defined in the \config\ by the text \texttt{[estimation]}. All commands and subcommands that follow the \texttt{[estimation]} header, until the \texttt{[output]} header is reached, are considered to be commands and subcommands the define the estimation structure of the model.  The estimation section is described in Section \ref{sec:estimation-section}.
+
+\item \textbf{output}:
+the output section is defined in the \config\ by the text \texttt{[output]}. All commands and subcommands that follow the \texttt{[output]} header, until the end of the file is reached, are considered to be commands and subcommands the define the outputs of the model.  The output section is described in Section \ref{sec:output-section}.
+
+\end{enumerate}
+
+The command and subcommand definitions in the \config\ can be extensive, and result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ file command \command{include\_file}. The \command{include\_file}{ file}\ command causes \emph{file} to be read and processed, exactly as if its contents had been inserted in the main \config\ file at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include\_file}\ commands \textemdash\ be careful that you do not set up a recursive \command{include\_file}\ state.
+
+\subsection{Redirecting standard output\label{sec:redirecting-stdout}}
+
+\SPM\ uses the standard out to display run-time information. Standard error is not used by \SPM, but may be used by the operating system to report an error with \SPM. We suggest redirecting both the standard out and standard error into files. With the bash shell (on Linux systems), you can do this using the command structure,
+
+\begin{verbatim}  (SPM [arguments] > out) >& err &\end{verbatim}
+
+It may also be useful to redirect the standard input, especially is you're using \SPM\ inside a batch job software, i.e. 
+
+\begin{verbatim}  (SPM [arguments] > out < /dev/null) >& err &\end{verbatim}
+
+On Microsoft Windows systems, you can redirect to standard output using,
+
+\begin{verbatim}  SPM [arguments] > out\end{verbatim}
+
+And, on some recent Microsoft Windows systems (e.g., Professional versions of WindowsNT, Windows2000, and Windows XP), you can redirect to both standard output and standard error, using the syntax, 
+
+\begin{verbatim}  SPM [arguments] > out 2> err\end{verbatim}
+
+Note that \SPM\ outputs a few lines of header information to the output. The header consists of the program name and version, the arguments passed to \SPM\ from the command line, the date and time that the program was called (derived from the system time), the user name, and the machine name (including the operating system and the process identification number). These can be used to track outputs as well as identifying the version of \SPM\ used to run the model.
+
+\subsection{Command line arguments\label{sec:command-line-arguments}}
+
+The call to \SPM\ is of the following form.: 
+
+\texttt{SPM [\emph{task}] [\emph{config\_file}] [-i \emph{input\_file}] [\emph{options}]}
+
+where \emph{task} is one of;
+\begin{description}
+\item \texttt{-h} Display help (this page).
+
+\item \texttt{-l} Display the EULA (CPLv1.0).
+
+\item \texttt{-v} Display the \SPM\ version number.
+
+\item \texttt{-r \emph{config\_file}} \emph{Run} the model once using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}}, or optionally, with the values in the file denoted with the command line argument \texttt{-i \emph{config\_file}}.
+
+\item \texttt{-e \emph{config\_file}} Do a point \emph{estimate} of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{config\_file}}.
+
+\item \texttt{-p \emph{config\_file}} Do a likelihood \emph{profile} using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{config\_file}}.
+
+\item \texttt{-m \emph{config\_file}} Do an \emph{MCMC} estimate of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{config\_file}}.
+
+\item \texttt{-f \emph{config\_file}} Project the model \emph{forward} in time using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{config\_file}}.
+
+\item \texttt{-s \emph{config\_file}} \emph{Simulate} observations of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{config\_file}}.
+
+\end{description}
+
+In addition, the following are optional arguments (\emph{options}),
+
+\begin{description}
+
+\item \texttt{-q} Run \emph{quietly}, i.e., suppress verbose printing of \SPM.
+
+\item \texttt{-i \emph{input\_file}} \emph{Input} one or more sets of free parameter values from \emph{input\_file}. See Section \ref{sec:InputFileFormat} the format of \emph{input\_file}.
+
+\item \texttt{-g \emph{seed}} Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ automatically generates a random number seed based on the computer clock time. 
+
+\end{description}
+
+\subsection{Constructing an \SPM\ \config\ file\label{constructing-spm-config"}}
+
+The model definition, parameters, observations, and output are specified in a \config. The definition of the population section is described in Section \ref{sec:population-section} and the commands and subcommands in Section \ref{sec:population-syntax}. Similarly, the definition of the estimation section is described in Section \ref{sec:estimation-section} and the commands and subcommands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:output-section} and Section \ref{sec:output-syntax} for the output. 
+
+In general, the \config\ uses a command-block format to describe commands, subcommands, and their arguments and values. The \config\ consists of any number of command-blocks in any order, but these must be within the \texttt{[population]}, \texttt{[estimation]}, and  \texttt{[output]} sections for the population, estimation, and output commands respectively. 
+
+\subsubsection{The command-block format}
+
+Each command-block either consists of a single command (starting with the symbol \@) and, for most commands, a label. Each command is then followed by its subcommands, e.g., 
+\begin{description}
+\item \command{command}{}, or 
+\item \command{command}{ label}
+\end{description}
+
+and then
+\begin{description}
+\item \subcommand{subcommand}{ arguments}
+\item \subcommand{subcommand}{ arguments}
+\item etc.
+\end{description}
+
+Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. Commands and subcommands consist of letters and/or underscores, must not contain a spaces or full-point ('.').
+
+There is no need to mark the end of a command block. This is automatically recognised by either the end of the file or the start of the next command block, which is marked by the \command{}\ on the first character of a line.
+
+In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include\_file}{ file}, the argument \emph{file} will be case sensitive). 
+
+\subsubsection{Commenting out lines}
+
+Comments beginning with \commentline\ are ignored. If you want to remove a group of commands or subcommands using \commentline, then you can comment out all lines in the block, not just the first line. 
+
+Alternatively, you can comment out an entire block or section by placing curly brackets around the text that you want to comment out. Put in a \commentstart\ as the first character on the line to start the comment block, then end it with \commentend. All lines (including line breaks) between \commentstart\ and \commentend\ inclusive are ignored. (These should ideally be the first character on a line. But if not, then the entire line will be treated as part of the comment block.)
+
+\subsubsection{Commands}
+
+\SPM\ has a range of commands that define the model structure, processes, observations, how tasks are carried out. Some commands can be used multiple times in the same parameter file (for example, \command{population\_process}) and for these commands, most have a label (that must be unique). Some commands can be used multiple times, but do not have a label (for example, \command{estimate}), and the remainder can be used only once and may never have a label (such as \command{spatial\_structure}). 
+
+Labels for commands must start with a letter or underscores, can contain letters, underscrores, or numbers, and must not contain white-space or full-point ('.').
+
+\subsubsection{Subcommands}
+
+Subcommands in \SPM\ are for defining options and parameter values for commands. They always take an argument which can be one or more of a range of types (the specific types acceptable for each subcommand are defined in Section \ref{sec:syntax}, but the general types are described below). 
+
+Unlike commands (\command{command}{}), subcommands can be order specific. In other words, the order in which they appear within a command-block is important, and can affect the way in which they are interpreted. Usually, \SPM\ will report an error if they are not supplied in the order that is expected, however, in some circumstances \SPM\ will not \textemdash leading to possible errors in your expected results.  
+
+Typically, the arguments for a subcommand are either,
+
+\begin{description}
+\item \textbf{switch} true/false 
+\item \textbf{integer} an integer number
+\item \textbf{integer vector} a vector of integer numbers
+\item \textbf{constant} a real number 
+\item \textbf{constant vector} a vector of real numbers
+\item \textbf{estimable} a real number that can be estimated
+\item \textbf{estimable vector} a vector of real numbers that can be estimated
+\item \textbf{string} a categorical value
+\item \textbf{string vector} a vector of categorical values
+\end{description}
+
+Switches are parameters which are either true or false. Enter \emph{true} as \texttt{true} or \texttt{t}, and \emph{false} as \texttt{false} or \texttt{f}. 
+
+Integers must be entered as integers (i.e., if \subcommand{year}\ is an integer then use 2008, not 2008.0)
+
+Arguments of type integer vector, constant vector, estimable vector, or categorical vector contain one or more entries on a row, separated by white space (tabs or spaces). 
+
+Estimable parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. However, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{free parameters}.
+
+\subsubsection{Determining parameter names}
+
+When SPM processes a \config, it translates each command and each subcommand into a parameter with a unique name. For commands, this parameter name is simply the command name. For subcommands, the parameter name format is either, 
+
+\begin{description}
+\item \command{command}{\emph{[}label\emph{]}}.subcommand if the command has a label, or
+\item \command{command}.subcommand if the command has no label, or
+\item \command{command}{\emph{[}label\emph{]}}.subcommand[\emph{i}] if the command has a label, and we are accessing the \emph{i}th element of that vector.
+\end{description} 
+
+The unique parameter name is then used to reference the parameter when estimating, applying a penalty, or a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{population\_process}{}\ with the label \commandlabel{recruitment}\ is,
+
+\texttt{@population\_process[recruitment].R0}
+
+\subsection{\SPM\ exit status values}
+
+When \SPM\ completes its task successfully or errors out gracefully, it returns a single exit status value (0) to the operating system. Otherwise the  operating system will return -1. To determine if \SPM\ completed its task successfully, then check the standard output for error and information messages.
