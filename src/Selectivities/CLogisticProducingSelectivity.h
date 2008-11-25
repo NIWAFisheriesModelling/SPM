@@ -1,0 +1,46 @@
+//============================================================================
+// Name        : CLogisticProducingSelectivity.h
+// Author      : A. Dunn
+// Date        : 7/03/2008
+// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Description :
+// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+//============================================================================
+#ifndef CLogisticProducingSELECTIVITY_H_
+#define CLogisticProducingSELECTIVITY_H_
+
+// Local Headers
+#include "CSelectivity.h"
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+class CLogisticProducingSelectivity : public CSelectivity {
+public:
+  // Functions
+  CLogisticProducingSelectivity(CLogisticProducingSelectivity *Selectivity = 0);
+  virtual                    ~CLogisticProducingSelectivity();
+  void                       setL(int value) { iL = value; }
+  int                        getL() { return iL; }
+  void                       setH(int value) { iH = value; }
+  int                        getH() { return iH; }
+  void                       setA50(double value) { dA50 = value; }
+  double                     getA50() { return dA50; }
+  void                       setAto95(double value) { dAto95 = value; }
+  double                     getAto95() { return dAto95; }
+  CSelectivity*              clone() { return (new CLogisticProducingSelectivity(this)); }
+  void                       validate();
+
+protected:
+  // Functions
+  double                     calculateResult(int Age);
+
+  // Variables
+  int                        iL;
+  int                        iH;
+  double                     dA50;
+  double                     dAto95;
+};
+
+#endif /*CLogisticProducingSELECTIVITY_H_*/

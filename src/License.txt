@@ -1,0 +1,22 @@
+static string sLicense="Redistribution and use of SPM (including the documentation, examples, and other ancillary files) in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n\
+\
+1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimers.\n\n\
+\
+2. Redistributions in binary form must reproduce the copyright notice, this list of conditions and the following disclaimers in the documentation and/or other materials provided with the distribution.\n\n\
+\
+3. SPM contains the libraries ADOL-C, newran, and GetPot. ADOL-C is available free of charge from http://www.math.tu dresden.de/~adol-c and is available under the terms of the Common Public License (see www.eclipse.org/legal/cpl-v10.html); newran is freely available and can be obtained from http://www.robertnz.net; and GetPot is distributed under GNU Lesser General Public License (www.gnu.org/licenses/lgpl.html) and is available from http://getpot.sourceforge.net.\n\n\
+\
+4. NIWA is to be acknowledged in publications relating to the use of or from conclusions drawn from the use of SPM.\n\n\
+\
+5. Neither the name of the NIWA nor the names of SPMs contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\n\
+\
+This software is provided by the copyright holders and contributors 'as is' and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright owner or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.\n\n\
+\
+All rights reserved.\n\n\
+\
+A suitable reference for SPM is:\n\
+\
+Dunn, A.; Rasmussen, S. (2008). Spatial Population Model (SPM v0.1): Users Manual v0.1-2008/02/14. NIWA Technical Report xx. xxp.\n\n\
+\
+See http://www.niwa.co.nz/ for more information\n\n\
+(c) Copyright (c) 2008, NIWA.";
