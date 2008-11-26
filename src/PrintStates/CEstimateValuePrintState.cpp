@@ -34,11 +34,11 @@ void CEstimateValuePrintState::execute() {
 
     // Variables
     CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    int              iCount            = pEstimateManager->getEnabledEstimateCount();
+    int              iCount            = pEstimateManager->getEstimateCount();
 
     if (!bHeaderWritten) {
       for (int i = 0; i < iCount; ++i) {
-        CEstimate *pEstimate = pEstimateManager->getEnabledEstimate(i);
+        CEstimate *pEstimate = pEstimateManager->getEstimate(i);
         cout << pEstimate->getParameter();
 
         if((i+1)<iCount)
@@ -50,7 +50,7 @@ void CEstimateValuePrintState::execute() {
     }
 
     for (int i = 0; i < iCount; ++i) {
-      CEstimate *pEstimate = pEstimateManager->getEnabledEstimate(i);
+      CEstimate *pEstimate = pEstimateManager->getEstimate(i);
       cout << pEstimate->getValue();
       if((i+1)<iCount) cout << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     }

@@ -44,9 +44,6 @@ typedef enum {
   STATE_FINALIZATION
 } EState;
 
-// Typedefs
-typedef boost::mutex::scoped_lock lock;
-
 //**********************************************************************
 //
 //
@@ -82,7 +79,7 @@ protected:
 private:
   // Variables
   static CRuntimeController* clInstance;
-  boost::mutex               mutLock;
+  boost::mutex               runtimeLock;
   boost::barrier             *runtimeBarrier;
 };
 

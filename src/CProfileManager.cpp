@@ -14,6 +14,7 @@
 #include "CMinimizerManager.h"
 #include "CEstimateManager.h"
 #include "Estimates/CEstimate.h"
+#include "CPrintStateManager.h"
 
 // Singleton Var
 boost::thread_specific_ptr<CProfileManager> CProfileManager::clInstance;
@@ -156,6 +157,8 @@ void CProfileManager::execute() {
     CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
     vector<CProfile*>::iterator vPtr = vProfileList.begin();
 
+    CPrintStateManager *pPrintStateManager = CPrintStateManager::Instance();
+
     // Save our Current State
     saveState();
     resetState();
@@ -168,6 +171,8 @@ void CProfileManager::execute() {
       while (Profile->doStep()) {
         // minimize
         pMinimizer->execute();
+
+        pPrintStateManager->execute(STATE_FINALIZATION);
 
         // Reset state back to initial world.
         resetState();

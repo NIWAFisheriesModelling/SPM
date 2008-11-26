@@ -50,8 +50,9 @@ protected:
 
 private:
   // Variables
-  //static CPrintStateManager* clInstance;
-  static boost::thread_specific_ptr<CPrintStateManager> clInstance;
+  static CPrintStateManager* clInstance;
+  //static boost::thread_specific_ptr<CPrintStateManager> clInstance;
+  static boost::mutex          printStateLock;
 };
 
 #endif /*CPRINTSTATEMANAGER_H_*/

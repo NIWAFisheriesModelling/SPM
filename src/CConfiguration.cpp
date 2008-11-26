@@ -41,6 +41,7 @@ CConfiguration::CConfiguration() {
 CConfiguration* CConfiguration::Instance() {
   if (clInstance == 0)
     clInstance = new CConfiguration();
+
   return clInstance;
 }
 
@@ -61,6 +62,8 @@ void CConfiguration::Destroy() {
 //**********************************************************************
 void CConfiguration::addCategory(string value) {
   try {
+    lock lk(configLock);
+
     // Validate
     if (value == "")
       throw string(ERROR_MISSING + string(PARAM_PARAMETER));
@@ -85,19 +88,8 @@ void CConfiguration::addCategory(string value) {
 // Get Category Name for Index
 //**********************************************************************
 string CConfiguration::getCategoryNameForIndex(int Index) {
-#ifndef OPTIMISE
-  try {
-    // Validate
-    if (Index < 0)
-      throw string(PARAM_INDEX + string(ERROR_LESS_THAN) + string(PARAM_ZERO));
-    if (Index >= (int)vCategoryList.size())
-      throw string(PARAM_INDEX + string(ERROR_GREATER_EQUAL_TO) + string(PARAM_CATEGORIES));
-
-  } catch (string Ex) {
-    Ex = "CRuntimeController.getCategoryNameForIndex()->" + Ex;
-    throw Ex;
-  }
-#endif
+  // Thread-Safe
+  lock lk(configLock);
 
   return vCategoryList[Index];
 }
@@ -108,6 +100,8 @@ string CConfiguration::getCategoryNameForIndex(int Index) {
 //**********************************************************************
 int CConfiguration::getCategoryIndexForName(string Name) {
   try {
+    lock lk(configLock);
+
     // Validate
     for (int i = 0; i < (int)vCategoryList.size(); ++i) {
       if (vCategoryList[i] == Name)
@@ -129,24 +123,7 @@ int CConfiguration::getCategoryIndexForName(string Name) {
 // Get the Age for our Column Index
 //**********************************************************************
 int CConfiguration::getAgeForColIndex(int ColIndex) {
-#ifndef OPTIMISE
-  try {
-    if ((ColIndex+iMinAge) > iMaxAge)
-      throw string(PARAM_COLUMN + string(ERROR_GREATER_THAN) + string(PARAM_MAX_AGE));
-    if (ColIndex < 0)
-      throw string(PARAM_COLUMN_INDEX + string(ERROR_LESS_THAN) + string(PARAM_ZERO));
-#endif
-
-    return (iMinAge+ColIndex);
-
-#ifndef OPTIMISE
-  } catch (string Ex) {
-    Ex = "CConfiguration.getAgeForColIndex()->" + Ex;
-    throw Ex;
-  }
-
-  return -1;
-#endif
+  return (iMinAge+ColIndex);
 }
 
 //**********************************************************************
@@ -154,24 +131,7 @@ int CConfiguration::getAgeForColIndex(int ColIndex) {
 // Get the Column Index for our Age
 //**********************************************************************
 int CConfiguration::getColIndexForAge(int Age) {
-#ifndef OPTIMISE
-  try {
-    if (Age < iMinAge)
-      throw string(PARAM_AGE + string(ERROR_LESS_THAN) + string(PARAM_MIN_AGE));
-    if (Age > iMaxAge)
-      throw string(PARAM_AGE + string(ERROR_GREATER_THAN) + string(PARAM_MAX_AGE));
-#endif
-
-    return (Age-iMinAge);
-
-#ifndef OPTIMISE
-  } catch (string Ex) {
-    Ex = "CConfiguration.getColIndexForAge()->" + Ex;
-    throw Ex;
-  }
-
-  return -1;
-#endif
+  return (Age-iMinAge);
 }
 
 //**********************************************************************
@@ -180,6 +140,8 @@ int CConfiguration::getColIndexForAge(int Age) {
 //**********************************************************************
 void CConfiguration::addInitializationPhase(string value) {
   try {
+    lock lk(configLock);
+
     vInitializationList.push_back(value);
   } catch (string Ex) {
     Ex = "CConfiguration.addInitializationPhase()->" + Ex;
@@ -194,6 +156,7 @@ void CConfiguration::addInitializationPhase(string value) {
 string CConfiguration::getInitializationPhase(int index) {
   try {
     lock lk(configLock);
+
     return vInitializationList[index];
 
   } catch (string Ex) {

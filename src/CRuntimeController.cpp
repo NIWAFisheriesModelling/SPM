@@ -24,6 +24,9 @@
 // Singleton Variable
 CRuntimeController* CRuntimeController::clInstance = 0;
 
+// Typedefs
+typedef boost::mutex::scoped_lock lock;
+
 //**********************************************************************
 // CRuntimeController::CRuntimeController()
 // Default Constructor
@@ -42,6 +45,7 @@ CRuntimeController::CRuntimeController() {
 CRuntimeController* CRuntimeController::Instance() {
   if (clInstance == 0)
     clInstance = new CRuntimeController();
+
   return clInstance;
 }
 
@@ -148,6 +152,10 @@ void CRuntimeController::run() {
     pBaseThread->validate();
     pBaseThread->build();
 
+    CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
+    pMinimizer->validate();
+    pMinimizer->build();
+
     // Set a default number of estimate values we want to run
     // the model for. This defaults to 1, because we always
     // want to run atleast 1 iteration of the model
@@ -171,6 +179,7 @@ void CRuntimeController::run() {
           startEstimation();
           break;
         case RUN_MODE_PROFILE:
+          // Get Minimizer Manager
           pProfileManager->execute();
           break;
         case RUN_MODE_MARKOV_CHAIN_MONTE_CARLO:
@@ -195,23 +204,21 @@ void CRuntimeController::startEstimation() {
   try {
     // Get Minimizer Manager
     CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
-    pMinimizer->validate();
-    pMinimizer->build();
 
     // Get Configuration
-    CConfiguration *pConfig = CConfiguration::Instance();
-    int iNumberOfThreads = pConfig->getNumberOfThreads();
+    // CConfiguration *pConfig = CConfiguration::Instance();
+    // int iNumberOfThreads = pConfig->getNumberOfThreads();
 
     // Create Threads
-    boost::thread_group threads;
+   /* boost::thread_group threads;
     for (int i = 0; i < iNumberOfThreads; ++i)
-      threads.create_thread(&CRuntimeController::initEstimationThread);
+      threads.create_thread(&CRuntimeController::initEstimationThread);*/
 
     // Start the Minimizer.
     pMinimizer->execute();
 
     // Wait for all threads to finish.
-    threads.join_all();
+//    threads.join_all();
 
   } catch (string Ex) {
     Ex = "CRuntimeController.startEstimation()->" + Ex;
@@ -231,7 +238,7 @@ void CRuntimeController::initEstimationThread() {
 
   if (true) {
     // Clone
-    lock lk(pThis->mutLock);
+    lock lk(pThis->runtimeLock);
     pThread->clone(pThis->pBaseThread);
 
     // Register with Publisher (CMinimizerManager)
@@ -298,7 +305,7 @@ void CRuntimeController::initMCMCThread() {
 
   if (true) {
     // Clone
-    lock lk(pThis->mutLock);
+    lock lk(pThis->runtimeLock);
     pThread->clone(pThis->pBaseThread);
 
     // Register with Publisher (MCMC)

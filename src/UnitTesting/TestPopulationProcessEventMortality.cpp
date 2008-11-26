@@ -317,7 +317,6 @@ BOOST_FIXTURE_TEST_CASE( EventMortality_Execute_ConstantSelectivity, CEventMorta
   CWorldSquare            *pSquare      = 0;
   CEventMortalityProcess  clMortality   = CEventMortalityProcess();
 
-  BOOST_REQUIRE_NO_THROW(pRuntime->setCurrentYear(0));
   BOOST_REQUIRE_NO_THROW(clMortality.setLabel("event_mortality"));
   BOOST_REQUIRE_NO_THROW(clMortality.setUMax(10.0));
   BOOST_REQUIRE_NO_THROW(clMortality.addLayers("double_layer_2000"));
@@ -354,7 +353,6 @@ BOOST_FIXTURE_TEST_CASE( EventMortality_Execute_DoubleNormalSelectivity, CEventM
   CWorldSquare            *pSquare      = 0;
   CEventMortalityProcess  clMortality   = CEventMortalityProcess();
 
-  BOOST_REQUIRE_NO_THROW(pRuntime->setCurrentYear(0));
   BOOST_REQUIRE_NO_THROW(clMortality.setLabel("event_mortality"));
   BOOST_REQUIRE_NO_THROW(clMortality.setUMax(10.0));
   BOOST_REQUIRE_NO_THROW(clMortality.addLayers("double_layer_2000"));

@@ -157,6 +157,7 @@ void CRuntimeThread::build() {
 //**********************************************************************
 void CRuntimeThread::rebuild() {
   pWorld->zeroGrid();
+
   pProcessManager->rebuild();
   pSelectivityManager->rebuild();
   pPenaltyManager->clearFlaggedPenaltyList();

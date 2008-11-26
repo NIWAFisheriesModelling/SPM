@@ -103,7 +103,6 @@ void CBaseTestFixture::setupWorld() {
 // Setup our CRuntimeController
 //**********************************************************************
 void CBaseTestFixture::setupRuntime() {
-  pRuntime->setCurrentYear(0);
   pRuntime->setRunMode("basic_run");
 }
 

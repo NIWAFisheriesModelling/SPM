@@ -13,8 +13,8 @@
 #include "PrintStates/CPrintState.h"
 
 // Single Static variable
-boost::thread_specific_ptr<CPrintStateManager> CPrintStateManager::clInstance;
-//CPrintStateManager* CPrintStateManager::clInstance = 0;
+CPrintStateManager* CPrintStateManager::clInstance = 0;
+boost::mutex CPrintStateManager::printStateLock;
 
 //**********************************************************************
 // CPrintStateManager::CPrintStateManager()
@@ -28,13 +28,12 @@ CPrintStateManager::CPrintStateManager() {
 // Instance Method - Singleton
 //**********************************************************************
 CPrintStateManager* CPrintStateManager::Instance() {
-/*  if (clInstance == 0)
-    clInstance = new CPrintStateManager();
-  return clInstance;*/
+  // Get a Lock
+  lock lk(CPrintStateManager::printStateLock);
 
-  if (clInstance.get() == 0)
-    clInstance.reset(new CPrintStateManager());
-  return clInstance.get();
+  if (clInstance == 0)
+    clInstance = new CPrintStateManager();
+  return clInstance;
 }
 
 //**********************************************************************
@@ -42,12 +41,11 @@ CPrintStateManager* CPrintStateManager::Instance() {
 // Destroy Method - Singleton
 //**********************************************************************
 void CPrintStateManager::Destroy() {
-  /*if (clInstance != 0) {
+  lock lk(CPrintStateManager::printStateLock);
+
+  if (clInstance != 0) {
     delete clInstance;
     clInstance = 0;
-  }*/
-  if (clInstance.get() != 0) {
-    clInstance.reset();
   }
 }
 
@@ -134,8 +132,8 @@ void CPrintStateManager::execute() {
 void CPrintStateManager::execute(EState state) {
   try {
     // Not allowed print_states in any mode but Basic Run
-    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-      return;
+   // if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+     // return;
 
     foreach(CPrintState *print, vPrintStateList) {
       if (print->getState() == state)
