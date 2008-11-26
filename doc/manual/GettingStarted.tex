@@ -93,19 +93,19 @@ The command and subcommand definitions in the \config\ can be extensive, and res
 
 \SPM\ uses the standard out to display run-time information. Standard error is not used by \SPM, but may be used by the operating system to report an error with \SPM. We suggest redirecting both the standard out and standard error into files. With the bash shell (on Linux systems), you can do this using the command structure,
 
-\begin{verbatim}  (SPM [arguments] > out) >& err &\end{verbatim}
+\begin{verbatim} (SPM [arguments] > out) >& err &\end{verbatim}
 
 It may also be useful to redirect the standard input, especially is you're using \SPM\ inside a batch job software, i.e. 
 
-\begin{verbatim}  (SPM [arguments] > out < /dev/null) >& err &\end{verbatim}
+\begin{verbatim} (SPM [arguments] > out < /dev/null) >& err &\end{verbatim}
 
 On Microsoft Windows systems, you can redirect to standard output using,
 
-\begin{verbatim}  SPM [arguments] > out\end{verbatim}
+\begin{verbatim} SPM [arguments] > out\end{verbatim}
 
 And, on some recent Microsoft Windows systems (e.g., Professional versions of WindowsNT, Windows2000, and Windows XP), you can redirect to both standard output and standard error, using the syntax, 
 
-\begin{verbatim}  SPM [arguments] > out 2> err\end{verbatim}
+\begin{verbatim} SPM [arguments] > out 2> err\end{verbatim}
 
 Note that \SPM\ outputs a few lines of header information to the output. The header consists of the program name and version, the arguments passed to \SPM\ from the command line, the date and time that the program was called (derived from the system time), the user name, and the machine name (including the operating system and the process identification number). These can be used to track outputs as well as identifying the version of \SPM\ used to run the model.
 
@@ -149,7 +149,7 @@ In addition, the following are optional arguments (\emph{options}),
 
 \end{description}
 
-\subsection{Constructing an \SPM\ \config\ file\label{constructing-spm-config"}}
+\subsection{Constructing an \SPM\ \config\ file\label{constructing-spm-config}}
 
 The model definition, parameters, observations, and output are specified in a \config. The definition of the population section is described in Section \ref{sec:population-section} and the commands and subcommands in Section \ref{sec:population-syntax}. Similarly, the definition of the estimation section is described in Section \ref{sec:estimation-section} and the commands and subcommands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:output-section} and Section \ref{sec:output-syntax} for the output. 
 
@@ -184,9 +184,14 @@ Alternatively, you can comment out an entire block or section by placing curly b
 
 \subsubsection{Commands}
 
-\SPM\ has a range of commands that define the model structure, processes, observations, how tasks are carried out. Some commands can be used multiple times in the same parameter file (for example, \command{population\_process}) and for these commands, most have a label (that must be unique). Some commands can be used multiple times, but do not have a label (for example, \command{estimate}), and the remainder can be used only once and may never have a label (such as \command{spatial\_structure}). 
+\SPM\ has a range of commands that define the model structure, processes, observations, how tasks are carried out. There are three types of commands, 
+\begin{enumerate}
+\item Commands that have an argument and do not have suncommands (for example, \command{inlude\_file})
+\item Commands that have a label but have subcommands (for example \command{process})
+\item Commands thtat do not have either a label or argument, but have subcommands (for example \command{spatial\_structure})
+\end{enumerate}
 
-Labels for commands must start with a letter or underscores, can contain letters, underscrores, or numbers, and must not contain white-space or full-point ('.').
+Commands that have a label must have a unique label, i.e., the label cannot be used on more that one command. The labels must start with a letter or underscores, can contain letters, underscrores, or numbers, but must not contain white-space or full-point ('.').
 
 \subsubsection{Subcommands}
 
