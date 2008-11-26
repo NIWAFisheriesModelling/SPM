@@ -27,8 +27,8 @@ public:
   int                        getMaxEvaluations() { return iMaxEvaluations; }
   void                       setGradientTolerance(double value) { dGradientTolerance = value; }
   double                     getGradientTolerance() { return dGradientTolerance; }
-  void                       setStepsize(double value) { dStepsize = value; }
-  double                     getStepsize() { return dStepsize; }
+  void                       setStepSize(double value) { dStepSize = value; }
+  double                     getStepSize() { return dStepSize; }
   virtual void               runEstimation() = 0;
   virtual void               validate() { }
   virtual void               build() { }
@@ -38,7 +38,7 @@ protected:
   int                        iMaxIterations;
   int                        iMaxEvaluations;
   double                     dGradientTolerance;
-  double                     dStepsize;
+  double                     dStepSize;
 };
 
 #endif /*CMINIMIZER_H_*/
