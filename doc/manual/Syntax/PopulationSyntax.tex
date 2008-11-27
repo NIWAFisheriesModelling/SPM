@@ -2,7 +2,7 @@
 
 \subsubsection{Spatial structure}
 
-\defCom{spatial\_structure}{Defines the spatial partition structure}
+\defCom{spatial\_structure}{Define the spatial partition structure}
 
 \defSub{nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defType{integer}
@@ -23,10 +23,10 @@
 
 \defCom{population\_structure} {Define the population partition structure}
 
-\defSub{type} {Defines the population partition as either age, size, or stage structured}
+\defSub{type} {Define the population partition as either age, size, or stage structured}
 \defType{string}
 \defDefault{age}
-\defEffect{Defines the nature of te population partition columns (i.e., age, size, or stage structured)}
+\defEffect{Defines the nature of the population partition columns (i.e., age, size, or stage structured)}
 \defCondition{Size and stage population partitions are not yet implemented}
 
 \defSub{categories} {Labels of the categories (rows) of the population partition}
@@ -52,21 +52,16 @@
 \defDefault{True}
 \defEffect{Defines  the largest age/size as a plus group}
 
-\subsubsection{Initialisation}
+\subsubsection{Initialization}
 
-\defCom{initialisation}{Define the initialisation method and phases of the initialisation}
+\defCom{initialization}{Define the initialization method and phases of the initialization}
 
-\defSub{method} {Defines the method of initialisation}
-\defType{String}
-\defDefault{Iterative}
-\defEffect{Defines the that iniialisation is determined iteratively}
-
-\defSub{initialisation\_phases}{Defines the labels of the phases of the initialisation}
-\defType{Vector of strings, of length of the number of initialisation phases}
+\defSub{initialization\_phases}{Defines the labels of the phases of the initialization}
+\defType{Vector of strings, of length of the number of initialization phases}
 \defDefault{None}
-\defEffect{Defines the phases, labels of the phases and the order of the phases to run for the initialisation}
+\defEffect{Defines the phases, labels of the phases and the order of the phases to run for the initialization}
 
-\defSub{first\_year}{Define the first year of the model, immediately following  initialisation}
+\defSub{first\_year}{Define the first year of the model, immediately following  initialization}
 \defType{Integer}
 \defDefault{None}
 \defEffect{Defines the first year of the model}
@@ -74,15 +69,29 @@
 \defSub{current\_year}{Define the current year of the model}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the current year of the model, i.e., the model is run from \command{initialisation}{first\_year} to \command{initialisation}{current\_year}}
+\defEffect{Defines the current year of the model, i.e., the model is run from \command{initialization}{first\_year} to \command{initialization}{current\_year}}
 
 \defSub{final\_year} {Define the final year of the model in projections}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the final year of the model for use in projections, i.e., the model is run from \command{initialisation}{first\_year} to \command{initialisation}{current\_year}, then projected to \command{initialisation}{final\_year}}
+\defEffect{Defines the final year of the model for use in projections, i.e., the model is run from \command{initialization}{first\_year} to \command{initialization}{current\_year}, then projected to \command{initialization}{final\_year}}
 
-\defComLab{initialisation\_phase}{Define the initialisation phases with label \texttt{label}}
+\defComLab{initialization\_phase}{Define the initialization phases with label \texttt{label}}
 
+\defSub{method} {Define the method of initialization}
+\defType{String}
+\defDefault{Iterative}
+\defEffect{Defines the method of initialization in that phase. Currently only iterative is defined}
+
+\defSub{years} {Define the number of years to run}
+\defType{Integer}
+\defDefault{None}
+\defEffect{Defines the number of years in this phase of the initialization over which the model runs}
+
+\defSub{processes} {Define the processes (in order of occurrence) to run in each year of the initialization}
+\defType{String vector}
+\defDefault{None}
+\defEffect{Defines the labels of the processes that are run in each year during that phase of initialization}
 
 \subsubsection{Annual cycle}
 

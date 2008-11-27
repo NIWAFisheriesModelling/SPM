@@ -1,6 +1,6 @@
 %\documentclass[11pt,twoside]{article}
 \documentclass[11pt,twoside,pdftex]{article}
-
+\usepackage{float}
 \usepackage{color}
 \definecolor{darkgray}{gray}{0.20}
 
@@ -21,6 +21,10 @@
 \usepackage[dvips]{graphicx}
 \usepackage{pslatex}
 
+% section header  fonts
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
 % Referencing
 \usepackage{natbib}
 \bibliographystyle{plainnat}
@@ -34,7 +38,7 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\headheight 25pt 
+\headheight 25pt
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 \setlength{\parskip}{\medskipamount}
@@ -44,7 +48,7 @@
 \usepackage{fancyvrb}
 
 % New commands to define macros and other aids to text and layout
-\newcommand{\config}{`input configuration file'}
+\newcommand{\config}{input configuration file}
 \newcommand{\command}[2] {\texttt{@#1\ #2}}
 \newcommand{\subcommand}[2] {\texttt{#1 \ #2}}
 \newcommand{\commandlabel}[1]{\texttt{#1}}
@@ -53,6 +57,7 @@
 \newcommand{\commentend}{\}}
 \newcommand{\Rzero}{\emph{R}$_0$}
 \newcommand{\Bzero}{\emph{B}$_0$}
+\newcommand{\R}{\textbf{R}}
 
 %New commands to template syntax definitions
 %Define null command
@@ -60,7 +65,7 @@
 % Define a command without a label
 \newcommand{\defCom}[2]{
  \begin{tabular}{l l}
-  \texttt{\textbf{@#1}}\ & {#2} 
+  \texttt{\textbf{@#1}}\ & {#2}
  \end{tabular}
 }
 % Define a command with a label
@@ -106,26 +111,25 @@
 \newcommand{\DocVer}{\SourceControlDateDoc}
 
 \input{SPMversion.tex}
-\newcommand{\VER}{0.2-\SourceControlDateSPM}
-
 %New commands to automate document dates, manual titles, etc.
+\newcommand{\VER}{\texttt{0.2-\SourceControlDateSPM}}
 \newcommand{\SPM}{\texttt{SPM}}
 \newcommand{\SPMName}{Spatial Population Model}
 \newcommand{\authors}{\href{mailto:"Alistair Dunn"<a.dunn@niwa.co.nz>?subject=SPM:}{authors}}
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.}
-\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ v\VER). \Organisation\ \emph{Unpublished report}.} 
+\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ v\VER). \Organisation\ \emph{Unpublished report}.}
 \title{\SPMName\ User Manual \\(\SPM\ v\VER)}
 \author{Alistair Dunn, Scott Rasmussen}
 \date{\DocDate}
 
 % Title page
 
-\maketitle 
+\maketitle
 \thispagestyle{empty}
 ~\vfill
 \begin{center}
 \SPMName\ User Manual (modified: \DocVer) \\
-for use with \SPM\ v\VER-\SourceControlTimeSPM\ UTC.
+for use with \SPM\ v\VER-\texttt{\SourceControlTimeSPM\ UTC}.
 \end{center}
 
 % Citation page
@@ -142,6 +146,7 @@ for use with \SPM\ v\VER-\SourceControlTimeSPM\ UTC.
 \tableofcontents{}
 
 % Document body
+\sloppy
 \cleardoublepage{}
 \renewcommand{\headrulewidth}{0.2pt}
 \fancyhead[LE]{\slshape \nouppercase \rightmark}
@@ -181,7 +186,7 @@ for use with \SPM\ v\VER-\SourceControlTimeSPM\ UTC.
 \include{Troubleshooting}
 
 \cleardoublepage{}
-\include{Acknowledgments}
+\include{Acknowledgements}
 
 \cleardoublepage{}
 \include{QuickReference}

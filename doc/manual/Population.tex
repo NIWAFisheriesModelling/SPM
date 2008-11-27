@@ -2,7 +2,7 @@
 
 \subsection{Overview}
 
-\subsection{spatial structure}
+\subsection{Spatial structure}
 
 The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
 
@@ -34,26 +34,26 @@ For the abundance layer, the abundance of a cell is simply a count of the number
 
 $N(a)=\sum_{k\in K} \sum_i element(i,j,k,l)$
 
-Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash except for a single case for covariate layers. In that instance, the covariate layer supplied can be can optionally (unless of type category or abundance) be standardised prior to use, i.e.,
+Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash except for a single case for covariate layers. In that instance, the covariate layer supplied can be can optionally (unless of type category or abundance) be standardized prior to use, i.e.,
 
 $L'(a)=L(a)/max(L)$
 
 i.e., $L'(a) < 1$.
 
-\subsection{Initialisation}
+\subsection{Initialization}
 
 The annual cycle in \SPM\ consists of an arbitrary number of time steps, and within each time step an arbitrary number of population processes are followed by an arbitrary number of movement processes. 
 
-initialisation\_phases Phase1
+initialization\_phases Phase1
 run\_years 14
 start\_year 1994
 projection\_years 100
 
-\subsection{Model initialisation}
+\subsection{Model initialization}
 
-\SPM\ initialises the initial equilibrium state as an iterative process, because a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can also be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimise models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. 
+\SPM\ initializes the initial equilibrium state as an iterative process, because a general solution that initializes complex structured movement models can be difficult to implement using analytic techniques. However, initializing via iteration for a long-lived species with complex movements can also be slow to run. In \SPM, we allow for user-defined multi-phased initialization using iteration to allow the user to optimize models for speed. Each phase of the initialization can involve any number of population and/or movement processes. 
 
-Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. This differs from the more usual implementation (see, for example, Bull et al. 2008) where observations can be associated with the population state during some part of a time step. 
+Following initialization, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. This differs from the more usual implementation (see, for example, Bull et al. 2008) where observations can be associated with the population state during some part of a time step. 
 
 \subsection{Annual cycle}
 
@@ -72,7 +72,7 @@ Following initialisation, the model then runs over a number of user-defined year
 
 \paragraph{The preference function}
 
- Movement in \SPM\ can be defined as a probability distribution based on an underlying preference function. Here, wWe define the preference for a cell $x$ as the preference function $f_x(\theta_x,P(x))$, where $\theta_x$ are the parameters for $f_x$. So, given a set of $n$ attributes for cell $x$, we can define a preference function for each, and hence we define the aggregated or total preference function for any cell $x$ as the weighted product of individual preference functions,
+ Movement in \SPM\ can be defined as a probability distribution based on an underlying preference function. Here, We define the preference for a cell $x$ as the preference function $f_x(\theta_x,P(x))$, where $\theta_x$ are the parameters for $f_x$. So, given a set of $n$ attributes for cell $x$, we can define a preference function for each, and hence we define the aggregated or total preference function for any cell $x$ as the weighted product of individual preference functions,
 
 $P_x=f_1(\theta_1,P_1(x))^{\alpha_1} + f_2(\theta_2,P_2(x))^{\alpha_2} + f_3(\theta_3,P_3(x))^{\alpha_3} + \cdots + f_n(\theta_n,P_n(x))^{\alpha_n}$
 
