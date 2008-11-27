@@ -1,13 +1,13 @@
 \section{Quick Reference\label{sec:quick-reference}}
 
-\subsection*{General commands and subcommands}
+\subsection*{General commands and subcommands\label{sec:general-syntax}}
 \defComArg{include\_file}{file\_name}{Include an external file}
-\subsection*{Population commands and subcommands}
+\subsection*{Population commands and subcommands\label{sec:population-syntax}}
 \subsubsection*{Spatial structure}
 \defCom{spatial\_structure}{Defines the spatial partition structure}
 \defSub{nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defSub{ncols}{The number of columns $n_{cols}$ in the spatial structure}
-\defSub{base\_layer}{The label for the base layer}
+\defSub{layer}{The label for the base layer}
 \subsubsection*{Population structure}
 \defCom{population\_structure} {Define the population partition structure}
 \defSub{type} {Defines the population partition as either age, size, or stage structured}
@@ -16,6 +16,13 @@
 \defSub{max\_age}{Maximum age of the population}
 \defSub{plus\_group}{Define the largest age/size as a plus group}
 \subsubsection*{Initialisation}
+\defCom{initialisation}{Define the initialisation method and phases of the initialisation}
+\defSub{method} {Defines the method of initialisation}
+\defSub{initialisation\_phases}{Defines the labels of the phases of the initialisation}
+\defSub{first\_year}{Define the first year of the model, immediately following  initialisation}
+\defSub{current\_year}{Define the current year of the model}
+\defSub{final\_year} {Define the final year of the model in projections}
+\defComLab{initialisation\_phase}{Define the initialisation phases with label \texttt{label}}
 \subsubsection*{Annual cycle}
 \subsubsection*{Time steps}
 \subsubsection*{Population processes}
@@ -24,6 +31,6 @@
 \subsubsection*{Derived quantities}
 \subsubsection*{Growth}
 \subsubsection*{Selectivities}
-\subsection*{Estimation syntax}
-\subsection*{Output syntax}
-\subsubsection*{Free parameters}
+\subsection*{Estimation syntax\label{sec:estimation-syntax}}
+\subsection*{Output syntax\label{sec:output-syntax}}
+\subsubsection*{Free parameters\label{sec:InputFileFormat}}

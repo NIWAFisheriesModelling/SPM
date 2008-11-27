@@ -14,7 +14,7 @@
 \defDefault{None}
 \defEffect{Defines the number of columns $n_{cols}$ for the spatial structure}
 
-\defSub{base\_layer}{The label for the base layer}
+\defSub{layer}{The label for the base layer}
 \defType{string}
 \defDefault{None}
 \defEffect{Defines the label for the base layer. Must be one of the layers defined by  \command{layer}{}}
@@ -53,6 +53,36 @@
 \defEffect{Defines  the largest age/size as a plus group}
 
 \subsubsection{Initialisation}
+
+\defCom{initialisation}{Define the initialisation method and phases of the initialisation}
+
+\defSub{method} {Defines the method of initialisation}
+\defType{String}
+\defDefault{Iterative}
+\defEffect{Defines the that iniialisation is determined iteratively}
+
+\defSub{initialisation\_phases}{Defines the labels of the phases of the initialisation}
+\defType{Vector of strings, of length of the number of initialisation phases}
+\defDefault{None}
+\defEffect{Defines the phases, labels of the phases and the order of the phases to run for the initialisation}
+
+\defSub{first\_year}{Define the first year of the model, immediately following  initialisation}
+\defType{Integer}
+\defDefault{None}
+\defEffect{Defines the first year of the model}
+
+\defSub{current\_year}{Define the current year of the model}
+\defType{Integer}
+\defDefault{None}
+\defEffect{Defines the current year of the model, i.e., the model is run from \command{initialisation}{first\_year} to \command{initialisation}{current\_year}}
+
+\defSub{final\_year} {Define the final year of the model in projections}
+\defType{Integer}
+\defDefault{None}
+\defEffect{Defines the final year of the model for use in projections, i.e., the model is run from \command{initialisation}{first\_year} to \command{initialisation}{current\_year}, then projected to \command{initialisation}{final\_year}}
+
+\defComLab{initialisation\_phase}{Define the initialisation phases with label \texttt{label}}
+
 
 \subsubsection{Annual cycle}
 

@@ -13,8 +13,8 @@ for i in range(len(FILE)):
     # if a line has a label, then delete it
     find = string.find(line,'\label')
     # if line if not blank, add a closing bracket
-    if line != "":
-      line = line[0:find] + "}"
+#    if line != "":
+#      line = line[0:find] + "}"
     # recode subsections, subsubsection to be excluded from the contents
     if line[1:11] == "subsection" :
       line = "\subsection*" + line[11:]
