@@ -57,6 +57,7 @@ int main(int argc,char * argv[]) {
 
   // Create The Header For Output
   string    sHeader    = "SPM (Spatial Population Model)\n";
+  string    sVersion   = "";
   time_t    tmeStart   = time(NULL);
 
   #ifndef __MINGW32__
@@ -71,7 +72,8 @@ int main(int argc,char * argv[]) {
     sHeader += argv[i] + string(" ");
 
   sHeader += "\nDate: "+ string(ctime(&tmeStart));
-  sHeader += "v0.1" + string("-") + string(SVN_REVDATE) + "   Copyright (c) 2008, NIWA\n";
+  sVersion = string("v0.1-") + string(SOURCE_CONTROL_VERSION);
+  sHeader += sVersion + "   Copyright (c) 2008, NIWA\n";
 
   #ifdef __MINGW32__
     sHeader += "User name: " + string(getenv("USERNAME")) + "\n";
