@@ -70,31 +70,26 @@ endif
 all: pre-build main-build
 
 # Main-build Target
-main-build: SFM.exe
+main-build: SPM.exe
 
 # Tool invocations
-SFM.exe: $(OBJS) $(USER_OBJS)
+SPM.exe: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MinGW C++ Linker'
-	g++ -L"" -o"SFM.exe" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o"SPM.exe" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
-	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
-	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) SFM.exe
+	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) SPM.exe
 	-@echo ' '
 
 pre-build:
-	-svnrev -o"..\src\Version.h" -i ../src/*.cpp ../src/*.h
-	-@echo ' '
-
-post-build:
-	-C:\Windows\System32\cmd.exe /C copy "C:\Work\Workspaces\SimFish\SimFish\Debug\SFM.exe" "C:\work"
+	-svn_version --path ../ --output ../src/Version.h --quiet
 	-@echo ' '
 
 .PHONY: all clean dependents
-.SECONDARY: main-build pre-build post-build
+.SECONDARY: main-build pre-build
 
 -include ../makefile.targets
