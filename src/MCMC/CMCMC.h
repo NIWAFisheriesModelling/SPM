@@ -2,7 +2,7 @@
 // Name        : CMCMC.h
 // Author      : S.Rasmussen
 // Date        : 2/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -48,6 +48,7 @@ protected:
   // Functions
   CMCMC();
   virtual                    ~CMCMC();
+  void                       sleep(int milliseconds);
 
   // Variables
   int                        iStart;

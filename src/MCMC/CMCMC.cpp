@@ -2,7 +2,7 @@
 // Name        : CMCMC.cpp
 // Author      : S.Rasmussen
 // Date        : 2/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -105,7 +105,7 @@ void CMCMC::execute() {
         lock lk(mutThread);
         iThreadListSize = (int)vThreadList.size();
       }
-      Sleep(1);
+      sleep(1);
     }
 
     // Start MCMC
@@ -128,7 +128,7 @@ void CMCMC::execute() {
       // Wait until all threads are "Waiting"
       foreach(CRuntimeThread *Thread, vThreadList) {
         while(!Thread->getWaiting())
-          Sleep(1);
+          sleep(1);
       }
 
       // Work Through and Look For our Match
@@ -155,6 +155,18 @@ void CMCMC::execute() {
    Ex = "CMCMC.execute()->" + Ex;
    throw Ex;
   }
+}
+
+//**********************************************************************
+// void CMCMC::sleep(int time)
+// Platform-Independent Sleep
+//**********************************************************************
+void CMCMC::sleep(int milliseconds) {
+#ifdef __MINGW32__
+  Sleep(milliseconds);
+#else
+  usleep( milliseconds * 1000);
+#endif
 }
 
 //**********************************************************************

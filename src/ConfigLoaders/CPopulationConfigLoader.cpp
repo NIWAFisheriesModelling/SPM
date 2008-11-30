@@ -2,7 +2,7 @@
 // Name        : CPopulationConfigLoader.cpp
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date$
 //============================================================================
@@ -34,7 +34,7 @@
 #include "../DirectedProcesses/CLogisticDirectedProcess.h"
 #include "../DirectedProcesses/CInverseLogisticDirectedProcess.h"
 #include "../DirectedProcesses/CConstantDirectedProcess.h"
-#include "../Timesteps/CTimeStep.h"
+#include "../TimeSteps/CTimeStep.h"
 
 //**********************************************************************
 // CPopulationConfigLoader::CPopulationConfigLoader()
