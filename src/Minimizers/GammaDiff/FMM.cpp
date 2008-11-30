@@ -399,6 +399,18 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       iConsecutiveMaxSteps = 0;
     }
 
+    cout << "DEBUG: Score: " << dPreviousScore2 << endl;
+
+    cout << "DEBUG: Candidates: ";
+    for (int i = 0; i < iVectorSize; ++i)
+      cout << pPreviousCandidates[i] << ", ";
+    cout << endl;
+
+    cout << "DEBUG: Gradient: ";
+    for (int i = 0; i < iVectorSize; ++i)
+      cout << pGradient[i] << ",";
+    cout << endl;
+
     // Build our Current Tolerance
     dCurrentTolerance = 0.0;
     for (int i = 0; i < iVectorSize; ++i) {

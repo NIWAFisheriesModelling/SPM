@@ -52,7 +52,6 @@ double CGammaDiffCallback::operator()(const vector<double>& Parameters) {
 #ifndef OPTIMISE
   } catch (string Ex) {
     Ex = "CBetaDiffCallback.operator()->" + Ex;
-    cout << Ex << endl;
     throw Ex;
   }
 #endif

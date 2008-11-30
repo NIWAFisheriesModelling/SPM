@@ -187,9 +187,12 @@ double GammaDiff::optimise_finite_differences(CGammaDiffCallback& objective, vec
           dScoreI = objective(vCurrentValues);
           dScoreI += dPenalty;
 
+          cout << "Scores: " << dScoreI << " / " << dScore << " / " << dStepSizeI << endl;
+
           // Populate Gradient, and Restore Orig Value
           vGradientValues[i]  = (dScoreI - dScore) / dStepSizeI;
-          vScaledValues[i]     = dOrigValue;
+          cout << "Gradient: " << vGradientValues[i] << endl;
+          vScaledValues[i]    = dOrigValue;
         }
       }
       // Gradient Finished

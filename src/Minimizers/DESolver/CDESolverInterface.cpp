@@ -7,11 +7,18 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CDESolverInterface.h"
 #include "CDESolverCallback.h"
 #include "../../CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
+
+// Namespaces
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CDESolverInterface::CDESolverInterface()
@@ -37,21 +44,28 @@ void CDESolverInterface::runEstimation() {
       throw string(ERROR_ENABLED_ESTIMATES);
 
     // Setup our Solver
-    CDESolverCallback     clDESolver = CDESolverCallback(iCount, 5);
+    CDESolverCallback     clDESolver = CDESolverCallback(iCount, 257);
 
     // Setup Lower, Upper Bounds
-    double dLowerBounds[iCount];
-    double dUpperBounds[iCount];
+    vector<double> vLowerBounds;
+    vector<double> vUpperBounds;
+    vector<double> vStartValues;
 
     for (int i = 0; i < iCount; ++i) {
       CEstimate *pEstimate = pEstimateManager->getEnabledEstimate(i);
-      dLowerBounds[i] = pEstimate->getLowerBound();
-      dUpperBounds[i] = pEstimate->getUpperBound();
+      vLowerBounds.push_back(pEstimate->getLowerBound());
+      vUpperBounds.push_back(pEstimate->getUpperBound());
+      vStartValues.push_back(pEstimate->getValue());
     }
 
-    clDESolver.Setup(dLowerBounds, dUpperBounds, stBest1Exp, 0.01, 0.5);
+    clDESolver.Setup(vStartValues, vLowerBounds, vUpperBounds, stBest1Exp, 0.8, 1.1);
 
-    clDESolver.Solve(100); // Max Generations
+    if (clDESolver.Solve(500)) {
+      cout << "Convergence was successful" << endl;
+      cout << "Final Score: " << clDESolver.getEnergy() << endl;
+      cout << "Score took " << clDESolver.getGenerations() << " generations to find" << endl;
+    } else
+      cout << "Failed to converge, ran out of generations" << endl;
 
   } catch (string Ex) {
     Ex = "CDESolverInterface.runEstimation()->" + Ex;

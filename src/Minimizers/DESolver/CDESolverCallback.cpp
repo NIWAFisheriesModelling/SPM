@@ -7,6 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CDESolverCallback.h"
 #include "../../ObjectiveFunction/CObjectiveFunction.h"
@@ -19,7 +22,9 @@
 // CDESolverCallback::CDESolverCallback()
 // Default Constructor
 //**********************************************************************
-CDESolverCallback::CDESolverCallback(int dim,int pop) : CBaseObject(0), DESolver(dim,pop) {
+CDESolverCallback::CDESolverCallback(int vectorsize, int populationsize)
+: CBaseObject(0), DESolver(vectorsize, populationsize) {
+
   // Vars
   pEstimateManager    = CEstimateManager::Instance();
 }
@@ -28,12 +33,12 @@ CDESolverCallback::CDESolverCallback(int dim,int pop) : CBaseObject(0), DESolver
 // double CDESolverCallback::EnergyFunction(double trial[],bool &bAtSolution)
 // Our CallBack Function. Returns our Score
 //**********************************************************************
-double CDESolverCallback::EnergyFunction(double trial[],bool &bAtSolution) {
+double CDESolverCallback::EnergyFunction(vector<double> vTrialValues) {
 
   // Update our Components with the New Parameters
   int iCount = pEstimateManager->getEnabledEstimateCount();
   for (int i = 0; i < iCount; ++i) {
-    pEstimateManager->getEnabledEstimate(i)->setValue(trial[i]);
+    pEstimateManager->getEnabledEstimate(i)->setValue(vTrialValues[i]);
   }
 
   CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
@@ -51,6 +56,8 @@ double CDESolverCallback::EnergyFunction(double trial[],bool &bAtSolution) {
     Ex = "CDESolverCallback.EnergyFunction()->" + Ex;
     throw Ex;
   }
+
+//  std::cout << "total_score: " << pObjectiveFunction->getScore() << std::endl;
 
   return pObjectiveFunction->getScore();
 }
