@@ -14,6 +14,9 @@
 //============================================================================
 #ifndef UNITTEST
 
+//SPM Version Number
+#define VERSION "0.2"
+
 // Global Headers
 #include <iostream>
 #include <vector>
@@ -67,13 +70,13 @@ int main(int argc,char * argv[]) {
   #endif
 
   // Add Parameters
-  sHeader += "CmdLine: ";
+  sHeader += "Call: ";
   for (int i=0; i<argc; i++)
     sHeader += argv[i] + string(" ");
 
   sHeader += "\nDate: "+ string(ctime(&tmeStart));
-  sVersion = string("v0.1-") + string(SOURCE_CONTROL_VERSION);
-  sHeader += sVersion + "   Copyright (c) 2008, NIWA\n";
+  sVersion = "v" + string(VERSION) + "-" + string(SOURCE_CONTROL_VERSION);
+  sHeader += sVersion + ". Copyright (c) 2008-" + string(SOURCE_CONTROL_YEAR) +", NIWA/MFish\n";
 
   #ifdef __MINGW32__
     sHeader += "User name: " + string(getenv("USERNAME")) + "\n";
@@ -98,18 +101,16 @@ int main(int argc,char * argv[]) {
     sHeader += "PID=" + PID.str() + ")\n\n";
   #endif
 
-  // Print our Our Header
-  cout << sHeader;
-
   // Create Model Variables
   CRuntimeController  *pRuntime = CRuntimeController::Instance();
   CConfiguration      *pConfig  = CConfiguration::Instance();
 
   try {
-    // Setup our Boost Command Line Arguements
+    // Setup our Boost Command Line Arguments
     options_description oDesc("Usage");
     oDesc.add_options()
-        ("help", "Print help")
+        ("help", "Print help (this screen")
+        ("version", "display single line summarising the version")
         ("license", "display source code license")
         ("mode", value<string>(), "mode of execution for the model")
         ("values", "load estimate values from configuration file")
@@ -123,6 +124,13 @@ int main(int argc,char * argv[]) {
     notify(vmParams);
 
     // Check our Params
+    if (vmParams.count("version")) {
+      cout << sVersion << endl;
+      return 0;
+    }
+    // Print our Our Header
+    cout << sHeader;
+
     if (vmParams.count("license")) {
       cout << sLicense << endl;
       return 0;
