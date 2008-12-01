@@ -2,14 +2,41 @@
 
 \subsection{Overview}
 
+The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
+
 \subsection{Spatial structure}
 
 The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
+
+\SPM\ implements two spatial structures, \emph{square} \textemdash the default (see Figure \ref{fig:SquareSpatialStructure}), and \emph{hexagonal} (see Figure \ref{fig:HexagonalSpatialStructure}. 
+
+\begin{figure}[htp]
+\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/SquareStructure}}
+ \caption{The \emph{square} spatial structure}
+ \label{fig:SquareSpatialStructure}
+\end{figure}
+
+\begin{figure}[htp]
+\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonalStructure}}
+ \caption{The \emph{hexagonal} spatial structure}
+ \label{fig:HexagonalSpatialStructure}
+\end{figure}
 
 \subsection{Population structure}
 
 The population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
 
+\subsubsection*{Movement processes}
+
+Movement processes are those processes that move individuals between cells but retain the their population state, and are defined such that,
+
+$element(i,j,k,l)\leftarrow element(i,j,k,l) + p \cdot element(i',j',k,l)$,
+
+i.e., each element in cell$(i,j)$ is updated as the sum of itself and some proportion $p$ of a neighbouring element in cell$(i',j')$. To conserve abundance we also update element$(i',j',k,l)$ as,
+
+$element(i',j',k,l)\leftarrow element(i',j',k,l) - p\cdot element(i',j',k,l)$
+
+\SPM\ assumes that each movement process occurs simultaneously over all cells (synchronous updating), i.e., all cell updates from each individual movement process are first evaluated for all cells, and then applied to all cells affected. The movement process (labelled directed movement in \SPM) allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. See Section \ref{sec:population-section} for detail.
 \subsection{Layers}
 
 Within \SPM, layers are used in three contexts:
@@ -110,7 +137,7 @@ $f(x | \mu, \sigma_L, \sigma_R) = \left\{
 \begin{array}{l l}
   2^{-[(x- \mu)/\sigma_L ]^2} & \quad \mbox{if $x \leq \mu$}\\
   2^{-[(x- \mu)/\sigma_R ]^2} & \quad \mbox{if $x \ge \mu$}\\
-\end{array} \right. $
+\end{array} \right.$ 
 
 \item The \subcommand{logistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 

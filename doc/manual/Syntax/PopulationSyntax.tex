@@ -1,8 +1,13 @@
-\subsection{Population commands and subcommands\label{sec:population-syntax}}
+\section{Population section command and subcommand syntax\label{sec:population-syntax}}
 
-\subsubsection{Spatial structure}
+\subsection{Spatial structure}
 
 \defCom{spatial\_structure}{Define the spatial partition structure}
+
+\defSub{cell\_shape}{The shape of the cells in the model}
+\defType{String}
+\defDefault{Square}
+\defEffect{Defines the shape of cells in the spatial grid, either \subcommand{Square}{}, \subcommand{hexagonal}{}, or \subcommand{Octagonal}{}}
 
 \defSub{nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defType{integer}
@@ -19,7 +24,7 @@
 \defDefault{None}
 \defEffect{Defines the label for the base layer. Must be one of the layers defined by  \command{layer}{}}
 
-\subsubsection{Population structure}
+\subsection{Population structure}
 
 \defCom{population\_structure} {Define the population partition structure}
 
@@ -52,7 +57,7 @@
 \defDefault{True}
 \defEffect{Defines  the largest age/size as a plus group}
 
-\subsubsection{Initialization}
+\subsection{Initialization}
 
 \defCom{initialization}{Define the initialization method and phases of the initialization}
 
@@ -93,20 +98,28 @@
 \defDefault{None}
 \defEffect{Defines the labels of the processes that are run in each year during that phase of initialization}
 
-\subsubsection{Annual cycle}
 
-\subsubsection{Time steps}
+\subsection{Annual cycle}
 
-\subsubsection{Population processes}
+\subsection{Time steps}
 
-\subsubsection{Movement processes}
+\subsection{Population processes}
 
-\subsubsection{Layers}
+\subsubsection{Recruitment}
+\subsubsection{Ageing}
+\subsubsection{Mortality}
+\subsubsection{Category-transition}
 
-\subsubsection{Derived quantities}
+\subsection{Movement processes}
+\subsubsection{Directed movement}
+\subsubsection{??movement}
 
-\subsubsection{Growth}
+\subsection{Layers}
 
-\subsubsection{Selectivities}
+\subsection{Derived quantities}
 
+\subsection{Growth}
 
+\subsection{Selectivities}
+
+\subsection{Annually varying parameters}

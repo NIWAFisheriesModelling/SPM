@@ -1,4 +1,7 @@
-\subsection{General commands and subcommands\label{sec:general-syntax}}
+\section{General commands and subcommands\label{sec:general-syntax}}
+
+
+General commands and subcommands can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections.
 
 \defComArg{include\_file}{file\_name}{Include an external file}
 
@@ -8,3 +11,4 @@
 \defEffect{Includes an external file into the \config}
 \defCondition{The file name must be enclosed in double quotes}
 \defExample{\command{include\_file}{\ "my\_file.txt"}}
+\defNote{The \command{} prefix is ignored, hence \command{include\_file} does not necessarily denote the end of a command block as is the case for all other commands}

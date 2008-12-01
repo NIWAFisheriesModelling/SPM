@@ -10,7 +10,7 @@ once: VERSION
 	latex -interaction=nonstopmode SPM.tex
 
 VERSION: *.tex
-	svn_version --path ../../src --format tex --recursive --quiet --suffix SPM --output SPMversion.tex
+	spm --version > SPMversion.tex
 	svn_version --format tex --recursive --quiet --suffix Doc
 
 QUICKREF:

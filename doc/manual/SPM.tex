@@ -1,5 +1,5 @@
 %\documentclass[11pt,twoside]{article}
-\documentclass[11pt,twoside,pdftex]{article}
+\documentclass[10pt,twoside,pdftex]{article}
 \usepackage{float}
 \usepackage{color}
 \definecolor{darkgray}{gray}{0.20}
@@ -16,6 +16,10 @@
   filecolor=black,      % colour of file links
   urlcolor=darkgray     % colour of external links
 }
+
+% Index
+\usepackage{makeidx}
+\makeindex
 
 %Graphics (no postscript files.. just use jpeg, png, etc)
 \usepackage[dvips]{graphicx}
@@ -100,9 +104,6 @@
 \newcommand{\defNote}[1]{\hspace*{0.5cm}Note: {#1} \\*}
 \newcommand{\defExample}[1]{\hspace*{0.5cm}Example: {#1} \\*}
 
-%Begin the document
-\begin{document}
-
 % Input SVN version definitions
 \input{version.tex}
 \newcommand{\DocYear}{\SourceControlYearDoc}
@@ -110,26 +111,27 @@
 \newcommand{\DocDate}{\SourceControlMonthDoc\ \SourceControlYearDoc}
 \newcommand{\DocVer}{\SourceControlDateDoc}
 
-\input{SPMversion.tex}
 %New commands to automate document dates, manual titles, etc.
-\newcommand{\VER}{\texttt{0.2-\SourceControlDateSPM}}
+\newcommand{\VER}{\small{\input{SPMversion.tex}}\normalsize}
 \newcommand{\SPM}{\texttt{SPM}}
 \newcommand{\SPMName}{Spatial Population Model}
 \newcommand{\authors}{\href{mailto:"Alistair Dunn"<a.dunn@niwa.co.nz>?subject=SPM:}{authors}}
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.}
-\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ v\VER). \Organisation\ \emph{Unpublished report}.}
-\title{\SPMName\ User Manual \\(\SPM\ v\VER)}
+\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ \VER). \Organisation\ \emph{Unpublished report}.}
+\title{\SPMName\ User Manual \\(\SPM\ \VER)}
 \author{Alistair Dunn, Scott Rasmussen}
 \date{\DocDate}
 
-% Title page
+%Begin the document
+\begin{document}
 
+% Title page
 \maketitle
 \thispagestyle{empty}
 ~\vfill
 \begin{center}
 \SPMName\ User Manual (modified: \DocVer) \\
-for use with \SPM\ v\VER-\texttt{\SourceControlTimeSPM\ UTC}.
+for use with \SPM\ \VER.
 \end{center}
 
 % Citation page
@@ -146,13 +148,15 @@ for use with \SPM\ v\VER-\texttt{\SourceControlTimeSPM\ UTC}.
 \tableofcontents{}
 
 % Document body
-\sloppy
 \cleardoublepage{}
 \renewcommand{\headrulewidth}{0.2pt}
 \fancyhead[LE]{\slshape \nouppercase \rightmark}
 \fancyhead[RO]{\slshape \nouppercase \leftmark}
 \pagenumbering{arabic}
 \include{Introduction}
+
+\cleardoublepage{}
+\include{RunningSPM}
 
 \cleardoublepage{}
 \include{GettingStarted}
@@ -167,10 +171,13 @@ for use with \SPM\ v\VER-\texttt{\SourceControlTimeSPM\ UTC}.
 \include{Output}
 
 \cleardoublepage{}
-\section{Command and subcommand syntax\label{sec:syntax}}
-\input{syntax/GeneralSyntax}
+%\section{Command and subcommand syntax\label{sec:syntax}}
+\input{syntax/GeneralSyntax}\label{sec:syntax}
+\cleardoublepage{}
 \input{syntax/PopulationSyntax}
+\cleardoublepage{}
 \input{syntax/EstimationSyntax}
+\cleardoublepage{}
 \input{syntax/OutputSyntax}
 
 \cleardoublepage{}
@@ -186,7 +193,7 @@ for use with \SPM\ v\VER-\texttt{\SourceControlTimeSPM\ UTC}.
 \include{Troubleshooting}
 
 \cleardoublepage{}
-\include{Acknowledgements}
+\include{Acknowledgments}
 
 \cleardoublepage{}
 \include{QuickReference}
@@ -196,6 +203,9 @@ for use with \SPM\ v\VER-\texttt{\SourceControlTimeSPM\ UTC}.
 
 \cleardoublepage{}
 \include{EULA}
+
+\cleardoublepage{}
+\printindex
 
 \end{document}
 %End
