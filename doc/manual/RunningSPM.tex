@@ -1,6 +1,6 @@
 \section{Running \SPM\label{sec:running-spm}}
 
-\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the outputs requested. Section \ref{sec:syntax} describes how to construct the \SPM\ configuration file. By convention, the name of the \config\ file ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the outputs requested. Section \ref{sec:getting-started} describes how to construct the \SPM\ configuration file. By convention, the name of the \config\ file ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
 Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.  
 
@@ -15,17 +15,17 @@ The \config\ comprises of four parts (preamble, population, estimation, and outp
 the preamble occurs at the start of the \config, before the three sections defined below. \SPM\ ignores any text within this section, and hence the preamble can be used to record comments or descriptions of the \config. 
 
 \item \textbf{population}: 
-the population section is defined in the \config\ by the text \texttt{[population]}. All commands and subcommands that follow the \texttt{[population]} header, until the \texttt{[estimation]} header is reached, are considered to be commands and subcommands the define the population structure of the model. The population section is described in Section \ref{sec:population-section}.
+the population section is defined in the \config\ by the text \texttt{[population]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[population]} header, until the \texttt{[estimation]} header is reached, are considered to be commands and subcommands the define the population structure of the model. The population section is described in Section \ref{sec:population-section}.
 
 \item \textbf{estimation}:
-the estimation section is defined in the \config\ by the text \texttt{[estimation]}. All commands and subcommands that follow the \texttt{[estimation]} header, until the \texttt{[output]} header is reached, are considered to be commands and subcommands the define the estimation structure of the model.  The estimation section is described in Section \ref{sec:estimation-section}.
+the estimation section is defined in the \config\ by the text \texttt{[estimation]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[estimation]} header, until the \texttt{[output]} header is reached, are considered to be commands and subcommands the define the estimation structure of the model.  The estimation section is described in Section \ref{sec:estimation-section}.
 
 \item \textbf{output}:
-the output section is defined in the \config\ by the text \texttt{[output]}. All commands and subcommands that follow the \texttt{[output]} header, until the end of the file is reached, are considered to be commands and subcommands the define the outputs of the model.  The output section is described in Section \ref{sec:output-section}.
+the output section is defined in the \config\ by the text \texttt{[output]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[output]} header, until the end of the file is reached, are considered to be commands and subcommands the define the outputs of the model.  The output section is described in Section \ref{sec:output-section}.
 
 \end{enumerate}
 
-The command and subcommand definitions in the \config\ can be extensive, and result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ file command \command{include\_file}{``filename''}. The command causes an external file, \emph{filename}, to be read and processed, exactly as if its contents had been inserted in the main \config\ file at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include\_file} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
+The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ file command \command{include\_file} ``\emph{filename}''. The command causes an external file, \emph{filename}, to be read and processed, exactly as if its contents had been inserted in the main \config\ file at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include\_file} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 \subsection{Redirecting standard output\label{sec:redirecting-stdout}}
 
@@ -98,23 +98,23 @@ In general, the \config\ uses a command-block format to describe commands, subco
 Each command-block either consists of a single command (starting with the symbol \@) and, for most commands, a label or an argument. Each command is then followed by its subcommands and their arguments, e.g., 
 
 \begin{description}
-\item \command{command}{}, or 
-\item \command{command}{argument}, or
-\item \command{command}{label}
+\item \command{command}, or 
+\item \command{command} \subcommand{argument}, or
+\item \command{command} \subcommand{\emph{label}}
 \end{description}
 
 and then
 \begin{description}
-\item \subcommand{subcommand}{arguments}
-\item \subcommand{subcommand}{arguments}
+\item \subcommand{subcommand} \subcommand{argument}
+\item \subcommand{subcommand} \subcommand{argument}
 \item etc.
 \end{description}
 
-Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. Commands and subcommands consist of letters and/or underscores, must not contain a spaces or full-point ('.').
+Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. Commands and subcommands consist of letters and/or underscores, must not contain a spaces or full-point (`.').
 
-There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{}\ on the first character of a line). The only exception is \command{include\_file}{} (see \ref{sec:general-syntax})\index{Command ! Include\_file}. 
+There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). The only exception is \command{include\_file} (see Section \ref{sec:general-syntax})\index{Command ! Include\_file}. 
 
-In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include\_file}{ file}, the argument \emph{file} will be case sensitive). 
+In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include\_file} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
 
 \subsubsection{Commenting out lines}\index{Comments}
 
@@ -131,13 +131,13 @@ Alternatively, you can comment out an entire block or section by placing curly b
 \item Commands that do not have either a label or argument, but have subcommands (for example \command{spatial\_structure})
 \end{enumerate}
 
-Commands that have a label must have a unique label, i.e., the label cannot be used on more that one command. The labels must start with a letter or underscores, can contain letters, underscores, or numbers, but must not contain white-space or full-point ('.').
+Commands that have a label must have a unique label, i.e., the label cannot be used on more that one command. The labels must start with a letter or underscores, can contain letters, underscores, or numbers, but must not contain white-space or full-point (`.').
 
 \subsubsection{Subcommands}\index{Commands ! Subcommands}
 
 Subcommands in \SPM\ are for defining options and parameter values for commands. They always take an argument which can be one or more of a range of types (the specific types acceptable for each subcommand are defined in Section \ref{sec:syntax}, but the general types are described below). 
 
-Unlike commands (\command{command}{}), subcommands can be order specific. In other words, the order in which they appear within a command-block is important, and can affect the way in which they are interpreted. Usually, \SPM\ will report an error if they are not supplied in the order that is expected, however, in some circumstances \SPM\ will not \textemdash leading to possible errors in your expected results.  
+Unlike commands (\command{command}), subcommands can be order specific. In other words, the order in which they appear within a command-block is important, and can affect the way in which they are interpreted. Usually, \SPM\ will report an error if they are not supplied in the order that is expected, however, in some circumstances \SPM\ will not \textemdash leading to possible errors in your expected results.  
 
 Typically, the arguments for a subcommand are either\index{Subcommand argument type},
 
@@ -166,12 +166,12 @@ Estimable parameters are those parameters that \SPM\ can estimate, if requested.
 When SPM processes a \config, it translates each command and each subcommand into a parameter with a unique name. For commands, this parameter name is simply the command name. For subcommands, the parameter name format is either, 
 
 \begin{description}
-\item \command{command}{\emph{[}label\emph{]}}.subcommand if the command has a label, or
-\item \command{command}.subcommand if the command has no label, or
-\item \command{command}{\emph{[}label\emph{]}}.subcommand[\emph{i}] if the command has a label, and we are accessing the \emph{i}th element of that vector.
+\item \command{command}\subcommand{[label]}.\subcommand{subcommand} if the command has a label, or
+\item \command{command}.\subcommand{subcommand} if the command has no label, or
+\item \command{command}\subcommand{[label]}.\subcommand{subcommand}\subcommand{[i]} if the command has a label, and we are accessing the \emph{i}th element of that vector of values of the subcommand.
 \end{description} 
 
-The unique parameter name is then used to reference the parameter when estimating, applying a penalty, or a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{population\_process}{}\ with the label \commandlabel{recruitment}\ is,
+The unique parameter name is then used to reference the parameter when estimating, applying a penalty, or a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{population\_process} with the label \subcommand{recruitment} is,
 
 \texttt{@population\_process[recruitment].R0}
 

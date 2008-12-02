@@ -4,11 +4,11 @@
 
 The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics and movement model. It allows the implementation of population models suitable for the simulation and estimation of parameters in models with a large number of areas. It implements a statistical catch-at-age population dynamics and movement model, using a discrete time-step state-space model that represents a cohort-based population age structure in a spatially explicit manner. 
 
-An \SPM\ model can be parametrised by both population processes (for example, ageing, recruitment, and mortality), and movement processes. Movement is parametrised by either adjacent cell movements or by global movements parametrised as the product of a set of preference functions based on known attributes at each spatial location. \SPM\ is designed to be flexible and to allow for the estimation of both population and movement parameters from local or aggregated spatially explicit observations. 
+An \SPM\ model can be parametrised by both population processes (for example, ageing, recruitment, and mortality), and movement processes. Movement is by either adjacent cell movements or by global movements parametrised as the product of a set of preference functions based on known attributes at each spatial location. \SPM\ is designed to be flexible and to allow for the estimation of both population and movement parameters from local or aggregated spatially explicit observations. 
 
 The population structure of \SPM\ follows the usual population modelling conventions and is similar to those implemented in other population models, for example CASAL\index{CASAL} \citep{1388}. The model records the numbers of individuals by age and category (i.e., male, female), as well as the locations of these cohorts within a spatial grid. In general, cohorts are added via a recruitment event, are aged annually, and are removed from the population via various forms of mortality. The population is assumed to be closed (i.e., no immigration or emigration from the modelled area)
 
-The spatial component of \SPM\ is designed to allow for and to estimate movements of cohorts and groups of individuals between spatial locations, and hence allow for movement and spatially explicit observations and processes. 
+The spatial component of \SPM\ is designed to allow for and to estimate movements of cohorts and groups of individuals between spatial locations, and hence allow for movement as well as spatially explicit observations and processes. 
 
 A model is implemented in \SPM\ using an \config\ file\index{Input configuration file}, which is a complete description of the model structure (including the spatial and population processes), observations and estimation methods, and outputs requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, free parameters can be \emph{estimated} or \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
 
@@ -20,9 +20,9 @@ A model in \SPM\ is specified in three parts, population, estimation, and output
 
 \subsubsection{The Population section}
 
-The population section\index{Population section} defines the model of the movement and population dynamics. It describes the model spatial structure, defines the population and movement processes (e.g., recruitment, migration, natural mortality), defines the layers, selectivities, parameters, and specifies the population parameters.
+The population section\index{Population section}(see Section \ref{sec:population-section}) defines the model of the movement and population dynamics. It describes the model spatial structure, defines the population and movement processes (e.g., recruitment, migration, natural mortality), defines the layers, selectivities, parameters, and specifies the population parameters.
 
-The population section specifies the structure, model years, parameters, and processes of the model. It consists of several components, including the 
+The population section specifies the structure, model years, parameters, and processes of the model. It consists of several components, including;
 \begin{itemize}
   \item The spatial and population structure
   \item Model initialisation (i.e., the state of the model in the first year)

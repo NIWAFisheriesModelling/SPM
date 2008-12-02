@@ -1,7 +1,10 @@
 \section{General commands and subcommands\label{sec:general-syntax}}
 
+The \config\ comprises of four parts (preamble, population, estimation, and output). All of these, except the preamble, are compulsory. \SPM\ will error out if one of the compulsory sections is missing. The preamble occurs at the start of the \config, before the three sections defined below. \SPM\ ignores any text within this section, and hence the preamble can be used to record comments or descriptions of the \config. 
 
-General commands and subcommands can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections.
+The population section is defined in the \config\ by the text \texttt{[population]}, the estimation section by the text \texttt{[estimation]}, and the output section by the text \texttt{[output]}. These must be the only text on those lines.
+
+Otherwise, the only command that can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections is the command \command{include\_file}. It is defined as,
 
 \defComArg{include\_file}{file\_name}{Include an external file}
 
