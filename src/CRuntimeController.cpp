@@ -183,6 +183,7 @@ void CRuntimeController::run() {
           pProfileManager->execute();
           break;
         case RUN_MODE_MARKOV_CHAIN_MONTE_CARLO:
+          startEstimation();
           startMCMC();
           break;
         default:
