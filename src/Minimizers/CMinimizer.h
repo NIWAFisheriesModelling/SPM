@@ -29,7 +29,7 @@ public:
   double                     getGradientTolerance() { return dGradientTolerance; }
   void                       setStepSize(double value) { dStepSize = value; }
   double                     getStepSize() { return dStepSize; }
-  double**                   getHessian() { return pHessian; }
+  double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   virtual void               runEstimation() = 0;
   virtual void               validate() { }
   virtual void               build();
