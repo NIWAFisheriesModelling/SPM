@@ -47,14 +47,6 @@ void CGammaDiffInterface::runEstimation() {
       vUpperBounds.push_back(pEstimate->getUpperBound());
     }
 
-    double **pHessian = new double*[iCount];
-    for (int i = 0; i < iCount; ++i)
-      pHessian[i] = new double[iCount];
-
-    for (int i = 0; i < iCount; ++i)
-      for (int j = 0; j < iCount; ++j)
-        pHessian[i][j] = 0.0;
-
     int status = 0;
 
     GammaDiff clGammaDiff;

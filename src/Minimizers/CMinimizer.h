@@ -29,16 +29,19 @@ public:
   double                     getGradientTolerance() { return dGradientTolerance; }
   void                       setStepSize(double value) { dStepSize = value; }
   double                     getStepSize() { return dStepSize; }
+  double**                   getHessian() { return pHessian; }
   virtual void               runEstimation() = 0;
   virtual void               validate() { }
-  virtual void               build() { }
+  virtual void               build();
 
 protected:
   // Variables
-  int                        iMaxIterations;
-  int                        iMaxEvaluations;
-  double                     dGradientTolerance;
-  double                     dStepSize;
+  int                         iMaxIterations;
+  int                         iMaxEvaluations;
+  double                      dGradientTolerance;
+  double                      dStepSize;
+  double                      **pHessian;
+  int                         iEstimateCount;
 };
 
 #endif /*CMINIMIZER_H_*/

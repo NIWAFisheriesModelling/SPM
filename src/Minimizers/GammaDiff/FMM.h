@@ -31,9 +31,6 @@ public:
   int                         getIters() { return iIters; }
   int                         getEvals() { return iEvals; }
 
-  // Variables
-
-
 private:
   // Functions
   void bfgsfac(long double* x,long double* xlast,long double* g,long double* glast,long double **pHessianConstruct);

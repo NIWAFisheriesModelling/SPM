@@ -7,12 +7,18 @@
 // $Date$
 //============================================================================
 
+// Global Headers
+#include <boost/random.hpp>
+
 // Local Headers
 #include "CMCMC.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../CEstimateManager.h"
 #include "../RuntimeThread/CRuntimeThread.h"
 #include "../Estimates/CEstimate.h"
+#include "../CMinimizerManager.h"
+#include "../Minimizers/CMinimizer.h"
+#include "../Minimizers/CHessian.h"
 
 // Singleton Variable
 CMCMC* CMCMC::clInstance = 0;
@@ -94,6 +100,12 @@ void CMCMC::build() {
 //**********************************************************************
 void CMCMC::execute() {
   try {
+
+    // Get handle to our Minimizer and Hessian
+    CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
+    CMinimizer *pMinimizer  = pMinimizerManager->getMinimizer();
+    double **pHessian       = pMinimizer->getHessian();
+
     // Variables
     int iEstimateCount      = CEstimateManager::Instance()->getEnabledEstimateCount();
     int iThreadCount        = pConfig->getNumberOfThreads();

@@ -22,35 +22,36 @@ class CMinimizer;
 //**********************************************************************
 class CMinimizerManager : public CBaseExecutableObject {
 public:
-  static CMinimizerManager* Instance();
-  static void               Destroy();
+  static CMinimizerManager*   Instance();
+  static void                 Destroy();
 
   // Functions
-  void                       addMinimizer(CMinimizer *value);
-  void                       setActiveMinimizer(string value) { sMinimizer = value; }
-  void                       addThread(CRuntimeThread *Thread);
-	void                       validate();
-	void                       build();
-	void                       execute();
+  void                        addMinimizer(CMinimizer *value);
+  void                        setActiveMinimizer(string value) { sMinimizer = value; }
+  void                        addThread(CRuntimeThread *Thread);
+  CMinimizer*                 getMinimizer() { return pMinimizer; }
+  void                        validate();
+  void                        build();
+  void                        execute();
 
 protected:
   // Functions
   CMinimizerManager();
-  virtual                    ~CMinimizerManager();
+  virtual                     ~CMinimizerManager();
 
   // Variables
-  string                     sMinimizer;
-  CMinimizer                 *pMinimizer;
-  int                        iMaxIterations;
-  int                        iMaxEvaluations;
-  double                     dGradientTolerance;
-  double                     dStepsize;
-  vector<CMinimizer*>        vMinimizerList;
-  vector<CRuntimeThread*>    vThreadList;
-  boost::mutex               mutThread;
+  string                      sMinimizer;
+  CMinimizer                  *pMinimizer;
+  int                         iMaxIterations;
+  int                         iMaxEvaluations;
+  double                      dGradientTolerance;
+  double                      dStepsize;
+  vector<CMinimizer*>         vMinimizerList;
+  vector<CRuntimeThread*>     vThreadList;
+  boost::mutex                mutThread;
 
 private:
-  static CMinimizerManager* clInstance;
+  static CMinimizerManager*   clInstance;
 };
 
 #endif /*CMINIMIZERMANAGER_H_*/
