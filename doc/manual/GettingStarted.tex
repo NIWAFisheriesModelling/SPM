@@ -38,7 +38,7 @@ The population section specifies the structure, model years, parameters, and pro
   \item Derived quantities required as parameters for some processes (i.e., recruitment)
 \end{itemize}
 
-The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. We define, within this grid, locations where the population can and cannot potentially be present using a \emph{layer}. 
+The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. We define, within this grid, locations where the population can and cannot potentially be present using a \emph{layer}. The layout of the grid can be either \emph{square} or \emph{hexagonal}.
 
 Within each spatial grid cell, the population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
 
@@ -86,18 +86,18 @@ Print summaries
 
 \subsection{Layers\label{sec:layers}}
 
-\emph{Layers} are an important component of a model in \SPM. Every model must define at least one layer. A layer is defined as a $n_{rows} \times n_{cols}$ rectangular grid of values (with one exception \textemdash the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. SPM defines the following types of layer:
+\emph{Layers} are an important component of a model in \SPM. Every model must define at least one layer. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception \textemdash the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. SPM defines the following types of layer:
 
 \begin{enumerate}
 \item The \emph{base layer} $L_B$: In any model there is one and only one base layer $L_B$, that defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) ge 0$. The base layer must always be defined, have only numeric values and have valid value for every cell in the spatial grid.
 
-\item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance. Here, the distance between and cell a and cell b is defined as,
+\item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square} \textemdash see Section \ref{sec:population-section} for distance calculations for the hexagon grid type). Here, the distance between cell a and cell b can be defined as,
 
 \[
-d\left( {a,b} \right) = \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
+d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
 \]
 
-where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. Note that unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ rectangular grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0.
+where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the sqaure. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
 
 \item A \emph{quantity layer}: A quantity layer is simply the count, biomass, or density of the number of individuals within each cell within categories $k$ and with selectivity $S$. SPM calculates the values of an quantity layer when running the model at the point in time where the value is required. Quantities can be 
 

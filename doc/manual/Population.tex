@@ -2,13 +2,30 @@
 
 \subsection{Overview}
 
-The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
+The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
 
 \subsection{Spatial structure}
 
-The spatial structure of \SPM\ is represented by an $n \times m$ rectangular grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
+The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
 
-\SPM\ implements two spatial structures, \emph{square} \textemdash the default (see Figure \ref{fig:SquareSpatialStructure}), and \emph{hexagonal} (see Figure \ref{fig:HexagonalSpatialStructure}. 
+\SPM\ implements two spatial structures, \emph{square} \textemdash the default (see Figure \ref{fig:SquareSpatialStructure}) and \emph{hexagon} (see Figure \ref{fig:HexagonSpatialStructure}). These effect the location of neighbours (for adjacent movements), and the distance between cells. For a square grid, the distance between any cell a and cell b is defined as,
+
+\[
+d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
+\]
+
+where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scalar representing the length of one side of the square.
+
+For a hexagonal grid, the distance between cell a and cell b is defined as,
+
+\[
+d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
+\]
+
+where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scalar representing the length of one side of the hexagon. 
+
+Note that under these definition, the distance between any cell and itself is 0.
+
 
 \begin{figure}[htp]
 \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/SquareStructure}}
@@ -17,9 +34,9 @@ The spatial structure of \SPM\ is represented by an $n \times m$ rectangular gri
 \end{figure}
 
 \begin{figure}[htp]
-\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonalStructure}}
- \caption{The \emph{hexagonal} spatial structure}
- \label{fig:HexagonalSpatialStructure}
+\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonStructure}}
+ \caption{The \emph{hexagon} spatial structure}
+ \label{fig:HexagonSpatialStructure}
 \end{figure}
 
 \subsection{Population structure}

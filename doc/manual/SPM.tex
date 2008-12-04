@@ -2,6 +2,7 @@
 \documentclass[10pt,twoside,pdftex]{article}
 \usepackage{float}
 \usepackage{color}
+\usepackage{natbib}
 \definecolor{darkgray}{gray}{0.20}
 
 \usepackage{geometry}
@@ -29,14 +30,6 @@
 \usepackage{sectsty}
 \allsectionsfont{\sffamily}
 
-% Referencing
-\usepackage{natbib}
-\bibliographystyle{plainnat}
-\renewcommand{\bibsection}{%
-  \section{References}}
-  \setcitestyle{round,aysep={},yysep={;}%
-}
-
 %Page style
 \usepackage{fancyhdr}
 \pagestyle{fancy}
@@ -55,9 +48,13 @@
 \newcommand{\config}{input configuration file}
 \newcommand{\command}[1] {\texttt{@#1}}
 \newcommand{\subcommand}[1] {\texttt{#1}}
+\newcommand{\commandsub}[2] {\command{@#1}\subcommand{#2}}
+\newcommand{\argument}[1] {\texttt{#1}}
+
 \newcommand{\commentline}{\#}
 \newcommand{\commentstart}{\{}
 \newcommand{\commentend}{\}}
+
 \newcommand{\Rzero}{\emph{R}$_0$}
 \newcommand{\Bzero}{\emph{B}$_0$}
 \newcommand{\R}{\textbf{R}}
@@ -99,7 +96,7 @@
 \newcommand{\defType}[1]{\hspace*{0.5cm}Type: {#1} \\*}
 \newcommand{\defDefault}[1]{\hspace*{0.5cm}Default: {#1} \\*}
 \newcommand{\defCondition}[1]{\hspace*{0.5cm}Conditions: {#1} \\*}
-\newcommand{\defEffect}[1]{\hspace*{0.5cm}Effect: {#1} \\*}
+\newcommand{\defValue}[1]{\hspace*{0.5cm}Effect: {#1} \\*}
 \newcommand{\defNote}[1]{\hspace*{0.5cm}Note: {#1} \\*}
 \newcommand{\defExample}[1]{\hspace*{0.5cm}Example: {#1} \\*}
 
@@ -198,10 +195,16 @@ for use with \SPM\ \VER.
 \include{QuickReference}
 
 \cleardoublepage{}
+% Referencing
+\bibliographystyle{plainnat}
+\renewcommand{\bibsection}{%
+  \section{References}}
+  \setcitestyle{round,aysep={},yysep={;}%
+}
 \include{References}
 
 \cleardoublepage{}
-\include{EULA}
+\include{License}
 
 \cleardoublepage{}
 \printindex

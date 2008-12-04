@@ -1,256 +1,293 @@
 \section{Population section command and subcommand syntax\label{sec:population-syntax}}
 
-\subsection{Spatial structure}
+\subsection{Model structure}
 
-\defCom{spatial\_structure}{Define the spatial partition structure}
+\defCom{ModelStructure}{Define the spatial and population model structure, annual cycle and model years}
 
-\defSub{cell\_shape}{The shape of the cells in the model}
+\defSub{CellShape}{The shape of the cells in the model}
 \defType{String}
 \defDefault{Square}
-\defEffect{Defines the shape of cells in the spatial grid, either \subcommand{Square}{}, \subcommand{hexagonal}{}, or \subcommand{Octagonal}{}}
+\defValue{Either \argument{Square} or \argument{Hexagon}}
 
-\defSub{nrows}{The number of rows $n_{rows}$ in the spatial structure}
+\defSub{CellDistance}{The distance, $\lambda$, of one side of a cell}
+\defType{Constant}
+\defDefault{1}
+\defValue{A positive real number , i.e., $\lambda > 0$}
+
+\defSub{Nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defType{integer}
 \defDefault{None}
-\defEffect{Defines the number of rows $n_{rows}$ for the spatial structure}
+\defValue{A positive integer, $n_{rows} > 0$}
 
-\defSub{ncols}{The number of columns $n_{cols}$ in the spatial structure}
+\defSub{Ncols}{The number of columns $n_{cols}$ in the spatial structure}
 \defType{integer}
 \defDefault{None}
-\defEffect{Defines the number of columns $n_{cols}$ for the spatial structure}
+\defValue{A positive integer, $n_{cols} > 0$}
 
-\defSub{layer}{The label for the base layer}
+\defSub{Layer}{The label for the base layer}
 \defType{string}
 \defDefault{None}
-\defEffect{Defines the label for the base layer. Must be one of the layers defined by  \command{layer}{}}
+\defValue{Must be a label of a layer defined by \command{Layer}}
 
-\subsection{Population structure}
-
-\defCom{population\_structure} {Define the population partition structure}
-
-\defSub{type} {Define the population partition as either age, size, or stage structured}
-\defType{string}
-\defDefault{age}
-\defEffect{Defines the nature of the population partition columns (i.e., age, size, or stage structured)}
-\defCondition{Size and stage population partitions are not yet implemented}
-
-\defSub{categories} {Labels of the categories (rows) of the population partition}
+\defSub{Categories} {Labels of the categories (rows) of the population component of the partition}
 \defType{Vector of strings, of length $1\ldots n_{categories}$}
 \defDefault{None}
-\defEffect{Defines the labels of the categories of the population partition}
-\defCondition{Must be unique}
+\defValue{Names of categories must be unique}
 
-\defSub{min\_age}{Minimum age of the population}
+\defSub{MinAge}{Minimum age of the population}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the minimum age of the population partition}
-\defCondition{Must be $geq 0$}
+\defValue{A non-negative integer, ${Age}_{min}\geq 0$ and ${Age}_{min}\leq {Age}_{max}$}
 
-\defSub{max\_age}{Maximum age of the population}
+\defSub{MaxAge}{Maximum age of the population}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the maximum age of the population partition}
-\defCondition{Must be $geq 0$ and $geq min_{age}$}
+\defValue{A non-negative integer, ${Age}_{max}\geq 0$ and ${Age}_{min}\geq {Age}_{min}$}
 
-\defSub{plus\_group}{Define the largest age/size as a plus group}
+\defSub{PlusGroup}{Define the largest age/size as a plus group}
 \defType{switch}
 \defDefault{True}
-\defEffect{Defines  the largest age/size as a plus group}
+\defValue{Defines  the largest age/size as a plus group}
 
-\subsection{Initialization}
-
-\defCom{initialization}{Define the initialization method and phases of the initialization}
-
-\defSub{initialization\_phases}{Defines the labels of the phases of the initialization}
-\defType{Vector of strings, of length of the number of initialization phases}
+\defSub{InitialisationPhases}{Define the labels of the phases of the initialisation}
+\defType{Vector of strings, of length of the number of initialisation phases}
 \defDefault{None}
-\defEffect{Defines the phases, labels of the phases and the order of the phases to run for the initialization}
+\defValue{A valid label defined by \command{InitialisationPhases}}
 
-\defSub{initial\_year}{Define the first year of the model, immediately following initialization}
+\defSub{InitialYear}{Define the first year of the model, immediately following initialisation}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the first year of the model}
+\defValue{Defines the first year of the model, $\geq 1$, e.g. 1990}
 
-\defSub{current\_year}{Define the current year of the model}
+\defSub{CurrentYear}{Define the current year of the model}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the current year of the model, i.e., the model is run from \command{initialization}{first\_year} to \command{initialization}{current\_year}}
+\defValue{Defines the current year of the model, i.e., the model is run from \commandsub{ModelStructure}{.FirstYear}\ to \commandsub{ModelStructure}{.CurrentYear}}
 
-\defSub{final\_year}{Define the final year of the model in projections}
+\defSub{FinalYear}{Define the final year of the model in projections}
 \defType{Integer}
 \defDefault{None}
-\defEffect{Defines the final year of the model for use in projections, i.e., the model is run from \command{initialization}{first\_year} to \command{initialization}{current\_year}, then projected to \command{initialization}{final\_year}}
+\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{ModelStructure}{.FirstYear} to \commandsub{ModelStructure}{.CurrentYear}, then projected to \commandsub{ModelStructure}{.FinalYear}}
 
-\defComLab{initialization\_phase}{Define the processes and years of the initialization phase with label}
-
-\defSub{method} {Define the method of initialization}
-\defType{String}
-\defDefault{Iterative}
-\defEffect{Defines the method of initialization in that phase. Currently only iterative is defined}
-
-\defSub{years} {Define the number of years to run}
-\defType{Integer}
-\defDefault{None}
-\defEffect{Defines the number of years in this phase of the initialization over which the model runs}
-
-\defSub{processes} {Define the processes (in order of occurrence) to run in each year of the initialization}
+\defSub{TimeSteps} {Define the \command{TimeStep} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}
 \defDefault{None}
-\defEffect{Defines the labels of the processes that are run in each year during that phase of initialization}
+\defValue{Defines the labels of the time steps that are run in each year}
 
-\subsection{Annual cycle and time steps}
+\defComLab{InitialisationPhase}{Define the processes and years of the initialisation phase with label}
 
-\defComLab{annual\_cycle}{Define the labels of the time steps that run in each year of the model}
+\defSub{Years} {Define the number of years to run}
+\defType{Integer}
+\defDefault{None}
+\defValue{A non-negative integer}
 
-\defSub{time\_steps} {Define the \subcommand{time\_step} labels (in order that they are applied) to form the annual cycle}
+\defSub{Processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
 \defType{String vector}
 \defDefault{None}
-\defEffect{Defines the labels of the time steps that are run in each year}
+\defValue{A valid process label}
 
-\defComLab{time\_steps} {Define a time step with label}
+\defComLab{TimeStep} {Define a time step with label}
 
-\defSub{process} {Define the process labels, in the order that they are applied, for the time step}
+\defSub{Process} {Define the process labels, in the order that they are applied, for the time step}
 \defType{String vector}
 \defDefault{None}
-\defEffect{Defines the labels of the processes for that time step}
+\defValue{Defines the labels of the processes for that time step}
 
 \subsection{Processes}
 
-\defComLab{process} {Define a process with label}
+There are a number of processes that are defined by \SPM, including 
 
-\defSub{type} {Define the type of process}
-\defType{String}
-\defDefault{None}
-\defEffect{Defines the type of process applied by \command{process}[\subcommand{label}]. Must be a valid process type. There are a number of processes that are defined by \SPM, including 
-\begin{description}
-\item ageing
-\item Beverton-Holt\_recruitment
-\item constant\_recruitment
-\item mortality\_rate
-\item event\_mortality
-\item category\_transition
-\item category\_transition\_rate
-\item directed\_movement
-\end{description}
-Each of the different types of process requires a different set of subcommands.}
+\begin{itemize}
+	\item Ageing process
+	\item Constant recruitment process
+	\item Beverton-Holt stock-recruit relationship recruitment process
+	\item Mortality rate process
+	\item Mortality event process
+	\item Category transition process
+	\item Category shift process
+	\item Preference movement process
+\end{itemize}
 
-If \subcommand{type=ageing},
+Each of the different types of process require different subcommands and arguments.
 
-\defSub{categories} {Define the categories that ageing is applied to}
+\defComLab{AgeingProcess} {Define an ageing process with label}
+
+\defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defEffect{Ages the named categories}
- 
-If \subcommand{type=Beverton-Holt\_recruitment},
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
 
-\defSub{categories} {Define the categories into which recruitment occurs}
-\defType{String vector}
-\defDefault{None}
-\defEffect{Categories that have recruitment}
-
-\defSub{proportions} {Define the proportion of recruitment that occurs into each category}
-\defType{Estimable vector of length \command{process}\subcommand{[label].categories}}
-\defDefault{None}
-\defEffect{Proportion of the annual recruitment that is applied to each category}
+\defComLab{ConstantRecruitmentProcess} {Define a constant recruitment process}
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
 \defDefault{None}
-\defEffect{Total amount (in numbers) of recruitment applied across all categories at equilibrium abundances}
+\defValue{Total amount (in numbers) of recruitment applied across all categories at equilibrium abundances}
 
-\defSub{ages} {Define the ages within each category that receive recruitment}
-\defType{Integer}
-\defDefault{None}
-\defEffect{The age classes that receive recruitment}
-
-\defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
-\defType{Estimable}
-\defDefault{None}
-\defEffect{The steepness parameter in the Beverton-Holt stock-recruit relationship}
-
-\defSub{sigma\_r} {Define the recruitment variability in the stock-recruitment relationship applied in projections}
-\defType{Estimable}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{rho} {Define the autocorrelation in the recruitment variability in the stock-recruitment relationship applied in projections}
-\defType{Estimable}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{layer} {Name of the layer used to determine where recruitment occurs}
-\defType{String}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{layer\_method} {Method by which the layer values determine where recruitment occurs}
-\defType{String}
-\defDefault{None}
-\defEffect{Must be one of uniform or uniform-by-area. If Uniform, then defined as uniformly distributed over cells in the layer where the values of the layer lie between layer\_min and layer\_max values inclusively. If uniform-by-area, then defined as uniformly distributed in proprotion to the cell area (from the base layer) where the values of the layer lie between layer\_min and layer\_max values inclusively}
-
-\defSub{layer\_max} {Maximum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{layer\_min} {Minimum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defEffect{...}
-
-If \subcommand{type=constant\_recruitment},
-
-\defSub{categories} {Define the categories into which recruitment occurs}
+\defSub{Categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
 \defDefault{None}
-\defEffect{Categories that have recruitment}
+\defValue{Must be a valid category from \commandsub{ModelStructure}{.Categories}}
 
-\defSub{proportions} {Define the proportion of recruitment that occurs into each category}
-\defType{Estimable vector of length \command{process}\subcommand{[label].categories}}
+\defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
+\defType{Estimable vector of length \commandsub{ConstantRecruitment}{[label].categories}}
 \defDefault{None}
-\defEffect{Proportion of the annual recruitment that is applied to each category}
+\defValue{Proportion of the annual recruitment that is applied to each category}
+
+\defSub{Ages} {Define the ages within each category that receive recruitment}
+\defType{Integer}
+\defDefault{None}
+\defValue{The age classes that receive recruitment}
+
+\defSub{Layer} {Name of the layer used to determine where recruitment occurs}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{Layer}}
+
+\defSub{LayerMethod} {Method by which the layer values determine where recruitment occurs}
+\defType{String}
+\defDefault{None}
+\defValue{Must be one of uniform or uniform-by-area. If \argument{Uniform}, then defined as uniformly distributed over cells in the layer where the values of the layer lie between \subcommand{LayerMin}\ and \subcommand{LayerMax}\ values inclusively. If \argument{uniform-by-area}, then defined as uniformly distributed in proportion to the cell area (from the base layer) where the values of the layer lie between  \subcommand{LayerMin}\ and  \subcommand{LayerMax}\ values inclusively}
+
+\defSub{LayerMin} {Minimum value of the layer where recruitment occurs}
+\defType{Constant}
+\defDefault{None}
+\defValue{...}
+
+\defSub{LayerMax} {Maximum value of the layer where recruitment occurs}
+\defType{Constant}
+\defDefault{None}
+\defValue{...}
+
+\defComLab{BHRecruitmentProcess}{Define a Beverton-Holt recruitment process}
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
 \defDefault{None}
-\defEffect{Total amount (in numbers) of recruitment applied across all categories at equilibrium abundances}
+\defValue{Total amount (in numbers) of recruitment applied across all categories at equilibrium abundances}
 
-\defSub{ages} {Define the ages within each category that receive recruitment}
-\defType{Integer}
-\defDefault{None}
-\defEffect{The age classes that receive recruitment}
-
-\defSub{layer} {Name of the layer used to determine where recruitment occurs}
-\defType{String}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{layer\_method} {Method by which the layer values determine where recruitment occurs}
-\defType{String}
-\defDefault{None}
-\defEffect{Must be one of uniform or uniform-by-area. If Uniform, then defined as uniformly distributed over cells in the layer where the values of the layer lie between layer\_min and layer\_max values inclusively. If uniform-by-area, then defined as uniformly distributed in proprotion to the cell area (from the base layer) where the values of the layer lie between layer\_min and layer\_max values inclusively}
-
-\defSub{layer\_max} {Maximum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{layer\_min} {Minimum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defEffect{...}
-
-\defSub{categories} {Define the categories into which recruitment occurs}
+\defSub{Categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
 \defDefault{None}
-\defEffect{Categories that have recruitment}
+\defValue{Must be a valid category from \commandsub{ModelStructure}{.Categories}}
+
+\defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
+\defType{Estimable vector of length \commandsub{Process}{[label].Categories}}
+\defDefault{None}
+\defValue{Proportion of the annual recruitment that is applied to each category}
+
+\defSub{Ages} {Define the age within each category that receive recruitment}
+\defType{Integer}
+\defDefault{None}
+\defValue{The age classes that receive recruitment}
+
+\defSub{Steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
+\defType{Estimable}
+\defDefault{None}
+\defValue{Steepness value between 0.2 and 1.0}
+
+\defSub{SigmaR} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship}
+\defType{Estimable}
+\defDefault{None}
+\defValue{...}
+
+\defSub{Rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship}
+\defType{Estimable}
+\defDefault{None}
+\defValue{...}
+
+\defSub{SSB} {Define the label of the \command{DerivedParameter} that defines the SSB}
+\defType{String}
+\defDefault{None}
+\defValue{Must be a valid \command{DerivedParameter} label}
+
+\defSub{YCS-Values} {YCS values}
+\defType{Estimable vector}
+\defDefault{None}
+\defValue{Must be vector of length equal to \commandsub{BHRecruitmentProcess}{[label].YCS-Years}}
+\defNote{Special values can be used here, i.e., mean, all}
+
+\defSub{YCS-Years} {Years for YCS values}
+\defType{Integer vector}
+\defDefault{None}
+\defValue{Must be vector of that specifies the years of \commandsub{BHRecruitmentProcess}{[label].YCS-Values}}
+\defNote{Special year ranges (YYYY-YYYY) can be used}
+
+\defSub{Layer} {Name of the layer used to determine where recruitment occurs}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{Layer}}
+
+\defSub{LayerMethod} {Method by which the layer values determine where recruitment occurs}
+\defType{String}
+\defDefault{None}
+\defValue{Must be one of uniform or uniform-by-area. If \argument{Uniform}, then defined as uniformly distributed over cells in the layer where the values of the layer lie between \subcommand{LayerMin}\ and \subcommand{LayerMax}\ values inclusively. If \argument{uniform-by-area}, then defined as uniformly distributed in proportion to the cell area (from the base layer) where the values of the layer lie between  \subcommand{LayerMin}\ and  \subcommand{LayerMax}\ values inclusively}
+
+\defSub{LayerMin} {Minimum value of the layer where recruitment occurs}
+\defType{Constant}
+\defDefault{None}
+\defValue{...}
+
+\defSub{LayerMax} {Maximum value of the layer where recruitment occurs}
+\defType{Constant}
+\defDefault{None}
+\defValue{...}
+
+\defComLab{MortalityRateProcess} {Define a mortality rate process with label}
+
+\defSub{Categories} {Define the categories that ageing is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+
+\defComLab{MortalityEventProcess} {Define a mortality event process with label}
+
+\defSub{Categories} {Define the categories that ageing is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+
+\defComLab{CategoryTransitionProcess} {Define a category transition process with label}
+
+\defSub{Categories} {Define the categories that ageing is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+
+\defComLab{CategoryMoveProcess} {Define a category shift process with label}
+
+\defSub{Categories} {Define the categories that ageing is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+
+\defComLab{PreferenceMovementProcess} {Define a preference function movement process with label}
+
+\defSub{Categories} {Define the categories that ageing is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+
+\subsection{Preference functions}
+
+\defComLab{PreferenceFunction} {Define a preference function with label}
 
 \subsection{Layers}
 
+\defComLab{Layer} {Define a layer with label}
+
+\defComLab{MetaLayer} {Define a meta-layer with label}
+
 \subsection{Derived quantities}
+
+\defComLab{DerivedQuantity} {Define a derived quantity with label}
 
 \subsection{Growth}
 
 \subsection{Selectivities}
 
-\subsection{Annually varying parameters}
+\defComLab{ConstantSelectivity} {Define a constant selectivity with label}
+
+\defComLab{VaryingSelectivity} {Define an annually varying selectivity with label}
+
+
