@@ -2,7 +2,7 @@
 
 \subsection{Model structure}
 
-\defCom{ModelStructure}{Define the spatial and population model structure, annual cycle and model years}
+\defCom{Structure}{Define the spatial and population model structure, annual cycle and model years}
 
 \defSub{CellShape}{The shape of the cells in the model}
 \defType{String}
@@ -281,6 +281,28 @@ Each of the different types of process require different subcommands and argumen
 \subsection{Derived quantities}
 
 \defComLab{DerivedQuantity} {Define a derived quantity with label}
+
+\defSub{Categories} {Define the categories are used to calculate the derived quantity}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+
+\defSub{Selectivity} {Define the selectivities}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid selectivity label from \command{Selectivity}}
+
+\defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid selectivity label from \command{TimeStep}}
+
+method uniform
+layer Depth
+layer\_min  10
+layer\_max 600
+value\_at\_year\_zero phase2
+
 
 \subsection{Growth}
 
