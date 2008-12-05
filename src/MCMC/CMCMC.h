@@ -9,11 +9,16 @@
 #ifndef CMCMC_H_
 #define CMCMC_H_
 
+// Global Headers
+#include <boost/numeric/ublas/matrix.hpp>
+
 // Local Headers
 #include "../BaseClasses/CBaseExecutableObject.h"
 
 // Classes
 class CRuntimeThread;
+
+using namespace boost::numeric;
 
 //**********************************************************************
 //
@@ -49,6 +54,9 @@ protected:
   CMCMC();
   virtual                    ~CMCMC();
   void                       sleep(int milliseconds);
+  void                       buildCovarianceMatrix();
+  bool                       generateEstimates();
+  bool                       choleskyDecomposition();
 
   // Variables
   int                        iStart;
@@ -62,6 +70,9 @@ protected:
   vector<double>             vLastAcceptedList;
   vector<CRuntimeThread*>    vThreadList;
   boost::mutex               mutThread;
+  ublas::matrix<double>      mxCovariance;
+  ublas::matrix<double>      mxCovarianceLT;
+  vector<double>             vCandidates;
 
 private:
   static CMCMC*              clInstance;
