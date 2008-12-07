@@ -4,7 +4,7 @@ FILE = [open('Syntax/GeneralSyntax.tex', 'r'),open('Syntax/PopulationSyntax.tex'
         open('Syntax/EstimationSyntax.tex', 'r'),open('Syntax/OutputSyntax.tex', 'r')]
 OUTFILE = open('QuickReference.tex', 'w')
 
-OUTFILE.write("\section{Quick Reference\label{sec:quick-reference}}\n")
+OUTFILE.write("\section{Quick reference\label{sec:quick-reference}}\n")
 
 for i in range(len(FILE)):
   count=0
@@ -33,7 +33,8 @@ for i in range(len(FILE)):
           line = "\\\\ " + line
         else:
           count=1
-        line = line + "\\\\ \\\\"
+        if(i > 0):
+          line = line + "\\\\ \\\\"
 
       OUTFILE.write(line)
       OUTFILE.write('\n')

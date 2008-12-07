@@ -1,18 +1,18 @@
-\section{Population section command and subcommand syntax\label{sec:population-syntax}}
+\section{Population command and subcommand syntax\label{sec:population-syntax}}
 
 \subsection{Model structure}
 
 \defCom{Structure}{Define the spatial and population model structure, annual cycle and model years}
 
-\defSub{CellShape}{The shape of the cells in the model}
+\defSub{CellShape}{The shape of the cells in the spatial grid}
 \defType{String}
 \defDefault{Square}
 \defValue{Either \argument{Square} or \argument{Hexagon}}
 
-\defSub{CellDistance}{The distance, $\lambda$, of one side of a cell}
+\defSub{CellLength}{The length (distance) of one side of a cell}
 \defType{Constant}
 \defDefault{1}
-\defValue{A positive real number , i.e., $\lambda > 0$}
+\defValue{A positive real number}
 
 \defSub{Nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defType{integer}
@@ -62,12 +62,12 @@
 \defSub{CurrentYear}{Define the current year of the model}
 \defType{Integer}
 \defDefault{None}
-\defValue{Defines the current year of the model, i.e., the model is run from \commandsub{ModelStructure}{.FirstYear}\ to \commandsub{ModelStructure}{.CurrentYear}}
+\defValue{Defines the current year of the model, i.e., the model is run from \commandsub{Structure}{.FirstYear}\ to \commandsub{Structure}{.CurrentYear}}
 
 \defSub{FinalYear}{Define the final year of the model in projections}
 \defType{Integer}
 \defDefault{None}
-\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{ModelStructure}{.FirstYear} to \commandsub{ModelStructure}{.CurrentYear}, then projected to \commandsub{ModelStructure}{.FinalYear}}
+\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{Structure}{.FirstYear} to \commandsub{Structure}{.CurrentYear}, then projected to \commandsub{Structure}{.FinalYear}}
 
 \defSub{TimeSteps} {Define the \command{TimeStep} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}

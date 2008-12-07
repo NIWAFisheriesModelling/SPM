@@ -84,7 +84,7 @@ In addition, the following are optional arguments [\emph{options}],
 
 \item \texttt{-q}:{\hspace*{0.5cm} Run \emph{quietly}, i.e., suppress verbose printing of \SPM.}
 
-\item \texttt{-g \emph{seed}}:{\hspace*{0.5cm} Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ first looks to the \texttt{[estimation]} section for a random number seed (\command{random\_number\_seed}{\emph{value}}, and if not defined, then automatically generates a random number seed based on the computer clock time.}
+\item \texttt{-g \emph{seed}}:{\hspace*{0.5cm} Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ first looks to the \texttt{[estimation]} section for a random number seed \command{RandomSeed}, and if not defined, then automatically generates a random number seed based on the computer clock time.}
 \end{description}
 
 \subsection{Constructing an \SPM\ \config\ file\label{constructing-spm-config}}\index{Input configuration file syntax}
@@ -126,9 +126,9 @@ Alternatively, you can comment out an entire block or section by placing curly b
 
 \SPM\ has a range of commands that define the model structure, processes, observations, how tasks are carried out. There are three types of commands, 
 \begin{enumerate}
-\item Commands that have an argument and do not have subcommands (for example, \command{include\_file})
-\item Commands that have a label but have subcommands (for example \command{process})
-\item Commands that do not have either a label or argument, but have subcommands (for example \command{spatial\_structure})
+\item Commands that have an argument and do not have subcommands (for example, \command{IncludeFile})
+\item Commands that have a label and subcommands (for example \command{ConstantRecruitment})
+\item Commands that do not have either a label or argument, but have subcommands (for example \command{Structure})
 \end{enumerate}
 
 Commands that have a label must have a unique label, i.e., the label cannot be used on more that one command. The labels must start with a letter or underscores, can contain letters, underscores, or numbers, but must not contain white-space or full-point (`.').

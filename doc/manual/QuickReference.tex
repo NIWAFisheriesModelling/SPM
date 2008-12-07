@@ -1,10 +1,10 @@
-\section{Quick Reference\label{sec:quick-reference}}
+\section{Quick reference\label{sec:quick-reference}}
 \subsection*{General commands and subcommands}
-\defComArg{include\_file}{file\_name}{Include an external file}\\ \\
-\subsection*{Population section command and subcommand syntax}
-\defCom{ModelStructure}{Define the spatial and population model structure, annual cycle and model years}\\ \\
-\defSub{CellShape}{The shape of the cells in the model}
-\defSub{CellDistance}{The distance, $\lambda$, of one side of a cell}
+\defComArg{include\_file}{file\_name}{Include an external file}
+\subsection*{Population command and subcommand syntax}
+\defCom{Structure}{Define the spatial and population model structure, annual cycle and model years}\\ \\
+\defSub{CellShape}{The shape of the cells in the spatial grid}
+\defSub{CellLength}{The length (distance) of one side of a cell}
 \defSub{Nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defSub{Ncols}{The number of columns $n_{cols}$ in the spatial structure}
 \defSub{Layer}{The label for the base layer}
@@ -62,7 +62,10 @@
 \\ \defComLab{Layer} {Define a layer with label}\\ \\
 \\ \defComLab{MetaLayer} {Define a meta-layer with label}\\ \\
 \\ \defComLab{DerivedQuantity} {Define a derived quantity with label}\\ \\
+\defSub{Categories} {Define the categories are used to calculate the derived quantity}
+\defSub{Selectivity} {Define the selectivities}
+\defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
 \\ \defComLab{ConstantSelectivity} {Define a constant selectivity with label}\\ \\
 \\ \defComLab{VaryingSelectivity} {Define an annually varying selectivity with label}\\ \\
-\subsection*{Estimation section command and subcommand syntax}
-\subsection*{Output section command and subcommand syntax}
+\subsection*{Estimation command and subcommand syntax}
+\subsection*{Output command and subcommand syntax}
