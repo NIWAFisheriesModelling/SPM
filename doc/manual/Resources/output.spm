@@ -1,0 +1,46 @@
+#Print State
+@print_state state-1995-1
+type current
+file_name "_Alpha.txt"
+year 1
+timestep 1
+
+@print_state state-1996-2
+type current
+file_name "_Beta.txt"
+year 2
+timestep 2
+
+@print_state state-1997-3
+type current
+file_name "_Gamma.txt"
+year 10
+timestep 2
+
+@print_state state-2008-3
+type current
+file_name "_Delta.txt"
+year 14
+timestep 2
+
+@print_state initial
+type initial
+file_name "_Initial.txt"
+
+@print_state final
+type final
+file_name "_Final.txt"
+
+@print_state objective
+type Objective
+overwrite True
+file_name "_Objective.txt"
+
+@print_state Estimate
+type estimate
+file_name "_Estimate.txt"
+
+@print_state Estimate-value
+type estimate_value
+file_name "_Estimate-value.txt"
+

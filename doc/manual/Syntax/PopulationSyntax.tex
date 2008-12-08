@@ -142,22 +142,7 @@ Each of the different types of process require different subcommands and argumen
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{Layer}}
-
-\defSub{LayerMethod} {Method by which the layer values determine where recruitment occurs}
-\defType{String}
-\defDefault{None}
-\defValue{Must be one of uniform or uniform-by-area. If \argument{Uniform}, then defined as uniformly distributed over cells in the layer where the values of the layer lie between \subcommand{LayerMin}\ and \subcommand{LayerMax}\ values inclusively. If \argument{uniform-by-area}, then defined as uniformly distributed in proportion to the cell area (from the base layer) where the values of the layer lie between  \subcommand{LayerMin}\ and  \subcommand{LayerMax}\ values inclusively}
-
-\defSub{LayerMin} {Minimum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defValue{...}
-
-\defSub{LayerMax} {Maximum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defValue{...}
+\defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
 \defComLab{BHRecruitmentProcess}{Define a Beverton-Holt recruitment process}
 
@@ -216,22 +201,7 @@ Each of the different types of process require different subcommands and argumen
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{Layer}}
-
-\defSub{LayerMethod} {Method by which the layer values determine where recruitment occurs}
-\defType{String}
-\defDefault{None}
-\defValue{Must be one of uniform or uniform-by-area. If \argument{Uniform}, then defined as uniformly distributed over cells in the layer where the values of the layer lie between \subcommand{LayerMin}\ and \subcommand{LayerMax}\ values inclusively. If \argument{uniform-by-area}, then defined as uniformly distributed in proportion to the cell area (from the base layer) where the values of the layer lie between  \subcommand{LayerMin}\ and  \subcommand{LayerMax}\ values inclusively}
-
-\defSub{LayerMin} {Minimum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defValue{...}
-
-\defSub{LayerMax} {Maximum value of the layer where recruitment occurs}
-\defType{Constant}
-\defDefault{None}
-\defValue{...}
+\defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
 \defComLab{MortalityRateProcess} {Define a mortality rate process with label}
 
@@ -276,7 +246,29 @@ Each of the different types of process require different subcommands and argumen
 
 \defComLab{Layer} {Define a layer with label}
 
-\defComLab{MetaLayer} {Define a meta-layer with label}
+\defSub{Type} {Define the type of layer}
+\defType{String}
+\defDefault{None}
+\defValue{Either \argument{categorical}, \argument{numeric}, \argument{logical}, or \argument{meta-layer}. If \argument{numeric}, then all values must be non-negative real numbers. If \argument{logical}, then all positive real numbers are interpreted as \texttt{TRUE} and otherwise false. If \argument{meta-layer}, then use subcommands \subcommand{value} and \subcommand{year} to specify the layers to use if each year}
+
+\defSub{Type} {Define the type of layer}
+\defType{String}
+\defDefault{None}
+\defValue{Either \argument{categorical}, \argument{numeric}, or \argument{logical}. If numeric, then all values must be non-negative real numbers. If logical, then all positive real numbers are interpreted as \texttt{TRUE} and otherwise false.}
+
+\defSub{Row$x$} {Define the values of the layer for row $x$}
+\defType{Either constant vector (if \subcommand{type} is numeric or logical), or string vector (if \subcommand{type} is \argument{categorical})}
+\defDefault{None}
+\defValue{A vector of values of length equal to the number of columns defined for the spatial structure. There must be exactly $x$ rows defined, one for each row of the spatial structure}
+
+\defSub{Year} {Define the years for \argument{meta-layer}}
+\defType{Constant vector, with values for each year of the model}
+\defDefault{None}
+
+\defSub{Value} {Define the layer labels for each of the years for \argument{meta-layer}}
+\defType{Constant vector, with values for each \argument{year} specified}
+\defDefault{None}
+
 
 \subsection{Derived quantities}
 

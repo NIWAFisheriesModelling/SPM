@@ -1,0 +1,313 @@
+s# Population structure
+
+My model preamble
+
+[population]
+@structure
+nrows 11
+ncols 19
+layer Base
+categories immature mature spawning
+min_age 1
+max_age 30
+age_plus_group True
+time_steps one two
+initialisation_phases Phase1 Phase2 Phase3
+initial_year 1994
+current_year 2008
+final_year 2045
+
+# Model initialisation and run length
+@initialisation_phase Phase1
+years 200
+processes Recruitment Spawning Maturation halfM halfM Postspawning Ageing
+
+@initialisation_phase Phase2
+years 1
+processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing Postspawning
+
+@initialisation_phase Phase3
+years 20
+processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing Postspawning
+
+@time_step one
+processes Recruitment Spawning Maturation halfM fishing halfM MoveImmature MoveMature MoveSpawning
+
+@time_step two
+processes PostSpawning Ageing
+
+# Population processes
+@AgeingProcess Ageing
+categories immature mature spawning
+
+@BHProcess Recruitment
+categories immature
+proportions 1.0
+R0 997386
+ages 1
+steepness 0.75
+SSB_quantity MySSB
+SSB_offset      -2
+YCS years  1 2 3 4
+YCS_values 1 1 1 1
+sigma_r 0.6
+rho 0.1
+method uniform
+layer Depth
+layer_min  10
+layer_max 600
+
+@MortalityRateProcess halfM
+Categories immature mature spawning
+DependsOnLayer False
+M 0.13
+Selectivities One One One
+
+@derived_quantity MySSB
+category immature
+selectivity ONE
+time_step two
+method uniform
+layer Depth
+layer_min  10
+layer_max 600
+value_at_year_zero phase2
+
+@meta_layer
+years 1990 1991
+layer layerA layerB
+
+@EventMortalityProcess Fishing
+categories immature mature spawning
+years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
+Umax 0.99
+selectivities FishingSel FishingSel FishingSel
+penalty event_mortality_penalty
+
+@population_process Maturation
+type category_transition
+from immature
+to mature
+proportion 0.324392
+selectivity Maturation
+depends_on_layer False
+
+@population_process Spawning
+type category_transition
+from mature
+to spawning
+proportion 0.574593
+selectivity One
+depends_on_layer False
+
+@population_process PostSpawning
+type category_transition
+from spawning
+to mature
+proportion 0.5
+selectivity One
+depends_on_layer False
+
+# Movement processes
+@movement_process MoveImmature
+method directed
+categories immature
+directed_processes ImmatureDepth ImmatureLatitude
+
+@movement_process MoveMature
+method directed
+categories mature
+directed_processes MatureDistance MatureDepth MatureLatitude
+
+@movement_process MoveSpawning
+method directed
+categories spawning
+directed_processes MatureDistance MatureDepth SpawningLatitude
+
+@movement_process InitialMoveImmature
+method directed
+categories immature
+directed_processes ImmatureDepth ImmatureLatitude
+
+@movement_process InitialMoveMature
+method directed
+categories mature
+directed_processes MatureDepth MatureLatitude
+
+@movement_process InitialMoveSpawning
+method directed
+categories spawning
+directed_processes MatureDepth SpawningLatitude
+
+@directed_process ImmatureDistance
+type exponential
+alpha 1
+lambda 1.5
+layer Distance
+
+@directed_process ImmatureDepth
+type inverse_logistic
+alpha 1
+layer Depth
+a50 1416.8
+ato95 245.354
+
+@directed_process ImmatureLatitude
+type logistic
+alpha 1
+layer Latitude
+a50 68.8512
+ato95 0.322301
+
+@directed_process MatureDistance
+type exponential
+alpha 1
+lambda 1.5
+layer Distance
+
+@directed_process MatureDepth
+type double_normal
+alpha 1
+layer Depth
+mu 875.389
+sigmaL 143.127
+sigmaR 1364.35
+
+@directed_process MatureLatitude
+type logistic
+alpha 1
+layer Latitude
+a50 70.9737
+ato95 0.436736
+
+@directed_process SpawningLatitude
+type double_normal
+alpha 1
+layer Latitude
+mu 65.8099
+sigmaL 1.77552
+sigmaR 1.62161
+
+# Definition of layers
+@layer Base
+type numeric
+#normalise False
+@include_file "Base.map"
+
+@layer Depth
+type numeric
+#normalise False
+@include_file "Depth.map"
+
+@layer Latitude
+type numeric
+#normalise False
+@include_file "Latitude.map"
+
+@layer CPUE
+type numeric
+#normalise True
+@include_file "CPUE.map"
+
+@layer SSRU
+type category
+#normalise False
+@include_file "SSRU.map"
+
+@layer Fishing_1998
+type numeric
+#normalise False
+@include_file "Fishing_1998.map"
+
+@layer Fishing_1999
+type numeric
+#normalise False
+@include_file "Fishing_1999.map"
+
+@layer Fishing_2000
+type numeric
+#normalise False
+@include_file "Fishing_2000.map"
+
+@layer Fishing_2001
+type numeric
+#normalise False
+@include_file "Fishing_2001.map"
+
+@layer Fishing_2002
+type numeric
+#normalise False
+@include_file "Fishing_2002.map"
+
+@layer Fishing_2003
+type numeric
+#normalise False
+@include_file "Fishing_2003.map"
+
+@layer Fishing_2004
+type numeric
+#normalise False
+@include_file "Fishing_2004.map"
+
+@layer Fishing_2005
+type numeric
+#normalise False
+@include_file "Fishing_2005.map"
+
+@layer Fishing_2006
+type numeric
+#normalise False
+@include_file "Fishing_2006.map"
+
+@layer Fishing_2007
+type numeric
+#normalise False
+@include_file "Fishing_2007.map"
+
+@layer constant
+type numeric
+#normalise True
+@include_file "constant.map"
+
+@layer test
+type numeric
+#normalise False
+@include_file "test.map"
+
+@layer Distance
+type distance
+{
+@layer Density
+type abundance
+categories immature mature spawning
+selectivity One One One
+}
+# Definition of selecivities
+@selectivity One
+type constant
+c 1
+
+@selectivity OneAV
+type annual_varying_constant
+c 1 1 1
+years 1 1 1
+
+
+@selectivity Maturation
+type logistic_producing
+L 1
+H 20
+a50 8.2
+ato95 2.8
+
+@selectivity FishingSel
+type logistic
+a50 6.91642
+ato95 2.70004
+
+@selectivity Age10
+type knife_edge
+c 10
+
+[estimation]
