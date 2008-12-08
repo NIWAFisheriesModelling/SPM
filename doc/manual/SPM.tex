@@ -69,7 +69,7 @@
 \newcommand{\config}{input configuration file}
 \newcommand{\command}[1] {\texttt{@#1}}
 \newcommand{\subcommand}[1] {\texttt{#1}}
-\newcommand{\commandsub}[2] {\command{@#1}\subcommand{#2}}
+\newcommand{\commandsub}[2] {\command{#1}\subcommand{#2}}
 \newcommand{\argument}[1] {\texttt{#1}}
 
 \newcommand{\commentline}{\#}
@@ -205,8 +205,8 @@
 \cleardoublepage{}
 \include{PostProcessing}
 
-\cleardoublepage{}
-\include{ChangesEnhancements}
+%\cleardoublepage{}
+%\include{ChangesEnhancements} % not required for first version
 
 \cleardoublepage{}
 \include{Troubleshooting}

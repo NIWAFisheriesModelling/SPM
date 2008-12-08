@@ -13,3 +13,165 @@ The tasks carried out by the estimation section are:
 
 \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (Section 6.3).
 \end{enumerate}
+
+\subsection{Specifying the free parameters}
+
+You need to tell SPM which of the estimable parameters are to be freed by using \command{estimate} commands (see \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like,
+
+\begin{verbatim}
+  @estimate
+  parameter Recruitment.R0
+  lower_bound 1000
+  upper_bound 100000
+  prior uniform
+\end{verbatim}
+
+See Section XXX for instructions on how to generate the parameter name. You have to specify at least one free parameter. You still provide values for the free parameters as normal, these are used as the starting values for the minimiser (unless you provide alternative starting values using SPM -i, see Section \ref{sec:command-line-arguments}).
+
+All parameters are estimated within bounds. For each free parameter, you need to specify the bounds and the prior (Section XXX). Note that the bounds and prior on an selectivity refer to the selectivity free parameters, not the actual values of the selectivity. 
+
+You need to estimate all the estimable parameters of an selectivity if you estimate any, but you can fix some of them if you want by setting the lower and upper bound equal. Similarly, if you want to estimate only some elements of a vector, fix the others by setting the bounds equal.
+
+\subsection{Point estimation}
+
+Point estimation is invoked with \texttt{SPM -e}. Mathematically, it is an attempt to find a minimum of the objective function. SPM has two algorithms for solving optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}.
+
+The minimiser has three kinds of (non-error) exit status: 
+
+\begin{enumerate}
+\item Successful convergence (suggests you have found a local minimum, at least).
+\item Convergence failure (you have not reached a local minimum, though you may deem yourself to be `close enough' at your own risk).
+\item Convergence unclear (the minimiser halted but waas unable to determine if convergence occurred. You may be at a local minimum, although you should check by restarting the minimiser at the final values of the free parameters).
+\end{enumerate}
+
+You can choose the maximum number of quasi-Newton iterations and objective function evaluations allotted to the minimiser. If it exceeds either limit, it exits with a convergence failure. We recommend large numbers of evaluations and iterations (at least the defaults of 300 and 1000) unless you successfully reach convergence with less. You can also specify the starting point of the minimiser using \texttt{SPM -i}.
+
+We want to stress that this is a local optimisation algorithm trying to solve a global optimisation problem. What this means is that, even if you get a 'successful convergence' message, your solution may be only a local minimum, not a global one. To diagnose this problem, try doing multiple runs from different starting points and comparing the results, or (probably better) doing profiles of one or more key parameters and seeing if any of the profiled estimates is actually better than the original point estimate.
+
+The approximate covariance matrix of the free parameters can be calculated as the inverse of the minimiser's approximation to the Hessian, and the corresponding correlation matrix is also calculated. Be aware that
+
+\begin{itemize}
+\item the Hessian approximation develops over many minimiser steps, so if the minimiser has only run for a small number of iterations the covariance matrix can be a very poor approximation
+\item the inverse Hessian is not a good approximation to the covariance matrix of the free parameters, and may not be useful to construct, for example, confidence intervals. 
+\end{itemize}
+
+Also note that if a free parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
+
+\subsection{Posterior profiles}
+
+If profiles are requested \texttt{SPM -p}, \SPM\ will first calculate a point estimate. For each scalar parameter or, in the case of vectors or selectivities, the element of the parameter to be profiled, \SPM\ will fix its value at a sequence of $n$ evenly spaced numbers between specified bounds $l$ and $u$, and calculate a point estimate at each value. 
+
+By default $n=10$, and $(l, u)=($lower bound on parameter plus $(range/(2n))$, upper bound on parameter less $(range/(2n))$. Each minimisation starts at the final parameter values from the previous resulting value of the parameter being profiled. \SPM\ will report the objective function for each parameter value and all the parameter estimates. The initial point estimate is also inserted into the profile (note that this can serve as a check that none of the other points along the profile have a better objective function value than the initial `minimum').
+
+You specify which parameters are to be profiled, and optionally $n$, $l$, and $u$ values for each. In the case of vector or selectivity parameters, you will also need to specify the element of the vector being profiled. 
+
+You can also supply the initial point estimate using \texttt{SPM -i}, so that \SPM\ doesn't need to do the first minimisation. Be aware that you are supplying the point estimate, not the minimiser starting point to get to the point estimate (as in other situations where \texttt{SPM -i} is used).
+
+If you have specified multi-phase estimation (see Section XXX), it is only used for the initial point estimate. Subsequent minimisations are done single-phase, as they should start reasonably close to the endpoint and so shouldn't need multiple phases.
+
+If you get an implausible profile, it may be a result of not using enough iterations in the minimiser (in this case, increase \subcommand{MaxIters} and/or \subcommand{MaxEvals} and retry), or the convergence criteria may not be strong enough (try setting \subcommand{GradTol} to a smaller value).
+
+\subsection{Bayesian estimation}
+
+\SPM\ can use a Monte Carlo Markov Chain to generate a sample from the posterior distribution of the free parameters \texttt{SPM -m}; and output the sampled values to a file, (optionally only every nth set of values).
+
+Two major steps are best done by an external package, as \SPM\ has no post-processing capabilities. \SPM\ cannot produce MCMC convergence diagnostics (use a package such as \href{http://www.public-health.uiowa.edu/boa}{BOA}) or plot/summarize the posterior distributions of the output quantities (for example, using a general-purpose statistical or spreadsheet package such as \href{http://www.insightful.com}{S-Plus}, \href{http://www.r-project.org}{R}, or \href{http://www.microsoft.com}{Microsoft Excel}).
+
+Bayesian methodology and MCMC are both large and complex topics, and we do not describe either properly here. See Gelman et al. \citeyearpar{823} and Gilks et al. \citeyearpar{143} for details of both Bayesian analysis and MCMC methods. In addition, see Punt \& Hilborn \citeyearpar{828} for an introduction to quantitative fish stock assessment using Bayesian methods. 
+
+This section only briefly describes the MCMC algorithms used in \SPM. See Section XXX for a better description of the sequence of SPM commands used in a full Bayesian analysis.
+
+SPM uses a straightforward implementation of the Metropolis algorithm \citep{823,143}. The Metropolis algorithm attempts to draw a sample from a Bayesian posterior distribution, and calculates the posterior density $\pi$, scaled by an unknown constant. The algorithm generates a `chain' or sequence of values. Typically the beginning of the chain is discarded and every $N$th element of the remainder is taken as the posterior sample. The chain is produced by taking an initial point $x_0$ and repeatedly applying the following rule, where $x_i$ is the current point: 
+
+\begin{itemize}
+\item Draw a candidate step s from a proposal distribution J, which should be symmetric i.e., $J(-s)=J(s)$.
+
+\item Calculate $r=min(\pi(x_i+s)/\pi(x_i),1)$. 
+
+\item Let $x_i+1=x_i+s$ with probability $r$, or $x_i$ with probability $1-r$.
+\end{itemize}
+
+An initial point estimate is produced before the chain starts, which is done so as to calculate the approximate covariance matrix of the free parameters (as the inverse Hessian), and may also be used as the starting point of the chain. 
+
+The user can specify the starting point of the point estimate minimiser using \texttt{SPM -i}. Don't start it too close to the actual estimate (either by using \texttt{SPM -i}, or by changing the initial parameter values in \config) as it takes a few iterations to form a reasonable approximation to the Hessian. 
+
+There are two options for the starting point of the Markov Chain: 
+
+\begin{itemize}
+\item Start from the point estimate.
+
+\item Start from a random point near the point estimate (the point is generated from a multivariate normal distribution, centred on the point estimate, with covariance equal to the inverse Hessian times a user-specified constant). This is done to prevent the chain from getting `stuck' at the point estimate.)
+
+\item Start from a point specified by the user with \texttt{SPM -i}.
+\end{itemize}
+
+The chain moves in natural space, i.e., no transformations are applied to the free parameters. The default proposal distribution is a multivariate normal centred on the current point, with covariance matrix equal to a matrix based on the approximate covariance produced by the minimiser, times some step-size factor. The following steps define the initial covariance matrix of the proposal distribution: 
+
+\begin{itemize}
+\item The covariance matrix is taken as the inverse of the approximate Hessian from the quasi-Newton minimiser.
+
+\item The covariance matrix is modified so as to decrease all correlations greater than \subcommand{MaxCor} down to \subcommand{MaxCor}, and similarly to increase all correlations less than  \subcommand{MaxCor} up to \subcommand{MaxCor} (the \subcommand{MaxCor} parameter defaults to 0.8). This should help to avoid getting 'stuck' in a lower-dimensional subspace.
+
+\item The covariance matrix is then modified either by,
+
+\begin{itemize}
+\item if \subcommand{AdjustmentMethod} is \argument{covariance}: that if the variance of the $i$th parameter is nonzero and less than \subcommand{MinDiff} times the difference between the parameters' lower and upper bound, then the variance is changed, without changing the associated correlations, to $k=$MinDiff$(upper\_bound_i-lower\_bound_i)$. This is done by setting \[
+{\mathop{\rm Cov}\nolimits} \left( {i,j} \right)^\prime   = {{{\mathop{\rm sqrt}\nolimits} \left( k \right){\mathop{\rm Cov}\nolimits} \left( {i,j} \right)} \mathord{\left/
+{\vphantom {{{\mathop{\rm sqrt}\nolimits} \left( k \right){\mathop{\rm Cov}\nolimits} \left( {i,j} \right)} {{\mathop{\rm sd}\nolimits} \left( i \right)}}} \right.
+\kern-\nulldelimiterspace} {{\mathop{\rm sd}\nolimits} \left( i \right)}}
+\]
+for $i \ne j$, and ${\mathop{\rm var}} \left( i \right)^\prime   = k$
+
+\item if \subcommand{AdjustmentMethod} is \argument{correlation}: that if the variance of the $i$th parameter is nonzero and less than \subcommand{MinDiff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=MinDiff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the ith parameter and all other parameters.
+\end{itemize}
+
+This allows a free parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \subcommand{MinDiff} parameter defaults to 0.0001.
+
+\item The \subcommand{StepSize} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of free parameters, as recommended by Gelman et al. \citep{823}, though experience has shown that this may be too high and can lead to a low acceptance rate. 
+\end{itemize}
+
+The proposal distribution can also change adaptively during the chain, using two different mechanisms. Both are offered as means of improving the convergence properties of the chain. It is important to note that any adaptive behaviour must finish before the end of the burn-in period, i.e., the proposal distribution must be finalised before the kept portion of the chain starts (\SPM\ enforces this). The adaptive mechanisms are as follows: 
+
+1.	You can request that the step size change adaptively at one or more sample numbers. At each adaptation, the step size is doubled if the acceptance rate since the last adaptation is more than 0.5, or halved if the acceptance rate is less than 0.2. (See Gelman et al. 1995 for justification.) The new step size is recorded in the objectives file. 
+
+2.	You can request that the entire covariance matrix change adaptively at one or more sample numbers. At each adaptation, it is replaced with a matrix based on the sample covariance of an earlier section of the chain. The theory here is that the covariance of a portion of chain could potentially be a better estimate of the covariance of the posterior distribution than the inverse Hessian.
+
+	The procedure used to choose the sample of points is as follows. First, all points on the chain so far are taken. All points in an initial user-specified period are discarded. The assumption is that the chain will have started moving during this period - if this is incorrect and the chain has still not moved by the end of this period, it is a fatal error and SPM stops. The remaining set of points must contain at least some user-specified number of transitions - if this is incorrect and the chain has not moved this often, it is again a fatal error. If this test is passed, the set of points is systematically sub-sampled down to 1000 points (it must be at least this long to start with).
+
+The variance-covariance matrix of this sub-sample of chain is calculated. As above, correlations greater than \subcommand{MaxCor} are reduced to \subcommand{MaxCor}, correlations less than \subcommand{MaxCor} are increased to  \subcommand{MaxCor}, and very small non-zero variances are increased (\subcommand{CovarianceAdjustment} and \subcommand{MinDiff}. The result is the new variance-covariance matrix of the proposal distribution.
+
+The step size parameter is now on a completely different scale, and must also be reset. It is set to a user-specified value (which may or may not be the same as the initial step size). We recommend that some of the step size adaptations are set to occur after this, so that the step size can be readjusted to an appropriate value which gives good acceptance probabilities with the new matrix. 
+
+All modified versions of the covariance matrix are printed to the standard output, but only the initial covariance matrix (inverse Hessian) is saved to the objectives file. The number of covariance modifications by each iteration is recorded as a column on the objectives file. 
+
+The probability of acceptance for each jump is 0 if it would move out of the bounds, or 1 if it improves the posterior, or (new posterior/old posterior) otherwise. 
+
+You can specify how often the position of the chain is recorded using the keep parameter. For example, with keep 10, only every 10th sample is written to file. 
+
+You have the option to specify that some of the free parameters are fixed during MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. If you specify the start of the chain using \texttt{SPM -i}, these fixed parameters are set to the values in the file.
+
+A multivariate $t$ distribution is available as an alternative to the multivariate normal proposal distribution. If you request multivariate $t$ proposals, you may want to change the degrees of freedom from the default of 4. As the degrees of freedom decrease, the $t$ distribution becomes more heavy tailed. This may lead to better convergence properties.
+
+Given a posterior (sub)sample, \SPM\ can calculate a list of output quantities for each sample point (see Section XXX). These quantities can be dumped into a file (using \texttt{SPM -v}) and read into an external software package where the posterior distributions can be plotted and/or summarised. 
+
+The posterior sample can also be used for projections (Section XXX) or simulations (Section XXX), allowing the parameter uncertainty, as expressed in the posterior distribution, can be included into the risk or other output estimates.
+
+\subsection{Observations}
+
+The objective function is based on the goodness-of-fit of the model to your observations. In the current release of \SPM, most observations are different kinds of time series, i.e., data which were recorded for one or more years, in the same format each year. Examples of time series data types include relative abundance indices, commercial catch length frequencies, survey numbers-at-age, etc,. 
+
+Generally, time series must relate to a specified time step and a specified area, and one or more years in which they were recorded.
+
+\subsubsection{Types of observations}
+
+\subsection{The objective function}
+
+In Bayesian estimation, the objective function is a negative log-posterior,
+
+\[
+Objective(p)= - \sum\limits_i {\log \left[ {L\left( {{\bf{p}}|O_i } \right)} \right]}  - \log \left[ {\pi \left( {\bf{p}} \right)} \right]
+\]
+
+where $\pi$ is the joint prior density of the parameters $p$.
+
+Under either estimation method, penalties can be added to the objective function (see Section XXX). You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken). A penalty to force the YCS to average to 1 (i.e., to have mean 1) may also be necessary.

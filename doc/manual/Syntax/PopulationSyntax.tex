@@ -2,12 +2,7 @@
 
 \subsection{Model structure}
 
-\defCom{Structure}{Define the spatial and population model structure, annual cycle and model years}
-
-\defSub{CellShape}{The shape of the cells in the spatial grid}
-\defType{String}
-\defDefault{Square}
-\defValue{Either \argument{Square} or \argument{Hexagon}}
+\defCom{Model}{Define the spatial structure, population structure, annual cycle, and model years}
 
 \defSub{CellLength}{The length (distance) of one side of a cell}
 \defType{Constant}
@@ -27,7 +22,7 @@
 \defSub{Layer}{The label for the base layer}
 \defType{string}
 \defDefault{None}
-\defValue{Must be a label of a layer defined by \command{Layer}}
+\defValue{Must be a label of a \argument{numeric} layer defined by \command{Layer}}
 
 \defSub{Categories} {Labels of the categories (rows) of the population component of the partition}
 \defType{Vector of strings, of length $1\ldots n_{categories}$}
@@ -44,10 +39,10 @@
 \defDefault{None}
 \defValue{A non-negative integer, ${Age}_{max}\geq 0$ and ${Age}_{min}\geq {Age}_{min}$}
 
-\defSub{PlusGroup}{Define the largest age/size as a plus group}
+\defSub{PlusGroup}{Define the largest age as a plus group}
 \defType{switch}
 \defDefault{True}
-\defValue{Defines  the largest age/size as a plus group}
+\defValue{Defines  the largest age as a plus group}
 
 \defSub{InitialisationPhases}{Define the labels of the phases of the initialisation}
 \defType{Vector of strings, of length of the number of initialisation phases}
@@ -62,12 +57,12 @@
 \defSub{CurrentYear}{Define the current year of the model}
 \defType{Integer}
 \defDefault{None}
-\defValue{Defines the current year of the model, i.e., the model is run from \commandsub{Structure}{.FirstYear}\ to \commandsub{Structure}{.CurrentYear}}
+\defValue{Defines the current year of the model, i.e., the model is run from \commandsub{Model}{.FirstYear}\ to \commandsub{Model}{.CurrentYear}}
 
 \defSub{FinalYear}{Define the final year of the model in projections}
 \defType{Integer}
 \defDefault{None}
-\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{Structure}{.FirstYear} to \commandsub{Structure}{.CurrentYear}, then projected to \commandsub{Structure}{.FinalYear}}
+\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{Model}{.FirstYear} to \commandsub{Model}{.CurrentYear}, then projected to \commandsub{Model}{.FinalYear}}
 
 \defSub{TimeSteps} {Define the \command{TimeStep} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}
@@ -95,7 +90,7 @@
 
 \subsection{Processes}
 
-There are a number of processes that are defined by \SPM, including 
+The population processes available are, 
 
 \begin{itemize}
 	\item Ageing process
@@ -105,17 +100,22 @@ There are a number of processes that are defined by \SPM, including
 	\item Mortality event process
 	\item Category transition process
 	\item Category shift process
+\end{itemize}
+
+The movement processes available are,	
+
+\begin{itemize}
 	\item Preference movement process
 \end{itemize}
 
-Each of the different types of process require different subcommands and arguments.
+Each different process requires different subcommands and arguments.
 
 \defComLab{AgeingProcess} {Define an ageing process with label}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \defComLab{ConstantRecruitmentProcess} {Define a constant recruitment process}
 
@@ -127,7 +127,7 @@ Each of the different types of process require different subcommands and argumen
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
 \defDefault{None}
-\defValue{Must be a valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{Must be a valid category from \commandsub{Model}{.Categories}}
 
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
 \defType{Estimable vector of length \commandsub{ConstantRecruitment}{[label].categories}}
@@ -208,35 +208,35 @@ Each of the different types of process require different subcommands and argumen
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \defComLab{MortalityEventProcess} {Define a mortality event process with label}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \defComLab{CategoryTransitionProcess} {Define a category transition process with label}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \defComLab{CategoryMoveProcess} {Define a category shift process with label}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \defComLab{PreferenceMovementProcess} {Define a preference function movement process with label}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \subsection{Preference functions}
 
@@ -277,7 +277,7 @@ Each of the different types of process require different subcommands and argumen
 \defSub{Categories} {Define the categories are used to calculate the derived quantity}
 \defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{ModelStructure}{.Categories}}
+\defValue{A valid category from \commandsub{Model}{.Categories}}
 
 \defSub{Selectivity} {Define the selectivities}
 \defType{String vector}
