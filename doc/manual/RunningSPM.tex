@@ -1,10 +1,10 @@
 \section{Running \SPM\label{sec:running-spm}}
 
-\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the outputs requested. Section \ref{sec:getting-started} describes how to construct the \SPM\ configuration file. By convention, the name of the \config\ file ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the outputs requested. Section \ref{sec:getting-started} describes how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
 Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.  
 
-Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc. Hence, the \emph{command line arguments} define the \emph{task}. for example, \texttt{-r} is \emph{run}, \texttt{-e} is \emph{estimation}, and \texttt{-s} is the \emph{simulation} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
+Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is \emph{run}, \texttt{-e} is \emph{estimation}, and \texttt{-s} is the \emph{simulation} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
 
 \subsection{The \config\label{sec:config-files}}\index{Input configuration file}
 
@@ -25,7 +25,7 @@ the output section is defined in the \config\ by the text \texttt{[output]}. Thi
 
 \end{enumerate}
 
-The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ file command \command{include\_file} ``\emph{filename}''. The command causes an external file, \emph{filename}, to be read and processed, exactly as if its contents had been inserted in the main \config\ file at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include\_file} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
+The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{IncludeFile} ``\emph{filename}''. The command causes an external file, \emph{filename}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{IncludeFile} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 \subsection{Redirecting standard output\label{sec:redirecting-stdout}}
 
@@ -87,7 +87,7 @@ In addition, the following are optional arguments [\emph{options}],
 \item \texttt{-g \emph{seed}}:{\hspace*{0.5cm} Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ first looks to the \texttt{[estimation]} section for a random number seed \command{RandomSeed}, and if not defined, then automatically generates a random number seed based on the computer clock time.}
 \end{description}
 
-\subsection{Constructing an \SPM\ \config\ file\label{constructing-spm-config}}\index{Input configuration file syntax}
+\subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
 
 The model definition, parameters, observations, and output are specified in a \config. The definition of the population section is described in Section \ref{sec:population-section} and the commands and subcommands in Section \ref{sec:population-syntax}. Similarly, the definition of the estimation section is described in Section \ref{sec:estimation-section} and the commands and subcommands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:output-section} and Section \ref{sec:output-syntax} for the output. 
 
@@ -112,9 +112,9 @@ and then
 
 Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. Commands and subcommands consist of letters and/or underscores, must not contain a spaces or full-point (`.').
 
-There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). The only exception is \command{include\_file} (see Section \ref{sec:general-syntax})\index{Command ! Include\_file}. 
+There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). The only exception is \command{IncludeFile} (see Section \ref{sec:general-syntax})\index{Command ! IncludeFile}. 
 
-In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include\_file} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
+In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{IncludeFile} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
 
 \subsubsection{Commenting out lines}\index{Comments}
 
