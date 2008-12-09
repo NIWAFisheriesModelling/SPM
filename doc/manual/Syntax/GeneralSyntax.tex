@@ -4,14 +4,14 @@ The \config\ comprises of four parts (preamble, population, estimation, and outp
 
 The population section is defined in the \config\ by the text \texttt{[population]}, the estimation section by the text \texttt{[estimation]}, and the output section by the text \texttt{[output]}. These must be the only text on those lines.
 
-Otherwise, the only command that can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections is the command \command{include\_file}. It is defined as,
+Otherwise, the only command that can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections is the command \command{IncludeFile}. It is defined as,
 
-\defComArg{include\_file}{file\_name}{Include an external file}
+\defComArg{IncludeFile}{file\_name}{Include an external file}
 
-\defArg{file\_name}{Include and external external file within the \config}
+\defArg{file\_name}{The name of the external file to include}
 \defType{string}
 \defDefault{None}
 \defValue{A valid external file}
 \defCondition{The file name must be enclosed in double quotes}
-\defExample{\command{include\_file}{\ "my\_file.txt"}}
-\defNote{The \command{} prefix is ignored, hence \command{include\_file} does not necessarily denote the end of a command block as is the case for all other commands}
+\defExample{\command{IncludeFile}{\ "my\_file.txt"}}
+\defNote{\command{IncludeFile} does not denote the end of the previous command block as is the case for all other commands}

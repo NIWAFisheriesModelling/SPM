@@ -23,18 +23,18 @@ for i in range(len(FILE)):
       #line = "\subsubsection*" + line[11:]
       line = ""
     if line[1:8] == "section" :
-      line = "\subsection*" + line[8:]
+      line = "\subsection" + line[8:]
     # keep line only if it is a section, defCom, defComlab, defComArg, or defSub
     if (line[1:11]=="subsection" or line[1:14]=="subsubsection" or line[1:7]=="defCom" or line[1:7]=="defSub") :
       if (line[1:11]=="subsection") :
         count=0
       if (line[1:7]=="defCom") :
         if (count!=0):
-          line = "\\\\ " + line
+          line = "\\par " + line
         else:
           count=1
         if(i > 0):
-          line = line + "\\\\ \\\\"
+          line = line + "\\par \\par"
 
       OUTFILE.write(line)
       OUTFILE.write('\n')

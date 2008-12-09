@@ -1,8 +1,8 @@
 \section{Quick reference\label{sec:quick-reference}}
-\subsection*{General commands and subcommands}
-\defComArg{include\_file}{file\_name}{Include an external file}
-\subsection*{Population command and subcommand syntax}
-\defCom{Model}{Define the spatial structure, population structure, annual cycle, and model years}\\ \\
+\subsection{General commands and subcommands}
+\defComArg{IncludeFile}{file\_name}{Include an external file}
+\subsection{Population command and subcommand syntax}
+\defCom{Model}{Define the spatial structure, population structure, annual cycle, and model years}\par \par
 \defSub{CellLength}{The length (distance) of one side of a cell}
 \defSub{Nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defSub{Ncols}{The number of columns $n_{cols}$ in the spatial structure}
@@ -16,20 +16,20 @@
 \defSub{CurrentYear}{Define the current year of the model}
 \defSub{FinalYear}{Define the final year of the model in projections}
 \defSub{TimeSteps} {Define the \command{TimeStep} labels (in order that they are applied) to form the annual cycle}
-\\ \defComLab{InitialisationPhase}{Define the processes and years of the initialisation phase with label}\\ \\
+\par \defComLab{InitialisationPhase}{Define the processes and years of the initialisation phase with label}\par \par
 \defSub{Years} {Define the number of years to run}
 \defSub{Processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
-\\ \defComLab{TimeStep} {Define a time step with label}\\ \\
+\par \defComLab{TimeStep} {Define a time step with label}\par \par
 \defSub{Process} {Define the process labels, in the order that they are applied, for the time step}
-\\ \defComLab{AgeingProcess} {Define an ageing process with label}\\ \\
+\par \defComLab{AgeingProcess} {Define an ageing process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\\ \defComLab{ConstantRecruitmentProcess} {Define a constant recruitment process}\\ \\
+\par \defComLab{ConstantRecruitmentProcess} {Define a constant recruitment process}\par \par
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{Ages} {Define the ages within each category that receive recruitment}
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
-\\ \defComLab{BHRecruitmentProcess}{Define a Beverton-Holt recruitment process}\\ \\
+\par \defComLab{BHRecruitmentProcess}{Define a Beverton-Holt recruitment process}\par \par
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
@@ -41,28 +41,28 @@
 \defSub{YCS-Values} {YCS values}
 \defSub{YCS-Years} {Years for YCS values}
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
-\\ \defComLab{MortalityRateProcess} {Define a mortality rate process with label}\\ \\
+\par \defComLab{MortalityRateProcess} {Define a mortality rate process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\\ \defComLab{MortalityEventProcess} {Define a mortality event process with label}\\ \\
+\par \defComLab{MortalityEventProcess} {Define a mortality event process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\\ \defComLab{CategoryTransitionProcess} {Define a category transition process with label}\\ \\
+\par \defComLab{CategoryTransitionProcess} {Define a category transition process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\\ \defComLab{CategoryMoveProcess} {Define a category shift process with label}\\ \\
+\par \defComLab{CategoryMoveProcess} {Define a category shift process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\\ \defComLab{PreferenceMovementProcess} {Define a preference function movement process with label}\\ \\
+\par \defComLab{PreferenceMovementProcess} {Define a preference function movement process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\\ \defComLab{PreferenceFunction} {Define a preference function with label}\\ \\
-\\ \defComLab{Layer} {Define a layer with label}\\ \\
+\par \defComLab{PreferenceFunction} {Define a preference function with label}\par \par
+\par \defComLab{Layer} {Define a layer with label}\par \par
 \defSub{Type} {Define the type of layer}
 \defSub{Type} {Define the type of layer}
 \defSub{Row$x$} {Define the values of the layer for row $x$}
 \defSub{Year} {Define the years for \argument{meta-layer}}
 \defSub{Value} {Define the layer labels for each of the years for \argument{meta-layer}}
-\\ \defComLab{DerivedQuantity} {Define a derived quantity with label}\\ \\
+\par \defComLab{DerivedQuantity} {Define a derived quantity with label}\par \par
 \defSub{Categories} {Define the categories are used to calculate the derived quantity}
 \defSub{Selectivity} {Define the selectivities}
 \defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
-\\ \defComLab{ConstantSelectivity} {Define a constant selectivity with label}\\ \\
-\\ \defComLab{VaryingSelectivity} {Define an annually varying selectivity with label}\\ \\
-\subsection*{Estimation command and subcommand syntax}
-\subsection*{Output command and subcommand syntax}
+\par \defComLab{ConstantSelectivity} {Define a constant selectivity with label}\par \par
+\par \defComLab{VaryingSelectivity} {Define an annually varying selectivity with label}\par \par
+\subsection{Estimation command and subcommand syntax}
+\subsection{Output command and subcommand syntax}

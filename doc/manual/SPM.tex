@@ -3,7 +3,11 @@
 % Misc packages
 \usepackage{float}
 \usepackage{setspace} % for defining spacing between lines
-\usepackage{lastpage} % for getting numner of pages in document, \pageref{LastPage}
+\usepackage{lastpage} % for getting number of pages in document, \pageref{LastPage}
+
+% Package for nice printing of external config files and program code
+\usepackage{listings} 
+\lstset{basicstyle=\ttfamily\small,columns=fullflexible} %courier, non-aligned columns
 
 % Allow colour for HTML links
 \usepackage{color}
@@ -26,17 +30,18 @@
   urlcolor=darkgray     % colour of external links
 }
 
-% Automatic index
+% Making the index
 \usepackage{makeidx}
 \makeindex
 
 % Graphics (no postscript files.. just use jpeg, png, etc)
 \usepackage[dvips]{graphicx}
-\usepackage{pslatex} % Changes fonts as well
+% Changes fonts to Times, Helvetica, Courier
+\usepackage{pslatex} 
 
 % Section header fonts
 \usepackage{sectsty}
-\allsectionsfont{\sffamily\normalsize} % Normal sized arial style section headings
+\allsectionsfont{\sffamily\large} % Normal sized arial style section headings
 \makeatletter % this bit adds a 'dot' after the section head numbers
 \def\@seccntformat#1{\csname the#1\endcsname.\quad}
 \makeatother
@@ -46,7 +51,7 @@
 \pagestyle{fancy}
 \fancyhead{}
 \fancyfoot{}
-\headheight 25pt
+\headheight 15pt
 \renewcommand{\headrulewidth}{0pt} % rule line under header
 \renewcommand{\footrulewidth}{0pt}
 \setlength{\parindent}{0pt} % No indentation at start of paragraph
@@ -60,10 +65,7 @@
 \renewcommand{\floatpagefraction}{0.75}
 
 %% make list gaps small
-\newcommand{\denselist}{\itemsep 0pt\topsep-0.5ex\partopsep-0.5ex}
-
-% Verbatim enviroment for including external text files (e.g., program code)
-\usepackage{fancyvrb}
+\newcommand{\denselist}{\itemsep 0pt\topsep-0.3ex\partopsep-0.3ex}
 
 % New commands to define macros and other aids to text and layout
 \newcommand{\config}{input configuration file}
@@ -82,42 +84,24 @@
 
 % New commands to template syntax definitions
 % Define a command without a label
-\newcommand{\defCom}[2]{
- \begin{tabular}{l l}
-  \texttt{\textbf{@#1}}\ & {#2}
- \end{tabular}
-}
+\newcommand{\defCom}[2]{\texttt{\textbf{@#1}} \hspace{0.5cm} {#2}}
 % Define a command with a label
-\newcommand{\defComLab}[2]{
- \begin{tabular}{l l}
-  \texttt{\textbf{@#1}\ \emph{label}} & {#2}
- \end{tabular}
-}
-% Define a command with an argument
-\newcommand{\defComArg}[3]{
- \begin{tabular}{l l}
-  \texttt{\textbf{@#1}\ #2} & {#3}
- \end{tabular}
-}
-% Define a Command argument
-\newcommand{\defArg}[2]{
- \begin{tabular}{l l}
-  \texttt{#1}\ & #2
- \end{tabular} \\*
-}
+\newcommand{\defComLab}[2]{\texttt{\textbf{@#1}\ \emph{label}} \hspace{0.5cm} {#2}}
 % Define a subcommand
-\newcommand{\defSub}[2]{
- \begin{tabular}{l l}
-  \texttt{#1}\ & #2
- \end{tabular} \\*
-}
-% Define subcommand types, confditions, etc.
-\newcommand{\defType}[1]{\hspace*{0.5cm}Type: {#1} \\*}
-\newcommand{\defDefault}[1]{\hspace*{0.5cm}Default: {#1} \\*}
-\newcommand{\defCondition}[1]{\hspace*{0.5cm}Conditions: {#1} \\*}
-\newcommand{\defValue}[1]{\hspace*{0.5cm}Effect: {#1} \\*}
-\newcommand{\defNote}[1]{\hspace*{0.5cm}Note: {#1} \\*}
-\newcommand{\defExample}[1]{\hspace*{0.5cm}Example: {#1} \\*}
+\newcommand{\defSub}[2]{\texttt{#1} \hspace{0.5cm} #2 \\*}% Define a command with an argument
+\newcommand{\defComArg}[3]{\texttt{\textbf{@#1}\ \emph{#2}} \hspace{0.5cm} {#3}}
+% Define a Command\index{Command} argument
+\newcommand{\defArg}[2]{\emph{\texttt{#1}} \hspace{0.5cm} #2 \\*}
+
+% Generic definition for subcommand syntax 
+\newcommand{\defText}[2]{\hangindent=0.3cm \small{#1\ #2}\normalsize \\*}
+% Define subcommand syntax for Type / Default / Condition / Value / Note / Example
+\newcommand{\defType}[1]{\defText{Type:}{#1}}
+\newcommand{\defDefault}[1]{\defText{Default:}{#1}}
+\newcommand{\defCondition}[1]{\defText{Condition:}{#1}}
+\newcommand{\defValue}[1]{\defText{Value:}{#1}}
+\newcommand{\defNote}[1]{\defText{Note:}{#1}}
+\newcommand{\defExample}[1]{\defText{Example:}{#1}}
 
 % Input SVN version definitions
 \input{version.tex}
@@ -140,11 +124,12 @@
 %Begin the document
 \begin{document}
 \hbadness=10000 % to deal with underull hbox warnings
+\sloppy % use sloppy paras
 
 % Title page
-\pagenumbering{alph} % alpha not used, but used to remove warnings when page 1 is defined below
+\pagenumbering{alph} % alpha not used, but used to remove warnings when page 1 is re-defined below
 \maketitle
-\thispagestyle{empty} % no header/footer/page numbers
+\thispagestyle{empty} % no header/footer/page number on this page
 ~\vfill
 \begin{center}
 \SPMName\ User Manual (modified: \DocVer) \\ for use with \SPM\ \VER.
@@ -161,7 +146,7 @@
 
 % Table of contents
 \cleardoublepage{}
-\begin{spacing}{0.6} % Reduce space between lines in contents list
+\begin{spacing}{0.8} % Reduce space between lines in contents list
 \tableofcontents
 \end{spacing}
 
@@ -189,8 +174,7 @@
 \include{Output}
 
 \cleardoublepage{}
-%\section{Command and subcommand syntax\label{sec:syntax}}
-\sloppy % use sloppy paras
+%\section{Command\index{Command} and subcommand syntax\label{sec:syntax}}
 \input{syntax/GeneralSyntax}\label{sec:syntax}
 \cleardoublepage{}
 \input{syntax/PopulationSyntax}

@@ -118,7 +118,7 @@ In general, commands, sub-commands, and arguments in the parameter files are cas
 
 \subsubsection{Commenting out lines}\index{Comments}
 
-Comments beginning with \commentline\ are ignored. If you want to remove a group of commands or subcommands using \commentline, then you can comment out all lines in the block, not just the first line. 
+Lines beginning with \commentline\ are considered to be comments and are ignored. If you want to remove a group of commands or subcommands using \commentline, then comment out all lines in the block, not just the first line. 
 
 Alternatively, you can comment out an entire block or section by placing curly brackets around the text that you want to comment out. Put in a \commentstart\ as the first character on the line to start the comment block, then end it with \commentend. All lines (including line breaks) between \commentstart\ and \commentend\ inclusive are ignored. (These should ideally be the first character on a line. But if not, then the entire line will be treated as part of the comment block.)
 
@@ -126,8 +126,8 @@ Alternatively, you can comment out an entire block or section by placing curly b
 
 \SPM\ has a range of commands that define the model structure, processes, observations, how tasks are carried out. There are three types of commands, 
 \begin{enumerate}
-\item Commands that have an argument and do not have subcommands (for example, \command{IncludeFile})
-\item Commands that have a label and subcommands (for example \command{ConstantRecruitment})
+\item Commands that have an argument and do not have subcommands (for example, \command{IncludeFile}\ \argument{argument})
+\item Commands that have a label and subcommands (for example \command{ConstantRecruitment}\ \argument{label})
 \item Commands that do not have either a label or argument, but have subcommands (for example \command{Structure})
 \end{enumerate}
 
@@ -135,11 +135,11 @@ Commands that have a label must have a unique label, i.e., the label cannot be u
 
 \subsubsection{Subcommands}\index{Commands ! Subcommands}
 
-Subcommands in \SPM\ are for defining options and parameter values for commands. They always take an argument which can be one or more of a range of types (the specific types acceptable for each subcommand are defined in Section \ref{sec:syntax}, but the general types are described below). 
+Subcommands in \SPM\ are for defining options and parameter values for commands. They always take an argument which is one of a specific \emph{type}. The types acceptable for each subcommand are defined in Section \ref{sec:syntax}, and are summarised below. 
 
 Unlike commands (\command{command}), subcommands can be order specific. In other words, the order in which they appear within a command-block is important, and can affect the way in which they are interpreted. Usually, \SPM\ will report an error if they are not supplied in the order that is expected, however, in some circumstances \SPM\ will not \textemdash leading to possible errors in your expected results.  
 
-Typically, the arguments for a subcommand are either\index{Subcommand argument type},
+The arguments for a subcommand are either\index{Subcommand argument type},
 
 \begin{description}
 \item \textbf{switch} true/false 
@@ -159,7 +159,7 @@ Integers must be entered as integers (i.e., if \subcommand{year}\ is an integer 
 
 Arguments of type integer vector, constant vector, estimable vector, or categorical vector contain one or more entries on a row, separated by white space (tabs or spaces). 
 
-Estimable parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. However, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{free parameters}.
+\emph{Estimable} parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. However, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{free parameters}.
 
 \subsubsection{Determining parameter names}
 
@@ -171,10 +171,10 @@ When SPM processes a \config, it translates each command and each subcommand int
 \item \command{command}\subcommand{[label]}.\subcommand{subcommand}\subcommand{[i]} if the command has a label, and we are accessing the \emph{i}th element of that vector of values of the subcommand.
 \end{description} 
 
-The unique parameter name is then used to reference the parameter when estimating, applying a penalty, or a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{population\_process} with the label \subcommand{recruitment} is,
+The unique parameter name is used to reference the parameter when estimating, applying a penalty, or a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{ConstantRecruitmentProcess} with the label \subcommand{MyRecruitment} is,
 
-\texttt{@population\_process[recruitment].R0}
+\texttt{@ConstantRecruitmentProcess[MyRecruitment].R0}
 
 \subsection{\SPM\ exit status values}
 
-When \SPM\ completes its task successfully or errors out gracefully, it returns a single exit status value (0) to the operating system. Otherwise the operating system will return -1. To determine if \SPM\ completed its task successfully, then check the standard output for error and information messages.
+When \SPM\ completes its task successfully or errors out gracefully, it returns a single exit status value (0) to the operating system. The operating system will return -1 id \SPM\ terminates unexpectedly. Hence, to determine if \SPM\ completed its task successfully, check the standard output for error and information messages.
