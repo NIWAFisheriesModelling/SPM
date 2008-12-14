@@ -54,6 +54,9 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 $element(i',j',k,l)\leftarrow element(i',j',k,l) - p\cdot element(i',j',k,l)$
 
 \SPM\ assumes that each movement process occurs simultaneously over all cells (synchronous updating), i.e., all cell updates from each individual movement process are first evaluated for all cells, and then applied to all cells affected. The movement process (labelled directed movement in \SPM) allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. See Section \ref{sec:population-section} for detail.
+
+For the later, we use the term \emph{preference function}\index{Preference function} \citep{1366,1367} to describe the movement probability distributions. We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.The preference function movement process allows the number of parameters describing movement to to reduced, and results in a movement process that is some function of some underlying property of each location. For example, if we assume that movement between areas was a function of the Euclidean distance between areas, we could model movement between any two areas as a linear decay or exponential decay function \citep{1366}. Alternately, if distribution and density were correlated with bathymetric depth for a marine organism, we might model the movement and distribution as a function of depth. 
+
 \subsection{Layers}
 
 Within \SPM, layers are used in three contexts:
@@ -198,6 +201,62 @@ $f(x | N, \lambda) = \left\{
 
 \subsection{Layers}
 
+\subsection{Layers\label{sec:layers}}
+
+\emph{Layers} are an important component of a model in \SPM. Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception \textemdash the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. SPM defines the following types of layer:
+
+\begin{enumerate}
+\item The \emph{base layer} $L_B$: In any model there is one and only one base layer $L_B$, that defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) ge 0$. The base layer must always be defined, have only numeric values and have valid value for every cell in the spatial grid.
+
+\item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square} \textemdash see Section \ref{sec:population-section} for distance calculations for the hexagon grid type). Here, the distance between cell a and cell b can be defined as,
+
+\[
+d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
+\]
+
+where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the sqaure. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
+
+\item A \emph{quantity layer}: A quantity layer is simply the count, biomass, or density of the number of individuals within each cell within categories $k$ and with selectivity $S$. SPM calculates the values of an quantity layer when running the model at the point in time where the value is required. Quantities can be 
+
+\begin{enumerate}
+
+\item Abundance, the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S$,
+
+\[
+N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
+\]
+
+\item Biomass, the sum of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S$,
+
+\[
+N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
+\]
+
+\item abundance-density, the density (sum divided by cell area as defined in the base layer) of the number of individuals within cell $a$ in categories $k$ and with selectivity $S$,
+
+\[
+N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
+\]
+
+\item biomass-density, the density (sum divided by cell area as defined in the base layer) of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S$,
+
+\[
+N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
+\]
+
+\end{enumerate}
+
+\item A \emph{numeric layer}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user.
+
+\item A \emph{categorical layer}: A model may have many categorical layers, and these are used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas. Such layers are typically used to aggregate the population within cells into groups for comparing with observations. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
+
+\end{enumerate}
+
+\subsubsection{Meta-layers\label{meta-layers}}
+
+In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
+
+
 \subsubsection{Numeric layers}
 
 \subsubsection{Category layers}
@@ -210,7 +269,7 @@ $f(x | N, \lambda) = \left\{
 
 \subsubsection{Distance layers}
 
-\subsection{Selectivity}
+\subsection{Selectivities\label{sec:selectivities}}
 
 \subsubsection{Logistic}
 

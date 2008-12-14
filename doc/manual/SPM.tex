@@ -3,7 +3,6 @@
 % Misc packages
 \usepackage{float}
 \usepackage{setspace} % for defining spacing between lines
-\usepackage{lastpage} % for getting number of pages in document, \pageref{LastPage}
 
 % Package for nice printing of external config files and program code
 \usepackage{listings} 
@@ -116,10 +115,22 @@
 \newcommand{\SPMName}{Spatial Population Model} %SPM long name
 \newcommand{\authors}{\href{mailto:"Alistair Dunn"<a.dunn@niwa.co.nz>?subject=SPM:}{authors}} %hyper ref for email
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.} %NIWA
-\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ \VER). \Organisation\ \emph{Unpublished report}. \pageref{LastPage} p.} % full document reference
+\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ \VER). \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
 \title{\SPMName\ User Manual \\(\SPM\ \VER)} %Document title
 \author{Alistair Dunn, Scott Rasmussen}  %Document authors
 \date{\DocDate} %Date of publication
+
+% Define \clearemptydoublepage so-as to have truely blank pages between sections
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+
+% Load package to count the number of pages in document
+% For getting number of pages in document (NOT the last page number printed), use \ref{TotPages}
+% Load this last to ensure its macros are not overwritten
+\usepackage{totpages} 
 
 %Begin the document
 \begin{document}
@@ -145,76 +156,75 @@
 \end{center}
 
 % Table of contents
-\cleardoublepage{}
+\clearemptydoublepage{}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
 \tableofcontents
 \end{spacing}
 
 % Document body
-\cleardoublepage{}
+\clearemptydoublepage{}
 \renewcommand{\headrulewidth}{0.2pt}
 \fancyhead[LE]{\slshape \nouppercase \rightmark} % Section headings at top of page (header, even pages)
 \fancyhead[RO]{\slshape \nouppercase \leftmark}  % Section headings at top of page (header, odd pages)
 \pagenumbering{arabic} % Page numbers a arabic numerals
 \include{Introduction}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
+\include{Overview}
+
+\clearemptydoublepage{}
 \include{RunningSPM}
 
-\cleardoublepage{}
-\include{GettingStarted}
-
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{Population}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{Estimation}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{Output}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 %\section{Command\index{Command} and subcommand syntax\label{sec:syntax}}
 \input{syntax/GeneralSyntax}\label{sec:syntax}
-\cleardoublepage{}
+\clearemptydoublepage{}
 \input{syntax/PopulationSyntax}
-\cleardoublepage{}
+\clearemptydoublepage{}
 \input{syntax/EstimationSyntax}
-\cleardoublepage{}
+\clearemptydoublepage{}
 \input{syntax/OutputSyntax}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{Examples}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{PostProcessing}
 
-%\cleardoublepage{}
+%\clearemptydoublepage{}
 %\include{ChangesEnhancements} % not required for first version
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{Troubleshooting}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{Acknowledgments}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{QuickReference}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 % Referencing
 \bibliographystyle{plainnat}
 \renewcommand{\bibsection}{%
   \section{References}}
   \setcitestyle{round,aysep={},yysep={;}%
 }
-
 \include{References}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 \include{License}
 
-\cleardoublepage{}
+\clearemptydoublepage{}
 
 \let\stdsection\section % Force index to be a numbered section
 \def\section*#1{\stdsection{#1}}

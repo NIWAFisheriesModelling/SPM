@@ -1,0 +1,92 @@
+\section{Model overview\label{sec:overview}}\index{Model overview}
+
+\subsection{Introduction}
+
+The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics and movement model. It allows the implementation of population models suitable for the simulation and estimation of parameters in models with a large number of areas. It implements a statistical catch-at-age population dynamics and movement model, using a discrete time-step state-space model that represents a cohort-based population age structure in a spatially explicit manner. 
+
+The basic structure of the model is defined in terms of the \emph{partition} and \emph{state}. 
+
+The state is the current status of the population at a point in time. The state will typically change one or more times in every time step of every year, depending on the \emph{processes} defined for each model. The state consists of two parts, the partition and derived quantities. 
+
+The partition is simply a breakdown of the total number of individuals in the current population by spatial location, category, and age at some point in time. The resulting information can be conceptualised as a 4-dimensional matrix, with dimensions for spatial location ($x$ and $y$), and dimensions for category and age. 
+
+A derived quantity is simply a cumulative summary of the state at some point in time. Unlike the partition, these are recorded for each year of the model run. Derived quantities build up a vector of values over the model run years, with one value for each year. For example, the numbers of individuals in a category labelled mature at some point in the annual cycle may be a derived quantity. 
+
+The application of processes within each year is controlled by the annual cycle. This defines what processes happen in each model year, and in what sequence. Each year is split up into one or more time steps, with at least one process occurring in each time step. You can think of each time step as representing a particular part of the calendar year, or you can just treat them as an abstract sequence of events.
+
+The division of the year into an arbitrary number of time steps allows the user to specify the exact order in which processes and observations occur. The user needs to specify the time step in which each process occurs. If you ask for more than one process to occur in the same time step, there is a default order in which they occur (see Section 5.3). If you don't want things to happen in this default order, just split them into different time steps.
+
+An \SPM\ model can be parametrised by both population processes (for example, ageing, recruitment, and mortality), and movement processes. Movement is by either adjacent cell movements, between cell migrations, or by global movements parametrised as a function of known attributes at each spatial location. \SPM\ is designed to be flexible and to allow for the estimation of both population and movement parameters from local or aggregated spatially explicit observations. 
+
+The population structure of \SPM\ follows the usual population modelling conventions and is similar to those implemented in other population models, for example CASAL\index{CASAL} \citep{1388}. The model records the numbers of individuals by age and category (i.e., male, female), as well as the locations of these cohorts within a spatial grid. In general, cohorts are added via a recruitment event, are aged annually, and are removed from the population via various forms of mortality. The population is assumed to be closed (i.e., no immigration or emigration from the modelled area)
+
+The spatial component of \SPM\ is designed to allow for and to estimate movements of cohorts and groups of individuals between spatial locations, and hence allow for movement as well as spatially explicit observations and processes. 
+
+A model is implemented in \SPM\ using an \config \index{Input configuration file}, which is a complete description of the model structure (including the spatial and population processes), observations and estimation methods, and outputs requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, free parameters can be \emph{estimated} or \emph{profiled}, \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
+
+This section gives a quick overview of the model, and how to use it. Detailed descriptions of the components of \SPM, the model structures, mathematical equations used, and command and subcommand arguments are given in the following sections.
+
+\subsection{Model specification}
+
+A model in \SPM\ is specified by the \config\ in three parts \textemdash the population section, the estimation section, and the output section. These three sections completely describe a model implemented in \SPM. See Sections \ref{sec:population-syntax}, \ref{sec:estimation-syntax}, and \ref{sec:output-syntax} for details and specification of \SPM s command and subcommand syntax. 
+
+\subsubsection{The population section}
+
+The population section\index{Population section} (see Section \ref{sec:population-section}) defines the model of the movement and population dynamics. It describes the model structure (both the spatial and population structure), defines the population and movement processes (for example, recruitment, migration, and mortality), defines the layers (the known attributes of each spatial cell), selectivities, and model parameters.
+
+It consists of several components, including;
+\begin{itemize}
+  \item The spatial and population structure
+  \item Model initialisation (i.e., the state of the model at the start of the first year)
+  \item The annual cycle (time steps and processes that are applied in each time step)
+  \item The specifications and parameters of the processes;
+  \begin{itemize}
+    \item Population processes (i.e., processes that add, remove, or shift numbers within each age/category)
+    \item Spatial processes (i.e., processes that move or shift cohorts between spatial locations but not their age or category)
+  \end{itemize}
+  \item Layers and their definitions,
+  \item Selectivities
+  \item Parameter values and their definitions
+  \item Derived quantities required as parameters for some processes (i.e., recruitment)
+\end{itemize}
+
+The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. We define, within this grid, locations where the population can and cannot potentially be present using a \emph{layer}. The layout of the grid can be either \emph{square} or a north-south orientated \emph{hexagon}.
+
+Within each spatial grid cell, the population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
+
+Model initialisation can occur in several phases, each which iterates through a number of years carrying out the population and/or spatial processes defined for that phase. Analytical initialisation is not implemented in \SPM, hence equilibrium and initial population states are evaluated iteratively. At the end of the initialisation, \SPM\ runs through the model years carrying out processes in the order defined in the annual cycle, and can evaluate expected values of observations in order to calculate likelihoods, project forward to determine future states, or simulate observations from the current state.
+
+\SPM\ has two types of processes, \emph{population}\index{Population processes} and \emph{movement}\index{Movement processes} processes. \emph{Population} processes are those processes which modify, move or otherwise change the numbers of individuals \emph{within} a spatial cell, i.e., they do not affect the spatial location of a cohort. \emph{Movement} processes, on the other hand, move, shift or otherwise modify cohorts emph{between} spatial cells, but do not affect the age or category of the numbers in each cohort. 
+
+The population processes include recruitment\index{Recruitment}, ageing\index{Ageing},  mortality\index{Mortality} events (e.g., natural and exploitation) and category transition processes\index{Category transition} (i.e., processes that move individuals between categories, while preserving their age structure). See Section \ref{sec:population-section} for a complete list of available processes.
+
+Each of these processes is carried out in the user-defined prescribed order when initialising the model, and then for a user-defined order in each year in the annual cycle\index{Annual cycle}.
+
+\SPM\ implements three different types of movement processes\index{Movement};
+\begin{enumerate}
+	\item  A migration movement rate of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
+	\item An adjacent cell movements, parametrised by some function of an underlying layer \textemdash equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
+	\item Movement parametrised as a probability density function. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
+\end{enumerate}
+
+The annual cycle is implemented as a set of processes that occur, in a user-defined order, within each year. User-defined time steps are used to break the annual cycle into separate components, and allow observations to be associated with different sets of processes. Any number of processes can occur within each time step, in any order and can occur multiple times within each time step. Note that time steps are not implemented during the initialisation phases, and that the annual cycle in the initialisation phases can be different from that run during the model years.
+
+Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. In this example, the spawning stock biomass could be defined as the abundance or biomass of a part of the population at some point in the annual cycle, for selected ages and categories. Derived quantities are described further in the population section (Section \ref{sec:population-section}).
+
+\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}, to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n \times m$ matrix and can be either \emph{logical}, \emph{numeric}, or \emph{categorical}. See Section \ref{sec:population-section} for further details.
+
+A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section} or to modify the effects of processes on each age class \ref{sec:population-section}. \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities. See Section \ref{sec:selectivities} for more details.
+
+\subsubsection{The estimation section}
+
+The estimation section\index{Estimation section} specifies the free parameters, estimation methods, observations, penalties and priors. Estimation is based on an objective function (e.g., negative log posterior). Depending on the run mode, the estimation section is used to specify the methods for finding a point estimate (i.e., the set of parameter values that minimizes the objective function), doing profiles, or MCMC methods and options, etc.
+
+Further, the estimation section specifies the \emph{free parameters}, i.e., those parameters that are to be estimated (i.e., free) within each model run. The estimation section specifies the choice of estimation method, observations and their error structures, which parameters are to be estimated, priors, starting values, and minimiser control values.
+
+Observations are data which allow us to make inferences about unknown parameters. Examples include relative or absolute abundance indices, proportions-at-age frequencies, etc. Estimation in \SPM\ involves finding values for each of the free parameters so that each observation is `close' (in some mathematical sense) to a corresponding expected value. 
+
+Penalties and priors act as constraints on the estimation. They can either encourage or discourage (depending on the specific implementation) parameter estimates that are `near' some value, and hence influence the estimation process. For example, the catch-limit penalties can be used to discourage parameter estimates that lead to models where the recorded catch was unable to be fully taken.
+
+\subsubsection{The output section}
+
+The output section\index{Output section} specifies to model outputs. It defines the quantities and model components to be output to external files or to the screen. While \SPM\ will provide informational messages to the screen, the \SPM\ will only produce model estimates, population states, and other data as requested by the output section. 
