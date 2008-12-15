@@ -1,125 +1,187 @@
 \section{The population section\label{sec:population-section}}
 
-\subsection{Overview}
+The population section\index{Population section} defines the model of the movement and population dynamics. It describes the model structure (both the spatial and population structure), defines the population and movement processes (for example, recruitment, migration, and mortality), defines the layers (the known attributes of each spatial cell), selectivities, and model parameters.
+
+The population, at any point in time, is described by the \emph{state}, which comprises of the \emph{partition} and any \emph{derived quantities}. The partition is comprised of the spatial structure, and within each spatial location, the population structure. 
 
 The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
 
 \subsection{Spatial structure}
 
-The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
+\SPM\ implements two spatial structures, one derived from a grid of \emph{square} cells \textemdash the default (see Figure \ref{fig:SquareSpatialStructure}) and the other derived from a grid of north-south orientated \emph{hexagons} (see Figure \ref{fig:HexagonSpatialStructure}). 
 
-\SPM\ implements two spatial structures, \emph{square} \textemdash the default (see Figure \ref{fig:SquareSpatialStructure}) and \emph{hexagon} (see Figure \ref{fig:HexagonSpatialStructure}). These effect the location of neighbours (for adjacent movements), and the distance between cells. For a square grid, the distance between any cell a and cell b is defined as,
-
-\[
-d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
-\]
-
-where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scalar representing the length of one side of the square.
-
-For a hexagonal grid, the distance between cell a and cell b is defined as,
-
-\[
-d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
-\]
-
-where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scalar representing the length of one side of the hexagon. 
-
-Note that under these definition, the distance between any cell and itself is 0.
-
+The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area} of each spatial cell, as used for density calculations within \SPM.
 
 \begin{figure}[htp]
 \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/SquareStructure}}
- \caption{The \emph{square} spatial structure}
+ \caption{An illustration of the \emph{square} spatial structure}
  \label{fig:SquareSpatialStructure}
 \end{figure}
 
 \begin{figure}[htp]
 \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonStructure}}
- \caption{The \emph{hexagon} spatial structure}
+ \caption{An illustration of the \emph{hexagon} spatial structure}
  \label{fig:HexagonSpatialStructure}
 \end{figure}
+
+Models can be implemented as a grid based on either squares or hexagons, but not both. This choice effects the location of neighbours (for adjacent movements) and the distance between cells (for preference based movements). Distance between cells is determined as the euclidean distance between cell centres, modified by an arbitrary scalar. 
+
+Hence, the definition of the spatial structure includes;
+\begin{itemize}
+\item The type of spatial grid and its dimensions, $n_{rows}$ and $m_{cols}$
+\item The label of a numeric layer to be used as the base layer (defining the locations where the population can be present as well as the relative area of each cell)
+\item the length (distance) of a side of the grid (either a square or hexagon) to be used as the scaler for distance calculations
+\end{itemize}
 
 \subsection{Population structure}
 
 The population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
 
-\subsubsection*{Movement processes}
+The names and number of categories are user defined, but there  just be at least one category in any model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, and the last age may optionally be a plus group.
 
-Movement processes are those processes that move individuals between cells but retain the their population state, and are defined such that,
+Hence, the definition of the population structure includes;
+\begin{itemize}
+\item The number and labels of the categories, $k_{categories}$
+\item The minimum and maximum ages that define the ages of the model, $l_{ages}$
+\item If the last age is a plus group
+\end{itemize}
 
-$element(i,j,k,l)\leftarrow element(i,j,k,l) + p \cdot element(i',j',k,l)$,
+\subsection{Layers\label{sec:layers}}
 
-i.e., each element in cell$(i,j)$ is updated as the sum of itself and some proportion $p$ of a neighbouring element in cell$(i',j')$. To conserve abundance we also update element$(i',j',k,l)$ as,
+Layers form a key underlying concept in \SPM. They comprise of a grid of known values, with a value for every spatial cell in the model. Layers are used by processes, observations, and outputs commands to supply spatially explicit covariates and any categorical groupings required. 
 
-$element(i',j',k,l)\leftarrow element(i',j',k,l) - p\cdot element(i',j',k,l)$
-
-\SPM\ assumes that each movement process occurs simultaneously over all cells (synchronous updating), i.e., all cell updates from each individual movement process are first evaluated for all cells, and then applied to all cells affected. The movement process (labelled directed movement in \SPM) allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. See Section \ref{sec:population-section} for detail.
-
-For the later, we use the term \emph{preference function}\index{Preference function} \citep{1366,1367} to describe the movement probability distributions. We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.The preference function movement process allows the number of parameters describing movement to to reduced, and results in a movement process that is some function of some underlying property of each location. For example, if we assume that movement between areas was a function of the Euclidean distance between areas, we could model movement between any two areas as a linear decay or exponential decay function \citep{1366}. Alternately, if distribution and density were correlated with bathymetric depth for a marine organism, we might model the movement and distribution as a function of depth. 
-
-\subsection{Layers}
+Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception \textemdash the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. Typically they are provided by the user as a matrix of values, although abundance and distance layers can be calculated by \SPM\ as and when required. 
 
 Within \SPM, layers are used in three contexts:
+\begin{enumerate}
+\item The base layer: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) > 0$. Further, positive values of the base layer $L_B$ represent the \emph{area} represented by that spatial cell. 
+\item Covariate layers: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates must be continuous (i.e., numeric) variables. Covariate layers must be $\geq 0$.
+\item Classification layer. A model may have many classification layers, and these are used as a classification or grouping variable for aggregating data over individual spatial cells $(i,j)$, e.g., statistical areas or management areas. Such layers are typically used to aggregate the population within cells into groups so-as to allow comparison with observations. The values in layers used as classification layers must be categorical.
+\end{enumerate}
+
+Typically, layers are supplied by the user and are assumed known and constant. \SPM\ defines the following types of layer;
 
 \begin{enumerate}
+\item The \emph{base layer} $L_B$: In any model there is one and only one base layer $L_B$, that defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) ge 0$. The base layer must always be defined, have only numeric values and have valid value for every cell in the spatial grid.
 
-\item The base layer: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) > 0$. Further, positive values of the base layer $L_B$ represent the relative or absolute \emph{area} represented by that spatial cell. 
+\item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square} \textemdash see Section \ref{sec:population-section} for distance calculations for the hexagon grid type). Here, the distance between cell a and cell b can be defined as,
 
-\item Covariate layers: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., sea floor depth may be a covariate of some movement process). The values in layers used as covariates must be continuous (i.e., numeric) variables. Covariate layers must be positive and $\geq 0$.
+$$
+d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
+$$
 
-\item Classification layer. A model may have many classification layers, and these are used as a classification or grouping variable for aggregating data over individual spatial cells $(i,j)$, e.g., statistical areas or management areas. Such layers are typically used to aggregate the population within cells into groups so-as to allow comparison with observations. The values in layers used as classification layers must be categorical variables.
+where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the sqaure. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
+
+\item A \emph{quantity layer}: A quantity layer is simply the count, biomass, or density of the number of individuals within each cell within categories $k$ and with selectivity $S$. SPM calculates the values of an quantity layer when running the model at the point in time where the value is required. Quantities can be 
+
+\begin{enumerate}
+\item Abundance, the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$,
+
+$$
+N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l \text{element} \left( {i,j,k,l} \right)} } 
+$$
+
+\item Biomass, the sum of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$ and mean weight $w_{ak}$
+
+$$
+N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {w_{k,l} S_l \text{element} \left({i,j,k,l}\right)} } 
+$$
+
+\item Abundance-density, the density (sum divided by cell area as defined in the base layer) of the number of individuals within cell $a$ with area $A_a$ in categories $k$ and with selectivity $S_l$ at age $l$,
+
+$$
+N\left( a \right) = \frac{\sum\limits_{k \in K} {\sum\limits_l {S_l \text{element} \left( {i,j,k,l} \right)} }}{A_a}
+$$
+
+\item Biomass-density, the density (sum divided by cell area as defined in the base layer) of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$ and with selectivity $S_l$ at age $l$ and mean weight $w_{ak}$,
+
+$$
+N\left( a \right) = \frac{\sum\limits_{k \in K} {\sum\limits_l {w_{k,l} S_l \text{element} \left( {i,j,k,l} \right)} }}{A_a}
+$$
 
 \end{enumerate}
 
-Typically, layers are supplied by the user and are assumed known and constant.However, there are two exceptions to this rule \textemdash layers of type abundance and distance are calculated automatically by \SPM\ as required. For the distance layer, the distance between cell $a$ and cell $b$ is defined as,
+\item A \emph{numeric layer}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user.
 
-$d(a,b)=\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$
+\item A \emph{categorical layer}: A model may have many categorical layers, and these are used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas. Such layers are typically used to aggregate the population within cells into groups for comparing with observations. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
 
-where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively.
+\item A \emph{meta-layer\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
 
-For the abundance layer, the abundance of a cell is simply a count of the number of individuals in the cell a within categories $K$, with selectivity $S$,
+\end{enumerate}
 
-$N(a)=\sum_{k\in K} \sum_i element(i,j,k,l)$
+However, there are  exceptions to this rule \textemdash layers of type biomass, quantity, and distance are calculated automatically by \SPM\ as required. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively.
 
-Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash except for a single case for covariate layers. In that instance, the covariate layer supplied can be can optionally (unless of type category or abundance) be standardized prior to use, i.e.,
+For the abundance layer, the abundance or biomass of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_{k\in K} \sum_i \text{element}(i,j,k,l)$.
 
-$L'(a)=L(a)/max(L)$
+Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash\ except for a single case for covariate layers. In that instance, the covariate layer supplied can be can optionally (unless of type category or abundance) be standardized prior to use, i.e., $L'(a)=L(a)/max(L)$ so that $L'(a) < 1$.
 
-i.e., $L'(a) < 1$.
+\subsection{Time sequence}
 
-\subsection{Initialization}
+The time sequence of the model is defined in three parts;
+\begin{itemize}
+\item Initialisation 
+\item Run years
+\item Projection years
+\end{itemize}
 
-The annual cycle in \SPM\ consists of an arbitrary number of time steps, and within each time step an arbitrary number of population processes are followed by an arbitrary number of movement processes. 
+\subsubsection{Model initialisation}
 
-initialization\_phases Phase1
-run\_years 14
-start\_year 1994
-projection\_years 100
+\SPM\ initialises the initial equilibrium state as an iterative process, because a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can also be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. 
 
-\subsection{Model initialization}
+The initialisation part can consist of one or more phases, with each phase occurring for at least one year. Within each phase, the processes defined for that phase are carried out, and use as the starting point for the following phase, or if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) seeded with a zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail. 
 
-\SPM\ initializes the initial equilibrium state as an iterative process, because a general solution that initializes complex structured movement models can be difficult to implement using analytic techniques. However, initializing via iteration for a long-lived species with complex movements can also be slow to run. In \SPM, we allow for user-defined multi-phased initialization using iteration to allow the user to optimize models for speed. Each phase of the initialization can involve any number of population and/or movement processes. 
+Hence, you need to define;
+\begin{itemize}
+\item The initialisation phases
+\item The number of years in each phase and the processes to apply in each
+\end{itemize}
 
-Following initialization, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. This differs from the more usual implementation (see, for example, Bull et al. 2008) where observations can be associated with the population state during some part of a time step. 
+\subsubsection{Model years}
 
-\subsection{Annual cycle}
+Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. 
 
-\subsection{Time steps}
+Processes are carried out in the order specified within each time step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. The projection part then extends the run time up to the end of year \argument{final}. 
+\begin{itemize}
+\item The time steps and the processes applied in each
+\item The initial year (i.e., the model start year)
+\item The current year (i.e., the model end year)
+\item The final year (i.e., the model projection end year)
+\end{itemize}
 
-\subsection{Movement processes}
+\subsection{Processes}
 
-\subsubsection{Directed movement}
+Processes produce changes in the model partition, by adding, removing or moving individuals between spatial cells (movement processes), and ages or categories (population processes). These include processes such as recruitment, mortality, ageing, and movements.
 
-\begin{figure}[htp]
-\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/Movement}}
- \caption{Movement}
- \label{fig:Movement}
-\end{figure}
+An \SPM\ model can be parametrised by both population processes (for example, ageing, recruitment, and mortality), and movement processes. Population processes are those processes which modify, move or otherwise change the numbers of individuals within a spatial cell, i.e., they do not affect the spatial location of a cohort. Movement processes, on the other hand, move, shift or otherwise modify cohorts between spatial cells, but do not affect the age or category of the numbers in each cohort. 
 
+\subsubsection{Movement processes}
 
-\paragraph{The preference function}
+Movement processes are those processes that move individuals between cells but retain the their population state, and are defined such that,
 
- Movement in \SPM\ can be defined as a probability distribution based on an underlying preference function. Here, We define the preference for a cell $x$ as the preference function $f_x(\theta_x,P(x))$, where $\theta_x$ are the parameters for $f_x$. So, given a set of $n$ attributes for cell $x$, we can define a preference function for each, and hence we define the aggregated or total preference function for any cell $x$ as the weighted product of individual preference functions,
+$\text{element}(i,j,k,l)\leftarrow \text{element}(i,j,k,l) + p \cdot \text{element}(i',j',k,l)$,
+
+i.e., each element in cell$(i,j)$ is updated as the sum of itself and some proportion $p$ of a neighbouring element in cell$(i',j')$. To conserve abundance we also update element$(i',j',k,l)$ as,
+
+$\text{element}(i',j',k,l)\leftarrow \text{element}(i',j',k,l) - p\cdot \text{element}(i',j',k,l)$
+
+\SPM\ assumes that each movement process occurs simultaneously over all cells (synchronous updating), i.e., all cell updates from each individual movement process are first evaluated for all cells, and then applied to all cells affected. 
+
+\SPM\ implements three types of movement\index{Movement};
+\begin{enumerate}
+	\item  A migration movement rate of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
+	\item An adjacent cell movements, parametrised by some function of an underlying layer \textemdash equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
+	\item Movement parametrised as a probability density function. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
+\end{enumerate}
+
+The migration process moves individuals from one location to another. A migration can involve one or more categories and movement at age is defined as some proportion multiplies by a selectivity. Migrations are limited in scope to move individuals from one cell to another, and are available to allow compatibility with limited space models such as CASAL \cite{1388}.
+
+The adjacent cell movement simply moves a proportion of individuals to neighbouring cells. It can be applied to a limited range of spatial locations by associating it with a layer.
+
+Preference movements allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. Here, we use the term \emph{preference function}\index{Preference function} \citep{1366,1367} to describe the movement probability distributions. We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.The preference function movement process allows the number of parameters describing movement to to reduced, and results in a movement process that is some function of some underlying property of each location. For example, if we assume that movement between areas was a function of the Euclidean distance between areas, we could model movement between any two areas as a linear decay or exponential decay function \citep{1366}. Alternately, if distribution and density were correlated with bathymetric depth for a marine organism, we might model the movement and distribution as a function of depth. 
+
+\subsubsection*{The total preference function}
+
+Movement in \SPM\ can be defined as a probability distribution based on an underlying preference function. Here, we define the preference for a cell $x$ as the preference function $f_x(\theta_x,P(x))$, where $\theta_x$ are the parameters for $f_x$. So, given a set of $n$ attributes for cell $x$, we can define a preference function for each, and hence we define the aggregated or total preference function for any cell $x$ as the weighted product of individual preference functions,
 
 $P_x=f_1(\theta_1,P_1(x))^{\alpha_1} + f_2(\theta_2,P_2(x))^{\alpha_2} + f_3(\theta_3,P_3(x))^{\alpha_3} + \cdots + f_n(\theta_n,P_n(x))^{\alpha_n}$
 
@@ -136,9 +198,9 @@ Note that there are three forms of preference function,
 \item Those that are a function of the distance between the sink and the source cells. 
 \end{enumerate} 
 
-Preference functions of the first type are determined only by the parameters of the preference function and some underlying, fixed, attribute. Preference functions of the other are dynamic, i.e. they depend on the relative locations of the cells or on the density of a cell at a particular point in time.
+Preference functions of the first type are determined only by the parameters of the preference function and some underlying, fixed, attribute. Preference functions of the others are dynamic, i.e. they depend on the relative locations of the cells or on the density of a cell at a particular point in time.
 
-\paragraph{Preference functions}
+\subsubsection*{Preference functions}
 
 Preference functions in \SPM\ include \subcommand{constant}, \subcommand{normal}, \subcommand{double-normal}, \subcommand{logistic}, \subcommand{inverse-logistic}, \subcommand{exponential-decay}, and \subcommand{threshold}. These are defined as,
 
@@ -181,95 +243,132 @@ $f(x | N, \lambda) = \left\{
 
 \end{enumerate}
 
-\subsection{Model years}
-
 \subsection{Population processes}
+
+Population processes are those processes that change the population state of individuals, but retain their location. 
 
 \subsubsection{Recruitment}
 
-\subsubsection{Ageing}
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements two recruitment processes, constant recruitment and Beverton-Holt recruitment \citep{1203}. 
 
-\subsubsection{Mortality}
+In both of the recruitment process, a number of individuals are added to the partition at the age and categories specified. If more than one category is defined, then the proportions of individuals added across categories are user-defined. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
+
+For each cell where cell$(i,j)$ is a member of some layer $L_R$, the  number of fish added in year $y$ is 
+$$
+\text{element}\left( i,j,k,l \right) \leftarrow \text{element}\left( i,j,k,l \right) + p_k \left( R_y / n \right)
+$$
+
+where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and $n$ is the number of spatial locations where recruitment occurs. 
+
+In the constant recruitment process, $R_y$, the number of recruits in year $y$ is simply the product of the average recruitment $R_0$ and the annual year class strength multiplier, $YCS$, i.e.,
+
+$$
+R_y = R_0 \times YCS_{y-offset}
+$$
+
+where $offset$ if the number of years offset to link the year class with the year of spawning.
+
+In the Beverton-Holt recruitment process, $R_y$, the number of recruits in year $y$ is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
+
+$$
+R_y = R_0 \times YCS_{y-offset} \times SR \left( SSB_{y-offset} \right)
+$$
+
+where $offset$ if the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship, parametrised by the steepness, $h$,
+
+$$
+SR(SSB) = \frac{SSB}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB}{B_0} \right) \right)
+$$
+
+Note that the Beverton-Holt recruitment process requires a value for $SSB$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the $SSB$ for the recruitment process.
+
+
+\subsubsection{Ageing\label{sec:ageing}}
+
+The ageing process simply moves all individuals in the named categories to the next age class. The ageing process is defined as 
+
+$\text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l-1)$
+
+except that in the case of the plus group (if defined), 
+
+$\text{element}(i,j,k,age_{max}) \leftarrow \text{element}(i,j,k,age_{max}) + \text{element}(i,j,k,age_{max-1})$.
+
+\subsubsection{Mortality\label{sec:mortality}}
+
+\SPM\ implements three mortality processes. Natural mortality, event mortality, and a rate mortality. 
 
 \subsubsection{Category transitions}
 
-\subsection{Movement processes}
-
-\subsubsection{Directed movement}
-
-\paragraph{Directed-process}
-
-\subsection{Layers}
-
-\subsection{Layers\label{sec:layers}}
-
-\emph{Layers} are an important component of a model in \SPM. Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception \textemdash the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. SPM defines the following types of layer:
-
-\begin{enumerate}
-\item The \emph{base layer} $L_B$: In any model there is one and only one base layer $L_B$, that defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) ge 0$. The base layer must always be defined, have only numeric values and have valid value for every cell in the spatial grid.
-
-\item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square} \textemdash see Section \ref{sec:population-section} for distance calculations for the hexagon grid type). Here, the distance between cell a and cell b can be defined as,
-
-\[
-d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
-\]
-
-where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the sqaure. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
-
-\item A \emph{quantity layer}: A quantity layer is simply the count, biomass, or density of the number of individuals within each cell within categories $k$ and with selectivity $S$. SPM calculates the values of an quantity layer when running the model at the point in time where the value is required. Quantities can be 
-
-\begin{enumerate}
-
-\item Abundance, the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S$,
-
-\[
-N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
-\]
-
-\item Biomass, the sum of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S$,
-
-\[
-N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
-\]
-
-\item abundance-density, the density (sum divided by cell area as defined in the base layer) of the number of individuals within cell $a$ in categories $k$ and with selectivity $S$,
-
-\[
-N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
-\]
-
-\item biomass-density, the density (sum divided by cell area as defined in the base layer) of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S$,
-
-\[
-N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l element\left( {i,j,k,l} \right)} } 
-\]
-
-\end{enumerate}
-
-\item A \emph{numeric layer}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user.
-
-\item A \emph{categorical layer}: A model may have many categorical layers, and these are used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas. Such layers are typically used to aggregate the population within cells into groups for comparing with observations. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
-
-\end{enumerate}
-
-\subsubsection{Meta-layers\label{meta-layers}}
-
-In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
-
-
-\subsubsection{Numeric layers}
-
-\subsubsection{Category layers}
-
-\subsubsection{Abundance layers}
-
-\subsubsection{Biomass layers}
-
-\subsubsection{Density layers}
-
-\subsubsection{Distance layers}
+Two sorts: category rate and category number
 
 \subsection{Selectivities\label{sec:selectivities}}
+
+An selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used frequently throughout the SPM population section: for selectivity curves. 
+
+Selectivities have a number of different parametric forms in SPM and you can use any of these for any selectivity parameter. Some common parameterisations are logistic, knife\_edge, double\_normal, and the most flexible parameterisation allvalues where each selectivity element is specified separately. See Section 3.4 for instructions on specifying Selectivities in SPM. 
+
+An selectivity is always defined to apply just to one category (or row) or the population. To apply the same selectivity to more than one category, the you need to specify the rows that it applied to.
+
+Note that selectivities are indexed by age, with indices from min\_age to max\_age. For example, you might have an age-based selectivity that was logistic with 50\% mark at age 5 and 95\% mark at age 7. This would be defined by subgroup logistic, a50=5, ato95=(7-5)=2. Then the value of the selectivity at age x=3 is  .
+
+Note that the function values for some choices of parameters for some Selectivities can result in an computer numeric overflow error (i.e., the number calculated from parameter values is either too large or too small to be represented in computer memory). SPM implements range checks on some parameters to test for a possible numeric overflow error before attempting to calculate function values. For example, the logistic selectivity is implemented such that if $(a50-x)/ato_95 > 5$ then the value of the selectivity at x is zero, i.e., for $a50=5$, $ato_95=0.1$, then the value of the selectivity at $x=1$, without range checking would be $7.1x10-52$. With range checking, that value is $0$ (as $(a50 x)/ato_95=40 > 5$).
+
+
+5.7	Selectivity descriptions
+
+The available Selectivities are described below. Table 1 summarises the available selectivities.
+
+constant
+
+ 
+
+The constant selectivity has the estimable parameter C. 
+
+allvalues
+
+ 
+
+The allvalues selectivity has estimable parameters Vlow Vlow+1 … Vhigh. Here, you need to provide an selectivity value for each age class.
+
+allvalues\_bounded
+
+ 
+
+The allvalues\_bounded selectivity has non-estimable parameters L and H. The estimable parameters are VL VL+1 … VH. Here, you need to provide an selectivity value for each age class.
+
+logistic
+
+ 
+
+The logistic selectivity has estimable parameters a50 and ato95. The logistic selectivity takes values 0.5 at x=a50 and 0.95 at x=a50+ato95. 
+
+double\_normal
+
+  
+
+The double\_normal selectivity has estimable parameters $a1$, $sL$, and $sR$. It has values $1$ at $x=a1$, and $0.5$ at $x=a1-sL$ or $x=a1+sR$. 
+
+logistic\_producing
+
+The logistic\_producing selectivity has the non-estimable parameters L and H, and has estimable parameters a50 and ato95. For category transitions, f(x) represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic\_producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters a50, ato9.
+
+double\_exponential
+
+The double\_exponential selectivity has non-estimable parameters x1 and x2, and estimable parameters x0, y0, y1, and y2. It can be 'U-shaped'. Bounds for x0 must be such that x1 < x0 < x2. The selectivity passes through the points (x1, y1), (x0, y0), and (x2, y2). If both y1 and y2 are greater than y0 the selectivity is 'U-shaped' with minimum at (x0, y0).
+
+Table 1: Summary of the selectivites available in SPM, their parameters, and if they can be shifted or used as a length-based selectivity in an age based model.
+ Selectivity	Parameters		Shift?	Length-
+	Non-estimable	Estimable		based?
+				
+constant		C	Yes	Yes
+allvalues		Vlow Vlow+1 … Vhigh	No	No
+allvalues\_bounded	L H	VL VL+1 … VH	No	No
+logistic		a50 ato95	Yes	Yes
+double\_normal		a1 sL sR	Yes	Yes
+logistic\_producing	L H	a50 ato95	No	No
+double\_exponential	x1, x2	x0, y0, y1, y2	No	Yes
+				
+
 
 \subsubsection{Logistic}
 

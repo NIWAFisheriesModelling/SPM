@@ -1,10 +1,13 @@
 \documentclass[a4paper,11pt,twoside,pdftex]{article}
 
 % Misc packages
-\usepackage{float}
+\usepackage{float} % for floating tables and graphics
 \usepackage{setspace} % for defining spacing between lines
 
-% Package for nice printing of external config files and program code
+% Use AMS Maths 
+\usepackage{amsmath} 
+
+% Package for including and pretty printing of external config files and program code
 \usepackage{listings} 
 \lstset{basicstyle=\ttfamily\small,columns=fullflexible} %courier, non-aligned columns
 
@@ -41,9 +44,6 @@
 % Section header fonts
 \usepackage{sectsty}
 \allsectionsfont{\sffamily\large} % Normal sized arial style section headings
-\makeatletter % this bit adds a 'dot' after the section head numbers
-\def\@seccntformat#1{\csname the#1\endcsname.\quad}
-\makeatother
 
 % Page style
 \usepackage{fancyhdr}
@@ -120,7 +120,7 @@
 \author{Alistair Dunn, Scott Rasmussen}  %Document authors
 \date{\DocDate} %Date of publication
 
-% Define \clearemptydoublepage so-as to have truely blank pages between sections
+% Define \clearemptydoublepage so-as to have truly blank pages between sections
 \let\origdoublepage\cleardoublepage
 \newcommand{\clearemptydoublepage}{%
   \clearpage
