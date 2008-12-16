@@ -66,9 +66,9 @@ Typically, layers are supplied by the user and are assumed known and constant. \
 
 \item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square} \textemdash see Section \ref{sec:population-section} for distance calculations for the hexagon grid type). Here, the distance between cell a and cell b can be defined as,
 
-$$
+\begin{equation}
 d\left( {a,b} \right) = \lambda \sqrt {\left( {x_a  - x_b } \right)^2  + \left( {y_a  - y_b } \right)^2 } 
-$$
+\end{equation}
 
 where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the sqaure. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
 
@@ -77,27 +77,27 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \begin{enumerate}
 \item Abundance, the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$,
 
-$$
+\begin{equation}
 N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {S_l \text{element} \left( {i,j,k,l} \right)} } 
-$$
+\end{equation}
 
 \item Biomass, the sum of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$ and mean weight $w_{ak}$
 
-$$
+\begin{equation}
 N\left( a \right) = \sum\limits_{k \in K} {\sum\limits_l {w_{k,l} S_l \text{element} \left({i,j,k,l}\right)} } 
-$$
+\end{equation}
 
 \item Abundance-density, the density (sum divided by cell area as defined in the base layer) of the number of individuals within cell $a$ with area $A_a$ in categories $k$ and with selectivity $S_l$ at age $l$,
 
-$$
+\begin{equation}
 N\left( a \right) = \frac{\sum\limits_{k \in K} {\sum\limits_l {S_l \text{element} \left( {i,j,k,l} \right)} }}{A_a}
-$$
+\end{equation}
 
 \item Biomass-density, the density (sum divided by cell area as defined in the base layer) of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$ and with selectivity $S_l$ at age $l$ and mean weight $w_{ak}$,
 
-$$
+\begin{equation}
 N\left( a \right) = \frac{\sum\limits_{k \in K} {\sum\limits_l {w_{k,l} S_l \text{element} \left( {i,j,k,l} \right)} }}{A_a}
-$$
+\end{equation}
 
 \end{enumerate}
 
@@ -158,11 +158,15 @@ An \SPM\ model can be parametrised by both population processes (for example, ag
 
 Movement processes are those processes that move individuals between cells but retain the their population state, and are defined such that,
 
-$\text{element}(i,j,k,l)\leftarrow \text{element}(i,j,k,l) + p \cdot \text{element}(i',j',k,l)$,
+\begin{equation}
+\text{element}(i,j,k,l)\leftarrow \text{element}(i,j,k,l) + p \cdot \text{element}(i',j',k,l)
+\end{equation},
 
 i.e., each element in cell$(i,j)$ is updated as the sum of itself and some proportion $p$ of a neighbouring element in cell$(i',j')$. To conserve abundance we also update element$(i',j',k,l)$ as,
 
-$\text{element}(i',j',k,l)\leftarrow \text{element}(i',j',k,l) - p\cdot \text{element}(i',j',k,l)$
+\begin{equation}
+\text{element}(i',j',k,l)\leftarrow \text{element}(i',j',k,l) - p\cdot \text{element}(i',j',k,l)
+\end{equation}
 
 \SPM\ assumes that each movement process occurs simultaneously over all cells (synchronous updating), i.e., all cell updates from each individual movement process are first evaluated for all cells, and then applied to all cells affected. 
 
@@ -183,13 +187,17 @@ Preference movements allows movement from any $cell(a) \rightarrow cell(b)$, for
 
 Movement in \SPM\ can be defined as a probability distribution based on an underlying preference function. Here, we define the preference for a cell $x$ as the preference function $f_x(\theta_x,P(x))$, where $\theta_x$ are the parameters for $f_x$. So, given a set of $n$ attributes for cell $x$, we can define a preference function for each, and hence we define the aggregated or total preference function for any cell $x$ as the weighted product of individual preference functions,
 
-$P_x=f_1(\theta_1,P_1(x))^{\alpha_1} + f_2(\theta_2,P_2(x))^{\alpha_2} + f_3(\theta_3,P_3(x))^{\alpha_3} + \cdots + f_n(\theta_n,P_n(x))^{\alpha_n}$
+\begin{equation}
+  P_x=f_1(\theta_1,P_1(x))^{\alpha_1} + f_2(\theta_2,P_2(x))^{\alpha_2} + f_3(\theta_3,P_3(x))^{\alpha_3} + \cdots + f_n(\theta_n,P_n(x))^{\alpha_n}
+\end{equation}
 
 where $\alpha_i$ is an arbitrary weighting factor for attribute $i$.
 
 Then we define the probability of moving from cell $a$ to any cell $b$ (where $b$ is defined as the set of all possible cells, including $a$),
 
-$p(a\rightarrow b) = {P_a} / {\sum_{i \in \forall b}P_i}$
+\begin{equation}
+  p(a\rightarrow b) = {P_a} / {\sum_{i \in \forall b}P_i}
+\end{equation}
 
 Note that there are three forms of preference function,
 \begin{enumerate}
@@ -207,39 +215,54 @@ Preference functions in \SPM\ include \subcommand{constant}, \subcommand{normal}
 \begin{enumerate}
 \item The \subcommand{constant}\ preference function has dependent variable $x$ and has no parameters, and is defined as,
 
-$f(x)=x$, where $0 \leq x \leq 1$
+\begin{equation}
+f(x)=x$, where $0 \leq x \leq 1
+\end{equation}
 
 \item The \subcommand{normal}\ preference function has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
 
-$f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2} $
+\begin{equation}\
+f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2} 
+\end{equation}
  
 \item The \subcommand{double-normal}\ preference function has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
 
-$f(x | \mu, \sigma_L, \sigma_R) = \left\{ 
-\begin{array}{l l}
-  2^{-[(x- \mu)/\sigma_L ]^2} & \quad \mbox{if $x \leq \mu$}\\
-  2^{-[(x- \mu)/\sigma_R ]^2} & \quad \mbox{if $x \ge \mu$}\\
-\end{array} \right.$ 
+\begin{equation}
+  f(x | \mu, \sigma_L, \sigma_R) = \left\{ 
+  \begin{array}{l l}
+    2^{-[(x- \mu)/\sigma_L ]^2} & \quad \mbox{if $x \leq \mu$}\\
+    2^{-[(x- \mu)/\sigma_R ]^2} & \quad \mbox{if $x \ge \mu$}\\
+  \end{array} \right.
+\end{equation} 
 
 \item The \subcommand{logistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 
-$f(x | a_{50}, a_{to95}) = 1 / [1+19^{(a_{50}-x)/a_{to95}}]$
+\begin{equation}
+  f(x | a_{50}, a_{to95}) = 1 / [1+19^{(a_{50}-x)/a_{to95}}]
+\end{equation}
 
 \item The \subcommand{inverse-logistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 
-$f(x | a_{50}, a_{to95}) =1- 1 / [1+19^{(a_{50}-x)/a_{to95}}]$
+\begin{equation}
+  f(x | a_{50}, a_{to95}) =1- 1 / [1+19^{(a_{50}-x)/a_{to95}}]
+\end{equation}
+
 
 \item The \subcommand{exponential-decay}\ preference function has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
 
-$f(x | \lambda) =\exp(-\lambda x)$, where $x \geq 0$ and $0$ otherwise
+\begin{equation}
+  f(x | \lambda) =\exp(-\lambda x), \text{where $x \geq 0$ and $0$ otherwise}
+\end{equation}
 
 \item The \subcommand{threshold}\ preference function has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
 
-$f(x | N, \lambda) = \left\{ 
-\begin{array}{l l}
-  1 & \quad \mbox{if $x \leq N$}\\
-  1/\left({\frac{x}{N}}^\lambda\right) & \quad \mbox{if $x \ge N$}\\
-\end{array} \right. $, where $x \geq 0$ and $0$ otherwise
+\begin{equation}
+  f(x | N, \lambda) = \left\{ 
+    \begin{array}{l l}
+    1 & \quad \mbox{if $x \leq N$}\\
+    1/\left({\frac{x}{N}}^\lambda\right) & \quad \mbox{if $x \ge N$}\\
+  \end{array} \right., \text{where $x \geq 0$ and $0$ otherwise}
+\end{equation}
 
 \end{enumerate}
 
@@ -254,48 +277,99 @@ Recruitment processes are defined as  process that introduces new individuals in
 In both of the recruitment process, a number of individuals are added to the partition at the age and categories specified. If more than one category is defined, then the proportions of individuals added across categories are user-defined. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
 For each cell where cell$(i,j)$ is a member of some layer $L_R$, the  number of fish added in year $y$ is 
-$$
-\text{element}\left( i,j,k,l \right) \leftarrow \text{element}\left( i,j,k,l \right) + p_k \left( R_y / n \right)
-$$
+
+\begin{equation}
+  \text{element}\left( i,j,k,l \right) \leftarrow \text{element}\left( i,j,k,l \right) + p_k \left( R_y / n \right)
+\end{equation}
+
 
 where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and $n$ is the number of spatial locations where recruitment occurs. 
 
 In the constant recruitment process, $R_y$, the number of recruits in year $y$ is simply the product of the average recruitment $R_0$ and the annual year class strength multiplier, $YCS$, i.e.,
 
-$$
-R_y = R_0 \times YCS_{y-offset}
-$$
+\begin{equation}
+  R_y = R_0 \times YCS_{y-offset}
+\end{equation}
+
 
 where $offset$ if the number of years offset to link the year class with the year of spawning.
 
 In the Beverton-Holt recruitment process, $R_y$, the number of recruits in year $y$ is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
 
-$$
-R_y = R_0 \times YCS_{y-offset} \times SR \left( SSB_{y-offset} \right)
-$$
+\begin{equation}
+  R_y = R_0 \times YCS_{y-offset} \times SR \left( SSB_{y-offset} \right)
+\end{equation}
 
 where $offset$ if the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship, parametrised by the steepness, $h$,
 
-$$
+\begin{equation}
 SR(SSB) = \frac{SSB}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB}{B_0} \right) \right)
-$$
+\end{equation}
 
 Note that the Beverton-Holt recruitment process requires a value for $SSB$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the $SSB$ for the recruitment process.
-
 
 \subsubsection{Ageing\label{sec:ageing}}
 
 The ageing process simply moves all individuals in the named categories to the next age class. The ageing process is defined as 
 
-$\text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l-1)$
+\begin{equation}
+  \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l-1)
+\end{equation}
 
 except that in the case of the plus group (if defined), 
 
-$\text{element}(i,j,k,age_{max}) \leftarrow \text{element}(i,j,k,age_{max}) + \text{element}(i,j,k,age_{max-1})$.
+\begin{equation}
+  \text{element}(i,j,k,age_{max}) \leftarrow \text{element}(i,j,k,age_{max}) + \text{element}(i,j,k,age_{max-1}).
+\end{equation}
 
 \subsubsection{Mortality\label{sec:mortality}}
 
-\SPM\ implements three mortality processes. Natural mortality, event mortality, and a rate mortality. 
+Two mortality processes are permissible in \SPM, natural and event. Both processes remove individuals from the partition. \SPM does not implement the Baranov catch equation or any other process where both natural and event mortality can be concurrently applied. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural, then some event mortality in sequence. It is up to the user to specify how this happens.
+
+Natural mortality can depend on a layer. Here only one method of dependance is implemented, the multiplicative method. The multiplicative natural mortality method defines that the value of instantaneous natural mortality applied to the population state within each cell is the product of the layer value, a selectivity-at-age, and a natural mortality rate. Hence, let the mortality rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $M(a,k,l)$, and given a value from a layer $L_a$  at $a$, a natural morality rate $M$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+
+\begin{equation}
+  M\left( {a,k,l} \right) = ML_a S_l 
+\end{equation}
+
+And the resulting number of individuals remaining in cell $a$ in category $k$ at age $l$ from applying a natural mortality process is then calculated as,
+
+\begin{equation}
+  n'\left( {a,k,l} \right) = n\left( {a,k,l} \right)\exp \left( { - M\left( {a,k,l} \right)} \right)
+\end{equation}
+
+Event mortality acts in a similar manner to natural mortality, except that it removes a specified number of individuals from the partition, rather than applying a mortality rate. However, the maximum number of individuals to remove is constrained by a maximum exploitation rate.
+
+Event mortality must be defined using a layer. Here, the number of individuals to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) \textemdash except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals as it can while not exceeding the maximum exploitation rate.
+
+Event mortality is applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$. and is applied as follows,
+
+First, calculate the vulnerable abundance for each category $k$ in $1 \ldots K$ for ages $l = 1 \ldots L$ that are subject to event mortality,
+
+\begin{equation}
+  V\left( {k,l} \right) = S\left( l \right)N\left( {k,l} \right)
+\end{equation}
+
+And hence define the total vulnerable abundance as,
+
+\begin{equation}
+  V_{Total}  = \sum\limits_K {\sum\limits_L {V\left( {k,l} \right)} } 
+\end{equation}
+
+Hence the exploitation rate to apply is 
+
+\begin{equation}
+U = \begin{cases}
+  C/V_{total}, & \text{if $C/V_{total} \leq U_{max}$} \\
+  U_{max}, & \text{otherwise}\\ 
+  \end{cases} 
+\end{equation}
+
+And the number removed from each age l in category k is,
+
+\begin{equation}
+  R\left( {k,l} \right) = UV\left( {k,l} \right)
+\end{equation}
 
 \subsubsection{Category transitions}
 
