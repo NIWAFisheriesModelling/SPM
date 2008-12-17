@@ -3,9 +3,28 @@
 % Misc packages
 \usepackage{float} % for floating tables and graphics
 \usepackage{setspace} % for defining spacing between lines
+\usepackage{cmap} % allow searching in pdf documents
 
+% Caption package for formating figure and label captions
+\usepackage[font=bf,format=hang,labelsep=colon,justification=justified,singlelinecheck=false]{caption}
+
+% hyperref for HTML links within pdf 
+%EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
+\usepackage[a4paper,bookmarks=true,bookmarksopen=true,bookmarksnumbered=true,
+%            pdfpagemode=UseNone,pdfpagelayout=TwoPageRight,
+            pdftitle={Spatial Population Model (SPM) Users Manual}, 
+            pdfauthor={Alistair Dunn; Scott Rasmussen}, 
+            pdfsubject={Spatial Population Model},pdftex]{hyperref}
+\hypersetup{
+  breaklinks=true,      % allow line breaks in URLs
+  colorlinks=true,      % use colour to define links
+  linkcolor=black,      % colour of internal links
+  citecolor=black,      % colour of links to bibliography
+  filecolor=black,      % colour of file links
+  urlcolor=darkgray     % colour of external links
+}
 % Use AMS Maths 
-\usepackage{amsmath} 
+\usepackage[fleqn]{amsmath}
 
 % Package for including and pretty printing of external config files and program code
 \usepackage{listings} 
@@ -21,17 +40,6 @@
 % Natlib to better cite references (round brackets, commas between refs, and sorted)
 \usepackage[round,comma,sort]{natbib}
 
-% hyperref for HTML links within pdf 
-\usepackage{hyperref}  %EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
-\hypersetup{
-  breaklinks=true,      % allow line breaks in URLs
-  colorlinks=true,      % use colour to define links
-  linkcolor=black,      % colour of internal links
-  citecolor=black,      % colour of links to bibliography
-  filecolor=black,      % colour of file links
-  urlcolor=darkgray     % colour of external links
-}
-
 % Making the index
 \usepackage{makeidx}
 \makeindex
@@ -44,6 +52,10 @@
 % Section header fonts
 \usepackage{sectsty}
 \allsectionsfont{\sffamily\large} % Normal sized arial style section headings
+% Add a dot after section headings
+\makeatletter
+\def\@seccntformat#1{\csname the#1\endcsname.\quad}
+\makeatother
 
 % Page style
 \usepackage{fancyhdr}
@@ -55,7 +67,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \setlength{\parindent}{0pt} % No indentation at start of paragraph
 \setlength{\baselineskip}{1ex plus 0.2ex minus 0.1ex}
-\setlength{\parskip}{\medskipamount} % Gap between paragraphs
+\setlength{\parskip}{1ex} % Gap between paragraphs
 \raggedbottom % prefer space at the bottom of page
 
 %% stop figures from going onto a page by themselves 
@@ -64,7 +76,17 @@
 \renewcommand{\floatpagefraction}{0.75}
 
 %% make list gaps small
-\newcommand{\denselist}{\itemsep 0pt\topsep-0.3ex\partopsep-0.3ex}
+\usepackage{tweaklist} % (a local style) for tweaking spacing between list elements
+\renewcommand{\enumhook}{\setlength{\topsep}{0.5ex}%
+  \setlength{\itemsep}{0.1ex}}
+\renewcommand{\itemhook}{\setlength{\topsep}{0.5ex}%
+  \setlength{\itemsep}{0.1ex}}
+\renewcommand{\descripthook}{\setlength{\topsep}{0.5ex}%
+  \setlength{\itemsep}{0.1ex}}
+  
+% Minimise hyphen use
+\hyphenpenalty=5000
+\tolerance=1000
 
 % New commands to define macros and other aids to text and layout
 \newcommand{\config}{input configuration file}
@@ -143,7 +165,7 @@
 \thispagestyle{empty} % no header/footer/page number on this page
 ~\vfill
 \begin{center}
-\SPMName\ User Manual (modified: \DocVer) \\ for use with \SPM\ \VER.
+\SPMName\ User Manual (modified: \DocVer) \\ for use with \SPM\ \VER
 \end{center}
 
 % Citation page
@@ -159,6 +181,18 @@
 \clearemptydoublepage{}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
 \tableofcontents
+\end{spacing}
+
+% Table of figures
+\clearemptydoublepage{}
+\begin{spacing}{0.8} % Reduce space between lines in contents list
+\listoffigures
+\end{spacing}
+
+% Table of tables
+\clearemptydoublepage{}
+\begin{spacing}{0.8} % Reduce space between lines in contents list
+\listoftables
 \end{spacing}
 
 % Document body

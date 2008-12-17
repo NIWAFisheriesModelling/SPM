@@ -10,20 +10,16 @@ Simple command line arguments\index{Command line arguments} are used to determin
 
 The \config\ comprises of four parts (preamble, population, estimation, and output). All of these, except the preamble, are compulsory. \SPM\ will error out if one of the compulsory sections is missing.
 
-\begin{enumerate}
-\item \textbf{preamble}: 
-the preamble occurs at the start of the \config, before the three sections defined below. \SPM\ ignores any text within this section, and hence the preamble can be used to record comments or descriptions of the \config. 
+\begin{description}
+\item [\textbf{preamble}] the preamble occurs at the start of the \config, before the three sections defined below. \SPM\ ignores any text within this section, and hence the preamble can be used to record comments or descriptions of the \config. 
 
-\item \textbf{population}: 
-the population section is defined in the \config\ by the text \texttt{[population]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[population]} header, until the \texttt{[estimation]} header is reached, are considered to be commands and subcommands the define the population structure of the model. The population section is described in Section \ref{sec:population-section}.
+\item [\textbf{population}]  the population section is defined in the \config\ by the text \texttt{[population]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[population]} header, until the \texttt{[estimation]} header is reached, are considered to be commands and subcommands the define the population structure of the model. The population section is described in Section \ref{sec:population-section}.
 
-\item \textbf{estimation}:
-the estimation section is defined in the \config\ by the text \texttt{[estimation]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[estimation]} header, until the \texttt{[output]} header is reached, are considered to be commands and subcommands the define the estimation structure of the model.  The estimation section is described in Section \ref{sec:estimation-section}.
+\item [\textbf{estimation}] the estimation section is defined in the \config\ by the text \texttt{[estimation]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[estimation]} header, until the \texttt{[output]} header is reached, are considered to be commands and subcommands the define the estimation structure of the model.  The estimation section is described in Section \ref{sec:estimation-section}.
 
-\item \textbf{output}:
-the output section is defined in the \config\ by the text \texttt{[output]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[output]} header, until the end of the file is reached, are considered to be commands and subcommands the define the outputs of the model.  The output section is described in Section \ref{sec:output-section}.
+\item [\textbf{output}] the output section is defined in the \config\ by the text \texttt{[output]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[output]} header, until the end of the file is reached, are considered to be commands and subcommands the define the outputs of the model.  The output section is described in Section \ref{sec:output-section}.
 
-\end{enumerate}
+\end{description}
 
 The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{IncludeFile} ``\emph{file}''. The command causes an external file, \emph{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{IncludeFile} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
@@ -55,36 +51,34 @@ The call to \SPM\ is of the following form.:
 
 where \emph{task} is one of;
 \begin{description}
-\item \texttt{-h}:{\hspace{0.5cm}  Display help (this page).}
+\item [\texttt{-h}]  Display help (this page).
+\item [\texttt{-l}] Display the reference for the software license (CPLv1.0).
+\item [\texttt{-v}] Display the \SPM\ version number.
 
-\item \texttt{-l}:{\hspace{0.5cm} Display the reference for the software license (CPLv1.0).}
+\item [\texttt{-r \emph{config\_file}}] \emph{Run} the model once using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}}, or optionally, with the values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item \texttt{-v}:{\hspace{0.5cm} Display the \SPM\ version number.}
+\item [\texttt{-e \emph{config\_file}}] Do a point \emph{estimate} of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item \texttt{-r \emph{config\_file}}:{\hspace{0.5cm} \emph{Run} the model once using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}}, or optionally, with the values in the file denoted with the command line argument \texttt{-i \emph{file}}.}
+\item [\texttt{-p \emph{config\_file}}] Do a likelihood \emph{profile} using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item \texttt{-e \emph{config\_file}}:{\hspace{0.5cm} Do a point \emph{estimate} of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.}
+\item [\texttt{-m \emph{config\_file}}] Do an \emph{MCMC} estimate of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item \texttt{-p \emph{config\_file}}:{\hspace{0.5cm} Do a likelihood \emph{profile} using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.}
+\item [\texttt{-f \emph{config\_file}}] Project the model \emph{forward} in time using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item \texttt{-m \emph{config\_file}}:{\hspace{0.5cm} Do an \emph{MCMC} estimate of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.}
-
-\item \texttt{-f \emph{config\_file}}:{\hspace{0.5cm} Project the model \emph{forward} in time using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.}
-
-\item \texttt{-s \emph{config\_file}}:{\hspace{0.5cm} \emph{Simulate} observations of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.}
+\item [\texttt{-s \emph{config\_file}}] \emph{Simulate} observations of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
 \end{description}
 
 In addition, the following are optional arguments [\emph{options}],
 
 \begin{description}
-\item \texttt{-i \emph{file}}:{\hspace*{0.5cm} \emph{Input} one or more sets of free parameter values from \texttt{\emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.}
+\item [\texttt{-i \emph{file}}] \emph{Input} one or more sets of free parameter values from \texttt{\emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.
 
-\item \texttt{-t \emph{number}}:{\hspace*{0.5cm} Number of \emph{threads} to run (i.e., number of processors available for use).}
+\item [\texttt{-t \emph{number}}] Number of \emph{threads} to run (i.e., number of processors available for use).
 
-\item \texttt{-q}:{\hspace*{0.5cm} Run \emph{quietly}, i.e., suppress verbose printing of \SPM.}
+\item [\texttt{-q}] Run \emph{quietly}, i.e., suppress verbose printing of \SPM.
 
-\item \texttt{-g \emph{seed}}:{\hspace*{0.5cm} Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ looks to the \texttt{[estimation]} section for a random number seed \command{RandomSeed}, and if not defined, then automatically generates a random number seed based on the computer clock time.}
+\item [\texttt{-g \emph{seed}}]  Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ looks to the \texttt{[estimation]} section for a random number seed \command{RandomSeed}, and if not defined, then automatically generates a random number seed based on the computer clock time.
 \end{description}
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}

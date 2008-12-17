@@ -13,15 +13,18 @@ The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows
 The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area} of each spatial cell, as used for density calculations within \SPM.
 
 \begin{figure}[htp]
-\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/SquareStructure}}
- \caption{An illustration of the \emph{square} spatial structure}
- \label{fig:SquareSpatialStructure}
+ \centering
+  \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/SquareStructure}}
+  \caption{An illustration of the \emph{square} spatial structure}
+  \label{fig:SquareSpatialStructure}
 \end{figure}
 
+
 \begin{figure}[htp]
-\resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonStructure}}
- \caption{An illustration of the \emph{hexagon} spatial structure}
- \label{fig:HexagonSpatialStructure}
+ \centering
+  \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonStructure}}
+  \caption{An illustration of the \emph{hexagon} spatial structure}
+  \label{fig:HexagonSpatialStructure}
 \end{figure}
 
 Models can be implemented as a grid based on either squares or hexagons, but not both. This choice effects the location of neighbours (for adjacent movements) and the distance between cells (for preference based movements). Distance between cells is determined as the euclidean distance between cell centres, modified by an arbitrary scalar. 
@@ -29,7 +32,7 @@ Models can be implemented as a grid based on either squares or hexagons, but not
 Hence, the definition of the spatial structure includes;
 \begin{itemize}
 \item The type of spatial grid and its dimensions, $n_{rows}$ and $m_{cols}$
-\item The label of a numeric layer to be used as the base layer (defining the locations where the population can be present as well as the relative area of each cell)
+\item The label of a numeric layer to be used as the base layer (defining the locations where the population can be present as well as the area of each cell)
 \item the length (distance) of a side of the grid (either a square or hexagon) to be used as the scaler for distance calculations
 \end{itemize}
 
