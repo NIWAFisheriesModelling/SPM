@@ -173,7 +173,7 @@
 \sloppy % use sloppy paras
 
 % Title page
-\pdfbookmark[1]{Title}{title}
+\pdfbookmark[1]{SPM users manual}{title}
 \pagenumbering{alph} % alpha not used, but used to remove warnings when page 1 is re-defined below
 \maketitle
 \thispagestyle{empty} % no header/footer/page number on this page
@@ -193,7 +193,7 @@
 
 % Table of contents
 \clearemptydoublepage{}
-\pdfbookmark[1]{Table of Contents}{contents}
+\pdfbookmark[1]{Contents}{contents}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
 \tableofcontents
 \end{spacing}
@@ -202,7 +202,7 @@
 \clearemptydoublepage{}
 \pdfbookmark[1]{List of figures}{figures}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
-\renewcommand\listtablename{List of figures}
+\renewcommand\listfigurename{List of figures}
 \listoffigures
 \end{spacing}
 
