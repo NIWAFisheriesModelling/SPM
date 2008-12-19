@@ -1,6 +1,7 @@
 \documentclass[a4paper,11pt,twoside,pdftex]{article}
 
 % Misc packages
+\usepackage{ifthen} % for conditional expressions
 \usepackage{float} % for floating tables and graphics
 \usepackage{setspace} % for defining spacing between lines
 \usepackage{cmap} % allow searching in pdf documents
@@ -14,7 +15,8 @@
 %            pdfpagemode=UseNone,pdfpagelayout=TwoPageRight,
             pdftitle={Spatial Population Model (SPM) Users Manual}, 
             pdfauthor={Alistair Dunn; Scott Rasmussen}, 
-            pdfsubject={Spatial Population Model},pdftex]{hyperref}
+            pdfsubject={Spatial Population Model},
+            pdftex]{hyperref}
 \hypersetup{
   breaklinks=true,      % allow line breaks in URLs
   colorlinks=true,      % use colour to define links
@@ -23,6 +25,7 @@
   filecolor=black,      % colour of file links
   urlcolor=darkgray     % colour of external links
 }
+
 % Use AMS Maths 
 \usepackage[fleqn]{amsmath}
 
@@ -69,6 +72,16 @@
 \setlength{\baselineskip}{1ex plus 0.2ex minus 0.1ex}
 \setlength{\parskip}{1ex} % Gap between paragraphs
 \raggedbottom % prefer space at the bottom of page
+
+% Make equation numbers be section number then equation number
+\makeatletter
+\@addtoreset{equation}{section}
+\@addtoreset{figure}{section}
+\@addtoreset{table}{section}
+\def\thefigure{\thesection.\@arabic\c@figure}
+\def\thetable{\thesection.\@arabic\c@table}
+\def\theequation{\thesection.\@arabic\c@equation}
+\makeatother
 
 %% stop figures from going onto a page by themselves 
 \renewcommand{\topfraction}{0.85}
@@ -160,6 +173,7 @@
 \sloppy % use sloppy paras
 
 % Title page
+\pdfbookmark[1]{Title}{title}
 \pagenumbering{alph} % alpha not used, but used to remove warnings when page 1 is re-defined below
 \maketitle
 \thispagestyle{empty} % no header/footer/page number on this page
@@ -179,19 +193,24 @@
 
 % Table of contents
 \clearemptydoublepage{}
+\pdfbookmark[1]{Table of Contents}{contents}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
 \tableofcontents
 \end{spacing}
 
 % Table of figures
 \clearemptydoublepage{}
+\pdfbookmark[1]{List of figures}{figures}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
+\renewcommand\listtablename{List of figures}
 \listoffigures
 \end{spacing}
 
 % Table of tables
 \clearemptydoublepage{}
+\pdfbookmark[1]{List of tables}{tables}
 \begin{spacing}{0.8} % Reduce space between lines in contents list
+\renewcommand\listtablename{List of tables}
 \listoftables
 \end{spacing}
 
