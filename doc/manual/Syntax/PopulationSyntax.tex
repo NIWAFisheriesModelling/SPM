@@ -93,31 +93,33 @@
 The population processes available are, 
 
 \begin{itemize}
-	\item Ageing process
-	\item Constant recruitment process
-	\item Beverton-Holt stock-recruit relationship recruitment process
-	\item Mortality rate process
-	\item Mortality event process
-	\item Category transition process
-	\item Category shift process
+	\item Ageing
+	\item Constant recruitment
+	\item Beverton-Holt stock-recruit relationship recruitment
+	\item Constant mortality rate
+	\item Annualy varying mortality rate
+	\item Mortality event (as a number)
+	\item Mortality event (as a biomass)
+	\item Category transition
+	\item Category shift
 \end{itemize}
 
 The movement processes available are,	
 
 \begin{itemize}
-	\item Preference movement process
+	\item Preference movement
 \end{itemize}
 
-Each different process requires different subcommands and arguments.
+Each type of process requires a set of subcommands and arguments specific to that process.
 
-\defComLab{AgeingProcess} {Define an ageing process with label}
+\defComLab{Process} {Define a process with label}
 
-\defSub{Categories} {Define the categories that ageing is applied to}
-\defType{String vector}
+\defSub{Type} {Define the type of process}
+\defType{String}
 \defDefault{None}
-\defValue{A valid category from \commandsub{Model}{.Categories}}
+\defValue{A valid type of process}
 
-\defComLab{ConstantRecruitmentProcess} {Define a constant recruitment process}
+If \subcommand{Type} = ConstantRecruitment, 
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -144,7 +146,7 @@ Each different process requires different subcommands and arguments.
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
-\defComLab{BHRecruitmentProcess}{Define a Beverton-Holt recruitment process}
+If \subcommand{Type} = BHRecruitment, 
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -203,19 +205,41 @@ Each different process requires different subcommands and arguments.
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
-\defComLab{MortalityRateProcess} {Define a mortality rate process with label}
+If \subcommand{Type} = Ageing, 
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{A valid category from \commandsub{Model}{.Categories}}
 
-\defComLab{MortalityEventProcess} {Define a mortality event process with label}
+If \subcommand{Type} = ConstantMortality, 
+
+\defSub{M} {Define the constant mortality rate to be applied}
+\defType{Constant}
+\defDefault{None}
+\defValue{A real number $>=0.0$ and $<=1.0$}
+
+\defSub{Categories} {Define the categories that mortality is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid categories from \commandsub{Model}{.Categories}}
+
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid selectivity labels defined by \command{Selectivities}}
+
+If \subcommand{Type} = EventMortality, 
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{A valid category from \commandsub{Model}{.Categories}}
+
+
+
+
+
 
 \defComLab{CategoryTransitionProcess} {Define a category transition process with label}
 
