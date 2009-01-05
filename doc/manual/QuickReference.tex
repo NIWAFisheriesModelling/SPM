@@ -21,48 +21,106 @@
 \defSub{Processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
 \par \defComLab{TimeStep} {Define a time step with label}\par \par
 \defSub{Process} {Define the process labels, in the order that they are applied, for the time step}
-\par \defComLab{AgeingProcess} {Define an ageing process with label}\par \par
-\defSub{Categories} {Define the categories that ageing is applied to}
-\par \defComLab{ConstantRecruitmentProcess} {Define a constant recruitment process}\par \par
+\par \defComLab{Process} {Define a process with label}\par \par
+\defSub{Type} {Define the type of process}
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{Ages} {Define the ages within each category that receive recruitment}
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
-\par \defComLab{BHRecruitmentProcess}{Define a Beverton-Holt recruitment process}\par \par
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{Ages} {Define the age within each category that receive recruitment}
 \defSub{Steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
-\defSub{SigmaR} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship}
-\defSub{Rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship}
+\defSub{SigmaR} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
+\defSub{Rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
 \defSub{SSB} {Define the label of the \command{DerivedParameter} that defines the SSB}
 \defSub{YCS-Values} {YCS values}
 \defSub{YCS-Years} {Years for YCS values}
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
-\par \defComLab{MortalityRateProcess} {Define a mortality rate process with label}\par \par
 \defSub{Categories} {Define the categories that ageing is applied to}
-\par \defComLab{MortalityEventProcess} {Define a mortality event process with label}\par \par
-\defSub{Categories} {Define the categories that ageing is applied to}
-\par \defComLab{CategoryTransitionProcess} {Define a category transition process with label}\par \par
-\defSub{Categories} {Define the categories that ageing is applied to}
-\par \defComLab{CategoryMoveProcess} {Define a category shift process with label}\par \par
-\defSub{Categories} {Define the categories that ageing is applied to}
-\par \defComLab{PreferenceMovementProcess} {Define a preference function movement process with label}\par \par
-\defSub{Categories} {Define the categories that ageing is applied to}
+\defSub{M} {Define the constant mortality rate to be applied}
+\defSub{Categories} {Define the categories that mortality is applied to}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{Years} {Define the years when the mortality rates are applied}
+\defSub{M} {Define the mortality rate to be applied for each year}
+\defSub{Categories} {Define the categories that mortality is applied to}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{Categories} {Define the categories that the event mortality is applied to}
+\defSub{Years} {Define the years where the mortality even is applied}
+\defSub{Layers} {Define the layers that specify the event mortality (as the abundance) in each year}
+\defSub{Umax}{Define the maximum exploitation rate}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{Penalty} {Define the event mortality penalty label}
+\defSub{Categories}{Define the categories that the event mortality is applied to}
+\defSub{Years}{Define the years where the mortality even is applied}
+\defSub{Layers}{Define the layers that specify the event mortality (as a biomass) in each year}
+\defSub{Umax} {Define the maximum exploitation rate}
+\defSub{Selectivities}{Define the selectivities applied to each category}
+\defSub{Penalty} {Define the event mortality penalty label}
+\defSub{From} {Define the category that is the source of the transition process}
+\defSub{To} {Define the category that is the sink of the transition process}
+\defSub{N} {Define the number of individuals to move}
+\defSub{Selectivity} {Define the selectivity applied to the source category}
+\defSub{From} {Define the category that is the source of the transition process}
+\defSub{To} {Define the category that is the sink of the transition process}
+\defSub{Proportion} {Define the proportion of individuals to move}
+\defSub{Selectivity} {Define the selectivity applied to the source category}
+\defSub{Categories} {Define the categories that the preference function movement is applied to}
+\defSub{PreferenceFunctions} {Define the labels of the individual  preference functions that make up the total preference function}
 \par \defComLab{PreferenceFunction} {Define a preference function with label}\par \par
-\par \defComLab{Layer} {Define a layer with label}\par \par
-\defSub{Type} {Define the type of layer}
+\defSub{Type} {Define the type of preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{Mu} {Defines the $\mu$ parameter of the normal preference function}
+\defSub{Sigma} {Defines the $\sigma$ parameter of the normal preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{Mu} {Defines the $\mu$ parameter of the double-normal preference function}
+\defSub{SigmaL} {Defines the $\sigma_L$ parameter of the double-normal preference function}
+\defSub{SigmaR} {Defines the $\sigma_R$ parameter of the double-normal preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{a50} {Defines the $a_{50}$ parameter of the logistic preference function}
+\defSub{ato95} {Defines the $a_{to95}$ parameter of the logistic preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{a50} {Defines the $a_{50}$ parameter of the inverse-logistic preference function}
+\defSub{ato95} {Defines the $a_{to95}$ parameter of the inverse-logistic preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{Lambda} {Defines the $\lambda$ parameter of the exponential-decay preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{N} {Defines the $N$ parameter of the threshold preference function}
+\defSub{Lambda} {Defines the $\lambda$ parameter of the threshold preference function}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\defSub{Biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
+\defSub{Lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
+\par \defComLab{Layer} {Define a layer function with label}\par \par
 \defSub{Type} {Define the type of layer}
 \defSub{Row$x$} {Define the values of the layer for row $x$}
-\defSub{Year} {Define the years for \argument{meta-layer}}
-\defSub{Value} {Define the layer labels for each of the years for \argument{meta-layer}}
+\defSub{Row$x$} {Define the values of the layer for row $x$}
+\defSub{Rescale} {Rescale values of the layer}
+\defSub{Year} {Define the years}
+\defSub{Layers} {Define the layer labels for each of the years}
 \par \defComLab{DerivedQuantity} {Define a derived quantity with label}\par \par
+\defSub{Type} {Define the type of derived quantity}
 \defSub{Categories} {Define the categories are used to calculate the derived quantity}
 \defSub{Selectivity} {Define the selectivities}
 \defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
-\par \defComLab{ConstantSelectivity} {Define a constant selectivity with label}\par \par
-\par \defComLab{VaryingSelectivity} {Define an annually varying selectivity with label}\par \par
+\defSub{Categories} {Define the categories are used to calculate the derived quantity}
+\defSub{Selectivity} {Define the selectivities}
+\defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
+\par \defComLab{SizeAtAge} {Define a size-at-age relationship with label}\par \par
+\defSub{Type} {Define the type of relationship}
+\defSub{Linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
+\defSub{k} {Define the $k$ parameter of the von Bertalanffy relationship}
+\defSub{t0} {Define the $t_0$ parameter of the von Bertalanffy relationship}
+\defSub{GrowthProps} {Define the proportion of the year for each time step for evaluating size}
 \subsection{Estimation command and subcommand syntax}
 \subsection{Output command and subcommand syntax}

@@ -119,7 +119,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid type of process}
 
-\subsubsection{\commandsubarg{Process}{.Type}{ConstantRecruitment}} 
+\subsubsection[Constant recruitment]{\commandsubarg{Process}{Type}{ConstantRecruitment}} 
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -146,7 +146,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
-\subsubsection{\commandsubarg{Process}{Type}{BHRecruitment}}
+\subsubsection[Beverton-Holt recruitment]{\commandsubarg{Process}{Type}{BHRecruitment}}
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -203,14 +203,14 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
-\subsubsection{\commandsubarg{Process}{Type}{Ageing}}
+\subsubsection[Ageing]{\commandsubarg{Process}{Type}{Ageing}}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{.Categories}}
 
-\subsubsection{\commandsubarg{Process}{Type}{ConstantMortality}}
+\subsubsection[Constant mortality rate]{\commandsubarg{Process}{Type}{ConstantMortalityRate}}
 
 \defSub{M} {Define the constant mortality rate to be applied}
 \defType{Estimable}
@@ -227,7 +227,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{Selectivity}}
 
-\subsubsection{\commandsubarg{Process}{Type}{AnnualMortalityRate}}
+\subsubsection[Annual mortality rate]{\commandsubarg{Process}{Type}{AnnualMortalityRate}}
 
 \defSub{Years} {Define the years when the mortality rates are applied}
 \defType{Constant vector}
@@ -249,7 +249,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{Selectivity}}
 
-\subsubsection{\commandsubarg{Process}{Type}{EventMortality}}
+\subsubsection[Event mortality]{\commandsubarg{Process}{Type}{EventMortality}}
 
 \defSub{Categories} {Define the categories that the event mortality is applied to}
 \defType{String vector}
@@ -266,7 +266,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid layers defined by \command{Layer}}
 
-\defSub{Umax} {Define the maximum exploitation rate}
+\defSub{Umax}{Define the maximum exploitation rate}
 \defType{Constant}
 \defDefault{None}
 \defValue{Must be $\ge 0$ and $\le 1$}
@@ -281,19 +281,19 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid penalty label defined by \command {Penalty}}
 
-\subsubsection{\commandsubarg{Process}{Type}{BiomassEventMortality}}
+\subsubsection[Biomass event mortality]{\commandsubarg{Process}{Type}{BiomassEventMortality}}
 
-\defSub{Categories} {Define the categories that the event mortality is applied to}
+\defSub{Categories}{Define the categories that the event mortality is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{.Categories}}
 
-\defSub{Years} {Define the years where the mortality even is applied}
+\defSub{Years}{Define the years where the mortality even is applied}
 \defType{Integer vector}
 \defDefault{None}
 \defValue{Valid years for the model}
 
-\defSub{Layers} {Define the layers that specify the event mortality (as a biomass) in each year}
+\defSub{Layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defType{String vector, of length years}
 \defDefault{None}
 \defValue{Valid layers defined by \command{Layer}}
@@ -303,7 +303,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Must be $\ge 0$ and $\le 1$}
 
-\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{Selectivities}{Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{Selectivity}}
@@ -313,7 +313,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid penalty label defined by \command {Penalty}}
 
-\subsubsection{\commandsubarg{Process}{Type}{CategoryTransition}}
+\subsubsection[Category transition]{\commandsubarg{Process}{Type}{CategoryTransition}}
 
 \defSub{From} {Define the category that is the source of the transition process}
 \defType{String}
@@ -335,7 +335,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid selectivity label defined by \command{Selectivity}}
 
-\subsubsection{\commandsubarg{Process}{Type}{CategoryTransitionRate}}
+\subsubsection[Category transition rate]{\commandsubarg{Process}{Type}{CategoryTransitionRate}}
 
 \defSub{From} {Define the category that is the source of the transition process}
 \defType{String}
@@ -357,7 +357,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid selectivity label defined by \command{Selectivity}}
 
-\subsubsection{\commandsubarg{Process}{Type}{PreferenceMovement}}
+\subsubsection[Preference movement]{\commandsubarg{Process}{Type}{PreferenceMovement}}
 
 \defSub{Categories} {Define the categories that the preference function movement is applied to}
 \defType{String vector}
@@ -393,7 +393,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defDefault{None}
 \defValue{A valid type of preference function}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Constant}}
+\subsubsection[Constant]{\commandsubarg{PreferenceFunction}{Type}{Constant}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -404,7 +404,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Normal}}
+\subsubsection[Normal]{\commandsubarg{PreferenceFunction}{Type}{Normal}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -423,7 +423,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Double-normal}}
+\subsubsection[Double-normal]{\commandsubarg{PreferenceFunction}{Type}{Double-normal}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -446,7 +446,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Logistic}}
+\subsubsection[Logistic]{\commandsubarg{PreferenceFunction}{Type}{Logistic}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -465,7 +465,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Inverse-logistic}}
+\subsubsection[Inverse-logistic]{\commandsubarg{PreferenceFunction}{Type}{Inverse-logistic}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -484,7 +484,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Exponential-decay}}
+\subsubsection[Exponential-decay]{\commandsubarg{PreferenceFunction}{Type}{Exponential-decay}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -499,7 +499,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Threshold}}
+\subsubsection[Threshold]{\commandsubarg{PreferenceFunction}{Type}{Threshold}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -518,7 +518,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection{\commandsubarg{PreferenceFunction}{Type}{Threshold-biomass}}
+\subsubsection[Threshold-biomass]{\commandsubarg{PreferenceFunction}{Type}{Threshold-biomass}}
 
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -554,14 +554,14 @@ The available layer types  are,
 \defDefault{None}
 \defValue{A valid type of layer}
 
-\subsubsection{\commandsubarg{Layer}{Type}{Categorical}}
+\subsubsection[Categorical]{\commandsubarg{Layer}{Type}{Categorical}}
 
 \defSub{Row$x$} {Define the values of the layer for row $x$}
 \defType{String vector, of length \commandsub{Model}{.ncols}}
 \defDefault{None}
 \defValue{A vector of values of length equal to the number of columns defined for the spatial structure. There must be exactly $x$ rows defined, one for each row of the spatial structure}
 
-\subsubsection{\commandsubarg{Layer}{Type}{Numeric}}
+\subsubsection[Numeric]{\commandsubarg{Layer}{Type}{Numeric}}
 
 \defSub{Row$x$} {Define the values of the layer for row $x$}
 \defType{Constant vector, of length \commandsub{Model}{.ncols}}
@@ -573,7 +573,7 @@ The available layer types  are,
 \defDefault{1.0}
 \defValue{Rescales the values in the layer so that they have maximum value defined by the rescaling constant}
 
-\subsubsection{\commandsubarg{Layer}{Type}{Meta-layer}}
+\subsubsection[Meta-layer]{\commandsubarg{Layer}{Type}{Meta-layer}}
 
 \defSub{Year} {Define the years}
 \defType{Constant vector, with values for each year of the model}
@@ -586,7 +586,21 @@ The available layer types  are,
 
 \subsection{Derived quantities}
 
+The individual types of derived quantities available are, 
+
+\begin{itemize}
+	\item Abundance
+	\item Biomass
+\end{itemize}
+
 \defComLab{DerivedQuantity} {Define a derived quantity with label}
+
+\defSub{Type} {Define the type of derived quantity}
+\defType{String}
+\defDefault{None}
+\defValue{A valid type of derived quantity}
+
+\subsubsection[Abundance]{\commandsubarg{DerivedQuantity}{Type}{Abundance}}
 
 \defSub{Categories} {Define the categories are used to calculate the derived quantity}
 \defType{String vector}
@@ -603,6 +617,61 @@ The available layer types  are,
 \defDefault{None}
 \defValue{A valid time step label from \command{TimeStep}}
 
-\subsection{Growth}
+\subsubsection[Biomass]{\commandsubarg{DerivedQuantity}{Type}{Biomass}}
+
+\defSub{Categories} {Define the categories are used to calculate the derived quantity}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid categories from \commandsub{Model}{.Categories}}
+
+\defSub{Selectivity} {Define the selectivities}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid selectivity labela from \command{Selectivity}}
+
+\defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
+\defType{String}
+\defDefault{None}
+\defValue{A valid time step label from \command{TimeStep}}
+
+\subsection{Size-at-age}
+
+The individual types of size-at-age available are, 
+
+\begin{itemize}
+	\item von Bertalanffy
+	\item Schnute
+\end{itemize}
+
+\defComLab{SizeAtAge} {Define a size-at-age relationship with label}
+
+\defSub{Type} {Define the type of relationship}
+\defType{String}
+\defDefault{None}
+\defValue{A valid type of size-at-age relationship}
+
+\subsubsection[von Bertalanffy]{\commandsubarg{DerivedQuantity}{Type}{vonBert}}
+
+\defSub{Linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
+\defSub{k} {Define the $k$ parameter of the von Bertalanffy relationship}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
+\defSub{t0} {Define the $t_0$ parameter of the von Bertalanffy relationship}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A real number}
+
+\defSub{GrowthProps} {Define the proportion of the year for each time step for evaluating size}
+\defType{Constant vector}
+\defDefault{None}
+\defValue{A vector of values, $\le1$ of length equal to the number of time steps}
+
+\subsubsection[Schnute]{\commandsubarg{DerivedQuantity}{Type}{Schnute}}
 
 \subsection{Selectivities}

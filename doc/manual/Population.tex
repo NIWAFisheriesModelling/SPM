@@ -487,4 +487,37 @@ The double\_exponential selectivity has non-estimable parameters $x_1$ and $x_2$
 
 \subsection{Derived quantities\label{sec:derived-quantities}}
 
-Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. 
+Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundances or as a biomass.
+
+\subsection{Size-at-age\label{sec:size-at-age}}
+
+The growth component of \SPM\ is used to evaluate the size (for example, using the age-length relationship) and mass (for example, from the length-weight relationship) of individuals. This is used to determine length frequencies or biomass of individuals at age/category. 
+
+In an age-based model, fish size does not feature in the partition, but size-at-age is still an element of the model. Size-at-age is based on a growth curve which specifies the mean size at a given age. There are two alternative growth curves in \SPM, 
+
+\begin{description}
+\item{von Bertalanffy} where size at age is defined as,
+\begin{equation} 
+\bar{s}(age)= L_\infty \left( 1 - \exp \left( -k \left(age-t_0 \right) \right) \right)
+\end{equation}
+
+\item{Schnute} where size at age is defined as,
+\begin{equation}
+\bar{s}(age)=\displaystyle\begin{cases}
+  \left[ y_1^b + (y_2^b - y_1^b) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right]^{1/b}, & \text{if $a\ne0$ and $b\ne0$} \\
+  \AddVspace
+  y_1 \exp \left[ \ln \left( y_2 / y_1 \right) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right], & \text{if $a\ne0$ and $b=0$} \\
+  \AddVspace
+  \left[ y_1^b + \left( y_2^b - y_1^b \right) \dfrac{age-\tau_1}{\tau_2 - \tau_1} \right]^{1/b}, & \text{if $a=0$ and $b\ne0$} \\
+  \AddVspace
+  y_1 \exp \left[ \ln \left( y_2/y_1 \right) \dfrac{age-\tau_1}{\tau_2 - \tau_1} \right] , & \text{if $a=0$ and $b=0$} \\
+  \end{cases}
+\end{equation}
+\end{description}
+
+The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Schnute curve \citep{836} by $y_1$ and $y_2$, which are the mean sizes at reference ages $\tau_1$ and $\tau_2$, and $a$ and $b$ (when $b=1$, this reduces to the von Bertalanffy with $k=a$). 
+
+The model can incorporate changes in size-at-age during the year (i.e., growth between fish birthdays) by specifying the growth proportions for each time step of the annual cycle.
+
+\subsection{Mean weight\label{sec:mean-weight}}
+
