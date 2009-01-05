@@ -1,9 +1,7 @@
 # Population structure
 
 My model preamble
-
 My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble My model preamble
-
 
 [population]
 @structure
@@ -11,39 +9,41 @@ nrows 11
 ncols 19
 layer Base
 categories immature mature spawning
-min_age 1
-max_age 30
+MinAge 1
+MaxAge 30
 age_plus_group True
-time_steps one two
+TimeSteps one two
 initialisation_phases Phase1 Phase2 Phase3
-initial_year 1994
-current_year 2008
-final_year 2045
+InitialYear 1994
+CurrentYear 2008
+FinalYear 2045
 
 # Model initialisation and run length
-@initialisation_phase Phase1
+@InitialisationPhase Phase1
 years 200
 processes Recruitment Spawning Maturation halfM halfM Postspawning Ageing
 
-@initialisation_phase Phase2
+InitialisationPhase Phase2
 years 1
 processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing Postspawning
 
-@initialisation_phase Phase3
+@InitialisationPhase Phase3
 years 20
 processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing Postspawning
 
-@time_step one
+@TimeStep one
 processes Recruitment Spawning Maturation halfM fishing halfM MoveImmature MoveMature MoveSpawning
 
-@time_step two
+@TimeStep two
 processes PostSpawning Ageing
 
 # Population processes
-@AgeingProcess Ageing
+@Process Ageing
+type Ageing
 categories immature mature spawning
 
-@BHProcess Recruitment
+@Process BHRecruitment
+type BHRecruitment
 categories immature
 proportions 1.0
 R0 997386
@@ -60,13 +60,14 @@ layer Depth
 layer_min  10
 layer_max 600
 
-@MortalityRateProcess halfM
+@Process halfM
+type MortalityRate
 Categories immature mature spawning
 DependsOnLayer False
 M 0.13
 Selectivities One One One
 
-@derived_quantity MySSB
+@DerivedQuantity MySSB
 category immature
 selectivity ONE
 time_step two
@@ -76,11 +77,13 @@ layer_min  10
 layer_max 600
 value_at_year_zero phase2
 
-@meta_layer
+@Layer
+type meta-layer
 years 1990 1991
 layer layerA layerB
 
-@EventMortalityProcess Fishing
+@Process Fishing
+type EventMortality
 categories immature mature spawning
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
@@ -88,88 +91,85 @@ Umax 0.99
 selectivities FishingSel FishingSel FishingSel
 penalty event_mortality_penalty
 
-@population_process Maturation
-type category_transition
+@process Maturation
+type CategoryTransition
 from immature
 to mature
 proportion 0.324392
 selectivity Maturation
-depends_on_layer False
 
-@population_process Spawning
-type category_transition
+@process Spawning
+type CategoryTransition
 from mature
 to spawning
 proportion 0.574593
 selectivity One
-depends_on_layer False
 
-@population_process PostSpawning
-type category_transition
+@process PostSpawning
+type CategoryTransition
 from spawning
 to mature
 proportion 0.5
 selectivity One
-depends_on_layer False
 
 # Movement processes
-@movement_process MoveImmature
-method directed
+@process MoveImmature
+type PreferenceMovement
 categories immature
-directed_processes ImmatureDepth ImmatureLatitude
+PreferenceFunctions ImmatureDepth ImmatureLatitude
 
-@movement_process MoveMature
-method directed
+@process MoveMature
+type PreferenceMovement
 categories mature
-directed_processes MatureDistance MatureDepth MatureLatitude
+PreferenceFunctions MatureDistance MatureDepth MatureLatitude
 
-@movement_process MoveSpawning
-method directed
+@process MoveSpawning
+type PreferenceMovement
 categories spawning
-directed_processes MatureDistance MatureDepth SpawningLatitude
+PreferenceFunctions MatureDistance MatureDepth SpawningLatitude
 
-@movement_process InitialMoveImmature
-method directed
+@process InitialMoveImmature
+type PreferenceMovement
 categories immature
-directed_processes ImmatureDepth ImmatureLatitude
+PreferenceFunctions ImmatureDepth ImmatureLatitude
 
-@movement_process InitialMoveMature
-method directed
+@process InitialMoveMature
+type PreferenceMovement
 categories mature
-directed_processes MatureDepth MatureLatitude
+PreferenceFunctions MatureDepth MatureLatitude
 
-@movement_process InitialMoveSpawning
-method directed
+@process InitialMoveSpawning
+type PreferenceMovement
 categories spawning
-directed_processes MatureDepth SpawningLatitude
+PreferenceFunctions MatureDepth SpawningLatitude
 
-@directed_process ImmatureDistance
+@PreferenceFunction ImmatureDistance
 type exponential
 alpha 1
 lambda 1.5
 layer Distance
 
-@directed_process ImmatureDepth
+@PreferenceFunction ImmatureDepth
 type inverse_logistic
 alpha 1
 layer Depth
 a50 1416.8
 ato95 245.354
 
-@directed_process ImmatureLatitude
+@PreferenceFunction ImmatureLatitude
 type logistic
 alpha 1
 layer Latitude
 a50 68.8512
 ato95 0.322301
 
-@directed_process MatureDistance
+@PreferenceFunction MatureDistance
 type exponential
 alpha 1
 lambda 1.5
 layer Distance
 
-@directed_process MatureDepth
+@PreferenceFunction MatureDepth
 type double_normal
 alpha 1
 layer Depth
@@ -177,14 +177,14 @@ mu 875.389
 sigmaL 143.127
 sigmaR 1364.35
 
-@directed_process MatureLatitude
+@PreferenceFunction MatureLatitude
 type logistic
 alpha 1
 layer Latitude
 a50 70.9737
 ato95 0.436736
 
-@directed_process SpawningLatitude
+@PreferenceFunction SpawningLatitude
 type double_normal
 alpha 1
 layer Latitude

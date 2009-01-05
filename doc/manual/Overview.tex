@@ -4,11 +4,7 @@
 
 The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics and movement model. It allows the implementation of population models suitable for the simulation and estimation of parameters in models with a large number of areas. It implements a statistical catch-at-age population dynamics and movement model, using a discrete time-step state-space model that represents a cohort-based population age structure in a spatially explicit manner. 
 
-The basic structure of the model is defined in terms of the \emph{partition} and \emph{state}. 
-
-The state is the current status of the population at a point in time. The state will typically change one or more times in every time step of every year, depending on the \emph{processes} defined for each model. The state consists of two parts, the partition and derived quantities. 
-
-The partition is simply a breakdown of the total number of individuals in the current population by spatial location, category, and age at some point in time. The resulting information can be conceptualised as a 4-dimensional matrix, with dimensions for spatial location ($x$ and $y$), and dimensions for category and age. 
+The basic structure \index{structure} of the model is defined in terms of the \emph{partition}\index{partition} and \emph{state}\index{state}. The state is the current status of the population at a point in time. The state will typically change one or more times in every time step of every year, depending on the \emph{processes} defined for each model. The state consists of two parts, the partition and \emph{derived quantities}. 
 
 A derived quantity is simply a cumulative summary of the state at some point in time. Unlike the partition, these are recorded for each year of the model run. Derived quantities build up a vector of values over the model run years, with one value for each year. For example, the numbers of individuals in a category labelled mature at some point in the annual cycle may be a derived quantity. 
 

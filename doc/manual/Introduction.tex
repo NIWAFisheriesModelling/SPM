@@ -1,12 +1,12 @@
 \section{Introduction\label{sec:Introduction}}
 
-The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics and movement model. \SPM\ is designed to model population dynamics and movement for an age-structured population using a range of observations, including tagging, relative abundance, and age frequency data. \SPM\ implements an age-structured population within an arbitrary shaped spatial structure, which can have user defined categories (e.g., immature, mature, male, female, etc.), and age range. Movement can be modelled as either adjacent cell movements or global movements based on covariates.
+The Spatial Population Model (\SPM) is a generalised spatially explicit age-structured population dynamics and movement model. \SPM\ can model population dynamics and movement parameters for an age-structured population using a range of observations, including tagging, relative abundance, and age frequency data. \SPM\ implements an age-structured population within an arbitrary shaped spatial structure, which can have user defined categories (e.g., immature, mature, male, female, etc.), and age range. Movement can be modelled as either adjacent cell movements or global movements based on covariates.
 
 This manual describes how to use \SPM, including how to run \SPM, how to set up an \config. Further, we describe the population dynamics and estimation methods, and describe how to specify and interpret output. If you are new to \SPM, then a good place to start is by reading this manual and attempting to replicate the examples (Section \ref{sec:examples}).
 
 \subsection{Version\label{sec:version}}
 
-This document (last modified \DocVer) details the usage of \SPM\ \VER. The \SPM\ version number is suffixed with a date/time in format \texttt{yyyy-mm-dd-hh:mm:ss}, and is the last UTC date on which its source files were officially modified. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.\index{Version}
+This document (last modified \DocVer) details the usage of \SPM\ \VER. The \SPM\ version number is suffixed with a date/time (\texttt{yyyy-mm-dd-hh:mm:ss}) and revision number, giving the revision control system UTC date and revision number for the most recent modification of the source files. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.\index{Version}
 
 \subsection{Citing \SPM}
 
@@ -40,7 +40,7 @@ No software other than the appropriate operating system or emulation package is 
 
 \subsection{Technical details}
 
-\SPM\ is compiled on Linux using \texttt{gcc}, the C/C++ compiler developed by the \href{http://gcc.gnu.org}{GNU Project}. The 32-bit Linux version has been compiled using \texttt{gcc} version 4.1.2 20070115 (prerelease) (SuSE Linux), the 64-bit Linux version uses \texttt{gcc} version 4.1.0 (SuSE Linux). Note that \SPM\ is not supported for Linux kernel versions prior to 2.6. The Microsoft Windows version is compiled using Mingw32 \texttt{gcc} 3.4.5, and should run on most 32-bit WindowsXP and Windows Vista systems. There are no plans to port \SPM\ to Microsoft Windows 64-bit platforms. 
+\SPM\ is compiled on Linux using \href{http://gcc.gnu.org}{\texttt{gcc}}, the C/C++ compiler developed by the \href{http://gcc.gnu.org}{GNU Project}. The 32-bit Linux version has been compiled using \texttt{gcc} version 4.1.2 20070115 (prerelease) (\href{http://www.opensuse.org/}{SuSE Linux}), the 64-bit Linux version uses \href{http://gcc.gnu.org}{\texttt{gcc}} version 4.1.0 (\href{http://www.opensuse.org/}{SuSE Linux}). Note that \SPM\ is not supported for Linux kernel versions prior to 2.6. The \href{http://www.microsoft.com}{Microsoft Windows} version is compiled using \href{http://www.mingw.org}{Mingw32} \href{http://gcc.gnu.org}{\texttt{gcc}} 3.4.5, and should run on most 32-bit WindowsXP and Windows Vista systems. There are no plans to port \SPM\ to Microsoft Windows 64-bit platforms. 
 
 \SPM\ uses two minimisers, \textemdash\ the first is closely based on the main algorithm of \cite{779}, and which which uses finite difference gradients, and the second is an implementation of the differential evolution solver \citep{1442}. The random number generator used by \SPM\ uses an implementation of the Mersenne twister random number generator \citep{796}, from the \href{http://www.boost.org/}{BOOST} C++ library (version xxxx).
 
