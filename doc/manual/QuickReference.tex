@@ -54,6 +54,7 @@
 \defSub{Selectivities} {Define the selectivities applied to each category}
 \defSub{Penalty} {Define the event mortality penalty label}
 \defSub{Categories}{Define the categories that the event mortality is applied to}
+\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the event mortality is applied to}
 \defSub{Years}{Define the years where the mortality even is applied}
 \defSub{Layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defSub{Umax} {Define the maximum exploitation rate}
@@ -94,18 +95,33 @@
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the exponential-decay preference function}
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Categories} {Define the categories are used to calculate the abundance}
+\defSub{Selectivity} {Define the selectivities applied to each category}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{N} {Defines the $N$ parameter of the threshold preference function}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the threshold preference function}
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
+\defSub{Categories} {Define the categories are used to calculate the biomass}
+\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
 \par \defComLab{Layer} {Define a layer function with label}\par \par
 \defSub{Type} {Define the type of layer}
 \defSub{Row$x$} {Define the values of the layer for row $x$}
-\defSub{Row$x$} {Define the values of the layer for row $x$}
 \defSub{Rescale} {Rescale values of the layer}
+\defSub{Row$x$} {Define the values of the layer for row $x$}
+\defSub{Categories} {Define the categories are used to calculate the abundance}
+\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Categories} {Define the categories are used to calculate the biomass}
+\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{Categories} {Define the categories are used to calculate the abundance}
+\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Categories} {Define the categories are used to calculate the biomass}
+\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
 \defSub{Year} {Define the years}
 \defSub{Layers} {Define the layer labels for each of the years}
 \par \defComLab{DerivedQuantity} {Define a derived quantity with label}\par \par
@@ -121,6 +137,49 @@
 \defSub{Linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
 \defSub{k} {Define the $k$ parameter of the von Bertalanffy relationship}
 \defSub{t0} {Define the $t_0$ parameter of the von Bertalanffy relationship}
+\defSub{Distribution} {Define the distribution of sizes-at-age around the mean}
+\defSub{ByLength} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
+\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
 \defSub{GrowthProps} {Define the proportion of the year for each time step for evaluating size}
+\defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
+\defSub{y2} {Define the $y_2$ parameter of the Schnute relationship}
+\defSub{tau1} {Define the $\tau_1$ parameter of the Schnute relationship}
+\defSub{tau2} {Define the $\tau_2$ parameter of the Schnute relationship}
+\defSub{a} {Define the $a$ parameter of the Schnute relationship}
+\defSub{b} {Define the $b$ parameter of the Schnute relationship}
+\defSub{ByLength} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
+\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
+\defSub{GrowthProps} {Define the proportion of the year for each time step for evaluating size}
+\par \defComLab{SizeWeight} {Define a size-weight relationship with label}\par \par
+\defSub{Type} {Define the type of relationship}
+\defSub{SizeAtAge} {Define the label of the associated size-at-age relationship relationship}
+\defSub{a} {Define the $a$ parameter of the basic relationship}
+\defSub{b} {Define the $b$ parameter of the basic relationship}
+\par \defComLab{Selectivity} {Define a selectivity function with label}\par \par
+\defSub{Type} {Define the type of selectivity function}
+\defSub{C} {Defines the $C$ parameter of the selectivity function}
+\defSub{E} {Defines the $E$ parameter of the selectivity function}
+\defSub{V} {Defines the $V$ parameters (one for each age class) of the selectivity function}
+\defSub{L} {Defines the $L$ parameter of the selectivity function}
+\defSub{H} {Defines the $H$ parameter of the selectivity function}
+\defSub{V} {Defines the $V$ parameters (one for each age class from $L$ to $H$) of the selectivity function}
+\defSub{L} {Defines the $L$ parameter of the selectivity function}
+\defSub{H} {Defines the $H$ parameter of the selectivity function}
+\defSub{V} {Defines the $V$ parameters (one for each age class from $L$ to $H$) of the selectivity function}
+\defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
+\defSub{ato95} {Defines the $a_{to95}$ parameter of the selectivity function}
+\defSub{L} {Defines the $L$ parameter of the selectivity function}
+\defSub{H} {Defines the $H$ parameter of the selectivity function}
+\defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
+\defSub{ato95} {Defines the $a_{to95}$ parameter of the selectivity function}
+\defSub{Mu} {Defines the $\mu$ parameter of the selectivity function}
+\defSub{SigmaL} {Defines the $\sigma_L$ parameter of the selectivity function}
+\defSub{SigmaR} {Defines the $\sigma_R$ parameter of the selectivity function}
+\defSub{x1} {Defines the $x_1$ parameter of the selectivity function}
+\defSub{x2} {Defines the $x_2$ parameter of the selectivity function}
+\defSub{x0} {Defines the $x_0$ parameter of the selectivity function}
+\defSub{y0} {Defines the $y_0$ parameter of the selectivity function}
+\defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
+\defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
 \subsection{Estimation command and subcommand syntax}
 \subsection{Output command and subcommand syntax}

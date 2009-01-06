@@ -56,60 +56,56 @@ Every model must define at least one layer, the base later $L_B$. A layer is def
 
 Within \SPM, layers are used in three contexts:
 \begin{enumerate}
-\item The base layer: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if every element $L_B(i,j) > 0$. Further, positive values of the base layer $L_B$ represent the \emph{area} represented by that spatial cell. 
-\item Covariate layers: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates must be continuous (i.e., numeric) variables. Covariate layers must have values $\geq 0$.
+\item The base layer: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if every element $L_B(i,j) \ge 0$. Further, positive values of the base layer $L_B$ represent the \emph{area} represented by that spatial cell. 
+\item Covariate layers: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates must be continuous (i.e., numeric) variables. Covariate layers must have values $\ge0$.
 \item Classification layer. A model may have many classification layers, and these are used as a classification or grouping variable for aggregating data over individual spatial cells $(i,j)$, e.g., statistical areas or management areas. Such layers are typically used to aggregate the population within cells into groups so-as to allow comparison with observations. The values in layers used as classification layers must be categorical.
 \end{enumerate}
 
 Typically, layers are supplied by the user and are assumed known and constant. \SPM\ defines the following types of layer;
 
 \begin{enumerate}
+\item{Numeric layer\label{numeric-layer}}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user.
 
-\item The \emph{base layer} $L_B$: In any model there is one and only one base layer $L_B$, that defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land). Here, we define that a cell may potentially have part of the population present if $L_B(i,j) ge 0$. The base layer must always be defined, have only numeric values and have valid value for every cell in the spatial grid.
+\item {Categorical layer\label{categorical-layer}}: A model may have many categorical layers, and these are used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas. Such layers are typically used to aggregate the population within cells into groups for comparing with observations. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
 
-\item A \emph{distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square} \textemdash see Section \ref{sec:population-section} for distance calculations for the hexagon grid type). Here, the distance between cell a and cell b can be defined as,
+\item {Distance layer}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square}). Here, the distance between cell a and cell b can be defined as,
 \begin{equation}
   d(a,b) = \lambda \sqrt{(x_a - x_b)^2 + (y_a - y_b)^2}
 \end{equation}
+where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the square. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{cols}) \times (n_{rows} \times n_{cols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
 
-where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the sqaure. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{ccols}) \times (n_{rows} \times n_{ccols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
-
-\item A \emph{quantity layer}: A quantity layer is simply the count, biomass, or density of the number of individuals within each cell within categories $k$ and with selectivity $S$. SPM calculates the values of an quantity layer when running the model at the point in time where the value is required. Quantities can be 
-
-\begin{enumerate}
-\item Abundance, the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$,
+\item{Abundance layer}: The abundance layer is the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$. 
 \begin{equation}
   N(a) = \sum\limits_{k} \sum\limits_l S_l \ \text{element}(i,j,k,l)
 \end{equation}
+\SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item Biomass, the sum of the biomass of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$ and mean weight $w_{ak}$
+\item {Biomass layer}: The biomass layer is the sum of the biomass of individuals within cell $a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$
 \begin{equation}
   N(a) = \sum\limits_{k} \sum\limits_l w_{k,l} S_l \ \text{element}(i,j,k,l) 
 \end{equation}
+\SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item Abundance-density, the density (sum divided by cell area as defined in the base layer) of the number of individuals within cell $a$ with area $A_a$ in categories $k$ and with selectivity $S_l$ at age $l$,
+\item {Abundance-density layer}: The abundance density layer is the density of the number of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$,
 \begin{equation}
   N(a) = \frac{1}{A_a} \sum\limits_{k} \sum\limits_l S_l \ \text{element}(i,j,k,l)
 \end{equation}
+\SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item Biomass-density, the density (sum divided by cell area as defined in the base layer) of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$ and with selectivity $S_l$ at age $l$ and mean weight $w_{ak}$,
+\item {Biomass-density layer}: The biomass-density layer is the density of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$,
 \begin{equation}
   N(a) = \frac{1}{A_a} \sum\limits_{k} \sum\limits_l w_{k,l} S_l \ \text{element}(i,j,k,l)
 \end{equation}
-\end{enumerate}
+\SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item A \emph{numeric layer}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user.
-
-\item A \emph{categorical layer}: A model may have many categorical layers, and these are used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas. Such layers are typically used to aggregate the population within cells into groups for comparing with observations. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
-
-\item A \emph{meta-layer\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
+\item {Meta-layer\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
 \end{enumerate}
 
 However, there are  exceptions to this rule \textemdash layers of type biomass, quantity, and distance are calculated automatically by \SPM\ as required. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively.
 
 For the abundance layer, the abundance or biomass of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
 
-Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash\ except for a single case for covariate layers. In that instance, the covariate layer supplied can be can optionally (unless of type category or abundance) be standardized prior to use, i.e., $L'(a)=L(a)/max(L)$ so that $L'(a) < 1$.
+Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash\ except for a single case for numeric layers. In that instance, the numeric layer supplied can optionally be standardized prior to use, i.e., $L'(a)=L(a)/\max(L)$ so that $L'(a) < 1$.
 
 \subsection{Time sequence}
 
@@ -363,6 +359,58 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
 
 \end{enumerate}
 
+\subsection{Derived quantities\label{sec:derived-quantities}}
+
+Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundances or as a biomass.
+
+\subsection{Size-at-age\label{sec:size-at-age}}
+
+This is used to determine length frequencies and hence biomass (using a size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
+
+\begin{description}
+\item{von Bertalanffy} where size at age is defined as,
+\begin{equation} 
+\bar{s}(age)= L_\infty \left( 1 - \exp \left( -k \left(age-t_0 \right) \right) \right)
+\end{equation}
+
+\item{Schnute} where size at age is defined as,
+\begin{equation}
+\bar{s}(age)=\displaystyle\begin{cases}
+  \left[ y_1^b + (y_2^b - y_1^b) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right]^{1/b}, & \text{if $a\ne0$ and $b\ne0$} \\
+  \AddVspace
+  y_1 \exp \left[ \ln \left( y_2 / y_1 \right) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right], & \text{if $a\ne0$ and $b=0$} \\
+  \AddVspace
+  \left[ y_1^b + \left( y_2^b - y_1^b \right) \dfrac{age-\tau_1}{\tau_2 - \tau_1} \right]^{1/b}, & \text{if $a=0$ and $b\ne0$} \\
+  \AddVspace
+  y_1 \exp \left[ \ln \left( y_2/y_1 \right) \dfrac{age-\tau_1}{\tau_2 - \tau_1} \right] , & \text{if $a=0$ and $b=0$} \\
+  \end{cases}
+\end{equation}
+\end{description}
+
+The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Schnute curve \citep{836} by $y_1$ and $y_2$, which are the mean sizes at reference ages $\tau_1$ and $\tau_2$, and $a$ and $b$ (when $b=1$, this reduces to the von Bertalanffy with $k=a$). 
+
+The model can incorporate changes in size-at-age during the year (i.e., growth between fish birthdays) by specifying the growth proportions for each time step of the annual cycle.
+
+\subsection{Mean weight\label{sec:mean-weight}}
+
+The size-weight parameters $a$ and $b$ is calculated as either,
+\begin{itemize}
+  \item{None:} A linear relationship where the weight of each individual is exactly 1 
+  \item{Basic:} The more usual size-weight relationship, where 
+  \begin{equation}
+    \text{mean weight}=a(\text{mean size-at-age})^b
+  \end{equation}
+\end{itemize}
+  
+Be careful about the scale of $a$, \textemdash this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then a should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an optional command \commandsub{Print}{.VerifySizeWeightRelationship} that can be used to help check that the units specified are plausible.
+
+If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
+\begin{equation}
+	\text{mean weight}=a \times (\text{mean size at age})^b \times \left( 1+\text{cv}^2 \right)^{\frac{b(b-1)}{2}}
+\end{equation}
+
+where cv is the c.v. of sizes-at-age.
+
 \subsection{Selectivities\label{sec:selectivities}}
 
 A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used frequently throughout the SPM population section: for selectivity curves. Selectivities have a number of different parametric forms (types) in SPM and you can use any of these for any selectivity parameter. 
@@ -378,18 +426,18 @@ The available selectivities are;
 \begin{itemize}
   \item Constant
   \item Knife-edge
-  \item Allvalues
-  \item Allvalues\_bounded
+  \item All values
+  \item All values bounded
   \item Increasing
   \item Logistic
-  \item Logistic\_producing
-  \item Double\_normal
-  \item Double\_exponential
+  \item Logistic-producing
+  \item Double-normal
+  \item Double-exponential
 \end{itemize}
 
 \subsubsection{Selectivity descriptions}
 
-The available Selectivities are described below.
+The available selectivities are described below.
 
 \subsubsection*{\argument{Constant}}
 
@@ -484,40 +532,4 @@ f(x)=\begin{cases}
 \end{equation}
 
 The double\_exponential selectivity has non-estimable parameters $x_1$ and $x_2$, and estimable parameters $x_0$, $y_0$, $y_1$, and $y_2$. It can be `U-shaped'. Bounds for $x_0$ must be such that $x_1 < x_0 < x_2$. The selectivity passes through the points $(x_1, y)1)$, $(x_0, y_0)$, and $(x_2, y_2)$. If both $y_1$ and $y_2$ are greater than $y_0$ the selectivity is `U-shaped' with minimum at $(x_0, y_0)$.
-
-\subsection{Derived quantities\label{sec:derived-quantities}}
-
-Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundances or as a biomass.
-
-\subsection{Size-at-age\label{sec:size-at-age}}
-
-The growth component of \SPM\ is used to evaluate the size (for example, using the age-length relationship) and mass (for example, from the length-weight relationship) of individuals. This is used to determine length frequencies or biomass of individuals at age/category. 
-
-In an age-based model, fish size does not feature in the partition, but size-at-age is still an element of the model. Size-at-age is based on a growth curve which specifies the mean size at a given age. There are two alternative growth curves in \SPM, 
-
-\begin{description}
-\item{von Bertalanffy} where size at age is defined as,
-\begin{equation} 
-\bar{s}(age)= L_\infty \left( 1 - \exp \left( -k \left(age-t_0 \right) \right) \right)
-\end{equation}
-
-\item{Schnute} where size at age is defined as,
-\begin{equation}
-\bar{s}(age)=\displaystyle\begin{cases}
-  \left[ y_1^b + (y_2^b - y_1^b) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right]^{1/b}, & \text{if $a\ne0$ and $b\ne0$} \\
-  \AddVspace
-  y_1 \exp \left[ \ln \left( y_2 / y_1 \right) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right], & \text{if $a\ne0$ and $b=0$} \\
-  \AddVspace
-  \left[ y_1^b + \left( y_2^b - y_1^b \right) \dfrac{age-\tau_1}{\tau_2 - \tau_1} \right]^{1/b}, & \text{if $a=0$ and $b\ne0$} \\
-  \AddVspace
-  y_1 \exp \left[ \ln \left( y_2/y_1 \right) \dfrac{age-\tau_1}{\tau_2 - \tau_1} \right] , & \text{if $a=0$ and $b=0$} \\
-  \end{cases}
-\end{equation}
-\end{description}
-
-The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Schnute curve \citep{836} by $y_1$ and $y_2$, which are the mean sizes at reference ages $\tau_1$ and $\tau_2$, and $a$ and $b$ (when $b=1$, this reduces to the von Bertalanffy with $k=a$). 
-
-The model can incorporate changes in size-at-age during the year (i.e., growth between fish birthdays) by specifying the growth proportions for each time step of the annual cycle.
-
-\subsection{Mean weight\label{sec:mean-weight}}
 
