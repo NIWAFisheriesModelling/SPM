@@ -1,2 +1,136 @@
 \section{Observation command and subcommand syntax\label{sec:observation-syntax}}
 
+\subsection{Proportions-at-age observations}
+
+\defComLab{ProportionsAtAge}{Define an observation using proportions-=at-age data}
+
+\defSub{Year} {Define the year that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \defSub{Model}{InitialYear} and \defSub{Model}{CurrentYear}}
+
+\defSub{Timestep} {Define the time-step that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid timestep}
+
+\defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defType{Constant}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
+
+\defSub{Categories} {Define the categories into which recruitment occurs}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid categories from \commandsub{Model}{.Categories}}
+
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid selectivity labels defined by \command{Selectivity}}
+
+\defSub{MinAge} {Define the minimum age for the observation}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid age in the range \defSub{Model}{MinAge} and \defSub{Model}{MaxAge}}
+
+\defSub{MaxAge} {Define the maximum age for the observation}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid age in the range \defSub{Model}{MinAge} and \defSub{Model}{MaxAge}}
+
+\defSub{PlusGroup} {Define is the the maximum age for the observation is a plus group}
+\defType{Switch}
+\defDefault{None}
+\defValue{Either true or false}
+
+\defSub{Layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{Layer}. Must be a categorical layer}
+
+\defSub{Obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
+\defType{Constant vector}
+\defDefault{None}
+\defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
+
+\defSub{N [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
+\defType{Constant}
+\defDefault{None}
+\defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
+
+\defSub{Distribution}{Define the likelihood distribution}
+\defType{String}
+\defDefault{None}
+\defValue{A valid distribution}
+
+\defSub{ProcessError}{Define the process error term}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+\defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+\subsection{Abundance observations}
+
+\defComLab{Abundance}{Define an observation using abundance data}
+
+\defSub{Year} {Define the year that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \defSub{Model}{InitialYear} and \defSub{Model}{CurrentYear}}
+
+\defSub{Timestep} {Define the time-step that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid timestep}
+
+\defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defType{Constant}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
+
+\defSub{Categories} {Define the categories into which recruitment occurs}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid categories from \commandsub{Model}{.Categories}}
+
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid selectivity labels defined by \command{Selectivity}}
+
+\defSub{Layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{Layer}. Must be a categorical layer}
+
+\defSub{Obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
+\defType{Constant vector}
+\defDefault{None}
+\defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
+
+\defSub{cv [label]}{Define the following data as error values ($cv$) for the categorical layer with value \texttt{[label]}}
+\defType{Constant}
+\defDefault{None}
+\defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
+
+\defSub{Distribution}{Define the likelihood distribution}
+\defType{String}
+\defDefault{None}
+\defValue{A valid distribution}
+
+\defSub{ProcessError}{Define the process error term}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+\defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+
