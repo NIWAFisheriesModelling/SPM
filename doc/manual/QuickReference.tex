@@ -2,7 +2,7 @@
 \subsection{General commands and subcommands}
 \defComArg{IncludeFile}{file\_name}{Include an external file}
 \subsection{Population command and subcommand syntax}
-\defCom{Model}{Define the spatial structure, population structure, annual cycle, and model years}\par \par
+\defCom{Model}{Define the spatial structure, population structure, annual cycle, and model years}\par
 \defSub{CellLength}{The length (distance) of one side of a cell}
 \defSub{Nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defSub{Ncols}{The number of columns $n_{cols}$ in the spatial structure}
@@ -16,18 +16,20 @@
 \defSub{CurrentYear}{Define the current year of the model}
 \defSub{FinalYear}{Define the final year of the model in projections}
 \defSub{TimeSteps} {Define the \command{TimeStep} labels (in order that they are applied) to form the annual cycle}
-\par \defComLab{InitialisationPhase}{Define the processes and years of the initialisation phase with label}\par \par
+\par \defComLab{InitialisationPhase}{Define the processes and years of the initialisation phase with label}\par
 \defSub{Years} {Define the number of years to run}
 \defSub{Processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
-\par \defComLab{TimeStep} {Define a time step with label}\par \par
+\par \defComLab{TimeStep} {Define a time step with label}\par
 \defSub{Process} {Define the process labels, in the order that they are applied, for the time step}
-\par \defComLab{Process} {Define a process with label}\par \par
+\par \defComLab{Process} {Define a process with label}\par
 \defSub{Type} {Define the type of process}
+\par\textbf{\commandsubarg{Process}{Type}{ConstantRecruitment}}\par
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{Ages} {Define the ages within each category that receive recruitment}
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
+\par\textbf{\commandsubarg{Process}{Type}{BHRecruitment}}\par
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Proportions} {Define the proportion of recruitment that occurs into each category}
@@ -39,101 +41,135 @@
 \defSub{YCS-Values} {YCS values}
 \defSub{YCS-Years} {Years for YCS values}
 \defSub{Layer} {Name of the layer used to determine where recruitment occurs}
+\par\textbf{\commandsubarg{Process}{Type}{Ageing}}\par
 \defSub{Categories} {Define the categories that ageing is applied to}
+\par\textbf{\commandsubarg{Process}{Type}{ConstantMortalityRate}}\par
 \defSub{M} {Define the constant mortality rate to be applied}
 \defSub{Categories} {Define the categories that mortality is applied to}
 \defSub{Selectivities} {Define the selectivities applied to each category}
+\par\textbf{\commandsubarg{Process}{Type}{AnnualMortalityRate}}\par
 \defSub{Years} {Define the years when the mortality rates are applied}
 \defSub{M} {Define the mortality rate to be applied for each year}
 \defSub{Categories} {Define the categories that mortality is applied to}
 \defSub{Selectivities} {Define the selectivities applied to each category}
+\par\textbf{\commandsubarg{Process}{Type}{EventMortality}}\par
 \defSub{Categories} {Define the categories that the event mortality is applied to}
 \defSub{Years} {Define the years where the mortality even is applied}
 \defSub{Layers} {Define the layers that specify the event mortality (as the abundance) in each year}
 \defSub{Umax}{Define the maximum exploitation rate}
 \defSub{Selectivities} {Define the selectivities applied to each category}
 \defSub{Penalty} {Define the event mortality penalty label}
+\par\textbf{\commandsubarg{Process}{Type}{BiomassEventMortality}}\par
 \defSub{Categories}{Define the categories that the event mortality is applied to}
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the event mortality is applied to}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
 \defSub{Years}{Define the years where the mortality even is applied}
 \defSub{Layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defSub{Umax} {Define the maximum exploitation rate}
 \defSub{Selectivities}{Define the selectivities applied to each category}
 \defSub{Penalty} {Define the event mortality penalty label}
+\par\textbf{\commandsubarg{Process}{Type}{CategoryTransition}}\par
 \defSub{From} {Define the category that is the source of the transition process}
 \defSub{To} {Define the category that is the sink of the transition process}
 \defSub{N} {Define the number of individuals to move}
 \defSub{Selectivity} {Define the selectivity applied to the source category}
+\par\textbf{\commandsubarg{Process}{Type}{CategoryTransitionRate}}\par
 \defSub{From} {Define the category that is the source of the transition process}
 \defSub{To} {Define the category that is the sink of the transition process}
 \defSub{Proportion} {Define the proportion of individuals to move}
 \defSub{Selectivity} {Define the selectivity applied to the source category}
+\par\textbf{\commandsubarg{Process}{Type}{MigrationMovement}}\par
+\defSub{Categories} {Define the categories that the migration movement event is applied to}
+\defSub{SourceLayer} {Define the label of a layer that defines the source cells of the migration movement event}
+\defSub{SinkLayer} {Define the label of a layer that defines the sink cells of the migration movement event}
+\defSub{Proportions} {Define the constant multiplier for the proportions that migrate}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\par\textbf{\commandsubarg{Process}{Type}{AdjacentCellMovement}}\par
+\par\textbf{\commandsubarg{Process}{Type}{PreferenceMovement}}\par
 \defSub{Categories} {Define the categories that the preference function movement is applied to}
 \defSub{PreferenceFunctions} {Define the labels of the individual  preference functions that make up the total preference function}
-\par \defComLab{PreferenceFunction} {Define a preference function with label}\par \par
+\par \defComLab{PreferenceFunction} {Define a preference function with label}\par
 \defSub{Type} {Define the type of preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Constant}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Normal}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Mu} {Defines the $\mu$ parameter of the normal preference function}
 \defSub{Sigma} {Defines the $\sigma$ parameter of the normal preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Double-normal}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Mu} {Defines the $\mu$ parameter of the double-normal preference function}
 \defSub{SigmaL} {Defines the $\sigma_L$ parameter of the double-normal preference function}
 \defSub{SigmaR} {Defines the $\sigma_R$ parameter of the double-normal preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Logistic}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{a50} {Defines the $a_{50}$ parameter of the logistic preference function}
 \defSub{ato95} {Defines the $a_{to95}$ parameter of the logistic preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Inverse-logistic}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{a50} {Defines the $a_{50}$ parameter of the inverse-logistic preference function}
 \defSub{ato95} {Defines the $a_{to95}$ parameter of the inverse-logistic preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Exponential-decay}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the exponential-decay preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Threshold}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Categories} {Define the categories are used to calculate the abundance}
 \defSub{Selectivity} {Define the selectivities applied to each category}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{N} {Defines the $N$ parameter of the threshold preference function}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the threshold preference function}
+\par\textbf{\commandsubarg{PreferenceFunction}{Type}{Threshold-biomass}}\par
 \defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{Categories} {Define the categories are used to calculate the biomass}
 \defSub{Selectivity} {Define the selectivities applied to each category}
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
-\par \defComLab{Layer} {Define a layer function with label}\par \par
+\par \defComLab{Layer} {Define a layer function with label}\par
 \defSub{Type} {Define the type of layer}
+\par\textbf{\commandsubarg{Layer}{Type}{Numeric}}\par
 \defSub{Row$x$} {Define the values of the layer for row $x$}
 \defSub{Rescale} {Rescale values of the layer}
+\par\textbf{\commandsubarg{Layer}{Type}{Categorical}}\par
 \defSub{Row$x$} {Define the values of the layer for row $x$}
+\par\textbf{\commandsubarg{Layer}{Type}{Distance}}\par
+\par\textbf{\commandsubarg{Layer}{Type}{Abundance}}\par
 \defSub{Categories} {Define the categories are used to calculate the abundance}
 \defSub{Selectivity} {Define the selectivities applied to each category}
+\par\textbf{\commandsubarg{Layer}{Type}{Biomass}}\par
 \defSub{Categories} {Define the categories are used to calculate the biomass}
 \defSub{Selectivity} {Define the selectivities applied to each category}
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\par\textbf{\commandsubarg{Layer}{Type}{AbundanceDensity}}\par
 \defSub{Categories} {Define the categories are used to calculate the abundance}
 \defSub{Selectivity} {Define the selectivities applied to each category}
+\par\textbf{\commandsubarg{Layer}{Type}{BiomassDensity}}\par
 \defSub{Categories} {Define the categories are used to calculate the biomass}
 \defSub{Selectivity} {Define the selectivities applied to each category}
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\par\textbf{\commandsubarg{Layer}{Type}{Meta-layer}}\par
 \defSub{Year} {Define the years}
 \defSub{Layers} {Define the layer labels for each of the years}
-\par \defComLab{DerivedQuantity} {Define a derived quantity with label}\par \par
+\par \defComLab{DerivedQuantity} {Define a derived quantity with label}\par
 \defSub{Type} {Define the type of derived quantity}
+\par\textbf{\commandsubarg{DerivedQuantity}{Type}{Abundance}}\par
 \defSub{Categories} {Define the categories are used to calculate the derived quantity}
 \defSub{Selectivity} {Define the selectivities}
 \defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
+\par\textbf{\commandsubarg{DerivedQuantity}{Type}{Biomass}}\par
 \defSub{Categories} {Define the categories are used to calculate the derived quantity}
 \defSub{Selectivity} {Define the selectivities}
 \defSub{TimeStep} {Define the time step at the end of which, the derived quantity is calculated}
-\par \defComLab{SizeAtAge} {Define a size-at-age relationship with label}\par \par
+\par \defComLab{SizeAtAge} {Define a size-at-age relationship with label}\par
 \defSub{Type} {Define the type of relationship}
+\par\textbf{\commandsubarg{SizeAtAge}{Type}{vonBert}}\par
 \defSub{Linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
 \defSub{k} {Define the $k$ parameter of the von Bertalanffy relationship}
 \defSub{t0} {Define the $t_0$ parameter of the von Bertalanffy relationship}
@@ -141,6 +177,8 @@
 \defSub{ByLength} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
 \defSub{GrowthProps} {Define the proportion of the year for each time step for evaluating size}
+\defSub{SizeWeight} {Define the label of the associated size-weight relationship}
+\par\textbf{\commandsubarg{SizeAtAge}{Type}{Schnute}}\par
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
 \defSub{y2} {Define the $y_2$ parameter of the Schnute relationship}
 \defSub{tau1} {Define the $\tau_1$ parameter of the Schnute relationship}
@@ -150,31 +188,43 @@
 \defSub{ByLength} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
 \defSub{GrowthProps} {Define the proportion of the year for each time step for evaluating size}
-\par \defComLab{SizeWeight} {Define a size-weight relationship with label}\par \par
+\defSub{SizeWeight} {Define the label of the associated size-weight relationship}
+\par \defComLab{SizeWeight} {Define a size-weight relationship with label}\par
 \defSub{Type} {Define the type of relationship}
+\par\textbf{\commandsubarg{SizeWeight}{Type}{None}}\par
+\par\textbf{\commandsubarg{SizeWeight}{Type}{Basic}}\par
 \defSub{SizeAtAge} {Define the label of the associated size-at-age relationship relationship}
 \defSub{a} {Define the $a$ parameter of the basic relationship}
 \defSub{b} {Define the $b$ parameter of the basic relationship}
-\par \defComLab{Selectivity} {Define a selectivity function with label}\par \par
+\par \defComLab{Selectivity} {Define a selectivity function with label}\par
 \defSub{Type} {Define the type of selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{Constant}}\par
 \defSub{C} {Defines the $C$ parameter of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{Knife-edge}}\par
 \defSub{E} {Defines the $E$ parameter of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{Allvalues}}\par
 \defSub{V} {Defines the $V$ parameters (one for each age class) of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{Allvalues}}\par
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
 \defSub{V} {Defines the $V$ parameters (one for each age class from $L$ to $H$) of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{Increasing}}\par
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
 \defSub{V} {Defines the $V$ parameters (one for each age class from $L$ to $H$) of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{Logistic}}\par
 \defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
 \defSub{ato95} {Defines the $a_{to95}$ parameter of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{LogisticProducing}}\par
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
 \defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
 \defSub{ato95} {Defines the $a_{to95}$ parameter of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{DoubleNormal}}\par
 \defSub{Mu} {Defines the $\mu$ parameter of the selectivity function}
 \defSub{SigmaL} {Defines the $\sigma_L$ parameter of the selectivity function}
 \defSub{SigmaR} {Defines the $\sigma_R$ parameter of the selectivity function}
+\par\textbf{\commandsubarg{Selectivity}{Type}{DoubleExponential}}\par
 \defSub{x1} {Defines the $x_1$ parameter of the selectivity function}
 \defSub{x2} {Defines the $x_2$ parameter of the selectivity function}
 \defSub{x0} {Defines the $x_0$ parameter of the selectivity function}
@@ -182,4 +232,33 @@
 \defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
 \subsection{Estimation command and subcommand syntax}
+\defComArg{Seed}{value}{Defines the random number generator seed}\par
+\par \defComLab{MPD}{Define the an estimater with label}\par
+\defSub{Type} {Define the type of minimiser}
+\par\textbf{\commandsubarg{MPD}{Type}{NumericalDifferences}}\par
+\defSub{MaxIterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
+\defSub{MaxEvaluations} {Define the maximum number of evaluations for the Numerical Differences minimiser}
+\defSub{StepSize} {Define the step-size for the Numerical Differences minimiser}
+\defSub{GradientTolerance} {Define the gradient tolerance for the Numerical Differences minimiser}
+\par\textbf{\commandsubarg{MPD}{Type}{DESolver}}\par
+\defSub{MaxIterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
+\defSub{MaxEvaluations} {Define the maximum number of evaluations for the Differential Evolution minimiser}
+\defSub{StepSize} {Define the step-size for the Differential Evolution minimiser}
+\defSub{GradientTolerance} {Define the gradient tolerance for the Differential Evolution minimiser}
+\par \defCom{MCMC}{Define the MCMC estimation arguments}\par
+\defSub{Type} {Define the method of MCMC}
+\par\textbf{\commandsubarg{MCMC}{Type}{MetropolisHastings}}\par
+\defSub{Start} {Covariance multiplier for the starting point of the Markov chain}
+\defSub{Length} {Length of the Markov chain}
+\defSub{keep} {Spacing between recorded values in the chain}
+\defSub{MaxCorrelation} {Maximum absolute correlation in the covariance matrix of the proposal distribution}
+\defSub{CorrelationAdjustmentMethod} {Method for adjusting small variances in the covariance proposal matrix}
+\defSub{CorrelationAdjustmentDiff} {Minimum nonzero variance times the range of the bounds in the covariance matrix of the proposal distribution}
+\defSub{StepSize} {Initial step-size (as a multiplier of the approximate covariance matrix)}
+\defSub{ProporsalDistribution} {The shape of the proposal distribution (either \textit{t} or normal)}
+\defSub{df} {Degrees of freedom of the multivariate t proposal distribution}
+\defSub{Parameter} {Name of the parameter to be profiled}
+\defSub{N} {Number of values at which to profile the parameter}
+\defSub{Lower} {lower bound on parameter}
+\defSub{Upper} {Upper bound on parameter}
 \subsection{Output command and subcommand syntax}

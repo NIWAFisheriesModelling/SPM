@@ -93,20 +93,22 @@
 The population processes available are, 
 
 \begin{itemize}
-	\item Constant recruitment
-  \item Beverton-Holt stock-recruit relationship recruitment
-	\item Ageing
-	\item Constant mortality rate
-	\item Annually varying mortality rate
-	\item Mortality event (as a number)
-	\item Mortality event (as a biomass)
-	\item Category transition
-	\item Category shift
+	\item Constant recruitment process
+  \item Beverton-Holt stock-recruit relationship recruitment process
+	\item Ageing process
+	\item Constant mortality rate process
+	\item Annually varying mortality rate process
+	\item Mortality event (as a number) process
+	\item Mortality event (as a biomass) process
+	\item Category transition process
+	\item Category shift process
 \end{itemize}
 
 The movement processes available are,	
 
 \begin{itemize}
+	\item Migration movement
+	\item Adjacent cell movement
 	\item Preference movement
 \end{itemize}
 
@@ -119,7 +121,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid type of process}
 
-\subsubsection[Constant recruitment]{\commandsubarg{Process}{Type}{ConstantRecruitment}} 
+\subsubsection[Constant recruitment process]{\commandsubarg{Process}{Type}{ConstantRecruitment}} 
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -146,7 +148,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
-\subsubsection[Beverton-Holt recruitment]{\commandsubarg{Process}{Type}{BHRecruitment}}
+\subsubsection[Beverton-Holt recruitment process]{\commandsubarg{Process}{Type}{BHRecruitment}}
 
 \defSub{R0} {Define the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -203,14 +205,14 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \texttt{TRUE}}
 
-\subsubsection[Ageing]{\commandsubarg{Process}{Type}{Ageing}}
+\subsubsection[Ageing process]{\commandsubarg{Process}{Type}{Ageing}}
 
 \defSub{Categories} {Define the categories that ageing is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{.Categories}}
 
-\subsubsection[Constant mortality rate]{\commandsubarg{Process}{Type}{ConstantMortalityRate}}
+\subsubsection[Constant mortality rate process]{\commandsubarg{Process}{Type}{ConstantMortalityRate}}
 
 \defSub{M} {Define the constant mortality rate to be applied}
 \defType{Estimable}
@@ -227,7 +229,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{Selectivity}}
 
-\subsubsection[Annual mortality rate]{\commandsubarg{Process}{Type}{AnnualMortalityRate}}
+\subsubsection[Annual mortality rate process]{\commandsubarg{Process}{Type}{AnnualMortalityRate}}
 
 \defSub{Years} {Define the years when the mortality rates are applied}
 \defType{Constant vector}
@@ -249,7 +251,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{Selectivity}}
 
-\subsubsection[Event mortality]{\commandsubarg{Process}{Type}{EventMortality}}
+\subsubsection[Event mortality process]{\commandsubarg{Process}{Type}{EventMortality}}
 
 \defSub{Categories} {Define the categories that the event mortality is applied to}
 \defType{String vector}
@@ -281,17 +283,17 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid penalty label defined by \command {Penalty}}
 
-\subsubsection[Biomass event mortality]{\commandsubarg{Process}{Type}{BiomassEventMortality}}
+\subsubsection[Biomass event mortality process]{\commandsubarg{Process}{Type}{BiomassEventMortality}}
 
 \defSub{Categories}{Define the categories that the event mortality is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{.Categories}}
 
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the event mortality is applied to}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
 \defType{String vector}
 \defDefault{None}
-\defValue{Valid labels from \command{SizeWeight}}
+\defValue{Valid labels from \command{SizeAtAge}}
 
 \defSub{Years}{Define the years where the mortality even is applied}
 \defType{Integer vector}
@@ -318,7 +320,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid penalty label defined by \command {Penalty}}
 
-\subsubsection[Category transition]{\commandsubarg{Process}{Type}{CategoryTransition}}
+\subsubsection[Category transition process]{\commandsubarg{Process}{Type}{CategoryTransition}}
 
 \defSub{From} {Define the category that is the source of the transition process}
 \defType{String}
@@ -340,7 +342,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A valid selectivity label defined by \command{Selectivity}}
 
-\subsubsection[Category transition rate]{\commandsubarg{Process}{Type}{CategoryTransitionRate}}
+\subsubsection[Category transition rate process]{\commandsubarg{Process}{Type}{CategoryTransitionRate}}
 
 \defSub{From} {Define the category that is the source of the transition process}
 \defType{String}
@@ -361,6 +363,37 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String}
 \defDefault{None}
 \defValue{A valid selectivity label defined by \command{Selectivity}}
+
+\subsubsection[Migration movement]{\commandsubarg{Process}{Type}{MigrationMovement}}
+
+\defSub{Categories} {Define the categories that the migration movement event is applied to}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid categories from \commandsub{Model}{.Categories}}
+
+\defSub{SourceLayer} {Define the label of a layer that defines the source cells of the migration movement event}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer defined by \command{Layer}}
+
+\defSub{SinkLayer} {Define the label of a layer that defines the sink cells of the migration movement event}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer defined by \command{Layer}}
+
+\defSub{Proportions} {Define the constant multiplier for the proportions that migrate}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
+
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid selectivity labels defined by \command{Selectivity}}
+
+\subsubsection[Adjacent cell movement]{\commandsubarg{Process}{Type}{AdjacentCellMovement}}
+
+Not yet implemented. No subcommands have been defined.
 
 \subsubsection[Preference movement]{\commandsubarg{Process}{Type}{PreferenceMovement}}
 
@@ -550,10 +583,10 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
 
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{None}
-\defValue{Valid labels from \command{SizeWeight}}
+\defValue{Valid labels from \command{SizeAtAge}}
 
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defType{Estimable}
@@ -610,7 +643,7 @@ The available layer types  are,
 
 \subsubsection[Distance]{\commandsubarg{Layer}{Type}{Distance}}
 
-The \subsubsection[Distance]{\commandsubarg{Layer}{Type}{Distance}} layer has no other subcommands.
+There are no other subcommands for \commandsubarg{Layer}{Type}{Distance}.
 
 \subsubsection[Abundance]{\commandsubarg{Layer}{Type}{Abundance}}
 
@@ -636,10 +669,10 @@ The \subsubsection[Distance]{\commandsubarg{Layer}{Type}{Distance}} layer has no
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
 
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{None}
-\defValue{Valid labels from \command{SizeWeight}}
+\defValue{Valid labels from \command{SizeAtAge}}
 
 \subsubsection[Abundance-density]{\commandsubarg{Layer}{Type}{AbundanceDensity}}
 
@@ -665,10 +698,10 @@ The \subsubsection[Distance]{\commandsubarg{Layer}{Type}{Distance}} layer has no
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
 
-\defSub{SizeWeight}{Define the size-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{None}
-\defValue{Valid labels from \command{SizeWeight}}
+\defValue{Valid labels from \command{SizeAtAge}}
 
 \subsubsection[Meta-layer]{\commandsubarg{Layer}{Type}{Meta-layer}}
 
@@ -784,6 +817,11 @@ The individual types of size-at-age relationship available are,
 \defDefault{None}
 \defValue{A vector of values, $\le1$ of length equal to the number of time steps}
 
+\defSub{SizeWeight} {Define the label of the associated size-weight relationship}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{SizeWeight}}
+
 \subsubsection[Schnute]{\commandsubarg{SizeAtAge}{Type}{Schnute}}
 
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
@@ -831,6 +869,11 @@ The individual types of size-at-age relationship available are,
 \defDefault{None}
 \defValue{A vector of values, $\le1$ of length equal to the number of time steps}
 
+\defSub{SizeWeight} {Define the label of the associated size-weight relationship}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{SizeWeight}}
+
 \subsection{SizeWeight}
 
 The individual types of size-weight relationship available are, 
@@ -849,7 +892,7 @@ The individual types of size-weight relationship available are,
 
 \subsubsection[None]{\commandsubarg{SizeWeight}{Type}{None}}
 
-There are no other subcommands for \commandsubarg{SizeWeight}{Type}{None}
+There are no other subcommands for \commandsubarg{SizeWeight}{Type}{None}.
 
 \subsubsection[Basic]{\commandsubarg{SizeWeight}{Type}{Basic}}
 

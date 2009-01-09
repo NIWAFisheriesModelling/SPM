@@ -361,7 +361,7 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
 
 \subsection{Derived quantities\label{sec:derived-quantities}}
 
-Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundances or as a biomass.
+Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundances or as a biomass. Derived quantities are simply the count or sum of cells within some categories, after applying a selectivity, within cells defined by a layer.
 
 \subsection{Size-at-age\label{sec:size-at-age}}
 
@@ -395,7 +395,7 @@ The model can incorporate changes in size-at-age during the year (i.e., growth b
 
 The size-weight parameters $a$ and $b$ is calculated as either,
 \begin{itemize}
-  \item{None:} A linear relationship where the weight of each individual is exactly 1 
+  \item{None:} A relationship where the weight of each individual is exactly 1 
   \item{Basic:} The more usual size-weight relationship, where 
   \begin{equation}
     \text{mean weight}=a(\text{mean size-at-age})^b

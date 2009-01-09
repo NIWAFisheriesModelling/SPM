@@ -18,14 +18,15 @@ for i in range(len(FILE)):
       line = line[0:find] + "}"
     # recode subsections, subsubsection to be excluded from the contents
     if line[1:14] == "subsubsection" :
-      line = ""
+      mat = string.find(line,']')+1
+      line = "\\par\\textbf" + line[mat:] + "\\par"
     if line[1:11] == "subsection" :
-      #line = "\subsubsection*" + line[11:]
+      line = "\\subsubsection" + line[11:]
       line = ""
     if line[1:8] == "section" :
-      line = "\subsection" + line[8:]
+      line = "\\subsection" + line[8:]
     # keep line only if it is a section, defCom, defComlab, defComArg, or defSub
-    if (line[1:11]=="subsection" or line[1:14]=="subsubsection" or line[1:7]=="defCom" or line[1:7]=="defSub") :
+    if (line[1:11]=="subsection" or line[1:14]=="subsubsection" or line[1:11]=="par\\textbf" or line[1:7]=="defCom" or line[1:7]=="defSub") :
       if (line[1:11]=="subsection") :
         count=0
       if (line[1:7]=="defCom") :
@@ -34,7 +35,7 @@ for i in range(len(FILE)):
         else:
           count=1
         if(i > 0):
-          line = line + "\\par \\par"
+          line = line + "\\par"
 
       OUTFILE.write(line)
       OUTFILE.write('\n')

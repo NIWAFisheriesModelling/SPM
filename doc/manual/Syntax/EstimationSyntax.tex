@@ -1,2 +1,153 @@
 \section{Estimation command and subcommand syntax\label{sec:estimation-syntax}}
 
+\subsection{Random number seed}
+
+\defComArg{Seed}{value}{Defines the random number generator seed}
+
+\defArg{value}{The random number generator seed value}
+\defType{Integer}
+\defDefault{None}
+\defValue{An integer between 0 and 10000 inclusive}
+
+\subsection{Maximum posterior density (MPD)}
+
+Two methods of minimising when estimating are, 
+ 
+\begin{itemize}
+	\item Numerical differences minimiser
+  \item Differential evolution minimiser
+\end{itemize}
+
+Each type of minimiser requires a set of subcommands and arguments specific to that minimiser. Different minimisers can be called in sequence, with the results of one output as input to the next.
+
+\defComLab{MPD}{Define the an estimater with label}
+
+\defSub{Type} {Define the type of minimiser}
+\defType{String}
+\defDefault{NumericalDifferences}
+\defValue{A valid type of minimiser, either NumericalDifferences or DESolver}
+
+\subsubsection[Numerical differences minimiser]{\commandsubarg{MPD}{Type}{NumericalDifferences}} 
+
+\defSub{MaxIterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
+\defType{Integer}
+\defDefault{1000}
+\defValue{A positive integer}
+
+\defSub{MaxEvaluations} {Define the maximum number of evaluations for the Numerical Differences minimiser}
+\defType{Integer}
+\defDefault{4000}
+\defValue{A positive integer}
+
+\defSub{StepSize} {Define the step-size for the Numerical Differences minimiser}
+\defType{Constant}
+\defDefault{1e-6}
+\defValue{A positive real number}
+
+\defSub{GradientTolerance} {Define the gradient tolerance for the Numerical Differences minimiser}
+\defType{Constant}
+\defDefault{0.0002}
+\defValue{A positive real number}
+
+\subsubsection[Differential evolution minimiser]{\commandsubarg{MPD}{Type}{DESolver}} 
+
+\defSub{MaxIterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
+\defType{Integer}
+\defDefault{1000}
+\defValue{A positive integer}
+
+\defSub{MaxEvaluations} {Define the maximum number of evaluations for the Differential Evolution minimiser}
+\defType{Integer}
+\defDefault{4000}
+\defValue{A positive integer}
+
+\defSub{StepSize} {Define the step-size for the Differential Evolution minimiser}
+\defType{Constant}
+\defDefault{1e-6}
+\defValue{A positive real number}
+
+\defSub{GradientTolerance} {Define the gradient tolerance for the Differential Evolution minimiser}
+\defType{Constant}
+\defDefault{0.0002}
+\defValue{A positive real number}
+
+\subsection{Monte Carlo Markov Chain (MCMC)}
+
+Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain using Metropolis-Hastings
+
+\defCom{MCMC}{Define the MCMC estimation arguments}
+
+\defSub{Type} {Define the method of MCMC}
+\defType{String}
+\defDefault{MetropolisHastings}
+\defValue{A valid type of MCMC, currently only Metropolis-Hastings is available}
+
+\subsubsection[Metropolis-Hastings]{\commandsubarg{MCMC}{Type}{MetropolisHastings}} 
+
+\defSub{Start} {Covariance multiplier for the starting point of the Markov chain}
+\defType{Constant}
+\defDefault{0}
+\defValue{If 0, defines the starting point of the chain as the point estimate.	If >0, defines the starting point as randomly generated, with covariance matrix equal to the approximate covariance (inverse Hessian) times the value of this start parameter}
+
+\defSub{Length} {Length of the Markov chain}
+\defType{Integer}
+\defDefault{None}
+\defValue{Defines the length of the Markov chain (as a number of iterations)}
+
+\defSub{keep} {Spacing between recorded values in the chain}
+\defType{Integer}
+\defDefault{1}
+\defValue{Defines the spacing between recorded values in the chain. Samples from the posterior are written to file only if their sample number is evenly divisible by \argument{keep}}
+
+\defSub{MaxCorrelation} {Maximum absolute correlation in the covariance matrix of the proposal distribution}
+\defType{Constant}
+\defDefault{0.8}
+\defValue{Defines the maximum correlation in the covariance matrix of the proposal distribution. Correlations greater than MaxCorrelation are decreased to MaxCorrelation, and those less than -MaxCorrelation are increased to -MaxCorrelation }
+
+\defSub{CorrelationAdjustmentMethod} {Method for adjusting small variances in the covariance proposal matrix}
+\defType{String}
+\defDefault{correlation}
+\defValue{Defines the method (either correlation or covariance) for the adjusting small variances in the covariance matrix of the proposal distribution}
+
+\defSub{CorrelationAdjustmentDiff} {Minimum nonzero variance times the range of the bounds in the covariance matrix of the proposal distribution}
+\defType{Constant}
+\defDefault{0.0001}
+\defValue{Defines the minimum nonzero variance times the difference in the bounds of each parameter in the covariance matrix of the proposal distribution}
+
+\defSub{StepSize} {Initial step-size (as a multiplier of the approximate covariance matrix)}
+\defType{Constant}
+\defDefault{$2.4d^{-0.5}$ where $d$ is the number of free parameters}
+\defValue{The covariance of the proposal distribution is the approximate covariance (inverse Hessian) times this step-size parameter}
+
+\defSub{ProporsalDistribution} {The shape of the proposal distribution (either \textit{t} or normal)}
+\defType{String}
+\defDefault{t}
+\defValue{Either t or normal. Defines whether the proposal distribution should be multivariate t rather than multivariate normal}
+
+\defSub{df} {Degrees of freedom of the multivariate t proposal distribution}
+\defType{Integer}
+\defDefault{4}
+\defValue{Defines the degrees of freedom of the multivariate t proposal distribution}
+
+\subsection{Profiles}
+
+\defSub{Parameter} {Name of the parameter to be profiled}
+\defType{String}
+\defDefault{None}
+\defValue{Defines the name of the parameter to be profiled}
+
+\defSub{N} {Number of values at which to profile the parameter}
+\defType{Integer}
+\defDefault{10}
+\defValue{Defines the number of values at which to profile the parameter}
+
+\defSub{Lower} {lower bound on parameter}
+\defType{Integer}
+\defDefault{None}
+\defValue{Defines the lower bound on the range of the parameter to profile}
+
+\defSub{Upper} {Upper bound on parameter}
+\defType{Integer}
+\defDefault{None}
+\defValue{Defines the upper bound on the range of the parameter to profile}
+
