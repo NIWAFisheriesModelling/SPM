@@ -202,9 +202,9 @@
 \defSub{C} {Defines the $C$ parameter of the selectivity function}
 \par\textbf{\commandsubarg{Selectivity}{Type}{Knife-edge}}\par
 \defSub{E} {Defines the $E$ parameter of the selectivity function}
-\par\textbf{\commandsubarg{Selectivity}{Type}{Allvalues}}\par
+\par\textbf{\commandsubarg{Selectivity}{Type}{All-values}}\par
 \defSub{V} {Defines the $V$ parameters (one for each age class) of the selectivity function}
-\par\textbf{\commandsubarg{Selectivity}{Type}{Allvalues}}\par
+\par\textbf{\commandsubarg{Selectivity}{Type}{All-values-bounded}}\par
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
 \defSub{V} {Defines the $V$ parameters (one for each age class from $L$ to $H$) of the selectivity function}
@@ -284,5 +284,16 @@
 \defSub{B}{The upper value of the range parameter $B$ of the Beta prior}
 \defSub{Mu}{Defines the mean $\mu$ of the Beta prior}
 \defSub{stdev}{Defines the standard deviation $\sigma$ of the Beta prior}
+\par \defComLab{AgeingError}{Define ageing error with \textit{label}}\par
+\defSub{Type} {The type of ageing error}
+\par\textbf{\commandsubarg{AgeingError[\textit{label}]}{Type}{None}}\par
+\par\textbf{\commandsubarg{AgeingError[\textit{label}]}{Type}{Normal}}\par
+\defSub{c} {Parameter of the normal ageing error model}
+\par\textbf{\commandsubarg{AgeingError[\textit{label}]}{Type}{Off-by-one}}\par
+\defSub{k} {The $k$ parameter of the off-by-one ageing error model}
+\defSub{p1} {The $p_1$ parameter of the off-by-one ageing error model}
+\defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
+\par \defComLab{q}{Define a catchability constant with \textit{label}}\par
+\defSub{q} {Value of the q parameter}
 \subsection{Observation command and subcommand syntax}
 \subsection{Output command and subcommand syntax}
