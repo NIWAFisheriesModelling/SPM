@@ -1,0 +1,19 @@
+\section{The observation section\label{sec:observation-section}}
+
+The objective function is based on the goodness-of-fit of the model to your observations. In the current release of \SPM, most observations are different kinds of time series, i.e., data which were recorded for one or more years, in the same format each year. Examples of time series data types include relative abundance indices, commercial catch length frequencies, survey numbers-at-age, etc,. 
+
+Generally, time series must relate to a specified time step and a specified area, and one or more years in which they were recorded.
+
+\subsubsection{Types of observations}
+
+\subsection{The objective function}
+
+In Bayesian estimation, the objective function is a negative log-posterior,
+
+\[
+Objective(p)= - \sum\limits_i {\log \left[ {L\left( {{\bf{p}}|O_i } \right)} \right]}  - \log \left[ {\pi \left( {\bf{p}} \right)} \right]
+\]
+
+where $\pi$ is the joint prior density of the parameters $p$.
+
+Under either estimation method, penalties can be added to the objective function (see Section XXX). You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken). A penalty to force the YCS to average to 1 (i.e., to have mean 1) may also be necessary.

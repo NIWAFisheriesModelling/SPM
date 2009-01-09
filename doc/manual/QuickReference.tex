@@ -261,4 +261,28 @@
 \defSub{N} {Number of values at which to profile the parameter}
 \defSub{Lower} {lower bound on parameter}
 \defSub{Upper} {Upper bound on parameter}
+\par \defComArg{Estimate}{parameter\_name}{Define the name of the free parameter to estimate}\par
+\defSub{Same}{Names of the other parameters which are constrained to have the same value}
+\defSub{Phase}{Phase at which this parameter should be estimated, in point estimation}
+\defSub{LowerBound}{Lower bound on this parameter}
+\defSub{UpperBound}{Upper bound on this parameter}
+\defSub{MCMCFixed}{Should this parameter be fixed during MCMC?}
+\defSub{Prior}{Defines the prior for this parameter}
+\par\textbf{\commandsubarg{estimate[\textit{label}]}{Prior}{Uniform}}\par
+\par\textbf{\commandsubarg{estimate[\textit{label}]}{Prior}{Uniform-Log}}\par
+\par\textbf{\commandsubarg{estimate[\textit{label}]}{Prior}{Normal}}\par
+\defSub{Mu}{Defines the mean $\mu$ of the normal prior}
+\defSub{cv}{Defines the c.v. $c$ of the normal prior}
+\par\textbf{\commandsubarg{estimate[\textit{label}]}{Prior}{Normal-by-stdev}}\par
+\defSub{Mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
+\defSub{stdev}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
+\par\textbf{\commandsubarg{estimate[\textit{label}]}{Prior}{Lognormal}}\par
+\defSub{Mu}{Defines the mean $\mu$ of the lognormal prior}
+\defSub{cv}{Defines the c.v. $c$ of the lognormal prior}
+\par\textbf{\commandsubarg{estimate[\textit{label}]}{Prior}{Beta}}\par
+\defSub{A}{The lower value of the range parameter $A$ of the Beta prior}
+\defSub{B}{The upper value of the range parameter $B$ of the Beta prior}
+\defSub{Mu}{Defines the mean $\mu$ of the Beta prior}
+\defSub{stdev}{Defines the standard deviation $\sigma$ of the Beta prior}
+\subsection{Observation command and subcommand syntax}
 \subsection{Output command and subcommand syntax}

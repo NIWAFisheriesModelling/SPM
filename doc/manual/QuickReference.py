@@ -1,7 +1,10 @@
 import string
 
-FILE = [open('Syntax/GeneralSyntax.tex', 'r'),open('Syntax/PopulationSyntax.tex', 'r'),
-        open('Syntax/EstimationSyntax.tex', 'r'),open('Syntax/OutputSyntax.tex', 'r')]
+FILE = [open('Syntax/GeneralSyntax.tex', 'r'),
+        open('Syntax/PopulationSyntax.tex', 'r'),
+        open('Syntax/EstimationSyntax.tex', 'r'),
+        open('Syntax/ObservationSyntax.tex', 'r'),
+        open('Syntax/OutputSyntax.tex', 'r')]
 OUTFILE = open('QuickReference.tex', 'w')
 
 OUTFILE.write("\section{Quick reference\label{sec:quick-reference}}\n")
