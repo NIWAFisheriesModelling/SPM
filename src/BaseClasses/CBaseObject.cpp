@@ -7,12 +7,10 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Global Headers
-#include <sstream>
-#include <iostream>
-
 // Local Includes
 #include "CBaseObject.h"
+#include "../Helpers/CConvertor.h"
+#include "../Helpers/CComparer.h"
 
 //**********************************************************************
 // CBaseObject::CBaseObject()
@@ -22,12 +20,13 @@ CBaseObject::CBaseObject(CBaseObject *Object) {
   // Assign Pointers
   pConfig               = CConfiguration::Instance();
   pRuntimeController    = CRuntimeController::Instance();
-
-  // Verbose Mode?
-  bVerbose              = pConfig->getVerboseMode();
+  pParameterList        = new CParameterList();
 
   // Values
   sLabel                = "";
+
+  // Register the user defined variables
+  pParameterList->registerAllowed(PARAM_LABEL);
 
   // Copy-Constructor
   if (Object != 0) {
@@ -36,62 +35,11 @@ CBaseObject::CBaseObject(CBaseObject *Object) {
 }
 
 //**********************************************************************
-// void CBaseObject::print(string output)
-// Print out to Screen
-//**********************************************************************
-void CBaseObject::print(string output) {
-#ifndef OPTIMISE
-  if (bVerbose) {
-    std::cout << output;
-    std::cout.flush();
-  }
-#endif
-}
-
-//**********************************************************************
-// void CBaseObject::println(string output)
-// Print a line out to Screen
-//**********************************************************************
-void CBaseObject::println(string output) {
-#ifndef OPTIMISE
-  if (bVerbose)
-    std::cout << output << std::endl;
-#endif
-}
-
-//**********************************************************************
-// string CBaseObject::convertDouble(double value)
-// Convert Double To String
-//**********************************************************************
-string CBaseObject::convertDouble(double value) {
-  std::ostringstream o;
-  if (!(o << value))
-    return "";
-  return o.str();
-}
-
-//**********************************************************************
-// string CBaseObject::convertDouble(int value)
-// Convert Double To String
-//**********************************************************************
-string CBaseObject::convertInt(int value) {
-  std::ostringstream o;
-  if (!(o << value))
-    return "";
-  return o.str();
-}
-
-//**********************************************************************
 // void CBaseObject::registerEstimable(string name, double *variable)
 // Register a Variable as Estimable.
 //**********************************************************************
 void CBaseObject::registerEstimable(string name, double *variable) {
-  try {
-    mEstimables[name] = variable;
-  } catch (string Ex) {
-    Ex = "CBaseObject.registerEstimable(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+  mEstimables[name] = variable;
 }
 
 //**********************************************************************
@@ -99,14 +47,8 @@ void CBaseObject::registerEstimable(string name, double *variable) {
 // Register variable as estimable with an index (used for Vectors)
 //**********************************************************************
 void CBaseObject::registerEstimable(string name, int index, double *variable) {
-  try {
-    string newName = name + string("(") + convertInt(index) + string(")");
-    mEstimables[name] = variable;
-
-  } catch (string Ex) {
-    Ex = "CBaseObject.registerEstimable(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+  string newName = name + string("(") + CConvertor::intToString(index) + string(")");
+  mEstimables[newName] = variable;
 }
 
 //**********************************************************************
@@ -134,90 +76,13 @@ double* CBaseObject::getEstimableVariable(string name) {
 }
 
 //**********************************************************************
-// void CBaseObject::errorMissing(string value)
-// Throw Missing Exception
+// void CBaseObject::addParameter(string name, string value)
+// Add A Parameters
 //**********************************************************************
-void CBaseObject::errorMissing(string value) {
-  string sException = ERROR_MISSING;
-  sException += value;
-  throw sException;
+void CBaseObject::addParameter(string name, string value) {
+  pParameterList->addParameter(name, value);
 }
 
-//**********************************************************************
-// void CBaseObject::errorLessThan(string less, string more)
-// Throw Less Than Exception
-//**********************************************************************
-void CBaseObject::errorLessThan(string less, string more) {
-  string sException = less;
-  sException += ERROR_LESS_THAN;
-  sException += more;
-  throw sException;
-}
-
-//**********************************************************************
-// void CBaseObject::errorLessThanEqualTo(string less, string more)
-// Throw Less Than or Equal To Exception
-//**********************************************************************
-void CBaseObject::errorLessThanEqualTo(string less, string more) {
-  string sException = less;
-  sException += ERROR_LESS_EQUAL_TO;
-  sException += more;
-  throw sException;
-}
-
-//**********************************************************************
-// void CBaseObject::errorGreaterThan(string more, string less)
-// Throw greater than exception
-//**********************************************************************
-void CBaseObject::errorGreaterThan(string more, string less) {
-  string sException = more;
-  sException += ERROR_GREATER_THAN;
-  sException += less;
-  throw sException;
-}
-
-//**********************************************************************
-// void CBaseObject::errorGreaterThanEqualTo(string more, string less)
-// Throw Greater than or equal too exception
-//**********************************************************************
-void CBaseObject::errorGreaterThanEqualTo(string more, string less) {
-  string sException = more;
-  sException += ERROR_GREATER_EQUAL_TO;
-  sException += less;
-  throw sException;
-}
-
-//**********************************************************************
-// void CBaseObject::errorNotEqual(string value1, string value2)
-// Throw not equal exception
-//**********************************************************************
-void CBaseObject::errorNotEqual(string value1, string value2) {
-  string sException = value1;
-  sException += ERROR_EQUAL_NOT;
-  sException += value1;
-  throw sException;
-}
-
-//**********************************************************************
-// void CBaseObject::errorEqualTo(string value1, string value2)
-// Throw equal to exception
-//**********************************************************************
-void CBaseObject::errorEqualTo(string value1, string value2) {
-  string sException = value1;
-  sException += ERROR_EQUAL_TO;
-  sException += value1;
-  throw sException;
-}
-
-//**********************************************************************
-// void CBaseObject::errorSupported(string value)
-// Throw not supported error.
-//**********************************************************************
-void CBaseObject::errorSupported(string value) {
-  string sException = value;
-  sException += ERROR_SUPPORTED;
-  throw sException;
-}
 
 //**********************************************************************
 // CBaseObject::~CBaseObject()
@@ -227,4 +92,7 @@ CBaseObject::~CBaseObject() {
   // Blank Pointers
   pConfig               = 0;
   pRuntimeController    = 0;
+
+  delete pParameterList;
+  pParameterList        = 0;
 }

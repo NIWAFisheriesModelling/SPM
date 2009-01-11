@@ -12,7 +12,8 @@
 
 // Local Headers
 #include "CWorldGridPrintState.h"
-#include "../CTimeStepManager.h"
+#include "../TimeSteps/CTimeStepManager.h"
+#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CWorldGridPrintState::CWorldGridPrintState()
@@ -37,9 +38,9 @@ void CWorldGridPrintState::validate() {
     if (eState == STATE_MODELLING) {
       // Local Validation
       if (iYear == -1)
-        errorMissing(PARAM_YEAR);
+        CError::errorMissing(PARAM_YEAR);
       if (iStep == -1)
-        errorMissing(PARAM_TIME_STEP);
+        CError::errorMissing(PARAM_TIME_STEP);
     }
 
   } catch (string Ex) {

@@ -9,8 +9,10 @@
 
 // Local Headers
 #include "CObservation.h"
-#include "../CLayerManager.h"
-#include "../CSelectivityManager.h"
+#include "../Layers/CLayerManager.h"
+#include "../Selectivities/CSelectivityManager.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
 
 //**********************************************************************
 // CObservation::CObservation(CObservation *Observation);
@@ -87,21 +89,21 @@ void CObservation::validate() {
         iYear -= pConfig->getHumanStartYear();
 
       if (iYear > pConfig->getNumberOfYearsToRun())
-        errorGreaterThan(PARAM_YEAR, PARAM_RUN_YEARS);
+        CError::errorGreaterThan(PARAM_YEAR, PARAM_RUN_YEARS);
       if (iYear < 0)
-        errorLessThan(PARAM_YEAR, PARAM_ZERO);
+        CError::errorLessThan(PARAM_YEAR, PARAM_ZERO);
       if (iTimeStep <= 0)
-        errorLessThanEqualTo(PARAM_TIME_STEP, PARAM_ZERO);
+        CError::errorLessThanEqualTo(PARAM_TIME_STEP, PARAM_ZERO);
       if (iTimeStep > pConfig->getNumberOfTimeSteps())
-        errorGreaterThan(PARAM_TIME_STEP, PARAM_TIME_STEPS);
+        CError::errorGreaterThan(PARAM_TIME_STEP, PARAM_TIME_STEPS);
       if (sLayer == "")
-        errorMissing(PARAM_LAYER_NAME);
+        CError::errorMissing(PARAM_LAYER_NAME);
       if (vCategoryList.size() == 0)
-        errorMissing(PARAM_CATEGORIES);
+        CError::errorMissing(PARAM_CATEGORIES);
       if (vSelectivityList.size() == 0)
-        errorMissing(PARAM_SELECTIVITIES);
+        CError::errorMissing(PARAM_SELECTIVITIES);
       if (sDist == "")
-        errorMissing(PARAM_DIST);
+        CError::errorMissing(PARAM_DIST);
 
   } catch (string Ex) {
     Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;

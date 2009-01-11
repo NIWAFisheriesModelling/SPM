@@ -9,8 +9,10 @@
 
 // Local Headers
 #include "CPenalty.h"
-#include "../CProcessManager.h"
-#include "../CPenaltyManager.h"
+#include "CPenaltyManager.h"
+#include "../Processes/CProcessManager.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/CComparer.h"
 
 //**********************************************************************
 // CPenalty::CPenalty(CPenalty *Penalty = 0)
@@ -37,9 +39,9 @@ CPenalty::CPenalty(CPenalty *Penalty)
 void CPenalty::validate() {
   try {
     if (sLabel == "")
-      errorMissing(PARAM_LABEL);
-    if (isSame(dMultiplier, -1.0))
-      errorMissing(PARAM_MULTIPLIER);
+      CError::errorMissing(PARAM_LABEL);
+    if (CComparer::isEqual(dMultiplier, -1.0))
+      CError::errorMissing(PARAM_MULTIPLIER);
 
   } catch (string Ex) {
     Ex = "CPenalty.validate(" + sLabel + ")->" + Ex;
@@ -69,8 +71,8 @@ void CPenalty::execute(string Label, double Value) {
   try {
 #endif
     // Value should Never be 0
-    if (isZero(Value))
-      errorEqualTo(PARAM_PENALTY, PARAM_ZERO);
+    if (CComparer::isZero(Value))
+      CError::errorEqualTo(PARAM_PENALTY, PARAM_ZERO);
 
     // Assign Variables
     string sFullLabel = sLabel + "(" + Label + ")";

@@ -20,9 +20,10 @@ CConfiguration* CConfiguration::clInstance = 0;
 //**********************************************************************
 CConfiguration::CConfiguration() {
   // Variables
-  bVerboseMode                = false;
+  bQuietMode                  = false;
   bPopulateWithDummyData      = false;
-  sConfigPath                 = "";
+  sConfigFile                 = "config.spm";
+  sInputValuesFile            = "";
   iNumberOfYearsToRun         = 0;
   iNumberOfYearsToProject     = 0;
   iNumberOfTimeSteps          = 0;
@@ -166,6 +167,23 @@ string CConfiguration::getInitializationPhase(int index) {
 
   return "";
 }
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+void CConfiguration::addCommandLineParameter(string value) {
+  vCommandLineParameters.push_back(value);
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+string CConfiguration::getCommandLineParameter(int index) {
+  return vCommandLineParameters[index];
+}
+
 
 //****************\******************************************************
 // void CConfiguration::validate()

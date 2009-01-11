@@ -22,16 +22,6 @@
 using std::string;
 using std::vector;
 
-// Defines/Macros
-#define ZERO 1e-10
-#define SMALL 1e-4
-#define DELTA 1e-10
-#define isZero(A) ( (A < ZERO) && (A > -ZERO) )
-#define isSmall(A) ( (A < SMALL) && (A > -SMALL) )
-#define isSame(A, B) ( ((A-B) < ZERO) && ((A-B) > -ZERO) )
-#define isSimilar(A, B) ( ((A-B) < SMALL) && ((A-B) > -SMALL) )
-#define isBetween(A, B, C) ( ((A-B) > -ZERO) && ((A-C) < ZERO) )
-
 // TypeDefs
 typedef boost::mutex::scoped_lock lock;
 
@@ -45,12 +35,14 @@ public:
   static void               Destroy();
 
   // Functions
-  void                       setVerboseMode(bool value) { bVerboseMode = value; }
-  bool                       getVerboseMode() { return bVerboseMode; }
+  void                       setQuietMode(bool value) { bQuietMode = value; }
+  bool                       getQuietMode() { return bQuietMode; }
   void                       setPopulateWithDummyData(bool value) { bPopulateWithDummyData = value; }
   bool                       getPopulateWithDummyData() { return bPopulateWithDummyData; }
-  void                       setConfigPath(string value) { sConfigPath = value; }
-  string                     getConfigPath() { return sConfigPath; }
+  void                       setConfigFile(string value) { sConfigFile = value; }
+  string                     getConfigFile() { return sConfigFile; }
+  void                       setInputValuesFile(string value) { sInputValuesFile = value; }
+  string                     getInputValuesFile() { return sInputValuesFile; }
   void                       setNumberOfYearsToRun(int value) { iNumberOfYearsToRun = value; }
   int                        getNumberOfYearsToRun() { return iNumberOfYearsToRun; }
   void                       setNumberOfYearsToProject(int value) { iNumberOfYearsToProject = value; }
@@ -78,6 +70,11 @@ public:
   void                       addInitializationPhase(string value);
   int                        getInitilizationPhaseCount() { return vInitializationList.size(); }
   string                     getInitializationPhase(int index);
+  void                       setRandomSeed(int value) { iRandomSeed = value; }
+  int                        getRandomSeed() { return iRandomSeed; }
+  void                       addCommandLineParameter(string value);
+  int                        getCommandLineParameterCount() { return (int)vCommandLineParameters.size(); }
+  string                     getCommandLineParameter(int index);
   void                       validate();
 
 protected:
@@ -86,9 +83,10 @@ protected:
 	virtual                    ~CConfiguration();
 
 	// Variables
-  bool                       bVerboseMode;
+  bool                       bQuietMode;
   bool                       bPopulateWithDummyData;
-  string                     sConfigPath;
+  string                     sConfigFile;
+  string                     sInputValuesFile;
   int                        iNumberOfYearsToRun;
   int                        iNumberOfYearsToProject;
   int                        iNumberOfTimeSteps;
@@ -100,6 +98,8 @@ protected:
   vector<string>             vCategoryList;
   bool                       bUseEstimateValues;
   vector<string>             vInitializationList;
+  int                        iRandomSeed;
+  vector<string>             vCommandLineParameters;
 
 private:
   static CConfiguration*     clInstance;

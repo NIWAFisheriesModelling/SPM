@@ -378,6 +378,7 @@
 #define PARAM_UMAX                                "umax"
 #define PARAM_UNIFORM                             "uniform"
 #define PARAM_UNIFORM_LOG                         "uniform_log"
+#define PARAM_UNIFORM_MOVEMENT_PROCESS            "uniform_movement_process"
 #define PARAM_UPPER_BOUND                         "upper_bound"
 #define PARAM_VALUE                               "value"
 #define PARAM_WIDTH                               "width"

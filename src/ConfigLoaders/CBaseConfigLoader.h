@@ -10,9 +10,9 @@
 #define CBASECONFIGLOADER_H_
 
 // Local Header
-#include "../CWorld.h"
+#include "../World/CWorld.h"
 #include "../CConfiguration.h"
-#include "../CLayerManager.h"
+#include "../Layers/CLayerManager.h"
 #include "../CRuntimeController.h"
 
 // Defines

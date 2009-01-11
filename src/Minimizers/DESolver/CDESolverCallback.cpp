@@ -13,9 +13,9 @@
 // Local Headers
 #include "CDESolverCallback.h"
 #include "../../ObjectiveFunction/CObjectiveFunction.h"
-#include "../../CPrintStateManager.h"
+#include "../../PrintStates/CPrintStateManager.h"
 #include "../../RuntimeThread/CRuntimeThread.h"
-#include "../../CEstimateManager.h"
+#include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 
 //**********************************************************************

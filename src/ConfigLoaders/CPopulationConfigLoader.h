@@ -9,14 +9,18 @@
 #ifndef CPOPULATIONCONFIGLOADER_H_
 #define CPOPULATIONCONFIGLOADER_H_
 
+// Global Headers
+#include <map>
+using std::map;
+
 // Local Headers
 #include "CBaseConfigLoader.h"
-#include "../CTimeStepManager.h"
-#include "../CProcessManager.h"
-#include "../CLayerManager.h"
-#include "../CSelectivityManager.h"
-#include "../CDirectedProcessManager.h"
-#include "../CInitializationManager.h"
+#include "../TimeSteps/CTimeStepManager.h"
+#include "../Processes/CProcessManager.h"
+#include "../Layers/CLayerManager.h"
+#include "../Selectivities/CSelectivityManager.h"
+#include "../DirectedProcesses/CDirectedProcessManager.h"
+#include "../InitializationPhases/CInitializationPhaseManager.h"
 
 //**********************************************************************
 //
@@ -69,12 +73,14 @@ protected:
   bool                      loadBaseDirectedProcessAttributes(CDirectedProcess *Process);
 
   // Variables
-  CTimeStepManager          *pTimeStepManager;
-  CProcessManager           *pProcessManager;
-  CLayerManager             *pLayerManager;
-  CSelectivityManager       *pSelectivityManager;
-  CDirectedProcessManager   *pDirectedProcessManager;
-  CInitializationManager    *pInitializationManager;
+  CTimeStepManager            *pTimeStepManager;
+  CProcessManager             *pProcessManager;
+  CLayerManager               *pLayerManager;
+  CSelectivityManager         *pSelectivityManager;
+  CDirectedProcessManager     *pDirectedProcessManager;
+  CInitializationPhaseManager *pInitializationManager;
+
+  map<string, vector<string> > mSection;
 
 };
 

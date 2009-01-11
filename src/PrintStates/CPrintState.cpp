@@ -114,9 +114,9 @@ void CPrintState::build() {
       if ( (sFileName.substr(0, 1) == "/") || (sFileName.substr(1,1) == ":") )
         sFullFileName = sFileName; // Absolute
       else {
-        if (pConfig->getConfigPath() != "")
-          sFullFileName = pConfig->getConfigPath() + "/" + sFileName; // Relative
-        else
+        //if (pConfig->getConfigPath() != "")
+         // sFullFileName = pConfig->getConfigPath() + "/" + sFileName; // Relative
+        //else
           sFullFileName = sFileName; // Relative, no Config Path attached.
       }
     }

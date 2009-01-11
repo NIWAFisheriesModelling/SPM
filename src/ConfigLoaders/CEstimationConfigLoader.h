@@ -11,15 +11,15 @@
 
 // Local Headers
 #include "CBaseConfigLoader.h"
-#include "../CWorld.h"
-#include "../CMinimizerManager.h"
-#include "../CEstimateManager.h"
+#include "../World/CWorld.h"
+#include "../Minimizers/CMinimizerManager.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../MCMC/CMCMC.h"
-#include "../CObservationManager.h"
-#include "../CPenaltyManager.h"
-#include "../CProfileManager.h"
-#include "../CPriorManager.h"
-#include "../CQManager.h"
+#include "../Observations/CObservationManager.h"
+#include "../Penalties/CPenaltyManager.h"
+#include "../Profiles/CProfileManager.h"
+#include "../Priors/CPriorManager.h"
+#include "../Qs/CQManager.h"
 
 //**********************************************************************
 //

@@ -13,6 +13,7 @@
 // Local Headers
 #include "DESolver.h"
 #include "../../CConfiguration.h"
+#include "../../Helpers/CComparer.h"
 
 // Namespaces
 using std::cout;
@@ -326,7 +327,7 @@ void DESolver::scaleValues() {
   // Build some Scaled Values
   for (int i = 0; i < iVectorSize; ++i) {
     // Boundary-Pinning
-    if (isSame(vLowerBounds[i], vUpperBounds[i]))
+    if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vScaledValues[i] = 0.0;
     else
       vScaledValues[i] = scaleValue(vCurrentValues[i], vLowerBounds[i], vUpperBounds[i]);
@@ -336,7 +337,7 @@ void DESolver::scaleValues() {
 
 void DESolver::unScaleValues() {
   for (int i = 0; i < iVectorSize; ++i) {
-    if (isSame(vLowerBounds[i], vUpperBounds[i]))
+    if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vCurrentValues[i] = vLowerBounds[i];
     else
       vCurrentValues[i] = unScaleValue(vScaledValues[i], vLowerBounds[i], vUpperBounds[i]);
@@ -348,9 +349,9 @@ void DESolver::unScaleValues() {
 // Scale our Value from -1.0 to 1.0
 //**********************************************************************
 double DESolver::scaleValue(double value, double min, double max) {
-  if (isSame(value, min))
+  if (CComparer::isEqual(value, min))
     return -1;
-  else if (isSame(value, max))
+  else if (CComparer::isEqual(value, max))
     return 1;
 
   return asin(2 * (value - min) / (max - min) - 1) / 1.57079633;

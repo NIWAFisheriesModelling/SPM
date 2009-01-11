@@ -10,7 +10,7 @@
 #define CUNIFORMMOVEMENTPROCESS_H_
 
 // Local Headers
-#include "../CMovementProcess.h"
+#include "Base/CMovementProcess.h"
 
 //**********************************************************************
 //

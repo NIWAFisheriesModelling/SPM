@@ -9,8 +9,9 @@
 
 // Local Headers
 #include "CDirectedProcess.h"
-#include "../CLayerManager.h"
-#include "../Layers/CNumericLayer.h"
+#include "../Layers/CLayerManager.h"
+#include "../Layers/Numeric/Base/CNumericLayer.h"
+#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CDirectedProcess::CDirectedProcess()
@@ -24,12 +25,15 @@ CDirectedProcess::CDirectedProcess(CDirectedProcess *Process)
   sLayerName             = "";
   pLayer                 = 0;
   dLayerValue            = 0.0;
-  sType                  = "";
   bIsStaticLookup        = false;
   dRet                   = 0.0;
 
   // Register our Estimables
   registerEstimable(PARAM_ALPHA, &dAlpha);
+
+  // Register User Allowed Parameters
+  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_ALPHA);
 
   // Copy Constructor
   if (Process != 0) {
@@ -47,11 +51,9 @@ void CDirectedProcess::validate() {
     // Base Validation
     CBaseExecutableObject::validate();
 
-    // Local Validation
-    if (sLayerName == "")
-      errorMissing(PARAM_LAYER_NAME);
-    if (sType == "")
-      errorMissing(PARAM_TYPE);
+    // Populate our Parameters.
+    sLayerName  = pParameterList->getString(PARAM_LAYER_NAME);
+    dAlpha      = pParameterList->getDouble(PARAM_ALPHA);
 
   } catch (string Ex) {
     Ex = "CDirectedProcess.validate(" + getLabel() + ")->" + Ex;

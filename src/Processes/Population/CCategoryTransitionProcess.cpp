@@ -10,6 +10,8 @@
 // Local Headers
 #include "CCategoryTransitionProcess.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CCategoryTransitionProcess::CCategoryTransitionProcess(CCategoryTransitionProcess *Process = 0)
@@ -45,21 +47,21 @@ void CCategoryTransitionProcess::validate() {
 
     // Validate
     if (bDependsOnLayer)
-      errorSupported(PARAM_LAYER_NAME);
+      CError::errorSupported(PARAM_LAYER_NAME);
     if (sFrom == "")
-      errorMissing(PARAM_FROM);
+      CError::errorMissing(PARAM_FROM);
     if (sTo == "")
-      errorMissing(PARAM_TO);
-    if (isZero(dProportion))
-      errorMissing(PARAM_PROPORTION);
+      CError::errorMissing(PARAM_TO);
+    if (CComparer::isZero(dProportion))
+      CError::errorMissing(PARAM_PROPORTION);
     if (getSelectivityCount() != 1)
-      errorMissing(PARAM_SELECTIVITY);
+      CError::errorMissing(PARAM_SELECTIVITY);
     if (getCategoryCount() != 0)
-      errorSupported(PARAM_CATEGORIES);
+      CError::errorSupported(PARAM_CATEGORIES);
     if (sPenalty != "")
-      errorSupported(PARAM_PENALTY);
+      CError::errorSupported(PARAM_PENALTY);
     if (dProportion > 1.0)
-      errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+      CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
   } catch(string Ex) {
     Ex = "CCategoryTransitionProcess.validate(" + getLabel() + ")->" + Ex;
@@ -110,7 +112,7 @@ void CCategoryTransitionProcess::execute() {
 
         for (int l = 0; l < iBaseColCount; ++l) {
           dCurrent = pBase->getValue(iFromIndex, l);
-          if(isZero(dCurrent))
+          if(CComparer::isZero(dCurrent))
              continue;
           dCurrent = dCurrent * dProportion * vSelectivityIndex[0]->getResult(l);
           pBase->subValue(iFromIndex, l, dCurrent);

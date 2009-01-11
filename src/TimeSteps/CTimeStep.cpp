@@ -9,8 +9,10 @@
 
 // Local Headers
 #include "CTimeStep.h"
-#include "../CProcessManager.h"
+#include "../Processes/CProcessManager.h"
 #include "../Processes/CProcess.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
 
 //**********************************************************************
 // CTimeStep::CTimeStep(CTimeStep *TimeStep = 0)
@@ -83,7 +85,7 @@ void CTimeStep::validate() {
     // Make sure we have some processes
     if (getPopulationProcessCount() == 0)
       if (getMovementProcessCount() == 0)
-        errorMissing(PARAM_PROCESSES);
+        CError::errorMissing(PARAM_PROCESSES);
 
     if ( (iStep == -1) && (iNumberOfYears == -1) )
       throw string(ERROR_MISSING_YEARS_STEP);
@@ -92,7 +94,7 @@ void CTimeStep::validate() {
     // IF We are using Steps
     if (iStep >= 0)
       if (iStep > pConfig->getNumberOfTimeSteps())
-        errorGreaterThan(PARAM_STEP, PARAM_TIME_STEPS);
+        CError::errorGreaterThan(PARAM_STEP, PARAM_TIME_STEPS);
 
   } catch(string Ex) {
     Ex = "CTimeStep.validate(" + getLabel() + ")->" + Ex;

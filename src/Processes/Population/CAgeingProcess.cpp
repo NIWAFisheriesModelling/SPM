@@ -9,6 +9,8 @@
 
 // Local Headers
 #include "CAgeingProcess.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CAgeingProcess::CAgeingProcess(CAgeingProcess *Process = 0)
@@ -29,13 +31,13 @@ void CAgeingProcess::validate() {
 
     // Do Our Own Validation Now:
     if (getDependsOnLayer())
-      errorSupported(PARAM_LAYER_NAME);
+      CError::errorSupported(PARAM_LAYER_NAME);
     if (getCategoryCount() == 0)
-      errorMissing(PARAM_CATEGORIES);
+      CError::errorMissing(PARAM_CATEGORIES);
     if (getSelectivityCount() > 0)
-      errorSupported(PARAM_SELECTIVITIES);
+      CError::errorSupported(PARAM_SELECTIVITIES);
     if (sPenalty != "")
-      errorSupported(PARAM_PENALTY);
+      CError::errorSupported(PARAM_PENALTY);
 
   } catch(string Ex) {
     Ex = "CAgeingProcess.validate(" + getLabel() + ")->" + Ex;
@@ -88,7 +90,7 @@ void CAgeingProcess::execute() {
 
           for (int k = 0; k < iBaseColCount; ++k) {
             dCurrent = pBase->getValue( (*vPtr), k);
-            if(isZero(dCurrent))
+            if(CComparer::isZero(dCurrent))
                continue;
             pDiff->subValue( (*vPtr), k, dCurrent);
             pDiff->addValue( (*vPtr), (k+1), dCurrent);

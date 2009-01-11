@@ -11,7 +11,7 @@
 
 // Local Headers
 #include "CBaseConfigLoader.h"
-#include "../CPrintStateManager.h"
+#include "../PrintStates/CPrintStateManager.h"
 
 //**********************************************************************
 //

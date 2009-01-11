@@ -16,11 +16,13 @@
 // Local Headers
 #include "CMCMC.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
-#include "../CEstimateManager.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../RuntimeThread/CRuntimeThread.h"
 #include "../Estimates/CEstimate.h"
-#include "../CMinimizerManager.h"
+#include "../Minimizers/CMinimizerManager.h"
 #include "../Minimizers/CMinimizer.h"
+#include "../Helpers/ForEach.h"
+#include "../Helpers/CComparer.h"
 
 // Namespaces
 using namespace boost::numeric;
@@ -124,6 +126,10 @@ void CMCMC::execute() {
 
     // Resize Vector for Generating our estimates
     vCandidates.resize(iEstimateCount);
+    vMeans.resize(iEstimateCount);
+
+    for (int i = 0; i < iEstimateCount; ++i)
+      vMeans[i] = 0.0;
 
     // Start MCMC
     for (int i = 0; i < iLength; ++i) {
@@ -192,18 +198,19 @@ bool CMCMC::generateEstimates() {
   // Make the 0 Covariances because they cause
   // The cholesky to fail.
   for (int i = 0; i < iSize; ++i)
-    if (isZero(mxCovariance(i,i))) {
+    if (CComparer::isZero(mxCovariance(i,i))) {
       mxCovarianceTemp(i,i) = 1.0;
       vZeros[i] = 1;
     }
 
   // generate the standard normal random numbers
   //fill_randn(s);
+
   if (!choleskyDecomposition())
     return false;
 
-  //for (int i = 0; i < iSize; ++i)
-    //vCandidates *= mxCovarianceLT(i,i) + dMean;
+  for (int i = 0; i < iSize; ++i)
+    vCandidates[i] *= mxCovarianceLT(i,i) + vMeans[i];
 
   // Reset our 0 Co-Variances
   for (int i = 0; i < iSize; ++i)

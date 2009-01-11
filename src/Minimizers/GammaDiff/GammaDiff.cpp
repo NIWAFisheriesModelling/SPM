@@ -14,6 +14,7 @@
 // Local Headers
 #include "GammaDiff.h"
 #include "FMM.h"
+#include "../../Helpers/CComparer.h"
 
 // Namespace
 using namespace std;
@@ -69,9 +70,9 @@ double GammaDiff::unScaleValue(const double& value, double min, double max) {
 // Boundary Pin
 //**********************************************************************
 double GammaDiff::scaleValue(double value, double min, double max) {
-  if (isSame(value, min))
+  if (CComparer::isEqual(value, min))
     return -1;
-  else if (isSame(value, max))
+  else if (CComparer::isEqual(value, max))
     return 1;
 
   return asin(2 * (value - min) / (max - min) - 1) / 1.57079633;
@@ -91,7 +92,7 @@ void GammaDiff::buildScaledValues() {
       throw string(GAMMADIFF_GREATER_START_UPPER_BOUND);
 
     // Boundary-Pinning
-    if (isSame(vLowerBounds[i], vUpperBounds[i]))
+    if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vScaledValues[i] = 0.0;
     else
       vScaledValues[i] = scaleValue(vStartValues[i], vLowerBounds[i], vUpperBounds[i]);
@@ -105,7 +106,7 @@ void GammaDiff::buildScaledValues() {
 void GammaDiff::buildCurrentValues() {
 
   for (int i = 0; i < (int)vStartValues.size(); ++i) {
-    if (isSame(vLowerBounds[i], vUpperBounds[i]))
+    if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vCurrentValues[i] = vLowerBounds[i];
     else
       vCurrentValues[i] = unScaleValue(vScaledValues[i], vLowerBounds[i], vUpperBounds[i]);
@@ -169,7 +170,7 @@ double GammaDiff::optimise_finite_differences(CGammaDiffCallback& objective, vec
       long double dScoreI;
 
       for (int i = 0; i < iVectorSize; ++i) {
-        if (isSame(vLowerBounds[i], vUpperBounds[i])) {
+        if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i])) {
           vGradientValues[i] = 0.0;
 
         } else {

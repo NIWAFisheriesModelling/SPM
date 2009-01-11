@@ -19,11 +19,11 @@
 class CBaseBuildableObject : public CBaseObject {
 public:
   // Functions
-	CBaseBuildableObject(CBaseBuildableObject *Object = 0);
-	virtual                    ~CBaseBuildableObject();
+	CBaseBuildableObject(CBaseBuildableObject *Object = 0) : CBaseObject(Object) { };
+	virtual                    ~CBaseBuildableObject() { };
   virtual void               validate() = 0;
   virtual void               build() = 0;
-  virtual void               rebuild();
+  virtual void               rebuild() { };
 };
 
 #endif /*CBASEBUILDABLEOBJECT_H_*/

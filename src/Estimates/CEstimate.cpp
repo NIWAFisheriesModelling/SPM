@@ -10,8 +10,11 @@
 // Local headers
 #include "CEstimate.h"
 #include "../ParameterParser/CParamParser.h"
-#include "../CPriorManager.h"
+#include "../Priors/CPriorManager.h"
 #include "../Priors/CPrior.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+#include "../Helpers/CConvertor.h"
 
 //**********************************************************************
 // CEstimate::CEstimate(CEstimate *Estimate = 0)
@@ -56,9 +59,9 @@ void CEstimate::addSame(string value) {
 string CEstimate::getSame(int index) {
   try {
     if (index >= (int)vSameList.size())
-      errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SAME);
+      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SAME);
     if (index < 0)
-      errorLessThan(PARAM_INDEX, PARAM_ZERO);
+      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
     return vSameList[index];
 
@@ -158,9 +161,9 @@ double CEstimate::getPriorScore() {
 void CEstimate::loadValue(int index) {
   try {
     if (index < 0)
-      throw string(ERROR_INVALID_IDX + convertInt(index));
+      throw string(ERROR_INVALID_IDX + CConvertor::intToString(index));
     if (index >= (int)vValueList.size())
-      throw string(ERROR_INVALID_IDX + convertInt(index));
+      throw string(ERROR_INVALID_IDX + CConvertor::intToString(index));
 
     setValue(vValueList[index]);
 
@@ -177,11 +180,11 @@ void CEstimate::loadValue(int index) {
 void CEstimate::validate() {
   try {
     if (sParameter == "")
-      errorMissing(PARAM_PARAMETER);
+      CError::errorMissing(PARAM_PARAMETER);
     if ( (dLowerBound == 0.0) && (dUpperBound == 0.0) )
-      errorMissing(PARAM_LOWER_BOUND);
+      CError::errorMissing(PARAM_LOWER_BOUND);
     if (dUpperBound < dLowerBound)
-      errorLessThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
+      CError::errorLessThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
 
   } catch (string Ex) {
     Ex = "CEstimate.validate(" + sParameter + ")->" + Ex;

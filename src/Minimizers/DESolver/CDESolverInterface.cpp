@@ -13,7 +13,7 @@
 // Local Headers
 #include "CDESolverInterface.h"
 #include "CDESolverCallback.h"
-#include "../../CEstimateManager.h"
+#include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 
 // Namespaces

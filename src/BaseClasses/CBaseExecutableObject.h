@@ -12,8 +12,8 @@
 
 // Local Headers
 #include "CBaseBuildableObject.h"
-#include "../CWorld.h"
-#include "../WorldSquares/CWorldSquare.h"
+#include "../World/CWorld.h"
+#include "../World/CWorldSquare.h"
 
 //**********************************************************************
 //
@@ -29,18 +29,11 @@ public:
   virtual void               execute() = 0;
 
 protected:
-  // Functions
-  string                     convertDouble(double value);
-  double                     lnGamma(double t);
-  double                     lnFactorial(double t);
-  double                     zeroFun(double x, double delta);
-
 	// Variables
   CWorld                     *pWorld;
   CWorldSquare               *pBase;
 	int                        iWorldWidth;
 	int                        iWorldHeight;
-	bool                       bVerbose;
 };
 
 #endif /*CBASEEXECUTABLEOBJECT_H_*/

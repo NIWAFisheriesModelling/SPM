@@ -9,7 +9,8 @@
 
 // Local Headers
 #include "CLayer.h"
-#include "../CWorld.h"
+#include "../World/CWorld.h"
+#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CLayer::CLayer(CLayer *Layer = 0)
@@ -20,8 +21,6 @@ CLayer::CLayer(CLayer *Layer)
 
   // Default Our Layer Vars
   sLabel      = "";
-  sType       = "";
-  bNormalize  = false;
 
   CWorld *pWorld    = CWorld::Instance();
   iWidth            = pWorld->getWidth();
@@ -30,8 +29,6 @@ CLayer::CLayer(CLayer *Layer)
   // Copy Construct
   if (Layer != 0) {
     sLabel          = Layer->getLabel();
-    sType           = Layer->getType();
-    bNormalize      = Layer->getNormalize();
     iWidth          = Layer->getWidth();
     iHeight         = Layer->getHeight();
   }
@@ -44,9 +41,7 @@ CLayer::CLayer(CLayer *Layer)
 void CLayer::validate() {
   try {
     if (sLabel == "")
-      errorMissing(PARAM_LABEL);
-    if (sType == "")
-      errorMissing(PARAM_TYPE);
+      CError::errorMissing(PARAM_LABEL);
 
   } catch (string Ex) {
     Ex = "CLayer.validate(" + getLabel() + ")->" + Ex;

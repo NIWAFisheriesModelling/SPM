@@ -73,6 +73,7 @@ protected:
   ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
+  vector<double>             vMeans;
 
 private:
   static CMCMC*              clInstance;

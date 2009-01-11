@@ -7,25 +7,36 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <boost/program_options.hpp>
+#include <sstream>
+#include <iostream>
+
 // Local Headers
 #include "Translations/Translations.h"
 #include "CRuntimeController.h"
 #include "CConfiguration.h"
-#include "CEstimateManager.h"
-#include "CProfileManager.h"
+#include "Estimates/CEstimateManager.h"
+#include "Profiles/CProfileManager.h"
+#include "ConfigLoaders/CEstimateValueConfigLoader.h"
 #include "ConfigLoaders/CEstimationConfigLoader.h"
 #include "ConfigLoaders/COutputConfigLoader.h"
 #include "ConfigLoaders/CPopulationConfigLoader.h"
-#include "ConfigLoaders/CEstimateValueConfigLoader.h"
 #include "RuntimeThread/CRuntimeThread.h"
 #include "MCMC/CMCMC.h"
-#include "CMinimizerManager.h"
+#include "Minimizers/CMinimizerManager.h"
 
 // Singleton Variable
 CRuntimeController* CRuntimeController::clInstance = 0;
 
 // Typedefs
 typedef boost::mutex::scoped_lock lock;
+
+// Namespaces
+using namespace boost::program_options;
+using std::cout;
+using std::endl;
+using std::ostringstream;
 
 //**********************************************************************
 // CRuntimeController::CRuntimeController()
@@ -36,6 +47,7 @@ CRuntimeController::CRuntimeController() {
   eRunMode                = RUN_MODE_INVALID;
   iCurrentEstimateValue   = 0;
   runtimeBarrier          = new boost::barrier(2);
+  sCommandLineOptions     = "Undefined";
 }
 
 //**********************************************************************
@@ -61,33 +73,109 @@ void CRuntimeController::Destroy() {
 }
 
 //**********************************************************************
-// void CRuntimeController::setRunMode(string value)
-// Set The Run Mode with a String
+// bool CRuntimeController::parseCommandLine(int argc, char* argv[])
+// Parse out command line
 //**********************************************************************
-void CRuntimeController::setRunMode(string value) {
-  try {
-    if (value == MODE_BASIC_RUN)
-      eRunMode = RUN_MODE_BASIC;
-    else if (value == MODE_ESTIMATION)
-      eRunMode = RUN_MODE_ESTIMATION;
-    else if (value == MODE_PROFILE)
-      eRunMode = RUN_MODE_PROFILE;
-    else if (value == MODE_MCMC)
-      eRunMode = RUN_MODE_MARKOV_CHAIN_MONTE_CARLO;
-    else if (value == MODE_FORWARD_PROJECTION)
-      eRunMode = RUN_MODE_FORWARD_PROJECTION;
-    else
-      throw string(ERROR_UNKNOWN_RUN_MODE + value);
+void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
 
-  } catch (string Ex) {
-    Ex = "CRuntimeController.setRunMode()->" + Ex;
-    throw Ex;
+  // Build Options menu
+  options_description oDesc("Usage");
+  oDesc.add_options()
+      ("help,h", "Print help")
+      ("license,l", "display source code license")
+      ("version,v", "display version information")
+      ("run,r", "basic model run")
+      ("estimate,e", "point estimation run")
+      ("profile,p", "likelihood profile run")
+      ("mcmc,m", "MCMC run")
+      ("forward,f", "forward projection run")
+      ("simulate,s", "simulation run, simulate observations")
+      ("input,i", value<string>(), "load estimate values from file")
+      ("threads,t", value<int>(), "number of threads to spawn")
+      ("quiet,q", "run in quiet mode")
+      ("genseed,g", value<int>(), "random number seed");
+
+  ostringstream o;
+  o << oDesc;
+  sCommandLineOptions = o.str();
+
+  // Read our Parameters
+  variables_map vmParams;
+  try {
+    store(parse_command_line(argc, argv, oDesc), vmParams);
+    notify(vmParams);
+  } catch (std::exception &ex) {
+    throw string(ex.what());
   }
+
+  // Check for Help Command
+  if ( (vmParams.count("help")) || (vmParams.size() == 0) ) {
+    setRunMode(RUN_MODE_HELP);
+    return;
+  }
+
+  // Check for Version
+  if (vmParams.count("version")) {
+    setRunMode(RUN_MODE_VERSION);
+    return;
+  }
+
+  // Check For License
+  if (vmParams.count("license")) {
+    setRunMode(RUN_MODE_LICENSE);
+    return;
+  }
+
+  // Count how many modes are present.
+  int iCount = 0;
+  iCount += vmParams.count("run");
+  iCount += vmParams.count("estimate");
+  iCount += vmParams.count("profile");
+  iCount += vmParams.count("mcmc");
+  iCount += vmParams.count("forward");
+  iCount += vmParams.count("simulate");
+
+  if (iCount == 0)
+    throw string("Missing run mode command line option");
+  if (iCount > 1)
+    throw string("More than one run mode parameter supplied");
+
+  if (vmParams.count("run"))
+    setRunMode(RUN_MODE_BASIC);
+  else if (vmParams.count("estimate"))
+    setRunMode(RUN_MODE_ESTIMATION);
+  else if (vmParams.count("profile"))
+    setRunMode(RUN_MODE_PROFILE);
+  else if (vmParams.count("mcmc"))
+    setRunMode(RUN_MODE_MARKOV_CHAIN_MONTE_CARLO);
+  else if (vmParams.count("forward"))
+    setRunMode(RUN_MODE_FORWARD_PROJECTION);
+  else if (vmParams.count("simulate"))
+    setRunMode(RUN_MODE_SIMULATION);
+
+  // Variables
+  CConfiguration *pConfig = CConfiguration::Instance();
+
+  // Estimates
+  if (vmParams.count("input"))
+    pConfig->setInputValuesFile(vmParams["input"].as<string>());
+
+  // Threads
+  if (vmParams.count("threads"))
+    pConfig->setNumberOfThreads(vmParams["threads"].as<int>());
+
+  // Quiet
+  if (vmParams.count("quiet"))
+    pConfig->setQuietMode(true);
+
+  // Random Seed
+  if (vmParams.count("genseed"))
+    pConfig->setRandomSeed(vmParams["genseed"].as<int>());
 }
 
 //**********************************************************************
 // EState CRuntimeController::getCurrentState()
-//
+// Get the current state from the base thread
 //**********************************************************************
 EState CRuntimeController::getCurrentState() {
   return pBaseThread->getCurrentState();
@@ -109,7 +197,7 @@ void CRuntimeController::loadConfiguration() {
   try {
     // Estimation
     CConfiguration *pConfig = CConfiguration::Instance();
-    string sConfigPath = pConfig->getConfigPath();
+    string sConfigPath = pConfig->getConfigFile();
 
     CEstimationConfigLoader clEstimationConfigLoader = CEstimationConfigLoader(sConfigPath);
     clEstimationConfigLoader.processConfigFile();

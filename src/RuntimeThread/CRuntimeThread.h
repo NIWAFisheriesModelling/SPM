@@ -15,7 +15,7 @@
 // Classes;
 class CDirectedProcessManager;
 class CEstimateManager;
-class CInitializationManager;
+class CInitializationPhaseManager;
 class CLayerManager;
 class CObservationManager;
 class CPenaltyManager;
@@ -60,7 +60,7 @@ protected:
   EState                      eCurrentState;
   CDirectedProcessManager     *pDirectedProcessManager;
   CEstimateManager            *pEstimateManager;
-  CInitializationManager      *pInitializationManager;
+  CInitializationPhaseManager *pInitializationManager;
   CLayerManager               *pLayerManager;
   CObjectiveFunction          *pObjectiveFunction;
   CObservationManager         *pObservationManager;

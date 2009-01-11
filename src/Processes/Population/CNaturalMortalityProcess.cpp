@@ -9,8 +9,10 @@
 
 // Local Headers
 #include "CNaturalMortalityProcess.h"
-#include "../../Layers/CNumericLayer.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CNaturalMortalityProcess::CNaturalMortalityProcess(CNaturalMortalityProcess *Process = 0)
@@ -41,15 +43,15 @@ void CNaturalMortalityProcess::validate() {
 
     // Local Validation
     if (getCategoryCount() == 0)
-      errorMissing(PARAM_CATEGORIES);
-    if (isSame(dM, -1.0))
-      errorMissing(PARAM_M);
+      CError::errorMissing(PARAM_CATEGORIES);
+    if (CComparer::isEqual(dM, -1.0))
+      CError::errorMissing(PARAM_M);
     if (getSelectivityCount() == 0)
-      errorMissing(PARAM_SELECTIVITIES);
+      CError::errorMissing(PARAM_SELECTIVITIES);
     if (getCategoryCount() != getSelectivityCount())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY);
+      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
     if (sPenalty != "")
-      errorSupported(PARAM_PENALTY);
+      CError::errorSupported(PARAM_PENALTY);
 
   } catch (string Ex) {
     Ex = "CNaturalMortalityProcess.validate(" + getLabel() + ")->" + Ex;
@@ -166,7 +168,7 @@ void CNaturalMortalityProcess::execute() {
             dCurrent = pBase->getValue( vCategoryIndex[k], l);
 
             // Check 0
-            if(isZero(dCurrent))
+            if(CComparer::isZero(dCurrent))
                continue;
 
             // Get Amount To Subtract

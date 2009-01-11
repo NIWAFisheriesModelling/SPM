@@ -9,11 +9,16 @@
 
 // Local headers
 #include "CEventMortalityProcess.h"
-#include "../../CLayerManager.h"
-#include "../../CTimeStepManager.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Penalties/CPenalty.h"
 #include "../../Selectivities/CSelectivity.h"
-#include "../../Layers/CNumericLayer.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CMath.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CEventMortalityProcess::CEventMortalityProcess(CEventMortalityProcess *Process)
@@ -54,7 +59,7 @@ void CEventMortalityProcess::addYears(int value) {
   value -= pConfig->getHumanStartYear();
 
   if (value < 0)
-    throw string(ERROR_INVALID_YEAR + convertInt(value));
+    throw string(ERROR_INVALID_YEAR + CConvertor::intToString(value));
 
   // Add
   vYearsList.push_back(value);
@@ -95,19 +100,19 @@ void CEventMortalityProcess::validate() {
 
     // Local Validation
     if (vLayersList.size() == 0)
-      errorMissing(PARAM_LAYERS);
-    if (isSame(dUMax, -1.0))
-      errorMissing(PARAM_UMAX);
+      CError::errorMissing(PARAM_LAYERS);
+    if (CComparer::isEqual(dUMax, -1.0))
+      CError::errorMissing(PARAM_UMAX);
     if (vYearsList.size() == 0)
-      errorMissing(PARAM_YEARS);
+      CError::errorMissing(PARAM_YEARS);
     if (vLayersList.size() != vYearsList.size())
-      errorNotEqual(PARAM_YEARS, PARAM_LAYERS);
+      CError::errorNotEqual(PARAM_YEARS, PARAM_LAYERS);
     if (vSelectivityList.size() != vCategoryList.size())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY);
+      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
     if (vSelectivityList.size() == 0)
-      errorMissing(PARAM_SELECTIVITIES);
+      CError::errorMissing(PARAM_SELECTIVITIES);
     if (bDependsOnLayer)
-      errorSupported(PARAM_LAYER_NAME);
+      CError::errorSupported(PARAM_LAYER_NAME);
 
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
@@ -201,7 +206,7 @@ void CEventMortalityProcess::execute() {
         }
 
         // Work out exploitation rate To Kill off
-        dExploitation = dCatch / zeroFun(dVulnerable,ZERO);
+        dExploitation = dCatch / CMath::zeroFun(dVulnerable,ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
           if (pPenalty != 0) { // Throw Penalty
@@ -216,7 +221,7 @@ void CEventMortalityProcess::execute() {
             dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
 
             // If is Zero, Cont
-            if (isZero(dCurrent))
+            if (CComparer::isZero(dCurrent))
               continue;
 
             // Subtract These

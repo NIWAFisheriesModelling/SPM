@@ -9,7 +9,7 @@
 
 // Local Headers
 #include "CEstimateValuePrintState.h"
-#include "../CEstimateManager.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
 
 //**********************************************************************

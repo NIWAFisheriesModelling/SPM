@@ -10,7 +10,7 @@
 #define CDIRECTEDMOVEMENTPROCESS_H_
 
 // Local Headers
-#include "../CMovementProcess.h"
+#include "Base/CMovementProcess.h"
 
 // Classes
 class CDirectedProcess;

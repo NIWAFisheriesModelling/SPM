@@ -16,25 +16,26 @@
 #include "../Processes/Population/CEventMortalityProcess.h"
 #include "../Processes/Movement/CUniformMovementProcess.h"
 #include "../Processes/Movement/CDirectedMovementProcess.h"
-#include "../Processes/CMovementProcess.h"
-#include "../Layers/NumericLayers/CDoubleLayer.h"
-#include "../Layers/NumericLayers/CDistanceLayer.h"
-#include "../Layers/NumericLayers/CAbundanceLayer.h"
-#include "../Layers/CStringLayer.h"
-#include "../Selectivities/CConstantSelectivity.h"
-#include "../Selectivities/CLogisticSelectivity.h"
-#include "../Selectivities/CLogisticProducingSelectivity.h"
-#include "../Selectivities/CDoubleNormalSelectivity.h"
-#include "../Selectivities/CKnifeEdgeSelectivity.h"
+#include "../Processes/Movement/Base/CMovementProcess.h"
+#include "../Layers/Numeric/CDoubleLayer.h"
+#include "../Layers/Numeric/CDistanceLayer.h"
+#include "../Layers/Numeric/CAbundanceLayer.h"
+#include "../Layers/String/CStringLayer.h"
+#include "../Selectivities/Children/CConstantSelectivity.h"
+#include "../Selectivities/Children/CLogisticSelectivity.h"
+#include "../Selectivities/Children/CLogisticProducingSelectivity.h"
+#include "../Selectivities/Children/CDoubleNormalSelectivity.h"
+#include "../Selectivities/Children/CKnifeEdgeSelectivity.h"
 #include "../PrintStates/CPrintState.h"
-#include "../DirectedProcesses/CExponentialDirectedProcess.h"
-#include "../DirectedProcesses/CThresholdDirectedProcess.h"
-#include "../DirectedProcesses/CNormalDirectedProcess.h"
-#include "../DirectedProcesses/CDoubleNormalDirectedProcess.h"
-#include "../DirectedProcesses/CLogisticDirectedProcess.h"
-#include "../DirectedProcesses/CInverseLogisticDirectedProcess.h"
-#include "../DirectedProcesses/CConstantDirectedProcess.h"
+#include "../DirectedProcesses/Children/CExponentialDirectedProcess.h"
+#include "../DirectedProcesses/Children/CThresholdDirectedProcess.h"
+#include "../DirectedProcesses/Children/CNormalDirectedProcess.h"
+#include "../DirectedProcesses/Children/CDoubleNormalDirectedProcess.h"
+#include "../DirectedProcesses/Children/CLogisticDirectedProcess.h"
+#include "../DirectedProcesses/Children/CInverseLogisticDirectedProcess.h"
+#include "../DirectedProcesses/Children/CConstantDirectedProcess.h"
 #include "../TimeSteps/CTimeStep.h"
+#include "../DirectedProcesses/Factory/CDirectedProcessFactory.h"
 
 //**********************************************************************
 // CPopulationConfigLoader::CPopulationConfigLoader()
@@ -51,7 +52,7 @@ CPopulationConfigLoader::CPopulationConfigLoader(string Directory) {
   pLayerManager              = CLayerManager::Instance();
   pSelectivityManager        = CSelectivityManager::Instance();
   pDirectedProcessManager    = CDirectedProcessManager::Instance();
-  pInitializationManager     = CInitializationManager::Instance();
+  pInitializationManager     = CInitializationPhaseManager::Instance();
 }
 
 //**********************************************************************
@@ -777,9 +778,7 @@ void CPopulationConfigLoader::loadLayer_Double() {
           } else
             throw string(ERROR_MISSING_ROW_NUMBER);
 
-        } else if (vParameterList[0] == PARAM_NORMALIZE)
-          pLayer->setNormalize(getBoolValue(1));
-        else
+        } else
           throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
       }
       vConfigPtr++;
@@ -822,8 +821,6 @@ void CPopulationConfigLoader::loadLayer_String() {
           } else
             throw string(ERROR_MISSING_ROW_NUMBER);
 
-        } else if (vParameterList[0] == PARAM_NORMALIZE) {
-          pLayer->setNormalize(getBoolValue(1));
         } else
           throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
       }
@@ -856,10 +853,7 @@ void CPopulationConfigLoader::loadLayer_Distance() {
         if (newSection())
           break;
 
-        if (vParameterList[0] == PARAM_NORMALIZE)
-          pLayer->setNormalize(getBoolValue(1));
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+        throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
       }
       vConfigPtr++;
     }
@@ -890,9 +884,7 @@ void CPopulationConfigLoader::loadLayer_Abundance() {
         if (newSection())
           break;
 
-        if (checkLine(PARAM_NORMALIZE))
-          pLayer->setNormalize(getBoolValue(1));
-        else if (checkLine(PARAM_CATEGORIES, 1, MAX_PARAMS))
+        if (checkLine(PARAM_CATEGORIES, 1, MAX_PARAMS))
           for (int i = 1; i < (int)vParameterList.size(); ++i)
             pLayer->addCategory(vParameterList[i]);
         else if (checkLine(PARAM_SELECTIVITIES, 1, MAX_PARAMS))
@@ -1146,38 +1138,51 @@ void CPopulationConfigLoader::loadDirectedProcess() {
     if (vParameterList.size() != 2)
       throw string(ERROR_QTY_ONE_PARAMETERS);
 
-    // Inc
-    vConfigPtr++;
-    // Populate Parameters
-    populateParameters();
+    mSection.clear();
 
-    if (vParameterList.size() == 0)
-      throw string(ERROR_EMPTY_PARAMETER);
-    if (vParameterList.size() != 2)
-      throw string(ERROR_QTY_ONE_PARAMETERS);
+    // Save label for a second
+    string sLabel = vParameterList[1];
+    string sType  = "";
 
-    // Must Be Type
-    if (vParameterList[0] != PARAM_TYPE)
-      throw string(ERROR_QTY_ONE_PARAMETERS);
-    if (vParameterList.size() != 2)
-      throw string(ERROR_QTY_ONE_PARAMETERS);
+    // Loop until we hit a new section.
+    while(vConfigPtr != vConfigList.end()) {
+      populateParameters();
 
-    if (vParameterList[1] == PARAM_CONSTANT)
-      loadDirectedProcess_Constant();
-    else if (vParameterList[1] == PARAM_DOUBLE_NORMAL)
-      loadDirectedProcess_DoubleNormal();
-    else if (vParameterList[1] == PARAM_EXPONENTIAL)
-      loadDirectedProcess_Exponential();
-    else if (vParameterList[1] == PARAM_INVERSE_LOGISTIC)
-      loadDirectedProcess_InverseLogistic();
-    else if (vParameterList[1] == PARAM_LOGISTIC)
-      loadDirectedProcess_Logistic();
-    else if (vParameterList[1] == PARAM_NORMAL)
-      loadDirectedProcess_Normal();
-    else if (vParameterList[1] == PARAM_THRESHOLD)
-      loadDirectedProcess_Threshold();
-    else
-      throw string(ERROR_UNKNOWN_PARAM + vParameterList[1]);
+      if ( ((int)vParameterList.size() == 0) || (newSection()) ) {
+        vConfigPtr++;
+        continue;
+      }
+
+      for (int i = 1; i < (int)vParameterList.size(); ++i)
+        mSection[vParameterList[0]].push_back(vParameterList[i]);
+
+      if ((int)vParameterList.size() == 1) {
+        mSection[vParameterList[0]].push_back("true");
+      }
+
+      vConfigPtr++;
+    }
+
+    // Did we hit a type parameter?
+    if ((int)mSection[PARAM_TYPE].size() == 0)
+      throw string("MISSING TYPE PARAM"); // ToDo: FIX THIS
+    if ((int)mSection[PARAM_TYPE].size() > 1)
+      throw string("TYPE MUST BE A SINGLE WORD, NO SPACES");
+
+    sType = mSection[PARAM_TYPE][0];
+
+    CDirectedProcess *pProcess = CDirectedProcessFactory::buildDirectedProcess(sType);
+    pProcess->addParameter(PARAM_LABEL, sLabel);
+
+    map<string, vector<string> >::iterator mPtr = mSection.begin();
+    while (mPtr != mSection.end()) {
+
+      vector<string>::iterator vPtr = (*mPtr).second.begin();
+      while (vPtr != (*mPtr).second.end()) {
+        pProcess->addParameter((*mPtr).first, (*vPtr));
+        vPtr++;
+      }
+    }
 
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadDirectedProcess()->" + Ex;
@@ -1204,12 +1209,12 @@ void CPopulationConfigLoader::loadDirectedProcess_Exponential() {
           break;
 
         // Check Section
-          if (!loadBaseDirectedProcessAttributes(pProcess)) {
+          /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
             if (checkLine(PARAM_LAMBDA))
               pProcess->setLambda(getDoubleValue(1));
             else
               throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-          }
+          }*/
       }
       vConfigPtr++;
     }
@@ -1240,14 +1245,14 @@ void CPopulationConfigLoader::loadDirectedProcess_Threshold() {
           break;
 
         // Check Section
-        if (!loadBaseDirectedProcessAttributes(pProcess)) {
+        /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
           if (checkLine(PARAM_N))
             pProcess->setN(getDoubleValue(1));
           else if (checkLine(PARAM_LAMBDA))
             pProcess->setLambda(getDoubleValue(1));
           else
             throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-        }
+        }*/
       }
       vConfigPtr++;
     }
@@ -1278,14 +1283,14 @@ void CPopulationConfigLoader::loadDirectedProcess_Normal() {
           break;
 
         // Check Section
-          if (!loadBaseDirectedProcessAttributes(pProcess)) {
+         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
             if (checkLine(PARAM_MU))
               pProcess->setMu(getDoubleValue(1));
             else if (checkLine(PARAM_SIGMA))
               pProcess->setSigma(getDoubleValue(1));
             else
               throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-          }
+          }*/
       }
       vConfigPtr++;
     }
@@ -1316,7 +1321,7 @@ void CPopulationConfigLoader::loadDirectedProcess_DoubleNormal() {
           break;
 
         // Check Section
-        if (!loadBaseDirectedProcessAttributes(pProcess)) {
+        /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
           if (checkLine(PARAM_MU))
             pProcess->setMu(getDoubleValue(1));
           else if (checkLine(PARAM_SIGMA_L))
@@ -1325,7 +1330,7 @@ void CPopulationConfigLoader::loadDirectedProcess_DoubleNormal() {
             pProcess->setSigmaR(getDoubleValue(1));
           else
             throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-        }
+        }*/
       }
       vConfigPtr++;
     }
@@ -1356,14 +1361,14 @@ void CPopulationConfigLoader::loadDirectedProcess_Logistic() {
           break;
 
         // Check Section
-          if (!loadBaseDirectedProcessAttributes(pProcess)) {
+         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
             if (checkLine(PARAM_A50))
               pProcess->setA50(getDoubleValue(1));
             else if (checkLine(PARAM_ATO95))
               pProcess->setAto95(getDoubleValue(1));
             else
               throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-          }
+          }*/
       }
       vConfigPtr++;
     }
@@ -1394,14 +1399,14 @@ void CPopulationConfigLoader::loadDirectedProcess_InverseLogistic() {
           break;
 
         // Check Section
-          if (!loadBaseDirectedProcessAttributes(pProcess)) {
+         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
             if (checkLine(PARAM_A50))
               pProcess->setA50(getDoubleValue(1));
             else if (checkLine(PARAM_ATO95))
               pProcess->setAto95(getDoubleValue(1));
             else
               throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-         }
+         }*/
       }
       vConfigPtr++;
     }
@@ -1486,12 +1491,12 @@ bool CPopulationConfigLoader::loadBaseProcessAttributes(CProcess *Process) {
 //**********************************************************************
 bool CPopulationConfigLoader::loadBaseDirectedProcessAttributes(CDirectedProcess *Process) {
   try {
-    if (checkLine(PARAM_ALPHA))
+    /*if (checkLine(PARAM_ALPHA))
       Process->setAlpha(getDoubleValue(1));
     else if (checkLine(PARAM_LAYER_NAME))
-      Process->setLayerName(vParameterList[1]);
+      Process->addParameter(vParameterList[0], vParameterList[1]);
     else
-      return false;
+      return false;*/
 
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadBaseDirectedProcessAttributes()->" + Ex;

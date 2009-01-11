@@ -8,16 +8,16 @@
 // Warning: This file is an atomatically generated file describing the source
 // control revision number, date, and time using svn_version.
 
-// Call: svn_version --path ../ --output ../src/Version.h --quiet
-// Current working directory: C:\Projects\General\SPM\Debug
+// Call: svn_version --path ../ --output ../src/Version.h --quiet 
+// Current working directory: C:\Work\Workspaces\SPM\SimFish\Debug
 
 #ifndef VERSION_H_
 #define VERSION_H_
 
-#define SOURCE_CONTROL_REVISION 0
-#define SOURCE_CONTROL_DATE "0000-00-00"
-#define SOURCE_CONTROL_YEAR "0000"
-#define SOURCE_CONTROL_MONTH ""
-#define SOURCE_CONTROL_TIME "00:00:00"
-#define SOURCE_CONTROL_VERSION "No version ID available"
+#define SOURCE_CONTROL_REVISION 2881
+#define SOURCE_CONTROL_DATE "2008-12-04"
+#define SOURCE_CONTROL_YEAR "2008"
+#define SOURCE_CONTROL_MONTH "December"
+#define SOURCE_CONTROL_TIME "21:37:00"
+#define SOURCE_CONTROL_VERSION "2008-12-04-21:37:00 UTC (rev. 2881)"
 #endif

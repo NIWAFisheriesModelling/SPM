@@ -9,22 +9,23 @@
 
 // Local Headers
 #include "CRuntimeThread.h"
-#include "../CMinimizerManager.h"
-#include "../CDirectedProcessManager.h"
-#include "../CEstimateManager.h"
-#include "../CInitializationManager.h"
-#include "../CLayerManager.h"
-#include "../CObservationManager.h"
-#include "../CPenaltyManager.h"
-#include "../CPrintStateManager.h"
-#include "../CPriorManager.h"
-#include "../CProcessManager.h"
-#include "../CProfileManager.h"
-#include "../CQManager.h"
-#include "../CSelectivityManager.h"
-#include "../CTimeStepManager.h"
+#include "../Minimizers/CMinimizerManager.h"
+#include "../DirectedProcesses/CDirectedProcessManager.h"
+#include "../Estimates/CEstimateManager.h"
+#include "../InitializationPhases/CInitializationPhaseManager.h"
+#include "../Layers/CLayerManager.h"
+#include "../Observations/CObservationManager.h"
+#include "../Penalties/CPenaltyManager.h"
+#include "../PrintStates/CPrintStateManager.h"
+#include "../Priors/CPriorManager.h"
+#include "../Processes/CProcessManager.h"
+#include "../Profiles/CProfileManager.h"
+#include "../Qs/CQManager.h"
+#include "../Selectivities/CSelectivityManager.h"
+#include "../TimeSteps/CTimeStepManager.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../TimeSteps/CTimeStep.h"
+#include "../Helpers/ForEach.h"
 
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
@@ -35,7 +36,7 @@ CRuntimeThread::CRuntimeThread() {
   // Create our Instances
   pDirectedProcessManager  = CDirectedProcessManager::Instance();
   pEstimateManager         = CEstimateManager::Instance();
-  pInitializationManager   = CInitializationManager::Instance();
+  pInitializationManager   = CInitializationPhaseManager::Instance();
   pLayerManager            = CLayerManager::Instance();
   pObjectiveFunction       = CObjectiveFunction::Instance();
   pObservationManager      = CObservationManager::Instance();
@@ -281,7 +282,7 @@ CRuntimeThread::~CRuntimeThread() {
   // Destroy Singleton Classes
   CDirectedProcessManager::Destroy();
   CEstimateManager::Destroy();
-  CInitializationManager::Destroy();
+  CInitializationPhaseManager::Destroy();
   CLayerManager::Destroy();
   CMinimizerManager::Destroy();
   CObjectiveFunction::Destroy();

@@ -1,0 +1,135 @@
+//============================================================================
+// Name        : CStandardHeaderReporter.cpp
+// Author      : S.Rasmussen
+// Date        : 5/01/2009
+// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Description :
+// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+//============================================================================
+
+// Global Headers
+#include <iostream>
+#include <vector>
+#include <iomanip>
+#include <sstream>
+#include <string>
+#include <math.h>
+
+// Local Headers
+#include "CStandardHeaderReporter.h"
+#include "../../Version.h"
+
+// Namespaces
+using std::endl;
+using std::cout;
+using std::ostringstream;
+
+//**********************************************************************
+// CStandardHeaderReporter::CStandardHeaderReporter()
+// Default Constructor
+//**********************************************************************
+CStandardHeaderReporter::CStandardHeaderReporter() {
+
+  // Variables
+  tmeStart   = time(NULL);
+
+  // Linux Vars
+#ifndef __MINGW32__
+  times(&cpu_start);
+#endif
+
+  // Start building our Header
+  sVersion   = "";
+  sHeader    = "SPM (Spatial Population Model)\n";
+
+}
+
+//**********************************************************************
+// void CStandardHeaderReporter::start()
+// Start the printing of this header
+//**********************************************************************
+void CStandardHeaderReporter::start() {
+
+  // Build Command Line
+  sHeader += "CmdLine: ";
+  for (int i = 0; i < pConfig->getCommandLineParameterCount(); ++i)
+    sHeader += pConfig->getCommandLineParameter(i) + string(" ");
+
+  // Build Date
+  sHeader += "\nDate: "+ string(ctime(&tmeStart));
+
+  // Build Version
+  sVersion = string("v0.1-") + string(SOURCE_CONTROL_VERSION);
+  sHeader += sVersion + "   Copyright (c) 2008, NIWA\n";
+
+  // Build User/Computer Info
+#ifdef __MINGW32__
+  sHeader += "User name: " + string(getenv("USERNAME")) + "\n";
+  sHeader += "Machine name: " + string(getenv("COMPUTERNAME")) + " (";
+  sHeader += string(getenv("OS")) + ", ";
+  ostringstream PID;
+  PID << _getpid();
+  sHeader += "PID=" + PID.str() + ")\n\n";
+#else
+  char* cUsername = getenv("LOGNAME");
+  if (cUsername != NULL)
+    sHeader += "User name: " + string(cUsername) + "\n";
+  else {
+    sHeader += "User name: -----\n";
+  }
+  sHeader += "\nMachine name: ";
+  struct utsname names;
+  uname(&names);
+  sHeader += static_cast<string>(names.nodename) + " (" + static_cast<string>(names.sysname) + " " + static_cast<string>(names.release) + " " + static_cast<string>(names.machine);
+  ostringstream PID;
+  PID << getpid();
+  sHeader += "PID=" + PID.str() + ")\n\n";
+#endif
+
+  // Print Header
+  cout << sHeader;
+}
+
+//**********************************************************************
+// void CStandardHeaderReporter::execute()
+//
+//**********************************************************************
+void CStandardHeaderReporter::execute() { }
+
+//**********************************************************************
+// void CStandardHeaderReporter::end()
+// End our Printing of this Header
+//**********************************************************************
+void CStandardHeaderReporter::end() {
+#ifndef __MINGW32__
+  times(&cpu_stop);
+  double cpu_time=(static_cast<double>(cpu_stop.tms_utime)+static_cast<double>(cpu_stop.tms_stime))-(static_cast<double>(cpu_start.tms_utime) + static_cast<double>(cpu_start.tms_stime));
+  // Turn into seconds
+  cpu_time /= static_cast<double>(sysconf(_SC_CLK_TCK));
+  // Turn into hours
+  cpu_time = cpu_time / 3600.0;
+  int P = (int) floor(log10(cpu_time))+4;
+  cout << "Total CPU time: " << std::setprecision(P) << cpu_time << (cpu_time==1?" hour":" hours") << ".\n";
+#endif
+
+  double elapsed_time = static_cast<double>(time(NULL)-tmeStart);
+  if(elapsed_time < 60) {
+    int P = (int) floor(log10(elapsed_time))+4;
+    cout << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" second":" seconds") << endl;
+  } else if((elapsed_time/60.0) < 60) {
+    elapsed_time /= 60.0;
+    int P = (int) floor(log10(elapsed_time))+4;
+    cout << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" minute":" minutes") << endl;
+  } else {
+    elapsed_time /= 3600.0;
+    int P = (int) floor(log10(elapsed_time))+4;
+    cout << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" hour":" hours") << endl;
+  }
+}
+
+//**********************************************************************
+// CStandardHeaderReporter::~CStandardHeaderReporter()
+// Destructor
+//**********************************************************************
+CStandardHeaderReporter::~CStandardHeaderReporter() {
+}

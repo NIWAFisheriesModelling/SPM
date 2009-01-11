@@ -11,7 +11,7 @@
 #include "GammaDiff.h"
 #include "CGammaDiffInterface.h"
 #include "CGammaDiffCallback.h"
-#include "../../CEstimateManager.h"
+#include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 
 //**********************************************************************

@@ -28,11 +28,15 @@ class CRuntimeThread;
 // Enums
 typedef enum {
   RUN_MODE_INVALID,
+  RUN_MODE_LICENSE,
+  RUN_MODE_VERSION,
+  RUN_MODE_HELP,
   RUN_MODE_BASIC,
   RUN_MODE_ESTIMATION,
   RUN_MODE_PROFILE,
   RUN_MODE_MARKOV_CHAIN_MONTE_CARLO,
-  RUN_MODE_FORWARD_PROJECTION
+  RUN_MODE_FORWARD_PROJECTION,
+  RUN_MODE_SIMULATION
 } ERunMode;
 
 typedef enum {
@@ -54,7 +58,8 @@ public:
   static void                Destroy();
 
   // Functions
-  void                       setRunMode(string value);
+  void                       parseCommandLine(int argc, char* argv[]);
+  string                     getCommandLineOptions() { return sCommandLineOptions; }
   void                       setRunMode(ERunMode value) { eRunMode = value; }
   ERunMode                   getRunMode() { return eRunMode; }
   EState                     getCurrentState();
@@ -75,6 +80,7 @@ protected:
 	ERunMode                   eRunMode;
 	int                        iCurrentEstimateValue;
   CRuntimeThread*            pBaseThread;
+  string                     sCommandLineOptions;
 
 private:
   // Variables

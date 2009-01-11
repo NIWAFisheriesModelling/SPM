@@ -9,7 +9,10 @@
 
 // Local Headers
 #include "CRecruitmentProcess.h"
-#include "../../Layers/CNumericLayer.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CRecruitmentProcess::CRecruitmentProcess(CRecruitmentProcess *Process)
@@ -65,9 +68,9 @@ void CRecruitmentProcess::addProportion(double value) {
 double CRecruitmentProcess::getProportion(int index) {
   try {
     if (index >= (int)vProportionList.size())
-      errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROPORTIONS);
+      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROPORTIONS);
     if (index < 0)
-      errorLessThan(PARAM_INDEX, PARAM_ZERO);
+      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
     return vProportionList[index];
 
@@ -106,28 +109,28 @@ void CRecruitmentProcess::validate() {
 
     // Local Validation
     if (getCategoryCount() == 0)
-      errorMissing(PARAM_CATEGORIES);
+      CError::errorMissing(PARAM_CATEGORIES);
     if (getProportionCount() == 0)
-      errorMissing(PARAM_PROPORTIONS);
+      CError::errorMissing(PARAM_PROPORTIONS);
     if (getProportionCount() != getCategoryCount())
-      throw string(ERROR_EQUAL_CATEGORY_PROPORTION);
+      throw string(ERROR_EQUAL_CATEGORY_PROPORTION); // TODO: FIX ME
     if (getAgesCount() == 0)
-      errorMissing(PARAM_AGES);
+      CError::errorMissing(PARAM_AGES);
     if (getAgesCount() != getCategoryCount())
-      throw string(ERROR_EQUAL_CATEGORY_AGES);
-    if (isZero(dR0))
-      errorMissing(PARAM_R0);
+      throw string(ERROR_EQUAL_CATEGORY_AGES); // TODO: FIX ME
+    if (CComparer::isZero(dR0))
+      CError::errorMissing(PARAM_R0);
     if (sMethod == "")
-      errorMissing(PARAM_METHOD);
+      CError::errorMissing(PARAM_METHOD);
     if (vSelectivityList.size() > 0)
-      errorSupported(PARAM_SELECTIVITIES);
+      CError::errorSupported(PARAM_SELECTIVITIES);
     if (vLayerCategoryList.size() > 0)
-      errorSupported(PARAM_LAYERS);
+      CError::errorSupported(PARAM_LAYERS);
     if (sPenalty != "")
-      errorSupported(PARAM_PENALTY);
+      CError::errorSupported(PARAM_PENALTY);
 
     if (sMethod != PARAM_UNIFORM)
-      throw string(ERROR_UNKNOWN_METHOD + sMethod);
+      throw string(ERROR_UNKNOWN_METHOD + sMethod); // TODO: FIX ME
     else
       eMethod = METHOD_UNIFORM;
 
@@ -137,8 +140,8 @@ void CRecruitmentProcess::validate() {
       dRunningTotal += Prop;
     }
     // See If It is close enough to 1.0
-    if (!isSame(dRunningTotal, 1.0))
-      errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
+    if (!CComparer::isEqual(dRunningTotal, 1.0))
+      CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
   } catch(string Ex) {
     Ex = "CRecruitmentProcess.validate(" + getLabel() + ")->" + Ex;

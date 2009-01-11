@@ -9,14 +9,15 @@
 
 // Local headers
 #include "CParamParser.h"
-#include "../CProcessManager.h"
+#include "../Processes/CProcessManager.h"
 #include "../Processes/CProcess.h"
-#include "../CDirectedProcessManager.h"
+#include "../DirectedProcesses/CDirectedProcessManager.h"
 #include "../DirectedProcesses/CDirectedProcess.h"
-#include "../CSelectivityManager.h"
+#include "../Selectivities/CSelectivityManager.h"
 #include "../Selectivities/CSelectivity.h"
-#include "../CQManager.h"
+#include "../Qs/CQManager.h"
 #include "../Qs/CQ.h"
+#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CParamParser::CParamParser()
@@ -73,9 +74,9 @@ void CParamParser::parseAbsoluteCommand() {
     if (iIndex == 0)
       throw string(ERROR_FORMAT_PARAMETER);
     if (iIndex == -1)
-      errorMissing(CONFIG_ARRAY_START);
+      CError::errorMissing(CONFIG_ARRAY_START);
     if (iIndex2 == -1)
-      errorMissing(CONFIG_ARRAY_END);
+      CError::errorMissing(CONFIG_ARRAY_END);
 
     sType       = sCommand.substr(0, iIndex);
     iIndex++; // move past "["

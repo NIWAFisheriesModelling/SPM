@@ -9,10 +9,12 @@
 
 // Local Headers
 #include "CProcess.h"
-#include "../CLayerManager.h"
-#include "../Layers/CNumericLayer.h"
-#include "../CPenaltyManager.h"
-#include "../CSelectivityManager.h"
+#include "../Layers/CLayerManager.h"
+#include "../Layers/Numeric/Base/CNumericLayer.h"
+#include "../Penalties/CPenaltyManager.h"
+#include "../Selectivities/CSelectivityManager.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
 
 //**********************************************************************
 // CProcess::CProcess(CProcess *Process = 0)
@@ -116,13 +118,13 @@ void CProcess::validate() {
     else
       setDependsOnLayer(false);
     if ( (sLayerName == "") && (bDependsOnLayer) )
-      errorMissing(PARAM_LAYER_NAME);
+      CError::errorMissing(PARAM_LAYER_NAME);
     if ( (dLayerMin == -1.0) && (dLayerMax != -1.0) )
-      errorMissing(PARAM_LAYER_MIN);
+      CError::errorMissing(PARAM_LAYER_MIN);
     if ( (dLayerMax == -1.0) && (dLayerMin != -1.0) )
-      errorMissing(PARAM_LAYER_MAX);
+      CError::errorMissing(PARAM_LAYER_MAX);
     if ( (dLayerMin >= -1.0) && (dLayerMax >= -1.0) && (dLayerMax < dLayerMin) )
-      errorGreaterThan(PARAM_LAYER_MAX, PARAM_LAYER_MIN);
+      CError::errorGreaterThan(PARAM_LAYER_MAX, PARAM_LAYER_MIN);
 
     map<string, int> mList;
 

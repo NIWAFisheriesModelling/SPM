@@ -9,7 +9,7 @@
 
 // Local Headers
 #include "CMinimizer.h"
-#include "../CMinimizerManager.h"
+#include "CMinimizerManager.h"
 
 //**********************************************************************
 // CMinimizer::CMinimizer()

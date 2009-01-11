@@ -9,9 +9,12 @@
 
 // Local Headers
 #include "CDirectedMovementProcess.h"
-#include "../../CDirectedProcessManager.h"
-#include "../../Layers/NumericLayers/CDoubleLayer.h"
+#include "../../DirectedProcesses/CDirectedProcessManager.h"
+#include "../../Layers/Numeric/CDoubleLayer.h"
 #include "../../DirectedProcesses/CDirectedProcess.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CDirectedMovementProcess::CDirectedMovementProcess(CDirectedMovementProcess *Process = 0)
@@ -59,13 +62,13 @@ void CDirectedMovementProcess::validate() {
 
     // Local Validation
     if (vDirectedProcessList.size() == 0)
-      errorMissing(PARAM_DIRECTED_PROCESSES);
+      CError::errorMissing(PARAM_DIRECTED_PROCESSES);
     if (getCategoryCount() == 0)
-      errorMissing(PARAM_CATEGORIES);
+      CError::errorMissing(PARAM_CATEGORIES);
     if (vSelectivityList.size() > 0)
-      errorSupported(PARAM_SELECTIVITIES);
+      CError::errorSupported(PARAM_SELECTIVITIES);
     if (getDependsOnLayer())
-      errorSupported(PARAM_LAYER_NAME);
+      CError::errorSupported(PARAM_LAYER_NAME);
 
   } catch (string Ex) {
     Ex = "CDirectedMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -166,7 +169,7 @@ void CDirectedMovementProcess::execute() {
               for (int m = (iBaseColCount-1); m >= 0; --m) {
                 // Get Logit Amount
                 dCurrent = pLayer->getValue(k, l);
-                if (isZero(dCurrent))
+                if (CComparer::isZero(dCurrent))
                   continue;
 
                 // Convert To Proportion

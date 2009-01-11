@@ -9,10 +9,12 @@
 
 // Local Headers
 #include "CProfile.h"
-#include "../CWorld.h"
+#include "../World/CWorld.h"
 #include "../ParameterParser/CParamParser.h"
-#include "../CEstimateManager.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/CComparer.h"
 
 //**********************************************************************
 // CProfile::CProfile(CProfile *Profile = 0)
@@ -46,7 +48,7 @@ CProfile::CProfile(CProfile *Profile)
 bool CProfile::doStep() {
   try {
     // Increase Current Value
-    if (isZero(dCurrent) && (!isZero(dL)))
+    if (CComparer::isZero(dCurrent) && (!CComparer::isZero(dL)))
       dCurrent = dL;
     else
       dCurrent += dN;
@@ -89,12 +91,12 @@ void CProfile::validate() {
   try {
     // Lower Bound Must be < Upper Bound
     if ((dL-dU) > ZERO)
-      errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
+      CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
     // N must be < Upper Bound
     if ((dN-dU) > ZERO)
-      errorGreaterThan(PARAM_N, PARAM_UPPER_BOUND);
-    if (isZero(dN))
-      errorEqualTo(PARAM_N, PARAM_ZERO);
+      CError::errorGreaterThan(PARAM_N, PARAM_UPPER_BOUND);
+    if (CComparer::isZero(dN))
+      CError::errorEqualTo(PARAM_N, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;

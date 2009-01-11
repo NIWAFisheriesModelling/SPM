@@ -10,6 +10,8 @@
 // Local Headers
 #include "CUniformMovementProcess.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CUniformMovementProcess::CUniformMovementProcess(CUniformMovementProcess *Process = 0)
@@ -30,15 +32,15 @@ void CUniformMovementProcess::validate() {
 
     // Local Validation
     if (getCategoryCount() == 0)
-      errorMissing(PARAM_CATEGORIES);
+      CError::errorMissing(PARAM_CATEGORIES);
     if (getSelectivityCount() == 0)
-      errorMissing(PARAM_SELECTIVITIES);
+      CError::errorMissing(PARAM_SELECTIVITIES);
     if (getCategoryCount() != getSelectivityCount())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY);
+      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
     if (sLayerName != "")
-      errorSupported(PARAM_LAYER_NAME);
+      CError::errorSupported(PARAM_LAYER_NAME);
     if (sPenalty != "")
-      errorSupported(PARAM_PENALTY);
+      CError::errorSupported(PARAM_PENALTY);
 
   } catch (string Ex) {
     Ex = "CUniformMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -88,7 +90,7 @@ void CUniformMovementProcess::execute() {
           for (int l = 0; l < iBaseColCount; ++l) {
 
             dCurrent = pBase->getValue( vCategoryIndex[k], l);
-            if(isZero(dCurrent))
+            if(CComparer::isZero(dCurrent))
               continue;
             dCurrent *= dProportion * vSelectivityIndex[k]->getResult(l);
 

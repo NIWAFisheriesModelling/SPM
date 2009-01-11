@@ -13,11 +13,12 @@ using std::endl;
 
 // Local Headers
 #include "CObjectiveFunction.h"
-#include "../CObservationManager.h"
+#include "../Observations/CObservationManager.h"
 #include "../Observations/CObservation.h"
-#include "../CPenaltyManager.h"
-#include "../CEstimateManager.h"
+#include "../Penalties/CPenaltyManager.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
+#include "../Helpers/CError.h"
 
 // Single Static variable
 boost::thread_specific_ptr<CObjectiveFunction> CObjectiveFunction::clInstance;
@@ -62,9 +63,9 @@ SScore* CObjectiveFunction::getScore(int Index) {
   try {
     // Validate
     if (Index < 0)
-      errorLessThan(PARAM_INDEX, PARAM_ZERO);
+      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
     if (Index >= (int)vScoreList.size())
-      errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SCORES_INDEX);
+      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SCORES_INDEX);
 #endif
 
     return &vScoreList[Index];
