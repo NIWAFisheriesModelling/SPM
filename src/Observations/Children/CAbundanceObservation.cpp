@@ -202,7 +202,7 @@ void CAbundanceObservation::execute() {
             if (!pBase->getEnabled())
               continue;
 
-            int iColCount = (pConfig->getMaxAge()+1) - pConfig->getMinAge();
+            int iColCount = (pWorld->getMaxAge()+1) - pWorld->getMinAge();
 
             for (int k = 0; k < iColCount; ++k) {
               for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {

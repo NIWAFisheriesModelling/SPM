@@ -18,6 +18,7 @@
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
+#include "../../Translations/Translations.h"
 
 // Using
 using std::map;
@@ -83,11 +84,25 @@ int CParameterList::getInt(string name) {
 }
 
 //**********************************************************************
+// bool CParameterList::getBool(string name)
+// Return the bool for the parameter
+//**********************************************************************
+bool CParameterList::getBool(string name) {
+  // Check for False/F match
+  if ( (getString(name) == CONFIG_FALSE) || (getString(name) == CONFIG_FALSE_SHORT) )
+    return false;
+  // Check for true/T match
+  if ( (getString(name) == CONFIG_TRUE) || (getString(name) == CONFIG_TRUE_SHORT) )
+    return true;
+
+  throw string("value not valid true/false for :" + name); // TODO: Add CError for this
+}
+
+//**********************************************************************
 // void CParameterList::fillVector(vector<string> &list, string name, int offset)
 // Fill the vector with strings from our parameter list
 //**********************************************************************
 void CParameterList::fillVector(vector<string> &list, string name, int offset) {
-
   if (!hasParameter(name))
     throw string ("Missing parameter " + name); // TODO: FIX THIS
 

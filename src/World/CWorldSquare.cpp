@@ -10,6 +10,7 @@
 // Local Headers
 #include "CWorldSquare.h"
 #include "../Helpers/CError.h"
+#include "CWorld.h"
 
 //**********************************************************************
 // CWorldSquare::CWorldSquare(CWorldSquare *WorldSquare = 0);
@@ -307,10 +308,11 @@ void CWorldSquare::build() {
 #endif
 
     // Get our Values From World
-    iNumberOfCategories = pConfig->getCategoryCount();
-    iMinAge             = pConfig->getMinAge();
-    iMaxAge             = pConfig->getMaxAge();
-    bAgePlus            = pConfig->getUseAgePlus();
+    CWorld *pWorld = CWorld::Instance();
+    iNumberOfCategories = pWorld->getCategoryCount();
+    iMinAge             = pWorld->getMinAge();
+    iMaxAge             = pWorld->getMaxAge();
+    bAgePlus            = pWorld->getAgePlusGroup();
 
 #ifndef OPTIMISE
     if (iNumberOfCategories <= 0)

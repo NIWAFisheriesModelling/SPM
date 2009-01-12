@@ -42,9 +42,9 @@ CLogisticProducingSelectivity::CLogisticProducingSelectivity(CLogisticProducingS
 //**********************************************************************
 void CLogisticProducingSelectivity::validate() {
   try {
-    if (iL < pConfig->getMinAge())
+    if (iL < pWorld->getMinAge())
       CError::errorLessThan(PARAM_L, PARAM_MIN_AGE);
-    if (iH > pConfig->getMaxAge())
+    if (iH > pWorld->getMaxAge())
       CError::errorGreaterThan(PARAM_H, PARAM_MAX_AGE);
     if (iL == -1)
       CError::errorMissing(PARAM_L);

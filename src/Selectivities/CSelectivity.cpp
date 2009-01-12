@@ -64,8 +64,8 @@ void CSelectivity::rebuild() {
     vResults.clear();
 
     // Get Age Range
-    int iMinAge = pConfig->getMinAge();
-    int iTop    = pConfig->getMaxAge() - iMinAge;
+    int iMinAge = pWorld->getMinAge();
+    int iTop    = pWorld->getMaxAge() - iMinAge;
 
     // Build Vector of our Results
     for (int i = 0; i <= iTop; ++i) {

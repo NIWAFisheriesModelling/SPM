@@ -26,6 +26,7 @@
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../TimeSteps/CTimeStep.h"
 #include "../Helpers/ForEach.h"
+#include "../InitializationPhases/CInitializationPhase.h"
 
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
@@ -53,8 +54,8 @@ CRuntimeThread::CRuntimeThread() {
   // Variables
   bWaiting        = false;
 
-  for (int i = 0; i < pConfig->getInitilizationPhaseCount(); ++i)
-    vInitializationList.push_back(pConfig->getInitializationPhase(i));
+  for (int i = 0; i < pWorld->getInitializationPhaseCount(); ++i)
+    vInitializationList.push_back(pWorld->getInitializationPhase(i));
 }
 
 //**********************************************************************
@@ -102,8 +103,6 @@ void CRuntimeThread::validate() {
 
   // Validate Them in Alphabetical Order, After World
   pWorld->validate(); // First because it's our Base
-
-  pConfig->validate();
   pDirectedProcessManager->validate();
   pEstimateManager->validate();
   pInitializationManager->validate();
@@ -128,7 +127,7 @@ void CRuntimeThread::build() {
   // Local Building
   vInitializationIndex.clear();
   foreach(string Label, vInitializationList) {
-    vInitializationIndex.push_back(pInitializationManager->getTimeStep(Label));
+    vInitializationIndex.push_back(pInitializationManager->getInitializationPhase(Label));
   }
 
   // do not fuck with this order
@@ -149,7 +148,7 @@ void CRuntimeThread::build() {
   pTimeStepManager->build();
 
   // Build our Own Locals
-  iNumberOfYears = pConfig->getNumberOfYearsToRun();
+  iNumberOfYears = pWorld->getCurrentYear() - pWorld->getInitialYear();
 }
 
 //**********************************************************************
@@ -233,8 +232,8 @@ void CRuntimeThread::startModel() {
 
   // Set State To Burn-In (Initialisation) & Execute
   eCurrentState = STATE_INITIALIZATION;
-  foreach(CTimeStep *TimeStep, vInitializationIndex) {
-    TimeStep->execute();
+  foreach(CInitializationPhase *InitializationPhase, vInitializationIndex) {
+    InitializationPhase->execute();
   }
   pPrintStateManager->execute(eCurrentState);
 

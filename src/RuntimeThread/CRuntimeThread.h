@@ -28,6 +28,7 @@ class CSelectivityManager;
 class CTimeStepManager;
 class CObjectiveFunction;
 class CTimeStep;
+class CInitializationPhase;
 
 //**********************************************************************
 //
@@ -73,7 +74,7 @@ protected:
   CSelectivityManager         *pSelectivityManager;
   CTimeStepManager            *pTimeStepManager;
   vector<string>              vInitializationList;
-  vector<CTimeStep*>          vInitializationIndex;
+  vector<CInitializationPhase*> vInitializationIndex;
   int                         iNumberOfYears;
   bool                        bTerminate;
   bool                        bWaiting;

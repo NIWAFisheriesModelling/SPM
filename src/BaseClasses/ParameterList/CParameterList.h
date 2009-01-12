@@ -33,6 +33,7 @@ public:
   string                      getString(string name);
   double                      getDouble(string name);
   int                         getInt(string name);
+  bool                        getBool(string name);
   int                         countMatches(string name);
   int                         countParameterValues(string name);
   string                      getMatchFullName(string name, int matchNumber);

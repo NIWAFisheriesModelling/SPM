@@ -161,7 +161,7 @@ void CRecruitmentProcess::build() {
     // Populate Our Ages Index
     if (vAgesIndex.size() <= 0) {
       foreach(int Age, vAgesList) {
-        vAgesIndex.push_back(pConfig->getColIndexForAge(Age));
+        vAgesIndex.push_back(pWorld->getColIndexForAge(Age));
       }
     }
 

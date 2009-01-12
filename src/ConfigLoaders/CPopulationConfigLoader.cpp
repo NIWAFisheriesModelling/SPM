@@ -124,27 +124,38 @@ void CPopulationConfigLoader::loadSpatialStructure() {
     if (vParameterList.size() != 1)
       throw string(ERROR_QTY_MORE_PARAMETERS);
 
-    // Load Next Line
-    vConfigPtr++;
+    mSection.clear();
+
+    // Loop until we hit a new section.
     while(vConfigPtr != vConfigList.end()) {
       populateParameters();
 
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (checkLine(PARAM_NROWS))
-          pWorld->setHeight(getIntValue(1));
-        else if (checkLine(PARAM_NCOLS))
-          pWorld->setWidth(getIntValue(1));
-        else if (checkLine(PARAM_LAYER_NAME))
-          pWorld->setBaseLayer(vParameterList[1]);
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+      if ( ((int)vParameterList.size() == 0) || (newSection()) ) {
+        vConfigPtr++;
+        continue;
       }
+
+      for (int i = 1; i < (int)vParameterList.size(); ++i)
+        mSection[vParameterList[0]].push_back(vParameterList[i]);
+
+      if ((int)vParameterList.size() == 1) {
+        mSection[vParameterList[0]].push_back("true");
+      }
+
       vConfigPtr++;
     }
+
+    CWorld *pWorld = CWorld::Instance();
+    map<string, vector<string> >::iterator mPtr = mSection.begin();
+    while (mPtr != mSection.end()) {
+
+      vector<string>::iterator vPtr = (*mPtr).second.begin();
+      while (vPtr != (*mPtr).second.end()) {
+        pWorld->addParameter((*mPtr).first, (*vPtr));
+        vPtr++;
+      }
+    }
+
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadSpatialStructure()->" + Ex;
     throw Ex;
@@ -171,7 +182,7 @@ void CPopulationConfigLoader::loadPopulationStructure() {
           break;
 
         // Check Section
-        if (checkLine(PARAM_CATEGORIES, 1, MAX_PARAMS))
+    /*    if (checkLine(PARAM_CATEGORIES, 1, MAX_PARAMS))
           for (int i = 1; i < (int)vParameterList.size(); ++i)
             pConfig->addCategory(vParameterList[i]);
         else if (checkLine(PARAM_MIN_AGE))
@@ -181,7 +192,7 @@ void CPopulationConfigLoader::loadPopulationStructure() {
         else if (checkLine(PARAM_AGE_PLUS_GROUP))
           pConfig->setUseAgePlus(getBoolValue(1));
         else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);*/
       }
       vConfigPtr++;
     }
@@ -212,7 +223,7 @@ void CPopulationConfigLoader::loadInitialization() {
           break;
 
         // Check Section
-        if (checkLine(PARAM_RUN_YEARS))
+        /*if (checkLine(PARAM_RUN_YEARS))
           pConfig->setNumberOfYearsToRun(getIntValue(1));
         else if (checkLine(PARAM_START_YEAR))
           pConfig->setHumanStartYear(getIntValue(1));
@@ -222,7 +233,7 @@ void CPopulationConfigLoader::loadInitialization() {
           for (int i = 1; i < (int)vParameterList.size(); ++i)
             pConfig->addInitializationPhase(vParameterList[i]);
         else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);*/
       }
       vConfigPtr++;
     }
@@ -252,10 +263,10 @@ void CPopulationConfigLoader::loadAnnualCycle() {
           break;
 
         // Check Section
-        if (checkLine(PARAM_TIME_STEPS))
+       /* if (checkLine(PARAM_TIME_STEPS))
           pConfig->setNumberOfTimeSteps(getIntValue(1));
         else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);*/
       }
       vConfigPtr++;
     }
@@ -308,7 +319,7 @@ void CPopulationConfigLoader::loadTimeStep() {
 //**********************************************************************
 void CPopulationConfigLoader::loadInitialisationPhase() {
   try {
-    CTimeStep *pTimeStep = new CTimeStep();
+    /*CTimeStep *pTimeStep = new CTimeStep();
     pTimeStep->setLabel(getLabel());
 
     // Load Next Line
@@ -330,7 +341,7 @@ void CPopulationConfigLoader::loadInitialisationPhase() {
       }
       vConfigPtr++;
     }
-    pInitializationManager->addTimeStep(pTimeStep);
+    pInitializationManager->addInitialisationPhase(pTimeStep);*/
 
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadInitialisationPhase()->" + Ex;

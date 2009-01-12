@@ -30,6 +30,22 @@ CWorld::CWorld() {
   sBaseLayer                  = "";
   pBaseLayer                  = 0;
   iEnabledSquareCount         = 0;
+
+  // Register user defined variables
+  pParameterList->registerAllowed(PARAM_CELL_LENGTH);
+  pParameterList->registerAllowed(PARAM_NROWS);
+  pParameterList->registerAllowed(PARAM_NCOLS);
+  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_MIN_AGE);
+  pParameterList->registerAllowed(PARAM_MAX_AGE);
+  pParameterList->registerAllowed(PARAM_AGE_PLUS_GROUP);
+  pParameterList->registerAllowed(PARAM_INITIALIZATION_PHASES);
+  pParameterList->registerAllowed(PARAM_INITIAL_YEAR);
+  pParameterList->registerAllowed(PARAM_CURRENT_YEAR);
+  pParameterList->registerAllowed(PARAM_FINAL_YEAR);
+  pParameterList->registerAllowed(PARAM_TIME_STEPS);
+
 }
 
 //**********************************************************************
@@ -75,16 +91,26 @@ void CWorld::clone(CWorld *World) {
 //**********************************************************************
 void CWorld::validate() {
   try {
-    // Validate The required parameters
-    if (getHeight() <= 0)
-      CError::errorMissing(PARAM_NROWS);
-    if (getWidth() <= 0)
-      CError::errorMissing(PARAM_NCOLS);
-    if (getBaseLayer() == "")
-      CError::errorMissing(PARAM_LAYER_NAME);
-    if (getHeight() > 1000)
+    // Load our Variable values
+    iCellLength       = pParameterList->getInt(PARAM_CELL_LENGTH);
+    iHeight           = pParameterList->getInt(PARAM_NROWS); // TODO: Change to N_ROWS or Better
+    iWidth            = pParameterList->getInt(PARAM_NCOLS); // TODO: Change to N_COLS or Better
+    sBaseLayer        = pParameterList->getString(PARAM_LAYER_NAME);
+    iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
+    iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
+    bAgePlusGroup     = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
+    iInitialYear      = pParameterList->getInt(PARAM_INITIAL_YEAR);
+    iCurrentYear      = pParameterList->getInt(PARAM_CURRENT_YEAR);
+    iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
+
+    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
+    pParameterList->fillVector(vInitializationPhases, PARAM_INITIALIZATION_PHASES);
+    pParameterList->fillVector(vTimeSteps, PARAM_TIME_STEPS);
+
+    // Check For upper-limit on Hight and Width
+    if (iHeight > 1000)
       CError::errorGreaterThan(PARAM_NROWS, PARAM_ONE_THOUSAND);
-    if (getWidth() > 1000)
+    if (iWidth > 1000)
       CError::errorGreaterThan(PARAM_NCOLS, PARAM_ONE_THOUSAND);
 
   } catch(string Ex) {
@@ -200,6 +226,48 @@ CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
 
   return 0;
 #endif
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+int CWorld::getCategoryIndexForName(string Name) {
+  try {
+    // Validate
+    for (int i = 0; i < (int)vCategories.size(); ++i) {
+      if (vCategories[i] == Name)
+        return i;
+    }
+
+    throw string(ERROR_UNKNOWN_CATEGORY + Name); // TODO: Add CError
+
+  } catch (string Ex) {
+    Ex = "CWorld.getCategoryNameForIndex()->" + Ex;
+    throw Ex;
+  }
+
+  return -1;
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+string CWorld::getCategoryNameForIndex(int Index) {
+  return vCategories[Index];
+}
+
+int CWorld::getColIndexForAge(int Age) {
+  return (Age-iMinAge);
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+string CWorld::getInitializationPhase(int index) {
+  return vInitializationPhases[index];
 }
 
 //**********************************************************************

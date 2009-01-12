@@ -9,7 +9,7 @@
 
 // Local Headers
 #include "CInitializationPhaseManager.h"
-#include "../TimeSteps/CTimeStep.h"
+#include "CInitializationPhase.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
 
@@ -44,31 +44,29 @@ void CInitializationPhaseManager::Destroy() {
 }
 
 //**********************************************************************
-// void CInitializationPhaseManager::addTimeStep(CTimeStep *value)
+// void CInitializationPhaseManager::addInitializationPhase(CInitializationPhase *value)
 // Add our Timestep To The List
 //**********************************************************************
-void CInitializationPhaseManager::addTimeStep(CTimeStep *value) {
-  // Set The Step Number and Push.
-  value->setStep(1);
-  vTimeStepList.push_back(value);
+void CInitializationPhaseManager::addInitializationPhase(CInitializationPhase *value) {
+  vInitializationPhases.push_back(value);
 }
 
 //**********************************************************************
-// CTimeStep* CInitializationPhaseManager::getTimeStep(string label)
-// Get a Pointer to our TimeStep
+// CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label)
+// Get a Pointer to our InitializationPhase
 //**********************************************************************
-CTimeStep* CInitializationPhaseManager::getTimeStep(string label) {
+CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label) {
   try {
     // Loop through looking for match.
-    foreach(CTimeStep *TimeStep, vTimeStepList) {
-      if (TimeStep->getLabel() == label)
-        return TimeStep;
+    foreach(CInitializationPhase *InitializationPhase, vInitializationPhases) {
+      if (InitializationPhase->getLabel() == label)
+        return InitializationPhase;
     }
     // Match not found
-    throw string(ERROR_UNKNOWN_TIME_STEP + label);
+    throw string(ERROR_UNKNOWN_TIME_STEP + label); // TODO: Add CError and Translation
 
   } catch (string Ex) {
-    Ex = "CInitialisationManager.getTimeStep()->" + Ex;
+    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
     throw Ex;
   }
 
@@ -76,20 +74,20 @@ CTimeStep* CInitializationPhaseManager::getTimeStep(string label) {
 }
 
 //**********************************************************************
-// CTimeStep* CInitializationPhaseManager::getTimeStep(int index)
-// Get timestep from our vector @ index
+// CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index)
+// Get InitializationPhase from our vector @ index
 //**********************************************************************
-CTimeStep* CInitializationPhaseManager::getTimeStep(int index) {
+CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index) {
   try {
-    if (index >= (int)vTimeStepList.size())
+    if (index >= (int)vInitializationPhases.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-    return vTimeStepList[index];
+    return vInitializationPhases[index];
 
   } catch (string Ex) {
-    Ex = "CInitialisationManager.getTimeStep()->" + Ex;
+    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
     throw Ex;
   }
 
@@ -102,9 +100,9 @@ CTimeStep* CInitializationPhaseManager::getTimeStep(int index) {
 //**********************************************************************
 void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager) {
   try {
-    for (int i = 0; i < Manager->getTimeStepCount(); ++i) {
-      CTimeStep *pTimeStep = Manager->getTimeStep(i);
-      vTimeStepList.push_back(pTimeStep->clone());
+    for (int i = 0; i < Manager->getInitializationPhaseCount(); ++i) {
+      CInitializationPhase *pInitializationPhase = Manager->getInitializationPhase(i);
+      vInitializationPhases.push_back(pInitializationPhase->clone());
     }
 
   } catch (string Ex) {
@@ -119,8 +117,8 @@ void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager) {
 //**********************************************************************
 void CInitializationPhaseManager::validate() {
   try {
-    foreach( CTimeStep *TimeStep, vTimeStepList) {
-      TimeStep->validate();
+    foreach( CInitializationPhase *InitializationPhase, vInitializationPhases) {
+      InitializationPhase->validate();
     }
 
   } catch(string Ex) {
@@ -136,8 +134,8 @@ void CInitializationPhaseManager::validate() {
 void CInitializationPhaseManager::build() {
   try {
     // Now, Call TimeStep Validations
-    foreach( CTimeStep *TimeStep, vTimeStepList) {
-      TimeStep->build();
+    foreach( CInitializationPhase *InitializationPhase, vInitializationPhases) {
+      InitializationPhase->build();
     }
 
   } catch(string Ex) {
@@ -152,10 +150,10 @@ void CInitializationPhaseManager::build() {
 //**********************************************************************
 CInitializationPhaseManager::~CInitializationPhaseManager() {
   // Delete Our Layers
-  foreach( CTimeStep *TimeStep, vTimeStepList) {
-    delete TimeStep;
+  foreach( CInitializationPhase *InitializationPhase, vInitializationPhases) {
+    delete InitializationPhase;
   }
 
   // Clear Vector
-  vTimeStepList.clear();
+  vInitializationPhases.clear();
 }

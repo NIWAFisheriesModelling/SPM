@@ -79,8 +79,8 @@ void CCategoryTransitionProcess::build() {
     CProcess::build();
 
     // Get our Category Indexes.
-    iFromIndex = pConfig->getCategoryIndexForName(getFrom());
-    iToIndex   = pConfig->getCategoryIndexForName(getTo());
+    iFromIndex = pWorld->getCategoryIndexForName(getFrom());
+    iToIndex   = pWorld->getCategoryIndexForName(getTo());
 
   } catch(string Ex) {
     Ex = "CCategoryTransitionProcess.build(" + getLabel() + ")->" + Ex;

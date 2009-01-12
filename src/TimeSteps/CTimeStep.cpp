@@ -93,7 +93,7 @@ void CTimeStep::validate() {
     // Make sure the StepNumber is < TotalSteps
     // IF We are using Steps
     if (iStep >= 0)
-      if (iStep > pConfig->getNumberOfTimeSteps())
+      if (iStep > pWorld->getTimeStepCount())
         CError::errorGreaterThan(PARAM_STEP, PARAM_TIME_STEPS);
 
   } catch(string Ex) {

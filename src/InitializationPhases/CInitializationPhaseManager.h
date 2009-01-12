@@ -13,32 +13,32 @@
 #include "../BaseClasses/CBaseExecutableObject.h"
 
 // Classes
-class CTimeStep;
+class CInitializationPhase;
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CInitializationPhaseManager : CBaseBuildableObject {
+class CInitializationPhaseManager: CBaseBuildableObject {
 public:
-  static CInitializationPhaseManager*   Instance();
-  static void                      Destroy();
   // Functions
-  void                       addTimeStep(CTimeStep *value);
-  int                        getTimeStepCount() { return vTimeStepList.size(); }
-  CTimeStep*                 getTimeStep(string label);
-  CTimeStep*                 getTimeStep(int index);
-  void                       clone(CInitializationPhaseManager *Manager);
-  void                       validate();
-  void                       build();
-  virtual                    ~CInitializationPhaseManager();
+  static CInitializationPhaseManager* Instance();
+  static void                 Destroy();
+  void                        clone(CInitializationPhaseManager *Manager);
+  void                        addInitializationPhase(CInitializationPhase *value);
+  int                         getInitializationPhaseCount() { return vInitializationPhases.size();  }
+  CInitializationPhase*       getInitializationPhase(string label);
+  CInitializationPhase*       getInitializationPhase(int index);
+  void                        validate();
+  void                        build();
+  virtual                     ~CInitializationPhaseManager();
 
 protected:
   // Functions
-	CInitializationPhaseManager();
+  CInitializationPhaseManager();
 
   // Variables
-	vector<CTimeStep*>         vTimeStepList;
+  vector<CInitializationPhase*> vInitializationPhases;
 
 private:
   // Variables

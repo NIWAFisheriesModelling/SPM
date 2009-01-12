@@ -178,9 +178,9 @@ void CProportionsByCategoryObservation::validate() {
     // We must have some proportions
     if (mvProportionMatrix.size() == 0)
       CError::errorMissing(PARAM_OBS);
-    if (iMinAge < pConfig->getMinAge())
+    if (iMinAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
-    if (iMaxAge > pConfig->getMaxAge())
+    if (iMaxAge > pWorld->getMaxAge())
       CError::errorGreaterThan(PARAM_MAX_AGE, PARAM_MAX_AGE);
     if (CComparer::isEqual(dR, -1.0))
       CError::errorMissing(PARAM_R);
@@ -286,7 +286,7 @@ void CProportionsByCategoryObservation::execute() {
   try {
 #endif
     // Variables
-    int    iSquareAgeOffset   = iMinAge - pConfig->getMinAge();
+    int    iSquareAgeOffset   = iMinAge - pWorld->getMinAge();
 
     // Loop Through Observations
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
@@ -317,7 +317,7 @@ void CProportionsByCategoryObservation::execute() {
             // And if the observation has a plus group
             if(bAgePlus) {
               // Loop Through Plus Group Ages in that square and add them to count for the Plus group
-              for (int k = (iArraySize+iSquareAgeOffset); k < pConfig->getMaxAge(); ++k) {
+              for (int k = (iArraySize+iSquareAgeOffset); k < pWorld->getMaxAge(); ++k) {
                 // Loop Through Categories
                 for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
                   double dSelectResult = vSelectivityIndex[l]->getResult(k);

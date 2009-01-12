@@ -232,9 +232,6 @@ void CRuntimeController::run() {
     CEstimateManager  *pEstimateManager = CEstimateManager::Instance();
     CProfileManager   *pProfileManager  = CProfileManager::Instance();
 
-    // Validate our Configuration
-    pConfig->validate();
-
     // Create our Base Thread
     pBaseThread = new CRuntimeThread();
     pBaseThread->validate();

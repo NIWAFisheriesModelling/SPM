@@ -56,7 +56,7 @@ CEventMortalityProcess::CEventMortalityProcess(CEventMortalityProcess *Process)
 //**********************************************************************
 void CEventMortalityProcess::addYears(int value) {
   // Scale Year back to internal representation
-  value -= pConfig->getHumanStartYear();
+  value -= pWorld->getInitialYear();
 
   if (value < 0)
     throw string(ERROR_INVALID_YEAR + CConvertor::intToString(value));

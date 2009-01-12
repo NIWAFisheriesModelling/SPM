@@ -47,15 +47,24 @@ public:
   void                      clone(CWorld *World);
   void                      validate();
   void                      build();
-  void                      setWidth(int value) { iWidth = value; }
   int                       getWidth() { return iWidth; }
-  void                      setHeight(int value) { iHeight = value; }
   int                       getHeight() { return iHeight; }
-  void                      setBaseLayer(string value) { sBaseLayer = value; }
   string                    getBaseLayer() { return sBaseLayer; }
+  int                       getMinAge() { return iMinAge; }
+  int                       getMaxAge() { return iMaxAge; }
+  bool                      getAgePlusGroup() { return bAgePlusGroup; }
+  int                       getInitialYear() { return iInitialYear; }
+  int                       getCurrentYear() { return iCurrentYear; }
+  int                       getTimeStepCount() { return (int)vTimeSteps.size(); }
+  int                       getInitializationPhaseCount() { return (int)vInitializationPhases.size(); }
+  int                       getCategoryCount() { return (int)vCategories.size(); }
+  string                    getInitializationPhase(int index);
   CWorldSquare*             getBaseSquare(int RowIndex, int ColIndex);
   CWorldSquare*             getDifferenceSquare(int RowIndex, int ColIndex);
   int                       getEnabledSquareCount() { return iEnabledSquareCount; };
+  int                       getCategoryIndexForName(string Name);
+  string                    getCategoryNameForIndex(int Index);
+  int                       getColIndexForAge(int Age);
   void                      mergeDifferenceGrid();
   void                      zeroGrid();
   virtual                   ~CWorld();
@@ -65,12 +74,22 @@ protected:
   CWorld();
 
   // Variables
+  int                       iCellLength;
   int                       iWidth;
   int                       iHeight;
-  CWorldSquare              **pGrid;
-  CWorldSquare              **pDifferenceGrid;
   string                    sBaseLayer;
   CNumericLayer             *pBaseLayer;
+  vector<string>            vCategories;
+  int                       iMinAge;
+  int                       iMaxAge;
+  bool                      bAgePlusGroup;
+  vector<string>            vInitializationPhases;
+  int                       iInitialYear;
+  int                       iCurrentYear;
+  int                       iFinalYear;
+  vector<string>            vTimeSteps;
+  CWorldSquare              **pGrid;
+  CWorldSquare              **pDifferenceGrid;
   int                       iEnabledSquareCount;
 
 private:

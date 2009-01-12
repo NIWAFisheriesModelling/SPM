@@ -85,16 +85,16 @@ string CObservation::getSelectivity(int index) {
 void CObservation::validate() {
   try {
     // Adjust Year
-      if (iYear > pConfig->getHumanStartYear())
-        iYear -= pConfig->getHumanStartYear();
+      if (iYear > pWorld->getInitialYear())
+        iYear -= pWorld->getInitialYear();
 
-      if (iYear > pConfig->getNumberOfYearsToRun())
+      if (iYear > pWorld->getCurrentYear())
         CError::errorGreaterThan(PARAM_YEAR, PARAM_RUN_YEARS);
       if (iYear < 0)
         CError::errorLessThan(PARAM_YEAR, PARAM_ZERO);
       if (iTimeStep <= 0)
         CError::errorLessThanEqualTo(PARAM_TIME_STEP, PARAM_ZERO);
-      if (iTimeStep > pConfig->getNumberOfTimeSteps())
+      if (iTimeStep > pWorld->getTimeStepCount())
         CError::errorGreaterThan(PARAM_TIME_STEP, PARAM_TIME_STEPS);
       if (sLayer == "")
         CError::errorMissing(PARAM_LAYER_NAME);
@@ -134,7 +134,7 @@ void CObservation::build() {
     // Do We Need To Re-Build Category Index?
     if ((int)vCategoryIndex.size() == 0) {
       foreach(string Name, vCategoryList) {
-        vCategoryIndex.push_back(pConfig->getCategoryIndexForName(Name));
+        vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
       }
     }
 

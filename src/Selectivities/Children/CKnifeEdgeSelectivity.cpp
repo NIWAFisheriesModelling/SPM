@@ -62,7 +62,8 @@ double CKnifeEdgeSelectivity::getResult(int Param) {
 #ifndef OPTIMISE
   try {
 #endif
-    Param = pConfig->getAgeForColIndex(Param);
+    // Get the column Index for the passed in Age
+    Param = pWorld->getMinAge() + Param;
 
     if(Param >= dC)
       return (1.0);

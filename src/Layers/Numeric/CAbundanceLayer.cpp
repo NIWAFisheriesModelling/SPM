@@ -96,7 +96,7 @@ void CAbundanceLayer::build() {
     // Do We Need To Re-Build Category Index?
     if ((int)vCategoryIndex.size() == 0) {
       foreach(string Name, vCategoryList) {
-        vCategoryIndex.push_back(pConfig->getCategoryIndexForName(Name));
+        vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
       }
     }
 

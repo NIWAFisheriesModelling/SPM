@@ -13,6 +13,7 @@
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CConvertor.h"
+#include "../World/CWorld.h"
 
 // Single Static variable
  boost::thread_specific_ptr<CTimeStepManager> CTimeStepManager::clInstance;
@@ -100,8 +101,8 @@ void CTimeStepManager::clone(CTimeStepManager *Manager) {
 void CTimeStepManager::validate() {
   try {
     // Vars
-    CConfiguration                *pConfig            = CConfiguration::Instance();
-    int                           iSteps              = pConfig->getNumberOfTimeSteps();
+    CWorld *pWorld = CWorld::Instance();
+    int                           iSteps              = pWorld->getTimeStepCount();
     map<int, int>                 mTimeStepList;
 
     // Make Sure We Have Right Amount Loaded
