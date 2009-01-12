@@ -282,7 +282,7 @@ void CPopulationConfigLoader::loadAnnualCycle() {
 //**********************************************************************
 void CPopulationConfigLoader::loadTimeStep() {
   try {
-    CTimeStep *pTimeStep = new CTimeStep();
+    /*CTimeStep *pTimeStep = new CTimeStep();
     pTimeStep->setStep(atoi(getLabel().c_str()));
 
     // Load Next Line
@@ -305,7 +305,7 @@ void CPopulationConfigLoader::loadTimeStep() {
       }
       vConfigPtr++;
     }
-    pTimeStepManager->addTimeStep(pTimeStep);
+    pTimeStepManager->addTimeStep(pTimeStep);*/
 
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadTimeStep()->" + Ex;

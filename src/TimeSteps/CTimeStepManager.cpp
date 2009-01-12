@@ -100,35 +100,7 @@ void CTimeStepManager::clone(CTimeStepManager *Manager) {
 //**********************************************************************
 void CTimeStepManager::validate() {
   try {
-    // Vars
-    CWorld *pWorld = CWorld::Instance();
-    int                           iSteps              = pWorld->getTimeStepCount();
-    map<int, int>                 mTimeStepList;
-
-    // Make Sure We Have Right Amount Loaded
-    if (iSteps > (int)vTimeStepList.size())
-      throw string(ERROR_QTY_LESS_TIME_STEPS + CConvertor::intToString(iSteps));
-    if (iSteps < (int)vTimeStepList.size())
-      throw string(ERRRO_QTY_MORE_TIME_STEPS + CConvertor::intToString(iSteps));
-
-    // Loop Through And Check For Duplicates
-    foreach( CTimeStep *TimeStep, vTimeStepList) {
-      if (TimeStep->getStep() > iSteps)
-        CError::errorGreaterThan(PARAM_STEP, PARAM_TIME_STEPS);
-
-      mTimeStepList[TimeStep->getStep()] += 1;
-
-      if (mTimeStepList[TimeStep->getStep()] > 1)
-        throw string(ERROR_DUPLICATE_TIME_STEP + CConvertor::intToString(TimeStep->getStep()));
-    }
-
-    // Loop through and check for Invalid/Missing Numbers
-    for (int i = 0; i < iSteps; ++i) {
-      if (mTimeStepList[i+1] == 0)
-        throw string(ERROR_MISSING_TIME_STEP + CConvertor::intToString(i+1));
-    }
-
-    // Now, Call TimeStep Validations
+    // Call TimeStep Validations
     foreach( CTimeStep *TimeStep, vTimeStepList) {
       TimeStep->validate();
     }
