@@ -238,6 +238,7 @@
 #define PARAM_A50                                 "a50"
 #define PARAM_ATO95                               "ato95"
 #define PARAM_B                                   "b"
+#define PARAM_BASIC                               "basic"
 #define PARAM_BETA                                "beta"
 #define PARAM_C                                   "c"
 #define PARAM_CATEGORIES                          "categories"

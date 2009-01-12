@@ -28,7 +28,7 @@ CObservation* CObservationFactory::buildObservation(string type) {
   else if (type == PARAM_PROPORTIONS_BY_CATEGORY)
     return new CProportionsByCategoryObservation();
   else
-    throw string("Unknown type: " + type);
+    throw string("Unknown type: " + type); // TODO: FIX ME
 
   return 0;
 }
