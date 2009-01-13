@@ -15,7 +15,7 @@
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CNaturalMortalityProcess.h"
-#include "../Population/CRecruitmentProcess.h"
+#include "../Population/CConstantRecruitmentProcess.h"
 
 //**********************************************************************
 // CProcessFactory::CProcessFactory()
@@ -25,8 +25,8 @@ CProcess* CProcessFactory::buildProcess(string type) {
 
   if (type == PARAM_AGEING)
     return new CAgeingProcess();
-  else if (type == PARAM_RECRUITMENT)
-    return new CRecruitmentProcess();
+  else if (type == PARAM_CONSTANT_RECRUITMENT)
+    return new CConstantRecruitmentProcess();
   else if (type == PARAM_NATURAL_MORTALITY)
     return new CNaturalMortalityProcess();
   else if (type == PARAM_EVENT_MORTALITY)

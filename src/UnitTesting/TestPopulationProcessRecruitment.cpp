@@ -16,7 +16,7 @@
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_Basic, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_THROW(clRecruitment.validate(), string); // Missing label
@@ -26,7 +26,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_Basic, CRecruitmentTestFixt
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodLabel, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -37,7 +37,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodLabel, CRecruitmentTest
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodCategory, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -49,7 +49,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodCategory, CRecruitmentT
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_NotCompleteProportions, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -62,7 +62,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_NotCompleteProportions, CRe
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodAges, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -76,7 +76,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodAges, CRecruitmentTestF
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodR0, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -91,7 +91,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodR0, CRecruitmentTestFix
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodMethod, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -107,7 +107,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodMethod, CRecruitmentTes
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodProportion, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -123,7 +123,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_GoodProportion, CRecruitmen
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_MultipleProportions, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -140,7 +140,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_MultipleProportions, CRecru
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_MultipleProportionsWithCategories, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -158,7 +158,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_MultipleProportionsWithCate
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_MultipleAgesWithCategories, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -177,7 +177,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_MultipleAgesWithCategories,
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_BadMethod, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -193,7 +193,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_BadMethod, CRecruitmentTest
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_LayerCategory, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -210,7 +210,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_LayerCategory, CRecruitment
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_Selectivity, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -227,7 +227,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_Selectivity, CRecruitmentTe
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_Penalty, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -244,7 +244,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Validate_Penalty, CRecruitmentTestFi
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_Baisc, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_THROW(clRecruitment.build(), string); // Validation has not being run yet
@@ -254,7 +254,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_Baisc, CRecruitmentTestFixture
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_GoodLayer, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -272,7 +272,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_GoodLayer, CRecruitmentTestFix
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadLayer, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -290,7 +290,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadLayer, CRecruitmentTestFixt
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_GoodCategory, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -308,7 +308,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_GoodCategory, CRecruitmentTest
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadCategory, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -326,7 +326,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadCategory, CRecruitmentTestF
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_GoodAge, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -344,7 +344,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_GoodAge, CRecruitmentTestFixtu
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadAgeTooHigh, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -362,7 +362,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadAgeTooHigh, CRecruitmentTes
 //**********************************************************************
 BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Build_BadAgeTooLow, CRecruitmentTestFixture ) {
   // Var
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));
@@ -382,7 +382,7 @@ BOOST_FIXTURE_TEST_CASE( RecruitmentProcess_Execute, CRecruitmentTestFixture ) {
 
   // Variables
   CWorldSquare         *pSquare    = 0;
-  CRecruitmentProcess  clRecruitment       = CRecruitmentProcess();
+  CConstantRecruitmentProcess  clRecruitment       = CConstantRecruitmentProcess();
 
   // Empty Validation.
   BOOST_REQUIRE_NO_THROW(clRecruitment.setLabel("recruitment"));

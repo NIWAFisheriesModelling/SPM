@@ -249,6 +249,7 @@
 #define PARAM_COLUMN                              "column"
 #define PARAM_COLUMN_INDEX                        "column_index"
 #define PARAM_CONSTANT                            "constant"
+#define PARAM_CONSTANT_RECRUITMENT                "constant_recruitment"
 #define PARAM_CURRENT                             "current"
 #define PARAM_CURRENT_YEAR                        "current_year"
 #define PARAM_CV                                  "cv"

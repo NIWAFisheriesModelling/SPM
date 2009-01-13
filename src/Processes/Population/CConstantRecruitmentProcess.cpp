@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CRecruitmentProcess.cpp
+// Name        : CConstantRecruitmentProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -8,53 +8,38 @@
 //============================================================================
 
 // Local Headers
-#include "CRecruitmentProcess.h"
+#include "CConstantRecruitmentProcess.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CRecruitmentProcess::CRecruitmentProcess(CRecruitmentProcess *Process)
+// CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
 // Default Constructor
 //**********************************************************************
-CRecruitmentProcess::CRecruitmentProcess(CRecruitmentProcess *Process)
+CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
 : CProcess(Process) {
 
   // Vars
   dR0                         = 0.0;
-  dSteepness                  = 0.0;
-  dSigmaR                     = 0.0;
-  dRho                        = 0.0;
-  sMethod                     = "";
-  eMethod                     = METHOD_UNKNOWN;
 
+  // Register allowed estimatbles
   registerEstimable(PARAM_R0, &dR0);
-  registerEstimable(PARAM_STEEPNESS, &dSteepness);
-  registerEstimable(PARAM_SIGMA_R, &dSigmaR);
-  registerEstimable(PARAM_RHO, &dRho);
 
-  // Copy Construct
-  if (Process != 0) {
-    dR0           = Process->getR0();
-    dSteepness    = Process->getSteepness();
-    dSigmaR       = Process->getSigmaR();
-    dRho          = Process->getRho();
-    sMethod       = Process->getMethod();
-
-    // Copy vectors
-    for (int i = 0; i < Process->getAgesCount(); ++i)
-      addAges(Process->getAges(i));
-    for (int i = 0; i < Process->getProportionCount(); ++i)
-      addProportion(Process->getProportion(i));
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_R0);
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_PROPORTIONS);
+  pParameterList->registerAllowed(PARAM_AGES);
+  pParameterList->registerAllowed(PARAM_LAYER_NAME);
 }
 
 //**********************************************************************
-// void CRecruitmentProcess::addProportion(double value)
+// void CConstantRecruitmentProcess::addProportion(double value)
 // Add A Proportion To Our List
 //**********************************************************************
-void CRecruitmentProcess::addProportion(double value) {
+void CConstantRecruitmentProcess::addProportion(double value) {
   vProportionList.push_back(value);
 
   int size = (int)vProportionList.size();
@@ -62,10 +47,10 @@ void CRecruitmentProcess::addProportion(double value) {
 }
 
 //**********************************************************************
-// double CRecruitmentProcess::getProportion(int index)
+// double CConstantRecruitmentProcess::getProportion(int index)
 // Get proportion from vector @ age
 //**********************************************************************
-double CRecruitmentProcess::getProportion(int index) {
+double CConstantRecruitmentProcess::getProportion(int index) {
   try {
     if (index >= (int)vProportionList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROPORTIONS);
@@ -83,56 +68,38 @@ double CRecruitmentProcess::getProportion(int index) {
 }
 
 //**********************************************************************
-// void CRecruitmentProcess::addAges(int value)
+// void CConstantRecruitmentProcess::addAges(int value)
 // Add Ages, These Match our Categories 1-1
 //**********************************************************************
-void CRecruitmentProcess::addAges(int value) {
+void CConstantRecruitmentProcess::addAges(int value) {
   vAgesList.push_back(value);
 }
 
 //**********************************************************************
-// int CRecruitmentProcess::getAges(int index)
+// int CConstantRecruitmentProcess::getAges(int index)
 // Get an ages element from our vector @ index
 //**********************************************************************
-int CRecruitmentProcess::getAges(int index) {
+int CConstantRecruitmentProcess::getAges(int index) {
   return vAgesList[index];
 }
 
 //**********************************************************************
-// void CRecruitmentProcess::validate()
+// void CConstantRecruitmentProcess::validate()
 // Validate Our Parameters
 //**********************************************************************
-void CRecruitmentProcess::validate() {
+void CConstantRecruitmentProcess::validate() {
   try {
     // Base Validation
     CProcess::validate();
 
-    // Local Validation
-    if (getCategoryCount() == 0)
-      CError::errorMissing(PARAM_CATEGORIES);
-    if (getProportionCount() == 0)
-      CError::errorMissing(PARAM_PROPORTIONS);
-    if (getProportionCount() != getCategoryCount())
-      throw string(ERROR_EQUAL_CATEGORY_PROPORTION); // TODO: FIX ME
-    if (getAgesCount() == 0)
-      CError::errorMissing(PARAM_AGES);
-    if (getAgesCount() != getCategoryCount())
-      throw string(ERROR_EQUAL_CATEGORY_AGES); // TODO: FIX ME
-    if (CComparer::isZero(dR0))
-      CError::errorMissing(PARAM_R0);
-    if (sMethod == "")
-      CError::errorMissing(PARAM_METHOD);
-    if (vSelectivityList.size() > 0)
-      CError::errorSupported(PARAM_SELECTIVITIES);
-    if (vLayerCategoryList.size() > 0)
-      CError::errorSupported(PARAM_LAYERS);
-    if (sPenalty != "")
-      CError::errorSupported(PARAM_PENALTY);
+    // Populate our Variables
+    dR0     = pParameterList->getDouble(PARAM_R0);
 
-    if (sMethod != PARAM_UNIFORM)
-      throw string(ERROR_UNKNOWN_METHOD + sMethod); // TODO: FIX ME
-    else
-      eMethod = METHOD_UNIFORM;
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
+    pParameterList->fillVector(vAgesList, PARAM_AGES);
+
+    // TODO: Add check to ensure vector sizes are the same.
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
@@ -150,10 +117,10 @@ void CRecruitmentProcess::validate() {
 }
 
 //**********************************************************************
-// void CRecruitmentProcess::build()
+// void CConstantRecruitmentProcess::build()
 // Build Our Relationships and Indexes
 //**********************************************************************
-void CRecruitmentProcess::build() {
+void CConstantRecruitmentProcess::build() {
   try {
     // Base Build
     CProcess::build();
@@ -178,10 +145,10 @@ void CRecruitmentProcess::build() {
 }
 
 //**********************************************************************
-// void CRecruitmentProcess::execute()
+// void CConstantRecruitmentProcess::execute()
 // Execute
 //**********************************************************************
-void CRecruitmentProcess::execute() {
+void CConstantRecruitmentProcess::execute() {
 #ifndef OPTIMISE
   try {
 #endif
@@ -211,10 +178,8 @@ void CRecruitmentProcess::execute() {
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
-          if (eMethod == METHOD_UNIFORM)
-            pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (dAmountPer * vProportionList[k]) );
-        }
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
+          pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (dAmountPer * vProportionList[k]) );
       }
     }
 #ifndef OPTIMISE
@@ -226,10 +191,10 @@ void CRecruitmentProcess::execute() {
 }
 
 //**********************************************************************
-// CRecruitmentProcess::~CRecruitmentProcess()
+// CConstantRecruitmentProcess::~CConstantRecruitmentProcess()
 // Default De-Constructor
 //**********************************************************************
-CRecruitmentProcess::~CRecruitmentProcess() {
+CConstantRecruitmentProcess::~CConstantRecruitmentProcess() {
   vProportionList.clear();
   vAgesList.clear();
   vAgesIndex.clear();

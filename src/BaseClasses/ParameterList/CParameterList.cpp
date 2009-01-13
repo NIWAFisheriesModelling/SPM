@@ -133,6 +133,24 @@ void CParameterList::fillVector(vector<double> &list, string name, int offset) {
 }
 
 //**********************************************************************
+// void CParameterList::fillVector(vector<int> &list, string name, int offset)
+// Fill Vector with Ints
+//**********************************************************************
+void CParameterList::fillVector(vector<int> &list, string name, int offset) {
+  if (!hasParameter(name))
+    throw string ("Missing parameter " + name); // TODO: FIX THIS
+
+  vector<string>::iterator vPtr = mParameters[name].begin();
+  vPtr+= offset; // Move to Offset
+
+  while (vPtr != mParameters[name].end()) {
+    list.push_back(CConvertor::stringToInt((*vPtr)));
+    vPtr++;
+  }
+
+}
+
+//**********************************************************************
 // void CParameterList::fillArray(double *array, string name, int offset)
 //
 //**********************************************************************

@@ -39,6 +39,7 @@ public:
   string                      getMatchFullName(string name, int matchNumber);
   void                        fillVector(vector<string> &list, string name, int offset = 0);
   void                        fillVector(vector<double> &list, string name, int offset = 0);
+  void                        fillVector(vector<int> &list, string name, int offset = 0);
   void                        fillArray(double *array, int length, string name, int offset = 0);
   void                        fillArray(string *array, int length, string name, int offset = 0);
 

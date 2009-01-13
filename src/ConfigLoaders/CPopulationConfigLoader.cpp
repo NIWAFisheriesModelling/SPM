@@ -10,7 +10,7 @@
 // Local Headers
 #include "CPopulationConfigLoader.h"
 #include "../Processes/Population/CAgeingProcess.h"
-#include "../Processes/Population/CRecruitmentProcess.h"
+#include "../Processes/Population/CConstantRecruitmentProcess.h"
 #include "../Processes/Population/CNaturalMortalityProcess.h"
 #include "../Processes/Population/CCategoryTransitionProcess.h"
 #include "../Processes/Population/CEventMortalityProcess.h"
@@ -433,9 +433,9 @@ void CPopulationConfigLoader::loadPopulationProcess_Ageing() {
 // @type = recruitment
 //**********************************************************************
 void CPopulationConfigLoader::loadPopulationProcess_Recruitment() {
-  try {
+ /* try {
     // Get Label
-    CRecruitmentProcess *pProcess = new CRecruitmentProcess();
+    CConstantRecruitmentProcess *pProcess = new CConstantRecruitmentProcess();
     pProcess->setLabel(getLabel());
 
     // Load Next Line
@@ -477,7 +477,7 @@ void CPopulationConfigLoader::loadPopulationProcess_Recruitment() {
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadPopulationProcess_Recruitment()->" + Ex;
     throw Ex;
-  }
+  }*/
 }
 
 //**********************************************************************
