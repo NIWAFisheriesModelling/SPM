@@ -262,7 +262,7 @@
 \defSub{N} {Number of values at which to profile the parameter}
 \defSub{Lower} {lower bound on parameter}
 \defSub{Upper} {Upper bound on parameter}
-\par \defComArg{Estimate}{parameter\_name}{Define the name of the free parameter to estimate}\par
+\par \defComArg{Estimate}{parameter\_name}{Estimate a free parameter}\par
 \defSub{Same}{Names of the other parameters which are constrained to have the same value}
 \defSub{Phase}{Phase at which this parameter should be estimated, in point estimation}
 \defSub{LowerBound}{Lower bound on this parameter}
@@ -297,12 +297,31 @@
 \par \defComLab{q}{Define a catchability constant with \textit{label}}\par
 \defSub{q} {Value of the q parameter}
 \subsection{Observation command and subcommand syntax}
-\defComLab{ProportionsAtAge}{Define an observation using proportions-=at-age data}\par
+\defComLab{ProportionsAtAge}{Define an observation using proportions-at-age data}\par
 \defSub{Year} {Define the year that the observation applies to}
 \defSub{Timestep} {Define the time-step that the observation applies to}
 \defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
-\defSub{Categories} {Define the categories into which recruitment occurs}
+\defSub{Categories} {Define the categories}
 \defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{MinAge} {Define the minimum age for the observation}
+\defSub{MaxAge} {Define the maximum age for the observation}
+\defSub{PlusGroup} {Define is the the maximum age for the observation is a plus group}
+\defSub{Layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{Obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
+\defSub{Tolerance}{Define the tolerance on the sum-t-one error check in \SPM}
+\defSub{N [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
+\defSub{Distribution}{Define the likelihood distribution}
+\defSub{ProcessError}{Define the process error term}
+\defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
+\par \defComLab{ProportionsByAge}{Define an observation using proportions-by-age data}\par
+\defSub{Year} {Define the year that the observation applies to}
+\defSub{Timestep} {Define the time-step that the observation applies to}
+\defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{Categories} {Define the categories}
+\defSub{Categories2} {Define the categories}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{Selectivities2} {Define the selectivities applied to each category}
 \defSub{MinAge} {Define the minimum age for the observation}
 \defSub{MaxAge} {Define the maximum age for the observation}
 \defSub{PlusGroup} {Define is the the maximum age for the observation is a plus group}
@@ -312,10 +331,13 @@
 \defSub{Distribution}{Define the likelihood distribution}
 \defSub{ProcessError}{Define the process error term}
 \defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
 \par \defComLab{Abundance}{Define an observation using abundance data}\par
+\defSub{Biomass} {Defines if the abundance is a measure of biomass or number}
 \defSub{Year} {Define the year that the observation applies to}
 \defSub{Timestep} {Define the time-step that the observation applies to}
 \defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{q} {Define the catchability constant for the observation}
 \defSub{Categories} {Define the categories into which recruitment occurs}
 \defSub{Selectivities} {Define the selectivities applied to each category}
 \defSub{Layer} {Name of the categorical layer used to group the spacial cells for the observation}
@@ -324,4 +346,5 @@
 \defSub{Distribution}{Define the likelihood distribution}
 \defSub{ProcessError}{Define the process error term}
 \defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
 \subsection{Output command and subcommand syntax}
