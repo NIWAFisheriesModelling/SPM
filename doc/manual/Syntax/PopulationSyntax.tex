@@ -88,7 +88,7 @@
 
 \defComLab{TimeStep} {Define a time step with label}
 
-\defSub{Process} {Define the process labels, in the order that they are applied, for the time step}
+\defSub{Processes} {Define the process labels, in the order that they are applied, for the time step}
 \defType{String vector}
 \defDefault{None}
 \defValue{Defines the labels of the processes for that time step}
@@ -144,7 +144,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
 \defSub{Ages} {Define the ages within each category that receive recruitment}
-\defType{Integer}
+\defType{Integer vector}
 \defDefault{None}
 \defValue{The age classes that receive recruitment}
 
@@ -171,7 +171,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
 \defSub{Ages} {Define the age within each category that receive recruitment}
-\defType{Integer}
+\defType{Integer vector}
 \defDefault{None}
 \defValue{The age classes that receive recruitment}
 
@@ -193,13 +193,13 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Must be a valid \command{DerivedParameter} label}
 
-\defSub{YCS-Values} {YCS values}
+\defSub{YCSValues} {YCS values}
 \defType{Estimable vector}
 \defDefault{None}
 \defValue{Must be vector of length equal to \commandsub{BHRecruitmentProcess}{[label].YCS-Years}}
 \defNote{Special values can be used here, i.e., mean, all}
 
-\defSub{YCS-Years} {Years for YCS values}
+\defSub{YCSYears} {Years for YCS values}
 \defType{Integer vector}
 \defDefault{None}
 \defValue{Must be vector of that specifies the years of \commandsub{BHRecruitmentProcess}{[label].YCS-Values}}
