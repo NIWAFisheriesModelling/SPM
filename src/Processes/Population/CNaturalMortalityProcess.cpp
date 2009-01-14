@@ -14,6 +14,8 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
+// TODO: Migrate this to constant mortality rate process
+
 //**********************************************************************
 // CNaturalMortalityProcess::CNaturalMortalityProcess(CNaturalMortalityProcess *Process = 0)
 // Default Constructor

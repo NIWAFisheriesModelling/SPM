@@ -24,15 +24,12 @@ public:
   // Functions
   CEventMortalityProcess(CEventMortalityProcess *Process = 0);
 	virtual                    ~CEventMortalityProcess();
-	void                       setUMax(double value) { dUMax = value; }
+  CProcess*                  clone() { return (new CEventMortalityProcess(this)); }
 	double                     getUMax() { return dUMax; }
-	void                       addYears(int value);
 	int                        getYearsCount() { return vYearsList.size(); }
 	int                        getYears(int index);
-	void                       addLayers(string value);
 	int                        getLayersCount() { return vLayersList.size(); }
 	string                     getLayers(int index);
-	CProcess*                  clone() { return (new CEventMortalityProcess(this)); }
 	void                       validate();
 	void                       build();
 	void                       execute();

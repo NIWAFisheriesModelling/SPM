@@ -536,7 +536,7 @@ void CPopulationConfigLoader::loadPopulationProcess_EventMortality() {
           break;
 
         // Check Section
-        if (!loadBaseProcessAttributes(pProcess)) {
+        /*if (!loadBaseProcessAttributes(pProcess)) {
           if (checkLine(PARAM_YEARS,1,MAX_PARAMS))
             for (int i = 1; i < (int)vParameterList.size(); ++i)
               pProcess->addYears(getIntValue(i));
@@ -547,7 +547,7 @@ void CPopulationConfigLoader::loadPopulationProcess_EventMortality() {
             pProcess->setUMax(getDoubleValue(1));
           else
             throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-        }
+        }*/
       }
       vConfigPtr++;
     }

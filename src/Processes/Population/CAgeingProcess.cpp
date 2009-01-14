@@ -18,6 +18,10 @@
 //**********************************************************************
 CAgeingProcess::CAgeingProcess(CAgeingProcess *Process)
 : CProcess(Process) {
+
+  // Register Allowed Parameters
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+
 }
 
 //**********************************************************************
@@ -29,15 +33,8 @@ void CAgeingProcess::validate() {
     // Call Base Validate
     CProcess::validate();
 
-    // Do Our Own Validation Now:
-    if (getDependsOnLayer())
-      CError::errorSupported(PARAM_LAYER_NAME);
-    if (getCategoryCount() == 0)
-      CError::errorMissing(PARAM_CATEGORIES);
-    if (getSelectivityCount() > 0)
-      CError::errorSupported(PARAM_SELECTIVITIES);
-    if (sPenalty != "")
-      CError::errorSupported(PARAM_PENALTY);
+    // populate our vector
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
   } catch(string Ex) {
     Ex = "CAgeingProcess.validate(" + getLabel() + ")->" + Ex;

@@ -36,33 +36,16 @@ CEventMortalityProcess::CEventMortalityProcess(CEventMortalityProcess *Process)
   bYearMatch       = false;
   pTimeStepManager = CTimeStepManager::Instance();
 
+  // Register estimable parameters
   registerEstimable(PARAM_UMAX, &dUMax);
 
-  // Copy Construct
-  if (Process != 0) {
-    dUMax         = Process->getUMax();
-
-    // Copy Vectors
-    for (int i = 0; i < Process->getYearsCount(); ++i)
-      vYearsList.push_back(Process->getYears(i));
-    for (int i = 0; i < Process->getLayersCount(); ++i)
-      vLayersList.push_back(Process->getLayers(i));
-  }
-}
-
-//**********************************************************************
-// void CEventMortalityProcess::addYears(int value)
-// Add A Years To Our List
-//**********************************************************************
-void CEventMortalityProcess::addYears(int value) {
-  // Scale Year back to internal representation
-  value -= pWorld->getInitialYear();
-
-  if (value < 0)
-    throw string(ERROR_INVALID_YEAR + CConvertor::intToString(value));
-
-  // Add
-  vYearsList.push_back(value);
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_YEARS);
+  pParameterList->registerAllowed(PARAM_LAYERS);
+  pParameterList->registerAllowed(PARAM_UMAX);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_PENALTY);
 }
 
 //**********************************************************************
@@ -71,14 +54,6 @@ void CEventMortalityProcess::addYears(int value) {
 //**********************************************************************
 int CEventMortalityProcess::getYears(int index) {
   return vYearsList[index];
-}
-
-//**********************************************************************
-// void CEventMortalityProcess::addLayers(string value)
-// Add Layers to our list
-//**********************************************************************
-void CEventMortalityProcess::addLayers(string value) {
-  vLayersList.push_back(value);
 }
 
 //**********************************************************************
@@ -98,21 +73,16 @@ void CEventMortalityProcess::validate() {
     // Base Validate
     CProcess::validate();
 
-    // Local Validation
-    if (vLayersList.size() == 0)
-      CError::errorMissing(PARAM_LAYERS);
-    if (CComparer::isEqual(dUMax, -1.0))
-      CError::errorMissing(PARAM_UMAX);
-    if (vYearsList.size() == 0)
-      CError::errorMissing(PARAM_YEARS);
-    if (vLayersList.size() != vYearsList.size())
-      CError::errorNotEqual(PARAM_YEARS, PARAM_LAYERS);
-    if (vSelectivityList.size() != vCategoryList.size())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
-    if (vSelectivityList.size() == 0)
-      CError::errorMissing(PARAM_SELECTIVITIES);
-    if (bDependsOnLayer)
-      CError::errorSupported(PARAM_LAYER_NAME);
+    // Get our Parameters
+    dUMax     = pParameterList->getDouble(PARAM_UMAX);
+    sPenalty  = pParameterList->getString(PARAM_PENALTY);
+
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vYearsList, PARAM_YEARS);
+    pParameterList->fillVector(vLayersList, PARAM_LAYERS);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+
+    // TODO: Check for vectors to be the same size
 
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;

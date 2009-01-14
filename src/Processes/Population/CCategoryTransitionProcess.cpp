@@ -13,6 +13,8 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
+// TODO: This is now CatTransRate, New one to go here.
+
 //**********************************************************************
 // CCategoryTransitionProcess::CCategoryTransitionProcess(CCategoryTransitionProcess *Process = 0)
 // Default Constructor
