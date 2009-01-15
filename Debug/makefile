@@ -33,9 +33,6 @@ RM := rm -rf
 -include src/Priors/Children/subdir.mk
 -include src/Priors/subdir.mk
 -include src/PrintStates/subdir.mk
--include src/PreferenceFunctions/Factory/subdir.mk
--include src/PreferenceFunctions/Children/subdir.mk
--include src/PreferenceFunctions/subdir.mk
 -include src/Penalties/Factory/subdir.mk
 -include src/Penalties/subdir.mk
 -include src/ParameterParser/subdir.mk

@@ -47,9 +47,6 @@ src/Priors/Factory \
 src/Priors/Children \
 src/Priors \
 src/PrintStates \
-src/PreferenceFunctions/Factory \
-src/PreferenceFunctions/Children \
-src/PreferenceFunctions \
 src/Penalties/Factory \
 src/Penalties \
 src/ParameterParser \
