@@ -8,6 +8,7 @@ CPP_SRCS += \
 ../src/PrintStates/CEstimateValuePrintState.cpp \
 ../src/PrintStates/CObjectivePrintState.cpp \
 ../src/PrintStates/CPrintState.cpp \
+../src/PrintStates/CPrintStateManager.cpp \
 ../src/PrintStates/CWorldGridPrintState.cpp 
 
 OBJS += \
@@ -15,6 +16,7 @@ OBJS += \
 ./src/PrintStates/CEstimateValuePrintState.o \
 ./src/PrintStates/CObjectivePrintState.o \
 ./src/PrintStates/CPrintState.o \
+./src/PrintStates/CPrintStateManager.o \
 ./src/PrintStates/CWorldGridPrintState.o 
 
 CPP_DEPS += \
@@ -22,6 +24,7 @@ CPP_DEPS += \
 ./src/PrintStates/CEstimateValuePrintState.d \
 ./src/PrintStates/CObjectivePrintState.d \
 ./src/PrintStates/CPrintState.d \
+./src/PrintStates/CPrintStateManager.d \
 ./src/PrintStates/CWorldGridPrintState.d 
 
 
@@ -29,7 +32,7 @@ CPP_DEPS += \
 src/PrintStates/%.o: ../src/PrintStates/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -DOPTIMISE -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

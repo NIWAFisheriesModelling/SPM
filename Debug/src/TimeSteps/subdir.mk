@@ -4,20 +4,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/TimeSteps/CTimeStep.cpp 
+../src/TimeSteps/CTimeStep.cpp \
+../src/TimeSteps/CTimeStepManager.cpp 
 
 OBJS += \
-./src/TimeSteps/CTimeStep.o 
+./src/TimeSteps/CTimeStep.o \
+./src/TimeSteps/CTimeStepManager.o 
 
 CPP_DEPS += \
-./src/TimeSteps/CTimeStep.d 
+./src/TimeSteps/CTimeStep.d \
+./src/TimeSteps/CTimeStepManager.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 src/TimeSteps/%.o: ../src/TimeSteps/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -DOPTIMISE -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

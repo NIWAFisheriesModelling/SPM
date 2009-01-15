@@ -4,20 +4,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Penalties/CPenalty.cpp 
+../src/Penalties/CPenalty.cpp \
+../src/Penalties/CPenaltyManager.cpp 
 
 OBJS += \
-./src/Penalties/CPenalty.o 
+./src/Penalties/CPenalty.o \
+./src/Penalties/CPenaltyManager.o 
 
 CPP_DEPS += \
-./src/Penalties/CPenalty.d 
+./src/Penalties/CPenalty.d \
+./src/Penalties/CPenaltyManager.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 src/Penalties/%.o: ../src/Penalties/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -DOPTIMISE -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
+	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o"$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
