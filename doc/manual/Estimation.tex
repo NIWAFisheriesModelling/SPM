@@ -16,11 +16,10 @@ The tasks carried out by the estimation section are:
 
 \subsection{Specifying the free parameters}
 
-You need to tell SPM which of the estimable parameters are to be freed by using \command{estimate} commands (see \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like,
+You need to tell SPM which of the estimable parameters are to be freed by using \command{Estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{Estimate} command-block looks like,
 
 \begin{verbatim}
-  @estimate
-  parameter Recruitment.R0
+  @estimate Process[MyRecruitment].R0
   lower_bound 1000
   upper_bound 100000
   prior uniform
@@ -69,7 +68,7 @@ You can also supply the initial point estimate using \texttt{SPM -i}, so that \S
 
 If you have specified multi-phase estimation (see Section XXX), it is only used for the initial point estimate. Subsequent minimisations are done single-phase, as they should start reasonably close to the endpoint and so shouldn't need multiple phases.
 
-If you get an implausible profile, it may be a result of not using enough iterations in the minimiser (in this case, increase \subcommand{MaxIters} and/or \subcommand{MaxEvals} and retry), or the convergence criteria may not be strong enough (try setting \subcommand{GradTol} to a smaller value).
+If you get an implausible profile, it may be a result of not using enough iterations in the minimiser (in this case, increase \commandsub{MPD}{MaxIters} and/or \commandsub{MPD}{MaxEvals} and retry), or the convergence criteria may not be strong enough (try setting \commandsub{MPD}{GradTol} to a smaller value).
 
 \subsection{Bayesian estimation}
 
@@ -110,24 +109,24 @@ The chain moves in natural space, i.e., no transformations are applied to the fr
 \begin{itemize}
 \item The covariance matrix is taken as the inverse of the approximate Hessian from the quasi-Newton minimiser.
 
-\item The covariance matrix is modified so as to decrease all correlations greater than \subcommand{MaxCor} down to \subcommand{MaxCor}, and similarly to increase all correlations less than  \subcommand{MaxCor} up to \subcommand{MaxCor} (the \subcommand{MaxCor} parameter defaults to 0.8). This should help to avoid getting 'stuck' in a lower-dimensional subspace.
+\item The covariance matrix is modified so as to decrease all correlations greater than \commandsub{MCMC}{MaxCor} down to \commandsub{MCMC}{MaxCor}, and similarly to increase all correlations less than  \commandsub{MCMC}{MaxCor} up to \commandsub{MCMC}{MaxCor} (the \commandsub{MCMC}{MaxCor} parameter defaults to 0.8). This should help to avoid getting 'stuck' in a lower-dimensional subspace.
 
 \item The covariance matrix is then modified either by,
 
 \begin{itemize}
-\item if \subcommand{AdjustmentMethod} is \argument{covariance}: that if the variance of the $i$th parameter is nonzero and less than \subcommand{MinDiff} times the difference between the parameters' lower and upper bound, then the variance is changed, without changing the associated correlations, to $k=$MinDiff$(upper\_bound_i-lower\_bound_i)$. This is done by setting \[
+\item if \commandsubarg{MCMC}{AdjustmentMethod}{Covariance}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{MinDiff} times the difference between the parameters' lower and upper bound, then the variance is changed, without changing the associated correlations, to $k=$MinDiff$(upper\_bound_i-lower\_bound_i)$. This is done by setting \[
 {\mathop{\rm Cov}\nolimits} \left( {i,j} \right)^\prime   = {{{\mathop{\rm sqrt}\nolimits} \left( k \right){\mathop{\rm Cov}\nolimits} \left( {i,j} \right)} \mathord{\left/
 {\vphantom {{{\mathop{\rm sqrt}\nolimits} \left( k \right){\mathop{\rm Cov}\nolimits} \left( {i,j} \right)} {{\mathop{\rm sd}\nolimits} \left( i \right)}}} \right.
 \kern-\nulldelimiterspace} {{\mathop{\rm sd}\nolimits} \left( i \right)}}
 \]
 for $i \ne j$, and ${\mathop{\rm var}} \left( i \right)^\prime   = k$
 
-\item if \subcommand{AdjustmentMethod} is \argument{correlation}: that if the variance of the $i$th parameter is nonzero and less than \subcommand{MinDiff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=MinDiff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the ith parameter and all other parameters.
+\item if \commandsubarg{MCMC}{AdjustmentMethod}{correlation}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{MinDiff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=MinDiff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the ith parameter and all other parameters.
 \end{itemize}
 
-This allows a free parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \subcommand{MinDiff} parameter defaults to 0.0001.
+This allows a free parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{MCMC}{MinDiff} parameter defaults to 0.0001.
 
-\item The \subcommand{StepSize} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of free parameters, as recommended by Gelman et al. \citep{823}, though experience has shown that this may be too high and can lead to a low acceptance rate. 
+\item The \commandsub{MCMC}{StepSize} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of free parameters, as recommended by Gelman et al. \citep{823}, though experience has shown that this may be too high and can lead to a low acceptance rate. 
 \end{itemize}
 
 The proposal distribution can also change adaptively during the chain, using two different mechanisms. Both are offered as means of improving the convergence properties of the chain. It is important to note that any adaptive behaviour must finish before the end of the burn-in period, i.e., the proposal distribution must be finalised before the kept portion of the chain starts (\SPM\ enforces this). The adaptive mechanisms are as follows: 
@@ -138,7 +137,7 @@ The proposal distribution can also change adaptively during the chain, using two
 
 	The procedure used to choose the sample of points is as follows. First, all points on the chain so far are taken. All points in an initial user-specified period are discarded. The assumption is that the chain will have started moving during this period - if this is incorrect and the chain has still not moved by the end of this period, it is a fatal error and SPM stops. The remaining set of points must contain at least some user-specified number of transitions - if this is incorrect and the chain has not moved this often, it is again a fatal error. If this test is passed, the set of points is systematically sub-sampled down to 1000 points (it must be at least this long to start with).
 
-The variance-covariance matrix of this sub-sample of chain is calculated. As above, correlations greater than \subcommand{MaxCor} are reduced to \subcommand{MaxCor}, correlations less than \subcommand{MaxCor} are increased to  \subcommand{MaxCor}, and very small non-zero variances are increased (\subcommand{CovarianceAdjustment} and \subcommand{MinDiff}. The result is the new variance-covariance matrix of the proposal distribution.
+The variance-covariance matrix of this sub-sample of chain is calculated. As above, correlations greater than \commandsub{MCMC}{MaxCor} are reduced to \commandsub{MCMC}{MaxCor}, correlations less than \commandsub{MCMC}{MaxCor} are increased to  \commandsub{MCMC}{MaxCor}, and very small non-zero variances are increased (\commandsub{MCMC}{CovarianceAdjustment} and \commandsub{MCMC}{MinDiff}. The result is the new variance-covariance matrix of the proposal distribution.
 
 The step size parameter is now on a completely different scale, and must also be reset. It is set to a user-specified value (which may or may not be the same as the initial step size). We recommend that some of the step size adaptations are set to occur after this, so that the step size can be readjusted to an appropriate value which gives good acceptance probabilities with the new matrix. 
 

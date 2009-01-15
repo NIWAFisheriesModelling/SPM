@@ -23,7 +23,7 @@ The \config\ comprises of five parts (preamble, population, estimation, observat
 
 \end{description}
 
-The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{IncludeFile} ``\emph{file}''. The command causes an external file, \emph{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{IncludeFile} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
+The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{IncludeFile} \texttt{ ``file''}. The command causes an external file, \argument{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{IncludeFile} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 \subsection{Redirecting standard output\label{sec:redirecting-stdout}}
 
@@ -113,17 +113,17 @@ The arguments for a subcommand are either\index{Subcommand argument type},
 \item \textbf{switch} true/false 
 \item \textbf{integer} an integer number
 \item \textbf{integer vector} a vector of integer numbers
-\item \textbf{constant} a real number 
-\item \textbf{constant vector} a vector of real numbers
-\item \textbf{estimable} a real number that can be estimated
-\item \textbf{estimable vector} a vector of real numbers that can be estimated
-\item \textbf{string} a categorical value
+\item \textbf{constant} a real number (i.e., double)
+\item \textbf{constant vector} a vector of real numbers (i.e., vector of doubles)
+\item \textbf{estimable} a real number that can be estimated (i.e., estimable double)
+\item \textbf{estimable vector} a vector of real numbers that can be estimated (i.e., vector of estimable doubles)
+\item \textbf{string} a categorical (string) value
 \item \textbf{string vector} a vector of categorical values
 \end{description}
 
-Switches are parameters which are either true or false. Enter \emph{true} as \texttt{true} or \texttt{t}, and \emph{false} as \texttt{false} or \texttt{f}. 
+Switches are parameters which are either true or false. Enter \emph{true} as \argument{true} or \argument{t}, and \emph{false} as \argument{false} or \argument{f}. 
 
-Integers must be entered as integers (i.e., if \subcommand{year}\ is an integer then use 2008, not 2008.0)
+Integers must be entered as integers (i.e., if \subcommand{Year}\ is an integer then use 2008, not 2008.0)
 
 Arguments of type integer vector, constant vector, estimable vector, or categorical vector contain one or more entries on a row, separated by white space (tabs or spaces). 
 
@@ -163,14 +163,14 @@ Alternatively, you can comment out an entire block or section by placing curly b
 When SPM processes a \config, it translates each command and each subcommand into a parameter with a unique name. For commands, this parameter name is simply the command name. For subcommands, the parameter name format is either, 
 
 \begin{description}
-\item \command{command}\subcommand{[label]}.\subcommand{subcommand} if the command has a label, or
-\item \command{command}.\subcommand{subcommand} if the command has no label, or
-\item \command{command}\subcommand{[label]}.\subcommand{subcommand}\subcommand{[i]} if the command has a label, and the subcommand arguments are a vector, and we are accessing the  \emph{i}th element of that vector. 
+\item \texttt{Command[label].Subcommand} if the command has a label, or
+\item \texttt{Command.Subcommand} if the command has no label, or
+\item \texttt{Command[label].Subcommand[i]} if the command has a label, and the subcommand arguments are a vector, and we are accessing the  \emph{i}th element of that vector. 
 \end{description} 
 
-The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{ConstantRecruitmentProcess} with the label \subcommand{MyRecruitment} is,
+The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{ConstantRecruitmentProcess} with the label \argument{MyRecruitment} is,
 
-\texttt{@ConstantRecruitmentProcess[MyRecruitment].R0}
+\texttt{ConstantRecruitmentProcess[MyRecruitment].R0}
 
 \subsection{\SPM\ exit status values}
 

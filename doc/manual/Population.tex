@@ -197,7 +197,7 @@ except that in the case of the plus group (if defined),
 
 \subsubsection{Mortality\label{sec:mortality}}
 
-Four types of mortality processes are permissible in \SPM, constant, annual-rate, event, or biomass-event. These processes remove individuals from the partition, either as a rate (for constant or annual-rate), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality can be concurrently applied. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural natural mortality (e.g., as a constant or annual-rate), then some event mortality in sequence. It is up to the user to specify how this happens.
+Four types of mortality processes are permissible in \SPM, constant, annual-rate, event, or biomass-event. These processes remove individuals from the partition, either as a rate (for constant or annual-rate), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are concurrently applied. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural natural mortality (e.g., as a constant or annual-rate), then some event mortality in sequence. It is up to the user to specify how this happens.
 
 Mortalities as rates can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative natural mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity-at-age, and the mortality rate. 
 
@@ -250,14 +250,14 @@ Category transition processes move individuals between categories. \SPM\ impleme
 
 The transition type moves a number $n$ between a source and sink category. The transition process with selectivity $S$ for source category $a$ and sink category $b$ is,
 \begin{equation}\begin{split}
-  & element(i,j,a,l) \leftarrow element(i,j,a,l) - \frac{nS_l}{\sum\limits_l S_l} \times element(i,j,a,l) \\
-  & element(i,j,b,l) \leftarrow element(i,j,b,l) + \frac{nS_l}{\sum\limits_l S_l} \times element(i,j,a,l)
+  & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l) \\
+  & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l)
 \end{split}\end{equation}
 
 The transition rate type moves a proportion $p$ between a source and sink category. The transition rate process with selectivity $S$ for source category $a$ and sink category $b$ is,
 \begin{equation}\begin{split}
-  & element(i,j,a,l) \leftarrow element(i,j,a,l) - pS_l \times element(i,j,a,l) \\
-  & element(i,j,b,l) \leftarrow element(i,j,b,l) + pS_l \times element(i,j,a,l)
+  & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - pS_l \times \text{element}(i,j,a,l) \\
+  & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + pS_l \times \text{element}(i,j,a,l)
 \end{split}\end{equation}
 
 \subsubsection{Movement processes}
@@ -312,20 +312,20 @@ Preference functions of the first type are determined only by the parameters of 
 
 \subsubsection*{Preference functions}
 
-Preference functions in \SPM\ include \subcommand{constant}, \subcommand{normal}, \subcommand{double-normal}, \subcommand{logistic}, \subcommand{inverse-logistic}, \subcommand{exponential-decay}, and \subcommand{threshold}. These are defined as,
+Preference functions in \SPM\ include \subcommand{Constant}, \subcommand{Normal}, \subcommand{DoubleNormal}, \subcommand{Logistic}, \subcommand{InverseLogistic}, \subcommand{ExponentialDecay}, and \subcommand{Threshold}. These are defined as,
 
 \begin{enumerate}
-\item The \subcommand{constant}\ preference function has dependent variable $x$ and has no parameters, and is defined as,
+\item The \subcommand{Constant}\ preference function has dependent variable $x$ and has no parameters, and is defined as,
 \begin{equation}
 f(x)=x$, where $0 \leq x \leq 1
 \end{equation}
 
-\item The \subcommand{normal}\ preference function has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
+\item The \subcommand{Normal}\ preference function has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
 \begin{equation}\
 f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2} 
 \end{equation}
  
-\item The \subcommand{double-normal}\ preference function has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
+\item The \subcommand{DoubleNormal}\ preference function has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
 \begin{equation}
   f(x | \mu, \sigma_L, \sigma_R) = \begin{cases}
     2^{-[(x- \mu)/\sigma_L ]^2}, & \text{if $x \leq \mu$} \\
@@ -333,22 +333,22 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
   \end{cases}
 \end{equation} 
 
-\item The \subcommand{logistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
+\item The \subcommand{Logistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 \begin{equation}
   f(x | a_{50}, a_{to95}) = 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The \subcommand{inverse-logistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
+\item The \subcommand{InverseLogistic}\ preference function has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 \begin{equation}
   f(x | a_{50}, a_{to95}) =1- 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The \subcommand{exponential-decay}\ preference function has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
+\item The \subcommand{ExponentialDecay}\ preference function has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
 \begin{equation}
   f(x | \lambda) =\exp(-\lambda x), \text{where $x \geq 0$ and $0$ otherwise}
 \end{equation}
 
-\item The \subcommand{threshold}\ preference function has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
+\item The \subcommand{Threshold}\ preference function has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
 \begin{equation}
   f(x | N, \lambda) = \begin{cases}
     1, & \text{if $0 \le x \leq N$} \\
@@ -402,7 +402,7 @@ The size-weight parameters $a$ and $b$ is calculated as either,
   \end{equation}
 \end{itemize}
   
-Be careful about the scale of $a$, \textemdash this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then a should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an optional command \commandsub{Print}{.VerifySizeWeightRelationship} that can be used to help check that the units specified are plausible.
+Be careful about the scale of $a$, \textemdash this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then a should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an optional command \commandsub{Print}{VerifySizeWeightRelationship} that can be used to help check that the units specified are plausible.
 
 If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
 \begin{equation}
@@ -447,7 +447,7 @@ f(x)=C
 
 The constant selectivity has the estimable parameter C. 
 
-\subsubsection*{\argument{Knife-edge}}
+\subsubsection*{\argument{KnifeEdge}}
 
 \begin{equation}
 f(x)= \begin{cases}
@@ -456,17 +456,17 @@ f(x)= \begin{cases}
   \end{cases} 
 \end{equation}
 
-The knife\_edge ogive has the non-estimable parameter E.
+The knife-edge ogive has the non-estimable parameter E.
 
-\subsubsection*{\argument{Allvalues}}
+\subsubsection*{\argument{AllValues}}
 
 \begin{equation}
 f(x)=V_x
 \end{equation}
 
-The allvalues selectivity has estimable parameters $V_{low}$, $V_{low+1}$ \ldots $V_{high}$. Here, you need to provide the selectivity value for each age class.
+The all-values selectivity has estimable parameters $V_{low}$, $V_{low+1}$ \ldots $V_{high}$. Here, you need to provide the selectivity value for each age class.
 
-\subsubsection*{\argument{Allvalues\_bounded}}
+\subsubsection*{\argument{AllValuesBounded}}
 
 \begin{equation}
 f(x)=\begin{cases}
@@ -476,7 +476,7 @@ f(x)=\begin{cases}
   \end{cases}
 \end{equation}
 
-The allvalues\_bounded selectivity has non-estimable parameters L and H. The estimable parameters are $V_L$, $V_{L+1}$ \ldots $V_H$. Here, you need to provide an selectivity value for each age class from $L \ldots H$.
+The all-values-bounded selectivity has non-estimable parameters L and H. The estimable parameters are $V_L$, $V_{L+1}$ \ldots $V_H$. Here, you need to provide an selectivity value for each age class from $L \ldots H$.
 
 \subsubsection*{\argument{Increasing}}
 
@@ -488,7 +488,7 @@ f(x)=\begin{cases}
   \end{cases}
 \end{equation}
 
-The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). Note that the increasing ogive is similar to the allvalues\_bounded ogive, but is constrained to be non-decreasing.
+The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
 
 \subsubsection*{\argument{Logistic}}
 
@@ -498,7 +498,7 @@ The increasing ogive has non-estimable parameters $L$ and $H$. The estimable par
  
 The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. The logistic selectivity takes values 0.5 at $x=a_{50}$ and 0.95 at $x=a_{50}+a_{to95}$. 
 
-\subsubsection*{\argument{Logistic\_producing}}
+\subsubsection*{\argument{LogisticProducing}}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -509,9 +509,9 @@ f(x)=\begin{cases}
   \end{cases}
 \end{equation}
 
-The logistic\_producing selectivity has the non-estimable parameters $L$ and $H$, and has estimable parameters $a_{50}$ and $a_{to95}$. For category transitions, $f(x)$ represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic\_producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters $a_{50}$, $a_{to95}$.
+The logistic-producing selectivity has the non-estimable parameters $L$ and $H$, and has estimable parameters $a_{50}$ and $a_{to95}$. For category transitions, $f(x)$ represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic-producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters $a_{50}$, $a_{to95}$.
 
-\subsubsection*{\argument{Double\_normal}}
+\subsubsection*{\argument{DoubleNormal}}
 
 \begin{equation}
   f(x) = \begin{cases}
@@ -520,9 +520,9 @@ The logistic\_producing selectivity has the non-estimable parameters $L$ and $H$
   \end{cases}
 \end{equation} 
 
-The double\_normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. It has values $1$ at $x=a_1$, and $0.5$ at $x=a_1-s_L$ or $x=a_1+s_R$. 
+The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. It has values $1$ at $x=a_1$, and $0.5$ at $x=a_1-s_L$ or $x=a_1+s_R$. 
 
-\subsubsection*{\argument{Double\_exponential}}
+\subsubsection*{\argument{DoubleExponential}}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -531,5 +531,5 @@ f(x)=\begin{cases}
   \end{cases}
 \end{equation}
 
-The double\_exponential selectivity has non-estimable parameters $x_1$ and $x_2$, and estimable parameters $x_0$, $y_0$, $y_1$, and $y_2$. It can be `U-shaped'. Bounds for $x_0$ must be such that $x_1 < x_0 < x_2$. The selectivity passes through the points $(x_1, y)1)$, $(x_0, y_0)$, and $(x_2, y_2)$. If both $y_1$ and $y_2$ are greater than $y_0$ the selectivity is `U-shaped' with minimum at $(x_0, y_0)$.
+The double-exponential selectivity has non-estimable parameters $x_1$ and $x_2$, and estimable parameters $x_0$, $y_0$, $y_1$, and $y_2$. It can be `U-shaped'. Bounds for $x_0$ must be such that $x_1 < x_0 < x_2$. The selectivity passes through the points $(x_1, y)1)$, $(x_0, y_0)$, and $(x_2, y_2)$. If both $y_1$ and $y_2$ are greater than $y_0$ the selectivity is `U-shaped' with minimum at $(x_0, y_0)$.
 

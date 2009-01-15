@@ -27,7 +27,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{NumericalDifferences}
 \defValue{A valid type of minimiser, either NumericalDifferences or DESolver}
 
-\subsubsection[Numerical differences minimiser]{\commandsubarg{MPD}{Type}{NumericalDifferences}} 
+\subsubsection[Numerical differences minimiser]{\commandlabsubarg{MPD}{Type}{NumericalDifferences}} 
 
 \defSub{MaxIterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
 \defType{Integer}
@@ -49,7 +49,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{0.0002}
 \defValue{A positive real number}
 
-\subsubsection[Differential evolution minimiser]{\commandsubarg{MPD}{Type}{DESolver}} 
+\subsubsection[Differential evolution minimiser]{\commandlabsubarg{MPD}{Type}{DESolver}} 
 
 \defSub{MaxIterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
 \defType{Integer}
@@ -109,10 +109,10 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defDefault{correlation}
 \defValue{Defines the method (either correlation or covariance) for the adjusting small variances in the covariance matrix of the proposal distribution}
 
-\defSub{CorrelationAdjustmentDiff} {Minimum nonzero variance times the range of the bounds in the covariance matrix of the proposal distribution}
+\defSub{CorrelationAdjustmentDiff} {Minimum non-zero variance times the range of the bounds in the covariance matrix of the proposal distribution}
 \defType{Constant}
 \defDefault{0.0001}
-\defValue{Defines the minimum nonzero variance times the difference in the bounds of each parameter in the covariance matrix of the proposal distribution}
+\defValue{Defines the minimum non-zero variance times the difference in the bounds of each parameter in the covariance matrix of the proposal distribution}
 
 \defSub{StepSize} {Initial step-size (as a multiplier of the approximate covariance matrix)}
 \defType{Constant}
@@ -191,15 +191,15 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 Different priors require different subcommands.
 
-\subsubsection[Uniform prior]{\commandsubarg{estimate[\textit{label}]}{Prior}{Uniform}} 
+\subsubsection[Uniform prior]{\commandlabsubarg{Estimate}{Prior}{Uniform}} 
 
-The command \commandsubarg{estimate[\textit{label}]}{Prior}{Uniform} has no other subcommands.
+The command \commandlabsubarg{Estimate}{Prior}{Uniform} has no other subcommands.
 
-\subsubsection[Uniform-log prior]{\commandsubarg{estimate[\textit{label}]}{Prior}{Uniform-Log}} 
+\subsubsection[Uniform-log prior]{\commandlabsubarg{Estimate}{Prior}{UniformLog}} 
 
-The command \commandsubarg{estimate[\textit{label}]}{Prior}{Uniform-Log} has no other subcommands.
+The command \commandlabsubarg{Estimate}{Prior}{UniformLog} has no other subcommands.
 
-\subsubsection[Normal prior]{\commandsubarg{estimate[\textit{label}]}{Prior}{Normal}} 
+\subsubsection[Normal prior]{\commandlabsubarg{Estimate}{Prior}{Normal}} 
 
 \defSub{Mu}{Defines the mean $\mu$ of the normal prior}
 \defType{Constant}
@@ -211,7 +211,7 @@ The command \commandsubarg{estimate[\textit{label}]}{Prior}{Uniform-Log} has no 
 \defDefault{No default}
 \defValue{Defines the c.v. of the normal prior}
 
-\subsubsection[Normal-by-stdev prior]{\commandsubarg{estimate[\textit{label}]}{Prior}{Normal-by-stdev}} 
+\subsubsection[Normal-by-stdev prior]{\commandlabsubarg{Estimate}{Prior}{NormalByStdev}} 
 
 \defSub{Mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
 \defType{Constant}
@@ -223,7 +223,7 @@ The command \commandsubarg{estimate[\textit{label}]}{Prior}{Uniform-Log} has no 
 \defDefault{No default}
 \defValue{Defines the standard deviation of the normal by standard deviation prior}
 
-\subsubsection[Lognormal prior]{\commandsubarg{estimate[\textit{label}]}{Prior}{Lognormal}} 
+\subsubsection[Lognormal prior]{\commandlabsubarg{Estimate}{Prior}{Lognormal}} 
 
 \defSub{Mu}{Defines the mean $\mu$ of the lognormal prior}
 \defType{Constant}
@@ -235,7 +235,7 @@ The command \commandsubarg{estimate[\textit{label}]}{Prior}{Uniform-Log} has no 
 \defDefault{No default}
 \defValue{Defines the c.v. of the lognormal prior}
 
-\subsubsection[Beta prior]{\commandsubarg{estimate[\textit{label}]}{Prior}{Beta}} 
+\subsubsection[Beta prior]{\commandlabsubarg{Estimate}{Prior}{Beta}} 
 
 \defSub{A}{The lower value of the range parameter $A$ of the Beta prior}
 \defType{Constant}
@@ -269,25 +269,25 @@ Three methods for including ageing error into estimation with observations are,
 
 Each type of ageing error requires a set of subcommands and arguments specific to its type.
 
-\defComLab{AgeingError}{Define ageing error with \textit{label}}
+\defComLab{AgeingError}{Define ageing error with \argument{label}}
 
 \defSub{Type} {The type of ageing error}
 \defType{String}
 \defDefault{None}
 \defValue{Defines the type of ageing error to use, currently only normal is defined}
 
-\subsubsection[No ageing error]{\commandsubarg{AgeingError[\textit{label}]}{Type}{None}} 
+\subsubsection[No ageing error]{\commandlabsubarg{AgeingError}{Type}{None}} 
 
-The \commandsubarg{AgeingError[\textit{label}]}{Type}{None} has no other subcommands.
+The \commandlabsubarg{AgeingError}{Type}{None} has no other subcommands.
 
-\subsubsection[Normal ageing error]{\commandsubarg{AgeingError[\textit{label}]}{Type}{Normal}} 
+\subsubsection[Normal ageing error]{\commandlabsubarg{AgeingError}{Type}{Normal}} 
 
 \defSub{c} {Parameter of the normal ageing error model}
 \defType{Constant}
 \defDefault{None}
 \defValue{Define the c.v. of misclassification}
 
-\subsubsection[Off-by-one ageing error]{\commandsubarg{AgeingError[\textit{label}]}{Type}{Off-by-one}} 
+\subsubsection[Off-by-one ageing error]{\commandlabsubarg{AgeingError}{Type}{OffByOne}} 
 
 \defSub{k} {The $k$ parameter of the off-by-one ageing error model}
 \defType{Integer}
@@ -306,7 +306,7 @@ The \commandsubarg{AgeingError[\textit{label}]}{Type}{None} has no other subcomm
 
 \subsection{Defining catchability constants}
 
-\defComLab{q}{Define a catchability constant with \textit{label}}
+\defComLab{q}{Define a catchability constant with \argument{label}}
 
 \defSub{q} {Value of the q parameter}
 \defType{Estimable}
