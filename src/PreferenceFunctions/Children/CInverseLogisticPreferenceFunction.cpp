@@ -30,12 +30,6 @@ CInverseLogisticPreferenceFunction::CInverseLogisticPreferenceFunction(CInverseL
   // Register our user allowed parameters
   pParameterList->registerAllowed(PARAM_A50);
   pParameterList->registerAllowed(PARAM_ATO95);
-
-  // Copy Construct
-  if (Process != 0) {
-    dA50      = Process->getA50();
-    dAto95    = Process->getAto95();
-  }
 }
 
 //**********************************************************************

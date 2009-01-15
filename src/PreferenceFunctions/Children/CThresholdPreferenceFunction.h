@@ -31,7 +31,8 @@ protected:
   // Variables
   double                     dN;
   double                     dLambda;
-
+  vector<string>             vCategories; // TODO: Implement this
+  vector<string>             vSelectivities; // TODO: Implement this
 };
 
 #endif /*CTHRESHOLDPREFERENCEFUNCTION_H_*/

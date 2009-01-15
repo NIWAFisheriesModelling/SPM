@@ -19,7 +19,6 @@
 //**********************************************************************
 CConstantPreferenceFunction::CConstantPreferenceFunction(CConstantPreferenceFunction *Process)
 : CPreferenceFunction(Process) {
-
 }
 
 //**********************************************************************

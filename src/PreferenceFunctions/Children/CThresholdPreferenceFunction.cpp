@@ -30,12 +30,8 @@ CThresholdPreferenceFunction::CThresholdPreferenceFunction(CThresholdPreferenceF
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_N);
   pParameterList->registerAllowed(PARAM_LAMBDA);
-
-  // Copy Part of the Constructor
-  if (Process != 0) {
-    dN       = Process->getN();
-    dLambda  = Process->getLambda();
-  }
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
 }
 
 //**********************************************************************
@@ -50,6 +46,9 @@ void CThresholdPreferenceFunction::validate() {
     // Assign local variables
     dN        = pParameterList->getDouble(PARAM_N);
     dLambda   = pParameterList->getDouble(PARAM_LAMBDA);
+
+    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
 
   } catch (string Ex) {
     Ex = "CThresholdPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

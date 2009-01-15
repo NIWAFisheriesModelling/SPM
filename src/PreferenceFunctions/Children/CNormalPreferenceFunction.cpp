@@ -31,12 +31,6 @@ CNormalPreferenceFunction::CNormalPreferenceFunction(CNormalPreferenceFunction *
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_MU);
   pParameterList->registerAllowed(PARAM_SIGMA);
-
-  // Copy Constructor
-  if (Process != 0) {
-    dMu     = Process->getMu();
-    dSigma  = Process->getSigma();
-  }
 }
 
 //**********************************************************************

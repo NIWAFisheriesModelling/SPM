@@ -34,13 +34,6 @@ CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction(CDoubleNormalPr
   pParameterList->registerAllowed(PARAM_SIGMA_L);
   pParameterList->registerAllowed(PARAM_SIGMA_R);
   pParameterList->registerAllowed(PARAM_MU);
-
-  // Copy Construct
-  if (Process != 0) {
-    dSigmaL   = Process->getSigmaL();
-    dSigmaR   = Process->getSigmaR();
-    dMu       = Process->getMu();
-  }
 }
 
 //**********************************************************************

@@ -29,10 +29,6 @@ CExponentialPreferenceFunction::CExponentialPreferenceFunction(CExponentialPrefe
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_LAMBDA);
 
-  // Copy Construct
-  if (Process != 0) {
-    dLambda = Process->getLambda();
-  }
 }
 
 //**********************************************************************
