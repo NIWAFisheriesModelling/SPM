@@ -43,7 +43,7 @@ CBaseTestFixture::CBaseTestFixture() {
   BOOST_REQUIRE_NO_THROW(pLayerManager = CLayerManager::Instance());
   BOOST_REQUIRE_NO_THROW(pSelectivityManager = CSelectivityManager::Instance());
   BOOST_REQUIRE_NO_THROW(pPenaltyManager = CPenaltyManager::Instance());
-  BOOST_REQUIRE_NO_THROW(pDirectedProcessManager = CDirectedProcessManager::Instance());
+  BOOST_REQUIRE_NO_THROW(pDirectedProcessManager = CPreferenceFunctionManager::Instance());
 
   // Default Some Variables
   immatureIndex       = -1;
@@ -260,7 +260,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //***************************************
   // Constant
-  CConstantDirectedProcess *pConstant = new CConstantDirectedProcess();
+  CConstantPreferenceFunction *pConstant = new CConstantPreferenceFunction();
   pConstant->setLabel("constant_directed");
   pConstant->setAlpha(3.0);
   pConstant->setLayerName("double_layer");
@@ -268,7 +268,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //*****************************************
   // Constant -Distance Layer
-  CConstantDirectedProcess *pConstantDist = new CConstantDirectedProcess();
+  CConstantPreferenceFunction *pConstantDist = new CConstantPreferenceFunction();
   pConstantDist->setLabel("constant_directed_distance");
   pConstantDist->setAlpha(1.0);
   pConstantDist->setLayerName("distance_layer");
@@ -276,7 +276,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //***************************************
   // Double-Normal
-  CDoubleNormalDirectedProcess *pDoubleNormal = new CDoubleNormalDirectedProcess();
+  CDoubleNormalPreferenceFunction *pDoubleNormal = new CDoubleNormalPreferenceFunction();
   pDoubleNormal->setLabel("double_normal_directed");
   pDoubleNormal->setLayerName("double_layer");
   pDoubleNormal->setAlpha(3.0);
@@ -287,7 +287,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //*************************************
   // Exponential
-  CExponentialDirectedProcess *pExponential = new CExponentialDirectedProcess();
+  CExponentialPreferenceFunction *pExponential = new CExponentialPreferenceFunction();
   pExponential->setLabel("exponential_directed");
   pExponential->setLayerName("double_layer");
   pExponential->setAlpha(3.0);
@@ -296,7 +296,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //************************************
   // Inverse Logistic
-  CInverseLogisticDirectedProcess *pInverse = new CInverseLogisticDirectedProcess();
+  CInverseLogisticPreferenceFunction *pInverse = new CInverseLogisticPreferenceFunction();
   pInverse->setLabel("inverse_logistic_directed");
   pInverse->setLayerName("double_layer");
   pInverse->setA50(3.0);
@@ -306,7 +306,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //*************************************
   // Logistic
-  CLogisticDirectedProcess *pLogistic = new CLogisticDirectedProcess();
+  CLogisticPreferenceFunction *pLogistic = new CLogisticPreferenceFunction();
   pLogistic->setLabel("logistic_directed");
   pLogistic->setLayerName("double_layer");
   pLogistic->setA50(3.0);
@@ -316,7 +316,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //**************************************
   // Normal
-  CNormalDirectedProcess *pNormal = new CNormalDirectedProcess();
+  CNormalPreferenceFunction *pNormal = new CNormalPreferenceFunction();
   pNormal->setLabel("normal_directed");
   pNormal->setLayerName("double_layer");
   pNormal->setAlpha(3.0);
@@ -326,7 +326,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //***************************************
   // Threshold
-  CThresholdDirectedProcess *pThreshold = new CThresholdDirectedProcess();
+  CThresholdPreferenceFunction *pThreshold = new CThresholdPreferenceFunction();
   pThreshold->setLabel("threshold_directed");
   pThreshold->setLayerName("double_layer");
   pThreshold->setAlpha(3.0);
@@ -336,7 +336,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
 
   //***************************************
   // Threshold Distance
-  CThresholdDirectedProcess *pDThreshold = new CThresholdDirectedProcess();
+  CThresholdPreferenceFunction *pDThreshold = new CThresholdPreferenceFunction();
   pDThreshold->setLabel("threshold_directed_distance");
   pDThreshold->setLayerName("distance_layer");
   pDThreshold->setAlpha(3.0);

@@ -10,7 +10,7 @@
 // Local Headers
 #include "CRuntimeThread.h"
 #include "../Minimizers/CMinimizerManager.h"
-#include "../DirectedProcesses/CDirectedProcessManager.h"
+#include "../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
@@ -35,7 +35,7 @@
 CRuntimeThread::CRuntimeThread() {
 
   // Create our Instances
-  pDirectedProcessManager  = CDirectedProcessManager::Instance();
+  pDirectedProcessManager  = CPreferenceFunctionManager::Instance();
   pEstimateManager         = CEstimateManager::Instance();
   pInitializationManager   = CInitializationPhaseManager::Instance();
   pLayerManager            = CLayerManager::Instance();
@@ -279,7 +279,7 @@ void CRuntimeThread::clone(CRuntimeThread *Thread) {
 //**********************************************************************
 CRuntimeThread::~CRuntimeThread() {
   // Destroy Singleton Classes
-  CDirectedProcessManager::Destroy();
+  CPreferenceFunctionManager::Destroy();
   CEstimateManager::Destroy();
   CInitializationPhaseManager::Destroy();
   CLayerManager::Destroy();

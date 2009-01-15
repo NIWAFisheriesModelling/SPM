@@ -9,9 +9,9 @@
 
 // Local Headers
 #include "CDirectedMovementProcess.h"
-#include "../../DirectedProcesses/CDirectedProcessManager.h"
+#include "../../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../../Layers/Numeric/CDoubleLayer.h"
-#include "../../DirectedProcesses/CDirectedProcess.h"
+#include "../../PreferenceFunctions/CPreferenceFunction.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
@@ -87,7 +87,7 @@ void CDirectedMovementProcess::build() {
 
     // Do We need to build our Process Index?
     if (vDirectedProcessIndex.size() == 0) {
-      CDirectedProcessManager *pDirectedProcessManager = CDirectedProcessManager::Instance();
+      CPreferenceFunctionManager *pDirectedProcessManager = CPreferenceFunctionManager::Instance();
       // Loop and Add
       foreach(string Label, vDirectedProcessList) {
         vDirectedProcessIndex.push_back(pDirectedProcessManager->getProcess(Label));
@@ -137,7 +137,7 @@ void CDirectedMovementProcess::execute() {
             if (pTargetBase->getEnabled()) {
               dCurrent = 1.0;
 
-              foreach(CDirectedProcess *Process, vDirectedProcessIndex) {
+              foreach(CPreferenceFunction *Process, vDirectedProcessIndex) {
                 dCurrent *= Process->getResult(i, j, k, l);
               }
               // Logit This

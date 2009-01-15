@@ -30,8 +30,8 @@ using namespace std;
 BOOST_FIXTURE_TEST_CASE( ConstantDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CConstantDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CConstantDirectedProcess*>(pDirectedProcessManager->getProcess("constant_directed"));
+  CConstantPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CConstantPreferenceFunction*>(pDirectedProcessManager->getProcess("constant_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 1.0);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 1.0);
@@ -55,8 +55,8 @@ BOOST_FIXTURE_TEST_CASE( ConstantDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( ConstantDirectedProcess_DistanceLayer, CBaseTestFixture ) {
 
   // Vars
-  CConstantDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CConstantDirectedProcess*>(pDirectedProcessManager->getProcess("constant_directed_distance"));
+  CConstantPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CConstantPreferenceFunction*>(pDirectedProcessManager->getProcess("constant_directed_distance"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 5.0000000000000002e-11);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 1.0);
@@ -80,8 +80,8 @@ BOOST_FIXTURE_TEST_CASE( ConstantDirectedProcess_DistanceLayer, CBaseTestFixture
 BOOST_FIXTURE_TEST_CASE( DoubleNormalDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CDoubleNormalDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CDoubleNormalDirectedProcess*>(pDirectedProcessManager->getProcess("double_normal_directed"));
+  CDoubleNormalPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CDoubleNormalPreferenceFunction*>(pDirectedProcessManager->getProcess("double_normal_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 0.000244140625);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 0.000244140625);
@@ -106,8 +106,8 @@ BOOST_FIXTURE_TEST_CASE( DoubleNormalDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( ExponentialDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CExponentialDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CExponentialDirectedProcess*>(pDirectedProcessManager->getProcess("exponential_directed"));
+  CExponentialPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CExponentialPreferenceFunction*>(pDirectedProcessManager->getProcess("exponential_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 3.0590232050182579e-07);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 3.0590232050182579e-07);
@@ -131,8 +131,8 @@ BOOST_FIXTURE_TEST_CASE( ExponentialDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( InverseLogisticDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CInverseLogisticDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CInverseLogisticDirectedProcess*>(pDirectedProcessManager->getProcess("inverse_logistic_directed"));
+  CInverseLogisticPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CInverseLogisticPreferenceFunction*>(pDirectedProcessManager->getProcess("inverse_logistic_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 0.30911402641729402);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 0.30911402641729402);
@@ -156,8 +156,8 @@ BOOST_FIXTURE_TEST_CASE( InverseLogisticDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( LogisticDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CLogisticDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CLogisticDirectedProcess*>(pDirectedProcessManager->getProcess("logistic_directed"));
+  CLogisticPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CLogisticPreferenceFunction*>(pDirectedProcessManager->getProcess("logistic_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 0.033966712196426191);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 0.033966712196426191);
@@ -181,8 +181,8 @@ BOOST_FIXTURE_TEST_CASE( LogisticDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( NormalDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CNormalDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CNormalDirectedProcess*>(pDirectedProcessManager->getProcess("normal_directed"));
+  CNormalPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CNormalPreferenceFunction*>(pDirectedProcessManager->getProcess("normal_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 0.01698023222696966);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 0.01698023222696966);
@@ -206,8 +206,8 @@ BOOST_FIXTURE_TEST_CASE( NormalDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( ThresholdDirectedProcess, CBaseTestFixture ) {
 
   // Vars
-  CThresholdDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CThresholdDirectedProcess*>(pDirectedProcessManager->getProcess("threshold_directed"));
+  CThresholdPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CThresholdPreferenceFunction*>(pDirectedProcessManager->getProcess("threshold_directed"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 1);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 1);
@@ -231,8 +231,8 @@ BOOST_FIXTURE_TEST_CASE( ThresholdDirectedProcess, CBaseTestFixture ) {
 BOOST_FIXTURE_TEST_CASE( ThresholdDirectedProcess_Distance, CBaseTestFixture ) {
 
   // Vars
-  CThresholdDirectedProcess *pProcess = 0;
-  pProcess = static_cast<CThresholdDirectedProcess*>(pDirectedProcessManager->getProcess("threshold_directed_distance"));
+  CThresholdPreferenceFunction *pProcess = 0;
+  pProcess = static_cast<CThresholdPreferenceFunction*>(pDirectedProcessManager->getProcess("threshold_directed_distance"));
 
   BOOST_CHECK_EQUAL(pProcess->getResult(0, 0, 0, 0), 1);
   BOOST_CHECK_EQUAL(pProcess->getResult(1, 0, 0, 0), 1);

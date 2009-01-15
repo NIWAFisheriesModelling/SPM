@@ -13,7 +13,7 @@
 #include "Base/CMovementProcess.h"
 
 // Classes
-class CDirectedProcess;
+class CPreferenceFunction;
 
 //**********************************************************************
 //
@@ -34,7 +34,7 @@ public:
 protected:
   // Variables
   vector<string>             vDirectedProcessList;
-  vector<CDirectedProcess*>  vDirectedProcessIndex;
+  vector<CPreferenceFunction*>  vDirectedProcessIndex;
   double                     dRunningTotal;
 };
 

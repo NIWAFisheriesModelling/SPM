@@ -13,7 +13,7 @@
 #include "../BaseClasses/CBaseExecutableObject.h"
 
 // Classes;
-class CDirectedProcessManager;
+class CPreferenceFunctionManager;
 class CEstimateManager;
 class CInitializationPhaseManager;
 class CLayerManager;
@@ -59,7 +59,7 @@ public:
 protected:
   // Variables
   EState                      eCurrentState;
-  CDirectedProcessManager     *pDirectedProcessManager;
+  CPreferenceFunctionManager     *pDirectedProcessManager;
   CEstimateManager            *pEstimateManager;
   CInitializationPhaseManager *pInitializationManager;
   CLayerManager               *pLayerManager;

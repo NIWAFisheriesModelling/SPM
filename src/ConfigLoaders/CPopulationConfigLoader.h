@@ -19,7 +19,7 @@ using std::map;
 #include "../Processes/CProcessManager.h"
 #include "../Layers/CLayerManager.h"
 #include "../Selectivities/CSelectivityManager.h"
-#include "../DirectedProcesses/CDirectedProcessManager.h"
+//#include "../DirectedProcesses/CDirectedProcessManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 
 //**********************************************************************
@@ -70,14 +70,14 @@ protected:
   void                      loadDirectedProcess_InverseLogistic();
   void                      loadDirectedProcess_Constant();
   bool                      loadBaseProcessAttributes(CProcess *Process);
-  bool                      loadBaseDirectedProcessAttributes(CDirectedProcess *Process);
+//  bool                      loadBaseDirectedProcessAttributes(CPreferenceFunction *Process);
 
   // Variables
   CTimeStepManager            *pTimeStepManager;
   CProcessManager             *pProcessManager;
   CLayerManager               *pLayerManager;
   CSelectivityManager         *pSelectivityManager;
-  CDirectedProcessManager     *pDirectedProcessManager;
+//  CPreferenceFunctionManager     *pDirectedProcessManager;
   CInitializationPhaseManager *pInitializationManager;
 
   map<string, vector<string> > mSection;

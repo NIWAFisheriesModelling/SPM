@@ -27,15 +27,15 @@
 #include "../Selectivities/Children/CDoubleNormalSelectivity.h"
 #include "../Selectivities/Children/CKnifeEdgeSelectivity.h"
 #include "../PrintStates/CPrintState.h"
-#include "../DirectedProcesses/Children/CExponentialDirectedProcess.h"
+/*#include "../DirectedProcesses/Children/CExponentialDirectedProcess.h"
 #include "../DirectedProcesses/Children/CThresholdDirectedProcess.h"
 #include "../DirectedProcesses/Children/CNormalDirectedProcess.h"
 #include "../DirectedProcesses/Children/CDoubleNormalDirectedProcess.h"
 #include "../DirectedProcesses/Children/CLogisticDirectedProcess.h"
 #include "../DirectedProcesses/Children/CInverseLogisticDirectedProcess.h"
-#include "../DirectedProcesses/Children/CConstantDirectedProcess.h"
+#include "../DirectedProcesses/Children/CConstantDirectedProcess.h"*/
 #include "../TimeSteps/CTimeStep.h"
-#include "../DirectedProcesses/Factory/CDirectedProcessFactory.h"
+//#include "../DirectedProcesses/Factory/CPreferenceFunctionFactory.h"
 
 //**********************************************************************
 // CPopulationConfigLoader::CPopulationConfigLoader()
@@ -51,7 +51,7 @@ CPopulationConfigLoader::CPopulationConfigLoader(string Directory) {
   pProcessManager            = CProcessManager::Instance();
   pLayerManager              = CLayerManager::Instance();
   pSelectivityManager        = CSelectivityManager::Instance();
-  pDirectedProcessManager    = CDirectedProcessManager::Instance();
+  //pDirectedProcessManager    = CPreferenceFunctionManager::Instance();
   pInitializationManager     = CInitializationPhaseManager::Instance();
 }
 
@@ -1144,7 +1144,7 @@ void CPopulationConfigLoader::loadSelectivity_DoubleNormal() {
 //
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess() {
-  try {
+  /*try {
     // Should have 1 parameter (Label)
     if (vParameterList.size() != 2)
       throw string(ERROR_QTY_ONE_PARAMETERS);
@@ -1182,7 +1182,7 @@ void CPopulationConfigLoader::loadDirectedProcess() {
 
     sType = mSection[PARAM_TYPE][0];
 
-    CDirectedProcess *pProcess = CDirectedProcessFactory::buildDirectedProcess(sType);
+    CPreferenceFunction *pProcess = CPreferenceFunctionFactory::buildDirectedProcess(sType);
     pProcess->addParameter(PARAM_LABEL, sLabel);
 
     map<string, vector<string> >::iterator mPtr = mSection.begin();
@@ -1198,7 +1198,7 @@ void CPopulationConfigLoader::loadDirectedProcess() {
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadDirectedProcess()->" + Ex;
     throw Ex;
-  }
+  }*/
 }
 
 //**********************************************************************
@@ -1206,8 +1206,8 @@ void CPopulationConfigLoader::loadDirectedProcess() {
 // type = exponential
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_Exponential() {
-  try {
-    CExponentialDirectedProcess *pProcess = new CExponentialDirectedProcess();
+  /*try {
+    CExponentialPreferenceFunction *pProcess = new CExponentialPreferenceFunction();
     pProcess->setLabel(getLabel());
 
     // Load Next Line
@@ -1226,7 +1226,7 @@ void CPopulationConfigLoader::loadDirectedProcess_Exponential() {
             else
               throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
           }*/
-      }
+     /* }
       vConfigPtr++;
     }
     pDirectedProcessManager->addProcess(pProcess);
@@ -1234,7 +1234,7 @@ void CPopulationConfigLoader::loadDirectedProcess_Exponential() {
   } catch (string Ex) {
     Ex = "CPopulationConfigLoader.loadDirectedProcess_Exponential()->" + Ex;
     throw Ex;
-  }
+  }*/
 }
 
 //**********************************************************************
@@ -1242,37 +1242,37 @@ void CPopulationConfigLoader::loadDirectedProcess_Exponential() {
 // type = threshold
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_Threshold() {
-  try {
-    CThresholdDirectedProcess *pProcess = new CThresholdDirectedProcess();
-    pProcess->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++; // Skip type =
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
-          if (checkLine(PARAM_N))
-            pProcess->setN(getDoubleValue(1));
-          else if (checkLine(PARAM_LAMBDA))
-            pProcess->setLambda(getDoubleValue(1));
-          else
-            throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-        }*/
-      }
-      vConfigPtr++;
-    }
-    pDirectedProcessManager->addProcess(pProcess);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadDirectedProcess_Threshhold()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CThresholdPreferenceFunction *pProcess = new CThresholdPreferenceFunction();
+//    pProcess->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++; // Skip type =
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
+//          if (checkLine(PARAM_N))
+//            pProcess->setN(getDoubleValue(1));
+//          else if (checkLine(PARAM_LAMBDA))
+//            pProcess->setLambda(getDoubleValue(1));
+//          else
+//            throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//        }*/
+//      }
+//      vConfigPtr++;
+//    }
+//    pDirectedProcessManager->addProcess(pProcess);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadDirectedProcess_Threshhold()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1280,37 +1280,37 @@ void CPopulationConfigLoader::loadDirectedProcess_Threshold() {
 // type = normal
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_Normal() {
-  try {
-    CNormalDirectedProcess *pProcess = new CNormalDirectedProcess();
-    pProcess->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++; // Skip type =
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
-            if (checkLine(PARAM_MU))
-              pProcess->setMu(getDoubleValue(1));
-            else if (checkLine(PARAM_SIGMA))
-              pProcess->setSigma(getDoubleValue(1));
-            else
-              throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-          }*/
-      }
-      vConfigPtr++;
-    }
-    pDirectedProcessManager->addProcess(pProcess);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadDirectedProcess_Normal()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CNormalPreferenceFunction *pProcess = new CNormalPreferenceFunction();
+//    pProcess->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++; // Skip type =
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
+//            if (checkLine(PARAM_MU))
+//              pProcess->setMu(getDoubleValue(1));
+//            else if (checkLine(PARAM_SIGMA))
+//              pProcess->setSigma(getDoubleValue(1));
+//            else
+//              throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//          }*/
+//      }
+//      vConfigPtr++;
+//    }
+//    pDirectedProcessManager->addProcess(pProcess);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadDirectedProcess_Normal()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1318,39 +1318,39 @@ void CPopulationConfigLoader::loadDirectedProcess_Normal() {
 // type = double_normal
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_DoubleNormal() {
-  try {
-    CDoubleNormalDirectedProcess *pProcess = new CDoubleNormalDirectedProcess();
-    pProcess->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++; // Skip type =
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
-          if (checkLine(PARAM_MU))
-            pProcess->setMu(getDoubleValue(1));
-          else if (checkLine(PARAM_SIGMA_L))
-            pProcess->setSigmaL(getDoubleValue(1));
-          else if (checkLine(PARAM_SIGMA_R))
-            pProcess->setSigmaR(getDoubleValue(1));
-          else
-            throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-        }*/
-      }
-      vConfigPtr++;
-    }
-    pDirectedProcessManager->addProcess(pProcess);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadDirectedProcess_DoubleNormal()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CDoubleNormalPreferenceFunction *pProcess = new CDoubleNormalPreferenceFunction();
+//    pProcess->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++; // Skip type =
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        /*if (!loadBaseDirectedProcessAttributes(pProcess)) {
+//          if (checkLine(PARAM_MU))
+//            pProcess->setMu(getDoubleValue(1));
+//          else if (checkLine(PARAM_SIGMA_L))
+//            pProcess->setSigmaL(getDoubleValue(1));
+//          else if (checkLine(PARAM_SIGMA_R))
+//            pProcess->setSigmaR(getDoubleValue(1));
+//          else
+//            throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//        }*/
+//      }
+//      vConfigPtr++;
+//    }
+//    pDirectedProcessManager->addProcess(pProcess);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadDirectedProcess_DoubleNormal()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1358,37 +1358,37 @@ void CPopulationConfigLoader::loadDirectedProcess_DoubleNormal() {
 // type = logistic
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_Logistic() {
-  try {
-    CLogisticDirectedProcess *pProcess = new CLogisticDirectedProcess();
-    pProcess->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++; // Skip type =
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
-            if (checkLine(PARAM_A50))
-              pProcess->setA50(getDoubleValue(1));
-            else if (checkLine(PARAM_ATO95))
-              pProcess->setAto95(getDoubleValue(1));
-            else
-              throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-          }*/
-      }
-      vConfigPtr++;
-    }
-    pDirectedProcessManager->addProcess(pProcess);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadDirectedProcess_Logistic()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CLogisticPreferenceFunction *pProcess = new CLogisticPreferenceFunction();
+//    pProcess->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++; // Skip type =
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
+//            if (checkLine(PARAM_A50))
+//              pProcess->setA50(getDoubleValue(1));
+//            else if (checkLine(PARAM_ATO95))
+//              pProcess->setAto95(getDoubleValue(1));
+//            else
+//              throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//          }*/
+//      }
+//      vConfigPtr++;
+//    }
+//    pDirectedProcessManager->addProcess(pProcess);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadDirectedProcess_Logistic()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1396,37 +1396,37 @@ void CPopulationConfigLoader::loadDirectedProcess_Logistic() {
 // type = inverse_logistic
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_InverseLogistic() {
-  try {
-    CInverseLogisticDirectedProcess *pProcess = new CInverseLogisticDirectedProcess();
-    pProcess->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++; // Skip type =
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
-            if (checkLine(PARAM_A50))
-              pProcess->setA50(getDoubleValue(1));
-            else if (checkLine(PARAM_ATO95))
-              pProcess->setAto95(getDoubleValue(1));
-            else
-              throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-         }*/
-      }
-      vConfigPtr++;
-    }
-    pDirectedProcessManager->addProcess(pProcess);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadDirectedProcess_InverseLogistic()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CInverseLogisticPreferenceFunction *pProcess = new CInverseLogisticPreferenceFunction();
+//    pProcess->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++; // Skip type =
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//         /* if (!loadBaseDirectedProcessAttributes(pProcess)) {
+//            if (checkLine(PARAM_A50))
+//              pProcess->setA50(getDoubleValue(1));
+//            else if (checkLine(PARAM_ATO95))
+//              pProcess->setAto95(getDoubleValue(1));
+//            else
+//              throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//         }*/
+//      }
+//      vConfigPtr++;
+//    }
+//    pDirectedProcessManager->addProcess(pProcess);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadDirectedProcess_InverseLogistic()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1434,32 +1434,32 @@ void CPopulationConfigLoader::loadDirectedProcess_InverseLogistic() {
 // type = constant
 //**********************************************************************
 void CPopulationConfigLoader::loadDirectedProcess_Constant() {
-  try {
-    CConstantDirectedProcess *pProcess = new CConstantDirectedProcess();
-    pProcess->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++; // Skip type =
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (!loadBaseDirectedProcessAttributes(pProcess)) {
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-        }
-      }
-      vConfigPtr++;
-    }
-    pDirectedProcessManager->addProcess(pProcess);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadDirectedProcess_Constant()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CConstantPreferenceFunction *pProcess = new CConstantPreferenceFunction();
+//    pProcess->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++; // Skip type =
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        if (!loadBaseDirectedProcessAttributes(pProcess)) {
+//          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//        }
+//      }
+//      vConfigPtr++;
+//    }
+//    pDirectedProcessManager->addProcess(pProcess);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadDirectedProcess_Constant()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1497,24 +1497,24 @@ bool CPopulationConfigLoader::loadBaseProcessAttributes(CProcess *Process) {
 }
 
 //**********************************************************************
-// bool CPopulationConfigLoader::loadBaseDirectedProcessAttributes(CDirectedProcess *Process)
+// bool CPopulationConfigLoader::loadBaseDirectedProcessAttributes(CPreferenceFunction *Process)
 // Load the base (common) DirectedProcess attributes
 //**********************************************************************
-bool CPopulationConfigLoader::loadBaseDirectedProcessAttributes(CDirectedProcess *Process) {
-  try {
-    /*if (checkLine(PARAM_ALPHA))
-      Process->setAlpha(getDoubleValue(1));
-    else if (checkLine(PARAM_LAYER_NAME))
-      Process->addParameter(vParameterList[0], vParameterList[1]);
-    else
-      return false;*/
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadBaseDirectedProcessAttributes()->" + Ex;
-    throw Ex;
-  }
-  return true;
-}
+//bool CPopulationConfigLoader::loadBaseDirectedProcessAttributes(CPreferenceFunction *Process) {
+//  try {
+//    /*if (checkLine(PARAM_ALPHA))
+//      Process->setAlpha(getDoubleValue(1));
+//    else if (checkLine(PARAM_LAYER_NAME))
+//      Process->addParameter(vParameterList[0], vParameterList[1]);
+//    else
+//      return false;*/
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadBaseDirectedProcessAttributes()->" + Ex;
+//    throw Ex;
+//  }
+//  return true;
+//}
 
 //**********************************************************************
 // CPopulationConfigLoader::~CPopulationConfigLoader()

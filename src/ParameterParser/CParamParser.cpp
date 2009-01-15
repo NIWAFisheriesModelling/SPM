@@ -11,8 +11,8 @@
 #include "CParamParser.h"
 #include "../Processes/CProcessManager.h"
 #include "../Processes/CProcess.h"
-#include "../DirectedProcesses/CDirectedProcessManager.h"
-#include "../DirectedProcesses/CDirectedProcess.h"
+#include "../PreferenceFunctions/CPreferenceFunctionManager.h"
+#include "../PreferenceFunctions/CPreferenceFunction.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../Selectivities/CSelectivity.h"
 #include "../Qs/CQManager.h"
@@ -95,8 +95,8 @@ void CParamParser::parseAbsoluteCommand() {
 
     // Directed Process
     if (sType == PARAM_DIRECTED_PROCESS) {
-      CDirectedProcessManager *pDirectedProcessManager = CDirectedProcessManager::Instance();
-      CDirectedProcess *pProcess = pDirectedProcessManager->getProcess(sLabel);
+      CPreferenceFunctionManager *pDirectedProcessManager = CPreferenceFunctionManager::Instance();
+      CPreferenceFunction *pProcess = pDirectedProcessManager->getProcess(sLabel);
 
       pRet = pProcess->getEstimableVariable(sVariable);
       return;
