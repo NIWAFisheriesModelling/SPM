@@ -18,25 +18,14 @@
 CStringLayer::CStringLayer(CStringLayer *Layer)
 : CLayer(Layer) {
 
-  // Allocate Space for our X (Width)
+  // Build 2D Array
   pGrid = new string*[iHeight];
-
-  // For Each X Add A Y (Height)
   for (int i = 0; i < iHeight; ++i) {
     pGrid[i] = new string[iWidth];
   }
 
-  for (int i = 0; i < iHeight; ++i)
-    for (int j = 0; j < iWidth; ++j)
-      pGrid[i][j] = "";
-
-  // Copy Construct
-  if (Layer != 0) {
-    // Copy Values Over
-    for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j)
-        pGrid[i][j] = Layer->getValue(i, j);
-  }
+  // Register user allowed variables
+  pParameterList->registerAllowed(PARAM_ROW);
 }
 
 //**********************************************************************
@@ -104,24 +93,32 @@ void CStringLayer::validate() {
     // Base Validate
     CLayer::validate();
 
-    // Fill Our Array
-    if (pParameterList->countMatches(string(PARAM_ROW) + string(CONFIG_WILDCARD_MULTIPLE)) != iHeight)
-      throw string("Not enough rows submitted for layer");
+    // Fill a new vector with our row information
+    vector<string> vData;
 
-    for (int i = 0; i < iHeight; ++i) {
-      string name = pParameterList->getMatchFullName(string(PARAM_ROW) + string(CONFIG_WILDCARD_MULTIPLE), i);
+    pParameterList->fillVector(vData, PARAM_Data);
 
-      if (pParameterList->countParameterValues(name) != iWidth)
-        throw string(name + " doesn't have correct number of values");
+    int iRow  = 0;
+    int iCol  = 0;
 
-      pParameterList->fillArray(pGrid[i], iWidth, name);
+    for (int i = 0; i < (int)vData.size(); ++i) {
+      if (vData[i] == PARAM_DATA)
+        continue;
+
+      if (iRow >= iHeight)
+        throw string("Too much data"); // TODO: Add CError
+
+      if (iCol >= iWidth) {
+        iCol = 0;
+        iRow++;
+      }
+
+      pGrid[iRow][iCol] = vData[i];
+      iCol++;
     }
 
-    // Make sure all spots have been filled.
-    for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j)
-        if (pGrid[i][j] == "")
-          throw string(ERROR_MISSING_LAYER_SPOT + sLabel);
+    if ((iRow < iHeight) || (iCol < iWidth))
+      throw string("Not enough data"); // TODO: Add CError
 
   } catch(string Ex) {
     Ex = "CStringLayer.validate()->" + Ex;

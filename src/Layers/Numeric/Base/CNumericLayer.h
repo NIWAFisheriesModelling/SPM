@@ -32,7 +32,7 @@ public:
   virtual bool              checkSpace(int RowIndex, int ColIndex);
   virtual int               countValidSpaces();
   virtual void              validate();
-  virtual void              build();
+  virtual void              build() = 0;
 
 protected:
   // Variables

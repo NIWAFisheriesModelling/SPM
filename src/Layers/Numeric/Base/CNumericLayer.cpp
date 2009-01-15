@@ -99,35 +99,6 @@ void CNumericLayer::validate() {
 }
 
 //**********************************************************************
-// void CNumericLayer::build()
-// build
-//**********************************************************************
-void CNumericLayer::build() {
-  try {
-    // Normalize
-    /*if (bNormalize) {
-      double dTotal = 0.0;
-
-      for (int i = 0; i < iHeight; ++i)
-        for (int j = 0; j < iWidth; ++j)
-          dTotal += pGrid[i][j];
-
-      if (CComparer::isZero(dTotal))
-        return;
-
-      if (!CComparer::isEqual(dTotal, 1.0)) { // Only normalize if not already done.
-        for (int i = 0; i < iHeight; ++i)
-          for (int j = 0; j < iWidth; ++j)
-            pGrid[i][j] = (pGrid[i][j]) / dTotal;
-      }
-    }*/
-  } catch (string Ex) {
-    Ex = "CNumericLayer.build(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // CNumericLayer::~CNumericLayer()
 // Default De-Constructor
 //**********************************************************************

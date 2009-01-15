@@ -13,6 +13,7 @@
 #include "../../World/CWorldSquare.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CConvertor.h"
 
 //**********************************************************************
 // CDoubleLayer::CDoubleLayer(CDoubleLayer *Layer = 0);
@@ -22,14 +23,8 @@ CDoubleLayer::CDoubleLayer(CDoubleLayer *Layer)
 : CNumericLayer(Layer) {
 
   // Register Allowed Parameters
-  pParameterList->registerAllowed(string(PARAM_ROW) + string(CONFIG_WILDCARD_MULTIPLE));
-
-  // Copy Construct
-  if (Layer != 0) {
-    for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j)
-        pGrid[i][j] = Layer->getValue(i, j, 0, 0);
-  }
+  pParameterList->registerAllowed(PARAM_ROW);
+  pParameterList->registerAllowed(PARAM_RESCALE);
 }
 
 //**********************************************************************
@@ -180,27 +175,68 @@ void CDoubleLayer::validate() {
     // Base Validate
     CNumericLayer::validate();
 
-    // Fill Our Array
-    if (pParameterList->countMatches(string(PARAM_ROW) + string(CONFIG_WILDCARD_MULTIPLE)) != iHeight)
-      throw string("Not enough rows submitted for layer");
+    // Get our variables
+    dRescale = pParameterList->getDouble(PARAM_RESCALE);
 
-    for (int i = 0; i < iHeight; ++i) {
-      string name = pParameterList->getMatchFullName(string(PARAM_ROW) + string(CONFIG_WILDCARD_MULTIPLE), i);
+    // Fill a new vector with our row information
+    vector<string> vData;
 
-      if (pParameterList->countParameterValues(name) != iWidth)
-        throw string(name + " doesn't have correct number of values");
+    pParameterList->fillVector(vData, PARAM_Data);
 
-      pParameterList->fillArray(pGrid[i], iWidth, name);
+    int iRow  = 0;
+    int iCol  = 0;
+
+    for (int i = 0; i < (int)vData.size(); ++i) {
+      if (vData[i] == PARAM_DATA)
+        continue;
+
+      if (iRow >= iHeight)
+        throw string("Too much data"); // TODO: Add CError
+
+      if (iCol >= iWidth) {
+        iCol = 0;
+        iRow++;
+      }
+
+      pGrid[iRow][iCol] = CConvertor::stringToDouble(vData[i]);
+      iCol++;
     }
 
-    // Make sure all spots have been filled.
-    for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j)
-        if (pGrid[i][j] == -1)
-          throw string(ERROR_MISSING_LAYER_SPOT + sLabel);
+    if ((iRow < iHeight) || (iCol < iWidth))
+      throw string("Not enough data"); // TODO: Add CError
 
   } catch(string Ex) {
     Ex = "CDoubleLayer.validate()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CDoubleLayer::build()
+// Build our layer
+//**********************************************************************
+void CDoubleLayer::build() {
+  try {
+    // Rescale the layer to 0-1 range
+    double dTotal = 0.0;
+
+    for (int i = 0; i < iHeight; ++i)
+      for (int j = 0; j < iWidth; ++j)
+        dTotal += pGrid[i][j];
+
+    if (!CComparer::isZero(dTotal)) {
+      if (!CComparer::isEqual(dTotal, dDouble)) { // Only normalize if not already done.
+        for (int i = 0; i < iHeight; ++i) {
+          for (int j = 0; j < iWidth; ++j) {
+            pGrid[i][j] = (pGrid[i][j]) / dTotal;
+            pGrid *= dRescale;
+          }
+        }
+      }
+    }
+
+  } catch (string Ex) {
+    Ex = "CDoubleLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

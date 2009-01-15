@@ -27,6 +27,11 @@ public:
   int                        countValidSpaces();
   CLayer*                    clone() { return (new CDoubleLayer(this)); }
   void                       validate();
+  void                       build();
+
+protected:
+  // Variables
+  double                     dRescale;
 };
 
 #endif /*CNUMERICLAYER_H_*/
