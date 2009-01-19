@@ -962,33 +962,33 @@ void CPopulationConfigLoader::loadSelectivity() {
 //
 //**********************************************************************
 void CPopulationConfigLoader::loadSelectivity_Constant() {
-  try {
-    CConstantSelectivity *pSelectivity = new CConstantSelectivity();
-    pSelectivity->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++;
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (checkLine(PARAM_C))
-          pSelectivity->setC(getIntValue(1));
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-      }
-      vConfigPtr++;
-    }
-    pSelectivityManager->addSelectivity(pSelectivity);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadSelectivity_Constant()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CConstantSelectivity *pSelectivity = new CConstantSelectivity();
+//    pSelectivity->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++;
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        if (checkLine(PARAM_C))
+//          pSelectivity->setC(getIntValue(1));
+//        else
+//          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//      }
+//      vConfigPtr++;
+//    }
+//    pSelectivityManager->addSelectivity(pSelectivity);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadSelectivity_Constant()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -996,35 +996,35 @@ void CPopulationConfigLoader::loadSelectivity_Constant() {
 //
 //**********************************************************************
 void CPopulationConfigLoader::loadSelectivity_Logistic() {
-  try {
-    CLogisticSelectivity *pSelectivity = new CLogisticSelectivity();
-    pSelectivity->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++;
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (checkLine(PARAM_A50))
-          pSelectivity->setA50(getDoubleValue(1));
-        else if (checkLine(PARAM_ATO95))
-          pSelectivity->setAto95(getDoubleValue(1));
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-      }
-      vConfigPtr++;
-    }
-    pSelectivityManager->addSelectivity(pSelectivity);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadSelectivity_Logistic()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CLogisticSelectivity *pSelectivity = new CLogisticSelectivity();
+//    pSelectivity->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++;
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        if (checkLine(PARAM_A50))
+//          pSelectivity->setA50(getDoubleValue(1));
+//        else if (checkLine(PARAM_ATO95))
+//          pSelectivity->setAto95(getDoubleValue(1));
+//        else
+//          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//      }
+//      vConfigPtr++;
+//    }
+//    pSelectivityManager->addSelectivity(pSelectivity);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadSelectivity_Logistic()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1032,39 +1032,39 @@ void CPopulationConfigLoader::loadSelectivity_Logistic() {
 //
 //**********************************************************************
 void CPopulationConfigLoader::loadSelectivity_LogisticProducing() {
-  try {
-    CLogisticProducingSelectivity *pSelectivity = new CLogisticProducingSelectivity();
-    pSelectivity->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++;
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (checkLine(PARAM_L))
-          pSelectivity->setL(getIntValue(1));
-        else if (checkLine(PARAM_H))
-          pSelectivity->setH(getIntValue(1));
-        else if (checkLine(PARAM_A50))
-          pSelectivity->setA50(getDoubleValue(1));
-        else if (checkLine(PARAM_ATO95))
-          pSelectivity->setAto95(getDoubleValue(1));
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-      }
-      vConfigPtr++;
-    }
-    pSelectivityManager->addSelectivity(pSelectivity);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadSelectivity_LogisticProducing()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CLogisticProducingSelectivity *pSelectivity = new CLogisticProducingSelectivity();
+//    pSelectivity->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++;
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        if (checkLine(PARAM_L))
+//          pSelectivity->setL(getIntValue(1));
+//        else if (checkLine(PARAM_H))
+//          pSelectivity->setH(getIntValue(1));
+//        else if (checkLine(PARAM_A50))
+//          pSelectivity->setA50(getDoubleValue(1));
+//        else if (checkLine(PARAM_ATO95))
+//          pSelectivity->setAto95(getDoubleValue(1));
+//        else
+//          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//      }
+//      vConfigPtr++;
+//    }
+//    pSelectivityManager->addSelectivity(pSelectivity);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadSelectivity_LogisticProducing()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1072,33 +1072,33 @@ void CPopulationConfigLoader::loadSelectivity_LogisticProducing() {
 //
 //**********************************************************************
 void CPopulationConfigLoader::loadSelectivity_KnifeEdge() {
-  try {
-    CKnifeEdgeSelectivity *pSelectivity = new CKnifeEdgeSelectivity();
-    pSelectivity->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++;
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (checkLine(PARAM_C))
-          pSelectivity->setC(getDoubleValue(1));
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-      }
-      vConfigPtr++;
-    }
-    pSelectivityManager->addSelectivity(pSelectivity);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadSelectivity_KnifeedgeProducing()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CKnifeEdgeSelectivity *pSelectivity = new CKnifeEdgeSelectivity();
+//    pSelectivity->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++;
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        if (checkLine(PARAM_C))
+//          pSelectivity->setC(getDoubleValue(1));
+//        else
+//          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//      }
+//      vConfigPtr++;
+//    }
+//    pSelectivityManager->addSelectivity(pSelectivity);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadSelectivity_KnifeedgeProducing()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************
@@ -1106,37 +1106,37 @@ void CPopulationConfigLoader::loadSelectivity_KnifeEdge() {
 //
 //**********************************************************************
 void CPopulationConfigLoader::loadSelectivity_DoubleNormal() {
-  try {
-    CDoubleNormalSelectivity *pSelectivity = new CDoubleNormalSelectivity();
-    pSelectivity->setLabel(getLabel());
-
-    // Load Next Line
-    vConfigPtr++;
-    while(vConfigPtr != vConfigList.end()) {
-      populateParameters();
-
-      if (vParameterList.size() > 0) {
-        if (newSection())
-          break;
-
-        // Check Section
-        if (checkLine(PARAM_MU))
-          pSelectivity->setMu(getDoubleValue(1));
-        else if (checkLine(PARAM_SIGMA_L))
-          pSelectivity->setSigmaL(getDoubleValue(1));
-        else if (checkLine(PARAM_SIGMA_R))
-          pSelectivity->setSigmaR(getDoubleValue(1));
-        else
-          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
-      }
-      vConfigPtr++;
-    }
-    pSelectivityManager->addSelectivity(pSelectivity);
-
-  } catch (string Ex) {
-    Ex = "CPopulationConfigLoader.loadSelectivity_Doublenormal()->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    CDoubleNormalSelectivity *pSelectivity = new CDoubleNormalSelectivity();
+//    pSelectivity->setLabel(getLabel());
+//
+//    // Load Next Line
+//    vConfigPtr++;
+//    while(vConfigPtr != vConfigList.end()) {
+//      populateParameters();
+//
+//      if (vParameterList.size() > 0) {
+//        if (newSection())
+//          break;
+//
+//        // Check Section
+//        if (checkLine(PARAM_MU))
+//          pSelectivity->setMu(getDoubleValue(1));
+//        else if (checkLine(PARAM_SIGMA_L))
+//          pSelectivity->setSigmaL(getDoubleValue(1));
+//        else if (checkLine(PARAM_SIGMA_R))
+//          pSelectivity->setSigmaR(getDoubleValue(1));
+//        else
+//          throw string(ERROR_UNKNOWN_PARAM + vParameterList[0]);
+//      }
+//      vConfigPtr++;
+//    }
+//    pSelectivityManager->addSelectivity(pSelectivity);
+//
+//  } catch (string Ex) {
+//    Ex = "CPopulationConfigLoader.loadSelectivity_Doublenormal()->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************

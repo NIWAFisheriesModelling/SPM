@@ -16,7 +16,7 @@
 //
 //
 //**********************************************************************
-class CThresholdBiomassPreferenceFunction {
+class CThresholdBiomassPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
   CThresholdBiomassPreferenceFunction(CThresholdBiomassPreferenceFunction *Process = 0);

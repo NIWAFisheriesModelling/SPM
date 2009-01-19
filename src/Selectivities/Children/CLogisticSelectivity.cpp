@@ -21,14 +21,14 @@ CLogisticSelectivity::CLogisticSelectivity(CLogisticSelectivity *Selectivity)
   dA50    = 0.0;
   dAto95  = 0.0;
 
+  // Register Estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
 
-  // Copy construct
-  if (Selectivity != 0) {
-    dA50    = Selectivity->getA50();
-    dAto95  = Selectivity->getAto95();
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_A50);
+  pParameterList->registerAllowed(PARAM_ATO95);
+
 }
 
 //**********************************************************************
@@ -37,11 +37,26 @@ CLogisticSelectivity::CLogisticSelectivity(CLogisticSelectivity *Selectivity)
 //**********************************************************************
 void CLogisticSelectivity::validate() {
   try {
-    // Nothing to do.
+    // Base
+    CSelectivity::validate();
+
+    // Populate our variables
+    dA50    = pParameterList->getDouble(PARAM_A50);
+    dAto95  = pParameterList->getDouble(PARAM_ATO95);
+
   } catch (string Ex) {
     Ex = "CLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+}
+
+//**********************************************************************
+// double CLogisticSelectivity::getResult(int Param)
+// Get the result from our Selectivity
+//**********************************************************************
+double CLogisticSelectivity::getResult(int Param) {
+  // TODO: Implement this
+  return 0;
 }
 
 //**********************************************************************

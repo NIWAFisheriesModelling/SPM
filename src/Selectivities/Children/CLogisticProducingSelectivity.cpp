@@ -16,24 +16,17 @@
 // Default Constructor
 //**********************************************************************
 CLogisticProducingSelectivity::CLogisticProducingSelectivity(CLogisticProducingSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
+: CCachedSelectivity(Selectivity) {
 
-  // Vars
-  iL      = -1;
-  iH      = -1;
-  dA50    = 0.0;
-  dAto95  = 0.0;
-
+  // Register estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
 
-  // Copy Construct
-  if (Selectivity != 0) {
-    iL      = Selectivity->getL();
-    iH      = Selectivity->getH();
-    dA50    = Selectivity->getA50();
-    dAto95  = Selectivity->getAto95();
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_L);
+  pParameterList->registerAllowed(PARAM_H);
+  pParameterList->registerAllowed(PARAM_A50);
+  pParameterList->registerAllowed(PARAM_ATO95);
 }
 
 //**********************************************************************
@@ -42,14 +35,14 @@ CLogisticProducingSelectivity::CLogisticProducingSelectivity(CLogisticProducingS
 //**********************************************************************
 void CLogisticProducingSelectivity::validate() {
   try {
-    if (iL < pWorld->getMinAge())
-      CError::errorLessThan(PARAM_L, PARAM_MIN_AGE);
-    if (iH > pWorld->getMaxAge())
-      CError::errorGreaterThan(PARAM_H, PARAM_MAX_AGE);
-    if (iL == -1)
-      CError::errorMissing(PARAM_L);
-    if (iH == -1)
-      CError::errorMissing(PARAM_H);
+    // Base
+    CSelectivity::validate();
+
+    // Populate our variables
+    iL      = pParameterList->getInt(PARAM_L);
+    iH      = pParameterList->getInt(PARAM_H);
+    dA50    = pParameterList->getDouble(PARAM_A50);
+    dAto95  = pParameterList->getDouble(PARAM_ATO95);
 
   } catch (string Ex) {
     Ex = "CLogisticProducingSelectivity.validate(" + getLabel() + ")->" + Ex;

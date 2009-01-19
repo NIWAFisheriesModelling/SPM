@@ -15,23 +15,17 @@
 // Default constructor
 //**********************************************************************
 CDoubleNormalSelectivity::CDoubleNormalSelectivity(CDoubleNormalSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
+: CCachedSelectivity(Selectivity) {
 
-  // Variables
-  dMu          = -1.0;
-  dSigmaL      = -1.0;
-  dSigmaR      = -1.0;
-
+  // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA_L, &dSigmaL);
   registerEstimable(PARAM_SIGMA_R, &dSigmaR);
 
-  // Copy Construct
-  if (Selectivity != 0) {
-    dMu     = Selectivity->getMu();
-    dSigmaL = Selectivity->getSigmaL();
-    dSigmaR = Selectivity->getSigmaR();
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_SIGMA_L);
+  pParameterList->registerAllowed(PARAM_SIGMA_R);
 }
 
 //**********************************************************************
@@ -40,7 +34,14 @@ CDoubleNormalSelectivity::CDoubleNormalSelectivity(CDoubleNormalSelectivity *Sel
 //**********************************************************************
 void CDoubleNormalSelectivity::validate() {
   try {
-    // Nothing To Do
+    // Base
+    CSelectivity::validate();
+
+    // Populate our variables
+    dMu     = pParameterList->getDouble(PARAM_MU);
+    dSigmaL = pParameterList->getDouble(PARAM_SIGMA_L);
+    dSigmaR = pParameterList->getDouble(PARAM_SIGMA_R);
+
   } catch (string Ex) {
     Ex = "CDoublenormalSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

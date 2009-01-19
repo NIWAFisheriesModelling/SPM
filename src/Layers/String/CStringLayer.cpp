@@ -96,7 +96,7 @@ void CStringLayer::validate() {
     // Fill a new vector with our row information
     vector<string> vData;
 
-    pParameterList->fillVector(vData, PARAM_Data);
+    pParameterList->fillVector(vData, PARAM_DATA);
 
     int iRow  = 0;
     int iCol  = 0;

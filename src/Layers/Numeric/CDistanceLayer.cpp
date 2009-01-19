@@ -66,11 +66,6 @@ void CDistanceLayer::build() {
         }
       }
     }
-
-    // Build Now. We do it afterwards because we didn't have any info
-    // that maybe normalized in the base build.
-    CNumericLayer::build();
-
   } catch (string Ex) {
     Ex = "CDistanceLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

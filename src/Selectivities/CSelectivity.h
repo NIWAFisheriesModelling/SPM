@@ -21,20 +21,11 @@ public:
   // Functions
   CSelectivity(CSelectivity *Selectivity = 0);
   virtual                    ~CSelectivity();
-	virtual double             getResult(int Index);
+	virtual double             getResult(int Index) = 0;
 	virtual CSelectivity*      clone() = 0;
 	virtual void               validate();
-	virtual void               build();
-	virtual void               rebuild();
-	void                       execute() { };
-
-protected:
-  // Functions
-  virtual double             calculateResult(int Age) = 0;
-
-  // Variables
-  vector<double>             vResults;
-
+	virtual void               build() { }
+	void                       execute() { }
 };
 
 #endif /*CSELECTIVITY_H_*/

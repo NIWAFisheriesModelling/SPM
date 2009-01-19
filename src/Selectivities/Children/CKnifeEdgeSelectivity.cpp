@@ -17,15 +17,11 @@
 CKnifeEdgeSelectivity::CKnifeEdgeSelectivity(CKnifeEdgeSelectivity *Selectivity)
 : CSelectivity(Selectivity) {
 
-  // Variables
-  dC    = 0;
+  // Register estimable
+  registerEstimable(PARAM_E, &dE);
 
-  registerEstimable(PARAM_C, &dC);
-
-  // Copy Construct
-  if (Selectivity != 0) {
-    dC    = Selectivity->getC();
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_E);
 }
 
 //**********************************************************************
@@ -34,22 +30,14 @@ CKnifeEdgeSelectivity::CKnifeEdgeSelectivity(CKnifeEdgeSelectivity *Selectivity)
 //**********************************************************************
 void CKnifeEdgeSelectivity::validate() {
   try {
-    // Nothing to do
+    // Base
+    CSelectivity::validate();
+
+    // Populate our variable
+    dE  = pParameterList->getDouble(PARAM_E);
+
   } catch (string Ex) {
     Ex = "CKnifeedgeSelectivity.validate(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
-// double CKnifeEdgeSelectivity::calculateResult(int Age)
-// calculate results for our Vector
-//**********************************************************************
-double CKnifeEdgeSelectivity::calculateResult(int Age) {
-  try {
-    throw string(ERROR_SUPPORTED_FUNCTION);
-  } catch (string Ex) {
-    Ex = "CKnifeedgeSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -65,7 +53,7 @@ double CKnifeEdgeSelectivity::getResult(int Param) {
     // Get the column Index for the passed in Age
     Param = pWorld->getMinAge() + Param;
 
-    if(Param >= dC)
+    if(Param >= dE)
       return (1.0);
 
 #ifndef OPTIMISE

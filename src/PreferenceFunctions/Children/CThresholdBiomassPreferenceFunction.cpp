@@ -20,9 +20,9 @@ CThresholdBiomassPreferenceFunction::CThresholdBiomassPreferenceFunction(
 : CPreferenceFunction(Process) {
 
   // Register Estmables
-  registerEstimable(&dSizeWeight, PARAM_SIZE_WEIGHT);
-  registerEstimable(&dBiomass, PARAM_BIOMASS);
-  registerEstimable(&dLambda, PARAM_LAMBDA);
+  registerEstimable(PARAM_SIZE_WEIGHT, &dSizeWeight);
+  registerEstimable(PARAM_BIOMASS, &dBiomass);
+  registerEstimable(PARAM_LAMBDA, &dLambda);
 
   // Register User allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);

@@ -21,20 +21,13 @@ public:
   // Functions
 	CKnifeEdgeSelectivity(CKnifeEdgeSelectivity *Selectivity = 0);
 	virtual                    ~CKnifeEdgeSelectivity();
-  void                       setC(double value) { dC = value; }
-  double                     getC() { return dC; }
   CSelectivity*              clone() { return (new CKnifeEdgeSelectivity(this)); }
   void                       validate();
-  void                       build() { }; // Prevent Parent
-  void                       rebuild() { }; // Prevent Parent
   double                     getResult(int Param);
 
 protected:
-  // Functions
-  double                     calculateResult(int Age);
-
   // Variables
-  double                     dC;
+  double                     dE;
 };
 
 #endif /*KNIFEEDGESELECTIVITY_H_*/

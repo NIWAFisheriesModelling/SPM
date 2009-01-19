@@ -9,23 +9,17 @@
 #ifndef CDOUBLENORMALSELECTIVITY_H_
 #define CDOUBLENORMALSELECTIVITY_H_
 
-#include "../CSelectivity.h"
+#include "Base/CCachedSelectivity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CDoubleNormalSelectivity : public CSelectivity {
+class CDoubleNormalSelectivity : public CCachedSelectivity {
 public:
   // Functions
 	CDoubleNormalSelectivity(CDoubleNormalSelectivity *Selectivity = 0);
 	virtual                    ~CDoubleNormalSelectivity();
-	void                       setMu(double value) { dMu = value; }
-	double                     getMu() { return dMu; }
-	void                       setSigmaL(double value) { dSigmaL = value; }
-	double                     getSigmaL() { return dSigmaL; }
-	void                       setSigmaR(double value) { dSigmaR = value; }
-	double                     getSigmaR() { return dSigmaR; }
 	CSelectivity*              clone() { return (new CDoubleNormalSelectivity(this)); }
 	void                       validate();
 

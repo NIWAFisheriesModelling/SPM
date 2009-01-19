@@ -21,12 +21,9 @@ public:
   // Functions
 	CLogisticSelectivity(CLogisticSelectivity *Selectivity = 0);
 	virtual                    ~CLogisticSelectivity();
-  void                       setA50(double value) { dA50 = value; }
-  double                     getA50() { return dA50; }
-  void                       setAto95(double value) { dAto95 = value; }
-  double                     getAto95() { return dAto95; }
   CSelectivity*              clone() { return (new CLogisticSelectivity(this)); }
 	void                       validate();
+	double                     getResult(int Param);
 
 protected:
   // Functions

@@ -11,21 +11,17 @@
 #include "CConstantSelectivity.h"
 
 //**********************************************************************
-// CConstantSelectivity::CConstantSelectivity(CConstantSelectivity *Selectivity = 0)
+// CConstantSelectivity::CConstantSelectivity(CConstantSelectivity *Selectivity)
 // Default Constructor
 //**********************************************************************
 CConstantSelectivity::CConstantSelectivity(CConstantSelectivity *Selectivity)
 : CSelectivity(Selectivity) {
 
-  // Variabes
-  dC        = -1.0;
-
+  // Register estimable
   registerEstimable(PARAM_C, &dC);
 
-  // Copy Construct
-  if (Selectivity != 0) {
-    dC    = Selectivity->getC();
-  }
+  // Register user allowed parameter
+  pParameterList->registerAllowed(PARAM_C);
 }
 
 //**********************************************************************
@@ -34,22 +30,14 @@ CConstantSelectivity::CConstantSelectivity(CConstantSelectivity *Selectivity)
 //**********************************************************************
 void CConstantSelectivity::validate() {
   try {
-    // Nothing To do
+    // Base validation
+    CSelectivity::validate();
+
+    // Populate our variables
+    dC = pParameterList->getDouble(PARAM_C);
+
   } catch (string Ex) {
     Ex = "CConstantSelectivity.validate(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
-// double CConstantSelectivity::calculateResult(int Age)
-// Calculate our Results
-//**********************************************************************
-double CConstantSelectivity::calculateResult(int Age) {
-  try {
-    throw string(ERROR_SUPPORTED_FUNCTION);
-  } catch (string Ex) {
-    Ex = "CConstantSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -59,19 +47,7 @@ double CConstantSelectivity::calculateResult(int Age) {
 // get Result
 //**********************************************************************
 double CConstantSelectivity::getResult(int Index) {
-#ifndef OPTIMISE
-  try {
-#endif
-    return dC;
-
-#ifndef OPTIMISE
-  } catch (string Ex) {
-    Ex = "CConstantSelectivity.getResult(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-
-  return 0.0;
-#endif
+  return dC;
 }
 
 //**********************************************************************

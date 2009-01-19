@@ -1,33 +1,31 @@
 //============================================================================
-// Name        : CConstantSelectivity.h
+// Name        : CAllValuesSelectivity.h
 // Author      : S.Rasmussen
-// Date        : 6/03/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Date        : 16/01/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CCONSTANTSELECTIVITY_H_
-#define CCONSTANTSELECTIVITY_H_
+#ifndef CALLVALUESSELECTIVITY_H_
+#define CALLVALUESSELECTIVITY_H_
 
-// Local Headers
+// Local headers
 #include "../CSelectivity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CConstantSelectivity : public CSelectivity {
+class CAllValuesSelectivity : public CSelectivity {
 public:
-  // Functions
-	CConstantSelectivity(CConstantSelectivity *Selectivity = 0);
-	virtual                    ~CConstantSelectivity();
-	CSelectivity*              clone() { return (new CConstantSelectivity(this)); }
+  CAllValuesSelectivity(CAllValuesSelectivity *Selectivity = 0);
+  virtual                   ~CAllValuesSelectivity();
+  CSelectivity*              clone() { return (new CAllValuesSelectivity(this)); }
   void                       validate();
   double                     getResult(int Index);
 
 protected:
-  // Variables
-  double                     dC;
+  vector<double>             vVs;
 };
 
-#endif /*CCONSTANTSELECTIVITY_H_*/
+#endif /* CALLVALUESSELECTIVITY_H_ */

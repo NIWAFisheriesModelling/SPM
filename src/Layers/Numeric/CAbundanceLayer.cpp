@@ -82,9 +82,6 @@ void CAbundanceLayer::validate() {
 //**********************************************************************
 void CAbundanceLayer::build() {
   try {
-    // Base Build
-    CNumericLayer::build();
-
     // Do We Need To Re-Build Selectivity Index?
     if ((int)vSelectivityIndex.size() == 0) {
       CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
