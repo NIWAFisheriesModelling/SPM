@@ -8,7 +8,7 @@
 \defSub{Ncols}{The number of columns $n_{cols}$ in the spatial structure}
 \defSub{Layer}{The label for the base layer}
 \defSub{Categories} {Labels of the categories (rows) of the population component of the partition}
-\defSub{SizeAtAge} {Define the label of the associated size-at-age relationship for each category}
+\defSub{SizeAtAges} {Define the label of the associated size-at-age relationship for each category}
 \defSub{MinAge}{Minimum age of the population}
 \defSub{MaxAge}{Maximum age of the population}
 \defSub{PlusGroup}{Define the largest age as a plus group}
@@ -62,7 +62,7 @@
 \defSub{Penalty} {Define the event mortality penalty label}
 \par\textbf{\commandlabsubarg{Process}{Type}{BiomassEventMortality}}\par
 \defSub{Categories}{Define the categories that the event mortality is applied to}
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
+\defSub{SizeAtAges}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
 \defSub{Years}{Define the years where the mortality even is applied}
 \defSub{LayerNames}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defSub{Umax} {Define the maximum exploitation rate}
@@ -121,42 +121,42 @@
 \par\textbf{\commandlabsubarg{PreferenceFunction}{Type}{Threshold}}\par
 \defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
 \defSub{Categories} {Define the categories are used to calculate the abundance}
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{N} {Defines the $N$ parameter of the threshold preference function}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the threshold preference function}
 \par\textbf{\commandlabsubarg{PreferenceFunction}{Type}{ThresholdBiomass}}\par
 \defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
 \defSub{Categories} {Define the categories are used to calculate the biomass}
-\defSub{Selectivity} {Define the selectivities applied to each category}
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{SizeAtAges}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defSub{Alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{Biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
 \defSub{Lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
 \par \defComLab{Layer} {Define a layer function with label}\par
 \defSub{Type} {Define the type of layer}
 \par\textbf{\commandlabsubarg{Layer}{Type}{Numeric}}\par
-\defSub{Row$x$} {Define the values of the layer for row $x$}
+\defSub{Data} {Define the values of the layer}
 \defSub{Rescale} {Rescale values of the layer}
 \par\textbf{\commandlabsubarg{Layer}{Type}{Categorical}}\par
 \defSub{Row$x$} {Define the values of the layer for row $x$}
 \par\textbf{\commandlabsubarg{Layer}{Type}{Distance}}\par
 \par\textbf{\commandlabsubarg{Layer}{Type}{Abundance}}\par
 \defSub{Categories} {Define the categories are used to calculate the abundance}
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \par\textbf{\commandlabsubarg{Layer}{Type}{Biomass}}\par
 \defSub{Categories} {Define the categories are used to calculate the biomass}
-\defSub{Selectivity} {Define the selectivities applied to each category}
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{SizeAtAges}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \par\textbf{\commandlabsubarg{Layer}{Type}{AbundanceDensity}}\par
 \defSub{Categories} {Define the categories are used to calculate the abundance}
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \par\textbf{\commandlabsubarg{Layer}{Type}{BiomassDensity}}\par
 \defSub{Categories} {Define the categories are used to calculate the biomass}
-\defSub{Selectivity} {Define the selectivities applied to each category}
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{SizeAtAgess}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \par\textbf{\commandlabsubarg{Layer}{Type}{MetaLayer}}\par
-\defSub{Year} {Define the years}
+\defSub{Years} {Define the years}
 \defSub{LayerNames} {Define the layer labels for each of the years}
 \par \defComLab{DerivedQuantity} {Define a derived quantity with label}\par
 \defSub{Type} {Define the type of derived quantity}
@@ -194,7 +194,6 @@
 \defSub{Type} {Define the type of relationship}
 \par\textbf{\commandlabsubarg{SizeWeight}{Type}{None}}\par
 \par\textbf{\commandlabsubarg{SizeWeight}{Type}{Basic}}\par
-\defSub{SizeAtAge} {Define the label of the associated size-at-age relationship relationship}
 \defSub{a} {Define the $a$ parameter of the basic relationship}
 \defSub{b} {Define the $b$ parameter of the basic relationship}
 \par \defComLab{Selectivity} {Define a selectivity function with label}\par

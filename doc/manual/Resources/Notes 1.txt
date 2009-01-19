@@ -1,0 +1,10 @@
+	@TimeStep: Should be processes not process
+	Recruitment: Ages of wrong type - Should be vector of ints
+	BHRecruitnment: YCS-Years/Values should be YCSYears and YCSValues
+	BHRecruitment: Ages is of wrong type
+	EventMortality: UMax should be estimable type. All constants should be numerics or decimals etc.
+
+	Note: Layer parameter should be LayerName
+	So layers would be LayerNames
+
+Need Optional/Required attribute for parameters

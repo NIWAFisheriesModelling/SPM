@@ -29,7 +29,7 @@
 \defDefault{None}
 \defValue{Names of categories must be unique}
 
-\defSub{SizeAtAge} {Define the label of the associated size-at-age relationship for each category}
+\defSub{SizeAtAges} {Define the label of the associated size-at-age relationship for each category}
 \defType{Vector of strings, of length $1\ldots n_{categories}$}
 \defDefault{None}
 \defValue{Names of SizeAtAge labels must be unique}
@@ -295,7 +295,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
+\defSub{SizeAtAges}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid labels from \command{SizeAtAge}}
@@ -554,7 +554,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
@@ -583,12 +583,12 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
 
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAges}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid labels from \command{SizeAtAge}}
@@ -629,10 +629,10 @@ The available layer types  are,
 
 \subsubsection[Numeric]{\commandlabsubarg{Layer}{Type}{Numeric}}
 
-\defSub{Row$x$} {Define the values of the layer for row $x$}
-\defType{Constant vector, of length \commandsub{Model}{Ncols}}
+\defSub{Data} {Define the values of the layer}
+\defType{Constant vector, with total length \commandsub{Model}{Ncols} $\times$ \commandsub{Model}{Nrows}}
 \defDefault{None}
-\defValue{A vector of values of length equal to the number of columns defined for the spatial structure. There must be exactly $x$ rows defined, one for each row of the spatial structure}
+\defValue{A vector of values of length equal to the number of elements defined for the spatial structure}
 
 \defSub{Rescale} {Rescale values of the layer}
 \defType{Constant}
@@ -657,7 +657,7 @@ There are no other subcommands for \commandlabsubarg{Layer}{Type}{Distance}.
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
@@ -669,12 +669,12 @@ There are no other subcommands for \commandlabsubarg{Layer}{Type}{Distance}.
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
 
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAges}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid labels from \command{SizeAtAge}}
@@ -686,7 +686,7 @@ There are no other subcommands for \commandlabsubarg{Layer}{Type}{Distance}.
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
@@ -698,19 +698,19 @@ There are no other subcommands for \commandlabsubarg{Layer}{Type}{Distance}.
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{Selectivity} {Define the selectivities applied to each category}
+\defSub{Selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{Selectivity}}
 
-\defSub{SizeAtAge}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{SizeAtAgess}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid labels from \command{SizeAtAge}}
 
 \subsubsection[MetaLayer]{\commandlabsubarg{Layer}{Type}{MetaLayer}}
 
-\defSub{Year} {Define the years}
+\defSub{Years} {Define the years}
 \defType{Constant vector, with values for each year of the model}
 \defDefault{None}
 
@@ -901,11 +901,6 @@ There are no other subcommands for \commandlabsubarg{SizeWeight}{Type}{None}.
 
 \subsubsection[Basic]{\commandlabsubarg{SizeWeight}{Type}{Basic}}
 
-\defSub{SizeAtAge} {Define the label of the associated size-at-age relationship relationship}
-\defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{SizeAtAge}}
-
 \defSub{a} {Define the $a$ parameter of the basic relationship}
 \defType{Estimable}
 \defDefault{None}
@@ -965,12 +960,12 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \subsubsection[All-values-bounded]{\commandlabsubarg{Selectivity}{Type}{AllValuesBounded}}
 
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 \defValue{A positive real number}
 
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 \defValue{A positive real number, must be greater than $L$}
 
@@ -982,12 +977,12 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \subsubsection[Increasing]{\commandlabsubarg{Selectivity}{Type}{Increasing}}
 
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 \defValue{A positive real number}
 
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 \defValue{A positive real number, must be greater than $L$}
 
@@ -1011,12 +1006,12 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \subsubsection[Logistic producing]{\commandlabsubarg{Selectivity}{Type}{LogisticProducing}}
 
 \defSub{L} {Defines the $L$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 \defValue{A positive real number}
 
 \defSub{H} {Defines the $H$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 \defValue{A positive real number, must be greater than $L$}
 
@@ -1047,11 +1042,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \subsubsection[Double-exponential]{\commandlabsubarg{Selectivity}{Type}{DoubleExponential}}
 
 \defSub{x1} {Defines the $x_1$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 
 \defSub{x2} {Defines the $x_2$ parameter of the selectivity function}
-\defType{Constant}
+\defType{Integer}
 \defDefault{None}
 
 \defSub{x0} {Defines the $x_0$ parameter of the selectivity function}

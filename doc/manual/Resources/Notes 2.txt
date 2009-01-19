@@ -1,0 +1,15 @@
+@PreferenceFunction.Type=Threshold - Selectivity should be Selectivities
+@PreferenceFunction.Type=ThresholdBiomass - Selectivity should be Selectivities
+AllLayers - RowX now becomes data keyword
+8.4.3 and 8.4.4 Are the same heading, with an error.
+@Layer.Type=Abundance - Selectivity should be Selectivities
+@Layer.Type=Biomass - Selectivity should be selecitivities, SizeWeight should be SizeWeights
+@Layer.Type=AbundanceDensity - Selectivity should be Selectivities
+@Layer.Type=BiomassDensity - Selectivity should be Selectivities
+@Layer.Type=BiomassDensity - SizeWeight should be SizeWeights
+@Layer.Type=MetaLayer - Year should Years. Layers should be LayerNames
+8.8.3 should be AllValues, not Allvalues
+8.8.4 should be AllValuesBounded
+8.8.4 L is type constant. Constant what? Have assumed double., Same with H
+8.8.5 ""
+8.8.7 L and H should be type Int
