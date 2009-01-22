@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CDESolverInterface.cpp
+// Name        : CDESolver.cpp
 // Author      : S.Rasmussen
 // Date        : 1/05/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -11,7 +11,7 @@
 #include <iostream>
 
 // Local Headers
-#include "CDESolverInterface.h"
+#include "CDESolver.h"
 #include "CDESolverCallback.h"
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
@@ -24,14 +24,14 @@ using std::endl;
 // CDESolverInterface::CDESolverInterface()
 // Default Constructor
 //**********************************************************************
-CDESolverInterface::CDESolverInterface() {
+CDESolver::CDESolver() {
 }
 
 //**********************************************************************
-// void CDESolverInterface::runEstimation()
+// void CDESolver::runEstimation()
 // run our Estimation
 //**********************************************************************
-void CDESolverInterface::runEstimation() {
+void CDESolver::runEstimation() {
   // Variables
   CEstimateManager      *pEstimateManager    = CEstimateManager::Instance();
   int                   iCount               = 0;
@@ -74,8 +74,8 @@ void CDESolverInterface::runEstimation() {
 }
 
 //**********************************************************************
-// CDESolverInterface::~CDESolverInterface()
+// CDESolver::~CDESolver()
 // Default De-Constructor
 //**********************************************************************
-CDESolverInterface::~CDESolverInterface() {
+CDESolver::~CDESolver() {
 }

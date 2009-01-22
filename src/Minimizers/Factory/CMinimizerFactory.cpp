@@ -11,7 +11,7 @@
 #include "CMinimizerFactory.h"
 #include "../CMinimizerManager.h"
 #include "../../Translations/Translations.h"
-#include "../DESolver/CDESolverInterface.h"
+#include "../DESolver/CDESolver.h"
 #include "../GammaDiff/CGammaDiffInterface.h"
 
 //**********************************************************************
@@ -25,7 +25,7 @@ CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithMana
   if (type == PARAM_GAMMADIFF)
     pMinimizer = new CGammaDiffInterface();
   else if (type == PARAM_DESOLVER)
-    pMinimizer = new CDESolverInterface();
+    pMinimizer = new CDESolver();
   else
     throw string("Unknown type: "+ type); // TODO: FIX THIS
 
