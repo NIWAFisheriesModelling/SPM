@@ -72,8 +72,12 @@ void CMinimizerManager::addThread(CRuntimeThread *Thread) {
 //**********************************************************************
 void CMinimizerManager::validate() {
   try {
-    if (sMinimizer == "")
-      CError::errorMissing(PARAM_MINIMIZER);
+    sMinimizer = pParameterList->getString(PARAM_MINIMIZER);
+
+    // Validate our Minimizers
+    foreach(CMinimizer *Minimizer, vMinimizerList) {
+      Minimizer->validate();
+    }
 
     // Reset Variable
     pMinimizer = 0;
@@ -85,7 +89,7 @@ void CMinimizerManager::validate() {
     }
 
     if (pMinimizer == 0)
-      throw string("TRANSLATE ME: Unknown minimizer: " + sMinimizer);
+      throw string("TRANSLATE ME: Unknown minimizer: " + sMinimizer); // TODO: Translate this
 
     pMinimizer->validate();
 

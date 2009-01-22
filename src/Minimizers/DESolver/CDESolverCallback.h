@@ -10,7 +10,7 @@
 #define CDESOLVERCALLBACK_H_
 
 // Local Headers
-#include "DESolver.h"
+#include "Engine/DESolverEngine.h"
 #include "../../BaseClasses/CBaseObject.h"
 
 // Classes
@@ -20,7 +20,7 @@ class CEstimateManager;
 //
 //
 //**********************************************************************
-class CDESolverCallback : public CBaseObject, public DESolver {
+class CDESolverCallback : public CBaseObject, public DESolverEngine {
 public:
   // Functions
 	CDESolverCallback(int vectorsize, int populationsize);

@@ -32,17 +32,17 @@ using std::map;
 #define stBest2Bin			   8
 #define stRand2Bin			   9
 
-class DESolver;
-typedef void (DESolver::*StrategyFunction)(int);
+class DESolverEngine;
+typedef void (DESolverEngine::*StrategyFunction)(int);
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class DESolver {
+class DESolverEngine {
 public:
-  DESolver(int vectorSize, int populationsize);
-  virtual                     ~DESolver(void);
+  DESolverEngine(int vectorSize, int populationsize);
+  virtual                     ~DESolverEngine(void);
   void                        Setup(vector<double> startValues, vector<double> lowerBounds,
       vector<double> upperBounds, int deStrategy, double diffScale, double crossoverProb);
   virtual bool                Solve(int maxGenerations);

@@ -27,7 +27,6 @@ public:
 
   // Functions
   void                        addMinimizer(CMinimizer *value);
-  void                        setActiveMinimizer(string value) { sMinimizer = value; }
   void                        addThread(CRuntimeThread *Thread);
   CMinimizer*                 getMinimizer() { return pMinimizer; }
   void                        validate();

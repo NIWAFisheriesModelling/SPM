@@ -31,7 +31,7 @@ public:
   double                     getStepSize() { return dStepSize; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   virtual void               runEstimation() = 0;
-  virtual void               validate() { }
+  virtual void               validate();
   virtual void               build();
 
 protected:

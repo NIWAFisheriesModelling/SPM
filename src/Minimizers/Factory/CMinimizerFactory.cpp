@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CMinimizerFactory.h"
+#include "../CMinimizerManager.h"
 #include "../../Translations/Translations.h"
 #include "../DESolver/CDESolverInterface.h"
 #include "../GammaDiff/CGammaDiffInterface.h"
@@ -17,14 +18,19 @@
 // CMinimizer* CMinimizerFactory::buildMinimizer(string type)
 // Build our Minimizer based on type
 //**********************************************************************
-CMinimizer* CMinimizerFactory::buildMinimizer(string type) {
+CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithManager) {
+
+  CMinimizer* pMinimizer = 0;
 
   if (type == PARAM_GAMMADIFF)
-    return new CGammaDiffInterface();
+    pMinimizer = new CGammaDiffInterface();
   else if (type == PARAM_DESOLVER)
-    return new CDESolverInterface();
+    pMinimizer = new CDESolverInterface();
   else
     throw string("Unknown type: "+ type); // TODO: FIX THIS
 
-  return 0;
+  if (registerWithManager)
+    CMinimizerManager::Instance()->addMinimizer(pMinimizer);
+
+  return pMinimizer;
 }

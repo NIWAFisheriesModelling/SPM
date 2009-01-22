@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : DESolver.cpp
+// Name        : DESolverEngine.cpp
 // Author      : Lester E. Godwin
 // Copyright   : Lester E. Godwin, godwin@pushcorp.com
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
@@ -11,9 +11,9 @@
 #include <math.h>
 
 // Local Headers
-#include "DESolver.h"
-#include "../../CConfiguration.h"
-#include "../../Helpers/CComparer.h"
+#include "DESolverEngine.h"
+#include "../../../CConfiguration.h"
+#include "../../../Helpers/CComparer.h"
 
 // Namespaces
 using std::cout;
@@ -28,10 +28,10 @@ inline double fmin(double a, double b){
 #endif
 
 //**********************************************************************
-// DESolver::DESolver(int dim,int popSize)
+// DESolverEngine::DESolverEngine(int dim,int popSize)
 // Constructor
 //**********************************************************************
-DESolver::DESolver(int vectorSize, int populationSize) {
+DESolverEngine::DESolverEngine(int vectorSize, int populationSize) {
 
   // Variables
   iVectorSize       = vectorSize;
@@ -59,68 +59,68 @@ DESolver::DESolver(int vectorSize, int populationSize) {
 }
 
 //**********************************************************************
-// DESolver::~DESolver()
+// DESolverEngine::~DESolverEngine()
 // Default De-Constructor
 //**********************************************************************
-DESolver::~DESolver() {
+DESolverEngine::~DESolverEngine() {
 }
 
 //**********************************************************************
-// void DESolver::Setup(double *min,double *max,
+// void DESolverEngine::Setup(double *min,double *max,
 //                            int deStrategy,double diffScale,double crossoverProb)
 // Setup
 //**********************************************************************
-void DESolver::Setup(vector<double> startValues, vector<double> lowerBounds, vector<double> upperBounds,
+void DESolverEngine::Setup(vector<double> startValues, vector<double> lowerBounds, vector<double> upperBounds,
     int deStrategy, double diffScale, double crossoverProb) {
 
   switch (deStrategy) {
     case stBest1Exp:
-    calcTrialSolution = &DESolver::Best1Exp;
+    calcTrialSolution = &DESolverEngine::Best1Exp;
     iNumberOfParents  = 2;
     break;
 
     case stRand1Exp:
-    calcTrialSolution = &DESolver::Rand1Exp;
+    calcTrialSolution = &DESolverEngine::Rand1Exp;
     iNumberOfParents  = 3;
     break;
 
     case stRandToBest1Exp:
-    calcTrialSolution = &DESolver::RandToBest1Exp;
+    calcTrialSolution = &DESolverEngine::RandToBest1Exp;
     iNumberOfParents  = 2;
     break;
 
     case stBest2Exp:
-    calcTrialSolution = &DESolver::Best2Exp;
+    calcTrialSolution = &DESolverEngine::Best2Exp;
     iNumberOfParents  = 4;
     break;
 
     case stRand2Exp:
-    calcTrialSolution = &DESolver::Rand2Exp;
+    calcTrialSolution = &DESolverEngine::Rand2Exp;
     iNumberOfParents  = 5;
     break;
 
     case stBest1Bin:
-    calcTrialSolution = &DESolver::Best1Bin;
+    calcTrialSolution = &DESolverEngine::Best1Bin;
     iNumberOfParents  = 2;
     break;
 
     case stRand1Bin:
-    calcTrialSolution = &DESolver::Rand1Bin;
+    calcTrialSolution = &DESolverEngine::Rand1Bin;
     iNumberOfParents  = 3;
     break;
 
     case stRandToBest1Bin:
-    calcTrialSolution = &DESolver::RandToBest1Bin;
+    calcTrialSolution = &DESolverEngine::RandToBest1Bin;
     iNumberOfParents  = 2;
     break;
 
     case stBest2Bin:
-    calcTrialSolution = &DESolver::Best2Bin;
+    calcTrialSolution = &DESolverEngine::Best2Bin;
     iNumberOfParents  = 4;
     break;
 
     case stRand2Bin:
-    calcTrialSolution = &DESolver::Rand2Bin;
+    calcTrialSolution = &DESolverEngine::Rand2Bin;
     iNumberOfParents  = 5;
     break;
   }
@@ -142,10 +142,10 @@ void DESolver::Setup(vector<double> startValues, vector<double> lowerBounds, vec
 }
 
 //**********************************************************************
-// bool DESolver::Solve(int maxGenerations)
+// bool DESolverEngine::Solve(int maxGenerations)
 //
 //**********************************************************************
-bool DESolver::Solve(int maxGenerations) {
+bool DESolverEngine::Solve(int maxGenerations) {
 
   // Variables
   bool    bNewBestEnergy  = false;
@@ -210,10 +210,10 @@ bool DESolver::Solve(int maxGenerations) {
 }
 
 //**********************************************************************
-// bool DESolver::generateGradient()
+// bool DESolverEngine::generateGradient()
 // Generate our Gradient
 //**********************************************************************
-bool DESolver::generateGradient() {
+bool DESolverEngine::generateGradient() {
   double dGradTol = 0.01;
 
   for (int i = 0; i < iVectorSize; ++i) {
@@ -322,7 +322,7 @@ bool DESolver::generateGradient() {
 }
 
 
-void DESolver::scaleValues() {
+void DESolverEngine::scaleValues() {
 
   // Build some Scaled Values
   for (int i = 0; i < iVectorSize; ++i) {
@@ -335,7 +335,7 @@ void DESolver::scaleValues() {
 }
 
 
-void DESolver::unScaleValues() {
+void DESolverEngine::unScaleValues() {
   for (int i = 0; i < iVectorSize; ++i) {
     if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
       vCurrentValues[i] = vLowerBounds[i];
@@ -345,10 +345,10 @@ void DESolver::unScaleValues() {
 }
 
 //**********************************************************************
-// double DESolver::scaleValue(double value, double min, double max)
+// double DESolverEngine::scaleValue(double value, double min, double max)
 // Scale our Value from -1.0 to 1.0
 //**********************************************************************
-double DESolver::scaleValue(double value, double min, double max) {
+double DESolverEngine::scaleValue(double value, double min, double max) {
   if (CComparer::isEqual(value, min))
     return -1;
   else if (CComparer::isEqual(value, max))
@@ -358,10 +358,10 @@ double DESolver::scaleValue(double value, double min, double max) {
 }
 
 //**********************************************************************
-// double DESolver::unScaleValue(const double& value, double min, double max)
+// double DESolverEngine::unScaleValue(const double& value, double min, double max)
 // Un-Scale our value back to Original Value
 //**********************************************************************
-double DESolver::unScaleValue(const double& value, double min, double max) {
+double DESolverEngine::unScaleValue(const double& value, double min, double max) {
   // courtesy of AUTODIF - modified to correct error -
   // penalty on values outside [-1,1] multiplied by 100 as of 14/1/02.
   double t = 0.0;
@@ -381,27 +381,27 @@ double DESolver::unScaleValue(const double& value, double min, double max) {
 }
 
 //**********************************************************************
-// void DESolver::condAssign(double &res, const double &cond, const double &arg1, const double &arg2)
+// void DESolverEngine::condAssign(double &res, const double &cond, const double &arg1, const double &arg2)
 // Conditional Assignment
 //**********************************************************************
-void DESolver::condAssign(double &res, const double &cond, const double &arg1, const double &arg2) {
+void DESolverEngine::condAssign(double &res, const double &cond, const double &arg1, const double &arg2) {
   res = (cond) > 0 ? arg1 : arg2;
 }
 
 //**********************************************************************
-// void DESolver::condAssign(double &res, const double &cond, const double &arg)
+// void DESolverEngine::condAssign(double &res, const double &cond, const double &arg)
 // Conditional Assignment
 //**********************************************************************
-void DESolver::condAssign(double &res, const double &cond, const double &arg) {
+void DESolverEngine::condAssign(double &res, const double &cond, const double &arg) {
   res = (cond) > 0 ? arg : res;
 }
 
 
 //**********************************************************************
-// void DESolver::Best1Exp(int candidate)
+// void DESolverEngine::Best1Exp(int candidate)
 // Generate A Solution from our Best Score
 //**********************************************************************
-void DESolver::Best1Exp(int candidate) {
+void DESolverEngine::Best1Exp(int candidate) {
 
   // Select our Previous Generations to Sample From
   SelectSamples(candidate);
@@ -428,7 +428,7 @@ void DESolver::Best1Exp(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Rand1Exp(int candidate) {
+void DESolverEngine::Rand1Exp(int candidate) {
   /*int r1, r2, r3;
   int n;
 
@@ -448,7 +448,7 @@ void DESolver::Rand1Exp(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::RandToBest1Exp(int candidate) {
+void DESolverEngine::RandToBest1Exp(int candidate) {
   /*int r1, r2;
   int n;
 
@@ -468,7 +468,7 @@ void DESolver::RandToBest1Exp(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Best2Exp(int candidate) {
+void DESolverEngine::Best2Exp(int candidate) {
   /*int r1, r2, r3, r4;
   int n;
 
@@ -488,7 +488,7 @@ void DESolver::Best2Exp(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Rand2Exp(int candidate) {
+void DESolverEngine::Rand2Exp(int candidate) {
   /*int r1, r2, r3, r4, r5;
   int n;
 
@@ -508,7 +508,7 @@ void DESolver::Rand2Exp(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Best1Bin(int candidate) {
+void DESolverEngine::Best1Bin(int candidate) {
   /*int r1, r2;
   int n;
 
@@ -529,7 +529,7 @@ void DESolver::Best1Bin(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Rand1Bin(int candidate) {
+void DESolverEngine::Rand1Bin(int candidate) {
   /*int r1, r2, r3;
   int n;
 
@@ -550,7 +550,7 @@ void DESolver::Rand1Bin(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::RandToBest1Bin(int candidate) {
+void DESolverEngine::RandToBest1Bin(int candidate) {
   /*int r1, r2;
   int n;
 
@@ -571,7 +571,7 @@ void DESolver::RandToBest1Bin(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Best2Bin(int candidate) {
+void DESolverEngine::Best2Bin(int candidate) {
   /*int r1, r2, r3, r4;
   int n;
 
@@ -592,7 +592,7 @@ void DESolver::Best2Bin(int candidate) {
 //
 //
 //**********************************************************************
-void DESolver::Rand2Bin(int candidate) {
+void DESolverEngine::Rand2Bin(int candidate) {
   /*int r1, r2, r3, r4, r5;
   int n;
 
@@ -610,10 +610,10 @@ void DESolver::Rand2Bin(int candidate) {
 }
 
 //**********************************************************************
-// void DESolver::SelectSamples(int candidate)
+// void DESolverEngine::SelectSamples(int candidate)
 // Build us some sample values
 //**********************************************************************
-void DESolver::SelectSamples(int candidate) {
+void DESolverEngine::SelectSamples(int candidate) {
 
   // Build first Sample
   if (iNumberOfParents >= 1) {
@@ -673,7 +673,7 @@ void DESolver::SelectSamples(int candidate) {
 #define EPS 1.2e-7
 #define RNMX (1.0-EPS)
 
-double DESolver::RandomUniform(double minValue, double maxValue) {
+double DESolverEngine::RandomUniform(double minValue, double maxValue) {
   long j;
   long k;
   static long idum;

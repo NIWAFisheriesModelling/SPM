@@ -12,8 +12,8 @@
 // Global headers
 #include <string>
 
-// Forward Dec
-class CMinimizer;
+// Local Includes
+#include "../CMinimizer.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CMinimizerFactory {
 public:
   // Functions
-  static CMinimizer*          buildMinimizer(string type);
+  static CMinimizer*          buildMinimizer(string type, bool registerWithManager = true);
 
 private:
   // Functions
