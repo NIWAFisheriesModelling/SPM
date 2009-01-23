@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CGammaDiffInterface.cpp
+// Name        : CGammaDiff.cpp
 // Author      : S.Rasmussen
 // Date        : 8/09/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -8,17 +8,17 @@
 //============================================================================
 
 // Local Headers
-#include "CGammaDiffInterface.h"
+#include "CGammaDiff.h"
 #include "CGammaDiffCallback.h"
 #include "Engine/GammaDiffEngine.h"
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 
 //**********************************************************************
-// CGammaDiffInterface::CGammaDiffInterface()
+// CGammaDiff::CGammaDiff()
 // Default Constructor
 //**********************************************************************
-CGammaDiffInterface::CGammaDiffInterface() {
+CGammaDiff::CGammaDiff() {
 
 }
 
@@ -26,7 +26,7 @@ CGammaDiffInterface::CGammaDiffInterface() {
 //
 //
 //**********************************************************************
-void CGammaDiffInterface::runEstimation() {
+void CGammaDiff::runEstimation() {
   try {
     // Variables
     CGammaDiffCallback    clGammaDiffCallback;
@@ -63,15 +63,15 @@ void CGammaDiffInterface::runEstimation() {
     }*/
 
   } catch (string Ex) {
-    Ex = "CGammaDiffInterface.runEstimation()->" + Ex;
+    Ex = "CGammaDiff.runEstimation()->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// CGammaDiffInterface::~CGammaDiffInterface()
+// CGammaDiff::~CGammaDiff()
 // Default Destructor
 //**********************************************************************
-CGammaDiffInterface::~CGammaDiffInterface() {
+CGammaDiff::~CGammaDiff() {
 
 }
