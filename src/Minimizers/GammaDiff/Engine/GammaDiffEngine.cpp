@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : GammaDiff.cpp
+// Name        : GammaDiffEngine.cpp
 // Author      : S.Rasmussen
 // Date        : 21/08/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -12,41 +12,41 @@
 #include <iomanip>
 
 // Local Headers
-#include "GammaDiff.h"
+#include "GammaDiffEngine.h"
 #include "FMM.h"
-#include "../../Helpers/CComparer.h"
+#include "../../../Helpers/CComparer.h"
 
 // Namespace
 using namespace std;
 
 //**********************************************************************
-// GammaDiff::GammaDiff()
+// GammaDiffEngine::GammaDiffEngine()
 // Default Constructor
 //**********************************************************************
-GammaDiff::GammaDiff() : CBaseObject(0) {
+GammaDiffEngine::GammaDiffEngine() : CBaseObject(0) {
 }
 
 //**********************************************************************
-// void GammaDiff::condassign( double &res, const double &cond, const double &arg1, const double &arg2 ) {
+// void GammaDiffEngine::condassign( double &res, const double &cond, const double &arg1, const double &arg2 ) {
 // Conditional Assignment
 //**********************************************************************
-void GammaDiff::condAssign(double &res, const double &cond, const double &arg1, const double &arg2) {
+void GammaDiffEngine::condAssign(double &res, const double &cond, const double &arg1, const double &arg2) {
   res = (cond) > 0 ? arg1 : arg2;
 }
 
 //**********************************************************************
-// void GammaDiff::condassign( double &res, const double &cond, const double &arg)
+// void GammaDiffEngine::condassign( double &res, const double &cond, const double &arg)
 // Conditional Assignment
 //**********************************************************************
-void GammaDiff::condAssign(double &res, const double &cond, const double &arg) {
+void GammaDiffEngine::condAssign(double &res, const double &cond, const double &arg) {
   res = (cond) > 0 ? arg : res;
 }
 
 //**********************************************************************
-// double GammaDiff::boundp(const double& xx, double fmin, double fmax, double& fpen) {
+// double GammaDiffEngine::boundp(const double& xx, double fmin, double fmax, double& fpen) {
 // Boundary Pin
 //**********************************************************************
-double GammaDiff::unScaleValue(const double& value, double min, double max) {
+double GammaDiffEngine::unScaleValue(const double& value, double min, double max) {
   // courtesy of AUTODIF - modified to correct error -
   // penalty on values outside [-1,1] multiplied by 100 as of 14/1/02.
   double t = 0.0;
@@ -66,10 +66,10 @@ double GammaDiff::unScaleValue(const double& value, double min, double max) {
 }
 
 //**********************************************************************
-// double GammaDiff::boundpin(double y, double fmin, double fmax)
+// double GammaDiffEngine::boundpin(double y, double fmin, double fmax)
 // Boundary Pin
 //**********************************************************************
-double GammaDiff::scaleValue(double value, double min, double max) {
+double GammaDiffEngine::scaleValue(double value, double min, double max) {
   if (CComparer::isEqual(value, min))
     return -1;
   else if (CComparer::isEqual(value, max))
@@ -79,10 +79,10 @@ double GammaDiff::scaleValue(double value, double min, double max) {
 }
 
 //**********************************************************************
-// void GammaDiff::buildScaledValues()
+// void GammaDiffEngine::buildScaledValues()
 // Build our scaled values in relation to our bounds
 //**********************************************************************
-void GammaDiff::buildScaledValues() {
+void GammaDiffEngine::buildScaledValues() {
 
   for (int i = 0; i < (int)vStartValues.size(); ++i) {
     // Check
@@ -100,10 +100,10 @@ void GammaDiff::buildScaledValues() {
 }
 
 //**********************************************************************
-// void GammaDiff::buildCurrentValues()
+// void GammaDiffEngine::buildCurrentValues()
 // Build the current test values from our scaled values
 //**********************************************************************
-void GammaDiff::buildCurrentValues() {
+void GammaDiffEngine::buildCurrentValues() {
 
   for (int i = 0; i < (int)vStartValues.size(); ++i) {
     if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))
@@ -114,12 +114,12 @@ void GammaDiff::buildCurrentValues() {
 }
 
 //**********************************************************************
-// double GammaDiff::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
+// double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
 //   vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,
 //   double **pOptimiseHessian, int untransformedHessians, double dStepSize)
 // Optimise our function
 //**********************************************************************
-double GammaDiff::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
+double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
     vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,
     double **pOptimiseHessian, int untransformedHessians, double dStepSize) {
 
@@ -301,8 +301,8 @@ double GammaDiff::optimise_finite_differences(CGammaDiffCallback& objective, vec
 }
 
 //**********************************************************************
-// GammaDiff::~GammaDiff()
+// GammaDiffEngine::~GammaDiffEngine()
 // Default Destructor
 //**********************************************************************
-GammaDiff::~GammaDiff() {
+GammaDiffEngine::~GammaDiffEngine() {
 }

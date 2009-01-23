@@ -8,9 +8,9 @@
 //============================================================================
 
 // Local Headers
-#include "GammaDiff.h"
 #include "CGammaDiffInterface.h"
 #include "CGammaDiffCallback.h"
+#include "Engine/GammaDiffEngine.h"
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 
@@ -49,7 +49,7 @@ void CGammaDiffInterface::runEstimation() {
 
     int status = 0;
 
-    GammaDiff clGammaDiff;
+    GammaDiffEngine clGammaDiff;
     clGammaDiff.optimise_finite_differences(clGammaDiffCallback,
         vStartValues, vLowerBounds, vUpperBounds,
         status, true, iMaxIterations, iMaxEvaluations, dGradientTolerance,

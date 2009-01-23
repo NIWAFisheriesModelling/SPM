@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : GammaDiff.h
+// Name        : GammaDiffEngine.h
 // Author      : S.Rasmussen
 // Date        : 21/08/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -7,21 +7,21 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-#ifndef GAMMADIFF_H_
-#define GAMMADIFF_H_
+#ifndef GAMMADIFFENGINE_H_
+#define GAMMADIFFENGINE_H_
 
 // Global Headers
-#include "../../BaseClasses/CBaseObject.h"
-#include "CGammaDiffCallback.h"
+#include "../../../BaseClasses/CBaseObject.h"
+#include "../CGammaDiffCallback.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class GammaDiff : public CBaseObject {
+class GammaDiffEngine : public CBaseObject {
 public:
-  GammaDiff();
-  virtual                     ~GammaDiff();
+  GammaDiffEngine();
+  virtual                     ~GammaDiffEngine();
   double optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
       vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,
       double **pOptimiseHessian, int untransformedHessians, double dStepSize);
@@ -45,4 +45,4 @@ private:
   void                        condAssign(double &res, const double &cond, const double &arg);
 };
 
-#endif /* GAMMADIFF_H_ */
+#endif /* GAMMADIFFENGINE_H_ */
