@@ -1,8 +1,25 @@
 \section{Observation command and subcommand syntax\label{sec:observation-syntax}}
 
-\subsection{Event mortality-at-age observations}
+The observation types available are, 
 
-\defComLab{EventMortalityAtAge}{Define an observation of an event mortality using proportions-at-age data}
+\begin{description}
+  \item Observations of a mortality event proportions of individuals by age class
+  \item Observations of proportions of individuals by age class
+  \item Observations of proportions of individuals between categories within each age class
+  \item Relative and absolute abundance observations
+  \item Relative and absolute biomass observations
+\end{description}
+
+Each type of observation requires a set of subcommands and arguments specific to that process.
+
+\defComLab{Observation}{Define an observation}
+
+\defSub{Type} {Define the type of observation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid type of observation}
+
+\subsection[Event mortality-at-age]{\commandlabsubarg{Observation}{Type}{EventMortalityAtAge}} 
 
 \defSub{Year} {Define the year that the observation applies to}
 \defType{Integer}
@@ -74,9 +91,7 @@
 \defDefault{True}
 \defValue{True/False}
 
-\subsection{Proportions-at-age observations}
-
-\defComLab{ProportionsAtAge}{Define an observation using proportions-at-age data}
+\subsection[Proportions-at-age]{\commandlabsubarg{Observation}{Type}{ProportionsAtAge}} 
 
 \defSub{Year} {Define the year that the observation applies to}
 \defType{Integer}
@@ -158,9 +173,7 @@
 \defDefault{True}
 \defValue{True/False}
 
-\subsection{Proportions-by-age observations}
-
-\defComLab{ProportionsByAge}{Define an observation using proportions-by-age data}
+\subsection[Proportions-by-age]{\commandlabsubarg{Observation}{Type}{ProportionsByAge}} 
 
 \defSub{Year} {Define the year that the observation applies to}
 \defType{Integer}
@@ -247,14 +260,74 @@
 \defDefault{True}
 \defValue{True/False}
 
-\subsection{Abundance observations}
+\subsection[Abundance]{\commandlabsubarg{Observation}{Type}{Abundance}}
 
-\defComLab{Abundance}{Define an observation using abundance data}
+\defSub{Year} {Define the year that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{Model}{InitialYear} and \commandsub{Model}{CurrentYear}}
 
-\defSub{Biomass} {Defines if the abundance is a measure of biomass or number}
+\defSub{Timestep} {Define the time-step that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid time-step}
+
+\defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defType{Constant}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
+
+\defSub{q} {Define the catchability constant for the observation}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{A positive real number}
+
+\defSub{Categories} {Define the categories into which recruitment occurs}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid categories from \commandsub{Model}{Categories}}
+
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid selectivity labels defined by \command{Selectivity}}
+
+\defSub{LayerName} {Name of the categorical layer used to group the spacial cells for the observation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{Layer}. Must be a categorical layer}
+
+\defSub{Obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
+\defType{Constant vector}
+\defDefault{None}
+\defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
+
+\defSub{cv [label]}{Define the following data as error values ($cv$) for the categorical layer with value \argument{[label]}}
+\defType{Constant}
+\defDefault{None}
+\defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
+
+\defSub{Distribution}{Define the likelihood distribution}
+\defType{String}
+\defDefault{None}
+\defValue{A valid distribution}
+
+\defSub{ProcessError}{Define the process error term}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+\defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+\defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
 \defType{Switch}
-\defDefault{False}
-\defValue{If true, then a biomass, else an abundance in numbers of individuals}
+\defDefault{True}
+\defValue{True/False}
+
+\subsection[Biomass]{\commandlabsubarg{Observation}{Type}{Biomass}}
 
 \defSub{Year} {Define the year that the observation applies to}
 \defType{Integer}

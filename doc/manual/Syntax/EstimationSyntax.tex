@@ -1,13 +1,24 @@
 \section{Estimation command and subcommand syntax\label{sec:estimation-syntax}}
 
-\subsection{Random number seed}
+\subsection{Estimation methods}
 
-\defComArg{Seed}{value}{Defines the random number generator seed}
+\defCom{Estimation} 
 
+\defSub{Seed}{Defines the random number generator seed}
 \defArg{value}{The random number generator seed value}
 \defType{Integer}
 \defDefault{None}
 \defValue{An integer between 0 and 10000 inclusive}
+
+\defSub{Minimiser} {The label of the minimiser to use}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{Minimiser}}
+
+\defSub{MCMC} {The label of the MCMC to use}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{MCMC}}
 
 \subsection{Maximum posterior density (MPD)}
 
@@ -20,14 +31,14 @@ Two methods of minimising when estimating are,
 
 Each type of minimiser requires a set of subcommands and arguments specific to that minimiser. Different minimisers can be called in sequence, with the results of one output as input to the next.
 
-\defComLab{MPD}{Define the an estimator with label}
+\defComLab{Minimiser}{Define the an minimiser estimator with label}
 
 \defSub{Type} {Define the type of minimiser}
 \defType{String}
 \defDefault{NumericalDifferences}
 \defValue{A valid type of minimiser, either NumericalDifferences or DESolver}
 
-\subsubsection[Numerical differences minimiser]{\commandlabsubarg{MPD}{Type}{NumericalDifferences}} 
+\subsubsection[Numerical differences minimiser]{\commandlabsubarg{Minimiser}{Type}{NumericalDifferences}} 
 
 \defSub{MaxIterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
 \defType{Integer}
@@ -49,7 +60,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{0.0002}
 \defValue{A positive real number}
 
-\subsubsection[Differential evolution minimiser]{\commandlabsubarg{MPD}{Type}{DESolver}} 
+\subsubsection[Differential evolution minimiser]{\commandlabsubarg{Minimiser}{Type}{DESolver}} 
 
 \defSub{MaxIterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
 \defType{Integer}

@@ -232,15 +232,18 @@
 \defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
 \subsection{Estimation command and subcommand syntax}
-\defComArg{Seed}{value}{Defines the random number generator seed}\par
-\par \defComLab{MPD}{Define the an estimator with label}\par
+\defCom{Estimation}\par
+\defSub{Seed}{Defines the random number generator seed}
+\defSub{Minimiser} {The label of the minimiser to use}
+\defSub{MCMC} {The label of the MCMC to use}
+\par \defComLab{Minimiser}{Define the an minimiser estimator with label}\par
 \defSub{Type} {Define the type of minimiser}
-\par\textbf{\commandlabsubarg{MPD}{Type}{NumericalDifferences}}\par
+\par\textbf{\commandlabsubarg{Minimiser}{Type}{NumericalDifferences}}\par
 \defSub{MaxIterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
 \defSub{MaxEvaluations} {Define the maximum number of evaluations for the Numerical Differences minimiser}
 \defSub{StepSize} {Define the step-size for the Numerical Differences minimiser}
 \defSub{GradientTolerance} {Define the gradient tolerance for the Numerical Differences minimiser}
-\par\textbf{\commandlabsubarg{MPD}{Type}{DESolver}}\par
+\par\textbf{\commandlabsubarg{Minimiser}{Type}{DESolver}}\par
 \defSub{MaxIterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
 \defSub{MaxEvaluations} {Define the maximum number of evaluations for the Differential Evolution minimiser}
 \defSub{StepSize} {Define the step-size for the Differential Evolution minimiser}
@@ -296,7 +299,8 @@
 \par \defComLab{q}{Define a catchability constant with \argument{label}}\par
 \defSub{q} {Value of the q parameter}
 \subsection{Observation command and subcommand syntax}
-\defComLab{EventMortalityAtAge}{Define an observation of an event mortality using proportions-at-age data}\par
+\defComLab{Observation}{Define an observation}\par
+\defSub{Type} {Define the type of observation}
 \defSub{Year} {Define the year that the observation applies to}
 \defSub{ProcessLabel} {Define the label of the event mortality process}
 \defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -311,7 +315,6 @@
 \defSub{ProcessError}{Define the process error term}
 \defSub{Delta}{Define the delta robustifying constant for the distribution}
 \defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
-\par \defComLab{ProportionsAtAge}{Define an observation using proportions-at-age data}\par
 \defSub{Year} {Define the year that the observation applies to}
 \defSub{Timestep} {Define the time-step that the observation applies to}
 \defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -328,7 +331,6 @@
 \defSub{ProcessError}{Define the process error term}
 \defSub{Delta}{Define the delta robustifying constant for the distribution}
 \defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
-\par \defComLab{ProportionsByAge}{Define an observation using proportions-by-age data}\par
 \defSub{Year} {Define the year that the observation applies to}
 \defSub{Timestep} {Define the time-step that the observation applies to}
 \defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -346,8 +348,19 @@
 \defSub{ProcessError}{Define the process error term}
 \defSub{Delta}{Define the delta robustifying constant for the distribution}
 \defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
-\par \defComLab{Abundance}{Define an observation using abundance data}\par
-\defSub{Biomass} {Defines if the abundance is a measure of biomass or number}
+\defSub{Year} {Define the year that the observation applies to}
+\defSub{Timestep} {Define the time-step that the observation applies to}
+\defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{q} {Define the catchability constant for the observation}
+\defSub{Categories} {Define the categories into which recruitment occurs}
+\defSub{Selectivities} {Define the selectivities applied to each category}
+\defSub{LayerName} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{Obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
+\defSub{cv [label]}{Define the following data as error values ($cv$) for the categorical layer with value \argument{[label]}}
+\defSub{Distribution}{Define the likelihood distribution}
+\defSub{ProcessError}{Define the process error term}
+\defSub{Delta}{Define the delta robustifying constant for the distribution}
+\defSub{Simulate}{Defines if this observation should be simulated when doing simulations}
 \defSub{Year} {Define the year that the observation applies to}
 \defSub{Timestep} {Define the time-step that the observation applies to}
 \defSub{ProportionTimestep} {Define the interpolated proportion of the time-step passes that the observation applies to}
