@@ -20,11 +20,6 @@ CQ::CQ(CQ *Q)
   dQ      = 0.0;
 
   registerEstimable(PARAM_Q, &dQ);
-
-  // Copy Construct
-  if (Q != 0) {
-    dQ = Q->getQ();
-  }
 }
 
 //**********************************************************************
