@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CQ.cpp
+// Name        : CCatchability.cpp
 // Author      : S.Rasmussen
 // Date        : 28/04/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -8,13 +8,13 @@
 //============================================================================
 
 // Local Headers
-#include "CQ.h"
+#include "CCatchability.h"
 
 //**********************************************************************
-// CQ::CQ(CQ *Q = 0)
+// CCatchability::CCatchability(CCatchability *Catchability = 0)
 // Default Constructor
 //**********************************************************************
-CQ::CQ(CQ *Q)
+CCatchability::CCatchability(CCatchability *Catchability)
 : CBaseExecutableObject(Q) {
   // Variables
   dQ      = 0.0;
@@ -23,8 +23,8 @@ CQ::CQ(CQ *Q)
 }
 
 //**********************************************************************
-// CQ::~CQ()
+// CCatchability::~CCatchability()
 // Default De-Constructor
 //**********************************************************************
-CQ::~CQ() {
+CCatchability::~CCatchability() {
 }

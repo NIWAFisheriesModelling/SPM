@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CQManager.cpp
+// Name        : CCatchabilityManager.cpp
 // Author      : S.Rasmussen
 // Date        : 28/04/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -8,57 +8,57 @@
 //============================================================================
 
 // Local Headers
-#include "CQManager.h"
-#include "CQ.h"
+#include "CCatchabilityManager.h"
+#include "CCatchability.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 
 // Singleton Variable
-boost::thread_specific_ptr<CQManager> CQManager::clInstance;
+boost::thread_specific_ptr<CCatchabilityManager> CCatchabilityManager::clInstance;
 
 //**********************************************************************
-// CQManager::CQManager()
+// CCatchabilityManager::CCatchabilityManager()
 // Default Constructor
 //**********************************************************************
-CQManager::CQManager() {
+CCatchabilityManager::CCatchabilityManager() {
 }
 
 //**********************************************************************
-// CQManager* CQManager::Instance()
+// CCatchabilityManager* CCatchabilityManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CQManager* CQManager::Instance() {
+CCatchabilityManager* CCatchabilityManager::Instance() {
   if (clInstance.get() == 0)
-    clInstance.reset(new CQManager());
+    clInstance.reset(new CCatchabilityManager());
   return clInstance.get();
 }
 
 //**********************************************************************
-// void CQManager::Destroy()
+// void CCatchabilityManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CQManager::Destroy() {
+void CCatchabilityManager::Destroy() {
   if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
 
 //**********************************************************************
-// void CQManager::addQ(CQ *Q)
+// void CCatchabilityManager::addQ(CCatchability *Q)
 // Add a Q (I hate this short name) to our List
 //**********************************************************************
-void CQManager::addQ(CQ *Q) {
+void CCatchabilityManager::addQ(CCatchability *Q) {
   vQList.push_back(Q);
 }
 
 //**********************************************************************
-// CQ* CQManager::getQ(string label)
+// CCatchability* CCatchabilityManager::getQ(string label)
 // Get a pointer to our Q from the vector
 //**********************************************************************
-CQ* CQManager::getQ(string label) {
+CCatchability* CCatchabilityManager::getQ(string label) {
   try {
     // Loop through and find our Q
-    foreach(CQ *Q, vQList) {
+    foreach(CCatchability *Q, vQList) {
       if (Q->getLabel() == label)
         return Q;
     }
@@ -66,17 +66,17 @@ CQ* CQManager::getQ(string label) {
     throw string(ERROR_UNKNOWN_Q + label);
 
   } catch (string Ex) {
-    Ex = "CQManager.getQ()->" + Ex;
+    Ex = "CCatchabilityManager.getQ()->" + Ex;
     throw Ex;
   }
   return 0;
 }
 
 //**********************************************************************
-// CQ* CQManager::getQ(int index)
+// CCatchability* CCatchabilityManager::getQ(int index)
 // Get the Q from vector @ index
 //**********************************************************************
-CQ* CQManager::getQ(int index) {
+CCatchability* CCatchabilityManager::getQ(int index) {
   try {
     if (index >= (int)vQList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_Q);
@@ -86,7 +86,7 @@ CQ* CQManager::getQ(int index) {
     return vQList[index];
 
   } catch (string Ex) {
-    Ex = "CQManager.getQ()->" + Ex;
+    Ex = "CCatchabilityManager.getQ()->" + Ex;
     throw Ex;
   }
 
@@ -94,26 +94,26 @@ CQ* CQManager::getQ(int index) {
 }
 
 //**********************************************************************
-// void CQManager::clone(CQManager *Manager)
+// void CCatchabilityManager::clone(CCatchabilityManager *Manager)
 // Clone the manager with param
 //**********************************************************************
-void CQManager::clone(CQManager *Manager) {
+void CCatchabilityManager::clone(CCatchabilityManager *Manager) {
   try {
 
     for (int i = 0; i < Manager->getQCount(); ++i) {
-      CQ *pQ = Manager->getQ(i);
+      CCatchability *pQ = Manager->getQ(i);
       vQList.push_back(pQ->clone());
     }
 
   } catch (string Ex) {
-    Ex = "CQManager.clone()->" + Ex;
+    Ex = "CCatchabilityManager.clone()->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// CQManager::~CQManager()
+// CCatchabilityManager::~CCatchabilityManager()
 // Default De-Constructor
 //**********************************************************************
-CQManager::~CQManager() {
+CCatchabilityManager::~CCatchabilityManager() {
 }

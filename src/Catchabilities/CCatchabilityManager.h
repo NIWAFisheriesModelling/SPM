@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CQManager.h
+// Name        : CCatchabilityManager.h
 // Author      : S.Rasmussen
 // Date        : 28/04/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -13,35 +13,35 @@
 #include "../BaseClasses/CBaseObject.h"
 
 // Classes
-class CQ;
+class CCatchability;
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CQManager : public CBaseObject {
+class CCatchabilityManager : public CBaseObject {
 public:
-  static CQManager*         Instance();
+  static CCatchabilityManager*         Instance();
   static void               Destroy();
 
   // Functions
-  void                       addQ(CQ *Q);
+  void                       addQ(CCatchability *Q);
   int                        getQCount() { return vQList.size(); }
-  CQ*                        getQ(string label);
-  CQ*                        getQ(int index);
-  void                       clone(CQManager *Manager);
-  virtual                    ~CQManager();
+  CCatchability*                        getQ(string label);
+  CCatchability*                        getQ(int index);
+  void                       clone(CCatchabilityManager *Manager);
+  virtual                    ~CCatchabilityManager();
 
 protected:
   // Functions
-	CQManager();
+	CCatchabilityManager();
 
 	// Variables
-	vector<CQ*>                vQList;
+	vector<CCatchability*>                vQList;
 
 private:
   // Variables
-  static boost::thread_specific_ptr<CQManager> clInstance;
+  static boost::thread_specific_ptr<CCatchabilityManager> clInstance;
 };
 
 #endif /*CQMANAGER_H_*/
