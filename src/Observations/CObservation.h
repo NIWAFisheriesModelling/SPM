@@ -10,7 +10,7 @@
 #define COBSERVATION_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Classes
 class CStringLayer;
@@ -20,38 +20,27 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CObservation : public CBaseExecutableObject {
+class CObservation : public CBaseExecute {
 public:
   // Functions
-	CObservation(CObservation *Observation = 0);
+	CObservation();
 	virtual                    ~CObservation();
-  void                       setLabel(string value) { sLabel = value; }
-  string                     getLabel() { return sLabel; }
-  void                       setYear(int value) { iYear = value; }
   int                        getYear() { return iYear; }
-  void                       setTimeStep(int value) { iTimeStep = value; }
   int                        getTimeStep() { return iTimeStep; }
-  void                       setLayer(string value) { sLayer = value; }
   string                     getLayer() { return sLayer; }
-  void                       addCategory(string value);
   int                        getCategoryCount() { return vCategoryList.size(); }
   string                     getCategory(int index);
-  void                       addSelectivity(string value);
   int                        getSelectivityCount() { return vSelectivityList.size(); }
   string                     getSelectivity(int index);
-  void                       setDist(string value) { sDist = value; }
   string                     getDist() { return sDist; }
   double                     getScore() { return dScore; }
-  virtual void               addProportion(string Group, double Proportion) = 0;
-  virtual CObservation*      clone() = 0;
-  virtual void               validate();
+  virtual void               validate() { CBaseExecute::validate(); }
 	virtual void               build();
 	virtual void               execute() = 0;
 
 protected:
   // Variables
   double                     dScore;
-  string                     sLabel;
   int                        iYear;
   int                        iTimeStep;
   string                     sLayer;

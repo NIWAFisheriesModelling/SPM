@@ -12,8 +12,8 @@
 // Global Headers
 #include <string>
 
-// Forward Declaration
-class CProcess;
+// Local headers
+#include "../CProcess.h"
 
 // Namespaces
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CProcessFactory {
 public:
   // Functions
-  static CProcess*            buildProcess(string type);
+  static CProcess*            buildProcess(string type, bool registerWithManager = true);
 
 private:
   // Functions

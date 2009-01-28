@@ -10,7 +10,7 @@
 #define CPREFERENCEFUNCTION_H_
 
 // Local Includes
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 // Forward Decs
 class CNumericLayer;
@@ -19,17 +19,15 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CPreferenceFunction : public CBaseExecutableObject {
+class CPreferenceFunction : public CBaseBuild {
 public:
-  CPreferenceFunction(CPreferenceFunction *Process = 0);
+  CPreferenceFunction();
   virtual                     ~CPreferenceFunction();
-  virtual CPreferenceFunction*  clone() = 0;
   string                     getLayerName() { return sLayerName; }
   double                     getAlpha() { return dAlpha; }
   virtual double             getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) = 0;
   virtual void               validate();
   void                       build();
-  void                       execute();
 
 protected:
   // Variables

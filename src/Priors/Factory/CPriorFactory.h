@@ -12,8 +12,8 @@
 // Global headers
 #include <string>
 
-// Forward-Dec
-class CPrior;
+// Local headers
+#include "../CPrior.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CPriorFactory {
 public:
   // Functions
-  static CPrior*              buildPrior(string type);
+  static CPrior*              buildPrior(string type, bool registerWithManager = true);
 
 private:
   // Functions

@@ -11,19 +11,12 @@
 #include "CUniformPrior.h"
 
 //**********************************************************************
-// CUniformPrior::CUniformPrior(CUniformPrior *Prior = 0)
+// CUniformPrior::CUniformPrior()
 // Default Constructor
 //**********************************************************************
-CUniformPrior::CUniformPrior(CUniformPrior *Prior)
-: CPrior(Prior) {
-
-  // Vars
-  dC      = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dC  = Prior->getC();
-  }
+CUniformPrior::CUniformPrior() {
+  // Register allowed parameter
+  pParameterList->registerAllowed(PARAM_C);
 }
 
 //**********************************************************************
@@ -32,11 +25,24 @@ CUniformPrior::CUniformPrior(CUniformPrior *Prior)
 //**********************************************************************
 void CUniformPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Assign param
+    dC    = pParameterList->getDouble(PARAM_C);
 
   } catch (string Ex) {
     Ex = "CUniformPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+}
+
+//**********************************************************************
+// double CUniformPrior::getResult(double Param)
+// get the result from our prior
+//**********************************************************************
+double CUniformPrior::getResult(double Param) {
+  return dC; // TODO: Validate this is accurate?
 }
 
 //**********************************************************************

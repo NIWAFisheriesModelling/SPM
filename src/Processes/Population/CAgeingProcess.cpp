@@ -13,15 +13,12 @@
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CAgeingProcess::CAgeingProcess(CAgeingProcess *Process = 0)
+// CAgeingProcess::CAgeingProcess()
 // Default Constructor
 //**********************************************************************
-CAgeingProcess::CAgeingProcess(CAgeingProcess *Process)
-: CProcess(Process) {
-
+CAgeingProcess::CAgeingProcess() {
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
-
 }
 
 //**********************************************************************
@@ -75,8 +72,8 @@ void CAgeingProcess::execute() {
     // Loop through World Grid (i, j)
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
-        pBase       = pWorld->getBaseSquare(i, j);
-        if (!pBase->getEnabled())
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
           continue;
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
@@ -86,15 +83,15 @@ void CAgeingProcess::execute() {
         while (vPtr != vCategoryIndex.end()) {
 
           for (int k = 0; k < iBaseColCount; ++k) {
-            dCurrent = pBase->getValue( (*vPtr), k);
+            dCurrent = pBaseSquare->getValue( (*vPtr), k);
             if(CComparer::isZero(dCurrent))
                continue;
             pDiff->subValue( (*vPtr), k, dCurrent);
             pDiff->addValue( (*vPtr), (k+1), dCurrent);
           }
 
-          if (!pBase->getAgePlus())
-            pDiff->subValue( (*vPtr), iBaseColCount, pBase->getValue((*vPtr), iBaseColCount));
+          if (!pBaseSquare->getAgePlus())
+            pDiff->subValue( (*vPtr), iBaseColCount, pBaseSquare->getValue((*vPtr), iBaseColCount));
 
           vPtr++;
         }

@@ -10,21 +10,19 @@
 #define CLAYER_H_
 
 // Local Includes
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CLayer : public CBaseBuildableObject {
+class CLayer : public CBaseBuild {
 public:
-	CLayer(CLayer *Layer = 0);
+	CLayer();
   virtual                   ~CLayer();
-  virtual CLayer*           clone() = 0;
   int                       getWidth() { return iWidth; }
   int                       getHeight() { return iHeight; }
   virtual void              validate();
-  virtual void              build() = 0;
 
 protected:
   int                       iWidth;

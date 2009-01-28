@@ -19,17 +19,8 @@
 class CBetaPrior : public CPrior {
 public:
   // Functions
-  CBetaPrior(CBetaPrior *Prior = 0);
+  CBetaPrior();
   virtual                    ~CBetaPrior();
-  void                       setMu(double value) { dMu = value; }
-  double                     getMu() { return dMu; }
-  void                       setSigma(double value) { dSigma = value; }
-  double                     getSigma() { return dSigma; }
-  void                       setA(double value) { dA = value; }
-  double                     getA() { return dA; }
-  void                       setB(double value) { dB = value; }
-  double                     getB() { return dB; }
-  CPrior*                    clone() { return (new CBetaPrior(this)); }
   void                       validate();
   double                     getResult(double Param);
 
@@ -40,13 +31,12 @@ protected:
   double                     dA;
   double                     dB;
 
- private:
+private:
    // Variables
   double                     dV;
   double                     dT;
   double                     dM;
   double                     dN;
-
 };
 
 #endif /*CBETAPRIOR_H_*/

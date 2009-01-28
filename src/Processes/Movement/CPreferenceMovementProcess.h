@@ -12,6 +12,9 @@
 // Local headers
 #include "Base/CMovementProcess.h"
 
+// Classes
+class CPreferenceFunction;
+
 //**********************************************************************
 //
 //
@@ -19,12 +22,18 @@
 class CPreferenceMovementProcess : public CMovementProcess {
 public:
   // Functions
-  CPreferenceMovementProcess(CPreferenceMovementProcess *Process = 0);
+  CPreferenceMovementProcess();
   virtual                     ~CPreferenceMovementProcess();
-  CProcess*                  clone() { return (new CPreferenceMovementProcess(this)); }
-  void                       validate();
-  void                       build();
-  void                       execute();
+  CProcess*                   clone() { return (new CPreferenceMovementProcess(*this)); }
+  void                        validate();
+  void                        build();
+  void                        execute();
+
+protected:
+  // Variables
+  vector<string>                vDirectedProcessList;
+  vector<CPreferenceFunction*>  vDirectedProcessIndex;
+  double                        dRunningTotal;
 };
 
 #endif /* CPREFERENCEMOVEMENTPROCESS_H_ */

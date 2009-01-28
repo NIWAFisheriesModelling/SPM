@@ -22,8 +22,7 @@ using std::endl;
 // FMM::FMM(int n)
 // Default Constructor
 //**********************************************************************
-FMM::FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol, bool print)
-: CBaseObject(0) {
+FMM::FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol, bool print) {
 
   // Assign the Variables
   iVectorSize             = vectorSize;

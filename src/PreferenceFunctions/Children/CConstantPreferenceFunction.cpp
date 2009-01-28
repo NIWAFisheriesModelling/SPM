@@ -17,23 +17,7 @@
 // CConstantPreferenceFunction::CConstantPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CConstantPreferenceFunction::CConstantPreferenceFunction(CConstantPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-}
-
-//**********************************************************************
-// void CConstantPreferenceFunction::validate()
-// Validate
-//**********************************************************************
-void CConstantPreferenceFunction::validate() {
-  try {
-    // Base Val
-    CPreferenceFunction::validate();
-
-  } catch (string Ex) {
-    Ex = "CConstantPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+CConstantPreferenceFunction::CConstantPreferenceFunction() {
 }
 
 //**********************************************************************

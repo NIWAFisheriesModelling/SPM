@@ -11,11 +11,24 @@
 #include "CPrior.h"
 
 //**********************************************************************
-// CPrior::CPrior(CPrior *Prior = 0)
+// CPrior::CPrior()
 // Default Constructor
 //**********************************************************************
-CPrior::CPrior(CPrior *Prior)
-: CBaseObject(Prior) {
+CPrior::CPrior() {
+}
+
+//**********************************************************************
+// void CPrior::validate()
+// Validate
+//**********************************************************************
+void CPrior::validate() {
+  try {
+    // Base
+    CBaseValidate::validate();
+  } catch (string Ex) {
+    Ex = "CPrior.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

@@ -9,6 +9,7 @@
 
 // Global Headers
 #include <sstream>
+#include <iostream>
 
 // Local Headers
 #include "CConvertor.h"
@@ -16,6 +17,8 @@
 // Namespace
 using std::ostringstream;
 using std::stringstream;
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // string CConvertor::doubleToString(double value)
@@ -47,7 +50,7 @@ double CConvertor::stringToDouble(string value) {
   double dRet = 0.0;
   stringstream myStream(value);
   if (!(myStream >> dRet))
-    throw string("Invalid double");
+    throw string("Invalid double: " + value);
 
   return dRet;
 }

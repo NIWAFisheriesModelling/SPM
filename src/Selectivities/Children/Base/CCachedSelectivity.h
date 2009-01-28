@@ -9,8 +9,14 @@
 #ifndef CCACHEDSELECTIVITY_H_
 #define CCACHEDSELECTIVITY_H_
 
+// Global Headers
+#include <vector>
+
 // Local headers
 #include "../../CSelectivity.h"
+
+// Using
+using std::vector;
 
 //**********************************************************************
 //
@@ -18,7 +24,7 @@
 //**********************************************************************
 class CCachedSelectivity : public CSelectivity {
 public:
-  CCachedSelectivity(CCachedSelectivity *Selectivity = 0);
+  CCachedSelectivity();
   virtual                     ~CCachedSelectivity();
   void                        build();
   void                        rebuild();

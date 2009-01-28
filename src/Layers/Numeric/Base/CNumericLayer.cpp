@@ -12,33 +12,15 @@
 #include "../../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CNumericLayer::CNumericLayer(CNumericLayer *Layer = 0);
+// CNumericLayer::CNumericLayer();
 // Default Constructor
 //**********************************************************************
-CNumericLayer::CNumericLayer(CNumericLayer *Layer)
-: CLayer(Layer) {
+CNumericLayer::CNumericLayer() {
 
   // Default Variables
   dMin              = -1.0;
   dMax              = -1.0;
-
-  // Allocate Space for our X (Width)
-  pGrid = new double*[iHeight];
-
-  // For Each X Add A Y (Width)
-  for (int i = 0; i < iHeight; ++i) {
-    pGrid[i] = new double[iWidth];
-  }
-
-  for (int i = 0; i < iHeight; ++i)
-    for (int j = 0; j < iWidth; ++j)
-      pGrid[i][j] = -1;
-
-  // Copy Construct
-  if (Layer != 0) {
-    dMin = Layer->getMin();
-    dMax = Layer->getMax();
-  }
+  pGrid             = 0;
 }
 
 //**********************************************************************
@@ -91,6 +73,11 @@ void CNumericLayer::validate() {
   try {
     // Base Validate
     CLayer::validate();
+
+    // Allocate Space for our X (Width)
+    pGrid = new double*[iHeight];
+    for (int i = 0; i < iHeight; ++i)
+      pGrid[i] = new double[iWidth];
 
   } catch (string Ex) {
     Ex = "CNumericLayer.validate(" + getLabel() + ")->" + Ex;

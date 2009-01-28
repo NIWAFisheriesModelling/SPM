@@ -14,23 +14,12 @@
 // CBetaPrior::CBetaPrior(CBetaPrior *Prior)
 // Default Constructor
 //**********************************************************************
-CBetaPrior::CBetaPrior(CBetaPrior *Prior)
-: CPrior(Prior) {
-
-  // Variables
-  dMu       = 0.0;
-  dSigma    = 0.0;
-  dA        = 0.0;
-  dB        = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dMu     = Prior->getMu();
-    dSigma  = Prior->getSigma();
-    dA      = Prior->getA();
-    dB      = Prior->getB();
-  }
-
+CBetaPrior::CBetaPrior() {
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_SIGMA);
+  pParameterList->registerAllowed(PARAM_A);
+  pParameterList->registerAllowed(PARAM_B);
 }
 
 //**********************************************************************
@@ -39,6 +28,14 @@ CBetaPrior::CBetaPrior(CBetaPrior *Prior)
 //**********************************************************************
 void CBetaPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Assign our parameters
+    dMu     = pParameterList->getDouble(PARAM_MU);
+    dSigma  = pParameterList->getDouble(PARAM_SIGMA);
+    dA      = pParameterList->getDouble(PARAM_A);
+    dB      = pParameterList->getDouble(PARAM_B);
 
   } catch (string Ex) {
     Ex = "CBetaPrior.validate(" + getLabel() + ")->" + Ex;

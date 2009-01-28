@@ -18,7 +18,7 @@
 // CGammaDiffCallback::CGammaDiffCallback()
 // Default Constructor
 //**********************************************************************
-CGammaDiffCallback::CGammaDiffCallback() : CBaseObject(0) {
+CGammaDiffCallback::CGammaDiffCallback() {
 
   // Vars
   pEstimateManager    = CEstimateManager::Instance();

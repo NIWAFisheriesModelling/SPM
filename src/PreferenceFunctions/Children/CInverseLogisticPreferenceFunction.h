@@ -19,9 +19,8 @@
 class CInverseLogisticPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
-	CInverseLogisticPreferenceFunction(CInverseLogisticPreferenceFunction *Process = 0);
+	CInverseLogisticPreferenceFunction();
 	virtual                    ~CInverseLogisticPreferenceFunction();
-  CPreferenceFunction*       clone() { return (new CInverseLogisticPreferenceFunction(this)); }
 	double                     getA50() { return dA50; }
 	double                     getAto95() { return dAto95; }
 	double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);

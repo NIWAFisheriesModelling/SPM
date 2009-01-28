@@ -54,70 +54,70 @@ void CWorldGridPrintState::validate() {
 // Execute
 //**********************************************************************
 void CWorldGridPrintState::execute() {
-  try {
-    if (eState == STATE_MODELLING) {
-      CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
-      // Check if it's the right time.
-      if (pTimeStepManager->getCurrentYear() == iYear) {
-        if (pTimeStepManager->getCurrentTimeStep() != iStep)
-          return;
-      } else
-        return;
-    }
-
-    // Variables
-    int         iSquareHeight   = -1;
-    int         iSquareWidth    = -1;
-
-    // Open Stream/File
-    openStream();
-
-    // Print Out
-    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-    cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;
-    cout << PARAM_COLUMN << CONFIG_SEPERATOR_ESTIMATE_VALUES,
-    cout << PARAM_CATEGORY;
-    for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {
-      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << PARAM_AGE;
-      cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
-    }
-    cout << "\n";
-
-    for (int i = 0; i < iWorldHeight; ++i) {
-      for (int j = 0; j < iWorldWidth; ++j) {
-        // Get Current Square
-        CWorld *pWorld2 = CWorld::Instance();
-        pBase = pWorld2->getBaseSquare(i, j);
-
-        // If not set, Set our SquareHeight/Width
-        if (iSquareHeight == -1) {
-          iSquareHeight = pBase->getHeight();
-          iSquareWidth  = pBase->getWidth();
-        }
-
-        if (!pBase->getEnabled())
-          continue;
-
-        // Loop Through
-        for (int k = 0; k < iSquareHeight; ++k) {
-          cout << i+1 << CONFIG_SEPERATOR_ESTIMATE_VALUES << j+1 << "," << pWorld->getCategoryNameForIndex(k);
-          for (int l = 0; l < iSquareWidth; ++l) {
-            cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << pBase->getValue(k, l);
-          }
-          cout << "\n";
-        }
-      }
-    }
-
-    cout << endl;
-
-    // Close our Stream
-    closeStream();
-
-  } catch (string Ex) {
-    Ex = "CWorldGridPrintState.execute(" + sLabel + ")->" + Ex;
-    throw Ex;
-  }
+//  try {
+//    if (eState == STATE_MODELLING) {
+//      CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
+//      // Check if it's the right time.
+//      if (pTimeStepManager->getCurrentYear() == iYear) {
+//        if (pTimeStepManager->getCurrentTimeStep() != iStep)
+//          return;
+//      } else
+//        return;
+//    }
+//
+//    // Variables
+//    int         iSquareHeight   = -1;
+//    int         iSquareWidth    = -1;
+//
+//    // Open Stream/File
+//    openStream();
+//
+//    // Print Out
+//    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+//    cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+//    cout << PARAM_COLUMN << CONFIG_SEPERATOR_ESTIMATE_VALUES,
+//    cout << PARAM_CATEGORY;
+//    for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {
+//      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << PARAM_AGE;
+//      cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
+//    }
+//    cout << "\n";
+//
+//    for (int i = 0; i < iWorldHeight; ++i) {
+//      for (int j = 0; j < iWorldWidth; ++j) {
+//        // Get Current Square
+//        CWorld *pWorld2 = CWorld::Instance();
+//        pBase = pWorld2->getBaseSquare(i, j);
+//
+//        // If not set, Set our SquareHeight/Width
+//        if (iSquareHeight == -1) {
+//          iSquareHeight = pBase->getHeight();
+//          iSquareWidth  = pBase->getWidth();
+//        }
+//
+//        if (!pBase->getEnabled())
+//          continue;
+//
+//        // Loop Through
+//        for (int k = 0; k < iSquareHeight; ++k) {
+//          cout << i+1 << CONFIG_SEPERATOR_ESTIMATE_VALUES << j+1 << "," << pWorld->getCategoryNameForIndex(k);
+//          for (int l = 0; l < iSquareWidth; ++l) {
+//            cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << pBase->getValue(k, l);
+//          }
+//          cout << "\n";
+//        }
+//      }
+//    }
+//
+//    cout << endl;
+//
+//    // Close our Stream
+//    closeStream();
+//
+//  } catch (string Ex) {
+//    Ex = "CWorldGridPrintState.execute(" + sLabel + ")->" + Ex;
+//    throw Ex;
+//  }
 }
 
 //**********************************************************************

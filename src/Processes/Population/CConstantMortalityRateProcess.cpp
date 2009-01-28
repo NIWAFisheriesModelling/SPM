@@ -11,11 +11,10 @@
 #include "CConstantMortalityRateProcess.h"
 
 //**********************************************************************
-// CConstantMortalityRateProcess::CConstantMortalityRateProcess(CConstantMortalityRateProcess *Process)
+// CConstantMortalityRateProcess::CConstantMortalityRateProcess()
 // Default Constructor
 //**********************************************************************
-CConstantMortalityRateProcess::CConstantMortalityRateProcess(CConstantMortalityRateProcess *Process)
-: CProcess(Process) {
+CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
   throw string("Not yet implemented"); // TODO: Implement this
 }
 

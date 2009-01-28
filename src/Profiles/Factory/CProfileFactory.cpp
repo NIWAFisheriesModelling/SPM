@@ -9,19 +9,24 @@
 
 // Local headers
 #include "CProfileFactory.h"
-#include "../../Translations/Translations.h"
+#include "../CProfileManager.h"
 #include "../CProfile.h"
 
 //**********************************************************************
 // CProfile* CProfileFactory::buildProfile(string type)
 // Build a profile based on type
 //**********************************************************************
-CProfile* CProfileFactory::buildProfile(string type) {
+CProfile* CProfileFactory::buildProfile(string type, bool registerWithManager) {
 
-  if (type == PARAM_BASIC)
-    return new CProfile();
+  CProfile *pProfile = 0;
+
+  if (type == "")
+    pProfile = new CProfile();
   else
     throw string("Unknown type: " + type);
 
-  return 0;
+  if (registerWithManager)
+    CProfileManager::Instance()->addProfile(pProfile);
+
+  return pProfile;
 }

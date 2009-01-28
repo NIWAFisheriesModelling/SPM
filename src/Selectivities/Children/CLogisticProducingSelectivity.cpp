@@ -9,15 +9,12 @@
 
 // Local Headers
 #include "CLogisticProducingSelectivity.h"
-#include "../../Helpers/CError.h"
 
 //**********************************************************************
-// CLogisticproducingSelectivity::CLogisticProducingSelectivity(CLogisticProducingSelectivity *Selectivity = 0)
+// CLogisticproducingSelectivity::CLogisticProducingSelectivity()
 // Default Constructor
 //**********************************************************************
-CLogisticProducingSelectivity::CLogisticProducingSelectivity(CLogisticProducingSelectivity *Selectivity)
-: CCachedSelectivity(Selectivity) {
-
+CLogisticProducingSelectivity::CLogisticProducingSelectivity() {
   // Register estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);

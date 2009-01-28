@@ -13,7 +13,7 @@
 #include <boost/numeric/ublas/matrix.hpp>
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Classes
 class CRuntimeThread;
@@ -24,7 +24,7 @@ using namespace boost::numeric;
 //
 //
 //**********************************************************************
-class CMCMC : public CBaseExecutableObject {
+class CMCMC : public CBaseExecute {
 public:
   static CMCMC*              Instance();
   static void                Destroy();

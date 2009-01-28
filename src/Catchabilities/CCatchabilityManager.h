@@ -10,7 +10,7 @@
 #define CQMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CCatchability;
@@ -19,17 +19,19 @@ class CCatchability;
 //
 //
 //**********************************************************************
-class CCatchabilityManager : public CBaseObject {
+class CCatchabilityManager : public CBaseManager {
 public:
-  static CCatchabilityManager*         Instance();
-  static void               Destroy();
+  static CCatchabilityManager*    Instance();
+  static void                     Destroy();
 
   // Functions
-  void                       addQ(CCatchability *Q);
-  int                        getQCount() { return vQList.size(); }
-  CCatchability*                        getQ(string label);
-  CCatchability*                        getQ(int index);
+  void                       addCatchability(CCatchability *Q);
+  int                        getCatchabilityCount() { return vCatchabilityList.size(); }
+  CCatchability*             getCatchability(string label);
+  CCatchability*             getCatchability(int index);
   void                       clone(CCatchabilityManager *Manager);
+  void                       validate();
+  void                       build() { }
   virtual                    ~CCatchabilityManager();
 
 protected:
@@ -37,7 +39,7 @@ protected:
 	CCatchabilityManager();
 
 	// Variables
-	vector<CCatchability*>                vQList;
+	vector<CCatchability*>                vCatchabilityList;
 
 private:
   // Variables

@@ -140,10 +140,9 @@ SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index) {
 //**********************************************************************
 void CPenaltyManager::clone(CPenaltyManager *Manager) {
   try {
-
     for (int i = 0; i < Manager->getPenaltyCount(); ++i) {
       CPenalty *pPenalty = Manager->getPenalty(i);
-      vPenaltyList.push_back(pPenalty->clone());
+      vPenaltyList.push_back( new CPenalty(*pPenalty) );
     }
 
   } catch (string Ex) {
@@ -164,23 +163,6 @@ void CPenaltyManager::validate() {
 
   } catch (string Ex) {
     Ex = "CPenaltyManager.validate()->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
-// void CPenaltyManager::build()
-// build
-//**********************************************************************
-void CPenaltyManager::build() {
-  try {
-    // Loop and build
-    foreach(CPenalty *Penalty, vPenaltyList) {
-      Penalty->build();
-    }
-
-  } catch (string Ex) {
-    Ex = "CPenaltyManager.build()->" + Ex;
     throw Ex;
   }
 }

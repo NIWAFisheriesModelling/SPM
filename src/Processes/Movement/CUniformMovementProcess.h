@@ -18,9 +18,9 @@
 //**********************************************************************
 class CUniformMovementProcess : public CMovementProcess {
 public:
-	CUniformMovementProcess(CUniformMovementProcess *Process = 0);
+	CUniformMovementProcess();
 	virtual                    ~CUniformMovementProcess();
-	CProcess*                  clone() { return (new CUniformMovementProcess(this)); }
+	CProcess*                  clone() { return (new CUniformMovementProcess(*this)); }
 	void                       validate();
 	void                       build();
 	void                       execute();

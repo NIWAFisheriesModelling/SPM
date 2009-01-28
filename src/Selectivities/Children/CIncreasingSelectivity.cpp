@@ -11,17 +11,14 @@
 #include "CIncreasingSelectivity.h"
 
 //**********************************************************************
-// CIncreasingSelectivity::CIncreasingSelectivity(CIncreasingSelectivity *Selectivity)
+// CIncreasingSelectivity::CIncreasingSelectivity()
 // Default constructor
 //**********************************************************************
-CIncreasingSelectivity::CIncreasingSelectivity(CIncreasingSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
+CIncreasingSelectivity::CIncreasingSelectivity() {
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_L);
   pParameterList->registerAllowed(PARAM_H);
   pParameterList->registerAllowed(PARAM_V);
-
 }
 
 //**********************************************************************

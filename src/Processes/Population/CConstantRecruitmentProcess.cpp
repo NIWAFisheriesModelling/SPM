@@ -18,12 +18,7 @@
 // CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
 // Default Constructor
 //**********************************************************************
-CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
-: CProcess(Process) {
-
-  // Vars
-  dR0                         = 0.0;
-
+CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   // Register allowed estimatbles
   registerEstimable(PARAM_R0, &dR0);
 
@@ -33,54 +28,6 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentPro
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
   pParameterList->registerAllowed(PARAM_AGES);
   pParameterList->registerAllowed(PARAM_LAYER_NAME);
-}
-
-//**********************************************************************
-// void CConstantRecruitmentProcess::addProportion(double value)
-// Add A Proportion To Our List
-//**********************************************************************
-void CConstantRecruitmentProcess::addProportion(double value) {
-  vProportionList.push_back(value);
-
-  int size = (int)vProportionList.size();
-  registerEstimable(PARAM_PROPORTION, size, &vProportionList[size-1]);
-}
-
-//**********************************************************************
-// double CConstantRecruitmentProcess::getProportion(int index)
-// Get proportion from vector @ age
-//**********************************************************************
-double CConstantRecruitmentProcess::getProportion(int index) {
-  try {
-    if (index >= (int)vProportionList.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROPORTIONS);
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-    return vProportionList[index];
-
-  } catch (string Ex) {
-    Ex = "CRecruitmentProcess.getProportion()->" + Ex;
-    throw Ex;
-  }
-
-  return 0.0;
-}
-
-//**********************************************************************
-// void CConstantRecruitmentProcess::addAges(int value)
-// Add Ages, These Match our Categories 1-1
-//**********************************************************************
-void CConstantRecruitmentProcess::addAges(int value) {
-  vAgesList.push_back(value);
-}
-
-//**********************************************************************
-// int CConstantRecruitmentProcess::getAges(int index)
-// Get an ages element from our vector @ index
-//**********************************************************************
-int CConstantRecruitmentProcess::getAges(int index) {
-  return vAgesList[index];
 }
 
 //**********************************************************************
@@ -100,6 +47,7 @@ void CConstantRecruitmentProcess::validate() {
     pParameterList->fillVector(vAgesList, PARAM_AGES);
 
     // TODO: Add check to ensure vector sizes are the same.
+    // TODO: Register Proportions as Estimable
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
@@ -168,9 +116,9 @@ void CConstantRecruitmentProcess::execute() {
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square, and Difference Equal
-        pBase       = pWorld->getBaseSquare(i, j);
+        pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check if this square is enabled or not.
-        if (!pBase->getEnabled())
+        if (!pBaseSquare->getEnabled())
           continue;
         if ( (bDependsOnLayer) && (!pLayer->checkSpace(i, j)) )
           continue;

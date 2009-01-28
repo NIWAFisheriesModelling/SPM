@@ -10,19 +10,13 @@
 // Local Headers
 #include "CThresholdPreferenceFunction.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CThresholdPreferenceFunction::CThresholdPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CThresholdPreferenceFunction::CThresholdPreferenceFunction(CThresholdPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-  // Variables
-  dN       = -1.0;
-  dLambda  = -1.0;
-
+CThresholdPreferenceFunction::CThresholdPreferenceFunction() {
   // Register estimables
   registerEstimable(PARAM_N, &dN);
   registerEstimable(PARAM_LAMBDA, &dLambda);

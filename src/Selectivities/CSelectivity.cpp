@@ -14,23 +14,15 @@
 // CSelectivity::CSelectivity(CSelectivity *Selectivity = 0);
 // Default Constructor
 //**********************************************************************
-CSelectivity::CSelectivity(CSelectivity *Selectivity)
-: CBaseExecutableObject(Selectivity) {
+CSelectivity::CSelectivity() {
 }
 
 //**********************************************************************
 // void CSelectivity::validate()
-// Validate
+// Validate Selectivity
 //**********************************************************************
 void CSelectivity::validate() {
-  try {
-    // Base
-    CBaseExecutableObject::validate();
-
-  } catch (string Ex) {
-    Ex = "CSelectivity.validate(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+  CBaseValidate::validate();
 }
 
 //**********************************************************************

@@ -21,12 +21,12 @@ class CPreferenceFunction;
 //**********************************************************************
 class CDirectedMovementProcess : public CMovementProcess {
 public:
-  CDirectedMovementProcess(CDirectedMovementProcess *Process = 0);
+  CDirectedMovementProcess();
   virtual                    ~CDirectedMovementProcess();
   void                       addDirectedProcess(string value);
   int                        getDirectedProcessCount() { return (int)vDirectedProcessList.size(); }
   string                     getDirectedProcess(int index);
-  CProcess*                  clone() { return (new CDirectedMovementProcess(this)); }
+  CProcess*                  clone() { return (new CDirectedMovementProcess(*this)); }
   void                       validate();
   void                       build();
   void                       execute();

@@ -19,9 +19,8 @@
 class CBiomassEventMortalityProcess : public CProcess {
 public:
   // Functions
-  CBiomassEventMortalityProcess(CBiomassEventMortalityProcess *Process = 0);
+  CBiomassEventMortalityProcess();
   virtual                     ~CBiomassEventMortalityProcess();
-  CProcess*                   clone() { return (new CBiomassEventMortalityProcess(this)); }
   void                        validate();
   void                        build();
   void                        execute();

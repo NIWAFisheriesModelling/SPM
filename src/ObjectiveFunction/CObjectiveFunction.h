@@ -10,7 +10,7 @@
 #define COBJECTIVEFUNCTION_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Structs
 struct SScore {
@@ -22,7 +22,7 @@ struct SScore {
 //
 //
 //**********************************************************************
-class CObjectiveFunction : public CBaseExecutableObject {
+class CObjectiveFunction : public CBaseExecute {
 public:
   static CObjectiveFunction* Instance();
   static void                Destroy();

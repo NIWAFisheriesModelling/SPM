@@ -19,7 +19,7 @@
 class CNumericLayer : public CLayer {
 public:
   // Functions
-	CNumericLayer(CNumericLayer *Layer = 0);
+	CNumericLayer();
 	virtual                  ~CNumericLayer();
   void                      setMin(double value) { dMin = value; }
   double                    getMin() { return dMin; }

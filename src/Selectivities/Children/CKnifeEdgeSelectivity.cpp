@@ -11,12 +11,10 @@
 #include "CKnifeEdgeSelectivity.h"
 
 //**********************************************************************
-// CKnifeEdgeSelectivity::CKnifeEdgeSelectivity(CKnifeEdgeSelectivity *Selectivity = 0)
+// CKnifeEdgeSelectivity::CKnifeEdgeSelectivity()
 // Default Constructor
 //**********************************************************************
-CKnifeEdgeSelectivity::CKnifeEdgeSelectivity(CKnifeEdgeSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
+CKnifeEdgeSelectivity::CKnifeEdgeSelectivity() {
   // Register estimable
   registerEstimable(PARAM_E, &dE);
 

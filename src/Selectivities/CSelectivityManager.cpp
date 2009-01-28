@@ -127,11 +127,11 @@ CSelectivity* CSelectivityManager::getSelectivity(int index) {
 void CSelectivityManager::clone(CSelectivityManager *Manager) {
   try {
 
-    for (int i = 0; i < Manager->getSelectivityCount(); ++i) {
-      CSelectivity *pSelectivity = Manager->getSelectivity(i);
-      vSelectivityList.push_back(pSelectivity->clone());
-    }
-
+//    for (int i = 0; i < Manager->getSelectivityCount(); ++i) {
+//      CSelectivity *pSelectivity = Manager->getSelectivity(i);
+//      vSelectivityList.push_back(pSelectivity->clone());
+//    }
+    // TODO: Fix Clones
   } catch (string Ex) {
     Ex = "CSelectivityManager.clone()->" + Ex;
     throw Ex;
@@ -144,20 +144,18 @@ void CSelectivityManager::clone(CSelectivityManager *Manager) {
 //**********************************************************************
 void CSelectivityManager::validate() {
   try {
-    // Variables
-    map<string, int>                  mSelectivityList;
+    // Validate
+    foreach(CSelectivity *Selectivity, vSelectivityList) {
+      Selectivity->validate();
+    }
 
     // Check For duplicate labels
+    map<string, int>                  mSelectivityList;
     foreach(CSelectivity *Selectivity, vSelectivityList) {
       mSelectivityList[Selectivity->getLabel()] += 1;
 
       if (mSelectivityList[Selectivity->getLabel()] > 1)
         throw string(ERROR_DUPLICATE_LABEL + Selectivity->getLabel());
-    }
-
-    // Validate
-    foreach(CSelectivity *Selectivity, vSelectivityList) {
-      Selectivity->validate();
     }
   } catch(string Ex) {
     Ex  = "CSelectivityManager.validate()->" + Ex;

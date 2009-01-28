@@ -18,35 +18,26 @@
 //**********************************************************************
 class CProportionsByCategoryObservation : public CObservation {
 public:
-	CProportionsByCategoryObservation(CProportionsByCategoryObservation *Observation = 0);
+	CProportionsByCategoryObservation();
 	virtual                    ~CProportionsByCategoryObservation();
-	void                       addProportion(string Group, double Proportion);
 	int                        getProportionCount() { return (int)mvProportionMatrix.size(); }
 	string                     getProportionKey(int index);
 	int                        getProportionKeyCount(string key);
 	double                     getProportionValue(string key, int index);
-  void                       addN(string key, double value);
   int                        getNCount() { return mvN.size(); }
   string                     getNKey(int index);
   int                        getNKeyValueCount(string key);
   double                     getNValue(string key, int index);
   void                       setNProcessError(double value) { dNProcessError = value; }
   double                     getNProcessError() { return dNProcessError; }
-  void                       addPopulationCategory(string value);
   int                        getPopulationCategoryCount() { return vPopulationCategoryList.size(); }
   string                     getPopulationCategory(int index);
-  void                       setMinAge(int value) { iMinAge = value; }
   int                        getMinAge() { return iMinAge; }
-  void                       setMaxAge(int value) { iMaxAge = value; }
   int                        getMaxAge() { return iMaxAge; }
-  void                       setAgePlus(bool value) { bAgePlus = value; }
   bool                       getAgePlus() { return bAgePlus; }
-  void                       setR(double value) { dR = value; }
   double                     getR() { return dR; }
-  void                       addPopulationSelectivity(string value);
   int                        getPopulationSelectivityCount() { return vPopulationSelectivityList.size(); }
   string                     getPopulationSelectivity(int index);
-  CObservation*              clone() { return (new CProportionsByCategoryObservation(this)); }
   void                       validate();
   void                       build();
   void                       execute();

@@ -11,12 +11,10 @@
 #include "CAllValuesSelectivity.h"
 
 //**********************************************************************
-// CAllValuesSelectivity::CAllValuesSelectivity(CAllValuesSelectivity *Selectivity)
+// CAllValuesSelectivity::CAllValuesSelectivity()
 // Default constructor
 //**********************************************************************
-CAllValuesSelectivity::CAllValuesSelectivity(CAllValuesSelectivity *Selectivity)
-:CSelectivity(Selectivity) {
-
+CAllValuesSelectivity::CAllValuesSelectivity() {
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_V);
 }

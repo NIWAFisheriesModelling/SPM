@@ -19,13 +19,8 @@
 class CLogNormalPrior : public CPrior {
 public:
   // Functions
-  CLogNormalPrior(CLogNormalPrior *Prior = 0);
+  CLogNormalPrior();
   virtual                     ~CLogNormalPrior();
-  void                        setMu(double value) { dMu = value; }
-  double                      getMu() { return dMu; }
-  void                        setCv(double value) { dCv = value; }
-  double                      getCv() { return dCv; }
-  CPrior*                     clone() { return (new CLogNormalPrior(this)); }
   void                        validate();
   double                      getResult(double Param);
 

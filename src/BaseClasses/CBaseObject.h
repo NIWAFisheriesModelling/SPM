@@ -12,7 +12,6 @@
 
 // Global Headers
 #include <map>
-#include <boost/thread/tss.hpp>
 
 // Local Headers
 #include "ParameterList/CParameterList.h"
@@ -23,19 +22,14 @@
 // Namespaces
 using std::map;
 
-
-
-
 //**********************************************************************
 //
 //
 //**********************************************************************
 class CBaseObject {
 public:
-	CBaseObject(CBaseObject *Object = 0);
+	CBaseObject();
 	virtual                    ~CBaseObject();
-	void                       setLabel(string value) { sLabel = value; }
-	string                     getLabel() { return sLabel; }
 	double*                    getEstimableVariable(string name);
 	void                       addParameter(string name, string value);
 
@@ -48,7 +42,6 @@ protected:
   CConfiguration                *pConfig;
   CRuntimeController            *pRuntimeController;
   CParameterList                *pParameterList;
-  string                        sLabel;
   map<string, double*>          mEstimables;
 };
 

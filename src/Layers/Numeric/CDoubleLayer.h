@@ -19,13 +19,13 @@
 class CDoubleLayer : public CNumericLayer  {
 public:
   // Functions
-	CDoubleLayer(CDoubleLayer *Layer = 0);
+	CDoubleLayer();
 	virtual                    ~CDoubleLayer();
 	double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       setValue(int Row, int Col, double Value);
   bool                       checkSpace(int RowIndex, int ColIndex);
   int                        countValidSpaces();
-  CLayer*                    clone() { return (new CDoubleLayer(this)); }
+  CLayer*                    clone() { return (new CDoubleLayer(*this)); }
   void                       validate();
   void                       build();
 

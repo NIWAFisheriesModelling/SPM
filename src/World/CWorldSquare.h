@@ -22,8 +22,7 @@
 class CWorldSquare : public CBaseObject {
 public:
   // Functions
-  CWorldSquare(CWorldSquare *WorldSquare = 0);
-                             CWorldSquare(int NumberOfCategories, int MinAge, int MaxAge, bool AgePlus);
+  CWorldSquare();
 	virtual                    ~CWorldSquare();
 	void                       setEnabled(bool value) { bEnabled = value; }
 	bool                       getEnabled() { return bEnabled; }

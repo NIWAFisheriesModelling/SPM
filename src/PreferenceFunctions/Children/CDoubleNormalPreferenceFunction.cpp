@@ -17,14 +17,7 @@
 // CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction(CDoubleNormalPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-
-  // Variables
-  dSigmaL       = -1.0;
-  dSigmaR       = -1.0;
-  dMu           = -1.0;
-
+CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction() {
   // Register our Estimables
   registerEstimable(PARAM_SIGMA_L, &dSigmaL);
   registerEstimable(PARAM_SIGMA_R, &dSigmaR);

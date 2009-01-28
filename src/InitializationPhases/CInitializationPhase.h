@@ -10,7 +10,7 @@
 #define CINITIALIZATIONPHASE_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Classes
 class CProcess;
@@ -19,12 +19,11 @@ class CProcess;
 //
 //
 //**********************************************************************
-class CInitializationPhase : public CBaseExecutableObject {
+class CInitializationPhase : public CBaseExecute {
 public:
-  CInitializationPhase(CInitializationPhase *Phase = 0);
+  CInitializationPhase();
   virtual                     ~CInitializationPhase();
-  CInitializationPhase*       clone() { return (new CInitializationPhase(this)); }
-  int                         getYears() { return iYears; }
+  CInitializationPhase*       clone() { return (new CInitializationPhase(*this)); }
   void                        validate();
   void                        build();
   void                        execute();

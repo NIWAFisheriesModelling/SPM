@@ -19,11 +19,9 @@
 class CStringLayer : public CLayer {
 public:
   // Functions
-	CStringLayer(CStringLayer *Layer = 0);
+	CStringLayer();
 	virtual                    ~CStringLayer();
-	void                       setValue(int Row, int Col, string Value);
 	string                     getValue(int RowIndex, int ColIndex);
-	CLayer*                    clone() { return (new CStringLayer(this)); }
 	void                       validate();
 	void                       build() { };
 

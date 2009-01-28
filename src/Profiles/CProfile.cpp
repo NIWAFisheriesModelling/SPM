@@ -17,11 +17,10 @@
 #include "../Helpers/CComparer.h"
 
 //**********************************************************************
-// CProfile::CProfile(CProfile *Profile = 0)
+// CProfile::CProfile()
 // Default Constructor
 //**********************************************************************
-CProfile::CProfile(CProfile *Profile)
-: CBaseBuildableObject(Profile) {
+CProfile::CProfile() {
 
   // Vars
   dN            = 0.0;
@@ -30,15 +29,6 @@ CProfile::CProfile(CProfile *Profile)
   dCurrent      = 0.0;
   sParameter    = "";
   pTarget       = 0;
-
-  // Copy Construct
-  if (Profile != 0) {
-    dN          = Profile->getN();
-    dL          = Profile->getL();
-    dU          = Profile->getU();
-    dCurrent    = Profile->getCurrent();
-    sParameter  = Profile->getParameter();
-  }
 }
 
 //**********************************************************************

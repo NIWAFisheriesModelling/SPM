@@ -13,7 +13,7 @@
 #include "../CObservation.h"
 
 // Classes
-class CQ;
+class CCatchability;
 
 //**********************************************************************
 //
@@ -22,21 +22,16 @@ class CQ;
 class CAbundanceObservation : public CObservation {
 public:
   // Functions
-	CAbundanceObservation(CAbundanceObservation *Observation = 0);
+	CAbundanceObservation();
 	virtual                    ~CAbundanceObservation();
-  void                       addProportion(string Group, double Proportion);
   int                        getProportionCount() { return (int)mvProportionMatrix.size(); }
   string                     getProportionKey(int index);
   double                     getProportionValue(string key);
-  void                       addCV(string Group, double Value);
   int                        getCVCount() { return (int)mvCVMatrix.size(); }
   string                     getCVKey(int index);
   double                     getCVValue(string key);
-  void                       setQ(string value) { sQ = value; }
   string                     getQ() { return sQ; }
-  void                       setCVProcessError(double value) { dCVProcessError = value; }
   double                     getCVProcessError() { return dCVProcessError; }
-  CObservation*              clone() { return (new CAbundanceObservation(this)); }
   void                       validate();
   void                       build();
   void                       execute();
@@ -46,7 +41,7 @@ protected:
   map<string, double>        mvProportionMatrix;
   map<string, double>        mvCVMatrix;
   string                     sQ;
-  CQ                         *pQ;
+  CCatchability              *pQ;
   double                     dSigma;
   double                     dCVProcessError;
 };

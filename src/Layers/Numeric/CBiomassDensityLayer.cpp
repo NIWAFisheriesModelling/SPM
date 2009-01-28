@@ -11,11 +11,10 @@
 #include "CBiomassDensityLayer.h"
 
 //**********************************************************************
-// CBiomassDensityLayer::CBiomassDensityLayer(CBiomassDensityLayer *Layer)
+// CBiomassDensityLayer::CBiomassDensityLayer()
 // Default constructor
 //**********************************************************************
-CBiomassDensityLayer::CBiomassDensityLayer(CBiomassDensityLayer *Layer)
-: CNumericLayer(Layer) {
+CBiomassDensityLayer::CBiomassDensityLayer() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);

@@ -82,7 +82,6 @@ CTimeStep* CTimeStepManager::getTimeStep(int index) {
 //**********************************************************************
 void CTimeStepManager::clone(CTimeStepManager *Manager) {
   try {
-
     for (int i = 0; i < Manager->getTimeStepCount(); ++i) {
       CTimeStep *pTimeStep = Manager->getTimeStep(i);
       vTimeStepList.push_back(pTimeStep->clone());
@@ -100,6 +99,9 @@ void CTimeStepManager::clone(CTimeStepManager *Manager) {
 //**********************************************************************
 void CTimeStepManager::validate() {
   try {
+    if ((int)vTimeStepList.size() == 0)
+      throw string("No time steps loaded"); // TODO: Add Translation
+
     // Call TimeStep Validations
     foreach( CTimeStep *TimeStep, vTimeStepList) {
       TimeStep->validate();
@@ -136,17 +138,19 @@ void CTimeStepManager::build() {
 // void CTimeStepManager::executeTimeSteps(int Step)
 // Execute Our TimeSteps
 //**********************************************************************
-void CTimeStepManager::execute(int Year, int Step) {
+void CTimeStepManager::execute() {
 #ifndef OPTIMISE
   try {
     if (Step > (int)vTimeStepList.size())
       throw string(ERROR_INVALID_TIME_STEP + CConvertor::intToString(Step));
 #endif
-    iCurrentYear     = Year;
-    iCurrentTimeStep = Step;
+    //iCurrentYear     = Year;
+    //iCurrentTimeStep = Step;
 
     // Execute
-    vTimeStepList[(Step-1)]->execute();
+    //vTimeStepList[(Step-1)]->execute();
+
+    // Loop through timesteps, and call observations and reporters.
 
 #ifndef OPTIMISE
   } catch (string Ex) {

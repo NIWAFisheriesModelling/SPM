@@ -10,25 +10,19 @@
 #define CPENALTY_H_
 
 // Local
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseValidate.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CPenalty : public CBaseBuildableObject {
+class CPenalty : public CBaseValidate {
 public:
   // Functions
-	CPenalty(CPenalty *Penalty = 0);
+	CPenalty();
 	virtual                    ~CPenalty();
-	void                       setLogScale(bool value){ bLogScale = value; }
-	bool                       getLogScale() { return bLogScale; }
-	void                       setMultiplier(double value) { dMultiplier = value; }
-	double                     getMultiplier() { return dMultiplier; }
-	CPenalty*                  clone() { return (new CPenalty(this)); }
 	void                       validate();
-	void                       build();
-	void                       execute(string Label, double Value);
+	void                       trigger(string Label, double Value);
 
 protected:
   // Variables

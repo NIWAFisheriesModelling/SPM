@@ -11,14 +11,12 @@
 #include "CExponentialPreferenceFunction.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
-#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CExponentialPreferenceFunction::CExponentialPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CExponentialPreferenceFunction::CExponentialPreferenceFunction(CExponentialPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
+CExponentialPreferenceFunction::CExponentialPreferenceFunction() {
 
   // Vars
   dLambda     = -1.0;

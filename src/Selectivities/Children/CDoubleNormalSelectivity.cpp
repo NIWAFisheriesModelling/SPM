@@ -11,12 +11,10 @@
 #include "CDoubleNormalSelectivity.h"
 
 //**********************************************************************
-// CDoubleNormalSelectivity::CDoubleNormalSelectivity(CDoubleNormalSelectivity *Selectivity = 0)
+// CDoubleNormalSelectivity::CDoubleNormalSelectivity()
 // Default constructor
 //**********************************************************************
-CDoubleNormalSelectivity::CDoubleNormalSelectivity(CDoubleNormalSelectivity *Selectivity)
-: CCachedSelectivity(Selectivity) {
-
+CDoubleNormalSelectivity::CDoubleNormalSelectivity() {
   // Register estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA_L, &dSigmaL);

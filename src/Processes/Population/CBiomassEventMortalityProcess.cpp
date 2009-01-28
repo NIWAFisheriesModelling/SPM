@@ -11,11 +11,10 @@
 #include "CBiomassEventMortalityProcess.h"
 
 //**********************************************************************
-// CBiomassEventMortalityProcess::CBiomassEventMortalityProcess(CBiomassEventMortalityProcess *Process)
+// CBiomassEventMortalityProcess::CBiomassEventMortalityProcess()
 // Default constructor
 //**********************************************************************
-CBiomassEventMortalityProcess::CBiomassEventMortalityProcess(CBiomassEventMortalityProcess *Process)
-: CProcess(Process) {
+CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   throw string("Not yet implemented"); // TODO: Implement this
 }
 

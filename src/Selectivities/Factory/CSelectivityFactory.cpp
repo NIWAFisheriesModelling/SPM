@@ -9,13 +9,48 @@
 
 // Local headers
 #include "CSelectivityFactory.h"
-#include "../CSelectivity.h"
+#include "../CSelectivityManager.h"
+#include "../Children/CAllValuesBoundedSelectivity.h"
+#include "../Children/CAllValuesSelectivity.h"
+#include "../Children/CConstantSelectivity.h"
+#include "../Children/CDoubleExponentialSelectivity.h"
+#include "../Children/CDoubleNormalSelectivity.h"
+#include "../Children/CIncreasingSelectivity.h"
+#include "../Children/CKnifeEdgeSelectivity.h"
+#include "../Children/CLogisticProducingSelectivity.h"
+#include "../Children/CLogisticSelectivity.h"
 
 //**********************************************************************
-// CSelectivity* CSelectivityFactory::buildSelectivity(string type)
+// CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
 // Build a selectivity based on type
 //**********************************************************************
-CSelectivity* CSelectivityFactory::buildSelectivity(string type) {
+CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager) {
 
-  return 0;
+  CSelectivity *pSelectivity    = 0;
+
+  if (type == PARAM_ALL_VALUES_BOUNDED)
+    pSelectivity = new CAllValuesBoundedSelectivity();
+  else if (type == PARAM_ALL_VALUES)
+    pSelectivity = new CAllValuesSelectivity();
+  else if (type == PARAM_CONSTANT)
+    pSelectivity = new CConstantSelectivity();
+  else if (type == PARAM_DOUBLE_EXPONENTIAL)
+    pSelectivity = new CDoubleExponentialSelectivity();
+  else if (type == PARAM_DOUBLE_NORMAL)
+    pSelectivity = new CDoubleNormalSelectivity();
+  else if (type == PARAM_INCREASING)
+    pSelectivity = new CIncreasingSelectivity();
+  else if (type == PARAM_KNIFE_EDGE)
+    pSelectivity = new CKnifeEdgeSelectivity();
+  else if (type == PARAM_LOGISTIC_PRODUCING)
+    pSelectivity = new CLogisticProducingSelectivity();
+  else if (type == PARAM_LOGISTIC)
+    pSelectivity = new CLogisticSelectivity();
+  else
+    throw string("Unknown type: " + type); // TODO: Add Error
+
+  if (registerWithManager)
+    CSelectivityManager::Instance()->addSelectivity(pSelectivity);
+
+  return pSelectivity;
 }

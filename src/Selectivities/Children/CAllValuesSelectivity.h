@@ -9,8 +9,14 @@
 #ifndef CALLVALUESSELECTIVITY_H_
 #define CALLVALUESSELECTIVITY_H_
 
+// Global Headers
+#include <vector>
+
 // Local headers
 #include "../CSelectivity.h"
+
+// Using
+using std::vector;
 
 //**********************************************************************
 //
@@ -18,9 +24,8 @@
 //**********************************************************************
 class CAllValuesSelectivity : public CSelectivity {
 public:
-  CAllValuesSelectivity(CAllValuesSelectivity *Selectivity = 0);
+  CAllValuesSelectivity();
   virtual                   ~CAllValuesSelectivity();
-  CSelectivity*              clone() { return (new CAllValuesSelectivity(this)); }
   void                       validate();
   double                     getResult(int Index);
 

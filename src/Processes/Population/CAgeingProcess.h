@@ -19,9 +19,8 @@
 class CAgeingProcess : public CProcess {
 public:
   // Functions
-	CAgeingProcess(CAgeingProcess *Process = 0);
+	CAgeingProcess();
 	virtual                    ~CAgeingProcess();
-	CProcess*                  clone() { return (new CAgeingProcess(this)); }
 	void                       validate();
 	void                       build();
 	void                       execute();

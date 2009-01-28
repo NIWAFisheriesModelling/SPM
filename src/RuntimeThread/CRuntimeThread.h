@@ -10,7 +10,7 @@
 #define CRUNTIMETHREAD_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Classes;
 class CPreferenceFunctionManager;
@@ -23,7 +23,7 @@ class CPrintStateManager;
 class CPriorManager;
 class CProcessManager;
 class CProfileManager;
-class CQManager;
+class CCatchabilityManager;
 class CSelectivityManager;
 class CTimeStepManager;
 class CObjectiveFunction;
@@ -34,7 +34,7 @@ class CInitializationPhase;
 //
 //
 //**********************************************************************
-class CRuntimeThread : public CBaseExecutableObject {
+class CRuntimeThread : public CBaseExecute {
 public:
   // Functions
   CRuntimeThread();
@@ -70,7 +70,7 @@ protected:
   CPrintStateManager          *pPrintStateManager;
   CProcessManager             *pProcessManager;
   CProfileManager             *pProfileManager;
-  CQManager                   *pQManager;
+  CCatchabilityManager                   *pQManager;
   CSelectivityManager         *pSelectivityManager;
   CTimeStepManager            *pTimeStepManager;
   vector<string>              vInitializationList;

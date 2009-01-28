@@ -11,11 +11,10 @@
 #include "CBiomassLayer.h"
 
 //**********************************************************************
-// CBiomassLayer::CBiomassLayer(CBiomassLayer *Layer)
+// CBiomassLayer::CBiomassLayer()
 // Default constructor
 //**********************************************************************
-CBiomassLayer::CBiomassLayer(CBiomassLayer *Layer)
-: CNumericLayer(Layer) {
+CBiomassLayer::CBiomassLayer() {
 
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);

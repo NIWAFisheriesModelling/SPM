@@ -19,9 +19,8 @@
 class CLogisticPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
-	CLogisticPreferenceFunction(CLogisticPreferenceFunction *Process = 0);
+	CLogisticPreferenceFunction();
 	virtual                    ~CLogisticPreferenceFunction();
-	CPreferenceFunction*       clone() { return (new CLogisticPreferenceFunction(this)); }
 	double                     getA50() { return dA50; }
 	double                     getAto95() { return dAto95; }
 	double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);

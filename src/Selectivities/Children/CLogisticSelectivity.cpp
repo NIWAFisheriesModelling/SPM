@@ -11,16 +11,10 @@
 #include "CLogisticSelectivity.h"
 
 //**********************************************************************
-// CLogisticSelectivity::CLogisticSelectivity(CLogisticSelectivity *Selectivity = 0)
+// CLogisticSelectivity::CLogisticSelectivity()
 // Default constructor
 //**********************************************************************
-CLogisticSelectivity::CLogisticSelectivity(CLogisticSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
-  // Variables
-  dA50    = 0.0;
-  dAto95  = 0.0;
-
+CLogisticSelectivity::CLogisticSelectivity() {
   // Register Estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
@@ -28,7 +22,6 @@ CLogisticSelectivity::CLogisticSelectivity(CLogisticSelectivity *Selectivity)
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_A50);
   pParameterList->registerAllowed(PARAM_ATO95);
-
 }
 
 //**********************************************************************
@@ -48,15 +41,6 @@ void CLogisticSelectivity::validate() {
     Ex = "CLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-}
-
-//**********************************************************************
-// double CLogisticSelectivity::getResult(int Param)
-// Get the result from our Selectivity
-//**********************************************************************
-double CLogisticSelectivity::getResult(int Param) {
-  // TODO: Implement this
-  return 0;
 }
 
 //**********************************************************************

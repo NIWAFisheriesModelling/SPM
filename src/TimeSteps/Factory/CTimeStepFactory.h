@@ -1,16 +1,19 @@
 //============================================================================
-// Name        : CConfigHandlerFactory.h
+// Name        : CTimeStepFactory.h
 // Author      : S.Rasmussen
-// Date        : 6/01/2009
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Date        : 23/01/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CCONFIGHANDLERFACTORY_H_
-#define CCONFIGHANDLERFACTORY_H_
+#ifndef CTIMESTEPFACTORY_H_
+#define CTIMESTEPFACTORY_H_
 
-// Global Headers
+// Global headers
 #include <string>
+
+// Local headers
+#include "../CTimeStep.h"
 
 // Using
 using std::string;
@@ -19,13 +22,15 @@ using std::string;
 //
 //
 //**********************************************************************
-class CConfigHandlerFactory {
+class CTimeStepFactory {
 public:
-//  static CConfigurationLoader*      buildLoader(string type);
+  // Functions
+  static CTimeStep*           buildTimeStep(string type, bool registerWithManager = true);
+
 private:
   // Functions
-  CConfigHandlerFactory() { };
-  virtual ~CConfigHandlerFactory() { };
+  CTimeStepFactory() { }
+  virtual ~CTimeStepFactory() { }
 };
 
-#endif /* CCONFIGHANDLERFACTORY_H_ */
+#endif /* CTIMESTEPFACTORY_H_ */

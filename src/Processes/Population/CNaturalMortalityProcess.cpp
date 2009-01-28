@@ -17,22 +17,21 @@
 // TODO: Migrate this to constant mortality rate process
 
 //**********************************************************************
-// CNaturalMortalityProcess::CNaturalMortalityProcess(CNaturalMortalityProcess *Process = 0)
+// CNaturalMortalityProcess::CNaturalMortalityProcess()
 // Default Constructor
 //**********************************************************************
-CNaturalMortalityProcess::CNaturalMortalityProcess(CNaturalMortalityProcess *Process)
-: CProcess(Process) {
-
+CNaturalMortalityProcess::CNaturalMortalityProcess() {
   // Variables
   pGrid            = 0;
   dM               = -1.0;
 
+  // Register Estimables
   registerEstimable(PARAM_M, &dM);
 
-  // Copy Construct
-  if (Process != 0) {
-    dM    = Process->getM();
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_M);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
 }
 //**********************************************************************
 // void CNaturalMortalityProcess::validate()
@@ -43,17 +42,15 @@ void CNaturalMortalityProcess::validate() {
     // Base Validate
     CProcess::validate();
 
+    // Get our parameters
+    dM    = pParameterList->getDouble(PARAM_M);
+
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+
     // Local Validation
-    if (getCategoryCount() == 0)
-      CError::errorMissing(PARAM_CATEGORIES);
-    if (CComparer::isEqual(dM, -1.0))
-      CError::errorMissing(PARAM_M);
-    if (getSelectivityCount() == 0)
-      CError::errorMissing(PARAM_SELECTIVITIES);
     if (getCategoryCount() != getSelectivityCount())
       throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
-    if (sPenalty != "")
-      CError::errorSupported(PARAM_PENALTY);
 
   } catch (string Ex) {
     Ex = "CNaturalMortalityProcess.validate(" + getLabel() + ")->" + Ex;
@@ -154,9 +151,9 @@ void CNaturalMortalityProcess::execute() {
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square, and Difference Equal
-        pBase       = pWorld->getBaseSquare(i, j);
+        pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check Square Ok
-        if (!pBase->getEnabled())
+        if (!pBaseSquare->getEnabled())
           continue;
         if ( (bDependsOnLayer) && (!pLayer->checkSpace(i, j)) )
           continue;
@@ -167,7 +164,7 @@ void CNaturalMortalityProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Current Value
-            dCurrent = pBase->getValue( vCategoryIndex[k], l);
+            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
 
             // Check 0
             if(CComparer::isZero(dCurrent))

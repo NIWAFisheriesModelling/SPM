@@ -19,9 +19,8 @@
 class CNormalPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
-	CNormalPreferenceFunction(CNormalPreferenceFunction *Process = 0);
+	CNormalPreferenceFunction();
 	virtual                    ~CNormalPreferenceFunction();
-  CPreferenceFunction*       clone() { return (new CNormalPreferenceFunction(this)); }
 	double                     getMu() { return dMu; }
   double                     getSigma() { return dSigma; }
 	double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);

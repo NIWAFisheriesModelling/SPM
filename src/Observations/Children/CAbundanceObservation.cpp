@@ -9,19 +9,19 @@
 
 // Local Headers
 #include "CAbundanceObservation.h"
-#include "../../Qs/CQManager.h"
-#include "../../Qs/CQ.h"
+#include "../../Catchabilities/CCatchabilityManager.h"
+#include "../../Catchabilities/CCatchability.h"
 #include "../../Layers/String/CStringLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CConvertor.h"
 
 //**********************************************************************
-// CAbundanceObservation::CAbundanceObservation(CAbundanceObservation *Observation = 0);
+// CAbundanceObservation::CAbundanceObservation()
 // Default Constructor
 //**********************************************************************
-CAbundanceObservation::CAbundanceObservation(CAbundanceObservation *Observation)
-: CObservation(Observation) {
+CAbundanceObservation::CAbundanceObservation() {
 
   // Variables
   sQ              = "";
@@ -29,30 +29,16 @@ CAbundanceObservation::CAbundanceObservation(CAbundanceObservation *Observation)
   dCVProcessError = 0.0;
   dSigma          = 0.0;
 
-  // Copy Construct
-  if (Observation != 0) {
-    sQ              = Observation->getQ();
-    dCVProcessError = Observation->getCVProcessError();
-    dSigma          = 0.0;
-
-    for (int i = 0; i < Observation->getProportionCount(); ++i) {
-      string key = Observation->getProportionKey(i);
-      mvProportionMatrix[key] = Observation->getProportionValue(key);
-    }
-
-    for (int i = 0; i < Observation->getCVCount(); ++i) {
-      string key = Observation->getCVKey(i);
-      mvCVMatrix[key] = Observation->getCVValue(key);
-    }
-  }
-}
-
-//**********************************************************************
-// void CAbundanceObservation::addProportion(string Group, double Proportion)
-// Add Proportion
-//**********************************************************************
-void CAbundanceObservation::addProportion(string Group, double Proportion) {
-  mvProportionMatrix[Group] = Proportion;
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_Q);
+  pParameterList->registerAllowed(PARAM_YEAR);
+  pParameterList->registerAllowed(PARAM_TIME_STEP);
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_OBS);
+  pParameterList->registerAllowed(PARAM_CV);
+  pParameterList->registerAllowed(PARAM_DIST);
 }
 
 //**********************************************************************
@@ -73,14 +59,6 @@ string CAbundanceObservation::getProportionKey(int index) {
 //**********************************************************************
 double CAbundanceObservation::getProportionValue(string key) {
   return mvProportionMatrix[key];
-}
-
-//**********************************************************************
-// void CAbundanceObservation::addCV(string Group, double Value)
-// Add CV
-//**********************************************************************
-void CAbundanceObservation::addCV(string Group, double Value) {
-  mvCVMatrix[Group] = Value;
 }
 
 //**********************************************************************
@@ -112,15 +90,35 @@ void CAbundanceObservation::validate() {
     // Base Validate
     CObservation::validate();
 
-    // Validate
-    if (mvProportionMatrix.size() == 0)
-      CError::errorMissing(PARAM_OBS);
-    if (mvCVMatrix.size() == 0)
-      CError::errorMissing(PARAM_CV);
-    if (mvProportionMatrix.size() != mvCVMatrix.size())
-      throw string(ERROR_EQUAL_OBS_CV); // ToDo: FIX THIS
-    if (sQ == "")
-      CError::errorMissing(PARAM_Q);
+    // Get our Parameters
+    sQ          = pParameterList->getString(PARAM_Q);
+    iYear       = pParameterList->getInt(PARAM_YEAR);
+    iTimeStep   = pParameterList->getInt(PARAM_TIME_STEP);
+    sLayer      = pParameterList->getString(PARAM_LAYER_NAME);
+    sDist       = pParameterList->getString(PARAM_DIST);
+
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+
+    // Get our OBS
+    vector<string> vOBS;
+    pParameterList->fillVector(vOBS, PARAM_OBS);
+
+    if ((vOBS.size() % 2) != 0)
+      throw string("OBS Must be done in pairs"); // TODO: Add CError
+
+    for (int i = 0; i < (int)vOBS.size(); i+=2)
+      mvProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
+
+    // Get our CV
+    vector<string> vCV;
+    pParameterList->fillVector(vCV, PARAM_CV);
+
+    if ((vCV.size() % 2) != 0)
+      throw string("CV must be done in pairs"); // TODO: ADD CError
+
+    for (int i = 0; i < (int)vCV.size(); i+=2)
+      mvCVMatrix[vCV[i]] = CConvertor::stringToDouble(vCV[i+1]);
 
     // Validate our cv's to make sure we have the right amount for our
     // Observations
@@ -162,10 +160,8 @@ void CAbundanceObservation::build() {
     // Base build
     CObservation::build();
 
-    if (pQ == 0) {
-      CQManager *pQManager = CQManager::Instance();
-      pQ = pQManager->getQ(sQ);
-    }
+    CCatchabilityManager *pQManager = CCatchabilityManager::Instance();
+    pQ = pQManager->getCatchability(sQ);
 
   } catch (string Ex) {
     Ex = "CAbundanceObservation.build(" + getLabel() + ")->" + Ex;
@@ -198,8 +194,8 @@ void CAbundanceObservation::execute() {
           // Check if this matches the key
           if (pLayer->getValue(i, j) == (*mPropPtr).first) {
             // Get our Square and check if it's enabled
-            pBase = pWorld->getBaseSquare(i, j);
-            if (!pBase->getEnabled())
+            pBaseSquare = pWorld->getBaseSquare(i, j);
+            if (!pBaseSquare->getEnabled())
               continue;
 
             int iColCount = (pWorld->getMaxAge()+1) - pWorld->getMinAge();
@@ -207,7 +203,7 @@ void CAbundanceObservation::execute() {
             for (int k = 0; k < iColCount; ++k) {
               for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
                 double dSelectResult = vSelectivityIndex[l]->getResult(k);
-                dExpectedTotal += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                dExpectedTotal += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
             }
           }

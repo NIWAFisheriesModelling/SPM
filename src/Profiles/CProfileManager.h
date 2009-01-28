@@ -7,7 +7,7 @@
 //       Like all managers it's responsible for validate, build and execute
 //       calls to children.
 //
-//       Profiling involves running the Minimiser (ADOLC) multiple times but
+//       Profiling involves running a Minimiser multiple times but
 //       changing the value of 1 Profiled variable each time to record
 //       the changes in results. Profiled variables have to be estimated
 //       variables too. During a run the estimated variable will be disabled
@@ -22,7 +22,7 @@
 #define CPROFILEMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CProfile;
@@ -31,7 +31,7 @@ class CProfile;
 //
 //
 //**********************************************************************
-class CProfileManager : public CBaseExecutableObject {
+class CProfileManager : public CBaseManager {
 public:
   static CProfileManager*    Instance();
   static void                Destroy();

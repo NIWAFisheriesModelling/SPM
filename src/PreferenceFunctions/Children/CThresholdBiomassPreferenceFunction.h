@@ -19,9 +19,8 @@
 class CThresholdBiomassPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
-  CThresholdBiomassPreferenceFunction(CThresholdBiomassPreferenceFunction *Process = 0);
+  CThresholdBiomassPreferenceFunction();
   virtual                     ~CThresholdBiomassPreferenceFunction();
-  CPreferenceFunction*       clone() { return (new CThresholdBiomassPreferenceFunction(this)); }
   double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
   void                       validate();
 

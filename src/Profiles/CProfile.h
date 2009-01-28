@@ -10,7 +10,7 @@
 #define CPROFILE_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 // Classes
 class CEstimate;
@@ -19,22 +19,18 @@ class CEstimate;
 //
 //
 //**********************************************************************
-class CProfile : public CBaseBuildableObject {
+class CProfile : public CBaseBuild {
 public:
-	CProfile(CProfile *Profile = 0);
+	CProfile();
 	virtual                    ~CProfile();
-  void                       setN(double value) { dN = value; }
   double                     getN() { return dN; }
-  void                       setL(double value) { dL = value; }
   double                     getL() { return dL; }
-  void                       setU(double value) { dU = value; }
   double                     getU() { return dU; }
-  void                       setParameter(string value) { sParameter = value; }
   string                     getParameter() { return sParameter; }
   double                     getCurrent() { return dCurrent; }
   void                       setEnabled();
   bool                       doStep();
-  CProfile*                  clone() { return (new CProfile(this)); }
+  CProfile*                  clone() { return (new CProfile(*this)); }
   void                       validate();
   void                       build();
   void                       setEnabled(bool value);

@@ -3,7 +3,7 @@
 // Author      : S.Rasmussen
 // Date        : 12/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
-// Description :
+// Description : << See CEstimateFactory.h >>
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
@@ -13,15 +13,16 @@
 #include "../CEstimate.h"
 
 //**********************************************************************
-// CEstimate* CEstimateFactory::buildEstimate(string type)
+// CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager)
 // Build our estimates
 //**********************************************************************
-CEstimate* CEstimateFactory::buildEstimate(string type) {
+CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager) {
+  // NOTE: Please add Unit Tests when adding new types
 
-  if (type == PARAM_ESTIMATE)
+  if (type == "")
     return new CEstimate();
   else
-    throw new string("unknown type: " + type); // TODO: FIX THIS
+    throw string("unknown type: " + type); // TODO: FIX THIS
 
   return 0;
 }

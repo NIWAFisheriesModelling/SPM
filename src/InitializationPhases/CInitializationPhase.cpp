@@ -15,12 +15,10 @@
 #include "../Helpers/ForEach.h"
 
 //**********************************************************************
-// CInitializationPhase::CInitializationPhase(CInitializationPhase *Phase)
+// CInitializationPhase::CInitializationPhase()
 // Default constructor
 //**********************************************************************
-CInitializationPhase::CInitializationPhase(CInitializationPhase *Phase)
-: CBaseExecutableObject(Phase) {
-
+CInitializationPhase::CInitializationPhase() {
   // Vars
   iYears    = 0;
 

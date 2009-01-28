@@ -9,19 +9,18 @@
 
 // Local Headers
 #include "CMinimizer.h"
-#include "CMinimizerManager.h"
+#include "../Estimates/CEstimateManager.h"
 
 //**********************************************************************
 // CMinimizer::CMinimizer()
 // Default Constructor
 //**********************************************************************
 CMinimizer::CMinimizer() {
-  iMaxIterations      = 300;
-  iMaxEvaluations     = 1000;
-  dGradientTolerance  = 0.002;
-  dStepSize           = 1e-4;
-  pHessian            = 0;
-  iEstimateCount      = 0;
+  // Register user allowed Parameters
+  pParameterList->registerAllowed(PARAM_MAX_ITERS);
+  pParameterList->registerAllowed(PARAM_MAX_EVALS);
+  pParameterList->registerAllowed(PARAM_GRAD_TOL);
+  pParameterList->registerAllowed(PARAM_STEP_SIZE);
 }
 
 //**********************************************************************
@@ -29,8 +28,20 @@ CMinimizer::CMinimizer() {
 //
 //**********************************************************************
 void CMinimizer::validate() {
-  // TODO: Finish this function
-  sLabel = pParameterList->getString(PARAM_LABEL);
+  try {
+    // Base
+    CBaseBuild::validate();
+
+    // Assign our param
+    iMaxIterations      = pParameterList->getInt(PARAM_MAX_ITERS);
+    iMaxEvaluations     = pParameterList->getInt(PARAM_MAX_EVALS);
+    dGradientTolerance  = pParameterList->getDouble(PARAM_GRAD_TOL);
+    dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE);
+
+  } catch (string Ex) {
+    Ex = "CMinimizer.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
@@ -39,8 +50,8 @@ void CMinimizer::validate() {
 //**********************************************************************
 void CMinimizer::build() {
 
-  //CMinimizerManager *pManager = CMinimizerManager::Instance();
-  iEstimateCount = 0; //pManager->getEnabledEstimateCount();
+  CEstimateManager *pManager = CEstimateManager::Instance();
+  iEstimateCount = pManager->getEnabledEstimateCount();
 
   pHessian = new double*[iEstimateCount];
   for (int i = 0; i < iEstimateCount; ++i)

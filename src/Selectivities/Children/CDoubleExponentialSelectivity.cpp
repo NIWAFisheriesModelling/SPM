@@ -14,9 +14,7 @@
 // CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
 // Default constructor
 //**********************************************************************
-CDoubleExponentialSelectivity::CDoubleExponentialSelectivity(CDoubleExponentialSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
+CDoubleExponentialSelectivity::CDoubleExponentialSelectivity() {
   // Register estimables
   registerEstimable(PARAM_X0, &dX0);
   registerEstimable(PARAM_Y0, &dY0);

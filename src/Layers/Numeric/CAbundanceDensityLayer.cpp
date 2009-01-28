@@ -11,11 +11,10 @@
 #include "CAbundanceDensityLayer.h"
 
 //**********************************************************************
-// CAbundanceDensityLayer::CAbundanceDensityLayer(CAbundanceDensityLayer *Layer)
+// CAbundanceDensityLayer::CAbundanceDensityLayer()
 // Default Constructor
 //**********************************************************************
-CAbundanceDensityLayer::CAbundanceDensityLayer(CAbundanceDensityLayer *Layer)
-: CNumericLayer(Layer) {
+CAbundanceDensityLayer::CAbundanceDensityLayer() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);

@@ -15,21 +15,13 @@
 #include "../Helpers/CComparer.h"
 
 //**********************************************************************
-// CPenalty::CPenalty(CPenalty *Penalty = 0)
+// CPenalty::CPenalty()
 // Default Constructor
 //**********************************************************************
-CPenalty::CPenalty(CPenalty *Penalty)
-: CBaseBuildableObject(Penalty) {
-
-  // Variables
-  bLogScale             = false;
-  dMultiplier           = -1.0;
-
-  // Copy Construct
-  if (Penalty != 0) {
-    bLogScale   = Penalty->getLogScale();
-    dMultiplier = Penalty->getMultiplier();
-  }
+CPenalty::CPenalty() {
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_MULTIPLIER);
+  pParameterList->registerAllowed(PARAM_LOG_SCALE);
 }
 
 //**********************************************************************
@@ -38,10 +30,12 @@ CPenalty::CPenalty(CPenalty *Penalty)
 //**********************************************************************
 void CPenalty::validate() {
   try {
-    if (sLabel == "")
-      CError::errorMissing(PARAM_LABEL);
-    if (CComparer::isEqual(dMultiplier, -1.0))
-      CError::errorMissing(PARAM_MULTIPLIER);
+    // Base
+    CBaseValidate::validate();
+
+    // Get local Parameters
+    dMultiplier   = pParameterList->getDouble(PARAM_MULTIPLIER, true, 1.0);
+    bLogScale     = pParameterList->getBool(PARAM_LOG_SCALE, true, false);
 
   } catch (string Ex) {
     Ex = "CPenalty.validate(" + sLabel + ")->" + Ex;
@@ -50,23 +44,10 @@ void CPenalty::validate() {
 }
 
 //**********************************************************************
-// void CPenalty::build()
-// build
+// void CPenalty::trigger(string Label, double Value)
+// trigger The penalty
 //**********************************************************************
-void CPenalty::build() {
-  try {
-
-  } catch (string Ex) {
-    Ex = "CPenalty.build(" + sLabel + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
-// void CPenalty::execute(string Label, double Value)
-// execute (Flag this Penalty - sort of)
-//**********************************************************************
-void CPenalty::execute(string Label, double Value) {
+void CPenalty::trigger(string Label, double Value) {
 #ifndef OPTIMISE
   try {
 #endif

@@ -10,28 +10,22 @@
 #define CCATCHABILITY_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseValidate.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CCatchability : public CBaseExecutableObject {
+class CCatchability : public CBaseValidate {
 public:
   // Functions
-	CCatchability(CCatchability *Catchability = 0);
+	CCatchability();
 	virtual                    ~CCatchability();
-	void                       setType(string value) { sType = value; }
-	string                     getType() { return sType; }
-	void                       setQ(double value) { dQ = value; }
 	double                     getQ() { return dQ; }
-	CCatchability*                        clone() { return (new CCatchability(this)); }
-	void                       build() { };
-	void                       execute() { };
+	void                       validate();
 
 protected:
   // Variables
-  string                     sType;
   double                     dQ;
 };
 

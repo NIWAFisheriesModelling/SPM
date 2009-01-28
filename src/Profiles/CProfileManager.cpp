@@ -17,6 +17,7 @@
 #include "../PrintStates/CPrintStateManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "../CRuntimeController.h"
 
 // Singleton Var
 boost::thread_specific_ptr<CProfileManager> CProfileManager::clInstance;
@@ -102,7 +103,7 @@ void CProfileManager::validate() {
   try {
     // Variables
     map<string, int>              mParameterList;
-    ERunMode                      eRunMode        = pRuntimeController->getRunMode();
+    ERunMode                      eRunMode        = CRuntimeController::Instance()->getRunMode();
 
     // Check Run Mode
     if (eRunMode == RUN_MODE_PROFILE)

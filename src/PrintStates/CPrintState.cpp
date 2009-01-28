@@ -78,7 +78,7 @@ void CPrintState::closeStream() {
 void CPrintState::validate() {
   try {
     // Base Validation
-    CBaseExecutableObject::validate();
+
 
   } catch (string Ex) {
     Ex = "CPrintState.validate(" + getLabel() + ")->" + Ex;

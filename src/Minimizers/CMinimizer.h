@@ -10,24 +10,20 @@
 #define CMINIMIZER_H_
 
 // Local Includes
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 //**********************************************************************
 // class CMinimzer
 //
 //**********************************************************************
-class CMinimizer : public CBaseBuildableObject {
+class CMinimizer : public CBaseBuild {
 public:
   // Functions
   CMinimizer();
 	virtual                    ~CMinimizer();
-  void                       setMaxIterations(int value) { iMaxIterations = value; }
   int                        getMaxIterations() { return iMaxIterations; }
-  void                       setMaxEvaluations(int value) { iMaxEvaluations = value; }
   int                        getMaxEvaluations() { return iMaxEvaluations; }
-  void                       setGradientTolerance(double value) { dGradientTolerance = value; }
   double                     getGradientTolerance() { return dGradientTolerance; }
-  void                       setStepSize(double value) { dStepSize = value; }
   double                     getStepSize() { return dStepSize; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   virtual void               runEstimation() = 0;

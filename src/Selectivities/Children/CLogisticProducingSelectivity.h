@@ -19,9 +19,8 @@
 class CLogisticProducingSelectivity : public CCachedSelectivity {
 public:
   // Functions
-  CLogisticProducingSelectivity(CLogisticProducingSelectivity *Selectivity = 0);
+  CLogisticProducingSelectivity();
   virtual                    ~CLogisticProducingSelectivity();
-  CSelectivity*              clone() { return (new CLogisticProducingSelectivity(this)); }
   void                       validate();
 
 protected:

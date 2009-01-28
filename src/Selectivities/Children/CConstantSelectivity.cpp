@@ -11,12 +11,10 @@
 #include "CConstantSelectivity.h"
 
 //**********************************************************************
-// CConstantSelectivity::CConstantSelectivity(CConstantSelectivity *Selectivity)
+// CConstantSelectivity::CConstantSelectivity()
 // Default Constructor
 //**********************************************************************
-CConstantSelectivity::CConstantSelectivity(CConstantSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
+CConstantSelectivity::CConstantSelectivity() {
   // Register estimable
   registerEstimable(PARAM_C, &dC);
 

@@ -12,47 +12,12 @@
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
-// CStringLayer::CStringLayer(CStringLayer *Layer = 0)
+// CStringLayer::CStringLayer()
 // Default Constructor
 //**********************************************************************
-CStringLayer::CStringLayer(CStringLayer *Layer)
-: CLayer(Layer) {
-
-  // Build 2D Array
-  pGrid = new string*[iHeight];
-  for (int i = 0; i < iHeight; ++i) {
-    pGrid[i] = new string[iWidth];
-  }
-
+CStringLayer::CStringLayer() {
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_ROW);
-}
-
-//**********************************************************************
-// void CStringLayer::setValue(int Row, int Col, string Value)
-// Add Value to Grid
-//**********************************************************************
-void CStringLayer::setValue(int Row, int Col, string Value) {
-#ifndef OPTIMISE
-  try {
-    if (Row > iHeight)
-      CError::errorGreaterThan(PARAM_ROW, PARAM_LAYER_HEIGHT);
-    if (Col > iWidth)
-      CError::errorGreaterThan(PARAM_COLUMN, PARAM_LAYER_WIDTH);
-    if (Row <= 0)
-      CError::errorLessThanEqualTo(PARAM_ROW, PARAM_ZERO);
-    if (Col <= 0)
-      CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
-#endif
-
-    pGrid[(Row-1)][(Col-1)] = Value;
-
-#ifndef OPTIMISE
-  } catch(string Ex) {
-    Ex = "CStringLayer.setValue()->" + Ex;
-    throw Ex;
-  }
-#endif
 }
 
 //**********************************************************************
@@ -93,6 +58,12 @@ void CStringLayer::validate() {
     // Base Validate
     CLayer::validate();
 
+    // Build 2D Array
+    pGrid = new string*[iHeight];
+    for (int i = 0; i < iHeight; ++i) {
+      pGrid[i] = new string[iWidth];
+    }
+
     // Fill a new vector with our row information
     vector<string> vData;
 
@@ -117,11 +88,11 @@ void CStringLayer::validate() {
       iCol++;
     }
 
-    if ((iRow < iHeight) || (iCol < iWidth))
+    if (((iRow+1) != iHeight) || (iCol != iWidth))
       throw string("Not enough data"); // TODO: Add CError
 
   } catch(string Ex) {
-    Ex = "CStringLayer.validate()->" + Ex;
+    Ex = "CStringLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

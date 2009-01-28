@@ -10,7 +10,7 @@
 #define CINITIALIZATIONPHASEMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CInitializationPhase;
@@ -19,7 +19,7 @@ class CInitializationPhase;
 //
 //
 //**********************************************************************
-class CInitializationPhaseManager: CBaseBuildableObject {
+class CInitializationPhaseManager: CBaseManager {
 public:
   // Functions
   static CInitializationPhaseManager* Instance();

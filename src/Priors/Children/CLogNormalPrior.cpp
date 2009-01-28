@@ -11,21 +11,13 @@
 #include "CLogNormalPrior.h"
 
 //**********************************************************************
-// CLogNormalPrior::CLogNormalPrior(CLogNormalPrior *Prior = 0)
+// CLogNormalPrior::CLogNormalPrior()
 // Default Constructor
 //**********************************************************************
-CLogNormalPrior::CLogNormalPrior(CLogNormalPrior *Prior)
-: CPrior(Prior) {
-
-  // Variables
-  dMu     = 0.0;
-  dCv     = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dMu = Prior->getMu();
-    dCv = Prior->getCv();
-  }
+CLogNormalPrior::CLogNormalPrior() {
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_CV);
 }
 
 //**********************************************************************
@@ -34,6 +26,12 @@ CLogNormalPrior::CLogNormalPrior(CLogNormalPrior *Prior)
 //**********************************************************************
 void CLogNormalPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Populate our variables
+    dMu   = pParameterList->getDouble(PARAM_MU);
+    dCv   = pParameterList->getDouble(PARAM_CV);
 
   } catch (string Ex) {
     Ex = "CLogNormalPrior.validate(" + getLabel() + ")->" + Ex;

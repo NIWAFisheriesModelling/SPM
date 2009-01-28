@@ -19,9 +19,8 @@
 class CDoubleNormalPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
-	CDoubleNormalPreferenceFunction(CDoubleNormalPreferenceFunction *Process = 0);
+	CDoubleNormalPreferenceFunction();
 	virtual                    ~CDoubleNormalPreferenceFunction();
-	CPreferenceFunction*       clone() { return (new CDoubleNormalPreferenceFunction(this)); }
 	double                     getSigmaL() { return dSigmaL; }
 	double                     getSigmaR() { return dSigmaR; }
   double                     getMu() { return dMu; }

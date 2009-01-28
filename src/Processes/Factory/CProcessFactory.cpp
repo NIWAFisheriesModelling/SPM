@@ -9,8 +9,9 @@
 
 // Local Headers
 #include "CProcessFactory.h"
+#include "../CProcessManager.h"
 #include "../../Translations/Translations.h"
-#include "../Movement/CDirectedMovementProcess.h"
+#include "../Movement/CPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CEventMortalityProcess.h"
@@ -21,22 +22,27 @@
 // CProcessFactory::CProcessFactory()
 // Default Constructor
 //**********************************************************************
-CProcess* CProcessFactory::buildProcess(string type) {
+CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
+
+  CProcess *pProcess = 0;
 
   if (type == PARAM_AGEING)
-    return new CAgeingProcess();
+    pProcess = new CAgeingProcess();
   else if (type == PARAM_CONSTANT_RECRUITMENT)
-    return new CConstantRecruitmentProcess();
+    pProcess = new CConstantRecruitmentProcess();
   else if (type == PARAM_NATURAL_MORTALITY)
-    return new CNaturalMortalityProcess();
+    pProcess = new CNaturalMortalityProcess();
   else if (type == PARAM_EVENT_MORTALITY)
-    return new CEventMortalityProcess();
+    pProcess = new CEventMortalityProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)
-    return new CCategoryTransitionProcess();
-  else if (type == PARAM_DIRECTED)
-    return new CDirectedMovementProcess();
+    pProcess = new CCategoryTransitionProcess();
+  else if (type == PARAM_PREFERENCE)
+    pProcess = new CPreferenceMovementProcess();
   else
     throw string("Unknown process type: " + type); // TODO: Finish This
 
-  return 0;
+  if (registerWithManager)
+    CProcessManager::Instance()->addProcess(pProcess);
+
+  return pProcess;
 }

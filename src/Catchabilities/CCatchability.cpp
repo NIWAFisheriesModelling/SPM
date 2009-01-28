@@ -11,15 +11,33 @@
 #include "CCatchability.h"
 
 //**********************************************************************
-// CCatchability::CCatchability(CCatchability *Catchability = 0)
+// CCatchability::CCatchability()
 // Default Constructor
 //**********************************************************************
-CCatchability::CCatchability(CCatchability *Catchability)
-: CBaseExecutableObject(Q) {
-  // Variables
-  dQ      = 0.0;
-
+CCatchability::CCatchability() {
+  // Register estimables
   registerEstimable(PARAM_Q, &dQ);
+
+  // Register user allowed params
+  pParameterList->registerAllowed(PARAM_Q);
+}
+
+//**********************************************************************
+// void CCatchability::validate()
+// Validate the Catchability
+//**********************************************************************
+void CCatchability::validate() {
+  try {
+    // Base
+    CBaseValidate::validate();
+
+    // Populate Vars
+    dQ  = pParameterList->getDouble(PARAM_Q);
+
+  } catch (string Ex) {
+    Ex = "CCatchability.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

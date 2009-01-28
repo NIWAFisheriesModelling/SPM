@@ -16,11 +16,10 @@
 #include "../../Helpers/ForEach.h"
 
 //**********************************************************************
-// CAbundanceLayer::CAbundanceLayer(CAbundanceLayer *Layer = 0)
+// CAbundanceLayer::CAbundanceLayer()
 // Default Constructor
 //**********************************************************************
-CAbundanceLayer::CAbundanceLayer(CAbundanceLayer *Layer)
-: CNumericLayer(Layer) {
+CAbundanceLayer::CAbundanceLayer() {
   // Variables
   pWorld = CWorld::Instance();
 

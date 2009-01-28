@@ -16,58 +16,11 @@
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CProportionsByCategoryObservation::CProportionsByCategoryObservation
-//                      {CProportionsByCategoryObservation *Observation)
+// CProportionsByCategoryObservation::CProportionsByCategoryObservation()
 // Default Constructor
 //**********************************************************************
-CProportionsByCategoryObservation::CProportionsByCategoryObservation(CProportionsByCategoryObservation *Observation)
-: CObservation(Observation) {
-
-  // vars
-  iMinAge             = -1;
-  iMaxAge             = -1;
-  bAgePlus            = false;
-  dR                  = DELTA;
-  pAgeResults         = 0;
-  pCombinedAgeResults = 0;
-  dNProcessError      = -1;
-
-  // Copy Construct
-  if (Observation != 0) {
-    iMinAge         = Observation->getMinAge();
-    iMaxAge         = Observation->getMaxAge();
-    bAgePlus        = Observation->getAgePlus();
-    dR              = Observation->getR();
-    dNProcessError  = Observation->getNProcessError();
-
-    // Loop Through mvN
-    for (int i = 0; i < Observation->getNCount(); ++i) {
-      string key = Observation->getNKey(i);
-      for (int j = 0; j < Observation->getNKeyValueCount(key); ++j)
-        mvN[key].push_back(Observation->getNValue(key, j));
-    }
-
-    // Loop through Proportion
-    for (int i = 0; i < Observation->getProportionCount(); ++i) {
-      string key = Observation->getProportionKey(i);
-      for (int j = 0; j < Observation->getProportionKeyCount(key); ++j)
-        mvProportionMatrix[key].push_back(Observation->getProportionValue(key, j));
-    }
-
-    // Loop Population Categories and Selectivities
-    for (int i = 0; i < Observation->getPopulationCategoryCount(); ++i)
-      vPopulationCategoryList.push_back(Observation->getPopulationCategory(i));
-    for (int i = 0; i < Observation->getPopulationSelectivityCount(); ++i)
-      vPopulationSelectivityList.push_back(Observation->getPopulationSelectivity(i));
-  }
-}
-
-//**********************************************************************
-// void CProportionsByCategoryObservation::addProportion(string Group, double Proportion)
-// Add Observation to our Map/Vector.
-//**********************************************************************
-void CProportionsByCategoryObservation::addProportion(string Group, double Proportion) {
-  mvProportionMatrix[Group].push_back(Proportion);
+CProportionsByCategoryObservation::CProportionsByCategoryObservation() {
+  // TODO: Implement
 }
 
 //**********************************************************************
@@ -99,14 +52,6 @@ double CProportionsByCategoryObservation::getProportionValue(string key, int ind
 }
 
 //**********************************************************************
-// void CProportionsByCategoryObservation::addN(string key, int value)
-// Add N to our Map
-//**********************************************************************
-void CProportionsByCategoryObservation::addN(string key, double value) {
-  mvN[key].push_back(value);
-}
-
-//**********************************************************************
 // string CProportionsByCategoryObservation::getNKey(int index)
 // Get Key from N by index
 //**********************************************************************
@@ -135,27 +80,11 @@ double CProportionsByCategoryObservation::getNValue(string key, int index) {
 }
 
 //**********************************************************************
-// void CProportionsByCategoryObservation::addPopulationCategory(string value)
-// Add Population_Category to our List
-//**********************************************************************
-void CProportionsByCategoryObservation::addPopulationCategory(string value) {
-  vPopulationCategoryList.push_back(value);
-}
-
-//**********************************************************************
 // string CProportionsByCategoryObservation::getPopulationCategory(int index)
 // Return the population category by index
 //**********************************************************************
 string CProportionsByCategoryObservation::getPopulationCategory(int index) {
   return vPopulationCategoryList[index];
-}
-
-//**********************************************************************
-// void CProportionsByCategoryObservation::addPopulationSelectivity(string value)
-// Add Selectivity to our vector
-//**********************************************************************
-void CProportionsByCategoryObservation::addPopulationSelectivity(string value) {
-  vPopulationSelectivityList.push_back(value);
 }
 
 //**********************************************************************
@@ -174,16 +103,6 @@ void CProportionsByCategoryObservation::validate() {
   try {
     // Base Validation
     CObservation::validate();
-
-    // We must have some proportions
-    if (mvProportionMatrix.size() == 0)
-      CError::errorMissing(PARAM_OBS);
-    if (iMinAge < pWorld->getMinAge())
-      CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
-    if (iMaxAge > pWorld->getMaxAge())
-      CError::errorGreaterThan(PARAM_MAX_AGE, PARAM_MAX_AGE);
-    if (CComparer::isEqual(dR, -1.0))
-      CError::errorMissing(PARAM_R);
 
     // Find out the Spread in Ages
     int iAgeSpread = (iMaxAge+1) - iMinAge;
@@ -298,8 +217,8 @@ void CProportionsByCategoryObservation::execute() {
           // Check if this matches the key
           if (pLayer->getValue(i, j) == (*vPropPtr).first) {
             // Get our Square and check if it's enabled
-            pBase = pWorld->getBaseSquare(i, j);
-            if (!pBase->getEnabled())
+            pBaseSquare = pWorld->getBaseSquare(i, j);
+            if (!pBaseSquare->getEnabled())
               continue;
 
             // Loop Through Ages in that square and add them to count
@@ -307,11 +226,11 @@ void CProportionsByCategoryObservation::execute() {
               // Loop Through Categories
               for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
                 double dSelectResult = vSelectivityIndex[l]->getResult(k);
-                pAgeResults[k] += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                pAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
               for (int l = 0; l < (int)vPopulationCategoryIndex.size(); ++l) {
                 double dSelectResult = vPopulationSelectivityIndex[l]->getResult(k);
-                pCombinedAgeResults[k] += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                pCombinedAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
             }
             // And if the observation has a plus group
@@ -321,11 +240,11 @@ void CProportionsByCategoryObservation::execute() {
                 // Loop Through Categories
                 for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
                   double dSelectResult = vSelectivityIndex[l]->getResult(k);
-                  pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                  pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
                 }
                 for (int l = 0; l < (int)vPopulationCategoryIndex.size(); ++l) {
                   double dSelectResult = vPopulationSelectivityIndex[l]->getResult(k);
-                  pCombinedAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                  pCombinedAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
                 }
               }
             }

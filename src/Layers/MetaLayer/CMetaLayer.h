@@ -9,8 +9,14 @@
 #ifndef CMETALAYER_H_
 #define CMETALAYER_H_
 
+// Global Headers
+#include <vector>
+
 // Local headers
 #include "../CLayer.h"
+
+// Using
+using std::vector;
 
 //**********************************************************************
 //
@@ -19,9 +25,8 @@
 class CMetaLayer : public CLayer {
 public:
   // Functions
-  CMetaLayer(CMetaLayer *Layer = 0);
+  CMetaLayer();
   virtual                     ~CMetaLayer();
-  CLayer*                     clone() { return new CMetaLayer(this); }
   void                        validate();
   void                        build();
 

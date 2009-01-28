@@ -14,20 +14,10 @@
 #include "../Helpers/CError.h"
 
 //**********************************************************************
-// CPreferenceFunction::CPreferenceFunction(CPreferenceFunction *Process)
+// CPreferenceFunction::CPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CPreferenceFunction::CPreferenceFunction(CPreferenceFunction *Process)
-: CBaseExecutableObject(Process) {
-
-  // Variables
-  dAlpha                 = -1.0;
-  sLayerName             = "";
-  pLayer                 = 0;
-  dLayerValue            = 0.0;
-  bIsStaticLookup        = false;
-  dRet                   = 0.0;
-
+CPreferenceFunction::CPreferenceFunction() {
   // Register our Estimables
   registerEstimable(PARAM_ALPHA, &dAlpha);
 
@@ -43,7 +33,7 @@ CPreferenceFunction::CPreferenceFunction(CPreferenceFunction *Process)
 void CPreferenceFunction::validate() {
   try {
     // Base Validation
-    CBaseExecutableObject::validate();
+    CBaseBuild::validate();
 
     // Populate our Parameters.
     sLayerName  = pParameterList->getString(PARAM_LAYER_NAME);
@@ -69,19 +59,6 @@ void CPreferenceFunction::build() {
 
   } catch (string Ex) {
     Ex = "CPreferenceFunction.build(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
-// void CPreferenceFunction::execute()
-// Execute - Should never be called
-//**********************************************************************
-void CPreferenceFunction::execute() {
-  try {
-    throw string(ERROR_SUPPORTED_FUNCTION);
-  } catch (string Ex) {
-    Ex = "CPreferenceFunction.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

@@ -19,21 +19,14 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Penalties/CPenalty.h"
 
 //**********************************************************************
-// CEventMortalityProcess::CEventMortalityProcess(CEventMortalityProcess *Process)
+// CEventMortalityProcess::CEventMortalityProcess()
 // Default Constructor
 //**********************************************************************
-CEventMortalityProcess::CEventMortalityProcess(CEventMortalityProcess *Process)
-: CProcess(Process) {
+CEventMortalityProcess::CEventMortalityProcess() {
   // Variables
-  dUMax            = -1.0;
-  dCatch           = 0.0;
-  dVulnerable      = 0.0;
-  dExploitation    = 0.0;
-  pWorldSquare     = 0;
-  iCurrentYear     = 0;
-  bYearMatch       = false;
   pTimeStepManager = CTimeStepManager::Instance();
 
   // Register estimable parameters
@@ -112,6 +105,8 @@ void CEventMortalityProcess::build() {
       vLayersIndex.push_back(pLayerManager->getNumericLayer(Label));
     }
 
+    // TODO: Build Penalty
+
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -148,9 +143,8 @@ void CEventMortalityProcess::execute() {
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square
-        pBase       = pWorld->getBaseSquare(i, j);
-        // Check Square Ok
-        if (!pBase->getEnabled())
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
           continue;
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
@@ -167,7 +161,7 @@ void CEventMortalityProcess::execute() {
         // Loop Through Categories & Work out Vulnerable Stock
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
-            dCurrent = pBase->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
             pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
 
             // Increase Vulnerable Amount
@@ -180,7 +174,7 @@ void CEventMortalityProcess::execute() {
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
           if (pPenalty != 0) { // Throw Penalty
-            pPenalty->execute(sLabel, (dCatch - (dVulnerable * dUMax)));
+            pPenalty->trigger(sLabel, (dCatch - (dVulnerable * dUMax)));
           }
         }
 

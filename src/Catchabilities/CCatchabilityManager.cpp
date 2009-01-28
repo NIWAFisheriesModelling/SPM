@@ -47,18 +47,18 @@ void CCatchabilityManager::Destroy() {
 // void CCatchabilityManager::addQ(CCatchability *Q)
 // Add a Q (I hate this short name) to our List
 //**********************************************************************
-void CCatchabilityManager::addQ(CCatchability *Q) {
-  vQList.push_back(Q);
+void CCatchabilityManager::addCatchability(CCatchability *Q) {
+  vCatchabilityList.push_back(Q);
 }
 
 //**********************************************************************
 // CCatchability* CCatchabilityManager::getQ(string label)
 // Get a pointer to our Q from the vector
 //**********************************************************************
-CCatchability* CCatchabilityManager::getQ(string label) {
+CCatchability* CCatchabilityManager::getCatchability(string label) {
   try {
     // Loop through and find our Q
-    foreach(CCatchability *Q, vQList) {
+    foreach(CCatchability *Q, vCatchabilityList) {
       if (Q->getLabel() == label)
         return Q;
     }
@@ -76,14 +76,14 @@ CCatchability* CCatchabilityManager::getQ(string label) {
 // CCatchability* CCatchabilityManager::getQ(int index)
 // Get the Q from vector @ index
 //**********************************************************************
-CCatchability* CCatchabilityManager::getQ(int index) {
+CCatchability* CCatchabilityManager::getCatchability(int index) {
   try {
-    if (index >= (int)vQList.size())
+    if (index >= (int)vCatchabilityList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_Q);
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-    return vQList[index];
+    return vCatchabilityList[index];
 
   } catch (string Ex) {
     Ex = "CCatchabilityManager.getQ()->" + Ex;
@@ -100,13 +100,29 @@ CCatchability* CCatchabilityManager::getQ(int index) {
 void CCatchabilityManager::clone(CCatchabilityManager *Manager) {
   try {
 
-    for (int i = 0; i < Manager->getQCount(); ++i) {
-      CCatchability *pQ = Manager->getQ(i);
-      vQList.push_back(pQ->clone());
-    }
+//    for (int i = 0; i < Manager->getCatchabilityCount(); ++i) {
+//      CCatchability *pQ = Manager->getCatchability(i);
+//      vCatchabilityList.push_back(pQ->clone());
+//    }
+    // TODO: Fix Clone
 
   } catch (string Ex) {
     Ex = "CCatchabilityManager.clone()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CCatchabilityManager::validate()
+// Validate our catchabilities
+//**********************************************************************
+void CCatchabilityManager::validate() {
+  try {
+    foreach(CCatchability *Catchability, vCatchabilityList) {
+      Catchability->validate();
+    }
+  } catch (string Ex) {
+    Ex = "CCatchabilityManager.validate()->" + Ex;
     throw Ex;
   }
 }

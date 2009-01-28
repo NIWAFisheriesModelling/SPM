@@ -17,13 +17,7 @@
 // CLogisticPreferenceFunction::CLogisticPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CLogisticPreferenceFunction::CLogisticPreferenceFunction(CLogisticPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-
-  // Variables
-  dA50          = -1.0;
-  dAto95        = -1.0;
-
+CLogisticPreferenceFunction::CLogisticPreferenceFunction() {
   // Register estimable parameters
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);

@@ -23,14 +23,14 @@ class CSelectivity;
 class CAbundanceLayer : public CNumericLayer {
 public:
   // Functions
-	CAbundanceLayer(CAbundanceLayer *Layer = 0);
+	CAbundanceLayer();
 	virtual                    ~CAbundanceLayer();
 	void                       addCategory(string value);
 	int                        getCategoryCount() { return (int)vCategoryList.size(); }
 	void                       addSelectivity(string value);
 	int                        getSelectivityCount() { return (int)vSelectivityList.size(); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  CLayer*                    clone() { return (new CAbundanceLayer(this)); }
+  CLayer*                    clone() { return (new CAbundanceLayer(*this)); }
   void                       validate();
   void                       build();
 

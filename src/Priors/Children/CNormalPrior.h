@@ -19,13 +19,8 @@
 class CNormalPrior : public CPrior {
 public:
   // Functions
-  CNormalPrior(CNormalPrior *Prior = 0);
+  CNormalPrior();
   virtual                    ~CNormalPrior();
-  void                       setMu(double value) { dMu = value; }
-  void                       setCv(double value) { dCv = value; }
-  double                     getMu() { return dMu; }
-  double                     getCv() { return dCv; }
-  CPrior*                    clone() { return (new CNormalPrior(this)); }
   void                       validate();
   double                     getResult(double Param);
 

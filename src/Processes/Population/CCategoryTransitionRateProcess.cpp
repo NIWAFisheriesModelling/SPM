@@ -11,11 +11,10 @@
 #include "CCategoryTransitionRateProcess.h"
 
 //**********************************************************************
-// CCategoryTransitionRateProcess::CCategoryTransitionRateProcess(CCategoryTransitionRateProcess *Process)
+// CCategoryTransitionRateProcess::CCategoryTransitionRateProcess()
 // Default constructor
 //**********************************************************************
-CCategoryTransitionRateProcess::CCategoryTransitionRateProcess(CCategoryTransitionRateProcess *Process)
-: CProcess(Process) {
+CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
   throw string("Not yet implemented"); // TODO: Implement this
 }
 

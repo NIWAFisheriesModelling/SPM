@@ -10,7 +10,7 @@
 #define CPENALTYMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CPenalty;
@@ -25,7 +25,7 @@ struct SFlaggedPenalty {
 //
 //
 //**********************************************************************
-class CPenaltyManager : public CBaseBuildableObject {
+class CPenaltyManager : public CBaseManager {
 public:
   static CPenaltyManager*    Instance();
   static void                Destroy();
@@ -41,7 +41,7 @@ public:
   SFlaggedPenalty*           getFlaggedPenalty(int Index);
   void                       clone(CPenaltyManager *Manager);
   void                       validate();
-  void                       build();
+  void                       build() { };
   virtual                    ~CPenaltyManager();
 
 protected:

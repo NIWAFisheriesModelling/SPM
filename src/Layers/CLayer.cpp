@@ -10,28 +10,12 @@
 // Local Headers
 #include "CLayer.h"
 #include "../World/CWorld.h"
-#include "../Helpers/CError.h"
 
 //**********************************************************************
-// CLayer::CLayer(CLayer *Layer = 0)
+// CLayer::CLayer()
 // Default Constructor
 //**********************************************************************
-CLayer::CLayer(CLayer *Layer)
-: CBaseBuildableObject(Layer) {
-
-  // Default Our Layer Vars
-  sLabel      = "";
-
-  CWorld *pWorld    = CWorld::Instance();
-  iWidth            = pWorld->getWidth();
-  iHeight           = pWorld->getHeight();
-
-  // Copy Construct
-  if (Layer != 0) {
-    sLabel          = Layer->getLabel();
-    iWidth          = Layer->getWidth();
-    iHeight         = Layer->getHeight();
-  }
+CLayer::CLayer() {
 }
 
 //**********************************************************************
@@ -40,8 +24,13 @@ CLayer::CLayer(CLayer *Layer)
 //**********************************************************************
 void CLayer::validate() {
   try {
-    if (sLabel == "")
-      CError::errorMissing(PARAM_LABEL);
+    // Base
+    CBaseBuild::validate();
+
+    // Get Variables from World
+    CWorld *pWorld    = CWorld::Instance();
+    iWidth            = pWorld->getWidth();
+    iHeight           = pWorld->getHeight();
 
   } catch (string Ex) {
     Ex = "CLayer.validate(" + getLabel() + ")->" + Ex;

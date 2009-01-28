@@ -19,11 +19,8 @@
 class CUniformLogPrior : public CPrior {
 public:
   // Functions
-  CUniformLogPrior(CUniformLogPrior *Prior = 0);
+  CUniformLogPrior();
   virtual                    ~CUniformLogPrior();
-  void                       setC(double value) { dC = value; }
-  double                     getC() { return dC; }
-  CPrior*                    clone() { return (new CUniformLogPrior(this)); }
   void                       validate();
   double                     getResult(double Param);
 

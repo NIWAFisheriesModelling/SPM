@@ -10,20 +10,18 @@
 #define CLOGISTICSELECTIVITY_H_
 
 // Local Headers
-#include "../CSelectivity.h"
+#include "Base/CCachedSelectivity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CLogisticSelectivity : public CSelectivity {
+class CLogisticSelectivity : public CCachedSelectivity {
 public:
   // Functions
-	CLogisticSelectivity(CLogisticSelectivity *Selectivity = 0);
+	CLogisticSelectivity();
 	virtual                    ~CLogisticSelectivity();
-  CSelectivity*              clone() { return (new CLogisticSelectivity(this)); }
 	void                       validate();
-	double                     getResult(int Param);
 
 protected:
   // Functions

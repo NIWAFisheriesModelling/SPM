@@ -28,7 +28,7 @@
 #define CWORLD_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CWorldSquare;
@@ -38,7 +38,7 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class CWorld : public CBaseBuildableObject {
+class CWorld : public CBaseManager {
 public:
   static CWorld*            Instance();
   static void               Destroy();

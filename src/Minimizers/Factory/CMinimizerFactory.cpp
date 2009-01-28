@@ -12,7 +12,7 @@
 #include "../CMinimizerManager.h"
 #include "../../Translations/Translations.h"
 #include "../DESolver/CDESolver.h"
-#include "../GammaDiff/CGammaDiffInterface.h"
+#include "../GammaDiff/CGammaDiff.h"
 
 //**********************************************************************
 // CMinimizer* CMinimizerFactory::buildMinimizer(string type)
@@ -23,7 +23,7 @@ CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithMana
   CMinimizer* pMinimizer = 0;
 
   if (type == PARAM_GAMMADIFF)
-    pMinimizer = new CGammaDiffInterface();
+    pMinimizer = new CGammaDiff();
   else if (type == PARAM_DESOLVER)
     pMinimizer = new CDESolver();
   else

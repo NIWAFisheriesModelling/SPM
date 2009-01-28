@@ -28,7 +28,7 @@
 #define CLAYERMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 #include "CLayerManager.h"
 
 // Classes
@@ -40,7 +40,7 @@ class CStringLayer;
 //
 //
 //**********************************************************************
-class CLayerManager : public CBaseBuildableObject {
+class CLayerManager : public CBaseManager {
 public:
   static CLayerManager*     Instance();
   static void               Destroy();

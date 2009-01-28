@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CPriorFactory.h"
+#include "../CPriorManager.h"
 #include "../../Translations/Translations.h"
 #include "../Children/CBetaPrior.h"
 #include "../Children/CLogNormalPrior.h"
@@ -19,27 +20,32 @@
 #include "../Children/CUniformPrior.h"
 
 //**********************************************************************
-//
-//
+// CPrior* CPriorFactory::buildPrior(string type, bool registerWithManager)
+// Build prior based on type
 //**********************************************************************
-CPrior* CPriorFactory::buildPrior(string type) {
+CPrior* CPriorFactory::buildPrior(string type, bool registerWithManager) {
+
+  CPrior *pPrior = 0;
 
   if (type == PARAM_BETA)
-    return new CBetaPrior();
+    pPrior = new CBetaPrior();
   else if (type == PARAM_LOG_NORMAL)
-    return new CLogNormalPrior();
+    pPrior = new CLogNormalPrior();
   else if (type == PARAM_NORMAL_BY_STDEV)
-    return new CNormalByStdevPrior();
+    pPrior = new CNormalByStdevPrior();
   else if (type == PARAM_NORMAL_LOG)
-    return new CNormalLogPrior();
+    pPrior = new CNormalLogPrior();
   else if (type == PARAM_NORMAL)
-    return new CNormalPrior();
+    pPrior = new CNormalPrior();
   else if (type == PARAM_UNIFORM_LOG)
-    return new CUniformLogPrior();
+    pPrior = new CUniformLogPrior();
   else if (type == PARAM_UNIFORM)
-    return new CUniformPrior();
+    pPrior = new CUniformPrior();
   else
     throw string("Unknown type: " + type); // TODO: FIX THIS
 
-  return 0;
+  if (registerWithManager)
+    CPriorManager::Instance()->addPrior(pPrior);
+
+  return pPrior;
 }

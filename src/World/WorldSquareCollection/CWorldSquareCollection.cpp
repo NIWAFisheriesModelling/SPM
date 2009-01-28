@@ -16,19 +16,12 @@
 #include "../../Helpers/ForEach.h"
 
 //**********************************************************************
-// CWorldSquareCollection::CWorldSquareCollection(CWorldSquareCollection *Collection)
+// CWorldSquareCollection::CWorldSquareCollection()
 // Default Constructor
 //**********************************************************************
-CWorldSquareCollection::CWorldSquareCollection(CWorldSquareCollection *Collection)
-: CBaseBuildableObject(Collection) {
-
+CWorldSquareCollection::CWorldSquareCollection() {
   // Set Variables
   pLayer      = 0;
-
-  // Copy Construct
-  if (Collection != 0) {
-    pLayer  = Collection->getLayer();
-  }
 }
 
 //**********************************************************************

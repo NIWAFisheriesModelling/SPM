@@ -23,7 +23,7 @@
 // Default Constructor
 //**********************************************************************
 CDESolverCallback::CDESolverCallback(int vectorsize, int populationsize)
-: CBaseObject(0), DESolverEngine(vectorsize, populationsize) {
+: DESolverEngine(vectorsize, populationsize) {
 
   // Vars
   pEstimateManager    = CEstimateManager::Instance();

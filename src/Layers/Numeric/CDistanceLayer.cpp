@@ -13,11 +13,10 @@
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
-// CDistanceLayer::CDistanceLayer(CDistanceLayer *Layer = 0)
+// CDistanceLayer::CDistanceLayer()
 // Default Constructor
 //**********************************************************************
-CDistanceLayer::CDistanceLayer(CDistanceLayer *Layer)
-: CNumericLayer(Layer) {
+CDistanceLayer::CDistanceLayer() {
 
 }
 

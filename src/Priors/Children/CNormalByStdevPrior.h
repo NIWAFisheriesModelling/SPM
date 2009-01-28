@@ -19,13 +19,8 @@
 class CNormalByStdevPrior : public CPrior {
 public:
   // Functions
-  CNormalByStdevPrior(CNormalByStdevPrior *Prior = 0);
+  CNormalByStdevPrior();
   virtual                    ~CNormalByStdevPrior();
-  void                       setMu(double value) { dMu = value; }
-  double                     getMu() { return dMu; }
-  void                       setSigma(double value) { dSigma = value; }
-  double                     getSigma() { return dSigma; }
-  CPrior*                    clone() { return (new CNormalByStdevPrior(this)); }
   void                       validate();
   double                     getResult(double Param);
 

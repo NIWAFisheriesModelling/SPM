@@ -12,7 +12,14 @@
 //
 // $Date$
 //============================================================================
-#ifndef UNITTEST
+#ifdef TEST
+#define BOOST_AUTO_TEST_MAIN
+#define BOOST_TEST_MODULE SPM_Unit_Tests
+
+// Global Includes
+#include <boost/test/included/unit_test.hpp>
+#else
+
 
 // Global Headers
 #include <iostream>

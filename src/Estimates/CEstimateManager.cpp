@@ -231,10 +231,11 @@ void CEstimateManager::clone(CEstimateManager *Manager) {
   try {
 
     // Copy from Manager into out vector
-    for (int i = 0; i < Manager->getEstimateCount(); ++i) {
-      CEstimate *pEstimate = Manager->getEstimate(i);
-      vEstimateList.push_back(pEstimate->clone());
-    }
+//    for (int i = 0; i < Manager->getEstimateCount(); ++i) {
+//      CEstimate *pEstimate = Manager->getEstimate(i);
+//      vEstimateList.push_back(pEstimate->clone());
+//    }
+    // TODO: Fix clone
 
   } catch (string Ex) {
     Ex = "CEstimateManager.clone()->" + Ex;

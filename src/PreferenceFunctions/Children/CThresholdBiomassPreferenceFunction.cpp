@@ -15,10 +15,7 @@
 //            CThresholdBiomassPreferenceFunction *Process)
 // Default Constructor
 //**********************************************************************
-CThresholdBiomassPreferenceFunction::CThresholdBiomassPreferenceFunction(
-  CThresholdBiomassPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-
+CThresholdBiomassPreferenceFunction::CThresholdBiomassPreferenceFunction() {
   // Register Estmables
   registerEstimable(PARAM_SIZE_WEIGHT, &dSizeWeight);
   registerEstimable(PARAM_BIOMASS, &dBiomass);

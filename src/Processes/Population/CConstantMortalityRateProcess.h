@@ -19,9 +19,8 @@
 class CConstantMortalityRateProcess : public CProcess {
 public:
   // Functions
-  CConstantMortalityRateProcess(CConstantMortalityRateProcess *Process = 0);
+  CConstantMortalityRateProcess();
   virtual                     ~CConstantMortalityRateProcess();
-  CProcess*                   clone() { return (new CConstantMortalityRateProcess(this)); }
   void                        validate();
   void                        build();
   void                        execute();

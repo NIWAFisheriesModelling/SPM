@@ -15,8 +15,8 @@
 #include "../PreferenceFunctions/CPreferenceFunction.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../Selectivities/CSelectivity.h"
-#include "../Qs/CQManager.h"
-#include "../Qs/CQ.h"
+#include "../Catchabilities/CCatchabilityManager.h"
+#include "../Catchabilities/CCatchability.h"
 #include "../Helpers/CError.h"
 
 //**********************************************************************
@@ -112,8 +112,8 @@ void CParamParser::parseAbsoluteCommand() {
     }
 
     if (sType == PARAM_Q) {
-      CQManager *pQManager = CQManager::Instance();
-      CQ *pQ = pQManager->getQ(sLabel);
+      CCatchabilityManager *pQManager = CCatchabilityManager::Instance();
+      CCatchability *pQ = pQManager->getCatchability(sLabel);
 
       pRet = pQ->getEstimableVariable(sVariable);
       return;

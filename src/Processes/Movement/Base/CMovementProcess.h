@@ -19,7 +19,7 @@
 class CMovementProcess : public CProcess {
 public:
   // Functions
-	CMovementProcess(CMovementProcess *Process = 0);
+	CMovementProcess();
 	virtual                    ~CMovementProcess();
 	void                       setHexMode(bool value) { bHexMode = value; }
 	bool                       getHexMode() { return bHexMode; }

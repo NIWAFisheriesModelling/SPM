@@ -11,11 +11,10 @@
 #include "CMetaLayer.h"
 
 //**********************************************************************
-// CMetaLayer::CMetaLayer(CMetaLayer *Layer)
+// CMetaLayer::CMetaLayer()
 // Default constructor
 //**********************************************************************
-CMetaLayer::CMetaLayer(CMetaLayer *Layer)
-: CLayer(Layer) {
+CMetaLayer::CMetaLayer() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_YEARS);

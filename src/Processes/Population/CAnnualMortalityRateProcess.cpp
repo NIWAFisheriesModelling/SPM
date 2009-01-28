@@ -11,11 +11,10 @@
 #include "CAnnualMortalityRateProcess.h"
 
 //**********************************************************************
-// CAnnualMortalityRateProcess::CAnnualMortalityRateProcess(CAnnualMortalityRateProcess *Process)
+// CAnnualMortalityRateProcess::CAnnualMortalityRateProcess()
 // Default constructor
 //**********************************************************************
-CAnnualMortalityRateProcess::CAnnualMortalityRateProcess(CAnnualMortalityRateProcess *Process)
-: CProcess(Process) {
+CAnnualMortalityRateProcess::CAnnualMortalityRateProcess() {
   throw string("Not yet implemented"); // TODO: Implement this
 }
 

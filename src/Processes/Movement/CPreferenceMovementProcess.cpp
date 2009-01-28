@@ -9,14 +9,22 @@
 
 // Local headers
 #include "CPreferenceMovementProcess.h"
+#include "../../PreferenceFunctions/CPreferenceFunctionManager.h"
+#include "../../Layers/Numeric/CDoubleLayer.h"
+#include "../../PreferenceFunctions/CPreferenceFunction.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CPreferenceMovementProcess::CPreferenceMovementProcess(CPreferenceMovementProcess *Process)
+// CPreferenceMovementProcess::CPreferenceMovementProcess()
 // Default constructor
 //**********************************************************************
-CPreferenceMovementProcess::CPreferenceMovementProcess(CPreferenceMovementProcess *Process)
-: CMovementProcess(Process) {
-  throw string("Not yet implemented"); // TODO: Implement this
+CPreferenceMovementProcess::CPreferenceMovementProcess() {
+
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_PREFERENCE_FUNCTIONS);
 }
 
 //**********************************************************************
@@ -25,7 +33,13 @@ CPreferenceMovementProcess::CPreferenceMovementProcess(CPreferenceMovementProces
 //**********************************************************************
 void CPreferenceMovementProcess::validate() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Base
+    CProcess::validate();
+
+    // Get our Variables
+    pParameterList->fillVector(vDirectedProcessList, PARAM_PREFERENCE_FUNCTIONS);
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+
   } catch (string Ex) {
     Ex = "CPreferenceMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -38,7 +52,21 @@ void CPreferenceMovementProcess::validate() {
 //**********************************************************************
 void CPreferenceMovementProcess::build() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Base Build
+    CMovementProcess::build();
+
+    // Do We need to build our Process Index?
+    if (vDirectedProcessIndex.size() == 0) {
+      CPreferenceFunctionManager *pDirectedProcessManager = CPreferenceFunctionManager::Instance();
+      // Loop and Add
+      foreach(string Label, vDirectedProcessList) {
+        vDirectedProcessIndex.push_back(pDirectedProcessManager->getProcess(Label));
+      }
+    }
+
+    if (pLayer == 0)
+      pLayer = new CDoubleLayer();
+
   } catch (string Ex) {
     Ex = "CPreferenceMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -51,7 +79,82 @@ void CPreferenceMovementProcess::build() {
 //**********************************************************************
 void CPreferenceMovementProcess::execute() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Base Execution
+    CMovementProcess::execute();
+
+    // Loop World
+    for (int i = (iWorldHeight-1); i >= 0; --i) {
+      for (int j = (iWorldWidth-1); j >= 0; --j) {
+        // Get Current Squares
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
+          continue;
+
+        pDiff       = pWorld->getDifferenceSquare(i, j);
+
+        // Reset our Running Total (For Proportions)
+        dRunningTotal = 0.0;
+
+        // Re-Loop Through World Generating Our Logit Layer
+        for (int k = (iWorldHeight-1); k >= 0; --k) {
+          for (int l = (iWorldWidth-1); l >= 0; --l) {
+            // Get Target Square
+            pTargetBase = pWorld->getBaseSquare(k, l);
+
+            // Make sure we are Ok!
+            if (pTargetBase->getEnabled()) {
+              dCurrent = 1.0;
+
+              foreach(CPreferenceFunction *Process, vDirectedProcessIndex) {
+                dCurrent *= Process->getResult(i, j, k, l);
+              }
+              // Logit This
+              // if (!isZero(dCurrent))
+              // dCurrent = 1 / (1-exp(-dCurrent));
+            } else
+              dCurrent = 0.0;
+
+            // Put This in our Logit-Layer
+            // +1 to k/l Because They are Indexes
+            // The Function Requires Human Co-Ords
+            pLayer->setValue(k+1, l+1, dCurrent);
+            dRunningTotal += dCurrent;
+          }
+        }
+
+        // Loop Through World
+        for (int k = (iWorldHeight-1); k >= 0; --k) {
+          for (int l = (iWorldWidth-1); l >= 0; --l) {
+            // Get Current Squares
+            pTargetDiff = pWorld->getDifferenceSquare(k, l);
+
+            // Check if this square is ok
+            if (!pTargetDiff->getEnabled())
+              continue;
+
+            // Loop Categories and Ages
+            foreach(int Category, vCategoryIndex) {
+              for (int m = (iBaseColCount-1); m >= 0; --m) {
+                // Get Logit Amount
+                dCurrent = pLayer->getValue(k, l);
+                if (CComparer::isZero(dCurrent))
+                  continue;
+
+                // Convert To Proportion
+                dCurrent /= dRunningTotal;
+
+                // Get Current Number of Fish
+                dCurrent *= pBaseSquare->getValue(Category, m);
+
+                // Move
+                pDiff->subValue(Category, m, dCurrent);
+                pTargetDiff->addValue(Category, m, dCurrent);
+              }
+            }
+          }
+        }
+      }
+    }
   } catch (string Ex) {
     Ex = "CPreferenceMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

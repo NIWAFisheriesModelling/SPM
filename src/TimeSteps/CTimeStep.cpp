@@ -15,19 +15,12 @@
 #include "../Helpers/ForEach.h"
 
 //**********************************************************************
-// CTimeStep::CTimeStep(CTimeStep *TimeStep = 0)
+// CTimeStep::CTimeStep()
 // Default Constructor
 //**********************************************************************
-CTimeStep::CTimeStep(CTimeStep *TimeStep)
-: CBaseExecutableObject(TimeStep) {
-}
-
-//**********************************************************************
-// void CTimeStep::addProcess(string value)
-// Add Process
-//**********************************************************************
-void CTimeStep::addProcess(string value) {
-  vProcessNames.push_back(value);
+CTimeStep::CTimeStep() {
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_PROCESSES);
 }
 
 //**********************************************************************
@@ -44,6 +37,9 @@ string CTimeStep::getProcess(int index) {
 //**********************************************************************
 void CTimeStep::validate() {
   try {
+    // Base
+    CBaseExecute::validate();
+
     // Populate our parameters
     pParameterList->fillVector(vProcessNames, PARAM_PROCESSES);
 
@@ -59,7 +55,6 @@ void CTimeStep::validate() {
 //**********************************************************************
 void CTimeStep::build() {
   try {
-
     // Now Lets Build Our Relationships
     CProcessManager *pProcessManager = CProcessManager::Instance();
 

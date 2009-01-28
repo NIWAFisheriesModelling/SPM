@@ -18,7 +18,7 @@
 #define CESTIMATEMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CEstimate;
@@ -27,7 +27,7 @@ class CEstimate;
 //
 //
 //**********************************************************************
-class CEstimateManager : public CBaseBuildableObject {
+class CEstimateManager : public CBaseManager {
 public:
   static CEstimateManager*  Instance();
   static void               Destroy();

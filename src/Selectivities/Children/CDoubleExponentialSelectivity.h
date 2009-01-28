@@ -19,11 +19,9 @@
 class CDoubleExponentialSelectivity: public CSelectivity {
 public:
   // Functions
-  CDoubleExponentialSelectivity(CDoubleExponentialSelectivity *Selectivity = 0);
+  CDoubleExponentialSelectivity();
   virtual                     ~CDoubleExponentialSelectivity();
-  CSelectivity*               clone() { return (new CDoubleExponentialSelectivity(this)); }
   void                        validate();
-  void                        build() { }
   double                      getResult(int Index);
 
 protected:

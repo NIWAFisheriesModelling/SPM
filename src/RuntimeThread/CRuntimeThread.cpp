@@ -20,13 +20,14 @@
 #include "../Priors/CPriorManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Profiles/CProfileManager.h"
-#include "../Qs/CQManager.h"
+#include "../Catchabilities/CCatchabilityManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../TimeSteps/CTimeStep.h"
 #include "../Helpers/ForEach.h"
 #include "../InitializationPhases/CInitializationPhase.h"
+#include "../Catchabilities/CCatchabilityManager.h"
 
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
@@ -46,7 +47,7 @@ CRuntimeThread::CRuntimeThread() {
   pPriorManager            = CPriorManager::Instance();
   pProcessManager          = CProcessManager::Instance();
   pProfileManager          = CProfileManager::Instance();
-  pQManager                = CQManager::Instance();
+  pQManager                = CCatchabilityManager::Instance();
   pSelectivityManager      = CSelectivityManager::Instance();
   pTimeStepManager         = CTimeStepManager::Instance();
   pWorld                   = CWorld::Instance();
@@ -115,6 +116,7 @@ void CRuntimeThread::validate() {
   pProfileManager->validate();
   pSelectivityManager->validate();
   pTimeStepManager->validate();
+  CCatchabilityManager::Instance()->validate(); // TODO: FIX THIS
 }
 
 //**********************************************************************
@@ -240,16 +242,7 @@ void CRuntimeThread::startModel() {
   // Flag and start modelling
   eCurrentState = STATE_MODELLING;
 
-  int iTimeStepCount = pTimeStepManager->getTimeStepCount();
-  // Loop Years and Steps And Execute.
-  for (int i = 0; i < iNumberOfYears; ++i) {
-    for (int j = 1; j <= iTimeStepCount; ++j) {
-      pTimeStepManager->execute(i, j);
-
-      pPrintStateManager->execute();
-      pObservationManager->execute(i, j);
-    }
-  }
+  pTimeStepManager->execute();
 }
 
 //**********************************************************************
@@ -291,7 +284,7 @@ CRuntimeThread::~CRuntimeThread() {
   CPriorManager::Destroy();
   CProcessManager::Destroy();
   CProfileManager::Destroy();
-  CQManager::Destroy();
+  CCatchabilityManager::Destroy();
   CSelectivityManager::Destroy();
   CTimeStepManager::Destroy();
   CWorld::Destroy();

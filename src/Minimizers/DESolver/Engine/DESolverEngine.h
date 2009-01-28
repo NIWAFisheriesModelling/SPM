@@ -9,8 +9,8 @@
 // Last Modified: 6/8/98
 // Revision: 1.0
 
-#ifndef _DESOLVER_H
-#define _DESOLVER_H
+#ifndef _DESOLVERENGINE_H
+#define _DESOLVERENGINE_H
 
 
 // Global Headers
@@ -102,4 +102,4 @@ private:
   void Rand2Bin(int candidate);
 };
 
-#endif // _DESOLVER_H
+#endif // _DESOLVERENGINE_H

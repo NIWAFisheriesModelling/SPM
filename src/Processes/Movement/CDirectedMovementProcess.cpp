@@ -17,20 +17,12 @@
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CDirectedMovementProcess::CDirectedMovementProcess(CDirectedMovementProcess *Process = 0)
+// CDirectedMovementProcess::CDirectedMovementProcess()
 // Default Constructor
 //**********************************************************************
-CDirectedMovementProcess::CDirectedMovementProcess(CDirectedMovementProcess *Process)
-: CMovementProcess(Process) {
+CDirectedMovementProcess::CDirectedMovementProcess() {
   // Variables
   dRunningTotal          = 0.0;
-
-  // Copy Construct
-  if (Process != 0) {
-    // Copy our DirectedProcess List
-    for (int i = 0; i < Process->getDirectedProcessCount(); ++i)
-      vDirectedProcessList.push_back(Process->getDirectedProcess(i));
-  }
 }
 
 //**********************************************************************
@@ -67,8 +59,6 @@ void CDirectedMovementProcess::validate() {
       CError::errorMissing(PARAM_CATEGORIES);
     if (vSelectivityList.size() > 0)
       CError::errorSupported(PARAM_SELECTIVITIES);
-    if (getDependsOnLayer())
-      CError::errorSupported(PARAM_LAYER_NAME);
 
   } catch (string Ex) {
     Ex = "CDirectedMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -118,8 +108,8 @@ void CDirectedMovementProcess::execute() {
     for (int i = (iWorldHeight-1); i >= 0; --i) {
       for (int j = (iWorldWidth-1); j >= 0; --j) {
         // Get Current Squares
-        pBase       = pWorld->getBaseSquare(i, j);
-        if (!pBase->getEnabled())
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
           continue;
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
@@ -176,7 +166,7 @@ void CDirectedMovementProcess::execute() {
                 dCurrent /= dRunningTotal;
 
                 // Get Current Number of Fish
-                dCurrent *= pBase->getValue(Category, m);
+                dCurrent *= pBaseSquare->getValue(Category, m);
 
                 // Move
                 pDiff->subValue(Category, m, dCurrent);

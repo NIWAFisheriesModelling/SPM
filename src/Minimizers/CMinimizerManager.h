@@ -10,7 +10,7 @@
 #define CMINIMIZERMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Forward Declarations
 class CRuntimeThread;
@@ -20,7 +20,7 @@ class CMinimizer;
 //
 //
 //**********************************************************************
-class CMinimizerManager : public CBaseExecutableObject {
+class CMinimizerManager : public CBaseManager {
 public:
   static CMinimizerManager*   Instance();
   static void                 Destroy();

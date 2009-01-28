@@ -102,12 +102,11 @@ CProcess* CProcessManager::getProcess(int index) {
 //**********************************************************************
 void CProcessManager::clone(CProcessManager *Manager) {
   try {
-
-    for (int i = 0; i < Manager->getProcessCount(); ++i) {
-      CProcess *pProcess = Manager->getProcess(i);
-      vProcessList.push_back(pProcess->clone());
-    }
-
+//    for (int i = 0; i < Manager->getProcessCount(); ++i) {
+//      CProcess *pProcess = Manager->getProcess(i);
+//      vProcessList.push_back(pProcess->clone());
+//    }
+    // TODO: Fix clone methods here
   } catch (string Ex) {
     Ex = "CProcessManager.clone()->" + Ex;
     throw Ex;
@@ -120,20 +119,19 @@ void CProcessManager::clone(CProcessManager *Manager) {
 //**********************************************************************
 void CProcessManager::validate() {
   try {
-    // Variables
-    map<string, int>              mLabelList;
+    // Validate Processes
+    foreach(CProcess *Process, vProcessList) {
+      Process->validate();
+    }
 
     // Check For Duplicate Labels
+    map<string, int>              mLabelList;
     foreach(CProcess *Process, vProcessList) {
       mLabelList[Process->getLabel()] += 1;
       if (mLabelList[Process->getLabel()] > 1)
         throw string(ERROR_DUPLICATE_LABEL + Process->getLabel());
     }
 
-    // Validate Processes
-    foreach(CProcess *Process, vProcessList) {
-      Process->validate();
-    }
   } catch(string Ex) {
     Ex = "CProcessManager.validate()->" + Ex;
     throw Ex;

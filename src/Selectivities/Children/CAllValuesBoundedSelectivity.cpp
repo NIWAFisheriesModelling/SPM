@@ -11,17 +11,14 @@
 #include "CAllValuesBoundedSelectivity.h"
 
 //**********************************************************************
-// CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity(CAllValuesBoundedSelectivity *Selectivity)
+// CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
 // Default Constructor
 //**********************************************************************
-CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity(CAllValuesBoundedSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
+CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_L);
   pParameterList->registerAllowed(PARAM_H);
   pParameterList->registerAllowed(PARAM_V);
-
 }
 
 //**********************************************************************

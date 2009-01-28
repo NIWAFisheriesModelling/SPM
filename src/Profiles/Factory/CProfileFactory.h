@@ -12,8 +12,8 @@
 // Global headers
 #include <string>
 
-// Forward dec
-class CProfile;
+// Local headers
+#include "../CProfile.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CProfileFactory {
 public:
   // Functions
-  static CProfile*            buildProfile(string type);
+  static CProfile*            buildProfile(string type, bool registerWithManager = true);
 
 private:
   // Functions

@@ -11,21 +11,13 @@
 #include "CNormalLogPrior.h"
 
 //**********************************************************************
-// CNormalLogPrior::CNormalLogPrior(CNormalLogPrior *Prior = 0)
+// CNormalLogPrior::CNormalLogPrior()
 // Default Constructor
 //**********************************************************************
-CNormalLogPrior::CNormalLogPrior(CNormalLogPrior *Prior)
-: CPrior(Prior) {
-
-  // Vars
-  dMu     = 0.0;
-  dSigma  = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dMu     = Prior->getMu();
-    dSigma  = Prior->getSigma();
-  }
+CNormalLogPrior::CNormalLogPrior() {
+  // Register parameters
+  pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_SIGMA);
 }
 
 //**********************************************************************
@@ -34,6 +26,12 @@ CNormalLogPrior::CNormalLogPrior(CNormalLogPrior *Prior)
 //**********************************************************************
 void CNormalLogPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Assign parameters
+    dMu     = pParameterList->getDouble(PARAM_MU);
+    dSigma  = pParameterList->getDouble(PARAM_SIGMA);
 
   } catch (string Ex) {
     Ex = "CNormalLogPrior.validate(" + getLabel() + ")->" + Ex;

@@ -10,32 +10,26 @@
 // Local Headers
 #include "CCategoryTransitionProcess.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
 // TODO: This is now CatTransRate, New one to go here.
 
 //**********************************************************************
-// CCategoryTransitionProcess::CCategoryTransitionProcess(CCategoryTransitionProcess *Process = 0)
+// CCategoryTransitionProcess::CCategoryTransitionProcess()
 // Default Constructor
 //**********************************************************************
-CCategoryTransitionProcess::CCategoryTransitionProcess(CCategoryTransitionProcess *Process)
-: CProcess(Process) {
-  // Vars
-  sFrom           = "";
-  sTo             = "";
-  dProportion     = 0.0;
-  iFromIndex      = -1;
-  iToIndex        = -1;
+CCategoryTransitionProcess::CCategoryTransitionProcess() {
 
+  // Register estimables
   registerEstimable(PARAM_PROPORTION, &dProportion);
 
-  // Copy Construct
-  if (Process != 0) {
-    sFrom         = Process->getFrom();
-    sTo           = Process->getTo();
-    dProportion   = Process->getProportion();
-  }
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_FROM);
+  pParameterList->registerAllowed(PARAM_TO);
+  pParameterList->registerAllowed(PARAM_PROPORTION);
+  pParameterList->registerAllowed(PARAM_SELECTIVITY);
 }
 
 //**********************************************************************
@@ -47,21 +41,13 @@ void CCategoryTransitionProcess::validate() {
     // Base Validation
     CProcess::validate();
 
-    // Validate
-    if (bDependsOnLayer)
-      CError::errorSupported(PARAM_LAYER_NAME);
-    if (sFrom == "")
-      CError::errorMissing(PARAM_FROM);
-    if (sTo == "")
-      CError::errorMissing(PARAM_TO);
-    if (CComparer::isZero(dProportion))
-      CError::errorMissing(PARAM_PROPORTION);
-    if (getSelectivityCount() != 1)
-      CError::errorMissing(PARAM_SELECTIVITY);
-    if (getCategoryCount() != 0)
-      CError::errorSupported(PARAM_CATEGORIES);
-    if (sPenalty != "")
-      CError::errorSupported(PARAM_PENALTY);
+    // Populate our variables
+    sFrom         = pParameterList->getString(PARAM_FROM);
+    sTo           = pParameterList->getString(PARAM_TO);
+    dProportion   = pParameterList->getDouble(PARAM_PROPORTION);
+    sSelectivity  = pParameterList->getString(PARAM_SELECTIVITY);
+
+    // Local Validation
     if (dProportion > 1.0)
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
@@ -81,8 +67,10 @@ void CCategoryTransitionProcess::build() {
     CProcess::build();
 
     // Get our Category Indexes.
-    iFromIndex = pWorld->getCategoryIndexForName(getFrom());
-    iToIndex   = pWorld->getCategoryIndexForName(getTo());
+    iFromIndex    = pWorld->getCategoryIndexForName(sFrom);
+    iToIndex      = pWorld->getCategoryIndexForName(sTo);
+
+    pSelectivity  = CSelectivityManager::Instance()->getSelectivity(sSelectivity);
 
   } catch(string Ex) {
     Ex = "CCategoryTransitionProcess.build(" + getLabel() + ")->" + Ex;
@@ -105,20 +93,20 @@ void CCategoryTransitionProcess::execute() {
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Square, and Difference Equal
-        pBase       = pWorld->getBaseSquare(i, j);
+        pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check if usable
-        if (!pBase->getEnabled())
+        if (!pBaseSquare->getEnabled())
           continue;
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
         for (int l = 0; l < iBaseColCount; ++l) {
-          dCurrent = pBase->getValue(iFromIndex, l);
+          dCurrent = pBaseSquare->getValue(iFromIndex, l);
           if(CComparer::isZero(dCurrent))
              continue;
           dCurrent = dCurrent * dProportion * vSelectivityIndex[0]->getResult(l);
-          pBase->subValue(iFromIndex, l, dCurrent);
-          pBase->addValue(iToIndex, l, dCurrent);
+          pBaseSquare->subValue(iFromIndex, l, dCurrent);
+          pBaseSquare->addValue(iToIndex, l, dCurrent);
         }
       }
     }

@@ -14,7 +14,7 @@
 #define CSELECTIVITYMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CSelectivity;
@@ -23,7 +23,7 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CSelectivityManager : public CBaseBuildableObject {
+class CSelectivityManager : public CBaseManager {
 public:
   static CSelectivityManager*   Instance();
   static void                Destroy();

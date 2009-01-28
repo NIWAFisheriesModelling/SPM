@@ -10,7 +10,7 @@
 #define CESTIMATE_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 // Classes
 class CPrior;
@@ -19,30 +19,22 @@ class CPrior;
 //
 //
 //**********************************************************************
-class CEstimate : public CBaseBuildableObject {
+class CEstimate : public CBaseBuild {
 public:
-	CEstimate(CEstimate *Estimate = 0);
+	CEstimate();
 	virtual                    ~CEstimate();
-	void                       setParameter(string value) { sParameter = value; }
 	string                     getParameter() { return sParameter; }
-	void                       setLowerBound(double value) { dLowerBound = value; }
 	double                     getLowerBound() { return dLowerBound; }
-	void                       setUpperBound(double value) { dUpperBound = value; }
 	double                     getUpperBound() { return dUpperBound; }
-	void                       setPrior(string value) { sPrior = value; }
 	string                     getPrior() { return sPrior; }
-	void                       setValue(double value);
+  void                       setValue(double value);
 	double                     getValue();
 	void                       setEnabled(bool value) { bEnabled = value; }
   bool                       getEnabled() { return bEnabled; }
-  void                       addSame(string value);
-  int                        getSameCount() { return (int)vSameList.size(); }
-  string                     getSame(int index);
   void                       addValue(double value);
   int                        getValueCount() { return (int)vValueList.size(); }
   void                       loadValue(int index);
   double                     getPriorScore();
-  CEstimate*                 clone() { return (new CEstimate(this)); }
   void                       validate();
 	void                       build();
 

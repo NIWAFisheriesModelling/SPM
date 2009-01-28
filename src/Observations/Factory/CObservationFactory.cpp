@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CObservationFactory.h"
+#include "../CObservationManager.h"
 #include "../../Translations/Translations.h"
 #include "../Children/CAbundanceObservation.h"
 #include "../Children/CProportionsAtAgeObservation.h"
@@ -16,19 +17,24 @@
 
 
 //**********************************************************************
-// CObservation* CObservationFactory::buildObservation(string type)
+// CObservation* CObservationFactory::buildObservation(string type, bool registerWithManager)
 // Build our Observation of type
 //**********************************************************************
-CObservation* CObservationFactory::buildObservation(string type) {
+CObservation* CObservationFactory::buildObservation(string type, bool registerWithManager) {
+
+  CObservation *pObservation = 0;
 
   if (type == PARAM_ABUNDANCE)
-    return new CAbundanceObservation();
+    pObservation = new CAbundanceObservation();
   else if (type == PARAM_PROPORTIONS_AT_AGE)
-    return new CProportionsAtAgeObservation();
+    pObservation = new CProportionsAtAgeObservation();
   else if (type == PARAM_PROPORTIONS_BY_CATEGORY)
-    return new CProportionsByCategoryObservation();
+    pObservation = new CProportionsByCategoryObservation();
   else
     throw string("Unknown type: " + type); // TODO: FIX ME
 
-  return 0;
+  if (registerWithManager)
+    CObservationManager::Instance()->addObservation(pObservation);
+
+  return pObservation;
 }

@@ -11,7 +11,7 @@
 #define CWORLDSQUARECOLLECTION_H_
 
 // Local Headers
-#include "../../BaseClasses/CBaseBuildableObject.h"
+#include "../../BaseClasses/CBaseBuild.h"
 
 // Classes
 class CWorldSquare;
@@ -21,10 +21,10 @@ class CStringLayer;
 //
 //
 //**********************************************************************
-class CWorldSquareCollection : public CBaseBuildableObject {
+class CWorldSquareCollection : public CBaseBuild {
 public:
   // Functions
-  CWorldSquareCollection(CWorldSquareCollection *Collection = 0);
+  CWorldSquareCollection();
   virtual                     ~CWorldSquareCollection();
   void                        setLayer(CStringLayer *layer) { pLayer = layer; }
   CStringLayer*               getLayer() { return pLayer; }

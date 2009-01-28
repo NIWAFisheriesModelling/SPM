@@ -10,7 +10,7 @@
 #define CPREFERENEFUNCTIONMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CPreferenceFunction;
@@ -19,13 +19,13 @@ class CPreferenceFunction;
 //
 //
 //**********************************************************************
-class CPreferenceFunctionManager : public CBaseBuildableObject {
+class CPreferenceFunctionManager : public CBaseManager {
 public:
   static CPreferenceFunctionManager*   Instance();
   static void                          Destroy();
 
   // Functions
-  void                       addProcess(CPreferenceFunction *Process);
+  void                       addPreferenceFunction(CPreferenceFunction *Function);
   int                        getProcessCount() { return (int)vPreferenceFunctions.size(); }
   CPreferenceFunction*       getProcess(int index);
   CPreferenceFunction*       getProcess(string Label);

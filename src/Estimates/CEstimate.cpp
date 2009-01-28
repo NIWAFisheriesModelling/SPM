@@ -17,61 +17,38 @@
 #include "../Helpers/CConvertor.h"
 
 //**********************************************************************
-// CEstimate::CEstimate(CEstimate *Estimate = 0)
+// CEstimate::CEstimate()
 // Default Constructor
 //**********************************************************************
-CEstimate::CEstimate(CEstimate *Estimate)
-: CBaseBuildableObject(Estimate) {
-  // Vars
-  sParameter        = "";
-  dLowerBound       = 0.0;
-  dUpperBound       = 0.0;
-  sPrior            = "";
-  pPrior            = 0;
-  pTarget           = 0;
-  bEnabled          = true;
-
-  // Copy Construct
-  if (Estimate != 0) {
-    sParameter      = Estimate->getParameter();
-    dLowerBound     = Estimate->getLowerBound();
-    dUpperBound     = Estimate->getUpperBound();
-    sPrior          = Estimate->getPrior();
-
-    // Copy Vectors
-    for (int i = 0; i < Estimate->getSameCount(); ++i)
-      addSame(Estimate->getSame(i));
-  }
-}
-
-//**********************************************************************
-// void CEstimate::addSame(string value)
-// Add a same to our Vector.
-//**********************************************************************
-void CEstimate::addSame(string value) {
-  vSameList.push_back(value);
+CEstimate::CEstimate() {
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_PARAMETER);
+  pParameterList->registerAllowed(PARAM_LOWER_BOUND);
+  pParameterList->registerAllowed(PARAM_UPPER_BOUND);
+  pParameterList->registerAllowed(PARAM_PRIOR);
+  pParameterList->registerAllowed(PARAM_SAME);
 }
 
 //**********************************************************************
 // string CEstimate::getSame(int index)
 // Get Same
 //**********************************************************************
-string CEstimate::getSame(int index) {
-  try {
-    if (index >= (int)vSameList.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SAME);
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-    return vSameList[index];
-
-  } catch (string Ex) {
-    Ex = "CEstimable.getSame()->" + Ex;
-    throw Ex;
-  }
-
-  return "";
-}
+//string CEstimate::getSame(int index) {
+//  try {
+//    if (index >= (int)vSameList.size())
+//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SAME);
+//    if (index < 0)
+//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
+//
+//    return vSameList[index];
+//
+//  } catch (string Ex) {
+//    Ex = "CEstimable.getSame()->" + Ex;
+//    throw Ex;
+//  }
+//
+//  return "";
+//}
 
 //**********************************************************************
 // void CEstimate::addValue(double value)
@@ -179,12 +156,18 @@ void CEstimate::loadValue(int index) {
 //**********************************************************************
 void CEstimate::validate() {
   try {
-    if (sParameter == "")
-      CError::errorMissing(PARAM_PARAMETER);
-    if ( (dLowerBound == 0.0) && (dUpperBound == 0.0) )
-      CError::errorMissing(PARAM_LOWER_BOUND);
-    if (dUpperBound < dLowerBound)
-      CError::errorLessThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
+    // Base
+    CBaseBuild::validate();
+
+    // Populate our Variables
+    sParameter    = pParameterList->getString(PARAM_PARAMETER);
+    dLowerBound   = pParameterList->getDouble(PARAM_LOWER_BOUND);
+    dUpperBound   = pParameterList->getDouble(PARAM_UPPER_BOUND);
+    sPrior        = pParameterList->getString(PARAM_PRIOR);
+
+    pParameterList->fillVector(vSameList, PARAM_SAME);
+
+    // TODO: Complete Validation
 
   } catch (string Ex) {
     Ex = "CEstimate.validate(" + sParameter + ")->" + Ex;
@@ -206,15 +189,13 @@ void CEstimate::build() {
     pTarget = clParser.parseCommand(sParameter);
 
     // Build our Prior Target
-    if ( (pPrior == 0) && (sPrior != "")) {
+    if (sPrior != "") {
       CPriorManager *pPriorManager = CPriorManager::Instance();
       pPrior = pPriorManager->getPrior(sPrior);
     }
 
-    if ((int)vSameIndex.size() == 0) {
-      foreach(string Same, vSameList) {
-        vSameIndex.push_back(clParser.parseCommand(Same));
-      }
+    foreach(string Same, vSameList) {
+      vSameIndex.push_back(clParser.parseCommand(Same));
     }
 
   } catch (string Ex) {

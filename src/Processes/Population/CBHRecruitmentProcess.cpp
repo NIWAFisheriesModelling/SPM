@@ -11,12 +11,10 @@
 #include "CBHRecruitmentProcess.h"
 
 //**********************************************************************
-// CBHRecruitmentProcess::CBHRecruitmentProcess(CBHRecruitmentProcess *Process)
+// CBHRecruitmentProcess::CBHRecruitmentProcess()
 // Default constructor
 //**********************************************************************
-CBHRecruitmentProcess::CBHRecruitmentProcess(CBHRecruitmentProcess *Process)
-: CProcess(Process) {
-
+CBHRecruitmentProcess::CBHRecruitmentProcess() {
   // Register Allowed variables
   pParameterList->registerAllowed(PARAM_R0);
   pParameterList->registerAllowed(PARAM_CATEGORIES);

@@ -11,21 +11,13 @@
 #include "CNormalByStdevPrior.h"
 
 //**********************************************************************
-// CNormalByStdevPrior::CNormalByStdevPrior(CNormalByStdevPrior *Prior = 0)
+// CNormalByStdevPrior::CNormalByStdevPrior()
 // Default Constructor
 //**********************************************************************
-CNormalByStdevPrior::CNormalByStdevPrior(CNormalByStdevPrior *Prior)
-: CPrior(Prior) {
-
-  // Vars
-  dMu     = 0.0;
-  dSigma  = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dMu     = Prior->getMu();
-    dSigma  = Prior->getSigma();
-  }
+CNormalByStdevPrior::CNormalByStdevPrior() {
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_SIGMA);
 }
 
 //**********************************************************************
@@ -34,6 +26,12 @@ CNormalByStdevPrior::CNormalByStdevPrior(CNormalByStdevPrior *Prior)
 //**********************************************************************
 void CNormalByStdevPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Assign parameters
+    dMu     = pParameterList->getDouble(PARAM_MU);
+    dSigma  = pParameterList->getDouble(PARAM_SIGMA);
 
   } catch (string Ex) {
     Ex = "CNormalByStdevPrior.validate(" + getLabel() + ")->" + Ex;

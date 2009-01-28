@@ -18,7 +18,7 @@
 #define CTIMESTEPMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CTimeStep;
@@ -27,32 +27,31 @@ class CTimeStep;
 //
 //
 //**********************************************************************
-class CTimeStepManager : public CBaseBuildableObject {
+class CTimeStepManager: public CBaseManager {
 public:
-  static CTimeStepManager*   Instance();
-  static void                Destroy();
+  static CTimeStepManager*    Instance();
+  static void                 Destroy();
 
   // Functions
-  void                       addTimeStep(CTimeStep *value);
-  int                        getTimeStepCount() { return vTimeStepList.size(); }
-  CTimeStep*                 getTimeStep(int index);
-  int                        getCurrentYear() { return iCurrentYear; }
-  int                        getCurrentTimeStep() { return iCurrentTimeStep; }
-  void                       clone(CTimeStepManager *Manager);
-	void                       validate();
-	void                       build();
-	void                       execute(int Year, int Step);
-  virtual                    ~CTimeStepManager();
+  void                        addTimeStep(CTimeStep *value);
+  int                         getTimeStepCount() { return (int) vTimeStepList.size(); }
+  CTimeStep*                  getTimeStep(int index);
+  int                         getCurrentYear() {return iCurrentYear;}
+  void                        clone(CTimeStepManager *Manager);
+  void                        validate();
+  void                        build();
+  void                        execute();
+  virtual                     ~CTimeStepManager();
 
 protected:
   // Functions
   CTimeStepManager();
 
   // Variables
-  int                        iNumberOfYears;
-  int                        iCurrentYear;
-  int                        iCurrentTimeStep;
-  vector<CTimeStep*>         vTimeStepList;
+  int                         iNumberOfYears;
+  int                         iCurrentYear;
+  int                         iCurrentTimeStep;
+  vector<CTimeStep*>          vTimeStepList;
 
 private:
   static boost::thread_specific_ptr<CTimeStepManager> clInstance;

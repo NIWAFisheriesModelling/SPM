@@ -9,21 +9,43 @@
 
 // Global Headers
 #include <fstream>
+#include <iostream>
 
 // Local Headers
 #include "CConfigurationLoader.h"
+#include "../CConfiguration.h"
+#include "../World/CWorld.h"
 #include "../Translations/Translations.h"
+#include "../BaseClasses/CBaseObject.h"
+#include "../Catchabilities/Factory/CCatchabilityFactory.h"
+#include "../Estimates/Factory/CEstimateFactory.h"
+#include "../InitializationPhases/Factory/CInitializationPhaseFactory.h"
+#include "../Layers/Factory/CLayerFactory.h"
+#include "../Minimizers/Factory/CMinimizerFactory.h"
+#include "../Observations/Factory/CObservationFactory.h"
+#include "../Penalties/Factory/CPenaltyFactory.h"
+#include "../PreferenceFunctions/Factory/CPreferenceFunctionFactory.h"
+#include "../Priors/Factory/CPriorFactory.h"
+#include "../Processes/Factory/CProcessFactory.h"
+#include "../Profiles/Factory/CProfileFactory.h"
+#include "../Selectivities/Factory/CSelectivityFactory.h"
+#include "../TimeSteps/Factory/CTimeStepFactory.h"
+#include "../Minimizers/CMinimizerManager.h"
+
+// TODO: Finish this structure
+#include "../MCMC/CMCMC.h"
+
 
 // Using
 using std::ifstream;
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CConfigurationLoader::CConfigurationLoader()
 // Default Constructor
 //**********************************************************************
 CConfigurationLoader::CConfigurationLoader() {
-  // Variables
-  sFileName           = "";
 }
 
 //**********************************************************************
@@ -33,7 +55,9 @@ CConfigurationLoader::CConfigurationLoader() {
 void CConfigurationLoader::loadConfigFile() {
   try {
     // Load file to memory
-    loadConfigIntoCache();
+    CConfiguration *pConfig = CConfiguration::Instance();
+    string sFileName = pConfig->getConfigFile();
+    loadConfigIntoCache(sFileName);
 
     // Verify file had contents
     if ((int)vLines.size() == 0)
@@ -56,7 +80,8 @@ void CConfigurationLoader::loadConfigFile() {
 
     processSection();
   } catch (string Ex) {
-    // TODO: Add Exception
+    Ex = "CConfigurationLoad.loadConfigFile()->" + Ex;
+    throw Ex;
   }
 }
 
@@ -66,20 +91,139 @@ void CConfigurationLoader::loadConfigFile() {
 //**********************************************************************
 void CConfigurationLoader::processSection() {
 
+  // See what section it is.
+  string sSection = vCurrentSection[0].substr(1, vCurrentSection[0].length()-1);
+
+  int iSpaceLocation = sSection.find_first_of(' '); // Check for space
+  if (iSpaceLocation > 0)
+    sSection = sSection.substr(0, iSpaceLocation);
+
+  // Based on the @section, we want to get a Base Object
+  CBaseObject *pBaseObject    = 0;
+
+  string sType = getTypeFromCurrentSection();
+  try {
+    if (sSection == PARAM_MODEL)
+      pBaseObject = CWorld::Instance();
+    else if (sSection == PARAM_CATCHABILITY)
+      pBaseObject = CCatchabilityFactory::buildCatchability(sType);
+    else if (sSection == PARAM_ESTIMATE)
+      pBaseObject = CEstimateFactory::buildEstimate(sType);
+    else if (sSection == PARAM_INITIALIZATION_PHASE)
+      pBaseObject = CInitializationPhaseFactory::buildInitializationPhase(sType);
+    else if (sSection == PARAM_LAYER)
+      pBaseObject = CLayerFactory::buildLayer(sType);
+    else if (sSection == PARAM_MINIMIZER)
+      pBaseObject = CMinimizerFactory::buildMinimizer(sType);
+    else if (sSection == PARAM_OBSERVATION)
+      pBaseObject = CObservationFactory::buildObservation(sType);
+    else if (sSection == PARAM_PENALTY)
+      pBaseObject = CPenaltyFactory::buildPenalty(sType);
+    else if (sSection == PARAM_PREFERENCE_FUNCTION)
+      pBaseObject = CPreferenceFunctionFactory::buildPreferenceFunction(sType);
+    else if (sSection == PARAM_PRIOR)
+      pBaseObject = CPriorFactory::buildPrior(sType);
+    else if (sSection == PARAM_PROCESS)
+      pBaseObject = CProcessFactory::buildProcess(sType);
+    else if (sSection == PARAM_PROFILE)
+      pBaseObject = CProfileFactory::buildProfile(sType);
+    else if (sSection == PARAM_SELECTIVITY)
+      pBaseObject = CSelectivityFactory::buildSelectivity(sType);
+    else if (sSection == PARAM_TIME_STEP)
+      pBaseObject = CTimeStepFactory::buildTimeStep(sType);
+    else if (sSection == PARAM_MPD)
+      pBaseObject = CMinimizerManager::Instance();
+    else if (sSection == PARAM_MCMC)
+      pBaseObject = CMCMC::Instance();
+    else
+      throw string("Unknown section: " + sSection); // TODO: Add Translation
+  } catch (string Ex) {
+    Ex += string(" - ") + sSection;
+    throw Ex;
+  }
+
+  assignParameters(pBaseObject);
+}
+
+//**********************************************************************
+// string CConfigurationLoader::getTypeFromCurrentSection()
+// Find the type variable in our current section
+//**********************************************************************
+string CConfigurationLoader::getTypeFromCurrentSection() {
+
+  for (int i = 0; i < (int)vCurrentSection.size(); ++i) {
+    int iTypeLocation = vCurrentSection[i].find(PARAM_TYPE);
+
+    if (iTypeLocation == 0) {
+      int iSpaceLocation = vCurrentSection[i].find_first_of(' ');
+      return vCurrentSection[i].substr(iSpaceLocation+1, vCurrentSection[i].length()-iSpaceLocation);
+    }
+  }
+
+  return "";
+}
+
+//**********************************************************************
+// void CConfigurationLoader::assignParameters(CBaseObject *Object)
+// Assign our parameters to the object
+//**********************************************************************
+void CConfigurationLoader::assignParameters(CBaseObject *Object) {
+  try {
+    // Extra Label
+    int iSpaceLocation = vCurrentSection[0].find(" ");
+    if (iSpaceLocation > 0) {
+      string sLabel = vCurrentSection[0].substr(iSpaceLocation+1, vCurrentSection[0].length()-iSpaceLocation);
+      Object->addParameter(PARAM_LABEL, sLabel);
+      cout << "Setting Label: " << sLabel << endl;
+    }
+
+    // Loop through rest of parameters
+    for (int i = 1; i < (int)vCurrentSection.size(); ++i) {
+      string sCurrentLine = vCurrentSection[i];
+
+      iSpaceLocation = sCurrentLine.find_first_of(' ');
+
+      if (iSpaceLocation == -1) {
+        Object->addParameter(sCurrentLine, "");
+        continue;
+      }
+
+      // Get variable name
+      string sName = sCurrentLine.substr(0, iSpaceLocation);
+
+      // Setup variables
+      int iNxtSpace = 0;
+      iSpaceLocation++;
+
+      do {
+        // Extract value, setup for next run
+        iNxtSpace = sCurrentLine.find(' ', iSpaceLocation);
+        string sValue = sCurrentLine.substr(iSpaceLocation, iNxtSpace-iSpaceLocation);
+        iSpaceLocation = iNxtSpace + 1;
+
+        // Add the parameter
+        if (sValue != "")
+          Object->addParameter(sName, sValue);
+      } while (iNxtSpace > 0);
+    }
+  } catch (string Ex) {
+    Ex = "CConfigurationLoader.assignParameters()->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
 // void CConfigurationLoader::loadConfigIntoCache()
 // Load the configuration file into memory
 //**********************************************************************
-void CConfigurationLoader::loadConfigIntoCache() {
+void CConfigurationLoader::loadConfigIntoCache(string FileName) {
   try {
-    if (sFileName == "")
+    if (FileName == "")
       throw string(ERROR_INVALID_FILE_NAME);
 
-    ifstream fConfig(sFileName.c_str());
+    ifstream fConfig(FileName.c_str());
     if (!fConfig)
-     throw string(ERROR_OPEN_FILE + sFileName);
+     throw string(ERROR_OPEN_FILE + FileName);
 
     string sLine = "";
     bool   bInMultiLineComment = false;
@@ -138,22 +282,36 @@ void CConfigurationLoader::loadConfigIntoCache() {
           throw string("include_file missing closing quote");
         sIncludeFile = sIncludeFile.substr(0, iIndex);
 
+        // TODO: Fix This
         // Check if it's absolute or relative
-       // if ( (sIncludeFile.substr(0, 1) == "/") || (sIncludeFile.substr(1, 1) == ":") )
-        //  loadConfigIntoCache(sIncludeFile); // Absolute
-       // else
-       //   loadConfigIntoCache(sDirectory + (sDirectory==""?"":"//") + sIncludeFile); // Relative
+        if ( (sIncludeFile.substr(0, 1) == "/") || (sIncludeFile.substr(1, 1) == ":") )
+          loadConfigIntoCache(sIncludeFile); // Absolute
+        else {
+          int iLastLoc = FileName.find_last_of('/');
+          if (iLastLoc == -1)
+            iLastLoc = FileName.find_last_of('\\');
+
+          if (iLastLoc == -1) {
+            loadConfigIntoCache(sIncludeFile);
+          } else {
+           string sDirectory = FileName.substr(0, iLastLoc+1);
+           loadConfigIntoCache(sDirectory + (sDirectory==""?"":"//") + sIncludeFile); // Relative
+          }
+        }
 
         // Blank line so it's not added
         sLine = "";
       }
+
+      for (unsigned i = 0; i < sLine.length(); ++i)
+        sLine[i] = tolower(sLine[i]);
 
       if (sLine.length() > 0)
         vLines.push_back(sLine);
     }
     fConfig.close();
   } catch (string Ex) {
-    Ex = "CConfigurationLoader.loadConfigIntoCache(" + sFileName +")->" + Ex;
+    Ex = "CConfigurationLoader.loadConfigIntoCache(" + FileName +")->" + Ex;
     throw Ex;
   }
 }

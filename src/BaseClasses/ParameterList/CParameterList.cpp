@@ -11,6 +11,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <iostream>
 
 // Local headers
 #include "CParameterList.h"
@@ -24,6 +25,8 @@
 using std::map;
 using std::vector;
 using std::string;
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CParameterList::CParameterList(CParameterList *Object = 0)
@@ -53,12 +56,41 @@ void CParameterList::addParameter(string name, string value) {
 }
 
 //**********************************************************************
+//
+//
+//**********************************************************************
+void CParameterList::checkInvalidParameters() {
+
+  map<string, vector<string> >::iterator mvPtr = mParameters.begin();
+  while (mvPtr != mParameters.end()) {
+    bool bMatch = false;
+
+    foreach(string Parameter, vAllowedParameters) {
+      if (Parameter == (*mvPtr).first) {
+        bMatch = true;
+        break;
+      }
+    }
+
+    if (!bMatch)
+      throw string("Parameter " + (*mvPtr).first + " is not supported");
+
+    mvPtr++;
+  }
+
+}
+
+//**********************************************************************
 // string CParameterList::getString(string name)
 // Return the value of the parameter
 //**********************************************************************
-string CParameterList::getString(string name) {
+string CParameterList::getString(string name, bool optional, string defaultValue) {
   if (!hasParameter(name))
-    CError::errorMissing(name);
+    if (optional)
+      return defaultValue;
+    else
+      CError::errorMissing(name);
+
   if ((int)mParameters[name].size() == 0)
     throw string("No value defined for " + name); // TODO: Add CError
   if ((int)mParameters[name].size() > 1)
@@ -71,8 +103,17 @@ string CParameterList::getString(string name) {
 // double CParameterList::getDouble(string name)
 // Return the double for the parameter
 //**********************************************************************
-double CParameterList::getDouble(string name) {
-  return CConvertor::stringToDouble(getString(name));
+double CParameterList::getDouble(string name, bool optional, double defaultValue) {
+
+  double dReturn = defaultValue;
+
+  // Get the string
+  string sValue = getString(name, optional);
+  // If we have one
+  if (sValue != "")
+    dReturn = CConvertor::stringToDouble(sValue);
+
+  return dReturn;
 }
 
 //**********************************************************************
@@ -84,15 +125,22 @@ int CParameterList::getInt(string name) {
 }
 
 //**********************************************************************
-// bool CParameterList::getBool(string name)
+// bool CParameterList::getBool(string name, bool optional, bool defaultValue)
 // Return the bool for the parameter
 //**********************************************************************
-bool CParameterList::getBool(string name) {
+bool CParameterList::getBool(string name, bool optional, bool defaultValue) {
+
+  string value = getString(name, optional);
+
+  // Check for non-existent optional value. If so, return default
+  if ( (value == "") && (optional) )
+    return defaultValue;
+
   // Check for False/F match
-  if ( (getString(name) == CONFIG_FALSE) || (getString(name) == CONFIG_FALSE_SHORT) )
+  if ( (value == CONFIG_FALSE) || (value == CONFIG_FALSE_SHORT) )
     return false;
   // Check for true/T match
-  if ( (getString(name) == CONFIG_TRUE) || (getString(name) == CONFIG_TRUE_SHORT) )
+  if ( (value == CONFIG_TRUE) || (value == CONFIG_TRUE_SHORT) )
     return true;
 
   throw string("value not valid true/false for :" + name); // TODO: Add CError for this
@@ -189,6 +237,8 @@ bool CParameterList::hasParameter(string name) {
   while (mPtr != mParameters.end()) {
     if (CComparer::isSame(name, (*mPtr).first, true))
       return true;
+
+    mPtr++;
   }
 
   return false;
@@ -205,6 +255,7 @@ int CParameterList::countMatches(string name) {
   while (mPtr != mParameters.end()) {
     if (CComparer::isSame(name, (*mPtr).first, true))
       iMatch++;
+    mPtr++;
   }
 
   return iMatch;
@@ -234,6 +285,8 @@ string CParameterList::getMatchFullName(string name, int matchNumber = 1) {
       if (matchNumber == 0)
         return (*mPtr).first;
     }
+
+    mPtr++;
   }
 
   throw string("Not enough matches for " + name); // TODO: Add CError

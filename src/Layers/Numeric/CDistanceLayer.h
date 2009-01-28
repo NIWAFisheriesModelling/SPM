@@ -19,10 +19,10 @@
 class CDistanceLayer : public CNumericLayer {
 public:
   // Functions
-	CDistanceLayer(CDistanceLayer *Layer = 0);
+	CDistanceLayer();
 	virtual                    ~CDistanceLayer();
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  CLayer*                    clone() { return (new CDistanceLayer(this)); }
+  CLayer*                    clone() { return (new CDistanceLayer(*this)); }
   void                       build();
 
 };

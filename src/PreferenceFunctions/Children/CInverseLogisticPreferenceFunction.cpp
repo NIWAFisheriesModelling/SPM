@@ -10,19 +10,13 @@
 // Local Headers
 #include "CInverseLogisticPreferenceFunction.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CInverseLogisticPreferenceFunction::CInverseLogisticPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CInverseLogisticPreferenceFunction::CInverseLogisticPreferenceFunction(CInverseLogisticPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-  // Variables
-  dA50          = -1.0;
-  dAto95        = -1.0;
-
+CInverseLogisticPreferenceFunction::CInverseLogisticPreferenceFunction() {
   // Register estimable parameters
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);

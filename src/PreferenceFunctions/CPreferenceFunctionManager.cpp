@@ -44,11 +44,11 @@ void CPreferenceFunctionManager::Destroy() {
 }
 
 //**********************************************************************
-// void CPreferenceFunctionManager::addProcess(CPreferenceFunction *Process)
+// void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function)
 // Add DirectedProcess to our list
 //**********************************************************************
-void CPreferenceFunctionManager::addProcess(CPreferenceFunction *Process) {
-  vPreferenceFunctions.push_back(Process);
+void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function) {
+  vPreferenceFunctions.push_back(Function);
 }
 
 //**********************************************************************
@@ -100,10 +100,11 @@ void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager) {
   try {
 
     // Copy our Directed Processes
-    for (int i = 0; i < Manager->getProcessCount(); ++i) {
-      CPreferenceFunction *pProcess = Manager->getProcess(i);
-      vPreferenceFunctions.push_back(pProcess->clone());
-    }
+//    for (int i = 0; i < Manager->getProcessCount(); ++i) {
+//      CPreferenceFunction *pProcess = Manager->getProcess(i);
+//      vPreferenceFunctions.push_back(pProcess->clone());
+//    }
+    // TODO: Fix up Clone Functions here
 
   } catch (string Ex) {
     Ex = "CPreferenceFunctionManager.clone()->" + Ex;

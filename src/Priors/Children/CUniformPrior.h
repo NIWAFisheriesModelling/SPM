@@ -19,13 +19,10 @@
 class CUniformPrior : public CPrior {
 public:
   // Functions
-	CUniformPrior(CUniformPrior *Prior = 0);
+	CUniformPrior();
 	virtual                    ~CUniformPrior();
-	void                       setC(double value) { dC = value; }
-	double                     getC() { return dC; }
-	CPrior*                    clone() { return (new CUniformPrior(this)); }
 	void                       validate();
-	double                     getResult(double Param) { return 0; };
+	double                     getResult(double Param);
 
 protected:
   // Variables

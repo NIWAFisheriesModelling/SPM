@@ -17,53 +17,24 @@
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CProportionsAtAgeObservation::CProportionsAtAgeObservation(CProportionsAtAgeObservation *Observation)
+// CProportionsAtAgeObservation::CProportionsAtAgeObservation()
 // Default Constructor
 //**********************************************************************
-CProportionsAtAgeObservation::CProportionsAtAgeObservation(CProportionsAtAgeObservation *Observation)
-: CObservation(Observation) {
+CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
 
-  // Vars
-  iMinAge             = -1;
-  iMaxAge             = -1;
-  bAgePlus            = false;
-  bRescale            = false;
-  dR                  = DELTA;
-  pAgeResults         = 0;
-  dNProcessError      = -1;
-
-  // Copy Construct
-  if (Observation != 0) {
-    iMinAge         = Observation->getMinAge();
-    iMaxAge         = Observation->getMaxAge();
-    bAgePlus        = Observation->getAgePlus();
-    bRescale        = Observation->getRescale();
-    dR              = Observation->getR();
-    dNProcessError  = Observation->getNProcessError();
-
-    // Clone our N Map
-    for (int i = 0; i < Observation->getNCount(); ++i) {
-      string key = Observation->getNKey(i);
-      mN[key] = Observation->getNValue(key);
-    }
-
-    // CLone our Proportion Matrix (Map of Vectors)
-    for (int i = 0; i < Observation->getProportionCount(); ++i) {
-      string key = Observation->getProportionKey(i);
-      for (int j = 0; j < Observation->getProportionKeyValueCount(key); ++j) {
-        mvProportionMatrix[key].push_back(Observation->getProportionValue(key, j));
-      }
-    }
-
-  }
-}
-
-//**********************************************************************
-// void CProportionsAtAgeObservation::addProportion(string Group, double Proportion)
-// Add Observation to our Map/Vector.
-//**********************************************************************
-void CProportionsAtAgeObservation::addProportion(string Group, double Proportion) {
-  mvProportionMatrix[Group].push_back(Proportion);
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_YEAR);
+  pParameterList->registerAllowed(PARAM_TIME_STEP);
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_MIN_AGE);
+  pParameterList->registerAllowed(PARAM_MAX_AGE);
+  pParameterList->registerAllowed(PARAM_AGE_PLUS_GROUP);
+  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_OBS);
+  pParameterList->registerAllowed(PARAM_N);
+  pParameterList->registerAllowed(PARAM_DIST);
+  pParameterList->registerAllowed(PARAM_R);
 }
 
 //**********************************************************************
@@ -95,14 +66,6 @@ double CProportionsAtAgeObservation::getProportionValue(string key, int index) {
 }
 
 //**********************************************************************
-// void CProportionsAtAgeObservation::addN(string key, double value)
-// Add N to our Map
-//**********************************************************************
-void CProportionsAtAgeObservation::addN(string key, double value) {
-  mN[key] = value;
-}
-
-//**********************************************************************
 // string CProportionsAtAgeObservation::getNKey(int index)
 // Get key for Index
 //**********************************************************************
@@ -131,18 +94,41 @@ void CProportionsAtAgeObservation::validate() {
     // Base
     CObservation::validate();
 
-    // We must have some proportions
-    if (mvProportionMatrix.size() == 0)
-      CError::errorMissing(PARAM_OBS);
-    if (iMinAge < pWorld->getMinAge())
-      CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
-    if (iMaxAge > pWorld->getMaxAge())
-      CError::errorGreaterThan(PARAM_MAX_AGE, PARAM_MAX_AGE);
-    if (CComparer::isEqual(dR, -1.0))
-      CError::errorMissing(PARAM_R);
+    // Populate our Parameters
+    iYear       = pParameterList->getInt(PARAM_YEAR);
+    iTimeStep   = pParameterList->getInt(PARAM_TIME_STEP);
+    iMinAge     = pParameterList->getInt(PARAM_MIN_AGE);
+    iMaxAge     = pParameterList->getInt(PARAM_MAX_AGE);
+    bAgePlus    = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
+    sDist       = pParameterList->getString(PARAM_DIST);
+    dR          = pParameterList->getDouble(PARAM_R);
+    sLayer      = pParameterList->getString(PARAM_LAYER_NAME);
+
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
     // Find out the Spread in Ages
     int iAgeSpread = (iMaxAge+1) - iMinAge;
+
+    // Get our OBS
+    vector<string> vOBS;
+    pParameterList->fillVector(vOBS, PARAM_OBS);
+
+    for (int i = 0; i < (int)vOBS.size(); i+=iAgeSpread) {
+      for (int j = 0; j < iAgeSpread; ++j) {
+        mvProportionMatrix[vOBS[i]].push_back(CConvertor::stringToDouble(vOBS[i+j+1]));
+      }
+    }
+
+    // Get our N
+    vector<string> vN;
+    pParameterList->fillVector(vN, PARAM_N);
+
+    if ((vN.size() % 2) != 0)
+      throw string("vN Must be done in pairs"); // TODO: Add CError
+
+    for (int i = 0; i < (int)vN.size(); i+=2)
+      mN[vN[i]] = CConvertor::stringToDouble(vN[i+1]);
 
     // Loop Through our Partitions
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
@@ -264,8 +250,8 @@ void CProportionsAtAgeObservation::execute() {
           // Check if this matches the key
           if (pLayer->getValue(i, j) == (*vPropPtr).first) {
             // Get our Square and check if it's enabled
-            pBase = pWorld->getBaseSquare(i, j);
-            if (!pBase->getEnabled())
+            pBaseSquare = pWorld->getBaseSquare(i, j);
+            if (!pBaseSquare->getEnabled())
               continue;
 
             // Loop Through Ages in that square and add them to count
@@ -273,7 +259,7 @@ void CProportionsAtAgeObservation::execute() {
               // Loop Through Categories
               for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
                 double dSelectResult = vSelectivityIndex[l]->getResult(k);
-                pAgeResults[k] += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                pAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
             }
             // And if the observation has a plus group
@@ -283,7 +269,7 @@ void CProportionsAtAgeObservation::execute() {
                 // Loop Through Categories
                 for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
                   double dSelectResult = vSelectivityIndex[l]->getResult(k);
-                  pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBase->getPopulationInCategoryForAge(k, l);
+                  pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
                 }
               }
             }

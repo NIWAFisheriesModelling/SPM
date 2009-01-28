@@ -17,13 +17,7 @@
 // CNormalPreferenceFunction::CNormalPreferenceFunction()
 // Default Constructor
 //**********************************************************************
-CNormalPreferenceFunction::CNormalPreferenceFunction(CNormalPreferenceFunction *Process)
-: CPreferenceFunction(Process) {
-
-  // Vars
-  dMu     = -1.0;
-  dSigma  = -1.0;
-
+CNormalPreferenceFunction::CNormalPreferenceFunction() {
   // Register Estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA, &dSigma);

@@ -14,30 +14,47 @@
 
 // Local Headers
 #include "CMinimizerFactory.h"
+#include "../DESolver/CDESolver.h"
+#include "../GammaDiff/CGammaDiff.h"
 
 // Namespaces
 using namespace std;
 
-////**********************************************************************
-////
-////
-////**********************************************************************
-//BOOST_AUTO_TEST_CASE( Build_Estimate ) {
-//  // See if we got a Valid Estimate
-//  CEstimate *pBasic = 0;
-//  BOOST_REQUIRE_NO_THROW(pBasic = CEstimateFactory::buildEstimate("", false));
-//  delete pBasic;
-//}
+//**********************************************************************
 //
-////**********************************************************************
-////
-////
-////**********************************************************************
-//BOOST_AUTO_TEST_CASE( Build_Estimate_PARAM_INVALID ) {
-//  // Try to Build Invalid Estimate
-//  CEstimate *pInvalid = 0;
-//  BOOST_REQUIRE_THROW(pInvalid = CEstimateFactory::buildEstimate(PARAM_ZERO, false), string);
-//}
+//
+//**********************************************************************
+BOOST_AUTO_TEST_CASE( Build_DESolver) {
+
+  CMinimizer *pMinimizer = 0;
+  BOOST_REQUIRE_NO_THROW(pMinimizer = CMinimizerFactory::buildMinimizer(PARAM_DESOLVER, false));
+
+  CDESolver *pPtr = dynamic_cast<CDESolver*>(pMinimizer);
+  BOOST_ASSERT(pPtr != 0);
+
+  CGammaDiff *pPtr2 = dynamic_cast<CGammaDiff*>(pMinimizer);
+  BOOST_ASSERT(pPtr2 == 0);
+
+  delete pMinimizer;
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+BOOST_AUTO_TEST_CASE( Build_GammaDiff) {
+
+  CMinimizer *pMinimizer = 0;
+  BOOST_REQUIRE_NO_THROW(pMinimizer = CMinimizerFactory::buildMinimizer(PARAM_GAMMADIFF, false));
+
+  CGammaDiff *pPtr = dynamic_cast<CGammaDiff*>(pMinimizer);
+  BOOST_ASSERT(pPtr != 0);
+
+  CDESolver *pPtr2 = dynamic_cast<CDESolver*>(pMinimizer);
+  BOOST_ASSERT(pPtr2 == 0);
+
+  delete pMinimizer;
+}
 
 #endif
 

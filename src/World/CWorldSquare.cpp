@@ -13,11 +13,10 @@
 #include "CWorld.h"
 
 //**********************************************************************
-// CWorldSquare::CWorldSquare(CWorldSquare *WorldSquare = 0);
+// CWorldSquare::CWorldSquare();
 // Default Constructor
 //**********************************************************************
-CWorldSquare::CWorldSquare(CWorldSquare *WorldSquare)
-: CBaseObject(WorldSquare) {
+CWorldSquare::CWorldSquare() {
 
   // Local Vars
   dArea   = 0.0;

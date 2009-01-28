@@ -22,7 +22,7 @@
 #define COBSERVATIONMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CObservation;
@@ -31,7 +31,7 @@ class CObservation;
 //
 //
 //**********************************************************************
-class CObservationManager : public CBaseBuildableObject {
+class CObservationManager : public CBaseManager {
 public:
   static CObservationManager* Instance();
   static void                Destroy();

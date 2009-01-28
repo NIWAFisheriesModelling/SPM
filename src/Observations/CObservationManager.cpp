@@ -7,11 +7,18 @@
 // $Date$
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CObservationManager.h"
 #include "CObservation.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Single Static variable
 boost::thread_specific_ptr<CObservationManager> CObservationManager::clInstance;
@@ -79,10 +86,11 @@ CObservation* CObservationManager::getObservation(int index) {
 void CObservationManager::clone(CObservationManager *Manager) {
   try {
 
-    for (int i = 0; i < Manager->getObservationCount(); ++i) {
-      CObservation *pObservation = Manager->getObservation(i);
-      vObservationList.push_back(pObservation->clone());
-    }
+//    for (int i = 0; i < Manager->getObservationCount(); ++i) {
+//      CObservation *pObservation = Manager->getObservation(i);
+//      vObservationList.push_back(pObservation->clone());
+//    }
+    // TODO: Fix Clones
 
   } catch (string Ex) {
     Ex = "CObservationManager.clone()->" + Ex;
@@ -96,6 +104,11 @@ void CObservationManager::clone(CObservationManager *Manager) {
 //**********************************************************************
 void CObservationManager::validate() {
   try {
+    foreach(CObservation *Observation, vObservationList) {
+      Observation->validate();
+      cout << "Validated observation: '" << Observation->getLabel() << "'" << endl;
+    }
+
     // Variables
     vector<CObservation*>::iterator vPtr;
     map<string, int>                     mObservationList;
@@ -113,12 +126,7 @@ void CObservationManager::validate() {
       vPtr++;
     }
 
-    // Validate Proportions
-    vPtr = vObservationList.begin();
-    while (vPtr != vObservationList.end()) {
-      (*vPtr)->validate();
-      vPtr++;
-    }
+
   } catch (string Ex) {
     Ex = "CObservationManager.validate()->" + Ex;
     throw Ex;

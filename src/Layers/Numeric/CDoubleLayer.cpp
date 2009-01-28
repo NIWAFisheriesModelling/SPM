@@ -7,6 +7,9 @@
 // $Date$
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Includes
 #include "CDoubleLayer.h"
 #include "../../World/CWorld.h"
@@ -15,12 +18,15 @@
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
 
+// Namespace
+using std::cout;
+using std::endl;
+
 //**********************************************************************
-// CDoubleLayer::CDoubleLayer(CDoubleLayer *Layer = 0);
+// CDoubleLayer::CDoubleLayer()
 // Default Constructor
 //**********************************************************************
-CDoubleLayer::CDoubleLayer(CDoubleLayer *Layer)
-: CNumericLayer(Layer) {
+CDoubleLayer::CDoubleLayer() {
 
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_ROW);
@@ -176,7 +182,7 @@ void CDoubleLayer::validate() {
     CNumericLayer::validate();
 
     // Get our variables
-    dRescale = pParameterList->getDouble(PARAM_RESCALE);
+    dRescale = pParameterList->getDouble(PARAM_RESCALE, true, 1.0);
 
     // Fill a new vector with our row information
     vector<string> vData;
@@ -202,11 +208,13 @@ void CDoubleLayer::validate() {
       iCol++;
     }
 
-    if ((iRow < iHeight) || (iCol < iWidth))
+    if (((iRow+1) != iHeight) || (iCol != iWidth))
       throw string("Not enough data"); // TODO: Add CError
 
+    cout << "Validated layer: '" << getLabel() << "'" << endl;
+
   } catch(string Ex) {
-    Ex = "CDoubleLayer.validate()->" + Ex;
+    Ex = "CDoubleLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

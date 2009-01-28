@@ -11,21 +11,13 @@
 #include "CNormalPrior.h"
 
 //**********************************************************************
-// CNormalPrior::CNormalPrior(CNormalPrior *Prior = 0)
+// CNormalPrior::CNormalPrior()
 // Default Constructor
 //**********************************************************************
-CNormalPrior::CNormalPrior(CNormalPrior *Prior)
-: CPrior(Prior) {
-
-  // Vars
-  dMu     = 0.0;
-  dCv     = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dMu   = Prior->getMu();
-    dCv   = Prior->getCv();
-  }
+CNormalPrior::CNormalPrior() {
+  // Register allowed parameters
+  pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_CV);
 }
 
 //**********************************************************************
@@ -34,6 +26,12 @@ CNormalPrior::CNormalPrior(CNormalPrior *Prior)
 //**********************************************************************
 void CNormalPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Assign parameters
+    dMu   = pParameterList->getDouble(PARAM_MU);
+    dCv   = pParameterList->getDouble(PARAM_CV);
 
   } catch (string Ex) {
     Ex = "CNormalPrior.validate(" + getLabel() + ")->" + Ex;

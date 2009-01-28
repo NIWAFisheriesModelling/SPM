@@ -12,8 +12,8 @@
 // Global headers
 #include <string>
 
-// Forward dec
-class CPenalty;
+// Local headers
+#include "../CPenalty.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CPenaltyFactory {
 public:
   // Functions
-  static CPenalty*            buildPenalty(string type);
+  static CPenalty*            buildPenalty(string type, bool registerWithManager = true);
 
 private:
   // Functions

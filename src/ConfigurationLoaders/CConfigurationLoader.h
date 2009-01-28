@@ -17,6 +17,9 @@
 using std::string;
 using std::vector;
 
+// Forward Dec
+class CBaseObject;
+
 //**********************************************************************
 //
 //
@@ -30,13 +33,13 @@ public:
 protected:
   // Functions
   void                        processSection();
-  void                        loadConfigIntoCache();
+  void                        loadConfigIntoCache(string FileName);
+  void                        assignParameters(CBaseObject *Object);
+  string                      getTypeFromCurrentSection();
 
   // Variables
   vector<string>              vLines;
   vector<string>              vCurrentSection;
-  string                      sFileName;
-  string                      sDirectory;
 };
 
 #endif /* CCONFIGURATIONLOADER_H_ */

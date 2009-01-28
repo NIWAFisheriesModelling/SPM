@@ -19,11 +19,8 @@
 class CNaturalMortalityProcess : public CProcess {
 public:
   // Functions
-	CNaturalMortalityProcess(CNaturalMortalityProcess *Process = 0);
+	CNaturalMortalityProcess();
 	virtual                    ~CNaturalMortalityProcess();
-	void                       setM(double value) { dM = value; }
-	double                     getM() { return dM; }
-	CProcess*                  clone() { return (new CNaturalMortalityProcess(this)); }
 	void                       validate();
 	void                       build();
 	void                       rebuild();

@@ -10,13 +10,13 @@
 #define CREPORTER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CReporter : public CBaseExecutableObject {
+class CReporter : public CBaseExecute {
 public:
   // Functions
   CReporter();

@@ -19,15 +19,8 @@
 class CConstantRecruitmentProcess : public CProcess {
 public:
   // Functions
-	CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process = 0);
+	CConstantRecruitmentProcess();
 	virtual                    ~CConstantRecruitmentProcess();
-	void                       addProportion(double value);
-	int                        getProportionCount() { return vProportionList.size(); }
-	double                     getProportion(int index);
-	void                       addAges(int value);
-	int                        getAgesCount() { return vAgesList.size(); }
-	int                        getAges(int index);
-	CProcess*                  clone() { return (new CConstantRecruitmentProcess(this)); }
 	void                       validate();
 	void                       build();
 	void                       execute();

@@ -18,9 +18,8 @@
 //**********************************************************************
 class CBHRecruitmentProcess : public CProcess {
 public:
-  CBHRecruitmentProcess(CBHRecruitmentProcess *Process = 0);
+  CBHRecruitmentProcess();
   virtual                     ~CBHRecruitmentProcess();
-  CProcess*                   clone() { return (new CBHRecruitmentProcess(this)); }
   void                        validate();
   void                        build();
   void                        execute();

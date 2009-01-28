@@ -18,13 +18,10 @@
 #include "CConfiguration.h"
 #include "Estimates/CEstimateManager.h"
 #include "Profiles/CProfileManager.h"
-#include "ConfigLoaders/CEstimateValueConfigLoader.h"
-#include "ConfigLoaders/CEstimationConfigLoader.h"
-#include "ConfigLoaders/COutputConfigLoader.h"
-#include "ConfigLoaders/CPopulationConfigLoader.h"
 #include "RuntimeThread/CRuntimeThread.h"
 #include "MCMC/CMCMC.h"
 #include "Minimizers/CMinimizerManager.h"
+#include "ConfigurationLoaders/CConfigurationLoader.h"
 
 // Singleton Variable
 CRuntimeController* CRuntimeController::clInstance = 0;
@@ -90,6 +87,7 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
       ("mcmc,m", "MCMC run")
       ("forward,f", "forward projection run")
       ("simulate,s", "simulation run, simulate observations")
+      ("config,c", value<string>(), "configuration file")
       ("input,i", value<string>(), "load estimate values from file")
       ("threads,t", value<int>(), "number of threads to spawn")
       ("quiet,q", "run in quiet mode")
@@ -171,6 +169,10 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
   // Random Seed
   if (vmParams.count("genseed"))
     pConfig->setRandomSeed(vmParams["genseed"].as<int>());
+
+  // Configuration File
+  if (vmParams.count("config"))
+    pConfig->setConfigFile(vmParams["config"].as<string>());
 }
 
 //**********************************************************************
@@ -196,25 +198,25 @@ CRuntimeThread* CRuntimeController::getCurrentThread() {
 void CRuntimeController::loadConfiguration() {
   try {
     // Estimation
-    CConfiguration *pConfig = CConfiguration::Instance();
-    string sConfigPath = pConfig->getConfigFile();
+    CConfigurationLoader clLoader = CConfigurationLoader();
+    clLoader.loadConfigFile();
 
-    CEstimationConfigLoader clEstimationConfigLoader = CEstimationConfigLoader(sConfigPath);
-    clEstimationConfigLoader.processConfigFile();
-
-    // Output
-    COutputConfigLoader clOutputConfigLoader = COutputConfigLoader(sConfigPath);
-    clOutputConfigLoader.processConfigFile();
+//    CEstimationConfigLoader clEstimationConfigLoader = CEstimationConfigLoader(sConfigPath);
+//    clEstimationConfigLoader.processConfigFile();
+//
+//    // Output
+//    COutputConfigLoader clOutputConfigLoader = COutputConfigLoader(sConfigPath);
+//    clOutputConfigLoader.processConfigFile();
 
     // Population
-    CPopulationConfigLoader clPopulationConfigLoader = CPopulationConfigLoader(sConfigPath);
-    clPopulationConfigLoader.processConfigFile();
+//    CPopulationConfigLoader clPopulationConfigLoader = CPopulationConfigLoader(sConfigPath);
+//    clPopulationConfigLoader.processConfigFile();
 
     // Estimate Values
-    if (pConfig->getUseEstimateValues()) {
-      CEstimateValueConfigLoader clEstimateValueConfigLoader = CEstimateValueConfigLoader(sConfigPath);
-      clEstimateValueConfigLoader.processConfigFile();
-    }
+//    if (pConfig->getUseEstimateValues()) {
+//      CEstimateValueConfigLoader clEstimateValueConfigLoader = CEstimateValueConfigLoader(sConfigPath);
+//      clEstimateValueConfigLoader.processConfigFile();
+//    }
 
   } catch (string Ex) {
     Ex = "CRuntimeController.loadConfiguration()->" + Ex;

@@ -19,13 +19,8 @@
 class CNormalLogPrior : public CPrior {
 public:
   // Functions
-  CNormalLogPrior(CNormalLogPrior *Prior = 0);
+  CNormalLogPrior();
   virtual                    ~CNormalLogPrior();
-  void                       setMu(double value) { dMu = value; }
-  void                       setSigma(double value) { dSigma = value; }
-  double                     getMu() { return dMu; }
-  double                     getSigma() { return dSigma; }
-  CPrior*                    clone() { return (new CNormalLogPrior(this)); }
   void                       validate();
   double                     getResult(double Param);
 
@@ -33,10 +28,6 @@ protected:
   // Variables
   double                     dMu;
   double                     dSigma;
-
- private:
-   // Variables
-
 };
 
 #endif /*CNORMALLOGPRIOR_H_*/

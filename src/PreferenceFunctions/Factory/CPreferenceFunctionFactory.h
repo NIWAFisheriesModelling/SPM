@@ -12,8 +12,8 @@
 // Global Includes
 #include <string>
 
-// Forward Dec
-class CPreferenceFunction;
+// Local headers
+#include "../CPreferenceFunction.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CPreferenceFunctionFactory {
 public:
   // Functions
-  static CPreferenceFunction*    buildDirectedProcess(string type);
+  static CPreferenceFunction*    buildPreferenceFunction(string type, bool registerWithManager = true);
 
 private:
   // Functions

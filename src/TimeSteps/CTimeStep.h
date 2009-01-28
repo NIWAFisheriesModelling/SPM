@@ -10,7 +10,7 @@
 #define CTIMESTEP_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Classes
 class CProcess;
@@ -19,14 +19,13 @@ class CProcess;
 //
 //
 //**********************************************************************
-class CTimeStep : public CBaseExecutableObject {
+class CTimeStep : public CBaseExecute {
 public:
-	CTimeStep(CTimeStep *TimeStep = 0);
+	CTimeStep();
 	virtual                    ~CTimeStep();
-  void                       addProcess(string value);
+	CTimeStep*                 clone() { return new CTimeStep(*this); }
   int                        getProcessCount() { return vProcessNames.size(); }
   string                     getProcess(int index);
-  CTimeStep*                 clone() { return (new CTimeStep(this)); }
   void                       validate();
   void                       build();
   void                       execute();

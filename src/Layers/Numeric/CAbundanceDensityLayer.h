@@ -19,9 +19,9 @@
 class CAbundanceDensityLayer : public CNumericLayer {
 public:
   // Functions
-  CAbundanceDensityLayer(CAbundanceDensityLayer *Layer = 0);
+  CAbundanceDensityLayer();
   virtual                     ~CAbundanceDensityLayer();
-  CLayer*                    clone() { return (new CAbundanceDensityLayer(this)); }
+  CLayer*                    clone() { return (new CAbundanceDensityLayer(*this)); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       validate();
   void                       build();

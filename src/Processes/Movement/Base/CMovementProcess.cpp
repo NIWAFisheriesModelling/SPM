@@ -12,25 +12,16 @@
 #include "../../../Helpers/CError.h"
 
 //**********************************************************************
-// CMovementProcess::CMovementProcess(CMovementProcess *Process = 0)
+// CMovementProcess::CMovementProcess()
 // Default Constructor
 //**********************************************************************
-CMovementProcess::CMovementProcess(CMovementProcess *Process)
-: CProcess(Process) {
-
+CMovementProcess::CMovementProcess() {
   // Vars
   sMethod             = "";
   dProportion         = 0.0;
   bHexMode            = false;
 
   registerEstimable(PARAM_PROPORTION, &dProportion);
-
-  // Copy Construct
-  if (Process != 0) {
-    sMethod     = Process->getMethod();
-    dProportion = Process->getProportion();
-    bHexMode    = Process->getHexMode();
-  }
 }
 
 //**********************************************************************
@@ -124,15 +115,16 @@ void CMovementProcess::doMove(int RIndex, int CIndex, int SRIndex, int SCIndex, 
     pTargetBase = pWorld->getBaseSquare( RIndex, CIndex);
 
     // Check if Target-Base Is Usable
-    if (!checkUsableSquare(pTargetBase, RIndex, CIndex))
-      return;
+    //if (!checkUsableSquare(pTargetBase, RIndex, CIndex))
+      //return;
+    // TODO: Un-Comment This
 
     // Get Target Diff
     pTargetDiff = pWorld->getDifferenceSquare( RIndex, CIndex);
 
     // Add/Sub Values
     pTargetDiff->addValue(SRIndex, SCIndex, Qty);
-    pBase->subValue(SRIndex, SCIndex, Qty);
+    pBaseSquare->subValue(SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMISE
   } catch (string Ex) {

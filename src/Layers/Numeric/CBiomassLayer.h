@@ -18,9 +18,9 @@
 //**********************************************************************
 class CBiomassLayer : public CNumericLayer {
 public:
-  CBiomassLayer(CBiomassLayer *Layer = 0);
+  CBiomassLayer();
   virtual                     ~CBiomassLayer();
-  CLayer*                    clone() { return (new CBiomassLayer(this)); }
+  CLayer*                    clone() { return (new CBiomassLayer(*this)); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       validate();
   void                       build();

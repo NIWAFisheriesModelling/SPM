@@ -14,9 +14,7 @@
 // CCachedSelectivity::CCachedSelectivity()
 // Default constructor
 //**********************************************************************
-CCachedSelectivity::CCachedSelectivity(CCachedSelectivity *Selectivity)
-: CSelectivity(Selectivity) {
-
+CCachedSelectivity::CCachedSelectivity() {
 }
 
 //**********************************************************************

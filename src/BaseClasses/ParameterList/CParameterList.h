@@ -30,10 +30,10 @@ public:
   virtual                     ~CParameterList();
   void                        addParameter(string name, string value);
   void                        registerAllowed(string name);
-  string                      getString(string name);
-  double                      getDouble(string name);
+  string                      getString(string name, bool optional = false, string defaultValue = "");
+  double                      getDouble(string name, bool optional = false, double defaultValue = 0.0);
   int                         getInt(string name);
-  bool                        getBool(string name);
+  bool                        getBool(string name, bool optional = false, bool defaultValue = true);
   int                         countMatches(string name);
   int                         countParameterValues(string name);
   string                      getMatchFullName(string name, int matchNumber);
@@ -42,6 +42,7 @@ public:
   void                        fillVector(vector<int> &list, string name, int offset = 0);
   void                        fillArray(double *array, int length, string name, int offset = 0);
   void                        fillArray(string *array, int length, string name, int offset = 0);
+  void                        checkInvalidParameters();
 
 protected:
   // Functions

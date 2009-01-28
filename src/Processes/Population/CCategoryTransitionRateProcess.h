@@ -18,9 +18,8 @@
 //**********************************************************************
 class CCategoryTransitionRateProcess : public CProcess {
 public:
-  CCategoryTransitionRateProcess(CCategoryTransitionRateProcess *Process = 0);
+  CCategoryTransitionRateProcess();
   virtual                     ~CCategoryTransitionRateProcess();
-  CProcess*                   clone() { return (new CCategoryTransitionRateProcess(this)); }
   void                        validate();
   void                        build();
   void                        execute();

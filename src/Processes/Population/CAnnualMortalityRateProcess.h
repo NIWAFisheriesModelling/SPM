@@ -19,9 +19,8 @@
 class CAnnualMortalityRateProcess : public CProcess {
 public:
   // Functions
-  CAnnualMortalityRateProcess(CAnnualMortalityRateProcess *Process = 0);
+  CAnnualMortalityRateProcess();
   virtual                     ~CAnnualMortalityRateProcess();
-  CProcess*                   clone() { return (new CAnnualMortalityRateProcess(this)); }
   void                        validate();
   void                        build();
   void                        execute();

@@ -19,9 +19,8 @@
 class CConstantSelectivity : public CSelectivity {
 public:
   // Functions
-	CConstantSelectivity(CConstantSelectivity *Selectivity = 0);
+	CConstantSelectivity();
 	virtual                    ~CConstantSelectivity();
-	CSelectivity*              clone() { return (new CConstantSelectivity(this)); }
   void                       validate();
   double                     getResult(int Index);
 

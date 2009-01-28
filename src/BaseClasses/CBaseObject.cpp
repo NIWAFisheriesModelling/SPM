@@ -16,22 +16,11 @@
 // CBaseObject::CBaseObject()
 // Default Constructor
 //**********************************************************************
-CBaseObject::CBaseObject(CBaseObject *Object) {
+CBaseObject::CBaseObject() {
   // Assign Pointers
   pConfig               = CConfiguration::Instance();
   pRuntimeController    = CRuntimeController::Instance();
   pParameterList        = new CParameterList();
-
-  // Values
-  sLabel                = "";
-
-  // Register the user defined variables
-  pParameterList->registerAllowed(PARAM_LABEL);
-
-  // Copy-Constructor
-  if (Object != 0) {
-    sLabel = Object->getLabel();
-  }
 }
 
 //**********************************************************************
@@ -82,7 +71,6 @@ double* CBaseObject::getEstimableVariable(string name) {
 void CBaseObject::addParameter(string name, string value) {
   pParameterList->addParameter(name, value);
 }
-
 
 //**********************************************************************
 // CBaseObject::~CBaseObject()

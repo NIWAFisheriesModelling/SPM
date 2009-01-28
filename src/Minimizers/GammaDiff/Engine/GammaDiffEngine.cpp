@@ -23,7 +23,7 @@ using namespace std;
 // GammaDiffEngine::GammaDiffEngine()
 // Default Constructor
 //**********************************************************************
-GammaDiffEngine::GammaDiffEngine() : CBaseObject(0) {
+GammaDiffEngine::GammaDiffEngine() {
 }
 
 //**********************************************************************

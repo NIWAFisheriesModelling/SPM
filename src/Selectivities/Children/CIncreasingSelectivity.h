@@ -9,8 +9,14 @@
 #ifndef CINCREASINGSELECTIVITY_H_
 #define CINCREASINGSELECTIVITY_H_
 
+// Global headers
+#include <vector>
+
 // Local headers
 #include "../CSelectivity.h"
+
+// Using
+using std::vector;
 
 //**********************************************************************
 //
@@ -19,9 +25,8 @@
 class CIncreasingSelectivity: public CSelectivity {
 public:
   // Functions
-  CIncreasingSelectivity(CIncreasingSelectivity *Selectivity = 0);
+  CIncreasingSelectivity();
   virtual                     ~CIncreasingSelectivity();
-  CSelectivity*              clone() { return (new CIncreasingSelectivity(this)); }
   void                       validate();
   double                     getResult(int Index);
 

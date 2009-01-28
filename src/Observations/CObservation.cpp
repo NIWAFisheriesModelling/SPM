@@ -15,44 +15,10 @@
 #include "../Helpers/ForEach.h"
 
 //**********************************************************************
-// CObservation::CObservation(CObservation *Observation);
+// CObservation::CObservation()
 // Default Constructor
 //**********************************************************************
-CObservation::CObservation(CObservation *Observation)
-: CBaseExecutableObject(Observation) {
-
-  // Variables
-  dScore              = 0.0;
-  pLayer              = 0;
-  sDist               = "";
-  sLayer              = "";
-  sLabel              = "";
-  iYear               = -1;
-  iTimeStep           = -1;
-
-  // Copy Construct
-  if (Observation != 0) {
-    iYear     = Observation->getYear();
-    sDist     = Observation->getDist();
-    sLayer    = Observation->getLayer();
-    sLabel    = Observation->getLabel();
-    iTimeStep = Observation->getTimeStep();
-
-    // Clone our Category and Selectivity Lists
-    for (int i = 0; i < Observation->getCategoryCount(); ++i)
-      vCategoryList.push_back(Observation->getCategory(i));
-    for (int i = 0; i < Observation->getSelectivityCount(); ++i)
-      vSelectivityList.push_back(Observation->getSelectivity(i));
-  }
-}
-
-
-//**********************************************************************
-// void CObservation::addCategory(string value)
-// Add Category To our Vector
-//**********************************************************************
-void CObservation::addCategory(string value) {
-  vCategoryList.push_back(value);
+CObservation::CObservation() {
 }
 
 //**********************************************************************
@@ -61,13 +27,6 @@ void CObservation::addCategory(string value) {
 //**********************************************************************
 string CObservation::getCategory(int index) {
   return vCategoryList[index];
-}
-//**********************************************************************
-// void CObservation::addSelectivity(string value)
-// Add Selectivity to our vector
-//**********************************************************************
-void CObservation::addSelectivity(string value) {
-  vSelectivityList.push_back(value);
 }
 
 //**********************************************************************
@@ -79,63 +38,23 @@ string CObservation::getSelectivity(int index) {
 }
 
 //**********************************************************************
-// void CObservation::validate()
-// validate
-//**********************************************************************
-void CObservation::validate() {
-  try {
-    // Adjust Year
-      if (iYear > pWorld->getInitialYear())
-        iYear -= pWorld->getInitialYear();
-
-      if (iYear > pWorld->getCurrentYear())
-        CError::errorGreaterThan(PARAM_YEAR, PARAM_RUN_YEARS);
-      if (iYear < 0)
-        CError::errorLessThan(PARAM_YEAR, PARAM_ZERO);
-      if (iTimeStep <= 0)
-        CError::errorLessThanEqualTo(PARAM_TIME_STEP, PARAM_ZERO);
-      if (iTimeStep > pWorld->getTimeStepCount())
-        CError::errorGreaterThan(PARAM_TIME_STEP, PARAM_TIME_STEPS);
-      if (sLayer == "")
-        CError::errorMissing(PARAM_LAYER_NAME);
-      if (vCategoryList.size() == 0)
-        CError::errorMissing(PARAM_CATEGORIES);
-      if (vSelectivityList.size() == 0)
-        CError::errorMissing(PARAM_SELECTIVITIES);
-      if (sDist == "")
-        CError::errorMissing(PARAM_DIST);
-
-  } catch (string Ex) {
-    Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // void CObservation::build()
 // build
 //**********************************************************************
 void CObservation::build() {
   try {
     // Get our Layer Pointer
-    if (pLayer == 0) {
-      CLayerManager *pLayerManager = CLayerManager::Instance();
-      pLayer = pLayerManager->getStringLayer(sLayer);
-    }
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getStringLayer(sLayer);
 
     // Do We Need To Re-Build Selectivity Index?
-    if ((int)vSelectivityIndex.size() == 0) {
-      CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
-      foreach(string Name, vSelectivityList) {
-        vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
-      }
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    foreach(string Name, vSelectivityList) {
+      vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
     }
 
-    // Do We Need To Re-Build Category Index?
-    if ((int)vCategoryIndex.size() == 0) {
-      foreach(string Name, vCategoryList) {
-        vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-      }
+    foreach(string Name, vCategoryList) {
+      vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
     }
 
   } catch (string Ex) {

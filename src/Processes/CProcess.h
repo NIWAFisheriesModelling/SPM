@@ -10,10 +10,9 @@
 #define CPROCESS_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Classes
-class CPenalty;
 class CNumericLayer;
 class CSelectivity;
 
@@ -21,33 +20,19 @@ class CSelectivity;
 //
 //
 //**********************************************************************
-class CProcess : public CBaseExecutableObject {
+class CProcess : public CBaseExecute {
 public:
   // Functions
-	CProcess(CProcess *Process = 0);
+	CProcess();
 	virtual                    ~CProcess();
-  void                       addCategory(string value);
   int                        getCategoryCount() { return vCategoryList.size(); }
   string                     getCategory(int index);
-  void                       addSelectivity(string value);
   int                        getSelectivityCount() { return vSelectivityList.size(); }
   string                     getSelectivity(int index);
-  void                       addLayerCategory(string value);
-  int                        getLayerCategoryCount() { return vLayerCategoryList.size(); }
-  string                     getLayerCategory(int index);
-  void                       setDependsOnLayer(bool value) { bDependsOnLayer = value; }
-  bool                       getDependsOnLayer() { return bDependsOnLayer; }
-  void                       setLayerName(string value) { sLayerName = value; }
-  string                     getLayerName() { return sLayerName; }
-  void                       setLayerMin(double value) { dLayerMin = value; }
-  double                     getLayerMin() { return dLayerMin; }
-  void                       setLayerMax(double value) { dLayerMax = value; }
-  double                     getLayerMax() { return dLayerMax; }
-  void                       setPenalty(string value) { sPenalty = value; }
-  string                     getPenalty() { return sPenalty; }
-  bool                       checkUsableSquare(CWorldSquare *Square, int iX, int iY);
-  bool                       checkUsableBaseSquare(int RowIndex, int ColIndex);
-  virtual CProcess*          clone() = 0;
+//  int                        getLayerCategoryCount() { return vLayerCategoryList.size(); }
+//  string                     getLayerCategory(int index);
+//  bool                       checkUsableSquare(CWorldSquare *Square, int iX, int iY);
+//  bool                       checkUsableBaseSquare(int RowIndex, int ColIndex);
   virtual void               validate();
   virtual void               build();
   virtual void               execute();
@@ -69,8 +54,6 @@ protected:
   int                        iBaseColCount;
   double                     dCurrent;
   double                     dSelectivityResult;
-  string                     sPenalty;
-  CPenalty                   *pPenalty;
 };
 
 #endif /*CPROCESS_H_*/

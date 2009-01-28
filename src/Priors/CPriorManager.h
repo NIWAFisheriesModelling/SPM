@@ -10,7 +10,7 @@
 #define CPRIORMANAGER_H_
 
 // Local Includes
-#include "../BaseClasses/CBaseObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CPrior;
@@ -19,7 +19,7 @@ class CPrior;
 //
 //
 //**********************************************************************
-class CPriorManager : public CBaseObject {
+class CPriorManager : public CBaseManager {
 public:
   static CPriorManager*      Instance();
   static void                Destroy();
@@ -31,6 +31,7 @@ public:
 	CPrior*                    getPrior(int index);
 	void                       clone(CPriorManager *Manager);
  	void                       validate();
+ 	void                       build() { }
  	virtual                    ~CPriorManager();
 
 protected:

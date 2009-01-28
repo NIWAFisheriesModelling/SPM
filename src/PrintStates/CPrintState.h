@@ -15,7 +15,7 @@
 #include <fstream>
 
 // Local headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseExecute.h"
 
 // Namespace
 using namespace std;
@@ -35,7 +35,7 @@ typedef enum EPrintStateType {
 //
 //
 //**********************************************************************
-class CPrintState : public CBaseExecutableObject {
+class CPrintState : public CBaseExecute {
 public:
   // Functions
 	CPrintState();

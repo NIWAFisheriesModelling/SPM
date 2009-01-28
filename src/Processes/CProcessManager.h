@@ -21,7 +21,7 @@
 #define CPROCESSMANAGER_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CProcess;
@@ -30,7 +30,7 @@ class CProcess;
 //
 //
 //**********************************************************************
-class CProcessManager : public CBaseBuildableObject {
+class CProcessManager : public CBaseManager {
 public:
   static CProcessManager*   Instance();
   static void               Destroy();

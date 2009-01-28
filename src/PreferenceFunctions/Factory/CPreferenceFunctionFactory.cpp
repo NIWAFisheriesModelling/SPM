@@ -9,35 +9,46 @@
 
 // Local headers
 #include "CPreferenceFunctionFactory.h"
+#include "../CPreferenceFunctionManager.h"
 #include "../../Translations/Translations.h"
-//#include "../Children/CConstantDirectedProcess.h"
-//#include "../Children/CDoubleNormalDirectedProcess.h"
-//#include "../Children/CExponentialDirectedProcess.h"
-//#include "../Children/CInverseLogisticDirectedProcess.h"
-//#include "../Children/CLogisticDirectedProcess.h"
-//#include "../Children/CNormalDirectedProcess.h"
-//#include "../Children/CThresholdDirectedProcess.h"
+#include "../Children/CConstantPreferenceFunction.h"
+#include "../Children/CDoubleNormalPreferenceFunction.h"
+#include "../Children/CExponentialPreferenceFunction.h"
+#include "../Children/CInverseLogisticPreferenceFunction.h"
+#include "../Children/CLogisticPreferenceFunction.h"
+#include "../Children/CNormalPreferenceFunction.h"
+#include "../Children/CThresholdBiomassPreferenceFunction.h"
+#include "../Children/CThresholdPreferenceFunction.h"
 
 //**********************************************************************
-// CPreferenceFunction* CPreferenceFunctionFactory::buildDirectedProcess(string type)
-// Build our Directed Process
+// CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager)
+// Build our buildPreferenceFunction
 //**********************************************************************
-CPreferenceFunction* CPreferenceFunctionFactory::buildDirectedProcess(string type) {
+CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager) {
 
-//  if (type == PARAM_CONSTANT)
-//    return new CConstantPreferenceFunction();
-//  else if (type == PARAM_DOUBLE_NORMAL)
-//    return new CDoubleNormalPreferenceFunction();
-//  else if (type == PARAM_EXPONENTIAL)
-//    return new CExponentialPreferenceFunction();
-//  else if (type == PARAM_INVERSE_LOGISTIC)
-//    return new CInverseLogisticPreferenceFunction();
-//  else if (type == PARAM_NORMAL)
-//    return new CNormalPreferenceFunction();
-//  else if (type == PARAM_THRESHOLD)
-//    return new CThresholdPreferenceFunction();
-//  else
-//    throw string("Unknown type: " + type); // TODO: ADD CErrir Handler
+  CPreferenceFunction *pFunction = 0;
 
-  return 0;
+  if (type == PARAM_CONSTANT)
+    pFunction = new CConstantPreferenceFunction();
+  else if (type == PARAM_DOUBLE_NORMAL)
+    pFunction = new CDoubleNormalPreferenceFunction();
+  else if (type == PARAM_EXPONENTIAL)
+    pFunction = new CExponentialPreferenceFunction();
+  else if (type == PARAM_INVERSE_LOGISTIC)
+    pFunction = new CInverseLogisticPreferenceFunction();
+  else if (type == PARAM_LOGISTIC)
+    pFunction = new CLogisticPreferenceFunction();
+  else if (type == PARAM_NORMAL)
+    pFunction = new CNormalPreferenceFunction();
+  else if (type == PARAM_THRESHOLD_BIOMASS)
+    pFunction = new CThresholdBiomassPreferenceFunction();
+  else if (type == PARAM_THRESHOLD)
+    pFunction = new CThresholdPreferenceFunction();
+  else
+    throw string("Unknown type: " + type); // TODO: ADD CError Handler
+
+  if (registerWithManager)
+    CPreferenceFunctionManager::Instance()->addPreferenceFunction(pFunction);
+
+  return pFunction;
 }

@@ -18,9 +18,8 @@
 class CDoubleNormalSelectivity : public CCachedSelectivity {
 public:
   // Functions
-	CDoubleNormalSelectivity(CDoubleNormalSelectivity *Selectivity = 0);
+	CDoubleNormalSelectivity();
 	virtual                    ~CDoubleNormalSelectivity();
-	CSelectivity*              clone() { return (new CDoubleNormalSelectivity(this)); }
 	void                       validate();
 
 protected:

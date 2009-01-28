@@ -139,10 +139,11 @@ CStringLayer* CLayerManager::getStringLayer(string Label) {
 void CLayerManager::clone(CLayerManager *Manager) {
   try {
 
-    for (int i = 0; i < Manager->getLayerCount(); ++i) {
-      CLayer *pLayer = Manager->getLayer(i);
-      vLayerList.push_back(pLayer->clone());
-    }
+//    for (int i = 0; i < Manager->getLayerCount(); ++i) {
+//      CLayer *pLayer = Manager->getLayer(i);
+//      vLayerList.push_back( new pLayer->clone());
+//    }
+    // TODO: Implement a solution
 
   } catch (string Ex) {
     Ex = "CLayerManager.clone()->" + Ex;
@@ -156,10 +157,13 @@ void CLayerManager::clone(CLayerManager *Manager) {
 //**********************************************************************
 void CLayerManager::validate() {
   try {
-    // Variables
-    map<string, int>            mLabelList;
+    // Validate The Layers
+    foreach(CLayer *Layer, vLayerList) {
+      Layer->validate();
+    }
 
     // Look for Duplicate Labels
+    map<string, int>            mLabelList;
     foreach(CLayer* Layer, vLayerList) {
       // Increase Count for this label
       mLabelList[Layer->getLabel()] += 1;
@@ -167,11 +171,6 @@ void CLayerManager::validate() {
       // Check if we have more than 1
       if (mLabelList[Layer->getLabel()] > 1)
         throw string(ERROR_DUPLICATE_LABEL + Layer->getLabel());
-    }
-
-    // Validate The Layers
-    foreach(CLayer *Layer, vLayerList) {
-      Layer->validate();
     }
 
   } catch(string Ex) {

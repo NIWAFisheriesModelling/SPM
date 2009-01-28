@@ -10,22 +10,20 @@
 #define CSELECTIVITY_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseExecutableObject.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CSelectivity : public CBaseExecutableObject {
+class CSelectivity : public CBaseBuild {
 public:
   // Functions
-  CSelectivity(CSelectivity *Selectivity = 0);
+  CSelectivity();
   virtual                    ~CSelectivity();
 	virtual double             getResult(int Index) = 0;
-	virtual CSelectivity*      clone() = 0;
-	virtual void               validate();
+	virtual void               validate() = 0;
 	virtual void               build() { }
-	void                       execute() { }
 };
 
 #endif /*CSELECTIVITY_H_*/

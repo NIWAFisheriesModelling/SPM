@@ -19,7 +19,7 @@
 #define CPRINTSTATEMANAGER_H_
 
 // Local Includes
-#include "../BaseClasses/CBaseBuildableObject.h"
+#include "../BaseClasses/CBaseManager.h"
 
 // Classes
 class CPrintState;
@@ -28,7 +28,7 @@ class CPrintState;
 //
 //
 //**********************************************************************
-class CPrintStateManager : public CBaseBuildableObject {
+class CPrintStateManager : public CBaseManager{
 public:
   static CPrintStateManager*  Instance();
   static void                 Destroy();

@@ -12,8 +12,8 @@
 // Global headers
 #include <string>
 
-// Forward Dec
-class CObservation;
+// Local headers
+#include "../CObservation.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CObservationFactory {
 public:
   // Functions
-  static CObservation*      buildObservation(string type);
+  static CObservation*      buildObservation(string type, bool registerWithManager = true);
 
 private:
   // Functions

@@ -10,21 +10,19 @@
 #define CPRIOR_H_
 
 // Local Headers
-#include "../BaseClasses/CBaseObject.h"
+#include "../BaseClasses/CBaseValidate.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CPrior : public CBaseObject {
+class CPrior : public CBaseValidate {
 public:
   // Functions
-	CPrior(CPrior *Prior = 0);
+	CPrior();
 	virtual                    ~CPrior();
 	virtual double             getResult(double param) = 0;
-	virtual CPrior*            clone() = 0;
-	virtual void               validate() = 0;
-
+  virtual void               validate() = 0;
 };
 
 #endif /*CPRIOR_H_*/

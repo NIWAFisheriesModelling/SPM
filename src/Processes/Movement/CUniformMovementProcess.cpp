@@ -14,11 +14,10 @@
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CUniformMovementProcess::CUniformMovementProcess(CUniformMovementProcess *Process = 0)
+// CUniformMovementProcess::CUniformMovementProcess()
 // Default Constructor
 //**********************************************************************
-CUniformMovementProcess::CUniformMovementProcess(CUniformMovementProcess *Process)
-: CMovementProcess(Process) {
+CUniformMovementProcess::CUniformMovementProcess() {
 }
 
 //**********************************************************************
@@ -39,8 +38,6 @@ void CUniformMovementProcess::validate() {
       throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
     if (sLayerName != "")
       CError::errorSupported(PARAM_LAYER_NAME);
-    if (sPenalty != "")
-      CError::errorSupported(PARAM_PENALTY);
 
   } catch (string Ex) {
     Ex = "CUniformMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -78,18 +75,19 @@ void CUniformMovementProcess::execute() {
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Squares
-        pBase   = pWorld->getBaseSquare(i, j);
-        pDiff   = pWorld->getDifferenceSquare(i, j);
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        pDiff       = pWorld->getDifferenceSquare(i, j);
 
         // Check if this square is ok
-        if (!checkUsableBaseSquare(i, j))
-          continue;
+        //if (!checkUsableBaseSquare(i, j))
+          //continue;
+        // TODO: Fix this
 
         // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
 
-            dCurrent = pBase->getValue( vCategoryIndex[k], l);
+            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
             if(CComparer::isZero(dCurrent))
               continue;
             dCurrent *= dProportion * vSelectivityIndex[k]->getResult(l);

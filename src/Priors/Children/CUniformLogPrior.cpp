@@ -11,19 +11,12 @@
 #include "CUniformLogPrior.h"
 
 //**********************************************************************
-// CUniformLogPrior::CUniformLogPrior(CUniformLogPrior *Prior = 0)
+// CUniformLogPrior::CUniformLogPrior()
 // Default Constructor
 //**********************************************************************
-CUniformLogPrior::CUniformLogPrior(CUniformLogPrior *Prior)
-: CPrior(Prior) {
-
-  // Vars
-  dC      = 0.0;
-
-  // Copy Construct
-  if (Prior != 0) {
-    dC = Prior->getC();
-  }
+CUniformLogPrior::CUniformLogPrior() {
+  // Register allowed parameters
+  pParameterList->registerAllowed(PARAM_C);
 }
 
 //**********************************************************************
@@ -32,6 +25,11 @@ CUniformLogPrior::CUniformLogPrior(CUniformLogPrior *Prior)
 //**********************************************************************
 void CUniformLogPrior::validate() {
   try {
+    // Base
+    CPrior::validate();
+
+    // Assign var
+    dC  = pParameterList->getDouble(PARAM_C);
 
   } catch (string Ex) {
     Ex = "CUniformLogPrior.validate(" + getLabel() + ")->" + Ex;

@@ -14,6 +14,7 @@
 
 // Classes
 class CTimeStepManager;
+class CPenalty;
 
 //**********************************************************************
 //
@@ -22,9 +23,8 @@ class CTimeStepManager;
 class CEventMortalityProcess : public CProcess {
 public:
   // Functions
-  CEventMortalityProcess(CEventMortalityProcess *Process = 0);
+  CEventMortalityProcess();
 	virtual                    ~CEventMortalityProcess();
-  CProcess*                  clone() { return (new CEventMortalityProcess(this)); }
 	double                     getUMax() { return dUMax; }
 	int                        getYearsCount() { return vYearsList.size(); }
 	int                        getYears(int index);
@@ -47,6 +47,8 @@ protected:
   int                        iCurrentYear;
   bool                       bYearMatch;
   CTimeStepManager           *pTimeStepManager;
+  string                     sPenalty;
+  CPenalty                   *pPenalty;
 };
 
 #endif /*CEVENTMORTALITYPROCESS_H_*/

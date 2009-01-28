@@ -12,8 +12,8 @@
 // Global headers
 #include <string>
 
-// Forward-Decs
-class CSelectivity;
+// Local headers
+#include "../CSelectivity.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CSelectivityFactory {
 public:
   // Functions
-  static CSelectivity*        buildSelectivity(string type);
+  static CSelectivity*        buildSelectivity(string type, bool registerWithManager = true);
 
 private:
   // Functions
