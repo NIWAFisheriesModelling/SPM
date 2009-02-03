@@ -21,6 +21,7 @@ public:
   // Functions
   CBetaPrior();
   virtual                    ~CBetaPrior();
+  CPrior*                    clone() { return new CBetaPrior(*this); }
   void                       validate();
   double                     getResult(double Param);
 

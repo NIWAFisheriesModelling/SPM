@@ -28,13 +28,11 @@ public:
   int                        getYear() { return iYear; }
   int                        getTimeStep() { return iTimeStep; }
   string                     getLayer() { return sLayer; }
-  int                        getCategoryCount() { return vCategoryList.size(); }
   string                     getCategory(int index);
-  int                        getSelectivityCount() { return vSelectivityList.size(); }
   string                     getSelectivity(int index);
   string                     getDist() { return sDist; }
   double                     getScore() { return dScore; }
-  virtual void               validate() { CBaseExecute::validate(); }
+  virtual void               validate();
 	virtual void               build();
 	virtual void               execute() = 0;
 
@@ -42,13 +40,14 @@ protected:
   // Variables
   double                     dScore;
   int                        iYear;
+  string                     sTimeStep;
   int                        iTimeStep;
   string                     sLayer;
   CStringLayer               *pLayer;
-  vector<string>             vCategoryList;
-  vector<string>             vSelectivityList;
-  vector<int>                vCategoryIndex;
-  vector<CSelectivity*>      vSelectivityIndex;
+  vector<string>             vCategoryNames;
+  vector<int>                vCategories;
+  vector<string>             vSelectivityNames;
+  vector<CSelectivity*>      vSelectivities;
   string                     sDist;
 };
 

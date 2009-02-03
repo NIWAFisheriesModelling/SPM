@@ -20,9 +20,20 @@ class CCategoryTransitionRateProcess : public CProcess {
 public:
   CCategoryTransitionRateProcess();
   virtual                     ~CCategoryTransitionRateProcess();
+  CProcess*                   clone() { return new CCategoryTransitionRateProcess(*this); }
   void                        validate();
   void                        build();
   void                        execute();
+
+protected:
+  // Variables
+  string                     sFrom;
+  string                     sTo;
+  double                     dProportion;
+  int                        iFromIndex;
+  int                        iToIndex;
+  string                     sSelectivity;
+  CSelectivity*              pSelectivity;
 };
 
 #endif /* CCATEGORYTRANSITIONRATEPROCESS_H_ */

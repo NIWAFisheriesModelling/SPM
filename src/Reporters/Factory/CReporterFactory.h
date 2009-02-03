@@ -12,8 +12,8 @@
 // Global Headers
 #include <string>
 
-// Forward Dec
-class CReporter;
+// Local headers
+#include "../CReporter.h"
 
 // Using
 using std::string;
@@ -25,7 +25,7 @@ using std::string;
 class CReporterFactory {
 public:
   // Functions
-  static CReporter*           buildReporter(string type);
+  static CReporter*           buildReporter(string type, bool registerWithManager = true);
 private:
   // Functions
   CReporterFactory();

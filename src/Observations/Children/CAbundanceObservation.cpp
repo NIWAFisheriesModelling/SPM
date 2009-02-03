@@ -31,10 +31,6 @@ CAbundanceObservation::CAbundanceObservation() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_Q);
-  pParameterList->registerAllowed(PARAM_YEAR);
-  pParameterList->registerAllowed(PARAM_TIME_STEP);
-  pParameterList->registerAllowed(PARAM_CATEGORIES);
-  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_LAYER_NAME);
   pParameterList->registerAllowed(PARAM_OBS);
   pParameterList->registerAllowed(PARAM_CV);
@@ -92,13 +88,8 @@ void CAbundanceObservation::validate() {
 
     // Get our Parameters
     sQ          = pParameterList->getString(PARAM_Q);
-    iYear       = pParameterList->getInt(PARAM_YEAR);
-    iTimeStep   = pParameterList->getInt(PARAM_TIME_STEP);
     sLayer      = pParameterList->getString(PARAM_LAYER_NAME);
     sDist       = pParameterList->getString(PARAM_DIST);
-
-    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
     // Get our OBS
     vector<string> vOBS;
@@ -201,8 +192,8 @@ void CAbundanceObservation::execute() {
             int iColCount = (pWorld->getMaxAge()+1) - pWorld->getMinAge();
 
             for (int k = 0; k < iColCount; ++k) {
-              for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
-                double dSelectResult = vSelectivityIndex[l]->getResult(k);
+              for (int l = 0; l < (int)vCategories.size(); ++l) {
+                double dSelectResult = vSelectivities[l]->getResult(k);
                 dExpectedTotal += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
             }

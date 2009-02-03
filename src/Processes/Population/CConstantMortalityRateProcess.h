@@ -21,6 +21,7 @@ public:
   // Functions
   CConstantMortalityRateProcess();
   virtual                     ~CConstantMortalityRateProcess();
+  CProcess*                   clone() { return new CConstantMortalityRateProcess(*this); }
   void                        validate();
   void                        build();
   void                        execute();

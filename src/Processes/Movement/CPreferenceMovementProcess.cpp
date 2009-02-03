@@ -7,6 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local headers
 #include "CPreferenceMovementProcess.h"
 #include "../../PreferenceFunctions/CPreferenceFunctionManager.h"
@@ -16,11 +19,17 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
 
+// Using
+using std::cout;
+using std::endl;
+
 //**********************************************************************
 // CPreferenceMovementProcess::CPreferenceMovementProcess()
 // Default constructor
 //**********************************************************************
 CPreferenceMovementProcess::CPreferenceMovementProcess() {
+  // Default Values
+  pLayer = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -64,8 +73,17 @@ void CPreferenceMovementProcess::build() {
       }
     }
 
-    if (pLayer == 0)
+    if (pLayer == 0) {
       pLayer = new CDoubleLayer();
+
+      for (int i = 0; i < pWorld->getHeight(); ++i)
+        for (int j = 0; j < pWorld->getWidth(); ++j)
+          pLayer->addParameter(PARAM_DATA, "0");
+
+      pLayer->addParameter(PARAM_LABEL, "_");
+      pLayer->validate();
+      pLayer->build();
+    }
 
   } catch (string Ex) {
     Ex = "CPreferenceMovementProcess.build(" + getLabel() + ")->" + Ex;
@@ -85,6 +103,7 @@ void CPreferenceMovementProcess::execute() {
     // Loop World
     for (int i = (iWorldHeight-1); i >= 0; --i) {
       for (int j = (iWorldWidth-1); j >= 0; --j) {
+
         // Get Current Squares
         pBaseSquare = pWorld->getBaseSquare(i, j);
         if (!pBaseSquare->getEnabled())

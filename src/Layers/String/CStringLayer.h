@@ -21,6 +21,7 @@ public:
   // Functions
 	CStringLayer();
 	virtual                    ~CStringLayer();
+	CLayer*                    clone() { return new CStringLayer(*this); }
 	string                     getValue(int RowIndex, int ColIndex);
 	void                       validate();
 	void                       build() { };

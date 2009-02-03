@@ -20,6 +20,7 @@ class CLayer : public CBaseBuild {
 public:
 	CLayer();
   virtual                   ~CLayer();
+  virtual CLayer*           clone() = 0;
   int                       getWidth() { return iWidth; }
   int                       getHeight() { return iHeight; }
   virtual void              validate();

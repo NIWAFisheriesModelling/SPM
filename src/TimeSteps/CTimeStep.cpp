@@ -7,12 +7,19 @@
 // $Date$
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CTimeStep.h"
 #include "../Processes/CProcessManager.h"
 #include "../Processes/CProcess.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CTimeStep::CTimeStep()
@@ -27,9 +34,9 @@ CTimeStep::CTimeStep() {
 // string CTimeStep::getProcess(int index)
 // Return process from our vector @ index
 //**********************************************************************
-string CTimeStep::getProcess(int index) {
-  return vProcessNames[index];
-}
+//string CTimeStep::getProcess(int index) {
+//  return vProcessNames[index];
+//}
 
 //**********************************************************************
 // void CTimeStep::validate()
@@ -57,11 +64,13 @@ void CTimeStep::build() {
   try {
     // Now Lets Build Our Relationships
     CProcessManager *pProcessManager = CProcessManager::Instance();
+    pProcessManager->fillVector(vProcesses, vProcessNames);
 
-    // Loop process names and get the process
-    foreach(string Label, vProcessNames) {
-      vProcesses.push_back(pProcessManager->getProcess(Label));
-    }
+#ifdef VERBOSE
+    cout << "Building TimeStep " << getLabel() << endl;
+    cout << ">> " << vProcessNames.size() << " named processes to load" << endl;
+    cout << ">> " << vProcesses.size() << " processes loaded" << endl;
+#endif
 
   } catch (string Ex) {
     Ex = "CTimeStep.build(" + getLabel() + ")->" + Ex;

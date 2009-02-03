@@ -24,6 +24,8 @@ CNaturalMortalityProcess::CNaturalMortalityProcess() {
   // Variables
   pGrid            = 0;
   dM               = -1.0;
+  bDependsOnLayer  = false;
+  pLayer           = 0;
 
   // Register Estimables
   registerEstimable(PARAM_M, &dM);

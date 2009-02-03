@@ -16,7 +16,6 @@
 
 // Local Headers
 #include "../CEstimate.h"
-#include "../../Translations/Translations.h"
 
 // Using
 using std::string;

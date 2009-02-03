@@ -21,11 +21,11 @@ public:
   // Functions
 	CDoubleLayer();
 	virtual                    ~CDoubleLayer();
+	CLayer*                    clone() { return (new CDoubleLayer(*this)); }
 	double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       setValue(int Row, int Col, double Value);
   bool                       checkSpace(int RowIndex, int ColIndex);
   int                        countValidSpaces();
-  CLayer*                    clone() { return (new CDoubleLayer(*this)); }
   void                       validate();
   void                       build();
 

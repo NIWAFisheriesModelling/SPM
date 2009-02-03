@@ -26,21 +26,21 @@ public:
 	CAbundanceLayer();
 	virtual                    ~CAbundanceLayer();
 	void                       addCategory(string value);
-	int                        getCategoryCount() { return (int)vCategoryList.size(); }
+	CLayer*                    clone() { return (new CAbundanceLayer(*this)); }
+	int                        getCategoryCount() { return (int)vCategoryNames.size(); }
 	void                       addSelectivity(string value);
-	int                        getSelectivityCount() { return (int)vSelectivityList.size(); }
+	int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  CLayer*                    clone() { return (new CAbundanceLayer(*this)); }
   void                       validate();
   void                       build();
 
 protected:
   // Variables
   CWorld                     *pWorld;
-  vector<string>             vCategoryList;
-  vector<int>                vCategoryIndex;
-  vector<string>             vSelectivityList;
-  vector<CSelectivity*>      vSelectivityIndex;
+  vector<string>             vCategoryNames;
+  vector<int>                vCategories;
+  vector<string>             vSelectivityNames;
+  vector<CSelectivity*>      vSelectivities;
 };
 
 #endif /*CABUNDANCELAYER_H_*/

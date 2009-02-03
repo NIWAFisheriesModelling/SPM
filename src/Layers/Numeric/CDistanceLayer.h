@@ -21,8 +21,8 @@ public:
   // Functions
 	CDistanceLayer();
 	virtual                    ~CDistanceLayer();
+	CLayer*                    clone() { return (new CDistanceLayer(*this)); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
-  CLayer*                    clone() { return (new CDistanceLayer(*this)); }
   void                       build();
 
 };

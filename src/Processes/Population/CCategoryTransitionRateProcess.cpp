@@ -9,13 +9,24 @@
 
 // Local headers
 #include "CCategoryTransitionRateProcess.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CCategoryTransitionRateProcess::CCategoryTransitionRateProcess()
 // Default constructor
 //**********************************************************************
 CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
-  throw string("Not yet implemented"); // TODO: Implement this
+  // Register estimables
+  registerEstimable(PARAM_PROPORTION, &dProportion);
+
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_FROM);
+  pParameterList->registerAllowed(PARAM_TO);
+  pParameterList->registerAllowed(PARAM_PROPORTION);
+  pParameterList->registerAllowed(PARAM_SELECTIVITY);
 }
 
 //**********************************************************************
@@ -24,7 +35,19 @@ CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
 //**********************************************************************
 void CCategoryTransitionRateProcess::validate() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Base Validation
+    CProcess::validate();
+
+    // Populate our variables
+    sFrom         = pParameterList->getString(PARAM_FROM);
+    sTo           = pParameterList->getString(PARAM_TO);
+    dProportion   = pParameterList->getDouble(PARAM_PROPORTION);
+    sSelectivity  = pParameterList->getString(PARAM_SELECTIVITY);
+
+    // Local Validation
+    if (dProportion > 1.0)
+      CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+
   } catch (string Ex) {
     Ex = "CCategoryTransitionRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -37,7 +60,14 @@ void CCategoryTransitionRateProcess::validate() {
 //**********************************************************************
 void CCategoryTransitionRateProcess::build() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Base Build
+    CProcess::build();
+
+    // Get our Category Indexes.
+    iFromIndex    = pWorld->getCategoryIndexForName(sFrom);
+    iToIndex      = pWorld->getCategoryIndexForName(sTo);
+
+    pSelectivity  = CSelectivityManager::Instance()->getSelectivity(sSelectivity);
   } catch (string Ex) {
     Ex = "CCategoryTransitionRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -50,7 +80,29 @@ void CCategoryTransitionRateProcess::build() {
 //**********************************************************************
 void CCategoryTransitionRateProcess::execute() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Base execute
+    CProcess::execute();
+
+    // Loop Through The World Grid (i,j)
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
+        // Get Current Square, and Difference Equal
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
+          continue;
+
+        pDiff       = pWorld->getDifferenceSquare(i, j);
+
+        for (int l = 0; l < iBaseColCount; ++l) {
+          dCurrent = pBaseSquare->getValue(iFromIndex, l);
+          if(CComparer::isZero(dCurrent))
+             continue;
+          dCurrent = dCurrent * dProportion * pSelectivity->getResult(l);
+          pBaseSquare->subValue(iFromIndex, l, dCurrent);
+          pBaseSquare->addValue(iToIndex, l, dCurrent);
+        }
+      }
+    }
   } catch (string Ex) {
     Ex = "CCategoryTransitionRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

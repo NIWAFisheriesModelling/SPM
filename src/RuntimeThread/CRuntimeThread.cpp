@@ -16,7 +16,6 @@
 #include "../Layers/CLayerManager.h"
 #include "../Observations/CObservationManager.h"
 #include "../Penalties/CPenaltyManager.h"
-#include "../PrintStates/CPrintStateManager.h"
 #include "../Priors/CPriorManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Profiles/CProfileManager.h"
@@ -28,6 +27,7 @@
 #include "../Helpers/ForEach.h"
 #include "../InitializationPhases/CInitializationPhase.h"
 #include "../Catchabilities/CCatchabilityManager.h"
+#include "../Reporters/CReporterManager.h"
 
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
@@ -43,20 +43,17 @@ CRuntimeThread::CRuntimeThread() {
   pObjectiveFunction       = CObjectiveFunction::Instance();
   pObservationManager      = CObservationManager::Instance();
   pPenaltyManager          = CPenaltyManager::Instance();
-  pPrintStateManager       = CPrintStateManager::Instance();
   pPriorManager            = CPriorManager::Instance();
   pProcessManager          = CProcessManager::Instance();
   pProfileManager          = CProfileManager::Instance();
   pQManager                = CCatchabilityManager::Instance();
+  pReporterManager         = CReporterManager::Instance();
   pSelectivityManager      = CSelectivityManager::Instance();
   pTimeStepManager         = CTimeStepManager::Instance();
   pWorld                   = CWorld::Instance();
 
   // Variables
   bWaiting        = false;
-
-  for (int i = 0; i < pWorld->getInitializationPhaseCount(); ++i)
-    vInitializationList.push_back(pWorld->getInitializationPhase(i));
 }
 
 //**********************************************************************
@@ -110,10 +107,10 @@ void CRuntimeThread::validate() {
   pLayerManager->validate();
   pObservationManager->validate();
   pPenaltyManager->validate();
-  pPrintStateManager->validate();
   pPriorManager->validate();
   pProcessManager->validate();
   pProfileManager->validate();
+  pReporterManager->validate();
   pSelectivityManager->validate();
   pTimeStepManager->validate();
   CCatchabilityManager::Instance()->validate(); // TODO: FIX THIS
@@ -125,12 +122,6 @@ void CRuntimeThread::validate() {
 //**********************************************************************
 void CRuntimeThread::build() {
   eCurrentState = STATE_CONSTRUCTION;
-
-  // Local Building
-  vInitializationIndex.clear();
-  foreach(string Label, vInitializationList) {
-    vInitializationIndex.push_back(pInitializationManager->getInitializationPhase(Label));
-  }
 
   // do not fuck with this order
   // There are dependencies based on the build order.
@@ -144,10 +135,10 @@ void CRuntimeThread::build() {
   pInitializationManager->build();
   pLayerManager->build();
   pProfileManager->build();
-  pPrintStateManager->build();
   pSelectivityManager->build();
   pObservationManager->build();
   pTimeStepManager->build();
+  pReporterManager->build();
 
   // Build our Own Locals
   iNumberOfYears = pWorld->getCurrentYear() - pWorld->getInitialYear();
@@ -179,7 +170,7 @@ void CRuntimeThread::executeBasicRun() {
 
   // Change State
   eCurrentState = STATE_FINALIZATION;
-  pPrintStateManager->execute(eCurrentState);
+  pReporterManager->execute(eCurrentState);
 }
 
 //**********************************************************************
@@ -234,15 +225,15 @@ void CRuntimeThread::startModel() {
 
   // Set State To Burn-In (Initialisation) & Execute
   eCurrentState = STATE_INITIALIZATION;
-  foreach(CInitializationPhase *InitializationPhase, vInitializationIndex) {
-    InitializationPhase->execute();
-  }
-  pPrintStateManager->execute(eCurrentState);
+  pInitializationManager->execute();
+
+  pReporterManager->execute(eCurrentState);
 
   // Flag and start modelling
   eCurrentState = STATE_MODELLING;
-
   pTimeStepManager->execute();
+
+  pWorld->debugToScreen();
 }
 
 //**********************************************************************
@@ -255,6 +246,7 @@ void CRuntimeThread::clone(CRuntimeThread *Thread) {
   pEstimateManager->clone(Thread->pEstimateManager);
   pLayerManager->clone(Thread->pLayerManager);
   pObservationManager->clone(Thread->pObservationManager);
+  pReporterManager->clone(Thread->pReporterManager);
   pPenaltyManager->clone(Thread->pPenaltyManager);
   pPriorManager->clone(Thread->pPriorManager);
   pProcessManager->clone(Thread->pProcessManager);
@@ -272,6 +264,7 @@ void CRuntimeThread::clone(CRuntimeThread *Thread) {
 //**********************************************************************
 CRuntimeThread::~CRuntimeThread() {
   // Destroy Singleton Classes
+  CReporterManager::Destroy();
   CPreferenceFunctionManager::Destroy();
   CEstimateManager::Destroy();
   CInitializationPhaseManager::Destroy();
@@ -280,7 +273,6 @@ CRuntimeThread::~CRuntimeThread() {
   CObjectiveFunction::Destroy();
   CObservationManager::Destroy();
   CPenaltyManager::Destroy();
-  CPrintStateManager::Destroy();
   CPriorManager::Destroy();
   CProcessManager::Destroy();
   CProfileManager::Destroy();

@@ -21,6 +21,7 @@ public:
   // Functions
 	CAgeingProcess();
 	virtual                    ~CAgeingProcess();
+	CProcess*                  clone() { return new CAgeingProcess(*this); }
 	void                       validate();
 	void                       build();
 	void                       execute();

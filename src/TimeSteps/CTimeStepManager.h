@@ -22,6 +22,8 @@
 
 // Classes
 class CTimeStep;
+class CObservationManager;
+class CReporterManager;
 
 //**********************************************************************
 //
@@ -34,9 +36,12 @@ public:
 
   // Functions
   void                        addTimeStep(CTimeStep *value);
-  int                         getTimeStepCount() { return (int) vTimeStepList.size(); }
-  CTimeStep*                  getTimeStep(int index);
+//  int                         getTimeStepCount() { return (int) vTimeSteps.size(); }
+//  CTimeStep*                  getTimeStep(int index);
+  void                        loadTimeStepOrder(vector<string> &order);
+  int                         getTimeStepOrderIndex(string label);
   int                         getCurrentYear() {return iCurrentYear;}
+  int                         getCurrentTimeStep() { return iCurrentTimeStep; }
   void                        clone(CTimeStepManager *Manager);
   void                        validate();
   void                        build();
@@ -48,10 +53,14 @@ protected:
   CTimeStepManager();
 
   // Variables
+  int                         iFirstHumanYear;
   int                         iNumberOfYears;
   int                         iCurrentYear;
   int                         iCurrentTimeStep;
-  vector<CTimeStep*>          vTimeStepList;
+  CObservationManager         *pObservationManager;
+  CReporterManager            *pReporterManager;
+  vector<CTimeStep*>          vTimeSteps;
+  vector<CTimeStep*>          vTimeStepsOrder;
 
 private:
   static boost::thread_specific_ptr<CTimeStepManager> clInstance;

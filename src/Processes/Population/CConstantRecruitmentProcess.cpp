@@ -7,6 +7,9 @@
 // $Date$
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CConstantRecruitmentProcess.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
@@ -14,12 +17,19 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
 
+// Using
+using std::cout;
+using std::endl;
+
 //**********************************************************************
 // CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
 // Default Constructor
 //**********************************************************************
 CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
-  // Register allowed estimatbles
+  // Default Vars
+  bDependsOnLayer = false;
+
+  // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
 
   // Register user allowed parameters

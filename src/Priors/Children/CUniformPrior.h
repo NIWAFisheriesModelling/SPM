@@ -21,6 +21,7 @@ public:
   // Functions
 	CUniformPrior();
 	virtual                    ~CUniformPrior();
+	CPrior*                    clone() { return new CUniformPrior(*this); }
 	void                       validate();
 	double                     getResult(double Param);
 

@@ -150,13 +150,17 @@ bool CParameterList::getBool(string name, bool optional, bool defaultValue) {
 // void CParameterList::fillVector(vector<string> &list, string name, int offset)
 // Fill the vector with strings from our parameter list
 //**********************************************************************
-void CParameterList::fillVector(vector<string> &list, string name, int offset) {
+void CParameterList::fillVector(vector<string> &list, string name, bool optional) {
   if (!hasParameter(name))
-    throw string ("Missing parameter " + name); // TODO: FIX THIS
+    if (optional)
+      return;
+    else
+      throw string ("Missing parameter " + name); // TODO: FIX THIS
+
+  // Clear the List
+  list.clear();
 
   vector<string>::iterator vPtr = mParameters[name].begin();
-  vPtr+= offset; // Move to Offset
-
   while (vPtr != mParameters[name].end()) {
     list.push_back((*vPtr));
     vPtr++;
@@ -167,13 +171,17 @@ void CParameterList::fillVector(vector<string> &list, string name, int offset) {
 // void CParameterList::fillVector(vector<double> &list, string name, int offset = 0)
 // Fill Vector with Doubles
 //**********************************************************************
-void CParameterList::fillVector(vector<double> &list, string name, int offset) {
+void CParameterList::fillVector(vector<double> &list, string name, bool optional) {
   if (!hasParameter(name))
-    throw string ("Missing parameter " + name); // TODO: FIX THIS
+    if (optional)
+      return;
+    else
+      throw string ("Missing parameter " + name); // TODO: FIX THIS
+
+  // Clear List
+  list.clear();
 
   vector<string>::iterator vPtr = mParameters[name].begin();
-  vPtr+= offset; // Move to Offset
-
   while (vPtr != mParameters[name].end()) {
     list.push_back(CConvertor::stringToDouble((*vPtr)));
     vPtr++;
@@ -184,13 +192,17 @@ void CParameterList::fillVector(vector<double> &list, string name, int offset) {
 // void CParameterList::fillVector(vector<int> &list, string name, int offset)
 // Fill Vector with Ints
 //**********************************************************************
-void CParameterList::fillVector(vector<int> &list, string name, int offset) {
+void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
   if (!hasParameter(name))
-    throw string ("Missing parameter " + name); // TODO: FIX THIS
+    if (optional)
+      return;
+    else
+      throw string ("Missing parameter " + name); // TODO: FIX THIS
+
+  // Clear the list
+  list.clear();
 
   vector<string>::iterator vPtr = mParameters[name].begin();
-  vPtr+= offset; // Move to Offset
-
   while (vPtr != mParameters[name].end()) {
     list.push_back(CConvertor::stringToInt((*vPtr)));
     vPtr++;

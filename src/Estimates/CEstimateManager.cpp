@@ -54,6 +54,16 @@ void CEstimateManager::addEstimate(CEstimate *Estimate) {
 }
 
 //**********************************************************************
+// void CEstimateManager::fillVector(vector<CEstimate*> &list)
+// Fill list with our Estimate pointers
+//**********************************************************************
+void CEstimateManager::fillVector(vector<CEstimate*> &list) {
+  foreach(CEstimate *Estimate, vEstimateList) {
+    list.push_back(Estimate);
+  }
+}
+
+//**********************************************************************
 // int CEstimateManager::getEnabledEstimateCount()
 // Get the count for enabled Estimates
 //**********************************************************************
@@ -231,11 +241,10 @@ void CEstimateManager::clone(CEstimateManager *Manager) {
   try {
 
     // Copy from Manager into out vector
-//    for (int i = 0; i < Manager->getEstimateCount(); ++i) {
-//      CEstimate *pEstimate = Manager->getEstimate(i);
-//      vEstimateList.push_back(pEstimate->clone());
-//    }
-    // TODO: Fix clone
+    for (int i = 0; i < Manager->getEstimateCount(); ++i) {
+      CEstimate *pEstimate = Manager->getEstimate(i);
+      vEstimateList.push_back(pEstimate->clone());
+    }
 
   } catch (string Ex) {
     Ex = "CEstimateManager.clone()->" + Ex;

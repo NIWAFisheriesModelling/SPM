@@ -43,7 +43,7 @@ public:
   void                       clone(CObservationManager *Manager);
   void                       validate();
   void                       build();
-  void                       execute(int Year, int Step);
+  void                       execute(int year, int step);
   virtual                    ~CObservationManager();
 
 protected:

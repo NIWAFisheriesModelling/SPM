@@ -17,7 +17,6 @@
 // Default Constructor
 //**********************************************************************
 CDistanceLayer::CDistanceLayer() {
-
 }
 
 //**********************************************************************
@@ -57,6 +56,7 @@ double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int
 //**********************************************************************
 void CDistanceLayer::build() {
   try {
+
     // Fill The Grid With The Distances
     if (pGrid[0][0] == -1) {
       for (int i = 0; i < iHeight; ++i) {
@@ -65,6 +65,7 @@ void CDistanceLayer::build() {
         }
       }
     }
+
   } catch (string Ex) {
     Ex = "CDistanceLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -9,20 +9,24 @@
 
 // Local headers
 #include "CEstimateFactory.h"
-#include "../../Translations/Translations.h"
-#include "../CEstimate.h"
+#include "../CEstimateManager.h"
+
 
 //**********************************************************************
 // CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager)
 // Build our estimates
 //**********************************************************************
 CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager) {
-  // NOTE: Please add Unit Tests when adding new types
+
+  CEstimate *pEstimate = 0;
 
   if (type == "")
-    return new CEstimate();
+    pEstimate = new CEstimate();
   else
     throw string("unknown type: " + type); // TODO: FIX THIS
 
-  return 0;
+  if (registerWithManager)
+    CEstimateManager::Instance()->addEstimate(pEstimate);
+
+  return pEstimate;
 }

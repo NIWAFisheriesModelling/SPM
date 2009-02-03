@@ -138,12 +138,10 @@ CStringLayer* CLayerManager::getStringLayer(string Label) {
 //**********************************************************************
 void CLayerManager::clone(CLayerManager *Manager) {
   try {
-
-//    for (int i = 0; i < Manager->getLayerCount(); ++i) {
-//      CLayer *pLayer = Manager->getLayer(i);
-//      vLayerList.push_back( new pLayer->clone());
-//    }
-    // TODO: Implement a solution
+    for (int i = 0; i < Manager->getLayerCount(); ++i) {
+      CLayer *pLayer = Manager->getLayer(i);
+      vLayerList.push_back( pLayer->clone());
+    }
 
   } catch (string Ex) {
     Ex = "CLayerManager.clone()->" + Ex;

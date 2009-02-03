@@ -56,7 +56,7 @@ double* CBaseObject::getEstimableVariable(string name) {
 
 #ifndef OPTIMISE
   } catch (string Ex) {
-    Ex = "CBaseObject.getEstimableVariable(" + getLabel() + ")->" + Ex;
+    Ex = "CBaseObject.getEstimableVariable()->" + Ex;
     throw Ex;
   }
 #endif

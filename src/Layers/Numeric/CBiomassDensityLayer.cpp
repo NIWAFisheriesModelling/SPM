@@ -51,6 +51,8 @@ void CBiomassDensityLayer::validate() {
     pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vSizeWeights, PARAM_SIZE_WEIGHTS);
 
+    throw string("Object not yet implemented");
+
   } catch (string Ex) {
     Ex = "CBiomassDensityLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -201,23 +201,6 @@ void CRuntimeController::loadConfiguration() {
     CConfigurationLoader clLoader = CConfigurationLoader();
     clLoader.loadConfigFile();
 
-//    CEstimationConfigLoader clEstimationConfigLoader = CEstimationConfigLoader(sConfigPath);
-//    clEstimationConfigLoader.processConfigFile();
-//
-//    // Output
-//    COutputConfigLoader clOutputConfigLoader = COutputConfigLoader(sConfigPath);
-//    clOutputConfigLoader.processConfigFile();
-
-    // Population
-//    CPopulationConfigLoader clPopulationConfigLoader = CPopulationConfigLoader(sConfigPath);
-//    clPopulationConfigLoader.processConfigFile();
-
-    // Estimate Values
-//    if (pConfig->getUseEstimateValues()) {
-//      CEstimateValueConfigLoader clEstimateValueConfigLoader = CEstimateValueConfigLoader(sConfigPath);
-//      clEstimateValueConfigLoader.processConfigFile();
-//    }
-
   } catch (string Ex) {
     Ex = "CRuntimeController.loadConfiguration()->" + Ex;
     throw Ex;

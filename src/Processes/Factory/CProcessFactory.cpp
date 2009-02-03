@@ -14,6 +14,7 @@
 #include "../Movement/CPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
+#include "../Population/CCategoryTransitionRateProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CNaturalMortalityProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
@@ -36,6 +37,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)
     pProcess = new CCategoryTransitionProcess();
+  else if (type == PARAM_CATEGORY_TRANSITION_RATE)
+    pProcess = new CCategoryTransitionRateProcess();
   else if (type == PARAM_PREFERENCE)
     pProcess = new CPreferenceMovementProcess();
   else

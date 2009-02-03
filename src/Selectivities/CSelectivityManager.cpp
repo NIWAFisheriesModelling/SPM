@@ -48,7 +48,20 @@ void CSelectivityManager::Destroy() {
 // Add Selectivity
 //**********************************************************************
 void CSelectivityManager::addSelectivity(CSelectivity* Selectivity) {
-  vSelectivityList.push_back(Selectivity);
+  vSelectivities.push_back(Selectivity);
+}
+
+//**********************************************************************
+// void CSelectivityManager::fillVector(vector<CSelectivity*> &list, vector<string> &names)
+// Fill our Vector with Selectivities
+//**********************************************************************
+void CSelectivityManager::fillVector(vector<CSelectivity*> &list, vector<string> &names) {
+  list.clear();
+
+  foreach(string Label, names) {
+    int iIndex = getSelectivityIndex(Label);
+    list.push_back( vSelectivities[iIndex] );
+  }
 }
 
 //**********************************************************************
@@ -57,9 +70,9 @@ void CSelectivityManager::addSelectivity(CSelectivity* Selectivity) {
 //**********************************************************************
 int CSelectivityManager::getSelectivityIndex(string Label) {
   try {
-    vector<CSelectivity*>::iterator vPtr = vSelectivityList.begin();
+    vector<CSelectivity*>::iterator vPtr = vSelectivities.begin();
     int iCount = 0;
-    while (vPtr != vSelectivityList.end()) {
+    while (vPtr != vSelectivities.end()) {
        if ((*vPtr)->getLabel() == Label)
          return iCount;
       iCount++;
@@ -82,8 +95,8 @@ int CSelectivityManager::getSelectivityIndex(string Label) {
 //**********************************************************************
 CSelectivity* CSelectivityManager::getSelectivity(string Label) {
   try {
-    vector<CSelectivity*>::iterator vPtr = vSelectivityList.begin();
-    while (vPtr != vSelectivityList.end()) {
+    vector<CSelectivity*>::iterator vPtr = vSelectivities.begin();
+    while (vPtr != vSelectivities.end()) {
        if ((*vPtr)->getLabel() == Label)
          return (*vPtr);
       vPtr++;
@@ -100,27 +113,6 @@ CSelectivity* CSelectivityManager::getSelectivity(string Label) {
 }
 
 //**********************************************************************
-// CSelectivity* CSelectivityManager::getSelectivity(int index)
-// Get the selectivity from our vector @ index
-//**********************************************************************
-CSelectivity* CSelectivityManager::getSelectivity(int index) {
-  try {
-    if (index >= (int)vSelectivityList.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SELECTIVITIES);
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-    return vSelectivityList[index];
-
-  } catch (string Ex) {
-    Ex = "CSelectivityManaget.getSelectivity()->" + Ex;
-    throw Ex;
-  }
-
-  return 0;
-}
-
-//**********************************************************************
 // void CSelectivityManager::clone(CSelectivityManager *Manager)
 // Clone
 //**********************************************************************
@@ -129,9 +121,9 @@ void CSelectivityManager::clone(CSelectivityManager *Manager) {
 
 //    for (int i = 0; i < Manager->getSelectivityCount(); ++i) {
 //      CSelectivity *pSelectivity = Manager->getSelectivity(i);
-//      vSelectivityList.push_back(pSelectivity->clone());
+//      vSelectivities.push_back(pSelectivity->clone());
 //    }
-    // TODO: Fix Clones
+    // TODO: Add Clones
   } catch (string Ex) {
     Ex = "CSelectivityManager.clone()->" + Ex;
     throw Ex;
@@ -145,13 +137,13 @@ void CSelectivityManager::clone(CSelectivityManager *Manager) {
 void CSelectivityManager::validate() {
   try {
     // Validate
-    foreach(CSelectivity *Selectivity, vSelectivityList) {
+    foreach(CSelectivity *Selectivity, vSelectivities) {
       Selectivity->validate();
     }
 
     // Check For duplicate labels
     map<string, int>                  mSelectivityList;
-    foreach(CSelectivity *Selectivity, vSelectivityList) {
+    foreach(CSelectivity *Selectivity, vSelectivities) {
       mSelectivityList[Selectivity->getLabel()] += 1;
 
       if (mSelectivityList[Selectivity->getLabel()] > 1)
@@ -173,7 +165,7 @@ void CSelectivityManager::build() {
 #endif
 
     // build Selectivities
-    foreach(CSelectivity *Selectivity, vSelectivityList) {
+    foreach(CSelectivity *Selectivity, vSelectivities) {
       Selectivity->build();
     }
 
@@ -195,7 +187,7 @@ void CSelectivityManager::rebuild() {
 #endif
 
     // build Selectivities
-    foreach(CSelectivity *Selectivity, vSelectivityList) {
+    foreach(CSelectivity *Selectivity, vSelectivities) {
       Selectivity->rebuild();
     }
 
@@ -213,10 +205,10 @@ void CSelectivityManager::rebuild() {
 //**********************************************************************
 CSelectivityManager::~CSelectivityManager() {
   vector<CSelectivity*>::iterator vPtr;
-  vPtr = vSelectivityList.begin();
-  while (vPtr != vSelectivityList.end()) {
+  vPtr = vSelectivities.begin();
+  while (vPtr != vSelectivities.end()) {
     delete (*vPtr);
     vPtr++;
   }
-  vSelectivityList.clear();
+  vSelectivities.clear();
 }

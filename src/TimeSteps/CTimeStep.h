@@ -23,17 +23,17 @@ class CTimeStep : public CBaseExecute {
 public:
 	CTimeStep();
 	virtual                    ~CTimeStep();
-	CTimeStep*                 clone() { return new CTimeStep(*this); }
-  int                        getProcessCount() { return vProcessNames.size(); }
-  string                     getProcess(int index);
-  void                       validate();
-  void                       build();
-  void                       execute();
+  CTimeStep*                  clone() { return new CTimeStep(*this); }
+  //int                        getProcessCount() { return vProcessNames.size(); }
+  //string                     getProcess(int index);
+  void                        validate();
+  void                        build();
+  void                        execute();
 
 protected:
   // Variables
-  vector<string>    vProcessNames;
-  vector<CProcess*> vProcesses;
+  vector<string>              vProcessNames;
+  vector<CProcess*>           vProcesses;
 };
 
 #endif /*CTIMESTEP_H_*/

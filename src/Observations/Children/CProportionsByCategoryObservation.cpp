@@ -84,7 +84,7 @@ double CProportionsByCategoryObservation::getNValue(string key, int index) {
 // Return the population category by index
 //**********************************************************************
 string CProportionsByCategoryObservation::getPopulationCategory(int index) {
-  return vPopulationCategoryList[index];
+  return vPopulationCategoryNames[index];
 }
 
 //**********************************************************************
@@ -92,7 +92,7 @@ string CProportionsByCategoryObservation::getPopulationCategory(int index) {
 // Get selectivity by index
 //**********************************************************************
 string CProportionsByCategoryObservation::getPopulationSelectivity(int index) {
-  return vPopulationSelectivityList[index];
+  return vPopulationSelectivityNames[index];
 }
 
 //**********************************************************************
@@ -224,12 +224,12 @@ void CProportionsByCategoryObservation::execute() {
             // Loop Through Ages in that square and add them to count
             for (int k = iSquareAgeOffset; k < (iArraySize+iSquareAgeOffset); ++k) {
               // Loop Through Categories
-              for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
-                double dSelectResult = vSelectivityIndex[l]->getResult(k);
+              for (int l = 0; l < (int)vCategories.size(); ++l) {
+                double dSelectResult = vSelectivities[l]->getResult(k);
                 pAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
-              for (int l = 0; l < (int)vPopulationCategoryIndex.size(); ++l) {
-                double dSelectResult = vPopulationSelectivityIndex[l]->getResult(k);
+              for (int l = 0; l < (int)vPopulationCategories.size(); ++l) {
+                double dSelectResult = vPopulationSelectivities[l]->getResult(k);
                 pCombinedAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
             }
@@ -238,12 +238,12 @@ void CProportionsByCategoryObservation::execute() {
               // Loop Through Plus Group Ages in that square and add them to count for the Plus group
               for (int k = (iArraySize+iSquareAgeOffset); k < pWorld->getMaxAge(); ++k) {
                 // Loop Through Categories
-                for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
-                  double dSelectResult = vSelectivityIndex[l]->getResult(k);
+                for (int l = 0; l < (int)vCategories.size(); ++l) {
+                  double dSelectResult = vSelectivities[l]->getResult(k);
                   pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
                 }
-                for (int l = 0; l < (int)vPopulationCategoryIndex.size(); ++l) {
-                  double dSelectResult = vPopulationSelectivityIndex[l]->getResult(k);
+                for (int l = 0; l < (int)vPopulationCategories.size(); ++l) {
+                  double dSelectResult = vPopulationSelectivities[l]->getResult(k);
                   pCombinedAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
                 }
               }

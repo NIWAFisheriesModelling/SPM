@@ -30,13 +30,13 @@ public:
   double                     getNValue(string key, int index);
   void                       setNProcessError(double value) { dNProcessError = value; }
   double                     getNProcessError() { return dNProcessError; }
-  int                        getPopulationCategoryCount() { return vPopulationCategoryList.size(); }
+  int                        getPopulationCategoryCount() { return vPopulationCategoryNames.size(); }
   string                     getPopulationCategory(int index);
   int                        getMinAge() { return iMinAge; }
   int                        getMaxAge() { return iMaxAge; }
   bool                       getAgePlus() { return bAgePlus; }
   double                     getR() { return dR; }
-  int                        getPopulationSelectivityCount() { return vPopulationSelectivityList.size(); }
+  int                        getPopulationSelectivityCount() { return vPopulationSelectivityNames.size(); }
   string                     getPopulationSelectivity(int index);
   void                       validate();
   void                       build();
@@ -46,8 +46,8 @@ protected:
   // Variables
   map<string, vector<double> > mvProportionMatrix;
   map<string, vector<double> >  mvN;
-  vector<string>             vPopulationCategoryList;
-  vector<int>                vPopulationCategoryIndex;
+  vector<string>             vPopulationCategoryNames;
+  vector<int>                vPopulationCategories;
   double                     dR;
   double                     dNProcessError;
   double                     *pAgeResults;
@@ -56,8 +56,8 @@ protected:
   int                        iMaxAge;
   int                        iArraySize;
   bool                       bAgePlus;
-  vector<string>             vPopulationSelectivityList;
-  vector<CSelectivity*>      vPopulationSelectivityIndex;
+  vector<string>             vPopulationSelectivityNames;
+  vector<CSelectivity*>      vPopulationSelectivities;
 };
 
 #endif /*CPROPORTIONSBYCATEGORYOBSERVATION_H_*/

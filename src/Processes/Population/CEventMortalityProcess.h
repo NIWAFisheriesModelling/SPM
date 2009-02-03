@@ -25,6 +25,7 @@ public:
   // Functions
   CEventMortalityProcess();
 	virtual                    ~CEventMortalityProcess();
+	CProcess*                  clone() { return new CEventMortalityProcess(*this); }
 	double                     getUMax() { return dUMax; }
 	int                        getYearsCount() { return vYearsList.size(); }
 	int                        getYears(int index);

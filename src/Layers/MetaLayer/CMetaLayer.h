@@ -27,6 +27,7 @@ public:
   // Functions
   CMetaLayer();
   virtual                     ~CMetaLayer();
+  CLayer*                     clone() { return new CMetaLayer(*this); }
   void                        validate();
   void                        build();
 

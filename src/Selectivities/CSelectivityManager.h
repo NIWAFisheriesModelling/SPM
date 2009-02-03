@@ -29,11 +29,9 @@ public:
   static void                Destroy();
 
   // Functions
+  void                       fillVector(vector<CSelectivity*> &list, vector<string> &names);
 	void                       addSelectivity(CSelectivity* Selectivity);
-	int                        getSelectivityCount() { return vSelectivityList.size(); }
-	int                        getSelectivityIndex(string Label);
 	CSelectivity*              getSelectivity(string Label);
-	CSelectivity*              getSelectivity(int index);
 	void                       clone(CSelectivityManager *Manager);
 	void                       validate();
 	void                       build();
@@ -43,9 +41,10 @@ public:
 protected:
   // Functions
   CSelectivityManager();
+  int                        getSelectivityIndex(string Label);
 
   // Variables
-  vector<CSelectivity*>       vSelectivityList;
+  vector<CSelectivity*>       vSelectivities;
 
 private:
   static boost::thread_specific_ptr<CSelectivityManager> clInstance;

@@ -106,7 +106,6 @@ void CObservationManager::validate() {
   try {
     foreach(CObservation *Observation, vObservationList) {
       Observation->validate();
-      cout << "Validated observation: '" << Observation->getLabel() << "'" << endl;
     }
 
     // Variables
@@ -152,15 +151,16 @@ void CObservationManager::build() {
 }
 
 //**********************************************************************
-// void CObservationManager::execute(int Year, int Step)
+// void CObservationManager::execute(int year, int step)
 // Execute
 //**********************************************************************
-void CObservationManager::execute(int Year, int Step) {
+void CObservationManager::execute(int year, int step) {
   try {
     // Loop and Test
     foreach(CObservation *Observation, vObservationList) {
-      if ( (Observation->getYear() == Year) && (Observation->getTimeStep() == Step) )
+      if ( (Observation->getYear() == year) && (Observation->getTimeStep() == step) ) {
         Observation->execute();
+      }
     }
   } catch (string Ex) {
     Ex = "CObservationManager.execute()->" + Ex;

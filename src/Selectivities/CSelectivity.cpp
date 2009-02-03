@@ -22,7 +22,7 @@ CSelectivity::CSelectivity() {
 // Validate Selectivity
 //**********************************************************************
 void CSelectivity::validate() {
-  CBaseValidate::validate();
+  CBaseBuild::validate();
 }
 
 //**********************************************************************

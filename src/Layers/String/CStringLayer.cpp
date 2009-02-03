@@ -16,8 +16,11 @@
 // Default Constructor
 //**********************************************************************
 CStringLayer::CStringLayer() {
+  // Vars
+  pGrid   = 0;
+
   // Register user allowed variables
-  pParameterList->registerAllowed(PARAM_ROW);
+  pParameterList->registerAllowed(PARAM_DATA);
 }
 
 //**********************************************************************

@@ -19,7 +19,6 @@ class CInitializationPhaseManager;
 class CLayerManager;
 class CObservationManager;
 class CPenaltyManager;
-class CPrintStateManager;
 class CPriorManager;
 class CProcessManager;
 class CProfileManager;
@@ -29,6 +28,7 @@ class CTimeStepManager;
 class CObjectiveFunction;
 class CTimeStep;
 class CInitializationPhase;
+class CReporterManager;
 
 //**********************************************************************
 //
@@ -59,7 +59,7 @@ public:
 protected:
   // Variables
   EState                      eCurrentState;
-  CPreferenceFunctionManager     *pDirectedProcessManager;
+  CPreferenceFunctionManager  *pDirectedProcessManager;
   CEstimateManager            *pEstimateManager;
   CInitializationPhaseManager *pInitializationManager;
   CLayerManager               *pLayerManager;
@@ -67,14 +67,12 @@ protected:
   CObservationManager         *pObservationManager;
   CPenaltyManager             *pPenaltyManager;
   CPriorManager               *pPriorManager;
-  CPrintStateManager          *pPrintStateManager;
   CProcessManager             *pProcessManager;
   CProfileManager             *pProfileManager;
-  CCatchabilityManager                   *pQManager;
+  CCatchabilityManager        *pQManager;
   CSelectivityManager         *pSelectivityManager;
   CTimeStepManager            *pTimeStepManager;
-  vector<string>              vInitializationList;
-  vector<CInitializationPhase*> vInitializationIndex;
+  CReporterManager            *pReporterManager;
   int                         iNumberOfYears;
   bool                        bTerminate;
   bool                        bWaiting;

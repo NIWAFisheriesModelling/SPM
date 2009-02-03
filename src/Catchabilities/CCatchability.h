@@ -21,6 +21,7 @@ public:
   // Functions
 	CCatchability();
 	virtual                    ~CCatchability();
+	CBaseValidate*             clone() { return new CCatchability(*this); }
 	double                     getQ() { return dQ; }
 	void                       validate();
 

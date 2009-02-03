@@ -21,6 +21,7 @@ public:
   // Functions
 	CPrior();
 	virtual                    ~CPrior();
+	virtual CPrior*            clone() = 0;
 	virtual double             getResult(double param) = 0;
   virtual void               validate() = 0;
 };

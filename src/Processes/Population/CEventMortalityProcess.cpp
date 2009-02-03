@@ -28,6 +28,7 @@
 CEventMortalityProcess::CEventMortalityProcess() {
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
+  pWorldSquare     = 0;
 
   // Register estimable parameters
   registerEstimable(PARAM_UMAX, &dUMax);

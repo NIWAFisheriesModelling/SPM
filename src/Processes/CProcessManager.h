@@ -37,9 +37,9 @@ public:
 
   // Functions
   void                        addProcess(CProcess* value);
-  int                         getProcessCount() { return vProcessList.size(); }
+  void                        fillVector(vector<CProcess*> &list, vector<string> &labels);
+  //int                         getProcessCount() { return vProcessList.size(); }
   CProcess*                   getProcess(string Label);
-  CProcess*                   getProcess(int index);
   void                        clone(CProcessManager *Manager);
   void                        validate();
   void                        build();

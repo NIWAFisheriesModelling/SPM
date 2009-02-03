@@ -21,6 +21,7 @@ public:
   // Functions
   CUniformLogPrior();
   virtual                    ~CUniformLogPrior();
+  CPrior*                    clone() { return new CUniformLogPrior(*this); }
   void                       validate();
   double                     getResult(double Param);
 

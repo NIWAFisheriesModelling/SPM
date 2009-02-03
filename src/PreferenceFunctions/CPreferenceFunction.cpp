@@ -18,6 +18,9 @@
 // Default Constructor
 //**********************************************************************
 CPreferenceFunction::CPreferenceFunction() {
+  // Layer
+  pLayer = 0;
+
   // Register our Estimables
   registerEstimable(PARAM_ALPHA, &dAlpha);
 
@@ -52,10 +55,8 @@ void CPreferenceFunction::validate() {
 void CPreferenceFunction::build() {
   try {
     // Get our Layer
-    if (pLayer == 0) {
-      CLayerManager *pLayerManager = CLayerManager::Instance();
-      pLayer = pLayerManager->getNumericLayer(sLayerName);
-    }
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
 
   } catch (string Ex) {
     Ex = "CPreferenceFunction.build(" + getLabel() + ")->" + Ex;

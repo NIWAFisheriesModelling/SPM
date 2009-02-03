@@ -7,11 +7,18 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CInitializationPhaseManager.h"
 #include "CInitializationPhase.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Singleton Variable
 boost::thread_specific_ptr<CInitializationPhaseManager> CInitializationPhaseManager::clInstance;
@@ -52,47 +59,70 @@ void CInitializationPhaseManager::addInitializationPhase(CInitializationPhase *v
 }
 
 //**********************************************************************
+//
+//
+//**********************************************************************
+void CInitializationPhaseManager::loadInitializationPhaseOrder(vector<string> &order) {
+  vInitializationPhaseOrder.clear();
+
+  foreach(string Label, order) {
+    foreach(CInitializationPhase *Phase, vInitializationPhases) {
+      if (Phase->getLabel() == Label) {
+        vInitializationPhaseOrder.push_back(Phase);
+        break;
+      }
+    }
+  }
+
+#ifdef VERBOSE
+  cout << "Initialization Phase Manager Load Initializaiton Phase Order" << endl;
+  cout << ">> " << order.size() << " labels provided" << endl;
+  cout << ">> " << vInitializationPhaseOrder.size() << " phases loaded" << endl;
+#endif
+}
+
+//**********************************************************************
 // CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label)
 // Get a Pointer to our InitializationPhase
 //**********************************************************************
-CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label) {
-  try {
-    // Loop through looking for match.
-    foreach(CInitializationPhase *InitializationPhase, vInitializationPhases) {
-      if (InitializationPhase->getLabel() == label)
-        return InitializationPhase;
-    }
-    // Match not found
-    throw string(ERROR_UNKNOWN_TIME_STEP + label); // TODO: Add CError and Translation
-
-  } catch (string Ex) {
-    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
-    throw Ex;
-  }
-
-  return 0;
-}
+//CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label) {
+//  try {
+//    // Loop through looking for match.
+//    foreach(CInitializationPhase *InitializationPhase, vInitializationPhases) {
+//      if (InitializationPhase->getLabel() == label)
+//        return InitializationPhase;
+//    }
+//    // Match not found
+//    throw string(ERROR_UNKNOWN_TIME_STEP + label); // TODO: Add CError and Translation
+//
+//  } catch (string Ex) {
+//    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
+//    throw Ex;
+//  }
+//
+//  return 0;
+//}
 
 //**********************************************************************
 // CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index)
 // Get InitializationPhase from our vector @ index
 //**********************************************************************
-CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index) {
-  try {
-    if (index >= (int)vInitializationPhases.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-    return vInitializationPhases[index];
-
-  } catch (string Ex) {
-    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
-    throw Ex;
-  }
-
-  return 0;
-}
+//CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index) {
+//  try {
+//    if (index >= (int)vInitializationPhases.size())
+//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
+//    if (index < 0)
+//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
+//
+//    return vInitializationPhases[index];
+//
+//  } catch (string Ex) {
+//    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
+//    throw Ex;
+//  }
+//
+//  return 0;
+//}
 
 //**********************************************************************
 // void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager)
@@ -100,8 +130,8 @@ CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int in
 //**********************************************************************
 void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager) {
   try {
-    for (int i = 0; i < Manager->getInitializationPhaseCount(); ++i) {
-      CInitializationPhase *pInitializationPhase = Manager->getInitializationPhase(i);
+    for (int i = 0; i < (int)Manager->vInitializationPhases.size(); ++i) {
+      CInitializationPhase *pInitializationPhase = Manager->vInitializationPhases[i];
       vInitializationPhases.push_back(pInitializationPhase->clone());
     }
 
@@ -141,6 +171,22 @@ void CInitializationPhaseManager::build() {
   } catch(string Ex) {
     Ex = "CInitialisationManager.build()->" + Ex;
     throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CInitializationPhaseManager::execute()
+// Execute our Initialization Phases
+//**********************************************************************
+void CInitializationPhaseManager::execute() {
+#ifdef VERBOSE
+  cout << "Initialization Phase Manager Execute" << endl;
+  cout << ">> " << vInitializationPhaseOrder.size() << " ordered phases" << endl;
+  cout << ">> " << vInitializationPhases.size() << " named phases" << endl;
+#endif
+
+  foreach(CInitializationPhase *Phase, vInitializationPhaseOrder) {
+    Phase->execute();
   }
 }
 

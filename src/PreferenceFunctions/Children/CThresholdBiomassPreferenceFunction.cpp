@@ -43,8 +43,8 @@ void CThresholdBiomassPreferenceFunction::validate() {
     dBiomass    = pParameterList->getDouble(PARAM_BIOMASS);
     dLambda     = pParameterList->getDouble(PARAM_LAMBDA);
 
-    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
+    pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
   } catch (string Ex) {
     Ex = "CThresholdBiomassPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

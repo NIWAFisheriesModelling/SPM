@@ -9,12 +9,31 @@
 
 // Local headers
 #include "CReporterFactory.h"
-#include "../CReporter.h"
+#include "../CReporterManager.h"
+#include "../Children/CWorldStateReporter.h"
+#include "../Children/CObjectiveFunctionReporter.h"
+#include "../Children/CEstimateSummaryReporter.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-CReporter* CReporterFactory::buildReporter(string type) {
-  return 0;
+CReporter* CReporterFactory::buildReporter(string type, bool registerWithManager) {
+
+  CReporter *pReporter = 0;
+
+  if (type == PARAM_WORLD_STATE)
+    pReporter = new CWorldStateReporter();
+  else if (type == PARAM_OBJECTIVE_FUNCTION)
+    pReporter = new CObjectiveFunctionReporter();
+  else if (type == PARAM_ESTIMATE_SUMMARY)
+    pReporter = new CEstimateSummaryReporter();
+  else
+    throw string("Unknown type: " + type);
+
+  // Add to manager if needed
+  if (registerWithManager)
+    CReporterManager::Instance()->addReporter(pReporter);
+
+  return pReporter;
 }

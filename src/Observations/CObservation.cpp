@@ -11,6 +11,7 @@
 #include "CObservation.h"
 #include "../Layers/CLayerManager.h"
 #include "../Selectivities/CSelectivityManager.h"
+#include "../TimeSteps/CTimeStepManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 
@@ -19,6 +20,11 @@
 // Default Constructor
 //**********************************************************************
 CObservation::CObservation() {
+  // Register some user allowed variables
+  pParameterList->registerAllowed(PARAM_YEAR);
+  pParameterList->registerAllowed(PARAM_TIME_STEP);
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
 }
 
 //**********************************************************************
@@ -26,7 +32,7 @@ CObservation::CObservation() {
 // Get Category
 //**********************************************************************
 string CObservation::getCategory(int index) {
-  return vCategoryList[index];
+  return vCategoryNames[index];
 }
 
 //**********************************************************************
@@ -34,7 +40,30 @@ string CObservation::getCategory(int index) {
 // Get The selectivity for index
 //**********************************************************************
 string CObservation::getSelectivity(int index) {
-  return vSelectivityList[index];
+  return vSelectivityNames[index];
+}
+
+//**********************************************************************
+// void CObservation::validate()
+// Validate the Observation
+//**********************************************************************
+void CObservation::validate() {
+  try {
+    // Base
+    CBaseExecute::validate();
+
+    // Assign our Variables
+    iYear       = pParameterList->getInt(PARAM_YEAR);
+    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
+
+    pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+
+  } catch (string Ex) {
+    Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
 }
 
 //**********************************************************************
@@ -47,15 +76,16 @@ void CObservation::build() {
     CLayerManager *pLayerManager = CLayerManager::Instance();
     pLayer = pLayerManager->getStringLayer(sLayer);
 
-    // Do We Need To Re-Build Selectivity Index?
+    // Get Selectivities
     CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
-    foreach(string Name, vSelectivityList) {
-      vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
-    }
+    pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
 
-    foreach(string Name, vCategoryList) {
-      vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-    }
+    // Get Categories
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
+    // Get the Index for our TimeStep in the Order Vector
+    CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
+    iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
   } catch (string Ex) {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;

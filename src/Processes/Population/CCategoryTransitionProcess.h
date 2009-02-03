@@ -21,6 +21,7 @@ public:
   // Functions
 	CCategoryTransitionProcess();
 	virtual                    ~CCategoryTransitionProcess();
+	CProcess*                  clone() { return new CCategoryTransitionProcess(*this); }
 	void                       validate();
 	void                       build();
 	void                       execute();
@@ -29,7 +30,7 @@ protected:
   // Variables
   string                     sFrom;
   string                     sTo;
-  double                     dProportion;
+  double                     dN;
   int                        iFromIndex;
   int                        iToIndex;
   string                     sSelectivity;

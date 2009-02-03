@@ -26,11 +26,13 @@ public:
   static void                 Destroy();
   void                        clone(CInitializationPhaseManager *Manager);
   void                        addInitializationPhase(CInitializationPhase *value);
-  int                         getInitializationPhaseCount() { return vInitializationPhases.size();  }
-  CInitializationPhase*       getInitializationPhase(string label);
-  CInitializationPhase*       getInitializationPhase(int index);
+  void                        loadInitializationPhaseOrder(vector<string> &order);
+//  int                         getInitializationPhaseCount() { return vInitializationPhases.size();  }
+//  CInitializationPhase*       getInitializationPhase(string label);
+//  CInitializationPhase*       getInitializationPhase(int index);
   void                        validate();
   void                        build();
+  void                        execute();
   virtual                     ~CInitializationPhaseManager();
 
 protected:
@@ -39,6 +41,7 @@ protected:
 
   // Variables
   vector<CInitializationPhase*> vInitializationPhases;
+  vector<CInitializationPhase*> vInitializationPhaseOrder;
 
 private:
   // Variables

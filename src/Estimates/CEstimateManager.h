@@ -34,6 +34,7 @@ public:
 
   // Functions
   void                       addEstimate(CEstimate *Estimate);
+  void                       fillVector(vector<CEstimate*> &list);
   int                        getEstimateCount() { return vEstimateList.size(); }
   int                        getEnabledEstimateCount();
   CEstimate*                 getEnabledEstimate(int Index);

@@ -21,6 +21,7 @@ public:
   // Functions
 	CConstantRecruitmentProcess();
 	virtual                    ~CConstantRecruitmentProcess();
+	CProcess*                  clone() { return new CConstantRecruitmentProcess(*this); }
 	void                       validate();
 	void                       build();
 	void                       execute();

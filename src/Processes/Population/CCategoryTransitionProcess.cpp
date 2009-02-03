@@ -14,8 +14,6 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
-// TODO: This is now CatTransRate, New one to go here.
-
 //**********************************************************************
 // CCategoryTransitionProcess::CCategoryTransitionProcess()
 // Default Constructor
@@ -23,12 +21,12 @@
 CCategoryTransitionProcess::CCategoryTransitionProcess() {
 
   // Register estimables
-  registerEstimable(PARAM_PROPORTION, &dProportion);
+  registerEstimable(PARAM_N, &dN);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FROM);
   pParameterList->registerAllowed(PARAM_TO);
-  pParameterList->registerAllowed(PARAM_PROPORTION);
+  pParameterList->registerAllowed(PARAM_N);
   pParameterList->registerAllowed(PARAM_SELECTIVITY);
 }
 
@@ -44,12 +42,8 @@ void CCategoryTransitionProcess::validate() {
     // Populate our variables
     sFrom         = pParameterList->getString(PARAM_FROM);
     sTo           = pParameterList->getString(PARAM_TO);
-    dProportion   = pParameterList->getDouble(PARAM_PROPORTION);
+    dN            = pParameterList->getDouble(PARAM_N);
     sSelectivity  = pParameterList->getString(PARAM_SELECTIVITY);
-
-    // Local Validation
-    if (dProportion > 1.0)
-      CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
   } catch(string Ex) {
     Ex = "CCategoryTransitionProcess.validate(" + getLabel() + ")->" + Ex;
@@ -101,12 +95,9 @@ void CCategoryTransitionProcess::execute() {
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
         for (int l = 0; l < iBaseColCount; ++l) {
-          dCurrent = pBaseSquare->getValue(iFromIndex, l);
-          if(CComparer::isZero(dCurrent))
-             continue;
-          dCurrent = dCurrent * dProportion * vSelectivityIndex[0]->getResult(l);
-          pBaseSquare->subValue(iFromIndex, l, dCurrent);
-          pBaseSquare->addValue(iToIndex, l, dCurrent);
+          // TODO: Add Penalty if dN > Current Population
+          pBaseSquare->subValue(iFromIndex, l, dN * vSelectivityIndex[0]->getResult(l));
+          pBaseSquare->addValue(iToIndex, l, dN * vSelectivityIndex[0]->getResult(l));
         }
       }
     }

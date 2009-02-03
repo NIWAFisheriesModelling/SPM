@@ -7,12 +7,22 @@
 // $Date$
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CWorld.h"
+#include "CWorldSquare.h"
+#include "../TimeSteps/CTimeStepManager.h"
+#include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
 #include "../Layers/Numeric/Base/CNumericLayer.h"
-#include "CWorldSquare.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Singleton Var
 boost::thread_specific_ptr<CWorld> CWorld::clInstance;
@@ -104,14 +114,16 @@ void CWorld::validate() {
     iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
 
     pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
-    pParameterList->fillVector(vInitializationPhases, PARAM_INITIALIZATION_PHASES);
+    pParameterList->fillVector(vInitializationPhases, PARAM_INITIALIZATION_PHASES, true);
     pParameterList->fillVector(vTimeSteps, PARAM_TIME_STEPS);
 
-    // Check For upper-limit on Hight and Width
+    // Validation
     if (iHeight > 1000)
       CError::errorGreaterThan(PARAM_NROWS, PARAM_ONE_THOUSAND);
     if (iWidth > 1000)
       CError::errorGreaterThan(PARAM_NCOLS, PARAM_ONE_THOUSAND);
+    if (iCurrentYear < iInitialYear)
+      CError::errorLessThan(PARAM_CURRENT_YEAR, PARAM_INITIAL_YEAR);
 
   } catch(string Ex) {
     Ex = "CWorld.validateWorld->" + Ex;
@@ -124,6 +136,14 @@ void CWorld::validate() {
 //**********************************************************************
 void CWorld::build() {
   try {
+    // Load TimeStep Order
+    CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
+    pTimeStepManager->loadTimeStepOrder(vTimeSteps);
+
+    // Load Initialization Phase Order
+    CInitializationPhaseManager *pInitialManager = CInitializationPhaseManager::Instance();
+    pInitialManager->loadInitializationPhaseOrder(vInitializationPhases);
+
     if (pGrid == 0) {
       // Allocate Space for our X (Height)
       pGrid = new CWorldSquare*[iHeight];
@@ -174,6 +194,18 @@ void CWorld::build() {
   } catch(string Ex) {
     Ex = "CWorld.buildWorld()->" + Ex;
     throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names)
+// Fill A Vector with Category Indexes.
+//**********************************************************************
+void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names) {
+  list.clear();
+
+  foreach(string Name, names) {
+    list.push_back(getCategoryIndexForName(Name));
   }
 }
 
@@ -312,6 +344,30 @@ void CWorld::zeroGrid() {
   }
 #endif
 }
+
+//**********************************************************************
+// void CWorld::debugToScreen()
+// Debug the World To Screen
+//**********************************************************************
+void CWorld::debugToScreen() {
+
+//
+//  for (int i = 0; i < iHeight; ++i) {
+//    for (int j = 0; j < iWidth; ++j) {
+//      CWorldSquare *pS = &pGrid[i][j];
+//
+//      cout << "Cat: ";
+//      for (int k = 0; k < vCategories.size(); ++k) {
+//        for (int L = 0; L < (iMaxAge+1)-iMinAge; ++L)
+//          cout << pS->getValue(k, L) << " ";
+//        cout << endl;
+//      }
+//      cout << "----------------" << endl;
+//    }
+//  }
+
+}
+
 //**********************************************************************
 // CWorld::~CWorld()
 // Default De-Constructor

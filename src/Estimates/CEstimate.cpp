@@ -21,34 +21,21 @@
 // Default Constructor
 //**********************************************************************
 CEstimate::CEstimate() {
+  // Default Values
+  pPrior    = 0;
+  pTarget   = 0;
+  bEnabled  = true;
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_PARAMETER);
   pParameterList->registerAllowed(PARAM_LOWER_BOUND);
   pParameterList->registerAllowed(PARAM_UPPER_BOUND);
   pParameterList->registerAllowed(PARAM_PRIOR);
   pParameterList->registerAllowed(PARAM_SAME);
-}
 
-//**********************************************************************
-// string CEstimate::getSame(int index)
-// Get Same
-//**********************************************************************
-//string CEstimate::getSame(int index) {
-//  try {
-//    if (index >= (int)vSameList.size())
-//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SAME);
-//    if (index < 0)
-//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-//
-//    return vSameList[index];
-//
-//  } catch (string Ex) {
-//    Ex = "CEstimable.getSame()->" + Ex;
-//    throw Ex;
-//  }
-//
-//  return "";
-//}
+  // Add Default
+  pParameterList->addParameter(PARAM_LABEL, "Estimate");
+}
 
 //**********************************************************************
 // void CEstimate::addValue(double value)
@@ -117,7 +104,7 @@ double CEstimate::getPriorScore() {
     if (sPrior == "")
       return 0.0; // No Prior
     if (pPrior == 0)
-      throw string(ERROR_INVALID_TARGET_NULL);
+      CError::errorMissing(PARAM_PRIOR);
 
     return pPrior->getResult((*pTarget));
 
@@ -163,11 +150,13 @@ void CEstimate::validate() {
     sParameter    = pParameterList->getString(PARAM_PARAMETER);
     dLowerBound   = pParameterList->getDouble(PARAM_LOWER_BOUND);
     dUpperBound   = pParameterList->getDouble(PARAM_UPPER_BOUND);
-    sPrior        = pParameterList->getString(PARAM_PRIOR);
+    sPrior        = pParameterList->getString(PARAM_PRIOR, true, "");
 
-    pParameterList->fillVector(vSameList, PARAM_SAME);
+    pParameterList->fillVector(vSameList, PARAM_SAME, true);
 
-    // TODO: Complete Validation
+    // Validate
+    if (dUpperBound < dLowerBound)
+      CError::errorLessThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
 
   } catch (string Ex) {
     Ex = "CEstimate.validate(" + sParameter + ")->" + Ex;
@@ -181,9 +170,6 @@ void CEstimate::validate() {
 //**********************************************************************
 void CEstimate::build() {
   try {
-    // Clear Same Index
-    vSameIndex.clear();
-
     // Build Our Estimate Target
     CParamParser clParser = CParamParser();
     pTarget = clParser.parseCommand(sParameter);
@@ -194,6 +180,8 @@ void CEstimate::build() {
       pPrior = pPriorManager->getPrior(sPrior);
     }
 
+    // Populate Same Index
+    vSameIndex.clear();
     foreach(string Same, vSameList) {
       vSameIndex.push_back(clParser.parseCommand(Same));
     }

@@ -19,6 +19,7 @@ using std::endl;
 #include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
 
 // Single Static variable
 boost::thread_specific_ptr<CObjectiveFunction> CObjectiveFunction::clInstance;
@@ -171,8 +172,6 @@ void CObjectiveFunction::execute() {
     addScore(sLabel, dValue);
 
   }
-
-  cout << PARAM_TOTAL_SCORE << ": " << dScore << endl << endl;
 }
 
 //**********************************************************************

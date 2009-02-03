@@ -7,6 +7,9 @@
 // $Date$
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CTimeStepManager.h"
 #include "CTimeStep.h"
@@ -14,17 +17,23 @@
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CConvertor.h"
 #include "../World/CWorld.h"
+#include "../Observations/CObservationManager.h"
+#include "../Reporters/CReporterManager.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Single Static variable
- boost::thread_specific_ptr<CTimeStepManager> CTimeStepManager::clInstance;
+boost::thread_specific_ptr<CTimeStepManager> CTimeStepManager::clInstance;
 
 //**********************************************************************
 // CTimeStepManager::CTimeStepManager()
 // Default Constructor
 //**********************************************************************
 CTimeStepManager::CTimeStepManager() {
-  // Vars
-  vTimeStepList.clear();
+  pObservationManager = 0;
+  pReporterManager    = 0;
 }
 
 //**********************************************************************
@@ -52,39 +61,73 @@ void CTimeStepManager::Destroy() {
 // Add New Time Step To The List
 //**********************************************************************
 void CTimeStepManager::addTimeStep(CTimeStep *value) {
-  vTimeStepList.push_back(value);
+  vTimeSteps.push_back(value);
 }
 
 //**********************************************************************
 // CTimeStep* CTimeStepManager::getTimeStep(int index)
 // Get the timestep from our vector @ index
 //**********************************************************************
-CTimeStep* CTimeStepManager::getTimeStep(int index) {
-  try {
-    if (index >= (int)vTimeStepList.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
+//CTimeStep* CTimeStepManager::getTimeStep(int index) {
+//  try {
+//    if (index >= (int)vTimeSteps.size())
+//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
+//    if (index < 0)
+//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
+//
+//    return vTimeSteps[index];
+//
+//  } catch (string Ex) {
+//    Ex = "CTimeStepManager.getTimeStep()->" + Ex;
+//    throw Ex;
+//  }
+//
+//  return 0;
+//}
 
-    return vTimeStepList[index];
+//**********************************************************************
+// void CTimeStepManager::loadTimeStepOrder(vector<string> &order)
+// Load the TimeStep Order for Execution
+//**********************************************************************
+void CTimeStepManager::loadTimeStepOrder(vector<string> &order) {
+  vTimeStepsOrder.clear();
 
-  } catch (string Ex) {
-    Ex = "CTimeStepManager.getTimeStep()->" + Ex;
-    throw Ex;
+  foreach(string Label, order) {
+    foreach(CTimeStep *TimeStep, vTimeSteps) {
+      if (TimeStep->getLabel() == Label) {
+        vTimeStepsOrder.push_back(TimeStep);
+        break;
+      }
+    }
   }
-
-  return 0;
 }
 
+//**********************************************************************
+// int CTimeStepManager::getTimeStepOrderIndex(string label)
+// Get the Index of a TimeStep in our Order
+//**********************************************************************
+int CTimeStepManager::getTimeStepOrderIndex(string label) {
+  try {
+    for (int i = 0; i < (int)vTimeStepsOrder.size(); ++i)
+      if (vTimeStepsOrder[i]->getLabel() == label)
+        return i;
+
+    throw string("Unknown timestep: " + label); // TODO: Add Error
+
+  } catch (string Ex) {
+    Ex = "CTimeStepManager.getTimeStepOrderIndex()->" + Ex;
+    throw Ex;
+  }
+}
 //**********************************************************************
 // void CTimeStepManager::clone(CTimeStepManager *Manager)
 // Clone the TimeStepManager with the parameter
 //**********************************************************************
 void CTimeStepManager::clone(CTimeStepManager *Manager) {
   try {
-    for (int i = 0; i < Manager->getTimeStepCount(); ++i) {
-      CTimeStep *pTimeStep = Manager->getTimeStep(i);
-      vTimeStepList.push_back(pTimeStep->clone());
+    for (int i = 0; i < (int)Manager->vTimeSteps.size(); ++i) {
+      CTimeStep *pTimeStep = Manager->vTimeSteps[i];
+      vTimeSteps.push_back(pTimeStep->clone());
     }
 
   } catch (string Ex) {
@@ -99,11 +142,11 @@ void CTimeStepManager::clone(CTimeStepManager *Manager) {
 //**********************************************************************
 void CTimeStepManager::validate() {
   try {
-    if ((int)vTimeStepList.size() == 0)
+    if ((int)vTimeSteps.size() == 0)
       throw string("No time steps loaded"); // TODO: Add Translation
 
     // Call TimeStep Validations
-    foreach( CTimeStep *TimeStep, vTimeStepList) {
+    foreach( CTimeStep *TimeStep, vTimeSteps) {
       TimeStep->validate();
     }
 
@@ -122,9 +165,16 @@ void CTimeStepManager::build() {
   try {
 #endif
 
-    foreach(CTimeStep *TimeStep, vTimeStepList) {
+    foreach(CTimeStep *TimeStep, vTimeSteps) {
       TimeStep->build();
     }
+
+    CWorld *pWorld = CWorld::Instance();
+    iFirstHumanYear   = pWorld->getInitialYear();
+    iNumberOfYears    = pWorld->getCurrentYear() - iFirstHumanYear;
+
+    pObservationManager = CObservationManager::Instance();
+    pReporterManager    = CReporterManager::Instance();
 
 #ifndef OPTIMISE
   } catch (string Ex) {
@@ -139,25 +189,27 @@ void CTimeStepManager::build() {
 // Execute Our TimeSteps
 //**********************************************************************
 void CTimeStepManager::execute() {
-#ifndef OPTIMISE
-  try {
-    if (Step > (int)vTimeStepList.size())
-      throw string(ERROR_INVALID_TIME_STEP + CConvertor::intToString(Step));
+#ifdef VERBOSE
+  cout << "TimeStep Manager Execution" << endl;
+  cout << ">> TimeSteps Size: " << vTimeSteps.size() << endl;
+  cout << ">> Order Size: " << vTimeStepsOrder.size() << endl;
+  cout << ">> NumberOfYears: " << iNumberOfYears << endl;
 #endif
-    //iCurrentYear     = Year;
-    //iCurrentTimeStep = Step;
 
-    // Execute
-    //vTimeStepList[(Step-1)]->execute();
+  for (int i = 0; i <= iNumberOfYears; ++i) {
+    iCurrentYear = i + iFirstHumanYear;
 
-    // Loop through timesteps, and call observations and reporters.
+    for (int j = 0; j < (int)vTimeStepsOrder.size(); ++j) {
+      iCurrentTimeStep = j;
 
-#ifndef OPTIMISE
-  } catch (string Ex) {
-    Ex = "CTimeStepManager.executeTimeSteps()->" + Ex;
-    throw Ex;
+      // Execute Time Step
+      vTimeStepsOrder[j]->execute();
+
+      // Execute Other Tasks
+      pObservationManager->execute(iCurrentYear, j);
+      pReporterManager->execute();
+    }
   }
-#endif
 }
 
 //**********************************************************************
@@ -166,10 +218,7 @@ void CTimeStepManager::execute() {
 //**********************************************************************
 CTimeStepManager::~CTimeStepManager() {
   // Delete Our Layers
-  foreach( CTimeStep *TimeStep, vTimeStepList) {
+  foreach( CTimeStep *TimeStep, vTimeSteps) {
     delete TimeStep;
   }
-
-  // Clear Vector
-  vTimeStepList.clear();
 }

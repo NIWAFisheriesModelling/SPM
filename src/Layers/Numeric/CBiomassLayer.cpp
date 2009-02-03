@@ -52,6 +52,7 @@ void CBiomassLayer::validate() {
     pParameterList->fillVector(vSizeWeights, PARAM_SIZE_WEIGHTS);
 
     // TODO: Add Vector size checks against each other
+    throw string("Not yet implemented"); // TODO: Implement this
 
   } catch (string Ex) {
     Ex = "CBiomassLayer.validate(" + getLabel() + ")->" + Ex;

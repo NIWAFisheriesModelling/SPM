@@ -21,6 +21,7 @@ public:
   // Functions
 	CNaturalMortalityProcess();
 	virtual                    ~CNaturalMortalityProcess();
+	CProcess*                  clone() { return new CNaturalMortalityProcess(*this); }
 	void                       validate();
 	void                       build();
 	void                       rebuild();

@@ -27,6 +27,7 @@ void CBaseBuild::validate() {
     CBaseValidate::validate();
 
     // Assign
+    pWorld               = CWorld::Instance();
     iWorldWidth          = pWorld->getWidth();
     iWorldHeight         = pWorld->getHeight();
 

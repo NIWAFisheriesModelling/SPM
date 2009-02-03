@@ -29,7 +29,7 @@ using std::endl;
 CDoubleLayer::CDoubleLayer() {
 
   // Register Allowed Parameters
-  pParameterList->registerAllowed(PARAM_ROW);
+  pParameterList->registerAllowed(PARAM_DATA);
   pParameterList->registerAllowed(PARAM_RESCALE);
 }
 
@@ -210,8 +210,6 @@ void CDoubleLayer::validate() {
 
     if (((iRow+1) != iHeight) || (iCol != iWidth))
       throw string("Not enough data"); // TODO: Add CError
-
-    cout << "Validated layer: '" << getLabel() << "'" << endl;
 
   } catch(string Ex) {
     Ex = "CDoubleLayer.validate(" + getLabel() + ")->" + Ex;

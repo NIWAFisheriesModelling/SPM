@@ -21,12 +21,17 @@ public:
   // Functions
   CReporter();
   virtual                     ~CReporter();
-  virtual void                validate() { };
+  virtual CReporter*          clone() = 0;
+  virtual void                validate() { CBaseExecute::validate(); };
   virtual void                build() { };
   virtual void                start() = 0;
   virtual void                execute() = 0;
   virtual void                end() = 0;
+  EState                      getExecutionState() { return eExecutionState; }
 
+protected:
+  // Variables
+  EState                      eExecutionState;
 };
 
 #endif /* CREPORTER_H_ */

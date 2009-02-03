@@ -31,10 +31,10 @@
 #include "../Selectivities/Factory/CSelectivityFactory.h"
 #include "../TimeSteps/Factory/CTimeStepFactory.h"
 #include "../Minimizers/CMinimizerManager.h"
+#include "../Reporters/Factory/CReporterFactory.h"
 
 // TODO: Finish this structure
 #include "../MCMC/CMCMC.h"
-
 
 // Using
 using std::ifstream;
@@ -127,6 +127,8 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CProcessFactory::buildProcess(sType);
     else if (sSection == PARAM_PROFILE)
       pBaseObject = CProfileFactory::buildProfile(sType);
+    else if (sSection == PARAM_REPORTER)
+      pBaseObject = CReporterFactory::buildReporter(sType);
     else if (sSection == PARAM_SELECTIVITY)
       pBaseObject = CSelectivityFactory::buildSelectivity(sType);
     else if (sSection == PARAM_TIME_STEP)
@@ -174,7 +176,6 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
     if (iSpaceLocation > 0) {
       string sLabel = vCurrentSection[0].substr(iSpaceLocation+1, vCurrentSection[0].length()-iSpaceLocation);
       Object->addParameter(PARAM_LABEL, sLabel);
-      cout << "Setting Label: " << sLabel << endl;
     }
 
     // Loop through rest of parameters

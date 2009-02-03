@@ -7,6 +7,9 @@
 // $Date$
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CProportionsAtAgeObservation.h"
 #include "../../Layers/String/CStringLayer.h"
@@ -16,17 +19,26 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
 
+// Using
+using std::cout;
+using std::endl;
+
 //**********************************************************************
 // CProportionsAtAgeObservation::CProportionsAtAgeObservation()
 // Default Constructor
 //**********************************************************************
 CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
 
+  // Default Values
+  pAgeResults         = 0;
+  iMinAge             = -1;
+  iMaxAge             = -1;
+  bAgePlus            = false;
+  bRescale            = false;
+  dR                  = DELTA;
+  dNProcessError      = -1;
+
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_YEAR);
-  pParameterList->registerAllowed(PARAM_TIME_STEP);
-  pParameterList->registerAllowed(PARAM_CATEGORIES);
-  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_MIN_AGE);
   pParameterList->registerAllowed(PARAM_MAX_AGE);
   pParameterList->registerAllowed(PARAM_AGE_PLUS_GROUP);
@@ -95,8 +107,6 @@ void CProportionsAtAgeObservation::validate() {
     CObservation::validate();
 
     // Populate our Parameters
-    iYear       = pParameterList->getInt(PARAM_YEAR);
-    iTimeStep   = pParameterList->getInt(PARAM_TIME_STEP);
     iMinAge     = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge     = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlus    = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
@@ -104,8 +114,10 @@ void CProportionsAtAgeObservation::validate() {
     dR          = pParameterList->getDouble(PARAM_R);
     sLayer      = pParameterList->getString(PARAM_LAYER_NAME);
 
-    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+    if (iMinAge < pWorld->getMinAge())
+      CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
+    if (iMaxAge > pWorld->getMaxAge())
+      CError::errorGreaterThan(PARAM_MAX_AGE, PARAM_MAX_AGE);
 
     // Find out the Spread in Ages
     int iAgeSpread = (iMaxAge+1) - iMinAge;
@@ -114,7 +126,10 @@ void CProportionsAtAgeObservation::validate() {
     vector<string> vOBS;
     pParameterList->fillVector(vOBS, PARAM_OBS);
 
-    for (int i = 0; i < (int)vOBS.size(); i+=iAgeSpread) {
+    if ((vOBS.size() % (iAgeSpread+1)) != 0)
+      throw string("OBS not right amount");
+
+    for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
         mvProportionMatrix[vOBS[i]].push_back(CConvertor::stringToDouble(vOBS[i+j+1]));
       }
@@ -168,7 +183,7 @@ void CProportionsAtAgeObservation::validate() {
       vPropPtr++;
     }
     // Must be same size
-    if (vCategoryList.size() != vSelectivityList.size())
+    if (vCategoryNames.size() != vSelectivityNames.size())
       throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY);
 
     // Number of N's must be equal to number of Proportions
@@ -257,8 +272,8 @@ void CProportionsAtAgeObservation::execute() {
             // Loop Through Ages in that square and add them to count
             for (int k = iSquareAgeOffset; k < (iArraySize+iSquareAgeOffset); ++k) {
               // Loop Through Categories
-              for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
-                double dSelectResult = vSelectivityIndex[l]->getResult(k);
+              for (int l = 0; l < (int)vCategories.size(); ++l) {
+                double dSelectResult = vSelectivities[l]->getResult(k);
                 pAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
               }
             }
@@ -267,8 +282,8 @@ void CProportionsAtAgeObservation::execute() {
               // Loop Through Plus Group Ages in that square and add them to count for the Plus group
               for (int k = (iArraySize+iSquareAgeOffset); k < pWorld->getMaxAge(); ++k) {
                 // Loop Through Categories
-                for (int l = 0; l < (int)vCategoryIndex.size(); ++l) {
-                  double dSelectResult = vSelectivityIndex[l]->getResult(k);
+                for (int l = 0; l < (int)vCategories.size(); ++l) {
+                  double dSelectResult = vSelectivities[l]->getResult(k);
                   pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
                 }
               }
@@ -323,5 +338,6 @@ void CProportionsAtAgeObservation::execute() {
 //**********************************************************************
 CProportionsAtAgeObservation::~CProportionsAtAgeObservation() {
   // Clear Age Results
-  delete [] pAgeResults;
+  if (pAgeResults != 0)
+    delete [] pAgeResults;
 }

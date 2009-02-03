@@ -12,6 +12,9 @@
 // Local headers
 #include "../CPreferenceFunction.h"
 
+// Forward-Decs
+class CSelectivity;
+
 //**********************************************************************
 //
 //
@@ -26,8 +29,10 @@ public:
 
 protected:
   // Variables
-  vector<string>             vCategories;
-  vector<string>             vSelectivities;
+  vector<string>             vCategoryNames;
+  vector<int>                vCategories;
+  vector<string>             vSelectivityNames;
+  vector<CSelectivity*>      vSelectivities;
   double                     dSizeWeight;
   double                     dBiomass;
   double                     dLambda;

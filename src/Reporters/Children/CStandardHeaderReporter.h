@@ -35,6 +35,7 @@ public:
   // Functions
   CStandardHeaderReporter();
   virtual                     ~CStandardHeaderReporter();
+  CReporter*                  clone() { return new CStandardHeaderReporter(*this); }
   void                        start();
   void                        execute();
   void                        end();

@@ -21,6 +21,7 @@ public:
   // Functions
   CBiomassEventMortalityProcess();
   virtual                     ~CBiomassEventMortalityProcess();
+  CProcess*                   clone() { return new CBiomassEventMortalityProcess(*this); }
   void                        validate();
   void                        build();
   void                        execute();

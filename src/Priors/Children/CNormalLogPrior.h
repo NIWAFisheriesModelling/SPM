@@ -21,6 +21,7 @@ public:
   // Functions
   CNormalLogPrior();
   virtual                    ~CNormalLogPrior();
+  CPrior*                    clone() { return new CNormalLogPrior(*this); }
   void                       validate();
   double                     getResult(double Param);
 

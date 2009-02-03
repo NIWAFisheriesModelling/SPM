@@ -25,6 +25,7 @@ public:
   // Functions
 	CProcess();
 	virtual                    ~CProcess();
+	virtual CProcess*          clone() = 0;
   int                        getCategoryCount() { return vCategoryList.size(); }
   string                     getCategory(int index);
   int                        getSelectivityCount() { return vSelectivityList.size(); }

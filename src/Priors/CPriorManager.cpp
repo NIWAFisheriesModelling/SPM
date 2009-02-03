@@ -114,6 +114,10 @@ void CPriorManager::clone(CPriorManager *Manager) {
 //**********************************************************************
 void CPriorManager::validate() {
   try {
+    foreach(CPrior *Prior, vPriorList) {
+      Prior->validate();
+    }
+
 
   } catch (string Ex) {
     Ex = "CPriorManager.validate()->" + Ex;

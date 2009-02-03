@@ -33,7 +33,7 @@ CAbundanceLayer::CAbundanceLayer() {
 // Add A Category to our Abundance Layer
 //**********************************************************************
 void CAbundanceLayer::addCategory(string value) {
-  vCategoryList.push_back(value);
+  vCategoryNames.push_back(value);
 }
 
 //**********************************************************************
@@ -41,7 +41,7 @@ void CAbundanceLayer::addCategory(string value) {
 // Add a selectivity to our list.
 //**********************************************************************
 void CAbundanceLayer::addSelectivity(string value) {
-  vSelectivityList.push_back(value);
+  vSelectivityNames.push_back(value);
 }
 
 //**********************************************************************
@@ -54,19 +54,15 @@ void CAbundanceLayer::validate() {
    CNumericLayer::validate();
 
    // Populate our Parameters
-   pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
-   pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+   pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
+   pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
    // Check For Duplicate Categories.
    map<string, int> mList;
-   if (vCategoryList.size() > 0) {
-     foreach(string Category, vCategoryList) {
-       mList[Category] += 1;
-
-       if (mList[Category] > 1)
-         throw string(ERROR_DUPLICATE_CATEGORY + Category);
-     }
-     mList.clear();
+   foreach(string Category, vCategoryNames) {
+     mList[Category] += 1;
+     if (mList[Category] > 1)
+       throw string(ERROR_DUPLICATE_CATEGORY + Category);
    }
 
  } catch (string Ex) {
@@ -81,20 +77,12 @@ void CAbundanceLayer::validate() {
 //**********************************************************************
 void CAbundanceLayer::build() {
   try {
-    // Do We Need To Re-Build Selectivity Index?
-    if ((int)vSelectivityIndex.size() == 0) {
-      CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
-      foreach(string Name, vSelectivityList) {
-        vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
-      }
-    }
+    // Build Selectivities
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
 
-    // Do We Need To Re-Build Category Index?
-    if ((int)vCategoryIndex.size() == 0) {
-      foreach(string Name, vCategoryList) {
-        vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-      }
-    }
+    // Build Categories
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
   } catch (string Ex) {
     Ex = "CAbundanceLayer.build(" + getLabel() + ")->" + Ex;
@@ -111,8 +99,7 @@ double CAbundanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, in
   try {
 #endif
 
-    CWorldSquare *pSquare = pWorld->getBaseSquare(RowIndex, ColIndex);
-    return pSquare->getPopulation();
+    return pWorld->getBaseSquare(RowIndex, ColIndex)->getPopulation();
 
 #ifndef OPTIMISE
   } catch (string Ex) {

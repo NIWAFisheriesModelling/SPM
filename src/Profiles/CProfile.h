@@ -23,14 +23,14 @@ class CProfile : public CBaseBuild {
 public:
 	CProfile();
 	virtual                    ~CProfile();
-  double                     getN() { return dN; }
+	CProfile*                  clone() { return (new CProfile(*this)); }
+	double                     getN() { return dN; }
   double                     getL() { return dL; }
   double                     getU() { return dU; }
   string                     getParameter() { return sParameter; }
   double                     getCurrent() { return dCurrent; }
   void                       setEnabled();
   bool                       doStep();
-  CProfile*                  clone() { return (new CProfile(*this)); }
   void                       validate();
   void                       build();
   void                       setEnabled(bool value);

@@ -7,11 +7,18 @@
 // $Date$
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local Headers
 #include "CProcessManager.h"
 #include "CProcess.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Single Static variable
 boost::thread_specific_ptr<CProcessManager> CProcessManager::clInstance;
@@ -78,23 +85,35 @@ CProcess* CProcessManager::getProcess(string Label) {
 }
 
 //**********************************************************************
+// void CProcessManager::fillVector(vector<CProcess*> list, vector<string> &labels)
+// Fill vector with Processes with Labels
+//**********************************************************************
+void CProcessManager::fillVector(vector<CProcess*> &list, vector<string> &labels) {
+  list.clear();
+
+  foreach(string Label, labels) {
+    list.push_back(getProcess(Label));
+  }
+}
+
+//**********************************************************************
 // CProcess* CProcessManager::getProcess(int index)
 // Get the process from our vector @ index
 //**********************************************************************
-CProcess* CProcessManager::getProcess(int index) {
-  try {
-    if (index >= (int)vProcessList.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROCESSES);
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-    return vProcessList[index];
-
-  } catch (string Ex) {
-    Ex = "CProcessManager.getProcess()->" + Ex;
-    throw Ex;
-  }
-}
+//CProcess* CProcessManager::getProcess(int index) {
+//  try {
+//    if (index >= (int)vProcessList.size())
+//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROCESSES);
+//    if (index < 0)
+//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
+//
+//    return vProcessList[index];
+//
+//  } catch (string Ex) {
+//    Ex = "CProcessManager.getProcess()->" + Ex;
+//    throw Ex;
+//  }
+//}
 
 //**********************************************************************
 // void CProcessManager::clone(CProcessManager *Manager)

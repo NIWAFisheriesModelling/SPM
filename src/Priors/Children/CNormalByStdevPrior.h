@@ -21,6 +21,7 @@ public:
   // Functions
   CNormalByStdevPrior();
   virtual                    ~CNormalByStdevPrior();
+  CPrior*                    clone() { return new CNormalByStdevPrior(*this); }
   void                       validate();
   double                     getResult(double Param);
 
