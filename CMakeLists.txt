@@ -6,7 +6,9 @@ project(SPM)
 # .cpp files in a txt file. Then use a simple find/replace from .cpp to ""
 # find | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest"
 
-ADD_EXECUTABLE(SimFish 
+SET(NAME SimFish) 
+
+ADD_EXECUTABLE(${NAME} 
  src/BaseClasses/CBaseBuild
  src/BaseClasses/CBaseExecute
  src/BaseClasses/CBaseManager
@@ -137,3 +139,13 @@ ADD_EXECUTABLE(SimFish
  src/World/WorldSquareCollection/CWorldSquareCollection
 )
 
+SET(LIBRARIES 
+ libboost_system-mgw34-d-1_35
+ libboost_unit_test_framework-mgw34-sd-1_35
+ libboost_filesystem-mgw34-d-1_35
+ libboost_thread-mgw34-mt-sd-1_35
+ libboost_program_options-mgw34-d-1_35
+)
+TARGET_LINK_LIBRARIES(${NAME} ${LIBRARIES})
+
+ 
