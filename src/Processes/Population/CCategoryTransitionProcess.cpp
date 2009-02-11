@@ -96,8 +96,8 @@ void CCategoryTransitionProcess::execute() {
 
         for (int l = 0; l < iBaseColCount; ++l) {
           // TODO: Add Penalty if dN > Current Population
-          pBaseSquare->subValue(iFromIndex, l, dN * vSelectivityIndex[0]->getResult(l));
-          pBaseSquare->addValue(iToIndex, l, dN * vSelectivityIndex[0]->getResult(l));
+          pBaseSquare->subValue(iFromIndex, l, dN * pSelectivity->getResult(l));
+          pBaseSquare->addValue(iToIndex, l, dN * pSelectivity->getResult(l));
         }
       }
     }

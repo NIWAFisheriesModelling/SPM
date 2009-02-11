@@ -16,6 +16,9 @@
 // Default Constructor
 //**********************************************************************
 CMinimizer::CMinimizer() {
+  // Default Variables
+  pHessian  = 0;
+
   // Register user allowed Parameters
   pParameterList->registerAllowed(PARAM_MAX_ITERS);
   pParameterList->registerAllowed(PARAM_MAX_EVALS);
@@ -67,8 +70,9 @@ void CMinimizer::build() {
 // Default De-Constructor
 //**********************************************************************
 CMinimizer::~CMinimizer() {
-
-  for (int i = 0; i < iEstimateCount; ++i)
-    delete [] pHessian[i];
-  delete [] pHessian;
+  if (pHessian != 0) {
+    for (int i = 0; i < iEstimateCount; ++i)
+      delete [] pHessian[i];
+    delete [] pHessian;
+  }
 }

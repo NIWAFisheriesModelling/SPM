@@ -43,11 +43,9 @@ public:
   void                        fillArray(double *array, int length, string name, int offset = 0);
   void                        fillArray(string *array, int length, string name, int offset = 0);
   void                        checkInvalidParameters();
-
-protected:
-  // Functions
   bool                        hasParameter(string name);
 
+protected:
   // Variables
   map<string, vector<string> >  mParameters;
   vector<string>                vAllowedParameters;

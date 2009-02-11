@@ -258,6 +258,11 @@ void CEstimateManager::clone(CEstimateManager *Manager) {
 //**********************************************************************
 void CEstimateManager::validate() {
   try {
+    // Validate Each Estimate
+    foreach(CEstimate *Estimate, vEstimateList) {
+      Estimate->validate();
+    }
+
     // Variables
     vector<CEstimate*>::iterator  vPtr;
     map<string, int>              mParameterList;
@@ -273,12 +278,6 @@ void CEstimateManager::validate() {
       vPtr++;
     }
 
-    // Validate Each Estimate
-    vPtr = vEstimateList.begin();
-    while (vPtr != vEstimateList.end()) {
-      (*vPtr)->validate();
-      vPtr++;
-    }
 
   } catch (string Ex) {
     Ex = "CEstimateManager.validate()->" + Ex;

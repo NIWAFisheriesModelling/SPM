@@ -7,10 +7,14 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local headers
 #include "CEventMortalityProcess.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../TimeSteps/CTimeStepManager.h"
+#include "../../Penalties/CPenaltyManager.h"
 #include "../../Penalties/CPenalty.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
@@ -19,7 +23,10 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
-#include "../../Penalties/CPenalty.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CEventMortalityProcess::CEventMortalityProcess()
@@ -69,7 +76,7 @@ void CEventMortalityProcess::validate() {
 
     // Get our Parameters
     dUMax     = pParameterList->getDouble(PARAM_UMAX);
-    sPenalty  = pParameterList->getString(PARAM_PENALTY);
+    sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
@@ -77,6 +84,7 @@ void CEventMortalityProcess::validate() {
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
     // TODO: Check for vectors to be the same size
+    // TODO: Check for duplicate years
 
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
@@ -101,12 +109,11 @@ void CEventMortalityProcess::build() {
 
     // Build our Layer Index
     CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayerManager->fillVector(vLayersIndex, vLayersList);
 
-    foreach(string Label, vLayersList) {
-      vLayersIndex.push_back(pLayerManager->getNumericLayer(Label));
-    }
-
-    // TODO: Build Penalty
+    // Build Penalty
+    if (sPenalty != "")
+      pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
 
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.build(" + getLabel() + ")->" + Ex;

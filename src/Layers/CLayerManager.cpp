@@ -104,6 +104,18 @@ CNumericLayer* CLayerManager::getNumericLayer(string Label) {
 }
 
 //**********************************************************************
+// void CLayerManager::fillVector(vector<CNumericLayer*> &list, vector<string> &names)
+// Fill Our Vector Of Labels
+//**********************************************************************
+void CLayerManager::fillVector(vector<CNumericLayer*> &list, vector<string> &names) {
+  list.clear();
+
+  foreach(string Name, names) {
+    list.push_back(getNumericLayer(Name));
+  }
+}
+
+//**********************************************************************
 // CStringLayer* CLayerManager::getStringLayer(string Label)
 // Get String Layer
 //**********************************************************************

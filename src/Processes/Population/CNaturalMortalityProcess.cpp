@@ -23,7 +23,7 @@
 CNaturalMortalityProcess::CNaturalMortalityProcess() {
   // Variables
   pGrid            = 0;
-  dM               = -1.0;
+  dM               = 0.0;
   bDependsOnLayer  = false;
   pLayer           = 0;
 

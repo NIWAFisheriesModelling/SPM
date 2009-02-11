@@ -11,6 +11,7 @@
 #include "CMinimizerManager.h"
 #include "CMinimizer.h"
 #include "../RuntimeThread/CRuntimeThread.h"
+#include "../CRuntimeController.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 
@@ -72,6 +73,9 @@ void CMinimizerManager::addThread(CRuntimeThread *Thread) {
 //**********************************************************************
 void CMinimizerManager::validate() {
   try {
+    if (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
+      return;
+
     sMinimizer = pParameterList->getString(PARAM_MINIMIZER);
 
     // Validate our Minimizers
@@ -105,6 +109,9 @@ void CMinimizerManager::validate() {
 //**********************************************************************
 void CMinimizerManager::build() {
   try {
+    if (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
+          return;
+
     pMinimizer->build();
 
   } catch (string Ex) {

@@ -186,7 +186,6 @@ void CDoubleLayer::validate() {
 
     // Fill a new vector with our row information
     vector<string> vData;
-
     pParameterList->fillVector(vData, PARAM_DATA);
 
     int iRow  = 0;
@@ -223,19 +222,22 @@ void CDoubleLayer::validate() {
 //**********************************************************************
 void CDoubleLayer::build() {
   try {
-    // Rescale the layer to 0-1 range
-    double dTotal = 0.0;
 
-    for (int i = 0; i < iHeight; ++i)
-      for (int j = 0; j < iWidth; ++j)
-        dTotal += pGrid[i][j];
+    if (pParameterList->hasParameter(PARAM_RESCALE)) {
+      // Rescale the layer to 0-1 range
+      double dTotal = 0.0;
 
-    if (!CComparer::isZero(dTotal)) {
-      if (!CComparer::isEqual(dTotal, dRescale)) { // Only normalize if not already done.
-        for (int i = 0; i < iHeight; ++i) {
-          for (int j = 0; j < iWidth; ++j) {
-            pGrid[i][j] = (pGrid[i][j]) / dTotal;
-            pGrid[i][j] *= dRescale;
+      for (int i = 0; i < iHeight; ++i)
+        for (int j = 0; j < iWidth; ++j)
+          dTotal += pGrid[i][j];
+
+      if (!CComparer::isZero(dTotal)) {
+        if (!CComparer::isEqual(dTotal, dRescale)) { // Only normalize if not already done.
+          for (int i = 0; i < iHeight; ++i) {
+            for (int j = 0; j < iWidth; ++j) {
+              pGrid[i][j] = (pGrid[i][j]) / dTotal;
+              pGrid[i][j] *= dRescale;
+            }
           }
         }
       }

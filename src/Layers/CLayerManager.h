@@ -44,17 +44,16 @@ class CLayerManager : public CBaseManager {
 public:
   static CLayerManager*     Instance();
   static void               Destroy();
-
-  // Functions
+  virtual                   ~CLayerManager();
+  void                      clone(CLayerManager *Manager);
   void                      addLayer(CLayer* Layer);
   CLayer*                   getLayer(int index);
   CNumericLayer*            getNumericLayer(string Label);
   CStringLayer*             getStringLayer(string Label);
   int                       getLayerCount() { return (int)vLayerList.size(); }
-  void                      clone(CLayerManager *Manager);
+  void                      fillVector(vector<CNumericLayer*> &list, vector<string> &names);
   void                      validate();
   void                      build();
-  virtual                   ~CLayerManager();
 
 protected:
   // Functions
