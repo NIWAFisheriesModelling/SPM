@@ -1,0 +1,29 @@
+SPM (Spatial Population Model)
+CmdLine: C:\Work\Workspaces\SPM\SimFish\Debug\SPM.exe -r -c examples\1x1_Examples\CategoryTransitionProcess\config.spm 
+Date: Wed Feb 11 10:48:46 2009
+v0.1-2008-12-04-21:37:00 UTC (rev. 2881)   Copyright (c) 2008, NIWA
+User name: rasmussensj
+Machine name: NIWA-33233 (Windows_NT, PID=3408)
+
+[1994_timestep_one]
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,25,-75,-75,-75,-75
+1,1,mature,25,25,25,25,25
+1,1,spawning,50,50,50,50,50
+
+[1995_timestep_one]
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,50,-150,-150,-150,-150
+1,1,mature,50,50,50,50,50
+1,1,spawning,100,100,100,100,100
+
+[1996_timestep_one]
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,75,-225,-225,-225,-225
+1,1,mature,75,75,75,75,75
+1,1,spawning,150,150,150,150,150
+
+[objective_score]
+total_score: 0
+
+Total elapsed time: 0 seconds
