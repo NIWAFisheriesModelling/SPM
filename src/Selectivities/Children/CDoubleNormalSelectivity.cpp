@@ -7,8 +7,15 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CDoubleNormalSelectivity.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CDoubleNormalSelectivity::CDoubleNormalSelectivity()
@@ -51,7 +58,7 @@ void CDoubleNormalSelectivity::validate() {
 // calculate the results for our Vector
 //**********************************************************************
 double CDoubleNormalSelectivity::calculateResult(int Age) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     double dRet = 0.0;
@@ -63,7 +70,7 @@ double CDoubleNormalSelectivity::calculateResult(int Age) {
 
     return dRet;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDoubleNormalSelectivity.calculateResult()->" + Ex;
     throw Ex;

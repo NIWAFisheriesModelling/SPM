@@ -201,7 +201,7 @@ void CProportionsByCategoryObservation::build() {
 // Execute our Observation to generate a score
 //**********************************************************************
 void CProportionsByCategoryObservation::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Variables
@@ -282,7 +282,7 @@ void CProportionsByCategoryObservation::execute() {
       vPropPtr++;
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CProportionsByCategoryObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

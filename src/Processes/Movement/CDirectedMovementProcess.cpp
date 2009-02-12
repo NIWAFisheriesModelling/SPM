@@ -98,7 +98,7 @@ void CDirectedMovementProcess::build() {
 // execute
 //**********************************************************************
 void CDirectedMovementProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Base Execution
@@ -177,7 +177,7 @@ void CDirectedMovementProcess::execute() {
         }
       }
     }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDirectedMovementProcess.execute()->" + Ex;
     throw Ex;

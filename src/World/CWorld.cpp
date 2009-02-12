@@ -214,7 +214,7 @@ void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names) {
 // Get a square from our Base Grid
 //**********************************************************************
 CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
@@ -226,7 +226,7 @@ CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex) {
       throw string(ERROR_BAD_CAST_WOLD_SQUARE);
 
     return pPtr;
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CWorld.getBaseSquare()->" + Ex;
     throw Ex;
@@ -240,7 +240,7 @@ CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex) {
 // Get a square from our Difference Grid
 //**********************************************************************
 CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
@@ -250,7 +250,7 @@ CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
 
     return &pDifferenceGrid[RowIndex][ColIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CWorld.getDifferenceSquare()->" + Ex;
     throw Ex;
@@ -307,7 +307,7 @@ string CWorld::getInitializationPhase(int index) {
 // Merge Difference Grid onto our Main Grid
 //**********************************************************************
 void CWorld::mergeDifferenceGrid() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     for (int i = 0; i < iHeight; ++i)
@@ -315,7 +315,7 @@ void CWorld::mergeDifferenceGrid() {
         pGrid[i][j].makeAdjustments(&pDifferenceGrid[i][j]);
         pDifferenceGrid[i][j].zeroGrid();
       }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CWorld.mergeDifferenceGrid->" + Ex;
     throw Ex;
@@ -328,7 +328,7 @@ void CWorld::mergeDifferenceGrid() {
 // Reset the WorldGrid To 0
 //**********************************************************************
 void CWorld::zeroGrid() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -337,7 +337,7 @@ void CWorld::zeroGrid() {
       for (int j = 0; j < iWidth; ++j)
         pGrid[i][j].zeroGrid();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorld.zeroGrid()->" + Ex;
     throw Ex;

@@ -54,14 +54,14 @@ double CNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex,
 
   dRet = 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     dLayerValue = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex);
     dRet = pow(2.0,-((dLayerValue-dMu)/dSigma * (dLayerValue-dMu)/dSigma));
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CNormalPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -45,6 +45,16 @@ void CConstantSelectivity::validate() {
 // get Result
 //**********************************************************************
 double CConstantSelectivity::getResult(int Index) {
+#ifndef OPTIMIZE
+  try {
+    if ((Index+pWorld->getMinAge()) > pWorld->getMaxAge())
+      throw string("index too high"); // TODO Add CERror
+  } catch (string Ex) {
+    Ex = "CConstantSelectivity.getResult(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+#endif
+
   return dC;
 }
 

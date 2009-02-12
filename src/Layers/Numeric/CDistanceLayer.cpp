@@ -24,7 +24,7 @@ CDistanceLayer::CDistanceLayer() {
 // Get The Value Fromo ur Distance Layer
 //**********************************************************************
 double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     // Check
     if (RowIndex >= iHeight)
@@ -40,7 +40,7 @@ double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int
     // Assign Ret
     return pGrid[RowIndex][ColIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDistanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;

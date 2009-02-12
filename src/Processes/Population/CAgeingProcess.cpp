@@ -63,7 +63,7 @@ void CAgeingProcess::build() {
 // execute this Process
 //**********************************************************************
 void CAgeingProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Base Execute
@@ -97,7 +97,7 @@ void CAgeingProcess::execute() {
         }
       }
     }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CAgeingProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

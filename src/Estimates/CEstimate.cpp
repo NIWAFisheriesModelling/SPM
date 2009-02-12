@@ -50,7 +50,7 @@ void CEstimate::addValue(double value) {
 // Set Value of our Target
 //**********************************************************************
 void CEstimate::setValue(double value) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     if (pTarget == 0)
@@ -63,7 +63,7 @@ void CEstimate::setValue(double value) {
       (*Target) = value;
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CEstimate.setValue()->" + Ex;
     throw Ex;
@@ -76,7 +76,7 @@ void CEstimate::setValue(double value) {
 // Get the Value of our Target
 //**********************************************************************
 double CEstimate::getValue() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     if (pTarget == 0)
@@ -84,7 +84,7 @@ double CEstimate::getValue() {
 
     return (*pTarget);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CEstimate.getValue()->" + Ex;
     throw Ex;
@@ -97,7 +97,7 @@ double CEstimate::getValue() {
 // Get The Score for Our Prior
 //**********************************************************************
 double CEstimate::getPriorScore() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -108,7 +108,7 @@ double CEstimate::getPriorScore() {
 
     return pPrior->getResult((*pTarget));
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CEstimate.getPriorScore(" + getParameter() + ")->" + Ex;
     throw Ex;

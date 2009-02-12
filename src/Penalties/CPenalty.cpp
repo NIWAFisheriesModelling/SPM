@@ -48,7 +48,7 @@ void CPenalty::validate() {
 // trigger The penalty
 //**********************************************************************
 void CPenalty::trigger(string Label, double Value) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Value should Never be 0
@@ -66,7 +66,7 @@ void CPenalty::trigger(string Label, double Value) {
     CPenaltyManager *pPenaltyManager = CPenaltyManager::Instance();
     pPenaltyManager->flagPenalty(sFullLabel, dValue);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CPenalty.execute(" + sLabel + ")->" + Ex;
     throw Ex;

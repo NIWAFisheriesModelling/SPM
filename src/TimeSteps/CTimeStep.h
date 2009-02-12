@@ -3,7 +3,9 @@
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
-// Description :
+// Description : A time-step is a unit of work in out model.
+//              Each time step will execute multiple processes during it's
+//              execution.
 // $Date$
 //============================================================================
 #ifndef CTIMESTEP_H_
@@ -24,8 +26,6 @@ public:
 	CTimeStep();
 	virtual                    ~CTimeStep();
   CTimeStep*                  clone() { return new CTimeStep(*this); }
-  //int                        getProcessCount() { return vProcessNames.size(); }
-  //string                     getProcess(int index);
   void                        validate();
   void                        build();
   void                        execute();

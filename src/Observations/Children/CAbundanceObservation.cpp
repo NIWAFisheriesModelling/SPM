@@ -165,7 +165,7 @@ void CAbundanceObservation::build() {
 // Execute
 //**********************************************************************
 void CAbundanceObservation::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Variables
@@ -217,7 +217,7 @@ void CAbundanceObservation::execute() {
       mPropPtr++;
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CAbundanceObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

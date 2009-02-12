@@ -45,16 +45,19 @@ void CKnifeEdgeSelectivity::validate() {
 // get Result
 //**********************************************************************
 double CKnifeEdgeSelectivity::getResult(int Param) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
+    if ((Param + pWorld->getMinAge()) > pWorld->getMaxAge())
+      throw string("Param too high"); // TODO ADD CError
 #endif
+
     // Get the column Index for the passed in Age
     Param = pWorld->getMinAge() + Param;
 
     if(Param >= dE)
       return (1.0);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CKnifeedgeSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

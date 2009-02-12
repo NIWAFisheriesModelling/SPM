@@ -44,7 +44,7 @@ void CLogNormalPrior::validate() {
 // get Result
 //**********************************************************************
 double CLogNormalPrior::getResult(double Param) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -53,7 +53,7 @@ double CLogNormalPrior::getResult(double Param) {
     dRet = log(Param) + 0.5 * pow(log(Param/dMu)/dSigma + dSigma*0.5, 2);
     return dRet;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CLogNormalPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

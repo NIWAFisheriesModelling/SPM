@@ -56,7 +56,7 @@ void CWorldSquare::zeroGrid() {
 // Get Value From Our Square
 //**********************************************************************
 double CWorldSquare::getValue(int RowIndex, int ColIndex) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
@@ -70,7 +70,7 @@ double CWorldSquare::getValue(int RowIndex, int ColIndex) {
 
     return pGrid[RowIndex][ColIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorldSquare.getValue->" + Ex;
     throw Ex;
@@ -85,7 +85,7 @@ double CWorldSquare::getValue(int RowIndex, int ColIndex) {
 // Set Value
 //**********************************************************************
 void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
@@ -99,7 +99,7 @@ void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
 
     pGrid[RowIndex][ColIndex] = Value;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CWorldSquare.setValue->" + Ex;
     throw Ex;
@@ -112,7 +112,7 @@ void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
 // Add Value To Our Square
 //**********************************************************************
 void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
@@ -126,7 +126,7 @@ void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
 
     pGrid[RowIndex][ColIndex] += Value;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CWorldSquare.addValue->" + Ex;
     throw Ex;
@@ -139,7 +139,7 @@ void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
 // Sub Value From Our Square
 //**********************************************************************
 void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_HEIGHT);
@@ -153,7 +153,7 @@ void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
 
     pGrid[RowIndex][ColIndex] -= Value;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CWorldSquare.subValue->" + Ex;
     throw Ex;
@@ -169,7 +169,7 @@ double CWorldSquare::getPopulation() {
   // Variables
   double dRet = 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -178,7 +178,7 @@ double CWorldSquare::getPopulation() {
       for (int j = 0; j < iWidth; ++j)
         dRet += pGrid[i][j];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorldSquare.getPopulation()->" + Ex;
     throw Ex;
@@ -196,7 +196,7 @@ double CWorldSquare::getPopulationForAge(int AgeIndex) {
   // Variables
   double dRet = 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (AgeIndex > iWidth)
       CError::errorGreaterThan(PARAM_AGE_INDEX, PARAM_WIDTH);
@@ -207,7 +207,7 @@ double CWorldSquare::getPopulationForAge(int AgeIndex) {
     for (int i = 0; i < iHeight; ++i)
       dRet += pGrid[i][AgeIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorldSquare.getPopulationForAge()->" + Ex;
     throw Ex;
@@ -225,7 +225,7 @@ double CWorldSquare::getPopulationInCategoryForAge(int AgeIndex, int CategoryInd
   // Variables
   double dRet = 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (AgeIndex > iWidth)
       CError::errorGreaterThan(PARAM_AGE_INDEX, PARAM_WIDTH);
@@ -239,7 +239,7 @@ double CWorldSquare::getPopulationInCategoryForAge(int AgeIndex, int CategoryInd
 
     dRet = pGrid[CategoryIndex][AgeIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorldSquare.getPopulationForAge()->" + Ex;
     throw Ex;
@@ -257,7 +257,7 @@ double CWorldSquare::getPopulationForCategory(int CategoryIndex) {
   // Variables
   double dRet = 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (CategoryIndex > iHeight)
       CError::errorGreaterThan(PARAM_CATEGORY_INDEX, PARAM_HEIGHT);
@@ -268,7 +268,7 @@ double CWorldSquare::getPopulationForCategory(int CategoryIndex) {
     for (int i = 0; i < iWidth; ++i)
       dRet += pGrid[CategoryIndex][i];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorldSquare.getPopulationForCategory()->" + Ex;
     throw Ex;
@@ -302,7 +302,7 @@ void CWorldSquare::loadDummyData() {
 // Build
 //**********************************************************************
 void CWorldSquare::build() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -313,7 +313,7 @@ void CWorldSquare::build() {
     iMaxAge             = pWorld->getMaxAge();
     bAgePlus            = pWorld->getAgePlusGroup();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
     if (iNumberOfCategories <= 0)
       CError::errorMissing(PARAM_CATEGORIES);
     if (iMinAge < 0)
@@ -335,7 +335,7 @@ void CWorldSquare::build() {
     // Zero it
     zeroGrid();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CWorldSquare.build()->" + Ex;
     throw Ex;

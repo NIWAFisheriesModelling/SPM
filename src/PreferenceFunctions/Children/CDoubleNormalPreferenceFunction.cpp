@@ -55,7 +55,7 @@ void CDoubleNormalPreferenceFunction::validate() {
 //**********************************************************************
 double CDoubleNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
   dRet= 0.0;
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -65,7 +65,7 @@ double CDoubleNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TR
     else
       dRet = pow(2.0,-((dLayerValue-dMu)/dSigmaR * (dLayerValue-dMu)/dSigmaR));
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDoubleNormalPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

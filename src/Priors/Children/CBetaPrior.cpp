@@ -48,7 +48,7 @@ void CBetaPrior::validate() {
 // get Result
 //**********************************************************************
 double CBetaPrior::getResult(double Param) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -61,7 +61,7 @@ double CBetaPrior::getResult(double Param) {
     dRet = (1-dM) * log(Param-dA) + (1-dN) * log(dB - Param);
     return dRet;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CBetaPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

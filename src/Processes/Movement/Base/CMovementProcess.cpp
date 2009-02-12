@@ -90,12 +90,12 @@ void CMovementProcess::build() {
 // Execute
 //**********************************************************************
 void CMovementProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     CProcess::execute();
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -108,7 +108,7 @@ void CMovementProcess::execute() {
 // Do The Move To RIndex/CIndex
 //**********************************************************************
 void CMovementProcess::doMove(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Get Target Base
@@ -126,7 +126,7 @@ void CMovementProcess::doMove(int RIndex, int CIndex, int SRIndex, int SCIndex, 
     pTargetDiff->addValue(SRIndex, SCIndex, Qty);
     pBaseSquare->subValue(SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.doMove(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -139,7 +139,7 @@ void CMovementProcess::doMove(int RIndex, int CIndex, int SRIndex, int SCIndex, 
 // Move Amount of Fish Up from World(RowIndex, ColIndex)
 //**********************************************************************
 void CMovementProcess::moveUp(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -150,7 +150,7 @@ void CMovementProcess::moveUp(int RIndex, int CIndex, int SRIndex, int SCIndex, 
     // Do it
     doMove( (RIndex-1), CIndex, SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.moveUp(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -163,7 +163,7 @@ void CMovementProcess::moveUp(int RIndex, int CIndex, int SRIndex, int SCIndex, 
 // Move Amount of Fish Down From World(RowIndex, ColIndex) Square(Row/Col)
 //**********************************************************************
 void CMovementProcess::moveDown(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -174,7 +174,7 @@ void CMovementProcess::moveDown(int RIndex, int CIndex, int SRIndex, int SCIndex
     // Do it
     doMove( (RIndex+1), CIndex, SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.moveDown(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -187,7 +187,7 @@ void CMovementProcess::moveDown(int RIndex, int CIndex, int SRIndex, int SCIndex
 // Move Amount of Fish Left From World(RowIndex, ColIndex)
 //**********************************************************************
 void CMovementProcess::moveLeft(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -198,7 +198,7 @@ void CMovementProcess::moveLeft(int RIndex, int CIndex, int SRIndex, int SCIndex
     // Do it
     doMove(RIndex, (CIndex-1), SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.moveLeft(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -211,7 +211,7 @@ void CMovementProcess::moveLeft(int RIndex, int CIndex, int SRIndex, int SCIndex
 // Move Amount of Fish right from World(RowIndex,ColIndex)
 //**********************************************************************
 void CMovementProcess::moveRight(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Can We Move Left?
@@ -221,7 +221,7 @@ void CMovementProcess::moveRight(int RIndex, int CIndex, int SRIndex, int SCInde
     // Do it
     doMove(RIndex, (CIndex+1), SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.moveRight(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -234,7 +234,7 @@ void CMovementProcess::moveRight(int RIndex, int CIndex, int SRIndex, int SCInde
 // Move Amount of fish from World(RowIndex, ColIndex)
 //**********************************************************************
 void CMovementProcess::moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Can We Move Left?
@@ -247,7 +247,7 @@ void CMovementProcess::moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCInd
     // Do it
     doMove( (RIndex-1), (CIndex-1), SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.moveLeftUp(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -260,7 +260,7 @@ void CMovementProcess::moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCInd
 // Move amount of fish from World(RowIndex, ColIndex)
 //**********************************************************************
 void CMovementProcess::moveLeftDown(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Can We Move Left?
@@ -273,7 +273,7 @@ void CMovementProcess::moveLeftDown(int RIndex, int CIndex, int SRIndex, int SCI
     // Do it
     doMove( (RIndex+1), (CIndex-1), SRIndex, SCIndex, Qty);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CMovementProcess.moveLeftDown(" + getLabel() + ")->" + Ex;
     throw Ex;

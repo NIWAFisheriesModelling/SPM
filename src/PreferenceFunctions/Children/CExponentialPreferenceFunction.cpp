@@ -52,13 +52,13 @@ void CExponentialPreferenceFunction::validate() {
 // get Result
 //**********************************************************************
 double CExponentialPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     return CMath::zeroFun(pow(exp(-dLambda * pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex)),dAlpha),ZERO);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CExponentialPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

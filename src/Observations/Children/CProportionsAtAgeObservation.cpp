@@ -246,7 +246,7 @@ void CProportionsAtAgeObservation::build() {
 // Execute
 //**********************************************************************
 void CProportionsAtAgeObservation::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Variables
@@ -324,7 +324,7 @@ void CProportionsAtAgeObservation::execute() {
       vPropPtr++;
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CProportionsAtAgeObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

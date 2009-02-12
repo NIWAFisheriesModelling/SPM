@@ -132,7 +132,7 @@ void CProfileManager::validate() {
 // build
 //**********************************************************************
 void CProfileManager::build() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -141,7 +141,7 @@ void CProfileManager::build() {
       Profile->build();
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CProfileManager.build()->" + Ex;
     throw Ex;

@@ -8,8 +8,8 @@
 //============================================================================
 #ifdef UNITTEST
 
-#ifdef OPTIMISE
-#error "OPTIMISE cannot be defined with UNITTEST"
+#ifdef OPTIMIZE
+#error "OPTIMIZE cannot be defined with UNITTEST"
 #endif
 
 // Defines

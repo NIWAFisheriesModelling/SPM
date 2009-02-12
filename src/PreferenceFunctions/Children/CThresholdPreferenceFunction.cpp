@@ -58,7 +58,7 @@ double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRInd
 
   dRet = 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -68,7 +68,7 @@ double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRInd
     else
       dRet = 1.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CThresholdPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

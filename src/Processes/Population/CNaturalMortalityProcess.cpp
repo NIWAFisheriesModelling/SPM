@@ -97,7 +97,7 @@ void CNaturalMortalityProcess::build() {
 // Rebuild
 //**********************************************************************
 void CNaturalMortalityProcess::rebuild() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Populate Grid With Values
@@ -130,7 +130,7 @@ void CNaturalMortalityProcess::rebuild() {
       }
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CNaturalMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -143,7 +143,7 @@ void CNaturalMortalityProcess::rebuild() {
 // Execute
 //**********************************************************************
 void CNaturalMortalityProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Base execute
@@ -181,7 +181,7 @@ void CNaturalMortalityProcess::execute() {
         }
       }
     }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CNaturalMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

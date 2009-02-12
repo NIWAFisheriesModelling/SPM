@@ -48,7 +48,7 @@ void CLogisticSelectivity::validate() {
 // Calculate a result for our Vector
 //**********************************************************************
 double CLogisticSelectivity::calculateResult(int Age) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -64,7 +64,7 @@ double CLogisticSelectivity::calculateResult(int Age) {
 
     return dRet;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CLogisticSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

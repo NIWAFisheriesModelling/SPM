@@ -77,7 +77,7 @@ void CCategoryTransitionProcess::build() {
 // Execute This Process
 //**********************************************************************
 void CCategoryTransitionProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Base execute
@@ -101,7 +101,7 @@ void CCategoryTransitionProcess::execute() {
         }
       }
     }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CCategoryTransitionProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

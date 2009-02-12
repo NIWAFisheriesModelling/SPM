@@ -107,7 +107,7 @@ void CConstantRecruitmentProcess::build() {
 // Execute
 //**********************************************************************
 void CConstantRecruitmentProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Base Execute
@@ -140,7 +140,7 @@ void CConstantRecruitmentProcess::execute() {
           pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (dAmountPer * vProportionList[k]) );
       }
     }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CRecruitmentProcess.execute(" + getLabel() +")->" + Ex;
     throw Ex;

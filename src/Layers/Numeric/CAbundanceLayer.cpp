@@ -95,13 +95,13 @@ void CAbundanceLayer::build() {
 // get Value
 //**********************************************************************
 double CAbundanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     return pWorld->getBaseSquare(RowIndex, ColIndex)->getPopulation();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CAbundanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;

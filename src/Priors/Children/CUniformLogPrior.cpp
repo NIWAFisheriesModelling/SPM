@@ -42,14 +42,14 @@ void CUniformLogPrior::validate() {
 // get Result
 //**********************************************************************
 double CUniformLogPrior::getResult(double Param) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     double dRet = log(Param);
     return dRet;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CUniformLogPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

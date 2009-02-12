@@ -63,7 +63,7 @@ void CProcessManager::addProcess(CProcess* value) {
 // Return Link To Our process
 //**********************************************************************
 CProcess* CProcessManager::getProcess(string Label) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -75,7 +75,7 @@ CProcess* CProcessManager::getProcess(string Label) {
 
     throw string(ERROR_UNKNOWN_PROCESS + Label);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CProcessManager.getProcess()->" + Ex;
     throw Ex;
@@ -162,7 +162,7 @@ void CProcessManager::validate() {
 // Build Our Processes, And Relationships.
 //**********************************************************************
 void CProcessManager::build() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -171,7 +171,7 @@ void CProcessManager::build() {
       Process->build();
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CProcessManager.buildProcesses()->" + Ex;
     throw Ex;
@@ -184,7 +184,7 @@ void CProcessManager::build() {
 // Rebuild our Processes
 //**********************************************************************
 void CProcessManager::rebuild() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -193,7 +193,7 @@ void CProcessManager::rebuild() {
       Process->rebuild();
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CProcessManager.buildProcesses()->" + Ex;
     throw Ex;

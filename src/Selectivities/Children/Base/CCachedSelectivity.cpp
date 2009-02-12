@@ -59,6 +59,11 @@ void CCachedSelectivity::rebuild() {
 // Get the result from our Cache
 //**********************************************************************
 double CCachedSelectivity::getResult(int index) {
+#ifndef OPTIMIZE
+  if (index >= (int)vResults.size())
+    throw string("index too high"); // TODO: Add CError
+#endif
+
   return vResults[index];
 }
 

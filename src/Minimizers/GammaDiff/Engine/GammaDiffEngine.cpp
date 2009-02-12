@@ -116,8 +116,8 @@ void GammaDiffEngine::buildCurrentValues() {
 //**********************************************************************
 // double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
 //   vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,
-//   double **pOptimiseHessian, int untransformedHessians, double dStepSize)
-// Optimise our function
+//   double **pOPTIMIZEHessian, int untransformedHessians, double dStepSize)
+// OPTIMIZE our function
 //**********************************************************************
 double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
     vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,

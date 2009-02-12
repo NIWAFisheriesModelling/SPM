@@ -60,7 +60,7 @@ void CObjectiveFunction::Destroy() {
 // Get A Score From Our List
 //**********************************************************************
 SScore* CObjectiveFunction::getScore(int Index) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     // Validate
     if (Index < 0)
@@ -71,7 +71,7 @@ SScore* CObjectiveFunction::getScore(int Index) {
 
     return &vScoreList[Index];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CObjectiveFunction.getScore()->" + Ex;
     throw Ex;

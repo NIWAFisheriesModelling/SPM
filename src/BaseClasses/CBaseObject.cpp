@@ -45,7 +45,7 @@ void CBaseObject::registerEstimable(string name, int index, double *variable) {
 // Get Our Estimable Variable
 //**********************************************************************
 double* CBaseObject::getEstimableVariable(string name) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -54,7 +54,7 @@ double* CBaseObject::getEstimableVariable(string name) {
     else
       throw string(ERROR_UNKNOWN_ESTIMABLE + name);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CBaseObject.getEstimableVariable()->" + Ex;
     throw Ex;

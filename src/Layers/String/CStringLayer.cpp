@@ -30,7 +30,7 @@ CStringLayer::CStringLayer() {
 string CStringLayer::getValue(int RowIndex, int ColIndex) {
   // Vars
   string sRet = "";
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     // Check
     if (RowIndex >= iHeight)
@@ -42,7 +42,7 @@ string CStringLayer::getValue(int RowIndex, int ColIndex) {
     // Assign Ret
     sRet = pGrid[RowIndex][ColIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CStringLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;

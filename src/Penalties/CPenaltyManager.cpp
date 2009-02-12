@@ -114,7 +114,7 @@ void CPenaltyManager::clearFlaggedPenaltyList() {
 //
 //**********************************************************************
 SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (Index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
@@ -124,7 +124,7 @@ SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index) {
 
     return &vFlaggedPenaltyList[Index];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CPenaltyManager.getFlaggedPenalty()->" + Ex;
     throw Ex;

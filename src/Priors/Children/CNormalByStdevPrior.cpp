@@ -44,13 +44,13 @@ void CNormalByStdevPrior::validate() {
 // get Result
 //**********************************************************************
 double CNormalByStdevPrior::getResult(double Param) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     return 0.5 * ((Param-dMu)/dSigma) * ((Param-dMu)/dSigma);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CNormalByStdevPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

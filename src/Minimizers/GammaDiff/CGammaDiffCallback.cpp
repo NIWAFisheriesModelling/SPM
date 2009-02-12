@@ -38,7 +38,7 @@ double CGammaDiffCallback::operator()(const vector<double>& Parameters) {
 
   CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Re-Run
@@ -49,7 +49,7 @@ double CGammaDiffCallback::operator()(const vector<double>& Parameters) {
     // Workout our Objective Score
     pObjectiveFunction->execute();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CBetaDiffCallback.operator()->" + Ex;
     throw Ex;

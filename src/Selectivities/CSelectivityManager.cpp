@@ -160,7 +160,7 @@ void CSelectivityManager::validate() {
 // build
 //**********************************************************************
 void CSelectivityManager::build() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -169,7 +169,7 @@ void CSelectivityManager::build() {
       Selectivity->build();
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex  = "CSelectivityManager.build()->" + Ex;
     throw Ex;
@@ -182,7 +182,7 @@ void CSelectivityManager::build() {
 // rebuild
 //**********************************************************************
 void CSelectivityManager::rebuild() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -191,7 +191,7 @@ void CSelectivityManager::rebuild() {
       Selectivity->rebuild();
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex  = "CSelectivityManager.rebuild()->" + Ex;
     throw Ex;

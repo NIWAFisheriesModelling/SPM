@@ -53,7 +53,7 @@ double CInverseLogisticPreferenceFunction::getResult(int RIndex, int CIndex, int
 
   dRet= 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -67,7 +67,7 @@ double CInverseLogisticPreferenceFunction::getResult(int RIndex, int CIndex, int
     else
       dRet  = 1.0-(1.0/(1.0+pow(19.0,dTemp)));
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CInverseLogisticPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -65,7 +65,7 @@ void CUniformMovementProcess::build() {
 // execute
 //**********************************************************************
 void CUniformMovementProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -112,7 +112,7 @@ void CUniformMovementProcess::execute() {
       }
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CUniformMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

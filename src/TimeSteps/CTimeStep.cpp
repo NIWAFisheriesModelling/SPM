@@ -3,7 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 13/02/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
-// Description :
 // $Date$
 //============================================================================
 
@@ -29,14 +28,6 @@ CTimeStep::CTimeStep() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_PROCESSES);
 }
-
-//**********************************************************************
-// string CTimeStep::getProcess(int index)
-// Return process from our vector @ index
-//**********************************************************************
-//string CTimeStep::getProcess(int index) {
-//  return vProcessNames[index];
-//}
 
 //**********************************************************************
 // void CTimeStep::validate()
@@ -66,12 +57,6 @@ void CTimeStep::build() {
     CProcessManager *pProcessManager = CProcessManager::Instance();
     pProcessManager->fillVector(vProcesses, vProcessNames);
 
-#ifdef VERBOSE
-    cout << "Building TimeStep " << getLabel() << endl;
-    cout << ">> " << vProcessNames.size() << " named processes to load" << endl;
-    cout << ">> " << vProcesses.size() << " processes loaded" << endl;
-#endif
-
   } catch (string Ex) {
     Ex = "CTimeStep.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -83,7 +68,7 @@ void CTimeStep::build() {
 // Execute This TimeStep
 //**********************************************************************
 void CTimeStep::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Loop Through and Execute
@@ -92,7 +77,7 @@ void CTimeStep::execute() {
       pWorld->mergeDifferenceGrid();
     }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CTimeStep.execute()->" + Ex;
     throw Ex;
@@ -105,6 +90,4 @@ void CTimeStep::execute() {
 // Default De-Constructor
 //**********************************************************************
 CTimeStep::~CTimeStep() {
-  // Don't need to delete process.
-  // This is done in process manager.
 }

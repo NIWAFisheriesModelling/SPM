@@ -52,7 +52,7 @@ void CLogisticProducingSelectivity::validate() {
 // Calculate Our Result
 //**********************************************************************
 double CLogisticProducingSelectivity::calculateResult(int Age) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     // Do our logistic producing Function
 #endif
@@ -71,7 +71,7 @@ double CLogisticProducingSelectivity::calculateResult(int Age) {
     }
     return 0.0;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CLogisticProducingSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;

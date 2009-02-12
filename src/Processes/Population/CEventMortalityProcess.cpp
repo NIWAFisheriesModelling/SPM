@@ -126,7 +126,7 @@ void CEventMortalityProcess::build() {
 // execute this Process
 //**********************************************************************
 void CEventMortalityProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // See if we are suppose to be executing first
@@ -202,7 +202,7 @@ void CEventMortalityProcess::execute() {
         }
       }
     }
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

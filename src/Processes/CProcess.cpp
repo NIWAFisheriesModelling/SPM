@@ -127,7 +127,7 @@ void CProcess::build() {
 // Base execution
 //**********************************************************************
 void CProcess::execute() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Default Variables
@@ -141,7 +141,7 @@ void CProcess::execute() {
 //        pLayer->defaultMinMax();
 //    }
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -153,13 +153,13 @@ void CProcess::execute() {
 // Check If Square Is Usable
 //**********************************************************************
 //bool CProcess::checkUsableSquare(CWorldSquare *Square, int iX, int iY) {
-//#ifndef OPTIMISE
+//#ifndef OPTIMIZE
 //  try {
 //#endif
 //    if (!Square->getEnabled())
 //      return false;
 //
-//#ifndef OPTIMISE
+//#ifndef OPTIMIZE
 //  } catch (string Ex) {
 //    Ex = "CProcess.checkUsableSquare(" + getLabel() + ")->" + Ex;
 //    throw Ex;
@@ -173,7 +173,7 @@ void CProcess::execute() {
 // Check If base Square Is Usable
 //**********************************************************************
 //bool CProcess::checkUsableBaseSquare(int RowIndex, int ColIndex) {
-//#ifndef OPTIMISE
+//#ifndef OPTIMIZE
 //  try {
 //#endif
 //    // Check if Enabled
@@ -185,7 +185,7 @@ void CProcess::execute() {
 //      if (!pLayer->checkSpace(RowIndex, ColIndex))
 //        return false;
 //
-//#ifndef OPTIMISE
+//#ifndef OPTIMIZE
 //  } catch (string Ex) {
 //    Ex = "CProcess.checkUsableSquare(" + getLabel() + ")->" + Ex;
 //    throw Ex;

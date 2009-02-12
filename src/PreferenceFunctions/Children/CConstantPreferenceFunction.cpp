@@ -25,13 +25,13 @@ CConstantPreferenceFunction::CConstantPreferenceFunction() {
 // Get Result
 //**********************************************************************
 double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     dRet = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex);
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CConstantPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

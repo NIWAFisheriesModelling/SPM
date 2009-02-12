@@ -38,7 +38,7 @@ CDoubleLayer::CDoubleLayer() {
 // Get Value From Our Layer
 //**********************************************************************
 double CDoubleLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     // Check
     if (RowIndex >= iHeight)
@@ -50,7 +50,7 @@ double CDoubleLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int T
     // Assign Ret
     return pGrid[RowIndex][ColIndex];
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDoubleLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -63,7 +63,7 @@ double CDoubleLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int T
 // Add Value to our Grid
 //**********************************************************************
 void CDoubleLayer::setValue(int Row, int Col, double Value) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (Row > iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW, PARAM_LAYER_HEIGHT);
@@ -77,7 +77,7 @@ void CDoubleLayer::setValue(int Row, int Col, double Value) {
 
     pGrid[(Row-1)][(Col-1)] = Value;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CDoubleLayer.addValue()->" + Ex;
     throw Ex;
@@ -90,7 +90,7 @@ void CDoubleLayer::setValue(int Row, int Col, double Value) {
 // Check This Grid Spot. Is it Valid for our Check
 //**********************************************************************
 bool CDoubleLayer::checkSpace(int RowIndex, int ColIndex) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
     if (RowIndex >= iHeight)
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
@@ -111,7 +111,7 @@ bool CDoubleLayer::checkSpace(int RowIndex, int ColIndex) {
     if ( (pGrid[RowIndex][ColIndex] <= (dMax+ZERO)) && (pGrid[RowIndex][ColIndex] >= (dMin-ZERO)) )
       return true;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CDoubleLayer.checkSpace()->" + Ex;
     throw Ex;
@@ -126,7 +126,7 @@ bool CDoubleLayer::checkSpace(int RowIndex, int ColIndex) {
 // Count How Many Valid Spots We Have Against World
 //**********************************************************************
 int CDoubleLayer::countValidSpaces() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
     // Variables
@@ -162,7 +162,7 @@ int CDoubleLayer::countValidSpaces() {
 
     return iRet;
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CDoubleLayer.countValidSpaces()->" + Ex;
     throw Ex;

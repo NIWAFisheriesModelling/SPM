@@ -161,7 +161,7 @@ void CTimeStepManager::validate() {
 // Build out TimeSteps
 //**********************************************************************
 void CTimeStepManager::build() {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
@@ -176,7 +176,7 @@ void CTimeStepManager::build() {
     pObservationManager = CObservationManager::Instance();
     pReporterManager    = CReporterManager::Instance();
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CTimeStepManager.build()->" + Ex;
     throw Ex;

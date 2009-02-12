@@ -44,13 +44,13 @@ void CNormalPrior::validate() {
 // get Result
 //**********************************************************************
 double CNormalPrior::getResult(double Param) {
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   try {
 #endif
 
     return 0.5 * ((Param-dMu)/(dCv*dMu)) * ((Param-dMu)/(dCv*dMu));
 
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CNormalPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
