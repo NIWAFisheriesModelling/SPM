@@ -31,23 +31,19 @@ double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
-#endif
 
-    // Adjust For our Location in Distance Layers
-    RowIndex = abs(RowIndex - TargetRow);
-    ColIndex = abs(ColIndex - TargetCol);
-
-    // Assign Ret
-    return pGrid[RowIndex][ColIndex];
-
-#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDistanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-
-  return 0.0;
 #endif
+
+  // Adjust For our Location in Distance Layers
+  RowIndex = abs(RowIndex - TargetRow);
+  ColIndex = abs(ColIndex - TargetCol);
+
+  // Assign Ret
+  return pGrid[RowIndex][ColIndex];
 }
 
 //**********************************************************************

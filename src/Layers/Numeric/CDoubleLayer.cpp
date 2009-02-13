@@ -45,17 +45,14 @@ double CDoubleLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int T
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
-#endif
 
-    // Assign Ret
-    return pGrid[RowIndex][ColIndex];
-
-#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CDoubleLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
+
+  return pGrid[RowIndex][ColIndex];
 }
 
 //**********************************************************************
@@ -73,16 +70,14 @@ void CDoubleLayer::setValue(int Row, int Col, double Value) {
       CError::errorLessThanEqualTo(PARAM_ROW, PARAM_ZERO);
     if (Col <= 0)
       CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
-#endif
 
-    pGrid[(Row-1)][(Col-1)] = Value;
-
-#ifndef OPTIMIZE
   } catch(string Ex) {
     Ex = "CDoubleLayer.addValue()->" + Ex;
     throw Ex;
   }
 #endif
+
+  pGrid[(Row-1)][(Col-1)] = Value;
 }
 
 //**********************************************************************

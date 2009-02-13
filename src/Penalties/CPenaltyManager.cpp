@@ -52,6 +52,18 @@ void CPenaltyManager::addPenalty(CPenalty *Penalty) {
 }
 
 //**********************************************************************
+// void CPenaltyManager::fillVectorWithFlagged(vector<SFlaggedPenalty*> &list)
+// Fill our vector with the penalties
+//**********************************************************************
+void CPenaltyManager::fillVectorWithFlagged(vector<SFlaggedPenalty*> &list) {
+  list.clear();
+
+  foreach(SFlaggedPenalty *Penalty, vFlaggedPenaltyList) {
+    list.push_back(Penalty);
+  }
+}
+
+//**********************************************************************
 // CPenalty* CPenaltyManager::getPenalty(string Label)
 // Get Penalty Pointer
 //**********************************************************************
@@ -94,9 +106,9 @@ CPenalty* CPenaltyManager::getPenalty(int index) {
 // Add A Penalty to our list of Executed ones.
 //**********************************************************************
 void CPenaltyManager::flagPenalty(string Label, double Value) {
-  SFlaggedPenalty stPenalty;
-  stPenalty.Label = Label;
-  stPenalty.Score = Value;
+  SFlaggedPenalty *stPenalty = new SFlaggedPenalty();
+  stPenalty->Label = Label;
+  stPenalty->Score = Value;
 
   vFlaggedPenaltyList.push_back(stPenalty);
 }
@@ -122,7 +134,7 @@ SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index) {
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_FLAGGED_PENALTIES);
 #endif
 
-    return &vFlaggedPenaltyList[Index];
+    return vFlaggedPenaltyList[Index];
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
@@ -173,12 +185,11 @@ void CPenaltyManager::validate() {
 //**********************************************************************
 CPenaltyManager::~CPenaltyManager() {
   // De-Allocate our Memory
-  vector<CPenalty*>::iterator vPtr;
-  vPtr = vPenaltyList.begin();
-  while (vPtr != vPenaltyList.end()) {
-    delete (*vPtr);
-    vPtr++;
+  foreach(CPenalty *Penalty, vPenaltyList) {
+    delete Penalty;
   }
-  vPenaltyList.clear();
-  vFlaggedPenaltyList.clear();
+
+  foreach(SFlaggedPenalty *Penalty, vFlaggedPenaltyList) {
+    delete Penalty;
+  }
 }

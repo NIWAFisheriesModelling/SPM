@@ -67,18 +67,14 @@ SScore* CObjectiveFunction::getScore(int Index) {
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
     if (Index >= (int)vScoreList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SCORES_INDEX);
-#endif
 
-    return &vScoreList[Index];
-
-#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CObjectiveFunction.getScore()->" + Ex;
     throw Ex;
   }
-
-  return 0;
 #endif
+
+  return &vScoreList[Index];
 }
 
 //**********************************************************************
@@ -96,81 +92,61 @@ void CObjectiveFunction::addScore(string Label, double Value) {
 }
 
 //**********************************************************************
-// void CObjectiveFunction::build()
-// Build our Objective Function
-//**********************************************************************
-void CObjectiveFunction::build() {
-  try {
-    throw string(ERROR_SUPPORTED_FUNCTION);
-
-  } catch (string Ex) {
-    Ex = "CObjectiveFunction.build(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // void CObjectiveFunction::execute()
 // Execute our Object Function
 //**********************************************************************
 void CObjectiveFunction::execute() {
 
   // Variables
-  CObservationManager   *pObservationManager  = CObservationManager::Instance();
-  CPenaltyManager       *pPenaltyManager      = CPenaltyManager::Instance();
-  CEstimateManager      *pEstimateManager     = CEstimateManager::Instance();
                         dScore                = 0;
                         vScoreList.clear();
   string                sLabel;
   double                dValue;
 
   // Loop Through Observations
-  int iCount = pObservationManager->getObservationCount();
-  for (int i = 0; i < iCount; ++i) {
-   CObservation *pObservation = pObservationManager->getObservation(i);
+  vector<CObservation*> vObservations;
+  CObservationManager::Instance()->fillVector(vObservations);
 
-   // Get Vars
-   sLabel = PARAM_OBS + string("->") + pObservation->getLabel();
-   dValue = pObservation->getScore();
+  foreach(CObservation *Observation, vObservations) {
+    // Get Vars
+   sLabel = PARAM_OBS + string("->") + Observation->getLabel();
+   dValue = Observation->getScore();
 
    // Increment Score, and Add Value to Vector
    dScore += dValue;
    addScore(sLabel, dValue);
-
   }
 
   // Loop Through Penalties
-  iCount = pPenaltyManager->getFlaggedPenaltyCount();
-  for (int i = 0; i < iCount; ++i) {
-    SFlaggedPenalty *pPenalty = pPenaltyManager->getFlaggedPenalty(i);
+  vector<SFlaggedPenalty*> vPenalties;
+  CPenaltyManager::Instance()->fillVectorWithFlagged(vPenalties);
 
-    // Get Vars
-    sLabel = PARAM_PENALTY + string("->") + pPenalty->Label;
-    dValue = pPenalty->Score;
+  foreach(SFlaggedPenalty *Penalty, vPenalties) {
+     // Get Vars
+     sLabel = PARAM_PENALTY + string("->") + Penalty->Label;
+     dValue = Penalty->Score;
 
-    // Inc Score, Add Value to Vector
-    dScore += dValue;
-    addScore(sLabel, dValue);
-
+     // Inc Score, Add Value to Vector
+     dScore += dValue;
+     addScore(sLabel, dValue);
   }
 
   // Loop Through Priors
-  iCount = pEstimateManager->getEstimateCount();
-  for (int i = 0; i < iCount; ++i) {
-    CEstimate *pEstimate = pEstimateManager->getEstimate(i);
+  vector<CEstimate*> vEstimates;
+  CEstimateManager::Instance()->fillVector(vEstimates);
 
+  foreach(CEstimate *Estimate, vEstimates) {
     // Check if we are using a prior on this estimate
-    if (pEstimate->getPrior() == "")
+    if (Estimate->getPrior() == "")
       continue;
 
     // Get Vars
-    sLabel = PARAM_PRIOR + string("->") + pEstimate->getParameter();
-    dValue = pEstimate->getPriorScore();
+    sLabel = PARAM_PRIOR + string("->") + Estimate->getParameter();
+    dValue = Estimate->getPriorScore();
 
     // Inc Score, Add Value to vector
     dScore += dValue;
     addScore(sLabel, dValue);
-
   }
 }
 

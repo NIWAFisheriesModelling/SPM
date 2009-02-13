@@ -78,18 +78,15 @@ void CEstimate::setValue(double value) {
 double CEstimate::getValue() {
 #ifndef OPTIMIZE
   try {
-#endif
     if (pTarget == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
-    return (*pTarget);
-
-#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CEstimate.getValue()->" + Ex;
     throw Ex;
   }
 #endif
+  return (*pTarget);
 }
 
 //**********************************************************************
@@ -99,12 +96,12 @@ double CEstimate::getValue() {
 double CEstimate::getPriorScore() {
 #ifndef OPTIMIZE
   try {
+    if (pPrior == 0)
+          CError::errorMissing(PARAM_PRIOR);
 #endif
 
     if (sPrior == "")
       return 0.0; // No Prior
-    if (pPrior == 0)
-      CError::errorMissing(PARAM_PRIOR);
 
     return pPrior->getResult((*pTarget));
 
@@ -113,7 +110,6 @@ double CEstimate::getPriorScore() {
     Ex = "CEstimate.getPriorScore(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
-
   return 0.0;
 #endif
 }

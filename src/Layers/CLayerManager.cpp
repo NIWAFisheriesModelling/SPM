@@ -213,7 +213,4 @@ CLayerManager::~CLayerManager() {
   foreach(CLayer *Layer, vLayerList) {
     delete Layer;
   }
-
-  // Clear Vector
-  vLayerList.clear();
 }

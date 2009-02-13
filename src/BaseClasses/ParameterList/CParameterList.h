@@ -26,7 +26,7 @@ using std::string;
 class CParameterList {
 public:
   // Functions
-  CParameterList(CParameterList *Object = 0);
+  CParameterList();
   virtual                     ~CParameterList();
   void                        addParameter(string name, string value);
   void                        registerAllowed(string name);

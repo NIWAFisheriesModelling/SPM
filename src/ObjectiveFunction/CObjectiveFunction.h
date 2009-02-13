@@ -31,7 +31,7 @@ public:
 	double                     getScore() { return dScore; }
 	int                        getScoreListCount() { return (int)vScoreList.size(); }
 	SScore*                    getScore(int Index);
-  void                       build();
+  void                       build() { };
   void                       execute();
   virtual                    ~CObjectiveFunction();
 

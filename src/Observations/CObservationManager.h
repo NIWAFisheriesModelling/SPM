@@ -35,12 +35,11 @@ class CObservationManager : public CBaseManager {
 public:
   static CObservationManager* Instance();
   static void                Destroy();
-
-  // Functions
-  void                       addObservation(CObservation *pObservation);
-  int                        getObservationCount() { return vObservationList.size(); }
-  CObservation*              getObservation(int index);
   void                       clone(CObservationManager *Manager);
+  void                       addObservation(CObservation *pObservation);
+  void                       fillVector(vector<CObservation*> &list);
+//  int                        getObservationCount() { return vObservationList.size(); }
+//  CObservation*              getObservation(int index);
   void                       validate();
   void                       build();
   void                       execute(int year, int step);

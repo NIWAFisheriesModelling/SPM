@@ -23,7 +23,7 @@ class CEstimate : public CBaseBuild {
 public:
 	CEstimate();
 	virtual                    ~CEstimate();
-	CEstimate*                clone() { return new CEstimate(*this); }
+	CEstimate*                 clone() { return new CEstimate(*this); }
 	string                     getParameter() { return sParameter; }
 	double                     getLowerBound() { return dLowerBound; }
 	double                     getUpperBound() { return dUpperBound; }

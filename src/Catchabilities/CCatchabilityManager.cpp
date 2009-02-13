@@ -100,10 +100,10 @@ CCatchability* CCatchabilityManager::getCatchability(int index) {
 void CCatchabilityManager::clone(CCatchabilityManager *Manager) {
   try {
 
-//    for (int i = 0; i < Manager->getCatchabilityCount(); ++i) {
-//      CCatchability *pQ = Manager->getCatchability(i);
-//      vCatchabilityList.push_back(pQ->clone());
-//    }
+    for (int i = 0; i < Manager->getCatchabilityCount(); ++i) {
+      CCatchability *pQ = Manager->getCatchability(i);
+      vCatchabilityList.push_back(pQ->clone());
+    }
     // TODO: Fix Clone
 
   } catch (string Ex) {

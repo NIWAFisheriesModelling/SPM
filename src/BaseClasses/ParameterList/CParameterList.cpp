@@ -29,14 +29,10 @@ using std::cout;
 using std::endl;
 
 //**********************************************************************
-// CParameterList::CParameterList(CParameterList *Object = 0)
+// CParameterList::CParameterList()
 // Constructor
 //**********************************************************************
-CParameterList::CParameterList(CParameterList *Object) {
-
-  // Copy Construct
-  if (Object != 0) {
-  }
+CParameterList::CParameterList() {
 }
 
 //**********************************************************************

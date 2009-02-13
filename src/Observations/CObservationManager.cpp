@@ -59,25 +59,37 @@ void CObservationManager::addObservation(CObservation *pObservation) {
 }
 
 //**********************************************************************
+// void CObservationManager::fillVector(vector<CObservation*> &list)
+// Fill our vector with the observations
+//**********************************************************************
+void CObservationManager::fillVector(vector<CObservation*> &list) {
+  list.clear();
+
+  foreach(CObservation *Observation, vObservationList) {
+    list.push_back(Observation);
+  }
+}
+
+//**********************************************************************
 // CObservation* CObservationManager::getObservation(int index)
 // Get Observation by Index
 //**********************************************************************
-CObservation* CObservationManager::getObservation(int index) {
-  try {
-    if (index < 0)
-      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-    if (index >= (int)vObservationList.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_OBSERVATIONS);
-
-    return vObservationList[index];
-
-  } catch (string Ex) {
-    Ex = "CObservationManager.getObservation()->" + Ex;
-    throw Ex;
-  }
-
-  return 0;
-}
+//CObservation* CObservationManager::getObservation(int index) {
+//  try {
+//    if (index < 0)
+//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
+//    if (index >= (int)vObservationList.size())
+//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_OBSERVATIONS);
+//
+//    return vObservationList[index];
+//
+//  } catch (string Ex) {
+//    Ex = "CObservationManager.getObservation()->" + Ex;
+//    throw Ex;
+//  }
+//
+//  return 0;
+//}
 
 //**********************************************************************
 // void CObservationManager::clone(CObservationManager *Manager)

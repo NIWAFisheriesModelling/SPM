@@ -74,9 +74,6 @@ void CInitializationPhase::build() {
 //
 //**********************************************************************
 void CInitializationPhase::execute() {
-  cout << "Initialization Phase " << getLabel() << endl;
-  cout << ">> " << iYears << " years to run" << endl;
-
   // Loop Through and Execute
   for (int i = 0; i < iYears; i++) {
     foreach(CProcess* Process, vProcesses) {

@@ -29,9 +29,9 @@ class CPenaltyManager : public CBaseManager {
 public:
   static CPenaltyManager*    Instance();
   static void                Destroy();
-
-  // Functions
+  void                       clone(CPenaltyManager *Manager);
   void                       addPenalty(CPenalty *Penalty);
+  void                       fillVectorWithFlagged(vector<SFlaggedPenalty*> &list);
   int                        getPenaltyCount() { return vPenaltyList.size(); }
   CPenalty*                  getPenalty(string Label);
   CPenalty*                  getPenalty(int index);
@@ -39,7 +39,6 @@ public:
   void                       clearFlaggedPenaltyList();
   int                        getFlaggedPenaltyCount() { return vFlaggedPenaltyList.size(); }
   SFlaggedPenalty*           getFlaggedPenalty(int Index);
-  void                       clone(CPenaltyManager *Manager);
   void                       validate();
   void                       build() { };
   virtual                    ~CPenaltyManager();
@@ -50,7 +49,7 @@ protected:
 
 	// Variables
 	vector<CPenalty*>          vPenaltyList;
-	vector<SFlaggedPenalty>    vFlaggedPenaltyList;
+	vector<SFlaggedPenalty*>   vFlaggedPenaltyList;
 
 private:
   static boost::thread_specific_ptr<CPenaltyManager>    clInstance;

@@ -28,8 +28,6 @@ CStringLayer::CStringLayer() {
 // get Value
 //**********************************************************************
 string CStringLayer::getValue(int RowIndex, int ColIndex) {
-  // Vars
-  string sRet = "";
 #ifndef OPTIMIZE
   try {
     // Check
@@ -37,19 +35,14 @@ string CStringLayer::getValue(int RowIndex, int ColIndex) {
       CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
-#endif
 
-    // Assign Ret
-    sRet = pGrid[RowIndex][ColIndex];
-
-#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CStringLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 
-  return sRet;
+  return pGrid[RowIndex][ColIndex];
 }
 
 //**********************************************************************

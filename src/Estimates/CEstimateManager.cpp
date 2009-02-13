@@ -58,6 +58,8 @@ void CEstimateManager::addEstimate(CEstimate *Estimate) {
 // Fill list with our Estimate pointers
 //**********************************************************************
 void CEstimateManager::fillVector(vector<CEstimate*> &list) {
+  list.clear();
+
   foreach(CEstimate *Estimate, vEstimateList) {
     list.push_back(Estimate);
   }
@@ -136,14 +138,12 @@ CEstimate* CEstimateManager::getEstimate(int Index) {
     if (Index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-    return vEstimateList[Index];
-
   } catch (string Ex) {
     Ex = "CEstimateManager.getEnabledEstimate()->" + Ex;
     throw Ex;
   }
 
-  return 0;
+  return vEstimateList[Index];
 }
 
 //**********************************************************************
@@ -309,12 +309,8 @@ void CEstimateManager::build() {
 // Default De-Constructor
 //**********************************************************************
 CEstimateManager::~CEstimateManager() {
-  vector<CEstimate*>::iterator vPtr;
-  vPtr = vEstimateList.begin();
-  while (vPtr != vEstimateList.end()) {
-    delete (*vPtr);
-    vPtr++;
+  foreach(CEstimate *Estimate, vEstimateList) {
+    delete Estimate;
   }
-  vEstimateList.clear();
 }
 
