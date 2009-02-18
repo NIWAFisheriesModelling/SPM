@@ -7,11 +7,18 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CConstantPreferenceFunction.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CConstantPreferenceFunction::CConstantPreferenceFunction()
@@ -37,7 +44,6 @@ double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
     throw Ex;
   }
 #endif
-
   //return dAlpha * dRet;
   return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }

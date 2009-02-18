@@ -21,10 +21,8 @@
 <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.gnu.platform.base.863408501" name="Debug Platform" osList="linux,hpux,aix,qnx" superClass="cdt.managedbuild.target.gnu.platform.base"/>
 <builder autoBuildTarget="all" buildPath="${workspace_loc:/SimFish/Debug}" cleanBuildTarget="clean" id="org.eclipse.cdt.build.core.internal.builder.1358188698" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.305513461" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
-<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1358371446" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
-<option id="gnu.cpp.compiler.option.preprocessor.def.995370221" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-<listOptionValue builtIn="false" value="OPTIMISE"/>
-</option>
+<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1358371446" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
+<option id="gnu.cpp.compiler.option.preprocessor.def.995370221" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols"/>
 <option id="gnu.cpp.compiler.option.optimization.level.639239456" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.debugging.level.1458729089" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.91077613" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -40,11 +38,11 @@
 <tool id="cdt.managedbuild.tool.gnu.c.linker.base.640230080" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.270702865" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
 <option id="gnu.cpp.link.option.libs.216388476" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-<listOptionValue builtIn="false" value="libboost_system-mgw34-d-1_35"/>
-<listOptionValue builtIn="false" value="libboost_unit_test_framework-mgw34-sd-1_35"/>
-<listOptionValue builtIn="false" value="libboost_filesystem-mgw34-d-1_35"/>
-<listOptionValue builtIn="false" value="libboost_thread-mgw34-mt-sd-1_35"/>
-<listOptionValue builtIn="false" value="libboost_program_options-mgw34-d-1_35"/>
+<listOptionValue builtIn="false" value="libboost_system-mgw34-mt-1_38"/>
+<listOptionValue builtIn="false" value="libboost_unit_test_framework-mgw34-mt-sd-1_38"/>
+<listOptionValue builtIn="false" value="libboost_filesystem-mgw34-mt-1_38"/>
+<listOptionValue builtIn="false" value="libboost_thread-mgw34-mt-1_38"/>
+<listOptionValue builtIn="false" value="libboost_program_options-mgw34-mt-1_38"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.325050597" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -56,38 +54,9 @@
 </tool>
 </toolChain>
 </folderInfo>
-<fileInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.102573569.1466544588" name="Main.cpp" rcbsApplicability="disable" resourcePath="src/Main.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.1260705299.260417376">
-<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.1260705299.260417376" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base">
-<option id="gnu.cpp.compiler.option.optimization.level.776793046" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.optimize" valueType="enumerated"/>
-<option id="gnu.cpp.compiler.option.debugging.level.1417372916" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-<option id="gnu.cpp.compiler.option.preprocessor.nostdinc.375488949" name="Do not search system directories (-nostdinc)" superClass="gnu.cpp.compiler.option.preprocessor.nostdinc"/>
-<option id="gnu.cpp.compiler.option.preprocessor.preprocess.1112410265" name="Preprocess only (-E)" superClass="gnu.cpp.compiler.option.preprocessor.preprocess"/>
-<option id="gnu.cpp.compiler.option.preprocessor.def.1642750137" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
-<listOptionValue builtIn="false" value="OPTIMISE"/>
-</option>
-<option id="gnu.cpp.compiler.option.preprocessor.undef.983520288" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef"/>
-<option id="gnu.cpp.compiler.option.include.paths.1299654623" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths"/>
-<option id="gnu.cpp.compiler.option.optimization.flags.1191636592" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags" value="-finline-functions" valueType="string"/>
-<option id="gnu.cpp.compiler.option.debugging.other.640268276" name="Other debugging flags" superClass="gnu.cpp.compiler.option.debugging.other" value="-ggdb" valueType="string"/>
-<option id="gnu.cpp.compiler.option.debugging.prof.67714116" name="Generate prof information (-p)" superClass="gnu.cpp.compiler.option.debugging.prof"/>
-<option id="gnu.cpp.compiler.option.debugging.gprof.2146021873" name="Generate gprof information (-pg)" superClass="gnu.cpp.compiler.option.debugging.gprof"/>
-<option id="gnu.cpp.compiler.option.warnings.syntax.1510578660" name="Check syntax only (-fsyntax-only)" superClass="gnu.cpp.compiler.option.warnings.syntax"/>
-<option id="gnu.cpp.compiler.option.warnings.pedantic.1729163702" name="Pedantic (-pedantic)" superClass="gnu.cpp.compiler.option.warnings.pedantic"/>
-<option id="gnu.cpp.compiler.option.warnings.pedantic.error.1447064968" name="Pedantic warnings as errors (-pedantic-errors)" superClass="gnu.cpp.compiler.option.warnings.pedantic.error"/>
-<option id="gnu.cpp.compiler.option.warnings.nowarn.1753292276" name="Inhibit all warnings (-w)" superClass="gnu.cpp.compiler.option.warnings.nowarn"/>
-<option id="gnu.cpp.compiler.option.warnings.allwarn.110919550" name="All warnings (-Wall)" superClass="gnu.cpp.compiler.option.warnings.allwarn"/>
-<option id="gnu.cpp.compiler.option.warnings.toerrors.1130026617" name="Warnings as errors (-Werror)" superClass="gnu.cpp.compiler.option.warnings.toerrors"/>
-<option id="gnu.cpp.compiler.option.other.other.159489125" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0" valueType="string"/>
-<option id="gnu.cpp.compiler.option.other.verbose.1005514850" name="Verbose (-v)" superClass="gnu.cpp.compiler.option.other.verbose"/>
-<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.4856229" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
-</tool>
-<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.174465839" name="Resource Custom Build Step">
-<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.741685818" name="Resource Custom Build Step Input Type">
-<additionalInput kind="additionalinputdependency" paths=""/>
-</inputType>
-<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1069236472" name="Resource Custom Build Step Output Type"/>
-</tool>
-</fileInfo>
+<sourceEntries>
+<entry excluding="R-libraries|misc|libs|examples|doc|Test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+</sourceEntries>
 </configuration>
 </storageModule>
 
@@ -2671,6 +2640,6 @@
 
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<project id="SimFish.cdt.managedbuild.target.gnu.mingw.exe.112496841" name="Executable" projectType="cdt.managedbuild.target.gnu.mingw.exe"/>
+<project id="SPM.cdt.managedbuild.target.gnu.mingw.exe.947072530" name="Executable" projectType="cdt.managedbuild.target.gnu.mingw.exe"/>
 </storageModule>
 </cproject>

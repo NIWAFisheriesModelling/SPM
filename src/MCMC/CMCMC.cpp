@@ -301,11 +301,7 @@ void CMCMC::buildCovarianceMatrix() {
 // Platform-Independent Sleep
 //**********************************************************************
 void CMCMC::sleep(int milliseconds) {
-#ifdef __MINGW32__
-  Sleep(milliseconds);
-#else
-  usleep( milliseconds * 1000);
-#endif
+ boost::this_thread::sleep(boost::posix_time::milliseconds(milliseconds));
 }
 
 //**********************************************************************

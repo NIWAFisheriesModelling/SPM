@@ -54,11 +54,9 @@ void CDistanceLayer::build() {
   try {
 
     // Fill The Grid With The Distances
-    if (pGrid[0][0] == -1) {
-      for (int i = 0; i < iHeight; ++i) {
-        for (int j = 0; j < iWidth; ++j) {
-          pGrid[i][j]= sqrt( (double)((i*i)+(j*j)) );
-        }
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
+        pGrid[i][j]= sqrt( (double)((i*i)+(j*j)) );
       }
     }
 

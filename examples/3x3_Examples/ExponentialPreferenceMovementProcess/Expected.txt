@@ -1,0 +1,47 @@
+SPM (Spatial Population Model)
+CmdLine: E:\Workspaces\SPM\SPM\Debug\SPM.exe -r -c examples\3x3_Examples\ExponentialPreferenceMovementProcess\config.spm 
+Date: Thu Feb 19 11:42:43 2009
+v0.1-2008-12-04-21:37:00 UTC (rev. 2881)   Copyright (c) 2008, NIWA
+User name: Admin
+Machine name: REDBOX (Windows_NT, PID=5548)
+
+[1994_timestep_one]
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,99.994,0,0,0,0
+1,2,immature,0.000744343,0,0,0,0
+1,3,immature,0.000744343,0,0,0,0
+2,1,immature,0.000744343,0,0,0,0
+2,2,immature,0.000744343,0,0,0,0
+2,3,immature,0.000744343,0,0,0,0
+3,1,immature,0.000744343,0,0,0,0
+3,2,immature,0.000744343,0,0,0,0
+3,3,immature,0.000744343,0,0,0,0
+
+[1995_timestep_one]
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,199.994,0,0,0,0
+1,2,immature,0.000744393,0,0,0,0
+1,3,immature,0.000744393,0,0,0,0
+2,1,immature,0.000744393,0,0,0,0
+2,2,immature,0.000744393,0,0,0,0
+2,3,immature,0.000744393,0,0,0,0
+3,1,immature,0.000744393,0,0,0,0
+3,2,immature,0.000744393,0,0,0,0
+3,3,immature,0.000744393,0,0,0,0
+
+[1996_timestep_one]
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,299.994,0,0,0,0
+1,2,immature,0.000744393,0,0,0,0
+1,3,immature,0.000744393,0,0,0,0
+2,1,immature,0.000744393,0,0,0,0
+2,2,immature,0.000744393,0,0,0,0
+2,3,immature,0.000744393,0,0,0,0
+3,1,immature,0.000744393,0,0,0,0
+3,2,immature,0.000744393,0,0,0,0
+3,3,immature,0.000744393,0,0,0,0
+
+[objective_score]
+total_score: 0
+
+Total elapsed time: 0 seconds
