@@ -114,7 +114,7 @@ void CProfileManager::validate() {
       mParameterList[Profile->getParameter()] += 1;
 
       if (mParameterList[Profile->getParameter()] > 1)
-        throw string(ERROR_DUPLICATE_PARAMETER + Profile->getParameter());
+        CError::errorDuplicate(PARAM_PARAMETER, Profile->getParameter());
     }
 
     // Validate The Parameters

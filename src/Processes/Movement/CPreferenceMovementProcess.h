@@ -14,6 +14,7 @@
 
 // Classes
 class CPreferenceFunction;
+class CNumericLayer;
 
 //**********************************************************************
 //
@@ -34,6 +35,7 @@ protected:
   vector<string>                vDirectedProcessList;
   vector<CPreferenceFunction*>  vDirectedProcessIndex;
   double                        dRunningTotal;
+  CNumericLayer                 *pLayer;
 };
 
 #endif /* CPREFERENCEMOVEMENTPROCESS_H_ */

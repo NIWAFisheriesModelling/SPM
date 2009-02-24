@@ -15,6 +15,7 @@
 // Classes
 class CTimeStepManager;
 class CPenalty;
+class CNumericLayer;
 
 //**********************************************************************
 //
@@ -45,6 +46,7 @@ protected:
   vector<int>                vYearsList;
   vector<string>             vLayersList;
   vector<CNumericLayer*>     vLayersIndex;
+  CNumericLayer              *pLayer;
   int                        iCurrentYear;
   bool                       bYearMatch;
   CTimeStepManager           *pTimeStepManager;

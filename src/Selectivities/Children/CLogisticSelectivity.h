@@ -21,6 +21,7 @@ public:
   // Functions
 	CLogisticSelectivity();
 	virtual                    ~CLogisticSelectivity();
+	CSelectivity*               clone() { return new CLogisticSelectivity(*this); }
 	void                       validate();
 
 protected:

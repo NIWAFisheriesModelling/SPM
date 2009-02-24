@@ -25,8 +25,10 @@ public:
   // Functions
 	CAbundanceLayer();
 	virtual                    ~CAbundanceLayer();
-	void                       addCategory(string value);
 	CLayer*                    clone() { return (new CAbundanceLayer(*this)); }
+  double                     getSmallestValue() { throw string("getSmallestValue Not Done"); }
+  double                     getLargestValue() { throw string("getLargestValue Not Done"); }
+  void                       addCategory(string value);
 	int                        getCategoryCount() { return (int)vCategoryNames.size(); }
 	void                       addSelectivity(string value);
 	int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }

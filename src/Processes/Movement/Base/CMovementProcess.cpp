@@ -62,9 +62,8 @@ void CMovementProcess::validate() {
       CError::errorMissing(PARAM_PROPORTION);
 
     // Check For Valid Method
-    if ( (sMethod != PARAM_SQUARE_UNIFORM) && (sMethod != PARAM_HEX_UNIFORM) ) {
-      throw string(ERROR_UNKNOWN_METHOD + sMethod);
-    }
+    if ( (sMethod != PARAM_SQUARE_UNIFORM) && (sMethod != PARAM_HEX_UNIFORM) )
+      CError::errorUnknown(PARAM_METHOD, sMethod);
 
   } catch(string Ex) {
     Ex = "CMovementProcess.validate(" + getLabel() + ")->" + Ex;

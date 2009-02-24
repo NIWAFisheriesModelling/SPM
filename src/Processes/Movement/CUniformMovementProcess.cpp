@@ -35,9 +35,7 @@ void CUniformMovementProcess::validate() {
     if (getSelectivityCount() == 0)
       CError::errorMissing(PARAM_SELECTIVITIES);
     if (getCategoryCount() != getSelectivityCount())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
-    if (sLayerName != "")
-      CError::errorSupported(PARAM_LAYER_NAME);
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
   } catch (string Ex) {
     Ex = "CUniformMovementProcess.validate(" + getLabel() + ")->" + Ex;

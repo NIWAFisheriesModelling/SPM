@@ -22,6 +22,8 @@ public:
 	CDistanceLayer();
 	virtual                    ~CDistanceLayer();
 	CLayer*                    clone() { return (new CDistanceLayer(*this)); }
+  double                     getSmallestValue() { throw string("getSmallestValue Not Done"); }
+  double                     getLargestValue() { throw string("getLargestValue Not Done"); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       build();
 

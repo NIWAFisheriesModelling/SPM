@@ -25,7 +25,7 @@ CPreferenceFunction::CPreferenceFunction() {
   registerEstimable(PARAM_ALPHA, &dAlpha);
 
   // Register User Allowed Parameters
-  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_ALPHA);
 }
 
@@ -39,7 +39,7 @@ void CPreferenceFunction::validate() {
     CBaseBuild::validate();
 
     // Populate our Parameters.
-    sLayerName  = pParameterList->getString(PARAM_LAYER_NAME);
+    sLayerName  = pParameterList->getString(PARAM_LAYER);
     dAlpha      = pParameterList->getDouble(PARAM_ALPHA);
 
   } catch (string Ex) {

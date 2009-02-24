@@ -112,7 +112,7 @@ int CTimeStepManager::getTimeStepOrderIndex(string label) {
       if (vTimeStepsOrder[i]->getLabel() == label)
         return i;
 
-    throw string("Unknown timestep: " + label); // TODO: Add Error
+    CError::errorUnknown(PARAM_TIME_STEP, label);
 
   } catch (string Ex) {
     Ex = "CTimeStepManager.getTimeStepOrderIndex()->" + Ex;
@@ -143,7 +143,7 @@ void CTimeStepManager::clone(CTimeStepManager *Manager) {
 void CTimeStepManager::validate() {
   try {
     if ((int)vTimeSteps.size() == 0)
-      throw string("No time steps loaded"); // TODO: Add Translation
+      CError::errorMissing(PARAM_TIME_STEPS);
 
     // Call TimeStep Validations
     foreach( CTimeStep *TimeStep, vTimeSteps) {

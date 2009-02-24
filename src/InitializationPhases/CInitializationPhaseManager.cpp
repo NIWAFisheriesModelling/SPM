@@ -82,49 +82,6 @@ void CInitializationPhaseManager::loadInitializationPhaseOrder(vector<string> &o
 }
 
 //**********************************************************************
-// CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label)
-// Get a Pointer to our InitializationPhase
-//**********************************************************************
-//CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(string label) {
-//  try {
-//    // Loop through looking for match.
-//    foreach(CInitializationPhase *InitializationPhase, vInitializationPhases) {
-//      if (InitializationPhase->getLabel() == label)
-//        return InitializationPhase;
-//    }
-//    // Match not found
-//    throw string(ERROR_UNKNOWN_TIME_STEP + label); // TODO: Add CError and Translation
-//
-//  } catch (string Ex) {
-//    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
-//    throw Ex;
-//  }
-//
-//  return 0;
-//}
-
-//**********************************************************************
-// CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index)
-// Get InitializationPhase from our vector @ index
-//**********************************************************************
-//CInitializationPhase* CInitializationPhaseManager::getInitializationPhase(int index) {
-//  try {
-//    if (index >= (int)vInitializationPhases.size())
-//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
-//    if (index < 0)
-//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-//
-//    return vInitializationPhases[index];
-//
-//  } catch (string Ex) {
-//    Ex = "CInitialisationManager.getInitializationPhase()->" + Ex;
-//    throw Ex;
-//  }
-//
-//  return 0;
-//}
-
-//**********************************************************************
 // void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager)
 // Clone the manager passed in as a parameter
 //**********************************************************************

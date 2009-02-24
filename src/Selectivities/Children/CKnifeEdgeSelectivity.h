@@ -20,9 +20,10 @@ class CKnifeEdgeSelectivity : public CSelectivity {
 public:
   // Functions
 	CKnifeEdgeSelectivity();
-	virtual                    ~CKnifeEdgeSelectivity();
-  void                       validate();
-  double                     getResult(int Param);
+	virtual                     ~CKnifeEdgeSelectivity();
+	CSelectivity*               clone() { return new CKnifeEdgeSelectivity(*this); }
+  void                        validate();
+  double                      getResult(int Param);
 
 protected:
   // Variables

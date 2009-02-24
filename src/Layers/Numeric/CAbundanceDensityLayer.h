@@ -22,6 +22,8 @@ public:
   CAbundanceDensityLayer();
   virtual                     ~CAbundanceDensityLayer();
   CLayer*                    clone() { return (new CAbundanceDensityLayer(*this)); }
+  double                     getSmallestValue() { throw string("getSmallestValue Not Done"); }
+  double                     getLargestValue() { throw string("getLargestValue Not Done"); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       validate();
   void                       build();

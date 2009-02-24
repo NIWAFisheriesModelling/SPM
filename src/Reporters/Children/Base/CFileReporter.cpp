@@ -61,10 +61,9 @@ void CFileReporter::start() {
       mode = ios_base::app;
 
     // Try to Open our File
-
     fFile->open(sFileName.c_str(), mode);
     if (!(*fFile))
-      throw string(ERROR_OPEN_FILE + sFileName); // TODO: CError
+      throw string(ERROR_OPEN_FILE + sFileName);
 
     // Redirect Standard Output
     cout.rdbuf(fFile->rdbuf());

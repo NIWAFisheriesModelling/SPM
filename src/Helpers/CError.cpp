@@ -104,3 +104,68 @@ void CError::errorSupported(string value) {
   sException += ERROR_SUPPORTED;
   throw sException;
 }
+
+//**********************************************************************
+// void CError::errorUnknown(string type, string label)
+// Throw Unknown Error
+//**********************************************************************
+void CError::errorUnknown(string type, string label) {
+  string sException = ERROR_UNKNOWN + type + ERROR_SEPARATOR + label;
+  throw sException;
+}
+
+//**********************************************************************
+// void CError::errorPairs(string value)
+// Throw "Must be in pairs" exception
+//**********************************************************************
+void CError::errorPairs(string value) {
+  string sException = value + ERROR_MUST_BE_PAIRED;
+  throw sException;
+}
+
+//**********************************************************************
+// void CError::errorNoMatch(string type, string value, string type2)
+// Throw "No matching X for Y" exception
+//**********************************************************************
+void CError::errorNoMatch(string type, string value, string type2) {
+  string sException = type + ERROR_SEPARATOR + value + ERROR_NO_MATCHING + type;
+  throw sException;
+}
+
+//**********************************************************************
+// void CError::errorDuplicate(string type, string label)
+// Duplicate Error
+//**********************************************************************
+void CError::errorDuplicate(string type, string label) {
+  string sException = ERROR_DUPLICATE + type + ERROR_SEPARATOR + label;
+  throw sException;
+
+}
+
+//**********************************************************************
+// void CError::errorListSameSize(string type, string type2)
+// Throw " list must be same size as" exception
+//**********************************************************************
+void CError::errorListSameSize(string type, string type2) {
+  string sException = type + ERROR_LIST_EQUAL_SIZE + type2;
+  throw sException;
+}
+
+//**********************************************************************
+// void CError::errorTooHigh(string type)
+// Throw type is too high exception
+//**********************************************************************
+void CError::errorTooHigh(string type) {
+  string sException = type + ERROR_TOO_HIGH;
+  throw sException;
+}
+
+void CError::errorTooMuch(string type) {
+  string sException = ERROR_TOO_MUCH + type;
+  throw sException;
+}
+
+void CError::errorNotEnough(string type) {
+  string sException = ERROR_NOT_ENOUGH + type;
+  throw sException;
+}

@@ -22,7 +22,7 @@
 <builder autoBuildTarget="all" buildPath="${workspace_loc:/SimFish/Debug}" cleanBuildTarget="clean" id="org.eclipse.cdt.build.core.internal.builder.1358188698" incrementalBuildTarget="all" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.305513461" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.cpp.compiler.base.1358371446" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.base">
-<option id="gnu.cpp.compiler.option.preprocessor.def.995370221" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols"/>
+<option id="gnu.cpp.compiler.option.preprocessor.def.995370221" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
 <option id="gnu.cpp.compiler.option.optimization.level.639239456" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.debugging.level.1458729089" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.91077613" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -55,7 +55,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="R-libraries|misc|libs|examples|doc|Test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="CMakeFiles|src/PrintStates|R-libraries|misc|libs|examples|doc|Test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -1374,7 +1374,7 @@
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/Qs"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/WorldSquares/WorldSquareCollection"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src/Layers/NumericLayers"/>
-<entry excluding="WorldSquares/WorldSquareCollection|Minimizers/BetaDiffInterface/BetaDiff|RuntimeThread|WorldSquares/RuntimeThread|Translations|Profiles/Translations|Processes/Movement/DirectedMovementThread|UnitTesting|Qs|ObjectiveFunction|Layers/ObjectiveFunction|Layers/StringLayers|Layers/NumericLayers|BaseClasses|Likelihoods|Penalties|Priors" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
+<entry excluding="PrintStates|WorldSquares/WorldSquareCollection|Minimizers/BetaDiffInterface/BetaDiff|RuntimeThread|WorldSquares/RuntimeThread|Translations|Profiles/Translations|Processes/Movement/DirectedMovementThread|UnitTesting|Qs|ObjectiveFunction|Layers/ObjectiveFunction|Layers/StringLayers|Layers/NumericLayers|BaseClasses|Likelihoods|Penalties|Priors" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 </sourceEntries>
 </configuration>
 </storageModule>

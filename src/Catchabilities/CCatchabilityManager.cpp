@@ -62,8 +62,9 @@ CCatchability* CCatchabilityManager::getCatchability(string label) {
       if (Q->getLabel() == label)
         return Q;
     }
+
     // Couldn't find it.
-    throw string(ERROR_UNKNOWN_Q + label);
+    CError::errorUnknown(PARAM_CATCHABILITY, label);
 
   } catch (string Ex) {
     Ex = "CCatchabilityManager.getQ()->" + Ex;
@@ -99,13 +100,10 @@ CCatchability* CCatchabilityManager::getCatchability(int index) {
 //**********************************************************************
 void CCatchabilityManager::clone(CCatchabilityManager *Manager) {
   try {
-
     for (int i = 0; i < Manager->getCatchabilityCount(); ++i) {
       CCatchability *pQ = Manager->getCatchability(i);
       vCatchabilityList.push_back(pQ->clone());
     }
-    // TODO: Fix Clone
-
   } catch (string Ex) {
     Ex = "CCatchabilityManager.clone()->" + Ex;
     throw Ex;

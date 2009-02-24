@@ -74,7 +74,8 @@ CPenalty* CPenaltyManager::getPenalty(string Label) {
         return Penalty;
     }
 
-    throw string(ERROR_UNKNOWN_PENALTY + Label);
+    CError::errorUnknown(PARAM_PENALTY, Label);
+    return 0;
 
   } catch (string Ex) {
     Ex = "CPenaltyManager.getPenalty()->" + Ex;

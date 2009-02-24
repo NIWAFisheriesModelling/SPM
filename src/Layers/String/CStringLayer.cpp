@@ -73,7 +73,7 @@ void CStringLayer::validate() {
         continue;
 
       if (iRow >= iHeight)
-        throw string("Too much data"); // TODO: Add CError
+        CError::errorTooMuch(PARAM_DATA);
 
       if (iCol >= iWidth) {
         iCol = 0;
@@ -85,7 +85,7 @@ void CStringLayer::validate() {
     }
 
     if (((iRow+1) != iHeight) || (iCol != iWidth))
-      throw string("Not enough data"); // TODO: Add CError
+      CError::errorNotEnough(PARAM_DATA);
 
   } catch(string Ex) {
     Ex = "CStringLayer.validate(" + getLabel() + ")->" + Ex;

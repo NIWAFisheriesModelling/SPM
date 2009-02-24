@@ -1,0 +1,54 @@
+[objective_score]
+obs->caa-year-1998: 146.935
+obs->caa-year-1999: 179.852
+obs->caa-year-2000: 175.592
+obs->caa-year-2001: 154.384
+obs->caa-year-2002: 218.071
+obs->caa-year-2003: 333.674
+obs->caa-year-2004: 213.415
+obs->caa-year-2005: 217.154
+obs->caa-year-2006: 291.401
+obs->caa-year-2007: 275.138
+obs->cpue-1998: 107.214
+obs->cpue-1999: 48.609
+obs->cpue-2000: 47.6732
+obs->cpue-2001: 78.4978
+obs->cpue-2002: 20.6148
+obs->cpue-2003: 35.3797
+obs->cpue-2004: 67.3162
+obs->cpue-2005: 31.5044
+obs->cpue-2006: 17.2816
+obs->cpue-2007: 24.6145
+prior->q[cpueq].q: 0
+prior->population_process[recruitment].r0: 13.8129
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2698.13
+
+[objective_score]
+obs->caa-year-1998: 146.935
+obs->caa-year-1999: 179.852
+obs->caa-year-2000: 175.592
+obs->caa-year-2001: 154.384
+obs->caa-year-2002: 218.071
+obs->caa-year-2003: 333.674
+obs->caa-year-2004: 213.415
+obs->caa-year-2005: 217.154
+obs->caa-year-2006: 291.401
+obs->caa-year-2007: 275.138
+obs->cpue-1998: 107.214
+obs->cpue-1999: 48.609
+obs->cpue-2000: 47.6732
+obs->cpue-2001: 78.4978
+obs->cpue-2002: 20.6148
+obs->cpue-2003: 35.3797
+obs->cpue-2004: 67.3162
+obs->cpue-2005: 31.5044
+obs->cpue-2006: 17.2816
+obs->cpue-2007: 24.6145
+prior->q[cpueq].q: 0
+prior->population_process[recruitment].r0: 13.8129
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2698.13
+

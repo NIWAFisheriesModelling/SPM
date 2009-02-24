@@ -88,9 +88,9 @@ string CParameterList::getString(string name, bool optional, string defaultValue
       CError::errorMissing(name);
 
   if ((int)mParameters[name].size() == 0)
-    throw string("No value defined for " + name); // TODO: Add CError
+    CError::errorMissing(name);
   if ((int)mParameters[name].size() > 1)
-    throw string("Too many parameters for " + name); // TODO: ADD Cerror
+    CError::errorTooMuch(name);
 
   return mParameters[name][0];
 }
@@ -139,7 +139,7 @@ bool CParameterList::getBool(string name, bool optional, bool defaultValue) {
   if ( (value == CONFIG_TRUE) || (value == CONFIG_TRUE_SHORT) )
     return true;
 
-  throw string("value not valid true/false for :" + name); // TODO: Add CError for this
+  throw string(value + ERROR_NOT_BOOLEAN + name);
 }
 
 //**********************************************************************
@@ -151,7 +151,7 @@ void CParameterList::fillVector(vector<string> &list, string name, bool optional
     if (optional)
       return;
     else
-      throw string ("Missing parameter " + name); // TODO: FIX THIS
+      CError::errorMissing(name);
 
   // Clear the List
   list.clear();
@@ -172,7 +172,7 @@ void CParameterList::fillVector(vector<double> &list, string name, bool optional
     if (optional)
       return;
     else
-      throw string ("Missing parameter " + name); // TODO: FIX THIS
+      CError::errorMissing(name);
 
   // Clear List
   list.clear();
@@ -193,7 +193,7 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
     if (optional)
       return;
     else
-      throw string ("Missing parameter " + name); // TODO: FIX THIS
+      CError::errorMissing(name);
 
   // Clear the list
   list.clear();
@@ -212,10 +212,10 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
 //**********************************************************************
 void CParameterList::fillArray(double *array, int length, string name, int offset) {
   if (!hasParameter(name))
-    throw string ("Missing parameter " + name); // TODO: FIX THIS
+    CError::errorMissing(name);
 
   if (((int)mParameters[name].size()-offset) != length)
-    throw string("Cannot fill array. Number of parameters doesn't match length");
+    CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
 
   for (int i = offset; i < (int)mParameters[name].size(); ++i)
     array[i-offset] = CConvertor::stringToDouble(mParameters[name][i]);
@@ -227,10 +227,10 @@ void CParameterList::fillArray(double *array, int length, string name, int offse
 //**********************************************************************
 void CParameterList::fillArray(string *array, int length, string name, int offset) {
   if (!hasParameter(name))
-    throw string ("Missing parameter " + name); // TODO: FIX THIS
+    CError::errorMissing(name);
 
   if (((int)mParameters[name].size()-offset) != length)
-    throw string("Cannot fill array. Number of parameters doesn't match length");
+    CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
 
   for (int i = offset; i < (int)mParameters[name].size(); ++i)
     array[i-offset] = mParameters[name][i];
@@ -275,7 +275,7 @@ int CParameterList::countMatches(string name) {
 //**********************************************************************
 int CParameterList::countParameterValues(string name) {
   if (!hasParameter(name))
-    throw string ("Missing parameter " + name); // TODO: FIX THIS
+    CError::errorMissing(name);
 
   return (int)mParameters[name].size();
 }
@@ -297,7 +297,8 @@ string CParameterList::getMatchFullName(string name, int matchNumber = 1) {
     mPtr++;
   }
 
-  throw string("Not enough matches for " + name); // TODO: Add CError
+  CError::errorMissing(name);
+  return "";
 }
 
 //**********************************************************************

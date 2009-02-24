@@ -79,7 +79,7 @@ int CSelectivityManager::getSelectivityIndex(string Label) {
       vPtr++;
     }
 
-    throw string(ERROR_UNKNOWN_SELECTIVITY + Label);
+    CError::errorUnknown(PARAM_SELECTIVITY, Label);
 
   } catch (string Ex) {
     Ex = "CSelectivityManager.getSelectivityIndex()->" + Ex;
@@ -102,7 +102,7 @@ CSelectivity* CSelectivityManager::getSelectivity(string Label) {
       vPtr++;
     }
 
-    throw string(ERROR_UNKNOWN_SELECTIVITY + Label);
+    CError::errorUnknown(PARAM_SELECTIVITY, Label);
 
   } catch (string Ex) {
     Ex = "CSelectivityManager.getSelectivity()->" + Ex;
@@ -119,11 +119,10 @@ CSelectivity* CSelectivityManager::getSelectivity(string Label) {
 void CSelectivityManager::clone(CSelectivityManager *Manager) {
   try {
 
-//    for (int i = 0; i < Manager->getSelectivityCount(); ++i) {
-//      CSelectivity *pSelectivity = Manager->getSelectivity(i);
-//      vSelectivities.push_back(pSelectivity->clone());
-//    }
-    // TODO: Add Clones
+    foreach(CSelectivity *Selectivity, Manager->vSelectivities) {
+      vSelectivities.push_back(Selectivity->clone());
+    }
+
   } catch (string Ex) {
     Ex = "CSelectivityManager.clone()->" + Ex;
     throw Ex;
@@ -147,7 +146,7 @@ void CSelectivityManager::validate() {
       mSelectivityList[Selectivity->getLabel()] += 1;
 
       if (mSelectivityList[Selectivity->getLabel()] > 1)
-        throw string(ERROR_DUPLICATE_LABEL + Selectivity->getLabel());
+        CError::errorDuplicate(PARAM_SELECTIVITY, Selectivity->getLabel());
     }
   } catch(string Ex) {
     Ex  = "CSelectivityManager.validate()->" + Ex;

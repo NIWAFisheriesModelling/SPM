@@ -12,6 +12,9 @@
 // Local Headers
 #include "../CProcess.h"
 
+// Forward Declaration
+class CNumericLayer;
+
 //**********************************************************************
 //
 //
@@ -32,6 +35,10 @@ protected:
   double                     dR0;
   vector<int>                vAgesList;
   vector<int>                vAgesIndex;
+  string                     sLayerName;
+  double                     dLayerMin;
+  double                     dLayerMax;
+  CNumericLayer              *pLayer;
 };
 
 #endif /*CCONSTANTRECRUITMENTPROCESS_H_*/

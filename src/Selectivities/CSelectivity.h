@@ -21,6 +21,7 @@ public:
   // Functions
   CSelectivity();
   virtual                    ~CSelectivity();
+  virtual CSelectivity*      clone() = 0;
 	virtual double             getResult(int Index) = 0;
 	virtual void               validate() = 0;
 	virtual void               build() { }

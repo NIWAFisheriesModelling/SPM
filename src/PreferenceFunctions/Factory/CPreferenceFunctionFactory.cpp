@@ -11,6 +11,7 @@
 #include "CPreferenceFunctionFactory.h"
 #include "../CPreferenceFunctionManager.h"
 #include "../../Translations/Translations.h"
+#include "../../Helpers/CError.h"
 #include "../Children/CConstantPreferenceFunction.h"
 #include "../Children/CDoubleNormalPreferenceFunction.h"
 #include "../Children/CExponentialPreferenceFunction.h"
@@ -45,7 +46,7 @@ CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string 
   else if (type == PARAM_THRESHOLD)
     pFunction = new CThresholdPreferenceFunction();
   else
-    throw string("Unknown type: " + type); // TODO: ADD CError Handler
+    CError::errorUnknown(PARAM_TYPE, type);
 
   if (registerWithManager)
     CPreferenceFunctionManager::Instance()->addPreferenceFunction(pFunction);

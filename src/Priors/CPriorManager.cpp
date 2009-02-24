@@ -62,7 +62,7 @@ CPrior* CPriorManager::getPrior(string Label) {
         return Prior;
     }
 
-    throw string(ERROR_UNKNOWN_PRIOR + Label);
+    CError::errorUnknown(PARAM_PRIOR, Label);
 
   } catch (string Ex) {
     Ex = "CPriorManager.getPrior()->" + Ex;

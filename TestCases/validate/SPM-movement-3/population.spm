@@ -1,0 +1,75 @@
+# Spatial structure
+@model
+nrows 1
+ncols 100
+layer Base
+categories all
+min_age 1
+max_age 1
+age_plus_group True
+initialisation_phases Phase1
+cell_length 1
+initial_year 1994
+current_year 2008
+final_year 2108
+time_steps step_one
+
+@initialisation_phase Phase1
+years 200
+processes Recruitment M Ageing
+
+@time_step step_one
+processes Recruitment M Move2 Ageing
+
+# Population processes
+@process Ageing
+type ageing
+categories all
+
+@process Recruitment
+type constant_recruitment
+categories all
+proportions 1.0
+R0 100
+ages 1
+layer Depth
+layer_min 0
+layer_max 1
+
+@process M
+type natural_mortality
+categories all
+M 0.13
+selectivities One
+
+@process Move2
+type preference
+categories all
+preference_functions distance-move
+
+@preference_function distance-move
+type exponential
+alpha 1
+layer depth
+lambda 0.2
+
+# Definition of layers
+@layer Base
+type double
+@include_file "Base.map"
+
+@layer Depth
+type double
+@include_file "Depth.map"
+
+@layer constant
+type double
+@include_file "Constant.map"
+
+@layer Distance
+type distance
+
+# Definition of selecivities
+@selectivity One
+type constant
+c 1

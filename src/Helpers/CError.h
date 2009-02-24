@@ -31,7 +31,15 @@ public:
   static void           errorNotEqual(string value1, string value2);
   static void           errorEqualTo(string value1, string value2);
   static void           errorSupported(string value);
-private:
+  static void           errorUnknown(string type, string label);
+  static void           errorPairs(string value);
+  static void           errorNoMatch(string type, string value, string type2);
+  static void           errorDuplicate(string type, string label);
+  static void           errorListSameSize(string type, string type2);
+  static void           errorTooHigh(string type);
+  static void           errorTooMuch(string type);
+  static void           errorNotEnough(string type);
+
   // Functions
   CError() { }
   virtual ~CError() { }

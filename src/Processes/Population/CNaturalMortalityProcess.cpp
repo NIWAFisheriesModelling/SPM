@@ -52,7 +52,7 @@ void CNaturalMortalityProcess::validate() {
 
     // Local Validation
     if (getCategoryCount() != getSelectivityCount())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY); // TODO: FIX THIS
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
   } catch (string Ex) {
     Ex = "CNaturalMortalityProcess.validate(" + getLabel() + ")->" + Ex;

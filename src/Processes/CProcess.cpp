@@ -63,7 +63,7 @@ void CProcess::validate() {
         mList[Category] += 1;
 
         if (mList[Category] > 1)
-          throw string(ERROR_DUPLICATE_CATEGORY + Category);
+          CError::errorDuplicate(PARAM_CATEGORY, Category);
       }
       mList.clear();
     }

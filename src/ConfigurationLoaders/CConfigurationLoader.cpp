@@ -15,6 +15,7 @@
 #include "CConfigurationLoader.h"
 #include "../CConfiguration.h"
 #include "../World/CWorld.h"
+#include "../Helpers/CError.h"
 #include "../Translations/Translations.h"
 #include "../BaseClasses/CBaseObject.h"
 #include "../Catchabilities/Factory/CCatchabilityFactory.h"
@@ -138,7 +139,8 @@ void CConfigurationLoader::processSection() {
     else if (sSection == PARAM_MCMC)
       pBaseObject = CMCMC::Instance();
     else
-      throw string("Unknown section: " + sSection); // TODO: Add Translation
+      CError::errorUnknown(PARAM_SECTION, sSection);
+
   } catch (string Ex) {
     Ex += string(" - ") + sSection;
     throw Ex;
@@ -218,6 +220,9 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
 // Load the configuration file into memory
 //**********************************************************************
 void CConfigurationLoader::loadConfigIntoCache(string FileName) {
+  // TODO: Add quote handling on strings to have them entered as a single entry
+  // e.g. param "option one" "option two"
+
   try {
     if (FileName == "")
       throw string(ERROR_INVALID_FILE_NAME);

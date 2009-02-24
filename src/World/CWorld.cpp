@@ -45,7 +45,7 @@ CWorld::CWorld() {
   pParameterList->registerAllowed(PARAM_CELL_LENGTH);
   pParameterList->registerAllowed(PARAM_NROWS);
   pParameterList->registerAllowed(PARAM_NCOLS);
-  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_MIN_AGE);
   pParameterList->registerAllowed(PARAM_MAX_AGE);
@@ -105,7 +105,7 @@ void CWorld::validate() {
     iCellLength       = pParameterList->getInt(PARAM_CELL_LENGTH);
     iHeight           = pParameterList->getInt(PARAM_NROWS); // TODO: Change to N_ROWS or Better
     iWidth            = pParameterList->getInt(PARAM_NCOLS); // TODO: Change to N_COLS or Better
-    sBaseLayer        = pParameterList->getString(PARAM_LAYER_NAME);
+    sBaseLayer        = pParameterList->getString(PARAM_LAYER);
     iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlusGroup     = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
@@ -272,7 +272,7 @@ int CWorld::getCategoryIndexForName(string Name) {
         return i;
     }
 
-    throw string(ERROR_UNKNOWN_CATEGORY + Name); // TODO: Add CError
+    CError::errorUnknown(PARAM_CATEGORY, Name);
 
   } catch (string Ex) {
     Ex = "CWorld.getCategoryNameForIndex()->" + Ex;

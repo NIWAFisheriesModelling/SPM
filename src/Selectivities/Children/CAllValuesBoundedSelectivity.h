@@ -27,6 +27,7 @@ public:
   // Functions
   CAllValuesBoundedSelectivity();
   virtual                     ~CAllValuesBoundedSelectivity();
+  CSelectivity*               clone() { return new CAllValuesBoundedSelectivity(*this); }
   void                        validate();
   double                      getResult(int Index);
 

@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CCachedSelectivity.h"
+#include "../../../Helpers/CError.h"
 
 //**********************************************************************
 // CCachedSelectivity::CCachedSelectivity()
@@ -61,7 +62,7 @@ void CCachedSelectivity::rebuild() {
 double CCachedSelectivity::getResult(int index) {
 #ifndef OPTIMIZE
   if (index >= (int)vResults.size())
-    throw string("index too high"); // TODO: Add CError
+    CError::errorTooHigh(PARAM_INDEX);
 #endif
 
   return vResults[index];

@@ -1,0 +1,14 @@
+#Print State
+@print_state state-1994-1
+type current
+file_name "_Alpha.txt"
+year 1
+timestep 1
+
+@print_state final
+type final
+file_name "_Final.txt"
+
+@print_state Estimate-value
+type estimate_value
+file_name "_Estimate-value.txt"

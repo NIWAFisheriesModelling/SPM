@@ -93,7 +93,7 @@ CNumericLayer* CLayerManager::getNumericLayer(string Label) {
       }
     }
 
-    throw string(ERROR_UNKNOWN_LAYER + Label);
+    CError::errorUnknown(PARAM_LAYER, Label);
 
   } catch(string Ex) {
     Ex = "CLayerManager.getNumericLayer()->" + Ex;
@@ -134,7 +134,7 @@ CStringLayer* CLayerManager::getStringLayer(string Label) {
       }
     }
 
-    throw string(ERROR_UNKNOWN_LAYER + Label);
+    CError::errorUnknown(PARAM_LAYER, Label);
 
   } catch(string Ex) {
     Ex = "CLayerManager.getStringLayer()->" + Ex;
@@ -180,7 +180,7 @@ void CLayerManager::validate() {
 
       // Check if we have more than 1
       if (mLabelList[Layer->getLabel()] > 1)
-        throw string(ERROR_DUPLICATE_LABEL + Layer->getLabel());
+        CError::errorDuplicate(PARAM_LAYER, Layer->getLabel());
     }
 
   } catch(string Ex) {

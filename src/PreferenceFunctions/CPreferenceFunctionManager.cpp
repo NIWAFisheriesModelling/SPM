@@ -83,7 +83,7 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label) {
         return Process;
     }
 
-    throw string(ERROR_UNKNOWN_PROCESS + Label);
+    CError::errorUnknown(PARAM_PROCESS, Label);
 
   } catch (string Ex) {
     Ex = "CPreferenceFunctionManager.getProcess()->" + Ex;

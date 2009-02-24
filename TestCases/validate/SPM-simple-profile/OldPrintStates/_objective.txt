@@ -1,0 +1,25 @@
+[objective]
+obs-caa-year-1998 : 151.227
+obs-caa-year-1999 : 380.101
+obs-caa-year-2000 : 429.462
+obs-caa-year-2001 : 344.06
+obs-caa-year-2002 : 343.497
+obs-caa-year-2003 : 367.571
+obs-caa-year-2004 : 310.479
+obs-caa-year-2005 : 260.743
+obs-caa-year-2006 : 510.772
+obs-caa-year-2007 : 474.057
+obs-cpue-1998 : 0.931262
+obs-cpue-1999 : 1.40307
+obs-cpue-2000 : 1.57233
+obs-cpue-2001 : -1.59447
+obs-cpue-2002 : 14.779
+obs-cpue-2003 : 5.39346
+obs-cpue-2004 : -1.47536
+obs-cpue-2005 : 6.54332
+obs-cpue-2006 : 16.0329
+obs-cpue-2007 : 9.70028
+prior-q[cpueq].q : 0
+prior-population_process[recruitment].r0 : 14.4999
+prior-selectivity[fishingsel].ato95 : 0
+Score: 3639.75

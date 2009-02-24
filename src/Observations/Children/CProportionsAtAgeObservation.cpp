@@ -42,7 +42,7 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
   pParameterList->registerAllowed(PARAM_MIN_AGE);
   pParameterList->registerAllowed(PARAM_MAX_AGE);
   pParameterList->registerAllowed(PARAM_AGE_PLUS_GROUP);
-  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_OBS);
   pParameterList->registerAllowed(PARAM_N);
   pParameterList->registerAllowed(PARAM_DIST);
@@ -112,7 +112,7 @@ void CProportionsAtAgeObservation::validate() {
     bAgePlus    = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
     sDist       = pParameterList->getString(PARAM_DIST);
     dR          = pParameterList->getDouble(PARAM_R);
-    sLayer      = pParameterList->getString(PARAM_LAYER_NAME);
+    sLayer      = pParameterList->getString(PARAM_LAYER);
 
     if (iMinAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
@@ -140,7 +140,7 @@ void CProportionsAtAgeObservation::validate() {
     pParameterList->fillVector(vN, PARAM_N);
 
     if ((vN.size() % 2) != 0)
-      throw string("vN Must be done in pairs"); // TODO: Add CError
+      throw string(PARAM_N + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
 
     for (int i = 0; i < (int)vN.size(); i+=2)
       mN[vN[i]] = CConvertor::stringToDouble(vN[i+1]);
@@ -184,11 +184,11 @@ void CProportionsAtAgeObservation::validate() {
     }
     // Must be same size
     if (vCategoryNames.size() != vSelectivityNames.size())
-      throw string(ERROR_EQUAL_CATEGORY_SELECTIVITY);
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
     // Number of N's must be equal to number of Proportions
     if (mN.size() != mvProportionMatrix.size())
-      throw string(ERROR_EQUAL_N_OBS);
+      CError::errorListSameSize(PARAM_N, PARAM_OBS);
 
     // Validate our N's against the OBS
     // They have to have a 1-to-1 relationship

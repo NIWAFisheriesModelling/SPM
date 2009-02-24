@@ -10,6 +10,7 @@
 // Local headers
 #include "CLayerFactory.h"
 #include "../CLayerManager.h"
+#include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../MetaLayer/CMetaLayer.h"
 #include "../Numeric/CAbundanceDensityLayer.h"
@@ -45,7 +46,7 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
   else if (type == PARAM_STRING)
     pLayer = new CStringLayer();
   else
-    throw string("unknown type: " + type); // TODO: Complete this
+    CError::errorUnknown(PARAM_TYPE, type);
 
   // Register the layer with the manager if required
   if (registerWithManager)

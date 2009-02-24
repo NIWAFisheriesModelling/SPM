@@ -13,7 +13,6 @@
 #include "../BaseClasses/CBaseExecute.h"
 
 // Classes
-class CNumericLayer;
 class CSelectivity;
 
 //**********************************************************************
@@ -46,11 +45,7 @@ protected:
   vector<CSelectivity*>      vSelectivityIndex;
   vector<string>             vLayerCategoryList;
   bool                       bDependsOnLayer;
-  string                     sLayerName;
-  double                     dLayerMin;
-  double                     dLayerMax;
   int                        iNumberOfValidLayerSpots;
-  CNumericLayer              *pLayer;
   CWorldSquare               *pDiff;
   int                        iBaseColCount;
   double                     dCurrent;

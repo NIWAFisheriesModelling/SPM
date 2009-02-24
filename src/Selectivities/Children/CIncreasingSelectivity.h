@@ -27,8 +27,9 @@ public:
   // Functions
   CIncreasingSelectivity();
   virtual                     ~CIncreasingSelectivity();
-  void                       validate();
-  double                     getResult(int Index);
+  CSelectivity*               clone() { return new CIncreasingSelectivity(*this); }
+  void                        validate();
+  double                      getResult(int Index);
 
 protected:
   double                      dL;

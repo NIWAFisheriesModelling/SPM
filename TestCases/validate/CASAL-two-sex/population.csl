@@ -1,0 +1,76 @@
+#INITALISATION
+@initialization
+R0 997386
+
+# PARTITION
+@size_based false
+@min_age 1
+@max_age 50
+@plus_group True
+@sex_partition True
+@mature_partition True
+@n_areas 1
+@n_stocks 1
+@weightless_model True
+
+# TIME SEQUENCE
+@initial 1994
+@current 2008
+@final 2108
+
+@annual_cycle
+time_steps 3
+recruitment_time 1
+spawning_time 2
+spawning_part_mort 0.5
+spawning_ps 1
+aging_time 3
+growth_props 0.0 0.0 0.00
+M_props 0.00 1.00 0.00
+fishery_names shelf
+fishery_times 2
+maturation_times 1
+baranov False
+
+# RECRUITMENT
+@y_enter 1
+@standardise_YCS true
+@recruitment
+YCS_years 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+YCS          1    1    1    1    1    1    1    1    1    1    1    1    1    1    1
+sigma_r 0.6
+SR none
+
+# RECRUITMENT VARIABILITY
+@randomisation_method lognormal
+@first_random_year 2005
+
+#MATURATION
+@maturation
+rates_all logistic_producing 5 30 8 3
+
+# NATURAL MORTALITY
+@natural_mortality
+all 0.13
+
+# FISHING
+@fishery shelf
+years           1998         1999         2000         2001         2002         2003         2004          2005          2006          2007
+catches  1849.153714 14442.000000 28323.203463 24207.464203 47279.000000 58350.943094 82875.872790 115974.547730 113852.472257 119739.517172
+U_max 0.999
+selectivity shelfsel
+
+# SELECTIVITIES
+@selectivity_names shelfsel
+@selectivity shelfsel
+all logistic 8 3
+
+# SIZE AT AGE
+@size_at_age_type von_Bert
+@size_at_age_dist normal
+@size_at_age
+by_length True
+k      0.093
+t0    -0.256
+Linf 169.07
+cv     0.102

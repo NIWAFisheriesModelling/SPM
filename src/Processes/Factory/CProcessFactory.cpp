@@ -10,6 +10,7 @@
 // Local Headers
 #include "CProcessFactory.h"
 #include "../CProcessManager.h"
+#include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../Movement/CPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
@@ -42,7 +43,7 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
   else if (type == PARAM_PREFERENCE)
     pProcess = new CPreferenceMovementProcess();
   else
-    throw string("Unknown process type: " + type); // TODO: Finish This
+    CError::errorUnknown(PARAM_PROCESS, type);
 
   if (registerWithManager)
     CProcessManager::Instance()->addProcess(pProcess);

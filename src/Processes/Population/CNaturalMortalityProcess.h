@@ -12,6 +12,9 @@
 // Local Headers
 #include "../CProcess.h"
 
+// Forward-Dec
+class CNumericLayer;
+
 //**********************************************************************
 //
 //
@@ -31,6 +34,7 @@ protected:
   // Variables
   double                     dM;
   CWorldSquare               **pGrid;
+  CNumericLayer              *pLayer;
 };
 
 #endif /*CNATURALMORTALITYPROCESS_H_*/

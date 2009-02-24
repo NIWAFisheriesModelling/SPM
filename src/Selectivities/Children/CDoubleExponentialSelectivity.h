@@ -21,6 +21,7 @@ public:
   // Functions
   CDoubleExponentialSelectivity();
   virtual                     ~CDoubleExponentialSelectivity();
+  CSelectivity*               clone() { return new CDoubleExponentialSelectivity(*this); }
   void                        validate();
   double                      getResult(int Index);
 

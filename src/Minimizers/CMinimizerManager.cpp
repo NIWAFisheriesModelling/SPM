@@ -27,6 +27,9 @@ CMinimizerManager::CMinimizerManager() {
   // Set Vars
   pMinimizer = 0;
   sMinimizer = "";
+
+  // Register
+  pParameterList->registerAllowed(PARAM_MINIMIZER);
 }
 
 //**********************************************************************
@@ -75,6 +78,8 @@ void CMinimizerManager::validate() {
   try {
     if (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
       return;
+
+    pParameterList->checkInvalidParameters();
 
     sMinimizer = pParameterList->getString(PARAM_MINIMIZER);
 

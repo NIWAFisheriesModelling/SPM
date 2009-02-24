@@ -10,6 +10,7 @@
 // Local headers
 #include "CSelectivityFactory.h"
 #include "../CSelectivityManager.h"
+#include "../../Helpers/CError.h"
 #include "../Children/CAllValuesBoundedSelectivity.h"
 #include "../Children/CAllValuesSelectivity.h"
 #include "../Children/CConstantSelectivity.h"
@@ -47,7 +48,7 @@ CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWi
   else if (type == PARAM_LOGISTIC)
     pSelectivity = new CLogisticSelectivity();
   else
-    throw string("Unknown type: " + type); // TODO: Add Error
+    CError::errorUnknown(PARAM_TYPE, type);
 
   if (registerWithManager)
     CSelectivityManager::Instance()->addSelectivity(pSelectivity);

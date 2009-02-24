@@ -18,7 +18,7 @@ CMetaLayer::CMetaLayer() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_YEARS);
-  pParameterList->registerAllowed(PARAM_LAYER_NAMES);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -32,7 +32,7 @@ void CMetaLayer::validate() {
 
     // Populate our variables
     pParameterList->fillVector(vYears, PARAM_YEARS);
-    pParameterList->fillVector(vLayerNames, PARAM_LAYER_NAMES);
+    pParameterList->fillVector(vLayerNames, PARAM_LAYER);
 
     // TODO: Add more validation for vector sizes
     throw string("Object not yet implemented");

@@ -81,93 +81,6 @@ void CDoubleLayer::setValue(int Row, int Col, double Value) {
 }
 
 //**********************************************************************
-// bool CDoubleLayer::checkSpace(int RowIndex, int ColIndex)
-// Check This Grid Spot. Is it Valid for our Check
-//**********************************************************************
-bool CDoubleLayer::checkSpace(int RowIndex, int ColIndex) {
-#ifndef OPTIMIZE
-  try {
-    if (RowIndex >= iHeight)
-      CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
-    if (ColIndex >= iWidth)
-      CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
-#endif
-
-    // Is this simple T/F Layer
-    if ( (CComparer::isEqual(dMin, -1.0)) && (CComparer::isEqual(dMax, -1.0)) ) {
-      if ( (pGrid[RowIndex][ColIndex] <= (1.0+ZERO)) && (pGrid[RowIndex][ColIndex] >= (1.0-ZERO)) ) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    // Otherwise, Does it fall within the Min/Max Range
-    if ( (pGrid[RowIndex][ColIndex] <= (dMax+ZERO)) && (pGrid[RowIndex][ColIndex] >= (dMin-ZERO)) )
-      return true;
-
-#ifndef OPTIMIZE
-  } catch(string Ex) {
-    Ex = "CDoubleLayer.checkSpace()->" + Ex;
-    throw Ex;
-  }
-#endif
-  return false;
-
-}
-
-//**********************************************************************
-// int CDoubleLayer::countValidSpaces()
-// Count How Many Valid Spots We Have Against World
-//**********************************************************************
-int CDoubleLayer::countValidSpaces() {
-#ifndef OPTIMIZE
-  try {
-#endif
-    // Variables
-    CWorld *pWorld    = CWorld::Instance();
-    double dCurMin    = 1.0;
-    double dCurMax    = 1.0;
-    int    iRet       = 0;
-
-    // Set Min/Max
-    if ( (CComparer::isEqual(dMin, -1.0)) && (CComparer::isEqual(dMax, -1.0)) ) {
-      dCurMin = dMin;
-      dCurMax = dMax;
-    }
-
-    // Check Sizing
-    if (pWorld->getHeight() != iHeight)
-      CError::errorNotEqual(PARAM_LAYER_HEIGHT, PARAM_NROWS);
-    if (pWorld->getWidth() != iWidth)
-      CError::errorNotEqual(PARAM_LAYER_WIDTH, PARAM_NCOLS);
-
-    // Loop Through World
-    for (int i = 0; i < iHeight; ++i) {
-      for (int j = 0; j < iWidth; ++j) {
-        // Check if Space is disabled on World first
-        if (!pWorld->getBaseSquare(i, j)->getEnabled())
-          continue;
-
-        // Check if our Grid Spot Matches Min/Max
-        if ( (pGrid[i][j] >= (dCurMin-ZERO)) && (pGrid[i][j] <= (dCurMax+ZERO)) )
-          iRet++;
-      }
-    }
-
-    return iRet;
-
-#ifndef OPTIMIZE
-  } catch(string Ex) {
-    Ex = "CDoubleLayer.countValidSpaces()->" + Ex;
-    throw Ex;
-  }
-
-  return -1;
-#endif
-}
-
-//**********************************************************************
 // void CDoubleLayer::validate()
 // Validate Our Layer
 //**********************************************************************
@@ -191,7 +104,7 @@ void CDoubleLayer::validate() {
         continue;
 
       if (iRow >= iHeight)
-        throw string("Too much data"); // TODO: Add CError
+        CError::errorTooMuch(PARAM_DATA);
 
       if (iCol >= iWidth) {
         iCol = 0;
@@ -203,7 +116,7 @@ void CDoubleLayer::validate() {
     }
 
     if (((iRow+1) != iHeight) || (iCol != iWidth))
-      throw string("Not enough data"); // TODO: Add CError
+      CError::errorNotEnough(PARAM_DATA);
 
   } catch(string Ex) {
     Ex = "CDoubleLayer.validate(" + getLabel() + ")->" + Ex;
@@ -235,6 +148,18 @@ void CDoubleLayer::build() {
             }
           }
         }
+      }
+    }
+
+    // Build our Smallest and Largest Stored Values
+    dSmallestValue  = pGrid[0][0];
+    dLargestValue   = pGrid[0][0];
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
+        if (pGrid[i][j] > dLargestValue)
+          dLargestValue = pGrid[i][j];
+        if (pGrid[i][j] < dSmallestValue)
+          dSmallestValue = pGrid[i][j];
       }
     }
 

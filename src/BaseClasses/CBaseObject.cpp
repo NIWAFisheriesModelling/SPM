@@ -11,6 +11,7 @@
 #include "CBaseObject.h"
 #include "../Helpers/CConvertor.h"
 #include "../Helpers/CComparer.h"
+#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CBaseObject::CBaseObject()
@@ -49,7 +50,7 @@ double* CBaseObject::getEstimableVariable(string name) {
   try {
 
     if (mEstimables[name] == 0)
-      throw string(ERROR_UNKNOWN_ESTIMABLE + name);
+      CError::errorUnknown(PARAM_ESTIMABLE, name);
 
   } catch (string Ex) {
     Ex = "CBaseObject.getEstimableVariable()->" + Ex;

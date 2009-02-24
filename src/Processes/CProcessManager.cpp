@@ -73,7 +73,7 @@ CProcess* CProcessManager::getProcess(string Label) {
         return Process;
     }
 
-    throw string(ERROR_UNKNOWN_PROCESS + Label);
+    CError::errorUnknown(PARAM_PROCESS, Label);
 
 #ifndef OPTIMIZE
   } catch(string Ex) {
@@ -95,25 +95,6 @@ void CProcessManager::fillVector(vector<CProcess*> &list, vector<string> &labels
     list.push_back(getProcess(Label));
   }
 }
-
-//**********************************************************************
-// CProcess* CProcessManager::getProcess(int index)
-// Get the process from our vector @ index
-//**********************************************************************
-//CProcess* CProcessManager::getProcess(int index) {
-//  try {
-//    if (index >= (int)vProcessList.size())
-//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PROCESSES);
-//    if (index < 0)
-//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-//
-//    return vProcessList[index];
-//
-//  } catch (string Ex) {
-//    Ex = "CProcessManager.getProcess()->" + Ex;
-//    throw Ex;
-//  }
-//}
 
 //**********************************************************************
 // void CProcessManager::clone(CProcessManager *Manager)
@@ -148,7 +129,7 @@ void CProcessManager::validate() {
     foreach(CProcess *Process, vProcessList) {
       mLabelList[Process->getLabel()] += 1;
       if (mLabelList[Process->getLabel()] > 1)
-        throw string(ERROR_DUPLICATE_LABEL + Process->getLabel());
+        CError::errorDuplicate(PARAM_LABEL, Process->getLabel());
     }
 
   } catch(string Ex) {

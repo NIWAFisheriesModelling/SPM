@@ -11,6 +11,7 @@
 #include "CCatchabilityFactory.h"
 #include "../CCatchabilityManager.h"
 #include "../CCatchability.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CCatchability* CCatchabilityFactory::buildCatchability(string type, bool registerWithManager)
@@ -23,7 +24,7 @@ CCatchability* CCatchabilityFactory::buildCatchability(string type, bool registe
   if (type == "")
     pCatchability = new CCatchability();
   else
-    throw string("unknown type: " + type); // TODO: Add Error
+    CError::errorUnknown(PARAM_TYPE, type);
 
   if (registerWithManager)
     CCatchabilityManager::Instance()->addCatchability(pCatchability);

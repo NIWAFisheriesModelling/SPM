@@ -20,13 +20,14 @@ class CConstantSelectivity : public CSelectivity {
 public:
   // Functions
 	CConstantSelectivity();
-	virtual                    ~CConstantSelectivity();
-  void                       validate();
-  double                     getResult(int Index);
+	virtual                      ~CConstantSelectivity();
+	CSelectivity*               clone() { return new CConstantSelectivity(*this); }
+  void                        validate();
+  double                      getResult(int Index);
 
 protected:
   // Variables
-  double                     dC;
+  double                      dC;
 };
 
 #endif /*CCONSTANTSELECTIVITY_H_*/

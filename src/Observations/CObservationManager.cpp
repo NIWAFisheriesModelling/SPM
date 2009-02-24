@@ -132,7 +132,7 @@ void CObservationManager::validate() {
 
       // Check
       if (mObservationList[(*vPtr)->getLabel()] > 1)
-        throw string(ERROR_DUPLICATE_LABEL + (*vPtr)->getLabel());
+        CError::errorDuplicate(PARAM_LABEL, (*vPtr)->getLabel());
 
       vPtr++;
     }

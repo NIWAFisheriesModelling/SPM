@@ -19,26 +19,22 @@
 class CNumericLayer : public CLayer {
 public:
   // Functions
-	CNumericLayer();
-	virtual                  ~CNumericLayer();
-  void                      setMin(double value) { dMin = value; }
-  double                    getMin() { return dMin; }
-  void                      setMax(double value) { dMax = value; }
-  double                    getMax() { return dMax; }
-  void                      setMinMax(double Min, double Max) { dMin = Min, dMax = Max; }
-  void                      defaultMinMax() { dMin = -1.0; dMax = -1.0; }
-  virtual void              setValue(int Row, int Col, double Value);
-  virtual double            getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0)=0;
-  virtual bool              checkSpace(int RowIndex, int ColIndex);
-  virtual int               countValidSpaces();
-  virtual void              validate();
-  virtual void              build() = 0;
+  CNumericLayer();
+  virtual                     ~CNumericLayer();
+  bool                        checkSpace(int RowIndex, int ColIndex, double Min = 0.0, double Max = 1.0);
+  int                         countValidSpaces();
+  int                         countValidSpaces(double Min, double Max);
+  virtual double              getSmallestValue() = 0;
+  virtual double              getLargestValue() = 0;
+  virtual void                setValue(int Row, int Col, double Value);
+  virtual double              getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0)=0;
+  virtual void                validate();
+  virtual void                build() = 0;
 
 protected:
   // Variables
   double                     **pGrid;
-  double                    dMin;
-  double                    dMax;
+
 };
 
 #endif /*CNUMERICLAYER_H_*/

@@ -22,6 +22,7 @@
 #include "MCMC/CMCMC.h"
 #include "Minimizers/CMinimizerManager.h"
 #include "ConfigurationLoaders/CConfigurationLoader.h"
+#include "Helpers/CError.h"
 
 // Singleton Variable
 CRuntimeController* CRuntimeController::clInstance = 0;
@@ -257,7 +258,7 @@ void CRuntimeController::run() {
           startMCMC();
           break;
         default:
-          throw string(ERROR_UNKNOWN_RUN_MODE);
+          CError::errorUnknown(PARAM_RUN_MODE, "");
       }
     }
 

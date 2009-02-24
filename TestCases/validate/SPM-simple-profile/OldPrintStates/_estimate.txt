@@ -1,0 +1,19 @@
+[estimate]
+q[cpueq].q
+Lower Bound: 1e-010
+Upper Bound: 0.1
+Prior: uniform
+Value: 8.95449e-006
+
+population_process[recruitment].r0
+Lower Bound: 100000
+Upper Bound: 1e+010
+Prior: uniform-log
+Value: 1.9825e+006
+
+selectivity[fishingsel].ato95
+Lower Bound: 0.01
+Upper Bound: 50
+Prior: uniform
+Value: 18.7814
+

@@ -31,7 +31,7 @@ CAbundanceObservation::CAbundanceObservation() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_Q);
-  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_OBS);
   pParameterList->registerAllowed(PARAM_CV);
   pParameterList->registerAllowed(PARAM_DIST);
@@ -88,7 +88,7 @@ void CAbundanceObservation::validate() {
 
     // Get our Parameters
     sQ          = pParameterList->getString(PARAM_Q);
-    sLayer      = pParameterList->getString(PARAM_LAYER_NAME);
+    sLayer      = pParameterList->getString(PARAM_LAYER);
     sDist       = pParameterList->getString(PARAM_DIST);
 
     // Get our OBS
@@ -96,7 +96,7 @@ void CAbundanceObservation::validate() {
     pParameterList->fillVector(vOBS, PARAM_OBS);
 
     if ((vOBS.size() % 2) != 0)
-      throw string("OBS Must be done in pairs"); // TODO: Add CError
+      CError::errorPairs(PARAM_OBS);
 
     for (int i = 0; i < (int)vOBS.size(); i+=2)
       mvProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
@@ -106,7 +106,7 @@ void CAbundanceObservation::validate() {
     pParameterList->fillVector(vCV, PARAM_CV);
 
     if ((vCV.size() % 2) != 0)
-      throw string("CV must be done in pairs"); // TODO: ADD CError
+      CError::errorPairs(PARAM_CV);
 
     for (int i = 0; i < (int)vCV.size(); i+=2)
       mvCVMatrix[vCV[i]] = CConvertor::stringToDouble(vCV[i+1]);
@@ -131,7 +131,7 @@ void CAbundanceObservation::validate() {
       }
 
       if (!bMatch)
-        throw string(ERROR_INVALID_OBS_CV_MATCH + (*mCVPtr).first);
+        CError::errorNoMatch(PARAM_CV, (*mCVPtr).first, PARAM_OBS);
 
       mCVPtr++;
     }

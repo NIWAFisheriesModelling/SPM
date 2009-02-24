@@ -9,6 +9,7 @@
 
 // Global headers
 #include <iostream>
+#include <limits>
 
 // Local Headers
 #include "CConstantRecruitmentProcess.h"
@@ -20,6 +21,7 @@
 // Using
 using std::cout;
 using std::endl;
+using std::numeric_limits;
 
 //**********************************************************************
 // CConstantRecruitmentProcess::CConstantRecruitmentProcess(CConstantRecruitmentProcess *Process)
@@ -37,7 +39,9 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
   pParameterList->registerAllowed(PARAM_AGES);
-  pParameterList->registerAllowed(PARAM_LAYER_NAME);
+  pParameterList->registerAllowed(PARAM_LAYER);
+  pParameterList->registerAllowed(PARAM_LAYER_MIN);
+  pParameterList->registerAllowed(PARAM_LAYER_MAX);
 }
 
 //**********************************************************************
@@ -50,14 +54,36 @@ void CConstantRecruitmentProcess::validate() {
     CProcess::validate();
 
     // Populate our Variables
-    dR0     = pParameterList->getDouble(PARAM_R0);
+    dR0       = pParameterList->getDouble(PARAM_R0);
+    dLayerMin = pParameterList->getDouble(PARAM_LAYER_MIN, true, -numeric_limits<double>::max());
+    dLayerMax = pParameterList->getDouble(PARAM_LAYER_MAX, true, numeric_limits<double>::max());
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
     pParameterList->fillVector(vAgesList, PARAM_AGES);
 
-    // TODO: Add check to ensure vector sizes are the same.
-    // TODO: Register Proportions as Estimable
+    // layer_max and layer_min must be assigned in pairs
+    bool bHasLayerMin = pParameterList->hasParameter(PARAM_LAYER_MIN);
+    bool bHasLayerMax = pParameterList->hasParameter(PARAM_LAYER_MAX);
+
+    if ((bHasLayerMin) && (!bHasLayerMax))
+      CError::errorMissing(PARAM_LAYER_MAX);
+    else if ( (!bHasLayerMin) && (bHasLayerMax))
+      CError::errorMissing(PARAM_LAYER_MIN);
+
+    // The 3 Vectors must be same size
+    unsigned iCategorySize    = vCategoryList.size();
+    unsigned iProportionSize  = vProportionList.size();
+    unsigned iAgesSize        = vAgesList.size();
+
+    if (iCategorySize != iProportionSize)
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_PROPORTION);
+    else if (iCategorySize != iAgesSize)
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_AGES);
+
+    // Register our Proportions as Estimable
+    for (int i = 0; i < (int)vProportionList.size(); ++i)
+      registerEstimable(PARAM_PROPORTION, i, &vProportionList[i]);
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
@@ -92,9 +118,9 @@ void CConstantRecruitmentProcess::build() {
 
     // Validate our Vectors are all same size
     if (vAgesIndex.size() != vCategoryIndex.size())
-      throw string(ERROR_EQUAL_CATEGORY_AGES);
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_AGES);
     if (vAgesIndex.size() != vProportionList.size())
-      throw string(ERROR_EQUAL_AGES_PROPORTIONS);
+      CError::errorListSameSize(PARAM_AGES, PARAM_PROPORTIONS);
 
   } catch(string Ex) {
     Ex = "CRecruitmentProcess.build(" + getLabel() + ")->" + Ex;
@@ -130,8 +156,13 @@ void CConstantRecruitmentProcess::execute() {
         // Check if this square is enabled or not.
         if (!pBaseSquare->getEnabled())
           continue;
-        if ( (bDependsOnLayer) && (!pLayer->checkSpace(i, j)) )
-          continue;
+
+        if (bDependsOnLayer) {
+          if ( (dLayerMax == numeric_limits<double>::max()) && (!pLayer->checkSpace(i,j)) )
+            continue;
+          else if (!pLayer->checkSpace(i, j, dLayerMin, dLayerMax))
+            continue;
+        }
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 

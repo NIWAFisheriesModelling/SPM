@@ -25,9 +25,10 @@ using std::vector;
 class CAllValuesSelectivity : public CSelectivity {
 public:
   CAllValuesSelectivity();
-  virtual                   ~CAllValuesSelectivity();
-  void                       validate();
-  double                     getResult(int Index);
+  virtual                     ~CAllValuesSelectivity();
+  CSelectivity*               clone() { return new CAllValuesSelectivity(*this); }
+  void                        validate();
+  double                      getResult(int Index);
 
 protected:
   vector<double>             vVs;

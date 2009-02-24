@@ -10,6 +10,7 @@
 // Local headers
 #include "CTimeStepFactory.h"
 #include "../CTimeStepManager.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CTimeStep* CTimeStepFactory::buildTimeStep(string type, bool registerWithManager = true)
@@ -22,7 +23,7 @@ CTimeStep* CTimeStepFactory::buildTimeStep(string type, bool registerWithManager
   if (type == "")
     pTimeStep = new CTimeStep();
   else
-    throw string("Unknown type: " + type); // TODO: Add Error
+    CError::errorUnknown(PARAM_TYPE, type);
 
   if (registerWithManager)
     CTimeStepManager::Instance()->addTimeStep(pTimeStep);

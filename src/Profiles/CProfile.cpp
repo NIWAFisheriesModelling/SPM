@@ -29,6 +29,12 @@ CProfile::CProfile() {
   dCurrent      = 0.0;
   sParameter    = "";
   pTarget       = 0;
+
+  // Register Params
+  pParameterList->registerAllowed(PARAM_L);
+  pParameterList->registerAllowed(PARAM_U);
+  pParameterList->registerAllowed(PARAM_N);
+  pParameterList->registerAllowed(PARAM_PARAMETER);
 }
 
 //**********************************************************************
@@ -79,14 +85,19 @@ void CProfile::setEnabled(bool value) {
 //**********************************************************************
 void CProfile::validate() {
   try {
-    // Lower Bound Must be < Upper Bound
-    if ((dL-dU) > ZERO)
+    // Base
+    CBaseBuild::validate();
+
+    // Get our Parameters
+    dL          = pParameterList->getDouble(PARAM_L);
+    dU          = pParameterList->getDouble(PARAM_U);
+    dN          = pParameterList->getDouble(PARAM_N);
+    sParameter  = pParameterList->getString(PARAM_PARAMETER);
+
+    if ((dL-dU) > ZERO) // Lower Bound Must be < Upper Bound
       CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
-    // N must be < Upper Bound
-    if ((dN-dU) > ZERO)
+    if ((dN-dU) > ZERO) // N must be < Upper Bound
       CError::errorGreaterThan(PARAM_N, PARAM_UPPER_BOUND);
-    if (CComparer::isZero(dN))
-      CError::errorEqualTo(PARAM_N, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;

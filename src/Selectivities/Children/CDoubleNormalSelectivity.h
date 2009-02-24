@@ -20,6 +20,7 @@ public:
   // Functions
 	CDoubleNormalSelectivity();
 	virtual                    ~CDoubleNormalSelectivity();
+	CSelectivity*               clone() { return new CDoubleNormalSelectivity(*this); }
 	void                       validate();
 
 protected:

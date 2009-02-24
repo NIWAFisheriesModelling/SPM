@@ -169,7 +169,7 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
       vPtr++;
     }
 
-    throw string(ERROR_UNKNOWN_ESTIMATE + Parameter);
+    CError::errorUnknown(PARAM_ESTIMATE, Parameter);
 
   } catch (string Ex) {
     Ex = "CEstimateManager.getEstimate()->" + Ex;
@@ -192,7 +192,7 @@ void CEstimateManager::addEstimateValue(string estimate, double value) {
       }
     }
 
-    throw string(ERROR_UNKNOWN_ESTIMATE + estimate);
+    CError::errorUnknown(PARAM_ESTIMATE, estimate);
 
   } catch (string Ex) {
     Ex = "CEstimateManager.addEstimateValue()->" + Ex;
@@ -274,7 +274,7 @@ void CEstimateManager::validate() {
       mParameterList[sParam] += 1;
 
       if (mParameterList[sParam] > 1)
-        throw string(ERROR_DUPLICATE_PARAMETER + (*vPtr)->getParameter());
+        CError::errorUnknown(PARAM_PARAMETER, (*vPtr)->getParameter());
       vPtr++;
     }
 

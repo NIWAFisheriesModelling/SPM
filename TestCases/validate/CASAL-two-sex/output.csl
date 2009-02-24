@@ -1,0 +1,43 @@
+@print
+# estimation section stuff
+parameters false
+fits_every_eval false
+objective_every_eval false
+parameters_every_eval false
+parameter_vector_every_eval false
+fits true
+resids true
+pearson_resids true
+normalised_resids true
+estimation_section true
+population_section true
+# population section stuff
+requests true
+initial_state false
+state_annually false
+state_every_step true
+final_state true
+results true
+#output section stuff
+yields true
+unused_parameters true
+covariance True
+
+@quantities
+all_free_parameters true
+B0 true
+R0 true
+SSBs true
+YCS true
+actual_catches false
+
+@abundance Total
+biomass False
+years 1994 2008
+step 3
+
+@abundance Mature
+biomass False
+years 1994 2008
+step 3
+mature_only True

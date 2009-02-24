@@ -77,7 +77,7 @@ void CWorldSquareCollection::validate() {
   try {
     // Validate local variables
     if (pLayer == 0)
-      CError::errorMissing(PARAM_LAYER_NAME);
+      CError::errorMissing(PARAM_LAYER);
 
   } catch (string Ex) {
     Ex = "CWorldSquareCollection.validate()->" + Ex;
