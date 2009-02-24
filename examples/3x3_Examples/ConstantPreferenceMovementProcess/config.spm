@@ -5,7 +5,7 @@
 @model
 nrows 3
 ncols 3
-layer_name Base
+layer Base
 categories immature
 min_age 1
 max_age 5
@@ -34,7 +34,7 @@ ages 1
 @preference_function constant_preference
 type constant
 alpha 2
-layer_name double_layer
+layer double_layer
 
 @layer base
 type double

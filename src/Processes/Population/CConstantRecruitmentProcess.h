@@ -35,10 +35,7 @@ protected:
   double                     dR0;
   vector<int>                vAgesList;
   vector<int>                vAgesIndex;
-  bool                       bDependsOnLayer;
-  string                     sLayerName;
-  double                     dLayerMin;
-  double                     dLayerMax;
+  string                     sLayer;
   CNumericLayer              *pLayer;
 };
 

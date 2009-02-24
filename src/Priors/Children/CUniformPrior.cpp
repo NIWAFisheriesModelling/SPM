@@ -15,8 +15,6 @@
 // Default Constructor
 //**********************************************************************
 CUniformPrior::CUniformPrior() {
-  // Register allowed parameter
-  pParameterList->registerAllowed(PARAM_C);
 }
 
 //**********************************************************************
@@ -28,21 +26,10 @@ void CUniformPrior::validate() {
     // Base
     CPrior::validate();
 
-    // Assign param
-    dC    = pParameterList->getDouble(PARAM_C);
-
   } catch (string Ex) {
     Ex = "CUniformPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-}
-
-//**********************************************************************
-// double CUniformPrior::getResult(double Param)
-// get the result from our prior
-//**********************************************************************
-double CUniformPrior::getResult(double Param) {
-  return dC; // TODO: Validate this is accurate?
 }
 
 //**********************************************************************

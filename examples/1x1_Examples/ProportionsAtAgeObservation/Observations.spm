@@ -11,7 +11,7 @@ selectivities One One
 min_age 1
 max_age 5
 age_plus_group True
-layer_name SSRU
+layer SSRU
 #age        1    2    3    4    5 
 obs 881A    1.00 0.00 0.00 0.00 0.00
 N  881A     1
@@ -27,7 +27,7 @@ selectivities One One
 min_age 1
 max_age 5
 age_plus_group True
-layer_name SSRU
+layer SSRU
 #age        1    2    3    4    5 
 obs 881A    0.50 0.50 0.00 0.00 0.00
 N  881A     1

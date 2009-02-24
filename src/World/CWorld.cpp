@@ -101,6 +101,9 @@ void CWorld::clone(CWorld *World) {
 //**********************************************************************
 void CWorld::validate() {
   try {
+    // Check our parameters
+    pParameterList->checkInvalidParameters();
+
     // Load our Variable values
     iCellLength       = pParameterList->getInt(PARAM_CELL_LENGTH);
     iHeight           = pParameterList->getInt(PARAM_NROWS); // TODO: Change to N_ROWS or Better

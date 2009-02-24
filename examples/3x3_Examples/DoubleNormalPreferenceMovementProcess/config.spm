@@ -2,7 +2,7 @@
 @model
 nrows 3
 ncols 3
-layer_name Base
+layer Base
 categories immature
 min_age 1
 max_age 5
@@ -34,7 +34,7 @@ alpha 1
 mu 3.0
 sigma_l 1.0
 sigma_r 5.0  
-layer_name double_layer
+layer double_layer
 
 @layer base
 type double

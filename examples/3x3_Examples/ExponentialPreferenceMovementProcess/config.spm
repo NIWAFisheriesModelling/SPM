@@ -2,7 +2,7 @@
 @model
 nrows 3
 ncols 3
-layer_name Base
+layer Base
 categories immature
 min_age 1
 max_age 5
@@ -27,12 +27,15 @@ categories immature
 proportions 1.0
 R0 100
 ages 1
+layer double_layer
+layer_min 1
+layer_max 3
 
 @preference_function exponential_preference
 type exponential
-alpha 3.0
-lambda 4.0  
-layer_name double_layer
+alpha 1.0
+lambda 0.2  
+layer double_layer
 
 @layer base
 type double

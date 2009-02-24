@@ -33,8 +33,6 @@ proportions 1.0
 R0 100
 ages 1
 layer Depth
-layer_min 0
-layer_max 1
 
 @process M
 type natural_mortality

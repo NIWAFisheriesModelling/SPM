@@ -41,8 +41,7 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
   pParameterList->registerAllowed(PARAM_AGES);
   pParameterList->registerAllowed(PARAM_LAYER);
-  pParameterList->registerAllowed(PARAM_LAYER_MIN);
-  pParameterList->registerAllowed(PARAM_LAYER_MAX);
+
 }
 
 //**********************************************************************
@@ -56,22 +55,11 @@ void CConstantRecruitmentProcess::validate() {
 
     // Populate our Variables
     dR0         = pParameterList->getDouble(PARAM_R0);
-    sLayerName  = pParameterList->getString(PARAM_LAYER, true, "");
-    dLayerMin   = pParameterList->getDouble(PARAM_LAYER_MIN, true, -numeric_limits<double>::max());
-    dLayerMax   = pParameterList->getDouble(PARAM_LAYER_MAX, true, numeric_limits<double>::max());
+    sLayer      = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
     pParameterList->fillVector(vAgesList, PARAM_AGES);
-
-    // layer_max and layer_min must be assigned in pairs
-    bool bHasLayerMin = pParameterList->hasParameter(PARAM_LAYER_MIN);
-    bool bHasLayerMax = pParameterList->hasParameter(PARAM_LAYER_MAX);
-
-    if ((bHasLayerMin) && (!bHasLayerMax))
-      CError::errorMissing(PARAM_LAYER_MAX);
-    else if ( (!bHasLayerMin) && (bHasLayerMax))
-      CError::errorMissing(PARAM_LAYER_MIN);
 
     // The 3 Vectors must be same size
     unsigned iCategorySize    = vCategoryList.size();
@@ -112,12 +100,8 @@ void CConstantRecruitmentProcess::build() {
     CProcess::build();
 
     // Get our Layer
-    if (sLayerName != "") {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-
-    cout << "LayerName: " << sLayerName << endl;
-    cout << "LayerLabel: " << pLayer->getLabel() << endl;
-    }
+    if (sLayer != "")
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
     // Populate Our Ages Index
     if (vAgesIndex.size() <= 0) {
@@ -150,24 +134,17 @@ void CConstantRecruitmentProcess::execute() {
     CProcess::execute();
 
     // Setup Our Variables
-    double        dAmountPer    = dR0;
+    double dAmountPer = dR0;
 
-    // Now, Divide That By The Number of WorldSquares We will be updating
     if (pLayer != 0) {
-      int iCount = 0;
+      double dTotal = 0.0;
 
-      for (int i = 0; i < iWorldHeight; ++i) {
-        for (int j = 0; j < iWorldWidth; ++j) {
-          if ( (dLayerMax == numeric_limits<double>::max()) && (!pLayer->checkSpace(i,j)) )
-            continue;
-          else if (!pLayer->checkSpace(i, j, dLayerMin, dLayerMax))
-            continue;
+      for (int i = 0; i < iWorldHeight; ++i)
+        for (int j = 0; j < iWorldWidth; ++j)
+          dTotal += pLayer->getValue(i, j);
 
-          iCount++;
-        }
-      }
-
-      dAmountPer /= iCount;
+      if (!CComparer::isZero(dTotal))
+        dAmountPer /= dTotal;
     } else
       dAmountPer /= pWorld->getEnabledSquareCount();
 
@@ -180,18 +157,15 @@ void CConstantRecruitmentProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        if (pLayer != 0) {
-          if ( (dLayerMax == numeric_limits<double>::max()) && (!pLayer->checkSpace(i,j)) )
-            continue;
-          else if (!pLayer->checkSpace(i, j, dLayerMin, dLayerMax))
-            continue;
-        }
+        double value = dAmountPer;
+        if (pLayer != 0)
+          value *= pLayer->getValue(i, j);
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-          pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (dAmountPer * vProportionList[k]) );
+          pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (value * vProportionList[k]) );
       }
     }
 #ifndef OPTIMIZE

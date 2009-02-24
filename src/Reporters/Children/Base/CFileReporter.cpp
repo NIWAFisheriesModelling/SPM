@@ -37,7 +37,7 @@ void CFileReporter::validate() {
 
     // Assign variables
     sFileName   = pParameterList->getString(PARAM_FILE_NAME, true, "");
-    bOverwrite  = pParameterList->getBool(PARAM_OVERWRITE, true, false);
+    bOverwrite  = pParameterList->getBool(PARAM_OVERWRITE, true, true);
 
     fFile = new ofstream();
   } catch (string Ex) {
@@ -57,7 +57,7 @@ void CFileReporter::start() {
 
     // Set our Open Flag
     ios_base::openmode mode = ios_base::out;
-    if (!bOverwrite )
+    if (!bOverwrite)
       mode = ios_base::app;
 
     // Try to Open our File

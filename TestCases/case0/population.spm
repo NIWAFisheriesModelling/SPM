@@ -1,0 +1,256 @@
+# Spatial structure
+@model
+nrows 11
+ncols 19
+layer Base
+categories immature mature spawning
+min_age 1
+max_age 30
+age_plus_group True
+initialisation_phases Phase1 Phase2 Phase3
+cell_length 1
+initial_year 1994
+current_year 2008
+final_year 2108
+time_steps step_one step_two
+
+@initialisation_phase Phase1
+years 200
+processes Recruitment Spawning Maturation halfM halfM Postspawning Ageing
+
+@initialisation_phase Phase2
+years 1
+processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing Postspawning
+
+@initialisation_phase Phase3
+years 20
+processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing Postspawning
+
+@time_step step_one
+processes Recruitment Spawning Maturation halfM fishing halfM
+processes MoveImmature MoveMature MoveSpawning
+
+@time_step step_two
+processes PostSpawning Ageing
+
+# Population processes
+@process Ageing
+type ageing
+categories immature mature spawning
+
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 997386
+ages 1
+layer Depth
+
+@process halfM
+type natural_mortality
+categories immature mature spawning
+M 0.065
+selectivities One One One
+
+@process Fishing
+type event_mortality
+categories immature mature spawning
+years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
+Umax 0.99
+selectivities FishingSel FishingSel FishingSel
+penalty event_mortality_penalty
+
+@process Maturation
+type category_transition_rate
+from immature
+to mature
+proportion 0.324392
+selectivity Maturation
+
+@process Spawning
+type category_transition_rate
+from mature
+to spawning
+proportion 0.574593
+selectivity One
+
+@process PostSpawning
+type category_transition_rate
+from spawning
+to mature
+proportion 0.5
+selectivity One
+
+# Movement processes
+@process MoveImmature
+type preference
+categories immature
+preference_functions ImmatureLatitude
+
+@process MoveMature
+type preference
+categories mature
+preference_functions MatureDistance MatureLatitude
+
+@process MoveSpawning
+type preference
+categories spawning
+preference_functions MatureDistance SpawningLatitude
+
+@process InitialMoveImmature
+type preference
+categories immature
+preference_functions ImmatureDepth ImmatureLatitude
+
+@process InitialMoveMature
+type preference
+categories mature
+preference_functions MatureDepth MatureLatitude
+
+@process InitialMoveSpawning
+type preference
+categories spawning
+preference_functions MatureDepth SpawningLatitude
+
+@preference_function ImmatureDistance
+type exponential
+alpha 1
+lambda 1.5
+layer Distance
+
+@preference_function ImmatureDepth
+type inverse_logistic
+alpha 1
+layer Depth
+a50 1416.8
+ato95 245.354
+
+@preference_function ImmatureLatitude
+type logistic
+alpha 1
+layer Latitude
+a50 68.8512
+ato95 0.322301
+
+@preference_function MatureDistance
+type exponential
+alpha 1
+lambda 1.5
+layer Distance
+
+@preference_function MatureDepth
+type double_normal
+alpha 1
+layer Depth
+mu 875.389
+sigma_L 143.127
+sigma_R 1364.35
+
+@preference_function MatureLatitude
+type logistic
+alpha 1
+layer Latitude
+a50 70.9737
+ato95 0.436736
+
+@preference_function SpawningLatitude
+type double_normal
+alpha 1
+layer Latitude
+mu 65.8099
+sigma_L 1.77552
+sigma_R 1.62161
+
+# Definition of layers
+@layer Base
+type double
+@include_file "Base.map"
+
+@layer Depth
+type double
+@include_file "Depth.map"
+
+@layer Latitude
+type double
+@include_file "Latitude.map"
+
+@layer CPUE
+type double
+@include_file "CPUE.map"
+
+@layer SSRU
+type string
+@include_file "SSRU.map"
+
+@layer Fishing_1998
+type double
+@include_file "Fishing_1998.map"
+
+@layer Fishing_1999
+type double
+@include_file "Fishing_1999.map"
+
+@layer Fishing_2000
+type double
+@include_file "Fishing_2000.map"
+
+@layer Fishing_2001
+type double
+@include_file "Fishing_2001.map"
+
+@layer Fishing_2002
+type double
+@include_file "Fishing_2002.map"
+
+@layer Fishing_2003
+type double
+@include_file "Fishing_2003.map"
+
+@layer Fishing_2004
+type double
+@include_file "Fishing_2004.map"
+
+@layer Fishing_2005
+type double
+@include_file "Fishing_2005.map"
+
+@layer Fishing_2006
+type double
+@include_file "Fishing_2006.map"
+
+@layer Fishing_2007
+type double
+@include_file "Fishing_2007.map"
+
+@layer constant
+type double
+@include_file "constant.map"
+
+@layer test
+type double
+@include_file "test.map"
+
+@layer Distance
+type distance
+
+# Definition of selecivities
+@selectivity One
+type constant
+c 1
+
+@selectivity Maturation
+type logistic_producing
+L 1
+H 20
+a50 8.2
+ato95 2.8
+
+@selectivity FishingSel
+type logistic
+a50 6.91642
+ato95 2.70004
+
+@selectivity Age10
+type knife_edge
+e 10

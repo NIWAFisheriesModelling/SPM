@@ -44,31 +44,6 @@ void CNumericLayer::setValue(int X, int Y, double Value) {
 }
 
 //**********************************************************************
-// bool CNumericLayer::checkSpace(int RowIndex, int ColIndex, double Min, double Max)
-// Check if the Space is Usable
-//**********************************************************************
-bool CNumericLayer::checkSpace(int RowIndex, int ColIndex, double Min, double Max) {
-#ifndef OPTIMIZE
-  try {
-    if (RowIndex >= iHeight)
-      CError::errorGreaterThanEqualTo(PARAM_ROW_INDEX, PARAM_LAYER_HEIGHT);
-    if (ColIndex >= iWidth)
-      CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
-
-  } catch(string Ex) {
-    Ex = "CNumericLayer.checkSpace()->" + Ex;
-    throw Ex;
-  }
-#endif
-
-  // Check
-  if (CComparer::isBetween(pGrid[RowIndex][ColIndex], Min, Max))
-    return true;
-
-  return false;
-}
-
-//**********************************************************************
 // int CNumericLayer::countValidSpaces()
 // count Valid Spaces
 //**********************************************************************
@@ -84,26 +59,6 @@ int CNumericLayer::countValidSpaces() {
         continue;
 
       iValidSquares++;
-    }
-  }
-
-  return iValidSquares;
-}
-
-//**********************************************************************
-// int CNumericLayer::countValidSpaces(double Min, double Max)
-// count Valid Spaces
-//**********************************************************************
-int CNumericLayer::countValidSpaces(double Min, double Max) {
-
-  int iValidSquares = countValidSpaces();
-
-  // Loop Through World
-  for (int i = 0; i < iHeight; ++i) {
-    for (int j = 0; j < iWidth; ++j) {
-      // Check if our Grid Spot Matches Min/Max
-      if (CComparer::isBetween(pGrid[i][j], Min, Max))
-        iValidSquares++;
     }
   }
 

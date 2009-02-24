@@ -5,7 +5,7 @@
 @model
 nrows 1
 ncols 1
-layer_name Base
+layer Base
 categories immature
 min_age 1
 max_age 5

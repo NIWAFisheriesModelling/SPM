@@ -163,8 +163,6 @@ void CNaturalMortalityProcess::execute() {
         // Check Square Ok
         if (!pBaseSquare->getEnabled())
           continue;
-        if ( (pLayer != 0) && (!pLayer->checkSpace(i, j)) )
-          continue;
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
@@ -180,6 +178,9 @@ void CNaturalMortalityProcess::execute() {
 
             // Get Amount To Subtract
             dCurrent *= pGrid[i][j].getValue(vCategoryIndex[k], l);
+
+            if (pLayer != 0)
+              dCurrent *= pLayer->getValue(i, j);
 
             // Do Add/Subs
             pDiff->subValue( vCategoryIndex[k], l, dCurrent);

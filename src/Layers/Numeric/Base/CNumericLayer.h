@@ -21,11 +21,7 @@ public:
   // Functions
   CNumericLayer();
   virtual                     ~CNumericLayer();
-  bool                        checkSpace(int RowIndex, int ColIndex, double Min = 0.0, double Max = 1.0);
   int                         countValidSpaces();
-  int                         countValidSpaces(double Min, double Max);
-  virtual double              getSmallestValue() = 0;
-  virtual double              getLargestValue() = 0;
   virtual void                setValue(int Row, int Col, double Value);
   virtual double              getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0)=0;
   virtual void                validate();

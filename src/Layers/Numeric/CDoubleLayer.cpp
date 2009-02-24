@@ -151,18 +151,6 @@ void CDoubleLayer::build() {
       }
     }
 
-    // Build our Smallest and Largest Stored Values
-    dSmallestValue  = pGrid[0][0];
-    dLargestValue   = pGrid[0][0];
-    for (int i = 0; i < iHeight; ++i) {
-      for (int j = 0; j < iWidth; ++j) {
-        if (pGrid[i][j] > dLargestValue)
-          dLargestValue = pGrid[i][j];
-        if (pGrid[i][j] < dSmallestValue)
-          dSmallestValue = pGrid[i][j];
-      }
-    }
-
   } catch (string Ex) {
     Ex = "CDoubleLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

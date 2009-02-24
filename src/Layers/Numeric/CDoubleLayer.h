@@ -24,16 +24,12 @@ public:
   CLayer*                     clone() { return (new CDoubleLayer(*this)); }
   double                      getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                        setValue(int Row, int Col, double Value);
-  double                      getSmallestValue() { return dSmallestValue; }
-  double                      getLargestValue() { return dLargestValue; }
   void                        validate();
   void                        build();
 
 protected:
   // Variables
   double                      dRescale;
-  double                      dSmallestValue;
-  double                      dLargestValue;
 };
 
 #endif /*CNUMERICLAYER_H_*/

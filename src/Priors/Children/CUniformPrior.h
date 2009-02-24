@@ -23,11 +23,8 @@ public:
 	virtual                    ~CUniformPrior();
 	CPrior*                    clone() { return new CUniformPrior(*this); }
 	void                       validate();
-	double                     getResult(double Param);
+	double                     getResult(double Param) { return 0; }
 
-protected:
-  // Variables
-  double                     dC;
 };
 
 #endif /*CUNIFORMPRIOR_H_*/

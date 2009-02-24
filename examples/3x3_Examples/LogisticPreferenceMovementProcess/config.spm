@@ -2,7 +2,7 @@
 @model
 nrows 3
 ncols 3
-layer_name Base
+layer Base
 categories immature
 min_age 1
 max_age 5
@@ -33,7 +33,7 @@ type logistic
 alpha 2.6
 a50 4.0
 ato95 12.7  
-layer_name double_layer
+layer double_layer
 
 @layer base
 type double
