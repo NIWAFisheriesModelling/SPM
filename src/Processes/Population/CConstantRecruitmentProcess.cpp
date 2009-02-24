@@ -13,6 +13,7 @@
 
 // Local Headers
 #include "CConstantRecruitmentProcess.h"
+#include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
@@ -29,7 +30,7 @@ using std::numeric_limits;
 //**********************************************************************
 CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   // Default Vars
-  bDependsOnLayer = false;
+  pLayer          = 0;
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
@@ -54,9 +55,10 @@ void CConstantRecruitmentProcess::validate() {
     CProcess::validate();
 
     // Populate our Variables
-    dR0       = pParameterList->getDouble(PARAM_R0);
-    dLayerMin = pParameterList->getDouble(PARAM_LAYER_MIN, true, -numeric_limits<double>::max());
-    dLayerMax = pParameterList->getDouble(PARAM_LAYER_MAX, true, numeric_limits<double>::max());
+    dR0         = pParameterList->getDouble(PARAM_R0);
+    sLayerName  = pParameterList->getString(PARAM_LAYER, true, "");
+    dLayerMin   = pParameterList->getDouble(PARAM_LAYER_MIN, true, -numeric_limits<double>::max());
+    dLayerMax   = pParameterList->getDouble(PARAM_LAYER_MAX, true, numeric_limits<double>::max());
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
@@ -109,6 +111,14 @@ void CConstantRecruitmentProcess::build() {
     // Base Build
     CProcess::build();
 
+    // Get our Layer
+    if (sLayerName != "") {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+
+    cout << "LayerName: " << sLayerName << endl;
+    cout << "LayerLabel: " << pLayer->getLabel() << endl;
+    }
+
     // Populate Our Ages Index
     if (vAgesIndex.size() <= 0) {
       foreach(int Age, vAgesList) {
@@ -143,9 +153,22 @@ void CConstantRecruitmentProcess::execute() {
     double        dAmountPer    = dR0;
 
     // Now, Divide That By The Number of WorldSquares We will be updating
-    if (bDependsOnLayer)
-      dAmountPer /= iNumberOfValidLayerSpots;
-    else
+    if (pLayer != 0) {
+      int iCount = 0;
+
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
+          if ( (dLayerMax == numeric_limits<double>::max()) && (!pLayer->checkSpace(i,j)) )
+            continue;
+          else if (!pLayer->checkSpace(i, j, dLayerMin, dLayerMax))
+            continue;
+
+          iCount++;
+        }
+      }
+
+      dAmountPer /= iCount;
+    } else
       dAmountPer /= pWorld->getEnabledSquareCount();
 
     // Loop Through The World Grid (i,j)
@@ -157,7 +180,7 @@ void CConstantRecruitmentProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        if (bDependsOnLayer) {
+        if (pLayer != 0) {
           if ( (dLayerMax == numeric_limits<double>::max()) && (!pLayer->checkSpace(i,j)) )
             continue;
           else if (!pLayer->checkSpace(i, j, dLayerMin, dLayerMax))

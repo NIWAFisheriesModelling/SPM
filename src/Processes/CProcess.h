@@ -44,8 +44,6 @@ protected:
   vector<string>             vSelectivityList;
   vector<CSelectivity*>      vSelectivityIndex;
   vector<string>             vLayerCategoryList;
-  bool                       bDependsOnLayer;
-  int                        iNumberOfValidLayerSpots;
   CWorldSquare               *pDiff;
   int                        iBaseColCount;
   double                     dCurrent;

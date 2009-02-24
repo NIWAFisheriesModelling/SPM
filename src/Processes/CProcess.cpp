@@ -9,8 +9,6 @@
 
 // Local Headers
 #include "CProcess.h"
-#include "../Layers/CLayerManager.h"
-#include "../Layers/Numeric/Base/CNumericLayer.h"
 #include "../Penalties/CPenaltyManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../Helpers/CError.h"

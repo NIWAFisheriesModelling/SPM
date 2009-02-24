@@ -35,6 +35,7 @@ protected:
   double                     dM;
   CWorldSquare               **pGrid;
   CNumericLayer              *pLayer;
+  string                     sLayer;
 };
 
 #endif /*CNATURALMORTALITYPROCESS_H_*/

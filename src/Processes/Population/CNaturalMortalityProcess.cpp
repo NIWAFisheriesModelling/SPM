@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CNaturalMortalityProcess.h"
+#include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Helpers/CError.h"
@@ -24,7 +25,6 @@ CNaturalMortalityProcess::CNaturalMortalityProcess() {
   // Variables
   pGrid            = 0;
   dM               = 0.0;
-  bDependsOnLayer  = false;
   pLayer           = 0;
 
   // Register Estimables
@@ -34,6 +34,8 @@ CNaturalMortalityProcess::CNaturalMortalityProcess() {
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_M);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_LAYER);
+
 }
 //**********************************************************************
 // void CNaturalMortalityProcess::validate()
@@ -45,7 +47,8 @@ void CNaturalMortalityProcess::validate() {
     CProcess::validate();
 
     // Get our parameters
-    dM    = pParameterList->getDouble(PARAM_M);
+    dM      = pParameterList->getDouble(PARAM_M);
+    sLayer  = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
@@ -83,6 +86,9 @@ void CNaturalMortalityProcess::build() {
           pGrid[i][j].build();
     }
 
+    if (sLayer != "")
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
     // Rebuild
     rebuild();
 
@@ -111,7 +117,7 @@ void CNaturalMortalityProcess::rebuild() {
             double dValue = dM*dSelectivityResult;
 
             // Multiply it by Layer Value
-            if (bDependsOnLayer)
+            if (pLayer != 0)
               dValue *= pLayer->getValue(i, j);
 
             // Convert To Proportion
@@ -157,7 +163,7 @@ void CNaturalMortalityProcess::execute() {
         // Check Square Ok
         if (!pBaseSquare->getEnabled())
           continue;
-        if ( (bDependsOnLayer) && (!pLayer->checkSpace(i, j)) )
+        if ( (pLayer != 0) && (!pLayer->checkSpace(i, j)) )
           continue;
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
