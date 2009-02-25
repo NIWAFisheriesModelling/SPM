@@ -19,7 +19,7 @@
 \defDefault{None}
 \defValue{A positive integer, $n_{cols} > 0$}
 
-\defSub{Layer}{The label for the base layer}
+\defSub{BaseLayer}{The label for the base layer}
 \defType{String}
 \defDefault{None}
 \defValue{Must be a label of a \argument{numeric} layer defined by \command{Layer}}
@@ -148,7 +148,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{The age classes that receive recruitment}
 
-\defSub{LayerName} {Name of the layer used to determine where recruitment occurs}
+\defSub{Layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{TRUE}}
@@ -205,7 +205,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defValue{Must be vector of that specifies the years of \commandlabsub{BHRecruitmentProcess}{YCSValues}}
 \defNote{Special year ranges (YYYY-YYYY) can be used}
 
-\defSub{LayerName} {Name of the layer used to determine where recruitment occurs}
+\defSub{Layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer as defined by \command{Layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{TRUE}}
@@ -268,7 +268,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid years for the model}
 
-\defSub{LayerNames} {Define the layers that specify the event mortality (as the abundance) in each year}
+\defSub{Layers} {Define the layers that specify the event mortality (as the abundance) in each year}
 \defType{String vector, of length years}
 \defDefault{None}
 \defValue{Valid layers defined by \command{Layer}}
@@ -305,7 +305,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid years for the model}
 
-\defSub{LayerNames}{Define the layers that specify the event mortality (as a biomass) in each year}
+\defSub{Layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defType{String vector, of length years}
 \defDefault{None}
 \defValue{Valid layers defined by \command{Layer}}
@@ -376,12 +376,12 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid categories from \commandsub{Model}{Categories}}
 
-\defSub{SourceLayerName} {Define the label of a layer that defines the source cells of the migration movement event}
+\defSub{SourceLayer} {Define the label of a layer that defines the source cells of the migration movement event}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
 
-\defSub{SinkLayerName} {Define the label of a layer that defines the sink cells of the migration movement event}
+\defSub{SinkLayer} {Define the label of a layer that defines the sink cells of the migration movement event}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -438,7 +438,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Constant]{\commandlabsubarg{PreferenceFunction}{Type}{Constant}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -449,7 +449,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Normal]{\commandlabsubarg{PreferenceFunction}{Type}{Normal}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -468,7 +468,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Double-normal]{\commandlabsubarg{PreferenceFunction}{Type}{DoubleNormal}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -491,7 +491,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Logistic]{\commandlabsubarg{PreferenceFunction}{Type}{Logistic}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -510,7 +510,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Inverse-logistic]{\commandlabsubarg{PreferenceFunction}{Type}{InverseLogistic}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -529,7 +529,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Exponential-decay]{\commandlabsubarg{PreferenceFunction}{Type}{ExponentialDecay}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -544,7 +544,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Threshold]{\commandlabsubarg{PreferenceFunction}{Type}{Threshold}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -573,7 +573,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 
 \subsubsection[Threshold-biomass]{\commandlabsubarg{PreferenceFunction}{Type}{ThresholdBiomass}}
 
-\defSub{LayerName} {Defines the layer which supplies the preference function independent variable}
+\defSub{Layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
 \defDefault{None}
 \defValue{A valid layer defined by \command{Layer}}
@@ -714,7 +714,7 @@ There are no other subcommands for \commandlabsubarg{Layer}{Type}{Distance}.
 \defType{Constant vector, with values for each year of the model}
 \defDefault{None}
 
-\defSub{LayerNames} {Define the layer labels for each of the years}
+\defSub{Layers} {Define the layer labels for each of the years}
 \defType{String vector, with values for each \argument{year} specified}
 \defDefault{None}
 \defCondition{Layers cannot be \commandlabsubarg{Layer}{Type}{MetaLayer}}
