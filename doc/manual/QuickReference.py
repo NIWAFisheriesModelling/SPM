@@ -1,6 +1,7 @@
 import string
 import re
 p = re.compile('\{\w+',re.IGNORECASE)
+q = re.compile('\}\}\w+',re.IGNORECASE)
 
 FILE = [open('Syntax/GeneralSyntax.tex', 'r'),
         open('Syntax/PopulationSyntax.tex', 'r'),
@@ -87,6 +88,10 @@ for i in range(len(FILE)):
       if (line[1:7]=="defSub") :
         m = p.search(line)
         Keywords2.append(m.group()[1:])
+      if (line[1:11]=="par\\textbf") :
+        m = q.search(line[::-1])
+        n = m.group()[::-1]
+        Keywords4.append(n[0:(len(n)-2)])
 
       OUTFILE.write(line)
       OUTFILE.write('\n')
