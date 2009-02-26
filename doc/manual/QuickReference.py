@@ -1,7 +1,8 @@
 import string
 import re
-p = re.compile('\{\w+',re.IGNORECASE)
-q = re.compile('\}\}\w+',re.IGNORECASE)
+
+p = re.compile('\{.*?\}',re.IGNORECASE)
+q = re.compile('\}.*?\{',re.IGNORECASE)
 
 FILE = [open('Syntax/GeneralSyntax.tex', 'r'),
         open('Syntax/PopulationSyntax.tex', 'r'),
@@ -78,7 +79,7 @@ for i in range(len(FILE)):
         count=0
       if (line[1:7]=="defCom") :
         m = p.search(line)
-        Keywords1.append("@" + m.group()[1:])
+        Keywords1.append(m.group()[1:(len(m.group())-1)])
         if (count!=0):
           line = "\\par " + line
         else:
@@ -87,31 +88,46 @@ for i in range(len(FILE)):
           line = line + "\\par"
       if (line[1:7]=="defSub") :
         m = p.search(line)
-        Keywords2.append(m.group()[1:])
+        Keywords2.append(m.group()[1:(len(m.group())-1)])
       if (line[1:11]=="par\\textbf") :
         m = q.search(line[::-1])
         n = m.group()[::-1]
-        Keywords4.append(n[0:(len(n)-2)])
+        Keywords4.append(n[1:(len(n)-2)])
 
       OUTFILE.write(line)
       OUTFILE.write('\n')
 
+# Remove duplicates
 Keywords1 = list(set(Keywords1))
 Keywords2 = list(set(Keywords2))
 Keywords3 = list(set(Keywords3))
 Keywords4 = list(set(Keywords4))
 Keywords5 = list(set(Keywords5))
 Keywords6 = list(set(Keywords6))
+# Sort
 Keywords1.sort()
 Keywords2.sort()
 Keywords3.sort()
 Keywords4.sort()
 Keywords5.sort()
 Keywords6.sort()
+#Remove '\' in each string
+for i in range(len(Keywords1)):
+  Keywords1[i] = Keywords1[i].replace("\\", "")
+for i in range(len(Keywords2)):
+  Keywords2[i] = Keywords2[i].replace("\\", "")
+for i in range(len(Keywords3)):
+  Keywords3[i] = Keywords3[i].replace("\\", "")
+for i in range(len(Keywords4)):
+  Keywords4[i] = Keywords4[i].replace("\\", "")
+for i in range(len(Keywords5)):
+  Keywords5[i] = Keywords5[i].replace("\\", "")
+for i in range(len(Keywords6)):
+  Keywords6[i] = Keywords6[i].replace("\\", "")
 
 SYNTAX_OUTFILE.write("\n[Keywords 1]\n")
 for i in Keywords1 :
-  SYNTAX_OUTFILE.write(i)
+  SYNTAX_OUTFILE.write("@" + i)
   SYNTAX_OUTFILE.write("\n")
 
 SYNTAX_OUTFILE.write("\n[Keywords 2]\n")
@@ -139,3 +155,37 @@ SYNTAX_OUTFILE.write("\n[Preprocessor keywords]\n")
 for i in Keywords6 :
   SYNTAX_OUTFILE.write(i)
   SYNTAX_OUTFILE.write("\n")
+
+# Compare against translations file
+r = re.compile('\".*?\"',re.IGNORECASE)
+TRANSLATION = open('../../src/Translations/English_UK.h', 'r')
+DEFINED = []
+for line in TRANSLATION:
+  if line[0:13] == "#define PARAM" :
+    o = r.search(line)
+    DEFINED.append(o.group()[1:(len(o.group())-1)])
+DEFINED = list(set(DEFINED))
+DEFINED.sort()
+# Generate a list of all keywords
+KEYWORDS = Keywords1 + Keywords2 + Keywords4
+# Make all lower case
+for i in range(len(DEFINED)):
+  DEFINED[i] = DEFINED[i].lower()
+for i in range(len(KEYWORDS)):
+  KEYWORDS[i] = KEYWORDS[i].lower()
+
+# In translation file, but not in Manual?
+print('\nIn SPM, but not in manual\n')
+for i in range(len(DEFINED)):
+  if (DEFINED[i] not in KEYWORDS) :
+    print("  " + DEFINED[i])
+print('\n\n\nIn manual, but not in SPM\n')
+for i in range(len(KEYWORDS)):
+  if (KEYWORDS[i] not in DEFINED) :
+    print("  " + KEYWORDS[i])
+
+
+
+
+
+

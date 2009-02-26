@@ -4,14 +4,14 @@ The \config\ comprises of four parts (preamble, population, estimation, and outp
 
 The population section is defined in the \config\ by the text \texttt{[population]}, the estimation section by the text \texttt{[estimation]}, and the output section by the text \texttt{[output]}. These must be the only text on those lines.
 
-Otherwise, the only command that can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections is the command \command{IncludeFile}. It is defined as,
+Otherwise, the only command that can occur in any of the \texttt{[population]}, \texttt{[estimation]}, or \texttt{[output]} sections is the command \command{include}. It is defined as,
 
-\defComArg{IncludeFile}{file\_name}{Include an external file}
+\defComArg{include}{file\_name}{Include an external file}
 
 \defArg{file\_name}{The name of the external file to include}
 \defType{string}
 \defDefault{None}
 \defValue{A valid external file}
 \defCondition{The file name must be enclosed in double quotes}
-\defExample{\command{IncludeFile} \argument{\ "my\_file.txt"}}
-\defNote{\command{IncludeFile} does not denote the end of the previous command block as is the case for all other commands}
+\defExample{\command{include} \argument{\ "my\_file.txt"}}
+\defNote{\command{include} does not denote the end of the previous command block as is the case for all other commands}

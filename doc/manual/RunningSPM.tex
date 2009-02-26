@@ -23,7 +23,7 @@ The \config\ comprises of five parts (preamble, population, estimation, observat
 
 \end{description}
 
-The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{IncludeFile} \texttt{ ``file''}. The command causes an external file, \argument{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{IncludeFile} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
+The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{ ``file''}. The command causes an external file, \argument{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 \subsection{Redirecting standard output\label{sec:redirecting-stdout}}
 
@@ -80,7 +80,7 @@ In addition, the following are optional arguments [\emph{options}],
 
 \item [\texttt{-q}] Run \emph{quietly}, i.e., suppress verbose printing of \SPM.
 
-\item [\texttt{-g \emph{seed}}]  Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ looks to the \texttt{[estimation]} section for a random number seed \command{RandomSeed}, and if not defined, then automatically generates a random number seed based on the computer clock time.
+\item [\texttt{-g \emph{seed}}]  Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ looks to the \texttt{[estimation]} section for a random number seed \command{random\_seed}, and if not defined, then automatically generates a random number seed based on the computer clock time.
 \end{description}
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
