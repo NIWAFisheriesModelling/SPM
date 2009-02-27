@@ -6,9 +6,16 @@ project(SPM)
 # .cpp files in a txt file. Then use a simple find/replace from .cpp to ""
 # find | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest"
 
-SET(NAME SimFish) 
+SET(NAME SimFish)
 
-ADD_EXECUTABLE(${NAME} 
+# Added autogeneration of Version.h file in src directory
+ADD_CUSTOM_COMMAND(
+  OUTPUT SVN
+  COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
+)
+ADD_CUSTOM_TARGET(version ALL DEPENDS SVN)
+
+ADD_EXECUTABLE(${NAME}
  src/BaseClasses/CBaseBuild
  src/BaseClasses/CBaseExecute
  src/BaseClasses/CBaseManager
@@ -139,7 +146,7 @@ ADD_EXECUTABLE(${NAME}
  src/World/WorldSquareCollection/CWorldSquareCollection
 )
 
-SET(LIBRARIES 
+SET(LIBRARIES
  libboost_system-mgw34-d-1_35
  libboost_unit_test_framework-mgw34-sd-1_35
  libboost_filesystem-mgw34-d-1_35
@@ -148,4 +155,4 @@ SET(LIBRARIES
 )
 TARGET_LINK_LIBRARIES(${NAME} ${LIBRARIES})
 
- 
+
