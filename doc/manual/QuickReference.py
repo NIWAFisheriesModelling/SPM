@@ -12,6 +12,7 @@ FILE = [open('Syntax/GeneralSyntax.tex', 'r'),
 OUTFILE = open('QuickReference.tex', 'w')
 VERSION = open('SPMversion.tex', 'r')
 SYNTAX_OUTFILE = open('SPM.syn', 'w')
+ERROR_OUTFILE = open('syntax_errors.txt', 'w')
 
 OUTFILE.write("\section{Quick reference\label{sec:quick-reference}}\n")
 
@@ -175,14 +176,14 @@ for i in range(len(KEYWORDS)):
   KEYWORDS[i] = KEYWORDS[i].lower()
 
 # In translation file, but not in Manual?
-print('\nIn SPM, but not in manual\n')
+ERROR_OUTFILE.write('\nIn SPM, but not in manual\n')
 for i in range(len(DEFINED)):
   if (DEFINED[i] not in KEYWORDS) :
-    print("  " + DEFINED[i])
-print('\n\n\nIn manual, but not in SPM\n')
+    ERROR_OUTFILE.write("  " + DEFINED[i] + "\n")
+ERROR_OUTFILE.write('\n\n\nIn manual, but not in SPM\n')
 for i in range(len(KEYWORDS)):
   if (KEYWORDS[i] not in DEFINED) :
-    print("  " + KEYWORDS[i])
+    ERROR_OUTFILE.write("  " + KEYWORDS[i] + "\n")
 
 
 
