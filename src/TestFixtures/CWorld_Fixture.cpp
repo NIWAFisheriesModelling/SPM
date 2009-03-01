@@ -26,7 +26,7 @@ CWorld_Fixture::CWorld_Fixture() {
   pWorld->addParameter(PARAM_CELL_LENGTH, "1");
   pWorld->addParameter(PARAM_NROWS, "5");
   pWorld->addParameter(PARAM_NCOLS, "5");
-  pWorld->addParameter(PARAM_LAYER_NAME, "base_layer");
+  pWorld->addParameter(PARAM_LAYER, "base_layer");
   pWorld->addParameter(PARAM_MIN_AGE, "1");
   pWorld->addParameter(PARAM_MAX_AGE, "20");
   pWorld->addParameter(PARAM_AGE_PLUS_GROUP, "true");

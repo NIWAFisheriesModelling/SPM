@@ -27,7 +27,7 @@ BOOST_FIXTURE_TEST_CASE( ConstantPreferenceFunction_DoubleLayer, CLayer_Fixture 
 
   pPreference->addParameter(PARAM_LABEL, "constant");
   pPreference->addParameter(PARAM_ALPHA, "2");
-  pPreference->addParameter(PARAM_LAYER_NAME, "double_layer");
+  pPreference->addParameter(PARAM_LAYER, "double_layer");
 
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());
@@ -70,7 +70,7 @@ BOOST_FIXTURE_TEST_CASE( ConstantPreferenceFunction_DistanceLayer, CLayer_Fixtur
 
   pPreference->addParameter(PARAM_LABEL, "constant");
   pPreference->addParameter(PARAM_ALPHA, "3");
-  pPreference->addParameter(PARAM_LAYER_NAME, "distance_layer");
+  pPreference->addParameter(PARAM_LAYER, "distance_layer");
 
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());

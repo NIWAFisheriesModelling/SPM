@@ -248,6 +248,9 @@ void CRuntimeController::run() {
           break;
         case RUN_MODE_ESTIMATION:
           startEstimation();
+
+          eRunMode = RUN_MODE_BASIC;
+          pBaseThread->executeBasicRun();
           break;
         case RUN_MODE_PROFILE:
           // Get Minimizer Manager

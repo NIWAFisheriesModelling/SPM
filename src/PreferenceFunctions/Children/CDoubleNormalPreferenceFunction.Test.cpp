@@ -30,7 +30,7 @@ BOOST_FIXTURE_TEST_CASE( DoubleNormalPreferenceFunction_DoubleLayer, CLayer_Fixt
   pPreference->addParameter(PARAM_MU, "3.0");
   pPreference->addParameter(PARAM_SIGMA_L, "1.0");
   pPreference->addParameter(PARAM_SIGMA_R, "5.0");
-  pPreference->addParameter(PARAM_LAYER_NAME, "double_layer");
+  pPreference->addParameter(PARAM_LAYER, "double_layer");
 
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());
@@ -76,7 +76,7 @@ BOOST_FIXTURE_TEST_CASE( DoubleNormalPreferenceFunction_DistanceLayer, CLayer_Fi
   pPreference->addParameter(PARAM_MU, "3.0");
   pPreference->addParameter(PARAM_SIGMA_L, "1.0");
   pPreference->addParameter(PARAM_SIGMA_R, "5.0");
-  pPreference->addParameter(PARAM_LAYER_NAME, "distance_layer");
+  pPreference->addParameter(PARAM_LAYER, "distance_layer");
 
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());

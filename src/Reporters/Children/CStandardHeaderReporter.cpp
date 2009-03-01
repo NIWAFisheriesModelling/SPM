@@ -60,7 +60,12 @@ void CStandardHeaderReporter::start() {
 
   // Build Version
   sVersion = string("v0.1-") + string(SOURCE_CONTROL_VERSION);
-  sHeader += sVersion + "   Copyright (c) 2008, NIWA\n";
+  sHeader += sVersion + "   Copyright (c) 2008, NIWA";
+#ifdef OPTIMISE
+  sHeader += " (OPTIMISED)";
+#endif
+
+  sHeader += "\n";
 
   // Build User/Computer Info
 #ifdef __MINGW32__

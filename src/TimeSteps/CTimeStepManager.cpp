@@ -118,6 +118,8 @@ int CTimeStepManager::getTimeStepOrderIndex(string label) {
     Ex = "CTimeStepManager.getTimeStepOrderIndex()->" + Ex;
     throw Ex;
   }
+
+  return 0;
 }
 //**********************************************************************
 // void CTimeStepManager::clone(CTimeStepManager *Manager)
