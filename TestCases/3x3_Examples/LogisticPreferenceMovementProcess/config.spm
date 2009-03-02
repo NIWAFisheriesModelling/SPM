@@ -1,0 +1,66 @@
+# Spatial structure
+@model
+nrows 3
+ncols 3
+layer Base
+categories immature
+min_age 1
+max_age 5
+age_plus_group True
+initial_year 1994
+current_year 1996
+final_year 100
+cell_length 1
+time_steps One
+
+@time_step One
+processes Recruitment PrefMoveOne
+
+@process PrefMoveOne
+type preference
+categories immature
+preference_functions logistic_preference
+
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 100
+ages 1
+
+@preference_function logistic_preference
+type logistic
+alpha 2.6
+a50 4.0
+ato95 12.7  
+layer double_layer
+
+@layer base
+type double
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer double_layer
+type double
+data 1 2 3
+data 4 5 6
+data 7 8 9
+
+@reporter 1994_TimeStep_One
+type world_state
+time_step one
+year 1994
+
+@reporter 1995_TimeStep_One
+type world_state
+time_step one
+year 1995
+
+@reporter 1996_TimeStep_One
+type world_state
+time_step one
+year 1996
+
+@reporter Objective_Score
+type objective_function
