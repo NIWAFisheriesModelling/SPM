@@ -1,0 +1,73 @@
+# Constant-Recruitment Process
+# 1x1 Example
+
+# Spatial structure
+@model
+nrows 1
+ncols 1
+layer Base
+categories immature
+min_age 1
+max_age 5
+age_plus_group True
+initial_year 1994
+current_year 1996
+final_year 100
+cell_length 1
+time_steps One
+
+@time_step One
+processes Recruitment EventMortality
+
+@process EventMortality
+type event_mortality
+categories immature
+years 1994 1995 1996
+layers EM1994 EM1995 EM1996 
+Umax 0.99
+selectivities One One One
+
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 100
+ages 1
+
+@layer EM1994
+type double
+data 20
+
+@layer EM1995
+type double
+data 40
+
+@layer EM1996
+type double
+data 60
+
+@layer base
+type double
+data 1 
+
+@selectivity One
+type constant
+c 1
+
+@reporter 1994_TimeStep_One
+type world_state
+time_step one
+year 1994
+
+@reporter 1995_TimeStep_One
+type world_state
+time_step one
+year 1995
+
+@reporter 1996_TimeStep_One
+type world_state
+time_step one
+year 1996
+
+@reporter Objective_Score
+type objective_function

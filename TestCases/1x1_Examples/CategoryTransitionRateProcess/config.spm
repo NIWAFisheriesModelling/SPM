@@ -1,0 +1,67 @@
+# Ageing Process
+# 1x1 Example
+
+# Spatial structure
+@model
+nrows 1
+ncols 1
+layer Base
+categories immature mature spawning
+min_age 1
+max_age 5
+age_plus_group True
+initial_year 1994
+current_year 1996
+final_year 100
+cell_length 1
+time_steps One
+
+@time_step One
+processes Mature_To_Spawning Immature_To_Mature Recruitment 
+
+@process Immature_To_Mature
+type category_transition_rate
+from immature
+to mature
+proportion 0.5
+selectivity One
+
+@process Mature_To_Spawning
+type category_transition_rate
+from mature
+to spawning
+proportion 0.25
+selectivity One
+
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 100
+ages 1
+
+@layer base
+type double
+data 1 
+
+@selectivity One
+type constant
+c 1
+
+@reporter 1994_TimeStep_One
+type world_state
+time_step one
+year 1994
+
+@reporter 1995_TimeStep_One
+type world_state
+time_step one
+year 1995
+
+@reporter 1996_TimeStep_One
+type world_state
+time_step one
+year 1996
+
+@reporter Objective_Score
+type objective_function
