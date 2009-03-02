@@ -21,9 +21,9 @@ file_name state-2004-1.txt
 
 @reporter Final
 type world_state
-time_step step_one
+time_step step_two
 year 2008
-file_name state-2008-1.txt
+file_name state-2008-2.txt
 
 @reporter Objective_Score
 type objective_function

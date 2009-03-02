@@ -2,6 +2,13 @@
 @MPD
 minimiser gammadiff
 
+@minimiser desolver
+type desolver
+max_iters 1000
+max_evals 4000
+step_size 1e-7
+grad_tol 0.00002 #The default is 0.002
+
 @minimiser gammadiff
 type gammadiff
 max_iters 1000
@@ -347,7 +354,6 @@ prior Uniform
 
 @prior Uniform
 type uniform
-c 0
 
 @prior Uniform-log
 type uniform_log
