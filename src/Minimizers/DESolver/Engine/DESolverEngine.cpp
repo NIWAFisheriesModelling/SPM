@@ -168,10 +168,10 @@ bool DESolverEngine::Solve(int maxGenerations) {
       // Build our Trial Solution
       (this->*calcTrialSolution)(j);
 
-      cout << "DEBUG: CurrentValues: ";
+      /*cout << "DEBUG: CurrentValues: ";
       for (int k = 0; k < iVectorSize; ++k)
         cout << vCurrentValues[k] << ", ";
-      cout << endl;
+      cout << endl;*/
 
       // Execute it.
       dTrialEnergy = EnergyFunction(vCurrentValues);

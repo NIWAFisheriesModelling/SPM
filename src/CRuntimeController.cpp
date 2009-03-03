@@ -245,11 +245,15 @@ void CRuntimeController::run() {
       switch(eRunMode) {
         case RUN_MODE_BASIC:
           pBaseThread->executeBasicRun();
+
+          if (pConfig->getUseEstimateValues())
+            pBaseThread->rebuild();
           break;
         case RUN_MODE_ESTIMATION:
-          startEstimation();
-
+          pBaseThread->executeEstimationRun();
+          // Now, Swap to Basic Run to Print Reporters with Answer
           eRunMode = RUN_MODE_BASIC;
+          pBaseThread->rebuild();
           pBaseThread->executeBasicRun();
           break;
         case RUN_MODE_PROFILE:

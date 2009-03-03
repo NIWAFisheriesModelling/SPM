@@ -73,12 +73,6 @@ void CInitializationPhaseManager::loadInitializationPhaseOrder(vector<string> &o
       }
     }
   }
-
-#ifdef VERBOSE
-  cout << "Initialization Phase Manager Load Initializaiton Phase Order" << endl;
-  cout << ">> " << order.size() << " labels provided" << endl;
-  cout << ">> " << vInitializationPhaseOrder.size() << " phases loaded" << endl;
-#endif
 }
 
 //**********************************************************************
@@ -136,12 +130,6 @@ void CInitializationPhaseManager::build() {
 // Execute our Initialization Phases
 //**********************************************************************
 void CInitializationPhaseManager::execute() {
-#ifdef VERBOSE
-  cout << "Initialization Phase Manager Execute" << endl;
-  cout << ">> " << vInitializationPhaseOrder.size() << " ordered phases" << endl;
-  cout << ">> " << vInitializationPhases.size() << " named phases" << endl;
-#endif
-
   foreach(CInitializationPhase *Phase, vInitializationPhaseOrder) {
     Phase->execute();
   }

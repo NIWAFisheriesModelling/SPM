@@ -27,7 +27,8 @@ CObjectiveFunctionReporter::CObjectiveFunctionReporter() {
 void CObjectiveFunctionReporter::execute() {
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    return;
+    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+      return;
 
   this->start();
 

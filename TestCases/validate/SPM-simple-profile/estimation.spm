@@ -353,7 +353,6 @@ prior Uniform
 
 @prior Uniform
 type uniform
-c 0
 
 @prior Uniform-log
 type uniform_log

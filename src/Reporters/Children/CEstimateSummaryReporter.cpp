@@ -27,8 +27,10 @@ CEstimateSummaryReporter::CEstimateSummaryReporter() {
 //**********************************************************************
 void CEstimateSummaryReporter::execute() {
   // Check Run-Mode
+  // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    return;
+    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+      return;
 
   // Start IO
   this->start();
@@ -57,5 +59,4 @@ void CEstimateSummaryReporter::execute() {
 // Destructor
 //**********************************************************************
 CEstimateSummaryReporter::~CEstimateSummaryReporter() {
-  // TODO Auto-generated destructor stub
 }

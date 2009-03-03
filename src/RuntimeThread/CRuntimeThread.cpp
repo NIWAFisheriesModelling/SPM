@@ -7,6 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CRuntimeThread.h"
 #include "../Minimizers/CMinimizerManager.h"
@@ -28,6 +31,11 @@
 #include "../InitializationPhases/CInitializationPhase.h"
 #include "../Catchabilities/CCatchabilityManager.h"
 #include "../Reporters/CReporterManager.h"
+#include "../CRuntimeController.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
@@ -178,8 +186,8 @@ void CRuntimeThread::executeBasicRun() {
 // Execute Estimations
 //**********************************************************************
 void CRuntimeThread::executeEstimationRun() {
-  //CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
-  //pMinimizerManager->execute();
+  CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
+  pMinimizerManager->execute();
 }
 
 //**********************************************************************

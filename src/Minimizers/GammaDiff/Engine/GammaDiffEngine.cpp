@@ -186,9 +186,10 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
           buildCurrentValues();
 
           dScoreI = objective(vCurrentValues);
+          cout << "Ret Score: " << dScoreI << endl;
           dScoreI += dPenalty;
 
-          cout << "Scores: " << dScoreI << " / " << dScore << " / " << dStepSizeI << endl;
+          cout << "Scores: " << dScoreI << " / " << dScore << " / " << dStepSizeI << " / " << dPenalty << endl;
 
           // Populate Gradient, and Restore Orig Value
           vGradientValues[i]  = (dScoreI - dScore) / dStepSizeI;

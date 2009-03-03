@@ -13,6 +13,7 @@
 #include "../Children/CWorldStateReporter.h"
 #include "../Children/CObjectiveFunctionReporter.h"
 #include "../Children/CEstimateSummaryReporter.h"
+#include "../Children/CEstimateValueReporter.h"
 
 //**********************************************************************
 //
@@ -28,6 +29,8 @@ CReporter* CReporterFactory::buildReporter(string type, bool registerWithManager
     pReporter = new CObjectiveFunctionReporter();
   else if (type == PARAM_ESTIMATE_SUMMARY)
     pReporter = new CEstimateSummaryReporter();
+  else if (type == PARAM_ESTIMATE_VALUE)
+    pReporter = new CEstimateValueReporter();
   else
     throw string("Unknown type: " + type);
 

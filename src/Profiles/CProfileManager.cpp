@@ -14,6 +14,7 @@
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
+#include "../Reporters/CReporterManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../CRuntimeController.h"
@@ -159,7 +160,7 @@ void CProfileManager::execute() {
     CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
     vector<CProfile*>::iterator vPtr = vProfileList.begin();
 
-//    CPrintStateManager *pPrintStateManager = CPrintStateManager::Instance();
+    CReporterManager *pReporter = CReporterManager::Instance();
 
     // Save our Current State
     saveState();
@@ -174,7 +175,7 @@ void CProfileManager::execute() {
         // minimize
         pMinimizer->execute();
 
-  //      pPrintStateManager->execute(STATE_FINALIZATION);
+        pReporter->execute(STATE_FINALIZATION);
 
         // Reset state back to initial world.
         resetState();

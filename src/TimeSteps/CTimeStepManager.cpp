@@ -65,27 +65,6 @@ void CTimeStepManager::addTimeStep(CTimeStep *value) {
 }
 
 //**********************************************************************
-// CTimeStep* CTimeStepManager::getTimeStep(int index)
-// Get the timestep from our vector @ index
-//**********************************************************************
-//CTimeStep* CTimeStepManager::getTimeStep(int index) {
-//  try {
-//    if (index >= (int)vTimeSteps.size())
-//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_TIME_STEPS);
-//    if (index < 0)
-//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-//
-//    return vTimeSteps[index];
-//
-//  } catch (string Ex) {
-//    Ex = "CTimeStepManager.getTimeStep()->" + Ex;
-//    throw Ex;
-//  }
-//
-//  return 0;
-//}
-
-//**********************************************************************
 // void CTimeStepManager::loadTimeStepOrder(vector<string> &order)
 // Load the TimeStep Order for Execution
 //**********************************************************************
@@ -191,12 +170,6 @@ void CTimeStepManager::build() {
 // Execute Our TimeSteps
 //**********************************************************************
 void CTimeStepManager::execute() {
-#ifdef VERBOSE
-  cout << "TimeStep Manager Execution" << endl;
-  cout << ">> TimeSteps Size: " << vTimeSteps.size() << endl;
-  cout << ">> Order Size: " << vTimeStepsOrder.size() << endl;
-  cout << ">> NumberOfYears: " << iNumberOfYears << endl;
-#endif
 
   for (int i = 0; i <= iNumberOfYears; ++i) {
     iCurrentYear = i + iFirstHumanYear;

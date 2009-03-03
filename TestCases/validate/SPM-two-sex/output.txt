@@ -1,0 +1,399 @@
+SPM (Spatial Population Model)
+CmdLine: spm -e 
+Date: Tue Mar 03 10:26:07 2009
+v0.1-2008-12-04-21:37:00 UTC (rev. 2881)   Copyright (c) 2008, NIWA (OPTIMISED)
+User name: Admin
+Machine name: REDBOX (Windows_NT, PID=3112)
+
+Total Score: 2698.13
+Total Score: 2698.13
+Ret Score: 2698.13
+Scores: 2698.13 / 2698.13 / -1e-007 / 0
+Gradient: 19423.9
+Total Score: 2698.13
+Ret Score: 2698.13
+Scores: 2698.13 / 2698.13 / -1e-007 / 0
+Gradient: 64561.8
+Total Score: 2698.13
+Ret Score: 2698.13
+Scores: 2698.13 / 2698.13 / -1e-007 / 0
+Gradient: -3442.2
+Total Score: 2698.13
+Ret Score: 2698.13
+Scores: 2698.13 / 2698.13 / -1e-007 / 0
+Gradient: 34.1203
+FMM: Iteration = 1
+FMM: Function value = 2698.13
+FMM: Current parameter estimates = -0.950162 -0.987938 -0.169528 -0.68542 
+FMM: Convergence check value = 23.9283
+FMM: Convergence threshold = 2e-005
+Total Score: 40440.7
+Total Score: 34708
+Total Score: 7082.21
+Total Score: 4138.73
+Total Score: 2553.66
+Total Score: 2553.66
+Ret Score: 2553.66
+Scores: 2568.19 / 2568.19 / -1e-007 / 14.5293
+Gradient: 18925.9
+Total Score: 2553.67
+Ret Score: 2553.67
+Scores: 2568.2 / 2568.19 / -1e-007 / 14.5295
+Gradient: -54209.3
+Total Score: 2553.66
+Ret Score: 2553.66
+Scores: 2568.19 / 2568.19 / -1e-007 / 14.5293
+Gradient: -3356.66
+Total Score: 2553.66
+Ret Score: 2553.66
+Scores: 2568.19 / 2568.19 / -1e-007 / 14.5293
+Gradient: -190.067
+FMM: Iteration = 2
+FMM: Function value = 2568.19
+FMM: Current parameter estimates = -0.957417 -1.01205 -0.168242 -0.685432 
+FMM: Convergence check value = 21.3624
+FMM: Convergence threshold = 2e-005
+Total Score: 21075.3
+Total Score: 7061.67
+Total Score: 2394.46
+Total Score: 2394.46
+Ret Score: 2394.46
+Scores: 2545.73 / 2545.73 / -1e-007 / 151.267
+Gradient: -24000.5
+Total Score: 2394.46
+Ret Score: 2394.46
+Scores: 2545.73 / 2545.73 / -1e-007 / 151.267
+Gradient: -39698.7
+Total Score: 2394.46
+Ret Score: 2394.46
+Scores: 2545.73 / 2545.73 / -1e-007 / 151.267
+Gradient: -2519.04
+Total Score: 2394.46
+Ret Score: 2394.46
+Scores: 2545.73 / 2545.73 / -1e-007 / 151.267
+Gradient: -829.226
+FMM: Iteration = 3
+FMM: Function value = 2545.73
+FMM: Current parameter estimates = -1.03712 -1.01161 -0.154112 -0.685066 
+FMM: Convergence check value = 15.7753
+FMM: Convergence threshold = 2e-005
+Total Score: 4.19842e+006
+Total Score: 2262.21
+Total Score: 2262.21
+Ret Score: 2262.21
+Scores: 2366.08 / 2366.08 / -1e-007 / 103.869
+Gradient: -12903.9
+Total Score: 2262.21
+Ret Score: 2262.21
+Scores: 2366.08 / 2366.08 / -1e-007 / 103.869
+Gradient: -9230.75
+Total Score: 2262.21
+Ret Score: 2262.21
+Scores: 2366.08 / 2366.08 / -1e-007 / 103.869
+Gradient: 2990.96
+Total Score: 2262.21
+Ret Score: 2262.21
+Scores: 2366.08 / 2366.08 / -1e-007 / 103.869
+Gradient: -6774.04
+FMM: Iteration = 4
+FMM: Function value = 2366.08
+FMM: Current parameter estimates = -1.03044 -1.0106 -0.0399722 -0.670393 
+FMM: Convergence check value = 5.61969
+FMM: Convergence threshold = 2e-005
+Total Score: 7002.93
+Total Score: 2641.6
+Total Score: 2081.49
+Total Score: 2081.48
+Ret Score: 2081.48
+Scores: 2153.69 / 2153.69 / -1e-007 / 72.2006
+Gradient: 79.7637
+Total Score: 2081.48
+Ret Score: 2081.48
+Scores: 2153.68 / 2153.69 / -1e-007 / 72.2003
+Gradient: 26028.6
+Total Score: 2081.49
+Ret Score: 2081.49
+Scores: 2153.69 / 2153.69 / 1e-007 / 72.2001
+Gradient: 1217.12
+Total Score: 2081.49
+Ret Score: 2081.49
+Scores: 2153.69 / 2153.69 / -1e-007 / 72.2001
+Gradient: -1202.18
+FMM: Iteration = 5
+FMM: Function value = 2153.69
+FMM: Current parameter estimates = -1.02505 -1.00971 0.0374664 -0.583062 
+FMM: Convergence check value = 12.203
+FMM: Convergence threshold = 2e-005
+Total Score: 2031.23
+Total Score: 2031.23
+Ret Score: 2031.23
+Scores: 2094.07 / 2094.07 / -1e-007 / 62.8367
+Gradient: -5293.93
+Total Score: 2031.23
+Ret Score: 2031.23
+Scores: 2094.07 / 2094.07 / -1e-007 / 62.8366
+Gradient: 634.25
+Total Score: 2031.23
+Ret Score: 2031.23
+Scores: 2094.07 / 2094.07 / 1e-007 / 62.8363
+Gradient: 781.43
+Total Score: 2031.23
+Ret Score: 2031.23
+Scores: 2094.07 / 2094.07 / -1e-007 / 62.8363
+Gradient: -270.009
+FMM: Iteration = 6
+FMM: Function value = 2094.07
+FMM: Current parameter estimates = -1.02125 -1.0133 0.0336951 -0.572714 
+FMM: Convergence check value = 2.58178
+FMM: Convergence threshold = 2e-005
+Total Score: 6081.48
+Total Score: 2019.95
+Total Score: 2019.95
+Ret Score: 2019.95
+Scores: 2075.46 / 2075.46 / -1e-007 / 55.515
+Gradient: -1974.72
+Total Score: 2019.95
+Ret Score: 2019.95
+Scores: 2075.46 / 2075.46 / -1e-007 / 55.5149
+Gradient: 4375.87
+Total Score: 2019.95
+Ret Score: 2019.95
+Scores: 2075.46 / 2075.46 / 1e-007 / 55.5146
+Gradient: 633.12
+Total Score: 2019.95
+Ret Score: 2019.95
+Scores: 2075.46 / 2075.46 / -1e-007 / 55.5146
+Gradient: -261.059
+FMM: Iteration = 7
+FMM: Function value = 2075.46
+FMM: Current parameter estimates = -1.01905 -1.01387 0.0184041 -0.579748 
+FMM: Convergence check value = 2.13763
+FMM: Convergence threshold = 2e-005
+Total Score: 2011.38
+Total Score: 2011.38
+Ret Score: 2011.38
+Scores: 2058.24 / 2058.24 / -1e-007 / 46.8618
+Gradient: 5658.61
+Total Score: 2011.38
+Ret Score: 2011.38
+Scores: 2058.24 / 2058.24 / -1e-007 / 46.8619
+Gradient: 7888.46
+Total Score: 2011.38
+Ret Score: 2011.38
+Scores: 2058.24 / 2058.24 / -1e-007 / 46.8615
+Gradient: -251.829
+Total Score: 2011.38
+Ret Score: 2011.38
+Scores: 2058.24 / 2058.24 / -1e-007 / 46.8615
+Gradient: 67.0673
+FMM: Iteration = 8
+FMM: Function value = 2058.24
+FMM: Current parameter estimates = -1.01434 -1.01621 -0.0359851 -0.60266 
+FMM: Convergence check value = 3.89476
+FMM: Convergence threshold = 2e-005
+Total Score: 2002.72
+Total Score: 2002.72
+Ret Score: 2002.72
+Scores: 2054.29 / 2054.29 / -1e-007 / 51.5651
+Gradient: -1637.44
+Total Score: 2002.72
+Ret Score: 2002.72
+Scores: 2054.29 / 2054.29 / -1e-007 / 51.5651
+Gradient: 2108.57
+Total Score: 2002.72
+Ret Score: 2002.72
+Scores: 2054.29 / 2054.29 / -1e-007 / 51.5647
+Gradient: -160.178
+Total Score: 2002.72
+Ret Score: 2002.72
+Scores: 2054.29 / 2054.29 / -1e-007 / 51.5647
+Gradient: 58.9095
+FMM: Iteration = 9
+FMM: Function value = 2054.29
+FMM: Current parameter estimates = -1.01611 -1.016 -0.0257009 -0.597865 
+FMM: Convergence check value = 1.04285
+FMM: Convergence threshold = 2e-005
+Total Score: 2001.1
+Total Score: 2001.1
+Ret Score: 2001.1
+Scores: 2051.9 / 2051.9 / -1e-007 / 50.8016
+Gradient: 651.444
+Total Score: 2001.09
+Ret Score: 2001.09
+Scores: 2051.9 / 2051.9 / -1e-007 / 50.8016
+Gradient: 3037.81
+Total Score: 2001.1
+Ret Score: 2001.1
+Scores: 2051.9 / 2051.9 / -1e-007 / 50.8013
+Gradient: 63.1209
+Total Score: 2001.1
+Ret Score: 2001.1
+Scores: 2051.9 / 2051.9 / -1e-007 / 50.8013
+Gradient: 66.6943
+FMM: Iteration = 10
+FMM: Function value = 2051.9
+FMM: Current parameter estimates = -1.01516 -1.01667 -0.0137542 -0.591261 
+FMM: Convergence check value = 1.50518
+FMM: Convergence threshold = 2e-005
+Total Score: 1998.65
+Total Score: 1998.65
+Ret Score: 1998.65
+Scores: 2049.97 / 2049.97 / -1e-007 / 51.3164
+Gradient: 1427.87
+Total Score: 1998.65
+Ret Score: 1998.65
+Scores: 2049.97 / 2049.97 / -1e-007 / 51.3165
+Gradient: 2518.24
+Total Score: 1998.65
+Ret Score: 1998.65
+Scores: 2049.97 / 2049.97 / -1e-007 / 51.3161
+Gradient: 5.56015
+Total Score: 1998.65
+Ret Score: 1998.65
+Scores: 2049.97 / 2049.97 / -1e-007 / 51.3161
+Gradient: 77.5135
+FMM: Iteration = 11
+FMM: Function value = 2049.97
+FMM: Current parameter estimates = -1.01425 -1.01761 -0.0181119 -0.593154 
+FMM: Convergence check value = 1.25006
+FMM: Convergence threshold = 2e-005
+Total Score: 1995.28
+Total Score: 1995.28
+Ret Score: 1995.28
+Scores: 2048.74 / 2048.74 / -1e-007 / 53.4684
+Gradient: 553.187
+Total Score: 1995.28
+Ret Score: 1995.28
+Scores: 2048.74 / 2048.74 / -1e-007 / 53.4685
+Gradient: 820.165
+Total Score: 1995.28
+Ret Score: 1995.28
+Scores: 2048.74 / 2048.74 / -1e-007 / 53.4681
+Gradient: -31.0736
+Total Score: 1995.28
+Ret Score: 1995.28
+Scores: 2048.74 / 2048.74 / -1e-007 / 53.4681
+Gradient: 40.6646
+FMM: Iteration = 12
+FMM: Function value = 2048.74
+FMM: Current parameter estimates = -1.01363 -1.01868 -0.0215642 -0.595278 
+FMM: Convergence check value = 0.407803
+FMM: Convergence threshold = 2e-005
+Total Score: 1994.08
+Total Score: 1994.08
+Ret Score: 1994.08
+Scores: 2048.6 / 2048.6 / -1e-007 / 54.5121
+Gradient: 82.3392
+Total Score: 1994.08
+Ret Score: 1994.08
+Scores: 2048.59 / 2048.6 / -1e-007 / 54.5122
+Gradient: 146.894
+Total Score: 1994.08
+Ret Score: 1994.08
+Scores: 2048.6 / 2048.6 / -1e-007 / 54.5118
+Gradient: -6.83609
+Total Score: 1994.08
+Ret Score: 1994.08
+Scores: 2048.6 / 2048.6 / -1e-007 / 54.5118
+Gradient: 8.56073
+FMM: Iteration = 13
+FMM: Function value = 2048.6
+FMM: Current parameter estimates = -1.01345 -1.01908 -0.0210146 -0.595353 
+FMM: Convergence check value = 0.0730731
+FMM: Convergence threshold = 2e-005
+Total Score: 1993.82
+Total Score: 1993.82
+Ret Score: 1993.82
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7675
+Gradient: 14.7143
+Total Score: 1993.82
+Ret Score: 1993.82
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7677
+Gradient: 14.3474
+Total Score: 1993.82
+Ret Score: 1993.82
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7673
+Gradient: 0.208688
+Total Score: 1993.82
+Ret Score: 1993.82
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7673
+Gradient: 0.107404
+FMM: Iteration = 14
+FMM: Function value = 2048.59
+FMM: Current parameter estimates = -1.0134 -1.01919 -0.0208625 -0.595366 
+FMM: Convergence check value = 0.00727886
+FMM: Convergence threshold = 2e-005
+Total Score: 1993.8
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7867
+Gradient: -3.25251
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7868
+Gradient: -1.55211
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7864
+Gradient: 0.0130721
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7864
+Gradient: -0.119544
+FMM: Iteration = 15
+FMM: Function value = 2048.59
+FMM: Current parameter estimates = -1.0134 -1.01919 -0.0208733 -0.595375 
+FMM: Convergence check value = 0.00160895
+FMM: Convergence threshold = 2e-005
+Total Score: 1993.8
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7869
+Gradient: 0.260981
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.787
+Gradient: 0.0448581
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7866
+Gradient: 0.0360074
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7866
+Gradient: -0.0540144
+FMM: Iteration = 16
+FMM: Function value = 2048.59
+FMM: Current parameter estimates = -1.01339 -1.01919 -0.0208723 -0.595373 
+FMM: Convergence check value = 0.000129102
+FMM: Convergence threshold = 2e-005
+Total Score: 1993.8
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7867
+Gradient: 0.037512
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7868
+Gradient: 0.032164
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7864
+Gradient: 0.00767223
+Total Score: 1993.8
+Ret Score: 1993.8
+Scores: 2048.59 / 2048.59 / -1e-007 / 54.7864
+Gradient: -0.0138169
+FMM: Iteration = 17
+FMM: Function value = 2048.59
+FMM: Current parameter estimates = -1.0134 -1.01919 -0.0208725 -0.595373 
+FMM: Convergence check value = 1.85564e-005
+FMM: Convergence threshold = 2e-005
+FMM: Convergence = 1.85564e-005
+FMM: Function score = 2048.59
+FMM: Current parameter estimates = -1.0134 -1.01919 -0.0208725 -0.595373 
+FMM: Gradient value = 0.037512 0.032164 0.00767223 -0.0138169 
+GammaDiff: Successful convergence
+Total Score: 1993.8
+Total Score: 1993.8
+Total elapsed time: 3 seconds

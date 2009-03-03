@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 2.6) project(SPM)
+cmake_minimum_required(VERSION 2.6) 
+project(SPM)
 
 # To build the list below I used MSYS
 # By executing the following command I could store the names of all
@@ -116,6 +117,7 @@ ADD_LIBRARY(${LIBRARY_NAME}
  src/Profiles/Factory/CProfileFactory
  src/Reporters/Children/Base/CFileReporter
  src/Reporters/Children/CEstimateSummaryReporter
+ src/Reporters/Children/CEstimateValueReporter
  src/Reporters/Children/CObjectiveFunctionReporter
  src/Reporters/Children/CStandardHeaderReporter
  src/Reporters/Children/CWorldStateReporter
@@ -146,7 +148,12 @@ ADD_LIBRARY(${LIBRARY_NAME}
 
 SET_TARGET_PROPERTIES(${LIBRARY_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -ggdb -Wall -fmessage-length=0" )
 
-SET(MAIN_LIBRARIES  libboost_system-mgw34-mt-1_38 libboost_filesystem-mgw34-mt-1_38 libboost_thread-mgw34-mt-1_38 libboost_program_options-mgw34-mt-1_38)
+SET(MAIN_LIBRARIES  
+ libboost_system-mgw34-mt-1_38 
+ libboost_filesystem-mgw34-mt-1_38 
+ libboost_thread-mgw34-mt-1_38 
+ libboost_program_options-mgw34-mt-1_38
+)
 
 SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
 ADD_EXECUTABLE(${MAIN_NAME}
@@ -287,6 +294,7 @@ ADD_EXECUTABLE(${OPTI_NAME}
  src/Profiles/Factory/CProfileFactory
  src/Reporters/Children/Base/CFileReporter
  src/Reporters/Children/CEstimateSummaryReporter
+ src/Reporters/Children/CEstimateValueReporter
  src/Reporters/Children/CObjectiveFunctionReporter
  src/Reporters/Children/CStandardHeaderReporter
  src/Reporters/Children/CWorldStateReporter
