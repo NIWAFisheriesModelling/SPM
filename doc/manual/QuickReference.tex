@@ -232,10 +232,11 @@
 \defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
 \subsection{Estimation command and subcommand syntax}
-\defCom{estimation}\par
+\defCom{Estimation}\par
+\defSub{minimiser} {The label of the minimiser to use, if doing a point estimate}
+\defSub{MCMC} {The label of the MCMC to use, of doing an MCMC}
+\defSub{Profile} {The labels of the profiles to use, if doing a profile}
 \defSub{random\_seed}{Defines the random number generator seed}
-\defSub{minimiser} {The label of the minimiser to use}
-\defSub{MCMC} {The label of the MCMC to use}
 \par \defComLab{Minimiser}{Define the an minimiser estimator with label}\par
 \defSub{type} {Define the type of minimiser}
 \par\textbf{\commandlabsubarg{minimiser}{type}{numerical\_differences}}\par
@@ -248,7 +249,7 @@
 \defSub{max\_evaluations} {Define the maximum number of evaluations for the Differential Evolution minimiser}
 \defSub{step\_size} {Define the step-size for the Differential Evolution minimiser}
 \defSub{gradient\_tolerance} {Define the gradient tolerance for the Differential Evolution minimiser}
-\par \defCom{MCMC}{Define the MCMC estimation arguments}\par
+\par \defComLab{MCMC}{Define the MCMC estimation arguments}\par
 \defSub{type} {Define the method of MCMC}
 \par\textbf{\commandsubarg{MCMC}{type}{Metropolis\_Hastings}}\par
 \defSub{start} {Covariance multiplier for the starting point of the Markov chain}
@@ -260,7 +261,9 @@
 \defSub{step\_size} {Initial step-size (as a multiplier of the approximate covariance matrix)}
 \defSub{proposal\_distribution} {The shape of the proposal distribution (either \textit{t} or normal)}
 \defSub{df} {Degrees of freedom of the multivariate t proposal distribution}
+\par \defComLab{Profile}{Define the profile parameters, minimiser, and arguments}\par
 \defSub{parameter} {Name of the parameter to be profiled}
+\defSub{minimiser} {The label of the minimiser to use}
 \defSub{N} {Number of values at which to profile the parameter}
 \defSub{lower\_bound} {lower bound on parameter}
 \defSub{upper\_bound} {Upper bound on parameter}
@@ -379,4 +382,12 @@
 \defSub{process\_error}{Define the process error term}
 \defSub{delta}{Define the delta robustifying constant for the distribution}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\subsection{Output command and subcommand syntax}
+\subsection{Reporting command and subcommand syntax}
+\defComLab{report}{Define an output report}\par
+\defSub{type} {Define the type of report}
+\par\textbf{\commandlabsubarg{report}{type}{partition}}\par
+\defSub{year} {Define the year that the partition report applies to}
+\defSub{time\_step} {Define the time-step that the partition report applies to}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\par\textbf{\commandlabsubarg{report}{type}{Parameters}}\par
+\defSub{file\_name} {Define the name of the output file where the report is written}

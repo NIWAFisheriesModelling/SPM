@@ -18,13 +18,13 @@ The population structure of \SPM\ follows the usual population modelling convent
 
 The spatial component of \SPM\ is designed to allow parametrise movement cohorts and groups of individuals between spatial locations, and hence allow movement parameters to be estimated by incorporating spatially explicit observations. 
 
-A model is implemented in \SPM\ using an \config \index{Input configuration file}, which is a complete description of the model structure (i.e., spatial and population processes), observations, estimation methods, and outputs (reports) requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, free parameters can be \emph{estimated} or \emph{profiled}, \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
+A model is implemented in \SPM\ using an \config \index{Input configuration file}, which is a complete description of the model structure (i.e., spatial and population processes), observations, estimation methods, and reports (outputs) requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, free parameters can be \emph{estimated} or \emph{profiled}, \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
 
 This section gives a quick overview of the model, and how to use it. Detailed descriptions of the components of \SPM, the model structures, mathematical equations used, and command and subcommand arguments are given in the following sections.
 
 \subsection{Model specification}
 
-A model in \SPM\ is specified by the \config\ in four components. These are the population section (model structure, population and spatial dynamics, etc,.), the estimation section (methods of estimation and the parameters to be estimated), the observation section (observational data and associated likelihoods), and the output section (printouts and reports from the model). These sections completely describe a model implemented in \SPM. See Sections \ref{sec:population-syntax}, \ref{sec:estimation-syntax}, \ref{sec:observation-syntax}, and \ref{sec:output-syntax} for details and specification of \SPM s command and subcommand syntax. 
+A model in \SPM\ is specified by the \config\ in four components. These are the population section (model structure, population and spatial dynamics, etc,.), the estimation section (methods of estimation and the parameters to be estimated), the observation section (observational data and associated likelihoods), and the report section (printouts and reports from the model). These sections completely describe a model implemented in \SPM. See Sections \ref{sec:population-syntax}, \ref{sec:estimation-syntax}, \ref{sec:observation-syntax}, and \ref{sec:output-syntax} for details and specification of \SPM s command and subcommand syntax. 
 
 \subsubsection{The population section}
 
@@ -89,6 +89,6 @@ Observations are data which allow us to make inferences about unknown parameters
 
 Types of observations, their values, and the associated error structures are defined in the observation section.
 
-\subsubsection{The output section}
+\subsubsection{The report section}
 
-The output section\index{Output section} specifies to model outputs. It defines the quantities and model components to be output to external files or to the screen. While \SPM\ will provide informational messages to the screen, the \SPM\ will only produce model estimates, population states, and other data as requested by the output section. 
+The report section\index{Report section} specifies to model outputs. It defines the quantities and model components to be output to external files or to the screen. While \SPM\ will provide informational messages to the screen, the \SPM\ will only produce model estimates, population states, and other data as requested by the report section. 

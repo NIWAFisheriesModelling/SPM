@@ -1,6 +1,6 @@
 \section{Running \SPM\label{sec:running-spm}}
 
-\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the outputs requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
 Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.  
 
@@ -8,20 +8,7 @@ Simple command line arguments\index{Command line arguments} are used to determin
 
 \subsection{The \config\label{sec:config-files}}\index{Input configuration file}
 
-The \config\ comprises of five parts (preamble, population, estimation, observations, and output). All of these, except the preamble, are compulsory. \SPM\ will error out if one of the compulsory sections is missing.
-
-\begin{description}
-\item [\textbf{preamble}] the preamble occurs at the start of the \config, before the three sections defined below. \SPM\ ignores any text within this section, and hence the preamble can be used to record comments or descriptions of the \config. 
-
-\item [\textbf{population}]  the population section is defined in the \config\ by the text \texttt{[population]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[population]} header, until the \texttt{[estimation]} header is reached, are considered to be commands and subcommands the define the population structure of the model. The population section is described in Section \ref{sec:population-section}.
-
-\item [\textbf{estimation}] the estimation section is defined in the \config\ by the text \texttt{[estimation]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[estimation]} header, until the \texttt{[observation]} header is reached, are considered to be commands and subcommands the define the estimation structure of the model.  The estimation section is described in Section \ref{sec:estimation-section}.
-
-\item [\textbf{observation}] the observation section is defined in the \config\ by the text \texttt{[observation]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[observation]} header, until the \texttt{[output]} header is reached, are considered to be commands and subcommands the define the observation structure of the model.  The observation section is described in Section \ref{sec:observation-section}.
-
-\item [\textbf{output}] the output section is defined in the \config\ by the text \texttt{[output]}. This must be the only text on that line. All commands and subcommands that follow the \texttt{[output]} header, until the end of the file is reached, are considered to be commands and subcommands the define the outputs of the model.  The output section is described in Section \ref{sec:output-section}.
-
-\end{description}
+The \config\ comprises of four components (population section, estimation section, observations section, and reports section). 
 
 The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{ ``file''}. The command causes an external file, \argument{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
@@ -85,9 +72,9 @@ In addition, the following are optional arguments [\emph{options}],
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
 
-The model definition, parameters, observations, and output are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:output-section} and Section \ref{sec:output-syntax} for the output and output commands. 
+The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:output-section} and Section \ref{sec:output-syntax} for the report and report commands. 
 
-In general, the \config\ uses a command-block format to describe commands, subcommands, and their arguments and values. The \config\ consists of any number of command-blocks in any order, but these must be within the \texttt{[population]}, \texttt{[estimation]}, and  \texttt{[output]} sections for the population, estimation, and output commands respectively. 
+In general, the \config\ uses a command-block format to describe commands, subcommands, and their arguments and values. The \config\ consists of any number of command-blocks in any order, but these must be within the \texttt{[population]}, \texttt{[estimation]}, and  \texttt{[report]} sections for the population, estimation, and report commands respectively. 
 
 \subsubsection{Commands}\index{Commands}
 
