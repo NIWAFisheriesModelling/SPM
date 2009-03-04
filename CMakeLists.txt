@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6) 
+cmake_minimum_required(VERSION 2.6)
 project(SPM)
 
 # To build the list below I used MSYS
@@ -12,11 +12,10 @@ SET(TEST_NAME SPM_UnitTests)
 SET(OPTI_NAME SPM)
 
 # Added autogeneration of Version.h file in src directory
-ADD_CUSTOM_COMMAND(
-  OUTPUT SVN
-  COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
+
+ADD_CUSTOM_TARGET(version ALL
+   COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
 )
-ADD_CUSTOM_TARGET(version ALL DEPENDS SVN)
 
 ADD_LIBRARY(${LIBRARY_NAME}
  src/BaseClasses/CBaseBuild
@@ -148,10 +147,10 @@ ADD_LIBRARY(${LIBRARY_NAME}
 
 SET_TARGET_PROPERTIES(${LIBRARY_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -ggdb -Wall -fmessage-length=0" )
 
-SET(MAIN_LIBRARIES  
- libboost_system-mgw34-mt-1_38 
- libboost_filesystem-mgw34-mt-1_38 
- libboost_thread-mgw34-mt-1_38 
+SET(MAIN_LIBRARIES
+ libboost_system-mgw34-mt-1_38
+ libboost_filesystem-mgw34-mt-1_38
+ libboost_thread-mgw34-mt-1_38
  libboost_program_options-mgw34-mt-1_38
 )
 
@@ -325,3 +324,8 @@ ADD_EXECUTABLE(${OPTI_NAME}
 
 SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
 TARGET_LINK_LIBRARIES(${OPTI_NAME} ${MAIN_LIBRARIES})
+
+ADD_DEPENDENCIES(${MAIN_NAME} version)
+ADD_DEPENDENCIES(${TEST_NAME} version)
+ADD_DEPENDENCIES(${LIBRARY_NAME} version)
+ADD_DEPENDENCIES(${OPTI_NAME} version)
