@@ -72,7 +72,6 @@ In SPM, but not in manual
   profile
   profiles
   projection_years
-  proportions_at_age
   proportions_by_category
   proposal_t
   r
@@ -152,6 +151,7 @@ In manual, but not in SPM
   biomass_event_mortality
   categorical
   constant_mortality_rate
+  event_mortality_at_age
   exponential_decay
   lognormal
   meta_layer
@@ -160,4 +160,5 @@ In manual, but not in SPM
   numerical_differences
   off_by_one
   preference_movement
+  proportions_by_age
   von_bertalanffy
