@@ -36,7 +36,6 @@ In SPM, but not in manual
   hex_uniform
   index
   initial
-  label
   layer_categories
   layer_height
   layer_max
@@ -57,7 +56,6 @@ In SPM, but not in manual
   natural_mortality
   normal_log
   normalise
-  objective
   objective_function
   obs
   observations
@@ -151,6 +149,7 @@ In manual, but not in SPM
   biomass_event_mortality
   categorical
   constant_mortality_rate
+  derived_parameter
   event_mortality_at_age
   exponential_decay
   lognormal

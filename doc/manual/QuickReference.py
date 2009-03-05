@@ -8,7 +8,7 @@ FILE = [open('Syntax/GeneralSyntax.tex', 'r'),
         open('Syntax/PopulationSyntax.tex', 'r'),
         open('Syntax/EstimationSyntax.tex', 'r'),
         open('Syntax/ObservationSyntax.tex', 'r'),
-        open('Syntax/OutputSyntax.tex', 'r')]
+        open('Syntax/ReportSyntax.tex', 'r')]
 OUTFILE = open('QuickReference.tex', 'w')
 VERSION = open('SPMversion.tex', 'r')
 SYNTAX_OUTFILE = open('SPM.syn', 'w')
