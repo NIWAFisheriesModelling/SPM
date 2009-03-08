@@ -4,11 +4,6 @@
 
 \defCom{model}{Define the spatial structure, population structure, annual cycle, and model years}
 
-\defSub{cell\_length}{The length (distance) of one side of a cell}
-\defType{Constant}
-\defDefault{1}
-\defValue{A positive real number}
-
 \defSub{nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defType{Integer}
 \defDefault{None}
@@ -29,11 +24,6 @@
 \defDefault{None}
 \defValue{Names of categories must be unique}
 
-\defSub{size\_at\_age}{Define the label of the associated size-at-age relationship for each category}
-\defType{Vector of strings, of length $1\ldots n_{categories}$}
-\defDefault{None}
-\defValue{Label names must be unique}
-
 \defSub{min\_age}{Minimum age of the population}
 \defType{Integer}
 \defDefault{None}
@@ -48,6 +38,16 @@
 \defType{Switch}
 \defDefault{True}
 \defValue{Defines  the largest age as a plus group}
+
+\defSub{cell\_length}{The length (distance) of one side of a cell}
+\defType{Constant}
+\defDefault{1}
+\defValue{A positive real number}
+
+\defSub{size\_at\_age}{Define the label of the associated size-at-age relationship for each category}
+\defType{Vector of strings, of length $1\ldots n_{categories}$}
+\defDefault{None}
+\defValue{Label names must be unique}
 
 \defSub{initialisation\_phases}{Define the labels of the phases of the initialisation}
 \defType{Vector of strings, of length of the number of initialisation phases}
@@ -219,7 +219,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \subsubsection[Constant mortality rate process]{\commandlabsubarg{process}{type}{constant\_mortality\_rate}}
 
-\defSub{M} {Define the constant mortality rate to be applied}
+\defSub{m} {Define the constant mortality rate to be applied}
 \defType{Estimable}
 \defDefault{None}
 \defValue{A real number $\ge 0$ and $\le 1$}
@@ -234,6 +234,11 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
+\defSub{layer} {Name of the layer}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}}
+
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
 
 \defSub{years} {Define the years when the mortality rates are applied}
@@ -241,7 +246,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid model years}
 
-\defSub{M} {Define the mortality rate to be applied for each year}
+\defSub{m} {Define the mortality rate to be applied for each year}
 \defType{Estimable vector}
 \defDefault{None}
 \defValue{A real number $\ge 0$ and $\le 1$}
@@ -255,6 +260,11 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{layer} {Name of the layer}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}}
 
 \subsubsection[Event mortality process]{\commandlabsubarg{process}{type}{event\_mortality}}
 
@@ -300,7 +310,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Valid labels from \command{size\_at\_age}}
 
-\defSub{years}{Define the years where the mortality even is applied}
+\defSub{years}{Define the years where the mortality event is applied}
 \defType{Integer vector}
 \defDefault{None}
 \defValue{Valid years for the model}
@@ -327,25 +337,30 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \subsubsection[Category transition process]{\commandlabsubarg{process}{type}{category\_transition}}
 
-\defSub{from} {Define the category that is the source of the transition process}
-\defType{String}
+\defSub{from} {Define the categories that are the source of the transition process}
+\defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{model}{categories}}
+\defValue{A valid list of categories from \commandsub{model}{categories}}
 
-\defSub{to} {Define the category that is the sink of the transition process}
-\defType{String}
+\defSub{selectivities} {Define the selectivities applied to the source categories}
+\defType{String vector}
 \defDefault{None}
-\defValue{A valid category from \commandsub{model}{categories}}
+\defValue{A valid list of selectivity labels defined by \command{selectivity}}
 
-\defSub{N} {Define the number of individuals to move}
-\defType{Estimable}
+\defSub{to} {Define the categories that are the sink of the transition process}
+\defType{String vector}
 \defDefault{None}
-\defValue{A value $\ge 0$}
+\defValue{A valid list of categories from \commandsub{model}{categories}}
 
-\defSub{selectivity} {Define the selectivity applied to the source category}
-\defType{String}
+\defSub{years} {Define the years where the category transition is applied}
+\defType{Integer vector}
 \defDefault{None}
-\defValue{A valid selectivity label defined by \command{selectivity}}
+\defValue{Valid years for the model}
+
+\defSub{layers} {Define the layers that specify the event mortality (as N for each cell) in each year}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid layers defined by \command{layer}}
 
 \subsubsection[Category transition rate process]{\commandlabsubarg{process}{type}{category\_transition\_rate}}
 
@@ -353,6 +368,11 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String}
 \defDefault{None}
 \defValue{A valid category from \commandsub{model}{categories}}
+
+\defSub{selectivities} {Define the selectivities applied to the source categories}
+\defType{String vector}
+\defDefault{None}
+\defValue{A valid list of selectivity labels defined by \command{selectivity}}
 
 \defSub{to} {Define the category that is the sink of the transition process}
 \defType{String}
@@ -364,10 +384,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{A value $\ge 0$ and $\le 1$}
 
-\defSub{selectivity} {Define the selectivity applied to the source category}
+\defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid selectivity label defined by \command{selectivity}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{TRUE}}
 
 \subsubsection[Migration movement]{\commandlabsubarg{process}{type}{migration\_movement}}
 
@@ -390,6 +410,11 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{Estimable}
 \defDefault{1.0}
 \defValue{A real number between 0 and 1, inclusive}
+
+\defSub{layer} {Name of the layer}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{TRUE}}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
@@ -563,7 +588,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\defSub{N} {Defines the $N$ parameter of the threshold preference function}
+\defSub{n} {Defines the $N$ parameter of the threshold preference function}
 \defType{Estimable}
 \defDefault{None}
 
@@ -601,7 +626,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\defSub{Lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
+\defSub{lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
 \defType{Estimable}
 \defDefault{None}
 
@@ -759,7 +784,7 @@ The individual types of derived quantities available are,
 \defDefault{None}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\defSub{selectivity} {Define the selectivities}
+\defSub{selectivities} {Define the selectivities}
 \defType{String vector}
 \defDefault{None}
 \defValue{Valid selectivity labels from \command{selectivity}}

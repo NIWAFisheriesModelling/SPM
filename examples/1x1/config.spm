@@ -2,36 +2,48 @@
 
 # Model Structure
 @model
-nrows 14
-ncols 15
+nrows 1
+ncols 1
 layer Base
-categories immature mature spawning
-min_age 1
-max_age 30
+categories male female
+min_age 2
+max_age 25
 age_plus_group True
-initialisation_phases Phase1 Phase2 Phase3
-initial_year 1994
-Current_year 2008
-final_year 2108
-cell_length 155.749
-time_steps one two
+initialisation_phases Phase1
+initial_year 1975
+current_year 2002
+final_year 2007
+cell_length 11
+time_steps one two three
+
+time_steps 3        # There are three time steps: Oct-Aug, Sep, Sep
+recruitment_time 2  # Recruitment occurs in time step 2
+recruitment_areas chat # in the area "chat" (the only area defined)
+spawning_time 2     # Spawning occurs in time step 2
+spawning_part_mort 0.5 # and SSBs are calculated after spawning fish have undergone 0.5 of the mortality assigned to this time step
+spawning_areas chat # Spawning occurs in the area "chat"
+spawning_ps 1       # and all mature fish spawn
+aging_time 3        # Age incrementation occurs in time step 3
+growth_props 1.00 1.00 0.00 # All fish growth occurs in time step 1
+M_props 1.00 0.00 0.00 # All natural mortality occurs in time step 1
+baranov false       # The baranov equation is not used
+midmortality_partition weighted_sum
+fishery_names chatFishery # The fishery has the label "chatFishery
+fishery_times 1     # and occurs in the first time step
+fishery_areas chat  # in the area labelled "chat"
+n_migrations 0      # No migrations are defined
 
 # Initialisation
 @initialisation_phase Phase1
 years 200
-processes Recruitment Spawning Maturation halfM halfM Postspawning Ageing
-
-@initialisation_phase Phase2
-years 1
-processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing Postspawning
-
-@initialisation_phase Phase3
-years 20
-processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing Postspawning
+processes Recruitment Spawning halfM halfM Ageing
 
 # Annual Cycle
 @time_step one
-processes Recruitment Spawning Maturation halfM fishing halfM
+processes Recruitment Spawning halfM fishing halfM Ageing
+
+@time_step two
+processes MoveImmature MoveMature MoveSpawning PostSpawning Ageing
 
 @time_step two
 processes MoveImmature MoveMature MoveSpawning PostSpawning Ageing
@@ -39,179 +51,66 @@ processes MoveImmature MoveMature MoveSpawning PostSpawning Ageing
 # Population processes
 @process Ageing
 type ageing
-categories immature mature spawning
+categories male female
 
 @process Recruitment
 type BH_recruitment
-categories immature
-proportions 1.0
+categories male female
+proportions 0.5 0.5
 r0 997386
-ages 1
-steepness 0.75
+ages 2
+steepness 0.9
 sigma_r 0.6
-rho 0.1
-layer Recruitment
+rho 0.0
+YCS_years 1973 1974 1975 1976 1977 1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000
+YCS       1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.04 1.21 0.85 1.38 1.03 1.25 0.89 1.47 1.40 1.84 2.66 2.28 2.17 1.70 1.59 0.71 1.00 1.00 1.00 1.00 1.00
+#first_free 1979
+#last_free 1998
 
 @process halfM
 type constant_mortality_rate
-categories immature mature spawning
+categories male female
 M 0.065
-selectivities One One One
 
 @process Fishing
 type event_mortality
-categories immature mature spawning
+categories male female
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008
+values?
 layers Catch1998 Catch1999 Catch2000 Catch2001 Catch2002 Catch2003 Catch2004 Catch2005 Catch2006 Catch2007 Catch2008
 U_max 0.99
-selectivities FishingSel FishingSel FishingSel
+selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 
-@process Maturation
-type category_transition
-from immature
-to mature
-proportion 0.324392
-selectivity Maturation
-
-@process Spawning
-type category_transition
-from mature
-to spawning
-proportion 0.574593
-selectivity One
-
-@process PostSpawning
-type category_transition
-from spawning
-to mature
-proportion 0.5
-selectivity One
-
-# Movement processes
-@process MoveImmature
-type preference_movement
-categories immature
-preference_functions ImmatureLatitude
-
-@process MoveMature
-type preference_movement
-categories mature
-preference_functions MatureDistance MatureLatitude
-
-@process MoveSpawning
-type preference_movement
-categories spawning
-preference_functions MatureDistance SpawningLatitude
-
-@process InitialMoveImmature
-type preference_movement
-categories immature
-preference_functions ImmatureDepth ImmatureLatitude
-
-@process InitialMoveMature
-type preference_movement
-categories mature
-preference_functions MatureDepth MatureLatitude
-
-@process InitialMoveSpawning
-type preference_movement
-categories spawning
-preference_functions MatureDepth SpawningLatitude
-
-@preference_function ImmatureDistance
-type exponential
-alpha 1
-lambda 1.5
-layer Distance
-
-@preference_function ImmatureDepth
-type inverse_logistic
-alpha 1
-layer Depth
-a50 1416.8
-ato95 245.354
-
-@preference_function ImmatureLatitude
-type logistic
-alpha 1
-layer Latitude
-a50 68.8512
-ato95 0.322301
-
-@preference_function MatureDistance
-type exponential
-alpha 1
-lambda 1.5
-layer Distance
-
-@preference_function MatureDepth
-type double_normal
-alpha 1
-layer Depth
-mu 875.389
-sigma_l 143.127
-sigma_r 1364.35
-
-@preference_function MatureLatitude
-type logistic
-alpha 1
-layer Latitude
-a50 70.9737
-ato95 0.436736
-
-@preference_function SpawningLatitude
-type double_normal
-alpha 1
-layer Latitude
-mu 65.8099
-sigma_l 1.77552
-sigma_r 1.62161
-
 # Definition of layers
-@include "../layers/Base.spm"
-@include "../Layers/Cell.spm"
-@include "../Layers/Constant.spm"
-@include "../Layers/CPUE.spm"
-@include "../layers/Depth.spm"
-@include "../Layers/Fishing_1998.spm"
-@include "../Layers/Fishing_1999.spm"
-@include "../Layers/Fishing_2000.spm"
-@include "../Layers/Fishing_2001.spm"
-@include "../Layers/Fishing_2002.spm"
-@include "../Layers/Fishing_2003.spm"
-@include "../Layers/Fishing_2004.spm"
-@include "../Layers/Fishing_2005.spm"
-@include "../Layers/Fishing_2006.spm"
-@include "../Layers/Fishing_2007.spm"
-@include "../Layers/Fishing_2008.spm"
-@include "../Layers/Latitude.spm"
-@include "../layers/Recruitment.spm"
-@include "../Layers/SSRU.spm"
+@layer Base
+type numeric
+data 1
 
-@layer Distance
-type distance
+# Derived parameters
+@Derived_quantity SSB
+type abundance
+categories male female
+selectivities MaleMaturity FemaleMaturity
+time_step
 
 # Definition of selectivities
-@selectivity One
-type constant
-c 1
+@selectivity MaleMaturity
+type all_values_bounded
+l 2
+h 10
+v 0.00 0.00 0.02 0.07 0.31 0.78 1.00 1.00 1.00
 
-@selectivity Maturation
-type logistic_producing
-L 1
-H 20
-a50 8.2
-ato95 2.8
+@selectivity FemaleMaturity
+type all_values_bounded
+l 2
+h 10
+v 0.00 0.00 0.02 0.04 0.07 0.45 0.86 1.00 1.00
 
 @selectivity FishingSel
 type logistic
 a50 6.91642
 ato95 2.70004
-
-@selectivity Age10
-type knife_edge
-e 10
 
 # Estimation Section
 @include "Estimation.spm"

@@ -36,6 +36,7 @@ In SPM, but not in manual
   hex_uniform
   index
   initial
+  label
   layer_categories
   layer_height
   layer_max
@@ -57,7 +58,6 @@ In SPM, but not in manual
   normal_log
   normalise
   objective_function
-  obs
   observations
   overwrite
   param_v
@@ -103,7 +103,6 @@ In manual, but not in SPM
   size_at_age
   linf
   mcmc_fixed
-  n [label]
   u_max
   by_length
   categories2
@@ -111,14 +110,19 @@ In manual, but not in SPM
   correlation_adjustment_method
   cv [label]
   delta
+  derived_parameter
   distribution
+  error
+  fits
   gradient_tolerance
   growth_proportions
   k
+  likelihood
   lower_bounds
   max_correlation
   max_evaluations
   max_iterations
+  n [label]
   obs [label]
   p1
   p2
@@ -128,6 +132,7 @@ In manual, but not in SPM
   proportion_time_step
   proposal_distribution
   random_seed
+  residuals
   selectivities2
   simulate
   sink_layer
@@ -142,6 +147,7 @@ In manual, but not in SPM
   bh_recruitment
   de_solver
   metropolis_hastings
+  parameter_vector
   parameters
   schnute
   adjacent_cell_movement

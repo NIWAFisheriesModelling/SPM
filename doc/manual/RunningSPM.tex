@@ -1,20 +1,26 @@
-\section{Running \SPM\label{sec:running-spm}}
+\section{Running \SPM\label{sec:running-spm}\index{Running \SPM}}
 
-\SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+\SPM\ is run from the command line in \I{Microsoft Windows}, or from a terminal window in \I{Linux}. \SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. 
 
-Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.  
+The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
-Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is \emph{run}, \texttt{-e} is \emph{estimation}, and \texttt{-s} is the \emph{simulation} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
+Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.
+
+Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc,. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is \emph{run}, \texttt{-e} is \emph{estimation}, and \texttt{-s} is the \emph{simulation} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
+
+\subsection{\I{Using \SPM}}
+
+To use \SPM, open a command line window (Microsoft Windows) or a terminal window (Linux). Navigate to a directory of your choice, where your \config files are located. Then type \texttt{spm} with any arguments (see Section \ref{sec:command-line-arguments}). SPM will print output to the screen, and return you to the command prompt when it completes its task. Note that the \SPM\ executable (binary) must be either in the directory where you run it or somewhere in your \texttt{PATH}. See your operating system documentation for help on identifying or modifying your \texttt{PATH}
 
 \subsection{The \config\label{sec:config-files}}\index{Input configuration file}
 
-The \config\ comprises of four components (population section, estimation section, observations section, and reports section). 
+The \config\ comprises of four components; the description of the population structure and parameters (the population section), the estimation methods and variables (the estimation section), the observations and their associated likelihoods (the observation section), and the outputs and reports that \SPM\ will return (the report section). The \config\ is made up of a number of commands (many with subcommands) which specify various options for each of these components.
 
-The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{ ``file''}. The command causes an external file, \argument{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point. The file name must be a complete file name with extension, but can have either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands \textemdash\ be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
+The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{ file}. The command causes an external file, \argument{file}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point\index{Including external files}. The file name must be a complete file name with extension, but can use either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands --- but be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 \subsection{Redirecting standard output\label{sec:redirecting-stdout}}
 
-\SPM\ uses the standard out to display run-time information. Standard error is not used by \SPM, but may be used by the operating system to report an error with \SPM. We suggest redirecting both the standard out and standard error into files. With the bash shell (on Linux systems), you can do this using the command structure,
+\SPM\ uses the standard out\index{Standard out} to display run-time information. \I{Standard error} is not used by \SPM, but may be used by the operating system to report an error with \SPM. We suggest redirecting both the standard out and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. With the bash shell (on Linux systems), you can do this using the command structure,
 
 \begin{verbatim} (spm [arguments] > out) >& err &\end{verbatim}
 
@@ -30,9 +36,9 @@ And, on some recent Microsoft Windows systems (e.g., Professional versions of Wi
 
 \begin{verbatim} spm [arguments] > out 2> err\end{verbatim}
 
-Note that \SPM\ outputs a few lines of header information to the output. The header consists of the program name and version, the arguments passed to \SPM\ from the command line, the date and time that the program was called (derived from the system time), the user name, and the machine name (including the operating system and the process identification number). These can be used to track outputs as well as identifying the version of \SPM\ used to run the model.
+Note that \SPM\ outputs a few lines of header information to the output. The header\index{Output header information} consists of the program name and version, the arguments passed to \SPM\ from the command line, the date and time that the program was called (derived from the system time), the user name, and the machine name (including the operating system and the process identification number). These can be used to track outputs as well as identifying the version of \SPM\ used to run the model.
 
-\subsection{Command line arguments\label{sec:command-line-arguments}}
+\subsection{\I{Command line arguments}\label{sec:command-line-arguments}}
 
 The call to \SPM\ is of the following form.: 
 
@@ -58,7 +64,7 @@ where \emph{task} is one of;
 
 \end{description}
 
-In addition, the following are optional arguments [\emph{options}],
+In addition, the following are optional arguments\index{Optional command line arguments} [\emph{options}],
 
 \begin{description}
 \item [\texttt{-i \emph{file}}] \emph{Input} one or more sets of free parameter values from \texttt{\emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.
@@ -81,18 +87,18 @@ In general, the \config\ uses a command-block format to describe commands, subco
 \SPM\ has a range of commands that define the model structure, processes, observations, and how tasks are carried out. There are three types of commands, 
 
 \begin{enumerate}
-\item Commands that have an argument and do not have subcommands (for example, \command{IncludeFile}\ \argument{file})
-\item Commands that have a label and subcommands (for example \command{ConstantRecruitment}\ \argument{MyRecruitment})
-\item Commands that do not have either a label or argument, but have subcommands (for example \command{Structure})
+\item Commands that have an argument and do not have subcommands (for example, \command{Include}\ \argument{file})
+\item Commands that have a label and subcommands (for example \command{Constant\_recruitment}\ \argument{MyRecruitment})
+\item Commands that do not have either a label or argument, but have subcommands (for example \command{Model})
 \end{enumerate}
 
-Commands that have a label must have a unique label, i.e., the label cannot be used on more than one command. The labels must start with a letter or underscores, can contain letters, underscores, or numbers, but must not contain white-space or full-point ('.').
+Commands that have a label must have a unique label, i.e., the label cannot be used on more than one command of that type. The labels must start with a letter or underscore, can contain letters, underscores, or numbers, but must not contain white-space or full-point ('.').
 
 \subsubsection{Subcommands}\index{Commands ! Subcommands}
 
 Subcommands in \SPM\ are for defining options and parameter values for commands. They always take an argument which is one of a specific \emph{type}. The types acceptable for each subcommand are defined in Section \ref{sec:syntax}, and are summarised below. 
 
-Unlike commands (\command{command}), subcommands and their arguments can be order specific. In other words, the order in which they appear is important, and can affect the way in which they are interpreted. \SPM\ may report an error if they are not supplied in the order that is expected, however, in some circumstances a different order may result in a valid, but unintended set of actions, leading to possible errors in your expected results.  
+Like commands (\command{command}), subcommands and their arguments are not order specific --- except that that all subcommands of a given command must appear before the next \command{command} block. \SPM\ may report an error if they are not supplied in this way, however, in some circumstances a different order may result in a valid, but unintended set of actions, leading to possible errors in your expected results.  
 
 The arguments for a subcommand are either\index{Subcommand argument type},
 
@@ -135,9 +141,9 @@ and then
 
 Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. Commands and subcommands consist of letters and/or underscores, must not contain a spaces or full-point ('.').
 
-There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). Note, however, that the \command{IncludeFile} is the only exception to this rule. See Section \ref{sec:general-syntax})\index{Command ! IncludeFile} for details of the use of \command{IncludeFile}. 
+There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). Note, however, that the \command{Include} is the only exception to this rule. See Section \ref{sec:general-syntax})\index{Command ! Include} for details of the use of \command{Include}. 
 
-In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{IncludeFile} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
+In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{Include} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
 
 \subsubsection{Commenting out lines}\index{Comments}
 
@@ -155,9 +161,9 @@ When SPM processes a \config, it translates each command and each subcommand int
 \item \texttt{Command[label].Subcommand[i]} if the command has a label, and the subcommand arguments are a vector, and we are accessing the  \emph{i}th element of that vector. 
 \end{description} 
 
-The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{ConstantRecruitmentProcess} with the label \argument{MyRecruitment} is,
+The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{Constant\_recruitment} with the label \argument{MyRecruitment} is,
 
-\texttt{ConstantRecruitmentProcess[MyRecruitment].R0}
+\texttt{Constant\_recruitment[MyRecruitment].R0}
 
 \subsection{\SPM\ exit status values}
 

@@ -65,8 +65,10 @@ int main(int argc, char * argv[]) {
   }
 
   // If we are just printing the Version, then do so.
+  std::stringstream sRevisionNumber;
+  sRevisionNumber << SOURCE_CONTROL_REVISION;
   if (pRuntime->getRunMode() == RUN_MODE_VERSION) {
-    cout << string("v0.1-") << string(SOURCE_CONTROL_VERSION) << endl;
+    cout << string(VERSION) << "-" << string(SOURCE_CONTROL_DATE) << " (rev. " << sRevisionNumber.str() << ")" << endl;
     return 0;
   }
 

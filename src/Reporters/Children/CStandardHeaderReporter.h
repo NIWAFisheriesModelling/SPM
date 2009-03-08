@@ -26,6 +26,9 @@
 // Namespace
 using std::string;
 
+// Version number
+#define VERSION "1.00"
+
 //**********************************************************************
 //
 //

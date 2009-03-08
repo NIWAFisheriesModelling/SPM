@@ -14,7 +14,7 @@
 \defDefault{None}
 \defValue{A valid label from \command{MCMC}}
 
-\defSub{Profile} {The labels of the profiles to use, if doing a profile}
+\defSub{profile} {The labels of the profiles to use, if doing a profile}
 \defType{String}
 \defDefault{None}
 \defValue{A valid label from \command{MPD}}
@@ -53,44 +53,44 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 \subsubsection[Numerical differences minimiser]{\commandlabsubarg{minimiser}{type}{numerical\_differences}} 
 
-\defSub{max\_iterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
+\defSub{max\_iterations} {Define the maximum number of iterations for the minimiser}
 \defType{Integer}
 \defDefault{1000}
 \defValue{A positive integer}
 
-\defSub{max\_evaluations} {Define the maximum number of evaluations for the Numerical Differences minimiser}
+\defSub{max\_evaluations} {Define the maximum number of evaluations for the minimiser}
 \defType{Integer}
 \defDefault{4000}
 \defValue{A positive integer}
 
-\defSub{step\_size} {Define the step-size for the Numerical Differences minimiser}
+\defSub{step\_size} {Define the step-size for the minimiser}
 \defType{Constant}
 \defDefault{1e-6}
 \defValue{A positive real number}
 
-\defSub{gradient\_tolerance} {Define the gradient tolerance for the Numerical Differences minimiser}
+\defSub{gradient\_tolerance} {Define the gradient tolerance for the minimiser}
 \defType{Constant}
 \defDefault{0.0002}
 \defValue{A positive real number}
 
 \subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{DE\_solver}} 
 
-\defSub{max\_iterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
+\defSub{max\_iterations} {Define the maximum number of iterations for the minimiser}
 \defType{Integer}
 \defDefault{1000}
 \defValue{A positive integer}
 
-\defSub{max\_evaluations} {Define the maximum number of evaluations for the Differential Evolution minimiser}
+\defSub{max\_evaluations} {Define the maximum number of evaluations for the minimiser}
 \defType{Integer}
 \defDefault{4000}
 \defValue{A positive integer}
 
-\defSub{step\_size} {Define the step-size for the Differential Evolution minimiser}
+\defSub{step\_size} {Define the step-size for the minimiser}
 \defType{Constant}
 \defDefault{1e-6}
 \defValue{A positive real number}
 
-\defSub{gradient\_tolerance} {Define the gradient tolerance for the Differential Evolution minimiser}
+\defSub{gradient\_tolerance} {Define the gradient tolerance for the minimiser}
 \defType{Constant}
 \defDefault{0.0002}
 \defValue{A positive real number}
@@ -157,7 +157,7 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 Only one method of carrying out profiles is available,
 
-\defComLab{Profile}{Define the profile parameters, minimiser, and arguments}
+\defComLab{profile}{Define the profile parameters, minimiser, and arguments}
 
 \defSub{parameter} {Name of the parameter to be profiled}
 \defType{String}
@@ -169,7 +169,7 @@ Only one method of carrying out profiles is available,
 \defDefault{None}
 \defValue{A valid label from \command{minimiser}}
 
-\defSub{N} {Number of values at which to profile the parameter}
+\defSub{n} {Number of values at which to profile the parameter}
 \defType{Integer}
 \defDefault{10}
 \defValue{Defines the number of values at which to profile the parameter}

@@ -1,28 +1,26 @@
 \section{Quick reference\label{sec:quick-reference}}
-\subsection{General commands and subcommands}
-\defComArg{include}{file\_name}{Include an external file}
-\subsection{Population command and subcommand syntax}
+\subsection{Population command and subcommand syntax}\par
 \defCom{model}{Define the spatial structure, population structure, annual cycle, and model years}\par
-\defSub{cell\_length}{The length (distance) of one side of a cell}
 \defSub{nrows}{The number of rows $n_{rows}$ in the spatial structure}
 \defSub{ncols}{The number of columns $n_{cols}$ in the spatial structure}
 \defSub{layer}{The label for the base layer}
 \defSub{categories} {Labels of the categories (rows) of the population component of the partition}
-\defSub{size\_at\_age}{Define the label of the associated size-at-age relationship for each category}
 \defSub{min\_age}{Minimum age of the population}
 \defSub{max\_age}{Maximum age of the population}
 \defSub{age\_plus\_group}{Define the largest age as a plus group}
+\defSub{cell\_length}{The length (distance) of one side of a cell}
+\defSub{size\_at\_age}{Define the label of the associated size-at-age relationship for each category}
 \defSub{initialisation\_phases}{Define the labels of the phases of the initialisation}
 \defSub{initial\_year}{Define the first year of the model, immediately following initialisation}
 \defSub{current\_year}{Define the current year of the model}
 \defSub{final\_year}{Define the final year of the model in projections}
 \defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) to form the annual cycle}
-\par \defComLab{initialisation\_phase}{Define the processes and years of the initialisation phase with label}\par
+\par\defComLab{initialisation\_phase}{Define the processes and years of the initialisation phase with label}\par
 \defSub{years} {Define the number of years to run}
 \defSub{processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
-\par \defComLab{time\_step} {Define a time step with label}\par
+\par\defComLab{time\_step} {Define a time step with label}\par
 \defSub{processes} {Define the process labels, in the order that they are applied, for the time step}
-\par \defComLab{process} {Define a process with label}\par
+\par\defComLab{process} {Define a process with label}\par
 \defSub{type} {Define the type of process}
 \par\textbf{\commandlabsubarg{process}{type}{constant\_recruitment}}\par
 \defSub{r0} {Define the total amount of recruitment at equilibrium abundance levels}
@@ -45,14 +43,16 @@
 \par\textbf{\commandlabsubarg{process}{type}{ageing}}\par
 \defSub{categories} {Define the categories that ageing is applied to}
 \par\textbf{\commandlabsubarg{process}{type}{constant\_mortality\_rate}}\par
-\defSub{M} {Define the constant mortality rate to be applied}
+\defSub{m} {Define the constant mortality rate to be applied}
 \defSub{categories} {Define the categories that mortality is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{layer} {Name of the layer}
 \par\textbf{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}\par
 \defSub{years} {Define the years when the mortality rates are applied}
-\defSub{M} {Define the mortality rate to be applied for each year}
+\defSub{m} {Define the mortality rate to be applied for each year}
 \defSub{categories} {Define the categories that mortality is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{layer} {Name of the layer}
 \par\textbf{\commandlabsubarg{process}{type}{event\_mortality}}\par
 \defSub{categories} {Define the categories that the event mortality is applied to}
 \defSub{years} {Define the years where the mortality even is applied}
@@ -63,32 +63,35 @@
 \par\textbf{\commandlabsubarg{process}{type}{biomass\_event\_mortality}}\par
 \defSub{categories}{Define the categories that the event mortality is applied to}
 \defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
-\defSub{years}{Define the years where the mortality even is applied}
+\defSub{years}{Define the years where the mortality event is applied}
 \defSub{layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defSub{U\_max} {Define the maximum exploitation rate}
 \defSub{selectivities}{Define the selectivities applied to each category}
 \defSub{penalty} {Define the event mortality penalty label}
 \par\textbf{\commandlabsubarg{process}{type}{category\_transition}}\par
-\defSub{from} {Define the category that is the source of the transition process}
-\defSub{to} {Define the category that is the sink of the transition process}
-\defSub{N} {Define the number of individuals to move}
-\defSub{selectivity} {Define the selectivity applied to the source category}
+\defSub{from} {Define the categories that are the source of the transition process}
+\defSub{selectivities} {Define the selectivities applied to the source categories}
+\defSub{to} {Define the categories that are the sink of the transition process}
+\defSub{years} {Define the years where the category transition is applied}
+\defSub{layers} {Define the layers that specify the event mortality (as N for each cell) in each year}
 \par\textbf{\commandlabsubarg{process}{type}{category\_transition\_rate}}\par
 \defSub{from} {Define the category that is the source of the transition process}
+\defSub{selectivities} {Define the selectivities applied to the source categories}
 \defSub{to} {Define the category that is the sink of the transition process}
 \defSub{proportion} {Define the proportion of individuals to move}
-\defSub{selectivity} {Define the selectivity applied to the source category}
+\defSub{layer} {Name of the layer}
 \par\textbf{\commandlabsubarg{process}{type}{migration\_movement}}\par
 \defSub{categories} {Define the categories that the migration movement event is applied to}
 \defSub{source\_layer} {Define the label of a layer that defines the source cells of the migration movement event}
 \defSub{sink\_layer} {Define the label of a layer that defines the sink cells of the migration movement event}
 \defSub{proportions} {Define the constant multiplier for the proportions that migrate}
+\defSub{layer} {Name of the layer}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \par\textbf{\commandlabsubarg{process}{type}{adjacent\_cell\_movement}}\par
 \par\textbf{\commandlabsubarg{process}{type}{preference\_movement}}\par
 \defSub{categories} {Define the categories that the preference function movement is applied to}
 \defSub{preference\_functions} {Define the labels of the individual  preference functions that make up the total preference function}
-\par \defComLab{preference\_function} {Define a preference function with label}\par
+\par\defComLab{preference\_function} {Define a preference function with label}\par
 \defSub{type} {Define the type of preference function}
 \par\textbf{\commandlabsubarg{preference\_function}{type}{constant}}\par
 \defSub{layer} {Defines the layer which supplies the preference function independent variable}
@@ -123,7 +126,7 @@
 \defSub{categories} {Define the categories are used to calculate the abundance}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defSub{alpha} {Defines the multiplicative constant $\alpha$}
-\defSub{N} {Defines the $N$ parameter of the threshold preference function}
+\defSub{n} {Defines the $N$ parameter of the threshold preference function}
 \defSub{lambda} {Defines the $\lambda$ parameter of the threshold preference function}
 \par\textbf{\commandlabsubarg{preference\_function}{type}{threshold\_biomass}}\par
 \defSub{layer} {Defines the layer which supplies the preference function independent variable}
@@ -132,8 +135,8 @@
 \defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defSub{alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
-\defSub{Lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
-\par \defComLab{layer} {Define a layer function with label}\par
+\defSub{lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
+\par\defComLab{layer} {Define a layer function with label}\par
 \defSub{type} {Define the type of layer}
 \par\textbf{\commandlabsubarg{layer}{type}{numeric}}\par
 \defSub{data} {Define the values of the layer}
@@ -158,7 +161,7 @@
 \par\textbf{\commandlabsubarg{layer}{type}{meta\_layer}}\par
 \defSub{years} {Define the years}
 \defSub{layers} {Define the layer labels for each of the years}
-\par \defComLab{derived\_quantity} {Define a derived quantity with label}\par
+\par\defComLab{derived\_quantity} {Define a derived quantity with label}\par
 \defSub{type} {Define the type of derived quantity}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{abundance}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
@@ -166,9 +169,9 @@
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
-\defSub{selectivity} {Define the selectivities}
+\defSub{selectivities} {Define the selectivities}
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
-\par \defComLab{size\_at\_age} {Define a size-at-age relationship with label}\par
+\par\defComLab{size\_at\_age} {Define a size-at-age relationship with label}\par
 \defSub{type} {Define the type of relationship}
 \par\textbf{\commandlabsubarg{size\_at\_age}{type}{von\_Bertalanffy}}\par
 \defSub{Linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
@@ -190,13 +193,13 @@
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
 \defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
-\par \defComLab{size\_weight} {Define a size-weight relationship with label}\par
+\par\defComLab{size\_weight} {Define a size-weight relationship with label}\par
 \defSub{Type} {Define the type of relationship}
 \par\textbf{\commandlabsubarg{size\_weight}{type}{none}}\par
 \par\textbf{\commandlabsubarg{size\_weight}{type}{basic}}\par
 \defSub{a} {Define the $a$ parameter of the basic relationship}
 \defSub{b} {Define the $b$ parameter of the basic relationship}
-\par \defComLab{selectivity} {Define a selectivity function with label}\par
+\par\defComLab{selectivity} {Define a selectivity function with label}\par
 \defSub{type} {Define the type of selectivity function}
 \par\textbf{\commandlabsubarg{selectivity}{type}{constant}}\par
 \defSub{c} {Defines the $C$ parameter of the selectivity function}
@@ -231,25 +234,25 @@
 \defSub{y0} {Defines the $y_0$ parameter of the selectivity function}
 \defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
-\subsection{Estimation command and subcommand syntax}
-\defCom{Estimation}\par
+\subsection{Estimation command and subcommand syntax}\par
+\defCom{Estimation}\par\par
 \defSub{minimiser} {The label of the minimiser to use, if doing a point estimate}
 \defSub{MCMC} {The label of the MCMC to use, of doing an MCMC}
-\defSub{Profile} {The labels of the profiles to use, if doing a profile}
+\defSub{profile} {The labels of the profiles to use, if doing a profile}
 \defSub{random\_seed}{Defines the random number generator seed}
-\par \defComLab{Minimiser}{Define the an minimiser estimator with label}\par
+\par\defComLab{Minimiser}{Define the an minimiser estimator with label}\par\par
 \defSub{type} {Define the type of minimiser}
 \par\textbf{\commandlabsubarg{minimiser}{type}{numerical\_differences}}\par
-\defSub{max\_iterations} {Define the maximum number of iterations for the Numerical Differences minimiser}
-\defSub{max\_evaluations} {Define the maximum number of evaluations for the Numerical Differences minimiser}
-\defSub{step\_size} {Define the step-size for the Numerical Differences minimiser}
-\defSub{gradient\_tolerance} {Define the gradient tolerance for the Numerical Differences minimiser}
+\defSub{max\_iterations} {Define the maximum number of iterations for the minimiser}
+\defSub{max\_evaluations} {Define the maximum number of evaluations for the minimiser}
+\defSub{step\_size} {Define the step-size for the minimiser}
+\defSub{gradient\_tolerance} {Define the gradient tolerance for the minimiser}
 \par\textbf{\commandlabsubarg{minimiser}{type}{DE\_solver}}\par
-\defSub{max\_iterations} {Define the maximum number of iterations for the Differential Evolution minimiser}
-\defSub{max\_evaluations} {Define the maximum number of evaluations for the Differential Evolution minimiser}
-\defSub{step\_size} {Define the step-size for the Differential Evolution minimiser}
-\defSub{gradient\_tolerance} {Define the gradient tolerance for the Differential Evolution minimiser}
-\par \defComLab{MCMC}{Define the MCMC estimation arguments}\par
+\defSub{max\_iterations} {Define the maximum number of iterations for the minimiser}
+\defSub{max\_evaluations} {Define the maximum number of evaluations for the minimiser}
+\defSub{step\_size} {Define the step-size for the minimiser}
+\defSub{gradient\_tolerance} {Define the gradient tolerance for the minimiser}
+\par\defComLab{MCMC}{Define the MCMC estimation arguments}\par\par
 \defSub{type} {Define the method of MCMC}
 \par\textbf{\commandsubarg{MCMC}{type}{Metropolis\_Hastings}}\par
 \defSub{start} {Covariance multiplier for the starting point of the Markov chain}
@@ -261,13 +264,13 @@
 \defSub{step\_size} {Initial step-size (as a multiplier of the approximate covariance matrix)}
 \defSub{proposal\_distribution} {The shape of the proposal distribution (either \textit{t} or normal)}
 \defSub{df} {Degrees of freedom of the multivariate t proposal distribution}
-\par \defComLab{Profile}{Define the profile parameters, minimiser, and arguments}\par
+\par\defComLab{profile}{Define the profile parameters, minimiser, and arguments}\par\par
 \defSub{parameter} {Name of the parameter to be profiled}
 \defSub{minimiser} {The label of the minimiser to use}
-\defSub{N} {Number of values at which to profile the parameter}
+\defSub{n} {Number of values at which to profile the parameter}
 \defSub{lower\_bound} {lower bound on parameter}
 \defSub{upper\_bound} {Upper bound on parameter}
-\par \defComArg{estimate}{parameter\_name}{Estimate a free parameter}\par
+\par\defComArg{estimate}{parameter\_name}{Estimate a free parameter}\par\par
 \defSub{same}{Names of the other parameters which are constrained to have the same value}
 \defSub{phase}{Phase at which this parameter should be estimated, in point estimation}
 \defSub{lower\_bounds}{Lower bounds on this parameter}
@@ -290,7 +293,7 @@
 \defSub{B}{The upper value of the range parameter $B$ of the Beta prior}
 \defSub{mu}{Defines the mean $\mu$ of the Beta prior}
 \defSub{stdev}{Defines the standard deviation $\sigma$ of the Beta prior}
-\par \defComLab{ageing\_error}{Define ageing error with \argument{label}}\par
+\par\defComLab{ageing\_error}{Define ageing error with \argument{label}}\par\par
 \defSub{type} {The type of ageing error}
 \par\textbf{\commandlabsubarg{ageing\_error}{type}{none}}\par
 \par\textbf{\commandlabsubarg{ageing\_error}{type}{normal}}\par
@@ -299,10 +302,10 @@
 \defSub{k} {The $k$ parameter of the off-by-one ageing error model}
 \defSub{p1} {The $p_1$ parameter of the off-by-one ageing error model}
 \defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
-\par \defComLab{q}{Define a catchability constant with \argument{label}}\par
+\par\defComLab{q}{Define a catchability constant with \argument{label}}\par\par
 \defSub{q} {Value of the q parameter}
-\subsection{Observation command and subcommand syntax}
-\defComLab{observation}{Define an observation}\par
+\subsection{Observation command and subcommand syntax}\par
+\defComLab{observation}{Define an observation}\par\par
 \defSub{type} {Define the type of observation}
 \par\textbf{\commandlabsubarg{observation}{type}{event\_mortality\_at\_age}}\par
 \defSub{year} {Define the year that the observation applies to}
@@ -314,7 +317,7 @@
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
 \defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
-\defSub{N [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
+\defSub{n [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
 \defSub{distribution}{Define the likelihood distribution}
 \defSub{process\_error}{Define the process error term}
 \defSub{delta}{Define the delta robustifying constant for the distribution}
@@ -331,7 +334,7 @@
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
 \defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
-\defSub{N [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
+\defSub{n [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
 \defSub{distribution}{Define the likelihood distribution}
 \defSub{process\_error}{Define the process error term}
 \defSub{delta}{Define the delta robustifying constant for the distribution}
@@ -349,7 +352,7 @@
 \defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
-\defSub{N [label]}{Define the following data as error values ($N$) for the categorical layer with value \argument{[label]}}
+\defSub{n [label]}{Define the following data as error values ($N$) for the categorical layer with value \argument{[label]}}
 \defSub{distribution}{Define the likelihood distribution}
 \defSub{process\_error}{Define the process error term}
 \defSub{delta}{Define the delta robustifying constant for the distribution}
@@ -382,17 +385,39 @@
 \defSub{process\_error}{Define the process error term}
 \defSub{delta}{Define the delta robustifying constant for the distribution}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\subsection{Reporting command and subcommand syntax}
-\defComLab{report}{Define an output report}\par
+\subsection{Reporting command and subcommand syntax}\par
+\defComLab{report}{Define an output report}\par\par
 \defSub{type} {Define the type of report}
 \par\textbf{\commandlabsubarg{report}{type}{partition}}\par
 \defSub{year} {Define the year that the partition report applies to}
 \defSub{time\_step} {Define the time-step that the partition report applies to}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \par\textbf{\commandlabsubarg{report}{type}{derived\_parameter}}\par
-\defSub{Label} {Define the label of the derived parameter to print}
+\defSub{derived\_parameter} {Define the label of the derived parameter to print}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\par\textbf{\commandlabsubarg{report}{type}{Parameter\_vector}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \par\textbf{\commandlabsubarg{report}{type}{Parameters}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \par\textbf{\commandlabsubarg{report}{type}{Objective}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
+\par\textbf{\commandlabsubarg{report}{type}{observation}}\par
+\defSub{observation} {Define the label of the observation to print}
+\defSub{obs} {Print the observations values?}
+\defSub{fits} {Print the observations expected values (fits)?}
+\defSub{residuals} {Print the observations residual values?}
+\defSub{error} {Print the observations error values?}
+\defSub{likelihood} {Print the observations likelihood values?}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\par\textbf{\commandlabsubarg{report}{type}{layer}}\par
+\defSub{layer} {Define the label of the layer to print}
+\defSub{year} {Define the year for the printing of the layer}
+\defSub{time\_step} {Define the time-step for the printing of the layer}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\par\textbf{\commandlabsubarg{report}{type}{selectivity}}\par
+\defSub{selectivity} {Define the label of the selectivity to print}
+\defSub{year} {Define the year for the printing of the selectivity}
+\defSub{time\_step} {Define the time-step for the printing of the selectivity}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\subsection{Other commands and subcommands}\par
+\defComArg{include}{file\_name}{Include an external file}\par\par

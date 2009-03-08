@@ -80,19 +80,19 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
   options_description oDesc("Usage");
   oDesc.add_options()
       ("help,h", "Print help")
-      ("license,l", "display source code license")
-      ("version,v", "display version information")
-      ("run,r", "basic model run")
-      ("estimate,e", "point estimation run")
-      ("profile,p", "likelihood profile run")
-      ("mcmc,m", "MCMC run")
-      ("forward,f", "forward projection run")
-      ("simulate,s", "simulation run, simulate observations")
-      ("config,c", value<string>(), "configuration file")
-      ("input,i", value<string>(), "load estimate values from file")
-      ("threads,t", value<int>(), "number of threads to spawn")
-      ("quiet,q", "run in quiet mode")
-      ("genseed,g", value<int>(), "random number seed");
+      ("license,l", "Display SPM license")
+      ("version,v", "Display version information")
+      ("run,r", "Basic model run")
+      ("estimate,e", "Point estimation")
+      ("profile,p", "Likelihood profiles")
+      ("mcmc,m", "MCMC")
+      ("forward,f", "Forward projections")
+      ("simulate,s", "Simulate observations")
+      ("config,c", value<string>(), "Configuration file")
+      ("input,i", value<string>(), "Load free parameter values from file")
+      ("threads,t", value<int>(), "Number of threads to spawn")
+      ("quiet,q", "Run in quiet mode")
+      ("genseed,g", value<int>(), "Random number seed");
 
   ostringstream o;
   o << oDesc;

@@ -51,7 +51,7 @@ CStandardHeaderReporter::CStandardHeaderReporter() {
 void CStandardHeaderReporter::start() {
 
   // Build Command Line
-  sHeader += "CmdLine: ";
+  sHeader += "Call: ";
   for (int i = 0; i < pConfig->getCommandLineParameterCount(); ++i)
     sHeader += pConfig->getCommandLineParameter(i) + string(" ");
 
@@ -59,12 +59,17 @@ void CStandardHeaderReporter::start() {
   sHeader += "\nDate: "+ string(ctime(&tmeStart));
 
   // Build Version
-  sVersion = string("v0.1-") + string(SOURCE_CONTROL_VERSION);
-  sHeader += sVersion + "   Copyright (c) 2008, NIWA";
+  std::stringstream sRevisionNumber;
+  sRevisionNumber << SOURCE_CONTROL_REVISION;
+  sVersion = "v" + string(VERSION) + "-" + string(SOURCE_CONTROL_DATE) + " (rev. " + sRevisionNumber.str() + ")";
+
 #ifdef OPTIMISE
-  sHeader += " (OPTIMISED)";
+  sVersion += " (OPTIMISED).";
+#else
+  sVersion += ".";
 #endif
 
+  sHeader += sVersion + " Copyright (c) 2008-" + SOURCE_CONTROL_YEAR + ", NIWA";
   sHeader += "\n";
 
   // Build User/Computer Info

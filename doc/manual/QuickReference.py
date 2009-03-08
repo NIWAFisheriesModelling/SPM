@@ -4,11 +4,11 @@ import re
 p = re.compile('\{.*?\}',re.IGNORECASE)
 q = re.compile('\}.*?\{',re.IGNORECASE)
 
-FILE = [open('Syntax/GeneralSyntax.tex', 'r'),
-        open('Syntax/PopulationSyntax.tex', 'r'),
+FILE = [open('Syntax/PopulationSyntax.tex', 'r'),
         open('Syntax/EstimationSyntax.tex', 'r'),
         open('Syntax/ObservationSyntax.tex', 'r'),
-        open('Syntax/ReportSyntax.tex', 'r')]
+        open('Syntax/ReportSyntax.tex', 'r'),
+        open('Syntax/GeneralSyntax.tex', 'r')]
 OUTFILE = open('QuickReference.tex', 'w')
 VERSION = open('SPMversion.tex', 'r')
 SYNTAX_OUTFILE = open('SPM.syn', 'w')
@@ -70,7 +70,7 @@ for i in range(len(FILE)):
       mat = string.find(line,']')+1
       line = "\\par\\textbf" + line[mat:] + "\\par"
     if line[1:11] == "subsection" :
-      line = "\\subsubsection" + line[11:]
+      #line = "\\subsubsection" + line[11:]
       line = ""
     if line[1:8] == "section" :
       line = "\\subsection" + line[8:]
@@ -78,11 +78,13 @@ for i in range(len(FILE)):
     if (line[1:11]=="subsection" or line[1:14]=="subsubsection" or line[1:11]=="par\\textbf" or line[1:7]=="defCom" or line[1:7]=="defSub") :
       if (line[1:11]=="subsection") :
         count=0
+        line = line + "\\par"
       if (line[1:7]=="defCom") :
         m = p.search(line)
         Keywords1.append(m.group()[1:(len(m.group())-1)])
+        line = line + "\\par"
         if (count!=0):
-          line = "\\par " + line
+          line = "\\par" + line
         else:
           count=1
         if(i > 0):

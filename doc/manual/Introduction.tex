@@ -6,23 +6,23 @@ This manual describes how to use \SPM, including how to run \SPM, how to set up 
 
 \subsection{Version\label{sec:version}}
 
-This document (last modified \DocVer) details the usage of \SPM\ \VER. The \SPM\ version number is suffixed with a date/time (\texttt{yyyy-mm-dd-hh:mm:ss}) and revision number, giving the revision control system UTC date and revision number for the most recent modification of the source files. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.\index{Version}
+This document (last modified \DocVer) describes \SPM\ \VER. The \SPM\ version number is suffixed with a date/time (\texttt{yyyy-mm-dd}) and revision number, giving the revision control system UTC date and revision number for the most recent modification of the source files. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.\index{Version}
 
 \subsection{Citing \SPM}
 
 A suitable reference for \SPM\ and this document is:
 
-\ManualRef\index{Citation}
+\ManualRef\index{Citation}\index{Citing \SPM}
 
-\subsection{Software license\index{Software license}\index{Common Public License}}
+\subsection{\I{Software license}\index{Common Public License}}
 
 This program and the accompanying materials are made available under the terms of the \href{http://www.opensource.org/licenses/cpl1.0.php}{Common Public License v1.0} which accompanies this distribution (Section \ref{sec:Common-Public-License}).
 
 Copyright \copyright 2008-\SourceControlYearDoc, \href{http://www.niwa.co.nz}{\Organisation} and the \href{http://www.fish.govt.nz}{New Zealand Ministry of Fisheries}. All rights reserved.
 
-\subsection{System requirements}
+\subsection{\I{System requirements}}
 
-\SPM\ is available for most IBM compatible machines running Linux and from the command prompt under most Microsoft Windows operating systems.
+\SPM\ is available for most IBM compatible machines running \I{Linux} and from the command prompt under most \I{Microsoft Windows} operating systems.
 
 Several of \SPM s tasks are highly computer intensive and a fast, powerful processor is recommended. We recommend a minimum of 10 megabytes of free RAM (although, depending on the scope of the problem, you may need much more). Some of \SPM s tasks can be multi-threaded, and hence multi-core machines may perform some tasks considerably quicker than single core processors. The program itself requires only a few megabytes of hard-disk space but output files can consume large amounts of disk space. Depending on number and type of user output requests, the output could range from a few hundred kilobytes to several hundred megabytes. However, we note that, depending on the model implemented, some of \SPM s tasks can take a considerable amount of time.
 
@@ -42,7 +42,7 @@ No software other than the appropriate operating system or emulation package is 
 
 \SPM\ is compiled on Linux using \href{http://gcc.gnu.org}{\texttt{gcc}}, the C/C++ compiler developed by the \href{http://gcc.gnu.org}{GNU Project}. The 32-bit Linux version has been compiled using \texttt{gcc} version 4.1.2 20070115 (prerelease) (\href{http://www.opensuse.org/}{SuSE Linux}), the 64-bit Linux version uses \href{http://gcc.gnu.org}{\texttt{gcc}} version 4.1.0 (\href{http://www.opensuse.org/}{SuSE Linux}). Note that \SPM\ is not supported for Linux kernel versions prior to 2.6. The \href{http://www.microsoft.com}{Microsoft Windows} version is compiled using \href{http://www.mingw.org}{Mingw32} \href{http://gcc.gnu.org}{\texttt{gcc}} 3.4.5, and should run on most 32-bit WindowsXP and Windows Vista systems. There are no plans to port \SPM\ to Microsoft Windows 64-bit platforms. 
 
-\SPM\ uses two minimisers, \textemdash\ the first is closely based on the main algorithm of \cite{779}, and which which uses finite difference gradients, and the second is an implementation of the differential evolution solver \citep{1442}. The random number generator used by \SPM\ uses an implementation of the Mersenne twister random number generator \citep{796}, from the \href{http://www.boost.org/}{BOOST} C++ library (Version 1.38.0).
+\SPM\ uses two minimisers, \textemdash\ the first is closely based on the main algorithm of \cite{779}, and which which uses finite difference gradients, and the second is an implementation of the differential evolution solver \citep{1442}. The random number generator used by \SPM\ uses an implementation of the Mersenne twister random number generator \citep{796}. This, the command line functionality, matrix operations, and a number of other functions use the \href{http://www.boost.org/}{BOOST} C++ library (Version 1.38.0).
 
 Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code for \SPM\ is available on request.
 

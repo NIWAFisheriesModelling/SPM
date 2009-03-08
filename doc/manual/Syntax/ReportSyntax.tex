@@ -9,6 +9,9 @@ The report types available are,
   \item Print a derived parameter
   \item Print the free parameter values
   \item Print the objective function values
+  \item Print an observation values, fits, and residuals
+  \item Print a layer
+  \item Print a selectivity's values
 \end{description}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
@@ -39,7 +42,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \subsubsection[Print a derived parameter]{\commandlabsubarg{report}{type}{derived\_parameter}}
 
-\defSub{Label} {Define the label of the derived parameter to print}
+\defSub{derived\_parameter} {Define the label of the derived parameter to print}
 \defType{String}
 \defDefault{None}
 \defValue{A valid label from \command{Derived\_parameter}}
@@ -49,7 +52,16 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
-\subsubsection[Print the free parameters]{\commandlabsubarg{report}{type}{Parameters}\label{sec:InputFileFormat}}
+\subsubsection[Unformatted printing of the free parameters]{\commandlabsubarg{report}{type}{Parameter\_vector}\label{sec:InputFileFormat}}
+
+Prints the free parameters in a format suitable for use with \texttt{spm -i}.
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\subsubsection[Print the free parameters]{\commandlabsubarg{report}{type}{Parameters}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -57,6 +69,87 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \subsubsection[Print the Objective function values]{\commandlabsubarg{report}{type}{Objective}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\subsubsection[Print an observation, fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
+
+\defSub{observation} {Define the label of the observation to print}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{Observation}}
+
+\defSub{obs} {Print the observations values?}
+\defType{Logical}
+\defDefault{True}
+\defValue{If true, then the observations observed values are printed}
+
+\defSub{fits} {Print the observations expected values (fits)?}
+\defType{Logical}
+\defDefault{True}
+\defValue{If true, then the observations expected values are printed}
+
+\defSub{residuals} {Print the observations residual values?}
+\defType{Logical}
+\defDefault{True}
+\defValue{If true, then the observations residuals are printed}
+
+\defSub{error} {Print the observations error values?}
+\defType{Logical}
+\defDefault{True}
+\defValue{If true, then the observations error values are printed (e.g., c.v's,. Ns, etc.,)}
+
+\defSub{likelihood} {Print the observations likelihood values?}
+\defType{Logical}
+\defDefault{False}
+\defValue{If true, then the individual contribution of each observations to the objective function is printed}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\subsubsection[Print a layer]{\commandlabsubarg{report}{type}{layer}}
+
+\defSub{layer} {Define the label of the layer to print}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{Layer}}
+
+\defSub{year} {Define the year for the printing of the layer}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
+\defSub{time\_step} {Define the time-step for the printing of the layer}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid time-step}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\subsubsection[Print a selectivity]{\commandlabsubarg{report}{type}{selectivity}}
+
+\defSub{selectivity} {Define the label of the selectivity to print}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{Selectivity}}
+
+\defSub{year} {Define the year for the printing of the selectivity}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
+\defSub{time\_step} {Define the time-step for the printing of the selectivity}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}

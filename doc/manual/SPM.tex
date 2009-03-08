@@ -58,9 +58,9 @@
 \usepackage{sectsty}
 \allsectionsfont{\sffamily\large} % Normal sized arial style section headings
 % Add a dot after section headings
-\makeatletter
-\def\@seccntformat#1{\csname the#1\endcsname.\quad}
-\makeatother
+%\makeatletter
+ %\def\@seccntformat#1{\csname the#1\endcsname.\quad}
+%\makeatother
 
 % Page style
 \usepackage{fancyhdr}
@@ -72,7 +72,7 @@
 \renewcommand{\footrulewidth}{0pt}
 \setlength{\parindent}{0pt} % No indentation at start of paragraph
 \setlength{\baselineskip}{1ex plus 0.2ex minus 0.1ex}
-\setlength{\parskip}{1ex} % Gap between paragraphs
+\setlength{\parskip}{1.1ex} % Gap between paragraphs
 \raggedbottom % prefer space at the bottom of page
 
 % Make equation numbers be section number then equation number
@@ -120,9 +120,13 @@
 \newcommand{\commentstart}{\{}
 \newcommand{\commentend}{\}}
 
+% command shortcuts
 \newcommand{\Rzero}{\emph{R}$_0$}
 \newcommand{\Bzero}{\emph{B}$_0$}
 \newcommand{\R}{\textbf{R}}
+
+%quick index
+\newcommand{\I}[1]{#1\index{#1}\ }
 
 % New commands to template syntax definitions
 % Define a command without a label
@@ -153,13 +157,13 @@
 \newcommand{\DocVer}{\SourceControlDateDoc}
 
 %New commands to automate document dates, manual titles, document reference, etc.
-\newcommand{\VER}{\begin{small}\input{SPMversion.tex}\end{small}} % SPM program version
+\newcommand{\VER}{v\input{SPMversion.tex}} % SPM program version
 \newcommand{\SPM}{\texttt{SPM}} % SPM short  name
 \newcommand{\SPMName}{Spatial Population Model} %SPM long name
 \newcommand{\authors}{\href{mailto:"Alistair Dunn"<a.dunn@niwa.co.nz>?subject=SPM:}{authors}} %hyper ref for email
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.} %NIWA
-\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual (\SPM\ \VER). \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
-\title{\SPMName\ User Manual \\(\SPM\ \VER)} %Document title
+\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
+\title{\SPMName\ User Manual \\\SPM\ \VER} %Document title
 \author{Alistair Dunn, Scott Rasmussen}  %Document authors
 \date{\DocDate} %Date of publication
 
@@ -181,7 +185,7 @@
 \sloppy % use sloppy paras
 
 % Title page
-\pdfbookmark[1]{SPM users manual}{title}
+\pdfbookmark[1]{SPM Users Manual}{title}
 \pagenumbering{alph} % alpha not used, but used to remove warnings when page 1 is re-defined below
 \maketitle
 \thispagestyle{empty} % no header/footer/page number on this page
@@ -215,20 +219,20 @@
 \end{spacing}
 
 % Table of figures
-\clearemptydoublepage{}
-\pdfbookmark[1]{List of figures}{figures}
-\begin{spacing}{0.8} % Reduce space between lines in contents list
-\renewcommand\listfigurename{List of figures}
-\listoffigures
-\end{spacing}
+%\clearemptydoublepage{}
+%\pdfbookmark[1]{List of figures}{figures}
+%\begin{spacing}{0.8} % Reduce space between lines in contents list
+%\renewcommand\listfigurename{List of figures}
+%\listoffigures
+%\end{spacing}
 
 % Table of tables
-\clearemptydoublepage{}
-\pdfbookmark[1]{List of tables}{tables}
-\begin{spacing}{0.8} % Reduce space between lines in contents list
-\renewcommand\listtablename{List of tables}
-\listoftables
-\end{spacing}
+%\clearemptydoublepage{}
+%\pdfbookmark[1]{List of tables}{tables}
+%\begin{spacing}{0.8} % Reduce space between lines in contents list
+%\renewcommand\listtablename{List of tables}
+%\listoftables
+%\end{spacing}
 
 % Document body
 \clearemptydoublepage{}
@@ -236,6 +240,7 @@
 \fancyhead[LE]{\slshape \nouppercase \rightmark} % Section headings at top of page (header, even pages)
 \fancyhead[RO]{\slshape \nouppercase \leftmark}  % Section headings at top of page (header, odd pages)
 \pagenumbering{arabic} % Page numbers a arabic numerals
+
 \include{Introduction}
 
 \clearemptydoublepage{}
@@ -257,16 +262,15 @@
 \include{Report}
 
 \clearemptydoublepage{}
-%\section{Command\index{Command} and subcommand syntax\label{sec:syntax}}
-\input{syntax/GeneralSyntax}\label{sec:syntax}
-\clearemptydoublepage{}
-\input{syntax/PopulationSyntax}
+\input{syntax/PopulationSyntax}\label{sec:syntax}
 \clearemptydoublepage{}
 \input{syntax/EstimationSyntax}
 \clearemptydoublepage{}
 \input{syntax/ObservationSyntax}
 \clearemptydoublepage{}
 \input{syntax/ReportSyntax}
+\clearemptydoublepage{}
+\input{syntax/GeneralSyntax}
 
 \clearemptydoublepage{}
 \include{Examples}
