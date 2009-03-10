@@ -7,9 +7,9 @@ project(SPM)
 # find | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest"
 
 SET(LIBRARY_NAME SimFish)
-SET(MAIN_NAME SPM_UnOptimised)
-SET(TEST_NAME SPM_UnitTests)
-SET(OPTI_NAME SPM)
+SET(MAIN_NAME spm_UnOptimised)
+SET(TEST_NAME spm_UnitTests)
+SET(OPTI_NAME spm)
 
 # Added autogeneration of Version.h file in src directory
 
