@@ -7,7 +7,6 @@ In SPM, but not in manual
   adaptive_stepsize
   age
   age_index
-  catchability
   category
   category_index
   column
@@ -22,10 +21,8 @@ In SPM, but not in manual
   double
   enabled_estimates
   estimable
-  estimate_summary
   estimate_value
   estimates
-  exponential
   final
   flagged_penalties
   function
@@ -47,7 +44,6 @@ In SPM, but not in manual
   log_scale
   max_evals
   max_iters
-  meta
   method
   movement_process
   movement_processes
@@ -55,11 +51,12 @@ In SPM, but not in manual
   multiplier
   n_process_error
   natural_mortality
+  normal_by_stdev
   normal_log
   normalise
-  objective_function
+  objective
+  obs
   observations
-  overwrite
   param_v
   population_categories
   population_process
@@ -68,7 +65,6 @@ In SPM, but not in manual
   preference
   profiles
   projection_years
-  proportions_by_category
   proposal_t
   r
   recruitment
@@ -99,6 +95,8 @@ In manual, but not in SPM
   ageing_error
   derived_quantity
   include
+  joint_selectivity
+  likelihood
   report
   size_at_age
   linf
@@ -108,22 +106,21 @@ In manual, but not in SPM
   categories2
   correlation_adjustment_diff
   correlation_adjustment_method
-  cv [label]
   delta
-  derived_parameter
+  derived_quantity
   distribution
-  error
-  fits
+  error_value [label]
+  estimation_phase
   gradient_tolerance
   growth_proportions
+  initialisation_layer
   k
-  likelihood
   lower_bounds
   max_correlation
   max_evaluations
   max_iterations
-  n [label]
   obs [label]
+  offset
   p1
   p2
   phase
@@ -132,13 +129,12 @@ In manual, but not in SPM
   proportion_time_step
   proposal_distribution
   random_seed
-  residuals
+  sd
   selectivities2
   simulate
   sink_layer
   size_at_age
   source_layer
-  stdev
   t0
   tau1
   tau2
@@ -147,25 +143,26 @@ In manual, but not in SPM
   bh_recruitment
   de_solver
   metropolis_hastings
-  parameter_vector
-  parameters
+  multinomial
   schnute
   adjacent_cell_movement
   annual_mortality_rate
+  binomial
   biomass_event_mortality
   categorical
   constant_mortality_rate
-  derived_parameter
+  derived_quantity
+  estimate_values
   event_mortality_at_age
-  exponential_decay
   initialisation
+  iterative
   lognormal
-  meta_layer
   migration_movement
   none
+  normal_by_sd
   numerical_differences
   off_by_one
   partition
   preference_movement
-  proportions_by_age
+  random_number_seed
   von_bertalanffy

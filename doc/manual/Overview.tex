@@ -18,7 +18,7 @@ The population structure of \SPM\ follows the usual population modelling convent
 
 The spatial component of \SPM\ is designed to allow parametrise movement cohorts and groups of individuals between spatial locations, and hence allow movement parameters to be estimated by incorporating spatially explicit observations. 
 
-A model is implemented in \SPM\ using an \config \index{Input configuration file}, which is a complete description of the model structure (i.e., spatial and population processes), observations, estimation methods, and reports (outputs) requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, free parameters can be \emph{estimated} or \emph{profiled}, \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
+A model is implemented in \SPM\ using an \config \index{Input configuration file}, which is a complete description of the model structure (i.e., spatial and population processes), observations, estimation methods, and reports (outputs) requested. \SPM\ runs from a command prompt window in Microsoft Windows or from a text terminal in Linux. A model can be either \emph{run}, estimable parameters can be \emph{estimated} or \emph{profiled}, \emph{MCMC} distributions calculated, and these estimates can be \emph{projected} into the future or used as an operating model to \emph{simulate} observations.
 
 This section gives a quick overview of the model, and how to use it. Detailed descriptions of the components of \SPM, the model structures, mathematical equations used, and command and subcommand arguments are given in the following sections.
 
@@ -30,7 +30,7 @@ The population section\index{Population section} (Section \ref{sec:population-se
 
 \subsection{\I{The estimation section}}
 
-The estimation section\index{Estimation section} specifies the free parameters\index{Free parameters}, estimation methods, penalties and priors. Estimation is based on an objective function (e.g., negative log posterior). Depending on the run mode, the estimation section is used to specify the methods for finding a point estimate (i.e., the set of parameter values that minimizes the objective function), doing profiles, or MCMC methods and options, etc.
+The estimation section\index{Estimation section} specifies the parameters parameters to be estimated\index{Estimated parameters}, estimation methods, penalties and priors. Estimation is based on an objective function (e.g., negative log posterior). Depending on the run mode, the estimation section is used to specify the methods for finding a point estimate (i.e., the set of parameter values that minimizes the objective function), doing profiles, or MCMC methods and options, etc.
 
 Further, the estimation section specifies the parameters to be estimated within each model run and the estimation methods. The estimation section specifies the choice of estimation method, which parameters are to be estimated, priors, starting values, and minimiser control values.
 

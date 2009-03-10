@@ -140,7 +140,7 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 \defSub{step\_size} {Initial step-size (as a multiplier of the approximate covariance matrix)}
 \defType{Constant}
-\defDefault{$2.4d^{-0.5}$ where $d$ is the number of free parameters}
+\defDefault{$2.4d^{-0.5}$ where $d$ is the number of estimated parameters}
 \defValue{The covariance of the proposal distribution is the approximate covariance (inverse Hessian) times this step-size parameter}
 
 \defSub{proposal\_distribution} {The shape of the proposal distribution (either \textit{t} or normal)}
@@ -155,19 +155,12 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 \subsection{Profiles}
 
-Only one method of carrying out profiles is available,
-
-\defComLab{profile}{Define the profile parameters, minimiser, and arguments}
+\defComLab{profile}{Define the profile parameters and arguments}
 
 \defSub{parameter} {Name of the parameter to be profiled}
 \defType{String}
 \defDefault{None}
 \defValue{Defines the name of the parameter to be profiled}
-
-\defSub{minimiser} {The label of the minimiser to use}
-\defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{minimiser}}
 
 \defSub{n} {Number of values at which to profile the parameter}
 \defType{Integer}
@@ -184,9 +177,9 @@ Only one method of carrying out profiles is available,
 \defDefault{None}
 \defValue{Defines the upper bound on the range of the parameter to profile}
 
-\subsection{Defining the free parameters and priors}
+\subsection{Defining the parameters to be estimated and their priors}
 
-\defComArg{estimate}{parameter\_name}{Estimate a free parameter}
+\defComArg{estimate}{parameter\_name}{Estimate an estimable parameter}
 \defArg{parameter\_name}{The \SPM\ name of the parameter to estimate}
 \defType{string}
 \defDefault{None}
@@ -197,7 +190,7 @@ Only one method of carrying out profiles is available,
 \defDefault{None}
 \defValue{Defines the names of all the other parameters which are constrained to have the same value as this parameter}
 
-\defSub{phase}{Phase at which this parameter should be estimated, in point estimation}
+\defSub{estimation\_phase}{Phase at which this parameter should be estimated, in point estimation}
 \defType{Integer}
 \defDefault{1}
 \defValue{Defines the phase at which this parameter should be freed}
@@ -217,22 +210,41 @@ Only one method of carrying out profiles is available,
 \defDefault{False}
 \defValue{Define this parameter as fixed during MCMC (i.e., considered a constant for the MCMC)}
 
-\defSub{prior}{Defines the prior for this parameter}
+\defSub{prior}{Defines the label for the prior for this parameter}
 \defType{String}
 \defDefault{No default}
-\defValue{Defines the type of prior on this parameter, and includes uniform, uniform-log, normal, normal-by-stdev, lognormal, Beta}
+\defValue{Defines the label of the prior on this parameter}
 
-Different priors require different subcommands.
 
-\subsubsection[Uniform prior]{\commandlabsubarg{estimate}{prior}{uniform}} 
+\subsection{Priors}
 
-The command \commandlabsubarg{estimate}{prior}{uniform} has no other subcommands.
+The available priors are,
 
-\subsubsection[Uniform-log prior]{\commandlabsubarg{estimate}{prior}{uniform\_log}} 
+\begin{itemize}
+  \item uniform
+  \item uniform-log
+  \item normal
+  \item normal-by-sd
+  \item lognormal
+  \item Beta
+\end{itemize}
 
-The command \commandlabsubarg{estimate}{prior}{uniform\_log} has no other subcommands.
+\defComLab{prior}{Define the prior label}
 
-\subsubsection[Normal prior]{\commandlabsubarg{estimate}{prior}{normal}} 
+\defSub{type} {Define the type of prior}
+\defType{String}
+\defDefault{None}
+\defValue{A valid type of prior}
+
+\subsubsection[Uniform prior]{\commandlabsubarg{prior}{type}{uniform}} 
+
+The command \commandlabsubarg{prior}{type}{uniform} has no other subcommands.
+
+\subsubsection[Uniform-log prior]{\commandlabsubarg{prior}{type}{uniform\_log}} 
+
+The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommands.
+
+\subsubsection[Normal prior]{\commandlabsubarg{prior}{type}{normal}} 
 
 \defSub{mu}{Defines the mean $\mu$ of the normal prior}
 \defType{Constant}
@@ -244,19 +256,19 @@ The command \commandlabsubarg{estimate}{prior}{uniform\_log} has no other subcom
 \defDefault{No default}
 \defValue{Defines the c.v. of the normal prior}
 
-\subsubsection[Normal-by-stdev prior]{\commandlabsubarg{estimate}{prior}{normal\_by\_stdev}} 
+\subsubsection[Normal-by-sd prior]{\commandlabsubarg{prior}{type}{normal\_by\_sd}} 
 
 \defSub{mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the mean of the normal by standard deviation prior}
 
-\defSub{stdev}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
+\defSub{sd}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the standard deviation of the normal by standard deviation prior}
 
-\subsubsection[Lognormal prior]{\commandlabsubarg{estimate}{prior}{lognormal}} 
+\subsubsection[Lognormal prior]{\commandlabsubarg{prior}{type}{lognormal}} 
 
 \defSub{mu}{Defines the mean $\mu$ of the lognormal prior}
 \defType{Constant}
@@ -268,7 +280,7 @@ The command \commandlabsubarg{estimate}{prior}{uniform\_log} has no other subcom
 \defDefault{No default}
 \defValue{Defines the c.v. of the lognormal prior}
 
-\subsubsection[Beta prior]{\commandlabsubarg{estimate}{prior}{beta}} 
+\subsubsection[Beta prior]{\commandlabsubarg{prior}{type}{beta}} 
 
 \defSub{A}{The lower value of the range parameter $A$ of the Beta prior}
 \defType{Constant}
@@ -285,7 +297,7 @@ The command \commandlabsubarg{estimate}{prior}{uniform\_log} has no other subcom
 \defDefault{No default}
 \defValue{Defines the mean of the Beta prior}
 
-\defSub{stdev}{Defines the standard deviation $\sigma$ of the Beta prior}
+\defSub{sd}{Defines the standard deviation $\sigma$ of the Beta prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the standard deviation of the Beta prior}
@@ -339,12 +351,12 @@ The \commandlabsubarg{ageing\_error}{type}{none} has no other subcommands.
 
 \subsection{Defining catchability constants}
 
-\defComLab{q}{Define a catchability constant with \argument{label}}
+\defComLab{catchability}{Define a catchability constant with \argument{label}}
 
 \defSub{q} {Value of the q parameter}
 \defType{Estimable}
 \defDefault{None}
-\defValue{Defines the value of the q parameter, a real positive number}
+\defValue{Defines the value of the catchability $q$ parameter, a real positive number}
 
 \subsection{Defining penalties}
 

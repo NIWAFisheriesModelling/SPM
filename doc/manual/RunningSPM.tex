@@ -2,7 +2,7 @@
 
 \SPM\ is run from the command line in \I{Microsoft Windows} or from a terminal window in \I{Linux}. \SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. 
 
-The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+The \config\ is compulsory and defines the model structure, processes, observations, parameters (both the fixed parameters and the parameters to be estimated)\index{Estimable parameters}\index{Estimated parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
 Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.
 
@@ -54,24 +54,24 @@ and where \emph{task} is one of;
 \item [\texttt{-l}] Display the reference for the software license (CPLv1.0).
 \item [\texttt{-v}] Display the \SPM\ version number.
 
-\item [\texttt{-r}] \emph{Run} the model once using the parameter values in the \config, or optionally, with the values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-r}] \emph{Run} the model once using the parameter values in the \config, or optionally, with the values from the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-e}] Do a point \emph{estimate} of the free parameters using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-e}] Do a point \emph{estimate} using the values in the \config\ as the starting point for the parameters to be estimated, or optionally, with the start values from the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-p}] Do a likelihood \emph{profile} using the parameter values in the \config\ as the starting point, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-p}] Do a likelihood \emph{profile} using the parameter values in the \config\ as the starting point, or optionally, with the start values from the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-m}] Do an \emph{MCMC} estimate of the free parameters using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-m}] Do an \emph{MCMC} estimate using the values in the \config\ as the starting point for the parameters to be estimated, or optionally, with the start values from the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-f}] Project the model \emph{forward} in time using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-f}] Project the model \emph{forward} in time using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values from the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-s}] \emph{Simulate} observations of the free parameters using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-s}] \emph{Simulate} observations using values in the \config\ as the parameter values, or optionally, with the values for the parameters denoted as estimated from the file with the command line argument \texttt{-i \emph{file}}.
 
 \end{description}
 
 In addition, the following are optional arguments\index{Optional command line arguments} [\emph{options}],
 
 \begin{description}
-\item [\texttt{-i \emph{file}}] \emph{Input} one or more sets of free parameter values from \texttt{\emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.
+\item [\texttt{-i \emph{file}}] \emph{Input} one or more sets of estimated parameter values from \texttt{\emph{file}}. See Section \ref{sec:InputFileFormat} for details about the format of \texttt{\emph{file}}.
 
 \item [\texttt{-t \emph{number}}] Number of \emph{threads} to run (i.e., number of processors available for use).
 
@@ -91,12 +91,12 @@ In general, the \config\ uses a command-block format to describe commands, subco
 \SPM\ has a range of commands that define the model structure, processes, observations, and how tasks are carried out. There are three types of commands, 
 
 \begin{enumerate}
-\item Commands that have an argument and do not have subcommands (for example, \command{Include}\ \argument{file})
-\item Commands that have a label and subcommands (for example \command{Constant\_recruitment}\ \argument{MyRecruitment})
+\item Commands that have an argument and do not have subcommands (for example, \command{include}\ \argument{file})
+\item Commands that have a label and subcommands (for example \command{process}\ \argument{MyRecruitment})
 \item Commands that do not have either a label or argument, but have subcommands (for example \command{Model})
 \end{enumerate}
 
-Commands that have a label must have a unique label, i.e., the label cannot be used on more than one command of that type. The labels must start with a letter or underscore, can contain letters, underscores, or numbers, but must not contain white-space or full-point ('.').
+Commands that have a label must have a unique label, i.e., the label cannot be used on more than one command of that type. The labels must start with a letter or underscore, can contain letters, underscores, or numbers, but must not contain white-space or a full-point ('.').
 
 \subsubsection{Subcommands}\index{Commands ! Subcommands}
 
@@ -124,7 +124,7 @@ Integers must be entered as integers (i.e., if \subcommand{Year}\ is an integer 
 
 Arguments of type integer vector, constant vector, estimable vector, or categorical vector contain one or more entries on a row, separated by white space (tabs or spaces). 
 
-\emph{Estimable} parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. And, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{free parameters}.
+\emph{Estimable} parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. And, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{estimated parameters}.
 
 \subsubsection{The command-block format}\index{Command block format}
 
@@ -163,11 +163,12 @@ When SPM processes a \config, it translates each command and each subcommand int
 \item \texttt{Command[label].Subcommand} if the command has a label, or
 \item \texttt{Command.Subcommand} if the command has no label, or
 \item \texttt{Command[label].Subcommand[i]} if the command has a label, and the subcommand arguments are a vector, and we are accessing the  \emph{i}th element of that vector. 
+\item \texttt{Command[label].Subcommand[i-j]} if the command has a label, and the subcommand arguments are a vector, and we are accessing the elements from $i$ to $j$ (inclusive) of that vector. 
 \end{description} 
 
-The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{R0} of the command \command{Constant\_recruitment} with the label \argument{MyRecruitment} is,
+The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{r0} of the command \command{process} with the label \argument{MyRecruitment} is,
 
-\texttt{Constant\_recruitment[MyRecruitment].R0}
+\texttt{process[MyRecruitment].r0}
 
 \subsection{\SPM\ exit status values}
 

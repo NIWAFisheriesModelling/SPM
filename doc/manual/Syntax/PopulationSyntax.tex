@@ -74,7 +74,24 @@
 \defDefault{None}
 \defValue{Defines the labels of the time steps that are run in each year}
 
+\subsection{Initialisation}
+
+The methods for initialisation available are, 
+
+\begin{itemize}
+	\item Iterative
+\end{itemize}
+
+Each type of initialisation requires a set of subcommands and arguments specific to that type.
+
 \defComLab{initialisation\_phase}{Define the processes and years of the initialisation phase with label}
+
+\defSub{type} {Define the type of initialisation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid type of initialisation}
+
+\subsubsection[Iterative initialisation]{\commandlabsubarg{initialisation\_phase}{type}{iterative}} 
 
 \defSub{years} {Define the number of years to run}
 \defType{Integer}
@@ -85,6 +102,8 @@
 \defType{String vector}
 \defDefault{None}
 \defValue{A valid process label, from one of \command{process}}
+
+\subsection{Time steps}
 
 \defComLab{time\_step} {Define a time step with label}
 
@@ -151,7 +170,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{TRUE}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
 
 \subsubsection[Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{BH\_recruitment}}
 
@@ -188,10 +207,15 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{Estimable}
 \defDefault{None}
 
-\defSub{SSB} {Define the label of the \command{derived\_parameter} that defines the SSB}
+\defSub{SSB} {Define the label of the \command{derived\_quantity} that defines the SSB}
 \defType{String}
 \defDefault{None}
-\defValue{Must be a valid \command{derived\_parameter} label}
+\defValue{Must be a valid \command{derived\_quantity} label}
+
+\defSub{offset} {Define the offset (in years) for the year of the derived quantity that is to be applied in the stock-recruit relationp}
+\defType{Integer}
+\defDefault{None}
+\defValue{Must be a value $ge0$}
 
 \defSub{YCS\_values} {YCS values}
 \defType{Estimable vector}
@@ -237,7 +261,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
 
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
 
@@ -264,7 +288,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
 
 \subsubsection[Event mortality process]{\commandlabsubarg{process}{type}{event\_mortality}}
 
@@ -281,7 +305,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layers} {Define the layers that specify the event mortality (as the abundance) in each year}
 \defType{String vector, of length years}
 \defDefault{None}
-\defValue{Valid layers defined by \command{layer}}
+\defValue{Valid layers defined by \command{layer}. Note that the layer values must be non-negative}
 
 \defSub{U\_max}{Define the maximum exploitation rate}
 \defType{Estimable}
@@ -318,7 +342,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defType{String vector, of length years}
 \defDefault{None}
-\defValue{Valid layers defined by \command{layer}}
+\defValue{Valid layers defined by \command{layer}. Note that the layer values must be non-negative}
 
 \defSub{U\_max} {Define the maximum exploitation rate}
 \defType{Constant}
@@ -360,7 +384,12 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layers} {Define the layers that specify the event mortality (as N for each cell) in each year}
 \defType{String vector}
 \defDefault{None}
-\defValue{Valid layers defined by \command{layer}}
+\defValue{Valid layers defined by \command{layer}. Note that the layer values must be non-negative}
+
+\defSub{penalty} {Define the penalty to encourage models parameter values away from those which result in not enough individuals to move}
+\defType{String}
+\defDefault{None}
+\defValue{Valid penalty label defined by \command{penalty}}
 
 \subsubsection[Category transition rate process]{\commandlabsubarg{process}{type}{category\_transition\_rate}}
 
@@ -387,7 +416,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{TRUE}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
 
 \subsubsection[Migration movement]{\commandlabsubarg{process}{type}{migration\_movement}}
 
@@ -447,7 +476,7 @@ The individual preference functions available are,
 	\item Double-normal
 	\item Logistic
 	\item Inverse logistic
-	\item Exponential-decay
+	\item Exponential
 	\item Threshold
 	\item Threshold-biomass	
 \end{itemize}
@@ -552,7 +581,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\subsubsection[Exponential-decay]{\commandlabsubarg{preference\_function}{type}{exponential\_decay}}
+\subsubsection[Exponential]{\commandlabsubarg{preference\_function}{type}{exponential}}
 
 \defSub{layer} {Defines the layer which supplies the preference function independent variable}
 \defType{String}
@@ -563,7 +592,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Estimable}
 \defDefault{None}
 
-\defSub{lambda} {Defines the $\lambda$ parameter of the exponential-decay preference function}
+\defSub{lambda} {Defines the $\lambda$ parameter of the exponential preference function}
 \defType{Estimable}
 \defDefault{None}
 
@@ -733,7 +762,7 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{None}
 \defValue{Valid labels from \command{size\_at\_age}}
 
-\subsubsection[MetaLayer]{\commandlabsubarg{layer}{type}{meta\_layer}}
+\subsubsection[Meta-layer]{\commandlabsubarg{layer}{type}{meta}}
 
 \defSub{years} {Define the years}
 \defType{Constant vector, with values for each year of the model}
@@ -743,6 +772,11 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defType{String vector, with values for each \argument{year} specified}
 \defDefault{None}
 \defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta\_layer}}
+
+\defSub{initialisation\_layer} {Define the layer label to use during the initialisation}
+\defType{String}
+\defDefault{None}
+\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
 
 \subsection{Derived quantities}
 
@@ -777,6 +811,11 @@ The individual types of derived quantities available are,
 \defDefault{None}
 \defValue{A valid time step label from \command{time\_step}}
 
+\defSub{layer} {Name of the layer}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell is multiplied by the value of the layer. If a logical layer, then the sum is only for cells where the layer value is \argument{True}}
+
 \subsubsection[Biomass]{\commandlabsubarg{derived\_quantity}{type}{biomass}}
 
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
@@ -793,6 +832,11 @@ The individual types of derived quantities available are,
 \defType{String}
 \defDefault{None}
 \defValue{A valid time step label from \command{time\_step}}
+
+\defSub{layer} {Name of the layer}
+\defType{String}
+\defDefault{None}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell biomass multiplied by the value of the layer. If a logical layer, then the sum is only for cells where the layer value is \argument{True}}
 
 \subsection{Size-at-age}
 
@@ -963,12 +1007,22 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[Constant]{\commandlabsubarg{selectivity}{type}{constant}}
 
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
 \defSub{c} {Defines the $C$ parameter of the selectivity function}
 \defType{Estimable}
 \defDefault{None}
 \defValue{A positive real number}
 
 \subsubsection[Knife-edge]{\commandlabsubarg{selectivity}{type}{knife\_edge}}
+
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
 
 \defSub{e} {Defines the $E$ parameter of the selectivity function}
 \defType{Estimable}
@@ -977,12 +1031,22 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[All-values]{\commandlabsubarg{selectivity}{type}{all\_values}}
 
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
 \defSub{v} {Defines the $V$ parameters (one for each age class) of the selectivity function}
 \defType{Estimable vector}
 \defDefault{None}
 \defValue{A vector of positive real numbers, of length equal to the number of age classes}
 
 \subsubsection[All-values-bounded]{\commandlabsubarg{selectivity}{type}{all\_values\_bounded}}
+
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
 
 \defSub{l} {Defines the $L$ parameter of the selectivity function}
 \defType{Integer}
@@ -1001,6 +1065,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[Increasing]{\commandlabsubarg{selectivity}{type}{increasing}}
 
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
 \defSub{l} {Defines the $L$ parameter of the selectivity function}
 \defType{Integer}
 \defDefault{None}
@@ -1018,6 +1087,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[Logistic]{\commandlabsubarg{selectivity}{type}{logistic}}
 
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
 \defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
 \defType{Estimable}
 \defDefault{None}
@@ -1029,6 +1103,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defValue{A positive real number}
 
 \subsubsection[Logistic producing]{\commandlabsubarg{selectivity}{type}{logistic\_producing}}
+
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
 
 \defSub{l} {Defines the $L$ parameter of the selectivity function}
 \defType{Integer}
@@ -1052,6 +1131,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[Double-normal]{\commandlabsubarg{selectivity}{type}{double\_normal}}
 
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
+
 \defSub{mu} {Defines the $\mu$ parameter of the selectivity function}
 \defType{Estimable}
 \defDefault{None}
@@ -1065,6 +1149,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defDefault{None}
 
 \subsubsection[Double-exponential]{\commandlabsubarg{selectivity}{type}{double\_exponential}}
+
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{None}
+\defValue{A positive real number}
 
 \defSub{x1} {Defines the $x_1$ parameter of the selectivity function}
 \defType{Integer}
@@ -1089,3 +1178,14 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
 \defType{Estimable}
 \defDefault{None}
+
+\subsection{Joint selectivities}
+
+How this works has yet to be defined...
+
+\defComLab{joint\_selectivity} {Define a joint selectivity}
+
+\defSub{selectivities} {Define the labels of the selectivities to be defined as 'joint'}
+\defType{String vector}
+\defDefault{None}
+\defValue{Valid \command{selectivity} labels}

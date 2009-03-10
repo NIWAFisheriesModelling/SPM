@@ -1,25 +1,8 @@
 \section{Troubleshooting\label{sec:trouble-shooting}}
 
-\subsection{Typical errors\label{sec:typical-errors}}
+\subsection{Introduction}
 
 \SPM\ is a complex system, providing many opportunities for error \textemdash either because your parameter files do not correctly specify your model, or because the model you tried to specify does not work as you expect. When in doubt, ask an experienced user. Debugging versions of \SPM\ can also be compiled that help to track down cryptic errors.
-
-Common errors include;
-\begin{enumerate}
-\item Misspelt arguments: 
-Probably more likely to be picked up by \SPM\ than misspelt commands, but still a potential problem. 
-
-\item Commented out command: 
-Commands that are commented out are ignored by \SPM. However, their subcommands will be assumed to be subcommands of the previous command. This will have unintended consequences. Either \SPM\ will error out, or it will run, but return an incorrect or nonsensical result. 
-
-\item No penalty on exceeding exploitation rate limits: 
-Unless you use penalties, there is nothing to stop \SPM\ from coming up with a parameter estimate under which there is not enough in the population to allow for the observed exploitation to be taken. You probably want to use a catch limit penalty for each fishery. 
-
-\item No penalty on year class strengths not averaging to 1: 
-If you estimate recruitment you may want to force year class strengths to average to 1. You need to use a vector average penalty to do this. If you don't, you may find that all your year class strengths are much more than 1 or much less than 1. 
-\end{enumerate}
-
-\subsection{Other errors}
 
 When \SPM\ generates an error and the error message makes no sense, please let the \SPM\ \authors\ know. Even if you manage to fix the problem yourself, we may be able to implement a more helpful error message and make life easier for the next person to encounter the problem. Guidelines for reporting an error are given in Section \ref{sec:error-guidelines}.
 

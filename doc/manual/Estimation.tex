@@ -7,16 +7,16 @@ The tasks carried out by the estimation section are:
 \begin{enumerate}
 \item Get the point estimate, i.e., the maximum posterior density estimate (MPD) (see Section 6.3).
 
-\item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other free parameters to vary, the minimum value of the objective function (Section 6.4).
+\item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other estimated parameters to vary, the minimum value of the objective function (Section 6.4).
 
 \item Generate an MCMC sample from the posterior distribution (Section 6.5).
 
 \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (Section 6.3).
 \end{enumerate}
 
-\subsection{Specifying the free parameters}
+\subsection{Specifying the parameters to be estimated}
 
-You need to tell SPM which of the estimable parameters are to be freed by using \command{Estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{Estimate} command-block looks like,
+You need to tell SPM which of the estimable parameters are to be estimated by using \command{Estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{Estimate} command-block looks like,
 
 \begin{verbatim}
   @estimate Process[MyRecruitment].R0
@@ -25,9 +25,9 @@ You need to tell SPM which of the estimable parameters are to be freed by using 
   prior uniform
 \end{verbatim}
 
-See Section XXX for instructions on how to generate the parameter name. You have to specify at least one free parameter. You still provide values for the free parameters as normal, these are used as the starting values for the minimiser (unless you provide alternative starting values using SPM -i, see Section \ref{sec:command-line-arguments}).
+See Section XXX for instructions on how to generate the parameter name. You have to specify at least one parameter to be estimated if doing an estimation, profile, or MCMC. You still provide values for the parameters to be estimated, and these are used as the starting values for the minimiser (unless you provide alternative starting values using \texttt{spm -i}, see Section \ref{sec:command-line-arguments}).
 
-All parameters are estimated within bounds. For each free parameter, you need to specify the bounds and the prior (Section XXX). Note that the bounds and prior on an selectivity refer to the selectivity free parameters, not the actual values of the selectivity. 
+All parameters are estimated within bounds. For each parameter to be estimated, you need to specify the bounds and the prior (Section XXX). Note that the bounds and prior on an selectivity refer to the selectivity parameters, not the actual values of the selectivity. 
 
 You need to estimate all the estimable parameters of an selectivity if you estimate any, but you can fix some of them if you want by setting the lower and upper bound equal. Similarly, if you want to estimate only some elements of a vector, fix the others by setting the bounds equal.
 
@@ -40,21 +40,21 @@ The minimiser has three kinds of (non-error) exit status:
 \begin{enumerate}
 \item Successful convergence (suggests you have found a local minimum, at least).
 \item Convergence failure (you have not reached a local minimum, though you may deem yourself to be `close enough' at your own risk).
-\item Convergence unclear (the minimiser halted but waas unable to determine if convergence occurred. You may be at a local minimum, although you should check by restarting the minimiser at the final values of the free parameters).
+\item Convergence unclear (the minimiser halted but was unable to determine if convergence occurred. You may be at a local minimum, although you should check by restarting the minimiser at the final values of the estimated parameters).
 \end{enumerate}
 
 You can choose the maximum number of quasi-Newton iterations and objective function evaluations allotted to the minimiser. If it exceeds either limit, it exits with a convergence failure. We recommend large numbers of evaluations and iterations (at least the defaults of 300 and 1000) unless you successfully reach convergence with less. You can also specify the starting point of the minimiser using \texttt{SPM -i}.
 
 We want to stress that this is a local optimisation algorithm trying to solve a global optimisation problem. What this means is that, even if you get a 'successful convergence' message, your solution may be only a local minimum, not a global one. To diagnose this problem, try doing multiple runs from different starting points and comparing the results, or (probably better) doing profiles of one or more key parameters and seeing if any of the profiled estimates is actually better than the original point estimate.
 
-The approximate covariance matrix of the free parameters can be calculated as the inverse of the minimiser's approximation to the Hessian, and the corresponding correlation matrix is also calculated. Be aware that
+The approximate covariance matrix of the estimated parameters can be calculated as the inverse of the minimiser's approximation to the Hessian, and the corresponding correlation matrix is also calculated. Be aware that
 
 \begin{itemize}
 \item the Hessian approximation develops over many minimiser steps, so if the minimiser has only run for a small number of iterations the covariance matrix can be a very poor approximation
-\item the inverse Hessian is not a good approximation to the covariance matrix of the free parameters, and may not be useful to construct, for example, confidence intervals. 
+\item the inverse Hessian is not a good approximation to the covariance matrix of the estimated parameters, and may not be useful to construct, for example, confidence intervals. 
 \end{itemize}
 
-Also note that if a free parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
+Also note that if an estimated parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
 
 \subsection{Posterior profiles}
 
@@ -72,7 +72,7 @@ If you get an implausible profile, it may be a result of not using enough iterat
 
 \subsection{Bayesian estimation}
 
-\SPM\ can use a Monte Carlo Markov Chain to generate a sample from the posterior distribution of the free parameters \texttt{SPM -m}; and output the sampled values to a file, (optionally only every nth set of values).
+\SPM\ can use a Monte Carlo Markov Chain to generate a sample from the posterior distribution of the estimated parameters \texttt{SPM -m}; and output the sampled values to a file, (optionally only every nth set of values).
 
 Two major steps are best done by an external package, as \SPM\ has no post-processing capabilities. \SPM\ cannot produce MCMC convergence diagnostics (use a package such as \href{http://www.public-health.uiowa.edu/boa}{BOA}) or plot/summarize the posterior distributions of the output quantities (for example, using a general-purpose statistical or spreadsheet package such as \href{http://www.insightful.com}{S-Plus}, \href{http://www.r-project.org}{R}, or \href{http://www.microsoft.com}{Microsoft Excel}).
 
@@ -90,7 +90,7 @@ SPM uses a straightforward implementation of the Metropolis algorithm \citep{823
 \item Let $x_i+1=x_i+s$ with probability $r$, or $x_i$ with probability $1-r$.
 \end{itemize}
 
-An initial point estimate is produced before the chain starts, which is done so as to calculate the approximate covariance matrix of the free parameters (as the inverse Hessian), and may also be used as the starting point of the chain. 
+An initial point estimate is produced before the chain starts, which is done so as to calculate the approximate covariance matrix of the estimated parameters (as the inverse Hessian), and may also be used as the starting point of the chain. 
 
 The user can specify the starting point of the point estimate minimiser using \texttt{SPM -i}. Don't start it too close to the actual estimate (either by using \texttt{SPM -i}, or by changing the initial parameter values in \config) as it takes a few iterations to form a reasonable approximation to the Hessian. 
 
@@ -104,7 +104,7 @@ There are two options for the starting point of the Markov Chain:
 \item Start from a point specified by the user with \texttt{SPM -i}.
 \end{itemize}
 
-The chain moves in natural space, i.e., no transformations are applied to the free parameters. The default proposal distribution is a multivariate normal centred on the current point, with covariance matrix equal to a matrix based on the approximate covariance produced by the minimiser, times some step-size factor. The following steps define the initial covariance matrix of the proposal distribution: 
+The chain moves in natural space, i.e., no transformations are applied to the estimated parameters. The default proposal distribution is a multivariate normal centred on the current point, with covariance matrix equal to a matrix based on the approximate covariance produced by the minimiser, times some step-size factor. The following steps define the initial covariance matrix of the proposal distribution: 
 
 \begin{itemize}
 \item The covariance matrix is taken as the inverse of the approximate Hessian from the quasi-Newton minimiser.
@@ -124,9 +124,9 @@ for $i \ne j$, and ${\mathop{\rm var}} \left( i \right)^\prime   = k$
 \item if \commandsubarg{MCMC}{AdjustmentMethod}{correlation}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{MinDiff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=MinDiff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the ith parameter and all other parameters.
 \end{itemize}
 
-This allows a free parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{MCMC}{MinDiff} parameter defaults to 0.0001.
+This allows each estimated parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{MCMC}{MinDiff} parameter defaults to 0.0001.
 
-\item The \commandsub{MCMC}{StepSize} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of free parameters, as recommended by Gelman et al. \citep{823}, though experience has shown that this may be too high and can lead to a low acceptance rate. 
+\item The \commandsub{MCMC}{StepSize} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of estimated parameters, as recommended by Gelman et al. \citep{823}, though experience has shown that this may be too high and can lead to a low acceptance rate. 
 \end{itemize}
 
 The proposal distribution can also change adaptively during the chain, using two different mechanisms. Both are offered as means of improving the convergence properties of the chain. It is important to note that any adaptive behaviour must finish before the end of the burn-in period, i.e., the proposal distribution must be finalised before the kept portion of the chain starts (\SPM\ enforces this). The adaptive mechanisms are as follows: 
@@ -147,7 +147,7 @@ The probability of acceptance for each jump is 0 if it would move out of the bou
 
 You can specify how often the position of the chain is recorded using the keep parameter. For example, with keep 10, only every 10th sample is written to file. 
 
-You have the option to specify that some of the free parameters are fixed during MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. If you specify the start of the chain using \texttt{SPM -i}, these fixed parameters are set to the values in the file.
+You have the option to specify that some of the estimated parameters are fixed during MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. If you specify the start of the chain using \texttt{SPM -i}, these fixed parameters are set to the values in the file.
 
 A multivariate $t$ distribution is available as an alternative to the multivariate normal proposal distribution. If you request multivariate $t$ proposals, you may want to change the degrees of freedom from the default of 4. As the degrees of freedom decrease, the $t$ distribution becomes more heavy tailed. This may lead to better convergence properties.
 

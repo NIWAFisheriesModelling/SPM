@@ -6,10 +6,12 @@ The report types available are,
 
 \begin{description}
   \item Print the partition
-  \item Print a derived parameter
-  \item Print the free parameter values
+  \item Print a derived quantity
+  \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
+  \item Print a summary of the estimated parameters
   \item Print the objective function values
   \item Print an observation values, fits, and residuals
+  \item Print the covariance matrix
   \item Print a layer
   \item Print a selectivity's values
 \end{description}
@@ -40,6 +42,11 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
 \subsubsection[Print the partition at initialisation]{\commandlabsubarg{report}{type}{initialisation}}
 
 \defSub{phase} {Define the phase of initialisation that the partition report applies to}
@@ -52,77 +59,82 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
-\subsubsection[Print a derived parameter]{\commandlabsubarg{report}{type}{derived\_parameter}}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
 
-\defSub{derived\_parameter} {Define the label of the derived parameter to print}
+\subsubsection[Print a derived quantity]{\commandlabsubarg{report}{type}{derived\_quantity}}
+
+\defSub{derived\_quantity} {Define the label of the derived quantity to print}
 \defType{String}
 \defDefault{None}
-\defValue{A valid label from \command{Derived\_parameter}}
+\defValue{A valid label from \command{derived\_quantity}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
-\subsubsection[Unformatted printing of the free parameters]{\commandlabsubarg{report}{type}{Parameter\_vector}\label{sec:InputFileFormat}}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
 
-Prints the free parameters in a format suitable for use with \texttt{spm -i}.
+\subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_values}\label{sec:InputFileFormat}}
 
-\defSub{file\_name} {Define the name of the output file where the report is written}
-\defType{String}
-\defDefault{None}
-\defValue{A valid file name. If not supplied, then output is directed to the standard out}
-
-\subsubsection[Print the free parameters]{\commandlabsubarg{report}{type}{Parameters}}
+Prints the estimated parameters in a format suitable for use with \texttt{spm -i}.
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
-\subsubsection[Print the Objective function values]{\commandlabsubarg{report}{type}{Objective}}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a summary of the estimated parameters]{\commandlabsubarg{report}{type}{estimate\_summary}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
-\subsubsection[Print an observation, fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print the Objective function values]{\commandlabsubarg{report}{type}{objective\_function}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a a summary of the an observation, including fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
 
 \defSub{observation} {Define the label of the observation to print}
 \defType{String}
 \defDefault{None}
 \defValue{A valid label from \command{Observation}}
 
-\defSub{obs} {Print the observations values?}
-\defType{Logical}
-\defDefault{True}
-\defValue{If true, then the observations observed values are printed}
-
-\defSub{fits} {Print the observations expected values (fits)?}
-\defType{Logical}
-\defDefault{True}
-\defValue{If true, then the observations expected values are printed}
-
-\defSub{residuals} {Print the observations residual values?}
-\defType{Logical}
-\defDefault{True}
-\defValue{If true, then the observations residuals are printed}
-
-\defSub{error} {Print the observations error values?}
-\defType{Logical}
-\defDefault{True}
-\defValue{If true, then the observations error values are printed (e.g., c.v's,. Ns, etc.,)}
-
-\defSub{likelihood} {Print the observations likelihood values?}
-\defType{Logical}
-\defDefault{False}
-\defValue{If true, then the individual contribution of each observations to the objective function is printed}
-
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
 
 \subsubsection[Print a layer]{\commandlabsubarg{report}{type}{layer}}
 
@@ -146,6 +158,11 @@ Prints the free parameters in a format suitable for use with \texttt{spm -i}.
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
 \subsubsection[Print a selectivity]{\commandlabsubarg{report}{type}{selectivity}}
 
 \defSub{selectivity} {Define the label of the selectivity to print}
@@ -167,3 +184,20 @@ Prints the free parameters in a format suitable for use with \texttt{spm -i}.
 \defType{String}
 \defDefault{None}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print the random number seed used]{\commandlabsubarg{report}{type}{random\_number\_seed}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}

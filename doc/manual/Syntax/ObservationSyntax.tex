@@ -68,7 +68,7 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{0.001}
 \defValue{The tolerance on the sum to one error check. If $abs(1-\sum O_i) > \text{\argument{tolerance}}$ then \SPM\ will report an error}
 
-\defSub{n [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
@@ -79,11 +79,6 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defValue{A valid distribution}
 
 \defSub{process\_error}{Define the process error term}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}
-
-\defSub{delta}{Define the delta robustifying constant for the distribution}
 \defType{Constant}
 \defDefault{0}
 \defValue{A non-negative real number}
@@ -150,7 +145,7 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{0.001}
 \defValue{The tolerance on the sum to one error check. If $abs(1-\sum O_i) > \text{\argument{tolerance}}$ then \SPM\ will report an error}
 
-\defSub{n [label]}{Define the following data as error values ($N$) for the categorical layer with value \texttt{[label]}}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
@@ -165,17 +160,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{0}
 \defValue{A non-negative real number}
 
-\defSub{delta}{Define the delta robustifying constant for the distribution}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}
-
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
 \defType{Switch}
 \defDefault{True}
 \defValue{True/False}
 
-\subsubsection[Proportions-by-age]{\commandlabsubarg{observation}{type}{proportions\_by\_age}}
+\subsubsection[Proportions by category]{\commandlabsubarg{observation}{type}{proportions\_by\_category}}
 
 \defSub{year} {Define the year that the observation applies to}
 \defType{Integer}
@@ -237,7 +227,7 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
-\defSub{n [label]}{Define the following data as error values ($N$) for the categorical layer with value \argument{[label]}}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
@@ -248,11 +238,6 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defValue{A valid distribution}
 
 \defSub{process\_error}{Define the process error term}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}
-
-\defSub{delta}{Define the delta robustifying constant for the distribution}
 \defType{Constant}
 \defDefault{0}
 \defValue{A non-negative real number}
@@ -279,10 +264,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{1.0}
 \defValue{A real number between 0 and 1, inclusive}
 
-\defSub{q} {Define the catchability constant for the observation}
-\defType{Estimable}
-\defDefault{1.0}
-\defValue{A positive real number}
+\defSub{catchability} {Define the catchability constant label for the observation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid \command{catchability} label}
 
 \defSub{categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
@@ -304,7 +289,7 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
-\defSub{cv [label]}{Define the following data as error values ($cv$) for the categorical layer with value \argument{[label]}}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
@@ -315,11 +300,6 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defValue{A valid distribution}
 
 \defSub{process\_error}{Define the process error term}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}
-
-\defSub{delta}{Define the delta robustifying constant for the distribution}
 \defType{Constant}
 \defDefault{0}
 \defValue{A non-negative real number}
@@ -346,10 +326,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{1.0}
 \defValue{A real number between 0 and 1, inclusive}
 
-\defSub{q} {Define the catchability constant for the observation}
-\defType{Estimable}
-\defDefault{1.0}
-\defValue{A positive real number}
+\defSub{catchability} {Define the catchability constant label for the observation}
+\defType{String}
+\defDefault{None}
+\defValue{A valid \command{catchability} label}
 
 \defSub{categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
@@ -371,7 +351,7 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
-\defSub{cv [label]}{Define the following data as error values ($cv$) for the categorical layer with value \argument{[label]}}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
@@ -386,12 +366,64 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{0}
 \defValue{A non-negative real number}
 
+\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\defType{Switch}
+\defDefault{True}
+\defValue{True/False}
+
+\subsection{Likelihoods}
+
+The types of likelihoods available are,
+
+\begin{itemize}
+  \item Binomial
+  \item Multinomial
+  \item Lognormal
+\end{itemize}
+
+Each type of observation requires a set of subcommands and arguments specific to that type. Further, each observation can use only a limited range of likelihood types. 
+
+\defComLab{likelihood}{Define an likelihood}
+
+\defSub{type} {Define the type of likelihood}
+\defType{String}
+\defDefault{None}
+\defValue{A valid type of likelihood}
+
+\subsubsection[Binomial likelihood]{\commandlabsubarg{likelihood}{type}{binomial}}
+
+Only implemented for the proportions-by-category observation
+
+\defSub{year} {Define the year that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
 \defSub{delta}{Define the delta robustifying constant for the distribution}
 \defType{Constant}
 \defDefault{0}
 \defValue{A non-negative real number}
 
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\defType{Switch}
-\defDefault{True}
-\defValue{True/False}
+\subsubsection[Multinomial likelihood]{\commandlabsubarg{likelihood}{type}{Multinomial}}
+
+\defSub{year} {Define the year that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
+\defSub{delta}{Define the delta robustifying constant for the distribution}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
+
+\subsubsection[Lognormal likelihood]{\commandlabsubarg{likelihood}{type}{lognormal}}
+
+\defSub{year} {Define the year that the observation applies to}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
+\defSub{delta}{Define the delta robustifying constant for the distribution}
+\defType{Constant}
+\defDefault{0}
+\defValue{A non-negative real number}
