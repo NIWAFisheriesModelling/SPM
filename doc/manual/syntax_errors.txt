@@ -158,6 +158,7 @@ In manual, but not in SPM
   derived_parameter
   event_mortality_at_age
   exponential_decay
+  initialisation
   lognormal
   meta_layer
   migration_movement

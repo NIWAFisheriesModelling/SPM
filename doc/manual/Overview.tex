@@ -22,7 +22,7 @@ A model is implemented in \SPM\ using an \config \index{Input configuration file
 
 This section gives a quick overview of the model, and how to use it. Detailed descriptions of the components of \SPM, the model structures, mathematical equations used, and command and subcommand arguments are given in the following sections.
 
-A model in \SPM\ is specified by the \config\ comprises of four main components. These are the population section (model structure, population and spatial dynamics, etc,.), the estimation section (methods of estimation and the parameters to be estimated), the observation section (observational data and associated likelihoods), and the report section (printouts and reports from the model). These sections completely describe a model implemented in \SPM. See Sections \ref{sec:population-syntax}, \ref{sec:estimation-syntax}, \ref{sec:observation-syntax}, and \ref{sec:report-syntax} for details and specification of \SPM s command and subcommand syntax. 
+A model in \SPM\ is specified by an \config, and comprises of four main components. These are the population section (model structure, population and spatial dynamics, etc.), the estimation section (methods of estimation and the parameters to be estimated), the observation section (observational data and associated likelihoods), and the report section (printouts and reports from the model). These \config\ completely describe a model implemented in \SPM. See Sections \ref{sec:population-syntax}, \ref{sec:estimation-syntax}, \ref{sec:observation-syntax}, and \ref{sec:report-syntax} for details and specification of \SPM s command and subcommand syntax within the \config. 
 
 \subsection{\I{The population section}}
 
@@ -32,13 +32,13 @@ The population section\index{Population section} (Section \ref{sec:population-se
 
 The estimation section\index{Estimation section} specifies the free parameters\index{Free parameters}, estimation methods, penalties and priors. Estimation is based on an objective function (e.g., negative log posterior). Depending on the run mode, the estimation section is used to specify the methods for finding a point estimate (i.e., the set of parameter values that minimizes the objective function), doing profiles, or MCMC methods and options, etc.
 
-Further, the estimation section specifies the \emph{free parameters}, i.e., those parameters that are to be estimated (i.e., free) within each model run. The estimation section specifies the choice of estimation method, which parameters are to be estimated, priors, starting values, and minimiser control values.
+Further, the estimation section specifies the parameters to be estimated within each model run and the estimation methods. The estimation section specifies the choice of estimation method, which parameters are to be estimated, priors, starting values, and minimiser control values.
 
 Penalties and priors act as constraints on the estimation. They can either encourage or discourage (depending on the specific implementation) parameter estimates that are `near' some value, and hence influence the estimation process. For example, the catch-limit penalties can be used to discourage parameter estimates that lead to models where the recorded catch was unable to be fully taken.
 
 \subsection{\I{The observation section}}
 
-Types of observations, their values, and the associated error structures are defined in the observation section. Observations are data which allow us to make inferences about unknown parameters. The observation section\index{Observation section} specifies the observations, their errors, likelihoods, and when the observations occur. Examples include relative or absolute abundance indices, proportions-at-age frequencies, etc,. Estimation uses the observations to find values for each of the free parameters so that each observation is `close' (in some mathematical sense) to a corresponding expected value. 
+Types of observations, their values, and the associated error structures are defined in the observation section. Observations are data which allow us to make inferences about unknown parameters. The observation section\index{Observation section} specifies the observations, their errors, likelihoods, and when the observations occur. Examples include relative or absolute abundance indices, proportions-at-age frequencies, etc. Estimation uses the observations to find values for each of the estimated parameters so that each observation is `close' (in some mathematical sense) to a corresponding expected value. 
 
 \subsection{\I{The report section}}
 

@@ -1,16 +1,16 @@
 \section{Running \SPM\label{sec:running-spm}\index{Running \SPM}}
 
-\SPM\ is run from the command line in \I{Microsoft Windows}, or from a terminal window in \I{Linux}. \SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. 
+\SPM\ is run from the command line in \I{Microsoft Windows} or from a terminal window in \I{Linux}. \SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. 
 
 The \config\ is compulsory and defines the model structure, processes, observations, free and fixed parameters\index{Free parameters}\index{Fixed parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
 Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.
 
-Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc,. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is \emph{run}, \texttt{-e} is \emph{estimation}, and \texttt{-s} is the \emph{simulation} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
+Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc,. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is the \emph{run}, \texttt{-e} is the \emph{estimation}, and \texttt{-m} is the \emph{MCMC} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
 
 \subsection{\I{Using \SPM}}
 
-To use \SPM, open a command line window (Microsoft Windows) or a terminal window (Linux). Navigate to a directory of your choice, where your \config files are located. Then type \texttt{spm} with any arguments (see Section \ref{sec:command-line-arguments}). SPM will print output to the screen, and return you to the command prompt when it completes its task. Note that the \SPM\ executable (binary) must be either in the directory where you run it or somewhere in your \texttt{PATH}. See your operating system documentation for help on identifying or modifying your \texttt{PATH}
+To use \SPM, open a command line window (Microsoft Windows) or a terminal window (Linux). Navigate to a directory of your choice, where your \config s are located. Then type \texttt{spm} with any arguments (see Section \ref{sec:command-line-arguments}). SPM will print output to the screen, and return you to the command prompt when it completes its task. Note that the \SPM\ executable (binary) must be either in the directory where you run it or somewhere in your \texttt{PATH}. See your operating system documentation for help on identifying or modifying your \texttt{PATH}
 
 \subsection{The \config\label{sec:config-files}}\index{Input configuration file}
 
@@ -32,7 +32,7 @@ On Microsoft Windows systems, you can redirect to standard output using,
 
 \begin{verbatim} spm [arguments] > out\end{verbatim}
 
-And, on some recent Microsoft Windows systems (e.g., Professional versions of WindowsNT, Windows2000, and WindowsXP), you can redirect to both standard output and standard error, using the syntax, 
+And, on some Microsoft Windows systems (e.g., the Professional version of WindowsXP), you can redirect to both standard output and standard error, using the syntax, 
 
 \begin{verbatim} spm [arguments] > out 2> err\end{verbatim}
 
@@ -42,25 +42,29 @@ Note that \SPM\ outputs a few lines of header information to the output. The hea
 
 The call to \SPM\ is of the following form.: 
 
-\texttt{spm [\emph{task}] [\emph{config\_file}] [\emph{options}]}
+\texttt{spm [-c \emph{config\_file}] [\emph{task}] [\emph{options}]}
 
-where \emph{task} is one of;
+\begin{description}
+  \item [\texttt{-c \emph{config\_file}}] Define the \config\ for \SPM. If omitted, then \SPM\ looks for a file named \texttt{config.spm}.
+\end{description}
+
+and where \emph{task} is one of;
 \begin{description}
 \item [\texttt{-h}]  Display help (this page).
 \item [\texttt{-l}] Display the reference for the software license (CPLv1.0).
 \item [\texttt{-v}] Display the \SPM\ version number.
 
-\item [\texttt{-r \emph{config\_file}}] \emph{Run} the model once using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}}, or optionally, with the values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-r}] \emph{Run} the model once using the parameter values in the \config, or optionally, with the values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-e \emph{config\_file}}] Do a point \emph{estimate} of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-e}] Do a point \emph{estimate} of the free parameters using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-p \emph{config\_file}}] Do a likelihood \emph{profile} using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-p}] Do a likelihood \emph{profile} using the parameter values in the \config\ as the starting point, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-m \emph{config\_file}}] Do an \emph{MCMC} estimate of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-m}] Do an \emph{MCMC} estimate of the free parameters using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-f \emph{config\_file}}] Project the model \emph{forward} in time using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-f}] Project the model \emph{forward} in time using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
-\item [\texttt{-s \emph{config\_file}}] \emph{Simulate} observations of the free parameters using the parameter values in the \config\ denoted by \emph{\texttt{config\_file}} as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
+\item [\texttt{-s}] \emph{Simulate} observations of the free parameters using the parameter values in the \config\ as the starting point for the estimation, or optionally, with the start values in the file denoted with the command line argument \texttt{-i \emph{file}}.
 
 \end{description}
 
@@ -73,7 +77,7 @@ In addition, the following are optional arguments\index{Optional command line ar
 
 \item [\texttt{-q}] Run \emph{quietly}, i.e., suppress verbose printing of \SPM.
 
-\item [\texttt{-g \emph{seed}}]  Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ looks to the \texttt{[estimation]} section for a random number seed \command{random\_seed}, and if not defined, then automatically generates a random number seed based on the computer clock time.
+\item [\texttt{-g \emph{seed}}]  Seed the random number \emph{generator} with \texttt{\emph{seed}}, a positive (long) integer value. Note, if \texttt{-g} is not specified, then \SPM\ looks the command \commandsub{Estimation}{random\_seed} for a random number seed , and if not defined, then automatically generates a random number seed based on the computer clock time.
 \end{description}
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
