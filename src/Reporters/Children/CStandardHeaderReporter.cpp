@@ -40,7 +40,12 @@ CStandardHeaderReporter::CStandardHeaderReporter() {
 
   // Start building our Header
   sVersion   = "";
-  sHeader    = "SPM (Spatial Population Model)\n";
+  sHeader    = "SPM (Spatial Population Model)";
+#ifndef OPTIMISE
+  sHeader += " (UNOPTIMISED)\n";
+#else
+  sHeader += "\n";
+#endif
 
 }
 
@@ -61,16 +66,9 @@ void CStandardHeaderReporter::start() {
   // Build Version
   std::stringstream sRevisionNumber;
   sRevisionNumber << SOURCE_CONTROL_REVISION;
-  sVersion = "v" + string(VERSION) + "-" + string(SOURCE_CONTROL_DATE) + " (rev. " + sRevisionNumber.str() + ")";
+  sVersion = "v" + string(VERSION) + "-" + string(SOURCE_CONTROL_DATE) + " (rev. " + sRevisionNumber.str() + ").";
 
-#ifdef OPTIMISE
-  sVersion += " (OPTIMISED).";
-#else
-  sVersion += ".";
-#endif
-
-  sHeader += sVersion + " Copyright (c) 2008-" + SOURCE_CONTROL_YEAR + ", NIWA";
-  sHeader += "\n";
+  sHeader += sVersion + " Copyright (c) 2008-" + SOURCE_CONTROL_YEAR + ", NIWA\n";
 
   // Build User/Computer Info
 #ifdef __MINGW32__
