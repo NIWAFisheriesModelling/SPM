@@ -14,6 +14,7 @@ The report types available are,
   \item Print the covariance matrix
   \item Print a layer
   \item Print a selectivity's values
+  \item Print the weight-at-size using the size-weight relationship
 \end{description}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
@@ -191,6 +192,28 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defValue{Either True of False}
 
 \subsubsection[Print the random number seed used]{\commandlabsubarg{report}{type}{random\_number\_seed}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print the weight-at-size]{\commandlabsubarg{report}{type}{weight\_at\_size}}
+
+\defSub{size\_weight} {Define the label of the size-weight relationship print}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{size\_weight}}
+
+\defSub{sizes} {Define the label of the size-weight relationship print}
+\defType{Constant}
+\defDefault{None}
+\defValue{Values of sizes to calculate the size-weight relationship for}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}

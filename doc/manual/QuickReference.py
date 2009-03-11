@@ -3,6 +3,7 @@ import re
 
 p = re.compile('\{.*?\}',re.IGNORECASE)
 q = re.compile('\}.*?\{',re.IGNORECASE)
+r = re.compile('[label]',re.IGNORECASE)
 
 FILE = [open('Syntax/PopulationSyntax.tex', 'r'),
         open('Syntax/EstimationSyntax.tex', 'r'),
@@ -114,11 +115,15 @@ Keywords3.sort()
 Keywords4.sort()
 Keywords5.sort()
 Keywords6.sort()
+# remove subscript [label]
+
 #Remove '\' in each string
 for i in range(len(Keywords1)):
   Keywords1[i] = Keywords1[i].replace("\\", "")
 for i in range(len(Keywords2)):
   Keywords2[i] = Keywords2[i].replace("\\", "")
+  if(Keywords2[i].count('[label]')):
+    Keywords2[i]=Keywords2[i][0:(Keywords2[i].find('[label]')-1)]
 for i in range(len(Keywords3)):
   Keywords3[i] = Keywords3[i].replace("\\", "")
 for i in range(len(Keywords4)):

@@ -73,10 +73,15 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
-\defSub{distribution}{Define the likelihood distribution}
+\defSub{Likelihood}{Define the likelihood for the observation}
 \defType{String}
 \defDefault{None}
-\defValue{A valid distribution}
+\defValue{A valid likelihood}
+
+\defSub{delta}{Define the delta robustifying constant for the likelihood}
+\defType{Constant}
+\defDefault{1e-11}
+\defValue{A non-negative real number}
 
 \defSub{process\_error}{Define the process error term}
 \defType{Constant}
@@ -150,10 +155,15 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
-\defSub{distribution}{Define the likelihood distribution}
+\defSub{Likelihood}{Define the likelihood for the observation}
 \defType{String}
 \defDefault{None}
-\defValue{A valid distribution}
+\defValue{A valid likelihood}
+
+\defSub{delta}{Define the delta robustifying constant for the likelihood}
+\defType{Constant}
+\defDefault{1e-11}
+\defValue{A non-negative real number}
 
 \defSub{process\_error}{Define the process error term}
 \defType{Constant}
@@ -232,10 +242,15 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
-\defSub{distribution}{Define the likelihood distribution}
+\defSub{Likelihood}{Define the likelihood for the observation}
 \defType{String}
 \defDefault{None}
-\defValue{A valid distribution}
+\defValue{A valid likelihood}
+
+\defSub{delta}{Define the delta robustifying constant for the likelihood}
+\defType{Constant}
+\defDefault{1e-11}
+\defValue{A non-negative real number}
 
 \defSub{process\_error}{Define the process error term}
 \defType{Constant}
@@ -294,10 +309,15 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
-\defSub{distribution}{Define the likelihood distribution}
+\defSub{Likelihood}{Define the likelihood for the observation}
 \defType{String}
 \defDefault{None}
-\defValue{A valid distribution}
+\defValue{A valid likelihood}
+
+\defSub{delta}{Define the delta robustifying constant for the likelihood}
+\defType{Constant}
+\defDefault{1e-11}
+\defValue{A non-negative real number}
 
 \defSub{process\_error}{Define the process error term}
 \defType{Constant}
@@ -356,10 +376,15 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{None}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
-\defSub{distribution}{Define the likelihood distribution}
+\defSub{Likelihood}{Define the likelihood for the observation}
 \defType{String}
 \defDefault{None}
-\defValue{A valid distribution}
+\defValue{A valid likelihood}
+
+\defSub{delta}{Define the delta robustifying constant for the likelihood}
+\defType{Constant}
+\defDefault{1e-11}
+\defValue{A non-negative real number}
 
 \defSub{process\_error}{Define the process error term}
 \defType{Constant}
@@ -371,59 +396,3 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{True}
 \defValue{True/False}
 
-\subsection{Likelihoods}
-
-The types of likelihoods available are,
-
-\begin{itemize}
-  \item Binomial
-  \item Multinomial
-  \item Lognormal
-\end{itemize}
-
-Each type of observation requires a set of subcommands and arguments specific to that type. Further, each observation can use only a limited range of likelihood types. 
-
-\defComLab{likelihood}{Define an likelihood}
-
-\defSub{type} {Define the type of likelihood}
-\defType{String}
-\defDefault{None}
-\defValue{A valid type of likelihood}
-
-\subsubsection[Binomial likelihood]{\commandlabsubarg{likelihood}{type}{binomial}}
-
-Only implemented for the proportions-by-category observation
-
-\defSub{year} {Define the year that the observation applies to}
-\defType{Integer}
-\defDefault{None}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
-
-\defSub{delta}{Define the delta robustifying constant for the distribution}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}
-
-\subsubsection[Multinomial likelihood]{\commandlabsubarg{likelihood}{type}{Multinomial}}
-
-\defSub{year} {Define the year that the observation applies to}
-\defType{Integer}
-\defDefault{None}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
-
-\defSub{delta}{Define the delta robustifying constant for the distribution}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}
-
-\subsubsection[Lognormal likelihood]{\commandlabsubarg{likelihood}{type}{lognormal}}
-
-\defSub{year} {Define the year that the observation applies to}
-\defType{Integer}
-\defDefault{None}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
-
-\defSub{delta}{Define the delta robustifying constant for the distribution}
-\defType{Constant}
-\defDefault{0}
-\defValue{A non-negative real number}

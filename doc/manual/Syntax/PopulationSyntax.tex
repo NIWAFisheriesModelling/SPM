@@ -27,12 +27,12 @@
 \defSub{min\_age}{Minimum age of the population}
 \defType{Integer}
 \defDefault{None}
-\defValue{A non-negative integer, ${Age}_{min}\geq 0$ and ${Age}_{min}\leq {Age}_{max}$}
+\defValue{A non-negative integer, ${age}_{min}\geq 0$ and ${age}_{min}\leq {age}_{max}$}
 
 \defSub{max\_age}{Maximum age of the population}
 \defType{Integer}
 \defDefault{None}
-\defValue{A non-negative integer, ${Age}_{max}\geq 0$ and ${Age}_{min}\geq {Age}_{min}$}
+\defValue{A non-negative integer, ${age}_{max}\geq 0$ and ${age}_{min}\geq {age}_{min}$}
 
 \defSub{age\_plus\_group}{Define the largest age as a plus group}
 \defType{Switch}
@@ -67,7 +67,7 @@
 \defSub{final\_year}{Define the final year of the model in projections}
 \defType{Integer}
 \defDefault{None}
-\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{model}{.first\_year} to \commandsub{model}{current\_year}, then projected to \commandsub{model}{.final\_year}}
+\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{model}{first\_year} to \commandsub{model}{current\_year}, then projected to \commandsub{model}{final\_year}}
 
 \defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}
@@ -158,7 +158,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defValue{Valid categories from \commandsub{model}{categories}}
 
 \defSub{proportions} {Define the proportion of recruitment that occurs into each category}
-\defType{Estimable vector of length \commandlabsub{constant\_recruitment}{categories}}
+\defType{Estimable vector of length \subcommand{categories}}
 \defDefault{None}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
@@ -170,7 +170,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{True}. Note that the layer values must be non-negative}
 
 \subsubsection[Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{BH\_recruitment}}
 
@@ -232,7 +232,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{TRUE}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values. If a logical layer, then recruitment occurs in cells where the layer value is \argument{True}}
 
 \subsubsection[Ageing process]{\commandlabsubarg{process}{type}{ageing}}
 
@@ -261,7 +261,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{True}. Note that the layer values must be non-negative}
 
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
 
@@ -288,7 +288,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. If a logical layer, then mortality occurs in cells where the layer value is \argument{True}. Note that the layer values must be non-negative}
 
 \subsubsection[Event mortality process]{\commandlabsubarg{process}{type}{event\_mortality}}
 
@@ -416,7 +416,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{TRUE}. Note that the layer values must be non-negative}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{True}. Note that the layer values must be non-negative}
 
 \subsubsection[Migration movement]{\commandlabsubarg{process}{type}{migration\_movement}}
 
@@ -443,7 +443,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{None}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{TRUE}}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. If a logical layer, then the transition occurs in cells where the layer value is \argument{True}}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
@@ -687,11 +687,6 @@ The available layer types  are,
 \defType{Constant vector, with total length \commandsub{model}{ncols} $\times$ \commandsub{model}{nrows}}
 \defDefault{None}
 \defValue{A vector of values of length equal to the number of elements defined for the spatial structure}
-
-\defSub{rescale} {Rescale values of the layer}
-\defType{Constant}
-\defDefault{1.0}
-\defValue{Rescales the values in the layer so that they have maximum value defined by the rescaling constant}
 
 \subsubsection[Categorical]{\commandlabsubarg{layer}{type}{categorical}}
 

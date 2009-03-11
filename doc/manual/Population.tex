@@ -28,7 +28,7 @@ The spatial structure of \SPM\ is represented by an $n_{rows} \times n_{cols}$ g
 
 The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
 
-\SPM\ implements two spatial structures, one derived from a grid of \emph{square} cells \textemdash the default (Figure \ref{fig:SquareSpatialStructure}) and the other derived from a grid of north-south orientated \emph{hexagons} (Figure \ref{fig:HexagonSpatialStructure}). We note that the spatial grid can be of an arbitrary size, but must be rectangular. 
+\SPM\ implements two spatial structures, one derived from a grid of \emph{square} cells --- the default (Figure \ref{fig:SquareSpatialStructure}) and the other derived from a grid of north-south orientated \emph{hexagons} (Figure \ref{fig:HexagonSpatialStructure}). We note that the spatial grid can be of an arbitrary size, but must be rectangular. 
 
 The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area} of each spatial cell, as used for density calculations within \SPM.
 
@@ -76,7 +76,7 @@ Hence, the definition of the population structure includes;
 
 Layers form a key underlying concept in \SPM. They comprise of a grid of known values, with a value for every spatial cell in the model. Layers are used by processes, observations, and outputs commands to supply spatially explicit covariates and any categorical groupings required. 
 
-Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception \textemdash the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. Typically they are provided by the user as a matrix of values, although abundance and distance layers can be calculated by \SPM\ as and when required. 
+Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception --- the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. Typically they are provided by the user as a matrix of values, although abundance and distance layers can be calculated by \SPM\ as and when required. 
 
 Within \SPM, layers are used in three contexts:
 \begin{enumerate}
@@ -125,11 +125,11 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
 \end{enumerate}
 
-However, there are  exceptions to this rule \textemdash layers of type biomass, quantity, and distance are calculated automatically by \SPM\ as required. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively.
+However, there are  exceptions to this rule --- layers of type biomass, quantity, and distance are calculated automatically by \SPM\ as required. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively.
 
 For the abundance layer, the abundance or biomass of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
 
-Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files \textemdash\ except for a single case for numeric layers. In that instance, the numeric layer supplied can optionally be standardized prior to use, i.e., $L'(a)=L(a)/\max(L)$ so that $L'(a) < 1$.
+Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files.
 
 \subsection{\I{Time sequences}}
 
@@ -188,7 +188,7 @@ Each of these processes is carried out in the user-defined prescribed order when
 \SPM\ implements three different types of movement processes\index{Movement};
 \begin{enumerate}
 	\item  A migration movement rate\index{Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
-	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer \textemdash equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
+	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
 	\item Movement parametrised as a probability density function\index{Preference movement}. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
@@ -262,7 +262,7 @@ Mortality for the annual rate is similar, except that the rate applied in each y
 
 The event mortality types\index{Event mortality} act in a similar manner, except that it removes a specified abundance (number of individuals) or biomass from the partition, rather than applying a mortality rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
-The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) \textemdash except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate.
+The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate.
 
 For example, the event mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
 
@@ -324,7 +324,7 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 \SPM\ implements three types of movement\index{Movement};
 \begin{enumerate}
 	\item  A migration movement rate of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
-	\item An adjacent cell movements, parametrised by some function of an underlying layer \textemdash equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
+	\item An adjacent cell movements, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
 	\item Movement parametrised as a probability density function. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
@@ -365,20 +365,20 @@ Preference functions of the first type are determined only by the parameters of 
 
 \subsubsection*{\I{Preference functions}}
 
-Preference functions in \SPM\ include \subcommand{Constant}, \subcommand{Normal}, \subcommand{DoubleNormal}, \subcommand{Logistic}, \subcommand{InverseLogistic}, \subcommand{ExponentialDecay}, and \subcommand{Threshold}. These are defined as,
+Preference functions in \SPM\ include constant, Normal, double-Normal, logistic, inverse-logistic, Exponential, and threshold. These are defined as,
 
 \begin{enumerate}
-\item The \subcommand{Constant}\ preference function\index{Constant preference function}\index{Preference functions ! Constant} has dependent variable $x$ and has no parameters, and is defined as,
+\item The constant preference function\index{Constant preference function}\index{Preference functions ! Constant} has dependent variable $x$ and has no parameters, and is defined as,
 \begin{equation}
 f(x)=x$, where $0 \leq x \leq 1
 \end{equation}
 
-\item The \subcommand{Normal}\ preference function\index{Normal preference function}\index{Preference functions ! Normal} has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
+\item The Normal preference function\index{Normal preference function}\index{Preference functions ! Normal} has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
 \begin{equation}\
 f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2} 
 \end{equation}
  
-\item The \subcommand{DoubleNormal}\ preference function\index{Double-normal preference function}\index{Preference functions ! Double-normal} has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
+\item The double-Normal preference function\index{Double-normal preference function}\index{Preference functions ! Double-Normal} has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
 \begin{equation}
   f(x | \mu, \sigma_L, \sigma_R) = \begin{cases}
     2^{-[(x- \mu)/\sigma_L ]^2}, & \text{if $x \leq \mu$} \\
@@ -386,22 +386,22 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
   \end{cases}
 \end{equation} 
 
-\item The \subcommand{Logistic}\ preference function \index{Logistic preference function}\index{Preference functions ! Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
+\item The Logistic preference function \index{Logistic preference function}\index{Preference functions ! Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 \begin{equation}
   f(x | a_{50}, a_{to95}) = 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The \subcommand{InverseLogistic}\ preference function\index{Inverse-Logistic preference function}\index{Preference functions ! Inverse-Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
+\item The inverse-Logistic preference function\index{Inverse-Logistic preference function}\index{Preference functions ! Inverse-Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 \begin{equation}
   f(x | a_{50}, a_{to95}) =1- 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The \subcommand{ExponentialDecay}\ preference function\index{Exponential-decay preference function}\index{Preference functions ! Exponential-decay} has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
+\item The Exponential preference function\index{Exponential preference function}\index{Preference functions ! Exponential} has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
 \begin{equation}
   f(x | \lambda) =\exp(-\lambda x), \text{where $x \geq 0$ and $0$ otherwise}
 \end{equation}
 
-\item The \subcommand{Threshold}\ preference function\index{Threshold preference function}\index{Preference functions ! Threshold} has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
+\item The threshold preference function\index{Threshold preference function}\index{Preference functions ! Threshold} has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
 \begin{equation}
   f(x | N, \lambda) = \begin{cases}
     1, & \text{if $0 \le x \leq N$} \\
@@ -457,7 +457,7 @@ The size-weight parameters $a$ and $b$ is calculated as either,
   \end{equation}
 \end{itemize}
   
-Be careful about the scale of $a$, \textemdash this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then a should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an optional command \commandsub{Print}{VerifySizeWeightRelationship} that can be used to help check that the units specified are plausible.
+Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then a should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an option \commandlabsubarg{report}{type}{weight\_at\_size} (see Section \ref{sec:report-weight-at-size}) that can be used to help check that the units specified are plausible.
 
 If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
 \begin{equation}
@@ -493,7 +493,7 @@ The available selectivities are;
 
 The available selectivities are described below.
 
-\subsubsection[Constant]{\argument{Constant}}
+\subsubsection[Constant]{\argument{constant}}
 
 \begin{equation}
 f(x)=C
@@ -501,7 +501,7 @@ f(x)=C
 
 The constant selectivity has the estimable parameter C. 
 
-\subsubsection[Knife-edge]{\argument{KnifeEdge}}
+\subsubsection[Knife-edge]{\argument{knife\_edge}}
 
 \begin{equation}
 f(x)= \begin{cases}
@@ -512,7 +512,7 @@ f(x)= \begin{cases}
 
 The knife-edge ogive has the non-estimable parameter E.
 
-\subsubsection[All-values]{\argument{AllValues}}
+\subsubsection[All-values]{\argument{all\_values}}
 
 \begin{equation}
 f(x)=V_x
@@ -520,7 +520,7 @@ f(x)=V_x
 
 The all-values selectivity has estimable parameters $V_{low}$, $V_{low+1}$ \ldots $V_{high}$. Here, you need to provide the selectivity value for each age class.
 
-\subsubsection[All-values-bounded]{\argument{AllValuesBounded}}
+\subsubsection[All-values-bounded]{\argument{all\_values\_bounded}}
 
 \begin{equation}
 f(x)=\begin{cases}
@@ -532,7 +532,7 @@ f(x)=\begin{cases}
 
 The all-values-bounded selectivity has non-estimable parameters L and H. The estimable parameters are $V_L$, $V_{L+1}$ \ldots $V_H$. Here, you need to provide an selectivity value for each age class from $L \ldots H$.
 
-\subsubsection[Increasing]{\argument{Increasing}}
+\subsubsection[Increasing]{\argument{increasing}}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -544,7 +544,7 @@ f(x)=\begin{cases}
 
 The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
 
-\subsubsection[Logistic]{\argument{Logistic}}
+\subsubsection[Logistic]{\argument{logistic}}
 
 \begin{equation}
   f(x) =1 / [1+19^{(a_{50}-x)/a_{to95}}]
@@ -552,7 +552,7 @@ The increasing ogive has non-estimable parameters $L$ and $H$. The estimable par
  
 The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. The logistic selectivity takes values 0.5 at $x=a_{50}$ and 0.95 at $x=a_{50}+a_{to95}$. 
 
-\subsubsection[Logistic producing]{\argument{LogisticProducing}}
+\subsubsection[Logistic producing]{\argument{logistic\_producing}}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -565,7 +565,7 @@ f(x)=\begin{cases}
 
 The logistic-producing selectivity has the non-estimable parameters $L$ and $H$, and has estimable parameters $a_{50}$ and $a_{to95}$. For category transitions, $f(x)$ represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic-producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters $a_{50}$, $a_{to95}$.
 
-\subsubsection[Double-normal]{\argument{DoubleNormal}}
+\subsubsection[Double-normal]{\argument{double\_normal}}
 
 \begin{equation}
   f(x) = \begin{cases}
@@ -576,7 +576,7 @@ The logistic-producing selectivity has the non-estimable parameters $L$ and $H$,
 
 The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. It has values $1$ at $x=a_1$, and $0.5$ at $x=a_1-s_L$ or $x=a_1+s_R$. 
 
-\subsubsection[Double-exponential]{\argument{DoubleExponential}}
+\subsubsection[Double-exponential]{\argument{double\_exponential}}
 
 \begin{equation} 
 f(x)=\begin{cases}

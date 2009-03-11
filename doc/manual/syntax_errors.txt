@@ -55,7 +55,6 @@ In SPM, but not in manual
   normal_log
   normalise
   objective
-  obs
   observations
   param_v
   population_categories
@@ -69,6 +68,7 @@ In SPM, but not in manual
   r
   recruitment
   reporter
+  rescale
   row
   row_index
   run_mode
@@ -96,9 +96,9 @@ In manual, but not in SPM
   derived_quantity
   include
   joint_selectivity
-  likelihood
   report
   size_at_age
+  likelihood
   linf
   mcmc_fixed
   u_max
@@ -109,7 +109,7 @@ In manual, but not in SPM
   delta
   derived_quantity
   distribution
-  error_value [label]
+  error_value
   estimation_phase
   gradient_tolerance
   growth_proportions
@@ -119,7 +119,6 @@ In manual, but not in SPM
   max_correlation
   max_evaluations
   max_iterations
-  obs [label]
   offset
   p1
   p2
@@ -134,6 +133,7 @@ In manual, but not in SPM
   simulate
   sink_layer
   size_at_age
+  sizes
   source_layer
   t0
   tau1
@@ -143,11 +143,9 @@ In manual, but not in SPM
   bh_recruitment
   de_solver
   metropolis_hastings
-  multinomial
   schnute
   adjacent_cell_movement
   annual_mortality_rate
-  binomial
   biomass_event_mortality
   categorical
   constant_mortality_rate
@@ -166,3 +164,4 @@ In manual, but not in SPM
   preference_movement
   random_number_seed
   von_bertalanffy
+  weight_at_size
