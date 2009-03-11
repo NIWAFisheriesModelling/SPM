@@ -12,10 +12,18 @@ SET(TEST_NAME spm_UnitTests)
 SET(OPTI_NAME spm)
 
 # Added autogeneration of Version.h file in src directory
-
 ADD_CUSTOM_TARGET(version ALL
-   COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
+  COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
 )
+
+IF (WIN32)
+  SET(LINK_ICON "-static icon.o")
+  ADD_CUSTOM_TARGET(icon ALL
+    COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
+  )
+ELSE (WIN32)
+  SET(LINK_ICON "")
+ENDIF (WIN32)
 
 ADD_LIBRARY(${LIBRARY_NAME}
  src/BaseClasses/CBaseBuild
@@ -159,7 +167,7 @@ ADD_EXECUTABLE(${MAIN_NAME}
  src/Main
 )
 
-SET_TARGET_PROPERTIES(${MAIN_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -Wall -fmessage-length=0")
+SET_TARGET_PROPERTIES(${MAIN_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -Wall -fmessage-length=0" LINK_FLAGS ${LINK_ICON})
 
 TARGET_LINK_LIBRARIES(${MAIN_NAME} ${LIBRARY_NAME} ${MAIN_LIBRARIES})
 
@@ -189,7 +197,7 @@ src/TestFixtures/CWorld_Fixture src/TestFixtures/CLayer_Fixture
 src/Main
 )
 
-SET_TARGET_PROPERTIES(${TEST_NAME} PROPERTIES COMPILE_FLAGS "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized"
+SET_TARGET_PROPERTIES(${TEST_NAME} PROPERTIES COMPILE_FLAGS "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized" LINK_FLAGS ${LINK_ICON}
 )
 TARGET_LINK_LIBRARIES(${TEST_NAME} ${LIBRARY_NAME} ${MAIN_LIBRARIES} ${TEST_LIBRARIES}
 )
@@ -322,10 +330,11 @@ ADD_EXECUTABLE(${OPTI_NAME}
  src/World/WorldSquareCollection/CWorldSquareCollection
  src/Main)
 
-SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
+SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized" LINK_FLAGS ${LINK_ICON})
 TARGET_LINK_LIBRARIES(${OPTI_NAME} ${MAIN_LIBRARIES})
 
-ADD_DEPENDENCIES(${MAIN_NAME} version)
-ADD_DEPENDENCIES(${TEST_NAME} version)
+ADD_DEPENDENCIES(${MAIN_NAME} version icon)
+ADD_DEPENDENCIES(${TEST_NAME} version icon)
 ADD_DEPENDENCIES(${LIBRARY_NAME} version)
-ADD_DEPENDENCIES(${OPTI_NAME} version)
+ADD_DEPENDENCIES(${OPTI_NAME} version icon)
+
