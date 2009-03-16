@@ -25,9 +25,6 @@ public:
   void                       validate();
   double                     getResult(double Param);
 
-protected:
-  // Variables
-  double                     dC;
 };
 
 #endif /*CUNIFORMLOGPRIOR_H_*/

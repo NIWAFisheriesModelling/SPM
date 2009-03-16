@@ -15,8 +15,6 @@
 // Default Constructor
 //**********************************************************************
 CUniformLogPrior::CUniformLogPrior() {
-  // Register allowed parameters
-  pParameterList->registerAllowed(PARAM_C);
 }
 
 //**********************************************************************
@@ -27,9 +25,6 @@ void CUniformLogPrior::validate() {
   try {
     // Base
     CPrior::validate();
-
-    // Assign var
-    dC  = pParameterList->getDouble(PARAM_C);
 
   } catch (string Ex) {
     Ex = "CUniformLogPrior.validate(" + getLabel() + ")->" + Ex;
@@ -54,7 +49,6 @@ double CUniformLogPrior::getResult(double Param) {
     Ex = "CUniformLogPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-
   return 0.0;
 #endif
 }
