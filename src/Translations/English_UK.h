@@ -305,7 +305,7 @@
 #define PARAM_UNIFORM                             "uniform"
 #define PARAM_UNIFORM_LOG                         "uniform_log"
 #define PARAM_UPPER_BOUND                         "upper_bound"
-#define PARAM_V                                   "param_v"
+#define PARAM_V                                   "v"
 #define PARAM_VALUE                               "value"
 #define PARAM_WIDTH                               "width"
 #define PARAM_WORLD_STATE                         "world_state"
