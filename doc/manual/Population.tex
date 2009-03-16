@@ -72,7 +72,7 @@ Hence, the definition of the population structure includes;
 
 \subsection{\I{Layers}\label{sec:layers}}
 
-\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}, to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n \times m$ matrix and can be either \emph{logical}, \emph{numeric}, or \emph{categorical}. See Section \ref{sec:population-section} for further details.
+\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n \times m$ matrix and can be either \emph{logical}, \emph{numeric}, or \emph{categorical}. See Section \ref{sec:population-section} for further details.
 
 Layers form a key underlying concept in \SPM. They comprise of a grid of known values, with a value for every spatial cell in the model. Layers are used by processes, observations, and outputs commands to supply spatially explicit covariates and any categorical groupings required. 
 
@@ -469,6 +469,7 @@ where cv is the c.v. of sizes-at-age.
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
 A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section} or to modify the effects of processes on each age class \ref{sec:population-section}. \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities. See Section \ref{sec:selectivities} for more details.
+
 A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used frequently throughout the SPM population section: for selectivity curves. Selectivities have a number of different parametric forms (types) in SPM and you can use any of these for any selectivity parameter. 
 
 A selectivity is always defined to apply just to one category of the population (i.e, row of the partition). To apply the same selectivity to more than one category, the you need to specify the categories that it applied to.
@@ -506,11 +507,11 @@ The constant selectivity has the estimable parameter C.
 \begin{equation}
 f(x)= \begin{cases}
   0, & \text{if $x < E$} \\
-  1, & \text{if $x \ge E$}\\ 
+  \alpha, & \text{if $x \ge E$}\\ 
   \end{cases} 
 \end{equation}
 
-The knife-edge ogive has the non-estimable parameter E.
+The knife-edge ogive has the estimable parameter E and a scaling parameter $\alpha$, where the default value of $\alpha = 1$
 
 \subsubsection[All-values]{\argument{all\_values}}
 
@@ -537,20 +538,20 @@ The all-values-bounded selectivity has non-estimable parameters L and H. The est
 \begin{equation} 
 f(x)=\begin{cases}
 	  0, & \text{if $x < L$} \\
-	  f(x-1)+ \pi_x(C-f(x-1)), & \text{if $L \le x \le H$} \\
-	  f(C), & \text{if $x \ge H$} \\  
+	  f(x-1)+ \pi_x(\alpha-f(x-1)), & \text{if $L \le x \le H$} \\
+	  f(\alpha), & \text{if $x \ge H$} \\  
   \end{cases}
 \end{equation}
 
-The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
+The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
 
 \subsubsection[Logistic]{\argument{logistic}}
 
 \begin{equation}
-  f(x) =1 / [1+19^{(a_{50}-x)/a_{to95}}]
+  f(x) = \alpha / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
  
-The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. The logistic selectivity takes values 0.5 at $x=a_{50}$ and 0.95 at $x=a_{50}+a_{to95}$. 
+The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}+a_{to95}$. 
 
 \subsubsection[Logistic producing]{\argument{logistic\_producing}}
 
@@ -569,12 +570,12 @@ The logistic-producing selectivity has the non-estimable parameters $L$ and $H$,
 
 \begin{equation}
   f(x) = \begin{cases}
-    2^{-[(x- \mu)/\sigma_L ]^2}, & \text{if $x \leq \mu$} \\
-    2^{-[(x- \mu)/\sigma_R ]^2}, & \text{if $x \ge \mu$}\\
+    \alpha 2^{-[(x- \mu)/\sigma_L ]^2}, & \text{if $x \leq \mu$} \\
+    \alpha 2^{-[(x- \mu)/\sigma_R ]^2}, & \text{if $x \ge \mu$}\\
   \end{cases}
 \end{equation} 
 
-The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. It has values $1$ at $x=a_1$, and $0.5$ at $x=a_1-s_L$ or $x=a_1+s_R$. 
+The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It has values $\alpha$ at $x=a_1$, and $0.5 \alpha$ at $x=a_1-s_L$ and $x=a_1+s_R$. 
 
 \subsubsection[Double-exponential]{\argument{double\_exponential}}
 

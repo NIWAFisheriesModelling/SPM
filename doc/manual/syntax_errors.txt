@@ -56,7 +56,6 @@ In SPM, but not in manual
   normalise
   objective
   observations
-  param_v
   population_categories
   population_process
   population_processes
@@ -139,7 +138,6 @@ In manual, but not in SPM
   tau1
   tau2
   tolerance
-  v
   bh_recruitment
   de_solver
   metropolis_hastings

@@ -1002,22 +1002,12 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[Constant]{\commandlabsubarg{selectivity}{type}{constant}}
 
-\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
-\defType{Estimable}
-\defDefault{None}
-\defValue{A positive real number}
-
 \defSub{c} {Defines the $C$ parameter of the selectivity function}
 \defType{Estimable}
 \defDefault{None}
 \defValue{A positive real number}
 
 \subsubsection[Knife-edge]{\commandlabsubarg{selectivity}{type}{knife\_edge}}
-
-\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
-\defType{Estimable}
-\defDefault{None}
-\defValue{A positive real number}
 
 \defSub{e} {Defines the $E$ parameter of the selectivity function}
 \defType{Estimable}
@@ -1026,22 +1016,12 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \subsubsection[All-values]{\commandlabsubarg{selectivity}{type}{all\_values}}
 
-\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
-\defType{Estimable}
-\defDefault{None}
-\defValue{A positive real number}
-
 \defSub{v} {Defines the $V$ parameters (one for each age class) of the selectivity function}
 \defType{Estimable vector}
 \defDefault{None}
 \defValue{A vector of positive real numbers, of length equal to the number of age classes}
 
 \subsubsection[All-values-bounded]{\commandlabsubarg{selectivity}{type}{all\_values\_bounded}}
-
-\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
-\defType{Estimable}
-\defDefault{None}
-\defValue{A positive real number}
 
 \defSub{l} {Defines the $L$ parameter of the selectivity function}
 \defType{Integer}

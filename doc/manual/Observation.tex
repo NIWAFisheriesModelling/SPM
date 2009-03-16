@@ -20,9 +20,45 @@ Five types
 
 \subsubsection{Proportions-at-age}
 
-\subsubsection{Proportions-by-age}
+In the case study, proportions-at-age data from the commercial catch, by SSRU and year (Figure 8), were fitted to the modelled proportions-at-age composition using a multinomial likelihood, i.e., 
+
+\begin{equation}
+  -\log \left(L \right) =  -\log \left(N! \right) + \sum\limits_i \log \left( \left(NO_i \right)! \right) - NO_i \log \left(E_i \right)
+\end{equation}
+
+where $O_i$ are the observed proportions at age $i$, $E_i$ are the model expected proportions at age $i$, and $N$ is the effective sample size. 
+
+\subsubsection{Proportions-by-category}
+
+The likelihood for these observations was implemented as a binomial likelihood. Here, 
+
+\begin{equation}
+  \begin{split}
+    -\log \left(L \right)= -\sum\limits_i & \log \left(N_i! \right) - \log \left(\left(N_i \left(1 - O_i \right) \right)! \right) - \log \left(\left(N_i O_i \right)! \right) + N_i O_i \log \left(E_i \right) \\
+    &+ N_i \left(1 - O_i \right)\log \left(1 - E_i \right)
+  \end{split}
+\end{equation}
+
+where $O_i$ are the observed proportions by category $i$, $E_i$ are the expected proportions by category $i$, and $N$ is the effective sample size. 
 
 \subsubsection{Abundance}
+
+The lognormal likelihood with observations $O_i$, c.v. $c_i$, and expected values $qE_i$, and was,
+
+\begin{equation}
+ - \log \left( L \right) = \sum\nolimits_{i = 1}^n \left( {\log \left( {\sigma _i } \right) + 0.5\left( {\frac{{\log \left( {{{O_i } \mathord{\left/  {\vphantom {{O_i } {qE_i }}} \right. \kern-\nulldelimiterspace} {qE_i }}} \right)}} {{\sigma _i }} + 0.5\sigma _i } \right)^2 } \right) 
+\end{equation}
+
+where 
+
+\begin{equation}
+  \sigma_i  = \sqrt{\log \left(1+c_i^2 \right)}
+\end{equation}
+
+.
+
+For the case study, c.v.s were all assumed to be 0.2.
+
 
 \subsection{The objective function}
 
