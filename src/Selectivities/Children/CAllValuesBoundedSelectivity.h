@@ -9,33 +9,29 @@
 #ifndef CALLVALUESBOUNDEDSELECTIVITY_H_
 #define CALLVALUESBOUNDEDSELECTIVITY_H_
 
-// Global Headers
-#include <vector>
-
 // Local headers
-#include "../CSelectivity.h"
-
-// Using
-using std::vector;
+#include "Base/CCachedSelectivity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CAllValuesBoundedSelectivity : public CSelectivity {
+class CAllValuesBoundedSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CAllValuesBoundedSelectivity();
   virtual                     ~CAllValuesBoundedSelectivity();
   CSelectivity*               clone() { return new CAllValuesBoundedSelectivity(*this); }
   void                        validate();
-  double                      getResult(int Index);
 
 protected:
+  // Functions
+  double                     calculateResult(int Age);
+
   // Variables
-  double                      dL;
-  double                      dH;
-  vector<double>              vVs;
+  int                      iL;
+  int                      iH;
+  vector<double>           vVs;
 };
 
 #endif /* CALLVALUESBOUNDEDSELECTIVITY_H_ */

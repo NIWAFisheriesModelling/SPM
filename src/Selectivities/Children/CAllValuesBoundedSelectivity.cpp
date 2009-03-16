@@ -31,12 +31,22 @@ void CAllValuesBoundedSelectivity::validate() {
     CSelectivity::validate();
 
     // Get our variables
-    dL      = pParameterList->getDouble(PARAM_L);
-    dH      = pParameterList->getDouble(PARAM_H);
+    iL      = pParameterList->getInt(PARAM_L);
+    iH      = pParameterList->getInt(PARAM_H);
 
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // TODO: Complete validation
+    // TODO: Complete validation - error messages need to be better phrased
+    // Check the iL !=iH and is a lower value
+    if (iH <= iL) {
+      //Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
+      //throw Ex;
+    }
+    // Check correct number of elements supplied
+    if ((int)vVs.size() != (iH - iL)) {
+      //Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
+      //throw Ex;
+    }
 
     // Register our vector as estimable
     for (int i = 0; i < (int)vVs.size(); ++i)
@@ -49,18 +59,31 @@ void CAllValuesBoundedSelectivity::validate() {
 }
 
 //**********************************************************************
-// double CAllValuesBoundedSelectivity::getResult(int Index)
+// double CAllValuesBoundedSelectivity::calculateResult(int Index)
 // Get the result from our Selectivity
 //**********************************************************************
-double CAllValuesBoundedSelectivity::getResult(int Index) {
+double CAllValuesBoundedSelectivity::calculateResult(int Age) {
+#ifndef OPTIMIZE
   try {
-    throw string("Not yet implemented");
+#endif
 
+    double dRet = 0.0;
+    if (Age <= iL)
+      dRet = 0.0;
+    else if (Age >= iH)
+      dRet = vVs[iH - iL - 1];
+    else
+      dRet = vVs[Age - iL - 1];
+
+    return dRet;
+
+#ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CAllValuesBoundedSelectivity.getResult(" + getLabel() + ")->" + Ex;
+    Ex = "CAllValuesBoundedSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-  return 0;
+  return 0.0;
+#endif
 }
 
 //**********************************************************************
