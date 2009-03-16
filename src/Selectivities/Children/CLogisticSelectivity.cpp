@@ -66,7 +66,7 @@ double CLogisticSelectivity::calculateResult(int Age) {
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CLogisticSelectivity.getResult(" + getLabel() + ")->" + Ex;
+    Ex = "CLogisticSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
   return 0.0;
