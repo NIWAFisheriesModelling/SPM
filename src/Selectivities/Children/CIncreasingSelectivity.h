@@ -9,32 +9,30 @@
 #ifndef CINCREASINGSELECTIVITY_H_
 #define CINCREASINGSELECTIVITY_H_
 
-// Global headers
-#include <vector>
-
 // Local headers
-#include "../CSelectivity.h"
-
-// Using
-using std::vector;
+#include "Base/CCachedSelectivity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CIncreasingSelectivity: public CSelectivity {
+class CIncreasingSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CIncreasingSelectivity();
   virtual                     ~CIncreasingSelectivity();
   CSelectivity*               clone() { return new CIncreasingSelectivity(*this); }
   void                        validate();
-  double                      getResult(int Index);
 
 protected:
-  double                      dL;
-  double                      dH;
-  vector<double>              vVs;
+  // Functions
+  double                     calculateResult(int Age);
+
+  // Variables
+  int                      iL;
+  int                      iH;
+  vector<double>           vVs;
+  double                   dAlpha;
 };
 
 #endif /* CINCREASINGSELECTIVITY_H_ */

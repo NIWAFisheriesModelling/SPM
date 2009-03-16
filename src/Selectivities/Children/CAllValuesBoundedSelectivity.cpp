@@ -37,16 +37,14 @@ void CAllValuesBoundedSelectivity::validate() {
     pParameterList->fillVector(vVs, PARAM_V);
 
     // TODO: Complete validation - error messages need to be better phrased
-    // Check the iL !=iH and is a lower value
-    if (iH <= iL) {
-      //Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
-      //throw Ex;
-    }
-    // Check correct number of elements supplied
-    if ((int)vVs.size() != (iH - iL)) {
-      //Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
-      //throw Ex;
-    }
+    if (iL < pWorld->getMinAge())
+      throw("L needs to be a value at least the same as the minimum age in the model"); //TODO: Better error message
+    if (iL > pWorld->getMaxAge())
+      throw("L cannot be larger that the maximum age in the model"); //TODO: Better error message
+    if (iH <= iL)
+       throw("L must be less than H"); //TODO: Better error message
+    if ((int)vVs.size() != (iH - iL))
+       throw("You need to supply the correct number of entries for V"); //TODO: Better error message
 
     // Register our vector as estimable
     for (int i = 0; i < (int)vVs.size(); ++i)

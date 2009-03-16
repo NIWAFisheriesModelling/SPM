@@ -19,6 +19,8 @@ CIncreasingSelectivity::CIncreasingSelectivity() {
   pParameterList->registerAllowed(PARAM_L);
   pParameterList->registerAllowed(PARAM_H);
   pParameterList->registerAllowed(PARAM_V);
+  pParameterList->registerAllowed(PARAM_ALPHA);
+
 }
 
 //**********************************************************************
@@ -31,12 +33,27 @@ void CIncreasingSelectivity::validate() {
     CSelectivity::validate();
 
     // Get our values
-    dL    = pParameterList->getDouble(PARAM_L);
-    dH    = pParameterList->getDouble(PARAM_H);
+    iL     = pParameterList->getInt(PARAM_L);
+    iH     = pParameterList->getInt(PARAM_H);
+    dAlpha = pParameterList->getDouble(PARAM_H,true,1.0);
 
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // TODO: Complete validation
+    // TODO: Complete validation - error messages need to be better phrased
+    if (dAlpha <= 0)
+      throw("Alpha must be positive"); // TODO: better error messages
+    if (iL < pWorld->getMinAge())
+      throw("L needs to be a value at least the same as the minimum age in the model"); //TODO: Better error message
+    if (iL > pWorld->getMaxAge())
+      throw("L cannot be larger that the maximum age in the model"); //TODO: Better error message
+    if (iH <= iL)
+       throw("L must be less than H"); //TODO: Better error message
+    if ((int)vVs.size() != (iH - iL + 1))
+       throw("You need to supply the correct number of entries for V"); //TODO: Better error message
+    for (int i = 0; i < (int)vVs.size(); ++i) {
+      if ((vVs[i] > 1.0) || (vVs[i] < 0.0))
+        throw("Vs should be be between 0 and 1"); //TODO: Better error message
+    }
 
     // Register Estimables
     for (int i = 0; i < (int)vVs.size(); ++i)
@@ -52,14 +69,33 @@ void CIncreasingSelectivity::validate() {
 // double CIncreasingSelectivity::getResult(int Index)
 // Get the result from the selectivity
 //**********************************************************************
-double CIncreasingSelectivity::getResult(int Index) {
+double CIncreasingSelectivity::calculateResult(int Age) {
+#ifndef OPTIMIZE
   try {
-    throw string("Not yet implemented");
+#endif
+
+    double dRet = 0.0;
+
+    if (Age <= iL) {
+      dRet = 0.0;
+    } else if (Age > iH) {
+      dRet = vVs[iH - iL];
+    } else {
+      dRet = vVs[0];
+      for (int i=(iL+1); i < Age; i++) {
+        if (i > iH || dRet >= dAlpha) break;
+        dRet += (dAlpha-dRet) * vVs[i - iL];
+      }
+    }
+    return dRet;
+
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CIncreasingSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
   return 0;
+#endif
 }
 
 //**********************************************************************

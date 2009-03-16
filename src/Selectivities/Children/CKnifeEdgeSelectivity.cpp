@@ -17,9 +17,11 @@
 CKnifeEdgeSelectivity::CKnifeEdgeSelectivity() {
   // Register estimable
   registerEstimable(PARAM_E, &dE);
+  registerEstimable(PARAM_E, &dAlpha);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_E);
+  pParameterList->registerAllowed(PARAM_ALPHA);
 }
 
 //**********************************************************************
@@ -33,6 +35,10 @@ void CKnifeEdgeSelectivity::validate() {
 
     // Populate our variable
     dE  = pParameterList->getDouble(PARAM_E);
+    dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
+
+    if (dAlpha <= 0)
+      throw("Alpha must be positive"); // TODO: better error messages
 
   } catch (string Ex) {
     Ex = "CKnifeedgeSelectivity.validate(" + getLabel() + ")->" + Ex;
@@ -55,7 +61,7 @@ double CKnifeEdgeSelectivity::getResult(int Param) {
     Param = pWorld->getMinAge() + Param;
 
     if(Param >= dE)
-      return (1.0);
+      return (dAlpha);
 
 #ifndef OPTIMIZE
   } catch (string Ex) {

@@ -10,22 +10,24 @@
 #define CDOUBLEEXPONENTIALSELECTIVITY_H_
 
 // Local headers
-#include "../CSelectivity.h"
+#include "Base/CCachedSelectivity.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CDoubleExponentialSelectivity: public CSelectivity {
+class CDoubleExponentialSelectivity : public CCachedSelectivity {
 public:
   // Functions
   CDoubleExponentialSelectivity();
   virtual                     ~CDoubleExponentialSelectivity();
   CSelectivity*               clone() { return new CDoubleExponentialSelectivity(*this); }
   void                        validate();
-  double                      getResult(int Index);
 
 protected:
+  // Functions
+  double                     calculateResult(int Age);
+
   // Variables
   double                      dX0;
   double                      dX1;
@@ -33,6 +35,7 @@ protected:
   double                      dY0;
   double                      dY1;
   double                      dY2;
+  double                      dAlpha;
 };
 
 #endif /* CDOUBLEEXPONENTIALSELECTIVITY_H_ */

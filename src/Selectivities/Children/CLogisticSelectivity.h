@@ -19,10 +19,10 @@
 class CLogisticSelectivity : public CCachedSelectivity {
 public:
   // Functions
-	CLogisticSelectivity();
-	virtual                    ~CLogisticSelectivity();
-	CSelectivity*               clone() { return new CLogisticSelectivity(*this); }
-	void                       validate();
+  CLogisticSelectivity();
+  virtual                    ~CLogisticSelectivity();
+  CSelectivity*               clone() { return new CLogisticSelectivity(*this); }
+  void                       validate();
 
 protected:
   // Functions
@@ -31,6 +31,7 @@ protected:
   // Variables
   double                     dA50;
   double                     dAto95;
+  double                     dAlpha;
 };
 
 #endif /*CLOGISTICSELECTIVITY_H_*/

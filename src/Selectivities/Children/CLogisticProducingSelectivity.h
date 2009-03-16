@@ -33,6 +33,7 @@ protected:
   int                        iH;
   double                     dA50;
   double                     dAto95;
+  double                     dAlpha;
 };
 
 #endif /*CLogisticProducingSELECTIVITY_H_*/

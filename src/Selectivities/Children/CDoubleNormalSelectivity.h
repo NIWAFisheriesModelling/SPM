@@ -18,19 +18,20 @@
 class CDoubleNormalSelectivity : public CCachedSelectivity {
 public:
   // Functions
-	CDoubleNormalSelectivity();
-	virtual                    ~CDoubleNormalSelectivity();
-	CSelectivity*               clone() { return new CDoubleNormalSelectivity(*this); }
-	void                       validate();
+  CDoubleNormalSelectivity();
+  virtual                    ~CDoubleNormalSelectivity();
+  CSelectivity*               clone() { return new CDoubleNormalSelectivity(*this); }
+  void                       validate();
 
 protected:
   // Functions
   double                     calculateResult(int Age);
 
-	// Variables
-	double                     dMu;
-	double                     dSigmaL;
-	double                     dSigmaR;
+  // Variables
+  double                     dMu;
+  double                     dSigmaL;
+  double                     dSigmaR;
+  double                     dAlpha;
 };
 
 #endif /*CDOUBLENORMALSELECTIVITY_H_*/

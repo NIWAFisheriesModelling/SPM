@@ -18,10 +18,12 @@ CLogisticSelectivity::CLogisticSelectivity() {
   // Register Estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
+  registerEstimable(PARAM_ATO95, &dAlpha);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_A50);
   pParameterList->registerAllowed(PARAM_ATO95);
+  pParameterList->registerAllowed(PARAM_ALPHA);
 }
 
 //**********************************************************************
@@ -36,6 +38,10 @@ void CLogisticSelectivity::validate() {
     // Populate our variables
     dA50    = pParameterList->getDouble(PARAM_A50);
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
+    dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
+
+    if (dAlpha <= 0)
+      throw("Alpha must be positive"); // TODO: better error messages
 
   } catch (string Ex) {
     Ex = "CLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;
@@ -58,9 +64,9 @@ double CLogisticSelectivity::calculateResult(int Age) {
     if(dTemp > 5.0)
       dRet = 0.0;
     else if (dTemp < -5.0)
-      dRet = 1.0;
+      dRet = dAlpha;
     else
-      dRet  = 1.0/(1.0+pow(19.0,dTemp));
+      dRet  = dAlpha/(1.0+pow(19.0,dTemp));
 
     return dRet;
 
