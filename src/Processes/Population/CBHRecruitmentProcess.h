@@ -27,15 +27,20 @@ public:
 
 protected:
   // Variables
+  vector<double>              vProportionList;
   double                      dR0;
-  vector<double>              vProportions;
-  vector<int>                 vAges;
+  vector<int>                 vAgesList;
+  vector<int>                 vAgesIndex;
   double                      dSteepness;
   double                      dSigmaR;
   double                      dRho;
   string                      sSSB;
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
+  vector<int>                 vStandardiseYCSYearRange;
+  int                         iSSBOffset;
+  string                      sLayer;
+  CNumericLayer               *pLayer;
 };
 
 #endif /* CBHRECRUITMENTPROCESS_H_ */

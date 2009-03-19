@@ -12,6 +12,9 @@
 // Local headers
 #include "../CProcess.h"
 
+// Forward-Dec
+class CNumericLayer;
+
 //**********************************************************************
 //
 //
@@ -24,7 +27,15 @@ public:
   CProcess*                   clone() { return new CConstantMortalityRateProcess(*this); }
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        execute();
+
+protected:
+  // Variables
+  double                     dM;
+  CWorldSquare               **pGrid;
+  CNumericLayer              *pLayer;
+  string                     sLayer;
 };
 
 #endif /* CCONSTANTMORTALITYRATEPROCESS_H_ */

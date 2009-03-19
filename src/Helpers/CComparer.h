@@ -29,6 +29,8 @@ public:
 
   // Inline Functions
   static bool     isZero(double A) { return ( (A < ZERO) && (A > -ZERO) ); }
+  static bool     isNonNegative(double A) { return ( 0.0 <= A ); }
+  static bool     isPositive(double A) { return ( 0.0 < A ); }
   static bool     isSmall(double A) { return ( (A < SMALL) && (A > -SMALL) ); }
   static bool     isEqual(double A, double B) { return ( ((A-B) < ZERO) && ((A-B) > -ZERO) ); }
   static bool     isSimilar(double A, double B) { return ( ((A-B) < SMALL) && ((A-B) > -SMALL) ); }

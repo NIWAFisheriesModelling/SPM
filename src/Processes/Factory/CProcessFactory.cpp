@@ -17,8 +17,9 @@
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CCategoryTransitionRateProcess.h"
 #include "../Population/CEventMortalityProcess.h"
-#include "../Population/CNaturalMortalityProcess.h"
+#include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
+#include "../Population/CBHRecruitmentProcess.h"
 
 //**********************************************************************
 // CProcessFactory::CProcessFactory()
@@ -32,8 +33,10 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CAgeingProcess();
   else if (type == PARAM_CONSTANT_RECRUITMENT)
     pProcess = new CConstantRecruitmentProcess();
-  else if (type == PARAM_NATURAL_MORTALITY)
-    pProcess = new CNaturalMortalityProcess();
+  else if (type == PARAM_BH_RECRUITMENT)
+    pProcess = new CBHRecruitmentProcess();
+  else if (type == PARAM_CONSTANT_MORTALITY_RATE)
+    pProcess = new CConstantMortalityRateProcess();
   else if (type == PARAM_EVENT_MORTALITY)
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)

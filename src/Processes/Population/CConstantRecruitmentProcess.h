@@ -22,12 +22,12 @@ class CNumericLayer;
 class CConstantRecruitmentProcess : public CProcess {
 public:
   // Functions
-	CConstantRecruitmentProcess();
-	virtual                    ~CConstantRecruitmentProcess();
-	CProcess*                  clone() { return new CConstantRecruitmentProcess(*this); }
-	void                       validate();
-	void                       build();
-	void                       execute();
+  CConstantRecruitmentProcess();
+  virtual                    ~CConstantRecruitmentProcess();
+  CProcess*                  clone() { return new CConstantRecruitmentProcess(*this); }
+  void                       validate();
+  void                       build();
+  void                       execute();
 
 protected:
   // Variables
