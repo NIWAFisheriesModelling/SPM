@@ -212,7 +212,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{None}
 \defValue{Must be a valid \command{derived\_quantity} label}
 
-\defSub{offset} {Define the offset (in years) for the year of the derived quantity that is to be applied in the stock-recruit relationp}
+\defSub{SSB\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
 \defType{Integer}
 \defDefault{None}
 \defValue{Must be a value $ge0$}
@@ -226,8 +226,13 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{YCS\_years} {Years for year class strength values}
 \defType{Integer vector}
 \defDefault{None}
-\defValue{Must be vector}
+\defValue{Must be vector of length \subcommand{YCS\_values}}
 \defNote{Special year ranges (YYYY-YYYY) can be used}
+
+\defSub{standardise\_YCS\_year\_range} {Years for which the year class strength values are defined to have mean 1.0}
+\defType{Integer vector of length 2}
+\defDefault{None}
+\defValue{Must be vector of length 2, with values of years between \commandsub{model}{initial} to \commandsub{model}{current}}
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}

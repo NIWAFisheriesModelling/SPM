@@ -39,9 +39,10 @@
 \defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
 \defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
 \defSub{SSB} {Define the label of the \command{derived\_quantity} that defines the SSB}
-\defSub{offset} {Define the offset (in years) for the year of the derived quantity that is to be applied in the stock-recruit relationp}
+\defSub{SSB\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
 \defSub{YCS\_values} {YCS values}
 \defSub{YCS\_years} {Years for year class strength values}
+\defSub{standardise\_YCS\_year\_range} {Years for which the year class strength values are defined to have mean 1.0}
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \par\textbf{\commandlabsubarg{process}{type}{ageing}}\par
 \defSub{categories} {Define the categories that ageing is applied to}
@@ -285,7 +286,7 @@
 \par\defComArg{estimate}{parameter\_name}{Estimate an estimable parameter}\par\par
 \defSub{same}{Names of the other parameters which are constrained to have the same value}
 \defSub{estimation\_phase}{Phase at which this parameter should be estimated, in point estimation}
-\defSub{lower\_bounds}{Lower bounds on this parameter}
+\defSub{lower\_bound}{Lower bounds on this parameter}
 \defSub{upper\_bound}{Upper bound on this parameter}
 \defSub{MCMC\_fixed}{Should this parameter be fixed during MCMC?}
 \defSub{prior}{Defines the label for the prior for this parameter}

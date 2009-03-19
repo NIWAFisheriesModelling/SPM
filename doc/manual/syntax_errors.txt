@@ -114,11 +114,9 @@ In manual, but not in SPM
   growth_proportions
   initialisation_layer
   k
-  lower_bounds
   max_correlation
   max_evaluations
   max_iterations
-  offset
   p1
   p2
   phase
@@ -138,7 +136,6 @@ In manual, but not in SPM
   tau1
   tau2
   tolerance
-  bh_recruitment
   de_solver
   metropolis_hastings
   schnute
@@ -146,7 +143,6 @@ In manual, but not in SPM
   annual_mortality_rate
   biomass_event_mortality
   categorical
-  constant_mortality_rate
   derived_quantity
   estimate_values
   event_mortality_at_age
