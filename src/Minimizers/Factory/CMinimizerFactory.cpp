@@ -24,7 +24,7 @@ CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithMana
 
   if (type == PARAM_GAMMADIFF)
     pMinimizer = new CGammaDiff();
-  else if (type == PARAM_DESOLVER)
+  else if (type == PARAM_DE_SOLVER)
     pMinimizer = new CDESolver();
   else
     throw string("Unknown type: "+ type); // TODO: FIX THIS

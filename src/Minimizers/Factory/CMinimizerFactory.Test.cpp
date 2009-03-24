@@ -27,7 +27,7 @@ using namespace std;
 BOOST_AUTO_TEST_CASE( Build_DESolver) {
 
   CMinimizer *pMinimizer = 0;
-  BOOST_REQUIRE_NO_THROW(pMinimizer = CMinimizerFactory::buildMinimizer(PARAM_DESOLVER, false));
+  BOOST_REQUIRE_NO_THROW(pMinimizer = CMinimizerFactory::buildMinimizer(PARAM_DE_SOLVER, false));
 
   CDESolver *pPtr = dynamic_cast<CDESolver*>(pMinimizer);
   BOOST_ASSERT(pPtr != 0);

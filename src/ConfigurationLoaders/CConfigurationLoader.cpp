@@ -134,7 +134,7 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CSelectivityFactory::buildSelectivity(sType);
     else if (sSection == PARAM_TIME_STEP)
       pBaseObject = CTimeStepFactory::buildTimeStep(sType);
-    else if (sSection == PARAM_MPD)
+    else if (sSection == PARAM_ESTIMATION)
       pBaseObject = CMinimizerManager::Instance();
     else if (sSection == PARAM_MCMC)
       pBaseObject = CMCMC::Instance();

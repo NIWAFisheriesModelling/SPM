@@ -10,7 +10,7 @@
 // Local headers
 #include "CReporterFactory.h"
 #include "../CReporterManager.h"
-#include "../Children/CWorldStateReporter.h"
+#include "../Children/CPartitionReporter.h"
 #include "../Children/CObjectiveFunctionReporter.h"
 #include "../Children/CEstimateSummaryReporter.h"
 #include "../Children/CEstimateValueReporter.h"
@@ -23,8 +23,8 @@ CReporter* CReporterFactory::buildReporter(string type, bool registerWithManager
 
   CReporter *pReporter = 0;
 
-  if (type == PARAM_WORLD_STATE)
-    pReporter = new CWorldStateReporter();
+  if (type == PARAM_PARTITION)
+    pReporter = new CPartitionReporter();
   else if (type == PARAM_OBJECTIVE_FUNCTION)
     pReporter = new CObjectiveFunctionReporter();
   else if (type == PARAM_ESTIMATE_SUMMARY)
