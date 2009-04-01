@@ -93,7 +93,7 @@
 \defSub{layer} {Name of the layer}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \par\textbf{\commandlabsubarg{process}{type}{adjacent\_cell\_movement}}\par
-\par\textbf{\commandlabsubarg{process}{type}{preference\_movement}}\par
+\par\textbf{\commandlabsubarg{process}{type}{preference}}\par
 \defSub{categories} {Define the categories that the preference function movement is applied to}
 \defSub{preference\_functions} {Define the labels of the individual  preference functions that make up the total preference function}
 \par\defComLab{preference\_function} {Define a preference function with label}\par
@@ -172,6 +172,7 @@
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
 \defSub{selectivity} {Define the selectivities}
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
+\defSub{time\_step\_proportion} {Define the proportion of the time step through which the derived quantity has been calculated}
 \defSub{layer} {Name of the layer}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
@@ -403,20 +404,26 @@
 \subsection{Reporting command and subcommand syntax}\par
 \defComLab{report}{Define an output report}\par\par
 \defSub{type} {Define the type of report}
+\par\textbf{\commandlabsubarg{report}{type}{spatial\_map}}\par
+\defSub{file\_name} {Define the name of the output file where the report is written}
 \par\textbf{\commandlabsubarg{report}{type}{partition}}\par
 \defSub{year} {Define the year that the partition report applies to}
 \defSub{time\_step} {Define the time-step that the partition report applies to}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{initialisation}}\par
-\defSub{phase} {Define the phase of initialisation that the partition report applies to}
+\defSub{initialisation\_phase} {Define the phase of initialisation that the partition report applies to}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\par\textbf{\commandlabsubarg{report}{type}{process}}\par
+\defSub{process} {Define the label of the process to summarise}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{derived\_quantity}}\par
 \defSub{derived\_quantity} {Define the label of the derived quantity to print}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
-\par\textbf{\commandlabsubarg{report}{type}{estimate\_values}}\par
+\par\textbf{\commandlabsubarg{report}{type}{estimate\_value}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{estimate\_summary}}\par

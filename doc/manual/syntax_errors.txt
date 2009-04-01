@@ -13,20 +13,16 @@ In SPM, but not in manual
   column_index
   current
   cv_process_error
-  desolver
   directed
   directed_process
   directed_processes
   dist
-  double
   enabled_estimates
   estimable
-  estimate_value
   estimates
   final
   flagged_penalties
   function
-  gammadiff
   grad_tol
   height
   hex
@@ -47,10 +43,8 @@ In SPM, but not in manual
   method
   movement_process
   movement_processes
-  mpd
   multiplier
   n_process_error
-  natural_mortality
   normal_by_stdev
   normal_log
   normalise
@@ -60,7 +54,6 @@ In SPM, but not in manual
   population_process
   population_processes
   population_selectivities
-  preference
   profiles
   projection_years
   proposal_t
@@ -79,18 +72,15 @@ In SPM, but not in manual
   square_uniform
   start_year
   step
-  string
   total_score
   u
   umax
   value
   width
-  world_state
 
 
 
 In manual, but not in SPM
-  estimation
   ageing_error
   derived_quantity
   include
@@ -119,7 +109,6 @@ In manual, but not in SPM
   max_iterations
   p1
   p2
-  phase
   process_error
   process_label
   proportion_time_step
@@ -135,16 +124,14 @@ In manual, but not in SPM
   t0
   tau1
   tau2
+  time_step_proportion
   tolerance
-  de_solver
   metropolis_hastings
   schnute
   adjacent_cell_movement
   annual_mortality_rate
   biomass_event_mortality
-  categorical
   derived_quantity
-  estimate_values
   event_mortality_at_age
   initialisation
   iterative
@@ -152,10 +139,8 @@ In manual, but not in SPM
   migration_movement
   none
   normal_by_sd
-  numerical_differences
   off_by_one
-  partition
-  preference_movement
   random_number_seed
+  spatial_map
   von_bertalanffy
   weight_at_size

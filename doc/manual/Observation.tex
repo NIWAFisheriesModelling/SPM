@@ -1,52 +1,278 @@
 \section{The observation section\label{sec:observation-section}}
 
-The objective function is based on the goodness-of-fit of the model to your observations. In the current release of \SPM, most observations are different kinds of time series, i.e., data which were recorded for one or more years, in the same format each year. Examples of time series data types include relative abundance indices, commercial catch length frequencies, survey numbers-at-age, etc,. 
+The objective function is based on a goodness-of-fit measure of the model to observations, priors and penalties. The observation section describes the objective function, observations, priors and penalties. 
 
-Generally, time series must relate to a specified time step and a specified area, and one or more years in which they were recorded.
+\subsection{The objective function}
 
-\subsection{Types of observations}
-
-Five types
-
-\begin{description}
-  \item Observations of a mortality event proportions of individuals by age class
-  \item Observations of proportions of individuals by age class
-  \item Observations of proportions of individuals between categories within each age class
-  \item Relative and absolute abundance observations
-  \item Relative and absolute biomass observations
-\end{description}
-
-\subsubsection{Event mortality proportions-at-age}
-
-\subsubsection{Proportions-at-age}
-
-In the case study, proportions-at-age data from the commercial catch, by SSRU and year (Figure 8), were fitted to the modelled proportions-at-age composition using a multinomial likelihood, i.e., 
+In Bayesian estimation, the objective function is a negative log-posterior,
 
 \begin{equation}
-  -\log \left(L \right) =  -\log \left(N! \right) + \sum\limits_i \log \left( \left(NO_i \right)! \right) - NO_i \log \left(E_i \right)
+Objective(p)= - \sum\limits_i {\log \left[ {L\left( {{\bf{p}}|O_i } \right)} \right]}  - \log \left[ {\pi \left( {\bf{p}} \right)} \right]
 \end{equation}
 
-where $O_i$ are the observed proportions at age $i$, $E_i$ are the model expected proportions at age $i$, and $N$ is the effective sample size. 
+where $\pi$ is the joint prior density of the parameters $p$.
+
+In addition to likelihoods (see Section \ref{observations-likelihoods}) and priors (see Section \ref{observations-priors}), penalties (see Section \ref{observations-penalties}) can be added to the objective function. You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken), penalties on category transitions (to ensure there are enough individuals to move), and possibly penalties to encourage estimated values to be similar, smoothed, etc.
+
+\subsection{Observations and likelihoods\label{observations-likelihoods}}
+
+Observations are typically supplied as observations at an instance in time, over some spatially aggregated area. Time series of observations can be supplied as separate observations for each year or point in time. 
+
+\SPM\ allows the following types of observations;
+
+\begin{description}
+  \item Observations of proportions by age class within categories
+  \item Observations of proportions between categories within age classes
+  \item Relative and absolute abundance/biomass observations
+\end{description}
+
+The definitions for each type of observation are described below, including how the observed values should be supplied, how \SPM\ calculates the expected values, and the likelihoods that are available for each type of observation.
+
+\subsubsection{Proportions-at-age observations}
+
+Proportions-at-age observations are observations of either the relative number of individuals at age or relative biomass at age. 
+
+The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. 
+
+The age range must be ages defined in the partition (i.e., between \commandsub{model}{min\_age} and \commandsub{model}{max\_age} inclusive), but the upper end of the age range can optionally be a plus group --- which may or may not be the same as the plus group defined for the partition. 
+
+Proportions-at-age observations can be supplied for a single category, aggregated across categories, or be proportions of multiple categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply either (i) observations of the proportions of males (or alternately female) within each age class; (ii) proportions of total individuals (males $+$ females) at each age class, or (iii) the proportions of individuals for both male and female categories simultaneously. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}. 
+
+The way the categories of the observation are defined specifies which of these alternatives to use. For example, to specify that the observations are of the proportions of male within each age class (example (i) above), then the subcommand \subcommand{categories} for the \commandlabsubarg{observation}{type}{proportion\_by\_age} command is,
+
+\begin{verbatim}
+categories male
+\end{verbatim}
+
+\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of males within each of these age classes, after applying a selectivity at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
+
+To aggregate categories, the command syntax uses a $+$ symbol to denote those categories to 'add' together. For example, to specify that the observations are of the proportions of total individuals (males $+$ females) at each age class (example (ii) above), then the subcommand \subcommand{categories} is,
+
+\begin{verbatim}
+categories male + female
+\end{verbatim}
+
+\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
+
+To provide proportions for multiple categories simultaneously, then just specify a vector of category labels. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
+
+\begin{verbatim}
+categories male female
+\end{verbatim}
+
+\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range for males and then females, i.e., if the age range was 3 to 10, then 16 proportions should be supplied, the first set of 8 corresponding to the proportions of male (out of male and female combined) and the second 8 to female. The expected values will be the expected proportions of selected males and selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 16 proportions) must sum to one (with a default tolerance of 0.001).
+
+The definition of categories can be a combination of the above cases and can become more complex as the number of categories in the model increases. For example, in a model with categories male-immature, male-mature, female-immature, and female-mature, we might supply observations of males (immature and mature combined) and females (immature and mature combined) simultaneously. Here the \subcommand{categories} subcommand would be;
+
+\begin{verbatim}
+categories male-immature + male-mature female-immature + female-mature
+\end{verbatim}
+
+Assuming that we wanted to supply observations for ages 1 to 5, then \SPM\ would expect a vector of 10 proportions for each spatial location --- the first five corresponding to the observed proportions of males aged 1--5, and the second set of five corresponding to the proportions of females aged 1--5. Further, the proportions would sum to one.
+
+The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
+
+For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
+
+\begin{verbatim}
+@layer Area
+type categorical
+data A A 
+data B B
+\end{verbatim}
+
+Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
+
+\begin{verbatim}
+@observation MyProportions
+...
+categories male female
+min_age 1
+max_age 5
+obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
+...
+\end{verbatim}
+
+Or, for both $A$ and $B$ as,
+
+\begin{verbatim}
+@observation MyProportions
+...
+categories male female
+min_age 1
+max_age 5
+obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
+obs B 0.02 0.06 0.10 0.21 0.18 0.02 0.05 0.15 0.20 0.01
+...
+\end{verbatim}
+
+To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
+
+\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
+
+\subsubsection*{Likelihoods for proportions-at-age observations}
+
+\SPM\ implements only one likelihood for proportions-at-age observations, the multinomial likelihood. 
+
+For the observed proportions at age $O_i$ for age classes $i$, with sample size $N$, and the expected proportions at the same age classes $E_i$, the log-likelihood is defined as; 
+
+\begin{equation}
+  -\log \left(L \right) =  -\log \left(N! \right) + \sum\limits_i \log \left( \left(NO_i \right)! \right) - NO_i \log \left(Z \left(E_i,\delta \right) \right)
+\end{equation}
+
+where $\sum\limits_i O_i = 1$ and $\sum\limits_i E_i = 1$. $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
+
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+The default value of $\delta$ is $1 \times 10^{-11}$.
 
 \subsubsection{Proportions-by-category}
 
-The likelihood for these observations was implemented as a binomial likelihood. Here, 
+Proportions-by-category observations are observations of either the relative number of individuals between categories within age classes, or relative biomass between categories within age classes. 
+
+The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. 
+
+The age range must be ages defined in the partition (i.e., between \commandsub{model}{min\_age} and \commandsub{model}{max\_age} inclusive), but the upper end of the age range can optionally be a plus group --- which may or may not be the same as the plus group defined for the partition. 
+
+Proportions-by-category observations can be supplied for any set of categories as a proportion of themselves and any set of additional categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply observations of the proportions of males in the population at each age class. The subcommand \subcommand{categories} defines the categories for the numerator in the calculation of the proportion, and the subcommand \subcommand{categories2} supplies the additional categories to be used in the denominator of the calculation. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities} for the numerator categories and \subcommand{selectivities2} for the additional categories used in the denominator, e.g., 
+
+\begin{verbatim}
+categories male
+categories2 female
+selectivities male-selectivity
+selectivities2 female-selectivity
+\end{verbatim}
+
+defines that the proportion of males in each age class as a proportion of males $+$ females. \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of male to male $+$ female within each of these age classes, after applying the selectivities at the year and time step specified. 
+
+The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
+
+For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
+
+\begin{verbatim}
+@layer Area
+type categorical
+data A A 
+data B B
+\end{verbatim}
+
+Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
+
+\begin{verbatim}
+@observation MyProportions
+...
+categories male 
+categories2 female
+min_age 1
+max_age 5
+obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
+...
+\end{verbatim}
+
+Or, for both $A$ and $B$ as,
+
+\begin{verbatim}
+@observation MyProportions
+...
+categories male
+categories2 female
+min_age 1
+max_age 5
+obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
+obs B 0.02 0.06 0.10 0.21 0.18 0.02 0.05 0.15 0.20 0.01
+...
+\end{verbatim}
+
+To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
+
+\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
+
+\subsubsection*{Likelihoods for proportions-by-category observations}
+
+\SPM\ implements only one likelihood for proportions-by-category observations, the binomial likelihood. 
 
 \begin{equation}
   \begin{split}
-    -\log \left(L \right)= -\sum\limits_i & \log \left(N_i! \right) - \log \left(\left(N_i \left(1 - O_i \right) \right)! \right) - \log \left(\left(N_i O_i \right)! \right) + N_i O_i \log \left(E_i \right) \\
-    &+ N_i \left(1 - O_i \right)\log \left(1 - E_i \right)
+    -\log \left(L \right)= -\sum\limits_i & \log \left(N_i! \right) - \log \left(\left(N_i \left(1 - O_i \right) \right)! \right) - \log \left(\left(N_i O_i \right)! \right) + N_i O_i \log \left(Z\left(E_i,\delta \right) \right) \\
+    &+ N_i \left(1 - O_i \right)\log \left(Z\left(1 - E_i,\delta\right) \right)
   \end{split}
 \end{equation}
 
-where $O_i$ are the observed proportions by category $i$, $E_i$ are the expected proportions by category $i$, and $N$ is the effective sample size. 
+where $O_i$ are the observed proportions for age class $i$, $E_i$ are the expected proportions for age class $i$, and $N_i$ is the effective sample size for age class $i$. 
+
+where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
+
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+The default value of $\delta$ is $1 \times 10^{-11}$.
 
 \subsubsection{Abundance}
+
+Abundance observations are observations of either a relative or absolute number of individuals from a set of categories after applying a selectivity. 
+
+The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated of fixed. For absolute abundance observations, define a catchability where $q=1$.
+
+Abundance observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance (male $+$ female) or just male abundance. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}, e.g., 
+
+\begin{verbatim}
+categories male
+selectivities male-selectivity
+\end{verbatim}
+
+defines an observation of the abundance of males. \SPM\ then expects that there will be a single abundance value supplied. The expected values will be the expected number of males, after applying the selectivities, at the year and time step specified. 
+
+The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
+
+For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
+
+\begin{verbatim}
+@layer Area
+type categorical
+data A A 
+data B B
+\end{verbatim}
+
+Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
+
+\begin{verbatim}
+@observation MyAbundance
+...
+categories male 
+obs A 1000
+...
+\end{verbatim}
+
+Or, for both $A$ and $B$ as,
+
+\begin{verbatim}
+@observation MyProportions
+...
+categories male
+obs A 1000
+obs B 1200
+...
+\end{verbatim}
+
+To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
+
+\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
+
+\subsubsection*{Likelihoods for abundance observations}
 
 The lognormal likelihood with observations $O_i$, c.v. $c_i$, and expected values $qE_i$, and was,
 
 \begin{equation}
- - \log \left( L \right) = \sum\nolimits_{i = 1}^n \left( {\log \left( {\sigma _i } \right) + 0.5\left( {\frac{{\log \left( {{{O_i } \mathord{\left/  {\vphantom {{O_i } {qE_i }}} \right. \kern-\nulldelimiterspace} {qE_i }}} \right)}} {{\sigma _i }} + 0.5\sigma _i } \right)^2 } \right) 
+ - \log \left(L \right) = \sum\limits_i \left( \log \left( \sigma _i \right) + 0.5\left( \frac{\log \left(O_i / q Z \left(E_i,\delta \right) \right)}{\sigma_i} + 0.5 \sigma_i \right)^2 \right)
 \end{equation}
 
 where 
@@ -55,31 +281,97 @@ where
   \sigma_i  = \sqrt{\log \left(1+c_i^2 \right)}
 \end{equation}
 
-.
+and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
 
-For the case study, c.v.s were all assumed to be 0.2.
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
 
+The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsection{The objective function}
+\subsubsection{Process error}
 
-\subsubsection{The objective function}
+Additional `process error' can be defined for each set of observations. Additional process error has the effect of increasing the observation error in the data, and hence of decreasing the relative weight given to the data in the fitting process. 
 
-In Bayesian estimation, the objective function is a negative log-posterior,
+For observations where where the likelihood is parameterised by the c.v., you can specify the process error for a given set of observations as a c.v., in which case all the c.v.s $c_i$ are changed to
 
-\[
-Objective(p)= - \sum\limits_i {\log \left[ {L\left( {{\bf{p}}|O_i } \right)} \right]}  - \log \left[ {\pi \left( {\bf{p}} \right)} \right]
-\]
+\begin{equation}
+  c'_i  = \sqrt {c_i^2  + c_{process\_error}^2 } 
+\end{equation}
 
-where $\pi$ is the joint prior density of the parameters $p$.
+Similarly, if the likelihood is parameterised by the standard deviation $sigma$,
 
-Under either estimation method, penalties can be added to the objective function (see Section XXX). You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken). A penalty to force the YCS to average to 1 (i.e., to have mean 1) may also be necessary.
+\begin{equation}
+  \sigma '_i  = \sqrt {\sigma _i^2  + \sigma _{process\_error}^2 } 
+\end{equation}
 
-\subsubsection{Likelihoods}
+or by the effective sample size $N$,
 
-\subsubsection{Priors}
+\begin{equation}
+ N'_i  = \frac{1}{1 / {N_i}+ 1 / N_{process\_error}}
+\end{equation}
 
-\subsubsection{Penalties}
+In all three cases, the process error has more effect on small errors than on large ones. Be clear that a large value for the multinomial process error means a small process error.
 
-\subsection{Simulating observations}
+\subsubsection{Simulating observations}
 
-\subsection{Pseudo-observations}
+TODO
+
+\subsection{Priors\label{observations-priors}}
+
+In a Bayesian analysis, you need to give a prior for every parameter that is being estimated. There are no default priors.  
+
+Note that when some of these priors are parameterised in terms of mean, c.v., and standard deviation, these refer to the parameters of the distribution before bounds are applied. The moments of the prior after the bounds are applied may differ.
+
+\SPM\ has the following priors (expressed in terms of their contribution to the objective function): 
+
+\begin{enumerate}
+\item{Uniform}
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = 0
+\end{equation}
+
+\item{Uniform-log} (i.e., $\log(p) \sim \text{uniform}$)
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = \log \left( p \right)
+\end{equation}
+
+\item{Normal with mean $\mu$ and c.v. $c$}
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = 0.5\left(\frac{p - \mu}{c\mu} \right)^2 
+\end{equation}
+
+\item{Normal with mean $\mu$ and standard deviation $\sigma$}
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = 0.5\left(\frac{p - \mu}
+{\sigma }\right)^2
+\end{equation}
+
+\item{Lognormal with mean $\mu$ and c.v. $c$} 
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = \log \left( p \right) + 0.5 \left( \frac{\log \left( p / \mu \right)}{s} + \frac{s}{2} \right)^2
+\end{equation}
+
+where $s$ is the standard deviation of $\log(p)$ and $s= \sqrt{\log \left(1+c^2 \right)}$.
+
+\item{Beta with mean $\mu$ and standard deviation $\sigma$, and range parameters $A$ and $B$}
+
+\begin{equation}
+ - \log \left(\pi \left( p \right) \right) = \left( 1 - m \right) \log \left( p - A \right) + \left( 1 - n \right)\log \left( B - p \right)
+\end{equation}
+
+where $\nu  = \frac{\mu  - A}{B - A}$, and $\tau = \frac{\left(\mu -A \right)\left(B - \mu \right)}{\sigma ^2} - 1$ and then $\mu=\tau \nu$ and $n=\tau(1-\nu)$. Note that the beta prior is undefined when $\tau \leq 0$.
+
+\end{enumerate}
+
+\subsection{Penalties\label{observations-penalties}}
+
+TODO

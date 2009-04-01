@@ -2,19 +2,17 @@
 
 \subsection{Role of the estimation section\label{sec:role-of-the-estimation-section}}
 
-The tasks carried out by the estimation section are: 
+The role of the estimation section is to define the tasks carried out by \SPM: 
 
 \begin{enumerate}
-\item Get the point estimate, i.e., the maximum posterior density estimate (MPD) (see Section 6.3).
-
-\item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other estimated parameters to vary, the minimum value of the objective function (Section 6.4).
-
-\item Generate an MCMC sample from the posterior distribution (Section 6.5).
-
-\item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (Section 6.3).
+  \item Determine the parameters to be estimated (see Section \ref{estimate-free-parameters})
+  \item Calculate a point estimate, i.e., the maximum posterior density estimate (MPD) (see Section \ref{estimate-MPD}).
+  \item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other estimated parameters to vary, the minimum value of the objective function (see Section \ref{estimate-profiles}).
+  \item Generate an MCMC sample from the posterior distribution (see Section \ref{estimate-MCMC}).
+  \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (see Section \ref{estimate-MPD}).
 \end{enumerate}
 
-\subsection{Specifying the parameters to be estimated}
+\subsection{Specifying the parameters to be estimated\label{estimate-free-parameters}}
 
 You need to tell SPM which of the estimable parameters are to be estimated by using \command{estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like,
 
@@ -31,7 +29,7 @@ All parameters are estimated within bounds. For each parameter to be estimated, 
 
 You need to estimate all the estimable parameters of an selectivity if you estimate any, but you can fix some of them if you want by setting the lower and upper bound equal. Similarly, if you want to estimate only some elements of a vector, fix the others by setting the bounds equal.
 
-\subsection{Point estimation}
+\subsection{Point estimation\label{estimate-MPD}}
 
 Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function. SPM has two algorithms for solving optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}.
 
@@ -56,7 +54,7 @@ The approximate covariance matrix of the estimated parameters can be calculated 
 
 Also note that if an estimated parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
 
-\subsection{Posterior profiles}
+\subsection{Posterior profiles\label{estimate-profiles}}
 
 If profiles are requested \texttt{spm -p}, \SPM\ will first calculate a point estimate. For each scalar parameter or, in the case of vectors or selectivities, the element of the parameter to be profiled, \SPM\ will fix its value at a sequence of $n$ evenly spaced numbers between specified bounds $l$ and $u$, and calculate a point estimate at each value. 
 
@@ -70,7 +68,7 @@ If you have specified multi-phase estimation (see Section XXX), it is only used 
 
 If you get an implausible profile, it may be a result of not using enough iterations in the minimiser (in this case, increase \commandsub{minimiser}{max\_iterations} and/or \commandsub{minimiser}{max\_evaluations} and retry), or the convergence criteria may not be strong enough (try setting \commandsub{minimiser}{gradient\_tolerAnce} to a smaller value).
 
-\subsection{Bayesian estimation}
+\subsection{Bayesian estimation\label{estimate-MCMC}}
 
 \SPM\ can use a Monte Carlo Markov Chain to generate a sample from the posterior distribution of the estimated parameters \texttt{spm -m}; and output the sampled values to a file, (optionally only every nth set of values).
 

@@ -28,7 +28,7 @@ The spatial structure of \SPM\ is represented by an $n_{rows} \times n_{cols}$ g
 
 The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
 
-\SPM\ implements two spatial structures, one derived from a grid of \emph{square} cells --- the default (Figure \ref{fig:SquareSpatialStructure}) and the other derived from a grid of north-south orientated \emph{hexagons} (Figure \ref{fig:HexagonSpatialStructure}). We note that the spatial grid can be of an arbitrary size, but must be rectangular. 
+\SPM\ implements a single spatial structure, a grid of \emph{square} cells (Figure \ref{fig:SquareSpatialStructure}) The spatial grid can be of an arbitrary size, but must be rectangular. 
 
 The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area} of each spatial cell, as used for density calculations within \SPM.
 
@@ -39,20 +39,13 @@ The dimensions of the spatial grid are user defined but must be at least a $1 \t
   \label{fig:SquareSpatialStructure}
 \end{figure}
 
-\begin{figure}[htp]
- \centering
-  \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/HexagonStructure}}
-  \caption{An illustration of the \emph{hexagon} spatial structure}
-  \label{fig:HexagonSpatialStructure}
-\end{figure}
-
-Models can be implemented as a grid based on either squares or hexagons, but not both. This choice effects the location of neighbours (for adjacent movements) and the distance between cells (for preference based movements). Distance between cells is determined as the euclidean distance between cell centres, modified by an arbitrary scalar. 
+Models are implemented as a grid of cells as a rectangular matrix. Distance between cells is determined as the euclidean distance between cell centres, modified by an arbitrary scalar. 
 
 Hence, the definition of the spatial structure includes;
 \begin{itemize}
 \item The type of spatial grid and its dimensions, $n_{rows}$ and $m_{cols}$
 \item The label of a numeric layer to be used as the base layer (defining the locations where the population can be present as well as the area of each cell)
-\item the length (distance) of a side of the grid (either a square or hexagon) to be used as the scaler for distance calculations
+\item The length (distance) of a side of the grid cell to be used as the scaler for distance calculations
 \end{itemize}
 
 \subsection{\I{Population structure}}
@@ -72,7 +65,7 @@ Hence, the definition of the population structure includes;
 
 \subsection{\I{Layers}\label{sec:layers}}
 
-\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n \times m$ matrix and can be either \emph{logical}, \emph{numeric}, or \emph{categorical}. See Section \ref{sec:population-section} for further details.
+\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n \times m$ matrix and can be either \emph{numeric} or \emph{categorical}. See Section \ref{sec:population-section} for further details.
 
 Layers form a key underlying concept in \SPM. They comprise of a grid of known values, with a value for every spatial cell in the model. Layers are used by processes, observations, and outputs commands to supply spatially explicit covariates and any categorical groupings required. 
 
@@ -137,7 +130,7 @@ The time sequence of the model is defined in three parts;
 \begin{itemize}
   \item \I{Initialisation}
   \item \I{Run years}
-  \item \I{Projection years}
+  \item \I{Projection year}s
 \end{itemize}
 
 \subsubsection{\I{Annual cycle}}
@@ -291,7 +284,7 @@ And the number removed $R$ from each age $l$ in category $k$ is,
 
 Similarly, the biomass-event mortality type is applied as \ldots \textbf{to be added}.
 
-\subsubsection{\I{Category transitions}}
+\subsubsection{\I{Category transition}s}
 
 Category transition processes move individuals between categories. \SPM\ implements two types, the total number and a rate. 
 
@@ -340,7 +333,7 @@ The adjacent cell movement simply moves a proportion of individuals to neighbour
 
 Preference movements allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. Here, we use the term \emph{preference function}\index{Preference function} \citep{1366,1367} to describe the movement probability distributions. We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.The preference function movement process allows the number of parameters describing movement to to reduced, and results in a movement process that is some function of some underlying property of each location. For example, if we assume that movement between areas was a function of the Euclidean distance between areas, we could model movement between any two areas as a linear decay or exponential decay function \citep{1366}. Alternately, if distribution and density were correlated with bathymetric depth for a marine organism, we might model the movement and distribution as a function of depth. 
 
-\subsubsection*{\I{The total preference function}}
+\subsubsection*{The total preference function\index{Total preference function}}
 
 Movement in \SPM\ can be defined as a probability distribution based on an underlying preference function. Here, we define the preference for a cell $x$ as the preference function $f_x(\theta_x,P(x))$, where $\theta_x$ are the parameters for $f_x$. So, given a set of $n$ attributes for cell $x$, we can define a preference function for each, and hence we define the aggregated or total preference function for any cell $x$ as the weighted product of individual preference functions,
 \begin{equation}
@@ -363,22 +356,22 @@ Note that there are three forms of preference function,
 
 Preference functions of the first type are determined only by the parameters of the preference function and some underlying, fixed, attribute. Preference functions of the others are dynamic, i.e. they depend on the relative locations of the cells or on the density of a cell at a particular point in time.
 
-\subsubsection*{\I{Preference functions}}
+\subsubsection*{Preference functions\index{Preference function}}
 
 Preference functions in \SPM\ include constant, Normal, double-Normal, logistic, inverse-logistic, Exponential, and threshold. These are defined as,
 
 \begin{enumerate}
-\item The constant preference function\index{Constant preference function}\index{Preference functions ! Constant} has dependent variable $x$ and has no parameters, and is defined as,
+\item The constant preference function\index{Constant preference function}\index{Preference function ! Constant} has dependent variable $x$ and has no parameters, and is defined as,
 \begin{equation}
 f(x)=x$, where $0 \leq x \leq 1
 \end{equation}
 
-\item The Normal preference function\index{Normal preference function}\index{Preference functions ! Normal} has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
+\item The Normal preference function\index{Normal preference function}\index{Preference function ! Normal} has dependent variable $x$ and parameters $\theta = (\mu,\sigma)$, and is defined as, 
 \begin{equation}\
 f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2} 
 \end{equation}
  
-\item The double-Normal preference function\index{Double-normal preference function}\index{Preference functions ! Double-Normal} has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
+\item The double-Normal preference function\index{Double-normal preference function}\index{Preference function ! Double-Normal} has dependent variable $x$ and parameters $\theta=(\mu,\sigma_L,\sigma_R)$, and is defined as,
 \begin{equation}
   f(x | \mu, \sigma_L, \sigma_R) = \begin{cases}
     2^{-[(x- \mu)/\sigma_L ]^2}, & \text{if $x \leq \mu$} \\
@@ -386,22 +379,22 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
   \end{cases}
 \end{equation} 
 
-\item The Logistic preference function \index{Logistic preference function}\index{Preference functions ! Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
+\item The Logistic preference function \index{Logistic preference function}\index{Preference function ! Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 \begin{equation}
   f(x | a_{50}, a_{to95}) = 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The inverse-Logistic preference function\index{Inverse-Logistic preference function}\index{Preference functions ! Inverse-Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
+\item The inverse-Logistic preference function\index{Inverse-Logistic preference function}\index{Preference function ! Inverse-Logistic} has dependent variable $x$ and parameters $\theta = (a_{50},a_{to95})$, and is defined as,
 \begin{equation}
   f(x | a_{50}, a_{to95}) =1- 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The Exponential preference function\index{Exponential preference function}\index{Preference functions ! Exponential} has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
+\item The Exponential preference function\index{Exponential preference function}\index{Preference function ! Exponential} has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
 \begin{equation}
   f(x | \lambda) =\exp(-\lambda x), \text{where $x \geq 0$ and $0$ otherwise}
 \end{equation}
 
-\item The threshold preference function\index{Threshold preference function}\index{Preference functions ! Threshold} has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
+\item The threshold preference function\index{Threshold preference function}\index{Preference function ! Threshold} has dependent variable $x$ and parameters $\theta = (N,\lambda)$, and is defined as,
 \begin{equation}
   f(x | N, \lambda) = \begin{cases}
     1, & \text{if $0 \le x \leq N$} \\

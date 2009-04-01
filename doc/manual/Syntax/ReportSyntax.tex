@@ -5,7 +5,9 @@
 The report types available are,
 
 \begin{description}
+  \item Print the map (i.e., row and column labels of each spatial cell) of the spatial structure
   \item Print the partition
+  \item Print a summary of a process
   \item Print a derived quantity
   \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
   \item Print a summary of the estimated parameters
@@ -25,6 +27,13 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defType{String}
 \defDefault{None}
 \defValue{A valid type of report}
+
+\subsubsection[Print the map (i.e., row and column labels of each spatial cell) of the spatial structure]{\commandlabsubarg{report}{type}{spatial\_map}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \subsubsection[Print the partition]{\commandlabsubarg{report}{type}{partition}}
 
@@ -50,10 +59,27 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \subsubsection[Print the partition at initialisation]{\commandlabsubarg{report}{type}{initialisation}}
 
-\defSub{phase} {Define the phase of initialisation that the partition report applies to}
+\defSub{initialisation\_phase} {Define the phase of initialisation that the partition report applies to}
 \defType{string}
 \defDefault{None}
 \defValue{A valid phase label, from \command{initialisation\_phase}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a summary of a process]{\commandlabsubarg{report}{type}{process}}
+
+\defSub{process} {Define the label of the process to summarise}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{process}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -82,7 +108,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{True}
 \defValue{Either True of False}
 
-\subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_values}\label{sec:InputFileFormat}}
+\subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_value}\label{sec:InputFileFormat}}
 
 Prints the estimated parameters in a format suitable for use with \texttt{spm -i}.
 
