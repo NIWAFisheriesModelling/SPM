@@ -6,7 +6,7 @@ This manual describes how to use \SPM, including how to run \SPM, how to set up 
 
 \subsection{Version\label{sec:version}}
 
-This document (last modified \DocVer) describes \SPM\ \VER. The \SPM\ version number is suffixed with a date/time (\texttt{yyyy-mm-dd}) and revision number, giving the revision control system UTC date and revision number for the most recent modification of the source files. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.\index{Version numbering}
+This document (last modified \DocVer) describes \SPM\ \VER. The \SPM\ version number is suffixed with a date/time (\texttt{yyyy-mm-dd}) and revision number, giving the revision control system UTC date and revision number for the most recent modification of the source files. User manual updates will usually be issued for each minor version or date release of \SPM, and can be obtained, on request, from the authors.\index{Version number}
 
 \subsection{Citing \SPM}
 
@@ -16,7 +16,7 @@ A suitable reference for \SPM\ and this document is:
 
 \subsection{\I{Software license}\index{Common Public License}}
 
-This program and the accompanying materials are made available under the terms of the \href{http://www.opensource.org/licenses/cpl1.0.php}{Common Public License v1.0} which accompanies this distribution (Section \ref{sec:Common-Public-License}).
+This program and the accompanying materials are made available under the terms of the \href{http://www.opensource.org/licenses/cpl1.0.php}{Common Public License v1.0} which accompanies this software (see Section \ref{sec:Common-Public-License}).
 
 Copyright \copyright 2008-\SourceControlYearDoc, \href{http://www.niwa.co.nz}{\Organisation} and the \href{http://www.fish.govt.nz}{New Zealand Ministry of Fisheries}. All rights reserved.
 
@@ -26,24 +26,24 @@ Copyright \copyright 2008-\SourceControlYearDoc, \href{http://www.niwa.co.nz}{\O
 
 Several of \SPM s tasks are highly computer intensive and a fast, powerful processor is recommended. We recommend a minimum of 10 megabytes of free RAM (although, depending on the scope of the problem, you may need much more). Some of \SPM s tasks can be multi-threaded, and hence multi-core machines may perform some tasks considerably quicker than single core processors. The program itself requires only a few megabytes of hard-disk space but output files can consume large amounts of disk space. Depending on number and type of user output requests, the output could range from a few hundred kilobytes to several hundred megabytes. However, we note that, depending on the model implemented, some of \SPM s tasks can take a considerable amount of time.
 
-\subsection{Necessary files}
+\subsection{\I{Necessary files}}
 
 In Linux, only the executable file \texttt{spm} is required to run \SPM\ (but, depending on your system, you may need the either the 32- or 64-bit version). For Microsoft Windows, you need the executable file \texttt{spm.exe}. There is no 64-bit version for Microsoft Windows.
 
-\subsection{Useful add-ons}
+\subsection{\I{Useful add-ons}}
 
 No software other than the appropriate operating system or emulation package is required to run \SPM. However, as \SPM\ offers little in the way of  post-processing of the output, most users will wish to have a package available that allows tabulation and graphing of model outputs. We recommend the use of software packages such as \href{http://www.microsoft.com}{Microsoft Excel}, \href{http://www.insightful.com}{S-Plus}, or \href{http://www.r-project.org}{\R}\ (R Development Core Team 2007). See Section \ref{sec:post-processing} for details of the \texttt{spm} \R\ package for extracting \SPM\ output.
 
-\subsection{Getting help}
+\subsection{Getting help\index{Getting help}\index{User assistance}\index{Notifying errors}}
 
 \SPM\ is distributed as unsupported software. The authors do not, as a rule, provide help for users of \SPM. However, we may be able to offer limited assistance, and we would appreciate being notified of any problems or errors in \SPM. See Section \ref{sec:reporting-errors} for how to report errors to the \authors. Further information about \SPM\ can be obtained by contacting the \authors.
 
-\subsection{Technical details}
+\subsection{Technical details\index{Technical specifications}}
 
-\SPM\ is compiled on Linux using \href{http://gcc.gnu.org}{\texttt{gcc}}, the C/C++ compiler developed by the \href{http://gcc.gnu.org}{GNU Project}. The 32-bit Linux version has been compiled using \texttt{gcc} version 4.1.2 20070115 (prerelease) (\href{http://www.opensuse.org/}{SUSE Linux}), the 64-bit Linux version uses \href{http://gcc.gnu.org}{\texttt{gcc}} version 4.1.0 (\href{http://www.opensuse.org/}{SUSE Linux}). Note that \SPM\ is not supported for Linux kernel versions prior to 2.6. The \href{http://www.microsoft.com}{Microsoft Windows} version is compiled using \href{http://www.mingw.org}{Mingw32} \href{http://gcc.gnu.org}{\texttt{gcc}} 3.4.5, and should run on most 32-bit WindowsXP and Windows Vista systems. There are no plans to port \SPM\ to Microsoft Windows 64-bit platforms. 
+\SPM\ is compiled on Linux using \href{http://gcc.gnu.org}{\texttt{gcc}}, the C/C++ compiler developed by the \href{http://gcc.gnu.org}{GNU Project}. The 32-bit Linux \index{Linux} version has been compiled using \texttt{gcc} version 4.1.2 20070115 (prerelease) (\href{http://www.opensuse.org/}{SUSE Linux}), the 64-bit Linux version uses \href{http://gcc.gnu.org}{\texttt{gcc}} version 4.1.0 (\href{http://www.opensuse.org/}{SUSE Linux}). Note that \SPM\ is not supported for Linux kernel versions prior to 2.6. The \href{http://www.microsoft.com}{Microsoft Windows}\index{Microsoft Windows} version is compiled using \href{http://www.mingw.org}{Mingw32}\index{Mingw} \href{http://gcc.gnu.org}{\texttt{gcc}} 3.4.5, and should run on most 32-bit WindowsXP and Windows Vista systems. There are no plans to port \SPM\ to Microsoft Windows 64-bit platforms. 
 
-\SPM\ uses two minimisers --- the first is closely based on the main algorithm of \cite{779}, and which which uses finite difference gradients, and the second is an implementation of the differential evolution solver \citep{1442}, and based on code by \href{mailto:<godwin@pushcorp.com>}{Lester E. Godwin} of \href{http://www.pushcorp.com}{PushCorp, Inc.} The random number generator used by \SPM\ uses an implementation of the Mersenne twister random number generator \citep{796}. This, the command line functionality, matrix operations, and a number of other functions use the \href{http://www.boost.org/}{BOOST} C++ library (Version 1.38.0).
+\SPM\ uses two minimisers --- the first is closely based on the main algorithm of \cite{779}, and which which uses finite difference gradients\index{Finite differences minimiser}, and the second is an implementation of the differential evolution solver\index{Differential evolution minimiser} \citep{1442}, and based on code by \href{mailto:<godwin@pushcorp.com>}{Lester E. Godwin} of \href{http://www.pushcorp.com}{PushCorp, Inc.} The random number generator\index{Random number generator} used by \SPM\ uses an implementation of the Mersenne twister random number generator \citep{796}. This, the command line functionality, matrix operations, and a number of other functions use the \href{http://www.boost.org/}{BOOST} C++ library (Version 1.38.0)\index{BOOST C++ library}.
 
-Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code for \SPM\ is available on request.
+Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code\index{\SPM\ source code} for \SPM\ is available on request.
 
 

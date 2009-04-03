@@ -1,20 +1,6 @@
 \section{The observation section\label{sec:observation-section}}
 
-The objective function is based on a goodness-of-fit measure of the model to observations, priors and penalties. The observation section describes the objective function, observations, priors and penalties. 
-
-\subsection{The objective function}
-
-In Bayesian estimation, the objective function is a negative log-posterior,
-
-\begin{equation}
-Objective(p)= - \sum\limits_i {\log \left[ {L\left( {{\bf{p}}|O_i } \right)} \right]}  - \log \left[ {\pi \left( {\bf{p}} \right)} \right]
-\end{equation}
-
-where $\pi$ is the joint prior density of the parameters $p$.
-
-In addition to likelihoods (see Section \ref{observations-likelihoods}) and priors (see Section \ref{observations-priors}), penalties (see Section \ref{observations-penalties}) can be added to the objective function. You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken), penalties on category transitions (to ensure there are enough individuals to move), and possibly penalties to encourage estimated values to be similar, smoothed, etc.
-
-\subsection{Observations and likelihoods\label{observations-likelihoods}}
+\subsection{\I{Observations} and likelihoods\label{sec:likelihoods}\index{Likelihoods}}
 
 Observations are typically supplied as observations at an instance in time, over some spatially aggregated area. Time series of observations can be supplied as separate observations for each year or point in time. 
 
@@ -28,7 +14,7 @@ Observations are typically supplied as observations at an instance in time, over
 
 The definitions for each type of observation are described below, including how the observed values should be supplied, how \SPM\ calculates the expected values, and the likelihoods that are available for each type of observation.
 
-\subsubsection{Proportions-at-age observations}
+\subsection{\I{Proportions-at-age observations}}
 
 Proportions-at-age observations are observations of either the relative number of individuals at age or relative biomass at age. 
 
@@ -44,31 +30,31 @@ The way the categories of the observation are defined specifies which of these a
 categories male
 \end{verbatim}
 
-\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of males within each of these age classes, after applying a selectivity at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
+\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of males within each of these age classes, after applying a selectivity at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
 
-To aggregate categories, the command syntax uses a $+$ symbol to denote those categories to 'add' together. For example, to specify that the observations are of the proportions of total individuals (males $+$ females) at each age class (example (ii) above), then the subcommand \subcommand{categories} is,
-
-\begin{verbatim}
-categories male + female
-\end{verbatim}
-
-\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
-
-To provide proportions for multiple categories simultaneously, then just specify a vector of category labels. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
+By default, categories are aggregated. For example, to specify that the observations are of the proportions of total individuals (males $+$ females) at each age class (example (ii) above), then the subcommand \subcommand{categories} is,
 
 \begin{verbatim}
 categories male female
 \end{verbatim}
 
-\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range for males and then females, i.e., if the age range was 3 to 10, then 16 proportions should be supplied, the first set of 8 corresponding to the proportions of male (out of male and female combined) and the second 8 to female. The expected values will be the expected proportions of selected males and selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 16 proportions) must sum to one (with a default tolerance of 0.001).
+\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
+
+Otherwise, to provide proportions for multiple categories simultaneously, you need to spe3cify which categories are aggregated and which are separate. \SPM\ uses a $:$ symbol to denote those categories to are separate. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
+
+\begin{verbatim}
+categories male : female
+\end{verbatim}
+
+\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range for males and then females. For example, if the age range was 3 to 10, then 16 proportions should be supplied, the first set of 8 corresponding to the proportions of male (out of male and female combined) and the second 8 to female. The expected values will be the expected proportions of selected males and selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 16 proportions) must sum to one (with a default tolerance of 0.001).
 
 The definition of categories can be a combination of the above cases and can become more complex as the number of categories in the model increases. For example, in a model with categories male-immature, male-mature, female-immature, and female-mature, we might supply observations of males (immature and mature combined) and females (immature and mature combined) simultaneously. Here the \subcommand{categories} subcommand would be;
 
 \begin{verbatim}
-categories male-immature + male-mature female-immature + female-mature
+categories male-immature male-mature : female-immature female-mature
 \end{verbatim}
 
-Assuming that we wanted to supply observations for ages 1 to 5, then \SPM\ would expect a vector of 10 proportions for each spatial location --- the first five corresponding to the observed proportions of males aged 1--5, and the second set of five corresponding to the proportions of females aged 1--5. Further, the proportions would sum to one.
+Assuming that we wanted to supply observations for ages 3 to 10, then \SPM\ would expect a vector of 16 proportions for each spatial location --- the first eight corresponding to the observed proportions of males aged 3--10, and the second set of eight corresponding to the proportions of females aged 3--10. Further, the proportions would sum to one.
 
 The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
 
@@ -110,7 +96,7 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
 
-\subsubsection*{Likelihoods for proportions-at-age observations}
+\subsubsection{Likelihoods for proportions-at-age observations}
 
 \SPM\ implements only one likelihood for proportions-at-age observations, the multinomial likelihood. 
 
@@ -131,7 +117,7 @@ where $\sum\limits_i O_i = 1$ and $\sum\limits_i E_i = 1$. $Z \left(\theta,\delt
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsubsection{Proportions-by-category}
+\subsection{Proportions-by-category}
 
 Proportions-by-category observations are observations of either the relative number of individuals between categories within age classes, or relative biomass between categories within age classes. 
 
@@ -192,7 +178,7 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
 
-\subsubsection*{Likelihoods for proportions-by-category observations}
+\subsubsection{Likelihoods for proportions-by-category observations}
 
 \SPM\ implements only one likelihood for proportions-by-category observations, the binomial likelihood. 
 
@@ -216,7 +202,7 @@ where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent divi
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsubsection{Abundance}
+\subsection{Abundance}
 
 Abundance observations are observations of either a relative or absolute number of individuals from a set of categories after applying a selectivity. 
 
@@ -267,7 +253,7 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
 
-\subsubsection*{Likelihoods for abundance observations}
+\subsubsection{Likelihoods for abundance observations}
 
 The lognormal likelihood with observations $O_i$, c.v. $c_i$, and expected values $qE_i$, and was,
 
@@ -292,7 +278,7 @@ and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent divisi
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsubsection{Process error}
+\subsection{Process error}
 
 Additional `process error' can be defined for each set of observations. Additional process error has the effect of increasing the observation error in the data, and hence of decreasing the relative weight given to the data in the fitting process. 
 
@@ -316,62 +302,32 @@ or by the effective sample size $N$,
 
 In all three cases, the process error has more effect on small errors than on large ones. Be clear that a large value for the multinomial process error means a small process error.
 
-\subsubsection{Simulating observations}
+\subsection{Simulating observations}
 
-TODO
+\SPM\ can generate simulated observations for a given model with given parameter values. Simulated observations are randomly distributed values, generated according to the error assumptions defined for each observation, around fits calculated from one or more sets of the 'true' parameter values. Simulating from a set of parameters can be used to generate observations from an operating model or as a form of parametric bootstrap. 
 
-\subsection{Priors\label{observations-priors}}
+\SPM\ generates simulated observations for the observations defined in the \config\ with \commandlabsubarg{observation}{simulate}{True}. 
 
-In a Bayesian analysis, you need to give a prior for every parameter that is being estimated. There are no default priors.  
+First, the model is run using the true free parameter values, and a set of fits is produced for each set of observations. If a set of observations uses ageing error, then ageing error is applied to the fits as usual. If there are relative observations, then the catchability coefficient q is applied to the fits as per normal. 
 
-Note that when some of these priors are parameterised in terms of mean, c.v., and standard deviation, these refer to the parameters of the distribution before bounds are applied. The moments of the prior after the bounds are applied may differ.
+Second, each set of observations is randomised, based on (i) the fitted values, (ii) the type of likelihood specified, and (iii) the variability parameters (e.g., \argument{error\_value} and \argument{process\_error}). 
 
-\SPM\ has the following priors (expressed in terms of their contribution to the objective function): 
+Methods for generating the random error, and hence simulated values, depend on the specific likelihood of each observation. 
 
 \begin{enumerate}
-\item{Uniform}
-
-\begin{equation}
- - \log \left(\pi \left(p \right) \right) = 0
-\end{equation}
-
-\item{Uniform-log} (i.e., $\log(p) \sim \text{uniform}$)
-
-\begin{equation}
- - \log \left(\pi \left(p \right) \right) = \log \left( p \right)
-\end{equation}
-
-\item{Normal with mean $\mu$ and c.v. $c$}
-
-\begin{equation}
- - \log \left(\pi \left(p \right) \right) = 0.5\left(\frac{p - \mu}{c\mu} \right)^2 
-\end{equation}
-
-\item{Normal with mean $\mu$ and standard deviation $\sigma$}
-
-\begin{equation}
- - \log \left(\pi \left(p \right) \right) = 0.5\left(\frac{p - \mu}
-{\sigma }\right)^2
-\end{equation}
-
-\item{Lognormal with mean $\mu$ and c.v. $c$} 
-
-\begin{equation}
- - \log \left(\pi \left(p \right) \right) = \log \left( p \right) + 0.5 \left( \frac{\log \left( p / \mu \right)}{s} + \frac{s}{2} \right)^2
-\end{equation}
-
-where $s$ is the standard deviation of $\log(p)$ and $s= \sqrt{\log \left(1+c^2 \right)}$.
-
-\item{Beta with mean $\mu$ and standard deviation $\sigma$, and range parameters $A$ and $B$}
-
-\begin{equation}
- - \log \left(\pi \left( p \right) \right) = \left( 1 - m \right) \log \left( p - A \right) + \left( 1 - n \right)\log \left( B - p \right)
-\end{equation}
-
-where $\nu  = \frac{\mu  - A}{B - A}$, and $\tau = \frac{\left(\mu -A \right)\left(B - \mu \right)}{\sigma ^2} - 1$ and then $\mu=\tau \nu$ and $n=\tau(1-\nu)$. Note that the beta prior is undefined when $\tau \leq 0$.
-
+  \item{} Normal likelihood parameterised by c.v.: Let $E_{i}$ be the fitted value for observation $i$, and $c_i$ be the corresponding c.v. (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent normal deviate with mean $E_i$ and standard deviation $E_i c_i$.
+  \item{} Normal likelihood parameterised by standard deviation: Let $E_i$ be the fitted value for observation $i$, and $s_i$ be the corresponding standard deviation (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent normal deviate with mean $E_i$ and standard deviation $s_i$.
+  \item{} Log-normal likelihood: Let $E_i$ be the fitted value for observation $i$ and $c_i$ be the corresponding c.v. (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent lognormal deviate with mean and standard deviation (on the natural scale, not the log-scale) of $E_i$ and $E_i c_i$ respectively. The robustification parameter $\delta$ is ignored.
+  \item{} Multinomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and let $N$ be the sample size (rounded up to the next whole number, and adjusted by process error if applicable). The robustification parameter $\delta$ is ignored. Then, 
+  \begin{enumerate}
+    \item{} A sample of $N$ values from $1$ to $n$ is generated using the multinomial distribution, using sample probabilities proportional to the values of $E_i$.
+    \item{} Each simulated observation value $S_i$ is calculated as the proportion of the $N$ sampled values equalling $i$
+    \item{} The simulated observation values $S_i$ are then rescaled so that their sum is equal to $1$
+  \end{enumerate}
+\item{} Binomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and $N_i$ the corresponding equivalent sample size (rounded up to the next whole number, and adjusted by the process error if applicable). The robustification parameter $\delta$ is ignored. Then, 
+  \begin{enumerate}
+    \item{} A sample of $N_i$ independent binary variates is generated, equalling $1$ with probability $E_i$ 
+    \item{}	The simulated observation value $S_i$ is calculated as the sum of these binary variates divided by $N_i$
+  \end{enumerate}
 \end{enumerate}
-
-\subsection{Penalties\label{observations-penalties}}
-
-TODO
+   

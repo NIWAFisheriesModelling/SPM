@@ -1,20 +1,38 @@
-\section{The estimation section\label{sec:estimation-section}}
+\section{\I{The estimation section}\label{sec:estimation-section}}
 
 \subsection{Role of the estimation section\label{sec:role-of-the-estimation-section}}
 
 The role of the estimation section is to define the tasks carried out by \SPM: 
 
 \begin{enumerate}
-  \item Determine the parameters to be estimated (see Section \ref{estimate-free-parameters})
-  \item Calculate a point estimate, i.e., the maximum posterior density estimate (MPD) (see Section \ref{estimate-MPD}).
-  \item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other estimated parameters to vary, the minimum value of the objective function (see Section \ref{estimate-profiles}).
-  \item Generate an MCMC sample from the posterior distribution (see Section \ref{estimate-MCMC}).
-  \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (see Section \ref{estimate-MPD}).
+  \item Define the objective function (see Section \ref{sec:objective-function})
+  \item Define the parameters to be estimated (see Section \ref{sec:estimate-free-parameters})
+  \item Calculate a point estimate, i.e., the maximum posterior density estimate (MPD) (see Section \ref{sec:estimate-MPD})\index{MPD}.
+  \item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other estimated parameters to vary, the minimum value of the objective function (see Section \ref{sec:estimate-profiles}\index{Profiles}).
+  \item Generate an MCMC sample from the posterior distribution (see Section \ref{sec:estimate-MCMC}\index{MCMC}).
+  \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (see Section \ref{sec:estimate-MPD}\index{Covariance matrix}).
 \end{enumerate}
 
-\subsection{Specifying the parameters to be estimated\label{estimate-free-parameters}}
+The estimation section defines 
+The objective function is based on a goodness-of-fit measure of the model to observations, priors and penalties. The observation section describes the objective function, observations, priors and penalties. 
 
-You need to tell SPM which of the estimable parameters are to be estimated by using \command{estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like,
+\subsection{\I{The objective function}\label{sec:objective-function}}
+
+In Bayesian estimation, the objective function is a negative log-posterior,
+
+\begin{equation}
+Objective(p)= - \sum\limits_i {\log \left[ {L\left( {{\bf{p}}|O_i } \right)} \right]}  - \log \left[ {\pi \left( {\bf{p}} \right)} \right]
+\end{equation}
+
+where $\pi$ is the joint prior density of the parameters $p$.
+
+The contribution to the objective function from the likelihoods are defined in Section \ref{sec:likelihoods}. In addition to likelihoods, priors (see Section \ref{sec:priors}) and penalties (see Section \ref{sec:penalties}) are components of the objective function. 
+
+You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken), penalties on category transitions (to ensure there are enough individuals to move), and possibly penalties to encourage estimated values to be similar, smoothed, etc.
+
+\subsection{\I{Specifying the parameters to be estimated}\label{sec:estimate-free-parameters}}
+
+You need to tell SPM which of the estimable parameters are to be estimated by using \command{estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like\index{Estimating parameters},
 
 \begin{verbatim}
   @estimate process[MyRecruitment].r0
@@ -23,15 +41,13 @@ You need to tell SPM which of the estimable parameters are to be estimated by us
   prior uniform
 \end{verbatim}
 
-See Section XXX for instructions on how to generate the parameter name. You have to specify at least one parameter to be estimated if doing an estimation, profile, or MCMC. You still provide values for the parameters to be estimated, and these are used as the starting values for the minimiser (unless you provide alternative starting values using \texttt{spm -i}, see Section \ref{sec:command-line-arguments}).
+See Section \ref{sec:parameter-names} for instructions on how to generate the parameter name. You have to specify at least one parameter to be estimated if doing an estimation, profile, or MCMC run. You still provide values for the parameters to be estimated, and these are used as the starting values for the minimiser. However, these may be overwritten if you provide a set of alternative starting values (i.e., using  \texttt{spm -i}, see Section \ref{sec:command-line-arguments}).
 
-All parameters are estimated within bounds. For each parameter to be estimated, you need to specify the bounds and the prior (Section XXX). Note that the bounds and prior on an selectivity refer to the selectivity parameters, not the actual values of the selectivity. 
+All parameters are estimated within bounds\index{Bounds}. For each parameter to be estimated, you need to specify the bounds and the prior\index{Priors} (Section \ref{sec:priors}). Note that the bounds and prior for each parameter refer to the values of the parameters, not the actual values resulting from the application of the parameter to an equation. If you want to estimate only some elements of a vector, either define the elements of the vector to be estimated (see \ref{sec:parameter-names}) or fix the others by setting the bounds equal.
 
-You need to estimate all the estimable parameters of an selectivity if you estimate any, but you can fix some of them if you want by setting the lower and upper bound equal. Similarly, if you want to estimate only some elements of a vector, fix the others by setting the bounds equal.
+\subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
-\subsection{Point estimation\label{estimate-MPD}}
-
-Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function. SPM has two algorithms for solving optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}.
+Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}\index{Differential evolution minimiser}.
 
 The minimiser has three kinds of (non-error) exit status: 
 
@@ -41,11 +57,11 @@ The minimiser has three kinds of (non-error) exit status:
 \item Convergence unclear (the minimiser halted but was unable to determine if convergence occurred. You may be at a local minimum, although you should check by restarting the minimiser at the final values of the estimated parameters).
 \end{enumerate}
 
-You can choose the maximum number of quasi-Newton iterations and objective function evaluations allotted to the minimiser. If it exceeds either limit, it exits with a convergence failure. We recommend large numbers of evaluations and iterations (at least the defaults of 300 and 1000) unless you successfully reach convergence with less. You can also specify the starting point of the minimiser using \texttt{spm -i}.
+You can choose the maximum number of quasi-Newton iterations\index{Quasi-Newton iterations} and objective function evaluations\index{Objective function evaluations} allotted to the minimiser. If it exceeds either limit, it exits with a convergence failure\index{Convergence failure}. We recommend large numbers of evaluations and iterations (at least the defaults of 300 and 1000) unless you successfully reach convergence with less. You can also specify an alternative starting point of the minimiser using \texttt{spm -i}.
 
-We want to stress that this is a local optimisation algorithm trying to solve a global optimisation problem. What this means is that, even if you get a 'successful convergence' message, your solution may be only a local minimum, not a global one. To diagnose this problem, try doing multiple runs from different starting points and comparing the results, or (probably better) doing profiles of one or more key parameters and seeing if any of the profiled estimates is actually better than the original point estimate.
+We want to stress that this is a local optimisation algorithm trying to solve a global optimisation problem. What this means is that, even if you get a 'successful convergence'\index{Successful convergence} message, your solution may be only a local minimum\index{Local minimums}, not a global one. To diagnose this problem, try doing multiple runs from different starting points and comparing the results, or doing profiles of one or more key parameters and seeing if any of the profiled estimates finds a better optimum than than the original point estimate.
 
-The approximate covariance matrix of the estimated parameters can be calculated as the inverse of the minimiser's approximation to the Hessian, and the corresponding correlation matrix is also calculated. Be aware that
+The approximate covariance matrix\index{Covariance matrix} of the estimated parameters can be calculated as the inverse of the minimiser's approximation to the \I{Hessian}, and the corresponding correlation matrix\index{Correlation matix} is also calculated. Be aware that
 
 \begin{itemize}
 \item the Hessian approximation develops over many minimiser steps, so if the minimiser has only run for a small number of iterations the covariance matrix can be a very poor approximation
@@ -54,29 +70,35 @@ The approximate covariance matrix of the estimated parameters can be calculated 
 
 Also note that if an estimated parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
 
-\subsection{Posterior profiles\label{estimate-profiles}}
+\subsection{\I{Posterior profiles}\label{sec:estimate-profiles}}
 
 If profiles are requested \texttt{spm -p}, \SPM\ will first calculate a point estimate. For each scalar parameter or, in the case of vectors or selectivities, the element of the parameter to be profiled, \SPM\ will fix its value at a sequence of $n$ evenly spaced numbers between specified bounds $l$ and $u$, and calculate a point estimate at each value. 
 
 By default $n=10$, and $(l, u)=($lower bound on parameter plus $(range/(2n))$, upper bound on parameter less $(range/(2n))$. Each minimisation starts at the final parameter values from the previous resulting value of the parameter being profiled. \SPM\ will report the objective function for each parameter value and all the parameter estimates. The initial point estimate is also inserted into the profile (note that this can serve as a check that none of the other points along the profile have a better objective function value than the initial `minimum').
 
-You specify which parameters are to be profiled, and optionally $n$, $l$, and $u$ values for each. In the case of vector or selectivity parameters, you will also need to specify the element of the vector being profiled. 
+You specify which parameters are to be profiled, and optionally $n$, $l$, and $u$ values for each. In the case of vector parameters, you will also need to specify the element of the vector being profiled. 
+
+TODO: Check the following para
 
 You can also supply the initial point estimate using \texttt{spm -i}, so that \SPM\ doesn't need to do the first minimisation. Be aware that you are supplying the point estimate, not the minimiser starting point to get to the point estimate (as in other situations where \texttt{spm -i} is used).
 
-If you have specified multi-phase estimation (see Section XXX), it is only used for the initial point estimate. Subsequent minimisations are done single-phase, as they should start reasonably close to the endpoint and so shouldn't need multiple phases.
+TODO: Check the following para
+
+If you have specified multi-phase estimation, it is only used for the initial point estimate. Subsequent minimisations are done single-phase, as they should start reasonably close to the endpoint and so shouldn't need multiple phases.
+
+TODO: Check the following para for syntax
 
 If you get an implausible profile, it may be a result of not using enough iterations in the minimiser (in this case, increase \commandsub{minimiser}{max\_iterations} and/or \commandsub{minimiser}{max\_evaluations} and retry), or the convergence criteria may not be strong enough (try setting \commandsub{minimiser}{gradient\_tolerAnce} to a smaller value).
 
-\subsection{Bayesian estimation\label{estimate-MCMC}}
+\subsection{\I{Bayesian estimation}\label{sec:estimate-MCMC}}
 
-\SPM\ can use a Monte Carlo Markov Chain to generate a sample from the posterior distribution of the estimated parameters \texttt{spm -m}; and output the sampled values to a file, (optionally only every nth set of values).
+\SPM\ can use a \I{Monte Carlo Markov Chain}\index{MCMC} to generate a sample from the posterior distribution of the estimated parameters \texttt{spm -m} and output the sampled values to a file (optionally only every $n$th set of values).
 
-Two major steps are best done by an external package, as \SPM\ has no post-processing capabilities. \SPM\ cannot produce MCMC convergence diagnostics (use a package such as \href{http://www.public-health.uiowa.edu/boa}{BOA}) or plot/summarize the posterior distributions of the output quantities (for example, using a general-purpose statistical or spreadsheet package such as \href{http://www.insightful.com}{S-Plus}, \href{http://www.r-project.org}{R}, or \href{http://www.microsoft.com}{Microsoft Excel}).
+As \SPM\ has no post-processing capabilities. \SPM\ cannot produce MCMC convergence diagnostics (use a package such as \href{http://www.public-health.uiowa.edu/boa}{BOA}) or plot/summarize the posterior distributions of the output quantities (for example, using a general-purpose statistical or spreadsheet package such as \href{http://www.insightful.com}{S-Plus}, \href{http://www.r-project.org}{\R}, or \href{http://www.microsoft.com}{Microsoft Excel}).
 
-Bayesian methodology and MCMC are both large and complex topics, and we do not describe either properly here. See Gelman et al. \citeyearpar{823} and Gilks et al. \citeyearpar{143} for details of both Bayesian analysis and MCMC methods. In addition, see Punt \& Hilborn \citeyearpar{828} for an introduction to quantitative fish stock assessment using Bayesian methods. 
+Bayesian methodology\index{Bayesian estimation} and MCMC are both large and complex topics, and we do not describe either properly here. See Gelman et al. \citeyearpar{823} and Gilks et al. \citeyearpar{143} for details of both Bayesian analysis and MCMC methods. In addition, see Punt \& Hilborn \citeyearpar{828} for an introduction to quantitative fish stock assessment using Bayesian methods. 
 
-This section only briefly describes the MCMC algorithms used in \SPM. See Section XXX for a better description of the sequence of SPM commands used in a full Bayesian analysis.
+This section only briefly describes the MCMC algorithms used in \SPM. See Section \ref{sec:estimation-syntax-MCMC} for a better description of the sequence of SPM commands used in a full Bayesian analysis.
 
 SPM uses a straightforward implementation of the Metropolis algorithm \citep{823,143}. The Metropolis algorithm attempts to draw a sample from a Bayesian posterior distribution, and calculates the posterior density $\pi$, scaled by an unknown constant. The algorithm generates a `chain' or sequence of values. Typically the beginning of the chain is discarded and every $N$th element of the remainder is taken as the posterior sample. The chain is produced by taking an initial point $x_0$ and repeatedly applying the following rule, where $x_i$ is the current point: 
 
@@ -153,3 +175,58 @@ Given a posterior (sub)sample, \SPM\ can calculate a list of output quantities f
 
 The posterior sample can also be used for projections (Section XXX) or simulations (Section XXX), allowing the parameter uncertainty, as expressed in the posterior distribution, can be included into the risk or other output estimates.
 
+\subsection{Priors\label{sec:priors}}
+
+In a Bayesian analysis, you need to give a prior for every parameter that is being estimated. There are no default priors.  
+
+Note that when some of these priors are parameterised in terms of mean, c.v., and standard deviation, these refer to the parameters of the distribution before bounds are applied. The moments of the prior after the bounds are applied may differ.
+
+\SPM\ has the following priors (expressed in terms of their contribution to the objective function): 
+
+\begin{enumerate}
+\item{Uniform\index{Uniform prior}\index{Priors ! Uniform}}
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = 0
+\end{equation}
+
+\item{Uniform-log\index{Uniform-log prior}\index{Priors ! Uniform-log}} (i.e., $\log(p) \sim \text{uniform}$)
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = \log \left( p \right)
+\end{equation}
+
+\item{Normal\index{Normal prior}\index{Priors ! Normal} with mean $\mu$ and c.v. $c$}
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = 0.5\left(\frac{p - \mu}{c\mu} \right)^2 
+\end{equation}
+
+\item{Normal with mean $\mu$ and standard deviation $\sigma$}
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = 0.5\left(\frac{p - \mu}
+{\sigma }\right)^2
+\end{equation}
+
+\item{Lognormal\index{Lognormal prior}\index{Priors ! Lognormal} with mean $\mu$ and c.v. $c$} 
+
+\begin{equation}
+ - \log \left(\pi \left(p \right) \right) = \log \left( p \right) + 0.5 \left( \frac{\log \left( p / \mu \right)}{s} + \frac{s}{2} \right)^2
+\end{equation}
+
+where $s$ is the standard deviation of $\log(p)$ and $s= \sqrt{\log \left(1+c^2 \right)}$.
+
+\item{Beta\index{Beta prior}\index{Priors ! Beta} with mean $\mu$ and standard deviation $\sigma$, and range parameters $A$ and $B$}
+
+\begin{equation}
+ - \log \left(\pi \left( p \right) \right) = \left( 1 - m \right) \log \left( p - A \right) + \left( 1 - n \right)\log \left( B - p \right)
+\end{equation}
+
+where $\nu  = \frac{\mu  - A}{B - A}$, and $\tau = \frac{\left(\mu -A \right)\left(B - \mu \right)}{\sigma ^2} - 1$ and then $\mu=\tau \nu$ and $n=\tau(1-\nu)$. Note that the beta prior is undefined when $\tau \leq 0$.
+
+\end{enumerate}
+
+\subsection{Penalties\label{sec:penalties}}
+
+TODO

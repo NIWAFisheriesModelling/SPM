@@ -1,16 +1,16 @@
-\section{The population section\label{sec:population-section}}
+\section{\I{The population section}\label{sec:population-section}}
 
 \subsection{Introduction}
 
 The population section\index{Population section} defines the models structure, movement and population dynamics, and other associated parameters. It describes the model structure (both the spatial and population structure), defines the population  (for example, recruitment, migration, and mortality) and movement processes, defines the layers (the known attributes of each spatial cell), selectivities, and model parameters.
 
-The population, at any point in time, is described by the \emph{state}, which comprises of the \emph{partition} and any \emph{derived quantities}. The partition is a 4-dimensional matrix, comprising of the spatial structure, and within each spatial location, the population structure. 
+The population, at any point in time, is described by the \emph{state}, which comprises of the \emph{partition} and any \emph{derived quantities}. The partition\index{Partition}\index{Model ! partition} is a 4-dimensional matrix, comprising of the spatial structure\index{Spatial structure}, and within each spatial location, the population structure\index{Population structure}. 
 
 The population section consists of several components, including;
 \begin{itemize}
   \item The spatial and population structure
-  \item Model initialisation (i.e., the state of the model at the start of the first year)
-  \item The annual cycle (time steps and processes that are applied in each time step)
+  \item Model initialisation (i.e., the state of the model at the start of the first year)\index{Initialisation}\index{Model ! initialisation}
+  \item The annual cycle (time steps and processes that are applied in each time step)\index{Annual cycle}
   \item The specifications and parameters of the processes;
   \begin{itemize}
     \item Population processes (i.e., processes that add, remove, or shift numbers between ages and categories)
@@ -26,11 +26,9 @@ The population section consists of several components, including;
 
 The spatial structure of \SPM\ is represented by an $n_{rows} \times n_{cols}$ grid, with rows $i=1 \dots n_{rows}$ and columns $j=1 \ldots n_{cols}$. Each cell of this matrix records the population structure at that point in space, where the population structure is represented by an $n_{categories} \times n_{ages}$ rectangular matrix (with categories $k=1 \ldots n_{categories}$ and ages $l=1 \ldots n_{ages} = age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. We define, within the spatial grid ($n_{rows} \times n_{cols}$), locations where the population can and cannot potentially be present using a \emph{layer}. 
 
-The spatial structure of \SPM\ is represented by an $n \times m$ grid, with rows $i=1 \dots n$ and columns $j=1 \ldots m$. Each cell of this matrix records the population structure at that point in space and is represented by an $k \times l$ rectangular matrix (with categories $k=1 \ldots k$ and ages $l=age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. 
-
 \SPM\ implements a single spatial structure, a grid of \emph{square} cells (Figure \ref{fig:SquareSpatialStructure}) The spatial grid can be of an arbitrary size, but must be rectangular. 
 
-The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area} of each spatial cell, as used for density calculations within \SPM.
+The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). But the largest spatial structure allowed by \SPM\ is a grid of $1000 \times 1000$ cells\index{Maximum size of the spatial grid}. Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}\index{Base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area}\index{Cell area} of each spatial cell, as used for density calculations within \SPM.
 
 \begin{figure}[htp]
  \centering
@@ -39,7 +37,7 @@ The dimensions of the spatial grid are user defined but must be at least a $1 \t
   \label{fig:SquareSpatialStructure}
 \end{figure}
 
-Models are implemented as a grid of cells as a rectangular matrix. Distance between cells is determined as the euclidean distance between cell centres, modified by an arbitrary scalar. 
+Models are implemented as a grid of cells as a rectangular matrix. Distance between cells is determined as the euclidean\index{Inter-cell distance} distance between cell centres, modified by an arbitrary scalar. 
 
 Hence, the definition of the spatial structure includes;
 \begin{itemize}
