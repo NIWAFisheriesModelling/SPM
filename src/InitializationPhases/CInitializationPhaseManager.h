@@ -14,6 +14,7 @@
 
 // Classes
 class CInitializationPhase;
+class CReportManager;
 
 //**********************************************************************
 //
@@ -27,9 +28,8 @@ public:
   void                        clone(CInitializationPhaseManager *Manager);
   void                        addInitializationPhase(CInitializationPhase *value);
   void                        loadInitializationPhaseOrder(vector<string> &order);
-//  int                         getInitializationPhaseCount() { return vInitializationPhases.size();  }
-//  CInitializationPhase*       getInitializationPhase(string label);
-//  CInitializationPhase*       getInitializationPhase(int index);
+  int                         getInitializationPhaseOrderIndex(string label);
+  int                         getLastExecutedInitializationPhase() { return lastExecutedInitializationPhase; }
   void                        validate();
   void                        build();
   void                        execute();
@@ -42,6 +42,8 @@ protected:
   // Variables
   vector<CInitializationPhase*> vInitializationPhases;
   vector<CInitializationPhase*> vInitializationPhaseOrder;
+  int                         lastExecutedInitializationPhase;
+  CReportManager              *pReportManager;
 
 private:
   // Variables

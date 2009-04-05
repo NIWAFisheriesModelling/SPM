@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CFileReporter.h
+// Name        : CFileReport.h
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CFILEREPORTER_H_
-#define CFILEREPORTER_H_
+#ifndef CFILEREPORT_H_
+#define CFILEREPORT_H_
 
 // Global Headers
 #include <string>
@@ -15,7 +15,7 @@
 #include <fstream>
 
 // Local headers
-#include "../../CReporter.h"
+#include "../../CReport.h"
 
 // Using
 using std::streambuf;
@@ -28,13 +28,13 @@ using std::ios_base;
 //
 //
 //**********************************************************************
-class CFileReporter: public CReporter {
+class CFileReport : public CReport {
 public:
   // Functions
-  CFileReporter();
-  virtual                     ~CFileReporter();
+  CFileReport();
+  virtual                     ~CFileReport();
   virtual void                validate();
-  virtual void                build() { CReporter::build(); };
+  virtual void                build() { CReport::build(); };
   void                        start();
   void                        end();
 
@@ -47,4 +47,4 @@ protected:
   bool                       bStartedWrite;
 };
 
-#endif /* CFILEREPORTER_H_ */
+#endif /* CFILEREPORT_H_ */

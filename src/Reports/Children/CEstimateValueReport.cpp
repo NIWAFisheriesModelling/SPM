@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CEstimateValueReporter.cpp
+// Name        : CEstimateValueReport.cpp
 // Author      : S.Rasmussen
 // Date        : 4/03/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -11,15 +11,15 @@
 #include <sys/stat.h>
 
 // Local Headers
-#include "CEstimateValueReporter.h"
+#include "CEstimateValueReport.h"
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 
 //**********************************************************************
-// CEstimateValueReporter::CEstimateValueReporter()
+// CEstimateValueReport::CEstimateValueReport()
 // Default Constructor
 //**********************************************************************
-CEstimateValueReporter::CEstimateValueReporter() {
+CEstimateValueReport::CEstimateValueReport() {
   eExecutionState = STATE_FINALIZATION;
   bWrittenHeader  = false;
 }
@@ -28,7 +28,7 @@ CEstimateValueReporter::CEstimateValueReporter() {
 //
 //
 //**********************************************************************
-void CEstimateValueReporter::execute() {
+void CEstimateValueReport::execute() {
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -78,8 +78,8 @@ void CEstimateValueReporter::execute() {
 }
 
 //**********************************************************************
-// CEstimateValueReporter::~CEstimateValueReporter()
+// CEstimateValueReport::~CEstimateValueReport()
 // Destructor
 //**********************************************************************
-CEstimateValueReporter::~CEstimateValueReporter() {
+CEstimateValueReport::~CEstimateValueReport() {
 }

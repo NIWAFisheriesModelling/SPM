@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CFileReporter.cpp
+// Name        : CFileReport.cpp
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -8,13 +8,13 @@
 //============================================================================
 
 // Local Headers
-#include "CFileReporter.h"
+#include "CFileReport.h"
 
 //**********************************************************************
-// CFileReporter::CFileReporter()
+// CFileReport::CFileReport()
 // Default constructor
 //**********************************************************************
-CFileReporter::CFileReporter() {
+CFileReport::CFileReport() {
   // Default Values
   sFileName           = "";
   bOverwrite          = true;
@@ -27,13 +27,13 @@ CFileReporter::CFileReporter() {
 }
 
 //**********************************************************************
-// void CFileReporter::validate()
+// void CFileReport::validate()
 // Validate file reporter
 //**********************************************************************
-void CFileReporter::validate() {
+void CFileReport::validate() {
   try {
     // Base
-    CReporter::validate();
+    CReport::validate();
 
     // Assign variables
     sFileName   = pParameterList->getString(PARAM_FILE_NAME, true, "");
@@ -47,10 +47,10 @@ void CFileReporter::validate() {
 }
 
 //**********************************************************************
-// void CFileReporter::start()
+// void CFileReport::start()
 // Start the Reporting
 //**********************************************************************
-void CFileReporter::start() {
+void CFileReport::start() {
   if (sFileName != "") {
     // Variables
     sCoutBackup     = cout.rdbuf();
@@ -74,10 +74,13 @@ void CFileReporter::start() {
 }
 
 //**********************************************************************
-// void CFileReporter::end()
+// void CFileReport::end()
 // End the Reporting
 //**********************************************************************
-void CFileReporter::end() {
+void CFileReport::end() {
+
+  cout.flush();
+
   if (sFileName != "") {
     fFile->close();
     cout.rdbuf(sCoutBackup);
@@ -86,10 +89,10 @@ void CFileReporter::end() {
 
 
 //**********************************************************************
-// CFileReporter::~CFileReporter()
+// CFileReport::~CFileReport()
 // Destructor
 //**********************************************************************
-CFileReporter::~CFileReporter() {
+CFileReport::~CFileReport() {
   if (fFile != 0)
     delete fFile;
 }

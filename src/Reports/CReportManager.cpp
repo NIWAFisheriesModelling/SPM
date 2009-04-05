@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CReporterManager.cpp
+// Name        : CReportManager.cpp
 // Author      : S.Rasmussen
 // Date        : 30/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -11,8 +11,8 @@
 #include <iostream>
 
 // Local headers
-#include "CReporterManager.h"
-#include "CReporter.h"
+#include "CReportManager.h"
+#include "CReport.h"
 #include "../Helpers/ForEach.h"
 
 // Using
@@ -20,58 +20,58 @@ using std::cout;
 using std::endl;
 
 // Single Static variable
-boost::thread_specific_ptr<CReporterManager> CReporterManager::clInstance;
+boost::thread_specific_ptr<CReportManager> CReportManager::clInstance;
 
 //**********************************************************************
-// CReporterManager::CReporterManager()
+// CReportManager::CReportManager()
 // Default Constructor
 //**********************************************************************
-CReporterManager::CReporterManager() {
+CReportManager::CReportManager() {
 }
 
 //**********************************************************************
-// CReporterManager* CReporterManager::Instance()
+// CReportManager* CReportManager::Instance()
 // Instance Method - Singleton
 //**********************************************************************
-CReporterManager* CReporterManager::Instance() {
+CReportManager* CReportManager::Instance() {
   if (clInstance.get() == 0)
-    clInstance.reset(new CReporterManager());
+    clInstance.reset(new CReportManager());
   return clInstance.get();
 }
 
 //**********************************************************************
-// void CReporterManager::Destroy()
+// void CReportManager::Destroy()
 // Destroy Method - Singleton
 //**********************************************************************
-void CReporterManager::Destroy() {
+void CReportManager::Destroy() {
   if (clInstance.get() != 0) {
     clInstance.reset();
   }
 }
 
 //**********************************************************************
-// void CReporterManager::addReporter(CReporter *value)
+// void CReportManager::addReporter(CReport *value)
 // Add a Reporter to our vector
 //**********************************************************************
-void CReporterManager::addReporter(CReporter *value) {
+void CReportManager::addReporter(CReport *value) {
   vReporters.push_back(value);
 }
 
 //**********************************************************************
-// void CReporterManager::clone(CReporterManager *Manager)
+// void CReportManager::clone(CReportManager *Manager)
 // Clone our reporters
 //**********************************************************************
-void CReporterManager::clone(CReporterManager *Manager) {
+void CReportManager::clone(CReportManager *Manager) {
   // TODO: Implement Clone Function
 }
 
 //**********************************************************************
-// void CReporterManager::validate()
+// void CReportManager::validate()
 // Validate our Reporters
 //**********************************************************************
-void CReporterManager::validate() {
+void CReportManager::validate() {
   try {
-    foreach(CReporter *Reporter, vReporters) {
+    foreach(CReport *Reporter, vReporters) {
       Reporter->validate();
     }
 
@@ -82,17 +82,17 @@ void CReporterManager::validate() {
 }
 
 //**********************************************************************
-// void CReporterManager::build()
+// void CReportManager::build()
 // Build our Reporters
 //**********************************************************************
-void CReporterManager::build() {
+void CReportManager::build() {
   try {
-    foreach(CReporter *Reporter, vReporters) {
+    foreach(CReport *Reporter, vReporters) {
       Reporter->build();
     }
 
     // Populate our other vectors
-    foreach(CReporter *Reporter, vReporters) {
+    foreach(CReport *Reporter, vReporters) {
       switch(Reporter->getExecutionState()) {
       case STATE_MODELLING:
         vModellingReporters.push_back(Reporter);
@@ -109,10 +109,10 @@ void CReporterManager::build() {
 }
 
 //**********************************************************************
-// void CReporterManager::execute()
+// void CReportManager::execute()
 // Execute Reporters
 //**********************************************************************
-void CReporterManager::execute() {
+void CReportManager::execute() {
   // Check for correct modes
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     return;
@@ -123,28 +123,28 @@ void CReporterManager::execute() {
   // Execute Modelling Reporters
   // Reporter will check Year/TimeStep itself
   // This is because some will run across multiple-timesteps
-  foreach(CReporter *Reporter, vModellingReporters) {
+  foreach(CReport *Reporter, vModellingReporters) {
     Reporter->execute();
   }
 }
 
 //**********************************************************************
-// void CReporterManager::execute(EState state)
+// void CReportManager::execute(EState state)
 // Execute State-Based reporters
 //**********************************************************************
-void CReporterManager::execute(EState state) {
-  foreach(CReporter *Reporter, vReporters) {
+void CReportManager::execute(EState state) {
+  foreach(CReport *Reporter, vReporters) {
     if (Reporter->getExecutionState() == state)
       Reporter->execute();
   }
 }
 
 //**********************************************************************
-// CReporterManager::~CReporterManager()
+// CReportManager::~CReportManager()
 // Destructor
 //**********************************************************************
-CReporterManager::~CReporterManager() {
-  foreach(CReporter *Reporter, vReporters) {
+CReportManager::~CReportManager() {
+  foreach(CReport *Reporter, vReporters) {
     delete Reporter;
   }
 }

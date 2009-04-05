@@ -28,7 +28,8 @@ class CTimeStepManager;
 class CObjectiveFunction;
 class CTimeStep;
 class CInitializationPhase;
-class CReporterManager;
+class CReportManager;
+class CDerivedQuantityManager;
 
 //**********************************************************************
 //
@@ -72,7 +73,8 @@ protected:
   CCatchabilityManager        *pQManager;
   CSelectivityManager         *pSelectivityManager;
   CTimeStepManager            *pTimeStepManager;
-  CReporterManager            *pReporterManager;
+  CReportManager              *pReporterManager;
+  CDerivedQuantityManager     *pDerivedQuantityManager;
   int                         iNumberOfYears;
   bool                        bTerminate;
   bool                        bWaiting;

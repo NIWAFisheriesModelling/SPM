@@ -24,26 +24,18 @@ public:
   // Functions
 	CAbundanceObservation();
 	virtual                    ~CAbundanceObservation();
-  int                        getProportionCount() { return (int)mvProportionMatrix.size(); }
-  string                     getProportionKey(int index);
-  double                     getProportionValue(string key);
-  int                        getCVCount() { return (int)mvCVMatrix.size(); }
-  string                     getCVKey(int index);
-  double                     getCVValue(string key);
-  string                     getQ() { return sQ; }
-  double                     getCVProcessError() { return dCVProcessError; }
   void                       validate();
   void                       build();
   void                       execute();
 
 protected:
   // Variables
-  map<string, double>        mvProportionMatrix;
-  map<string, double>        mvCVMatrix;
-  string                     sQ;
-  CCatchability              *pQ;
+  map<string, double>        mProportionMatrix;
+  map<string, double>        mErrorValue;
+  string                     sCatchability;
+  CCatchability              *pCatchability;
+  double                     dDelta;
   double                     dSigma;
-  double                     dCVProcessError;
 };
 
 #endif /*CABUNDANCEOBSERVATION_H_*/

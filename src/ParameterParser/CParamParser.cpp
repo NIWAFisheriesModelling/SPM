@@ -85,7 +85,7 @@ void CParamParser::parseAbsoluteCommand() {
     sVariable   = sCommand.substr( iIndex2, (sCommand.length() - iIndex2) );
 
     // Processes
-    if ( (sType == PARAM_POPULATION_PROCESS) || (sType == PARAM_MOVEMENT_PROCESS) ) {
+    if (sType == PARAM_PROCESS) {
       CProcessManager *pProcessManager  = CProcessManager::Instance();
       CProcess        *pProcess         = pProcessManager->getProcess(sLabel);
 
@@ -94,7 +94,7 @@ void CParamParser::parseAbsoluteCommand() {
     }
 
     // Directed Process
-    if (sType == PARAM_DIRECTED_PROCESS) {
+    if (sType == PARAM_PREFERENCE_FUNCTION) {
       CPreferenceFunctionManager *pDirectedProcessManager = CPreferenceFunctionManager::Instance();
       CPreferenceFunction *pProcess = pDirectedProcessManager->getProcess(sLabel);
 
@@ -111,7 +111,7 @@ void CParamParser::parseAbsoluteCommand() {
       return;
     }
 
-    if (sType == PARAM_Q) {
+    if (sType == PARAM_CATCHABILITY) {
       CCatchabilityManager *pQManager = CCatchabilityManager::Instance();
       CCatchability *pQ = pQManager->getCatchability(sLabel);
 

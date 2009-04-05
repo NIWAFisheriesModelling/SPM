@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CStandardHeaderReporter.cpp
+// Name        : CStandardHeaderReport.cpp
 // Author      : S.Rasmussen
 // Date        : 5/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -16,7 +16,7 @@
 #include <math.h>
 
 // Local Headers
-#include "CStandardHeaderReporter.h"
+#include "CStandardHeaderReport.h"
 #include "../../Version.h"
 
 // Namespaces
@@ -25,10 +25,10 @@ using std::cout;
 using std::ostringstream;
 
 //**********************************************************************
-// CStandardHeaderReporter::CStandardHeaderReporter()
+// CStandardHeaderReport::CStandardHeaderReport()
 // Default Constructor
 //**********************************************************************
-CStandardHeaderReporter::CStandardHeaderReporter() {
+CStandardHeaderReport::CStandardHeaderReport() {
 
   // Variables
   tmeStart   = time(NULL);
@@ -50,10 +50,10 @@ CStandardHeaderReporter::CStandardHeaderReporter() {
 }
 
 //**********************************************************************
-// void CStandardHeaderReporter::start()
+// void CStandardHeaderReport::start()
 // Start the printing of this header
 //**********************************************************************
-void CStandardHeaderReporter::start() {
+void CStandardHeaderReport::start() {
 
   // Build Command Line
   sHeader += "Call: ";
@@ -99,16 +99,16 @@ void CStandardHeaderReporter::start() {
 }
 
 //**********************************************************************
-// void CStandardHeaderReporter::execute()
+// void CStandardHeaderReport::execute()
 //
 //**********************************************************************
-void CStandardHeaderReporter::execute() { }
+void CStandardHeaderReport::execute() { }
 
 //**********************************************************************
-// void CStandardHeaderReporter::end()
+// void CStandardHeaderReport::end()
 // End our Printing of this Header
 //**********************************************************************
-void CStandardHeaderReporter::end() {
+void CStandardHeaderReport::end() {
 #ifndef __MINGW32__
   times(&cpu_stop);
   double cpu_time=(static_cast<double>(cpu_stop.tms_utime)+static_cast<double>(cpu_stop.tms_stime))-(static_cast<double>(cpu_start.tms_utime) + static_cast<double>(cpu_start.tms_stime));
@@ -136,8 +136,8 @@ void CStandardHeaderReporter::end() {
 }
 
 //**********************************************************************
-// CStandardHeaderReporter::~CStandardHeaderReporter()
+// CStandardHeaderReport::~CStandardHeaderReport()
 // Destructor
 //**********************************************************************
-CStandardHeaderReporter::~CStandardHeaderReporter() {
+CStandardHeaderReport::~CStandardHeaderReport() {
 }

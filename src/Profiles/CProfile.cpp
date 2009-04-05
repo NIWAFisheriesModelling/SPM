@@ -16,6 +16,8 @@
 #include "../Helpers/CError.h"
 #include "../Helpers/CComparer.h"
 
+// TODO: Refactor variable names to full versions
+
 //**********************************************************************
 // CProfile::CProfile()
 // Default Constructor
@@ -31,8 +33,8 @@ CProfile::CProfile() {
   pTarget       = 0;
 
   // Register Params
-  pParameterList->registerAllowed(PARAM_L);
-  pParameterList->registerAllowed(PARAM_U);
+  pParameterList->registerAllowed(PARAM_LOWER_BOUND);
+  pParameterList->registerAllowed(PARAM_UPPER_BOUND);
   pParameterList->registerAllowed(PARAM_N);
   pParameterList->registerAllowed(PARAM_PARAMETER);
 }
@@ -89,15 +91,15 @@ void CProfile::validate() {
     CBaseBuild::validate();
 
     // Get our Parameters
-    dL          = pParameterList->getDouble(PARAM_L);
-    dU          = pParameterList->getDouble(PARAM_U);
+    dL          = pParameterList->getDouble(PARAM_LOWER_BOUND);
+    dU          = pParameterList->getDouble(PARAM_UPPER_BOUND);
     dN          = pParameterList->getDouble(PARAM_N);
     sParameter  = pParameterList->getString(PARAM_PARAMETER);
 
     if ((dL-dU) > ZERO) // Lower Bound Must be < Upper Bound
       CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
-    if ((dN-dU) > ZERO) // N must be < Upper Bound
-      CError::errorGreaterThan(PARAM_N, PARAM_UPPER_BOUND);
+    if (dN <= ZERO) // N is number of steps
+      CError::errorLessThanEqualTo(PARAM_N, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;

@@ -1,27 +1,27 @@
 //============================================================================
-// Name        : CEstimateSummaryReporter.h
+// Name        : CObjectiveFunctionReport.h
 // Author      : S.Rasmussen
 // Date        : 30/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CESTIMATESUMMARYREPORTER_H_
-#define CESTIMATESUMMARYREPORTER_H_
+#ifndef COBJECTIVEFUNCTIONREPORT_H_
+#define COBJECTIVEFUNCTIONREPORT_H_
 
-// Local headers
-#include "Base/CFileReporter.h"
+// Local Headers
+#include "Base/CFileReport.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CEstimateSummaryReporter: public CFileReporter {
+class CObjectiveFunctionReport: public CFileReport {
 public:
-  CEstimateSummaryReporter();
-  virtual                     ~CEstimateSummaryReporter();
-  CReporter*                  clone() { return new CEstimateSummaryReporter(*this); }
+  CObjectiveFunctionReport();
+  virtual                     ~CObjectiveFunctionReport();
+  CReport*                    clone() { return new CObjectiveFunctionReport(*this); }
   void                        execute();
 };
 
-#endif /* CESTIMATESUMMARYREPORTER_H_ */
+#endif /* COBJECTIVEFUNCTIONREPORT_H_ */

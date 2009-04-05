@@ -18,7 +18,7 @@
 #include "../Helpers/CConvertor.h"
 #include "../World/CWorld.h"
 #include "../Observations/CObservationManager.h"
-#include "../Reporters/CReporterManager.h"
+#include "../Reports/CReportManager.h"
 
 // Using
 using std::cout;
@@ -155,7 +155,7 @@ void CTimeStepManager::build() {
     iNumberOfYears    = pWorld->getCurrentYear() - iFirstHumanYear;
 
     pObservationManager = CObservationManager::Instance();
-    pReporterManager    = CReporterManager::Instance();
+    pReporterManager    = CReportManager::Instance();
 
 #ifndef OPTIMIZE
   } catch (string Ex) {

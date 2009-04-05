@@ -13,6 +13,7 @@
 // Local Headers
 #include "CInitializationPhaseManager.h"
 #include "CInitializationPhase.h"
+#include "../Reports/CReportManager.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
 
@@ -28,6 +29,9 @@ boost::thread_specific_ptr<CInitializationPhaseManager> CInitializationPhaseMana
 // Default Constructor
 //**********************************************************************
 CInitializationPhaseManager::CInitializationPhaseManager() {
+  // Variables
+  lastExecutedInitializationPhase = -1;
+  pReportManager                  = 0;
 }
 
 //**********************************************************************
@@ -59,8 +63,8 @@ void CInitializationPhaseManager::addInitializationPhase(CInitializationPhase *v
 }
 
 //**********************************************************************
-//
-//
+// void CInitializationPhaseManager::loadInitializationPhaseOrder(vector<string> &order)
+// Populate the ordered vector with phases based on the vector parameter
 //**********************************************************************
 void CInitializationPhaseManager::loadInitializationPhaseOrder(vector<string> &order) {
   vInitializationPhaseOrder.clear();
@@ -72,6 +76,26 @@ void CInitializationPhaseManager::loadInitializationPhaseOrder(vector<string> &o
         break;
       }
     }
+  }
+}
+
+//**********************************************************************
+// int CInitializationPhaseManager::getInitializationPhaseOrderIndex(string label)
+// Get the Index for our Initializaton Phase when Ordered
+//**********************************************************************
+int CInitializationPhaseManager::getInitializationPhaseOrderIndex(string label) {
+  try {
+    // Get the Index for our Initialization Phase
+    for (int i = 0; i < (int)vInitializationPhaseOrder.size(); ++i)
+      if (vInitializationPhaseOrder[i]->getLabel() == label)
+        return i;
+
+    CError::errorUnknown(PARAM_INITIALIZATION_PHASE, label);
+    return -1;
+
+  } catch (string Ex) {
+    Ex = "CInitializationPhaseManager.getInitializationPhaseOrderIndex(" + label + ")->" + Ex;
+    throw Ex;
   }
 }
 
@@ -119,6 +143,9 @@ void CInitializationPhaseManager::build() {
       InitializationPhase->build();
     }
 
+    // Variables
+    pReportManager = CReportManager::Instance();
+
   } catch(string Ex) {
     Ex = "CInitialisationManager.build()->" + Ex;
     throw Ex;
@@ -130,8 +157,15 @@ void CInitializationPhaseManager::build() {
 // Execute our Initialization Phases
 //**********************************************************************
 void CInitializationPhaseManager::execute() {
+
+  // Reset Lasr Executed
+  lastExecutedInitializationPhase = -1;
+
   foreach(CInitializationPhase *Phase, vInitializationPhaseOrder) {
     Phase->execute();
+    // Incremenet Place holder
+    lastExecutedInitializationPhase++;
+    pReportManager->execute(STATE_INITIALIZATION_MODELLING);
   }
 }
 

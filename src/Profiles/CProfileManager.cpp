@@ -14,7 +14,7 @@
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
-#include "../Reporters/CReporterManager.h"
+#include "../Reports/CReportManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../CRuntimeController.h"
@@ -160,7 +160,7 @@ void CProfileManager::execute() {
     CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
     vector<CProfile*>::iterator vPtr = vProfileList.begin();
 
-    CReporterManager *pReporter = CReporterManager::Instance();
+    CReportManager *pReporter = CReportManager::Instance();
 
     // Save our Current State
     saveState();

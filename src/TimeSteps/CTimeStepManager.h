@@ -23,7 +23,7 @@
 // Classes
 class CTimeStep;
 class CObservationManager;
-class CReporterManager;
+class CReportManager;
 
 //**********************************************************************
 //
@@ -58,7 +58,7 @@ protected:
   int                         iCurrentYear;
   int                         iCurrentTimeStep;
   CObservationManager         *pObservationManager;
-  CReporterManager            *pReporterManager;
+  CReportManager              *pReporterManager;
   vector<CTimeStep*>          vTimeSteps;
   vector<CTimeStep*>          vTimeStepsOrder;
 

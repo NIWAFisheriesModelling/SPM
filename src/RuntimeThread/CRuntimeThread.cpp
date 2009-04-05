@@ -30,7 +30,8 @@
 #include "../Helpers/ForEach.h"
 #include "../InitializationPhases/CInitializationPhase.h"
 #include "../Catchabilities/CCatchabilityManager.h"
-#include "../Reporters/CReporterManager.h"
+#include "../Reports/CReportManager.h"
+#include "../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../CRuntimeController.h"
 
 // Using
@@ -44,6 +45,8 @@ using std::endl;
 CRuntimeThread::CRuntimeThread() {
 
   // Create our Instances
+  pDerivedQuantityManager  = CDerivedQuantityManager::Instance();
+  // TODO: Refactor DirectProc into PrefFunc
   pDirectedProcessManager  = CPreferenceFunctionManager::Instance();
   pEstimateManager         = CEstimateManager::Instance();
   pInitializationManager   = CInitializationPhaseManager::Instance();
@@ -55,7 +58,7 @@ CRuntimeThread::CRuntimeThread() {
   pProcessManager          = CProcessManager::Instance();
   pProfileManager          = CProfileManager::Instance();
   pQManager                = CCatchabilityManager::Instance();
-  pReporterManager         = CReporterManager::Instance();
+  pReporterManager         = CReportManager::Instance();
   pSelectivityManager      = CSelectivityManager::Instance();
   pTimeStepManager         = CTimeStepManager::Instance();
   pWorld                   = CWorld::Instance();
@@ -109,6 +112,7 @@ void CRuntimeThread::validate() {
 
   // Validate Them in Alphabetical Order, After World
   pWorld->validate(); // First because it's our Base
+  pDerivedQuantityManager->validate();
   pDirectedProcessManager->validate();
   pEstimateManager->validate();
   pInitializationManager->validate();
@@ -121,6 +125,7 @@ void CRuntimeThread::validate() {
   pReporterManager->validate();
   pSelectivityManager->validate();
   pTimeStepManager->validate();
+
   CCatchabilityManager::Instance()->validate(); // TODO: FIX THIS
 }
 
@@ -137,6 +142,7 @@ void CRuntimeThread::build() {
   pProcessManager->build();
 
   // Build Rest that rely on the Above.
+  pDerivedQuantityManager->build();
   pDirectedProcessManager->build();
   pEstimateManager->build();
   pPenaltyManager->build();
@@ -250,6 +256,7 @@ void CRuntimeThread::startModel() {
 //**********************************************************************
 void CRuntimeThread::clone(CRuntimeThread *Thread) {
 
+  pDerivedQuantityManager->clone(Thread->pDerivedQuantityManager);
   pDirectedProcessManager->clone(Thread->pDirectedProcessManager);
   pEstimateManager->clone(Thread->pEstimateManager);
   pLayerManager->clone(Thread->pLayerManager);
@@ -272,7 +279,7 @@ void CRuntimeThread::clone(CRuntimeThread *Thread) {
 //**********************************************************************
 CRuntimeThread::~CRuntimeThread() {
   // Destroy Singleton Classes
-  CReporterManager::Destroy();
+  CReportManager::Destroy();
   CPreferenceFunctionManager::Destroy();
   CEstimateManager::Destroy();
   CInitializationPhaseManager::Destroy();

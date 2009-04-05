@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CReporter.h
+// Name        : CReport.h
 // Author      : S.Rasmussen
 // Date        : 5/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CREPORTER_H_
-#define CREPORTER_H_
+#ifndef CREPORT_H_
+#define CREPORT_H_
 
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
@@ -16,12 +16,12 @@
 //
 //
 //**********************************************************************
-class CReporter : public CBaseExecute {
+class CReport : public CBaseExecute {
 public:
   // Functions
-  CReporter();
-  virtual                     ~CReporter();
-  virtual CReporter*          clone() = 0;
+  CReport();
+  virtual                     ~CReport();
+  virtual CReport*            clone() = 0;
   virtual void                validate() { CBaseExecute::validate(); };
   virtual void                build() { };
   virtual void                start() = 0;
@@ -34,4 +34,4 @@ protected:
   EState                      eExecutionState;
 };
 
-#endif /* CREPORTER_H_ */
+#endif /* CREPORT_H_ */

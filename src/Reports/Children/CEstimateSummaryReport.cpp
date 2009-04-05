@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CEstimateSummaryReporter.cpp
+// Name        : CEstimateSummaryReport.cpp
 // Author      : S.Rasmussen
 // Date        : 30/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -8,24 +8,24 @@
 //============================================================================
 
 // Local headers
-#include "CEstimateSummaryReporter.h"
+#include "CEstimateSummaryReport.h"
 #include "../../Estimates/CEstimateManager.h"
 #include "../../Estimates/CEstimate.h"
 #include "../../Helpers/ForEach.h"
 
 //**********************************************************************
-// CEstimateSummaryReporter::CEstimateSummaryReporter()
+// CEstimateSummaryReport::CEstimateSummaryReport()
 // Default Constructor
 //**********************************************************************
-CEstimateSummaryReporter::CEstimateSummaryReporter() {
+CEstimateSummaryReport::CEstimateSummaryReport() {
   eExecutionState = STATE_FINALIZATION;
 }
 
 //**********************************************************************
-// void CEstimateSummaryReporter::execute()
+// void CEstimateSummaryReport::execute()
 // Execute print state
 //**********************************************************************
-void CEstimateSummaryReporter::execute() {
+void CEstimateSummaryReport::execute() {
   // Check Run-Mode
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
@@ -55,8 +55,8 @@ void CEstimateSummaryReporter::execute() {
 }
 
 //**********************************************************************
-// CEstimateSummaryReporter::~CEstimateSummaryReporter()
+// CEstimateSummaryReport::~CEstimateSummaryReport()
 // Destructor
 //**********************************************************************
-CEstimateSummaryReporter::~CEstimateSummaryReporter() {
+CEstimateSummaryReport::~CEstimateSummaryReport() {
 }

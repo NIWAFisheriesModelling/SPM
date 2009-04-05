@@ -1,35 +1,27 @@
 //============================================================================
-// Name        : CReporterFactory.h
+// Name        : CReport.cpp
 // Author      : S.Rasmussen
-// Date        : 9/01/2009
+// Date        : 5/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CREPORTERFACTORY_H_
-#define CREPORTERFACTORY_H_
-
-// Global Headers
-#include <string>
 
 // Local headers
-#include "../CReporter.h"
-
-// Using
-using std::string;
+#include "CReport.h"
 
 //**********************************************************************
-//
-//
+// CReport::CReport()
+// Default Constructor
 //**********************************************************************
-class CReporterFactory {
-public:
-  // Functions
-  static CReporter*           buildReporter(string type, bool registerWithManager = true);
-private:
-  // Functions
-  CReporterFactory();
-  virtual ~CReporterFactory();
-};
+CReport::CReport() {
+  // Default
+  eExecutionState     = STATE_INVALID;
+}
 
-#endif /* CREPORTERFACTORY_H_ */
+//**********************************************************************
+// CReport::~CReport()
+// Destructor
+//**********************************************************************
+CReport::~CReport() {
+}

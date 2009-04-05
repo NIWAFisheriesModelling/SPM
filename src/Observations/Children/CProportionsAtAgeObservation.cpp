@@ -35,67 +35,65 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
   iMaxAge             = -1;
   bAgePlus            = false;
   bRescale            = false;
-  dR                  = DELTA;
-  dNProcessError      = -1;
+  dDelta              = DELTA;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MIN_AGE);
   pParameterList->registerAllowed(PARAM_MAX_AGE);
   pParameterList->registerAllowed(PARAM_AGE_PLUS_GROUP);
-  pParameterList->registerAllowed(PARAM_LAYER);
+  pParameterList->registerAllowed(PARAM_TOLERANCE);
   pParameterList->registerAllowed(PARAM_OBS);
-  pParameterList->registerAllowed(PARAM_N);
-  pParameterList->registerAllowed(PARAM_DIST);
-  pParameterList->registerAllowed(PARAM_R);
+  pParameterList->registerAllowed(PARAM_DELTA);
+  pParameterList->registerAllowed(PARAM_ERROR_VALUE);
 }
 
 //**********************************************************************
 // string CProportionsAtAgeObservation::getProportionKey(int index)
 // Get key from our matrix for the index
 //**********************************************************************
-string CProportionsAtAgeObservation::getProportionKey(int index) {
-
-  map<string, vector<double> >::iterator ptr = mvProportionMatrix.begin();
-  for (int i = 0; i < index; ++i)
-    ptr++;
-  return (*ptr).first;
-}
+//string CProportionsAtAgeObservation::getProportionKey(int index) {
+//
+//  map<string, vector<double> >::iterator ptr = mvProportionMatrix.begin();
+//  for (int i = 0; i < index; ++i)
+//    ptr++;
+//  return (*ptr).first;
+//}
 
 //**********************************************************************
 // int CProportionsAtAgeObservation::getProportionKeyValueCount(string key)
 // Get the number of elements for our key in the vector
 //**********************************************************************
-int CProportionsAtAgeObservation::getProportionKeyValueCount(string key) {
-  return (int)mvProportionMatrix[key].size();
-}
+//int CProportionsAtAgeObservation::getProportionKeyValueCount(string key) {
+//  return (int)mvProportionMatrix[key].size();
+//}
 
 //**********************************************************************
 // double CProportionsAtAgeObservation::getProportionValue(string key, int index)
 // Return value from the vector in the map at key
 //**********************************************************************
-double CProportionsAtAgeObservation::getProportionValue(string key, int index) {
-  return mvProportionMatrix[key][index];
-}
+//double CProportionsAtAgeObservation::getProportionValue(string key, int index) {
+//  return mvProportionMatrix[key][index];
+//}
 
 //**********************************************************************
 // string CProportionsAtAgeObservation::getNKey(int index)
 // Get key for Index
 //**********************************************************************
-string CProportionsAtAgeObservation::getNKey(int index) {
-
-  map<string, double>::iterator ptr = mN.begin();
-  for (int i = 0; i < index; ++i)
-    ptr++;
-  return (*ptr).first;
-}
+//string CProportionsAtAgeObservation::getNKey(int index) {
+//
+//  map<string, double>::iterator ptr = mN.begin();
+//  for (int i = 0; i < index; ++i)
+//    ptr++;
+//  return (*ptr).first;
+//}
 
 //**********************************************************************
 // double CProportionsAtAgeObservation::getNValue(string key)
 // Return Double For Key
 //**********************************************************************
-double CProportionsAtAgeObservation::getNValue(string key) {
-  return mN[key];
-}
+//double CProportionsAtAgeObservation::getNValue(string key) {
+//  return mN[key];
+//}
 
 //**********************************************************************
 // void CProportionsAtAgeObservation::Validate()
@@ -110,9 +108,8 @@ void CProportionsAtAgeObservation::validate() {
     iMinAge     = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge     = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlus    = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
-    sDist       = pParameterList->getString(PARAM_DIST);
-    dR          = pParameterList->getDouble(PARAM_R);
-    sLayer      = pParameterList->getString(PARAM_LAYER);
+    dDelta      = pParameterList->getDouble(PARAM_DELTA);
+    dTolerance  = pParameterList->getDouble(PARAM_TOLERANCE);
 
     if (iMinAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
@@ -135,15 +132,15 @@ void CProportionsAtAgeObservation::validate() {
       }
     }
 
-    // Get our N
-    vector<string> vN;
-    pParameterList->fillVector(vN, PARAM_N);
+    // Get our Error Value
+    vector<string> vErrorValues;
+    pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
 
-    if ((vN.size() % 2) != 0)
-      throw string(PARAM_N + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
+    if ((vErrorValues.size() % 2) != 0)
+      throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
 
-    for (int i = 0; i < (int)vN.size(); i+=2)
-      mN[vN[i]] = CConvertor::stringToDouble(vN[i+1]);
+    for (int i = 0; i < (int)vErrorValues.size(); i+=2)
+      mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
 
     // Loop Through our Partitions
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
@@ -154,32 +151,21 @@ void CProportionsAtAgeObservation::validate() {
       if (iAgeSpread < (int)((*vPropPtr).second).size())
         throw string(ERROR_QTY_MORE_PROPORTIONS + (*vPropPtr).first);
 
-      // If bRescale=True, loop through proportions and rescale so sum equals one
-      if (bRescale) {
+        // Rescale if Tolerance is exceeded
         double dRunningTotal = 0.0;
         vector<double>::iterator vPtr3 = ((*vPropPtr).second).begin();
         while (vPtr3 != ((*vPropPtr).second).end()) {
           dRunningTotal += (*vPtr3);
           vPtr3++;
         }
-        vector<double>::iterator vPtr4 = ((*vPropPtr).second).begin();
-        while (vPtr4 != ((*vPropPtr).second).end()) {
-          (*vPtr4) /= dRunningTotal;
-          vPtr4++;
-        }
-      } else {
-        // Loop Through Proportions, Ensuring they approximately Equal 1.0
-        double dRunningTotal = 0.0;
-        vector<double>::iterator vPtr2 = ((*vPropPtr).second).begin();
-        while (vPtr2 != ((*vPropPtr).second).end()) {
-          dRunningTotal += (*vPtr2);
-          vPtr2++;
-        }
-        if (fabs(1.0-dRunningTotal)> 0.001) {
-          throw string((*vPropPtr).first + ERROR_EQUAL_PROPORTION_ONE + CConvertor::doubleToString(dRunningTotal));
-        }
-      }
 
+        if (fabs(1.0-dRunningTotal) > dTolerance) {
+          vector<double>::iterator vPtr4 = ((*vPropPtr).second).begin();
+          while (vPtr4 != ((*vPropPtr).second).end()) {
+            (*vPtr4) /= dRunningTotal;
+            vPtr4++;
+          }
+        }
       vPropPtr++;
     }
     // Must be same size
@@ -187,15 +173,15 @@ void CProportionsAtAgeObservation::validate() {
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
     // Number of N's must be equal to number of Proportions
-    if (mN.size() != mvProportionMatrix.size())
+    if (mErrorValue.size() != mvProportionMatrix.size())
       CError::errorListSameSize(PARAM_N, PARAM_OBS);
 
     // Validate our N's against the OBS
     // They have to have a 1-to-1 relationship
     bool bMatch = false;
-    map<string, double>::iterator vNPtr = mN.begin();
+    map<string, double>::iterator vNPtr = mErrorValue.begin();
 
-    while (vNPtr != mN.end()) {
+    while (vNPtr != mErrorValue.end()) {
       bMatch = false;
       // Loop Props Looking For Match;
       vPropPtr = mvProportionMatrix.begin();
@@ -301,9 +287,9 @@ void CProportionsAtAgeObservation::execute() {
       // If we have a running total, do a comparison against
       // Our AgeResults
 
-      double dN = mN[(*vPropPtr).first];
+      double dN = mErrorValue[(*vPropPtr).first];
       //Add in Process Error if defined
-      if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
+      //if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
 
       dScore = -CMath::lnFactorial(dN);
 
@@ -314,7 +300,7 @@ void CProportionsAtAgeObservation::execute() {
           dCurrentProp = pAgeResults[i] / dRunningTotal;
         else
           dCurrentProp = 0.0;
-        dScore += CMath::lnFactorial(dN * ((*vPropPtr).second)[i]) - dN * ((*vPropPtr).second)[i] * log(CMath::zeroFun(dCurrentProp,dR));
+        dScore += CMath::lnFactorial(dN * ((*vPropPtr).second)[i]) - dN * ((*vPropPtr).second)[i] * log(CMath::zeroFun(dCurrentProp,dDelta));
       }
 
       // Clear Our Age Results

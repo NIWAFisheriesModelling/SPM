@@ -24,57 +24,16 @@
 CAbundanceObservation::CAbundanceObservation() {
 
   // Variables
-  sQ              = "";
-  pQ              = 0;
-  dCVProcessError = 0.0;
+  sCatchability   = "";
+  pCatchability   = 0;
+  dDelta          = 0.0;
   dSigma          = 0.0;
 
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_Q);
-  pParameterList->registerAllowed(PARAM_LAYER);
+  pParameterList->registerAllowed(PARAM_CATCHABILITY);
   pParameterList->registerAllowed(PARAM_OBS);
-  pParameterList->registerAllowed(PARAM_CV);
-  pParameterList->registerAllowed(PARAM_DIST);
-}
-
-//**********************************************************************
-// string CAbundanceObservation::getProportionKey(int index)
-// Get the proportion key for an index
-//**********************************************************************
-string CAbundanceObservation::getProportionKey(int index) {
-
-  map<string, double>::iterator ptr = mvProportionMatrix.begin();
-  for (int i = 0; i < index; ++i)
-    ptr++;
-  return (*ptr).first;
-}
-
-//**********************************************************************
-// double CAbundanceObservation::getProportionValue(string key)
-// Get The Proportion value for a key
-//**********************************************************************
-double CAbundanceObservation::getProportionValue(string key) {
-  return mvProportionMatrix[key];
-}
-
-//**********************************************************************
-// string CAbundanceObservation::getCVKey(int index)
-// Get The CV Key for Index
-//**********************************************************************
-string CAbundanceObservation::getCVKey(int index) {
-
-  map<string, double>::iterator ptr = mvCVMatrix.begin();
-  for (int i = 0; i < index; ++i)
-    ptr++;
-  return (*ptr).first;
-}
-
-//**********************************************************************
-// double CAbundanceObservation::getCVValue(string key)
-// Get the CV Value for Key
-//**********************************************************************
-double CAbundanceObservation::getCVValue(string key) {
-  return mvCVMatrix[key];
+  pParameterList->registerAllowed(PARAM_ERROR_VALUE);
+  pParameterList->registerAllowed(PARAM_DELTA);
 }
 
 //**********************************************************************
@@ -87,9 +46,8 @@ void CAbundanceObservation::validate() {
     CObservation::validate();
 
     // Get our Parameters
-    sQ          = pParameterList->getString(PARAM_Q);
-    sLayer      = pParameterList->getString(PARAM_LAYER);
-    sDist       = pParameterList->getString(PARAM_DIST);
+    sCatchability = pParameterList->getString(PARAM_CATCHABILITY);
+    dDelta        = pParameterList->getDouble(PARAM_DELTA);
 
     // Get our OBS
     vector<string> vOBS;
@@ -99,31 +57,31 @@ void CAbundanceObservation::validate() {
       CError::errorPairs(PARAM_OBS);
 
     for (int i = 0; i < (int)vOBS.size(); i+=2)
-      mvProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
+      mProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
 
-    // Get our CV
-    vector<string> vCV;
-    pParameterList->fillVector(vCV, PARAM_CV);
+    // Get our ErrorValues
+    vector<string> vErrorValues;
+    pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
 
-    if ((vCV.size() % 2) != 0)
-      CError::errorPairs(PARAM_CV);
+    if ((vErrorValues.size() % 2) != 0)
+      CError::errorPairs(PARAM_ERROR_VALUE);
 
-    for (int i = 0; i < (int)vCV.size(); i+=2)
-      mvCVMatrix[vCV[i]] = CConvertor::stringToDouble(vCV[i+1]);
+    for (int i = 0; i < (int)vErrorValues.size(); i+=2)
+      mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
 
-    // Validate our cv's to make sure we have the right amount for our
+    // Validate our vErrorValues's to make sure we have the right amount for our
     // Observations
     bool bMatch = false;
-    map<string, double>::iterator mCVPtr      = mvCVMatrix.begin();
-    map<string, double>::iterator mPropPtr    = mvProportionMatrix.begin();
+    map<string, double>::iterator mErrorValuePtr  = mErrorValue.begin();
+    map<string, double>::iterator mPropPtr        = mProportionMatrix.begin();
 
-    while (mCVPtr != mvCVMatrix.end()) {
+    while (mErrorValuePtr != mErrorValue.end()) {
       // Reset Vars
       bMatch      = false;
-      mPropPtr    = mvProportionMatrix.begin();
+      mPropPtr    = mProportionMatrix.begin();
 
-      while (mPropPtr != mvProportionMatrix.end()) {
-        if ( (*mPropPtr).first == (*mCVPtr).first ) {
+      while (mPropPtr != mProportionMatrix.end()) {
+        if ( (*mPropPtr).first == (*mErrorValuePtr).first ) {
           bMatch = true;
           break;
         }
@@ -131,9 +89,9 @@ void CAbundanceObservation::validate() {
       }
 
       if (!bMatch)
-        CError::errorNoMatch(PARAM_CV, (*mCVPtr).first, PARAM_OBS);
+        CError::errorNoMatch(PARAM_ERROR_VALUE, (*mErrorValuePtr).first, PARAM_OBS);
 
-      mCVPtr++;
+      mErrorValuePtr++;
     }
 
   } catch (string Ex) {
@@ -151,8 +109,9 @@ void CAbundanceObservation::build() {
     // Base build
     CObservation::build();
 
-    CCatchabilityManager *pQManager = CCatchabilityManager::Instance();
-    pQ = pQManager->getCatchability(sQ);
+    // Build relationships
+    CCatchabilityManager *pCatchabilityManager = CCatchabilityManager::Instance();
+    pCatchability = pCatchabilityManager->getCatchability(sCatchability);
 
   } catch (string Ex) {
     Ex = "CAbundanceObservation.build(" + getLabel() + ")->" + Ex;
@@ -173,11 +132,10 @@ void CAbundanceObservation::execute() {
     double   dExpectedTotal   = 0.0;
 
     // Loop Through Obs
-    map<string, double>::iterator mPropPtr = mvProportionMatrix.begin();
-    while (mPropPtr != mvProportionMatrix.end()) {
+    map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
+    while (mPropPtr != mProportionMatrix.end()) {
       // Reset Vars
       dExpectedTotal = 0.0;
-
 
       // Loop Through Each Square in our Layer
       for (int i = 0; i < pLayer->getHeight(); ++i) {
@@ -204,13 +162,13 @@ void CAbundanceObservation::execute() {
       // Note: dExpectedTotal is total number of fish the model has for that
       // Proportion Label across all squares in that layer where that
       // label is used.
-      dExpectedTotal *= pQ->getQ();
+      dExpectedTotal *= pCatchability->getQ();
 
-      double dCV = mvCVMatrix[(*mPropPtr).first];
+      double dErrorValue = mErrorValue[(*mPropPtr).first];
       //Add in process error if defined
-      if(dCVProcessError>0) dCV = sqrt(dCV*dCV + dCVProcessError*dCVProcessError);
+      //if(dCVProcessError>0) dCV = sqrt(dCV*dCV + dCVProcessError*dCVProcessError);
 
-      dSigma = sqrt(log(1+ dCV*dCV));
+      dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
       double dTemp = log((*mPropPtr).second / CMath::zeroFun(dExpectedTotal,DELTA)) / dSigma + 0.5*dSigma;
       dScore += log(dSigma) + 0.5 * dTemp * dTemp;
 

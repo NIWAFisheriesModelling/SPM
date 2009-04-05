@@ -1,16 +1,16 @@
 //============================================================================
-// Name        : CWorldStateReporter.h
+// Name        : CPartitionReport.h
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CWORLDSTATEREPORTER_H_
-#define CWORLDSTATEREPORTER_H_
+#ifndef CPARTITIONREPORT_H_
+#define CPARTITIONREPORT_H_
 
 // Local headers
-#include "Base/CFileReporter.h"
+#include "Base/CFileReport.h"
 
 // Forward Dec
 class CTimeStepManager;
@@ -19,12 +19,12 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CWorldStateReporter: public CFileReporter {
+class CPartitionReport: public CFileReport {
 public:
   // Functions
-  CWorldStateReporter();
-  virtual                     ~CWorldStateReporter();
-  CReporter*                  clone() { return new CWorldStateReporter(*this); }
+  CPartitionReport();
+  virtual                     ~CPartitionReport();
+  CReport*                    clone() { return new CPartitionReport(*this); }
   void                        validate();
   void                        build();
   void                        execute();
@@ -37,4 +37,4 @@ protected:
   CTimeStepManager            *pTimeStepManager;
 };
 
-#endif /* CWORLDSTATEREPORTER_H_ */
+#endif /* CPARTITIONREPORT_H_ */

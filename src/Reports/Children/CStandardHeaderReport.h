@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CStandardHeaderReporter.h
+// Name        : CStandardHeaderReport.h
 // Author      : S.Rasmussen
 // Date        : 5/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CSTANDARDHEADERREPORTER_H_
-#define CSTANDARDHEADERREPORTER_H_
+#ifndef CSTANDARDHEADERREPORT_H_
+#define CSTANDARDHEADERREPORT_H_
 
 // Global Headers
 #include <string>
@@ -21,7 +21,7 @@
 #endif
 
 // Local headers
-#include "../CReporter.h"
+#include "../CReport.h"
 
 // Namespace
 using std::string;
@@ -33,12 +33,12 @@ using std::string;
 //
 //
 //**********************************************************************
-class CStandardHeaderReporter: public CReporter {
+class CStandardHeaderReport: public CReport {
 public:
   // Functions
-  CStandardHeaderReporter();
-  virtual                     ~CStandardHeaderReporter();
-  CReporter*                  clone() { return new CStandardHeaderReporter(*this); }
+  CStandardHeaderReport();
+  virtual                     ~CStandardHeaderReport();
+  CReport*                    clone() { return new CStandardHeaderReport(*this); }
   void                        start();
   void                        execute();
   void                        end();
@@ -56,4 +56,4 @@ protected:
 #endif
 };
 
-#endif /* CSTANDARDHEADERREPORTER_H_ */
+#endif /* CSTANDARDHEADERREPORT_H_ */

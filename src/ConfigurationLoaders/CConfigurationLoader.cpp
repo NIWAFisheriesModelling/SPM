@@ -32,7 +32,7 @@
 #include "../Selectivities/Factory/CSelectivityFactory.h"
 #include "../TimeSteps/Factory/CTimeStepFactory.h"
 #include "../Minimizers/CMinimizerManager.h"
-#include "../Reporters/Factory/CReporterFactory.h"
+#include "../Reports/Factory/CReportFactory.h"
 
 // TODO: Finish this structure
 #include "../MCMC/CMCMC.h"
@@ -128,8 +128,8 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CProcessFactory::buildProcess(sType);
     else if (sSection == PARAM_PROFILE)
       pBaseObject = CProfileFactory::buildProfile(sType);
-    else if (sSection == PARAM_REPORTER)
-      pBaseObject = CReporterFactory::buildReporter(sType);
+    else if (sSection == PARAM_REPORT)
+      pBaseObject = CReportFactory::buildReport(sType);
     else if (sSection == PARAM_SELECTIVITY)
       pBaseObject = CSelectivityFactory::buildSelectivity(sType);
     else if (sSection == PARAM_TIME_STEP)
@@ -222,6 +222,7 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
 void CConfigurationLoader::loadConfigIntoCache(string FileName) {
   // TODO: Add quote handling on strings to have them entered as a single entry
   // e.g. param "option one" "option two"
+  // TODO: Re-write this tidier
 
   try {
     if (FileName == "")
@@ -309,8 +310,12 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         sLine = "";
       }
 
+      // Lowercase line
       for (unsigned i = 0; i < sLine.length(); ++i)
         sLine[i] = tolower(sLine[i]);
+      // Remove trailing spaces caused by Comments
+      int iLastNotSpace = sLine.find_last_not_of(" ");
+      sLine = sLine.substr(0, (iLastNotSpace+1));
 
       if (sLine.length() > 0)
         vLines.push_back(sLine);

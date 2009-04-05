@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CWorldStateReporter.cpp
+// Name        : CWorldStateReport.cpp
 // Author      : S.Rasmussen
 // Date        : 29/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -8,14 +8,14 @@
 //============================================================================
 
 // Local header
-#include "CWorldStateReporter.h"
+#include "CWorldStateReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
-// CWorldStateReporter::CWorldStateReporter()
+// CWorldStateReport::CWorldStateReport()
 // Default Constructor
 //**********************************************************************
-CWorldStateReporter::CWorldStateReporter() {
+CWorldStateReport::CWorldStateReport() {
   // Variables
   eExecutionState     = STATE_MODELLING;
   pTimeStepManager    = CTimeStepManager::Instance();
@@ -26,13 +26,13 @@ CWorldStateReporter::CWorldStateReporter() {
 }
 
 //**********************************************************************
-// void CWorldStateReporter::validate()
+// void CWorldStateReport::validate()
 // Validate this reporter
 //**********************************************************************
-void CWorldStateReporter::validate() {
+void CWorldStateReport::validate() {
   try {
     // Base
-    CFileReporter::validate();
+    CFileReport::validate();
 
     // Assign Variables
     iYear       = pParameterList->getInt(PARAM_YEAR);
@@ -46,13 +46,13 @@ void CWorldStateReporter::validate() {
 
 
 //**********************************************************************
-// void CWorldStateReporter::build()
+// void CWorldStateReport::build()
 // Build this reporter
 //**********************************************************************
-void CWorldStateReporter::build() {
+void CWorldStateReport::build() {
   try {
     // Base
-    CFileReporter::build();
+    CFileReport::build();
 
     // Populate TimeStepIndex
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
@@ -64,10 +64,10 @@ void CWorldStateReporter::build() {
 }
 
 //**********************************************************************
-// void CWorldStateReporter::execute()
+// void CWorldStateReport::execute()
 // Execute reporter
 //**********************************************************************
-void CWorldStateReporter::execute() {
+void CWorldStateReport::execute() {
   try {
     // Check
     if (iYear != pTimeStepManager->getCurrentYear())
@@ -127,8 +127,8 @@ void CWorldStateReporter::execute() {
 }
 
 //**********************************************************************
-// CWorldStateReporter::~CWorldStateReporter()
+// CWorldStateReport::~CWorldStateReport()
 // Destructor
 //**********************************************************************
-CWorldStateReporter::~CWorldStateReporter() {
+CWorldStateReport::~CWorldStateReport() {
 }

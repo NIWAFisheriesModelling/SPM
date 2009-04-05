@@ -38,13 +38,13 @@ CEventMortalityProcess::CEventMortalityProcess() {
   pWorldSquare     = 0;
 
   // Register estimable parameters
-  registerEstimable(PARAM_UMAX, &dUMax);
+  registerEstimable(PARAM_U_MAX, &dUMax);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_LAYERS);
-  pParameterList->registerAllowed(PARAM_UMAX);
+  pParameterList->registerAllowed(PARAM_U_MAX);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_PENALTY);
 }
@@ -75,7 +75,7 @@ void CEventMortalityProcess::validate() {
     CProcess::validate();
 
     // Get our Parameters
-    dUMax     = pParameterList->getDouble(PARAM_UMAX);
+    dUMax     = pParameterList->getDouble(PARAM_U_MAX);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);

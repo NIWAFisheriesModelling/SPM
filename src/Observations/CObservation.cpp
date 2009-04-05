@@ -25,6 +25,8 @@ CObservation::CObservation() {
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_LAYER);
+  pParameterList->registerAllowed(PARAM_LIKELIHOOD);
 }
 
 //**********************************************************************
@@ -55,6 +57,8 @@ void CObservation::validate() {
     // Assign our Variables
     iYear       = pParameterList->getInt(PARAM_YEAR);
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
+    sLayer      = pParameterList->getString(PARAM_LAYER);
+    sLikelihood = pParameterList->getString(PARAM_LIKELIHOOD);
 
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);

@@ -29,7 +29,7 @@
 #include "CConfiguration.h"
 #include "Version.h"
 #include "License.txt"
-#include "Reporters/Children/CStandardHeaderReporter.h"
+#include "Reports/Children/CStandardHeaderReport.h"
 
 // Namespaces
 using namespace std;
@@ -47,7 +47,7 @@ int main(int argc, char * argv[]) {
     pConfig->addCommandLineParameter(argv[i]);
 
   // Create Reporter
-  CStandardHeaderReporter clReporter;
+  CStandardHeaderReport clReporter;
 
   // Create Runtime Controller
   CRuntimeController  *pRuntime = 0;

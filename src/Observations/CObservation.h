@@ -30,7 +30,6 @@ public:
   string                     getLayer() { return sLayer; }
   string                     getCategory(int index);
   string                     getSelectivity(int index);
-  string                     getDist() { return sDist; }
   double                     getScore() { return dScore; }
   virtual void               validate();
 	virtual void               build();
@@ -48,7 +47,7 @@ protected:
   vector<int>                vCategories;
   vector<string>             vSelectivityNames;
   vector<CSelectivity*>      vSelectivities;
-  string                     sDist;
+  string                     sLikelihood;
 };
 
 #endif /*COBSERVATION_H_*/

@@ -1,47 +1,47 @@
 //============================================================================
-// Name        : CReporterManager.h
+// Name        : CReportManager.h
 // Author      : S.Rasmussen
 // Date        : 30/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CREPORTERMANAGER_H_
-#define CREPORTERMANAGER_H_
+#ifndef CREPORTMANAGER_H_
+#define CREPORTMANAGER_H_
 
 // Local headers
 #include "../BaseClasses/CBaseManager.h"
 #include "../CRuntimeController.h"
 
 // Forward-Dec
-class CReporter;
+class CReport;
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CReporterManager: public CBaseManager {
+class CReportManager: public CBaseManager {
 public:
   // Function
-  static CReporterManager*    Instance();
+  static CReportManager*      Instance();
   static void                 Destroy();
-  virtual                     ~CReporterManager();
-  void                        addReporter(CReporter *value);
-  void                        clone(CReporterManager *Manager);
+  virtual                     ~CReportManager();
+  void                        addReporter(CReport *value);
+  void                        clone(CReportManager *Manager);
   void                        validate();
   void                        build();
   void                        execute();
   void                        execute(EState state);
 protected:
   // Functions
-  CReporterManager();
+  CReportManager();
 
   // Variables
-  vector<CReporter*>          vReporters;
-  vector<CReporter*>          vModellingReporters;
+  vector<CReport*>          vReporters;
+  vector<CReport*>          vModellingReporters;
 
 private:
-  static boost::thread_specific_ptr<CReporterManager> clInstance;
+  static boost::thread_specific_ptr<CReportManager> clInstance;
 };
 
-#endif /* CREPORTERMANAGER_H_ */
+#endif /* CREPORTMANAGER_H_ */

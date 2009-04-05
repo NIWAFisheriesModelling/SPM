@@ -60,7 +60,7 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(int index) {
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
     if (index >= (int)vPreferenceFunctions.size())
-      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_DIRECTED_PROCESSES);
+      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PREFERENCE_FUNCTIONS);
 
     return vPreferenceFunctions[index];
 

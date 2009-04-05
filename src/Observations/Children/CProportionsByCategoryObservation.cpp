@@ -7,6 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+
 // Local Headers
 #include "CProportionsByCategoryObservation.h"
 #include "../../Layers/String/CStringLayer.h"
@@ -14,85 +17,33 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CConvertor.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CProportionsByCategoryObservation::CProportionsByCategoryObservation()
 // Default Constructor
 //**********************************************************************
 CProportionsByCategoryObservation::CProportionsByCategoryObservation() {
-  // TODO: Implement
-}
+  // Variables
+  pAgeResults             = 0;
+  pCombinedAgeResults     = 0;
+  iMinAge                 = -1;
+  iMaxAge                 = -1;
+  bAgePlus                = false;
 
-//**********************************************************************
-// string CProportionsByCategoryObservation::getProportionKey(int index)
-// Return key by index into the map
-//**********************************************************************
-string CProportionsByCategoryObservation::getProportionKey(int index) {
-
-  map<string, vector<double> >::iterator ptr = mvProportionMatrix.begin();
-  for (int i = 0; i < index; ++i)
-    ptr++;
-  return (*ptr).first;
-}
-
-//**********************************************************************
-// int CProportionsByCategoryObservation::getProportionKeyCount(string key)
-// Return number of elements in vector by key
-//**********************************************************************
-int CProportionsByCategoryObservation::getProportionKeyCount(string key) {
-  return (int)mvProportionMatrix[key].size();
-}
-
-//**********************************************************************
-// double CProportionsByCategoryObservation::getProportionValue(string key, int index)
-// Return value by key (map) and index (vector)
-//**********************************************************************
-double CProportionsByCategoryObservation::getProportionValue(string key, int index) {
-  return mvProportionMatrix[key][index];
-}
-
-//**********************************************************************
-// string CProportionsByCategoryObservation::getNKey(int index)
-// Get Key from N by index
-//**********************************************************************
-string CProportionsByCategoryObservation::getNKey(int index) {
-
-  map<string, vector<double> >::iterator ptr = mvN.begin();
-  for (int i = 0; i < index; ++i)
-    ptr++;
-  return (*ptr).first;
-}
-
-//**********************************************************************
-// int CProportionsByCategoryObservation::getNKeyValueCount(string key)
-// Get number of values in vector from matrix by key
-//**********************************************************************
-int CProportionsByCategoryObservation::getNKeyValueCount(string key) {
-  return (int)mvN[key].size();
-}
-
-//**********************************************************************
-// double CProportionsByCategoryObservation::getNValue(string key, int index)
-// Get the Value from mvN
-//**********************************************************************
-double CProportionsByCategoryObservation::getNValue(string key, int index) {
-  return mvN[key][index];
-}
-
-//**********************************************************************
-// string CProportionsByCategoryObservation::getPopulationCategory(int index)
-// Return the population category by index
-//**********************************************************************
-string CProportionsByCategoryObservation::getPopulationCategory(int index) {
-  return vPopulationCategoryNames[index];
-}
-
-//**********************************************************************
-// string CProportionsByCategoryObservation::getPopulationSelectivity(int index)
-// Get selectivity by index
-//**********************************************************************
-string CProportionsByCategoryObservation::getPopulationSelectivity(int index) {
-  return vPopulationSelectivityNames[index];
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_MIN_AGE);
+  pParameterList->registerAllowed(PARAM_MAX_AGE);
+  pParameterList->registerAllowed(PARAM_AGE_PLUS_GROUP);
+  pParameterList->registerAllowed(PARAM_OBS);
+  pParameterList->registerAllowed(PARAM_ERROR_VALUE);
+  pParameterList->registerAllowed(PARAM_TARGET_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_TARGET_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_DELTA);
 }
 
 //**********************************************************************
@@ -104,11 +55,56 @@ void CProportionsByCategoryObservation::validate() {
     // Base Validation
     CObservation::validate();
 
+    // Get our Variables from ParameterList
+    //dR                = pParameterList->getDouble(PARAM_R);
+    //dNProcessError    = pParameterList->getDouble(PARAM_ERROR_VALUE); // TODO: FIX THIS
+    dDelta            = pParameterList->getDouble(PARAM_DELTA);
+    iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
+    iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
+    bAgePlus          = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
+
+    /*map<string, vector<double> > mvProportionMatrix;
+    map<string, vector<double> >  mvN;
+    vector<string>             vPopulationCategoryNames;
+    vector<int>                vPopulationCategories;
+    double                     *pAgeResults;
+    double                     *pCombinedAgeResults;
+    vector<string>             vPopulationSelectivityNames;
+    vector<CSelectivity*>      vPopulationSelectivities;*/
+
     // Find out the Spread in Ages
     int iAgeSpread = (iMaxAge+1) - iMinAge;
 
+    // Get our OBS
+    vector<string> vOBS;
+    pParameterList->fillVector(vOBS, PARAM_OBS);
+
+    if ((vOBS.size() % (iAgeSpread+1)) != 0)
+      throw string("OBS not right amount");
+
+    for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
+      for (int j = 0; j < iAgeSpread; ++j) {
+        mvProportionMatrix[vOBS[i]].push_back(CConvertor::stringToDouble(vOBS[i+j+1]));
+      }
+    }
+
+    // Get our Error Value
+    vector<string> vErrorValues;
+    pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
+
+    if (vErrorValues.size() != vOBS.size()) {
+      CError::errorListSameSize(PARAM_OBS, PARAM_ERROR_VALUE);
+    }
+
+
+    for (int i = 0; i < (int)vErrorValues.size(); i+=(iAgeSpread+1)) {
+      for (int j = 0; j < iAgeSpread; ++j) {
+        mvErrorValue[vErrorValues[i]].push_back(CConvertor::stringToDouble(vErrorValues[i+j+1]));
+      }
+    }
+
     // Loop Through our Partitions
-    map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
+    /*map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
     while (vPropPtr != mvProportionMatrix.end()) {
       // Validate Sizes of proportions
       if (iAgeSpread > (int)((*vPropPtr).second).size())
@@ -136,7 +132,7 @@ void CProportionsByCategoryObservation::validate() {
         throw string(ERROR_QTY_MORE_N + (*vNPtr).first);
 
       vNPtr++;
-    }
+    }*/
 
   } catch (string Ex) {
     Ex = "CProportionsByCategoryObservation.validate(" + getLabel() + ")->" + Ex;
@@ -169,10 +165,10 @@ void CProportionsByCategoryObservation::build() {
     // Validate our N's against the OBS
     // They have to have a 1-to-1 relationship
     bool bMatch = false;
-    map<string, vector<double> >::iterator vNPtr = mvN.begin();
+    map<string, vector<double> >::iterator vNPtr = mvErrorValue.begin();
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
 
-    while (vNPtr != mvN.end()) {
+    while (vNPtr != mvErrorValue.end()) {
       bMatch = false;
       // Loop Props Looking For Match;
       vPropPtr = mvProportionMatrix.begin();
@@ -257,8 +253,8 @@ void CProportionsByCategoryObservation::execute() {
 
       dScore = 0.0;
 
-      map<string, vector<double> >::iterator mNPtr = mvN.begin();
-      while (mNPtr != mvN.end()) {
+      map<string, vector<double> >::iterator mNPtr = mvErrorValue.begin();
+      while (mNPtr != mvErrorValue.end()) {
         if ((*mNPtr).first == (*vPropPtr).first)
           break;
         mNPtr++;
@@ -268,10 +264,10 @@ void CProportionsByCategoryObservation::execute() {
         double dExp = pAgeResults[i]/pCombinedAgeResults[i];
         double dObs  = (*vPropPtr).second[i] ;
         double dN  = (*mNPtr).second[i];
-        if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
+        //if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
         dScore -= CMath::lnFactorial(dN) - CMath::lnFactorial(dN-(1-dObs)) -
-            CMath::lnFactorial(dN*dObs) + dN * dObs * log(CMath::zeroFun(dExp,dR)) + dN *(1-dObs)
-            * log(CMath::zeroFun(1-dExp,dR));
+            CMath::lnFactorial(dN*dObs) + dN * dObs * log(CMath::zeroFun(dExp,dDelta)) + dN *(1-dObs)
+            * log(CMath::zeroFun(1-dExp,dDelta));
       }
 
       // Clear Our Age Results
