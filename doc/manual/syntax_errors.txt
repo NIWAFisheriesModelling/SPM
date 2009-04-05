@@ -85,9 +85,9 @@ In manual, but not in SPM
   derived_quantity
   include
   joint_selectivity
+  pseudo-observation
   report
   size_at_age
-  likelihood
   linf
   mcmc_fixed
   u_max
@@ -104,6 +104,7 @@ In manual, but not in SPM
   growth_proportions
   initialisation_layer
   k
+  likelihood
   max_correlation
   max_evaluations
   max_iterations

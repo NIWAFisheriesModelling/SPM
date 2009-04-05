@@ -334,7 +334,7 @@
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
 \defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defSub{Likelihood}{Define the likelihood for the observation}
+\defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
@@ -351,7 +351,7 @@
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
 \defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defSub{Likelihood}{Define the likelihood for the observation}
+\defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
@@ -369,7 +369,7 @@
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defSub{Likelihood}{Define the likelihood for the observation}
+\defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
@@ -383,7 +383,7 @@
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defSub{Likelihood}{Define the likelihood for the observation}
+\defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
@@ -397,11 +397,80 @@
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defSub{Likelihood}{Define the likelihood for the observation}
+\defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\subsection{Reporting command and subcommand syntax}\par
+\par\defComLab{pseudo-observation}{Define a pseudo-observation}\par\par
+\defSub{type} {Define the type of pseudo-observation}
+\par\textbf{\commandlabsubarg{pseudo-observation}{type}{event\_mortality\_at\_age}}\par
+\defSub{year} {Define the year that the observation applies to}
+\defSub{process\_label} {Define the label of the event mortality process}
+\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{min\_age} {Define the minimum age for the observation}
+\defSub{max\_age} {Define the maximum age for the observation}
+\defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
+\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
+\defSub{likelihood}{Define the likelihood for the observation}
+\defSub{process\_error}{Define the process error term}
+\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\par\textbf{\commandlabsubarg{pseudo-observation}{type}{proportions\_at\_age}}\par
+\defSub{year} {Define the year that the observation applies to}
+\defSub{time\_step} {Define the time-step that the observation applies to}
+\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{categories} {Define the categories}
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{min\_age} {Define the minimum age for the observation}
+\defSub{max\_age} {Define the maximum age for the observation}
+\defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
+\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
+\defSub{likelihood}{Define the likelihood for the observation}
+\defSub{process\_error}{Define the process error term}
+\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\par\textbf{\commandlabsubarg{pseudo-observation}{type}{proportions\_by\_category}}\par
+\defSub{year} {Define the year that the observation applies to}
+\defSub{time\_step} {Define the time-step that the observation applies to}
+\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{categories} {Define the categories}
+\defSub{categories2} {Define the categories}
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{selectivities2} {Define the selectivities applied to each category}
+\defSub{min\_age} {Define the minimum age for the observation}
+\defSub{max\_age} {Define the maximum age for the observation}
+\defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
+\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
+\defSub{likelihood}{Define the likelihood for the observation}
+\defSub{process\_error}{Define the process error term}
+\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\par\textbf{\commandlabsubarg{pseudo-observation}{type}{abundance}}\par
+\defSub{year} {Define the year that the observation applies to}
+\defSub{time\_step} {Define the time-step that the observation applies to}
+\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{catchability} {Define the catchability constant label for the observation}
+\defSub{categories} {Define the categories into which recruitment occurs}
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
+\defSub{likelihood}{Define the likelihood for the observation}
+\defSub{delta}{Define the delta robustifying constant for the likelihood}
+\defSub{process\_error}{Define the process error term}
+\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\par\textbf{\commandlabsubarg{pseudo-observation}{type}{biomass}}\par
+\defSub{year} {Define the year that the observation applies to}
+\defSub{time\_step} {Define the time-step that the observation applies to}
+\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{catchability} {Define the catchability constant label for the observation}
+\defSub{categories} {Define the categories into which recruitment occurs}
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
+\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
+\defSub{likelihood}{Define the likelihood for the observation}
+\defSub{process\_error}{Define the process error term}
+\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\subsection{Report command and subcommand syntax}\par
 \defComLab{report}{Define an output report}\par\par
 \defSub{type} {Define the type of report}
 \par\textbf{\commandlabsubarg{report}{type}{spatial\_map}}\par

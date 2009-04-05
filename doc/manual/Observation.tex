@@ -308,9 +308,9 @@ In all three cases, the process error has more effect on small errors than on la
 
 \SPM\ generates simulated observations for the observations defined in the \config\ with \commandlabsubarg{observation}{simulate}{True}. 
 
-First, the model is run using the true free parameter values, and a set of fits is produced for each set of observations. If a set of observations uses ageing error, then ageing error is applied to the fits as usual. If there are relative observations, then the catchability coefficient q is applied to the fits as per normal. 
+First, the model is run using the `true' parameter values, and a set of fits is produced for each set of observations. If a set of observations uses ageing error, then ageing error is applied to the fits as usual. If there are relative observations, then the catchability coefficient $q$ is applied to the fits as per normal. 
 
-Second, each set of observations is randomised, based on (i) the fitted values, (ii) the type of likelihood specified, and (iii) the variability parameters (e.g., \argument{error\_value} and \argument{process\_error}). 
+Second, each set of observations is randomised, based on (i) the fitted values, (ii) the type of likelihood specified, and (iii) the variability parameters (e.g., \subcommand{error\_value} and \subcommand{process\_error}). 
 
 Methods for generating the random error, and hence simulated values, depend on the specific likelihood of each observation. 
 
@@ -331,3 +331,13 @@ Methods for generating the random error, and hence simulated values, depend on t
   \end{enumerate}
 \end{enumerate}
    
+\subsection{Pseudo-observations}
+
+\SPM\ can generate expected values for observations where there is no observed value. These are called pseudo-observations, and can be use to either generate the expected values from \SPM\, or as `observations' to be simulated from when using \SPM\ as an operating model.
+
+All of the observation types in \SPM\ can be used as pseudo-observations. The observation command is \command{pseudo-observation}, and the subcommands are then the same as for observations except that;
+
+\begin{itemize}
+  \item Do not provide observed values ---these are not required to generate expected values of to simulate observations. Note that if you do provide observed values, \SPM\ will ignore them.
+  \item The subcommands \subcommand{likelihood}, \subcommand{error\_value} and \subcommand{process\_error} will be ignored when generating the expected values for the pseudo-observation. However, if simulating (\texttt{spm -s}) then the subcommands \subcommand{likelihood} and \subcommand{error\_value} are required. In this case, \SPM\ needs to know the likelihood and error value to simulate observations. In addition, if the subcommand \subcommand{process\_error} is supplied, \SPM\ will modify the the error value (\subcommand{error\_value}) as usual, before generating the simulated observation.
+\end{itemize}

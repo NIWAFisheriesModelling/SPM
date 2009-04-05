@@ -84,8 +84,6 @@ In addition, the following are optional arguments\index{Optional command line ar
 
 The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. 
 
-In general, the \config\ uses a command-block format to describe commands, subcommands, and their arguments and values. The \config\ consists of any number of command-blocks in any order, but these must be within the \texttt{[population]}, \texttt{[estimation]}, and  \texttt{[report]} sections for the population, estimation, and report commands respectively. 
-
 \subsubsection{Commands}\index{Commands}
 
 \SPM\ has a range of commands that define the model structure, processes, observations, and how tasks are carried out. There are three types of commands, 
@@ -172,4 +170,4 @@ The unique parameter name is used to reference the parameter when estimating, ap
 
 \subsection{\SPM\ exit status values\index{Exit status value}}
 
-When \SPM\ completes its task successfully or errors out gracefully, it returns a single exit status value (0) to the operating system. The operating system will return -1 if \SPM\ terminates unexpectedly. Hence, to determine if \SPM\ completed its task successfully, check the standard output for error and information messages.
+When \SPM\ completes its task successfully or errors out gracefully, it returns a single exit status value (0) to the operating system. The operating system will return -1 if \SPM\ terminates unexpectedly. To determine if \SPM\ has completed its task successfully, check the standard output for error and information messages.
