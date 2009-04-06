@@ -23,134 +23,143 @@ IF (WIN32)
   )
 ENDIF (WIN32)
 
-ADD_LIBRARY(${LIBRARY_NAME}
- src/BaseClasses/CBaseBuild
- src/BaseClasses/CBaseExecute
- src/BaseClasses/CBaseManager
- src/BaseClasses/CBaseObject
- src/BaseClasses/CBaseValidate
- src/BaseClasses/ParameterList/CParameterList
- src/Catchabilities/CCatchability
- src/Catchabilities/CCatchabilityManager
- src/Catchabilities/Factory/CCatchabilityFactory
- src/CConfiguration
- src/ConfigurationLoaders/CConfigurationLoader
- src/CRuntimeController
- src/Estimates/CEstimate
- src/Estimates/CEstimateManager
- src/Estimates/Factory/CEstimateFactory
- src/Helpers/CComparer
- src/Helpers/CConvertor
- src/Helpers/CError
- src/Helpers/CMath
- src/InitializationPhases/CInitializationPhase
- src/InitializationPhases/CInitializationPhaseManager
- src/InitializationPhases/Factory/CInitializationPhaseFactory
- src/Layers/CLayer
- src/Layers/CLayerManager
- src/Layers/Factory/CLayerFactory
- src/Layers/MetaLayer/CMetaLayer
- src/Layers/Numeric/Base/CNumericLayer
- src/Layers/Numeric/CAbundanceDensityLayer
- src/Layers/Numeric/CAbundanceLayer
- src/Layers/Numeric/CBiomassDensityLayer
- src/Layers/Numeric/CBiomassLayer
- src/Layers/Numeric/CDistanceLayer
- src/Layers/Numeric/CDoubleLayer
- src/Layers/String/CStringLayer
- src/MCMC/CMCMC
- src/Minimizers/CMinimizer
- src/Minimizers/CMinimizerManager
- src/Minimizers/DESolver/CDESolver
- src/Minimizers/DESolver/CDESolverCallback
- src/Minimizers/DESolver/Engine/DESolverEngine
- src/Minimizers/Factory/CMinimizerFactory
- src/Minimizers/GammaDiff/CGammaDiff
- src/Minimizers/GammaDiff/CGammaDiffCallback
- src/Minimizers/GammaDiff/Engine/FMM
- src/Minimizers/GammaDiff/Engine/GammaDiffEngine
- src/ObjectiveFunction/CObjectiveFunction
- src/Observations/Children/CAbundanceObservation
- src/Observations/Children/CProportionsAtAgeObservation
- src/Observations/Children/CProportionsByCategoryObservation
- src/Observations/CObservation
- src/Observations/CObservationManager
- src/Observations/Factory/CObservationFactory
- src/ParameterParser/CParamParser
- src/Penalties/CPenalty
- src/Penalties/CPenaltyManager
- src/Penalties/Factory/CPenaltyFactory
- src/PreferenceFunctions/Children/CConstantPreferenceFunction
- src/PreferenceFunctions/Children/CDoubleNormalPreferenceFunction
- src/PreferenceFunctions/Children/CExponentialPreferenceFunction
- src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction
- src/PreferenceFunctions/Children/CLogisticPreferenceFunction
- src/PreferenceFunctions/Children/CNormalPreferenceFunction
- src/PreferenceFunctions/Children/CThresholdBiomassPreferenceFunction
- src/PreferenceFunctions/Children/CThresholdPreferenceFunction
- src/PreferenceFunctions/CPreferenceFunction
- src/PreferenceFunctions/CPreferenceFunctionManager
- src/PreferenceFunctions/Factory/CPreferenceFunctionFactory
- src/Priors/Children/CBetaPrior
- src/Priors/Children/CLogNormalPrior
- src/Priors/Children/CNormalByStdevPrior
- src/Priors/Children/CNormalLogPrior
- src/Priors/Children/CNormalPrior
- src/Priors/Children/CUniformLogPrior
- src/Priors/Children/CUniformPrior
- src/Priors/CPrior
- src/Priors/CPriorManager
- src/Priors/Factory/CPriorFactory
- src/Processes/CProcess
- src/Processes/CProcessManager
- src/Processes/Factory/CProcessFactory
- src/Processes/Movement/Base/CMovementProcess
- src/Processes/Movement/CPreferenceMovementProcess
- src/Processes/Movement/CUniformMovementProcess
- src/Processes/Population/CAgeingProcess
- src/Processes/Population/CAnnualMortalityRateProcess
- src/Processes/Population/CBHRecruitmentProcess
- src/Processes/Population/CBiomassEventMortalityProcess
- src/Processes/Population/CCategoryTransitionProcess
- src/Processes/Population/CCategoryTransitionRateProcess
- src/Processes/Population/CConstantMortalityRateProcess
- src/Processes/Population/CConstantRecruitmentProcess
- src/Processes/Population/CEventMortalityProcess
- src/Processes/Population/CNaturalMortalityProcess
- src/Profiles/CProfile
- src/Profiles/CProfileManager
- src/Profiles/Factory/CProfileFactory
- src/Reporters/Children/Base/CFileReporter
- src/Reporters/Children/CEstimateSummaryReporter
- src/Reporters/Children/CEstimateValueReporter
- src/Reporters/Children/CObjectiveFunctionReporter
- src/Reporters/Children/CStandardHeaderReporter
- src/Reporters/Children/CWorldStateReporter
- src/Reporters/CReporter
- src/Reporters/CReporterManager
- src/Reporters/Factory/CReporterFactory
- src/RuntimeThread/CRuntimeThread
- src/Selectivities/Children/Base/CCachedSelectivity
- src/Selectivities/Children/CAllValuesBoundedSelectivity
- src/Selectivities/Children/CAllValuesSelectivity
- src/Selectivities/Children/CConstantSelectivity
- src/Selectivities/Children/CDoubleExponentialSelectivity
- src/Selectivities/Children/CDoubleNormalSelectivity
- src/Selectivities/Children/CIncreasingSelectivity
- src/Selectivities/Children/CKnifeEdgeSelectivity
- src/Selectivities/Children/CLogisticProducingSelectivity
- src/Selectivities/Children/CLogisticSelectivity
- src/Selectivities/CSelectivity
- src/Selectivities/CSelectivityManager
- src/Selectivities/Factory/CSelectivityFactory
- src/TimeSteps/CTimeStep
- src/TimeSteps/CTimeStepManager
- src/TimeSteps/Factory/CTimeStepFactory
- src/World/CWorld
- src/World/CWorldSquare
- src/World/WorldSquareCollection/CWorldSquareCollection
+SET(SOURCE_FILES
+src/MCMC/CMCMC.cpp
+src/ParameterParser/CParamParser.cpp
+src/CConfiguration.cpp
+src/World/WorldSquareCollection/CWorldSquareCollection.cpp
+src/World/CWorldSquare.cpp
+src/World/CWorld.cpp
+src/DerivedQuantities/CDerivedQuantity.cpp
+src/DerivedQuantities/CDerivedQuantityManager.cpp
+src/Layers/Numeric/Base/CNumericLayer.cpp
+src/Layers/Numeric/CAbundanceDensityLayer.cpp
+src/Layers/Numeric/CBiomassDensityLayer.cpp
+src/Layers/Numeric/CAbundanceLayer.cpp
+src/Layers/Numeric/CDistanceLayer.cpp
+src/Layers/Numeric/CBiomassLayer.cpp
+src/Layers/Numeric/CDoubleLayer.cpp
+src/Layers/CLayer.cpp
+src/Layers/String/CStringLayer.cpp
+src/Layers/CLayerManager.cpp
+src/Layers/MetaLayer/CMetaLayer.cpp
+src/Layers/Factory/CLayerFactory.cpp
+src/Priors/Children/CNormalPrior.cpp
+src/Priors/Children/CNormalLogPrior.cpp
+src/Priors/Children/CNormalByStdevPrior.cpp
+src/Priors/Children/CUniformLogPrior.cpp
+src/Priors/Children/CLogNormalPrior.cpp
+src/Priors/Children/CUniformPrior.cpp
+src/Priors/Children/CBetaPrior.cpp
+src/Priors/CPrior.cpp
+src/Priors/Factory/CPriorFactory.cpp
+src/Priors/CPriorManager.cpp
+src/CRuntimeController.cpp
+src/ObjectiveFunction/CObjectiveFunction.cpp
+src/Penalties/CPenalty.cpp
+src/Penalties/Factory/CPenaltyFactory.cpp
+src/Penalties/CPenaltyManager.cpp
+src/Processes/Population/CEventMortalityProcess.cpp
+src/Processes/Population/CAnnualMortalityRateProcess.cpp
+src/Processes/Population/CBiomassEventMortalityProcess.cpp
+src/Processes/Population/CConstantMortalityRateProcess.cpp
+src/Processes/Population/CCategoryTransitionProcess.cpp
+src/Processes/Population/CAgeingProcess.cpp
+src/Processes/Population/CBHRecruitmentProcess.cpp
+src/Processes/Population/CCategoryTransitionRateProcess.cpp
+src/Processes/Population/CNaturalMortalityProcess.cpp
+src/Processes/Population/CConstantRecruitmentProcess.cpp
+src/Processes/Movement/Base/CMovementProcess.cpp
+src/Processes/Movement/CPreferenceMovementProcess.cpp
+src/Processes/Movement/CUniformMovementProcess.cpp
+src/Processes/CProcess.cpp
+src/Processes/CProcessManager.cpp
+src/Processes/Factory/CProcessFactory.cpp
+src/Estimates/CEstimateManager.cpp
+src/Estimates/Factory/CEstimateFactory.cpp
+src/Estimates/CEstimate.cpp
+src/Reports/CReport.cpp
+src/Reports/Children/Base/CFileReport.cpp
+src/Reports/Children/CStandardHeaderReport.cpp
+src/Reports/Children/CWorldStateReport.cpp
+src/Reports/Children/CEstimateValueReport.cpp
+src/Reports/Children/CInitializationReport.cpp
+src/Reports/Children/CObjectiveFunctionReport.cpp
+src/Reports/Children/CPartitionReport.cpp
+src/Reports/Children/CObservationReport.cpp
+src/Reports/Children/CEstimateSummaryReport.cpp
+src/Reports/Children/CSelectivityReport.cpp
+src/Reports/Children/CDerivedQuantityReport.cpp
+src/Reports/Children/CRandomNumberSeedReport.cpp
+src/Reports/CReportManager.cpp
+src/Reports/Factory/CReportFactory.cpp
+src/Profiles/CProfileManager.cpp
+src/Profiles/CProfile.cpp
+src/Profiles/Factory/CProfileFactory.cpp
+src/Selectivities/Children/Base/CCachedSelectivity.cpp
+src/Selectivities/Children/CDoubleNormalSelectivity.cpp
+src/Selectivities/Children/CIncreasingSelectivity.cpp
+src/Selectivities/Children/CConstantSelectivity.cpp
+src/Selectivities/Children/CAllValuesSelectivity.cpp
+src/Selectivities/Children/CAllValuesBoundedSelectivity.cpp
+src/Selectivities/Children/CDoubleExponentialSelectivity.cpp
+src/Selectivities/Children/CLogisticProducingSelectivity.cpp
+src/Selectivities/Children/CKnifeEdgeSelectivity.cpp
+src/Selectivities/Children/CLogisticSelectivity.cpp
+src/Selectivities/CSelectivity.cpp
+src/Selectivities/Factory/CSelectivityFactory.cpp
+src/Selectivities/CSelectivityManager.cpp
+src/Observations/Children/CAbundanceObservation.cpp
+src/Observations/Children/CProportionsByCategoryObservation.cpp
+src/Observations/Children/CProportionsAtAgeObservation.cpp
+src/Observations/CObservationManager.cpp
+src/Observations/Factory/CObservationFactory.cpp
+src/Observations/CObservation.cpp
+src/TimeSteps/CTimeStepManager.cpp
+src/TimeSteps/Factory/CTimeStepFactory.cpp
+src/TimeSteps/CTimeStep.cpp
+src/Minimizers/CMinimizer.cpp
+src/Minimizers/DESolver/Engine/DESolverEngine.cpp
+src/Minimizers/DESolver/CDESolverCallback.cpp
+src/Minimizers/DESolver/CDESolver.cpp
+src/Minimizers/Factory/CMinimizerFactory.cpp
+src/Minimizers/GammaDiff/Engine/GammaDiffEngine.cpp
+src/Minimizers/GammaDiff/Engine/FMM.cpp
+src/Minimizers/GammaDiff/CGammaDiff.cpp
+src/Minimizers/GammaDiff/CGammaDiffCallback.cpp
+src/Minimizers/CMinimizerManager.cpp
+src/RuntimeThread/CRuntimeThread.cpp
+src/Catchabilities/CCatchabilityManager.cpp
+src/Catchabilities/Factory/CCatchabilityFactory.cpp
+src/Catchabilities/CCatchability.cpp
+src/PreferenceFunctions/CPreferenceFunctionManager.cpp
+src/PreferenceFunctions/Children/CThresholdBiomassPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CDoubleNormalPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CThresholdPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CLogisticPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CExponentialPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CConstantPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CNormalPreferenceFunction.cpp
+src/PreferenceFunctions/CPreferenceFunction.cpp
+src/PreferenceFunctions/Factory/CPreferenceFunctionFactory.cpp
+src/ConfigurationLoaders/CConfigurationLoader.cpp
+src/InitializationPhases/CInitializationPhase.cpp
+src/InitializationPhases/Factory/CInitializationPhaseFactory.cpp
+src/InitializationPhases/CInitializationPhaseManager.cpp
+src/BaseClasses/CBaseManager.cpp
+src/BaseClasses/CBaseBuild.cpp
+src/BaseClasses/CBaseObject.cpp
+src/BaseClasses/CBaseExecute.cpp
+src/BaseClasses/ParameterList/CParameterList.cpp
+src/BaseClasses/CBaseValidate.cpp
+src/Helpers/CComparer.cpp
+src/Helpers/CError.cpp
+src/Helpers/CMath.cpp
+src/Helpers/CConvertor.cpp
 )
 
+ADD_LIBRARY(${LIBRARY_NAME} ${SOURCE_FILES} )
 SET_TARGET_PROPERTIES(${LIBRARY_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -ggdb -Wall -fmessage-length=0" )
 
 SET(MAIN_LIBRARIES
@@ -174,28 +183,31 @@ ENDIF (WIN32)
 TARGET_LINK_LIBRARIES(${MAIN_NAME} ${LIBRARY_NAME} ${MAIN_LIBRARIES})
 
 ADD_EXECUTABLE(${TEST_NAME}
-src/Catchabilities/Factory/CCatchabilityFactory.Test.cpp
-src/Estimates/Factory/CEstimateFactory.Test.cpp
-src/InitializationPhases/Factory/CInitializationPhaseFactory.Test.cpp
-src/Layers/Factory/CLayerFactory.Test.cpp src/Minimizers/Factory/CMinimizerFactory.Test.cpp
-src/Observations/Factory/CObservationFactory.Test.cpp src/Penalties/Factory/CPenaltyFactory.Test.cpp
-src/PreferenceFunctions/Children/CConstantPreferenceFunction.Test.cpp
-src/PreferenceFunctions/Children/CDoubleNormalPreferenceFunction.Test.cpp
-src/PreferenceFunctions/Children/CExponentialPreferenceFunction.Test.cpp
-src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction.Test.cpp
-src/PreferenceFunctions/Children/CLogisticPreferenceFunction.Test.cpp
-src/PreferenceFunctions/Children/CNormalPreferenceFunction.Test.cpp
-src/PreferenceFunctions/Factory/CPreferenceFunctionFactory.Test.cpp
+src/Layers/Factory/CLayerFactory.Test.cpp
 src/Priors/Factory/CPriorFactory.Test.cpp
+src/Penalties/Factory/CPenaltyFactory.Test.cpp
+src/Estimates/Factory/CEstimateFactory.Test.cpp
+src/TestFixtures/CLayer_Fixture.cpp
+src/TestFixtures/CWorld_Fixture.cpp
 src/Profiles/Factory/CProfileFactory.Test.cpp
 src/Selectivities/Children/CConstantSelectivity.Test.cpp
-src/Selectivities/Children/CDoubleNormalSelectivity.Test.cpp
-src/Selectivities/Children/CKnifeEdgeSelectivity.Test.cpp
 src/Selectivities/Children/CLogisticProducingSelectivity.Test.cpp
 src/Selectivities/Children/CLogisticSelectivity.Test.cpp
+src/Selectivities/Children/CDoubleNormalSelectivity.Test.cpp
+src/Selectivities/Children/CKnifeEdgeSelectivity.Test.cpp
 src/Selectivities/Factory/CSelectivityFactory.Test.cpp
+src/Observations/Factory/CObservationFactory.Test.cpp
 src/TimeSteps/Factory/CTimeStepFactory.Test.cpp
-src/TestFixtures/CWorld_Fixture src/TestFixtures/CLayer_Fixture
+src/Minimizers/Factory/CMinimizerFactory.Test.cpp
+src/Catchabilities/Factory/CCatchabilityFactory.Test.cpp
+src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction.Test.cpp
+src/PreferenceFunctions/Children/CDoubleNormalPreferenceFunction.Test.cpp
+src/PreferenceFunctions/Children/CLogisticPreferenceFunction.Test.cpp
+src/PreferenceFunctions/Children/CNormalPreferenceFunction.Test.cpp
+src/PreferenceFunctions/Children/CExponentialPreferenceFunction.Test.cpp
+src/PreferenceFunctions/Children/CConstantPreferenceFunction.Test.cpp
+src/PreferenceFunctions/Factory/CPreferenceFunctionFactory.Test.cpp
+src/InitializationPhases/Factory/CInitializationPhaseFactory.Test.cpp
 src/Main
 )
 
@@ -208,132 +220,9 @@ ENDIF (WIN32)
 TARGET_LINK_LIBRARIES(${TEST_NAME} ${LIBRARY_NAME} ${MAIN_LIBRARIES} ${TEST_LIBRARIES})
 
 ADD_EXECUTABLE(${OPTI_NAME}
- src/BaseClasses/CBaseBuild
- src/BaseClasses/CBaseExecute
- src/BaseClasses/CBaseManager
- src/BaseClasses/CBaseObject
- src/BaseClasses/CBaseValidate
- src/BaseClasses/ParameterList/CParameterList
- src/Catchabilities/CCatchability
- src/Catchabilities/CCatchabilityManager
- src/Catchabilities/Factory/CCatchabilityFactory
- src/CConfiguration
- src/ConfigurationLoaders/CConfigurationLoader
- src/CRuntimeController
- src/Estimates/CEstimate
- src/Estimates/CEstimateManager
- src/Estimates/Factory/CEstimateFactory
- src/Helpers/CComparer
- src/Helpers/CConvertor
- src/Helpers/CError
- src/Helpers/CMath
- src/InitializationPhases/CInitializationPhase
- src/InitializationPhases/CInitializationPhaseManager
- src/InitializationPhases/Factory/CInitializationPhaseFactory
- src/Layers/CLayer
- src/Layers/CLayerManager
- src/Layers/Factory/CLayerFactory
- src/Layers/MetaLayer/CMetaLayer
- src/Layers/Numeric/Base/CNumericLayer
- src/Layers/Numeric/CAbundanceDensityLayer
- src/Layers/Numeric/CAbundanceLayer
- src/Layers/Numeric/CBiomassDensityLayer
- src/Layers/Numeric/CBiomassLayer
- src/Layers/Numeric/CDistanceLayer
- src/Layers/Numeric/CDoubleLayer
- src/Layers/String/CStringLayer
- src/MCMC/CMCMC
- src/Minimizers/CMinimizer
- src/Minimizers/CMinimizerManager
- src/Minimizers/DESolver/CDESolver
- src/Minimizers/DESolver/CDESolverCallback
- src/Minimizers/DESolver/Engine/DESolverEngine
- src/Minimizers/Factory/CMinimizerFactory
- src/Minimizers/GammaDiff/CGammaDiff
- src/Minimizers/GammaDiff/CGammaDiffCallback
- src/Minimizers/GammaDiff/Engine/FMM
- src/Minimizers/GammaDiff/Engine/GammaDiffEngine
- src/ObjectiveFunction/CObjectiveFunction
- src/Observations/Children/CAbundanceObservation
- src/Observations/Children/CProportionsAtAgeObservation
- src/Observations/Children/CProportionsByCategoryObservation
- src/Observations/CObservation
- src/Observations/CObservationManager
- src/Observations/Factory/CObservationFactory
- src/ParameterParser/CParamParser
- src/Penalties/CPenalty
- src/Penalties/CPenaltyManager
- src/Penalties/Factory/CPenaltyFactory
- src/PreferenceFunctions/Children/CConstantPreferenceFunction
- src/PreferenceFunctions/Children/CDoubleNormalPreferenceFunction
- src/PreferenceFunctions/Children/CExponentialPreferenceFunction
- src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction
- src/PreferenceFunctions/Children/CLogisticPreferenceFunction
- src/PreferenceFunctions/Children/CNormalPreferenceFunction
- src/PreferenceFunctions/Children/CThresholdBiomassPreferenceFunction
- src/PreferenceFunctions/Children/CThresholdPreferenceFunction
- src/PreferenceFunctions/CPreferenceFunction
- src/PreferenceFunctions/CPreferenceFunctionManager
- src/PreferenceFunctions/Factory/CPreferenceFunctionFactory
- src/Priors/Children/CBetaPrior
- src/Priors/Children/CLogNormalPrior
- src/Priors/Children/CNormalByStdevPrior
- src/Priors/Children/CNormalLogPrior
- src/Priors/Children/CNormalPrior
- src/Priors/Children/CUniformLogPrior
- src/Priors/Children/CUniformPrior
- src/Priors/CPrior
- src/Priors/CPriorManager
- src/Priors/Factory/CPriorFactory
- src/Processes/CProcess
- src/Processes/CProcessManager
- src/Processes/Factory/CProcessFactory
- src/Processes/Movement/Base/CMovementProcess
- src/Processes/Movement/CPreferenceMovementProcess
- src/Processes/Movement/CUniformMovementProcess
- src/Processes/Population/CAgeingProcess
- src/Processes/Population/CAnnualMortalityRateProcess
- src/Processes/Population/CBHRecruitmentProcess
- src/Processes/Population/CBiomassEventMortalityProcess
- src/Processes/Population/CCategoryTransitionProcess
- src/Processes/Population/CCategoryTransitionRateProcess
- src/Processes/Population/CConstantMortalityRateProcess
- src/Processes/Population/CConstantRecruitmentProcess
- src/Processes/Population/CEventMortalityProcess
- src/Processes/Population/CNaturalMortalityProcess
- src/Profiles/CProfile
- src/Profiles/CProfileManager
- src/Profiles/Factory/CProfileFactory
- src/Reporters/Children/Base/CFileReporter
- src/Reporters/Children/CEstimateSummaryReporter
- src/Reporters/Children/CEstimateValueReporter
- src/Reporters/Children/CObjectiveFunctionReporter
- src/Reporters/Children/CStandardHeaderReporter
- src/Reporters/Children/CWorldStateReporter
- src/Reporters/CReporter
- src/Reporters/CReporterManager
- src/Reporters/Factory/CReporterFactory
- src/RuntimeThread/CRuntimeThread
- src/Selectivities/Children/Base/CCachedSelectivity
- src/Selectivities/Children/CAllValuesBoundedSelectivity
- src/Selectivities/Children/CAllValuesSelectivity
- src/Selectivities/Children/CConstantSelectivity
- src/Selectivities/Children/CDoubleExponentialSelectivity
- src/Selectivities/Children/CDoubleNormalSelectivity
- src/Selectivities/Children/CIncreasingSelectivity
- src/Selectivities/Children/CKnifeEdgeSelectivity
- src/Selectivities/Children/CLogisticProducingSelectivity
- src/Selectivities/Children/CLogisticSelectivity
- src/Selectivities/CSelectivity
- src/Selectivities/CSelectivityManager
- src/Selectivities/Factory/CSelectivityFactory
- src/TimeSteps/CTimeStep
- src/TimeSteps/CTimeStepManager
- src/TimeSteps/Factory/CTimeStepFactory
- src/World/CWorld
- src/World/CWorldSquare
- src/World/WorldSquareCollection/CWorldSquareCollection
- src/Main)
+ ${SOURCE_FILES}
+ src/Main
+ )
 
 IF (WIN32)
   SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized" LINK_FLAGS ${LINK_ICON})
