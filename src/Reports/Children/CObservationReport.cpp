@@ -29,7 +29,10 @@ void CObservationReport::execute() {
   this->start();
 
   // TODO: Add Observation Writing Stuff Cout
-  cout << "Not Yet Implemented" << endl;
+  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+  cout << "report.type=observation\n";
+  cout << "# Not Yet Implemented" << endl;
+  cout << "*end\n" << endl;
 
   this->end();
 }

@@ -88,6 +88,7 @@ void CPartitionReport::execute() {
 
     // Print Out
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << "report.type=partition\n";
     cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     cout << PARAM_COLUMN << CONFIG_SEPERATOR_ESTIMATE_VALUES,
     cout << PARAM_CATEGORY;
@@ -121,8 +122,7 @@ void CPartitionReport::execute() {
         }
       }
     }
-
-    cout << endl;
+    cout << "*end\n" << endl;
 
     this->end();
   } catch (string Ex) {

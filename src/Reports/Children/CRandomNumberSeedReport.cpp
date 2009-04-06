@@ -34,7 +34,9 @@ void CRandomNumberSeedReport::execute() {
 
   // Output
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+  cout << "report.type=random_number_seed\n";
   cout << PARAM_RANDOM_NUMBER_SEED << CONFIG_RATIO_SEPARATOR << " " << pConfig->getRandomSeed() << "\n";
+  cout << "*end\n" << endl;
 
   this->end();
 }

@@ -79,15 +79,18 @@ void CSelectivityReport::execute() {
 
   // Output Header
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+  cout << "report.type=selectivity\n";
   cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
   for (int i = 1; i < iSpread; ++i)
     cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
   cout << "\n";
 
+  cout << "values" << CONFIG_RATIO_SEPARATOR << " ";
   cout << pSelectivity->getResult(0);
   for (int i = 1; i < iSpread; ++i)
     cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << pSelectivity->getResult(i);
-  cout << endl;
+  cout << "\n";
+  cout << "*end\n" << endl;
 
   this->end();
 }

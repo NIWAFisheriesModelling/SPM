@@ -40,16 +40,18 @@ void CEstimateSummaryReport::execute() {
   CEstimateManager::Instance()->fillVector(vEstimates);
 
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+  cout << "report.type=estimate_summary\n\n";
 
   foreach(CEstimate *Estimate, vEstimates) {
-    cout << Estimate->getParameter() << "\n";
+    cout << "parameter " << Estimate->getParameter() << "\n";
     cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
     cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
     cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
     cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n" << endl;
   }
 
-  cout << endl;
+  cout << "*end\n" << endl;
+
   // End IO
   this->end();
 }

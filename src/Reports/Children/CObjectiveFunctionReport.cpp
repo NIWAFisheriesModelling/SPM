@@ -37,6 +37,7 @@ void CObjectiveFunctionReport::execute() {
 
   // Print
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+  cout << "report.type=objective_function\n";
   int iCount = pObjectiveFunction->getScoreListCount();
   for (int i = 0; i < iCount; ++i) {
     SScore *pScore = pObjectiveFunction->getScore(i);
@@ -44,7 +45,7 @@ void CObjectiveFunctionReport::execute() {
   }
 
   cout << PARAM_TOTAL_SCORE << ": " << pObjectiveFunction->getScore() << endl;
-  cout << endl;
+  cout << "*end\n" << endl;
   this->end();
 }
 
