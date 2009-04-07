@@ -43,7 +43,7 @@ void CEstimateSummaryReport::execute() {
   cout << "report.type=estimate_summary\n\n";
 
   foreach(CEstimate *Estimate, vEstimates) {
-    cout << "parameter:" << Estimate->getParameter() << "\n";
+    cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";
     cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
     cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
     cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
