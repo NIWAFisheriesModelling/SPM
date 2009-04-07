@@ -1,5 +1,4 @@
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
-"spm.make.filename"<-
+"spm.make.filename" <-
 function(file,path="")
 {
   if(path != "") {

@@ -1,6 +1,3 @@
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
-
-
 "extract" <-
 function(file,path=""){
   if(missing(path)) path<-""
@@ -167,8 +164,3 @@ function(file,path=""){
   }
   return(res)
 }
-
-file<-"run.log"
-path<-"c:\\X\\no_tag"
-
-a<-extract(file,path)
