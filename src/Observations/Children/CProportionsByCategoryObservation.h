@@ -28,8 +28,8 @@ protected:
   // Variables
   map<string, vector<double> > mvProportionMatrix;
   map<string, vector<double> > mvErrorValue;
-  vector<string>             vPopulationCategoryNames;
-  vector<int>                vPopulationCategories;
+  vector<string>             vTargetCategoryNames;
+  vector<int>                vTargetCategories;
 
   double                     *pAgeResults;
   double                     *pCombinedAgeResults;
@@ -37,8 +37,8 @@ protected:
   int                        iMaxAge;
   int                        iArraySize;
   bool                       bAgePlus;
-  vector<string>             vPopulationSelectivityNames;
-  vector<CSelectivity*>      vPopulationSelectivities;
+  vector<string>             vTargetSelectivityNames;
+  vector<CSelectivity*>      vTargetSelectivities;
   double                     dDelta;
 };
 

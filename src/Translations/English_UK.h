@@ -248,8 +248,6 @@
 #define PARAM_PARAMETER                           "parameter"
 #define PARAM_PARTITION                           "partition"
 #define PARAM_PENALTY                             "penalty"
-#define PARAM_POPULATION_CATEGORIES               "population_categories"
-#define PARAM_POPULATION_SELECTIVITIES            "population_selectivities"
 #define PARAM_PREFERENCE                          "preference"
 #define PARAM_PREFERENCE_FUNCTION                 "preference_function"
 #define PARAM_PREFERENCE_FUNCTIONS                "preference_functions"

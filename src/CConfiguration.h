@@ -42,7 +42,7 @@ public:
   void                       setConfigFile(string value) { sConfigFile = value; }
   string                     getConfigFile() { return sConfigFile; }
   void                       setInputValuesFile(string value) { sInputValuesFile = value; }
-  string                     getInputValuesFile() { return sInputValuesFile; }
+  //string                     getInputValuesFile() { return sInputValuesFile; }
   void                       setNumberOfThreads(int value) { iNumberOfThreads = value; }
   int                        getNumberOfThreads() { return iNumberOfThreads; }
   void                       setUseEstimateValues(bool value) { bUseEstimateValues = value; }

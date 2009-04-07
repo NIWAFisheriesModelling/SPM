@@ -149,6 +149,7 @@ void CObjectiveFunction::execute() {
     addScore(sLabel, dValue);
   }
 
+  // TODO: Debug Code
   cout << "Total Score: " << dScore << endl;
 }
 

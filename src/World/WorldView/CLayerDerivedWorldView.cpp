@@ -1,0 +1,93 @@
+//============================================================================
+// Name        : CLayerDerivedWorldView.cpp
+// Author      : S.Rasmussen
+// Date        : 7/04/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+//============================================================================
+
+// Local Headers
+#include "CLayerDerivedWorldView.h"
+#include "../../Layers/String/CStringLayer.h"
+#include "../../Helpers/ForEach.h"
+#include "../CWorldSquare.h"
+
+//**********************************************************************
+// CLayerDerivedWorldView::CLayerDerivedWorldView(CStringLayer *sourceLayer)
+// Default Constructor
+//**********************************************************************
+CLayerDerivedWorldView::CLayerDerivedWorldView(CStringLayer *sourceLayer) {
+  // Variables
+  pSourceLayer = sourceLayer;
+
+  pParameterList->addParameter(PARAM_LABEL, PARAM_ZERO);
+}
+
+//**********************************************************************
+// CWorldSquare* CLayerDerivedWorldView::getSquare(string area)
+// Get A Square From our Map of Areas.
+//**********************************************************************
+CWorldSquare* CLayerDerivedWorldView::getSquare(string area) {
+  try {
+    if (mView[area] == 0)
+      throw string("Area doesn't exist"); // TODO: Add proper error message
+  } catch (string Ex) {
+    Ex = "CLayerDerivedWorldView.getSquare(" + area + ")->" + Ex;
+    throw Ex;
+  }
+
+  return mView[area];
+}
+
+//**********************************************************************
+// void CLayerDerivedWorldView::build()
+// Build our Derived View of the World
+//**********************************************************************
+void CLayerDerivedWorldView::build() {
+  try {
+
+    // Populate our map with the different squares we have
+    for (int i = 0; i < iWorldHeight; ++i)
+      for (int j = 0; j < iWorldWidth; ++j)
+        mvAreas[pSourceLayer->getValue(i,j)].push_back(pWorld->getBaseSquare(i,j));
+
+    // Populate some variables
+    int iRows       = pWorld->getCategoryCount();
+    int iAgeSpread  = pWorld->getMaxAge() - (pWorld->getMinAge() + 1);
+
+    // Loop through the areas.
+    map<string, vector<CWorldSquare*> >::iterator mvAreaPtr = mvAreas.begin();
+    while(mvAreaPtr != mvAreas.end()) {
+      CWorldSquare *pNewSquare = new CWorldSquare();
+      pNewSquare->build();
+
+      // Loop through the squares in this area.
+      foreach(CWorldSquare *Square, (*mvAreaPtr).second) {
+        for (int i = 0; i < iRows; ++i)
+          for (int j = 0; j < iAgeSpread; ++j)
+            pNewSquare->addValue(i, j, Square->getValue(i, j));
+      }
+
+      // Assign Square.
+      mView[(*mvAreaPtr).first] = pNewSquare;
+      mvAreaPtr++;
+    }
+
+  } catch (string Ex) {
+    Ex = "CLayerDerivedWorldView.build()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// CLayerDerivedWorldView::~CLayerDerivedWorldView()
+// Destructor
+//**********************************************************************
+CLayerDerivedWorldView::~CLayerDerivedWorldView() {
+  // Free Memory
+  map<string, CWorldSquare*>::iterator mViewPtr = mView.begin();
+  while (mViewPtr != mView.end()) {
+    delete (*mViewPtr).second;
+    mViewPtr++;
+  }
+}
