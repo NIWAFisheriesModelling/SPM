@@ -2,5 +2,5 @@
 "spm.version"<-
 function()
 {
-  cat(paste("spm R package (",spm.Rpackage.version(),") for use with spm ",spm.binary.version(),"\n",sep=""))
+  cat(paste("spm R package for use with spm ",spm.binary.version(),"\n",sep=""))
 }
