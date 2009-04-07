@@ -157,6 +157,7 @@ src/Helpers/CComparer.cpp
 src/Helpers/CError.cpp
 src/Helpers/CMath.cpp
 src/Helpers/CConvertor.cpp
+src/World/WorldView/CLayerDerivedWorldView.cpp
 )
 
 ADD_LIBRARY(${LIBRARY_NAME} ${SOURCE_FILES} )
