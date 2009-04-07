@@ -1,7 +1,7 @@
 Package: casal
 Title: SPM extract package
-Version: 0.1
-Date: 2008-03-19
+Version: 1.0
+Date: 2009-04-07
 Author: A. Dunn & S. Rasmussen
 Description: A set of R functions are available for reading SPM input and output files.
 Maintainer: A. Dunn
