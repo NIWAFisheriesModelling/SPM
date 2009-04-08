@@ -11,6 +11,16 @@
 
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
+#include "../World/WorldView/CLayerDerivedWorldView.h"
+
+// structures
+struct SComparison {
+  string sKey;
+  double dExpectedValue;
+  double dObservedValue;
+  double dErrorValue;
+  double dScore;
+};
 
 // Classes
 class CStringLayer;
@@ -31,9 +41,11 @@ public:
   string                     getCategory(int index);
   string                     getSelectivity(int index);
   double                     getScore() { return dScore; }
+  void                       saveComparison(string key, double expected, double observed, double errorValue, double score);
+  void                       fillComparisons(vector<SComparison*> &comparisons);
   virtual void               validate();
 	virtual void               build();
-	virtual void               execute() = 0;
+	virtual void               execute();
 
 protected:
   // Variables
@@ -48,6 +60,8 @@ protected:
   vector<string>             vSelectivityNames;
   vector<CSelectivity*>      vSelectivities;
   string                     sLikelihood;
+  vector<SComparison*>       vComparisons;
+  CLayerDerivedWorldView     *pWorldView;
 };
 
 #endif /*COBSERVATION_H_*/

@@ -71,25 +71,25 @@ void CObservationManager::fillVector(vector<CObservation*> &list) {
 }
 
 //**********************************************************************
-// CObservation* CObservationManager::getObservation(int index)
-// Get Observation by Index
+// CObservation* CObservationManager::getObservation(string label)
+// Get Observation by label
 //**********************************************************************
-//CObservation* CObservationManager::getObservation(int index) {
-//  try {
-//    if (index < 0)
-//      CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-//    if (index >= (int)vObservationList.size())
-//      CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_OBSERVATIONS);
-//
-//    return vObservationList[index];
-//
-//  } catch (string Ex) {
-//    Ex = "CObservationManager.getObservation()->" + Ex;
-//    throw Ex;
-//  }
-//
-//  return 0;
-//}
+CObservation* CObservationManager::getObservation(string label) {
+  try {
+    foreach(CObservation *Observation, vObservationList) {
+      if (Observation->getLabel() == label)
+        return Observation;
+    }
+
+    CError::errorUnknown(PARAM_OBSERVATION, label);
+
+  } catch (string Ex) {
+    Ex = "CObservationManager.getObservation()->" + Ex;
+    throw Ex;
+  }
+
+  return 0;
+}
 
 //**********************************************************************
 // void CObservationManager::clone(CObservationManager *Manager)

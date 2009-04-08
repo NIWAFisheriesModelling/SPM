@@ -48,54 +48,6 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
 }
 
 //**********************************************************************
-// string CProportionsAtAgeObservation::getProportionKey(int index)
-// Get key from our matrix for the index
-//**********************************************************************
-//string CProportionsAtAgeObservation::getProportionKey(int index) {
-//
-//  map<string, vector<double> >::iterator ptr = mvProportionMatrix.begin();
-//  for (int i = 0; i < index; ++i)
-//    ptr++;
-//  return (*ptr).first;
-//}
-
-//**********************************************************************
-// int CProportionsAtAgeObservation::getProportionKeyValueCount(string key)
-// Get the number of elements for our key in the vector
-//**********************************************************************
-//int CProportionsAtAgeObservation::getProportionKeyValueCount(string key) {
-//  return (int)mvProportionMatrix[key].size();
-//}
-
-//**********************************************************************
-// double CProportionsAtAgeObservation::getProportionValue(string key, int index)
-// Return value from the vector in the map at key
-//**********************************************************************
-//double CProportionsAtAgeObservation::getProportionValue(string key, int index) {
-//  return mvProportionMatrix[key][index];
-//}
-
-//**********************************************************************
-// string CProportionsAtAgeObservation::getNKey(int index)
-// Get key for Index
-//**********************************************************************
-//string CProportionsAtAgeObservation::getNKey(int index) {
-//
-//  map<string, double>::iterator ptr = mN.begin();
-//  for (int i = 0; i < index; ++i)
-//    ptr++;
-//  return (*ptr).first;
-//}
-
-//**********************************************************************
-// double CProportionsAtAgeObservation::getNValue(string key)
-// Return Double For Key
-//**********************************************************************
-//double CProportionsAtAgeObservation::getNValue(string key) {
-//  return mN[key];
-//}
-
-//**********************************************************************
 // void CProportionsAtAgeObservation::Validate()
 // Validate
 //**********************************************************************
@@ -241,39 +193,34 @@ void CProportionsAtAgeObservation::execute() {
     double dRunningTotal      = 0.0;
     double dCurrentProp       = 0.0;
 
-    // Loop Through Observations
-    map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
-    while (vPropPtr != mvProportionMatrix.end()) {
-      // For this Key, Populate our Age Results For Each Age
-      // Loop Through Each Square In Layer
-      for (int i = 0; i < pLayer->getHeight(); ++i) {
-        for (int j = 0; j < pLayer->getWidth(); ++j) {
-          // Check if this matches the key
-          if (pLayer->getValue(i, j) == (*vPropPtr).first) {
-            // Get our Square and check if it's enabled
-            pBaseSquare = pWorld->getBaseSquare(i, j);
-            if (!pBaseSquare->getEnabled())
-              continue;
+    // Base
+    CObservation::execute();
 
-            // Loop Through Ages in that square and add them to count
-            for (int k = iSquareAgeOffset; k < (iArraySize+iSquareAgeOffset); ++k) {
-              // Loop Through Categories
-              for (int l = 0; l < (int)vCategories.size(); ++l) {
-                double dSelectResult = vSelectivities[l]->getResult(k);
-                pAgeResults[k] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
-              }
-            }
-            // And if the observation has a plus group
-            if(bAgePlus) {
-              // Loop Through Plus Group Ages in that square and add them to count for the Plus group
-              for (int k = (iArraySize+iSquareAgeOffset); k < pWorld->getMaxAge(); ++k) {
-                // Loop Through Categories
-                for (int l = 0; l < (int)vCategories.size(); ++l) {
-                  double dSelectResult = vSelectivities[l]->getResult(k);
-                  pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
-                }
-              }
-            }
+    pWorldView->execute();
+
+    // Loop Through Observations
+    map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
+    while (mvPropPtr != mvProportionMatrix.end()) {
+      // Get Square for this Area
+      CWorldSquare *pSquare = pWorldView->getSquare((*mvPropPtr).first);
+
+      // Loop Through Ages in that square and add them to count
+      for (int i = iSquareAgeOffset; i < (iArraySize+iSquareAgeOffset); ++i) {
+        // Loop Through Categories
+        for (int j = 0; j < (int)vCategories.size(); ++j) {
+          double dSelectResult = vSelectivities[j]->getResult(i);
+          pAgeResults[i] += dSelectResult * pSquare->getPopulationInCategoryForAge(i, j);
+        }
+      }
+
+      // And if the observation has a plus group
+      if(bAgePlus) {
+        // Loop Through Plus Group Ages in that square and add them to count for the Plus group
+        for (int i = (iArraySize+iSquareAgeOffset); i < pWorld->getMaxAge(); ++i) {
+          // Loop Through Categories
+          for (int j = 0; j < (int)vCategories.size(); ++j) {
+            double dSelectResult = vSelectivities[j]->getResult(i);
+            pAgeResults[iArraySize+iSquareAgeOffset-1] += dSelectResult * pSquare->getPopulationInCategoryForAge(i, j);
           }
         }
       }
@@ -287,7 +234,7 @@ void CProportionsAtAgeObservation::execute() {
       // If we have a running total, do a comparison against
       // Our AgeResults
 
-      double dN = mErrorValue[(*vPropPtr).first];
+      double dN = mErrorValue[(*mvPropPtr).first];
       //Add in Process Error if defined
       //if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
 
@@ -300,14 +247,18 @@ void CProportionsAtAgeObservation::execute() {
           dCurrentProp = pAgeResults[i] / dRunningTotal;
         else
           dCurrentProp = 0.0;
-        dScore += CMath::lnFactorial(dN * ((*vPropPtr).second)[i]) - dN * ((*vPropPtr).second)[i] * log(CMath::zeroFun(dCurrentProp,dDelta));
+        double dTemp = CMath::lnFactorial(dN * ((*mvPropPtr).second)[i]) - dN * ((*mvPropPtr).second)[i] * log(CMath::zeroFun(dCurrentProp,dDelta));
+        dScore += dTemp;
+
+        // Store results of calculations so they can be used by the reports
+        saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dN, dTemp);
       }
 
       // Clear Our Age Results
       for (int i = 0; i < iArraySize; ++i)
         pAgeResults[i] = 0.0;
 
-      vPropPtr++;
+      mvPropPtr++;
     }
 
 #ifndef OPTIMIZE

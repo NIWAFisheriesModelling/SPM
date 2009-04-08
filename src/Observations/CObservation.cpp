@@ -20,6 +20,9 @@
 // Default Constructor
 //**********************************************************************
 CObservation::CObservation() {
+  // Variables
+  pWorldView = 0;
+
   // Register some user allowed variables
   pParameterList->registerAllowed(PARAM_YEAR);
   pParameterList->registerAllowed(PARAM_TIME_STEP);
@@ -43,6 +46,32 @@ string CObservation::getCategory(int index) {
 //**********************************************************************
 string CObservation::getSelectivity(int index) {
   return vSelectivityNames[index];
+}
+
+//**********************************************************************
+// void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score)
+// Save comparison into our Vector
+//**********************************************************************
+void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score) {
+  SComparison *pComparison = new SComparison();
+  pComparison->sKey           = key;
+  pComparison->dExpectedValue = expected;
+  pComparison->dObservedValue = observed;
+  pComparison->dErrorValue    = errorValue;
+  pComparison->dScore         = score;
+  vComparisons.push_back(pComparison);
+}
+
+//**********************************************************************
+// void CObservation::fillComparisons(vector<SComparison*> &comparisons)
+// Fill Vector with Comparisons for Print Out
+//**********************************************************************
+void CObservation::fillComparisons(vector<SComparison*> &comparisons) {
+ comparisons.clear();
+
+ foreach(SComparison *Comparison, vComparisons) {
+   comparisons.push_back(Comparison);
+ }
 }
 
 //**********************************************************************
@@ -91,9 +120,25 @@ void CObservation::build() {
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
+    // Build our World View
+    pWorldView = new CLayerDerivedWorldView(pLayer);
+    pWorldView->validate();
+    pWorldView->build();
+
   } catch (string Ex) {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CObservation::execute()
+// Execute Observation
+//**********************************************************************
+void CObservation::execute() {
+  // Clear Comparisons List
+  foreach(SComparison *Comparison, vComparisons) {
+      delete Comparison;
   }
 }
 
@@ -102,4 +147,9 @@ void CObservation::build() {
 // Default De-Constructor
 //**********************************************************************
 CObservation::~CObservation() {
+  delete pWorldView;
+
+  foreach(SComparison *Comparison, vComparisons) {
+    delete Comparison;
+  }
 }

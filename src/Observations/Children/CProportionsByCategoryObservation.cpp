@@ -20,7 +20,6 @@
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/ForEach.h"
-#include "../../World/WorldView/CLayerDerivedWorldView.h"
 #include "../../Selectivities/CSelectivityManager.h"
 
 // Using
@@ -206,9 +205,11 @@ void CProportionsByCategoryObservation::build() {
 //**********************************************************************
 void CProportionsByCategoryObservation::execute() {
 
-  CLayerDerivedWorldView *pWorldView = new CLayerDerivedWorldView(pLayer);
-  pWorldView->validate();
-  pWorldView->build();
+  // Base
+  CObservation::execute();
+
+  // Execute the World View to get a Snapshot
+  pWorldView->execute();
 
   int    iSquareAgeOffset   = iMinAge - pWorld->getMinAge();
 
@@ -251,23 +252,23 @@ void CProportionsByCategoryObservation::execute() {
     // Reset our Score
     dScore = 0.0;
 
-    // Get Matching Error Value
-    vector<double> *vErrorValuePtr = &mvErrorValue[(*mvPropPtr).first];
-
     // Do our Comparison
     for (int i = 0; i < iArraySize; ++i) {
-      double dExp = 0.0;
+      double dExpected = 0.0;
       if (!CComparer::isZero(pCombinedAgeResults[i]))
-        dExp = pAgeResults[i]/pCombinedAgeResults[i];
+        dExpected = pAgeResults[i]/pCombinedAgeResults[i];
 
-      double dObs  = (*mvPropPtr).second[i] ;
-      double dN  = (*vErrorValuePtr)[i];
-      //if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
-      double dTemp = CMath::lnFactorial(dN) - CMath::lnFactorial(dN*(1-dObs)) -
-          CMath::lnFactorial(dN*dObs) + dN * dObs * log(CMath::zeroFun(dExp,dDelta)) + dN *(1-dObs)
-          * log(CMath::zeroFun(1-dExp,dDelta));
+      double dObserved  = (*mvPropPtr).second[i] ;
+      double dErrorValue  = mvErrorValue[(*mvPropPtr).first][i];
+      //if(dNProcessError>=0) dErrorValue = 1.0/(1.0/dErrorValue + 1.0/dNProcessError);
 
+      double dTemp = CMath::lnFactorial(dErrorValue) - CMath::lnFactorial(dErrorValue*(1-dObserved)) -
+          CMath::lnFactorial(dErrorValue*dObserved) + dErrorValue * dObserved * log(CMath::zeroFun(dExpected,dDelta)) + dErrorValue *(1-dObserved)
+          * log(CMath::zeroFun(1-dExpected,dDelta));
       dScore -= dTemp;
+
+      // Store results of calculations so they can be used by the reports
+      saveComparison((*mvPropPtr).first, dExpected, dObserved, dErrorValue, dTemp);
     }
 
     // Clear Our Age Results

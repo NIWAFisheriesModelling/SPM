@@ -38,8 +38,7 @@ public:
   void                       clone(CObservationManager *Manager);
   void                       addObservation(CObservation *pObservation);
   void                       fillVector(vector<CObservation*> &list);
-//  int                        getObservationCount() { return vObservationList.size(); }
-//  CObservation*              getObservation(int index);
+  CObservation*              getObservation(string label);
   void                       validate();
   void                       build();
   void                       execute(int year, int step);

@@ -12,6 +12,9 @@
 // Local Headers
 #include "Base/CFileReport.h"
 
+// Forward-Dec
+class CObservation;
+
 //**********************************************************************
 //
 //
@@ -22,7 +25,14 @@ public:
   CObservationReport();
   virtual                     ~CObservationReport();
   CReport*                    clone() { return new CObservationReport(*this); }
+  void                        validate();
+  void                        build();
   void                        execute();
+
+protected:
+  // Variables
+  string                      sObservation;
+  CObservation                *pObservation;
 };
 
 #endif /* COBSERVATIONREPORT_H_ */

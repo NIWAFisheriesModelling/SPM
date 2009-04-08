@@ -1,11 +1,17 @@
-/*
- * CObservationReport.cpp
- *
- *  Created on: 26/03/2009
- *      Author: Admin
- */
+//============================================================================
+// Name        : CObservationReport.cpp
+// Author      : S.Rasmussen
+// Date        : 8/04/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Description :
+// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+//============================================================================
 
+// Local headers
 #include "CObservationReport.h"
+#include "../../Observations/CObservation.h"
+#include "../../Observations/CObservationManager.h"
+#include "../../Helpers/ForEach.h"
 
 //**********************************************************************
 // CObservationReport::CObservationReport()
@@ -14,6 +20,45 @@
 CObservationReport::CObservationReport() {
   // Variables
   eExecutionState   = STATE_FINALIZATION;
+
+  // Register Allowed
+  pParameterList->registerAllowed(PARAM_OBSERVATION);
+}
+
+//**********************************************************************
+// void CObservationReport::validate()
+// Validate our Observation Report
+//**********************************************************************
+void CObservationReport::validate() {
+  try {
+    // Base
+    CFileReport::validate();
+
+    // Get Params
+    sObservation = pParameterList->getString(PARAM_OBSERVATION);
+
+  } catch (string Ex) {
+    Ex = "CObservationReport.validate(" + sLabel + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CObservationReport::build()
+// Build our Observation Report
+//**********************************************************************
+void CObservationReport::build() {
+  try {
+    // Base
+    CFileReport::build();
+
+    // Get our Obs
+    pObservation = CObservationManager::Instance()->getObservation(sObservation);
+
+  } catch (string Ex) {
+    Ex = "CObservationReport.build(" + sLabel + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
@@ -28,10 +73,22 @@ void CObservationReport::execute() {
 
   this->start();
 
-  // TODO: Add Observation Writing Stuff Cout
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << "report.type=observation\n";
-  cout << "# Not Yet Implemented" << endl;
+  cout << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+
+  vector<SComparison*> vComparisons;
+  pObservation->fillComparisons(vComparisons);
+
+  cout << "Area, Expected, Observed, ErrorValue, Score\n";
+
+  foreach(SComparison *Comparison, vComparisons) {
+    cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES
+      << Comparison->dExpectedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+      << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+      << Comparison->dErrorValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+      << Comparison->dScore << "\n";
+  }
+
   cout << "*end\n" << endl;
 
   this->end();

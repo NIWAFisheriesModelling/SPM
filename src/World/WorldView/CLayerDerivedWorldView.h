@@ -15,7 +15,7 @@
 #define CLAYERDERIVEDWORLDVIEW_H_
 
 // Local headers
-#include "../../BaseClasses/CBaseBuild.h"
+#include "../../BaseClasses/CBaseExecute.h"
 
 // Forward-Declaration
 class CStringLayer;
@@ -25,12 +25,14 @@ class CWorldSquare;
 //
 //
 //**********************************************************************
-class CLayerDerivedWorldView : public CBaseBuild {
+class CLayerDerivedWorldView : public CBaseExecute {
 public:
   CLayerDerivedWorldView(CStringLayer *sourceLayer);
   virtual                     ~CLayerDerivedWorldView();
   CWorldSquare*               getSquare(string area);
+  void                        cleanUp();
   void                        build();
+  void                        execute();
 
 protected:
   // Variables

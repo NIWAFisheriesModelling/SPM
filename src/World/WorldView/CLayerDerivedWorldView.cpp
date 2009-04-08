@@ -40,6 +40,19 @@ CWorldSquare* CLayerDerivedWorldView::getSquare(string area) {
 }
 
 //**********************************************************************
+//
+//
+//**********************************************************************
+void CLayerDerivedWorldView::cleanUp() {
+  // Free Memory
+  map<string, CWorldSquare*>::iterator mViewPtr = mView.begin();
+  while (mViewPtr != mView.end()) {
+    delete (*mViewPtr).second;
+    mViewPtr++;
+  }
+}
+
+//**********************************************************************
 // void CLayerDerivedWorldView::build()
 // Build our Derived View of the World
 //**********************************************************************
@@ -48,30 +61,11 @@ void CLayerDerivedWorldView::build() {
 
     // Populate our map with the different squares we have
     for (int i = 0; i < iWorldHeight; ++i)
-      for (int j = 0; j < iWorldWidth; ++j)
-        mvAreas[pSourceLayer->getValue(i,j)].push_back(pWorld->getBaseSquare(i,j));
-
-    // Populate some variables
-    int iRows       = pWorld->getCategoryCount();
-    int iAgeSpread  = pWorld->getMaxAge() - (pWorld->getMinAge() + 1);
-
-    // Loop through the areas.
-    map<string, vector<CWorldSquare*> >::iterator mvAreaPtr = mvAreas.begin();
-    while(mvAreaPtr != mvAreas.end()) {
-      CWorldSquare *pNewSquare = new CWorldSquare();
-      pNewSquare->build();
-
-      // Loop through the squares in this area.
-      foreach(CWorldSquare *Square, (*mvAreaPtr).second) {
-        for (int i = 0; i < iRows; ++i)
-          for (int j = 0; j < iAgeSpread; ++j)
-            pNewSquare->addValue(i, j, Square->getValue(i, j));
+      for (int j = 0; j < iWorldWidth; ++j) {
+        CWorldSquare *pSquare = pWorld->getBaseSquare(i,j);
+        //if (pSquare->getEnabled())
+          mvAreas[pSourceLayer->getValue(i,j)].push_back(pSquare);
       }
-
-      // Assign Square.
-      mView[(*mvAreaPtr).first] = pNewSquare;
-      mvAreaPtr++;
-    }
 
   } catch (string Ex) {
     Ex = "CLayerDerivedWorldView.build()->" + Ex;
@@ -80,14 +74,41 @@ void CLayerDerivedWorldView::build() {
 }
 
 //**********************************************************************
+// void CLayerDerivedWorldView::execute()
+// Execute layer derived value
+//**********************************************************************
+void CLayerDerivedWorldView::execute() {
+  // Free any memory that has been allocated.
+  cleanUp();
+
+  // Populate some variables
+  int iRows       = pWorld->getCategoryCount();
+  int iAgeSpread  = pWorld->getMaxAge() - (pWorld->getMinAge() + 1);
+
+  // Loop through the areas.
+  map<string, vector<CWorldSquare*> >::iterator mvAreaPtr = mvAreas.begin();
+  while(mvAreaPtr != mvAreas.end()) {
+    CWorldSquare *pNewSquare = new CWorldSquare();
+    pNewSquare->build();
+
+    // Loop through the squares in this area.
+    foreach(CWorldSquare *Square, (*mvAreaPtr).second) {
+      for (int i = 0; i < iRows; ++i)
+        for (int j = 0; j < iAgeSpread; ++j)
+          pNewSquare->addValue(i, j, Square->getValue(i, j));
+    }
+
+    // Assign Square.
+    mView[(*mvAreaPtr).first] = pNewSquare;
+    mvAreaPtr++;
+  }
+}
+
+//**********************************************************************
 // CLayerDerivedWorldView::~CLayerDerivedWorldView()
 // Destructor
 //**********************************************************************
 CLayerDerivedWorldView::~CLayerDerivedWorldView() {
-  // Free Memory
-  map<string, CWorldSquare*>::iterator mViewPtr = mView.begin();
-  while (mViewPtr != mView.end()) {
-    delete (*mViewPtr).second;
-    mViewPtr++;
-  }
+  // Clear Memory
+  cleanUp();
 }

@@ -131,33 +131,24 @@ void CAbundanceObservation::execute() {
              dScore           = 0.0;
     double   dExpectedTotal   = 0.0;
 
+    // Base
+    CObservation::execute();
+
+    pWorldView->execute();
+
     // Loop Through Obs
     map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
     while (mPropPtr != mProportionMatrix.end()) {
       // Reset Vars
       dExpectedTotal = 0.0;
 
-      // Loop Through Each Square in our Layer
-      for (int i = 0; i < pLayer->getHeight(); ++i) {
-        for (int j = 0; j < pLayer->getWidth(); ++j) {
-          // Check if this matches the key
-          if (pLayer->getValue(i, j) == (*mPropPtr).first) {
-            // Get our Square and check if it's enabled
-            pBaseSquare = pWorld->getBaseSquare(i, j);
-            if (!pBaseSquare->getEnabled())
-              continue;
+      CWorldSquare *pSquare = pWorldView->getSquare((*mPropPtr).first);
 
-            int iColCount = (pWorld->getMaxAge()+1) - pWorld->getMinAge();
-
-            for (int k = 0; k < iColCount; ++k) {
-              for (int l = 0; l < (int)vCategories.size(); ++l) {
-                double dSelectResult = vSelectivities[l]->getResult(k);
-                dExpectedTotal += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(k, l);
-              }
-            }
-          }
+      for (int i = 0; i < (int)vCategories.size(); ++i)
+        for (int j = 0; j < pSquare->getWidth(); ++j) {
+          double dSelectResult = vSelectivities[i]->getResult(j);
+          dExpectedTotal += dSelectResult * pSquare->getPopulationInCategoryForAge(j, vCategories[i]);
         }
-      }
 
       // Note: dExpectedTotal is total number of fish the model has for that
       // Proportion Label across all squares in that layer where that
@@ -170,7 +161,10 @@ void CAbundanceObservation::execute() {
 
       dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
       double dTemp = log((*mPropPtr).second / CMath::zeroFun(dExpectedTotal,DELTA)) / dSigma + 0.5*dSigma;
-      dScore += log(dSigma) + 0.5 * dTemp * dTemp;
+      dTemp = log(dSigma) + 0.5 * dTemp * dTemp;
+      dScore += dTemp;
+
+      saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, dErrorValue, dTemp);
 
       mPropPtr++;
     }
