@@ -44,7 +44,7 @@ void CDESolver::runEstimation() {
       throw string(ERROR_ENABLED_ESTIMATES);
 
     // Setup our Solver
-    CDESolverCallback     clDESolver = CDESolverCallback(iCount, 257);
+    CDESolverCallback     clDESolver = CDESolverCallback(iCount, 30);
 
     // Setup Lower, Upper Bounds
     vector<double> vLowerBounds;
