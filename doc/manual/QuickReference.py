@@ -165,7 +165,7 @@ for i in Keywords6 :
   SYNTAX_OUTFILE.write("\n")
 
 # Compare against translations file
-r = re.compile('\".*?\"',re.IGNORECASE)
+r = re.compile('\".*?\"')
 TRANSLATION = open('../../src/Translations/English_UK.h', 'r')
 DEFINED = []
 for line in TRANSLATION:
