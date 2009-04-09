@@ -15,7 +15,7 @@
 #include "FMM.h"
 
 // Namespaces
-using std::cout;
+using std::cerr;
 using std::endl;
 
 //**********************************************************************
@@ -267,7 +267,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     // have exceeded maximum no. of function evaluations
     if (iEvals > iMaxFunc) {
       iRet = -2;
-      cout << FMM_MANY_FUNCTION_EVALUATIONS << endl;
+      cerr << FMM_MANY_FUNCTION_EVALUATIONS << endl;
 
       for (int i = 0; i < iVectorSize; ++i)
         Candidates[i] = pPreviousCandidates[i];
@@ -278,7 +278,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     iLinearSearchIters++;
     if (iLinearSearchIters > iMaxSteps) {
       iRet = -3;
-      cout << FMM_MANY_LOOPS_LINEAR_SEARCH << endl;
+      cerr << FMM_MANY_LOOPS_LINEAR_SEARCH << endl;
 
       // Go back to last accepted candidates
       for (int i = 0; i < iVectorSize; ++i)
@@ -307,7 +307,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     // Is StepSize too Small?
     if (dLambda < dLambdaMin) {
       iRet = -3;
-      cout << FMM_SMALL_LINEAR_STEP_SIZE << endl;
+      cerr << FMM_SMALL_LINEAR_STEP_SIZE << endl;
       return;
     }
 
@@ -363,17 +363,17 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
 
     if (iIters > iMaxQuasiSteps) { // have exceeded maximum no. of iterations
       iRet = -2;
-      cout << FMM_MANY_QUASI_NEWTON_ITERATIONS << endl;
+      cerr << FMM_MANY_QUASI_NEWTON_ITERATIONS << endl;
       return;
     }
 
     if (bPrint) {
-      cout << FMM_ITERATION << iIters << endl;
-      cout << FMM_FUNCTION_VALUE << Score << endl;
-      cout << FMM_CURRENT_PARAMETER_ESTIMATES;
+      cerr << FMM_ITERATION << iIters << endl;
+      cerr << FMM_FUNCTION_VALUE << Score << endl;
+      cerr << FMM_CURRENT_PARAMETER_ESTIMATES;
       for (int i = 0; i < iVectorSize; ++i)
-        cout << Candidates[i] << " ";
-      cout << endl;
+        cerr << Candidates[i] << " ";
+      cerr << endl;
     }
 
     // Load our Previous Candidates, Last Gradient, and Gradient
@@ -390,7 +390,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       iConsecutiveMaxSteps++;
 
       if (iConsecutiveMaxSteps == 5) {
-        cout << FMM_MAX_NEWTON_STEP_FIVE << endl;
+        cerr << FMM_MAX_NEWTON_STEP_FIVE << endl;
         iRet = -3;
         return;
       }
@@ -398,40 +398,40 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       iConsecutiveMaxSteps = 0;
     }
 
-//    cout << "DEBUG: Score: " << dPreviousScore2 << endl;
+//    cerr << "DEBUG: Score: " << dPreviousScore2 << endl;
 
-//    cout << "DEBUG: Candidates: ";
+//    cerr << "DEBUG: Candidates: ";
 //    for (int i = 0; i < iVectorSize; ++i)
-//      cout << pPreviousCandidates[i] << ", ";
-//    cout << endl;
+//      cerr << pPreviousCandidates[i] << ", ";
+//    cerr << endl;
 //
-//    cout << "DEBUG: Gradient: ";
+//    cerr << "DEBUG: Gradient: ";
 //    for (int i = 0; i < iVectorSize; ++i)
-//      cout << pGradient[i] << ",";
-//    cout << endl;
+//      cerr << pGradient[i] << ",";
+//    cerr << endl;
 
     // Build our Current Tolerance
     dCurrentTolerance = 0.0;
     for (int i = 0; i < iVectorSize; ++i) {
       dCurrentTolerance = fmax(dCurrentTolerance, fabs(pGradient[i]) * fmax(1, fabs(pPreviousCandidates[i])) / fabs(dPreviousScore2));
     }
-    cout << FMM_CONVERGENCE_CHECK << dCurrentTolerance << endl;
-    cout << FMM_CONVERGENCE_THRESHOLD << dGradTol << endl;
+    cerr << FMM_CONVERGENCE_CHECK << dCurrentTolerance << endl;
+    cerr << FMM_CONVERGENCE_THRESHOLD << dGradTol << endl;
 
     if (dCurrentTolerance <= dGradTol) {
       iRet = -1; // convergence!
-      cout << FMM_CONVERGENCE << dCurrentTolerance << endl;
-      cout << FMM_FUNCTION_SCORE << dPreviousScore2 << endl;
+      cerr << FMM_CONVERGENCE << dCurrentTolerance << endl;
+      cerr << FMM_FUNCTION_SCORE << dPreviousScore2 << endl;
 
-      cout << FMM_CURRENT_PARAMETER_ESTIMATES;
+      cerr << FMM_CURRENT_PARAMETER_ESTIMATES;
       for (int i = 0; i < iVectorSize; i++)
-        cout << pPreviousCandidates[i] << " ";
-      cout << endl;
+        cerr << pPreviousCandidates[i] << " ";
+      cerr << endl;
 
-      cout << FMM_GRADIENT_VALUE;
+      cerr << FMM_GRADIENT_VALUE;
       for (int i = 0; i < iVectorSize; i++)
-        cout << pGradient[i] << " ";
-      cout << endl;
+        cerr << pGradient[i] << " ";
+      cerr << endl;
 
       return;
     }
@@ -444,8 +444,8 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       }
 
       if (dCurrentTolerance <= dStepTol) {
-        cout << FMM_SMALL_STEP_SIZE_CONVERGENCE << endl;
-        cout << FMM_CONVERGENCE_NOT_TEXTBOOK << endl;
+        cerr << FMM_SMALL_STEP_SIZE_CONVERGENCE << endl;
+        cerr << FMM_CONVERGENCE_NOT_TEXTBOOK << endl;
 
         iRet = -1;
         return;

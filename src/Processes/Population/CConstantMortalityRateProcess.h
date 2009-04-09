@@ -32,7 +32,7 @@ public:
 
 protected:
   // Variables
-  double                     dM;
+  vector<double>             vMortalityRates;
   CWorldSquare               **pGrid;
   CNumericLayer              *pLayer;
   string                     sLayer;

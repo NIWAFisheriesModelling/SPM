@@ -19,6 +19,7 @@
 #include "../Children/CDerivedQuantityReport.h"
 #include "../Children/CRandomNumberSeedReport.h"
 #include "../Children/CSelectivityReport.h"
+#include "../Children/CLayerDerivedWorldViewReport.h"
 
 //**********************************************************************
 //
@@ -46,6 +47,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CRandomNumberSeedReport();
   else if (type == PARAM_SELECTIVITY)
     pReporter = new CSelectivityReport();
+  else if (type == PARAM_LAYER_DERIVED_WORLD_VIEW)
+    pReporter = new CLayerDerivedWorldViewReport();
   else
     throw string("Unknown type: " + type);
 

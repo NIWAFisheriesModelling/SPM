@@ -186,14 +186,14 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
           buildCurrentValues();
 
           dScoreI = objective(vCurrentValues);
-          cout << "Ret Score: " << dScoreI << endl;
+          cerr << "Ret Score: " << dScoreI << endl;
           dScoreI += dPenalty;
 
-          cout << "Scores: " << dScoreI << " / " << dScore << " / " << dStepSizeI << " / " << dPenalty << endl;
+          cerr << "Scores: " << dScoreI << " / " << dScore << " / " << dStepSizeI << " / " << dPenalty << endl;
 
           // Populate Gradient, and Restore Orig Value
           vGradientValues[i]  = (dScoreI - dScore) / dStepSizeI;
-          cout << "Gradient: " << vGradientValues[i] << endl;
+          cerr << "Gradient: " << vGradientValues[i] << endl;
           vScaledValues[i]    = dOrigValue;
         }
       }
@@ -204,13 +204,13 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
   }
 
   if (clMinimiser.getResult() == -3)
-    cout << GAMMADIFF_CONVERGENCE_UNCLEAR << endl;
+    cerr << GAMMADIFF_CONVERGENCE_UNCLEAR << endl;
   else if (clMinimiser.getResult() == -2)
-    cout << GAMMADIFF_EVALUATIONS_MAX << endl;
+    cerr << GAMMADIFF_EVALUATIONS_MAX << endl;
   else if (clMinimiser.getResult() == -1)
-    cout << GAMMADIFF_CONVERGENCE << endl;
+    cerr << GAMMADIFF_CONVERGENCE << endl;
   else
-    cout << GAMMADIFF_RETURN_VALUE_UNKNOWN << clMinimiser.getResult() << endl;
+    cerr << GAMMADIFF_RETURN_VALUE_UNKNOWN << clMinimiser.getResult() << endl;
 
   for (int i = 0; i < iVectorSize; ++i) {
     vCurrentValues[i] = unScaleValue(vScaledValues[i], vLowerBounds[i], vUpperBounds[i]);

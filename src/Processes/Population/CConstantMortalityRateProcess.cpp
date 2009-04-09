@@ -25,11 +25,7 @@ CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
   // TODO: Implement this
   // Variables
   pGrid            = 0;
-  dM               = 0.0;
   pLayer           = 0;
-
-  // Register Estimables
-  registerEstimable(PARAM_M, &dM);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -50,15 +46,21 @@ void CConstantMortalityRateProcess::validate() {
     CProcess::validate();
 
     // Get our parameters
-    dM      = pParameterList->getDouble(PARAM_M);
     sLayer  = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+    pParameterList->fillVector(vMortalityRates, PARAM_M);
+
+    // Register Estimables
+    for (int i = 0; i < (int)vMortalityRates.size(); ++i)
+      registerEstimable(PARAM_M, i, &vMortalityRates[i]);
 
     // Local Validation
     if (getCategoryCount() != getSelectivityCount())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
+    if (getCategoryCount() != (int)vMortalityRates.size())
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_M);
 
   } catch (string Ex) {
     Ex = "CConstantMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
@@ -118,7 +120,7 @@ void CConstantMortalityRateProcess::rebuild() {
             // Get Our Selectivity Result
             dSelectivityResult = vSelectivityIndex[k]->getResult(l);
             // Calculate Our Value
-            double dValue = dM*dSelectivityResult;
+            double dValue = vMortalityRates[k]*dSelectivityResult;
 
             // Multiply it by Layer Value
             if (pLayer != 0)
@@ -157,31 +159,38 @@ void CConstantMortalityRateProcess::execute() {
 #ifndef OPTIMIZE
   try {
 #endif
-    // Populate Grid With Values
+    // Base execute
+    CProcess::execute();
+
+    // Loop Through The World Grid (i,j)
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
+        // Get Current Square, and Difference Equal
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        // Check Square Ok
+        if (!pBaseSquare->getEnabled())
+          continue;
+
+        pDiff       = pWorld->getDifferenceSquare(i, j);
+
+        // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
-            // Get Our Selectivity Result
-            dSelectivityResult = vSelectivityIndex[k]->getResult(l);
-            // Calculate Our Value
-            double dValue = dM*dSelectivityResult;
+            // Get Current Value
+            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
 
-            // Multiply it by Layer Value
+            // Check 0
+            if(CComparer::isZero(dCurrent))
+               continue;
+
+            // Get Amount To Subtract
+            dCurrent *= pGrid[i][j].getValue(vCategoryIndex[k], l);
+
             if (pLayer != 0)
-              dValue *= pLayer->getValue(i, j);
+              dCurrent *= pLayer->getValue(i, j);
 
-            // Convert To Proportion
-            dValue = 1-exp(-dValue);
-
-            // Make sure it's between 0 and 1
-            if (dValue < 0.0)
-              dValue = 0.0;
-            if (dValue > 1.0)
-              dValue = 1.0;
-
-            // Assign it to our Grid
-            pGrid[i][j].setValue(vCategoryIndex[k], l, dValue);
+            // Do Add/Subs
+            pDiff->subValue( vCategoryIndex[k], l, dCurrent);
           }
         }
       }
@@ -189,7 +198,7 @@ void CConstantMortalityRateProcess::execute() {
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CConstantMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
+    Ex = "CConstantMortalityRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -200,4 +209,13 @@ void CConstantMortalityRateProcess::execute() {
 // Destructor
 //**********************************************************************
 CConstantMortalityRateProcess::~CConstantMortalityRateProcess() {
+
+  // Clean Our Grid
+  if (pGrid != 0) {
+    for (int i = 0; i < iWorldHeight; ++i) {
+      delete [] pGrid[i];
+      pGrid[i] = 0;
+    }
+    delete [] pGrid;
+  }
 }

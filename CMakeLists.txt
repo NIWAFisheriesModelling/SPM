@@ -91,6 +91,7 @@ src/Reports/Children/CEstimateSummaryReport.cpp
 src/Reports/Children/CSelectivityReport.cpp
 src/Reports/Children/CDerivedQuantityReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
+src/Reports/Children/CLayerDerivedWorldViewReport.cpp
 src/Reports/CReportManager.cpp
 src/Reports/Factory/CReportFactory.cpp
 src/Profiles/CProfileManager.cpp

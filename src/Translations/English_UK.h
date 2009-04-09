@@ -117,6 +117,7 @@
 //
 //**********************************************************************
 #define PARAM_A                                   "a"
+#define PARAM_A50                                 "a50"
 #define PARAM_ABUNDANCE                           "abundance"
 #define PARAM_ABUNDANCE_DENSITY                   "abundance_density"
 #define PARAM_ADAPT_AT                            "adapt_at"
@@ -129,7 +130,7 @@
 #define PARAM_ALL_VALUES_BOUNDED                  "all_values_bounded"
 #define PARAM_ALL_VALUES                          "all_values"
 #define PARAM_ALPHA                               "alpha"
-#define PARAM_A50                                 "a50"
+#define PARAM_AREA                                "area"
 #define PARAM_ATO95                               "ato95"
 #define PARAM_B                                   "b"
 #define PARAM_BASIC                               "basic"
@@ -201,6 +202,7 @@
 #define PARAM_LABEL                               "label"
 #define PARAM_LAMBDA                              "lambda"
 #define PARAM_LAYER                               "layer"
+#define PARAM_LAYER_DERIVED_WORLD_VIEW            "layer_derived_world_view"
 #define PARAM_LAYERS                              "layers"
 #define PARAM_LAYER_CATEGORIES                    "layer_categories"
 #define PARAM_LAYER_HEIGHT                        "layer_height"

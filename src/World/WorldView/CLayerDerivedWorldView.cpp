@@ -50,6 +50,7 @@ void CLayerDerivedWorldView::cleanUp() {
     delete (*mViewPtr).second;
     mViewPtr++;
   }
+  mView.clear();
 }
 
 //**********************************************************************

@@ -16,7 +16,7 @@
 #include "../../../Helpers/CComparer.h"
 
 // Namespaces
-using std::cout;
+using std::cerr;
 using std::endl;
 
 // Macro
@@ -155,11 +155,15 @@ bool DESolverEngine::Solve(int maxGenerations) {
 
   if (dTrialEnergy < dBestEnergy) {
     bNewBestEnergy = true;
-    cout << ">>>>> New Best Score: " << dTrialEnergy << endl;
+    cerr << ">>>>> New Best Score: " << dTrialEnergy << endl;
 
     // Copy the solution to our best.
     dBestEnergy = dTrialEnergy;
     vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
+
+    for (int k = 0; k < (int)vBestSolution.size(); ++k)
+      cerr << vBestSolution[k] << " ";
+    cerr << endl;
   }
 
   for (int i = 0; i < maxGenerations; ++i) {
@@ -168,10 +172,10 @@ bool DESolverEngine::Solve(int maxGenerations) {
       // Build our Trial Solution
       (this->*calcTrialSolution)(j);
 
-      /*cout << "DEBUG: CurrentValues: ";
+      /*cerr << "DEBUG: CurrentValues: ";
       for (int k = 0; k < iVectorSize; ++k)
-        cout << vCurrentValues[k] << ", ";
-      cout << endl;*/
+        cerr << vCurrentValues[k] << ", ";
+      cerr << endl;*/
 
       // Execute it.
       dTrialEnergy = EnergyFunction(vCurrentValues);
@@ -186,11 +190,15 @@ bool DESolverEngine::Solve(int maxGenerations) {
         // Is this a new all-time low for our search?
         if (dTrialEnergy < dBestEnergy) {
           bNewBestEnergy = true;
-          cout << ">>>>> New Best Score: " << dTrialEnergy << endl;
+          cerr << ">>>>> New Best Score: " << dTrialEnergy << endl;
 
           // Copy the solution to our best.
           dBestEnergy = dTrialEnergy;
           vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
+
+          for (int k = 0; k < (int)vBestSolution.size(); ++k)
+            cerr << vBestSolution[k] << " ";
+          cerr << endl;
         }
       }
     } // end for()
@@ -233,7 +241,7 @@ bool DESolverEngine::generateGradient() {
     }
 
     if ((dMax-dMin) > dGradTol) {
-      cout << "Max/Min: " << (dMax-dMin) << endl;
+      cerr << "Max/Min: " << (dMax-dMin) << endl;
       return false; // No Convergence
     }
   }
@@ -254,10 +262,10 @@ bool DESolverEngine::generateGradient() {
 
   vCurrentValues.assign(vBestSolution.begin(), vBestSolution.end());
 
-  cout << "DEBUG: BestSolution: ";
+  cerr << "DEBUG: BestSolution: ";
   for (int i = 0; i < iVectorSize; ++i)
-    cout << vBestSolution[i] << ", ";
-  cout << endl;
+    cerr << vBestSolution[i] << ", ";
+  cerr << endl;
 
 
 
@@ -281,22 +289,22 @@ bool DESolverEngine::generateGradient() {
       dScoreI = EnergyFunction(vCurrentValues);
       dScoreI += dPenalty;
 
-      cout << "Scores: " << dScoreI << " / " << dBestEnergy << " / " << dStepSizeI << endl;
+      cerr << "Scores: " << dScoreI << " / " << dBestEnergy << " / " << dStepSizeI << endl;
 
       // Populate Gradient, and Restore Orig Value
       vGradientValues[i]  = ((double)dScoreI - dBestEnergy) / dStepSizeI;
     }
   }
 
-  cout << "ScaledValues: ";
+  cerr << "ScaledValues: ";
   for (int i = 0; i < iVectorSize; ++i)
-    cout << vScaledValues[i] << ", ";
-  cout << endl;
+    cerr << vScaledValues[i] << ", ";
+  cerr << endl;
 
-  cout << "Gradient: ";
+  cerr << "Gradient: ";
   for (int i = 0; i < iVectorSize; ++i)
-    cout << vGradientValues[i] << ", ";
-  cout << endl;
+    cerr << vGradientValues[i] << ", ";
+  cerr << endl;
 
   scaleValues();
 
@@ -307,7 +315,7 @@ bool DESolverEngine::generateGradient() {
         fmax(1, fabs(vCurrentBackUp[i])) / fabs(dBestEnergy));
   }
 
-  cout << "### dCurrentTolerance: " << dCurrentTolerance << endl;
+  cerr << "### dCurrentTolerance: " << dCurrentTolerance << endl;
 
 
   vCurrentValues.assign(vCurrentBackUp.begin(), vCurrentBackUp.end());

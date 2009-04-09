@@ -53,6 +53,10 @@ string CObservation::getSelectivity(int index) {
 // Save comparison into our Vector
 //**********************************************************************
 void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score) {
+
+  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+    return;
+
   SComparison *pComparison = new SComparison();
   pComparison->sKey           = key;
   pComparison->dExpectedValue = expected;
@@ -140,6 +144,7 @@ void CObservation::execute() {
   foreach(SComparison *Comparison, vComparisons) {
       delete Comparison;
   }
+  vComparisons.clear();
 }
 
 //**********************************************************************
@@ -152,4 +157,5 @@ CObservation::~CObservation() {
   foreach(SComparison *Comparison, vComparisons) {
     delete Comparison;
   }
+  vComparisons.clear();
 }
