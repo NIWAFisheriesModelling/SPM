@@ -12,6 +12,11 @@
 // Local Headers
 #include "../CProcess.h"
 
+// Classes
+class CTimeStepManager;
+class CPenalty;
+class CNumericLayer;
+
 //**********************************************************************
 //
 //
@@ -19,22 +24,43 @@
 class CCategoryTransitionProcess : public CProcess {
 public:
   // Functions
-	CCategoryTransitionProcess();
-	virtual                    ~CCategoryTransitionProcess();
-	CProcess*                  clone() { return new CCategoryTransitionProcess(*this); }
-	void                       validate();
-	void                       build();
-	void                       execute();
+  CCategoryTransitionProcess();
+  virtual                    ~CCategoryTransitionProcess();
+  CProcess*                  clone() { return new CCategoryTransitionProcess(*this); }
+  int                        getYearsCount() { return vYearsList.size(); }
+  int                        getYears(int index);
+  int                        getLayersCount() { return vLayersList.size(); }
+  string                     getLayers(int index);
+  string                     getCategoryTo(int index);
+  int                        getCategoryToCount() { return vCategoryToList.size(); }
+  void                       validate();
+  void                       build();
+  void                       execute();
 
 protected:
   // Variables
+  double                     dN;
+  double                     dVulnerable;
+  double                     dExploitation;
   string                     sFrom;
   string                     sTo;
-  double                     dN;
   int                        iFromIndex;
   int                        iToIndex;
   string                     sSelectivity;
+  vector<string>             vCategoryToList;
+  vector<int>                vCategoryToIndex;
   CSelectivity*              pSelectivity;
+  CWorldSquare               *pWorldSquare;
+  vector<int>                vYearsList;
+  vector<string>             vLayersList;
+  vector<CNumericLayer*>     vLayersIndex;
+  CNumericLayer              *pLayer;
+  int                        iCurrentYear;
+  bool                       bYearMatch;
+  CTimeStepManager           *pTimeStepManager;
+  string                     sPenalty;
+  CPenalty                   *pPenalty;
+
 };
 
 #endif /*CCATEGORYTRANSITIONPROCESS_H_*/
