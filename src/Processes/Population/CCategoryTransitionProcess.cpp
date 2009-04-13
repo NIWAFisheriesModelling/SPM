@@ -22,6 +22,8 @@
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "CCategoryTransitionProcess.h"
 
+//TODO: Scott to look over and check
+
 //**********************************************************************
 // CCategoryTransitionProcess::CCategoryTransitionProcess()
 // Default Constructor
