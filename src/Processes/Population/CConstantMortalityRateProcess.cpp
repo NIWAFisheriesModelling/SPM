@@ -144,7 +144,7 @@ void CConstantMortalityRateProcess::rebuild() {
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CConstantMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
+    Ex = "CConstantMortalityRateProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
