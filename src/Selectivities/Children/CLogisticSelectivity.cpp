@@ -18,7 +18,7 @@ CLogisticSelectivity::CLogisticSelectivity() {
   // Register Estimables
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
-  registerEstimable(PARAM_ATO95, &dAlpha);
+  registerEstimable(PARAM_ALPHA, &dAlpha);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_A50);
