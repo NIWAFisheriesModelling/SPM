@@ -53,12 +53,12 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 \subsubsection[Numerical differences minimiser]{\commandlabsubarg{minimiser}{type}{numerical\_differences}} 
 
-\defSub{max\_iterations} {Define the maximum number of iterations for the minimiser}
+\defSub{iterations} {Define the maximum number of iterations for the minimiser}
 \defType{Integer}
 \defDefault{1000}
 \defValue{A positive integer}
 
-\defSub{max\_evaluations} {Define the maximum number of evaluations for the minimiser}
+\defSub{evaluations} {Define the maximum number of evaluations for the minimiser}
 \defType{Integer}
 \defDefault{4000}
 \defValue{A positive integer}
@@ -68,19 +68,19 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{1e-6}
 \defValue{A positive real number}
 
-\defSub{gradient\_tolerance} {Define the gradient tolerance for the minimiser}
+\defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defType{Constant}
 \defDefault{0.0002}
 \defValue{A positive real number}
 
 \subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{DE\_solver}} 
 
-\defSub{max\_iterations} {Define the maximum number of iterations for the minimiser}
+\defSub{iterations} {Define the maximum number of iterations for the minimiser}
 \defType{Integer}
 \defDefault{1000}
 \defValue{A positive integer}
 
-\defSub{max\_evaluations} {Define the maximum number of evaluations for the minimiser}
+\defSub{evaluations} {Define the maximum number of evaluations for the minimiser}
 \defType{Integer}
 \defDefault{4000}
 \defValue{A positive integer}
@@ -90,7 +90,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{1e-6}
 \defValue{A positive real number}
 
-\defSub{gradient\_tolerance} {Define the gradient tolerance for the minimiser}
+\defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defType{Constant}
 \defDefault{0.0002}
 \defValue{A positive real number}

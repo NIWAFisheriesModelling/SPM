@@ -7,20 +7,19 @@ In SPM, but not in manual
   adaptive_stepsize
   age
   age_index
+  area
   category
   category_index
   column
   column_index
   current
   cv_process_error
-  dist
   enabled_estimates
   estimable
   estimates
   final
   flagged_penalties
   function
-  grad_tol
   height
   hex
   hex_uniform
@@ -28,6 +27,7 @@ In SPM, but not in manual
   initial
   label
   layer_categories
+  layer_derived_world_view
   layer_height
   layer_max
   layer_min
@@ -35,20 +35,16 @@ In SPM, but not in manual
   layer_width
   log_normal
   log_scale
-  max_evals
-  max_iters
   method
   multiplier
-  n_process_error
   normal_by_stdev
   normal_log
   normalise
   objective
   observations
-  population_categories
-  population_selectivities
   profiles
   projection_years
+  proportion
   proposal_t
   r
   recruitment
@@ -84,13 +80,10 @@ In manual, but not in SPM
   correlation_adjustment_method
   distribution
   estimation_phase
-  gradient_tolerance
   growth_proportions
   initialisation_layer
   k
   max_correlation
-  max_evaluations
-  max_iterations
   p1
   p2
   process_error
