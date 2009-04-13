@@ -19,27 +19,28 @@ function(file,path=""){
   # get the report label
   report.label<-substring(line[index],2,nchar(line[index])-1)
   # get the report type
-  report.type<-substring(line[index+1],13)
+  report.type<-substring(line[index+1],14)
   # error check
   if(length(report.label)!=length(report.type)) stop("Error")
   # add the last line of the file to index to assist in tracking reports
   index<-c(index,length(line))
   # create a counter to assist in labelling
-  counter<-list("initialisation_phase"=0,"partition"=0,"process"=0,"derived_quantity"=0,"estimate_value"=0,"estimate_summary"=0,"objective_function"=0,"observation"=0,"layer"=0,"selectivity"=0,"random_number_seed"=0,"weight_at_size"=0)
-
+  report.types<-spm.report.types()
+  counter<-as.list(rep(0,length(report.types)))
+  names(counter)<-report.types
   # iterate through report types and extract values
   for(i in 1:length(report.type)) {
-    if(report.type[i]=="initialisation_phase") {
-      if(!("initialisation_phase" %in% names(res))) {
-        res$"initialisation_phase"<-list() #create an entry if it doesn't already exist
+    if(report.type[i]=="initialisation") {
+      if(!("initialisation" %in% names(res))) {
+        res$"initialisation"<-list() #create an entry if it doesn't already exist
       }
       # update counter
-      counter$"initialisation_phase"<-counter$"initialisation_phase"+1
+      counter$"initialisation"<-counter$"initialisation"+1
       # extract report
       temp<-extract.initialisationphase(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
       # add to results
-      res$"initialisation_phase"[[counter$"initialisation_phase"]]<-temp
-      names(res$"initialisation_phase")[counter$"initialisation_phase"]<-report.label[i]
+      res$"initialisation"[[counter$"initialisation"]]<-temp
+      names(res$"initialisation")[counter$"initialisation"]<-report.label[i]
     }
     if(report.type[i]=="partition") {
       if(!("partition" %in% names(res))) {
@@ -52,6 +53,18 @@ function(file,path=""){
       # add to results
       res$"partition"[[counter$"partition"]]<-temp
       names(res$"partition")[counter$"partition"]<-report.label[i]
+    }
+    if(report.type[i]=="layer_derived_world_view") {
+      if(!("layer_derived_world_view" %in% names(res))) {
+        res$"layer_derived_world_view"<-list() #create an entry if it doesn't already exist
+      }
+      # update counter
+      counter$"layer_derived_world_view"<-counter$"layer_derived_world_view"+1
+      # extract report
+      temp<-extract.layerderivedworldview(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
+      # add to results
+      res$"layer_derived_world_view"[[counter$"layer_derived_world_view"]]<-temp
+      names(res$"layer_derived_world_view")[counter$"layer_derived_world_view"]<-report.label[i]
     }
     if(report.type[i]=="process") {
       if(!("process" %in% names(res))) {

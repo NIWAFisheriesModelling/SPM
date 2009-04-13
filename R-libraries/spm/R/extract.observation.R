@@ -11,8 +11,17 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
-  res$data<-NA
+  res$type<-substring(lines[index.start+1],6)
+  variables<-spm.string.to.vector.of.words(lines[index.start+2],sep=",")
+  data<-spm.string.to.vector.of.words(lines[(index.start+3):(index.end-1)],sep=",")
+  data<<-data
+  data<-matrix(data,ncol=5,byrow=FALSE)
+  data<-data.frame("area"=data[,1], expected=data[,2], observed=data[,3], errorvalue=data[,4], score=data[,5])
+  data$area<-as.character(data$area)
+  data$expected<-as.numeric(as.character(data$expected))
+  data$observed<-as.numeric(as.character(data$observed))
+  data$errorvalue<-as.numeric(as.character( data$errorvalue))
+  data$score<-as.numeric(as.character(data$score))
+  res$data<-data
   return(res)
 }
-
