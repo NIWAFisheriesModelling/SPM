@@ -123,27 +123,28 @@ function(file,path=""){
   # get the report label
   report.label<-substring(line[index],2,nchar(line[index])-1)
   # get the report type
-  report.type<-substring(line[index+1],13)
+  report.type<-substring(line[index+1],14)
   # error check
   if(length(report.label)!=length(report.type)) stop("Error")
   # add the last line of the file to index to assist in tracking reports
   index<-c(index,length(line))
   # create a counter to assist in labelling
-  counter<-list("initialisation_phase"=0,"partition"=0,"process"=0,"derived_quantity"=0,"estimate_value"=0,"estimate_summary"=0,"objective_function"=0,"observation"=0,"layer"=0,"selectivity"=0,"random_number_seed"=0,"weight_at_size"=0)
-
+  report.types<-spm.report.types()
+  counter<-as.list(rep(0,length(report.types)))
+  names(counter)<-report.types
   # iterate through report types and extract values
   for(i in 1:length(report.type)) {
-    if(report.type[i]=="initialisation_phase") {
-      if(!("initialisation_phase" %in% names(res))) {
-        res$"initialisation_phase"<-list() #create an entry if it doesn't already exist
+    if(report.type[i]=="initialisation") {
+      if(!("initialisation" %in% names(res))) {
+        res$"initialisation"<-list() #create an entry if it doesn't already exist
       }
       # update counter
-      counter$"initialisation_phase"<-counter$"initialisation_phase"+1
+      counter$"initialisation"<-counter$"initialisation"+1
       # extract report
       temp<-extract.initialisationphase(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
       # add to results
-      res$"initialisation_phase"[[counter$"initialisation_phase"]]<-temp
-      names(res$"initialisation_phase")[counter$"initialisation_phase"]<-report.label[i]
+      res$"initialisation"[[counter$"initialisation"]]<-temp
+      names(res$"initialisation")[counter$"initialisation"]<-report.label[i]
     }
     if(report.type[i]=="partition") {
       if(!("partition" %in% names(res))) {
@@ -156,6 +157,18 @@ function(file,path=""){
       # add to results
       res$"partition"[[counter$"partition"]]<-temp
       names(res$"partition")[counter$"partition"]<-report.label[i]
+    }
+    if(report.type[i]=="layer_derived_world_view") {
+      if(!("layer_derived_world_view" %in% names(res))) {
+        res$"layer_derived_world_view"<-list() #create an entry if it doesn't already exist
+      }
+      # update counter
+      counter$"layer_derived_world_view"<-counter$"layer_derived_world_view"+1
+      # extract report
+      temp<-extract.layerderivedworldview(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
+      # add to results
+      res$"layer_derived_world_view"[[counter$"layer_derived_world_view"]]<-temp
+      names(res$"layer_derived_world_view")[counter$"layer_derived_world_view"]<-report.label[i]
     }
     if(report.type[i]=="process") {
       if(!("process" %in% names(res))) {
@@ -336,6 +349,31 @@ function(file,path="",lines){
 }
 
 # $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
+"extract.layerderivedworldview" <-
+function(file,path="",lines){
+  if(missing(lines)) {
+    if(missing(path)) path<-""
+    filename<-spm.make.filename(path=path,file=file)
+    res<-read.table(filename,skip=1,sep=",",header=T,na.strings="-1.#IND")
+  }
+  index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
+  index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
+  if(index.start >= index.end) stop("Error")
+  col.labs<-spm.string.to.vector.of.words(lines[2+index.start],sep=",")
+  values<-spm.string.to.vector.of.words(lines[(3+index.start):(index.end-1)])
+  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
+  names(values)<-col.labs
+  values$category<-as.character(values$category)
+  values$area<-as.character(values$area)
+  values[,3:ncol(values)]<-apply(values[,3:ncol(values)],2,as.numeric)
+  res<-list()
+  res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
+  res$type<-substring(lines[index.start+1],13)
+  res$data<-values
+  return(res)
+}
+
+# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.objectivefunction" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -373,11 +411,20 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
-  res$data<-NA
+  res$type<-substring(lines[index.start+1],6)
+  variables<-spm.string.to.vector.of.words(lines[index.start+2],sep=",")
+  data<-spm.string.to.vector.of.words(lines[(index.start+3):(index.end-1)],sep=",")
+  data<<-data
+  data<-matrix(data,ncol=5,byrow=FALSE)
+  data<-data.frame("area"=data[,1], expected=data[,2], observed=data[,3], errorvalue=data[,4], score=data[,5])
+  data$area<-as.character(data$area)
+  data$expected<-as.numeric(as.character(data$expected))
+  data$observed<-as.numeric(as.character(data$observed))
+  data$errorvalue<-as.numeric(as.character( data$errorvalue))
+  data$score<-as.numeric(as.character(data$score))
+  res$data<-data
   return(res)
 }
-
 # $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.partition" <-
 function(file,path="",lines){
@@ -507,7 +554,7 @@ function(corners)
 }
 "spm.binary.version"<-
 function() {
-return("1.00-2009-04-07 (rev. 3098)")
+return("1.00-2009-04-09 (rev. 3107)")
 }
 # $Id: spm.convert.to.lines.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.convert.to.lines"<-
@@ -726,6 +773,11 @@ function(string, words = 1)
   to.drop <- length(temp) - (0:(words - 1))
   paste(unlist(temp[ - to.drop]), collapse = " ")
 }
+"spm.report.types" <-
+function() {
+  return(c("initialisation","partition","process","derived_quantity","estimate_value","estimate_summary","objective_function","observation","layer","selectivity","random_number_seed","weight_at_size","layer_derived_world_view"))
+}
+
 # $Id: spm.string.to.vector.of.numbers.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.string.to.vector.of.numbers"<-
 function(string,sep=",")
@@ -762,7 +814,7 @@ function()
 {
   cat(paste("spm R package for use with spm ",spm.binary.version(),"\n",sep=""))
 }
-spm.zeroFun<-function(x,delta=1e-10) {
+spm.zeroFun<-function(x,delta=1e-11) {
   if (x>=delta) return(x)
   else return(delta/(2-(x/delta)))
 }
