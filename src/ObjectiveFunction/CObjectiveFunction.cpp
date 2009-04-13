@@ -150,7 +150,7 @@ void CObjectiveFunction::execute() {
   }
 
   // TODO: Debug Code
-  cout << "Total Score: " << dScore << endl;
+  std::cerr << "Total Score: " << dScore << endl;
 }
 
 //**********************************************************************
