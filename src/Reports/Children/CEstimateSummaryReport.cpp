@@ -40,7 +40,7 @@ void CEstimateSummaryReport::execute() {
   CEstimateManager::Instance()->fillVector(vEstimates);
 
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << "report.type=estimate_summary\n\n";
+  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
 
   foreach(CEstimate *Estimate, vEstimates) {
     cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";

@@ -104,8 +104,7 @@ void CLayerDerivedWorldViewReport::execute() {
 
   // Start Output
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_TYPE << ": " << pParameterList->getString(PARAM_TYPE) << "\n";
-
+  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   cout << PARAM_AREA << CONFIG_SEPERATOR_ESTIMATE_VALUES;
   cout << PARAM_CATEGORY;
   for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {

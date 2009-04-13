@@ -37,7 +37,7 @@ void CObjectiveFunctionReport::execute() {
 
   // Print
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << "report.type=objective_function\n";
+  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   int iCount = pObjectiveFunction->getScoreListCount();
   for (int i = 0; i < iCount; ++i) {
     SScore *pScore = pObjectiveFunction->getScore(i);

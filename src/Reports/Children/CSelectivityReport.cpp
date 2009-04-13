@@ -79,7 +79,7 @@ void CSelectivityReport::execute() {
 
   // Output Header
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << "report.type=selectivity\n";
+  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
   for (int i = 1; i < iSpread; ++i)
     cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);

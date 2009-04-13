@@ -81,7 +81,7 @@ void CInitializationReport::execute() {
 
     // Print Out
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-    cout << "report.type=initialisation_phase\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     cout << PARAM_COLUMN << CONFIG_SEPERATOR_ESTIMATE_VALUES,
     cout << PARAM_CATEGORY;

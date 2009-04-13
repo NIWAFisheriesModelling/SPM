@@ -33,7 +33,7 @@ void CDerivedQuantityReport::execute() {
 
   // TODO: Add Observation Writing Stuff Cout
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << "report.type=derived_quantity\n";
+  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   cout << "# Not Yet Implemented" << endl;
   cout << "*end\n" << endl;
 

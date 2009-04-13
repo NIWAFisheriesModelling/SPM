@@ -77,7 +77,7 @@ void CStandardHeaderReport::start() {
   sHeader += string(getenv("OS")) + ", ";
   ostringstream PID;
   PID << _getpid();
-  sHeader += "PID=" + PID.str() + ")\n\n";
+  sHeader += "PID=" + PID.str() + ")\n";
 #else
   char* cUsername = getenv("LOGNAME");
   if (cUsername != NULL)
@@ -91,11 +91,11 @@ void CStandardHeaderReport::start() {
   sHeader += static_cast<string>(names.nodename) + " (" + static_cast<string>(names.sysname) + " " + static_cast<string>(names.release) + " " + static_cast<string>(names.machine);
   ostringstream PID;
   PID << getpid();
-  sHeader += "PID=" + PID.str() + ")\n\n";
+  sHeader += "PID=" + PID.str() + ")\n";
 #endif
 
   // Print Header
-  cout << sHeader;
+  cout << sHeader << endl;
 }
 
 //**********************************************************************
