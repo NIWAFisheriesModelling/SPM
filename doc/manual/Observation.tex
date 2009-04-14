@@ -98,9 +98,11 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \subsubsection{Likelihoods for proportions-at-age observations}
 
-\SPM\ implements only one likelihood for proportions-at-age observations, the multinomial likelihood. 
+\SPM\ implements two likelihoods for proportions-at-age observations, the multinomial likelihood and the lognormal likelihood. 
 
-For the observed proportions at age $O_i$ for age classes $i$, with sample size $N$, and the expected proportions at the same age classes $E_i$, the log-likelihood is defined as; 
+\subsubsection*{The multinomial likelihood}
+
+For the observed proportions at age $O_i$ for age classes $i$, with sample size $N$, and the expected proportions at the same age classes $E_i$, the negative log-likelihood is defined as; 
 
 \begin{equation}
   -\log \left(L \right) =  -\log \left(N! \right) + \sum\limits_i \log \left( \left(NO_i \right)! \right) - NO_i \log \left(Z \left(E_i,\delta \right) \right)
@@ -116,6 +118,32 @@ where $\sum\limits_i O_i = 1$ and $\sum\limits_i E_i = 1$. $Z \left(\theta,\delt
 \end{equation}
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
+
+\subsubsection*{The lognormal likelihood}
+
+For the observed proportions at age $O_i$ for age classes $i$, with c.v. $c_i$, and the expected proportions at the same age classes $E_i$, the negative log-likelihood is defined as; 
+
+\begin{equation}
+ - \log \left(L \right) = \sum\limits_i \left( \log \left( \sigma _i \right) + 0.5\left( \frac{\log \left(O_i / Z \left(E_i,\delta \right) \right)}{\sigma_i} + 0.5 \sigma_i \right)^2 \right)
+\end{equation}
+
+where 
+
+\begin{equation}
+  \sigma_i  = \sqrt{\log \left(1+c_i^2 \right)}
+\end{equation}
+
+and the $c_i$'s are the c.v.s for each age class $i$, and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
+
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+The default value of $\delta$ is $1 \times 10^{-11}$.
+
 
 \subsection{Proportions-by-category}
 
@@ -180,7 +208,11 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \subsubsection{Likelihoods for proportions-by-category observations}
 
-\SPM\ implements only one likelihood for proportions-by-category observations, the binomial likelihood. 
+\SPM\ implements two likelihoods for proportions-by-category observations, the binomial likelihood, and the normal approximation to the binomial (binomial-approx). 
+
+\subsubsection*{The binomial likelihood}
+
+For observed proportions $O_i$ for age class $i$, where $E_i$ are the expected proportions for age class $i$, and $N_i$ is the effective sample size for age class $i$, then the negative log-likelihood is defined as;  
 
 \begin{equation}
   \begin{split}
@@ -189,7 +221,25 @@ To supply an observation for individual spatial cells, then you will need to def
   \end{split}
 \end{equation}
 
-where $O_i$ are the observed proportions for age class $i$, $E_i$ are the expected proportions for age class $i$, and $N_i$ is the effective sample size for age class $i$. 
+
+where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
+
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+The default value of $\delta$ is $1 \times 10^{-11}$.
+
+\subsubsection*{The normal approximation to the binomial likelihood}
+
+For observed proportions $O_i$ for age class $i$, where $E_i$ are the expected proportions for age class $i$, and $N_i$ is the effective sample size for age class $i$, then the negative log-likelihood is defined as;  
+
+\begin{equation}
+  -\log \left(L \right)= \log \left( \sqrt{Z\left(E_i,\delta \right)Z\left(1-E_i,\delta\right)/N_i} \right)     + \frac{1}{2} \sum\limits_i\left( \frac{O_i-E_i}{\sqrt{Z\left(E_i,\delta\right)Z\left(1-E_i,\delta \right)/N_i}} \right)^2
+\end{equation}
 
 where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
 
@@ -255,7 +305,9 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \subsubsection{Likelihoods for abundance observations}
 
-The lognormal likelihood with observations $O_i$, c.v. $c_i$, and expected values $qE_i$, and was,
+\subsubsection*{The lognormal likelihood}
+
+For observations $O_i$, c.v. $c_i$, and expected values $qE_i$, the negative log-likelihood is defined as;
 
 \begin{equation}
  - \log \left(L \right) = \sum\limits_i \left( \log \left( \sigma _i \right) + 0.5\left( \frac{\log \left(O_i / q Z \left(E_i,\delta \right) \right)}{\sigma_i} + 0.5 \sigma_i \right)^2 \right)
@@ -265,6 +317,25 @@ where
 
 \begin{equation}
   \sigma_i  = \sqrt{\log \left(1+c_i^2 \right)}
+\end{equation}
+
+and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
+
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+The default value of $\delta$ is $1 \times 10^{-11}$.
+
+\subsubsection*{The normal likelihood}
+
+For observations $O_i$, c.v. $c_i$, and expected values $qE_i$, the negative log-likelihood is defined as;
+
+\begin{equation}
+ - \log \left(L \right) = \sum\limits_i \left( \log \left( c_i E_i \right) +0.5 \left( \frac{O_i-E_i}{Z\left(c_i E_i,\delta \right)}\right)^2\right)
 \end{equation}
 
 and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
@@ -288,19 +359,13 @@ For observations where where the likelihood is parameterised by the c.v., you ca
   c'_i  = \sqrt {c_i^2  + c_{process\_error}^2 } 
 \end{equation}
 
-Similarly, if the likelihood is parameterised by the standard deviation $sigma$,
-
-\begin{equation}
-  \sigma '_i  = \sqrt {\sigma _i^2  + \sigma _{process\_error}^2 } 
-\end{equation}
-
-or by the effective sample size $N$,
+Similarly, if the likelihood is parameterised by the effective sample size $N$,
 
 \begin{equation}
  N'_i  = \frac{1}{1 / {N_i}+ 1 / N_{process\_error}}
 \end{equation}
 
-In all three cases, the process error has more effect on small errors than on large ones. Be clear that a large value for the multinomial process error means a small process error.
+In all cases, the process error has more effect on small errors than on large ones. Be clear that a large value for the multinomial process error means a small process error.
 
 \subsection{Simulating observations}
 
@@ -316,7 +381,6 @@ Methods for generating the random error, and hence simulated values, depend on t
 
 \begin{enumerate}
   \item{} Normal likelihood parameterised by c.v.: Let $E_{i}$ be the fitted value for observation $i$, and $c_i$ be the corresponding c.v. (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent normal deviate with mean $E_i$ and standard deviation $E_i c_i$.
-  \item{} Normal likelihood parameterised by standard deviation: Let $E_i$ be the fitted value for observation $i$, and $s_i$ be the corresponding standard deviation (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent normal deviate with mean $E_i$ and standard deviation $s_i$.
   \item{} Log-normal likelihood: Let $E_i$ be the fitted value for observation $i$ and $c_i$ be the corresponding c.v. (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent lognormal deviate with mean and standard deviation (on the natural scale, not the log-scale) of $E_i$ and $E_i c_i$ respectively. The robustification parameter $\delta$ is ignored.
   \item{} Multinomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and let $N$ be the sample size (rounded up to the next whole number, and adjusted by process error if applicable). The robustification parameter $\delta$ is ignored. Then, 
   \begin{enumerate}
@@ -330,16 +394,14 @@ Methods for generating the random error, and hence simulated values, depend on t
     \item{}	The simulated observation value $S_i$ is calculated as the sum of these binary variates divided by $N_i$
   \end{enumerate}
 \end{enumerate}
-   
+
 \subsection{Pseudo-observations}
 
-\SPM\ can generate expected values for observations without them contributing to the likelihood. These are called pseudo-observations, and can be use to either generate the expected values from \SPM\ (for reporting or diagnostic purposes), or as `observations' to be simulated from when using \SPM\ as an operating model.
+\SPM\ can generate expected values for observations without them contributing to the likelihood. These are called pseudo-observations, and can be used to either generate the expected values from \SPM\ for reporting or diagnostic purposes.
 
-All of the observation types in \SPM\ can be used as pseudo-observations. To specify a pseudo-observation, include the onservation as usual in the \config, but with a likelihood of \argument{type=none}. Note that;
+All of the observation types in \SPM\ can be used as pseudo-observations. To specify a pseudo-observation, include the observation as usual in the \config, but with a likelihood of \argument{type=none}. Note that;
 
 \begin{itemize}
-  \item The observed values should be supplied (even if they are `dummy' observation). These will be processed by \SPM\ as if they were actual observation values, and must conform to the validations carried out for normal observations. 
-  \item The subcommands \subcommand{likelihood}, \subcommand{obs}, \subcommand{error\_value} and \subcommand{process\_error} have no effect when generating the expected values for the pseudo-observation. However, if simulating (\texttt{spm -s}) then all these subcommands are required. 
-  \item If \subcommand{likelihood} is \argument{none}, then \SPM\ needs to know the likelihood to be used to simulate observations, and will look for a subcommand \subcommand{simulation\_likelihood} for the error distribution to use when simulating. Otherwise, if \subcommand{likelihood} is not none, but \subcommand{simulation\_likelihood} is present but not equal to \subcommand{likelihood}, then \SPM\ will return an error.
-  \item In addition, if the subcommand \subcommand{process\_error} is supplied, \SPM\ will modify the the error values (\subcommand{error\_value}) as usual, before generating the simulated observation.
+  \item The observed values should be supplied (even if they are `dummy' observation). These will be processed by \SPM\ as if they were actual observation values, and must conform to the validations carried out for non-pseudo-observations. 
+  \item The subcommands \subcommand{likelihood}, \subcommand{obs}, \subcommand{error\_value} and \subcommand{process\_error} have no effect when generating the expected values for the pseudo-observation.   \item \SPM\ cannot simulate from pseudo-observations.
 \end{itemize}
