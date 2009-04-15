@@ -26,6 +26,7 @@ CConfiguration::CConfiguration() {
   sInputValuesFile            = "";
   iNumberOfThreads            = 1;
   bUseEstimateValues          = false;
+  iSimulationCandidates       = 0;
 }
 
 //**********************************************************************

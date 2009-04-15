@@ -29,6 +29,7 @@ public:
   void                        clone(CDerivedQuantityManager *Manager);
   void                        validate();
   void                        build();
+  void                        execute();
   virtual                     ~CDerivedQuantityManager();
 
 protected:

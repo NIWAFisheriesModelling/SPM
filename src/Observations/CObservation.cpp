@@ -12,6 +12,7 @@
 #include "../Layers/CLayerManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
+#include "../Likelihoods/Factory/CLikelihoodFactory.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 
@@ -21,7 +22,8 @@
 //**********************************************************************
 CObservation::CObservation() {
   // Variables
-  pWorldView = 0;
+  pWorldView    = 0;
+  pLikelihood   = 0;
 
   // Register some user allowed variables
   pParameterList->registerAllowed(PARAM_YEAR);
@@ -30,6 +32,7 @@ CObservation::CObservation() {
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_LIKELIHOOD);
+  pParameterList->registerAllowed(PARAM_SIMULATE);
 }
 
 //**********************************************************************
@@ -92,9 +95,15 @@ void CObservation::validate() {
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
     sLayer      = pParameterList->getString(PARAM_LAYER);
     sLikelihood = pParameterList->getString(PARAM_LIKELIHOOD);
+    bSimulate   = pParameterList->getBool(PARAM_SIMULATE, true, true);
 
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+
+    // If we are going to simulate the observation, then it
+    // cannot be a pseudo observation
+    if ( (bSimulate) && (sLikelihood == PARAM_PSEUDO) )
+      throw string("Simulate must be false if likelihood is: " + string(PARAM_PSEUDO));
 
   } catch (string Ex) {
     Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;
@@ -129,6 +138,9 @@ void CObservation::build() {
     pWorldView->validate();
     pWorldView->build();
 
+    // Get our Likelihood
+    pLikelihood = CLikelihoodFactory::buildLikelihood(pParameterList->getString(PARAM_TYPE), sLikelihood);
+
   } catch (string Ex) {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -152,10 +164,14 @@ void CObservation::execute() {
 // Default De-Constructor
 //**********************************************************************
 CObservation::~CObservation() {
-  delete pWorldView;
+  if (pWorldView != 0)
+    delete pWorldView;
 
   foreach(SComparison *Comparison, vComparisons) {
     delete Comparison;
   }
   vComparisons.clear();
+
+  if (pLikelihood != 0)
+    delete pLikelihood;
 }

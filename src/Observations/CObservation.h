@@ -25,6 +25,7 @@ struct SComparison {
 // Classes
 class CStringLayer;
 class CSelectivity;
+class CLikelihood;
 
 //**********************************************************************
 //
@@ -59,9 +60,12 @@ protected:
   vector<int>                vCategories;
   vector<string>             vSelectivityNames;
   vector<CSelectivity*>      vSelectivities;
-  string                     sLikelihood;
   vector<SComparison*>       vComparisons;
   CLayerDerivedWorldView     *pWorldView;
+  string                     sLikelihood;
+  CLikelihood                *pLikelihood;
+  bool                       bSimulate;
+
 };
 
 #endif /*COBSERVATION_H_*/

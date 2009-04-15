@@ -88,7 +88,7 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
       ("profile,p", "Likelihood profiles")
       ("mcmc,m", "MCMC")
       ("forward,f", "Forward projections")
-      ("simulate,s", "Simulate observations")
+      ("simulate,s", value<int>(), "Simulate observations")
       ("input,i", value<string>(), "Load free parameter values from file")
       ("threads,t", value<int>(), "Number of threads to spawn")
       ("quiet,q", "Run in quiet mode")
@@ -174,6 +174,10 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
   // Configuration File
   if (vmParams.count("config"))
     pConfig->setConfigFile(vmParams["config"].as<string>());
+
+  // Set number of simulation candidates to generate
+  if (vmParams.count("simulate"))
+    pConfig->setSimulationCandidates(vmParams["simulate"].as<int>());
 }
 
 //**********************************************************************

@@ -10,6 +10,8 @@
 // Local Headers
 #include "CDerivedQuantityManager.h"
 #include "CDerivedQuantity.h"
+#include "../Helpers/ForEach.h"
+#include "../Helpers/CError.h"
 
 // Singleton Variable
 boost::thread_specific_ptr<CDerivedQuantityManager> CDerivedQuantityManager::clInstance;
@@ -62,7 +64,16 @@ void CDerivedQuantityManager::addDerivedQuantity(CDerivedQuantity *DerivedQuanti
 // Validate our Derived Quantities
 //**********************************************************************
 void CDerivedQuantityManager::validate() {
+  try {
 
+    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+      DerivedQuantity->validate();
+    }
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantityManager.validate()->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
@@ -70,7 +81,27 @@ void CDerivedQuantityManager::validate() {
 // Build our Derived Quantities
 //**********************************************************************
 void CDerivedQuantityManager::build() {
+  try {
 
+    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+      DerivedQuantity->build();
+    }
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantityManager.build()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CDerivedQuantityManager::execute()
+// Execute Derived Quantities
+//**********************************************************************
+void CDerivedQuantityManager::execute() {
+
+  foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+    DerivedQuantity->execute();
+  }
 }
 
 //**********************************************************************

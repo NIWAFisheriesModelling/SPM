@@ -135,6 +135,7 @@ void CMinimizerManager::execute() {
       throw string(ERROR_INVALID_TARGET_NULL);
 
     pMinimizer->runEstimation();
+    pMinimizer->buildCovarianceMatrix();
 
   } catch (string Ex) {
     Ex = "CMinimizerManager.execute()->" + Ex;

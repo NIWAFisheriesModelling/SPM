@@ -52,6 +52,8 @@ public:
   void                       addCommandLineParameter(string value);
   int                        getCommandLineParameterCount() { return (int)vCommandLineParameters.size(); }
   string                     getCommandLineParameter(int index);
+  void                       setSimulationCandidates(int value) { iSimulationCandidates = value; }
+  int                        getSimulationCandidates() { return iSimulationCandidates; }
 
 protected:
   // Functions
@@ -67,6 +69,7 @@ protected:
   bool                       bUseEstimateValues;
   int                        iRandomSeed;
   vector<string>             vCommandLineParameters;
+  int                        iSimulationCandidates;
 
 private:
   static CConfiguration*     clInstance;

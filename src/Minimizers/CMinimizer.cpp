@@ -7,6 +7,11 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <boost/numeric/ublas/triangular.hpp>
+#include <boost/numeric/ublas/io.hpp>
+#include <boost/numeric/ublas/lu.hpp>
+
 // Local Headers
 #include "CMinimizer.h"
 #include "../Estimates/CEstimateManager.h"
@@ -24,6 +29,29 @@ CMinimizer::CMinimizer() {
   pParameterList->registerAllowed(PARAM_MAX_EVALS);
   pParameterList->registerAllowed(PARAM_GRAD_TOL);
   pParameterList->registerAllowed(PARAM_STEP_SIZE);
+}
+
+//**********************************************************************
+// void CMinimizer::buildCovarianceMatrix()
+// Build our Covariance matrix from the Hessian
+//**********************************************************************
+void CMinimizer::buildCovarianceMatrix() {
+
+  // Get handle to our Minimizer and Hessian
+  ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
+  for (int i = 0; i < iEstimateCount; ++i)
+    for (int j = 0; j < iEstimateCount; ++j)
+      mxHessian(i,j) = pHessian[i][j];
+
+  // Convert Hessian to Covariance
+  ublas::permutation_matrix<> pm(mxHessian.size1());
+  ublas::matrix<double> copiedMatrix = ublas::matrix<double>(mxHessian);
+  ublas::lu_factorize(copiedMatrix,pm);
+
+  ublas::matrix<double> identityMatrix(ublas::identity_matrix<double>(copiedMatrix.size1()));
+  ublas::lu_substitute(copiedMatrix,pm,identityMatrix);
+
+  mxCovariance.swap(identityMatrix);
 }
 
 //**********************************************************************

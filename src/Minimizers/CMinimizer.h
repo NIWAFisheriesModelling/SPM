@@ -9,8 +9,14 @@
 #ifndef CMINIMIZER_H_
 #define CMINIMIZER_H_
 
-// Local Includes
+// Global headers
+#include <boost/numeric/ublas/matrix.hpp>
+
+// Local headers
 #include "../BaseClasses/CBaseBuild.h"
+
+// Usings
+using namespace boost::numeric;
 
 //**********************************************************************
 // class CMinimzer
@@ -26,6 +32,7 @@ public:
   double                     getGradientTolerance() { return dGradientTolerance; }
   double                     getStepSize() { return dStepSize; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
+  void                       buildCovarianceMatrix();
   virtual void               runEstimation() = 0;
   virtual void               validate();
   virtual void               build();
@@ -37,6 +44,7 @@ protected:
   double                      dGradientTolerance;
   double                      dStepSize;
   double                      **pHessian;
+  ublas::matrix<double>       mxCovariance;
   int                         iEstimateCount;
 };
 

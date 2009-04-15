@@ -94,6 +94,9 @@ void CProportionsAtAgeObservation::validate() {
     for (int i = 0; i < (int)vErrorValues.size(); i+=2)
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
 
+    // TODO: Make mErrorValue a map of vectors and replicate the N's to the same length
+    // as OBS. One of the likelihoods requires a vector while the other doesn't.
+
     // Loop Through our Partitions
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
     while (vPropPtr != mvProportionMatrix.end()) {
