@@ -29,7 +29,7 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
   if (observationType == PARAM_ABUNDANCE) {
     if (type == PARAM_NORMAL)
       pLikelihood = new CNormalLikelihood();
-    else if (type == PARAM_LOG_NORMAL)
+    else if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_PSEUDO)
       pLikelihood = new CPseudoLikelihood();
@@ -37,7 +37,7 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
 
   } else if (observationType == PARAM_PROPORTIONS_AT_AGE) {
-    if (type == PARAM_LOG_NORMAL)
+    if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_MULTINOMIAL)
       pLikelihood = new CMultinomialLikelihood();

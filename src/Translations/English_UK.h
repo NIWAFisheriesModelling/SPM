@@ -162,7 +162,6 @@
 #define PARAM_DELTA                               "delta"
 #define PARAM_DERIVED_QUANTITY                    "derived_quantity"
 #define PARAM_DF                                  "df"
-//#define PARAM_DIST                                "dist"
 #define PARAM_DISTANCE                            "distance"
 #define PARAM_DOUBLE                              "numeric"
 #define PARAM_DOUBLE_EXPONENTIAL                  "double_exponential"
@@ -218,7 +217,7 @@
 #define PARAM_LOG_SCALE                           "log_scale"
 #define PARAM_LOGISTIC                            "logistic"
 #define PARAM_LOGISTIC_PRODUCING                  "logistic_producing"
-#define PARAM_LOG_NORMAL                          "log_normal"
+#define PARAM_LOGNORMAL                           "lognormal"
 #define PARAM_LOWER_BOUND                         "lower_bound"
 #define PARAM_M                                   "m"
 #define PARAM_MAX_AGE                             "max_age"
@@ -234,7 +233,6 @@
 #define PARAM_MULTINOMIAL                         "multinomial"
 #define PARAM_MULTIPLIER                          "multiplier"
 #define PARAM_N                                   "n"
-//#define PARAM_N_PROCESS_ERROR                     "n_process_error"
 #define PARAM_NCOLS                               "ncols"
 #define PARAM_NORMAL                              "normal"
 #define PARAM_NORMAL_BY_STDEV                     "normal_by_stdev"
@@ -331,6 +329,5 @@
 #define PARAM_YEAR                                "year"
 #define PARAM_YEARS                               "years"
 #define PARAM_ZERO                                "0 (zero)"
-
 
 #endif /* ENGLISH_H_ */

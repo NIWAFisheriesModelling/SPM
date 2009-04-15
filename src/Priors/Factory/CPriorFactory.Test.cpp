@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE( Build_BetaPrior) {
 BOOST_AUTO_TEST_CASE( Build_LogNormalPrior) {
   CPrior *pPrior= 0;
 
-  BOOST_REQUIRE_NO_THROW(pPrior = CPriorFactory::buildPrior(PARAM_LOG_NORMAL, false));
+  BOOST_REQUIRE_NO_THROW(pPrior = CPriorFactory::buildPrior(PARAM_LOGNORMAL, false));
 
   CLogNormalPrior *pPtr = dynamic_cast<CLogNormalPrior*>(pPrior);
   BOOST_ASSERT(pPtr != 0);

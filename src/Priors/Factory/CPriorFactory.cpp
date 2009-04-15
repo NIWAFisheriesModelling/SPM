@@ -29,7 +29,7 @@ CPrior* CPriorFactory::buildPrior(string type, bool registerWithManager) {
 
   if (type == PARAM_BETA)
     pPrior = new CBetaPrior();
-  else if (type == PARAM_LOG_NORMAL)
+  else if (type == PARAM_LOGNORMAL)
     pPrior = new CLogNormalPrior();
   else if (type == PARAM_NORMAL_BY_STDEV)
     pPrior = new CNormalByStdevPrior();
