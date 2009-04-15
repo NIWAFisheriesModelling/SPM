@@ -1,13 +1,13 @@
 # ESTIMATION
-@MPD
+@estimation
 minimiser gammadiff
 
 @minimiser gammadiff
-type gammadiff
-max_iters 1000
-max_evals 4000
+type numerical_differences
+iterations 1000
+evaluations 4000
 step_size 1e-6
-grad_tol 0.00002 #The default is 0.002
+tolerance 0.00002 #The default is 0.002
 
 # MCMC
 @MCMC
@@ -23,11 +23,11 @@ df 4
 #step_size 0.01
 
 # ESTIMATION PROFILING
-@profile Spawning.proportion
-parameter population_process[Spawning].proportion
-n  0.09
-l  0.01
-u  1.00
+#@profile Spawning.proportion
+#parameter population_process[Spawning].proportion
+#n  0.09
+#l  0.01
+#u  1.00
 
 # OBSERVATIONS: CATCH AT AGE
 @observation CAA-year-1998
@@ -47,15 +47,14 @@ obs 881G    0    0 0.0000 0.0000 0.0000 0.0042 0.0042 0.0000 0.0000 0.0071 0.017
 obs 881H    0    0 0.0000 0.0171 0.0961 0.1072 0.1391 0.1376 0.0814 0.0747 0.0342 0.0477 0.0533 0.0414 0.0243 0.0349 0.0226 0.0090 0.0119 0.0060 0.0043 0.0124 0.0024 0.0097 0.0031 0.0030 0.0117 0.0000 0.0030 0.0118
 obs 881I    0    0 0.0000 0.0030 0.0161 0.0104 0.0484 0.0609 0.0436 0.0825 0.0457 0.0920 0.1072 0.0958 0.0699 0.0961 0.0459 0.0292 0.0271 0.0204 0.0168 0.0200 0.0087 0.0145 0.0114 0.0093 0.0107 0.0027 0.0039 0.0078
 obs 881J    0    0 0.0000 0.0059 0.0176 0.0000 0.0482 0.1999 0.1049 0.1300 0.0487 0.1513 0.0792 0.0655 0.0211 0.0728 0.0029 0.0153 0.0121 0.0000 0.0000 0.0029 0.0000 0.0000 0.0000 0.0000 0.0059 0.0000 0.0041 0.0117
-N  881B   1
-N  881E 172
-N  881G  60
-N  881H  99
-N  881I 207
-N  881J  61
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881B   1
+error_value  881E 172
+error_value  881G  60
+error_value  881H  99
+error_value  881I 207
+error_value  881J  61
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-1999
 type proportions_at_age
@@ -74,15 +73,14 @@ obs 881H    0    0 0.0003 0.0009 0.0021 0.0189 0.0712 0.1292 0.1442 0.1274 0.108
 obs 881I    0    0 0.0016 0.0035 0.0044 0.0356 0.0910 0.0861 0.0749 0.0708 0.0711 0.1147 0.0862 0.0944 0.0864 0.0535 0.0246 0.0221 0.0187 0.0091 0.0253 0.0039 0.0097     0 0.0011     0 0.0050 0.0016 0.0013 0.0035
 obs 881J    0    0 0.0000 0.0009 0.0165 0.1378 0.2679 0.1617 0.0786 0.0558 0.0568 0.0613 0.0474 0.0358 0.0226 0.0196 0.0073 0.0071 0.0077 0.0018 0.0085 0.0005 0.0013     0 0.0000     0 0.0027 0.0000 0.0000 0.0005
 obs 881K    0    0 0.0009 0.0050 0.0031 0.0392 0.1335 0.1171 0.1251 0.0949 0.0977 0.1124 0.0679 0.0741 0.0446 0.0289 0.0134 0.0037 0.0089 0.0039 0.0091 0.0052 0.0021     0 0.0000     0 0.0042 0.0010 0.0031 0.0010
-N  881E   4
-N  881G   7
-N  881H 488
-N  881I 409
-N  881J 228
-N  881K 287
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881E   4
+error_value  881G   7
+error_value  881H 488
+error_value  881I 409
+error_value  881J 228
+error_value  881K 287
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2000
 type proportions_at_age
@@ -99,13 +97,12 @@ obs 881H     0    0    0 0.0009 0.0074 0.0114 0.0286 0.0724 0.0868 0.0748 0.0852
 obs 881I     0    0    0 0.0003 0.0032 0.0049 0.0143 0.0459 0.0556 0.0559 0.0756 0.0499 0.0981 0.0829 0.1012 0.1173 0.0730 0.0852 0.0359 0.0259 0.0324 0.0109 0.0113 0.0072 0.0029 0.0066     0 0.0027     0 0.0009
 obs 881J     0    0    0 0.0000 0.0038 0.0128 0.0187 0.0884 0.0930 0.0922 0.0956 0.0688 0.0995 0.0878 0.0777 0.0820 0.0582 0.0461 0.0214 0.0175 0.0099 0.0078 0.0048 0.0055 0.0019 0.0025     0 0.0030     0 0.0014
 obs 881K     0    0    0 0.0001 0.0032 0.0048 0.0216 0.1059 0.1157 0.1017 0.1052 0.0683 0.1176 0.0760 0.0751 0.0662 0.0440 0.0413 0.0176 0.0145 0.0088 0.0034 0.0020 0.0028 0.0013 0.0017     0 0.0013     0 0.0000
-N  881H 426
-N  881I 554
-N  881J 158
-N  881K 488
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881H 426
+error_value  881I 554
+error_value  881J 158
+error_value  881K 488
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2001
 type proportions_at_age
@@ -126,17 +123,16 @@ obs 881H    0    0    0    0 0.0000 0.0645 0.0161 0.0484 0.0484 0.0161 0.0530 0.
 obs 881I    0    0    0    0 0.0026 0.0039 0.0038 0.0215 0.0327 0.0261 0.0462 0.0478 0.0548 0.0738 0.0738 0.0847 0.0689 0.0687 0.0665 0.0470 0.0455 0.0380 0.0375 0.0395 0.0181 0.0195 0.0163 0.0260 0.0041 0.0324
 obs 881J    0    0    0    0 0.0000 0.0615 0.0894 0.1726 0.1394 0.0984 0.0854 0.0547 0.0170 0.0383 0.0230 0.0355 0.0261 0.0270 0.0204 0.0142 0.0251 0.0113 0.0097 0.0148 0.0071 0.0044 0.0043 0.0091 0.0026 0.0087
 obs 881L    0    0    0    0 0.0025 0.0733 0.1556 0.2245 0.1811 0.0891 0.0844 0.0452 0.0219 0.0294 0.0177 0.0180 0.0096 0.0093 0.0072 0.0052 0.0038 0.0032 0.0028 0.0030 0.0018 0.0021 0.0023 0.0039 0.0004 0.0028
-N  881B 344
-N  881C 237
-N  881E 128
-N  881G 414
-N  881H  42
-N  881I 523
-N  881J 142
-N  881L 746
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881B 344
+error_value  881C 237
+error_value  881E 128
+error_value  881G 414
+error_value  881H  42
+error_value  881I 523
+error_value  881J 142
+error_value  881L 746
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2002
 type proportions_at_age
@@ -156,16 +152,15 @@ obs 881H    0    0    0 0.0000 0.0001 0.0001 0.0013 0.0120 0.0619 0.0441 0.0715 
 obs 881I    0    0    0 0.0001 0.0036 0.0035 0.0033 0.0142 0.0517 0.0342 0.0570 0.0689 0.0766 0.1016 0.0571 0.0674 0.0780 0.0448 0.0433 0.0267 0.0414 0.0383 0.0267 0.0307 0.0168 0.0295 0.0227 0.0155 0.0094 0.0369
 obs 881K    0    0    0 0.0014 0.0045 0.0130 0.0102 0.0379 0.0819 0.0679 0.1044 0.0928 0.0903 0.1069 0.0509 0.0671 0.0558 0.0315 0.0233 0.0137 0.0231 0.0195 0.0151 0.0181 0.0111 0.0110 0.0236 0.0037 0.0036 0.0174
 obs 882A    0    0    0 0.0000 0.0079 0.0071 0.0018 0.0082 0.0301 0.0271 0.0469 0.0496 0.0792 0.1147 0.0678 0.0953 0.0800 0.0401 0.0489 0.0192 0.0445 0.0392 0.0294 0.0365 0.0145 0.0281 0.0269 0.0190 0.0100 0.0280
-N  881B 207
-N  881C 335
-N  881G 153
-N  881H 488
-N  881I 512
-N  881K 239
-N  882A 227
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881B 207
+error_value  881C 335
+error_value  881G 153
+error_value  881H 488
+error_value  881I 512
+error_value  881K 239
+error_value  882A 227
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2003
 type proportions_at_age
@@ -185,16 +180,15 @@ obs 881F    0    0    0    0    0 0.0000 0.0429 0.1545 0.1266 0.0987 0.0279 0.16
 obs 881G    0    0    0    0    0 0.0077 0.0019 0.0106 0.0067 0.0077 0.0105 0.0146 0.0238 0.0375 0.0328 0.0539 0.0631 0.0652 0.0635 0.0794 0.0500 0.0544 0.0841 0.0566 0.0511 0.0587 0.0360 0.0313 0.0332 0.0656
 obs 881H    0    0    0    0    0 0.0014 0.0019 0.0111 0.0331 0.0259 0.0617 0.0952 0.1037 0.0989 0.0558 0.0761 0.0581 0.0353 0.0462 0.0471 0.0352 0.0255 0.0366 0.0265 0.0299 0.0256 0.0105 0.0118 0.0157 0.0310
 obs 881I    0    0    0    0    0 0.0009 0.0016 0.0069 0.0153 0.0192 0.0389 0.0694 0.0800 0.0875 0.0521 0.0748 0.0613 0.0403 0.0437 0.0539 0.0475 0.0360 0.0496 0.0351 0.0358 0.0376 0.0169 0.0220 0.0254 0.0483
-N  881B 221
-N  881C 479
-N  881E  38
-N  881F  15
-N  881G 148
-N  881H 291
-N  881I 321
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881B 221
+error_value  881C 479
+error_value  881E  38
+error_value  881F  15
+error_value  881G 148
+error_value  881H 291
+error_value  881I 321
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2004
 type proportions_at_age
@@ -218,20 +212,19 @@ obs 881K    0    0    0 0.0000 0.0000 0.0000 0.0000 0.0500 0.0000 0.0250 0.1000 
 obs 881L    0    0    0 0.0000 0.0015 0.0327 0.0701 0.0708 0.0773 0.1353 0.1249 0.0721 0.0571 0.1102 0.0515 0.0677 0.0363 0.0150 0.0312 0.0058 0.0066 0.0072 0.0034 0.0038 0.0042 0.0055 0.0015 0.0031 0.0008 0.0043
 obs 882A    0    0    0 0.0046 0.0165 0.1561 0.1790 0.1282 0.0933 0.1614 0.0507 0.0483 0.0358 0.0581 0.0121 0.0290 0.0077 0.0037 0.0033 0.0038 0.0014 0.0014 0.0009 0.0005 0.0014 0.0002 0.0007 0.0003 0.0002 0.0013
 obs 882B    0    0    0 0.0000 0.0148 0.0686 0.0666 0.0552 0.0666 0.1805 0.0910 0.0877 0.0959 0.0445 0.0396 0.0914 0.0288 0.0087 0.0282 0.0025 0.0027 0.0027 0.0108 0.0054 0.0000 0.0051 0.0000 0.0000 0.0000 0.0027
-N  881B 173
-N  881C 252
-N  881E 190
-N  881G 238
-N  881H 462
-N  881I 454
-N  881J  34
-N  881K  11
-N  881L 272
-N  882A 206
-N  882B  47
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881B 173
+error_value  881C 252
+error_value  881E 190
+error_value  881G 238
+error_value  881H 462
+error_value  881I 454
+error_value  881J  34
+error_value  881K  11
+error_value  881L 272
+error_value  882A 206
+error_value  882B  47
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2005
 type proportions_at_age
@@ -254,19 +247,18 @@ obs 881J   0    0    0 0.0000 0.0023 0.0063 0.0092 0.0255 0.0248 0.0233 0.0490 0
 obs 881K   0    0    0 0.0187 0.0449 0.0398 0.0210 0.0282 0.0214 0.0159 0.0456 0.0458 0.0761 0.0808 0.0954 0.0731 0.0824 0.0671 0.0397 0.0520 0.0263 0.0212 0.0246 0.0076 0.0138 0.0051 0.0051 0.0153 0.0078 0.0255
 obs 881L   0    0    0 0.0039 0.0279 0.0291 0.0277 0.0701 0.0541 0.0340 0.0810 0.0870 0.1017 0.0790 0.1006 0.0719 0.0737 0.0508 0.0187 0.0298 0.0137 0.0046 0.0104 0.0034 0.0070 0.0006 0.0015 0.0060 0.0038 0.0078
 obs 882A   0    0    0 0.0647 0.1464 0.1155 0.0573 0.0389 0.0154 0.0065 0.0132 0.0183 0.0303 0.0397 0.0624 0.0488 0.0567 0.0403 0.0354 0.0627 0.0259 0.0269 0.0139 0.0074 0.0127 0.0040 0.0085 0.0153 0.0084 0.0244
-N  881B  80
-N  881C 348
-N  881E 118
-N  881G 180
-N  881H 401
-N  881I 454
-N  881J 267
-N  881K 392
-N  881L 221
-N  882A 145
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881B  80
+error_value  881C 348
+error_value  881E 118
+error_value  881G 180
+error_value  881H 401
+error_value  881I 454
+error_value  881J 267
+error_value  881K 392
+error_value  881L 221
+error_value  882A 145
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2006
 type proportions_at_age
@@ -287,17 +279,16 @@ obs 881I    0    0    0    0 0.0037 0.0008 0.0070 0.0129 0.0131 0.0124 0.0335 0.
 obs 881J    0    0    0    0 0.0045 0.0032 0.0562 0.0572 0.0549 0.0500 0.1118 0.1203 0.0943 0.1273 0.0916 0.0722 0.0479 0.0292 0.0243 0.0083 0.0129 0.0087 0.0031 0.0042 0.0028 0.0028 0.0043 0.0018 0.0001 0.0061
 obs 881K    0    0    0    0 0.0099 0.0078 0.0139 0.0154 0.0160 0.0110 0.0420 0.0460 0.0575 0.1074 0.1111 0.1209 0.0967 0.0787 0.0667 0.0310 0.0344 0.0314 0.0133 0.0195 0.0106 0.0149 0.0170 0.0101 0.0015 0.0151
 obs 881L    0    0    0    0 0.0114 0.0110 0.0846 0.0863 0.0368 0.0279 0.0949 0.0894 0.0560 0.1264 0.0868 0.0834 0.0602 0.0304 0.0376 0.0081 0.0236 0.0101 0.0037 0.0081 0.0035 0.0037 0.0056 0.0022 0.0000 0.0083
-N  881A  17
-N  881B  46
-N  881C 256
-N  881H 674
-N  881I 612
-N  881J 782
-N  881K 459
-N  881L 161
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881A  17
+error_value  881B  46
+error_value  881C 256
+error_value  881H 674
+error_value  881I 612
+error_value  881J 782
+error_value  881K 459
+error_value  881L 161
+likelihood multinomial
+#process_error 500
 
 @observation CAA-year-2007
 type proportions_at_age
@@ -318,22 +309,21 @@ obs 881F    0    0    0 0.0000 0.0138 0.0276 0.0000 0.0269 0.0033 0.0213 0.0547 
 obs 881H    0    0    0 0.0022 0.0093 0.0059 0.0170 0.0249 0.0399 0.0373 0.0474 0.0421 0.0421 0.0672 0.0897 0.0904 0.1091 0.0863 0.0701 0.0332 0.0423 0.0267 0.0267 0.0257 0.0114 0.0125 0.0120 0.0076 0.0035 0.0174
 obs 881I    0    0    0 0.0026 0.0162 0.0036 0.0081 0.0059 0.0080 0.0164 0.0256 0.0249 0.0331 0.0572 0.0842 0.0958 0.1234 0.1048 0.0942 0.0411 0.0545 0.0369 0.0351 0.0333 0.0165 0.0144 0.0188 0.0121 0.0051 0.0281
 obs 881J    0    0    0 0.0017 0.0314 0.0686 0.0740 0.1063 0.0626 0.0620 0.0877 0.0813 0.0731 0.0675 0.0885 0.0687 0.0436 0.0277 0.0188 0.0108 0.0105 0.0031 0.0040 0.0021 0.0007 0.0013 0.0010 0.0007 0.0001 0.0021
-N  881A   6
-N  881B  58
-N  881C 329
-N  881E  11
-N  881F  60
-N  881H 688
-N  881I 527
-N  881J 617
-dist multinomial
-r 1e-11
-#N_process_error 500
+error_value  881A   6
+error_value  881B  58
+error_value  881C 329
+error_value  881E  11
+error_value  881F  60
+error_value  881H 688
+error_value  881I 527
+error_value  881J 617
+likelihood multinomial
+#process_error 500
 
 # OBSERVATIONS: CPUE
 @observation CPUE-1998
 type abundance
-q CPUEq
+catchability CPUEq
 year 1998
 time_step step_one
 categories immature mature spawning
@@ -345,18 +335,18 @@ obs 881G  5.36
 obs 881H  33.5
 obs 881I  45.2
 obs 881J  40.5
-cv 881B 0.2
-cv 881E 0.2
-cv 881G 0.2
-cv 881H 0.2
-cv 881I 0.2
-cv 881J 0.2
-dist lognormal
-#cv_process_error 0.00
+error_value 881B 0.2
+error_value 881E 0.2
+error_value 881G 0.2
+error_value 881H 0.2
+error_value 881I 0.2
+error_value 881J 0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-1999
 type abundance
-q CPUEq
+catchability CPUEq
 year 1999
 time_step step_one
 categories immature mature spawning
@@ -368,18 +358,18 @@ obs 881H  85.35
 obs 881I  51.24
 obs 881J  42.09
 obs 881K  54.09
-cv  881E  0.2
-cv  881G  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-cv  881K  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881E  0.2
+error_value  881G  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+error_value  881K  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2000
 type abundance
-q CPUEq
+catchability CPUEq
 year 2000
 time_step step_one
 categories immature mature spawning
@@ -389,16 +379,16 @@ obs 881H  56.04
 obs 881I  47.4
 obs 881J  25.67
 obs 881K  97.61
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-cv  881K  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+error_value  881K  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2001
 type abundance
-q CPUEq
+catchability CPUEq
 year 2001
 time_step step_one
 categories immature mature spawning
@@ -412,20 +402,20 @@ obs 881H  76.76
 obs 881I  39.49
 obs 881J  16.66
 obs 881L  58.76
-cv  881B  0.2
-cv  881C  0.2
-cv  881E  0.2
-cv  881G  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-cv  881L  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881E  0.2
+error_value  881G  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+error_value  881L  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2002
 type abundance
-q CPUEq
+catchability CPUEq
 year 2002
 time_step step_one
 categories immature mature spawning
@@ -438,19 +428,19 @@ obs 881H  137.14
 obs 881I  78.71
 obs 881K  137.79
 obs 882A  152.33
-cv  881B  0.2
-cv  881C  0.2
-cv  881G  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881K  0.2
-cv  882A  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881G  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881K  0.2
+error_value  882A  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2003
 type abundance
-q CPUEq
+catchability CPUEq
 year 2003
 time_step step_one
 categories immature mature spawning
@@ -464,20 +454,20 @@ obs 881F  8.61
 obs 881G  21.89
 obs 881H  126.57
 obs 881I  28.19
-cv  881A  0.2
-cv  881B  0.2
-cv  881C  0.2
-cv  881E  0.2
-cv  881F  0.2
-cv  881G  0.2
-cv  881H  0.2
-cv  881I  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881A  0.2
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881E  0.2
+error_value  881F  0.2
+error_value  881G  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2004
 type abundance
-q CPUEq
+catchability CPUEq
 year 2004
 time_step step_one
 categories immature mature spawning
@@ -494,23 +484,23 @@ obs 881K  1.47
 obs 881L  49.14
 obs 882A  86.06
 obs 882B  22.14
-cv  881B  0.2
-cv  881C  0.2
-cv  881E  0.2
-cv  881G  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-cv  881K  0.2
-cv  881L  0.2
-cv  882A  0.2
-cv  882B  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881E  0.2
+error_value  881G  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+error_value  881K  0.2
+error_value  881L  0.2
+error_value  882A  0.2
+error_value  882B  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2005
 type abundance
-q CPUEq
+catchability CPUEq
 year 2005
 time_step step_one
 categories immature mature spawning
@@ -526,22 +516,22 @@ obs 881J  44
 obs 881K  79.13
 obs 881L  76.1
 obs 882A  112.51
-cv  881B  0.2
-cv  881C  0.2
-cv  881E  0.2
-cv  881G  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-cv  881K  0.2
-cv  881L  0.2
-cv  882A  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881E  0.2
+error_value  881G  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+error_value  881K  0.2
+error_value  881L  0.2
+error_value  882A  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2006
 type abundance
-q CPUEq
+catchability CPUEq
 year 2006
 time_step step_one
 categories immature mature spawning
@@ -556,21 +546,21 @@ obs 881J  125.73
 obs 881K  124.78
 obs 881L  91.58
 obs 882A  79.88
-cv  881A  0.2
-cv  881B  0.2
-cv  881C  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-cv  881K  0.2
-cv  881L  0.2
-cv  882A  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881A  0.2
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+error_value  881K  0.2
+error_value  881L  0.2
+error_value  882A  0.2
+likelihood lognormal
+#process_error 0.00
 
 @observation CPUE-2007
 type abundance
-q CPUEq
+catchability CPUEq
 year 2007
 time_step step_one
 categories immature mature spawning
@@ -584,119 +574,119 @@ obs 881F  25.52
 obs 881H  81.54
 obs 881I  62.55
 obs 881J  154.29
-cv  881A  0.2
-cv  881B  0.2
-cv  881C  0.2
-cv  881E  0.2
-cv  881F  0.2
-cv  881H  0.2
-cv  881I  0.2
-cv  881J  0.2
-dist lognormal
-#cv_process_error 0.00
+error_value  881A  0.2
+error_value  881B  0.2
+error_value  881C  0.2
+error_value  881E  0.2
+error_value  881F  0.2
+error_value  881H  0.2
+error_value  881I  0.2
+error_value  881J  0.2
+likelihood lognormal
+#process_error 0.00
 
 @catchability CPUEq
 q 0.00014939
 
 # ESTIMATION PARAMETERS
 @estimate
-parameter q[CPUEq].q
+parameter catchability[CPUEq].q
 lower_bound 1e-20
 upper_bound 1e-2
 prior Uniform
 {
 @estimate
-parameter directed_process[ImmatureDistance].lambda
+parameter preference_function[ImmatureDistance].lambda
 lower_bound  0.01
 upper_bound 20
 prior Uniform
 
 @estimate
-parameter directed_process[ImmatureDepth].a50
+parameter preference_function[ImmatureDepth].a50
 lower_bound 100
 upper_bound 3000
 prior Uniform
 
 @estimate
-parameter directed_process[ImmatureDepth].ato95
+parameter preference_function[ImmatureDepth].ato95
 lower_bound    1
 upper_bound 3000
 prior Uniform
 }
 @estimate
-parameter directed_process[ImmatureLatitude].a50
+parameter preference_function[ImmatureLatitude].a50
 lower_bound 60
 upper_bound 80
 prior Uniform
 
 @estimate
-parameter directed_process[ImmatureLatitude].ato95
+parameter preference_function[ImmatureLatitude].ato95
 lower_bound 0.01
 upper_bound 30
 prior Uniform
 
 @estimate
-parameter directed_process[MatureDistance].lambda
+parameter preference_function[MatureDistance].lambda
 lower_bound  0.01
 upper_bound 20
 prior Uniform
 {
 @estimate
-parameter directed_process[MatureDepth].mu
+parameter preference_function[MatureDepth].mu
 lower_bound  100
 upper_bound 3000
 prior Uniform
 
 @estimate
-parameter directed_process[MatureDepth].sigma_L
+parameter preference_function[MatureDepth].sigma_L
 lower_bound    1
 upper_bound 3000
 prior Uniform
 
 @estimate
-parameter directed_process[MatureDepth].sigma_R
+parameter preference_function[MatureDepth].sigma_R
 lower_bound     1
 upper_bound 10000
 prior Uniform
 }
 @estimate
-parameter directed_process[MatureLatitude].a50
+parameter preference_function[MatureLatitude].a50
 lower_bound 60
 upper_bound 80
 prior Uniform
 
 @estimate
-parameter directed_process[MatureLatitude].ato95
+parameter preference_function[MatureLatitude].ato95
 lower_bound  0.01
 upper_bound 30
 prior Uniform
 
 @estimate
-parameter directed_process[SpawningLatitude].mu
+parameter preference_function[SpawningLatitude].mu
 lower_bound 60
 upper_bound 80
 prior Uniform
 
 @estimate
-parameter directed_process[SpawningLatitude].sigma_L
+parameter preference_function[SpawningLatitude].sigma_L
 lower_bound  0.01
 upper_bound 30
 prior Uniform
 
 @estimate
-parameter directed_process[SpawningLatitude].sigma_R
+parameter preference_function[SpawningLatitude].sigma_R
 lower_bound  0.01
 upper_bound 30
 prior Uniform
 
 @estimate
-parameter population_process[Spawning].proportion
+parameter process[Spawning].proportion
 lower_bound 1e-5
 upper_bound 1
 prior Uniform
 
 @estimate
-parameter population_process[PostSpawning].proportion
+parameter process[PostSpawning].proportion
 lower_bound 1e-5
 upper_bound 1
 prior Uniform
@@ -714,43 +704,43 @@ upper_bound 50
 prior Uniform
 {
 @estimate
-parameter directed_process[ImmatureDistance].alpha
+parameter preference_function[ImmatureDistance].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
 
 @estimate
-parameter directed_process[ImmatureDepth].alpha
+parameter preference_function[ImmatureDepth].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
 
 @estimate
-parameter directed_process[ImmatureLatitude].alpha
+parameter preference_function[ImmatureLatitude].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
 
 @estimate
-parameter directed_process[MatureDistance].alpha
+parameter preference_function[MatureDistance].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
 
 @estimate
-parameter directed_process[MatureDepth].alpha
+parameter preference_function[MatureDepth].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
 
 @estimate
-parameter directed_process[MatureLatitude].alpha
+parameter preference_function[MatureLatitude].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
 
 @estimate
-parameter directed_process[SpawningLatitude].alpha
+parameter preference_function[SpawningLatitude].alpha
 lower_bound 0.01
 upper_bound 1.0
 prior Uniform
