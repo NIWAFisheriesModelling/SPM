@@ -21,10 +21,10 @@ class CEstimate;
 //**********************************************************************
 class CProfile : public CBaseBuild {
 public:
-	CProfile();
-	virtual                    ~CProfile();
-	CProfile*                  clone() { return (new CProfile(*this)); }
-	double                     getN() { return dN; }
+  CProfile();
+  virtual                    ~CProfile();
+  CProfile*                  clone() { return (new CProfile(*this)); }
+  double                     getStep() { return dStep; }
   double                     getL() { return dL; }
   double                     getU() { return dU; }
   string                     getParameter() { return sParameter; }
@@ -37,7 +37,8 @@ public:
 
 protected:
   // Variables
-  double                     dN;
+  int                        iN;
+  double                     dStep;
   double                     dL;
   double                     dU;
   double                     dCurrent;

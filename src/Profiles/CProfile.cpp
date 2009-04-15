@@ -25,7 +25,8 @@
 CProfile::CProfile() {
 
   // Vars
-  dN            = 0.0;
+  iN            = 0;
+  dStep         = 0.0;
   dL            = 0.0;
   dU            = 0.0;
   dCurrent      = 0.0;
@@ -49,7 +50,7 @@ bool CProfile::doStep() {
     if (CComparer::isZero(dCurrent) && (!CComparer::isZero(dL)))
       dCurrent = dL;
     else
-      dCurrent += dN;
+      dCurrent += dStep;
 
     // Check
     if (dCurrent > dU)
@@ -93,13 +94,15 @@ void CProfile::validate() {
     // Get our Parameters
     dL          = pParameterList->getDouble(PARAM_LOWER_BOUND);
     dU          = pParameterList->getDouble(PARAM_UPPER_BOUND);
-    dN          = pParameterList->getDouble(PARAM_N);
+    iN          = pParameterList->getInt(PARAM_N);
     sParameter  = pParameterList->getString(PARAM_PARAMETER);
 
     if ((dL-dU) > ZERO) // Lower Bound Must be < Upper Bound
       CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
-    if (dN <= ZERO) // N is number of steps
-      CError::errorLessThanEqualTo(PARAM_N, PARAM_ZERO);
+    if (iN <= 1) // N is number of steps
+      CError::errorLessThanEqualTo(PARAM_N, "1");
+
+    dStep = (dU - dL)/((double)(iN - 1));
 
   } catch (string Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;
