@@ -267,7 +267,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     // have exceeded maximum no. of function evaluations
     if (iEvals > iMaxFunc) {
       iRet = -2;
-      cerr << FMM_MANY_FUNCTION_EVALUATIONS << endl;
+      cerr << FMM_MANY_FUNCTION_EVALUATIONS << " (" << iEvals << ")" << endl;
 
       for (int i = 0; i < iVectorSize; ++i)
         Candidates[i] = pPreviousCandidates[i];
@@ -278,7 +278,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     iLinearSearchIters++;
     if (iLinearSearchIters > iMaxSteps) {
       iRet = -3;
-      cerr << FMM_MANY_LOOPS_LINEAR_SEARCH << endl;
+      cerr << FMM_MANY_LOOPS_LINEAR_SEARCH << " (" << iLinearSearchIters << ")" <<endl;
 
       // Go back to last accepted candidates
       for (int i = 0; i < iVectorSize; ++i)
@@ -307,7 +307,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     // Is StepSize too Small?
     if (dLambda < dLambdaMin) {
       iRet = -3;
-      cerr << FMM_SMALL_LINEAR_STEP_SIZE << endl;
+      cerr << FMM_SMALL_LINEAR_STEP_SIZE << " (" << dLambda << ")" << endl;
       return;
     }
 
@@ -363,7 +363,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
 
     if (iIters > iMaxQuasiSteps) { // have exceeded maximum no. of iterations
       iRet = -2;
-      cerr << FMM_MANY_QUASI_NEWTON_ITERATIONS << endl;
+      cerr << FMM_MANY_QUASI_NEWTON_ITERATIONS << " (" << iIters << ")" << endl;
       return;
     }
 
