@@ -32,7 +32,7 @@ public:
   void                        registerAllowed(string name);
   string                      getString(string name, bool optional = false, string defaultValue = "");
   double                      getDouble(string name, bool optional = false, double defaultValue = 0.0);
-  int                         getInt(string name);
+  int                         getInt(string name, bool optional = false, int defaultValue = 0);
   bool                        getBool(string name, bool optional = false, bool defaultValue = true);
   int                         countMatches(string name);
   int                         countParameterValues(string name);

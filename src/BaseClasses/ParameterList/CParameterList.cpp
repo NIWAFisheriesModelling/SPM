@@ -116,8 +116,17 @@ double CParameterList::getDouble(string name, bool optional, double defaultValue
 // int CParameterList::getInt(string name)
 // Return the int for the parameter
 //**********************************************************************
-int CParameterList::getInt(string name) {
-  return CConvertor::stringToInt(getString(name));
+int CParameterList::getInt(string name, bool optional, int defaultValue) {
+
+  int dReturn = defaultValue;
+
+  // Get the string
+  string sValue = getString(name, optional);
+  // If we have one
+  if (sValue != "")
+    dReturn = CConvertor::stringToInt(sValue);
+
+  return dReturn;
 }
 
 //**********************************************************************
