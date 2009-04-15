@@ -35,7 +35,6 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
   iMaxAge             = -1;
   bAgePlus            = false;
   bRescale            = false;
-  dDelta              = DELTA;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MIN_AGE);
@@ -60,8 +59,8 @@ void CProportionsAtAgeObservation::validate() {
     iMinAge     = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge     = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlus    = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
-    dDelta      = pParameterList->getDouble(PARAM_DELTA);
-    dTolerance  = pParameterList->getDouble(PARAM_TOLERANCE);
+    dDelta      = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
+    dTolerance  = pParameterList->getDouble(PARAM_TOLERANCE,true,0.001);
 
     if (iMinAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);

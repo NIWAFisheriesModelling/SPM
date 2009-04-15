@@ -60,7 +60,7 @@ void CProportionsByCategoryObservation::validate() {
     CObservation::validate();
 
     // Get our Variables from ParameterList
-    dDelta            = pParameterList->getDouble(PARAM_DELTA);
+    dDelta            = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
     iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlus          = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);

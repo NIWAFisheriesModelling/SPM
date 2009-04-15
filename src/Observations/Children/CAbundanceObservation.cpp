@@ -26,7 +26,6 @@ CAbundanceObservation::CAbundanceObservation() {
   // Variables
   sCatchability   = "";
   pCatchability   = 0;
-  dDelta          = 0.0;
   dSigma          = 0.0;
 
   // Register user allowed parameters
@@ -47,7 +46,7 @@ void CAbundanceObservation::validate() {
 
     // Get our Parameters
     sCatchability = pParameterList->getString(PARAM_CATCHABILITY);
-    dDelta        = pParameterList->getDouble(PARAM_DELTA);
+    dDelta        = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
 
     // Get our OBS
     vector<string> vOBS;
@@ -160,7 +159,7 @@ void CAbundanceObservation::execute() {
       //if(dCVProcessError>0) dCV = sqrt(dCV*dCV + dCVProcessError*dCVProcessError);
 
       dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
-      double dTemp = log((*mPropPtr).second / CMath::zeroFun(dExpectedTotal,DELTA)) / dSigma + 0.5*dSigma;
+      double dTemp = log((*mPropPtr).second / CMath::zeroFun(dExpectedTotal,dDelta)) / dSigma + 0.5*dSigma;
       dTemp = log(dSigma) + 0.5 * dTemp * dTemp;
       dScore += dTemp;
 
