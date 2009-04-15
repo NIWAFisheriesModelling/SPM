@@ -35,7 +35,7 @@ ages 1
 layer Depth
 
 @process M
-type natural_mortality
+type constant_mortality_rate
 categories all
 M 0.13
 selectivities One
@@ -53,16 +53,16 @@ lambda 0.1
 
 # Definition of layers
 @layer Base
-type double
-@include_file "Base.map"
+type numeric
+@include "Base.map"
 
 @layer Depth
-type double
-@include_file "Depth.map"
+type numeric
+@include "Depth.map"
 
 @layer constant
-type double
-@include_file "Constant.map"
+type numeric
+@include "Constant.map"
 
 @layer Distance
 type distance

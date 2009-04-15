@@ -1,3 +1,5 @@
 [objective_score]
+report.type: objective_function
 total_score: 0
+*end
 
