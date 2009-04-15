@@ -29,6 +29,7 @@ CMinimizer::CMinimizer() {
   pParameterList->registerAllowed(PARAM_MAX_EVALS);
   pParameterList->registerAllowed(PARAM_GRAD_TOL);
   pParameterList->registerAllowed(PARAM_STEP_SIZE);
+  pParameterList->registerAllowed(PARAM_COVARIANCE);
 }
 
 //**********************************************************************
@@ -64,10 +65,11 @@ void CMinimizer::validate() {
     CBaseBuild::validate();
 
     // Assign our param
-    iMaxIterations      = pParameterList->getInt(PARAM_MAX_ITERS);
-    iMaxEvaluations     = pParameterList->getInt(PARAM_MAX_EVALS);
-    dGradientTolerance  = pParameterList->getDouble(PARAM_GRAD_TOL);
-    dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE);
+    iMaxIterations      = pParameterList->getInt(PARAM_MAX_ITERS,true,1000);
+    iMaxEvaluations     = pParameterList->getInt(PARAM_MAX_EVALS,true,4000);
+    dGradientTolerance  = pParameterList->getDouble(PARAM_GRAD_TOL,true,0.002);
+    dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE,true,1e-6);
+    bCovariance         = pParameterList->getBool(PARAM_COVARIANCE,true,true);
 
   } catch (string Ex) {
     Ex = "CMinimizer.validate(" + getLabel() + ")->" + Ex;

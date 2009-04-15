@@ -26,7 +26,7 @@ class CMinimizer : public CBaseBuild {
 public:
   // Functions
   CMinimizer();
-	virtual                    ~CMinimizer();
+  virtual                    ~CMinimizer();
   int                        getMaxIterations() { return iMaxIterations; }
   int                        getMaxEvaluations() { return iMaxEvaluations; }
   double                     getGradientTolerance() { return dGradientTolerance; }
@@ -36,6 +36,7 @@ public:
   virtual void               runEstimation() = 0;
   virtual void               validate();
   virtual void               build();
+  bool                       bCovariance;
 
 protected:
   // Variables
