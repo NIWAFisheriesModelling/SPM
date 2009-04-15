@@ -164,7 +164,6 @@ src/Selectivities/Factory/CSelectivityFactory.cpp
 src/TimeSteps/CTimeStep.cpp
 src/TimeSteps/CTimeStepManager.cpp
 src/TimeSteps/Factory/CTimeStepFactory.cpp
-src/World/
 src/World/CWorld.cpp
 src/World/CWorldSquare.cpp
 src/World/WorldSquareCollection/CWorldSquareCollection.cpp
