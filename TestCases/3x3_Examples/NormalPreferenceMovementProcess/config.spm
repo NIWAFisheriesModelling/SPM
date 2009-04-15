@@ -32,35 +32,35 @@ ages 1
 type normal
 alpha 2.6
 mu 4.0
-sigma 12.7  
+sigma 12.7
 layer double_layer
 
 @layer base
-type double
+type numeric
 data 1 1 1
 data 1 1 1
 data 1 1 1
 
 @layer double_layer
-type double
+type numeric
 data 1 2 3
 data 4 5 6
 data 7 8 9
 
-@reporter 1994_TimeStep_One
-type world_state
+@report 1994_TimeStep_One
+type partition
 time_step one
 year 1994
 
-@reporter 1995_TimeStep_One
-type world_state
+@report 1995_TimeStep_One
+type partition
 time_step one
 year 1995
 
-@reporter 1996_TimeStep_One
-type world_state
+@report 1996_TimeStep_One
+type partition
 time_step one
 year 1996
 
-@reporter Objective_Score
+@report Objective_Score
 type objective_function

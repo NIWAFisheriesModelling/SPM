@@ -17,21 +17,27 @@ cell_length 1
 time_steps One
 
 @time_step One
-processes Mature_To_Spawning Immature_To_Mature Recruitment 
+processes Recruitment Ageing Mature_To_Spawning Immature_To_Mature
+
+@process Ageing
+type ageing
+categories immature mature spawning
 
 @process Immature_To_Mature
 type category_transition
 from immature
 to mature
-n 75
-selectivity One
+layers N1
+years 1995
+selectivities One
 
 @process Mature_To_Spawning
 type category_transition
 from mature
 to spawning
-n 50
-selectivity One
+years 1996
+layers N2
+selectivities One
 
 @process Recruitment
 type constant_recruitment
@@ -41,27 +47,35 @@ R0 100
 ages 1
 
 @layer base
-type double
-data 1 
+type numeric
+data 1
+
+@layer N1
+type numeric
+data 75
+
+@layer N2
+type numeric
+data 50
 
 @selectivity One
 type constant
 c 1
 
-@reporter 1994_TimeStep_One
-type world_state
+@report 1994_TimeStep_One
+type partition
 time_step one
 year 1994
 
-@reporter 1995_TimeStep_One
-type world_state
+@report 1995_TimeStep_One
+type partition
 time_step one
 year 1995
 
-@reporter 1996_TimeStep_One
-type world_state
+@report 1996_TimeStep_One
+type partition
 time_step one
 year 1996
 
-@reporter Objective_Score
+@report Objective_Score
 type objective_function
