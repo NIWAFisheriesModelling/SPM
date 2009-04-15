@@ -153,6 +153,7 @@
 #define PARAM_CONSTANT                            "constant"
 #define PARAM_CONSTANT_MORTALITY_RATE             "constant_mortality_rate"
 #define PARAM_CONSTANT_RECRUITMENT                "constant_recruitment"
+#define PARAM_COVARIANCE                          "covariance"
 #define PARAM_CURRENT                             "current"
 #define PARAM_CURRENT_YEAR                        "current_year"
 #define PARAM_CV                                  "cv"
