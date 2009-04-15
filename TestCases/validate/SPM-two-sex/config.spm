@@ -1,30 +1,25 @@
 @include "population.spm"
 @include "estimation.spm"
 
-@reporter state-1994-1
-type world_state
+@report state-1994-1
+type partition
 time_step step_one
 year 1994
-file_name Alpha.txt
 
-@reporter state-1998-1
-type world_state
+@report state-1998-1
+type partition
 time_step step_one
 year 1998
-file_name state_1998_1.txt
 
-@reporter state-2004-1
-type world_state
+@report state-2004-1
+type partition
 time_step step_one
 year 2004
-file_name state-2004-1.txt
 
-@reporter Final
-type world_state
+@report Final
+type partition
 time_step step_two
 year 2008
-file_name state-2008-2.txt
 
-@reporter Objective_Score
+@report Objective_Score
 type objective_function
-file_name objective_function.txt

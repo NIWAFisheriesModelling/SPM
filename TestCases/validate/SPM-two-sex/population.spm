@@ -41,9 +41,9 @@ R0 997386
 ages 1 1
 
 @process halfM
-type natural_mortality
+type constant_mortality_rate
 categories immature-male mature-male immature-female mature-female
-M 0.065
+M 0.065 0.065 0.065 0.065
 selectivities One One One One
 
 @process Fishing
@@ -51,7 +51,7 @@ type event_mortality
 categories immature-male mature-male immature-female mature-female
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
-Umax 0.99
+U_max 0.99
 selectivities FishingSel FishingSel FishingSel FishingSel
 penalty event_mortality_penalty
 
@@ -71,56 +71,56 @@ selectivity Maturation
 
 # Definition of layers
 @layer Base
-type double
+type numeric
 @include_file "Base.map"
 
 @layer constant
-type double
-@include_file "constant.map"
+type numeric
+@include "constant.map"
 
 @layer SSRU
-type string
-@include_file "SSRU.map"
+type categorical
+@include "SSRU.map"
 
 @layer Fishing_1998
-type double
-@include_file "Fishing_1998.map"
+type numeric
+@include "Fishing_1998.map"
 
 @layer Fishing_1999
-type double
-@include_file "Fishing_1999.map"
+type numeric
+@include "Fishing_1999.map"
 
 @layer Fishing_2000
-type double
-@include_file "Fishing_2000.map"
+type numeric
+@include "Fishing_2000.map"
 
 @layer Fishing_2001
-type double
-@include_file "Fishing_2001.map"
+type numeric
+@include "Fishing_2001.map"
 
 @layer Fishing_2002
-type double
-@include_file "Fishing_2002.map"
+type numeric
+@include "Fishing_2002.map"
 
 @layer Fishing_2003
-type double
-@include_file "Fishing_2003.map"
+type numeric
+@include "Fishing_2003.map"
 
 @layer Fishing_2004
-type double
-@include_file "Fishing_2004.map"
+type numeric
+@include "Fishing_2004.map"
 
 @layer Fishing_2005
-type double
-@include_file "Fishing_2005.map"
+type numeric
+@include "Fishing_2005.map"
 
 @layer Fishing_2006
-type double
-@include_file "Fishing_2006.map"
+type numeric
+@include "Fishing_2006.map"
 
 @layer Fishing_2007
-type double
-@include_file "Fishing_2007.map"
+type numeric
+@include "Fishing_2007.map"
 
 # Definition of selecivities
 @selectivity One
