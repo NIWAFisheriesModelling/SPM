@@ -32,12 +32,10 @@ categories all
 proportions 1.0
 R0 100
 ages 1
-layer Depth
-layer_min 0
-layer_max 1
+layer Recruit
 
 @process M
-type natural_mortality
+type constant_mortality_rate
 categories all
 M 0.13
 selectivities One
@@ -62,16 +60,20 @@ sigma 15
 
 # Definition of layers
 @layer Base
-type double
-@include_file "Base.map"
+type numeric
+@include "Base.map"
 
 @layer Depth
-type double
-@include_file "Depth.map"
+type numeric
+@include "Depth.map"
+
+@layer Recruit
+type numeric
+@include "Recruit.map"
 
 @layer constant
-type double
-@include_file "Constant.map"
+type numeric
+@include "Constant.map"
 
 @layer Distance
 type distance
