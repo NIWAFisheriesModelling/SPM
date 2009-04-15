@@ -1,4 +1,5 @@
 [state-2004-1]
+report.type: partition
 row,column,category,age[1]
 1,1,all,0.0138351
 1,2,all,0.0186534
@@ -100,4 +101,5 @@ row,column,category,age[1]
 1,98,all,0.0186534
 1,99,all,0.0138351
 1,100,all,0.0101983
+*end
 

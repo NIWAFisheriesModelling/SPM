@@ -34,7 +34,7 @@ R0 100
 ages 1
 
 @process M
-type natural_mortality
+type constant_mortality_rate
 categories all
 M 0.13
 selectivities One
@@ -53,12 +53,12 @@ sigma 15
 
 # Definition of layers
 @layer Base
-type double
-@include_file "Base.map"
+type numeric
+@include "Base.map"
 
 @layer Depth
-type double
-@include_file "Depth.map"
+type numeric
+@include "Depth.map"
 
 # Definition of selecivities
 @selectivity One
