@@ -72,7 +72,7 @@ selectivity Maturation
 # Definition of layers
 @layer Base
 type numeric
-@include_file "Base.map"
+@include "Base.map"
 
 @layer constant
 type numeric
