@@ -1,19 +1,18 @@
 # ESTIMATION
 @estimation
-minimiser  DE #gammadiff
+minimiser gammadiff
 
 @minimiser gammadiff
 type numerical_differences
 tolerance 0.002
 iterations 1000
-covariance false
-
+covariance True
 
 @minimiser DE
 type DE_Solver
 tolerance 0.0002
 iterations 1000
-covariance false
+covariance True
 
 @MCMC
 start 0
