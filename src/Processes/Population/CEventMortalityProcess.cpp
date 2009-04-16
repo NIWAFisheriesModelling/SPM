@@ -75,13 +75,18 @@ void CEventMortalityProcess::validate() {
     CProcess::validate();
 
     // Get our Parameters
-    dUMax     = pParameterList->getDouble(PARAM_U_MAX);
+    dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
     pParameterList->fillVector(vLayersList, PARAM_LAYERS);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+
+    if (dUMax >= ONE)
+      CError::errorGreaterThanEqualTo(PARAM_U_MAX, PARAM_ONE);
+    if (dUMax <= TRUE_ZERO)
+      CError::errorLessThanEqualTo(PARAM_U_MAX, PARAM_ZERO);
 
     // TODO: Check for vectors to be the same size
     // TODO: Check for duplicate years
