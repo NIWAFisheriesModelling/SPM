@@ -216,24 +216,25 @@ ato95 2
 
 @selectivity chatTANselMale
 type logistic
-a50 6.91642
-ato95 2.70004
+a50 9
+ato95 4
 
 @selectivity chatTANselFemale
 type logistic
-a50 6.91642
-ato95 2.70004
-alpha 1.0
+a50 9
+ato95 4
+alpha 0.7
 
 @selectivity chatFselMale
 type logistic
-a50 6.91642
-ato95 2.70004
+a50 9
+ato95 4
 
 @selectivity chatFselFemale
 type logistic
-a50 6.91642
-ato95 2.70004
+a50 9
+ato95 4
+alpha 0.7
 
 @selectivity one
 type constant

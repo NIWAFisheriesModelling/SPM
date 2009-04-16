@@ -44,7 +44,7 @@ last_free 1998
 p_male 0.5
 sigma_r 0.6
 SR BH
-steepness 0.9
+steepness 1.0
 
 # RECRUITMENT VARIABILITY
 @randomisation_method lognormal
@@ -64,6 +64,7 @@ diff 0.00
 @fishery chatFishery
 years   1975 1976 1977 1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002
 catches 1191 1488 1288 2004  609  750  997  596  302  344  544  362  509  574  804  977  991 2454 2775 2898 4094 3760 3761 3673 3524 3700 3700 3700
+#catches 1191    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0
 selectivity chatFsel
 U_max 0.4
 future_years   2003 2004 2005 2006 2007

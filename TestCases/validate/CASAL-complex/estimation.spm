@@ -1,6 +1,6 @@
 # ESTIMATION
 @estimation
-minimiser DE #gammadiff
+minimiser  DE #gammadiff
 
 @minimiser gammadiff
 type numerical_differences
@@ -8,9 +8,10 @@ tolerance 0.002
 iterations 1000
 covariance false
 
+
 @minimiser DE
 type DE_Solver
-tolerance 0.002
+tolerance 0.0002
 iterations 1000
 covariance false
 
@@ -144,6 +145,7 @@ year 2001
 obs All 1.23
 error_value All 0.35
 
+
 @observation chatTANbiomass1992
 type abundance
 catchability chatTANq
@@ -270,12 +272,12 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 2002
 obs All 1567
 error_value All 0.15
-
+{
 @observation chatTANage1992
 type proportions_at_age
 likelihood lognormal
@@ -485,7 +487,7 @@ selectivities chatFselMale chatFselFemale
 year 2001
 obs all 0.0087 0.0280 0.0422 0.0427 0.0849 0.0887 0.0788 0.0711 0.0566 0.0275 0.0162 0.0166 0.0507 0.0019 0.0383 0.0246 0.0332 0.0786 0.0594 0.0345 0.0295 0.0240 0.0219 0.0120 0.0062 0.0233
 error_value all 0.383 0.332 0.311 0.300 0.192 0.200 0.227 0.245 0.268 0.372 0.551 0.602 0.257 1.445 0.257 0.333 0.305 0.191 0.195 0.211 0.255 0.265 0.295 0.356 0.481 0.239
-
+}
 # CATCHABILITY COEFFICIENTS
 @catchability chatCPUEq
 q 6.52606e-005
@@ -511,7 +513,7 @@ parameter process[recruitment].R0
 lower_bound 10000
 upper_bound 150000
 prior uniform-log
-
+{
 @estimate
 parameter selectivity[chatTANselMale].a50
 lower_bound 0
@@ -571,7 +573,7 @@ parameter selectivity[chatFselFemale].alpha
 lower_bound 0.2
 upper_bound 5
 prior Uniform
-
+}
 @prior Uniform-log
 type uniform_log
 

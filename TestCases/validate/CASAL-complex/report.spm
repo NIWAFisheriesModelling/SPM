@@ -4,49 +4,74 @@
 type initialisation
 initialisation_phase Phase1
 
+@report state-1975-1
+type partition
+time_step three
+year 1975
+
+@report state-1976-1
+type partition
+time_step three
+year 1976
+
+@report state-1977-1
+type partition
+time_step three
+year 1977
+
+@report state-1978-1
+type partition
+time_step three
+year 1978
+
+@report state-1979-1
+type partition
+time_step three
+year 1979
+
 @report state-1994-1
 type partition
-time_step one
+time_step three
 year 1994
 
 @report state-1995-1
 type partition
-time_step one
+time_step three
 year 1995
 
 @report state-1996-1
 type partition
-time_step one
+time_step three
 year 1996
 
 @report state-1997-1
 type partition
-time_step one
+time_step three
 year 1997
 
 @report state-1998-1
 type partition
-time_step one
+time_step three
 year 1998
 
 @report state-1999-1
 type partition
-time_step one
+time_step three
 year 1999
 
 @report state-2000-1
 type partition
-time_step one
+time_step three
 year 2000
 
 @report state-2001-1
 type partition
-time_step one
+time_step three
 year 2001
 
 @report state-2002-1
 type partition
-time_step one
+time_step three
 year 2002
 
 #@report SSB
@@ -74,19 +99,19 @@ selectivity MaleMaturity
 type selectivity
 selectivity FemaleMaturity
 
-@report FishingSelMale-selectivity
+@report chatFselMale
 type selectivity
 selectivity chatFselMale
 
-@report FishingSelFemale-selectivity
+@report chatFselFemale
 type selectivity
 selectivity chatFselFemale
 
-@report TANSelMale-selectivity
+@report chatTANselMale
 type selectivity
 selectivity chatTANselMale
 
-@report TANSelFemale-selectivity
+@report chatTANselFemale
 type selectivity
 selectivity chatTANselFemale
 
@@ -101,3 +126,7 @@ selectivity chatTANselFemale
 #layer Recruitment
 #year 1994
 #time_step One
+
+@report TAN2002
+type observation
+observation chatTANbiomass2002

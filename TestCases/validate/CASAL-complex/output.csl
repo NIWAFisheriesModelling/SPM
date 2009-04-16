@@ -6,15 +6,15 @@ objective_every_eval false
 parameters_every_eval false
 parameter_vector_every_eval false
 fits true
-resids false
+resids true
 pearson_resids false
-normalised_resids true
+normalised_resids false
 estimation_section false
 covariance True
 # population section
 requests true
-initial_state false
-state_annually false
+initial_state true
+state_annually true
 state_every_step false
 final_state true
 results false

@@ -49,7 +49,7 @@ biomass False
 q chatTANq
 years 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002
 step 1
-proportion_mortality 1
+proportion_mortality 1.0
 ogive chatTANsel
 1992 4180
 1993 2950
@@ -75,11 +75,11 @@ cv_2001 0.13
 cv_2002 0.15
 dist lognormal
 cv_process_error 0.0
-
+{
 @proportions_at chatTANage
 years 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002
 step 1
-proportion_mortality 1
+proportion_mortality 1.0
 sexed true
 plus_group true
 sum_to_one true
@@ -135,15 +135,15 @@ cvs_2001 0.383 0.332 0.311 0.300 0.192 0.200 0.227 0.245 0.268 0.372 0.551 0.602
 dist lognormal
 cv_process_error 0.2
 ageing_error False
-
+}
 # CATCHABILITY COEFFICIENTS
 @q_method free
 
 @q chatCPUEq
-q 0.00005
+q 6.52606e-005
 
 @q chatTANq
-q 0.000005
+q 0.205139
 
 @estimate
 parameter q[chatCPUEq].q
@@ -163,7 +163,7 @@ parameter initialization.R0
 lower_bound 2500
 upper_bound 150000
 prior uniform-log
-
+{
 @estimate
 parameter selectivity[chatTANsel].male
 lower_bound 0 0
@@ -187,7 +187,7 @@ parameter selectivity[chatFsel].female
 lower_bound 0 0 0.2
 upper_bound 30 30 5
 prior uniform
-
+}
 # PENALTIES
 @catch_limit_penalty
 label chatCatchMustBeTaken
