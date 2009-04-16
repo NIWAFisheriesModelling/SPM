@@ -11,6 +11,8 @@
 #define DEFINEDVALUES_H_
 
 // Defines
+#define ONE  1
+#define TRUE_ZERO 0
 #define ZERO 1e-10
 #define SMALL 1e-4
 #define DELTA 1e-11
