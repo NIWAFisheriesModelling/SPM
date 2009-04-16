@@ -31,7 +31,7 @@ void CLayer::validate() {
     CWorld *pWorld    = CWorld::Instance();
     iWidth            = pWorld->getWidth();
     iHeight           = pWorld->getHeight();
-    dCellLength       = pWorld->getCellLength();
+    dCellLength       = pWorld->getCellLength(); //TODO: MOVE TO DISTANCE LAYER
 
   } catch (string Ex) {
     Ex = "CLayer.validate(" + getLabel() + ")->" + Ex;

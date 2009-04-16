@@ -27,6 +27,7 @@ public:
   // Functions
   CDerivedQuantity();
   virtual                     ~CDerivedQuantity();
+  double                      getValue(int offset = 0);
   void                        validate();
   void                        build();
   void                        execute();
@@ -43,6 +44,7 @@ protected:
   vector<string>              vSelectivityNames;
   vector<CSelectivity*>       vSelectivities;
   CCompleteWorldView          *pWorldView;
+  vector<double>              vValues;
 
 };
 

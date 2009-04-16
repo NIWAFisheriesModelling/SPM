@@ -31,12 +31,12 @@ public:
   int                        getMaxEvaluations() { return iMaxEvaluations; }
   double                     getGradientTolerance() { return dGradientTolerance; }
   double                     getStepSize() { return dStepSize; }
+  double                     getBuildCovariance() { return bCovariance; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   void                       buildCovarianceMatrix();
   virtual void               runEstimation() = 0;
   virtual void               validate();
   virtual void               build();
-  bool                       bCovariance;
 
 protected:
   // Variables
@@ -47,6 +47,7 @@ protected:
   double                      **pHessian;
   ublas::matrix<double>       mxCovariance;
   int                         iEstimateCount;
+  bool                        bCovariance;
 };
 
 #endif /*CMINIMIZER_H_*/

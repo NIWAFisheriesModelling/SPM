@@ -13,20 +13,21 @@
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 
 //**********************************************************************
 // CCategoryTransitionRateProcess::CCategoryTransitionRateProcess()
 // Default constructor
 //**********************************************************************
 CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
-  // Register estimables
-  registerEstimable(PARAM_PROPORTION, &dProportion);
-
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FROM);
   pParameterList->registerAllowed(PARAM_TO);
-  pParameterList->registerAllowed(PARAM_PROPORTION);
-  pParameterList->registerAllowed(PARAM_SELECTIVITY);
+  pParameterList->registerAllowed(PARAM_PROPORTIONS);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -39,14 +40,29 @@ void CCategoryTransitionRateProcess::validate() {
     CProcess::validate();
 
     // Populate our variables
-    sFrom         = pParameterList->getString(PARAM_FROM);
-    sTo           = pParameterList->getString(PARAM_TO);
-    dProportion   = pParameterList->getDouble(PARAM_PROPORTION);
-    sSelectivity  = pParameterList->getString(PARAM_SELECTIVITY);
+    sLayer  = pParameterList->getString(PARAM_LAYER);
+
+    pParameterList->fillVector(vFrom, PARAM_FROM);
+    pParameterList->fillVector(vTo, PARAM_TO);
+    pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
+    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+
+    // Validate Sizes
+    if (vFrom.size() != vTo.size())
+      CError::errorListSameSize(PARAM_FROM, PARAM_TO);
+    if (vFrom.size() != vProportions.size())
+      CError::errorListSameSize(PARAM_FROM, PARAM_PROPORTIONS);
+    if (vFrom.size() != vSelectivityNames.size())
+      CError::errorListSameSize(PARAM_FROM, PARAM_SELECTIVITIES);
 
     // Local Validation
-    if (dProportion > 1.0)
-      CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+    for (int i = 0; i < (int)vProportions.size(); ++i) {
+      if (vProportions[i] > 1.0)
+        CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+
+      // Register estimables
+      registerEstimable(PARAM_PROPORTION, i, &vProportions[i]);
+    }
 
   } catch (string Ex) {
     Ex = "CCategoryTransitionRateProcess.validate(" + getLabel() + ")->" + Ex;
@@ -64,10 +80,21 @@ void CCategoryTransitionRateProcess::build() {
     CProcess::build();
 
     // Get our Category Indexes.
-    iFromIndex    = pWorld->getCategoryIndexForName(sFrom);
-    iToIndex      = pWorld->getCategoryIndexForName(sTo);
+    foreach(string Category, vFrom) {
+      vFromIndex.push_back(pWorld->getCategoryIndexForName(Category));
+    }
+    foreach(string Category, vTo) {
+      vToIndex.push_back(pWorld->getCategoryIndexForName(Category));
+    }
 
-    pSelectivity  = CSelectivityManager::Instance()->getSelectivity(sSelectivity);
+    // Get Selectivities
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    foreach(string Label, vSelectivityNames) {
+      vSelectivities.push_back(pSelectivityManager->getSelectivity(Label));
+    }
+
+    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
   } catch (string Ex) {
     Ex = "CCategoryTransitionRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -94,12 +121,19 @@ void CCategoryTransitionRateProcess::execute() {
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
         for (int l = 0; l < iBaseColCount; ++l) {
-          dCurrent = pBaseSquare->getValue(iFromIndex, l);
-          if(CComparer::isZero(dCurrent))
-             continue;
-          dCurrent = dCurrent * dProportion * pSelectivity->getResult(l);
-          pBaseSquare->subValue(iFromIndex, l, dCurrent);
-          pBaseSquare->addValue(iToIndex, l, dCurrent);
+          // Loop through vectors and make adjustment
+          for (int k = 0; k < (int)vFromIndex.size(); ++k) {
+            dCurrent = pBaseSquare->getValue(vFromIndex[k], l);
+            if(CComparer::isZero(dCurrent))
+               continue;
+
+            // TODO: Add Multiplayer for layer here
+            // dCurrent *= LOG(pLayer->getValue(i, j));
+
+            dCurrent = dCurrent * vProportions[k] * vSelectivities[k]->getResult(l);
+            pBaseSquare->subValue(vFromIndex[k], l, dCurrent);
+            pBaseSquare->addValue(vToIndex[k], l, dCurrent);
+          }
         }
       }
     }

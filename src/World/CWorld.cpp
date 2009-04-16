@@ -206,6 +206,15 @@ void CWorld::build() {
 }
 
 //**********************************************************************
+// void CWorld::rebuild()
+// Rebuild our World
+//**********************************************************************
+void CWorld::rebuild() {
+  // Clear the Grid
+  zeroGrid();
+}
+
+//**********************************************************************
 // void CWorld::fillCategoryVector(vector<int> &list, vector<string> &names)
 // Fill A Vector with Category Indexes.
 //**********************************************************************

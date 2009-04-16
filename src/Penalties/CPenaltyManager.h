@@ -41,6 +41,7 @@ public:
   SFlaggedPenalty*           getFlaggedPenalty(int Index);
   void                       validate();
   void                       build() { };
+  void                       rebuild();
   virtual                    ~CPenaltyManager();
 
 protected:

@@ -20,7 +20,7 @@ class CReportManager;
 //
 //
 //**********************************************************************
-class CInitializationPhaseManager: CBaseManager {
+class CInitializationPhaseManager : public CBaseManager {
 public:
   // Functions
   static CInitializationPhaseManager* Instance();

@@ -32,6 +32,22 @@ CDerivedQuantity::CDerivedQuantity() {
 
   // Build World View
   pWorldView = new CCompleteWorldView();
+
+  //
+  vValues.push_back(0.0);
+}
+
+//**********************************************************************
+// double CDerivedQuantity::getValue(int offset = 0)
+// Get Value From our Derived Quantity
+//**********************************************************************
+double CDerivedQuantity::getValue(int offset) {
+
+  int iIndex = pTimeStepManager->getCurrentYear() - offset;
+  if (iIndex < 0)
+    iIndex = 0;
+
+  return vValues[iIndex];
 }
 
 //**********************************************************************
@@ -96,7 +112,7 @@ void CDerivedQuantity::execute() {
   if (pTimeStepManager->getCurrentTimeStep() != iTimeStep)
     return;
 
-  double value = 0.0;
+  double dValue = 0.0;
 
 
   pWorldView->execute();
@@ -104,10 +120,12 @@ void CDerivedQuantity::execute() {
 
   for (int i = 0; i < (int)vCategories.size(); ++i) {
     for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      value += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
     }
   }
 
+  // Store our Value
+  vValues.push_back(dValue);
 }
 
 //**********************************************************************

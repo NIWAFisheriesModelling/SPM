@@ -181,6 +181,16 @@ void CPenaltyManager::validate() {
 }
 
 //**********************************************************************
+// void CPenaltyManager::rebuild()
+// Rebuild our Penalty Manager
+//**********************************************************************
+void CPenaltyManager::rebuild() {
+
+  // Clear the Flagged Penalties
+  clearFlaggedPenaltyList();
+}
+
+//**********************************************************************
 // CPenaltyManager::~CPenaltyManager()
 // Default De-Constructor
 //**********************************************************************

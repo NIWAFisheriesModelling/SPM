@@ -12,24 +12,10 @@
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
 
-// Classes;
-class CPreferenceFunctionManager;
-class CEstimateManager;
-class CInitializationPhaseManager;
-class CLayerManager;
-class CObservationManager;
-class CPenaltyManager;
-class CPriorManager;
-class CProcessManager;
-class CProfileManager;
-class CCatchabilityManager;
-class CSelectivityManager;
-class CTimeStepManager;
+// Classes
+class CBaseManager;
 class CObjectiveFunction;
-class CTimeStep;
-class CInitializationPhase;
-class CReportManager;
-class CDerivedQuantityManager;
+class CEstimateManager;
 
 //**********************************************************************
 //
@@ -53,6 +39,7 @@ public:
   void                        execute() { executeBasicRun(); }
   void                        executeBasicRun();
   void                        executeEstimationRun();
+  void                        executeProfileRun();
   void                        executeMCMC();
   void                        clone(CRuntimeThread *Thread);
   void                        startModel();
@@ -60,21 +47,9 @@ public:
 protected:
   // Variables
   EState                      eCurrentState;
-  CPreferenceFunctionManager  *pDirectedProcessManager;
-  CEstimateManager            *pEstimateManager;
-  CInitializationPhaseManager *pInitializationManager;
-  CLayerManager               *pLayerManager;
+  vector<CBaseManager*>       vManagers;
   CObjectiveFunction          *pObjectiveFunction;
-  CObservationManager         *pObservationManager;
-  CPenaltyManager             *pPenaltyManager;
-  CPriorManager               *pPriorManager;
-  CProcessManager             *pProcessManager;
-  CProfileManager             *pProfileManager;
-  CCatchabilityManager        *pQManager;
-  CSelectivityManager         *pSelectivityManager;
-  CTimeStepManager            *pTimeStepManager;
-  CReportManager              *pReporterManager;
-  CDerivedQuantityManager     *pDerivedQuantityManager;
+  CEstimateManager            *pEstimateManager;
   int                         iNumberOfYears;
   bool                        bTerminate;
   bool                        bWaiting;

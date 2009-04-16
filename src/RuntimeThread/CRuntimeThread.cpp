@@ -12,31 +12,33 @@
 
 // Local Headers
 #include "CRuntimeThread.h"
-#include "../Minimizers/CMinimizerManager.h"
-#include "../PreferenceFunctions/CPreferenceFunctionManager.h"
+#include "../BaseClasses/CBaseManager.h"
+#include "../Catchabilities/CCatchabilityManager.h"
+#include "../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
+#include "../Minimizers/CMinimizerManager.h"
+#include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../Observations/CObservationManager.h"
 #include "../Penalties/CPenaltyManager.h"
+#include "../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../Priors/CPriorManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Profiles/CProfileManager.h"
-#include "../Catchabilities/CCatchabilityManager.h"
+#include "../Reports/CReportManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
-#include "../ObjectiveFunction/CObjectiveFunction.h"
-#include "../TimeSteps/CTimeStep.h"
+
+//#include "../TimeSteps/CTimeStep.h"
+//#include "../InitializationPhases/CInitializationPhase.h"
 #include "../Helpers/ForEach.h"
-#include "../InitializationPhases/CInitializationPhase.h"
-#include "../Catchabilities/CCatchabilityManager.h"
-#include "../Reports/CReportManager.h"
-#include "../DerivedQuantities/CDerivedQuantityManager.h"
-#include "../CRuntimeController.h"
 
 // Using
 using std::cout;
 using std::endl;
+
+// TODO: Add each manager to a vector<CBaseManager*> and iterate to build/validate etc.
 
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
@@ -44,27 +46,28 @@ using std::endl;
 //**********************************************************************
 CRuntimeThread::CRuntimeThread() {
 
-  // Create our Instances
-  pDerivedQuantityManager  = CDerivedQuantityManager::Instance();
-  // TODO: Refactor DirectProc into PrefFunc
-  pDirectedProcessManager  = CPreferenceFunctionManager::Instance();
-  pEstimateManager         = CEstimateManager::Instance();
-  pInitializationManager   = CInitializationPhaseManager::Instance();
-  pLayerManager            = CLayerManager::Instance();
-  pObjectiveFunction       = CObjectiveFunction::Instance();
-  pObservationManager      = CObservationManager::Instance();
-  pPenaltyManager          = CPenaltyManager::Instance();
-  pPriorManager            = CPriorManager::Instance();
-  pProcessManager          = CProcessManager::Instance();
-  pProfileManager          = CProfileManager::Instance();
-  pQManager                = CCatchabilityManager::Instance();
-  pReporterManager         = CReportManager::Instance();
-  pSelectivityManager      = CSelectivityManager::Instance();
-  pTimeStepManager         = CTimeStepManager::Instance();
-  pWorld                   = CWorld::Instance();
+  // Add our managers to the Vector
+  vManagers.push_back(CWorld::Instance());
+  vManagers.push_back(CProcessManager::Instance());
+  vManagers.push_back(CCatchabilityManager::Instance());
+  vManagers.push_back(CDerivedQuantityManager::Instance());
+  vManagers.push_back(CEstimateManager::Instance());
+  vManagers.push_back(CInitializationPhaseManager::Instance());
+  vManagers.push_back(CLayerManager::Instance());
+  vManagers.push_back(CMinimizerManager::Instance());
+  vManagers.push_back(CObservationManager::Instance());
+  vManagers.push_back(CPenaltyManager::Instance());
+  vManagers.push_back(CPreferenceFunctionManager::Instance());
+  vManagers.push_back(CPriorManager::Instance());
+  vManagers.push_back(CProfileManager::Instance());
+  vManagers.push_back(CReportManager::Instance());
+  vManagers.push_back(CSelectivityManager::Instance());
+  vManagers.push_back(CTimeStepManager::Instance());
 
   // Variables
-  bWaiting        = false;
+  bWaiting            = false;
+  pEstimateManager    = CEstimateManager::Instance(); // Use for MCMC
+  pObjectiveFunction  = CObjectiveFunction::Instance();
 }
 
 //**********************************************************************
@@ -110,23 +113,10 @@ bool CRuntimeThread::getTerminate() {
 void CRuntimeThread::validate() {
   eCurrentState = STATE_VALIDATION;
 
-  // Validate Them in Alphabetical Order, After World
-  pWorld->validate(); // First because it's our Base
-  pDerivedQuantityManager->validate();
-  pDirectedProcessManager->validate();
-  pEstimateManager->validate();
-  pInitializationManager->validate();
-  pLayerManager->validate();
-  pObservationManager->validate();
-  pPenaltyManager->validate();
-  pPriorManager->validate();
-  pProcessManager->validate();
-  pProfileManager->validate();
-  pReporterManager->validate();
-  pSelectivityManager->validate();
-  pTimeStepManager->validate();
-
-  CCatchabilityManager::Instance()->validate(); // TODO: FIX THIS
+  // Validate our Managers
+  foreach(CBaseManager *Manager, vManagers) {
+    Manager->validate();
+  }
 }
 
 //**********************************************************************
@@ -136,23 +126,10 @@ void CRuntimeThread::validate() {
 void CRuntimeThread::build() {
   eCurrentState = STATE_CONSTRUCTION;
 
-  // do not fuck with this order
-  // There are dependencies based on the build order.
-  pWorld->build();
-  pProcessManager->build();
-
-  // Build Rest that rely on the Above.
-  pDerivedQuantityManager->build();
-  pDirectedProcessManager->build();
-  pEstimateManager->build();
-  pPenaltyManager->build();
-  pInitializationManager->build();
-  pLayerManager->build();
-  pProfileManager->build();
-  pSelectivityManager->build();
-  pObservationManager->build();
-  pTimeStepManager->build();
-  pReporterManager->build();
+  // Validate our Managers
+  foreach(CBaseManager *Manager, vManagers) {
+    Manager->build();
+  }
 
   // Build our Own Locals
   iNumberOfYears = pWorld->getCurrentYear() - pWorld->getInitialYear();
@@ -163,11 +140,11 @@ void CRuntimeThread::build() {
 // Re-Build the components with caches.
 //**********************************************************************
 void CRuntimeThread::rebuild() {
-  pWorld->zeroGrid();
 
-  pProcessManager->rebuild();
-  pSelectivityManager->rebuild();
-  pPenaltyManager->clearFlaggedPenaltyList();
+  // Validate our Managers
+  foreach(CBaseManager *Manager, vManagers) {
+    Manager->rebuild();
+  }
 }
 
 //**********************************************************************
@@ -184,7 +161,7 @@ void CRuntimeThread::executeBasicRun() {
 
   // Change State
   eCurrentState = STATE_FINALIZATION;
-  pReporterManager->execute(eCurrentState);
+  CReportManager::Instance()->execute(eCurrentState);
 }
 
 //**********************************************************************
@@ -194,6 +171,15 @@ void CRuntimeThread::executeBasicRun() {
 void CRuntimeThread::executeEstimationRun() {
   CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
   pMinimizerManager->execute();
+}
+
+//**********************************************************************
+// void CRuntimeThread:executeProfileRun()
+// Execute a Profile Run
+//**********************************************************************
+void CRuntimeThread::executeProfileRun() {
+  CProfileManager *pProfileManager = CProfileManager::Instance();
+  pProfileManager->execute();
 }
 
 //**********************************************************************
@@ -237,15 +223,16 @@ void CRuntimeThread::executeMCMC() {
 //**********************************************************************
 void CRuntimeThread::startModel() {
 
+
+
   // Set State To Burn-In (Initialisation) & Execute
   eCurrentState = STATE_INITIALIZATION;
-  pInitializationManager->execute();
-
-  pReporterManager->execute(eCurrentState);
+  CInitializationPhaseManager::Instance()->execute();
+  CReportManager::Instance()->execute(eCurrentState);
 
   // Flag and start modelling
   eCurrentState = STATE_MODELLING;
-  pTimeStepManager->execute();
+  CTimeStepManager::Instance()->execute();
 
   pWorld->debugToScreen();
 }
@@ -255,22 +242,25 @@ void CRuntimeThread::startModel() {
 // Clone our Parameter
 //**********************************************************************
 void CRuntimeThread::clone(CRuntimeThread *Thread) {
+  // TODO: Re-Do This Function for threading
 
+  /*pCatchabilityManager->clone(Thread->pCatchabilityManager);
   pDerivedQuantityManager->clone(Thread->pDerivedQuantityManager);
-  pDirectedProcessManager->clone(Thread->pDirectedProcessManager);
   pEstimateManager->clone(Thread->pEstimateManager);
+  pInitializationManager->clone(Thread->pInitializationManager);
   pLayerManager->clone(Thread->pLayerManager);
+  pMinimizerManager->clone(Thread->pMinimizerManager);
+  // pObjectiveFunction->clone(Thread->pObjectiveFunction); // TODO: Do we need this?
   pObservationManager->clone(Thread->pObservationManager);
-  pReporterManager->clone(Thread->pReporterManager);
   pPenaltyManager->clone(Thread->pPenaltyManager);
+  pPreferenceFunctionManager->clone(Thread->pPreferenceFunctionManager);
   pPriorManager->clone(Thread->pPriorManager);
   pProcessManager->clone(Thread->pProcessManager);
   pProfileManager->clone(Thread->pProfileManager);
-  pQManager->clone(Thread->pQManager);
+  pReporterManager->clone(Thread->pReporterManager);
   pSelectivityManager->clone(Thread->pSelectivityManager);
-  pInitializationManager->clone(Thread->pInitializationManager);
   pTimeStepManager->clone(Thread->pTimeStepManager);
-  pWorld->clone(Thread->pWorld);
+  pWorld->clone(Thread->pWorld);*/
 }
 
 //**********************************************************************
@@ -278,21 +268,23 @@ void CRuntimeThread::clone(CRuntimeThread *Thread) {
 // Destructor
 //**********************************************************************
 CRuntimeThread::~CRuntimeThread() {
-  // Destroy Singleton Classes
-  CReportManager::Destroy();
-  CPreferenceFunctionManager::Destroy();
-  CEstimateManager::Destroy();
-  CInitializationPhaseManager::Destroy();
-  CLayerManager::Destroy();
-  CMinimizerManager::Destroy();
-  CObjectiveFunction::Destroy();
-  CObservationManager::Destroy();
-  CPenaltyManager::Destroy();
-  CPriorManager::Destroy();
-  CProcessManager::Destroy();
-  CProfileManager::Destroy();
-  CCatchabilityManager::Destroy();
-  CSelectivityManager::Destroy();
+
+  // Destroy Singleton Classes in reverse Order
   CTimeStepManager::Destroy();
+  CSelectivityManager::Destroy();
+  CReportManager::Destroy();
+  CProfileManager::Destroy();
+  CProcessManager::Destroy();
+  CPriorManager::Destroy();
+  CPreferenceFunctionManager::Destroy();
+  CPenaltyManager::Destroy();
+  CObservationManager::Destroy();
+  CObjectiveFunction::Destroy();
+  CMinimizerManager::Destroy();
+  CLayerManager::Destroy();
+  CInitializationPhaseManager::Destroy();
+  CEstimateManager::Destroy();
+  CDerivedQuantityManager::Destroy();
+  CCatchabilityManager::Destroy();
   CWorld::Destroy();
 }

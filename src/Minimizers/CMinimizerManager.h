@@ -29,6 +29,7 @@ public:
   void                        addMinimizer(CMinimizer *value);
   void                        addThread(CRuntimeThread *Thread);
   CMinimizer*                 getMinimizer() { return pMinimizer; }
+  void                        clone(CMinimizerManager *Manager) { }
   void                        validate();
   void                        build();
   void                        execute();

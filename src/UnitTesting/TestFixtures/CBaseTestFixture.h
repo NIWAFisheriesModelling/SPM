@@ -43,7 +43,7 @@ public:
   CLayerManager              *pLayerManager;
   CSelectivityManager        *pSelectivityManager;
   CPenaltyManager            *pPenaltyManager;
-  CPreferenceFunctionManager    *pDirectedProcessManager;
+  CPreferenceFunctionManager    *pPreferenceFunctionManager;
   int                        immatureIndex;
   int                        matureIndex;
   int                        spawningIndex;

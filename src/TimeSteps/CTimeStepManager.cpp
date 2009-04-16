@@ -19,6 +19,7 @@
 #include "../World/CWorld.h"
 #include "../Observations/CObservationManager.h"
 #include "../Reports/CReportManager.h"
+#include "../DerivedQuantities/CDerivedQuantityManager.h"
 
 // Using
 using std::cout;
@@ -32,8 +33,11 @@ boost::thread_specific_ptr<CTimeStepManager> CTimeStepManager::clInstance;
 // Default Constructor
 //**********************************************************************
 CTimeStepManager::CTimeStepManager() {
-  pObservationManager = 0;
-  pReporterManager    = 0;
+  pObservationManager         = 0;
+  pReporterManager            = 0;
+  pDerivedQuantityManager     = 0;
+
+  iCurrentYear                = 0;
 }
 
 //**********************************************************************
@@ -154,8 +158,9 @@ void CTimeStepManager::build() {
     iFirstHumanYear   = pWorld->getInitialYear();
     iNumberOfYears    = pWorld->getCurrentYear() - iFirstHumanYear;
 
-    pObservationManager = CObservationManager::Instance();
-    pReporterManager    = CReportManager::Instance();
+    pObservationManager       = CObservationManager::Instance();
+    pReporterManager          = CReportManager::Instance();
+    pDerivedQuantityManager   = CDerivedQuantityManager::Instance();
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
@@ -181,6 +186,7 @@ void CTimeStepManager::execute() {
       vTimeStepsOrder[j]->execute();
 
       // Execute Other Tasks
+      pDerivedQuantityManager->execute();
       pObservationManager->execute(iCurrentYear, j);
       pReporterManager->execute();
     }

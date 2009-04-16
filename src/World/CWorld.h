@@ -47,6 +47,7 @@ public:
   void                      clone(CWorld *World);
   void                      validate();
   void                      build();
+  void                      rebuild();
   void                      fillCategoryVector(vector<int> &list, vector<string> &names);
   int                       getWidth() { return iWidth; }
   int                       getHeight() { return iHeight; }

@@ -12,6 +12,9 @@
 // Local headers
 #include "../CProcess.h"
 
+// Forward Declaration
+class CNumericLayer;
+
 //**********************************************************************
 //
 //
@@ -27,13 +30,16 @@ public:
 
 protected:
   // Variables
-  string                     sFrom;
-  string                     sTo;
-  double                     dProportion;
-  int                        iFromIndex;
-  int                        iToIndex;
-  string                     sSelectivity;
-  CSelectivity*              pSelectivity;
+  vector<string>             vFrom;
+  vector<int>                vFromIndex;
+  vector<string>             vTo;
+  vector<int>                vToIndex;
+  vector<double>             vProportions;
+  vector<string>             vSelectivityNames;
+  vector<CSelectivity*>      vSelectivities;
+  string                     sLayer;
+  CNumericLayer              *pLayer;
+
 };
 
 #endif /* CCATEGORYTRANSITIONRATEPROCESS_H_ */

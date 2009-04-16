@@ -32,6 +32,7 @@ public:
   virtual                     ~CBaseManager();
   virtual void                validate() = 0;
   virtual void                build() = 0;
+  virtual void                rebuild() { }
 };
 
 #endif /* CBASEMANAGER_H_ */

@@ -43,7 +43,7 @@ CBaseTestFixture::CBaseTestFixture() {
   BOOST_REQUIRE_NO_THROW(pLayerManager = CLayerManager::Instance());
   BOOST_REQUIRE_NO_THROW(pSelectivityManager = CSelectivityManager::Instance());
   BOOST_REQUIRE_NO_THROW(pPenaltyManager = CPenaltyManager::Instance());
-  BOOST_REQUIRE_NO_THROW(pDirectedProcessManager = CPreferenceFunctionManager::Instance());
+  BOOST_REQUIRE_NO_THROW(pPreferenceFunctionManager = CPreferenceFunctionManager::Instance());
 
   // Default Some Variables
   immatureIndex       = -1;
@@ -264,7 +264,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pConstant->setLabel("constant_directed");
   pConstant->setAlpha(3.0);
   pConstant->setLayerName("double_layer");
-  pDirectedProcessManager->addProcess(pConstant);
+  pPreferenceFunctionManager->addProcess(pConstant);
 
   //*****************************************
   // Constant -Distance Layer
@@ -272,7 +272,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pConstantDist->setLabel("constant_directed_distance");
   pConstantDist->setAlpha(1.0);
   pConstantDist->setLayerName("distance_layer");
-  pDirectedProcessManager->addProcess(pConstantDist);
+  pPreferenceFunctionManager->addProcess(pConstantDist);
 
   //***************************************
   // Double-Normal
@@ -283,7 +283,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pDoubleNormal->setMu(3.0);
   pDoubleNormal->setSigmaL(1.0);
   pDoubleNormal->setSigmaR(5.0);
-  pDirectedProcessManager->addProcess(pDoubleNormal);
+  pPreferenceFunctionManager->addProcess(pDoubleNormal);
 
   //*************************************
   // Exponential
@@ -292,7 +292,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pExponential->setLayerName("double_layer");
   pExponential->setAlpha(3.0);
   pExponential->setLambda(5.0);
-  pDirectedProcessManager->addProcess(pExponential);
+  pPreferenceFunctionManager->addProcess(pExponential);
 
   //************************************
   // Inverse Logistic
@@ -302,7 +302,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pInverse->setA50(3.0);
   pInverse->setAto95(8.0);
   pInverse->setAlpha(3.0);
-  pDirectedProcessManager->addProcess(pInverse);
+  pPreferenceFunctionManager->addProcess(pInverse);
 
   //*************************************
   // Logistic
@@ -312,7 +312,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pLogistic->setA50(3.0);
   pLogistic->setAto95(8.0);
   pLogistic->setAlpha(3.0);
-  pDirectedProcessManager->addProcess(pLogistic);
+  pPreferenceFunctionManager->addProcess(pLogistic);
 
   //**************************************
   // Normal
@@ -322,7 +322,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pNormal->setAlpha(3.0);
   pNormal->setMu(8.0);
   pNormal->setSigma(5.0);
-  pDirectedProcessManager->addProcess(pNormal);
+  pPreferenceFunctionManager->addProcess(pNormal);
 
   //***************************************
   // Threshold
@@ -332,7 +332,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pThreshold->setAlpha(3.0);
   pThreshold->setLambda(4.0);
   pThreshold->setN(5.0);
-  pDirectedProcessManager->addProcess(pThreshold);
+  pPreferenceFunctionManager->addProcess(pThreshold);
 
   //***************************************
   // Threshold Distance
@@ -342,7 +342,7 @@ void CBaseTestFixture::setupDirectedProcesses() {
   pDThreshold->setAlpha(3.0);
   pDThreshold->setLambda(4.0);
   pDThreshold->setN(1.1);
-  pDirectedProcessManager->addProcess(pDThreshold);
+  pPreferenceFunctionManager->addProcess(pDThreshold);
 }
 
 //**********************************************************************
@@ -356,7 +356,7 @@ void CBaseTestFixture::validateAll() {
   pLayerManager->validate();
   pSelectivityManager->validate();
   pPenaltyManager->validate();
-  pDirectedProcessManager->validate();
+  pPreferenceFunctionManager->validate();
 }
 
 //**********************************************************************
@@ -368,7 +368,7 @@ void CBaseTestFixture::buildAll() {
   pLayerManager->build();
   pSelectivityManager->build();
   pPenaltyManager->build();
-  pDirectedProcessManager->build();
+  pPreferenceFunctionManager->build();
 }
 
 //**********************************************************************

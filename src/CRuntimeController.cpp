@@ -220,16 +220,11 @@ void CRuntimeController::run() {
   try {
     CConfiguration    *pConfig          = CConfiguration::Instance();
     CEstimateManager  *pEstimateManager = CEstimateManager::Instance();
-    CProfileManager   *pProfileManager  = CProfileManager::Instance();
 
     // Create our Base Thread
     pBaseThread = new CRuntimeThread();
     pBaseThread->validate();
     pBaseThread->build();
-
-    CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
-    pMinimizer->validate();
-    pMinimizer->build();
 
     // Set a default number of estimate values we want to run
     // the model for. This defaults to 1, because we always
@@ -261,8 +256,7 @@ void CRuntimeController::run() {
           pBaseThread->executeBasicRun();
           break;
         case RUN_MODE_PROFILE:
-          // Get Minimizer Manager
-          pProfileManager->execute();
+          pBaseThread->executeProfileRun();
           break;
         case RUN_MODE_MARKOV_CHAIN_MONTE_CARLO:
           startEstimation();
