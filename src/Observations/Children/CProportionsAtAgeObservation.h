@@ -45,6 +45,7 @@ protected:
   bool                       bAgePlus;
   bool                       bRescale;
   double                     dTolerance;
+  double                     dProportionTimeStep;
   double                     dProcessError;
 };
 

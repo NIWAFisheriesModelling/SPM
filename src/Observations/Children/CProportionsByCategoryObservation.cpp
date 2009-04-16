@@ -48,6 +48,7 @@ CProportionsByCategoryObservation::CProportionsByCategoryObservation() {
   pParameterList->registerAllowed(PARAM_TARGET_CATEGORIES);
   pParameterList->registerAllowed(PARAM_TARGET_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_DELTA);
+  pParameterList->registerAllowed(PARAM_PROPORTION_TIME_STEP);
   pParameterList->registerAllowed(PARAM_PROCESS_ERROR);
 }
 
@@ -61,11 +62,12 @@ void CProportionsByCategoryObservation::validate() {
     CObservation::validate();
 
     // Get our Variables from ParameterList
-    dDelta            = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
-    iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
-    iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
-    bAgePlus          = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
-    dProcessError     = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
+    dDelta              = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
+    iMinAge             = pParameterList->getInt(PARAM_MIN_AGE);
+    iMaxAge             = pParameterList->getInt(PARAM_MAX_AGE);
+    bAgePlus            = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
+    dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP,true,1.0);
+    dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
 
     pParameterList->fillVector(vTargetCategoryNames, PARAM_TARGET_CATEGORIES);
     pParameterList->fillVector(vTargetSelectivityNames, PARAM_TARGET_SELECTIVITIES);

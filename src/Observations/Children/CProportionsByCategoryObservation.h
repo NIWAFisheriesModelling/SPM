@@ -40,6 +40,7 @@ protected:
   vector<string>             vTargetSelectivityNames;
   vector<CSelectivity*>      vTargetSelectivities;
   double                     dDelta;
+  double                     dProportionTimeStep;
   double                     dProcessError;
 };
 
