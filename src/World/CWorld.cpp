@@ -114,7 +114,7 @@ void CWorld::validate() {
     sBaseLayer        = pParameterList->getString(PARAM_LAYER);
     iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
-    bAgePlusGroup     = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
+    bAgePlusGroup     = pParameterList->getBool(PARAM_AGE_PLUS_GROUP,true,true);
     iInitialYear      = pParameterList->getInt(PARAM_INITIAL_YEAR);
     iCurrentYear      = pParameterList->getInt(PARAM_CURRENT_YEAR);
     iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
