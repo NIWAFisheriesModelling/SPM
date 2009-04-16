@@ -22,8 +22,8 @@ class CCatchability;
 class CAbundanceObservation : public CObservation {
 public:
   // Functions
-	CAbundanceObservation();
-	virtual                    ~CAbundanceObservation();
+  CAbundanceObservation();
+  virtual                    ~CAbundanceObservation();
   void                       validate();
   void                       build();
   void                       execute();
@@ -36,6 +36,7 @@ protected:
   CCatchability              *pCatchability;
   double                     dDelta;
   double                     dSigma;
+  double                     dProcessError;
 };
 
 #endif /*CABUNDANCEOBSERVATION_H_*/

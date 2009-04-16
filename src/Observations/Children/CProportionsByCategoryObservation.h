@@ -18,8 +18,8 @@
 //**********************************************************************
 class CProportionsByCategoryObservation : public CObservation {
 public:
-	CProportionsByCategoryObservation();
-	virtual                    ~CProportionsByCategoryObservation();
+  CProportionsByCategoryObservation();
+  virtual                    ~CProportionsByCategoryObservation();
   void                       validate();
   void                       build();
   void                       execute();
@@ -40,6 +40,7 @@ protected:
   vector<string>             vTargetSelectivityNames;
   vector<CSelectivity*>      vTargetSelectivities;
   double                     dDelta;
+  double                     dProcessError;
 };
 
 #endif /*CPROPORTIONSBYCATEGORYOBSERVATION_H_*/

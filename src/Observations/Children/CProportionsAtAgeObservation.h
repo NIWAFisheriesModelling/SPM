@@ -19,19 +19,19 @@
 class CProportionsAtAgeObservation : public CObservation {
 public:
   // Functions
-	CProportionsAtAgeObservation();
-	virtual                    ~CProportionsAtAgeObservation();
-//	int                        getProportionCount() { return (int)mvProportionMatrix.size(); }
-//	string                     getProportionKey(int index);
-//	int                        getProportionKeyValueCount(string key);
-//	double                     getProportionValue(string key, int index);
+  CProportionsAtAgeObservation();
+  virtual                    ~CProportionsAtAgeObservation();
+//  int                        getProportionCount() { return (int)mvProportionMatrix.size(); }
+//  string                     getProportionKey(int index);
+//  int                        getProportionKeyValueCount(string key);
+//  double                     getProportionValue(string key, int index);
 //  int                        getMinAge() { return iMinAge; }
 //  int                        getMaxAge() { return iMaxAge; }
 //  bool                       getAgePlus() { return bAgePlus; }
 //  bool                       getRescale() { return bRescale; }
-	void                       validate();
-	void                       build();
-	void                       execute();
+  void                       validate();
+  void                       build();
+  void                       execute();
 
 protected:
   // Variables
@@ -45,6 +45,7 @@ protected:
   bool                       bAgePlus;
   bool                       bRescale;
   double                     dTolerance;
+  double                     dProcessError;
 };
 
 #endif /*CPROPORTIONSATAGE_H_*/

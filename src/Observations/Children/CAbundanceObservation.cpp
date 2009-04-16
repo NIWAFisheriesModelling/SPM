@@ -33,6 +33,7 @@ CAbundanceObservation::CAbundanceObservation() {
   pParameterList->registerAllowed(PARAM_OBS);
   pParameterList->registerAllowed(PARAM_ERROR_VALUE);
   pParameterList->registerAllowed(PARAM_DELTA);
+  pParameterList->registerAllowed(PARAM_PROCESS_ERROR);
 }
 
 //**********************************************************************
@@ -47,6 +48,7 @@ void CAbundanceObservation::validate() {
     // Get our Parameters
     sCatchability = pParameterList->getString(PARAM_CATCHABILITY);
     dDelta        = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
+    dProcessError = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
 
     // Get our OBS
     vector<string> vOBS;
@@ -57,6 +59,9 @@ void CAbundanceObservation::validate() {
 
     for (int i = 0; i < (int)vOBS.size(); i+=2)
       mProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
+
+    if (dProcessError < 0)
+      CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
 
     // Get our ErrorValues
     vector<string> vErrorValues;

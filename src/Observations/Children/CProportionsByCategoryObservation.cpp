@@ -48,6 +48,7 @@ CProportionsByCategoryObservation::CProportionsByCategoryObservation() {
   pParameterList->registerAllowed(PARAM_TARGET_CATEGORIES);
   pParameterList->registerAllowed(PARAM_TARGET_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_DELTA);
+  pParameterList->registerAllowed(PARAM_PROCESS_ERROR);
 }
 
 //**********************************************************************
@@ -64,6 +65,7 @@ void CProportionsByCategoryObservation::validate() {
     iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlus          = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
+    dProcessError     = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
 
     pParameterList->fillVector(vTargetCategoryNames, PARAM_TARGET_CATEGORIES);
     pParameterList->fillVector(vTargetSelectivityNames, PARAM_TARGET_SELECTIVITIES);
@@ -83,6 +85,9 @@ void CProportionsByCategoryObservation::validate() {
         mvProportionMatrix[vOBS[i]].push_back(CConvertor::stringToDouble(vOBS[i+j+1]));
       }
     }
+
+    if (dProcessError < 0)
+      CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
 
     // Get our Error Value
     vector<string> vErrorValues;
