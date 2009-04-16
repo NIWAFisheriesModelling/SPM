@@ -44,7 +44,7 @@ void CObjectiveFunctionReport::execute() {
     cout << pScore->Label << ": " << pScore->Score << "\n";
   }
 
-  cout << PARAM_TOTAL_SCORE << ": " << pObjectiveFunction->getScore() << endl;
+  cout << PARAM_TOTAL_SCORE << ": " << pObjectiveFunction->getScore() << "\n";
   cout << "*end\n" << endl;
   this->end();
 }
