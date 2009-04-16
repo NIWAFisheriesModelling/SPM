@@ -70,8 +70,13 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 \defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defType{Constant}
-\defDefault{0.0002}
+\defDefault{0.002}
 \defValue{A positive real number}
+
+\defSub{covariance} {Specify if \SPM\ should attempt to calculate the covariance matrix, if estimating}
+\defType{Logical}
+\defDefault{True}
+\defValue{Either true of false}
 
 \subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{DE\_solver}} 
 
@@ -92,8 +97,13 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 \defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defType{Constant}
-\defDefault{0.0002}
+\defDefault{0.002}
 \defValue{A positive real number}
+
+\defSub{covariance} {Specify if \SPM\ should attempt to calculate the covariance matrix, if estimating}
+\defType{Logical}
+\defDefault{True}
+\defValue{Either true of false}
 
 \subsection{Monte Carlo Markov Chain (MCMC)\label{sec:estimation-syntax-MCMC}}
 

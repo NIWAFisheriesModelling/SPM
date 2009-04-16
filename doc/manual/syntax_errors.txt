@@ -8,12 +8,13 @@ In SPM, but not in manual
   age
   age_index
   area
+  binomial
+  binomial_approx
   category
   category_index
   column
   column_index
   current
-  cv_process_error
   enabled_estimates
   estimable
   estimates
@@ -33,9 +34,9 @@ In SPM, but not in manual
   layer_min
   layer_type
   layer_width
-  log_normal
   log_scale
   method
+  multinomial
   multiplier
   normal_by_stdev
   normal_log
@@ -86,13 +87,11 @@ In manual, but not in SPM
   max_correlation
   p1
   p2
-  process_error
   process_label
   proportion_time_step
   proposal_distribution
   random_seed
   sd
-  simulate
   sink_layer
   size_at_age
   sizes
@@ -108,9 +107,7 @@ In manual, but not in SPM
   biomass_event_mortality
   event_mortality_at_age
   iterative
-  lognormal
   migration_movement
-  none
   normal_by_sd
   off_by_one
   spatial_map
