@@ -275,18 +275,20 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         iIndex = (int)sLine.find_first_of("\t");
       }
 
-      if (sLine.substr(0, 8) == CONFIG_INCLUDE) {
+      // look for @include commands
+      iIndex = (int)sLine.find_first_of(" ");
+      if (sLine.substr(0, iIndex) == CONFIG_INCLUDE) { //command is '@include'
         // Find First "
         iIndex = (int)sLine.find_first_of("\"");
         if (iIndex == -1)
-          throw string("include_file value should be surrounded by quotes");
+          throw string("@include file name should be surrounded by quotes"); //TODO: Add to translation file
         // get line from First " (+1) onwards
         string sIncludeFile = sLine.substr(iIndex+1, sLine.length()-iIndex);
 
         // Remove last "
         iIndex = (int)sIncludeFile.find_first_of("\"");
         if (iIndex == -1)
-          throw string("include_file missing closing quote");
+          throw string("@include file name is missing a closing quote");  //TODO: Add to translation file
         sIncludeFile = sIncludeFile.substr(0, iIndex);
 
         // TODO: Fix This
