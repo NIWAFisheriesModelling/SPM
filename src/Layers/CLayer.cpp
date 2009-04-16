@@ -31,6 +31,7 @@ void CLayer::validate() {
     CWorld *pWorld    = CWorld::Instance();
     iWidth            = pWorld->getWidth();
     iHeight           = pWorld->getHeight();
+    dCellLength       = pWorld->getCellLength();
 
   } catch (string Ex) {
     Ex = "CLayer.validate(" + getLabel() + ")->" + Ex;

@@ -18,14 +18,16 @@
 //**********************************************************************
 class CLayer : public CBaseBuild {
 public:
-	CLayer();
+  CLayer();
   virtual                   ~CLayer();
   virtual CLayer*           clone() = 0;
   int                       getWidth() { return iWidth; }
   int                       getHeight() { return iHeight; }
+  double                    getCellLength() { return dCellLength; }
   virtual void              validate();
 
 protected:
+  double                    dCellLength;
   int                       iWidth;
   int                       iHeight;
 };
