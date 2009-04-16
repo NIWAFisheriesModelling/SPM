@@ -265,6 +265,7 @@
 #define PARAM_PROPORTIONS                         "proportions"
 #define PARAM_PROPORTIONS_AT_AGE                  "proportions_at_age"
 #define PARAM_PROPORTIONS_BY_CATEGORY             "proportions_by_category"
+#define PARAM_PROPORTION_TIME_STEP                "proportion_time-step"
 #define PARAM_PROPOSAL_T                          "proposal_t"
 #define PARAM_PSEUDO                              "none"
 #define PARAM_Q                                   "q"
