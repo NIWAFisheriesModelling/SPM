@@ -13,6 +13,7 @@
 // Local Headers
 #include "CWorld.h"
 #include "CWorldSquare.h"
+#include "../Helpers/DefinedValues.h"
 #include "../TimeSteps/CTimeStepManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
@@ -37,6 +38,7 @@ CWorld::CWorld() {
   pDifferenceGrid             = 0;
   iWidth                      = 0;
   iHeight                     = 0;
+  dCellLength                 = 0;
   sBaseLayer                  = "";
   pBaseLayer                  = 0;
   iEnabledSquareCount         = 0;
@@ -87,6 +89,7 @@ void CWorld::clone(CWorld *World) {
   try {
     iWidth                      = World->getWidth();
     iHeight                     = World->getHeight();
+    dCellLength                 = World->getCellLength();
     sBaseLayer                  = World->getBaseLayer();
 
   } catch (string Ex) {
@@ -105,7 +108,7 @@ void CWorld::validate() {
     pParameterList->checkInvalidParameters();
 
     // Load our Variable values
-    iCellLength       = pParameterList->getInt(PARAM_CELL_LENGTH);
+    dCellLength       = pParameterList->getDouble(PARAM_CELL_LENGTH,true,1.0);
     iHeight           = pParameterList->getInt(PARAM_NROWS); // TODO: Change to N_ROWS or Better
     iWidth            = pParameterList->getInt(PARAM_NCOLS); // TODO: Change to N_COLS or Better
     sBaseLayer        = pParameterList->getString(PARAM_LAYER);
@@ -127,6 +130,8 @@ void CWorld::validate() {
       CError::errorGreaterThan(PARAM_NCOLS, PARAM_ONE_THOUSAND);
     if (iCurrentYear < iInitialYear)
       CError::errorLessThan(PARAM_CURRENT_YEAR, PARAM_INITIAL_YEAR);
+    if (dCellLength <= ZERO )
+      CError::errorLessThan(PARAM_CELL_LENGTH, PARAM_ZERO);
 
   } catch(string Ex) {
     Ex = "CWorld.validateWorld->" + Ex;

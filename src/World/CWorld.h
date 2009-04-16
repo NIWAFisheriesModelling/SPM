@@ -50,6 +50,7 @@ public:
   void                      fillCategoryVector(vector<int> &list, vector<string> &names);
   int                       getWidth() { return iWidth; }
   int                       getHeight() { return iHeight; }
+  double                    getCellLength() { return dCellLength; }
   string                    getBaseLayer() { return sBaseLayer; }
   int                       getMinAge() { return iMinAge; }
   int                       getMaxAge() { return iMaxAge; }
@@ -76,7 +77,7 @@ protected:
   CWorld();
 
   // Variables
-  int                       iCellLength;
+  double                    dCellLength;
   int                       iWidth;
   int                       iHeight;
   string                    sBaseLayer;
