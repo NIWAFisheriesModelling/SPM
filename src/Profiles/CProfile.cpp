@@ -94,13 +94,13 @@ void CProfile::validate() {
     // Get our Parameters
     dL          = pParameterList->getDouble(PARAM_LOWER_BOUND);
     dU          = pParameterList->getDouble(PARAM_UPPER_BOUND);
-    iN          = pParameterList->getInt(PARAM_N);
+    iN          = pParameterList->getInt(PARAM_N,true,10);
     sParameter  = pParameterList->getString(PARAM_PARAMETER);
 
     if ((dL-dU) > ZERO) // Lower Bound Must be < Upper Bound
       CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
     if (iN <= 1) // N is number of steps
-      CError::errorLessThanEqualTo(PARAM_N, "1");
+      CError::errorLessThanEqualTo(PARAM_N, PARAM_ONE);
 
     dStep = (dU - dL)/((double)(iN - 1));
 
