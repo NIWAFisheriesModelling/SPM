@@ -21,7 +21,15 @@ public:
   // Functions
   CDESolver();
   virtual                    ~CDESolver();
+  void                       validate();
   void                       runEstimation();
+
+protected:
+  // Variables
+  double                     dDifferenceScale;
+  double                     dCrossoverProbability;
+  int                        iPopulationSize;
+  int                        iMaxGenerations;
 
 };
 

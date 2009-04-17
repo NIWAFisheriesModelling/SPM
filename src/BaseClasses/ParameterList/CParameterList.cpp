@@ -52,8 +52,8 @@ void CParameterList::addParameter(string name, string value) {
 }
 
 //**********************************************************************
-//
-//
+// void CParameterList::checkInvalidParameters()
+// Check supplied parameters incase we have some not supported
 //**********************************************************************
 void CParameterList::checkInvalidParameters() {
 
@@ -118,15 +118,15 @@ double CParameterList::getDouble(string name, bool optional, double defaultValue
 //**********************************************************************
 int CParameterList::getInt(string name, bool optional, int defaultValue) {
 
-  int dReturn = defaultValue;
+  int iReturn = defaultValue;
 
   // Get the string
   string sValue = getString(name, optional);
   // If we have one
   if (sValue != "")
-    dReturn = CConvertor::stringToInt(sValue);
+    iReturn = CConvertor::stringToInt(sValue);
 
-  return dReturn;
+  return iReturn;
 }
 
 //**********************************************************************

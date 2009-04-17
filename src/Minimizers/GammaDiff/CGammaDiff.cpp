@@ -20,11 +20,36 @@
 //**********************************************************************
 CGammaDiff::CGammaDiff() {
 
+  // Register Allowed Parameters
+  pParameterList->registerAllowed(PARAM_MAX_ITERATIONS);
+  pParameterList->registerAllowed(PARAM_MAX_EVALUATIONS);
+  pParameterList->registerAllowed(PARAM_GRAD_TOL);
+  pParameterList->registerAllowed(PARAM_STEP_SIZE);
 }
 
 //**********************************************************************
-//
-//
+// void CGammaDiff::validate()
+// Validate our Minimizer
+//**********************************************************************
+void CGammaDiff::validate() {
+  try {
+    CMinimizer::validate();
+
+    // Get Variables
+    iMaxIterations      = pParameterList->getInt(PARAM_MAX_ITERATIONS,true,1000);
+    iMaxEvaluations     = pParameterList->getInt(PARAM_MAX_EVALUATIONS,true,4000);
+    dGradientTolerance  = pParameterList->getDouble(PARAM_GRAD_TOL,true,0.002);
+    dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE,true,1e-6);
+
+  } catch (string Ex) {
+    Ex = "CGammaDiff.validate()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CGammaDiff::runEstimation()void CGammaDiff::runEstimation()
+// Run the Estimation through our Minimizer
 //**********************************************************************
 void CGammaDiff::runEstimation() {
   try {

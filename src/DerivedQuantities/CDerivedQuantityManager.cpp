@@ -48,7 +48,15 @@ void CDerivedQuantityManager::Destroy() {
 // Clone our Derived Quantities
 //**********************************************************************
 void CDerivedQuantityManager::clone(CDerivedQuantityManager *Manager) {
-  // TODO: Implement this clone function
+  try {
+    foreach(CDerivedQuantity *Quantity, vDerivedQuantities) {
+      vDerivedQuantities.push_back(Quantity->clone());
+    }
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantityManager.clone()->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

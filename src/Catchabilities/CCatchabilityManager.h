@@ -25,11 +25,9 @@ public:
   static void                     Destroy();
 
   // Functions
-  void                       addCatchability(CCatchability *Q);
-  int                        getCatchabilityCount() { return vCatchabilityList.size(); }
-  CCatchability*             getCatchability(string label);
-  CCatchability*             getCatchability(int index);
   void                       clone(CCatchabilityManager *Manager);
+  void                       addCatchability(CCatchability *Q);
+  CCatchability*             getCatchability(string label);
   void                       validate();
   void                       build() { }
   virtual                    ~CCatchabilityManager();
@@ -39,7 +37,7 @@ protected:
 	CCatchabilityManager();
 
 	// Variables
-	vector<CCatchability*>                vCatchabilityList;
+	vector<CCatchability*>                vCatchabilities;
 
 private:
   // Variables

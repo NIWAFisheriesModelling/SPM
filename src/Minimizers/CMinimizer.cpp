@@ -11,10 +11,15 @@
 #include <boost/numeric/ublas/triangular.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/lu.hpp>
+#include <iostream>
 
 // Local Headers
 #include "CMinimizer.h"
 #include "../Estimates/CEstimateManager.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CMinimizer::CMinimizer()
@@ -25,10 +30,6 @@ CMinimizer::CMinimizer() {
   pHessian  = 0;
 
   // Register user allowed Parameters
-  pParameterList->registerAllowed(PARAM_MAX_ITERS);
-  pParameterList->registerAllowed(PARAM_MAX_EVALS);
-  pParameterList->registerAllowed(PARAM_GRAD_TOL);
-  pParameterList->registerAllowed(PARAM_STEP_SIZE);
   pParameterList->registerAllowed(PARAM_COVARIANCE);
 }
 
@@ -37,6 +38,11 @@ CMinimizer::CMinimizer() {
 // Build our Covariance matrix from the Hessian
 //**********************************************************************
 void CMinimizer::buildCovarianceMatrix() {
+
+  if (pHessian == 0) {
+    cout << "WARNING: No Hessian" << endl;
+    return;
+  }
 
   // Get handle to our Minimizer and Hessian
   ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
@@ -65,10 +71,6 @@ void CMinimizer::validate() {
     CBaseBuild::validate();
 
     // Assign our param
-    iMaxIterations      = pParameterList->getInt(PARAM_MAX_ITERS,true,1000);
-    iMaxEvaluations     = pParameterList->getInt(PARAM_MAX_EVALS,true,4000);
-    dGradientTolerance  = pParameterList->getDouble(PARAM_GRAD_TOL,true,0.002);
-    dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE,true,1e-6);
     bCovariance         = pParameterList->getBool(PARAM_COVARIANCE,true,true);
 
   } catch (string Ex) {

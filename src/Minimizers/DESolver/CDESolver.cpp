@@ -25,6 +25,33 @@ using std::endl;
 // Default Constructor
 //**********************************************************************
 CDESolver::CDESolver() {
+
+
+  // Register some Parameters
+  pParameterList->registerAllowed(PARAM_POPULATION_SIZE);
+  pParameterList->registerAllowed(PARAM_CROSSOVER_PROBABILITY);
+  pParameterList->registerAllowed(PARAM_DIFFERENCE_SCALE);
+  pParameterList->registerAllowed(PARAM_MAX_GENERATIONS);
+}
+
+//**********************************************************************
+// void CDESolver::validate()
+// Validate our DE Solver Minimizer
+//**********************************************************************
+void CDESolver::validate() {
+  try {
+    // Base
+    CMinimizer::validate();
+
+    iPopulationSize         = pParameterList->getInt(PARAM_POPULATION_SIZE);
+    dCrossoverProbability   = pParameterList->getDouble(PARAM_CROSSOVER_PROBABILITY);
+    dDifferenceScale        = pParameterList->getDouble(PARAM_DIFFERENCE_SCALE);
+    iMaxGenerations         = pParameterList->getInt(PARAM_MAX_GENERATIONS);
+
+  } catch (string Ex) {
+    Ex = "CDESolver.validate()->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************
@@ -44,7 +71,7 @@ void CDESolver::runEstimation() {
       throw string(ERROR_ENABLED_ESTIMATES);
 
     // Setup our Solver
-    CDESolverCallback     clDESolver = CDESolverCallback(iCount, 30);
+    CDESolverCallback     clDESolver = CDESolverCallback(iCount, iPopulationSize);
 
     // Setup Lower, Upper Bounds
     vector<double> vLowerBounds;
@@ -58,9 +85,9 @@ void CDESolver::runEstimation() {
       vStartValues.push_back(pEstimate->getValue());
     }
 
-    clDESolver.Setup(vStartValues, vLowerBounds, vUpperBounds, stBest1Exp, 0.8, 1.1);
+    clDESolver.Setup(vStartValues, vLowerBounds, vUpperBounds, stBest1Exp, dDifferenceScale, dCrossoverProbability);
 
-    if (clDESolver.Solve(500)) {
+    if (clDESolver.Solve(iMaxGenerations)) {
       cout << "Convergence was successful" << endl;
       cout << "Final Score: " << clDESolver.getEnergy() << endl;
       cout << "Score took " << clDESolver.getGenerations() << " generations to find" << endl;

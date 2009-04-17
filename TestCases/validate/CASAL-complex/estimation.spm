@@ -1,18 +1,19 @@
 # ESTIMATION
 @estimation
-minimiser gammadiff
-
+minimiser  gammadiff
 @minimiser gammadiff
 type numerical_differences
 tolerance 0.002
 iterations 1000
-covariance True
+covariance true
 
 @minimiser DE
 type DE_Solver
-tolerance 0.0002
-iterations 1000
-covariance True
+population_size 10
+max_generations 100
+crossover_probability 1.1
+difference_scale 0.8
+covariance false
 
 @MCMC
 start 0

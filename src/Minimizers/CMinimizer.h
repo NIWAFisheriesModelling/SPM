@@ -27,10 +27,6 @@ public:
   // Functions
   CMinimizer();
   virtual                    ~CMinimizer();
-  int                        getMaxIterations() { return iMaxIterations; }
-  int                        getMaxEvaluations() { return iMaxEvaluations; }
-  double                     getGradientTolerance() { return dGradientTolerance; }
-  double                     getStepSize() { return dStepSize; }
   double                     getBuildCovariance() { return bCovariance; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   void                       buildCovarianceMatrix();
@@ -40,10 +36,6 @@ public:
 
 protected:
   // Variables
-  int                         iMaxIterations;
-  int                         iMaxEvaluations;
-  double                      dGradientTolerance;
-  double                      dStepSize;
   double                      **pHessian;
   ublas::matrix<double>       mxCovariance;
   int                         iEstimateCount;
