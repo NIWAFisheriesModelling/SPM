@@ -59,8 +59,8 @@ penalty event_mortality_penalty
 type category_transition_rate
 from immature
 to mature
-proportion 1.0
-selectivity Maturation
+proportions 1.0
+selectivities Maturation
 
 # Definition of layers
 @layer Base
