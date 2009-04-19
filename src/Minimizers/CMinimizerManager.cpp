@@ -100,7 +100,7 @@ void CMinimizerManager::validate() {
     if (pMinimizer == 0)
       throw string("TRANSLATE ME: Unknown minimizer: " + sMinimizer); // TODO: Translate this
 
-    pMinimizer->validate();
+    //pMinimizer->validate();
 
   } catch (string Ex) {
     Ex = "CMinimizerManager.validate()->" + Ex;

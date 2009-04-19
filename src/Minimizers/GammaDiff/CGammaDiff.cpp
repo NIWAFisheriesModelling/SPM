@@ -74,10 +74,14 @@ void CGammaDiff::runEstimation() {
 
     int status = 0;
 
+    // Setup copies of our variables for return information
+    int iMaxIters = iMaxIterations;
+    int iMaxEvals = iMaxEvaluations;
+
     GammaDiffEngine clGammaDiff;
     clGammaDiff.optimise_finite_differences(clGammaDiffCallback,
         vStartValues, vLowerBounds, vUpperBounds,
-        status, true, iMaxIterations, iMaxEvaluations, dGradientTolerance,
+        status, true, iMaxIters, iMaxEvals, dGradientTolerance,
         pHessian,1,dStepSize);
 
     /*cout << "Hessian: " << endl;
