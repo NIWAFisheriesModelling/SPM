@@ -1,11 +1,12 @@
 # ESTIMATION
 @estimation
 minimiser  gammadiff
+
 @minimiser gammadiff
 type numerical_differences
 tolerance 0.002
 iterations 1000
-covariance true
+covariance False
 
 @minimiser DE
 type DE_Solver
@@ -513,7 +514,7 @@ parameter process[recruitment].R0
 lower_bound 10000
 upper_bound 150000
 prior uniform-log
-{
+
 @estimate
 parameter selectivity[chatTANselMale].a50
 lower_bound 0
@@ -573,7 +574,7 @@ parameter selectivity[chatFselFemale].alpha
 lower_bound 0.2
 upper_bound 5
 prior Uniform
-}
+
 @prior Uniform-log
 type uniform_log
 
