@@ -43,10 +43,10 @@ void CDESolver::validate() {
     // Base
     CMinimizer::validate();
 
-    iPopulationSize         = pParameterList->getInt(PARAM_POPULATION_SIZE);
-    dCrossoverProbability   = pParameterList->getDouble(PARAM_CROSSOVER_PROBABILITY);
-    dDifferenceScale        = pParameterList->getDouble(PARAM_DIFFERENCE_SCALE);
-    iMaxGenerations         = pParameterList->getInt(PARAM_MAX_GENERATIONS);
+    iPopulationSize         = pParameterList->getInt(PARAM_POPULATION_SIZE,true,25);
+    dCrossoverProbability   = pParameterList->getDouble(PARAM_CROSSOVER_PROBABILITY,true,1.1);
+    dDifferenceScale        = pParameterList->getDouble(PARAM_DIFFERENCE_SCALE,true,0.8);
+    iMaxGenerations         = pParameterList->getInt(PARAM_MAX_GENERATIONS,true,1000);
 
   } catch (string Ex) {
     Ex = "CDESolver.validate()->" + Ex;
