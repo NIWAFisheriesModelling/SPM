@@ -29,6 +29,7 @@ public:
   CConfigurationLoader();
   virtual                     ~CConfigurationLoader();
   void                        loadConfigFile();
+  void                        loadEstimateValuesFile();
 
 protected:
   // Functions
@@ -36,6 +37,7 @@ protected:
   void                        loadConfigIntoCache(string FileName);
   void                        assignParameters(CBaseObject *Object);
   string                      getTypeFromCurrentSection();
+  void                        splitLineIntoVector(string line, vector<string> &parameters);
 
   // Variables
   vector<string>              vLines;

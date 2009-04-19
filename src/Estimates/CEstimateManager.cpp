@@ -7,6 +7,10 @@
 // $Date$
 //============================================================================
 
+// Global Header
+#include <fstream>
+#include <iostream>
+
 // Local Headers
 #include "CEstimateManager.h"
 #include "CEstimate.h"
@@ -14,6 +18,11 @@
 #include "../Helpers/CError.h"
 #include "../Helpers/CConvertor.h"
 #include "../Helpers/ForEach.h"
+
+// Using
+using std::ifstream;
+using std::cout;
+using std::endl;
 
 // Singleton Variable
 boost::thread_specific_ptr<CEstimateManager> CEstimateManager::clInstance;
@@ -277,7 +286,6 @@ void CEstimateManager::validate() {
         CError::errorUnknown(PARAM_PARAMETER, (*vPtr)->getParameter());
       vPtr++;
     }
-
 
   } catch (string Ex) {
     Ex = "CEstimateManager.validate()->" + Ex;

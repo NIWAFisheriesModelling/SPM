@@ -157,7 +157,7 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
 
   // Estimates
   if (vmParams.count("input"))
-    pConfig->setInputValuesFile(vmParams["input"].as<string>());
+    pConfig->setEstimateValuesFile(vmParams["input"].as<string>());
 
   // Threads
   if (vmParams.count("threads"))
@@ -204,7 +204,9 @@ void CRuntimeController::loadConfiguration() {
   try {
     // Estimation
     CConfigurationLoader clLoader = CConfigurationLoader();
+
     clLoader.loadConfigFile();
+    clLoader.loadEstimateValuesFile();
 
   } catch (string Ex) {
     Ex = "CRuntimeController.loadConfiguration()->" + Ex;

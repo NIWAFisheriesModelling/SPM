@@ -16,6 +16,8 @@
 #include "../CConfiguration.h"
 #include "../World/CWorld.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/ForEach.h"
+#include "../Helpers/CConvertor.h"
 #include "../Translations/Translations.h"
 #include "../BaseClasses/CBaseObject.h"
 #include "../Catchabilities/Factory/CCatchabilityFactory.h"
@@ -34,6 +36,7 @@
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Reports/Factory/CReportFactory.h"
 
+#include "../Estimates/CEstimateManager.h"
 // TODO: Finish this structure
 #include "../MCMC/CMCMC.h"
 
@@ -225,6 +228,8 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
   // TODO: Re-write this tidier
 
   try {
+    vLines.clear();
+
     if (FileName == "")
       throw string(ERROR_INVALID_FILE_NAME);
 
@@ -325,6 +330,96 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
     fConfig.close();
   } catch (string Ex) {
     Ex = "CConfigurationLoader.loadConfigIntoCache(" + FileName +")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CConfigurationLoader::loadEstimateValuesFile()
+//
+//**********************************************************************
+void CConfigurationLoader::loadEstimateValuesFile() {
+  try {
+    CConfiguration *pConfig = CConfiguration::Instance();
+    string sFileName = pConfig->getEstimateValuesFile();
+
+    if (sFileName == "")
+      return;
+
+    loadConfigIntoCache(sFileName);
+
+    // Verify file had contents
+    if ((int)vLines.size() == 0)
+      throw string("Empty configuration file");
+
+    // Get the First Line and load Estimate names
+    // Then delete from Vector
+    string sFirstLine = vLines[0];
+    vector<string> vEstimates;
+    splitLineIntoVector(sFirstLine, vEstimates);
+    vLines.erase(vLines.begin());
+
+    // Loop through remaining lines and set values through estimate manager
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+    vector<string> vValues;
+
+    foreach(string Line, vLines) {
+      splitLineIntoVector(Line, vValues);
+
+      if (vValues.size() != vEstimates.size())
+        CError::errorListSameSize(PARAM_VALUE, PARAM_ESTIMATE);
+
+      for(int i = 0; i < (int)vValues.size(); ++i)
+        pEstimateManager->addEstimateValue(vEstimates[i], CConvertor::stringToDouble(vValues[i]));
+    }
+
+    // Now we've loaded correctly. Flag Configuration
+    pConfig->setUseEstimateValues(true);
+
+  } catch (string Ex) {
+    Ex = "CConfigurationLoader.loadEstimateValuesFile()->" + Ex;
+    throw Ex;
+  }
+
+}
+
+//**********************************************************************
+// void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &parameters)
+// Split a Line into Vectors
+//**********************************************************************
+void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &parameters) {
+  try {
+    // Clear Our Old Parameters
+    parameters.clear();
+
+    // Variables
+    string  sLine         = line;
+    int     iFirstSpace   = -1;
+
+    // Lowercase sline
+    for (unsigned i = 0; i < sLine.length(); ++i)
+      sLine[i] = tolower(sLine[i]);
+
+    iFirstSpace = sLine.find_first_of(CONFIG_SEPERATOR_ESTIMATE_VALUES);
+    if (iFirstSpace == -1) {
+      parameters.push_back( sLine );
+      return;
+    }
+
+    while (iFirstSpace >= 0) {
+      // Check Difference Between Our Spaces
+      if (iFirstSpace > 0)
+        parameters.push_back( sLine.substr(0, iFirstSpace));
+
+      sLine = sLine.erase(0, iFirstSpace+1);
+      iFirstSpace = sLine.find_first_of(CONFIG_SEPERATOR_ESTIMATE_VALUES, 0);
+    }
+    // If anything is remaining, add it to the list
+    if (sLine.length() > 0)
+      parameters.push_back(sLine);
+
+  } catch (string Ex) {
+    Ex = "CConfigurationLoader.splitLineIntoVector()->" + Ex;
     throw Ex;
   }
 }

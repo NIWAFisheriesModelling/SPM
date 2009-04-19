@@ -23,7 +23,7 @@ CConfiguration::CConfiguration() {
   bQuietMode                  = false;
   bPopulateWithDummyData      = false;
   sConfigFile                 = "config.spm";
-  sInputValuesFile            = "";
+  sEstimateValuesFile         = "";
   iNumberOfThreads            = 1;
   bUseEstimateValues          = false;
   iSimulationCandidates       = 0;

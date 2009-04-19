@@ -41,8 +41,8 @@ public:
   bool                       getPopulateWithDummyData() { return bPopulateWithDummyData; }
   void                       setConfigFile(string value) { sConfigFile = value; }
   string                     getConfigFile() { return sConfigFile; }
-  void                       setInputValuesFile(string value) { sInputValuesFile = value; }
-  //string                     getInputValuesFile() { return sInputValuesFile; }
+  void                       setEstimateValuesFile(string value) { sEstimateValuesFile = value; }
+  string                     getEstimateValuesFile() { return sEstimateValuesFile; }
   void                       setNumberOfThreads(int value) { iNumberOfThreads = value; }
   int                        getNumberOfThreads() { return iNumberOfThreads; }
   void                       setUseEstimateValues(bool value) { bUseEstimateValues = value; }
@@ -64,7 +64,7 @@ protected:
   bool                       bQuietMode;
   bool                       bPopulateWithDummyData;
   string                     sConfigFile;
-  string                     sInputValuesFile;
+  string                     sEstimateValuesFile;
   int                        iNumberOfThreads;
   bool                       bUseEstimateValues;
   int                        iRandomSeed;
