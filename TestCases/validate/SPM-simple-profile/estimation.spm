@@ -4,8 +4,8 @@ minimiser gammadiff
 
 @minimiser gammadiff
 type numerical_differences
-iterations 4000
-evaluations 4000
+iterations 1000
+evaluations 1000
 step_size 1e-7
 tolerance 0.002 #The default is 0.002
 covariance False
