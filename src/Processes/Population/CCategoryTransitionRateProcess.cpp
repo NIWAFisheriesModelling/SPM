@@ -17,6 +17,7 @@
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 
+
 //**********************************************************************
 // CCategoryTransitionRateProcess::CCategoryTransitionRateProcess()
 // Default constructor
@@ -40,7 +41,7 @@ void CCategoryTransitionRateProcess::validate() {
     CProcess::validate();
 
     // Populate our variables
-    sLayer  = pParameterList->getString(PARAM_LAYER);
+    sLayer  = pParameterList->getString(PARAM_LAYER,true,""); //TODO: add as a multiplicative layer (somehow...)
 
     pParameterList->fillVector(vFrom, PARAM_FROM);
     pParameterList->fillVector(vTo, PARAM_TO);
@@ -58,10 +59,10 @@ void CCategoryTransitionRateProcess::validate() {
     // Local Validation
     for (int i = 0; i < (int)vProportions.size(); ++i) {
       if (vProportions[i] > 1.0)
-        CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
+        CError::errorGreaterThan(PARAM_PROPORTIONS, PARAM_ONE);
 
       // Register estimables
-      registerEstimable(PARAM_PROPORTION, i, &vProportions[i]);
+      registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
     }
 
   } catch (string Ex) {
@@ -93,7 +94,8 @@ void CCategoryTransitionRateProcess::build() {
       vSelectivities.push_back(pSelectivityManager->getSelectivity(Label));
     }
 
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+    if (sLayer != "")
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
   } catch (string Ex) {
     Ex = "CCategoryTransitionRateProcess.build(" + getLabel() + ")->" + Ex;
