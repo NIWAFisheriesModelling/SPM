@@ -45,6 +45,7 @@ CRuntimeController::CRuntimeController() {
   iCurrentEstimateValue   = 0;
   runtimeBarrier          = new boost::barrier(2);
   sCommandLineOptions     = "Undefined";
+  pBaseThread             = 0;
 }
 
 //**********************************************************************
@@ -410,5 +411,6 @@ void CRuntimeController::initMCMCThread() {
 // Default De-Constructor
 //**********************************************************************
 CRuntimeController::~CRuntimeController() {
-  delete pBaseThread;
+  if (pBaseThread != 0)
+    delete pBaseThread;
 }

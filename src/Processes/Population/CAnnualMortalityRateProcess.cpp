@@ -23,6 +23,9 @@
 // Default constructor
 //**********************************************************************
 CAnnualMortalityRateProcess::CAnnualMortalityRateProcess() {
+  // Variables
+  pLayer = 0;
+
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_M);
@@ -41,7 +44,7 @@ void CAnnualMortalityRateProcess::validate() {
     CProcess::validate();
 
     // Get our variables
-    sLayer  = pParameterList->getString(PARAM_LAYER);
+    sLayer  = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vYears, PARAM_YEARS);
     pParameterList->fillVector(vMs, PARAM_M);
@@ -70,7 +73,8 @@ void CAnnualMortalityRateProcess::build() {
     CProcess::build();
 
     // Get our Layer
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+    if (sLayer != "")
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
     // Get selectivities and categories.
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
@@ -117,12 +121,17 @@ void CAnnualMortalityRateProcess::execute() {
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
-        double dLayerValue = pLayer->getValue(i, j);
+        double dLayerValue = 0.0;
+        if (pLayer != 0)
+          dLayerValue = pLayer->getValue(i, j);
 
         for(int k = 0; k < (int)vCategories.size(); ++k) {
           for (int m = 0; m < iBaseColCount; ++m) {
             double dCurrent = pBaseSquare->getValue(vCategories[k], m);
-            dCurrent *= dM * vSelectivities[k]->getResult(m) * dLayerValue;
+            dCurrent *= dM * vSelectivities[k]->getResult(m);
+
+            if (pLayer != 0)
+              dCurrent *= dLayerValue;
 
             pDiff->subValue(vCategories[k], m, dCurrent);
           } // for m

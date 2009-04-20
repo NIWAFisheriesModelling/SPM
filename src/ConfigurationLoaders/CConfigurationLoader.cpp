@@ -70,9 +70,9 @@ void CConfigurationLoader::loadConfigFile(bool skipLoadingFile) {
   try {
     // Load file to memory
     CConfiguration *pConfig = CConfiguration::Instance();
-    vLines.clear();
 
     if (!skipLoadingFile) {
+      vLines.clear();
       string sFileName = pConfig->getConfigFile();
       loadConfigIntoCache(sFileName);
     }
@@ -353,12 +353,12 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
 void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
   try {
     CConfiguration *pConfig = CConfiguration::Instance();
-    vLines.clear();
 
     if (!skipLoadingFile) {
       string sFileName = pConfig->getEstimateValuesFile();
       if (sFileName == "")
         return;
+      vLines.clear();
       loadConfigIntoCache(sFileName);
     }
 
