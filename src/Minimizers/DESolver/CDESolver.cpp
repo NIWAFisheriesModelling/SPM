@@ -32,6 +32,7 @@ CDESolver::CDESolver() {
   pParameterList->registerAllowed(PARAM_CROSSOVER_PROBABILITY);
   pParameterList->registerAllowed(PARAM_DIFFERENCE_SCALE);
   pParameterList->registerAllowed(PARAM_MAX_GENERATIONS);
+  pParameterList->registerAllowed(PARAM_TOLERANCE);
 }
 
 //**********************************************************************
@@ -44,9 +45,11 @@ void CDESolver::validate() {
     CMinimizer::validate();
 
     iPopulationSize         = pParameterList->getInt(PARAM_POPULATION_SIZE,true,25);
-    dCrossoverProbability   = pParameterList->getDouble(PARAM_CROSSOVER_PROBABILITY,true,1.1);
-    dDifferenceScale        = pParameterList->getDouble(PARAM_DIFFERENCE_SCALE,true,0.8);
+    dCrossoverProbability   = pParameterList->getDouble(PARAM_CROSSOVER_PROBABILITY,true,0.9);
+    dDifferenceScale        = pParameterList->getDouble(PARAM_DIFFERENCE_SCALE,true,0.02);
     iMaxGenerations         = pParameterList->getInt(PARAM_MAX_GENERATIONS,true,1000);
+    //dTolerance            = pParameterList->getInt(PARAM_TOLERANCE,true,0.01);
+
 
   } catch (string Ex) {
     Ex = "CDESolver.validate()->" + Ex;
