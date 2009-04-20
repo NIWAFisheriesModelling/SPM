@@ -140,7 +140,6 @@ void CRuntimeThread::build() {
 // Re-Build the components with caches.
 //**********************************************************************
 void CRuntimeThread::rebuild() {
-
   // Validate our Managers
   foreach(CBaseManager *Manager, vManagers) {
     Manager->rebuild();
@@ -171,6 +170,12 @@ void CRuntimeThread::executeBasicRun() {
 void CRuntimeThread::executeEstimationRun() {
   CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
   pMinimizerManager->execute();
+
+  // Now Execute a Basic Run
+  pRuntimeController->setRunMode(RUN_MODE_BASIC);
+  rebuild();
+  executeBasicRun();
+
 }
 
 //**********************************************************************
@@ -218,12 +223,19 @@ void CRuntimeThread::executeMCMC() {
 }
 
 //**********************************************************************
+// void CRuntimeThread::executeSimulationRun()
+// Execute a Simulation Run
+//**********************************************************************
+void CRuntimeThread::executeSimulationRun() {
+  // Validate, Build, Start
+  startModel();
+}
+
+//**********************************************************************
 // void CRuntimeThread::startModel()
 // Start The Model
 //**********************************************************************
 void CRuntimeThread::startModel() {
-
-
 
   // Set State To Burn-In (Initialisation) & Execute
   eCurrentState = STATE_INITIALIZATION;

@@ -238,30 +238,30 @@ void CRuntimeController::run() {
 
     for (int i = 0; i < iEstimateValueCount; ++i) {
       // If we are using loaded estimate values, set them now.
-      if (pConfig->getUseEstimateValues())
+      if (pConfig->getUseEstimateValues()) {
         pEstimateManager->loadEstimateValues(i);
+        pBaseThread->rebuild();
+      }
 
       // Run the model.
       switch(eRunMode) {
         case RUN_MODE_BASIC:
           pBaseThread->executeBasicRun();
-
-          if (pConfig->getUseEstimateValues())
-            pBaseThread->rebuild();
           break;
+
         case RUN_MODE_ESTIMATION:
           pBaseThread->executeEstimationRun();
-          // Now, Swap to Basic Run to Print Reporters with Answer
-          eRunMode = RUN_MODE_BASIC;
-          pBaseThread->rebuild();
-          pBaseThread->executeBasicRun();
           break;
+
         case RUN_MODE_PROFILE:
           pBaseThread->executeProfileRun();
           break;
         case RUN_MODE_MARKOV_CHAIN_MONTE_CARLO:
           startEstimation();
           startMCMC();
+          break;
+        case RUN_MODE_SIMULATION:
+          pBaseThread->executeSimulationRun();
           break;
         default:
           CError::errorUnknown(PARAM_RUN_MODE, "");

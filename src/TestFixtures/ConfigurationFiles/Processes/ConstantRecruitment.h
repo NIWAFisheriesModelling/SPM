@@ -18,5 +18,13 @@ const string constant_recruitment =
   "R0 100\n"
   "ages 1\n";
 
+const string constant_recruitment_all_ages =
+  "@process constant_recruitment_all_ages\n"
+  "type constant_recruitment\n"
+  "categories immature\n"
+  "proportions 1.0\n"
+  "R0 10000\n"
+  "ages 1 2 3 4 5 6 7 8 9 0\n";
+
 #endif /* CONSTANTRECRUITMENT_H_ */
 #endif /* TEST */

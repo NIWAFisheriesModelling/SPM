@@ -12,6 +12,11 @@
 // Local headers
 #include "../CProcess.h"
 
+// Forward Decs
+class CSelectivity;
+class CNumericLayer;
+class CTimeStepManager;
+
 //**********************************************************************
 //
 //
@@ -25,6 +30,18 @@ public:
   void                        validate();
   void                        build();
   void                        execute();
+
+protected:
+  // Variables
+  vector<int>                 vYears;
+  vector<double>              vMs;
+  vector<string>              vCategoryNames;
+  vector<int>                 vCategories;
+  vector<string>              vSelectivityNames;
+  vector<CSelectivity*>       vSelectivities;
+  string                      sLayer;
+  CNumericLayer               *pLayer;
+  CTimeStepManager            *pTimeStepManager;
 };
 
 #endif /* CANNUALMORTALITYRATEPROCESS_H_ */

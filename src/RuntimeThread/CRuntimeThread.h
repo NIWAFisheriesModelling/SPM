@@ -41,6 +41,7 @@ public:
   void                        executeEstimationRun();
   void                        executeProfileRun();
   void                        executeMCMC();
+  void                        executeSimulationRun();
   void                        clone(CRuntimeThread *Thread);
   void                        startModel();
 

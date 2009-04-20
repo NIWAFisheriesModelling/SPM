@@ -73,7 +73,6 @@ void CParameterList::checkInvalidParameters() {
 
     mvPtr++;
   }
-
 }
 
 //**********************************************************************

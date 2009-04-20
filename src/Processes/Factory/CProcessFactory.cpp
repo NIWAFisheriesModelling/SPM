@@ -14,6 +14,7 @@
 #include "../../Translations/Translations.h"
 #include "../Movement/CPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
+#include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CCategoryTransitionRateProcess.h"
 #include "../Population/CEventMortalityProcess.h"
@@ -29,14 +30,16 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
 
   CProcess *pProcess = 0;
 
-  if (type == PARAM_AGEING)
-    pProcess = new CAgeingProcess();
-  else if (type == PARAM_CONSTANT_RECRUITMENT)
+  if (type == PARAM_CONSTANT_RECRUITMENT)
     pProcess = new CConstantRecruitmentProcess();
   else if (type == PARAM_BH_RECRUITMENT)
     pProcess = new CBHRecruitmentProcess();
+  else if (type == PARAM_AGEING)
+    pProcess = new CAgeingProcess();
   else if (type == PARAM_CONSTANT_MORTALITY_RATE)
     pProcess = new CConstantMortalityRateProcess();
+  else if (type == PARAM_ANNUAL_MORTALITY_RATE)
+    pProcess = new CAnnualMortalityRateProcess();
   else if (type == PARAM_EVENT_MORTALITY)
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)

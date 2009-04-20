@@ -62,7 +62,7 @@ protected:
   int                        iMaxAge;
   bool                       bAgePlus;
   double                     dArea;
-
+  //CWorldSquare               *pDifference; // TODO: Migrate this to here
 };
 
 #endif /*CWORLDSQUARE_H_*/

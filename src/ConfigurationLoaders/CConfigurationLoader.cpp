@@ -70,6 +70,7 @@ void CConfigurationLoader::loadConfigFile(bool skipLoadingFile) {
   try {
     // Load file to memory
     CConfiguration *pConfig = CConfiguration::Instance();
+    vLines.clear();
 
     if (!skipLoadingFile) {
       string sFileName = pConfig->getConfigFile();
@@ -241,8 +242,6 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
   // TODO: Re-write this tidier
 
   try {
-    vLines.clear();
-
     if (FileName == "")
       throw string(ERROR_INVALID_FILE_NAME);
 
@@ -295,7 +294,7 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
 
       // look for @include commands
       iIndex = (int)sLine.find_first_of(" ");
-      if (sLine.substr(0, iIndex) == CONFIG_INCLUDE) { //command is '@include'
+      if ( (iIndex != -1) && (sLine.substr(0, iIndex) == CONFIG_INCLUDE)) { //command is '@include'
         // Find First "
         iIndex = (int)sLine.find_first_of("\"");
         if (iIndex == -1)
@@ -354,6 +353,7 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
 void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
   try {
     CConfiguration *pConfig = CConfiguration::Instance();
+    vLines.clear();
 
     if (!skipLoadingFile) {
       string sFileName = pConfig->getEstimateValuesFile();
