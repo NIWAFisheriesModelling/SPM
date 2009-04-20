@@ -31,7 +31,7 @@ inline double fmin(double a, double b){
 // DESolverEngine::DESolverEngine(int dim,int popSize)
 // Constructor
 //**********************************************************************
-DESolverEngine::DESolverEngine(int vectorSize, int populationSize) {
+DESolverEngine::DESolverEngine(int vectorSize, int populationSize, double tolerance) {
 
   // Variables
   iVectorSize       = vectorSize;
@@ -41,6 +41,7 @@ DESolverEngine::DESolverEngine(int vectorSize, int populationSize) {
   dProbability      = 0.5;
   dBestEnergy       = 1.0E20;
   dStepSize         = 1e-6;
+  dTolerance        = tolerance;
 
   // Build our Vectors so they are correct size
   vCurrentValues.resize(iVectorSize);
@@ -222,7 +223,6 @@ bool DESolverEngine::Solve(int maxGenerations) {
 // Generate our Gradient
 //**********************************************************************
 bool DESolverEngine::generateGradient() {
-  double dGradTol = 0.01;
 
   for (int i = 0; i < iVectorSize; ++i) {
     // Create Vars
@@ -236,11 +236,9 @@ bool DESolverEngine::generateGradient() {
         dMin = scaled;
       if (scaled > dMax)
         dMax = scaled;
-
-
     }
 
-    if ((dMax-dMin) > dGradTol) {
+    if ((dMax-dMin) > dTolerance) {
       cerr << "Max/Min: " << (dMax-dMin) << endl;
       return false; // No Convergence
     }

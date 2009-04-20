@@ -23,7 +23,7 @@ CGammaDiff::CGammaDiff() {
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_MAX_ITERATIONS);
   pParameterList->registerAllowed(PARAM_MAX_EVALUATIONS);
-  pParameterList->registerAllowed(PARAM_GRAD_TOL);
+  pParameterList->registerAllowed(PARAM_TOLERANCE);
   pParameterList->registerAllowed(PARAM_STEP_SIZE);
 }
 
@@ -38,7 +38,7 @@ void CGammaDiff::validate() {
     // Get Variables
     iMaxIterations      = pParameterList->getInt(PARAM_MAX_ITERATIONS,true,1000);
     iMaxEvaluations     = pParameterList->getInt(PARAM_MAX_EVALUATIONS,true,4000);
-    dGradientTolerance  = pParameterList->getDouble(PARAM_GRAD_TOL,true,0.002);
+    dGradientTolerance  = pParameterList->getDouble(PARAM_TOLERANCE,true,0.002);
     dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE,true,1e-6);
 
   } catch (string Ex) {

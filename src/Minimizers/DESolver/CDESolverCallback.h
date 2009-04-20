@@ -23,7 +23,7 @@ class CEstimateManager;
 class CDESolverCallback : public CBaseObject, public DESolverEngine {
 public:
   // Functions
-	CDESolverCallback(int vectorsize, int populationsize);
+	CDESolverCallback(int vectorsize, int populationsize, double tolerance);
 	virtual                    ~CDESolverCallback();
 	double                     EnergyFunction(vector<double> vTrialValues);
 

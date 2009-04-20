@@ -48,7 +48,7 @@ void CDESolver::validate() {
     dCrossoverProbability   = pParameterList->getDouble(PARAM_CROSSOVER_PROBABILITY,true,0.9);
     dDifferenceScale        = pParameterList->getDouble(PARAM_DIFFERENCE_SCALE,true,0.02);
     iMaxGenerations         = pParameterList->getInt(PARAM_MAX_GENERATIONS,true,1000);
-    //dTolerance            = pParameterList->getInt(PARAM_TOLERANCE,true,0.01);
+    dTolerance              = pParameterList->getDouble(PARAM_TOLERANCE,true,0.01);
 
 
   } catch (string Ex) {
@@ -74,7 +74,7 @@ void CDESolver::runEstimation() {
       throw string(ERROR_ENABLED_ESTIMATES);
 
     // Setup our Solver
-    CDESolverCallback     clDESolver = CDESolverCallback(iCount, iPopulationSize);
+    CDESolverCallback     clDESolver = CDESolverCallback(iCount, iPopulationSize, dTolerance);
 
     // Setup Lower, Upper Bounds
     vector<double> vLowerBounds;

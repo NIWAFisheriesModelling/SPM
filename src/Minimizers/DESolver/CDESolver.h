@@ -30,6 +30,7 @@ protected:
   double                     dCrossoverProbability;
   int                        iPopulationSize;
   int                        iMaxGenerations;
+  double                     dTolerance;
 
 };
 

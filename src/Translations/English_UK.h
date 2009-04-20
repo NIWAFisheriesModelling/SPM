@@ -186,7 +186,6 @@
 #define PARAM_FROM                                "from"
 #define PARAM_FUNCTION                            "function"
 #define PARAM_GAMMADIFF                           "numerical_differences"
-#define PARAM_GRAD_TOL                            "tolerance"
 #define PARAM_H                                   "h"
 #define PARAM_HEIGHT                              "height"
 #define PARAM_HEX                                 "hex"

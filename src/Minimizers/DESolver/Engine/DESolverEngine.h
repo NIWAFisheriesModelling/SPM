@@ -41,7 +41,7 @@ typedef void (DESolverEngine::*StrategyFunction)(int);
 //**********************************************************************
 class DESolverEngine {
 public:
-  DESolverEngine(int vectorSize, int populationsize);
+  DESolverEngine(int vectorSize, int populationsize, double tolerance);
   virtual                     ~DESolverEngine(void);
   void                        Setup(vector<double> startValues, vector<double> lowerBounds,
       vector<double> upperBounds, int deStrategy, double diffScale, double crossoverProb);
@@ -87,6 +87,7 @@ protected:
   int                         iR5;
   double                      dStepSize;
   double                      dPenalty;
+  double                      dTolerance;
 
 private:
   // Functions
