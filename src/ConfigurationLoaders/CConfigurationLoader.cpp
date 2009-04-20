@@ -53,15 +53,28 @@ CConfigurationLoader::CConfigurationLoader() {
 }
 
 //**********************************************************************
-// void CConfigurationLoader::loadConfigFile()
+// void CConfigurationLoader::loadIntoCache(vector<string> &lines)
+// Load a vector into cache, we use this instead of file for Unit tests
+//**********************************************************************
+void CConfigurationLoader::loadIntoCache(vector<string> &lines) {
+  foreach(string Line, lines) {
+    vLines.push_back(Line);
+  }
+}
+
+//**********************************************************************
+// void CConfigurationLoader::loadConfigFile(bool skipLoadingFile = false)
 // Entry Point to load our configuration file
 //**********************************************************************
-void CConfigurationLoader::loadConfigFile() {
+void CConfigurationLoader::loadConfigFile(bool skipLoadingFile) {
   try {
     // Load file to memory
     CConfiguration *pConfig = CConfiguration::Instance();
-    string sFileName = pConfig->getConfigFile();
-    loadConfigIntoCache(sFileName);
+
+    if (!skipLoadingFile) {
+      string sFileName = pConfig->getConfigFile();
+      loadConfigIntoCache(sFileName);
+    }
 
     // Verify file had contents
     if ((int)vLines.size() == 0)
@@ -335,18 +348,19 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
 }
 
 //**********************************************************************
-// void CConfigurationLoader::loadEstimateValuesFile()
+// void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile = false)
 //
 //**********************************************************************
-void CConfigurationLoader::loadEstimateValuesFile() {
+void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
   try {
     CConfiguration *pConfig = CConfiguration::Instance();
-    string sFileName = pConfig->getEstimateValuesFile();
 
-    if (sFileName == "")
-      return;
-
-    loadConfigIntoCache(sFileName);
+    if (!skipLoadingFile) {
+      string sFileName = pConfig->getEstimateValuesFile();
+      if (sFileName == "")
+        return;
+      loadConfigIntoCache(sFileName);
+    }
 
     // Verify file had contents
     if ((int)vLines.size() == 0)

@@ -11,9 +11,11 @@
 
 // Global Headers
 #include <string>
+#include <vector>
 
 // Using
 using std::string;
+using std::vector;
 
 //**********************************************************************
 //
@@ -27,6 +29,7 @@ public:
   static double         stringToDouble(string value);
   static int            stringToInt(string value);
   static bool           stringToBool(string value);
+  static void           stringToVectorByNewline(string value, vector<string> &lines);
 
 private:
   // Functions

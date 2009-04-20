@@ -85,3 +85,35 @@ bool CConvertor::stringToBool(string value) {
   return bRet;
 }
 
+//**********************************************************************
+// void CConvertor::stringToVectorByNewline(string value, vector<string> &lines)
+// Convert a string to a vector, split by \n
+//**********************************************************************
+void CConvertor::stringToVectorByNewline(string value, vector<string> &lines) {
+  // Variables
+  string  sLine         = value;
+  int     iFirstSpace   = -1;
+
+  // Lowercase sline
+  for (unsigned i = 0; i < sLine.length(); ++i)
+    sLine[i] = tolower(sLine[i]);
+
+  iFirstSpace = sLine.find_first_of('\n');
+  if (iFirstSpace == -1) {
+    lines.push_back( sLine );
+    return;
+  }
+
+  while (iFirstSpace >= 0) {
+    // Check Difference Between Our Spaces
+    if (iFirstSpace > 0)
+      lines.push_back( sLine.substr(0, iFirstSpace));
+
+    sLine = sLine.erase(0, iFirstSpace+1);
+    iFirstSpace = sLine.find_first_of('\n', 0);
+  }
+  // If anything is remaining, add it to the list
+  if (sLine.length() > 0)
+    lines.push_back(sLine);
+}
+

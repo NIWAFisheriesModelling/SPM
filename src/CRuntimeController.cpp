@@ -1,4 +1,3 @@
-
 // Name        : CRuntimeController.cpp
 // Author      : S.Rasmussen
 // Date        : 29/04/2008
@@ -411,6 +410,5 @@ void CRuntimeController::initMCMCThread() {
 // Default De-Constructor
 //**********************************************************************
 CRuntimeController::~CRuntimeController() {
-  CMCMC::Destroy();
-  CMinimizerManager::Destroy();
+  delete pBaseThread;
 }

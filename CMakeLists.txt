@@ -4,7 +4,8 @@ project(SPM)
 # To build the list below I used MSYS
 # By executing the following command I could store the names of all
 # .cpp files in a txt file. Then use a simple find/replace from .cpp to ""
-# find | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest"
+# find src | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest" | grep -v "TestFixtures" > cpps.txt
+# To get Unit Test only Files
 
 SET(LIBRARY_NAME SimFish)
 SET(MAIN_NAME spm_UnOptimised)
@@ -198,8 +199,12 @@ ADD_EXECUTABLE(${TEST_NAME}
 src/Layers/Factory/CLayerFactory.Test.cpp
 src/Priors/Factory/CPriorFactory.Test.cpp
 src/Penalties/Factory/CPenaltyFactory.Test.cpp
+src/Processes/Population/CCategoryTransitionRateProcess.Test.cpp
+src/Processes/Population/CAgeingProcess.Test.cpp
+src/Processes/Population/CConstantRecruitmentProcess.Test.cpp
 src/Estimates/Factory/CEstimateFactory.Test.cpp
 src/TestFixtures/CLayer_Fixture.cpp
+src/TestFixtures/C1x1_Fixture.cpp
 src/TestFixtures/CWorld_Fixture.cpp
 src/Profiles/Factory/CProfileFactory.Test.cpp
 src/Selectivities/Children/CConstantSelectivity.Test.cpp

@@ -28,8 +28,9 @@ class CConfigurationLoader {
 public:
   CConfigurationLoader();
   virtual                     ~CConfigurationLoader();
-  void                        loadConfigFile();
-  void                        loadEstimateValuesFile();
+  void                        loadConfigFile(bool skipLoadingFile = false);
+  void                        loadEstimateValuesFile(bool skipLoadingFile = false);
+  void                        loadIntoCache(vector<string> &lines);
 
 protected:
   // Functions
