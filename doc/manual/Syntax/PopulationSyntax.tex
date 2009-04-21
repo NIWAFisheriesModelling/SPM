@@ -196,16 +196,16 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
 \defType{Estimable}
-\defDefault{None}
+\defDefault{1.0}
 \defValue{Steepness value between 0.2 and 1.0}
 
 \defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
 \defType{Estimable}
-\defDefault{None}
+\defDefault{1.0}
 
 \defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
 \defType{Estimable}
-\defDefault{None}
+\defDefault{0.0}
 
 \defSub{SSB} {Define the label of the \command{derived\_quantity} that defines the SSB}
 \defType{String}
@@ -215,7 +215,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{SSB\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
 \defType{Integer}
 \defDefault{None}
-\defValue{Must be a value $ge0$}
+\defValue{Must be a value $\ge 0$}
 
 \defSub{YCS\_values} {YCS values}
 \defType{Estimable vector}
@@ -236,7 +236,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
-\defDefault{None}
+\defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values.}
 
 \subsubsection[Ageing process]{\commandlabsubarg{process}{type}{ageing}}
@@ -265,7 +265,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{layer} {Name of the layer}
 \defType{String}
-\defDefault{None}
+\defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. Note that the layer values must be non-negative}
 
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
@@ -292,7 +292,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{layer} {Name of the layer}
 \defType{String}
-\defDefault{None}
+\defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. Note that the layer values must be non-negative}
 
 \subsubsection[Event mortality process]{\commandlabsubarg{process}{type}{event\_mortality}}
@@ -314,8 +314,8 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{U\_max}{Define the maximum exploitation rate}
 \defType{Estimable}
-\defDefault{None}
-\defValue{Must be $\ge 0$ and $\le 1$}
+\defDefault{0.99}
+\defValue{Must be $> 0$ and $< 1$}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
@@ -351,8 +351,8 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{U\_max} {Define the maximum exploitation rate}
 \defType{Constant}
-\defDefault{None}
-\defValue{Must be $\ge 0$ and $\le 1$}
+\defDefault{0.99}
+\defValue{Must be $> 0$ and $< 1$}
 
 \defSub{selectivities}{Define the selectivities applied to each category}
 \defType{String vector}

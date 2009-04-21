@@ -49,6 +49,8 @@ All parameters are estimated within bounds\index{Bounds}. For each parameter to 
 
 Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}\index{Differential evolution minimiser}.
 
+\subsubsection{I{The numerical differences minimiser}}
+
 The minimiser has three kinds of (non-error) exit status: 
 
 \begin{enumerate}
@@ -69,6 +71,12 @@ The approximate covariance matrix\index{Covariance matrix} of the estimated para
 \end{itemize}
 
 Also note that if an estimated parameter has equal lower and upper bounds, it will have entries of `0' in the covariance matrix and \texttt{NaN} or \texttt{-1.\#IND} (depending on the operating system) in the correlation matrix. 
+
+\subsubsection{I{The differential evolution minimiser}}
+
+The differential evolution minimiser is a simple population based, stochastic function minimizer, but is claimed to be quite powerful in solving minimisation problems. It is a method of mathematical optimization of multidimensional functions and belongs to the class of evolution strategy optimizers. Initially, the procedure randomly generates and evaluates a number of solution vectors (the population size), each with $p$ parameters. Then, for each generation (iteration), the algorithm creates a candidate solution for each existing solution by random mutation and uniform crossover. The random mutation generates a new solution by multiplying the difference between two randomly selected solution vectors by some scale factor, then adding the result to a third vector. Then an element-wise crossover takes place with probability $P_{cr}$, to generate a potential candidate solution. If this is better than the initial solution vector, it replaces it, otherwise the original solution is retained. The algorithm is terminated after either a predefined number of generations (\argument{max\_generations}) or when the maximum difference between the scaled individual parameters from the candidate solutions from all populations is less than some predefined amount \argument{difference\_scale}.
+
+We note that there is no proof of convergence for the differential evolution solver, but several papers have found it to be an efficient method of solving multidimensional problems with multiple modes. 
 
 \subsection{\I{Posterior profiles}\label{sec:estimate-profiles}}
 

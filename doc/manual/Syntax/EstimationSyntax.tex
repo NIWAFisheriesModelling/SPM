@@ -80,24 +80,29 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 \subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{DE\_solver}} 
 
-\defSub{iterations} {Define the maximum number of iterations for the minimiser}
+\defSub{population\_size} {Define the minimisers number of populations to generate}
 \defType{Integer}
-\defDefault{1000}
+\defDefault{25}
 \defValue{A positive integer}
 
-\defSub{evaluations} {Define the maximum number of evaluations for the minimiser}
+\defSub{crossover\_probability} {Define the minimisers crossover probability }
 \defType{Integer}
-\defDefault{4000}
+\defDefault{0.9}
 \defValue{A positive integer}
 
-\defSub{step\_size} {Define the step-size for the minimiser}
+\defSub{difference\_scale} {Define the scale of the difference of the parent candidates for the minimiser}
 \defType{Constant}
-\defDefault{1e-6}
+\defDefault{0.02}
+\defValue{A positive real number}
+
+\defSub{max\_generations} {Define the maximum generations for the minimiser convergence}
+\defType{Constant}
+\defDefault{0.002}
 \defValue{A positive real number}
 
 \defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defType{Constant}
-\defDefault{0.002}
+\defDefault{0.01}
 \defValue{A positive real number}
 
 \defSub{covariance} {Specify if \SPM\ should attempt to calculate the covariance matrix, if estimating}

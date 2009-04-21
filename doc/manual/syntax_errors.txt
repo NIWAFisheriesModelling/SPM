@@ -46,6 +46,7 @@ In SPM, but not in manual
   profiles
   projection_years
   proportion
+  proportion_time-step
   proposal_t
   r
   recruitment
@@ -103,7 +104,6 @@ In manual, but not in SPM
   metropolis_hastings
   schnute
   adjacent_cell_movement
-  annual_mortality_rate
   biomass_event_mortality
   event_mortality_at_age
   iterative
