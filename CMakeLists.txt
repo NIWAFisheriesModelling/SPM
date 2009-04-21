@@ -18,9 +18,29 @@ ADD_CUSTOM_TARGET(version ALL
 )
 
 IF (WIN32)
-  SET(LINK_ICON "-static icon.o")
+  SET(COMPILE_OPTIONS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
+  SET(LINK_OPTIONS "-static icon.o")
   ADD_CUSTOM_TARGET(icon ALL
     COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
+  )
+  SET(MAIN_LIBRARIES
+    libboost_system-mgw34-mt-1_38
+    libboost_filesystem-mgw34-mt-1_38
+    libboost_thread-mgw34-mt-1_38
+    libboost_program_options-mgw34-mt-1_38
+  )
+  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
+ELSE (WIN32)
+  SET(COMPILE_OPTIONS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized -I /opt/boost138/usr/include")
+  SET(LINK_OPTIONS "-L /opt/boost138/usr/lib -static")
+  SET(MAIN_LIBRARIES
+    libboost_system-gcc41-mt-1_38.so
+    libboost_filesystem-gcc41-mt-1_38.so
+    libboost_thread-gcc41-mt-1_38.so
+    libboost_program_options-gcc41-mt-1_38.so
+  )
+  SET(TEST_LIBRARIES
+    libboost_unit_test_framework-gcc41-mt-sd-1_38.so
   )
 ENDIF (WIN32)
 
@@ -173,25 +193,13 @@ src/World/WorldView/CLayerDerivedWorldView.cpp
 )
 
 ADD_LIBRARY(${LIBRARY_NAME} ${SOURCE_FILES} )
-SET_TARGET_PROPERTIES(${LIBRARY_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -ggdb -Wall -fmessage-length=0" )
+SET_TARGET_PROPERTIES(${LIBRARY_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_OPTIONS} LINK_FLAGS ${LINK_OPTIONS})
 
-SET(MAIN_LIBRARIES
- libboost_system-mgw34-mt-1_38
- libboost_filesystem-mgw34-mt-1_38
- libboost_thread-mgw34-mt-1_38
- libboost_program_options-mgw34-mt-1_38
-)
-
-SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
 ADD_EXECUTABLE(${MAIN_NAME}
  src/Main
 )
 
-IF (WIN32)
-  SET_TARGET_PROPERTIES(${MAIN_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -Wall -fmessage-length=0" LINK_FLAGS ${LINK_ICON})
-ELSE (WIN32)
-  SET_TARGET_PROPERTIES(${MAIN_NAME} PROPERTIES COMPILE_FLAGS "-O0 -g3 -Wall -fmessage-length=0")
-ENDIF (WIN32)
+SET_TARGET_PROPERTIES(${MAIN_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_OPTIONS} LINK_FLAGS ${LINK_OPTIONS})
 
 TARGET_LINK_LIBRARIES(${MAIN_NAME} ${LIBRARY_NAME} ${MAIN_LIBRARIES})
 
@@ -228,11 +236,7 @@ src/InitializationPhases/Factory/CInitializationPhaseFactory.Test.cpp
 src/Main
 )
 
-IF (WIN32)
-  SET_TARGET_PROPERTIES(${TEST_NAME} PROPERTIES COMPILE_FLAGS "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized" LINK_FLAGS ${LINK_ICON})
-ELSE (WIN32)
-  SET_TARGET_PROPERTIES(${TEST_NAME} PROPERTIES COMPILE_FLAGS "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized" )
-ENDIF (WIN32)
+SET_TARGET_PROPERTIES(${TEST_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_OPTIONS} LINK_FLAGS ${LINK_OPTIONS})
 
 TARGET_LINK_LIBRARIES(${TEST_NAME} ${LIBRARY_NAME} ${MAIN_LIBRARIES} ${TEST_LIBRARIES})
 
@@ -241,11 +245,7 @@ ADD_EXECUTABLE(${OPTI_NAME}
  src/Main
  )
 
-IF (WIN32)
-  SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized" LINK_FLAGS ${LINK_ICON})
-ELSE (WIN32)
-  SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
-ENDIF (WIN32)
+SET_TARGET_PROPERTIES(${OPTI_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_OPTIONS} LINK_FLAGS ${LINK_OPTIONS})
 
 TARGET_LINK_LIBRARIES(${OPTI_NAME} ${MAIN_LIBRARIES})
 
