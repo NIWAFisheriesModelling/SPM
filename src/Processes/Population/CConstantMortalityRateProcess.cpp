@@ -15,14 +15,11 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
-// TODO: This is a copy of CNaturalMortalityProcess. It probably need to be migrated properly
-
 //**********************************************************************
 // CConstantMortalityRateProcess::CConstantMortalityRateProcess()
 // Default Constructor
 //**********************************************************************
 CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
-  // TODO: Implement this
   // Variables
   pGrid            = 0;
   pLayer           = 0;
@@ -40,7 +37,6 @@ CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
 // Validate our process
 //**********************************************************************
 void CConstantMortalityRateProcess::validate() {
-// TODO: Implement this
   try {
     // Base Validate
     CProcess::validate();
@@ -73,7 +69,6 @@ void CConstantMortalityRateProcess::validate() {
 // Build our process
 //**********************************************************************
 void CConstantMortalityRateProcess::build() {
-// TODO: Implement this
   try {
     // Base Build
     CProcess::build();
@@ -155,7 +150,6 @@ void CConstantMortalityRateProcess::rebuild() {
 // Execute our process
 //**********************************************************************
 void CConstantMortalityRateProcess::execute() {
-// TODO: Implement this
 #ifndef OPTIMIZE
   try {
 #endif

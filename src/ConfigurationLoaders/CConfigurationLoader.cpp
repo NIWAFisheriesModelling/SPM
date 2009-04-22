@@ -21,6 +21,7 @@
 #include "../Translations/Translations.h"
 #include "../BaseClasses/CBaseObject.h"
 #include "../Catchabilities/Factory/CCatchabilityFactory.h"
+#include "../DerivedQuantities/Factory/CDerivedQuantityFactory.h"
 #include "../Estimates/Factory/CEstimateFactory.h"
 #include "../InitializationPhases/Factory/CInitializationPhaseFactory.h"
 #include "../Layers/Factory/CLayerFactory.h"
@@ -125,6 +126,8 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CWorld::Instance();
     else if (sSection == PARAM_CATCHABILITY)
       pBaseObject = CCatchabilityFactory::buildCatchability(sType);
+    else if (sSection == PARAM_DERIVED_QUANTITY)
+      pBaseObject = CDerivedQuantityFactory::buildDerivedQuantity(sType);
     else if (sSection == PARAM_ESTIMATE)
       pBaseObject = CEstimateFactory::buildEstimate(sType);
     else if (sSection == PARAM_INITIALIZATION_PHASE)

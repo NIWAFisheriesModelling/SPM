@@ -26,6 +26,7 @@ public:
 
   // Functions
   void                        addDerivedQuantity(CDerivedQuantity *DerivedQuantity);
+  CDerivedQuantity*           getDerivedQuantity(string label);
   void                        clone(CDerivedQuantityManager *Manager);
   void                        validate();
   void                        build();

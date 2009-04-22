@@ -7,6 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local headers
 #include "CDerivedQuantity.h"
 #include "../TimeSteps/CTimeStepManager.h"
@@ -17,6 +20,10 @@
 #include "../World/WorldView/CCompleteWorldView.h"
 #include "../Helpers/CError.h"
 #include "../Selectivities/CSelectivityManager.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CDerivedQuantity::CDerivedQuantity()
@@ -42,8 +49,19 @@ CDerivedQuantity::CDerivedQuantity() {
 // Get Value From our Derived Quantity
 //**********************************************************************
 double CDerivedQuantity::getValue(int offset) {
+#ifndef OPTIMIZE
+  try {
 
-  int iIndex = pTimeStepManager->getCurrentYear() - offset;
+    if (offset < 0)
+      CError::errorLessThan(PARAM_VALUE, PARAM_ZERO);
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantity.getValue()->" + Ex;
+    throw Ex;
+  }
+#endif
+
+  int iIndex = ((pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()) + 1) - offset;
   if (iIndex < 0)
     iIndex = 0;
 

@@ -68,6 +68,28 @@ void CDerivedQuantityManager::addDerivedQuantity(CDerivedQuantity *DerivedQuanti
 }
 
 //**********************************************************************
+// CDerivedQuantity* CDerivedQuantityManager::getDerivedQuantity(string label)
+// Get our Derived Quantity
+//**********************************************************************
+CDerivedQuantity* CDerivedQuantityManager::getDerivedQuantity(string label) {
+  try {
+
+    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+      if (DerivedQuantity->getLabel() == label)
+        return DerivedQuantity;
+    }
+
+    CError::errorUnknown(PARAM_DERIVED_QUANTITY, label);
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantityManager.validate()->" + Ex;
+    throw Ex;
+  }
+
+  return 0;
+}
+
+//**********************************************************************
 // void CDerivedQuantityManager::validate()
 // Validate our Derived Quantities
 //**********************************************************************
@@ -117,4 +139,8 @@ void CDerivedQuantityManager::execute() {
 // Destructor
 //**********************************************************************
 CDerivedQuantityManager::~CDerivedQuantityManager() {
+  foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+    delete DerivedQuantity;
+  }
+  vDerivedQuantities.clear();
 }

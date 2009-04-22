@@ -84,7 +84,7 @@ void CLayerDerivedWorldView::execute() {
 
   // Populate some variables
   int iRows       = pWorld->getCategoryCount();
-  int iAgeSpread  = pWorld->getMaxAge() - (pWorld->getMinAge() + 1);
+  int iAgeSpread  = (pWorld->getMaxAge()+1) - pWorld->getMinAge();
 
   // Loop through the areas.
   map<string, vector<CWorldSquare*> >::iterator mvAreaPtr = mvAreas.begin();
