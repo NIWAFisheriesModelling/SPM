@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.4)
 project(SPM)
 
 # To build the list below I used MSYS
@@ -34,13 +34,14 @@ ELSE (WIN32)
   SET(COMPILE_OPTIONS "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized -I /opt/boost138/usr/include")
   SET(LINK_OPTIONS "-L /opt/boost138/usr/lib -static")
   SET(MAIN_LIBRARIES
-    libboost_system-gcc41-mt-1_38.so
-    libboost_filesystem-gcc41-mt-1_38.so
-    libboost_thread-gcc41-mt-1_38.so
-    libboost_program_options-gcc41-mt-1_38.so
-  )
+    libboost_system-gcc41-mt-1_38
+    libboost_filesystem-gcc41-mt-1_38
+    libboost_thread-gcc41-mt-1_38
+    libboost_program_options-gcc41-mt-1_38
+    pthread
+    )
   SET(TEST_LIBRARIES
-    libboost_unit_test_framework-gcc41-mt-sd-1_38.so
+    libboost_unit_test_framework-gcc41-mt-sd-1_38
   )
 ENDIF (WIN32)
 
@@ -148,7 +149,6 @@ src/Processes/Population/CCategoryTransitionRateProcess.cpp
 src/Processes/Population/CConstantMortalityRateProcess.cpp
 src/Processes/Population/CConstantRecruitmentProcess.cpp
 src/Processes/Population/CEventMortalityProcess.cpp
-src/Processes/Population/CNaturalMortalityProcess.cpp
 src/Profiles/CProfile.cpp
 src/Profiles/CProfileManager.cpp
 src/Profiles/Factory/CProfileFactory.cpp
@@ -187,7 +187,6 @@ src/TimeSteps/CTimeStepManager.cpp
 src/TimeSteps/Factory/CTimeStepFactory.cpp
 src/World/CWorld.cpp
 src/World/CWorldSquare.cpp
-src/World/WorldSquareCollection/CWorldSquareCollection.cpp
 src/World/WorldView/CCompleteWorldView.cpp
 src/World/WorldView/CLayerDerivedWorldView.cpp
 )
