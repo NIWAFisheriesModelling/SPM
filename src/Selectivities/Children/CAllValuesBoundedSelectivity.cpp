@@ -7,8 +7,15 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local headers
 #include "CAllValuesBoundedSelectivity.h"
+
+// Usong
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity()
@@ -50,6 +57,8 @@ void CAllValuesBoundedSelectivity::validate() {
     for (int i = 0; i < (int)vVs.size(); ++i)
       registerEstimable(PARAM_V, i, &vVs[i]);
 
+    iMinAge = pWorld->getMinAge();
+
   } catch (string Ex) {
     Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -57,31 +66,21 @@ void CAllValuesBoundedSelectivity::validate() {
 }
 
 //**********************************************************************
-// double CAllValuesBoundedSelectivity::calculateResult(int Index)
-// Get the result from our Selectivity
+// double CAllValuesBoundedSelectivity::calculateResult(int Age)
+// Calculate a cached result for this selectivity
 //**********************************************************************
 double CAllValuesBoundedSelectivity::calculateResult(int Age) {
-#ifndef OPTIMIZE
-  try {
-#endif
 
-    double dRet = 0.0;
-    if (Age <= iL)
-      dRet = 0.0;
-    else if (Age >= iH)
-      dRet = vVs[iH - iL - 1];
-    else
-      dRet = vVs[Age - iL - 1];
+  double dRet = 0.0;
 
-    return dRet;
+  if ( Age < iL)
+    dRet = 0.0;
+  else  if ( Age >= iH)
+    dRet = vVs[vVs.size() - 1];
+  else
+    dRet = vVs[(Age-iL)];
 
-#ifndef OPTIMIZE
-  } catch (string Ex) {
-    Ex = "CAllValuesBoundedSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-  return 0.0;
-#endif
+  return dRet;
 }
 
 //**********************************************************************

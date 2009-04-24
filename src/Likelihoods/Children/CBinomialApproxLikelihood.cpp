@@ -18,6 +18,33 @@ CBinomialApproxLikelihood::CBinomialApproxLikelihood() {
 }
 
 //**********************************************************************
+// double CBinomialApproxLikelihood::adjustErrorValue(double processError, double errorValue)
+// Adjust our error value based on process error
+//**********************************************************************
+double CBinomialApproxLikelihood::adjustErrorValue(double processError, double errorValue) {
+  throw string("BinomialApproxLikelihood.adjustErrorValue() not yet implemented");
+}
+
+//**********************************************************************
+// double CBinomialApproxLikelihood::getResult(double expected, double observed, double errorValue,
+//                                                                    double processError, double delta)
+// Get the result from our likelihood
+//**********************************************************************
+double CBinomialApproxLikelihood::getResult(double expected, double observed, double errorValue,
+                                                                double processError, double delta) {
+
+  throw string("BinomialApproxLikelihood.getResult() Not yet implemented");
+}
+
+//**********************************************************************
+// double CBinomialApproxLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
+// Simulate observed value from our observation
+//**********************************************************************
+double CBinomialApproxLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
+  throw string("CBinomialApproxLikelihood.simulateObserved() not yet implemented");
+}
+
+//**********************************************************************
 // CBinomialApproxLikelihood::~CBinomialApproxLikelihood()
 // Destructor
 //**********************************************************************

@@ -9,15 +9,20 @@
 #ifndef CLIKELIHOOD_H_
 #define CLIKELIHOOD_H_
 
+// Local headers
+#include "../BaseClasses/CBaseObject.h"
+
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CLikelihood {
+class CLikelihood : public CBaseObject {
 public:
   CLikelihood();
   virtual                     ~CLikelihood();
+  virtual double              adjustErrorValue(double processError, double errorValue) = 0;
   virtual double              getResult(double expected, double observed, double errorValue, double processError, double delta) = 0;
+  virtual double              simulateObserved(double expected, double errorValue, double processError, double delta) = 0;
 };
 
 #endif /* CLIKELIHOOD_H_ */

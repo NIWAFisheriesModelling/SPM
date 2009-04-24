@@ -19,6 +19,32 @@ CLogNormalLikelihood::CLogNormalLikelihood() {
 }
 
 //**********************************************************************
+// double CLogNormalLikelihood::adjustErrorValue(double processError, double errorValue)
+// Adjust our error value based on process error
+//**********************************************************************
+double CLogNormalLikelihood::adjustErrorValue(double processError, double errorValue) {
+  throw string("CLogNormalLikelihood.adjustErrorValue() not yet implemented");
+}
+
+//**********************************************************************
+// double CLogNormalLikelihood::getResult(double expected, double observed, double errorValue,
+//                                                                  double processError, double delta)
+// Get the result from our likelihood for the observation
+//**********************************************************************
+double CLogNormalLikelihood::getResult(double expected, double observed, double errorValue,
+                                                                      double processError, double delta) {
+  throw string("CLogNormalLikelihood.getResult() not yet implmented");
+}
+
+//**********************************************************************
+// double CLogNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
+// Simulate an observed value from our expected
+//**********************************************************************
+double CLogNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
+  throw string("CLogNormalLikelihood.simulateObserved() not yet implemented");
+}
+
+//**********************************************************************
 // CLogNormalLikelihood::~CLogNormalLikelihood()
 // Destructor
 //**********************************************************************

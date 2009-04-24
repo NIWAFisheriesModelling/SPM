@@ -14,6 +14,7 @@
 #include "../Children/CBinomialApproxLikelihood.h"
 #include "../Children/CBinomialLikelihood.h"
 #include "../Children/CLogNormalLikelihood.h"
+#include "../Children/CLogNormalWithQLikelihood.h"
 #include "../Children/CMultinomialLikelihood.h"
 #include "../Children/CNormalLikelihood.h"
 #include "../Children/CPseudoLikelihood.h"
@@ -30,7 +31,7 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
     if (type == PARAM_NORMAL)
       pLikelihood = new CNormalLikelihood();
     else if (type == PARAM_LOGNORMAL)
-      pLikelihood = new CLogNormalLikelihood();
+      pLikelihood = new CLogNormalWithQLikelihood();
     else if (type == PARAM_PSEUDO)
       pLikelihood = new CPseudoLikelihood();
     else

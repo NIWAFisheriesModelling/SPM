@@ -9,6 +9,8 @@
 
 // Local headers
 #include "CDoubleExponentialSelectivity.h"
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CDoubleExponentialSelectivity::CDoubleExponentialSelectivity()
@@ -48,17 +50,12 @@ void CDoubleExponentialSelectivity::validate() {
     dY0    = pParameterList->getDouble(PARAM_Y0);
     dY1    = pParameterList->getDouble(PARAM_Y1);
     dY2    = pParameterList->getDouble(PARAM_Y2);
-    dAlpha    = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
+    dAlpha = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
     if (dAlpha <= 0)
       throw("Alpha must be positive"); // TODO: better error messages
-    if (dX1 >= dX0)
-      throw("x0 must be defined so that x1 < x0 < x2"); // TODO: better error messages
-    if (dX0 >= dX1)
-      throw("x0 must be defined so that x1 < x0 < x2"); // TODO: better error messages
-    if (dX0 >= dX1)
-      throw("x0 must be defined so that x1 < x0 < x2"); // TODO: better error messages
-
+    if (!CComparer::isBetween(dX0, dX1, dX2))
+      throw string("dX0 is not between dX1 and dX2");
     if (dY0 < 0 || dY1 < 0 || dY2 < 0)
       throw("y0, y1, and y2 must be positive numbers"); // TODO: better error messages
 
@@ -100,5 +97,4 @@ double CDoubleExponentialSelectivity::calculateResult(int Age) {
 // Destructor
 //**********************************************************************
 CDoubleExponentialSelectivity::~CDoubleExponentialSelectivity() {
-  // TODO Auto-generated destructor stub
 }

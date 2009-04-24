@@ -12,6 +12,7 @@
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
 #include "../World/WorldView/CLayerDerivedWorldView.h"
+#include "../Likelihoods/CLikelihood.h"
 
 // structures
 struct SComparison {
@@ -25,7 +26,6 @@ struct SComparison {
 // Classes
 class CStringLayer;
 class CSelectivity;
-class CLikelihood;
 
 //**********************************************************************
 //
@@ -42,13 +42,15 @@ public:
   string                     getCategory(int index);
   string                     getSelectivity(int index);
   double                     getScore() { return dScore; }
-  void                       saveComparison(string key, double expected, double observed, double errorValue, double score);
   void                       fillComparisons(vector<SComparison*> &comparisons);
   virtual void               validate();
 	virtual void               build();
 	virtual void               execute();
 
 protected:
+  // Functions
+  void                       saveComparison(string key, double expected, double observed, double errorValue, double score);
+
   // Variables
   double                     dScore;
   int                        iYear;
@@ -65,6 +67,7 @@ protected:
   string                     sLikelihood;
   CLikelihood                *pLikelihood;
   bool                       bSimulate;
+  bool                       bSimulationRunMode;
 
 };
 

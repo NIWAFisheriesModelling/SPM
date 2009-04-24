@@ -32,7 +32,7 @@ void CAllValuesSelectivity::validate() {
     pParameterList->fillVector(vVs, PARAM_V);
 
     // TODO: Complete validation
-    if ((int)vVs.size() !=  (pWorld->getMaxAge() - pWorld->getMinAge()))
+    if ((int)vVs.size() !=  ((pWorld->getMaxAge()+1) - pWorld->getMinAge()))
       throw string("Too many/not enough values in V. Supply exactly one value of V for every age classs in the model"); // TODO ADD CError
 
     // Register the Vs as estimable
@@ -46,25 +46,13 @@ void CAllValuesSelectivity::validate() {
 }
 
 //**********************************************************************
-// double CAllValuesSelectivity::getResult(int Index)
+// double CAllValuesSelectivity::getResult(int Age)
 // Get the result from our selectivity
 //**********************************************************************
 double CAllValuesSelectivity::calculateResult(int Age) {
-#ifndef OPTIMIZE
-  try {
-#endif
-
-    double dRet = 0.0;
-    dRet = vVs[Age - pWorld->getMinAge() - 1];
-    return dRet;
-
-#ifndef OPTIMIZE
-  } catch (string Ex) {
-    Ex = "CAllValuesSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-  return 0.0;
-#endif
+  double dRet = 0.0;
+  dRet = vVs[Age - pWorld->getMinAge()];
+  return dRet;
 }
 
 //**********************************************************************

@@ -26,7 +26,6 @@ CAbundanceObservation::CAbundanceObservation() {
   // Variables
   sCatchability   = "";
   pCatchability   = 0;
-  dSigma          = 0.0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATCHABILITY);
@@ -160,16 +159,10 @@ void CAbundanceObservation::execute() {
       // Proportion Label across all squares in that layer where that
       // label is used.
       dExpectedTotal *= pCatchability->getQ();
-
       double dErrorValue = mErrorValue[(*mPropPtr).first];
-      //Add in process error if defined
-      //if(dCVProcessError>0) dCV = sqrt(dCV*dCV + dCVProcessError*dCVProcessError);
 
-      dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
-      double dTemp = log((*mPropPtr).second / CMath::zeroFun(dExpectedTotal,dDelta)) / dSigma + 0.5*dSigma;
-      dTemp = log(dSigma) + 0.5 * dTemp * dTemp;
+      double dTemp = pLikelihood->getResult(dExpectedTotal, (*mPropPtr).second, dErrorValue, dProcessError, dDelta);
       dScore += dTemp;
-
       saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, dErrorValue, dTemp);
 
       mPropPtr++;

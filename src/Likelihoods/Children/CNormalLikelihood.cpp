@@ -18,6 +18,33 @@ CNormalLikelihood::CNormalLikelihood() {
 }
 
 //**********************************************************************
+// double CNormalLikelihood::adjustErrorValue(double processError, double errorValue)
+// Adjust our error value based on process error.
+//**********************************************************************
+double CNormalLikelihood::adjustErrorValue(double processError, double errorValue) {
+  throw string("CNormalLikelihood.adjustErrorValue() not yet implemented");
+}
+
+//**********************************************************************
+// double CNormalLikelihood::getResult(double expected, double observed, double errorValue,
+//                                                            double processError, double delta)
+// Get result from likelihood for our observation
+//**********************************************************************
+double CNormalLikelihood::getResult(double expected, double observed, double errorValue,
+                                                            double processError, double delta) {
+
+  throw string("CNormalLikelihood.getResult() not yet implemented");
+}
+
+//**********************************************************************
+// double CNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
+// Simulate observed value for our observation
+//**********************************************************************
+double CNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
+  throw string("CNormalLikelihood.simulateObserved() not yet implemented");
+}
+
+//**********************************************************************
 // CNormalLikelihood::~CNormalLikelihood()
 // Destructor
 //**********************************************************************

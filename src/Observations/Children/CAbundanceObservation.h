@@ -35,7 +35,6 @@ protected:
   string                     sCatchability;
   CCatchability              *pCatchability;
   double                     dDelta;
-  double                     dSigma;
   double                     dProportionTimeStep;
   double                     dProcessError;
 };

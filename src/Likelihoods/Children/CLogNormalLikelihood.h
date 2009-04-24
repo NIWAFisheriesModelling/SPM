@@ -20,8 +20,10 @@ class CLogNormalLikelihood: public CLikelihood {
 public:
   // Functions
   CLogNormalLikelihood();
-  virtual                 ~CLogNormalLikelihood();
-  double                  getResult(double expected, double observed, double errorValue, double processError, double delta) { return 0; }
+  virtual                     ~CLogNormalLikelihood();
+  double                      adjustErrorValue(double processError, double errorValue);
+  double                      getResult(double expected, double observed, double errorValue, double processError, double delta);
+  double                      simulateObserved(double expected, double errorValue, double processError, double delta);
 
 };
 

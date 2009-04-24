@@ -42,6 +42,7 @@ public:
   void                        fillVector(vector<int> &list, string name, bool optional = false);
   void                        fillArray(double *array, int length, string name, int offset = 0);
   void                        fillArray(string *array, int length, string name, int offset = 0);
+  void                        fillDefinedParameterVector(vector<string> &list);
   void                        checkInvalidParameters();
   bool                        hasParameter(string name);
 

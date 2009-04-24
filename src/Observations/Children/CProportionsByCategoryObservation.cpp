@@ -267,11 +267,8 @@ void CProportionsByCategoryObservation::execute() {
 
       double dObserved  = (*mvPropPtr).second[i] ;
       double dErrorValue  = mvErrorValue[(*mvPropPtr).first][i];
-      //if(dNProcessError>=0) dErrorValue = 1.0/(1.0/dErrorValue + 1.0/dNProcessError);
 
-      double dTemp = CMath::lnFactorial(dErrorValue) - CMath::lnFactorial(dErrorValue*(1-dObserved)) -
-          CMath::lnFactorial(dErrorValue*dObserved) + dErrorValue * dObserved * log(CMath::zeroFun(dExpected,dDelta)) + dErrorValue *(1-dObserved)
-          * log(CMath::zeroFun(1-dExpected,dDelta));
+      double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);
       dScore -= dTemp;
 
       // Store results of calculations so they can be used by the reports

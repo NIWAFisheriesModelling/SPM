@@ -215,6 +215,20 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
 }
 
 //**********************************************************************
+// void CParameterList::fillDefinedParameterVector(vector<string> &list)
+// Fill a vector with the parameters that have been defined
+//**********************************************************************
+void CParameterList::fillDefinedParameterVector(vector<string> &list) {
+  list.clear();
+
+  map<string, vector<string> >::iterator mvPtr = mParameters.begin();
+  while (mvPtr != mParameters.end()) {
+    list.push_back( (*mvPtr).first );
+    mvPtr++;
+  }
+}
+
+//**********************************************************************
 // void CParameterList::fillArray(double *array, string name, int offset)
 //
 //**********************************************************************

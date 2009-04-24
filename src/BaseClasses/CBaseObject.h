@@ -32,6 +32,7 @@ public:
 	virtual                    ~CBaseObject();
 	double*                    getEstimableVariable(string name);
 	void                       addParameter(string name, string value);
+	CParameterList*            getParameterList() { return pParameterList; }
 
 protected:
   // Functions

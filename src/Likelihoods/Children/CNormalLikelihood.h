@@ -20,8 +20,10 @@ class CNormalLikelihood: public CLikelihood {
 public:
   // Functions
   CNormalLikelihood();
-  virtual                 ~CNormalLikelihood();
-  double                  getResult(double expected, double observed, double errorValue, double processError, double delta) { return 0; }
+  virtual                     ~CNormalLikelihood();
+  double                      adjustErrorValue(double processError, double errorValue);
+  double                      getResult(double expected, double observed, double errorValue, double processError, double delta);
+  double                      simulateObserved(double expected, double errorValue, double processError, double delta);
 };
 
 #endif /* CNORMALLIKELIHOOD_H_ */

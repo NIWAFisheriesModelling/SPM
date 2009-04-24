@@ -242,11 +242,11 @@ void CProportionsAtAgeObservation::execute() {
       // If we have a running total, do a comparison against
       // Our AgeResults
 
-      double dN = mErrorValue[(*mvPropPtr).first];
+      double dErrorValue = mErrorValue[(*mvPropPtr).first];
       //Add in Process Error if defined
-      //if(dNProcessError>=0) dN = 1.0/(1.0/dN + 1.0/dNProcessError);
-
-      dScore = -CMath::lnFactorial(dN);
+      //
+      // TODO: Is this right? since we gen process error in likelihood
+      dScore = -CMath::lnFactorial(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
 
       for (int i = 0; i < iArraySize; ++i) {
 
@@ -255,11 +255,12 @@ void CProportionsAtAgeObservation::execute() {
           dCurrentProp = pAgeResults[i] / dRunningTotal;
         else
           dCurrentProp = 0.0;
-        double dTemp = CMath::lnFactorial(dN * ((*mvPropPtr).second)[i]) - dN * ((*mvPropPtr).second)[i] * log(CMath::zeroFun(dCurrentProp,dDelta));
+
+        double dTemp = pLikelihood->getResult(dCurrentProp, (*mvPropPtr).second[i], dErrorValue, dProcessError, dDelta);
         dScore += dTemp;
 
         // Store results of calculations so they can be used by the reports
-        saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dN, dTemp);
+        saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dErrorValue, dTemp);
       }
 
       // Clear Our Age Results

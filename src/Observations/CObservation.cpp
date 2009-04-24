@@ -22,8 +22,9 @@
 //**********************************************************************
 CObservation::CObservation() {
   // Variables
-  pWorldView    = 0;
-  pLikelihood   = 0;
+  pWorldView            = 0;
+  pLikelihood           = 0;
+  bSimulationRunMode    = false;
 
   // Register some user allowed variables
   pParameterList->registerAllowed(PARAM_YEAR);
@@ -140,6 +141,12 @@ void CObservation::build() {
 
     // Get our Likelihood
     pLikelihood = CLikelihoodFactory::buildLikelihood(pParameterList->getString(PARAM_TYPE), sLikelihood);
+
+    // Set simulation mode flag if needed
+    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION)
+      bSimulationRunMode = true;
+    else
+      bSimulationRunMode = false;
 
   } catch (string Ex) {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;

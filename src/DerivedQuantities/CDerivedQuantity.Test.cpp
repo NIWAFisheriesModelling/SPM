@@ -23,12 +23,6 @@
 #include "../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
 #include "../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 
-// Debug
-#include <iostream>
-#include "../TimeSteps/CTimeStepManager.h"
-using std::cout;
-using std::endl;
-
 //**********************************************************************
 //
 //

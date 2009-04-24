@@ -21,7 +21,9 @@ public:
   // Functions
   CBinomialApproxLikelihood();
   virtual                     ~CBinomialApproxLikelihood();
-  double                      getResult(double expected, double observed, double errorValue, double processError, double delta) { return 0; }
+  double                      adjustErrorValue(double processError, double errorValue);
+  double                      getResult(double expected, double observed, double errorValue, double processError, double delta);
+  double                      simulateObserved(double expected, double errorValue, double processError, double delta);
 };
 
 #endif /* CBINOMIALAPPROXLIKELIHOOD_H_ */

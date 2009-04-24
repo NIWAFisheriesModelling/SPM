@@ -32,6 +32,7 @@ protected:
   int                      iL;
   int                      iH;
   vector<double>           vVs;
+  int                      iMinAge;
 };
 
 #endif /* CALLVALUESBOUNDEDSELECTIVITY_H_ */
