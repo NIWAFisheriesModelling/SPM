@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.4)
+cmake_minimum_required(VERSION 2.6)
 project(SPM)
 
 # To build the list below I used MSYS
@@ -60,6 +60,7 @@ src/ConfigurationLoaders/CConfigurationLoader.cpp
 src/CRuntimeController.cpp
 src/DerivedQuantities/CDerivedQuantity.cpp
 src/DerivedQuantities/CDerivedQuantityManager.cpp
+src/DerivedQuantities/Factory/CDerivedQuantityFactory.cpp
 src/Estimates/CEstimate.cpp
 src/Estimates/CEstimateManager.cpp
 src/Estimates/Factory/CEstimateFactory.cpp
@@ -161,6 +162,7 @@ src/Reports/Children/CLayerDerivedWorldViewReport.cpp
 src/Reports/Children/CObjectiveFunctionReport.cpp
 src/Reports/Children/CObservationReport.cpp
 src/Reports/Children/CPartitionReport.cpp
+src/Reports/Children/CParameterListReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
 src/Reports/Children/CSelectivityReport.cpp
 src/Reports/Children/CStandardHeaderReport.cpp
