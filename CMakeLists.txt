@@ -20,7 +20,7 @@ ADD_CUSTOM_TARGET(version ALL
 IF (WIN32)
   SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
+  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
   SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized")
   SET(LINK_OPTIONS "-static icon.o")
   ADD_CUSTOM_TARGET(icon ALL
@@ -36,7 +36,7 @@ IF (WIN32)
 ELSE (WIN32)
   SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0 -I /opt/boost138/usr/include")
   SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0  -I /opt/boost138/usr/include")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMISE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized  -I /opt/boost138/usr/include")
+  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized  -I /opt/boost138/usr/include")
   SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized  -I /opt/boost138/usr/include")
   SET(LINK_OPTIONS "-L /opt/boost138/usr/lib -static")
   SET(MAIN_LIBRARIES
