@@ -23,7 +23,11 @@ CLogNormalLikelihood::CLogNormalLikelihood() {
 // Adjust our error value based on process error
 //**********************************************************************
 double CLogNormalLikelihood::adjustErrorValue(double processError, double errorValue) {
-  throw string("CLogNormalLikelihood.adjustErrorValue() not yet implemented");
+  // adjust for c.v. process error
+  if(processError > 0)
+    return (sqrt(errorValue*errorValue + processError*processError));
+
+  return errorValue;
 }
 
 //**********************************************************************

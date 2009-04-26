@@ -22,7 +22,11 @@ CBinomialApproxLikelihood::CBinomialApproxLikelihood() {
 // Adjust our error value based on process error
 //**********************************************************************
 double CBinomialApproxLikelihood::adjustErrorValue(double processError, double errorValue) {
-  throw string("BinomialApproxLikelihood.adjustErrorValue() not yet implemented");
+  // adjust for N process error
+  if(processError > 0)
+    return (1.0/(1.0/errorValue + 1.0/processError));
+
+  return errorValue;
 }
 
 //**********************************************************************

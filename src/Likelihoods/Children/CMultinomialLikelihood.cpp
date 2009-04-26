@@ -26,7 +26,8 @@ CMultinomialLikelihood::CMultinomialLikelihood() {
 // Adjust error value based on process error
 //**********************************************************************
 double CMultinomialLikelihood::adjustErrorValue(double processError, double errorValue) {
-  if(processError >= 0)
+  // adjust for N process error
+  if(processError > 0)
     return (1.0/(1.0/errorValue + 1.0/processError));
 
   return errorValue;
