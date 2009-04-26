@@ -41,7 +41,7 @@ CStandardHeaderReport::CStandardHeaderReport() {
   // Start building our Header
   sVersion   = "";
   sHeader    = "SPM (Spatial Population Model)";
-#ifndef OPTIMISE
+#ifndef OPTIMIZE
   sHeader += " (UNOPTIMISED)\n";
 #else
   sHeader += "\n";
