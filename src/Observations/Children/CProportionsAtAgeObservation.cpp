@@ -81,7 +81,7 @@ void CProportionsAtAgeObservation::validate() {
     pParameterList->fillVector(vOBS, PARAM_OBS);
 
     if ((vOBS.size() % (iAgeSpread+1)) != 0)
-      throw string("OBS not right amount");
+      throw string("OBS not right amount"); //TODO: better error message
 
     for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
