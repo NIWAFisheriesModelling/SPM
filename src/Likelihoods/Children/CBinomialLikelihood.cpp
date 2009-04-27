@@ -26,9 +26,9 @@ CBinomialLikelihood::CBinomialLikelihood() {
 // Adjust our ErrorValue based on process error
 //**********************************************************************
 double CBinomialLikelihood::adjustErrorValue(double processError, double errorValue) {
-
-  if (processError >= 0.0)
-    return (1.0 / (1.0 / errorValue + 1.0 / errorValue));
+  // adjust for N process error
+  if(errorValue > 0 && processError > 0)
+    return (1.0/(1.0/errorValue + 1.0/processError));
 
   return errorValue;
 }

@@ -23,7 +23,7 @@ CBinomialApproxLikelihood::CBinomialApproxLikelihood() {
 //**********************************************************************
 double CBinomialApproxLikelihood::adjustErrorValue(double processError, double errorValue) {
   // adjust for N process error
-  if(processError > 0)
+  if(errorValue > 0 && processError > 0)
     return (1.0/(1.0/errorValue + 1.0/processError));
 
   return errorValue;
