@@ -27,6 +27,7 @@ CConfiguration::CConfiguration() {
   iNumberOfThreads            = 1;
   bUseEstimateValues          = false;
   iSimulationCandidates       = 0;
+  bDisableReports             = false;
 }
 
 //**********************************************************************

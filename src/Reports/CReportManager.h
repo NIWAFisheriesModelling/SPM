@@ -39,6 +39,7 @@ protected:
   // Variables
   vector<CReport*>          vReporters;
   vector<CReport*>          vModellingReporters;
+  bool                      bDisableReports;
 
 private:
   static boost::thread_specific_ptr<CReportManager> clInstance;

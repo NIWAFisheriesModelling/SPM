@@ -9,7 +9,8 @@
 
 // Local headers
 #include "CIncreasingSelectivity.h"
-
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 //**********************************************************************
 // CIncreasingSelectivity::CIncreasingSelectivity()
 // Default constructor
@@ -41,18 +42,18 @@ void CIncreasingSelectivity::validate() {
 
     // TODO: Complete validation - error messages need to be better phrased
     if (dAlpha <= 0)
-      throw("Alpha must be positive"); // TODO: better error messages
+      CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
     if (iL < pWorld->getMinAge())
-      throw("L needs to be a value at least the same as the minimum age in the model"); //TODO: Better error message
+      CError::errorLessThan(PARAM_L, PARAM_MIN_AGE);
     if (iL > pWorld->getMaxAge())
-      throw("L cannot be larger that the maximum age in the model"); //TODO: Better error message
+      CError::errorGreaterThan(PARAM_L, PARAM_MAX_AGE);
     if (iH <= iL)
-       throw("L must be less than H"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_H, PARAM_L);
     if ((int)vVs.size() != (iH - iL + 1))
-       throw("You need to supply the correct number of entries for V"); //TODO: Better error message
+       throw string("You need to supply the correct number of entries for V"); //TODO: Better error message
     for (int i = 0; i < (int)vVs.size(); ++i) {
       if ((vVs[i] > 1.0) || (vVs[i] < 0.0))
-        throw("Vs should be be between 0 and 1"); //TODO: Better error message
+        throw string("Vs should be be between 0 and 1"); //TODO: Better error message
     }
 
     // Register Estimables

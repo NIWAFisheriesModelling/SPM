@@ -27,6 +27,8 @@ boost::thread_specific_ptr<CReportManager> CReportManager::clInstance;
 // Default Constructor
 //**********************************************************************
 CReportManager::CReportManager() {
+  // Variables
+  bDisableReports       = false;;
 }
 
 //**********************************************************************
@@ -71,6 +73,9 @@ void CReportManager::clone(CReportManager *Manager) {
 //**********************************************************************
 void CReportManager::validate() {
   try {
+    // Vars
+    bDisableReports = pConfig->getDisableReports();
+
     foreach(CReport *Reporter, vReporters) {
       Reporter->validate();
     }
@@ -113,6 +118,8 @@ void CReportManager::build() {
 // Execute Reporters
 //**********************************************************************
 void CReportManager::execute() {
+  if (bDisableReports)
+    return;
   // Check for correct modes
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     return;
@@ -133,6 +140,9 @@ void CReportManager::execute() {
 // Execute State-Based reporters
 //**********************************************************************
 void CReportManager::execute(EState state) {
+  if (bDisableReports)
+    return;
+
   foreach(CReport *Reporter, vReporters) {
     if (Reporter->getExecutionState() == state)
       Reporter->execute();

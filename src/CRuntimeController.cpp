@@ -76,6 +76,11 @@ void CRuntimeController::Destroy() {
 //**********************************************************************
 void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
 
+  // Build some hidden options
+  options_description oHidden("Hidden");
+  oHidden.add_options()
+      ("disable_reports,d", "Disable all reports");
+
   // Build Options menu
   options_description oDesc("Usage");
   oDesc.add_options()
@@ -94,6 +99,10 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
       ("quiet,q", "Run in quiet mode")
       ("genseed,g", value<int>(), "Random number seed");
 
+  options_description oAllOptions("All");
+  oAllOptions.add(oDesc);
+  oAllOptions.add(oHidden);
+
   ostringstream o;
   o << oDesc;
   sCommandLineOptions = o.str();
@@ -101,7 +110,7 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
   // Read our Parameters
   variables_map vmParams;
   try {
-    store(parse_command_line(argc, argv, oDesc), vmParams);
+    store(parse_command_line(argc, argv, oAllOptions), vmParams);
     notify(vmParams);
   } catch (std::exception &ex) {
     throw string(ex.what());

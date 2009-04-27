@@ -54,6 +54,8 @@ public:
   string                     getCommandLineParameter(int index);
   void                       setSimulationCandidates(int value) { iSimulationCandidates = value; }
   int                        getSimulationCandidates() { return iSimulationCandidates; }
+  void                       setDisableReports(bool value) { bDisableReports = value; }
+  bool                       getDisableReports() { return bDisableReports; }
 
 protected:
   // Functions
@@ -70,6 +72,7 @@ protected:
   int                        iRandomSeed;
   vector<string>             vCommandLineParameters;
   int                        iSimulationCandidates;
+  bool                       bDisableReports;
 
 private:
   static CConfiguration*     clInstance;

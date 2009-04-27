@@ -76,4 +76,6 @@ void CCompleteWorldView::execute() {
 CCompleteWorldView::~CCompleteWorldView() {
   if (pWorldSquare != 0)
     delete pWorldSquare;
+
+  pWorldSquare = 0;
 }
