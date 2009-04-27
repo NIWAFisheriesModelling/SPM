@@ -359,13 +359,17 @@ For observations where where the likelihood is parameterised by the c.v., you ca
   c'_i  = \sqrt {c_i^2  + c_{process\_error}^2 } 
 \end{equation}
 
+Note that $c_{process\_ error} \ge 0$.
+
 Similarly, if the likelihood is parameterised by the effective sample size $N$,
 
 \begin{equation}
  N'_i  = \frac{1}{1 / {N_i}+ 1 / N_{process\_error}}
 \end{equation}
 
-In all cases, the process error has more effect on small errors than on large ones. Be clear that a large value for the multinomial process error means a small process error.
+Note that $N_{process\_ error} > 0$, but we allow $N_{process\_ error}=0$ which is defined as no process error (i.e., defined to be equivalent to $N_{process\_ error}=\infty$). 
+
+For both the c.v. and $N$ process errors, the process error has more effect on small errors than on large ones. Be clear that a large value for the $N$ process error means a small process error.
 
 \subsection{Simulating observations}
 
