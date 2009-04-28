@@ -27,13 +27,10 @@ CBinomialLikelihood::CBinomialLikelihood() {
 //**********************************************************************
 double CBinomialLikelihood::adjustErrorValue(double processError, double errorValue) {
   // adjust for N process error
-  if(errorValue > 0 && processError > 0)
-    return (1.0/(1.0/errorValue + 1.0/processError));
-
-<<<<<<< .mine  if ( (processError >= 0.0) && (errorValue > 0.0) )
+  if ( (processError >= 0.0) && (errorValue > 0.0) )
     return (1.0 / (1.0 / errorValue + 1.0 / errorValue));
 
-=======>>>>>>> .theirs  return errorValue;
+  return errorValue;
 }
 
 //**********************************************************************
