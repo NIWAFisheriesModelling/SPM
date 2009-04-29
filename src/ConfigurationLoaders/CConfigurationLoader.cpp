@@ -58,6 +58,7 @@ CConfigurationLoader::CConfigurationLoader() {
 // Load a vector into cache, we use this instead of file for Unit tests
 //**********************************************************************
 void CConfigurationLoader::loadIntoCache(vector<string> &lines) {
+  vLines.clear();
   foreach(string Line, lines) {
     vLines.push_back(Line);
   }

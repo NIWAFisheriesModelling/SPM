@@ -224,7 +224,7 @@ void CProportionsByCategoryObservation::execute() {
   map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
   while (mvPropPtr != mvProportionMatrix.end()) {
     // Get Square for this Area
-    CWorldSquare *pSquare = pWorldView->getSquare((*mvPropPtr).first);
+    pBaseSquare = pWorldView->getSquare((*mvPropPtr).first);
 
     // Build our 2 Age Result arrays so we can compare them to get the
     // proportion to match against our observation.
@@ -232,18 +232,18 @@ void CProportionsByCategoryObservation::execute() {
       // Loop Through Categories
       for (int j = 0; j < (int)vCategories.size(); ++j) {
         double dSelectResult = vSelectivities[j]->getResult(i);
-        pAgeResults[i] += dSelectResult * pSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+        pAgeResults[i] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
       }
       for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
         double dSelectResult = vTargetSelectivities[j]->getResult(i);
-        pCombinedAgeResults[i] += dSelectResult * pSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
+        pCombinedAgeResults[i] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
       }
     }
 
     // If we have an age_plus_group we wanna add all + ages to the highest specified
     if(bAgePlus) {
       // Loop Through Plus Group Ages in that square and add them to count for the Plus group
-      for (int i = iArraySize+iSquareAgeOffset; i < pWorld->getMaxAge(); ++i) {
+      for (int i = iArraySize+iSquareAgeOffset; i < pWorld->getAgeSpread(); ++i) {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult(i);
@@ -251,7 +251,7 @@ void CProportionsByCategoryObservation::execute() {
         }
         for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
           double dSelectResult = vTargetSelectivities[j]->getResult(i);
-          pCombinedAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(i, j);
+          pCombinedAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(i, vTargetCategories[j]);
         }
       }
     }

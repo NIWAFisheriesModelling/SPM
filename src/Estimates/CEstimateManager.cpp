@@ -195,7 +195,8 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
 void CEstimateManager::addEstimateValue(string estimate, double value) {
   try {
     foreach(CEstimate *Estimate, vEstimateList) {
-      if (Estimate->getParameter() == estimate) {
+      CParameterList *pList = Estimate->getParameterList();
+      if (pList->getString(PARAM_PARAMETER) == estimate) {
         Estimate->addValue(value);
         return;
       }

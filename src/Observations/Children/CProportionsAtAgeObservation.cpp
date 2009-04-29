@@ -206,36 +206,29 @@ void CProportionsAtAgeObservation::execute() {
 
     pWorldView->execute();
 
-    //TODO: remove debug messages
-    //cout << "Some Stats for " << getLabel() << endl;
-    //cout << "iSquareAgeOffset = " << iSquareAgeOffset << endl;
-    //cout << "iArraySize = " << iArraySize << endl;
-    //cout << "Min/Max Age = " << iMinAge << "/" << iMaxAge << endl;
-
-
     // Loop Through Observations
     map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
     while (mvPropPtr != mvProportionMatrix.end()) {
       // Get Square for this Area
-      CWorldSquare *pSquare = pWorldView->getSquare((*mvPropPtr).first);
+      pBaseSquare = pWorldView->getSquare((*mvPropPtr).first);
 
       // Loop Through Ages in that square and add them to count
       for (int i = 0; i < iArraySize; ++i) {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult((i+iSquareAgeOffset));
-          pAgeResults[i] += dSelectResult * pSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+          pAgeResults[i] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
         }
       }
 
       // And if the observation has a plus group
       if(bAgePlus) {
         // Loop Through Plus Group Ages in that square and add them to count for the Plus group
-        for (int i = iArraySize+iSquareAgeOffset; i < pWorld->getMaxAge(); ++i) {
+        for (int i = iArraySize+iSquareAgeOffset; i < pWorld->getAgeSpread(); ++i) {
           // Loop Through Categories
           for (int j = 0; j < (int)vCategories.size(); ++j) {
             double dSelectResult = vSelectivities[j]->getResult(i);
-            pAgeResults[iArraySize-1] += dSelectResult * pSquare->getPopulationInCategoryForAge(i, vCategories[j]);
+            pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(i, vCategories[j]);
           }
         }
       }

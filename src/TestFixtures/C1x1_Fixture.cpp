@@ -44,8 +44,16 @@ void C1x1_Fixture::addToConfiguration(string value) {
 }
 
 //**********************************************************************
+// void C1x1_Fixture::addToEstimateValueConfiguration(string value)
+// Add values to our Estimate Value configuration
+//**********************************************************************
+void C1x1_Fixture::addToEstimateValueConfiguation(string value){
+  CConvertor::stringToVectorByNewline(value, vEstimateValueConfiguration);
+}
+
+//**********************************************************************
 // void C1x1_Fixture::addToTimeStep(string process)
-//
+// Add processes to our time step
 //**********************************************************************
 void C1x1_Fixture::addToTimeStep(string process) {
   sTimeStep += process + " ";
@@ -61,6 +69,11 @@ void C1x1_Fixture::loadEnvironment() {
 
   pConfigLoader->loadIntoCache(vConfiguration);
   pConfigLoader->loadConfigFile(true);
+
+  if (vEstimateValueConfiguration.size() > 0) {
+    pConfigLoader->loadIntoCache(vEstimateValueConfiguration);
+    pConfigLoader->loadEstimateValuesFile(true);
+  }
 }
 
 //**********************************************************************

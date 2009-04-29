@@ -55,6 +55,7 @@ public:
   string                    getBaseLayer() { return sBaseLayer; }
   int                       getMinAge() { return iMinAge; }
   int                       getMaxAge() { return iMaxAge; }
+  int                       getAgeSpread() { return ((iMaxAge+1) - iMinAge); }
   bool                      getAgePlusGroup() { return bAgePlusGroup; }
   int                       getInitialYear() { return iInitialYear; }
   int                       getCurrentYear() { return iCurrentYear; }

@@ -422,4 +422,6 @@ void CRuntimeController::initMCMCThread() {
 CRuntimeController::~CRuntimeController() {
   if (pBaseThread != 0)
     delete pBaseThread;
+
+  CConfiguration::Destroy();
 }

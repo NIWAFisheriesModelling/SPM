@@ -80,8 +80,9 @@ CProcess* CProcessManager::getProcess(string Label) {
     Ex = "CProcessManager.getProcess()->" + Ex;
     throw Ex;
   }
-  return 0;
 #endif
+
+  return 0;
 }
 
 //**********************************************************************

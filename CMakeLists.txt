@@ -28,7 +28,7 @@ IF (WIN32)
     libboost_thread-mgw34-mt-1_38
     libboost_program_options-mgw34-mt-1_38
   )
-  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-1_38)
+  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
 ELSE (WIN32)
   SET(BOOST_LIBS "/opt/usr/boost_1_38_0/libs")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
@@ -235,7 +235,12 @@ src/Selectivities/Children/CAllValuesSelectivity.Test.cpp
 src/Selectivities/Children/CDoubleNormalSelectivity.Test.cpp
 src/Selectivities/Children/CKnifeEdgeSelectivity.Test.cpp
 src/Selectivities/Factory/CSelectivityFactory.Test.cpp
+src/Likelihoods/Children/CLogNormalLikelihood.Test.cpp
+src/Likelihoods/Children/CBinomialApproxLikelihood.Test.cpp
+src/Likelihoods/Children/CBinomialLikelihood.Test.cpp
 src/Observations/Children/CAbundanceObservation.Test.cpp
+src/Observations/Children/CProportionsAtAgeObservation.Test.cpp
+src/Observations/Children/CProportionsByCategoryObservation.Test.cpp
 src/Observations/Factory/CObservationFactory.Test.cpp
 src/TimeSteps/Factory/CTimeStepFactory.Test.cpp
 src/Minimizers/Factory/CMinimizerFactory.Test.cpp
@@ -248,6 +253,7 @@ src/PreferenceFunctions/Children/CNormalPreferenceFunction.Test.cpp
 src/PreferenceFunctions/Children/CExponentialPreferenceFunction.Test.cpp
 src/PreferenceFunctions/Children/CConstantPreferenceFunction.Test.cpp
 src/PreferenceFunctions/Factory/CPreferenceFunctionFactory.Test.cpp
+src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
 src/InitializationPhases/Factory/CInitializationPhaseFactory.Test.cpp
 src/Main
 )

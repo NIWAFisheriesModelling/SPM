@@ -1,7 +1,7 @@
 //============================================================================
-// Name        : CAbundanceObservation.Test.cpp
+// Name        : CProportionsAtAgeObservation.Test.cpp
 // Author      : S.Rasmussen
-// Date        : 27/04/2009
+// Date        : 28/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
@@ -25,13 +25,13 @@
 #include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/Catchabilities/Catchability.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/StringLayer.h"
-#include "../../TestFixtures/ConfigurationFiles/Observations/Abundance.h"
+#include "../../TestFixtures/ConfigurationFiles/Observations/ProportionsAtAge.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
+BOOST_FIXTURE_TEST_CASE( ProportionsAtAgeObservation, C3x3_Fixture ) {
 
   // Add What we need to configuration
   // Then run our model
@@ -42,61 +42,82 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
   addToConfiguration(logistic_producing);
   addToConfiguration(catchability_basic);
   addToConfiguration(string_layer);
-  addToConfiguration(abundance_observation);
+  addToConfiguration(proportions_at_age_observation);
   addToConfiguration(constant);
   addToTimeStep("ageing constant_recruitment_all_ages category_transition_rate annual_mortality_rate");
-  loadAndRunEnvironment();
+  BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
   CObservationManager *pManager       = CObservationManager::Instance();
-  CObservation        *pObservation   = pManager->getObservation("abundance_observation");
+  CObservation        *pObservation   = pManager->getObservation("proportions_at_age_observation");
 
   vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
-  BOOST_REQUIRE_EQUAL(vComparisons.size(), 6.0);
+  BOOST_REQUIRE_EQUAL(vComparisons.size(), 18.0);
 
   SComparison *pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areaa");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.01);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 60.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 59.291539712786701);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -3.893781669483003);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.1);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.06214466926819362);
+  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0022018966384533441);
 
   pComparison = vComparisons[1];
-  BOOST_CHECK_EQUAL(pComparison->sKey, "areab");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.012);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 40.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 39.527693141857796);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -3.9270126834056875);
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areaa");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.01);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.2);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.062176851694000113);
+  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0044044003526992875);
 
   pComparison = vComparisons[2];
-  BOOST_CHECK_EQUAL(pComparison->sKey, "areac");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.013);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -3.919440512772415);
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areaa");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.01);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.7);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.87567847903780627);
+  BOOST_CHECK_EQUAL(pComparison->dScore, -0.0030710515392823622); // Negative???
 
   pComparison = vComparisons[3];
-  BOOST_CHECK_EQUAL(pComparison->sKey, "aread");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.014);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -3.9028365885727005);
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areab");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.012);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.20);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.062144669268193627);
+  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0052873108523987045);
 
   pComparison = vComparisons[4];
-  BOOST_CHECK_EQUAL(pComparison->sKey, "areae");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.015);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -3.8802359506994817);
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areab");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.012);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.30);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.06217685169400012);
+  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0079326451579975615);
 
   pComparison = vComparisons[5];
-  BOOST_CHECK_EQUAL(pComparison->sKey, "areaf");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.016);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -3.8536669813845563);
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areab");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.012);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.5);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.87567847903780638);
+  BOOST_CHECK_EQUAL(pComparison->dScore, -0.0026372336443515436); // Negative???
+
+  pComparison = vComparisons[6];
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areac");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.013);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.30);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.062144669268193627);
+  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0085966768478735779);
+
+  pComparison = vComparisons[7];
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areac");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.013);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.40);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.06217685169400012);
+  BOOST_CHECK_EQUAL(pComparison->dScore, 0.011465078948925317);
+
+  pComparison = vComparisons[8];
+  BOOST_CHECK_EQUAL(pComparison->sKey, "areac");
+  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.013);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.30);
+  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.87567847903780638);
+  BOOST_CHECK_EQUAL(pComparison->dScore, -0.0017209055503232609); // Negative???
 
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 3; ++j) {
@@ -150,5 +171,4 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
     }
   }
 }
-
 #endif /* TEST */

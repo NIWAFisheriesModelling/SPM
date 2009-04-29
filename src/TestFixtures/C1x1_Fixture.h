@@ -32,6 +32,7 @@ public:
   C1x1_Fixture();
   virtual                     ~C1x1_Fixture();
   void                        addToConfiguration(string value);
+  void                        addToEstimateValueConfiguation(string value);
   void                        addToTimeStep(string process);
   void                        loadEnvironment();
   void                        loadAndRunEnvironment();
@@ -39,6 +40,7 @@ public:
 
 protected:
   vector<string>              vConfiguration;
+  vector<string>              vEstimateValueConfiguration;
   CConfigurationLoader        *pConfigLoader;
   string                      sTimeStep;
 };
