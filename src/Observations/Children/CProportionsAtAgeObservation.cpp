@@ -206,10 +206,11 @@ void CProportionsAtAgeObservation::execute() {
 
     pWorldView->execute();
 
-    cout << "Some Stats for " << getLabel() << endl;
-    cout << "iSquareAgeOffset = " << iSquareAgeOffset << endl;
-    cout << "iArraySize = " << iArraySize << endl;
-    cout << "Min/Max Age = " << iMinAge << "/" << iMaxAge << endl;
+    //TODO: remove debug messages
+    //cout << "Some Stats for " << getLabel() << endl;
+    //cout << "iSquareAgeOffset = " << iSquareAgeOffset << endl;
+    //cout << "iArraySize = " << iArraySize << endl;
+    //cout << "Min/Max Age = " << iMinAge << "/" << iMaxAge << endl;
 
 
     // Loop Through Observations
