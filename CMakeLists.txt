@@ -1,28 +1,24 @@
 cmake_minimum_required(VERSION 2.6)
 project(SPM)
 
-# To build the list below I used MSYS
-# By executing the following command I could store the names of all
-# .cpp files in a txt file. Then use a simple find/replace from .cpp to ""
-# find src | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest" | grep -v "TestFixtures" > cpps.txt
-# To get Unit Test only Files
-
 SET(LIBRARY_NAME SimFish)
 SET(MAIN_NAME spm_UnOptimised)
 SET(TEST_NAME spm_UnitTests)
 SET(OPTI_NAME spm)
 
-# Added autogeneration of Version.h file in src directory
-ADD_CUSTOM_TARGET(version ALL
-  COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
-)
+# Assumptions
+# Compiled with MinGW under Windows, where,
+#   MinGW is in c:\Program Files
+#   Boost libraries are located in C:/Progra~1/MingW/boost_libs
+#   Boost header files are located in C:/Progra~1/MinGW/include/boost/
 
 IF (WIN32)
+  SET(BOOST_LIBS "C:/Progra~1/MingW/boost_libs")
+  SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
   SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
   SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized")
-  SET(LINK_OPTIONS "-static icon.o")
   ADD_CUSTOM_TARGET(icon ALL
     COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
   )
@@ -32,24 +28,33 @@ IF (WIN32)
     libboost_thread-mgw34-mt-1_38
     libboost_program_options-mgw34-mt-1_38
   )
-  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
+  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-1_38)
 ELSE (WIN32)
-  SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0 -I /opt/boost138/usr/include")
-  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0  -I /opt/boost138/usr/include")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized  -I /opt/boost138/usr/include")
-  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized  -I /opt/boost138/usr/include")
-  SET(LINK_OPTIONS "-L /opt/boost138/usr/lib -static")
+  SET(BOOST_LIBS "/opt/usr/boost_1_38_0/libs")
+  SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
   SET(MAIN_LIBRARIES
-    libboost_system-gcc41-mt-1_38
-    libboost_filesystem-gcc41-mt-1_38
-    libboost_thread-gcc41-mt-1_38
-    libboost_program_options-gcc41-mt-1_38
+    boost_system-gcc41-mt-1_38
+    boost_filesystem-gcc41-mt-1_38
+    boost_thread-gcc41-mt-1_38
+    boost_program_options-gcc41-mt-1_38
     pthread
     )
   SET(TEST_LIBRARIES
-    libboost_unit_test_framework-gcc41-mt-sd-1_38
+    libboost_unit_test_framework-gcc41-mt-1_38
   )
 ENDIF (WIN32)
+
+
+# Autogeneration of Version.h file in src directory
+ADD_CUSTOM_TARGET(version ALL
+  COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
+)
+
+# To build the list below I used MSYS
+# By executing the following command I could store the names of all
+# .cpp files in a txt file. Then use a simple find/replace from .cpp to ""
+# find src | grep ".cpp" | grep -v "svn" | grep -v ".Test." | grep -v "UnitTest" | grep -v "TestFixtures" > cpps.txt
+# To get Unit Test only Files
 
 SET(SOURCE_FILES
 src/MCMC/CMCMC.cpp
