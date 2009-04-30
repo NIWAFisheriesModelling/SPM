@@ -4,15 +4,24 @@
 !include Modules\EnvVarUpdate.nsh
 !include Modules\fileassoc.nsh
 
+; check installer is not already running
+Function .onInit
+System::Call 'kernel32::CreateMutexA(i 0, i 0, t "SPMinstaller") i .r1 ?e'
+ Pop $R0
+ StrCmp $R0 0 +3
+   MessageBox MB_OK|MB_ICONEXCLAMATION "The SPM installer is already running."
+   Abort
+FunctionEnd
+
 ; generate version text
 !system "svn_version -f nsi --path ../ -q"
 !include "version.nsi"
 
 ;Setup
-CRCCheck on
-SilentInstall normal
-SilentUnInstall silent
-XPStyle on
+CRCCheck on ;CRC check
+SilentInstall normal ;normal install
+SilentUnInstall silent ;uninstall quietly
+XPStyle on ;graphic 
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SPM"
