@@ -18,8 +18,9 @@ function(file,path="",lines){
   data$parameter<-as.character(data$parameter)
   tmp<-regexpr("->",data$parameter)
   data$type<-substring(data$parameter,1,tmp-1)
+  res$total<-data$value[nrow(data)]
   data$parameter<-substring(data$parameter,tmp+2,nchar(data$parameter)-1)
-  res$data<-data
+  res$data<-data[-nrow(data),]
   return(res)
 }
 
