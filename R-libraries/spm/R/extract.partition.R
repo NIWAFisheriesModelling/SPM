@@ -14,8 +14,8 @@ function(file,path="",lines){
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
-  values$row<-as.numeric(values$row)
-  values$column<-as.numeric(values$column)
+  values$row<-as.numeric(as.character(values$row))
+  values$column<-as.numeric(as.character(values$column))
   values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,as.numeric)
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
@@ -23,4 +23,3 @@ function(file,path="",lines){
   res$data<-values
   return(res)
 }
-
