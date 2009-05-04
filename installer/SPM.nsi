@@ -3,6 +3,7 @@
 ; generate version
 !system 'python version.py'
 !include version.nsi
+!system 'del version.nsi'
 
 ; Standard installer  options
 SetCompressor /FINAL /SOLID lzma
