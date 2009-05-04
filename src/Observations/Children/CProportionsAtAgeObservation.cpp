@@ -246,7 +246,7 @@ void CProportionsAtAgeObservation::execute() {
       //Add in Process Error if defined
       //
       // TODO: Is this right? since we gen process error in likelihood
-      dScore = -CMath::lnFactorial(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
+      dScore += -CMath::lnFactorial(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
 
       for (int i = 0; i < iArraySize; ++i) {
 

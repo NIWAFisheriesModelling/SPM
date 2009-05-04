@@ -215,6 +215,9 @@ void CProportionsByCategoryObservation::execute() {
   // Base
   CObservation::execute();
 
+  // Reset our Score
+  dScore = 0.0;
+
   // Execute the World View to get a Snapshot
   pWorldView->execute();
 
@@ -255,9 +258,6 @@ void CProportionsByCategoryObservation::execute() {
         }
       }
     }
-
-    // Reset our Score
-    dScore = 0.0;
 
     // Do our Comparison
     for (int i = 0; i < iArraySize; ++i) {
