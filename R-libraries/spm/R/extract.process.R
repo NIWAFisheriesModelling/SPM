@@ -11,7 +11,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   res$data<-NA
   return(res)
 }
