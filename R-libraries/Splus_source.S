@@ -76,12 +76,11 @@ function(x,alpha,lambda,rescale=T) {
   if(rescale) res<-res/max(res)
   return(res)
 }
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "calc.abundance" <-
 function(data,categories=NULL,ages=NULL,total=T) {
-  if(!is.null(categories)) data<-data[data$Category %in% categories,]
-  index<-paste(data$Row,data$Col)
-  data<-data[,regexpr("Age",names(data))>0]
+  if(!is.null(categories)) data<-data[data$category %in% categories,]
+  index<-paste(data$col,data$row,sep="-")
+  data<-data[,regexpr("age",names(data))>0]
   Ages<-substring(names(data),5)
   Ages<-as.numeric(substring(Ages,1,nchar(Ages)-1))
   if(!is.null(ages)) {
@@ -89,17 +88,17 @@ function(data,categories=NULL,ages=NULL,total=T) {
     Ages<-Ages[Ages %in% ages]
   }
   data<-aggregate(data,by=list("index"=index),sum)
-  index<-unpaste(data$index,sep=" ")
-  Row<-as.numeric(index[[1]])
-  Col<-as.numeric(index[[2]])
+  index<-unpaste(data$index,sep="-")
+  Col<-as.numeric(index[[1]])
+  Row<-as.numeric(index[[2]])
   if(length(Ages)==1) {
     data$Total<-data[,-1]
   }
-  data$Total<-apply(data[,-1],1,sum)
-  data$Row<-Row+1
-  data$Col<-Col+1
+  data$total<-apply(data[,-1],1,sum)
+  data$row<-Row
+  data$column<-Col
   row.names(data)<-1:nrow(data)
-  if(total) return(data[,names(data) %in% c("Row","Col","Total")])
+  if(total) return(data[,names(data) %in% c("row","column","total")])
   else return(data)
 }
 "extract" <-
@@ -294,7 +293,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   res$data<-NA
   return(res)
 }
@@ -312,7 +311,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   data<-spm.string.to.vector.of.words(lines[(index.start+2):(index.end-1)],sep=" ")
   data<-matrix(data,ncol=5,byrow=TRUE)
   data<-data[(nrow(data)/2+1):nrow(data),]
@@ -338,12 +337,12 @@ function(file,path="",lines){
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
-  values$row<-as.numeric(values$row)
-  values$column<-as.numeric(values$column)
-  values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,as.numeric)
+  values$row<-as.numeric(as.character(values$row))
+  values$column<-as.numeric(as.character(values$column))
+  values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,function(x) as.numeric(as.character(x)))
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   res$data<-values
   return(res)
 }
@@ -368,7 +367,7 @@ function(file,path="",lines){
   values[,3:ncol(values)]<-apply(values[,3:ncol(values)],2,as.numeric)
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   res$data<-values
   return(res)
 }
@@ -386,15 +385,16 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   data<-spm.string.to.vector.of.words(lines[(index.start+2):(index.end-1)],sep=" ")
   data<-matrix(data,ncol=2,byrow=FALSE)
   data<-data.frame("type"=data[,1],"parameter"=data[,1],"value"=as.numeric(data[,2]))
   data$parameter<-as.character(data$parameter)
   tmp<-regexpr("->",data$parameter)
   data$type<-substring(data$parameter,1,tmp-1)
+  res$total<-data$value[nrow(data)]
   data$parameter<-substring(data$parameter,tmp+2,nchar(data$parameter)-1)
-  res$data<-data
+  res$data<-data[-nrow(data),]
   return(res)
 }
 
@@ -411,7 +411,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],6)
+  res$report.type<-substring(lines[index.start+1],14)
   variables<-spm.string.to.vector.of.words(lines[index.start+2],sep=",")
   data<-spm.string.to.vector.of.words(lines[(index.start+3):(index.end-1)],sep=",")
   data<<-data
@@ -441,16 +441,15 @@ function(file,path="",lines){
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
-  values$row<-as.numeric(values$row)
-  values$column<-as.numeric(values$column)
+  values$row<-as.numeric(as.character(values$row))
+  values$column<-as.numeric(as.character(values$column))
   values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,as.numeric)
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   res$data<-values
   return(res)
 }
-
 # $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.process" <-
 function(file,path="",lines){
@@ -464,7 +463,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   res$data<-NA
   return(res)
 }
@@ -482,7 +481,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   data<-spm.string.to.vector.of.words(lines[(index.start+2):(index.end-1)],sep=" ")
   res$data<-data[2]
   return(res)
@@ -501,7 +500,7 @@ function(file,path="",lines){
   if(index.start >= index.end) stop("Error")
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$type<-substring(lines[index.start+1],13)
+  res$report.type<-substring(lines[index.start+1],14)
   data<-spm.string.to.vector.of.words(lines[(index.start+2):(index.end-1)],sep=",")
   data<-matrix(data,ncol=2,byrow=TRUE)
   data<-data.frame("ages"=as.numeric(data[-1,1]),"values"=as.numeric(data[-1,2]))
@@ -554,7 +553,7 @@ function(corners)
 }
 "spm.binary.version"<-
 function() {
-return("1.00-2009-04-09 (rev. 3107)")
+return("1.00-2009-04-30 (rev. 3210)")
 }
 # $Id: spm.convert.to.lines.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.convert.to.lines"<-
