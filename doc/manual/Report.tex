@@ -1,6 +1,26 @@
 \section{The report section\label{sec:report-section}}
 
-The report section specifies the printouts and other outputs from the model. 
+The report section specifies the printouts and other outputs from the model. \SPM\ does not, in general, produce any output unless requested by a valid report. Reports can be defined that are  not valid, for example printing the partition for a year and/or time-step that does not exist --- although  all reports must conform to syntax requirements.
+
+\SPM\ has the following reports;
+
+\begin{enumerate}
+  \item Print the map (i.e., row and column labels of each spatial cell) of the spatial structure
+  \item Print the partition for a year and time step
+  \item Print the partition at the end of an initialisation
+  \item Print a summary of a process
+  \item Print a derived quantity
+  \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
+  \item Print a summary of the estimated parameters
+  \item Print the objective function values
+  \item Print the covariance matrix
+  \item Print an observation values, fits, and residuals
+  \item Print a layer
+  \item Print a derived view via a categorical layer
+  \item Print a selectivity's values
+  \item Print the random number seed
+  \item Print the weight-at-size using the size-weight relationship
+\end{enumerate}
 
 \subsection{Reporting model outputs}
 

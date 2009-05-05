@@ -4,20 +4,23 @@
 
 The report types available are,
 
-\begin{description}
+\begin{enumerate}
   \item Print the map (i.e., row and column labels of each spatial cell) of the spatial structure
-  \item Print the partition
+  \item Print the partition for a year and time step
+  \item Print the partition at the end of an initialisation
   \item Print a summary of a process
   \item Print a derived quantity
   \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
   \item Print a summary of the estimated parameters
   \item Print the objective function values
-  \item Print an observation values, fits, and residuals
   \item Print the covariance matrix
+  \item Print an observation values, fits, and residuals
   \item Print a layer
+  \item Print a derived view via a categorical layer
   \item Print a selectivity's values
+  \item Print the random number seed
   \item Print the weight-at-size using the size-weight relationship
-\end{description}
+\end{enumerate}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
 
@@ -134,7 +137,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True of False}
 
-\subsubsection[Print the Objective function values]{\commandlabsubarg{report}{type}{objective\_function}}
+\subsubsection[Print the objective function values]{\commandlabsubarg{report}{type}{objective\_function}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -146,7 +149,19 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True of False}
 
-\subsubsection[Print a a summary of the an observation, including fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
+\subsubsection[Print the covariance matrix]{\commandlabsubarg{report}{type}{covaraince}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a summary of the an observation, including fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
 
 \defSub{observation} {Define the label of the observation to print}
 \defType{String}
@@ -164,6 +179,33 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defValue{Either True of False}
 
 \subsubsection[Print a layer]{\commandlabsubarg{report}{type}{layer}}
+
+\defSub{layer} {Define the label of the layer to print}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{Layer}}
+
+\defSub{year} {Define the year for the printing of the layer}
+\defType{Integer}
+\defDefault{None}
+\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
+\defSub{time\_step} {Define the time-step for the printing of the layer}
+\defType{Integer}
+\defDefault{None}
+\defValue{A valid time-step}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a derived view via a categorical layer]{\commandlabsubarg{report}{type}{layer\_derived\_view}}
 
 \defSub{layer} {Define the label of the layer to print}
 \defType{String}

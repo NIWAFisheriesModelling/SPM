@@ -28,7 +28,6 @@ In SPM, but not in manual
   initial
   label
   layer_categories
-  layer_derived_world_view
   layer_height
   layer_max
   layer_min
@@ -105,6 +104,7 @@ In manual, but not in SPM
   schnute
   adjacent_cell_movement
   biomass_event_mortality
+  covaraince
   event_mortality_at_age
   iterative
   migration_movement
