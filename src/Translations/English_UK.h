@@ -83,34 +83,34 @@
 // FMM
 //
 //**********************************************************************
-#define FMM_MANY_FUNCTION_EVALUATIONS             "FMM: Too many function evaluations"
-#define FMM_MANY_LOOPS_LINEAR_SEARCH              "FMM: Too many loops in this linear search"
-#define FMM_SMALL_LINEAR_STEP_SIZE                "FMM: Linear step size too small"
-#define FMM_MANY_QUASI_NEWTON_ITERATIONS          "FMM: Too many quasi-newton iterations"
-#define FMM_ITERATION                             "FMM: Iteration = "
-#define FMM_FUNCTION_VALUE                        "FMM: Function value = "
-#define FMM_CURRENT_PARAMETER_ESTIMATES           "FMM: Current parameter estimates = "
-#define FMM_MAX_NEWTON_STEP_FIVE                  "FMM: The max newton step has been taken 5 times, see D&S p 348"
+#define FMM_MANY_FUNCTION_EVALUATIONS             "Numerical_differences: Too many function evaluations"
+#define FMM_MANY_LOOPS_LINEAR_SEARCH              "Numerical_differences: Too many loops in this linear search"
+#define FMM_SMALL_LINEAR_STEP_SIZE                "Numerical_differences: Linear step size too small"
+#define FMM_MANY_QUASI_NEWTON_ITERATIONS          "Numerical_differences: Too many quasi-newton iterations"
+#define FMM_ITERATION                             "Numerical_differences: Iteration = "
+#define FMM_FUNCTION_VALUE                        "Numerical_differences: Function value = "
+#define FMM_CURRENT_PARAMETER_ESTIMATES           "Numerical_differences: Current parameter estimates = "
+#define FMM_MAX_NEWTON_STEP_FIVE                  "Numerical_differences: The max newton step has been taken 5 times, see D&S p 348"
 #define FMM_CONVERGENCE_CHECK                     "Numerical_differences: Convergence check value = "
-#define FMM_CONVERGENCE_THRESHOLD                 "Numerical_differences: Convergence threshold = "
-#define FMM_CONVERGENCE                           "FMM: Convergence = "
-#define FMM_FUNCTION_SCORE                        "FMM: Function score = "
-#define FMM_GRADIENT_VALUE                        "FMM: Gradient value = "
-#define FMM_SMALL_STEP_SIZE_CONVERGENCE           "FMM: Step size too small. Indicates successful convergence"
-#define FMM_CONVERGENCE_NOT_TEXTBOOK              "FMM: This is not a textbook ideal convergence"
+#define FMM_CONVERGENCE_THRESHOLD                 "Numerical_differences: Convergence tolerance   = "
+#define FMM_CONVERGENCE                           "Numerical_differences: Convergence = "
+#define FMM_FUNCTION_SCORE                        "Numerical_differences: Function score = "
+#define FMM_GRADIENT_VALUE                        "Numerical_differences: Gradient value = "
+#define FMM_SMALL_STEP_SIZE_CONVERGENCE           "Numerical_differences: Step size too small. Indicates successful convergence, but this is not a textbook ideal convergence"
+#define FMM_CONVERGENCE_NOT_TEXTBOOK              "Numerical_differences: "
 
 //**********************************************************************
 // GAMMADIFF
 //
 //**********************************************************************
-#define GAMMADIFF_SIZE_LOWER_BOUND_START_VALUE    "GammaDiff: Lower bound vector is not same size as start value"
-#define GAMMADIFF_SIZE_UPPER_BOUND_START_VALUE    "GammaDiff: Upper bound vector is not same size as start value"
-#define GAMMADIFF_CONVERGENCE_UNCLEAR             "GammaDiff: Unclear convergence, maybe local minimum"
-#define GAMMADIFF_EVALUATIONS_MAX                 "GammaDiff: Maximum evaluations/iterations with no convergence"
-#define GAMMADIFF_CONVERGENCE                     "GammaDiff: Successful convergence"
-#define GAMMADIFF_RETURN_VALUE_UNKNOWN            "GammaDiff: Fatal error, unknown return value = "
-#define GAMMADIFF_LESS_START_LOWER_BOUND          "GammaDiff: Start value is less than lower bound"
-#define GAMMADIFF_GREATER_START_UPPER_BOUND       "GammaDiff: Start value is greater than upper bound"
+#define GAMMADIFF_SIZE_LOWER_BOUND_START_VALUE    "Lower bound vector is not same size as start value"
+#define GAMMADIFF_SIZE_UPPER_BOUND_START_VALUE    "Upper bound vector is not same size as start value"
+#define GAMMADIFF_CONVERGENCE_UNCLEAR             "Unclear convergence, maybe local minimum"
+#define GAMMADIFF_EVALUATIONS_MAX                 "Maximum evaluations/iterations with no convergence"
+#define GAMMADIFF_CONVERGENCE                     "Convergence was successful"
+#define GAMMADIFF_RETURN_VALUE_UNKNOWN            "Fatal error, unknown return value = "
+#define GAMMADIFF_LESS_START_LOWER_BOUND          "Start value is less than lower bound"
+#define GAMMADIFF_GREATER_START_UPPER_BOUND       "Start value is greater than upper bound"
 
 //**********************************************************************
 // PARAMETERS

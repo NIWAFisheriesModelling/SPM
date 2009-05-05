@@ -17,6 +17,7 @@
 #include "../../Estimates/CEstimate.h"
 
 // Namespaces
+using std::cerr;
 using std::cout;
 using std::endl;
 
@@ -91,12 +92,12 @@ void CDESolver::runEstimation() {
     clDESolver.Setup(vStartValues, vLowerBounds, vUpperBounds, stBest1Exp, dDifferenceScale, dCrossoverProbability);
 
     if (clDESolver.Solve(iMaxGenerations)) {
-      cout << "Convergence was successful" << endl;
-      cout << "Final Score: " << clDESolver.getEnergy() << endl;
-      cout << "Score took " << clDESolver.getGenerations() << " generations to find" << endl;
-    } else
-      cout << "Failed to converge, ran out of generations" << endl;
-
+      cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations to find a solution\n";
+      cerr << "Convergence was successful" << "\n" << endl;
+    } else {
+      cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations\n";
+      cerr << "Failed to converge, ran out of generations\n" << endl;
+    }
   } catch (string Ex) {
     Ex = "CDESolverInterface.runEstimation()->" + Ex;
     throw Ex;

@@ -218,7 +218,7 @@ bool DESolverEngine::Solve(int maxGenerations) {
 // Generate our Gradient
 //**********************************************************************
 bool DESolverEngine::generateGradient() {
-
+  double dConvergenceCheck;
   for (int i = 0; i < iVectorSize; ++i) {
     // Create Vars
     double dMin   = 1.0E20;
@@ -233,94 +233,17 @@ bool DESolverEngine::generateGradient() {
         dMax = scaled;
     }
 
-    if ((dMax-dMin) > dTolerance) {
-      cerr << "DE_Solver: Convergence check value = " << (dMax-dMin) << "\n";
-      cerr << "DE_Solver: Convergence threshold = " << dTolerance << "\n" << endl;
+    dConvergenceCheck = dMax-dMin;
+
+    if (dConvergenceCheck > dTolerance) {
+      cerr << "DE_Solver: Convergence check value = " << dConvergenceCheck << "\n";
+      cerr << "DE_Solver: Convergence tolerance   = " << dTolerance << "\n" << endl;
       return false; // No Convergence
     }
   }
-
+  cerr << "DE_Solver: Convergence check value = " << dConvergenceCheck << "\n";
+  cerr << "DE_Solver: Convergence tolerance   = " << dTolerance << "\n" << endl;
   return true; // Convergence
-
-
-  /*
-  // Variables
-  long double dStepSizeI;
-  long double dScoreI;
-
-
-
-
-  vector<double> vCurrentBackUp;
-  vCurrentBackUp.assign(vCurrentValues.begin(), vCurrentValues.end());
-
-  vCurrentValues.assign(vBestSolution.begin(), vBestSolution.end());
-
-  cerr << "DEBUG: BestSolution: ";
-  for (int i = 0; i < iVectorSize; ++i)
-    cerr << vBestSolution[i] << ", ";
-  cerr << endl;
-
-
-
-  // Loop Through and do a step, then create a gradient.
-  for (int i = 0; i < iVectorSize; ++i) {
-    if (isSame(vLowerBounds[i], vUpperBounds[i])) {
-      vGradientValues[i] = 0.0;
-    } else {
-      scaleValues();
-
-      // Workout how much to change the variable by
-      dStepSizeI  = dStepSize * ((vScaledValues[i] > 0) ? 1 : -1);
-
-      // Backup Orig Value, and Assign New Var
-      vScaledValues[i]  += dStepSizeI;
-
-      dPenalty = 0.0;
-
-      // Unscale our Values
-      unScaleValues();
-      dScoreI = EnergyFunction(vCurrentValues);
-      dScoreI += dPenalty;
-
-      cerr << "Scores: " << dScoreI << " / " << dBestEnergy << " / " << dStepSizeI << endl;
-
-      // Populate Gradient, and Restore Orig Value
-      vGradientValues[i]  = ((double)dScoreI - dBestEnergy) / dStepSizeI;
-    }
-  }
-
-  cerr << "ScaledValues: ";
-  for (int i = 0; i < iVectorSize; ++i)
-    cerr << vScaledValues[i] << ", ";
-  cerr << endl;
-
-  cerr << "Gradient: ";
-  for (int i = 0; i < iVectorSize; ++i)
-    cerr << vGradientValues[i] << ", ";
-  cerr << endl;
-
-  scaleValues();
-
-  // Build our Current Tolerance
-  double dCurrentTolerance = 0.0;
-  for (int i = 0; i < iVectorSize; ++i) {
-    dCurrentTolerance = fmax(dCurrentTolerance, fabs(vGradientValues[i]) *
-        fmax(1, fabs(vCurrentBackUp[i])) / fabs(dBestEnergy));
-  }
-
-  cerr << "### dCurrentTolerance: " << dCurrentTolerance << endl;
-
-
-  vCurrentValues.assign(vCurrentBackUp.begin(), vCurrentBackUp.end());
-
-  if (dCurrentTolerance <= dGradTol)
-    return true;
-
-  // Our Convergen*/
-
-
- // return false; // no Convergence
 }
 
 

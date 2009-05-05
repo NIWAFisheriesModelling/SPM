@@ -399,18 +399,18 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
 
     if (dCurrentTolerance <= dGradTol) {
       iRet = -1; // convergence!
-      cerr << FMM_CONVERGENCE << dCurrentTolerance << endl;
-      cerr << FMM_FUNCTION_SCORE << dPreviousScore2 << endl;
+      //cerr << FMM_CONVERGENCE << dCurrentTolerance << endl;
+      //cerr << FMM_FUNCTION_SCORE << dPreviousScore2 << endl;
 
-      cerr << FMM_CURRENT_PARAMETER_ESTIMATES;
-      for (int i = 0; i < iVectorSize; i++)
-        cerr << pPreviousCandidates[i] << " ";
-      cerr << endl;
+      //cerr << FMM_CURRENT_PARAMETER_ESTIMATES;
+      //for (int i = 0; i < iVectorSize; i++)
+      //  cerr << pPreviousCandidates[i] << " ";
+      //cerr << endl;
 
-      cerr << FMM_GRADIENT_VALUE;
-      for (int i = 0; i < iVectorSize; i++)
-        cerr << pGradient[i] << " ";
-      cerr << endl;
+      //cerr << FMM_GRADIENT_VALUE;
+      //for (int i = 0; i < iVectorSize; i++)
+      //  cerr << pGradient[i] << " ";
+      //cerr << endl;
 
       return;
     }
@@ -424,8 +424,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
 
       if (dCurrentTolerance <= dStepTol) {
         cerr << FMM_SMALL_STEP_SIZE_CONVERGENCE << endl;
-        cerr << FMM_CONVERGENCE_NOT_TEXTBOOK << endl;
-
+        //cerr << FMM_CONVERGENCE_NOT_TEXTBOOK << endl;
         iRet = -1;
         return;
       }
