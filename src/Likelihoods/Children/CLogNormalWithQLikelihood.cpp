@@ -27,7 +27,7 @@ CLogNormalWithQLikelihood::CLogNormalWithQLikelihood() {
 //**********************************************************************
 double CLogNormalWithQLikelihood::adjustErrorValue(double processError, double errorValue) {
   // adjust for c.v. process error
-  if(processError > 0)
+  if(processError > 0.0)
     return (sqrt(errorValue*errorValue + processError*processError));
 
   return errorValue;
