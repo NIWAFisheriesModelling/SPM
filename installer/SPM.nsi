@@ -110,6 +110,10 @@ ShowUnInstDetails show
 
 Section "Install program files" SEC01
 SectionIn RO
+  LogSet On
+  LogText "${PRODUCT_NAME} ${PRODUCT_VERSION} install log"
+  Logtext "==============================================\n"
+  LogText "Install path $INSTDIR"
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "..\\spm.exe"
@@ -197,7 +201,8 @@ Section Uninstall
   Delete "$INSTDIR\SPM-file.ico"
   Delete "$INSTDIR\spm.exe"
   Delete "$INSTDIR\Run SPM.lnk"
-
+  Delete "$INSTDIR\Install.log"
+  
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Readme.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\SPM User Manual.lnk"

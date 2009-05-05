@@ -32,3 +32,15 @@ and modifies the system registry to,
 (ii)  associate .spm icons with Notepad.exe
 (iii) register the uninstall information required to uninstall SPM.
 
+Removing SPM
+============
+
+To uninstall, use the Microsoft Windows uninstaller. To uninstall
+manually, delete the files from your computer (typically stored in
+c:\Program Files\SPM, but this depends on your choices when you
+installed the program) and any program links in your Start menu.
+You could also modify your PATH to remove references to the SPM
+directory and delete the following registry keys;
+
+HKEY_CLASSES_ROOT\SPM.textfile\
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\SPM\
