@@ -367,15 +367,6 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       return;
     }
 
-    if (bPrint) {
-      cerr << FMM_ITERATION << iIters << endl;
-      cerr << FMM_FUNCTION_VALUE << Score << endl;
-      cerr << FMM_CURRENT_PARAMETER_ESTIMATES;
-      for (int i = 0; i < iVectorSize; ++i)
-        cerr << Candidates[i] << " ";
-      cerr << endl;
-    }
-
     // Load our Previous Candidates, Last Gradient, and Gradient
     for (int i = 0; i < iVectorSize; i++) {
       pPreviousCandidates[i]  = Candidates[i];
@@ -398,25 +389,13 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       iConsecutiveMaxSteps = 0;
     }
 
-//    cerr << "DEBUG: Score: " << dPreviousScore2 << endl;
-
-//    cerr << "DEBUG: Candidates: ";
-//    for (int i = 0; i < iVectorSize; ++i)
-//      cerr << pPreviousCandidates[i] << ", ";
-//    cerr << endl;
-//
-//    cerr << "DEBUG: Gradient: ";
-//    for (int i = 0; i < iVectorSize; ++i)
-//      cerr << pGradient[i] << ",";
-//    cerr << endl;
-
     // Build our Current Tolerance
     dCurrentTolerance = 0.0;
     for (int i = 0; i < iVectorSize; ++i) {
       dCurrentTolerance = fmax(dCurrentTolerance, fabs(pGradient[i]) * fmax(1, fabs(pPreviousCandidates[i])) / fabs(dPreviousScore2));
     }
-    cerr << FMM_CONVERGENCE_CHECK << dCurrentTolerance << endl;
-    cerr << FMM_CONVERGENCE_THRESHOLD << dGradTol << endl;
+    cerr << FMM_CONVERGENCE_CHECK << dCurrentTolerance << "\n";
+    cerr << FMM_CONVERGENCE_THRESHOLD << dGradTol << "\n" << endl;
 
     if (dCurrentTolerance <= dGradTol) {
       iRet = -1; // convergence!
@@ -490,7 +469,6 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     dLambdaMin  = dStepTol * dRelLength;
     dLambda     = 1.0;
 
-    // std::cerr << "lambda = 1\n";
     for (int i = 0; i < iVectorSize; i++) {
       pTrialValues[i] = pPreviousCandidates[i] + dLambda * pCholeskyVector[i];
       Candidates[i] = pTrialValues[i]; // pass back to calling program

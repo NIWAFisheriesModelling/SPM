@@ -156,27 +156,22 @@ bool DESolverEngine::Solve(int maxGenerations) {
 
   if (dTrialEnergy < dBestEnergy) {
     bNewBestEnergy = true;
-    cerr << ">>>>> New Best Score: " << dTrialEnergy << endl;
-
     // Copy the solution to our best.
     dBestEnergy = dTrialEnergy;
     vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
 
+    cerr << "Current estimates: ";
     for (int k = 0; k < (int)vBestSolution.size(); ++k)
       cerr << vBestSolution[k] << " ";
-    cerr << endl;
+    cerr << "\n";
+    cerr << "Objective function value: " << dTrialEnergy << "\n\n";
   }
 
   for (int i = 0; i < maxGenerations; ++i) {
-
+    cerr << "DE_Solver: Current generation = " << (i+1) << "\n"; //TODO: Add to translation file
     for (int j = 0; j < iPopulationSize; ++j) {
       // Build our Trial Solution
       (this->*calcTrialSolution)(j);
-
-      /*cerr << "DEBUG: CurrentValues: ";
-      for (int k = 0; k < iVectorSize; ++k)
-        cerr << vCurrentValues[k] << ", ";
-      cerr << endl;*/
 
       // Execute it.
       dTrialEnergy = EnergyFunction(vCurrentValues);
@@ -191,21 +186,21 @@ bool DESolverEngine::Solve(int maxGenerations) {
         // Is this a new all-time low for our search?
         if (dTrialEnergy < dBestEnergy) {
           bNewBestEnergy = true;
-          cerr << ">>>>> New Best Score: " << dTrialEnergy << endl;
-
           // Copy the solution to our best.
           dBestEnergy = dTrialEnergy;
           vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
 
+          cerr << "Current estimates: ";
           for (int k = 0; k < (int)vBestSolution.size(); ++k)
             cerr << vBestSolution[k] << " ";
           cerr << endl;
+          cerr << "Objective function value: " << dTrialEnergy << "\n";
         }
       }
     } // end for()
 
     // If we have a new Best, lets generate a gradient.
-    if ((bNewBestEnergy) || ((i % 5) == 0) )
+    if ((bNewBestEnergy) || ((i % 5) == 0) ) // TODO: Remove this?
       if (generateGradient()) {
         iGenerations = i;
         return true; // Convergence!
@@ -239,7 +234,8 @@ bool DESolverEngine::generateGradient() {
     }
 
     if ((dMax-dMin) > dTolerance) {
-      cerr << "Max/Min: " << (dMax-dMin) << endl;
+      cerr << "DE_Solver: Convergence check value = " << (dMax-dMin) << "\n";
+      cerr << "DE_Solver: Convergence threshold = " << dTolerance << "\n" << endl;
       return false; // No Convergence
     }
   }

@@ -157,7 +157,14 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
 
       buildCurrentValues();
       dScore = objective(vCurrentValues);
-      dScore += dPenalty;
+      if (bPrint) {
+        cerr << "Current estimates: ";  //TODO: add to translation file
+        for (int i = 0; i < iVectorSize; ++i) {
+          cerr << vCurrentValues[i] << " ";
+        }
+        cerr << "\nObjective function value: " << dScore << "\n"; //TODO: add to translation file
+      }
+      dScore += dPenalty; // Bound penalty
     }
 
     // Gradient Required
@@ -186,14 +193,10 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
           buildCurrentValues();
 
           dScoreI = objective(vCurrentValues);
-          cerr << "Ret Score: " << dScoreI << endl;
           dScoreI += dPenalty;
-
-          cerr << "Scores: " << dScoreI << " / " << dScore << " / " << dStepSizeI << " / " << dPenalty << endl;
 
           // Populate Gradient, and Restore Orig Value
           vGradientValues[i]  = (dScoreI - dScore) / dStepSizeI;
-          cerr << "Gradient: " << vGradientValues[i] << endl;
           vScaledValues[i]    = dOrigValue;
         }
       }
