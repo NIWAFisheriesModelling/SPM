@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.6)
 project(SPM)
 
+# to run (Windows, Mingw32-gcc)
+# cmake -G "MinGW Makefiles"
+# mingw32-make all
+
 SET(LIBRARY_NAME SimFish)
 SET(MAIN_NAME spm_UnOptimised)
 SET(TEST_NAME spm_UnitTests)
@@ -47,6 +51,7 @@ ENDIF (WIN32)
 
 # Autogeneration of Version.h file in src directory
 ADD_CUSTOM_TARGET(version ALL
+  COMMAND cp ${PROJECT_SOURCE_DIR}/src/default_version.h ${PROJECT_SOURCE_DIR}/src/Version.h
   COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
 )
 
