@@ -205,7 +205,7 @@
 #define PARAM_LABEL                               "label"
 #define PARAM_LAMBDA                              "lambda"
 #define PARAM_LAYER                               "layer"
-#define PARAM_LAYER_DERIVED_WORLD_VIEW            "layer_derived_world_view"
+#define PARAM_LAYER_DERIVED_WORLD_VIEW            "layer_derived_view"
 #define PARAM_LAYERS                              "layers"
 #define PARAM_LAYER_CATEGORIES                    "layer_categories"
 #define PARAM_LAYER_HEIGHT                        "layer_height"
