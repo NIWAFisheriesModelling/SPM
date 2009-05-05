@@ -269,10 +269,10 @@ void CProportionsByCategoryObservation::execute() {
       double dErrorValue  = mvErrorValue[(*mvPropPtr).first][i];
 
       double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);
-      dScore -= dTemp;
+      dScore += dTemp;
 
       // Store results of calculations so they can be used by the reports
-      saveComparison((*mvPropPtr).first, dExpected, dObserved, dErrorValue, -dTemp);
+      saveComparison((*mvPropPtr).first, dExpected, dObserved, dErrorValue, dTemp);
     }
 
     // Clear Our Age Results
