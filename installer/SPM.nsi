@@ -4,6 +4,8 @@
 !system 'python version.py'
 !include version.nsi
 !system 'del version.nsi'
+!system 'svn export -q --force ..//src source_files'
+!system 'svn export -q --force ..//examples example_files'
 
 ; Standard installer  options
 SetCompressor /FINAL /SOLID lzma
@@ -147,18 +149,35 @@ Section "Modify path for SPM" SEC04
   ${EnvVarUpdate} $0 "PATH" "R" "HKCU" "$INSTDIR"  ; Remove path of old rev
   ${EnvVarUpdate} $0 "PATH" "A" "HKCU" "$INSTDIR"  ; Append the new one
 SectionEnd
-;# ..
+
+Section /o "Copy example files" SEC05
+  SetOutPath "$INSTDIR\\Examples"
+  File /r "example_Files\\*"
+SectionEnd
+
+Section /o "Copy src files" SEC06
+  SetOutPath "$INSTDIR\\SPM_src"
+  File /r "source_files\\*"
+  File "..\\CMakeLists.txt"
+SectionEnd
+
+!system 'rm -rf source_files'
+!system 'rm -rf example_files'
 
 LangString DESC_SEC01 ${LANG_ENGLISH} "Copy ${PRODUCT_NAME} ${PRODUCT_VERSION} program files to the installation directory (required)"
 LangString DESC_SEC02 ${LANG_ENGLISH} "Add icons to your start menu for easy access"
 LangString DESC_SEC03 ${LANG_ENGLISH} "Associate .spm files with notepad.exe"
 LangString DESC_SEC04 ${LANG_ENGLISH} "Add the installation directory of SPM to your Windows PATH? (recommended)"
+LangString DESC_SEC05 ${LANG_ENGLISH} "Copy the example files"
+LangString DESC_SEC06 ${LANG_ENGLISH} "Copy the source files (not required unless you intend to compile ${PRODUCT_NAME}"
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} $(DESC_SEC01)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC02} $(DESC_SEC02)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC03} $(DESC_SEC03)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC04} $(DESC_SEC04)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC05} $(DESC_SEC05)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC06} $(DESC_SEC06)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section -AdditionalIcons
@@ -202,6 +221,8 @@ Section Uninstall
   Delete "$INSTDIR\spm.exe"
   Delete "$INSTDIR\Run SPM.lnk"
   Delete "$INSTDIR\Install.log"
+  RmDir /r "$INSTDIR\SPM_src"
+  RmDir /r "$INSTDIR\examples"
   
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
   Delete "$SMPROGRAMS\$ICONS_GROUP\Readme.lnk"
