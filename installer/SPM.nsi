@@ -156,10 +156,11 @@ Section /o "Copy example files" SEC05
 SectionEnd
 
 Section /o "Copy src files" SEC06
-  SetOutPath "$INSTDIR\\SPM_src"
-  File /r "source_files\\*"
+  SetOutPath "$INSTDIR\\source"
   File "..\\CMakeLists.txt"
-  File "..\\Readme.make"
+  File "Readme.make"
+  SetOutPath "$INSTDIR\\source\src"
+  File /r "source_files\\*"
 SectionEnd
 
 !system 'rm -rf source_files'
