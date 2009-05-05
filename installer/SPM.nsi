@@ -151,11 +151,16 @@ Section "Modify path for SPM" SEC04
 SectionEnd
 
 Section /o "Copy example files" SEC05
-  SetOutPath "$INSTDIR\\Examples"
+  SetOutPath "$INSTDIR\\examples"
   File /r "example_Files\\*"
 SectionEnd
 
-Section /o "Copy src files" SEC06
+Section /o "Copy the R library" SEC06
+  SetOutPath "$INSTDIR"
+  File "..\\R-libraries\\spm_1.0.zip"
+SectionEnd
+
+Section /o "Copy src files" SEC07
   SetOutPath "$INSTDIR\\source"
   File "..\\CMakeLists.txt"
   File "Readme.make"
@@ -169,9 +174,10 @@ SectionEnd
 LangString DESC_SEC01 ${LANG_ENGLISH} "Copy ${PRODUCT_NAME} ${PRODUCT_VERSION} program files to the installation directory (required)"
 LangString DESC_SEC02 ${LANG_ENGLISH} "Add icons to your start menu for easy access"
 LangString DESC_SEC03 ${LANG_ENGLISH} "Associate .spm files with notepad.exe"
-LangString DESC_SEC04 ${LANG_ENGLISH} "Add the installation directory of SPM to your Windows PATH? (recommended)"
+LangString DESC_SEC04 ${LANG_ENGLISH} "Add the installation directory of ${PRODUCT_NAME} to your Windows PATH? (recommended)"
 LangString DESC_SEC05 ${LANG_ENGLISH} "Copy the example files"
-LangString DESC_SEC06 ${LANG_ENGLISH} "Copy the source files (not required unless you intend to compile ${PRODUCT_NAME}"
+LangString DESC_SEC06 ${LANG_ENGLISH} "Copy the R ${PRODUCT_NAME} library"
+LangString DESC_SEC07 ${LANG_ENGLISH} "Copy the source files (not required unless you intend to compile ${PRODUCT_NAME}"
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} $(DESC_SEC01)
@@ -180,6 +186,7 @@ LangString DESC_SEC06 ${LANG_ENGLISH} "Copy the source files (not required unles
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC04} $(DESC_SEC04)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC05} $(DESC_SEC05)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC06} $(DESC_SEC06)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC07} $(DESC_SEC07)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section -AdditionalIcons
@@ -223,7 +230,8 @@ Section Uninstall
   Delete "$INSTDIR\spm.exe"
   Delete "$INSTDIR\Run SPM.lnk"
   Delete "$INSTDIR\Install.log"
-  RmDir /r "$INSTDIR\SPM_src"
+  Delete "$INSTDIR\spm_1.0.zip"
+  RmDir /r "$INSTDIR\source"
   RmDir /r "$INSTDIR\examples"
   
   Delete "$SMPROGRAMS\$ICONS_GROUP\Uninstall.lnk"
