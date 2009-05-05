@@ -553,7 +553,7 @@ function(corners)
 }
 "spm.binary.version"<-
 function() {
-return("1.00-2009-04-30 (rev. 3210)")
+return("1.00-2009-05-05 (rev. 3245)")
 }
 # $Id: spm.convert.to.lines.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.convert.to.lines"<-
@@ -814,6 +814,6 @@ function()
   cat(paste("spm R package for use with spm ",spm.binary.version(),"\n",sep=""))
 }
 spm.zeroFun<-function(x,delta=1e-11) {
-  if (x>=delta) return(x)
-  else return(delta/(2-(x/delta)))
+  res<-ifelse(x>=delta,x,delta/(2-(x/delta)))
+  return(res)
 }
