@@ -51,7 +51,7 @@ double CMultinomialLikelihood::getResult(double expected, double observed, doubl
 // Simulate observed value for our observation
 //**********************************************************************
 double CMultinomialLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  throw string("CMultinomialLikelihood.simulateObserved() not yet implemented");
+  return expected;
 }
 
 //**********************************************************************

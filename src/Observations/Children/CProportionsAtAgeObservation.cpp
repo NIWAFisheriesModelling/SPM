@@ -256,11 +256,15 @@ void CProportionsAtAgeObservation::execute() {
         else
           dCurrentProp = 0.0;
 
-        double dTemp = pLikelihood->getResult(dCurrentProp, (*mvPropPtr).second[i], dErrorValue, dProcessError, dDelta);
-        dScore += dTemp;
+        if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+          mvProportionMatrix[(*mvPropPtr).first][i] = pLikelihood->simulateObserved(dCurrentProp, dErrorValue, dProcessError, dDelta);
 
-        // Store results of calculations so they can be used by the reports
-        saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dErrorValue, dTemp);
+        } else {
+          double dTemp = pLikelihood->getResult(dCurrentProp, (*mvPropPtr).second[i], dErrorValue, dProcessError, dDelta);
+          dScore += dTemp;
+          // Store results of calculations so they can be used by the reports
+          saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dErrorValue, dTemp);
+        }
       }
 
       // Clear Our Age Results

@@ -268,11 +268,15 @@ void CProportionsByCategoryObservation::execute() {
       double dObserved  = (*mvPropPtr).second[i] ;
       double dErrorValue  = mvErrorValue[(*mvPropPtr).first][i];
 
-      double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);
-      dScore += dTemp;
+      if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+        mvProportionMatrix[(*mvPropPtr).first][i] = pLikelihood->simulateObserved(dExpected, dErrorValue, dProcessError, dDelta);
 
-      // Store results of calculations so they can be used by the reports
-      saveComparison((*mvPropPtr).first, dExpected, dObserved, dErrorValue, dTemp);
+      } else {
+        double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);
+        dScore += dTemp;
+        // Store results of calculations so they can be used by the reports
+        saveComparison((*mvPropPtr).first, dExpected, dObserved, dErrorValue, dTemp);
+      }
     }
 
     // Clear Our Age Results

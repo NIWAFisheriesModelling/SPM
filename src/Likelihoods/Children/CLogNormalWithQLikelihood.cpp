@@ -56,7 +56,7 @@ double CLogNormalWithQLikelihood::getResult(double expected, double observed, do
 //
 //**********************************************************************
 double CLogNormalWithQLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  throw string("CLogNormalWithQLikelihood.simulateObserved() not yet implemented");
+  return expected;
 }
 
 //**********************************************************************

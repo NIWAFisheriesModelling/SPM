@@ -161,9 +161,14 @@ void CAbundanceObservation::execute() {
       dExpectedTotal *= pCatchability->getQ();
       double dErrorValue = mErrorValue[(*mPropPtr).first];
 
-      double dTemp = pLikelihood->getResult(dExpectedTotal, (*mPropPtr).second, dErrorValue, dProcessError, dDelta);
-      dScore += dTemp;
-      saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, dErrorValue, dTemp);
+      // Simulate or Generate Result?
+      if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+        mProportionMatrix[(*mPropPtr).first] = pLikelihood->simulateObserved(dExpectedTotal, dErrorValue, dProcessError, dDelta);
+      } else {
+        double dTemp = pLikelihood->getResult(dExpectedTotal, (*mPropPtr).second, dErrorValue, dProcessError, dDelta);
+        dScore += dTemp;
+        saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, dErrorValue, dTemp);
+      }
 
       mPropPtr++;
     }

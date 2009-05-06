@@ -56,7 +56,8 @@ double CBinomialLikelihood::getResult(double expected, double observed, double e
 //
 //**********************************************************************
 double CBinomialLikelihood::simulateObserved(double expected, double errorValue, double ProcessError, double delta) {
-  throw string("CBinomialLikelihood.simulateObserved() not yet implemented");
+
+  return expected;
 }
 
 //**********************************************************************
