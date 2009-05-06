@@ -59,7 +59,8 @@ string CObservation::getSelectivity(int index) {
 void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score) {
 
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    return;
+    if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+      return;
 
   SComparison *pComparison = new SComparison();
   pComparison->sKey           = key;

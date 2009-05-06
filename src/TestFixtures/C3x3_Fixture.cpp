@@ -28,9 +28,6 @@ C3x3_Fixture::C3x3_Fixture() {
 
   CConvertor::stringToVectorByNewline(basic_3x3, vConfiguration);
 
-  char *argv[] = { "C:\\Temp\\spm.exe", "-r" };
-  CRuntimeController::Instance()->parseCommandLine(2, argv);
-
   sTimeStep = "@time_step step_one\n";
   sTimeStep += "processes ";
 }
@@ -55,7 +52,16 @@ void C3x3_Fixture::addToTimeStep(string process) {
 //
 //
 //**********************************************************************
-void C3x3_Fixture::loadEnvironment() {
+void C3x3_Fixture::loadEnvironment(string runMode) {
+
+  if (runMode == "-s") {
+    char *argv[] = { "C:\\Temp\\spm.exe", "-s", "1" };
+    CRuntimeController::Instance()->parseCommandLine(3, argv);
+  } else {
+    char *argv[] = { "C:\\Temp\\spm.exe", (char *)runMode.c_str() };
+    CRuntimeController::Instance()->parseCommandLine(2, argv);
+  }
+
   sTimeStep += "\n";
   addToConfiguration(sTimeStep);
 
@@ -67,8 +73,8 @@ void C3x3_Fixture::loadEnvironment() {
 //
 //
 //**********************************************************************
-void C3x3_Fixture::loadAndRunEnvironment() {
-  loadEnvironment();
+void C3x3_Fixture::loadAndRunEnvironment(string runMode) {
+  loadEnvironment(runMode);
   CRuntimeController::Instance()->run();
 }
 

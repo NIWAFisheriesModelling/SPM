@@ -269,7 +269,8 @@ void CProportionsByCategoryObservation::execute() {
       double dErrorValue  = mvErrorValue[(*mvPropPtr).first][i];
 
       if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
-        mvProportionMatrix[(*mvPropPtr).first][i] = pLikelihood->simulateObserved(dExpected, dErrorValue, dProcessError, dDelta);
+        double dTemp = pLikelihood->simulateObserved(dExpected, dErrorValue, dProcessError, dDelta);
+        saveComparison((*mvPropPtr).first, dExpected, dTemp, dErrorValue, 0.0);
 
       } else {
         double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);

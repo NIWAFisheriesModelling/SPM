@@ -257,12 +257,12 @@ void CProportionsAtAgeObservation::execute() {
           dCurrentProp = 0.0;
 
         if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
-          mvProportionMatrix[(*mvPropPtr).first][i] = pLikelihood->simulateObserved(dCurrentProp, dErrorValue, dProcessError, dDelta);
+          double dTemp = pLikelihood->simulateObserved(dCurrentProp, dErrorValue, dProcessError, dDelta);
+          saveComparison((*mvPropPtr).first, dCurrentProp, dTemp, dErrorValue, 0.0);
 
         } else {
           double dTemp = pLikelihood->getResult(dCurrentProp, (*mvPropPtr).second[i], dErrorValue, dProcessError, dDelta);
           dScore += dTemp;
-          // Store results of calculations so they can be used by the reports
           saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dErrorValue, dTemp);
         }
       }

@@ -32,8 +32,8 @@ public:
   virtual                     ~C3x3_Fixture();
   void                        addToConfiguration(string value);
   void                        addToTimeStep(string process);
-  void                        loadEnvironment();
-  void                        loadAndRunEnvironment();
+  void                        loadEnvironment(string runMode = "-r");
+  void                        loadAndRunEnvironment(string runMode = "-r");
   CWorldSquare*               getSquare(int row, int col);
 
 protected:

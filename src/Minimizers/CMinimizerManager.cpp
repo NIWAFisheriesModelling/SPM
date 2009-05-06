@@ -76,7 +76,8 @@ void CMinimizerManager::addThread(CRuntimeThread *Thread) {
 //**********************************************************************
 void CMinimizerManager::validate() {
   try {
-    if (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
+    if ( (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
+        || (CRuntimeController::Instance()->getRunMode() == RUN_MODE_SIMULATION) )
       return;
 
     pParameterList->checkInvalidParameters();
@@ -114,8 +115,9 @@ void CMinimizerManager::validate() {
 //**********************************************************************
 void CMinimizerManager::build() {
   try {
-    if (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
-          return;
+    if ( (CRuntimeController::Instance()->getRunMode() == RUN_MODE_BASIC)
+        || (CRuntimeController::Instance()->getRunMode() == RUN_MODE_SIMULATION) )
+      return;
 
     pMinimizer->build();
 

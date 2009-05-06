@@ -27,7 +27,6 @@
 // Local Headers
 #include "CRuntimeController.h"
 #include "CConfiguration.h"
-#include "Version.h"
 #include "License.txt"
 #include "Reports/Children/CStandardHeaderReport.h"
 

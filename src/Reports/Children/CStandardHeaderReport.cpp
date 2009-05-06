@@ -17,7 +17,7 @@
 
 // Local Headers
 #include "CStandardHeaderReport.h"
-#include "../../Version.h"
+#include "../../default_version.h"
 
 // Namespaces
 using std::endl;
