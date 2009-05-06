@@ -49,9 +49,9 @@ ELSE (WIN32)
 ENDIF (WIN32)
 
 
-# Autogeneration of Version.h file in src directory
+# Autogeneration of Version.h file in src directory (backing up current ('NULL') version
 ADD_CUSTOM_TARGET(version ALL
-  COMMAND cp ${PROJECT_SOURCE_DIR}/src/default_version.h ${PROJECT_SOURCE_DIR}/src/Version.h
+  COMMAND cp ${PROJECT_SOURCE_DIR}/src/Version.h ${PROJECT_SOURCE_DIR}/src/Version.h.old
   COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
 )
 
@@ -132,6 +132,7 @@ src/Reports/Children/CSelectivityReport.cpp
 src/Reports/Children/CDerivedQuantityReport.cpp
 src/Reports/Children/CLayerDerivedWorldViewReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
+src/Reports/Children/CCovarianceReport.cpp
 src/Reports/CReportManager.cpp
 src/Reports/Factory/CReportFactory.cpp
 src/Profiles/CProfileManager.cpp
@@ -292,4 +293,3 @@ ADD_DEPENDENCIES(${MAIN_NAME} version icon)
 ADD_DEPENDENCIES(${TEST_NAME} version icon)
 ADD_DEPENDENCIES(${LIBRARY_NAME} version)
 ADD_DEPENDENCIES(${OPTI_NAME} version icon)
-
