@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CNormalLikelihood.h"
+#include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CNormalLikelihood::CNormalLikelihood()
@@ -37,7 +38,14 @@ double CNormalLikelihood::adjustErrorValue(double processError, double errorValu
 double CNormalLikelihood::getResult(double expected, double observed, double errorValue,
                                                             double processError, double delta) {
 
-  throw string("CNormalLikelihood.getResult() not yet implemented");
+  //Add in process error if defined
+  errorValue = adjustErrorValue(processError, errorValue);
+
+  double dSigma = errorValue*expected;
+  double dTemp = (observed-expected) / CMath::zeroFun(errorValue*expected,delta);
+  dTemp = log(dSigma) + 0.5 * (dTemp * dTemp);
+
+  return dTemp;
 }
 
 //**********************************************************************

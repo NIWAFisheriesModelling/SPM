@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CBinomialApproxLikelihood.h"
+#include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CBinomialApproxLikelihood::CBinomialApproxLikelihood()
@@ -36,8 +37,13 @@ double CBinomialApproxLikelihood::adjustErrorValue(double processError, double e
 //**********************************************************************
 double CBinomialApproxLikelihood::getResult(double expected, double observed, double errorValue,
                                                                 double processError, double delta) {
+  //Add in process error if defined
+  errorValue = adjustErrorValue(processError, errorValue);
 
-  throw string("BinomialApproxLikelihood.getResult() Not yet implemented");
+  double dStdError = sqrt((CMath::zeroFun(expected,delta) * CMath::zeroFun(1.0-expected,delta))/errorValue);
+  double dTemp = log(dStdError) + 0.5 * pow((observed - expected)/dStdError,2.0);
+
+  return dTemp;
 }
 
 //**********************************************************************

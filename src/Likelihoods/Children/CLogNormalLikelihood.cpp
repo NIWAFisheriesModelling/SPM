@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CLogNormalLikelihood.h"
+#include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CLogNormalLikelihood::CLogNormalLikelihood()
@@ -37,7 +38,14 @@ double CLogNormalLikelihood::adjustErrorValue(double processError, double errorV
 //**********************************************************************
 double CLogNormalLikelihood::getResult(double expected, double observed, double errorValue,
                                                                       double processError, double delta) {
-  throw string("CLogNormalLikelihood.getResult() not yet implmented");
+  //Add in process error if defined
+  errorValue = adjustErrorValue(processError, errorValue);
+
+  double dSigma = sqrt(log(1+ errorValue*errorValue));
+  double dTemp = log(observed / CMath::zeroFun(expected,delta)) / dSigma + 0.5*dSigma;
+  dTemp = log(dSigma) + 0.5 * dTemp * dTemp;
+
+  return dTemp;
 }
 
 //**********************************************************************

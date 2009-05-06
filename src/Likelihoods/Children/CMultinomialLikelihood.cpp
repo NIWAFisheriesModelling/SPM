@@ -42,7 +42,8 @@ double CMultinomialLikelihood::getResult(double expected, double observed, doubl
 
   errorValue = adjustErrorValue(processError, errorValue);
 
-  double dTemp = CMath::lnFactorial(errorValue * observed) - errorValue * observed * log(CMath::zeroFun(expected,delta));
+  double dTemp = CMath::lnFactorial(errorValue * observed)
+                 - errorValue * observed * log(CMath::zeroFun(expected,delta));
   return dTemp;
 }
 

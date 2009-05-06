@@ -46,7 +46,7 @@ double CLogNormalWithQLikelihood::getResult(double expected, double observed, do
 
   double dSigma = sqrt(log(1+ errorValue*errorValue));
   double dTemp = log(observed / CMath::zeroFun(expected,delta)) / dSigma + 0.5*dSigma;
-  dTemp = log(dSigma) + 0.5 * dTemp * dTemp;
+  dTemp = log(dSigma) + 0.5 * (dTemp * dTemp);
 
   return dTemp;
 }
