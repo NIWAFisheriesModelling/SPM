@@ -27,7 +27,7 @@ using std::endl;
 //**********************************************************************
 CMinimizer::CMinimizer() {
   // Default Variables
-  pHessian  = 0;
+  pHessian        = 0;
 
   // Register user allowed Parameters
   pParameterList->registerAllowed(PARAM_COVARIANCE);
@@ -59,6 +59,17 @@ void CMinimizer::buildCovarianceMatrix() {
   ublas::lu_substitute(copiedMatrix,pm,identityMatrix);
 
   mxCovariance.swap(identityMatrix);
+}
+
+//**********************************************************************
+// double CMinimizer::getCovarianceValue(int row, int col)
+// Return our Covariance Matrix Value
+//**********************************************************************
+double CMinimizer::getCovarianceValue(int row, int col) {
+  if ( (mxCovariance.size1() == 0) || (mxCovariance.size2() == 0) )
+    throw string("Covariance Matrix has not been set"); // TODO: Translate
+
+  return mxCovariance(row, col);
 }
 
 //**********************************************************************

@@ -27,8 +27,10 @@ public:
   // Functions
   CMinimizer();
   virtual                    ~CMinimizer();
-  double                     getBuildCovariance() { return bCovariance; }
+  bool                       getBuildCovariance() { return bCovariance; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
+  double                     getCovarianceValue(int row, int col);
+  int                        getEstimateCount() { return iEstimateCount; }
   void                       buildCovarianceMatrix();
   virtual void               runEstimation() = 0;
   virtual void               validate();

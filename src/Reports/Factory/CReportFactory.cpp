@@ -21,6 +21,7 @@
 #include "../Children/CSelectivityReport.h"
 #include "../Children/CLayerDerivedWorldViewReport.h"
 #include "../Children/CParameterListReport.h"
+#include "../Children/CCovarianceReport.h"
 
 //**********************************************************************
 //
@@ -52,6 +53,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CLayerDerivedWorldViewReport();
   else if (type == PARAM_PARAMETER)
     pReporter = new CParameterListReport();
+  else if (type == PARAM_COVARIANCE)
+    pReporter = new CCovarianceReport();
   else
     throw string("Unknown type: " + type);
 
