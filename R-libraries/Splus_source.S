@@ -811,7 +811,7 @@ function(string, sep)
 "spm.version"<-
 function()
 {
-  cat(paste("spm R package for use with spm ",spm.binary.version(),"\n",sep=""))
+  cat(paste("spm R package for use with SPM v",spm.binary.version(),"\n",sep=""))
 }
 spm.zeroFun<-function(x,delta=1e-11) {
   res<-ifelse(x>=delta,x,delta/(2-(x/delta)))
