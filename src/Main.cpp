@@ -29,7 +29,7 @@
 #include "CConfiguration.h"
 #include "License.txt"
 #include "Reports/Children/CStandardHeaderReport.h"
-
+#include "Version.h"
 // Namespaces
 using namespace std;
 
