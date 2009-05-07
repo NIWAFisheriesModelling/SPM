@@ -26,6 +26,7 @@
 #include "../Priors/CPriorManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Profiles/CProfileManager.h"
+#include "../RandomNumberGenerator/CRandomNumberGenerator.h"
 #include "../Reports/CReportManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
@@ -60,6 +61,7 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CPreferenceFunctionManager::Instance());
   vManagers.push_back(CPriorManager::Instance());
   vManagers.push_back(CProfileManager::Instance());
+  vManagers.push_back(CRandomNumberGenerator::Instance());
   vManagers.push_back(CReportManager::Instance());
   vManagers.push_back(CSelectivityManager::Instance());
   vManagers.push_back(CTimeStepManager::Instance());
@@ -285,6 +287,7 @@ CRuntimeThread::~CRuntimeThread() {
   CTimeStepManager::Destroy();
   CSelectivityManager::Destroy();
   CReportManager::Destroy();
+  CRandomNumberGenerator::Destroy();
   CProfileManager::Destroy();
   CProcessManager::Destroy();
   CPriorManager::Destroy();
