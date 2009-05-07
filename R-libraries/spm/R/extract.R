@@ -138,6 +138,18 @@ function(file,path=""){
       res$"layer"[[counter$"layer"]]<-temp
       names(res$"layer")[counter$"layer"]<-report.label[i]
     }
+    if(report.type[i]=="layer_derived_view") {
+      if(!("layer_derived_view" %in% names(res))) {
+        res$"layer_derived_view"<-list() #create an entry if it doesn't already exist
+      }
+      # update counter
+      counter$"layer_derived_view"<-counter$"layer_derived_view"+1
+      # extract report
+      temp<-extract.layerderivedview(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
+      # add to results
+      res$"layer_derived_view"[[counter$"layer_derived_view"]]<-temp
+      names(res$"layer_derived_view")[counter$"layer_derived_view"]<-report.label[i]
+    }
     if(report.type[i]=="selectivity") {
       if(!("selectivity" %in% names(res))) {
         res$"selectivity"<-list() #create an entry if it doesn't already exist

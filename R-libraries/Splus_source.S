@@ -241,6 +241,18 @@ function(file,path=""){
       res$"layer"[[counter$"layer"]]<-temp
       names(res$"layer")[counter$"layer"]<-report.label[i]
     }
+    if(report.type[i]=="layer_derived_view") {
+      if(!("layer_derived_view" %in% names(res))) {
+        res$"layer_derived_view"<-list() #create an entry if it doesn't already exist
+      }
+      # update counter
+      counter$"layer_derived_view"<-counter$"layer_derived_view"+1
+      # extract report
+      temp<-extract.layerderivedview(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
+      # add to results
+      res$"layer_derived_view"[[counter$"layer_derived_view"]]<-temp
+      names(res$"layer_derived_view")[counter$"layer_derived_view"]<-report.label[i]
+    }
     if(report.type[i]=="selectivity") {
       if(!("selectivity" %in% names(res))) {
         res$"selectivity"<-list() #create an entry if it doesn't already exist
@@ -348,7 +360,7 @@ function(file,path="",lines){
 }
 
 # $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
-"extract.layerderivedworldview" <-
+"extract.layerderivedview" <-
 function(file,path="",lines){
   if(missing(lines)) {
     if(missing(path)) path<-""
@@ -774,7 +786,7 @@ function(string, words = 1)
 }
 "spm.report.types" <-
 function() {
-  return(c("initialisation","partition","process","derived_quantity","estimate_value","estimate_summary","objective_function","observation","layer","selectivity","random_number_seed","weight_at_size","layer_derived_world_view"))
+  return(c("initialisation","partition","process","derived_quantity","estimate_value","estimate_summary","objective_function","observation","layer","selectivity","random_number_seed","weight_at_size","layer_derived_view"))
 }
 
 # $Id: spm.string.to.vector.of.numbers.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
