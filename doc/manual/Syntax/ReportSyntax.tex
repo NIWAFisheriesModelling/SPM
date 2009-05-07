@@ -10,8 +10,8 @@ The report types available are,
   \item Print the partition at the end of an initialisation
   \item Print a summary of a process
   \item Print a derived quantity
-  \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
   \item Print a summary of the estimated parameters
+  \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
   \item Print the objective function values
   \item Print the covariance matrix
   \item Print an observation values, fits, and residuals
@@ -31,7 +31,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{None}
 \defValue{A valid type of report}
 
-\subsubsection[Print the map (i.e., row and column labels of each spatial cell) of the spatial structure]{\commandlabsubarg{report}{type}{spatial\_map}}
+\subsubsection[Print the spatial co-ordinates of each spatial cell (i.e., row and column labels of each spatial cell) of the spatial structure]{\commandlabsubarg{report}{type}{spatial\_map}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -111,9 +111,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{True}
 \defValue{Either True of False}
 
-\subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_value}\label{sec:InputFileFormat}}
-
-Prints the estimated parameters in a format suitable for use with \texttt{spm -i}.
+\subsubsection[Print a summary of the estimated parameters]{\commandlabsubarg{report}{type}{estimate\_summary}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -125,7 +123,9 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True of False}
 
-\subsubsection[Print a summary of the estimated parameters]{\commandlabsubarg{report}{type}{estimate\_summary}}
+\subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_value}\label{sec:InputFileFormat}}
+
+Prints the estimated parameters in a format suitable for use with \texttt{spm -i}.
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
