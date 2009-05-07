@@ -158,7 +158,7 @@ SectionEnd
 
 Section /o "Copy the R library" SEC06
   SetOutPath "$INSTDIR"
-  File "..\\R-libraries\\spm_1.0.zip"
+  File "..\\R-libraries\\spm_1.00.zip"
 SectionEnd
 
 Section /o "Copy src files" SEC07
@@ -231,7 +231,7 @@ Section Uninstall
   Delete "$INSTDIR\spm.exe"
   Delete "$INSTDIR\Run SPM.lnk"
   Delete "$INSTDIR\Install.log"
-  Delete "$INSTDIR\spm_1.0.zip"
+  Delete "$INSTDIR\spm_1.00.zip"
   RmDir /r "$INSTDIR\source"
   RmDir /r "$INSTDIR\examples"
   
