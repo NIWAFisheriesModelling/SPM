@@ -339,8 +339,9 @@ function(file,path="",lines){
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  col.labs<-spm.string.to.vector.of.words(lines[2+index.start],sep=",")
-  values<-spm.string.to.vector.of.words(lines[(3+index.start):(index.end-1)])
+
+  col.labs<-spm.string.to.vector.of.words(lines[3+index.start],sep=",")
+  values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
@@ -350,6 +351,7 @@ function(file,path="",lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
+  res$phase<-substring(lines[index.start+2],38)
   res$data<-values
   return(res)
 }
@@ -416,14 +418,17 @@ function(file,path="",lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
-  variables<-spm.string.to.vector.of.words(lines[index.start+2],sep=",")
-  data<-spm.string.to.vector.of.words(lines[(index.start+3):(index.end-1)],sep=",")
-  data<<-data
-  data<-matrix(data,ncol=5,byrow=FALSE)
-  data<-data.frame("area"=data[,1], expected=data[,2], observed=data[,3], errorvalue=data[,4], score=data[,5])
+  res$observation.label<-substring(lines[index.start+2],20)
+  variables<-spm.string.to.vector.of.words(lines[index.start+3],sep=",")
+  data<-spm.string.to.vector.of.words(lines[(index.start+4):(index.end-1)],sep=",")
+  data<-matrix(data,ncol=6,byrow=FALSE)
+  data<-as.data.frame(data)
+  names(data)<-variables
+  #data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4], errorvalue=data[,5], score=data[,6])
   data$area<-as.character(data$area)
-  data$expected<-as.numeric(as.character(data$expected))
   data$observed<-as.numeric(as.character(data$observed))
+  data$expected<-as.numeric(as.character(data$expected))
+  data$residuals<-as.numeric(as.character(data$residuals))
   data$errorvalue<-as.numeric(as.character( data$errorvalue))
   data$score<-as.numeric(as.character(data$score))
   res$data<-data
@@ -439,17 +444,19 @@ function(file,path="",lines){
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  col.labs<-spm.string.to.vector.of.words(lines[2+index.start],sep=",")
-  values<-spm.string.to.vector.of.words(lines[(3+index.start):(index.end-1)])
+  res<-list()
+  res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
+  res$report.type<-substring(lines[index.start+1],14)
+  res$year<-substring(lines[index.start+2],17)
+  res$"time_step"<-substring(lines[index.start+3],22)
+  col.labs<-spm.string.to.vector.of.words(lines[4+index.start],sep=",")
+  values<-spm.string.to.vector.of.words(lines[(5+index.start):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
   values$row<-as.numeric(as.character(values$row))
   values$column<-as.numeric(as.character(values$column))
   values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,as.numeric)
-  res<-list()
-  res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
-  res$report.type<-substring(lines[index.start+1],14)
   res$data<-values
   return(res)
 }
