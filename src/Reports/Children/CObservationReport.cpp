@@ -75,18 +75,21 @@ void CObservationReport::execute() {
 
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
   cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+  cout << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
 
   vector<SComparison*> vComparisons;
   pObservation->fillComparisons(vComparisons);
 
-  cout << "Area, Expected, Observed, ErrorValue, Score\n";
+  cout << "area,observed,expected,residual,errorvalue,score\n";
 
   foreach(SComparison *Comparison, vComparisons) {
+    double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
     cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES
-      << Comparison->dExpectedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
-      << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
-      << Comparison->dErrorValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
-      << Comparison->dScore << "\n";
+         << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+         << Comparison->dExpectedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+         << dResidual << CONFIG_SEPERATOR_ESTIMATE_VALUES
+         << Comparison->dErrorValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+         << Comparison->dScore << "\n";
   }
 
   cout << "*end\n" << endl;
