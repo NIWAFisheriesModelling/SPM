@@ -1,0 +1,45 @@
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report initialisation-phase2
+type initialisation
+initialisation_phase Phase2
+
+@report state-1994-1
+type partition
+time_step step_one
+year 1994
+
+@report state-1998-1
+type partition
+time_step step_one
+year 1998
+
+@report state-1998-2
+type partition
+time_step step_two
+year 1998
+
+@report state-1998-2
+type partition
+time_step step_two
+year 2008
+
+@report Objective_Score
+type objective_function
+
+@report estimate
+type estimate_value
+file_name MPD.dat
+
+@report estimate-summary
+type estimate_summary
+
+@report Maturation-selectivity
+type selectivity
+selectivity Maturation
+
+@report FishingSel-selectivity
+type selectivity
+selectivity FishingSel

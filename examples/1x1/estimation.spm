@@ -1,0 +1,72 @@
+# ESTIMATION
+@estimation
+minimiser GammaDiff
+
+@minimiser GammaDiff
+type numerical_differences
+iterations 1000
+evaluations 4000
+tolerance 0.002
+covariance false
+
+@minimiser DE
+type DE_Solver
+population_size 350
+tolerance 0.0002
+covariance false
+
+@MCMC
+start 1
+length 1500000
+keep 1000
+adaptive_stepsize True
+adapt_at 100000 200000 400000
+proposal_t True
+df 4
+
+#Profile
+@Profile R0
+parameter Process[Recruitment].R0
+N  10
+lower_bound  100000
+upper_bound  400000
+
+#Catchability
+@catchability CPUEq
+q 0.0001
+
+# ESTIMATION PARAMETERS
+@estimate
+parameter catchability[CPUEq].q
+lower_bound 1e-10
+upper_bound 1e-1
+prior Uniform
+
+@estimate
+parameter process[Recruitment].R0
+lower_bound 1e4
+upper_bound 1e7
+prior Uniform-log
+
+@estimate
+parameter selectivity[FishingSel].a50
+lower_bound 1
+upper_bound 20
+prior Uniform
+
+@estimate
+parameter selectivity[FishingSel].ato95
+lower_bound 0.01
+upper_bound 50
+prior Uniform
+
+@prior Uniform
+type uniform
+
+@prior Uniform-log
+type uniform_log
+
+# PENALTIES
+@penalty event_mortality_penalty
+log_scale False
+multiplier 10
