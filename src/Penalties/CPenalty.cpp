@@ -13,6 +13,7 @@
 #include "../Processes/CProcessManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/CComparer.h"
+#include <CMath>
 
 //**********************************************************************
 // CPenalty::CPenalty()
@@ -47,20 +48,23 @@ void CPenalty::validate() {
 // void CPenalty::trigger(string Label, double Value)
 // trigger The penalty
 //**********************************************************************
-void CPenalty::trigger(string Label, double Value) {
+void CPenalty::trigger(string Label, double Value1, double Value2) {
 #ifndef OPTIMIZE
   try {
 #endif
-    // Value should Never be 0
-    if (CComparer::isZero(Value))
-      CError::errorEqualTo(PARAM_PENALTY, PARAM_ZERO);
+    // Value should never be 0
+    //if (CComparer::isZero(Value))
+    //  CError::errorEqualTo(PARAM_PENALTY, PARAM_ZERO);
 
     // Assign Variables
     string sFullLabel = sLabel + "(" + Label + ")";
-    double dValue     = Value * dMultiplier;
+    double dValue;
 
-    //if (bLogScale)
-    // ToDo: Add LogScale Code
+    if(bLogScale) {
+      dValue = abs((log(Value1) - log(Value2)) * dMultiplier);
+    } else {
+      dValue = abs((Value1 - Value2) * dMultiplier);
+    }
 
     // Flag Penalty Manager
     CPenaltyManager *pPenaltyManager = CPenaltyManager::Instance();

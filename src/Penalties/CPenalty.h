@@ -19,10 +19,10 @@
 class CPenalty : public CBaseValidate {
 public:
   // Functions
-	CPenalty();
-	virtual                    ~CPenalty();
-	void                       validate();
-	void                       trigger(string Label, double Value);
+  CPenalty();
+  virtual                    ~CPenalty();
+  void                       validate();
+  void                       trigger(string Label, double Value1, double Value2);
 
 protected:
   // Variables

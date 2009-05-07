@@ -197,7 +197,7 @@ void CCategoryTransitionProcess::execute() {
         if (dExploitation > 0.999) {
           dExploitation = 0.999;
           if (pPenalty != 0) { // Throw Penalty
-            pPenalty->trigger(sLabel, (dN - (dVulnerable * 0.999)));
+            pPenalty->trigger(sLabel, dN, (dVulnerable * 0.999));
           }
         }
 

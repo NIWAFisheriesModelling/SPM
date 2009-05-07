@@ -187,7 +187,7 @@ void CEventMortalityProcess::execute() {
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
           if (pPenalty != 0) { // Throw Penalty
-            pPenalty->trigger(sLabel, (dCatch - (dVulnerable * dUMax)));
+            pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
           }
         }
 
