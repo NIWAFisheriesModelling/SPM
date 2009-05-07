@@ -1,4 +1,3 @@
-# $Id: spm.make.table.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.make.table"<-
 function(lines)
 {

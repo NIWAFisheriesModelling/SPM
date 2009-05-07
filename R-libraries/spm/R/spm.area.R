@@ -1,4 +1,3 @@
-# $Id: spm.area.R,v 1.1 2007/11/13 04:32:41 adunn Exp $
 "spm.area"<-
 function(corners)
 {

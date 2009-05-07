@@ -1,4 +1,3 @@
-# $Id: spm.get.lines.R,v 1.3 2007/11/12 21:01:38 adunn Exp $
 "spm.get.lines"<-
 function(lines, from = -1, to = -1, contains = "", starts.with = "", clip.to = "", clip.from = "", clip.to.match = "", clip.from.match = "", ...)
 {

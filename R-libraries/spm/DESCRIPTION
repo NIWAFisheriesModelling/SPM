@@ -1,8 +1,8 @@
 Package: spm
 Title: SPM extract package
-Version: 1.0
-Date: 2009-04-07
-Author: A. Dunn & S. Rasmussen
+Version: 1.00
+Date: 2009-05-06
+Author: A. Dunn
 Description: A set of R functions are available for reading SPM input and output files.
 Maintainer: A Dunn <a.dunn@niwa.co.nz>
-License: See the SPM manual, or use 'spm -l' at the command line to view the SPM license.
+License: CPL v1.0. See the SPM User Manual for license details.

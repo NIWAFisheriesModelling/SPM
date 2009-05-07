@@ -1,4 +1,3 @@
-# $Id: spm.is.whole.number.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.is.whole.number"<-
 function(string)
 {

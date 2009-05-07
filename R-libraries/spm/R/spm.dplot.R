@@ -1,4 +1,3 @@
-# $Id: spm.dplot.R,v 1.2 2007/11/13 04:23:59 adunn Exp $
 "spm.dplot"<-
 function(..., name=T, quantiles=c(0.5), plot.mean=F, main="", xlab="", ylab="", ylim, srtx=0, bw="nrd0", adjust=1/3, adj=0, fill=F, gap=0.2)
 {

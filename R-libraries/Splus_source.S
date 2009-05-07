@@ -1,10 +1,8 @@
-# $Id: First.lib.R,v 1.3 2007/11/12 21:01:38 adunn Exp $
 ".First.lib"<-
 function(library, section)
 {
   spm.version()
 }
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "PF" <-
 function(type="none",x,alpha,...,rescale=T) {
   valid<-c("constant","doublenormal","exponential","inverselogistic","logistic","normal","threshold")
@@ -292,7 +290,6 @@ function(file,path=""){
   }
   return(res)
 }
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.derivedquantity" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -310,7 +307,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.estimatesummary" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -333,7 +329,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.initialisationphase" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -359,7 +354,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.layerderivedview" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -384,7 +378,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.objectivefunction" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -410,7 +403,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.observation" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -437,7 +429,6 @@ function(file,path="",lines){
   res$data<-data
   return(res)
 }
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.partition" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -462,7 +453,6 @@ function(file,path="",lines){
   res$data<-values
   return(res)
 }
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.process" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -480,7 +470,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.randomnumberseed" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -499,7 +488,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.make.filename.R,v 1.3 2007/12/02 21:32:26 adunn Exp $
 "extract.selectivity" <-
 function(file,path="",lines){
   if(missing(lines)) {
@@ -520,7 +508,6 @@ function(file,path="",lines){
   return(res)
 }
 
-# $Id: spm.area.R,v 1.1 2007/11/13 04:32:41 adunn Exp $
 "spm.area"<-
 function(corners)
 {
@@ -567,14 +554,12 @@ function(corners)
 function() {
 return("1.00-2009-05-06")
 }
-# $Id: spm.convert.to.lines.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.convert.to.lines"<-
 function(filename)
 {
 # note blank lines are not included - I would rather they were but am not sure how
   scan(filename, what = "", sep = "\n")
 }
-# $Id: spm.dplot.R,v 1.2 2007/11/13 04:23:59 adunn Exp $
 "spm.dplot"<-
 function(..., name=T, quantiles=c(0.5), plot.mean=F, main="", xlab="", ylab="", ylim, srtx=0, bw="nrd0", adjust=1/3, adj=0, fill=F, gap=0.2)
 {
@@ -644,7 +629,6 @@ function(..., name=T, quantiles=c(0.5), plot.mean=F, main="", xlab="", ylab="", 
   invisible(centers)
 }
 
-# $Id: spm.get.lines.R,v 1.3 2007/11/12 21:01:38 adunn Exp $
 "spm.get.lines"<-
 function(lines, from = -1, to = -1, contains = "", starts.with = "", clip.to = "", clip.from = "", clip.to.match = "", clip.from.match = "", ...)
 {
@@ -679,7 +663,6 @@ function(lines, from = -1, to = -1, contains = "", starts.with = "", clip.to = "
   }
   return(result)
 }
-# $Id: spm.inR.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.inR"<-
 function()
 {
@@ -687,13 +670,11 @@ function()
   else if(is.null(version$language)) return(F)
   else return(version$language == "R")
 }
-# $Id: spm.inS.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.inS"<-
 function()
 {
   !exists("version")
 }
-# $Id: spm.is.whole.number.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.is.whole.number"<-
 function(string)
 {
@@ -706,7 +687,6 @@ function(string)
   }
   return(T)
 }
-# $Id: spm.isin.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.isin"<-
 function(x, y)
 {
@@ -722,7 +702,6 @@ function(file,path="")
   filename<-paste(path, file, sep = "")
   return(filename)
 }
-# $Id: spm.make.list.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.make.list"<-
 function(lines)
 {
@@ -734,7 +713,6 @@ function(lines)
   }
   result
 }
-# $Id: spm.make.table.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.make.table"<-
 function(lines)
 {
@@ -748,19 +726,16 @@ function(lines)
   names(data) <- columns
   data
 }
-# $Id: spm.pos.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.pos"<-
 function(vector, x)
 {
   min((1:length(vector))[vector == x])
 }
-# $Id: spm.pos.match.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.pos.match"<-
 function(vector, regexp)
 {
   min((1:length(vector))[spm.regexpr(regexp, vector) > 0])
 }
-# $Id: spm.recodevector.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.recodevector"<-
 function(in.data, from.vals, to.vals)
 {
@@ -770,13 +745,11 @@ function(in.data, from.vals, to.vals)
   }
   return(data)
 }
-# $Id: spm.remove.first.words.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.remove.first.words"<-
 function(string, words = 1)
 {
   paste(spm.unpaste(string, sep = " ")[ - (1:words)], collapse = " ")
 }
-# $Id: spm.remove.last.words.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.remove.last.words"<-
 function(string, words = 1)
 {
@@ -789,20 +762,17 @@ function() {
   return(c("initialisation","partition","process","derived_quantity","estimate_value","estimate_summary","objective_function","observation","layer","selectivity","random_number_seed","weight_at_size","layer_derived_view"))
 }
 
-# $Id: spm.string.to.vector.of.numbers.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.string.to.vector.of.numbers"<-
 function(string,sep=",")
 {
   as.numeric(spm.string.to.vector.of.words(string,sep))
 }
-# $Id: spm.string.to.vector.of.words.R,v 1.3 2007/11/12 21:01:38 adunn Exp $
 "spm.string.to.vector.of.words"<-
 function(string,sep=",")
 {
   temp <- spm.unpaste(string, sep = sep)
   return(temp[temp != ""])
 }
-# $Id: spm.unpaste.R,v 1.2 2007/11/12 21:01:38 adunn Exp $
 "spm.unpaste"<-
 function(string, sep)
 {
@@ -819,7 +789,6 @@ function(string, sep)
     unlist(unpaste(string, sep))
   }
 }
-# $Id: spm.version.R,v 1.6 2007/11/26 20:40:31 adunn Exp $
 "spm.version"<-
 function()
 {
