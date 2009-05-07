@@ -13,9 +13,9 @@ report.type: ...
 *end
 \end{verbatim}
 
-This syntax should make it easier for external packages to be configured to read \SPM\ output. The \texttt{extract} functions in the \R\ \texttt{spm} package use this information to identify and read \SPM\ output.
+This syntax should make it easier for external packages to be configured to read \SPM\ output. The \texttt{extract} functions in the \R\ \texttt{spm} package uses this information to identify and read \SPM\ output.
 
-The \texttt{estimate\_values} does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
+However, the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
 
 Reports, by default, are directed to standard out (see Section \ref{sec:redirecting-stdout}), but this default can be overwritten be specifying an output file (\commandlabsub{report}{file\_name}). Hence reports can be directed to separate files as required. Note that if an output file is defined, any data within it is deleted and replaced with the output from the report. To append data to an output file rather than replacing it, use the subcommand \commandlabsubarg{report}{overwrite}{false}.
 
@@ -47,7 +47,7 @@ Print a summary of the estimated parameters, including the parameter name, lower
 
 \subsection{\I{Printing the estimated parameters in a vector format}}\index{Reports ! Estimated parameters}
 
-Print the estimated parameter values out as a vector, in a format suitable for use with \texttt{spm -i}.
+Print the estimated parameter values out as a vector, in a format suitable for use with \texttt{spm -i}. The \texttt{estimate\_values} report prints two lines --- a line for the labels of the estimated parameters, and then a line of the values of the estimated parameters. For run modes that produce multi-line output (for example, MCMCs or profiles), only the first line contains the labels of the  estimated parameters. All subsequent lines are the values of the estimated parameters only (with each line representing a single set of parameter values). 
 
 Note that unlike other reports, the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end. 
 
@@ -61,7 +61,9 @@ Print the Hessian and covariance matrices if estimating and if the covariance ha
 
 \subsection{\I{Printing observations, fits, and residuals}}\index{Reports ! Observations}
 
-Prints out the area (from the observation categorical layer), observed values (as supplied in the \config), expected values as calculated by the model, and the error value (as modified by any additional process error), and the contribution to the total objective function of that individual point in the observation. Note that, depending on if the observation likelihood has an additional constant term (for example, the multinomial likelihood of the proportions-by-age observation), this is ignored. 
+Prints out the area (from the observation categorical layer), observed values (as supplied in the \config), expected values as calculated by the model, residuals (observed $-$ expected), the error value (as modified by any additional process error), and the contribution to the total objective function of that individual point in the observation. 
+
+Note that constants in likelihoods are often ignored in the objective function score of individual points. Hence, the total score from an observation equals the contribution of the objective function scores from each individual point plus a constant term (if applicable). In likelihoods without a constant term, then the total score from an observation will equal the contribution of the objective function scores from each individual point.
 
 \subsection{\I{Printing layers}}\index{Reports ! Layers}
 
