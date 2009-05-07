@@ -117,6 +117,7 @@ src/Processes/Factory/CProcessFactory.cpp
 src/Estimates/CEstimateManager.cpp
 src/Estimates/Factory/CEstimateFactory.cpp
 src/Estimates/CEstimate.cpp
+src/RandomNumberGenerator/CRandomNumberGenerator.cpp
 src/Reports/CReport.cpp
 src/Reports/Children/Base/CFileReport.cpp
 src/Reports/Children/CStandardHeaderReport.cpp
