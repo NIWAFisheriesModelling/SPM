@@ -508,7 +508,8 @@ function(file,path="",lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
-  data<-spm.string.to.vector.of.words(lines[(index.start+2):(index.end-1)],sep=",")
+  res$selectivity.label<-substring(lines[index.start+2],20)
+  data<-spm.string.to.vector.of.words(lines[(index.start+3):(index.end-1)],sep=",")
   data<-matrix(data,ncol=2,byrow=TRUE)
   data<-data.frame("ages"=as.numeric(data[-1,1]),"values"=as.numeric(data[-1,2]))
   res$data<-data
