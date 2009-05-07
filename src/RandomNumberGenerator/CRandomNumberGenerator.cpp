@@ -56,7 +56,7 @@ void CRandomNumberGenerator::Destroy() {
 double CRandomNumberGenerator::getNormalDistribution(double sigma, double mean) {
 
   // Build our Normal Distribution Generator
-  boost::normal_distribution<> distNormal(sigma, mean);
+  boost::normal_distribution<> distNormal(mean,sigma);
   boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
 
   return gen(); // Generated Number
