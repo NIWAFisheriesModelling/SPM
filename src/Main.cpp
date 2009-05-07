@@ -58,7 +58,7 @@ int main(int argc, char * argv[]) {
 
   } catch(string &Ex) {
     clReporter.start();
-    cout << "[ERROR] " << Ex << endl;
+    cerr << "[ERROR] " << Ex << endl;
     clReporter.end();
     return 0;
   }
@@ -85,7 +85,7 @@ int main(int argc, char * argv[]) {
     }
 
   } catch (string Ex) {
-    cout << "[ERROR] SPM has encountered a problem" << endl;
+    cerr << "[ERROR] SPM has encountered a problem" << endl;
 
     // Un-Wind our Exception Stack
     int iLastLocation = 0;
@@ -94,11 +94,11 @@ int main(int argc, char * argv[]) {
       cout << Ex.substr(iLastLocation+1, (iLoc-iLastLocation)) << endl;
       iLastLocation = iLoc;
     }
-    cout << endl;
+    cerr << endl;
   } catch(exception &Ex) {
     // Do Nothing
-    cout << "[ERROR] SPM encountered an exception" << endl;
-    cout << "[EXCEPTION] " << Ex.what() << endl;
+    cerr << "[ERROR] SPM encountered an exception" << endl;
+    cerr << "[EXCEPTION] " << Ex.what() << endl;
   }
 
   // Clean Up our Model

@@ -22,6 +22,7 @@
 // Namespaces
 using std::endl;
 using std::cout;
+using std::cerr;
 using std::ostringstream;
 
 //**********************************************************************
@@ -96,6 +97,7 @@ void CStandardHeaderReport::start() {
 
   // Print Header
   cout << sHeader << endl;
+  cerr << sHeader << endl;
 }
 
 //**********************************************************************
@@ -117,21 +119,21 @@ void CStandardHeaderReport::end() {
   // Turn into hours
   cpu_time = cpu_time / 3600.0;
   int P = (int) floor(log10(cpu_time))+4;
-  cout << "Total CPU time: " << std::setprecision(P) << cpu_time << (cpu_time==1?" hour":" hours") << ".\n";
+  cerr << "Total CPU time: " << std::setprecision(P) << cpu_time << (cpu_time==1?" hour":" hours") << ".\n";
 #endif
 
   double elapsed_time = static_cast<double>(time(NULL)-tmeStart);
   if(elapsed_time < 60) {
     int P = (int) floor(log10(elapsed_time))+4;
-    cout << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" second":" seconds") << endl;
+    cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" second":" seconds") << endl;
   } else if((elapsed_time/60.0) < 60) {
     elapsed_time /= 60.0;
     int P = (int) floor(log10(elapsed_time))+4;
-    cout << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" minute":" minutes") << endl;
+    cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" minute":" minutes") << endl;
   } else {
     elapsed_time /= 3600.0;
     int P = (int) floor(log10(elapsed_time))+4;
-    cout << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" hour":" hours") << endl;
+    cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" hour":" hours") << endl;
   }
 }
 
