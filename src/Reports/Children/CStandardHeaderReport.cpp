@@ -97,7 +97,6 @@ void CStandardHeaderReport::start() {
 
   // Print Header
   cout << sHeader << endl;
-  cerr << sHeader << endl;
 }
 
 //**********************************************************************

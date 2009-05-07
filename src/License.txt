@@ -2,10 +2,10 @@ static string sLicense="\
 This program and the accompanying materials are made available under the\n\
 terms of the Common Public License v1.0 which accompanies this software.\n\
 \n\
-A suitable reference for SPM is:\n\
+Refer to the SPM User Manual for a copy of the license.\n\
 \n\
-Dunn, A.; Rasmussen, S. (2008). Spatial Population Model Users Manual\n\
-(SPM v0.1-2008/02/14). Unpublished Report.\n\n\
+A suitable reference for this software is the SPM User Manual. Refer to the\n\
+SPM User Manual for a suggested citation.\n\n\
 \
 Copyright (c) National Institute of Water & Atmospheric Research (NIWA)\n\
 and the New Zealand Ministry of Fisheries (MFish). All rights reserved.\n\
