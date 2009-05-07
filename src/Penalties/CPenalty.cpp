@@ -13,7 +13,6 @@
 #include "../Processes/CProcessManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/CComparer.h"
-#include <CMath>
 
 //**********************************************************************
 // CPenalty::CPenalty()
@@ -58,12 +57,12 @@ void CPenalty::trigger(string Label, double Value1, double Value2) {
 
     // Assign Variables
     string sFullLabel = sLabel + "(" + Label + ")";
-    double dValue;
+    double dValue = 0.0;
 
     if(bLogScale) {
-      dValue = abs((log(Value1) - log(Value2)) * dMultiplier);
+      dValue = std::abs((log(Value1) - log(Value2)) * dMultiplier);
     } else {
-      dValue = abs((Value1 - Value2) * dMultiplier);
+      dValue = std::abs((Value1 - Value2) * dMultiplier);
     }
 
     // Flag Penalty Manager
