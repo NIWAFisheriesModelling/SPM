@@ -10,6 +10,7 @@
 // Local header
 #include "CPartitionReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
+#include "../../Helpers/CConvertor.h"
 
 //**********************************************************************
 // CPartitionReport::CPartitionReport()
@@ -36,7 +37,6 @@ void CPartitionReport::validate() {
 
     // Assign Variables
     iYear       = pParameterList->getInt(PARAM_YEAR);
-    sYear       = pParameterList->getString(PARAM_YEAR); // TODO: Probably better to cast int to string when used (see execute function below)
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
 
     // ToDO: Validate Year is valid in our run
@@ -90,7 +90,7 @@ void CPartitionReport::execute() {
     // Print Out
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << sYear << "\n";
+    cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << CConvertor::intToString(iYear) << "\n";
     cout << PARAM_PARTITION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
     cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;

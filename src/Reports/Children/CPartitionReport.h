@@ -32,7 +32,6 @@ public:
 protected:
   // Variables
   int                         iYear;
-  string                      sYear;
   int                         iTimeStep;
   string                      sTimeStep;
   CTimeStepManager            *pTimeStepManager;
