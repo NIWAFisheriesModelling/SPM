@@ -67,7 +67,8 @@ double CLogNormalWithQLikelihood::simulateObserved(double expected, double error
   errorValue = adjustErrorValue(processError, errorValue);
 
   //Get random number
-  result = CRandomNumberGenerator::getRandomLogNormal(expected, errorValue);
+  CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+  result = pRandom -> getRandomLogNormal(expected, errorValue);
 
   return result;
 }
