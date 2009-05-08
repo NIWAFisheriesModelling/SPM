@@ -60,7 +60,8 @@ void CObservation::saveComparison(string key, double expected, double observed, 
 
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
-      return;
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
   SComparison *pComparison = new SComparison();
   pComparison->sKey           = key;
