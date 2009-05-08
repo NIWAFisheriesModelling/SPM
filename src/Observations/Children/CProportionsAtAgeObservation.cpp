@@ -243,24 +243,54 @@ void CProportionsAtAgeObservation::execute() {
       // Our AgeResults
 
       double dErrorValue = mErrorValue[(*mvPropPtr).first];
-      //Add in Process Error if defined
-      //
-      // TODO: Is this right? since we gen process error in likelihood
+
+      //Add in Process Error for the _constant_ term if defined
+      // TODO: Fix this: this constant ONLY exists if its a multinomial... otherwise (e.g.) lognormal, then don't do it!
       dScore += -CMath::lnFactorial(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
 
-      for (int i = 0; i < iArraySize; ++i) {
-
-        // Get our Proportion
-        if(!CComparer::isZero(dRunningTotal))
-          dCurrentProp = pAgeResults[i] / dRunningTotal;
-        else
-          dCurrentProp = 0.0;
-
-        if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
-          double dTemp = pLikelihood->simulateObserved(dCurrentProp, dErrorValue, dProcessError, dDelta);
-          saveComparison((*mvPropPtr).first, dCurrentProp, dTemp, dErrorValue, 0.0);
-
-        } else {
+      if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) { //TODO: Scott - this needs fixing for greater efficiency?
+                                                                     // And should be moved to the simulate part of the likelihood like other obervations...
+                                                                     //   as its based on the expectation its a multinomial
+                                                                     // we have to pass the observed/expected vectors to the likelihoods here... and let them sort out the simulation
+                                                                     // this section should just rescale any returned values to sum to 1?
+        // instance the random number generator
+        CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+        // get the multinomial N value
+        double dN = std::ceil(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
+        //declare a vector to hold result
+        std::vector<double> vCount(iArraySize, 0.0);
+        // iteratate through errorvalue numbers
+        for(int i = 0; i< (int)dN; i++) {
+          // get a random uniform
+          double dRandomNumber = pRandom -> getRandomUniform_01();
+          // create a holder for the cumulative sum of expected values
+          double dCumulativeSumExpected = 0.0;
+          // iterate through the proportions..
+          for (int j = 0; j < iArraySize; ++j) {
+            if(!CComparer::isZero(dRunningTotal))
+              dCurrentProp = pAgeResults[i] / dRunningTotal;
+            else
+              dCurrentProp = 0.0;
+            // update the running total
+            dCumulativeSumExpected = dCumulativeSumExpected + dCurrentProp;
+            // compare with random number
+            if(dRandomNumber  <= dCumulativeSumExpected) {
+              vCount[j]++;
+              break;
+            }
+          }
+        }
+        // rescale everything back to = 1.0
+        for (int i = 0; i < iArraySize; ++i) {
+          saveComparison((*mvPropPtr).first, vCount[i]/dN, ((*mvPropPtr).second)[i], dErrorValue, 0.0);
+        }
+      } else {
+        for (int i = 0; i < iArraySize; ++i) {
+          // Get our Proportion
+          if(!CComparer::isZero(dRunningTotal))
+            dCurrentProp = pAgeResults[i] / dRunningTotal;
+          else
+            dCurrentProp = 0.0;
           double dTemp = pLikelihood->getResult(dCurrentProp, (*mvPropPtr).second[i], dErrorValue, dProcessError, dDelta);
           dScore += dTemp;
           saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dErrorValue, dTemp);

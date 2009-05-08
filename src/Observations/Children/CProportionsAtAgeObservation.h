@@ -11,6 +11,7 @@
 
 // Local Headers
 #include "../CObservation.h"
+#include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
 //**********************************************************************
 //
