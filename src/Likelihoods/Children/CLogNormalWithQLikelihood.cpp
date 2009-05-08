@@ -56,10 +56,8 @@ double CLogNormalWithQLikelihood::getResult(double expected, double observed, do
 //
 //**********************************************************************
 double CLogNormalWithQLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  double logvar = 0.0;
-  double logmean = 0.0;
-  double result = 0.0;
 
+  double result = 0.0;
   // Should never happen ...
   if(expected <= 0.0) {
     return(0.0) ;
@@ -68,17 +66,9 @@ double CLogNormalWithQLikelihood::simulateObserved(double expected, double error
  //Add in process error if defined
   errorValue = adjustErrorValue(processError, errorValue);
 
-  logvar = sqrt(log(errorValue*errorValue + 1.0));
-  logmean = log(expected) - (logvar*logvar)/2.0;
-  //result = exp(rnorm(logmean, logvar)); -- need a random normal deviate here ---> need to link to randome functions in BOOST
-  // Here we need a random normal number with mean = logmean and sigma = logvar.
-  // The BOOST random number generator mersenne_twister
-  // and use the distribution normal_distribution.hpp
-  // note a random class is requires that is initialised with a defined seed.
-  // this should also be used by DESolver for generating its random uniform numbers
-  // next line delete once we have fixed up the above
-  // Other likelihhods will require other distributions... but probably only the uniform.
-  result = exp(logmean);
+  //Get random number
+  result = CRandomNumberGenerator::getRandomLogNormal(expected, errorValue);
+
   return result;
 }
 
