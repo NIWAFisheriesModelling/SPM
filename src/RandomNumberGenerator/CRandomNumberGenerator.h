@@ -30,7 +30,7 @@ public:
   void                        build();
   double                      getRandomUniform(double min, double max);
   double                      getRandomNormal(double mean, double sigma);
-  double                      getRandomLogNormal(double mean, double sigma);
+  double                      getRandomLogNormal(double mean, double cv);
 
 protected:
   // Functions

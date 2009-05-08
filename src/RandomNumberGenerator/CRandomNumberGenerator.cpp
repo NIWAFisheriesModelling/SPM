@@ -10,7 +10,6 @@
 // Global headers
 #include <boost/random/uniform_real.hpp>
 #include <boost/random/normal_distribution.hpp>
-#include <boost/random/lognormal_distribution.hpp>
 #include <boost/random/variate_generator.hpp>
 
 // Local Headers
@@ -78,16 +77,17 @@ double CRandomNumberGenerator::getRandomNormal(double mean, double sigma) {
 }
 
 //**********************************************************************
-// double CRandomNumberGenerator::getRandomLogNormal(double mean, double sigma)
-// Get a lognormal distributed random number
+// double CRandomNumberGenerator::getRandomLogNormal(double mean, double cv)
+// Get a lognormal distributed random number, with mean and c.v.
 //**********************************************************************
-double CRandomNumberGenerator::getRandomLogNormal(double mean, double sigma) {
+double CRandomNumberGenerator::getRandomLogNormal(double mean, double cv) {
 
-  // Build our Normal Distribution Generator
-  boost::lognormal_distribution<> distLogNormal(mean,sigma);
-  boost::variate_generator<mt19937&, boost::lognormal_distribution<> > gen(clGenerator, distLogNormal);
+  double dLogSigma = sqrt(log(cv*cv + 1.0));
+  double dLogMean = log(mean) - (dLogSigma*dLogSigma)/2.0;
 
-  return gen(); // Generated Number
+  double result = CRandomNumberGenerator::getRandomNormal(dLogMean, dLogSigma);
+
+  return std::exp(result); // Generated Number
 }
 
 //**********************************************************************
