@@ -8,7 +8,9 @@
 //============================================================================
 
 // Global headers
+#include <boost/random/uniform_real.hpp>
 #include <boost/random/normal_distribution.hpp>
+#include <boost/random/lognormal_distribution.hpp>
 #include <boost/random/variate_generator.hpp>
 
 // Local Headers
@@ -50,14 +52,40 @@ void CRandomNumberGenerator::Destroy() {
 }
 
 //**********************************************************************
-// double CRandomNumberGenerator::getNormalDistribution(double sigma, double mean)
-// Get a normal distribution random number
+// double CRandomNumberGenerator::getRandomUniform(double min, double max)
+// Get a uniform distributed random number
 //**********************************************************************
-double CRandomNumberGenerator::getNormalDistribution(double sigma, double mean) {
+double CRandomNumberGenerator::getRandomUniform(double min, double max) {
+
+  // Build our Uniform Distribution Generator
+  boost::uniform_real<> distUniform(min,max);
+  boost::variate_generator<mt19937&, boost::uniform_real<> > gen(clGenerator, distUniform);
+
+  return gen(); // Generated Number
+}
+
+//**********************************************************************
+// double CRandomNumberGenerator::getRandomNormal(double mean, double sigma)
+// Get a normal distributed random number
+//**********************************************************************
+double CRandomNumberGenerator::getRandomNormal(double mean, double sigma) {
 
   // Build our Normal Distribution Generator
   boost::normal_distribution<> distNormal(mean,sigma);
   boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
+
+  return gen(); // Generated Number
+}
+
+//**********************************************************************
+// double CRandomNumberGenerator::getRandomLogNormal(double mean, double sigma)
+// Get a lognormal distributed random number
+//**********************************************************************
+double CRandomNumberGenerator::getRandomLogNormal(double mean, double sigma) {
+
+  // Build our Normal Distribution Generator
+  boost::lognormal_distribution<> distLogNormal(mean,sigma);
+  boost::variate_generator<mt19937&, boost::lognormal_distribution<> > gen(clGenerator, distLogNormal);
 
   return gen(); // Generated Number
 }

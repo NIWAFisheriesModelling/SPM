@@ -28,7 +28,9 @@ public:
   static void                 Destroy();
   void                        validate();
   void                        build();
-  double                      getNormalDistribution(double sigma, double mean);
+  double                      getRandomUniform(double min, double max);
+  double                      getRandomNormal(double mean, double sigma);
+  double                      getRandomLogNormal(double mean, double sigma);
 
 protected:
   // Functions
