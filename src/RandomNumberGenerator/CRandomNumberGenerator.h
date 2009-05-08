@@ -29,8 +29,10 @@ public:
   void                        validate();
   void                        build();
   double                      getRandomUniform(double min, double max);
+  double                      getRandomUniform_01();
   double                      getRandomNormal(double mean, double sigma);
   double                      getRandomLogNormal(double mean, double cv);
+  double                      getRandomBinomial(double p, double N);
 
 protected:
   // Functions
