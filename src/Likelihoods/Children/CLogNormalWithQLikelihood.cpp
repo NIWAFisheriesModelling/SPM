@@ -60,7 +60,7 @@ double CLogNormalWithQLikelihood::simulateObserved(double expected, double error
   double result = 0.0;
   // Should never happen ...
   if(expected <= 0.0) {
-    return(0.0) ;
+    return(result) ;
   }
 
  //Add in process error if defined

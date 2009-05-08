@@ -53,7 +53,21 @@ double CNormalLikelihood::getResult(double expected, double observed, double err
 // Simulate observed value for our observation
 //**********************************************************************
 double CNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  throw string("CNormalLikelihood.simulateObserved() not yet implemented");
+
+  double result = 0.0;
+  // Should never happen ...
+  if(expected <= 0.0) {
+    return(result) ;
+  }
+
+ //Add in process error if defined
+  errorValue = adjustErrorValue(processError, errorValue);
+
+  //Get random number
+  CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+  result = pRandom -> getRandomNormal(expected, (expected*errorValue));
+
+  return result;
 }
 
 //**********************************************************************

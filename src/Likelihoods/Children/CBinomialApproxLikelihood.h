@@ -11,6 +11,7 @@
 
 // Local headers
 #include "../CLikelihood.h"
+#include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
 //**********************************************************************
 //
