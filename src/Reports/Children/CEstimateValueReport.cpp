@@ -31,8 +31,7 @@ CEstimateValueReport::CEstimateValueReport() {
 void CEstimateValueReport::execute() {
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
+    return;
 
   // Check if File Already Exists for overwrite
   // If file already exists, and we not overwriting we don't

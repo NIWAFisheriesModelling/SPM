@@ -28,7 +28,8 @@ void CRandomNumberSeedReport::execute() {
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
+      if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+        return;
 
   this->start();
 
