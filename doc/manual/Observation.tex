@@ -384,13 +384,13 @@ Methods for generating the random error, and hence simulated values, depend on t
 \begin{enumerate}
   \item{} Normal likelihood parameterised by c.v.: Let $E_{i}$ be the fitted value for observation $i$, and $c_i$ be the corresponding c.v. (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent normal deviate with mean $E_i$ and standard deviation $E_i c_i$.
   \item{} Log-normal likelihood: Let $E_i$ be the fitted value for observation $i$ and $c_i$ be the corresponding c.v. (adjusted by the process error if applicable). Each simulated observation value $S_i$ is generated as an independent lognormal deviate with mean and standard deviation (on the natural scale, not the log-scale) of $E_i$ and $E_i c_i$ respectively. The robustification parameter $\delta$ is ignored.
-  \item{} Multinomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and let $N$ be the sample size (rounded up to the next whole number, and adjusted by process error if applicable). The robustification parameter $\delta$ is ignored. Then, 
+  \item{} Multinomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and let $N$ be the sample size (adjusted by process error if applicable, and then rounded up to the next whole number). The robustification parameter $\delta$ is ignored. Then, 
   \begin{enumerate}
     \item{} A sample of $N$ values from $1$ to $n$ is generated using the multinomial distribution, using sample probabilities proportional to the values of $E_i$.
     \item{} Each simulated observation value $S_i$ is calculated as the proportion of the $N$ sampled values equalling $i$
     \item{} The simulated observation values $S_i$ are then rescaled so that their sum is equal to $1$
   \end{enumerate}
-\item{} Binomial likelihood: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and $N_i$ the corresponding equivalent sample size (rounded up to the next whole number, and adjusted by the process error if applicable). The robustification parameter $\delta$ is ignored. Then, 
+\item{} Binomial and the normal approximation to the binomial likelihoods: Let $E_i$ be the fitted value for observation $i$, for $i$ between $1$ and $n$, and $N_i$ the corresponding equivalent sample size (adjusted by process error if applicable, and then rounded up to the next whole number). The robustification parameter $\delta$ is ignored. Then, 
   \begin{enumerate}
     \item{} A sample of $N_i$ independent binary variates is generated, equalling $1$ with probability $E_i$ 
     \item{}	The simulated observation value $S_i$ is calculated as the sum of these binary variates divided by $N_i$
