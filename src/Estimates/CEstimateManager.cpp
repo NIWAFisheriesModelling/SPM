@@ -284,7 +284,7 @@ void CEstimateManager::validate() {
       mParameterList[sParam] += 1;
 
       if (mParameterList[sParam] > 1)
-        CError::errorUnknown(PARAM_PARAMETER, (*vPtr)->getParameter());
+        CError::errorDuplicate(PARAM_PARAMETER, (*vPtr)->getParameter());
       vPtr++;
     }
 
