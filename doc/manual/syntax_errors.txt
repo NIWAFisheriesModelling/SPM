@@ -14,6 +14,7 @@ In SPM, but not in manual
   category_index
   column
   column_index
+  command
   current
   enabled_estimates
   estimable
@@ -55,7 +56,6 @@ In SPM, but not in manual
   run_mode
   run_years
   scores_index
-  section
   size_weights
   square
   square_uniform
