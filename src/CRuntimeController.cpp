@@ -10,6 +10,7 @@
 #include <boost/program_options.hpp>
 #include <sstream>
 #include <iostream>
+#include <time.h>
 
 // Local Headers
 #include "Translations/Translations.h"
@@ -177,8 +178,13 @@ void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
     pConfig->setQuietMode(true);
 
   // Random Seed
-  if (vmParams.count("genseed"))
+  if (vmParams.count("genseed")) {
     pConfig->setRandomSeed(vmParams["genseed"].as<int>());
+  } else {
+    long iSeed = time (0);
+    iSeed = (long)(iSeed-(floor((double)iSeed/100000)*100000));
+    pConfig->setRandomSeed(iSeed);
+  }
 
   // Configuration File
   if (vmParams.count("config"))
