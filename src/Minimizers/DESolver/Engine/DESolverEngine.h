@@ -17,20 +17,23 @@
 #include <vector>
 #include <map>
 
+// Local headers
+#include "../../../RandomNumberGenerator/CRandomNumberGenerator.h"
+
 using std::vector;
 using std::map;
 
 // Defines
-#define stBest1Exp			   0
-#define stRand1Exp			   1
-#define stRandToBest1Exp	 2
-#define stBest2Exp			   3
-#define stRand2Exp			   4
-#define stBest1Bin		  	 5
-#define stRand1Bin			   6
-#define stRandToBest1Bin	 7
-#define stBest2Bin			   8
-#define stRand2Bin			   9
+#define stBest1Exp         0
+#define stRand1Exp         1
+#define stRandToBest1Exp   2
+#define stBest2Exp         3
+#define stRand2Exp         4
+#define stBest1Bin         5
+#define stRand1Bin         6
+#define stRandToBest1Bin   7
+#define stBest2Bin         8
+#define stRand2Bin         9
 
 class DESolverEngine;
 typedef void (DESolverEngine::*StrategyFunction)(int);
@@ -52,7 +55,6 @@ public:
 
 protected:
   // Functions
-  double                      RandomUniform(double min, double max);
   void                        SelectSamples(int candidate);
   bool                        generateGradient();
   void                        scaleValues();
