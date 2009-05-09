@@ -65,10 +65,10 @@ CCatchability* CCatchabilityManager::getCatchability(string label) {
         return Q;
     }
 
-#ifndef OPTIMIZE
     // Couldn't find it.
     CError::errorUnknown(PARAM_CATCHABILITY, label);
 
+#ifndef OPTIMIZE
   } catch (string Ex) {
     Ex = "CCatchabilityManager.getQ()->" + Ex;
     throw Ex;
