@@ -134,6 +134,7 @@ void CStandardHeaderReport::end() {
     int P = (int) floor(log10(elapsed_time))+4;
     cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" hour":" hours") << endl;
   }
+  cout << "Completed" << endl;
 }
 
 //**********************************************************************
