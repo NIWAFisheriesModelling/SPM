@@ -12,7 +12,7 @@ SetCompressor /FINAL /SOLID lzma
 SetDatablockOptimize 	on
 CRCCheck on ;CRC check
 SilentInstall normal ;normal install
-SilentUnInstall silent ;uninstall quietly
+SilentUnInstall normal ;uninstall quietly
 XPStyle on ;graphic
 BrandingText "http://www.niwa.co.nz"
 
