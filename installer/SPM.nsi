@@ -39,14 +39,14 @@ Function .onInit
     MessageBox MB_OK|MB_ICONEXCLAMATION "The SPM installer is already running."
     Abort
   ;Check earlier installation
-
+  init.restart:
   ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "UninstallString"
   ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "DisplayVersion"
   IfFileExists $R0 +1 init.done
     StrCmp $0 ${PRODUCT_VERSION} init.Same
     MessageBox MB_YESNO|MB_ICONQUESTION "Setup has found another version of ${PRODUCT_NAME} ($0) installed on your system.$\nWould you like to remove it before continuing with the installation of version ${PRODUCT_VERSION}?" \
       IDYES init.uninst
-    MessageBox MB_OK "Setup will now exit"
+    MessageBox MB_OK "${PRODUCT_NAME} ${PRODUCT_VERSION} setup will now exit"
     Quit
   init.uninst:
     ClearErrors
@@ -56,7 +56,7 @@ Function .onInit
       StrCmp $0 2 Quit +1
       ExecWait '"$0" _?=$INSTDIR'
       ;'"$INSTDIR\uninstall.exe" _?=$INSTDIR'
-      GOTO init.done
+      GOTO init.restart
   init.Same:
     MessageBox MB_YESNO|MB_ICONQUESTION "${PRODUCT_NAME} $0 seems to be already installed on your system.$\nDo you want to uninstall and continue?" \
       IDYES init.uninst
@@ -217,7 +217,7 @@ FunctionEnd
 
 Function un.onInit
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Are you sure you want to completely remove $(^Name) and all of its components?" IDYES +2
-  Quit
+  Abort
 FunctionEnd
 
 Section Uninstall
