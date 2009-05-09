@@ -84,7 +84,7 @@ void CConfigurationLoader::loadConfigFile(bool skipLoadingFile) {
       throw string("Empty configuration file");
 
     if (vLines[0].substr(0, 1) != CONFIG_SECTION_SYMBOL)
-      throw string("First statement (ex comments) must be a section header");
+      throw string("First statement (excluding comments) must be an @command");
 
     vCurrentSection.push_back(vLines[0]);
     for (int i = 1; i < (int)vLines.size(); ++i) {
