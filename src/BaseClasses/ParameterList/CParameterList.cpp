@@ -69,7 +69,7 @@ void CParameterList::checkInvalidParameters() {
     }
 
     if (!bMatch)
-      throw string("Parameter " + (*mvPtr).first + " is not supported");
+      throw string("Unknown subcommand :" + (*mvPtr).first);
 
     mvPtr++;
   }
