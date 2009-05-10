@@ -49,7 +49,7 @@ string CConvertor::intToString(int value) {
 double CConvertor::stringToDouble(string value) {
   double dRet = 0.0;
   stringstream myStream(value);
-  if (!(myStream >> dRet))
+  if (!(myStream >> dRet) || myStream.peek()!= std::string::npos)
     throw string("Invalid double: " + value);
 
   return dRet;
@@ -62,7 +62,7 @@ double CConvertor::stringToDouble(string value) {
 int CConvertor::stringToInt(string value) {
   int iRet = 0;
   stringstream myStream(value);
-  if (!(myStream >> iRet))
+  if (!(myStream >> iRet) || myStream.peek()!= std::string::npos)
     throw string("Invalid integer: " + value);
 
   return iRet;
