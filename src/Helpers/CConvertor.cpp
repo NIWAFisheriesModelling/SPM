@@ -63,7 +63,7 @@ int CConvertor::stringToInt(string value) {
   int iRet = 0;
   stringstream myStream(value);
   if (!(myStream >> iRet))
-    throw string("Invalid integer");
+    throw string("Invalid integer: " + value);
 
   return iRet;
 }
@@ -80,7 +80,7 @@ bool CConvertor::stringToBool(string value) {
   else if ( (value == "false") || (value == "f"))
     bRet = false;
   else
-    throw string("Unknown bool: " + value);
+    throw string("Unknown boolean (true/false): " + value);
 
   return bRet;
 }
