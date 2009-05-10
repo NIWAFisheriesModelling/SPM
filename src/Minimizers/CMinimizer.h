@@ -31,6 +31,7 @@ public:
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   double                     getCovarianceValue(int row, int col);
   int                        getEstimateCount() { return iEstimateCount; }
+  bool                       getCovarianceError() { return bCovarianceError; }
   void                       buildCovarianceMatrix();
   virtual void               runEstimation() = 0;
   virtual void               validate();
@@ -42,6 +43,7 @@ protected:
   ublas::matrix<double>       mxCovariance;
   int                         iEstimateCount;
   bool                        bCovariance;
+  bool                        bCovarianceError;
 };
 
 #endif /*CMINIMIZER_H_*/

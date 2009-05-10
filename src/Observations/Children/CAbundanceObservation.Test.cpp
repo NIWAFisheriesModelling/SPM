@@ -183,42 +183,42 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation_Simulation, C3x3_Fixture ) {
   SComparison *pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areaa");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.01);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 59.291539712786701);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 59.015732958899918);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 59.291539712786701);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[1];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areab");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.012);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 39.527693141857796);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 39.943062454020186);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 39.527693141857796);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[2];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areac");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.013);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.763846570928898);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.699897424039253);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[3];
   BOOST_CHECK_EQUAL(pComparison->sKey, "aread");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.014);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.763846570928898);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.819693932280696);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[4];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areae");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.015);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.763846570928898);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.270542967008392);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[5];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areaf");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.016);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 19.763846570928898);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.459717207632266);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 

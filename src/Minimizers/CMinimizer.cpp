@@ -27,7 +27,8 @@ using std::endl;
 //**********************************************************************
 CMinimizer::CMinimizer() {
   // Default Variables
-  pHessian        = 0;
+  pHessian          = 0;
+  bCovarianceError  = false;
 
   // Register user allowed Parameters
   pParameterList->registerAllowed(PARAM_COVARIANCE);
@@ -44,21 +45,27 @@ void CMinimizer::buildCovarianceMatrix() {
     return;
   }
 
-  // Get handle to our Minimizer and Hessian
-  ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
-  for (int i = 0; i < iEstimateCount; ++i)
-    for (int j = 0; j < iEstimateCount; ++j)
-      mxHessian(i,j) = pHessian[i][j];
+  try {
 
-  // Convert Hessian to Covariance
-  ublas::permutation_matrix<> pm(mxHessian.size1());
-  ublas::matrix<double> copiedMatrix = ublas::matrix<double>(mxHessian);
-  ublas::lu_factorize(copiedMatrix,pm);
+    // Get handle to our Minimizer and Hessian
+    ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
+    for (int i = 0; i < iEstimateCount; ++i)
+      for (int j = 0; j < iEstimateCount; ++j)
+        mxHessian(i,j) = pHessian[i][j];
 
-  ublas::matrix<double> identityMatrix(ublas::identity_matrix<double>(copiedMatrix.size1()));
-  ublas::lu_substitute(copiedMatrix,pm,identityMatrix);
+    // Convert Hessian to Covariance
+    ublas::permutation_matrix<> pm(mxHessian.size1());
+    ublas::matrix<double> copiedMatrix = ublas::matrix<double>(mxHessian);
+    ublas::lu_factorize(copiedMatrix,pm);
 
-  mxCovariance.swap(identityMatrix);
+    ublas::matrix<double> identityMatrix(ublas::identity_matrix<double>(copiedMatrix.size1()));
+    ublas::lu_substitute(copiedMatrix,pm,identityMatrix);
+
+    mxCovariance.swap(identityMatrix);
+  } catch (...) {
+    // Something went wrong.
+    bCovarianceError = true;
+  }
 }
 
 //**********************************************************************

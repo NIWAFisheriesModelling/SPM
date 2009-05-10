@@ -282,8 +282,9 @@ void CProportionsAtAgeObservation::execute() {
         }
         // rescale everything back to = 1.0
         for (int i = 0; i < iArraySize; ++i) {
-          saveComparison((*mvPropPtr).first, vCount[i]/dN, ((*mvPropPtr).second)[i], dErrorValue, 0.0);
+          saveComparison((*mvPropPtr).first, dCurrentProp, vCount[i]/dN, dErrorValue, 0.0);
         }
+
       } else {
         for (int i = 0; i < iArraySize; ++i) {
           // Get our Proportion

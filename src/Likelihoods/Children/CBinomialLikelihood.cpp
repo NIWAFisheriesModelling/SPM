@@ -56,19 +56,17 @@ double CBinomialLikelihood::getResult(double expected, double observed, double e
 //
 //**********************************************************************
 double CBinomialLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-
-  double result = 0.0;
   // Should never happen ...
-  if(expected < 0.0) {
-    return(result) ;
-  }
+  if(expected < 0.0)
+    return 0.0;
+
 
  //Add in process error if defined
   errorValue = adjustErrorValue(processError, errorValue);
 
   //Get random number
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
-  result = pRandom -> getRandomBinomial(expected, errorValue);
+  double result = pRandom->getRandomBinomial(expected, errorValue);
 
   return result;
 }

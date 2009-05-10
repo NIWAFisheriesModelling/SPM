@@ -22,7 +22,7 @@ public:
   virtual                     ~CPseudoLikelihood();
   double                      adjustErrorValue(double processError, double errorValue) { return 0; }
   double                      getResult(double expected, double observed, double errorValue, double processError, double delta) { return 0.0; }
-  double                      simulateObserved(double expected, double errorValue, double processError, double delta) { return 0.0; }
+  double                      simulateObserved(double expected, double errorValue, double processError, double delta);
 };
 
 #endif /* CPSEUDOLIKELIHOOD_H_ */

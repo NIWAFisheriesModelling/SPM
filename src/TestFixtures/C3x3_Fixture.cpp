@@ -55,8 +55,8 @@ void C3x3_Fixture::addToTimeStep(string process) {
 void C3x3_Fixture::loadEnvironment(string runMode) {
 
   if (runMode == "-s") {
-    char *argv[] = { "C:\\Temp\\spm.exe", "-s", "1" };
-    CRuntimeController::Instance()->parseCommandLine(3, argv);
+    char *argv[] = { "C:\\Temp\\spm.exe", "-s", "1", "-g", "656" };
+    CRuntimeController::Instance()->parseCommandLine(5, argv);
   } else {
     char *argv[] = { "C:\\Temp\\spm.exe", (char *)runMode.c_str() };
     CRuntimeController::Instance()->parseCommandLine(2, argv);

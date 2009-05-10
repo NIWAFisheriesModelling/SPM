@@ -53,12 +53,18 @@ void CCovarianceReport::execute() {
     }
 
   cout << "Covariance:\n";
-  for (int i = 0; i < iCount; ++i) {
-    for (int j = 0; j < iCount; ++j) {
-      cout << pMinimizer->getCovarianceValue(i, j) << " ";
+  if (pMinimizer->getCovarianceError()) {
+    cout << "Covariance creationg failed. Hessian was un-invertable\n";
+  } else {
+    for (int i = 0; i < iCount; ++i) {
+      for (int j = 0; j < iCount; ++j) {
+        cout << pMinimizer->getCovarianceValue(i, j) << " ";
+      }
+      cout << "\n";
     }
-    cout << "\n";
   }
+
+
 
   cout << "*end\n" << endl;
 

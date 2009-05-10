@@ -28,7 +28,7 @@ CConfiguration::CConfiguration() {
   bUseEstimateValues          = false;
   iSimulationCandidates       = 0;
   bDisableReports             = false;
-  iRandomSeed                 = 0;
+  iRandomSeed                 = 123;
 }
 
 //**********************************************************************

@@ -23,9 +23,8 @@ CRandomNumberGenerator* CRandomNumberGenerator::clInstance = 0;
 // Default Constructor
 //**********************************************************************
 CRandomNumberGenerator::CRandomNumberGenerator() {
-
   // Set our Seed.
-  clGenerator.seed(pConfig->getRandomSeed());
+  clGenerator.seed((unsigned int)pConfig->getRandomSeed());
 }
 
 //**********************************************************************
