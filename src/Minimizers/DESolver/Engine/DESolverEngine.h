@@ -17,9 +17,6 @@
 #include <vector>
 #include <map>
 
-// Local headers
-#include "../../../RandomNumberGenerator/CRandomNumberGenerator.h"
-
 using std::vector;
 using std::map;
 

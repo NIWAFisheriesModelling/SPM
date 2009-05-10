@@ -14,6 +14,8 @@
 #include "DESolverEngine.h"
 #include "../../../CConfiguration.h"
 #include "../../../Helpers/CComparer.h"
+// Local headers
+#include "../../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
 // Namespaces
 using std::cerr;
