@@ -67,7 +67,7 @@ double CRandomNumberGenerator::getRandomUniform(double min, double max) {
 // Get a uniform distributed random number on range 0 to 1
 //**********************************************************************
 double CRandomNumberGenerator::getRandomUniform_01() {
-  return CRandomNumberGenerator::getRandomUniform(0.0,1.0); // Generated Number
+  return getRandomUniform(0.0,1.0); // Generated Number
 }
 
 //**********************************************************************
@@ -92,7 +92,7 @@ double CRandomNumberGenerator::getRandomLogNormal(double mean, double cv) {
   double dLogSigma = sqrt(log(cv*cv + 1.0));
   double dLogMean = log(mean) - (dLogSigma*dLogSigma)/2.0;
 
-  double result = CRandomNumberGenerator::getRandomNormal(dLogMean, dLogSigma);
+  double result = getRandomNormal(dLogMean, dLogSigma);
 
   return std::exp(result); // Generated Number
 }
@@ -103,11 +103,12 @@ double CRandomNumberGenerator::getRandomLogNormal(double mean, double cv) {
 //**********************************************************************
 double CRandomNumberGenerator::getRandomBinomial(double p, double N) {
 
-  double dCount=0;
+  double dCount = 0;
 
   for(int i; i < std::ceil(N); i++) {
-    double dTemp = CRandomNumberGenerator::getRandomUniform_01();
-    if(dTemp <= p) dCount++;
+    double dTemp = getRandomUniform_01();
+    if (dTemp <= p)
+      dCount++;
   }
 
   return (dCount / std::ceil(N)); // Generated Number
