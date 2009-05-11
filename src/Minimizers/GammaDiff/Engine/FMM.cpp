@@ -13,6 +13,7 @@
 
 // Local Headers
 #include "FMM.h"
+#include "../../../CConfiguration.h"
 
 // Namespaces
 using std::cerr;
@@ -22,14 +23,13 @@ using std::endl;
 // FMM::FMM(int n)
 // Default Constructor
 //**********************************************************************
-FMM::FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol, bool print) {
+FMM::FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol) {
 
   // Assign the Variables
   iVectorSize             = vectorSize;
   iMaxFunc                = maxFunc;
   iMaxQuasiSteps          = maxQuasiSteps;
   dGradTol                = gradTol;
-  bPrint                  = print;
   bMaxStepTaken           = false;
   iMaxSteps               = 200;
   iLinearSearchIters      = 0;
@@ -260,6 +260,7 @@ void FMM::CholeskyDecomposition(long double* Gradient, long double** LowerTriang
 //**********************************************************************
 void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradient) {
 
+  CConfiguration *pConfig = CConfiguration::Instance();
   if (iRet == 0) { // bringing a function call for the linear search
 
     iEvals++;
@@ -394,8 +395,11 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     for (int i = 0; i < iVectorSize; ++i) {
       dCurrentTolerance = fmax(dCurrentTolerance, fabs(pGradient[i]) * fmax(1, fabs(pPreviousCandidates[i])) / fabs(dPreviousScore2));
     }
-    cerr << FMM_CONVERGENCE_CHECK << dCurrentTolerance << "\n";
-    cerr << FMM_CONVERGENCE_THRESHOLD << dGradTol << "\n" << endl;
+
+    if(!(pConfig->getQuietMode())) {
+      cerr << FMM_CONVERGENCE_CHECK << dCurrentTolerance << "\n";
+      cerr << FMM_CONVERGENCE_THRESHOLD << dGradTol << "\n" << endl;
+    }
 
     if (dCurrentTolerance <= dGradTol) {
       iRet = -1; // convergence!
@@ -424,7 +428,6 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
 
       if (dCurrentTolerance <= dStepTol) {
         cerr << FMM_SMALL_STEP_SIZE_CONVERGENCE << endl;
-        //cerr << FMM_CONVERGENCE_NOT_TEXTBOOK << endl;
         iRet = -1;
         return;
       }

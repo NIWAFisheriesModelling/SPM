@@ -151,8 +151,10 @@ void DESolverEngine::Setup(vector<double> startValues, vector<double> lowerBound
 //**********************************************************************
 bool DESolverEngine::Solve(int maxGenerations) {
 
+
   // Variables
   bool    bNewBestEnergy  = false;
+  CConfiguration *pConfig = CConfiguration::Instance();
 
   // Execute it.
   dTrialEnergy = EnergyFunction(vCurrentValues);
@@ -162,16 +164,18 @@ bool DESolverEngine::Solve(int maxGenerations) {
     // Copy the solution to our best.
     dBestEnergy = dTrialEnergy;
     vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
-
-    cerr << "Current estimates: ";
-    for (int k = 0; k < (int)vBestSolution.size(); ++k)
-      cerr << vBestSolution[k] << " ";
-    cerr << "\n";
-    cerr << "Objective function value: " << dTrialEnergy << "\n\n";
+    if(!(pConfig->getQuietMode())) {
+      cerr << "Current estimates: ";
+      for (int k = 0; k < (int)vBestSolution.size(); ++k)
+        cerr << vBestSolution[k] << " ";
+      cerr << "\n";
+      cerr << "Objective function value: " << dTrialEnergy << "\n\n";
+    }
   }
 
   for (int i = 0; i < maxGenerations; ++i) {
-    cerr << "DE_Solver: Current generation = " << (i+1) << "\n"; //TODO: Add to translation file
+    if(!(pConfig->getQuietMode()))
+      cerr << "DE_Solver: Current generation = " << (i+1) << "\n"; //TODO: Add to translation file
     for (int j = 0; j < iPopulationSize; ++j) {
       // Build our Trial Solution
       (this->*calcTrialSolution)(j);
@@ -193,11 +197,13 @@ bool DESolverEngine::Solve(int maxGenerations) {
           dBestEnergy = dTrialEnergy;
           vBestSolution.assign(vCurrentValues.begin(), vCurrentValues.end());
 
-          cerr << "Current estimates: ";
-          for (int k = 0; k < (int)vBestSolution.size(); ++k)
-            cerr << vBestSolution[k] << " ";
-          cerr << endl;
-          cerr << "Objective function value: " << dTrialEnergy << "\n";
+          if(!(pConfig->getQuietMode())) {
+            cerr << "Current estimates: ";
+            for (int k = 0; k < (int)vBestSolution.size(); ++k)
+              cerr << vBestSolution[k] << " ";
+            cerr << endl;
+            cerr << "Objective function value: " << dTrialEnergy << "\n";
+          }
         }
       }
     } // end for()
@@ -221,6 +227,9 @@ bool DESolverEngine::Solve(int maxGenerations) {
 // Generate our Gradient
 //**********************************************************************
 bool DESolverEngine::generateGradient() {
+
+  CConfiguration *pConfig = CConfiguration::Instance();
+
   double dConvergenceCheck;
   for (int i = 0; i < iVectorSize; ++i) {
     // Create Vars
@@ -239,16 +248,19 @@ bool DESolverEngine::generateGradient() {
     dConvergenceCheck = dMax-dMin;
 
     if (dConvergenceCheck > dTolerance) {
-      cerr << "DE_Solver: Convergence check value = " << dConvergenceCheck << "\n";
-      cerr << "DE_Solver: Convergence tolerance   = " << dTolerance << "\n" << endl;
+      if(!(pConfig->getQuietMode())) {
+        cerr << "DE_Solver: Convergence check value = " << dConvergenceCheck << "\n";
+        cerr << "DE_Solver: Convergence tolerance   = " << dTolerance << "\n" << endl;
+      }
       return false; // No Convergence
     }
   }
-  cerr << "DE_Solver: Convergence check value = " << dConvergenceCheck << "\n";
-  cerr << "DE_Solver: Convergence tolerance   = " << dTolerance << "\n" << endl;
+  if(!(pConfig->getQuietMode())) {
+    cerr << "DE_Solver: Convergence check value = " << dConvergenceCheck << "\n";
+    cerr << "DE_Solver: Convergence tolerance   = " << dTolerance << "\n" << endl;
+  }
   return true; // Convergence
 }
-
 
 void DESolverEngine::scaleValues() {
 
@@ -261,7 +273,6 @@ void DESolverEngine::scaleValues() {
       vScaledValues[i] = scaleValue(vCurrentValues[i], vLowerBounds[i], vUpperBounds[i]);
   }
 }
-
 
 void DESolverEngine::unScaleValues() {
   for (int i = 0; i < iVectorSize; ++i) {

@@ -81,7 +81,7 @@ void CGammaDiff::runEstimation() {
     GammaDiffEngine clGammaDiff;
     clGammaDiff.optimise_finite_differences(clGammaDiffCallback,
         vStartValues, vLowerBounds, vUpperBounds,
-        status, true, iMaxIters, iMaxEvals, dGradientTolerance,
+        status, iMaxIters, iMaxEvals, dGradientTolerance,
         pHessian,1,dStepSize);
 
     /*cout << "Hessian: " << endl;

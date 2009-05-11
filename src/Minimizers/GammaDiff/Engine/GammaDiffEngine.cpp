@@ -115,12 +115,12 @@ void GammaDiffEngine::buildCurrentValues() {
 
 //**********************************************************************
 // double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
-//   vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,
+//   vector<double>& UpperBounds, int& convergence, int& iMaxIter, int& iMaxFunc, double dGradTol,
 //   double **pOPTIMIZEHessian, int untransformedHessians, double dStepSize)
 // OPTIMIZE our function
 //**********************************************************************
 double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objective, vector<double>& StartValues, vector<double>& LowerBounds,
-    vector<double>& UpperBounds, int& convergence, bool bPrint, int& iMaxIter, int& iMaxFunc, double dGradTol,
+    vector<double>& UpperBounds, int& convergence, int& iMaxIter, int& iMaxFunc, double dGradTol,
     double **pOptimiseHessian, int untransformedHessians, double dStepSize) {
 
   // Variables
@@ -143,7 +143,7 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
     throw string(GAMMADIFF_SIZE_UPPER_BOUND_START_VALUE);
 
   // Create our Minimiser
-  FMM clMinimiser(iVectorSize, iMaxFunc, iMaxIter, dGradTol, bPrint);
+  FMM clMinimiser(iVectorSize, iMaxFunc, iMaxIter, dGradTol);
 
   // Build our Scaled Values
   buildScaledValues();
@@ -157,7 +157,7 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
 
       buildCurrentValues();
       dScore = objective(vCurrentValues);
-      if (bPrint) {
+      if(!(pConfig->getQuietMode())) {
         cerr << "Current estimates: ";  //TODO: add to translation file
         for (int i = 0; i < iVectorSize; ++i) {
           cerr << vCurrentValues[i] << " ";

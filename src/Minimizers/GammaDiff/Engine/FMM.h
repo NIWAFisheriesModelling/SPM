@@ -23,7 +23,7 @@
 class FMM : public CBaseObject {
 public:
   // Functions
-  FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol, bool print);
+  FMM(int vectorSize, int maxFunc, int maxQuasiSteps, double gradTol);
   virtual                     ~FMM();
   void                        fMin(vector<double>& Candidates, double& Score, vector<double>& Gradient);
   int                         getResult() { return iRet; }
@@ -45,7 +45,6 @@ private:
   long double                 dGradTol;         // scaled gradient (see Dennis & Schnabel p 279) required for termination
   long double                 dStepTol;         // scaled step size (D&S p 279) required for termination
   long double                 dMaxStep;         // maximum scaled step size (D&S p 279) permitted
-  bool                        bPrint;
   int                         iIters;
   int                         iEvals;           // quasi-Newton iterations, function evaluations
   int                         iRet;
