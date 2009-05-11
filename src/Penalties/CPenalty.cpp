@@ -60,9 +60,9 @@ void CPenalty::trigger(string Label, double Value1, double Value2) {
     double dValue = 0.0;
 
     if(bLogScale) {
-      dValue = std::abs((log(Value1) - log(Value2)) * dMultiplier);
+      dValue = (log(Value1) - log(Value2)) * (log(Value1) - log(Value2)) *dMultiplier;
     } else {
-      dValue = std::abs((Value1 - Value2) * dMultiplier);
+      dValue = (Value1 - Value2) * (Value1 - Value2) * dMultiplier;
     }
 
     // Flag Penalty Manager
