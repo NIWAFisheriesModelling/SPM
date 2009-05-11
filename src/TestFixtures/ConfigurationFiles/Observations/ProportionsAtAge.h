@@ -28,12 +28,12 @@ const string proportions_at_age_observation =
   "obs AreaD 0.4 0.5 0.1\n"
   "obs AreaE 0.3 0.3 0.4\n"
   "obs AreaF 0.4 0.4 0.2\n"
-  "error_value AreaA 0.01\n"
-  "error_value AreaB 0.012\n"
-  "error_value AreaC 0.013\n"
-  "error_value AreaD 0.014\n"
-  "error_value AreaE 0.015\n"
-  "error_value AreaF 0.016\n"
+  "error_value AreaA 1000\n"
+  "error_value AreaB 1200\n"
+  "error_value AreaC 1300\n"
+  "error_value AreaD 1400\n"
+  "error_value AreaE 1500\n"
+  "error_value AreaF 1600\n"
   "likelihood multinomial\n"
   "delta 1e-11\n";
 

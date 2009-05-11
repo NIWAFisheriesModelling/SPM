@@ -29,12 +29,12 @@ const string proportions_by_category_observation =
   "obs AreaD 0.4 0.5 0.1\n"
   "obs AreaE 0.3 0.3 0.4\n"
   "obs AreaF 0.4 0.4 0.2\n"
-  "error_value AreaA 0.01 0.011 0.012\n"
-  "error_value AreaB 0.02 0.021 0.022\n"
-  "error_value AreaC 0.03 0.031 0.032\n"
-  "error_value AreaD 0.04 0.041 0.042\n"
-  "error_value AreaE 0.05 0.051 0.052\n"
-  "error_value AreaF 0.06 0.061 0.062\n"
+  "error_value AreaA 1000 1100 1200\n"
+  "error_value AreaB 1200 1300 1400\n"
+  "error_value AreaC 1300 1400 1500\n"
+  "error_value AreaD 1400 1500 1600\n"
+  "error_value AreaE 1500 1500 1500\n"
+  "error_value AreaF 1600 200 2000\n"
   "likelihood binomial\n"
   "delta 1e-11\n";
 
