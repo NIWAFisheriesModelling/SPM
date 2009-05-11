@@ -36,7 +36,7 @@ Function .onInit
   System::Call 'kernel32::CreateMutexA(i 0, i 0, t "SPMinstaller") i .r1 ?e'
   Pop $R0
   StrCmp $R0 0 +3
-    MessageBox MB_OK|MB_ICONEXCLAMATION "The SPM installer is already running."
+    MessageBox MB_OK|MB_ICONEXCLAMATION "The ${PRODUCT_NAME} installer is already running."
     Abort
   ;Check earlier installation
   init.restart:
@@ -44,9 +44,9 @@ Function .onInit
   ReadRegStr $0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "DisplayVersion"
   IfFileExists $R0 +1 init.done
     StrCmp $0 ${PRODUCT_VERSION} init.Same
-    MessageBox MB_YESNO|MB_ICONQUESTION "Setup has found another version of ${PRODUCT_NAME} ($0) installed on your system.$\nWould you like to remove it before continuing with the installation of version ${PRODUCT_VERSION}?" \
+    MessageBox MB_YESNO|MB_ICONQUESTION "Setup has found another version of ${PRODUCT_NAME} (v$0) installed on your system.$\nWould you like to remove it before continuing with the installation of version ${PRODUCT_VERSION}?" \
       IDYES init.uninst
-    MessageBox MB_OK "${PRODUCT_NAME} ${PRODUCT_VERSION} setup will now exit"
+    MessageBox MB_OK "${PRODUCT_NAME} v${PRODUCT_VERSION} setup will now exit"
     Quit
   init.uninst:
     ClearErrors
@@ -58,9 +58,9 @@ Function .onInit
       ;'"$INSTDIR\uninstall.exe" _?=$INSTDIR'
       GOTO init.restart
   init.Same:
-    MessageBox MB_YESNO|MB_ICONQUESTION "${PRODUCT_NAME} $0 seems to be already installed on your system.$\nDo you want to uninstall and continue?" \
+    MessageBox MB_YESNO|MB_ICONQUESTION "${PRODUCT_NAME} v$0 seems to be already installed on your system.$\nDo you want to uninstall and continue?" \
       IDYES init.uninst
-    MessageBox MB_OK "${PRODUCT_NAME} ${PRODUCT_VERSION} setup will now exit"
+    MessageBox MB_OK "${PRODUCT_NAME} v${PRODUCT_VERSION} setup will now exit"
     Quit
   Quit:
     Quit
@@ -104,7 +104,7 @@ var ICONS_GROUP
 !insertmacro MUI_LANGUAGE "English"
 ; MUI end ------
 
-Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
+Name "${PRODUCT_NAME} v${PRODUCT_VERSION}"
 OutFile "..//Setup_${PRODUCT_NAME}_${PRODUCT_VERSION}.exe"
 InstallDir "$PROGRAMFILES\SPM"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
@@ -114,7 +114,7 @@ ShowUnInstDetails show
 Section "Install program files" SEC01
 SectionIn RO
   LogSet On
-  LogText "${PRODUCT_NAME} ${PRODUCT_VERSION} install log"
+  LogText "${PRODUCT_NAME} v${PRODUCT_VERSION} install log"
   Logtext "==============================================\n"
   LogText "Install path $INSTDIR"
   SetOutPath "$INSTDIR"
@@ -172,7 +172,7 @@ SectionEnd
 !system 'rm -rf source_files'
 !system 'rm -rf example_files'
 
-LangString DESC_SEC01 ${LANG_ENGLISH} "Copy ${PRODUCT_NAME} ${PRODUCT_VERSION} program files to the installation directory (required)"
+LangString DESC_SEC01 ${LANG_ENGLISH} "Copy the ${PRODUCT_NAME} v${PRODUCT_VERSION} program files to the installation directory (required)"
 LangString DESC_SEC02 ${LANG_ENGLISH} "Add icons to your start menu for easy access"
 LangString DESC_SEC03 ${LANG_ENGLISH} "Associate .spm files with notepad.exe"
 LangString DESC_SEC04 ${LANG_ENGLISH} "Add the installation directory of ${PRODUCT_NAME} to your Windows PATH? (recommended)"
