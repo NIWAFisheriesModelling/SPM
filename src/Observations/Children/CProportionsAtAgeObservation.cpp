@@ -257,8 +257,10 @@ void CProportionsAtAgeObservation::execute() {
         CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
         // get the multinomial N value
         double dN = std::ceil(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
-        //declare a vector to hold result
-        std::vector<double> vCount(iArraySize, 0.0);
+        //declare a vector to hold vector of results (simulated observed values)
+        std::vector<double> vObserved(iArraySize, 0.0);
+        //declare a vector to hold vector of expected values
+        std::vector<double> vExpected(iArraySize, 0.0);
         // iteratate through errorvalue numbers
         for(int i = 0; i< (int)dN; i++) {
           // get a random uniform
@@ -268,21 +270,21 @@ void CProportionsAtAgeObservation::execute() {
           // iterate through the proportions..
           for (int j = 0; j < iArraySize; ++j) {
             if(!CComparer::isZero(dRunningTotal))
-              dCurrentProp = pAgeResults[i] / dRunningTotal;
+              vExpected[j] = pAgeResults[j] / dRunningTotal;
             else
-              dCurrentProp = 0.0;
+              vExpected[j] = 0.0;
             // update the running total
-            dCumulativeSumExpected = dCumulativeSumExpected + dCurrentProp;
+            dCumulativeSumExpected = dCumulativeSumExpected + vExpected[j];
             // compare with random number
             if(dRandomNumber  <= dCumulativeSumExpected) {
-              vCount[j]++;
+              vObserved[j]++;
               break;
             }
           }
         }
         // rescale everything back to = 1.0
         for (int i = 0; i < iArraySize; ++i) {
-          saveComparison((*mvPropPtr).first, dCurrentProp, vCount[i]/dN, dErrorValue, 0.0);
+          saveComparison((*mvPropPtr).first, vExpected[i], vObserved[i]/dN, dErrorValue, 0.0);
         }
 
       } else {
