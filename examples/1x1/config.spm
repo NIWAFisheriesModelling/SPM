@@ -36,7 +36,7 @@ categories immature mature
 type constant_recruitment
 categories immature
 proportions 1.0
-R0 450000
+R0 500000
 ages 1
 
 @process halfM

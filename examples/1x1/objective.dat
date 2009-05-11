@@ -1,0 +1,580 @@
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 39.9626
+obs->caa-year-1999: 41.306
+obs->caa-year-2000: 39.6444
+obs->caa-year-2001: 39.1048
+obs->caa-year-2002: 39.285
+obs->caa-year-2003: 37.3072
+obs->caa-year-2004: 42.9161
+obs->caa-year-2005: 39.9525
+obs->caa-year-2006: 52.1558
+obs->caa-year-2007: 58.2676
+obs->cpue-1998: 0.0233461
+obs->cpue-1999: -0.210255
+obs->cpue-2000: -1.47653
+obs->cpue-2001: 0.224941
+obs->cpue-2002: -0.67672
+obs->cpue-2003: -1.5356
+obs->cpue-2004: -1.45439
+obs->cpue-2005: -0.951913
+obs->cpue-2006: -0.945381
+obs->cpue-2007: -1.03152
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 421.868
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 30.7654
+obs->caa-year-1999: 34.0307
+obs->caa-year-2000: 28.4162
+obs->caa-year-2001: 27.6496
+obs->caa-year-2002: 27.1748
+obs->caa-year-2003: 29.5405
+obs->caa-year-2004: 32.301
+obs->caa-year-2005: 30.0657
+obs->caa-year-2006: 37.642
+obs->caa-year-2007: 47.6184
+obs->cpue-1998: 0.968622
+obs->cpue-1999: 0.647762
+obs->cpue-2000: -1.61333
+obs->cpue-2001: -0.46815
+obs->cpue-2002: -0.125616
+obs->cpue-2003: -1.37934
+obs->cpue-2004: -1.36185
+obs->cpue-2005: -0.727987
+obs->cpue-2006: 0.120362
+obs->cpue-2007: 2.06784
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 323.333
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.8226
+obs->caa-year-1999: 33.1247
+obs->caa-year-2000: 27.8016
+obs->caa-year-2001: 26.7526
+obs->caa-year-2002: 25.675
+obs->caa-year-2003: 30.4802
+obs->caa-year-2004: 31.4969
+obs->caa-year-2005: 28.0247
+obs->caa-year-2006: 30.6736
+obs->caa-year-2007: 36.0602
+obs->cpue-1998: 0.130133
+obs->cpue-1999: -0.106419
+obs->cpue-2000: -1.50909
+obs->cpue-2001: 0.0994947
+obs->cpue-2002: -0.575344
+obs->cpue-2003: -1.50263
+obs->cpue-2004: -1.41432
+obs->cpue-2005: -0.970578
+obs->cpue-2006: -0.810155
+obs->cpue-2007: -0.578408
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 290.675
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.1974
+obs->caa-year-1999: 33.0811
+obs->caa-year-2000: 28.1722
+obs->caa-year-2001: 26.9419
+obs->caa-year-2002: 25.9261
+obs->caa-year-2003: 30.9896
+obs->caa-year-2004: 31.7394
+obs->caa-year-2005: 27.971
+obs->caa-year-2006: 28.0478
+obs->caa-year-2007: 31.4161
+obs->cpue-1998: -0.557024
+obs->cpue-1999: -0.715322
+obs->cpue-2000: -1.27639
+obs->cpue-2001: 0.764044
+obs->cpue-2002: -0.922432
+obs->cpue-2003: -1.57252
+obs->cpue-2004: -1.43233
+obs->cpue-2005: -1.22376
+obs->cpue-2006: -1.39657
+obs->cpue-2007: -1.56447
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 281.586
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.1454
+obs->caa-year-1999: 33.0828
+obs->caa-year-2000: 28.2282
+obs->caa-year-2001: 26.981
+obs->caa-year-2002: 25.9958
+obs->caa-year-2003: 31.1189
+obs->caa-year-2004: 31.8551
+obs->caa-year-2005: 28.1214
+obs->caa-year-2006: 27.1059
+obs->caa-year-2007: 30.0033
+obs->cpue-1998: -0.950365
+obs->cpue-1999: -1.05878
+obs->cpue-2000: -1.03185
+obs->cpue-2001: 1.29624
+obs->cpue-2002: -1.11767
+obs->cpue-2003: -1.6001
+obs->cpue-2004: -1.43051
+obs->cpue-2005: -1.38208
+obs->cpue-2006: -1.59146
+obs->cpue-2007: -1.54051
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 279.231
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.1999
+obs->caa-year-1999: 33.0868
+obs->caa-year-2000: 28.1883
+obs->caa-year-2001: 26.9622
+obs->caa-year-2002: 25.9812
+obs->caa-year-2003: 31.1414
+obs->caa-year-2004: 31.8945
+obs->caa-year-2005: 28.2348
+obs->caa-year-2006: 26.6877
+obs->caa-year-2007: 29.4921
+obs->cpue-1998: -1.16817
+obs->cpue-1999: -1.2466
+obs->cpue-2000: -0.829374
+obs->cpue-2001: 1.68243
+obs->cpue-2002: -1.22752
+obs->cpue-2003: -1.61095
+obs->cpue-2004: -1.4229
+obs->cpue-2005: -1.47115
+obs->cpue-2006: -1.61779
+obs->cpue-2007: -1.24667
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 278.71
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.2689
+obs->caa-year-1999: 33.0909
+obs->caa-year-2000: 28.1364
+obs->caa-year-2001: 26.9347
+obs->caa-year-2002: 25.9507
+obs->caa-year-2003: 31.1351
+obs->caa-year-2004: 31.907
+obs->caa-year-2005: 28.3131
+obs->caa-year-2006: 26.4626
+obs->caa-year-2007: 29.2661
+obs->cpue-1998: -1.29706
+obs->cpue-1999: -1.35656
+obs->cpue-2000: -0.669147
+obs->cpue-2001: 1.96608
+obs->cpue-2002: -1.29477
+obs->cpue-2003: -1.61559
+obs->cpue-2004: -1.41436
+obs->cpue-2005: -1.52297
+obs->cpue-2006: -1.58607
+obs->cpue-2007: -0.923632
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 278.752
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.3331
+obs->caa-year-1999: 33.0949
+obs->caa-year-2000: 28.0902
+obs->caa-year-2001: 26.9096
+obs->caa-year-2002: 25.9211
+obs->caa-year-2003: 31.1214
+obs->caa-year-2004: 31.9098
+obs->caa-year-2005: 28.3692
+obs->caa-year-2006: 26.3244
+obs->caa-year-2007: 29.151
+obs->cpue-1998: -1.37883
+obs->cpue-1999: -1.42568
+obs->cpue-2000: -0.541657
+obs->cpue-2001: 2.18128
+obs->cpue-2002: -1.33935
+obs->cpue-2003: -1.61771
+obs->cpue-2004: -1.40636
+obs->cpue-2005: -1.55467
+obs->cpue-2006: -1.53664
+obs->cpue-2007: -0.630244
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 278.975
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.3889
+obs->caa-year-1999: 33.0985
+obs->caa-year-2000: 28.0519
+obs->caa-year-2001: 26.8887
+obs->caa-year-2002: 25.8959
+obs->caa-year-2003: 31.1064
+obs->caa-year-2004: 31.9087
+obs->caa-year-2005: 28.411
+obs->caa-year-2006: 26.2317
+obs->caa-year-2007: 29.086
+obs->cpue-1998: -1.43363
+obs->cpue-1999: -1.47162
+obs->cpue-2000: -0.438806
+obs->cpue-2001: 2.34923
+obs->cpue-2002: -1.37066
+obs->cpue-2003: -1.61869
+obs->cpue-2004: -1.39913
+obs->cpue-2005: -1.575
+obs->cpue-2006: -1.48405
+obs->cpue-2007: -0.376011
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 279.249
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.4369
+obs->caa-year-1999: 33.1019
+obs->caa-year-2000: 28.0205
+obs->caa-year-2001: 26.8714
+obs->caa-year-2002: 25.8748
+obs->caa-year-2003: 31.0922
+obs->caa-year-2004: 31.9063
+obs->caa-year-2005: 28.4434
+obs->caa-year-2006: 26.1655
+obs->caa-year-2007: 29.0468
+obs->cpue-1998: -1.47208
+obs->cpue-1999: -1.5036
+obs->cpue-2000: -0.354322
+obs->cpue-2001: 2.48387
+obs->cpue-2002: -1.39377
+obs->cpue-2003: -1.61912
+obs->cpue-2004: -1.39276
+obs->cpue-2005: -1.58849
+obs->cpue-2006: -1.43362
+obs->cpue-2007: -0.158197
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 279.528
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.478
+obs->caa-year-1999: 33.1048
+obs->caa-year-2000: 27.9946
+obs->caa-year-2001: 26.8572
+obs->caa-year-2002: 25.8573
+obs->caa-year-2003: 31.0793
+obs->caa-year-2004: 31.9033
+obs->caa-year-2005: 28.4691
+obs->caa-year-2006: 26.116
+obs->caa-year-2007: 29.0219
+obs->cpue-1998: -1.50007
+obs->cpue-1999: -1.5267
+obs->cpue-2000: -0.283784
+obs->cpue-2001: 2.59421
+obs->cpue-2002: -1.41146
+obs->cpue-2003: -1.61926
+obs->cpue-2004: -1.38717
+obs->cpue-2005: -1.59769
+obs->cpue-2006: -1.38714
+obs->cpue-2007: 0.0286026
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 279.791
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.5134
+obs->caa-year-1999: 33.1075
+obs->caa-year-2000: 27.9732
+obs->caa-year-2001: 26.8454
+obs->caa-year-2002: 25.8427
+obs->caa-year-2003: 31.0678
+obs->caa-year-2004: 31.9004
+obs->caa-year-2005: 28.4902
+obs->caa-year-2006: 26.0775
+obs->caa-year-2007: 29.0053
+obs->cpue-1998: -1.52101
+obs->cpue-1999: -1.54387
+obs->cpue-2000: -0.224164
+obs->cpue-2001: 2.68609
+obs->cpue-2002: -1.42537
+obs->cpue-2003: -1.61926
+obs->cpue-2004: -1.38222
+obs->cpue-2005: -1.6041
+obs->cpue-2006: -1.34492
+obs->cpue-2007: 0.18979
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 280.034
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.5443
+obs->caa-year-1999: 33.1099
+obs->caa-year-2000: 27.9549
+obs->caa-year-2001: 26.8353
+obs->caa-year-2002: 25.8303
+obs->caa-year-2003: 31.0575
+obs->caa-year-2004: 31.8974
+obs->caa-year-2005: 28.5076
+obs->caa-year-2006: 26.047
+obs->caa-year-2007: 28.9942
+obs->cpue-1998: -1.5371
+obs->cpue-1999: -1.55697
+obs->cpue-2000: -0.173
+obs->cpue-2001: 2.76402
+obs->cpue-2002: -1.43663
+obs->cpue-2003: -1.61918
+obs->cpue-2004: -1.37788
+obs->cpue-2005: -1.60864
+obs->cpue-2006: -1.30687
+obs->cpue-2007: 0.329729
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 280.256
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.5711
+obs->caa-year-1999: 33.1121
+obs->caa-year-2000: 27.9397
+obs->caa-year-2001: 26.8269
+obs->caa-year-2002: 25.8199
+obs->caa-year-2003: 31.0483
+obs->caa-year-2004: 31.8947
+obs->caa-year-2005: 28.5223
+obs->caa-year-2006: 26.022
+obs->caa-year-2007: 28.9863
+obs->cpue-1998: -1.54969
+obs->cpue-1999: -1.56714
+obs->cpue-2000: -0.128806
+obs->cpue-2001: 2.83064
+obs->cpue-2002: -1.44586
+obs->cpue-2003: -1.61906
+obs->cpue-2004: -1.37398
+obs->cpue-2005: -1.61189
+obs->cpue-2006: -1.27254
+obs->cpue-2007: 0.45226
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 280.457
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.5948
+obs->caa-year-1999: 33.114
+obs->caa-year-2000: 27.9263
+obs->caa-year-2001: 26.8196
+obs->caa-year-2002: 25.8107
+obs->caa-year-2003: 31.0403
+obs->caa-year-2004: 31.8922
+obs->caa-year-2005: 28.535
+obs->caa-year-2006: 26.0013
+obs->caa-year-2007: 28.9809
+obs->cpue-1998: -1.55975
+obs->cpue-1999: -1.57522
+obs->cpue-2000: -0.0900011
+obs->cpue-2001: 2.88869
+obs->cpue-2002: -1.45363
+obs->cpue-2003: -1.61892
+obs->cpue-2004: -1.37057
+obs->cpue-2005: -1.61421
+obs->cpue-2006: -1.24165
+obs->cpue-2007: 0.560039
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 280.64
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.6157
+obs->caa-year-1999: 33.1158
+obs->caa-year-2000: 27.915
+obs->caa-year-2001: 26.8133
+obs->caa-year-2002: 25.803
+obs->caa-year-2003: 31.033
+obs->caa-year-2004: 31.8899
+obs->caa-year-2005: 28.5459
+obs->caa-year-2006: 25.9837
+obs->caa-year-2007: 28.9769
+obs->cpue-1998: -1.56785
+obs->cpue-1999: -1.58168
+obs->cpue-2000: -0.0560138
+obs->cpue-2001: 2.93912
+obs->cpue-2002: -1.46016
+obs->cpue-2003: -1.61878
+obs->cpue-2004: -1.36743
+obs->cpue-2005: -1.61589
+obs->cpue-2006: -1.21362
+obs->cpue-2007: 0.655866
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 280.806
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.6344
+obs->caa-year-1999: 33.1174
+obs->caa-year-2000: 27.905
+obs->caa-year-2001: 26.8078
+obs->caa-year-2002: 25.7962
+obs->caa-year-2003: 31.0264
+obs->caa-year-2004: 31.8878
+obs->caa-year-2005: 28.5554
+obs->caa-year-2006: 25.9688
+obs->caa-year-2007: 28.9741
+obs->cpue-1998: -1.57449
+obs->cpue-1999: -1.58694
+obs->cpue-2000: -0.0258776
+obs->cpue-2001: 2.98355
+obs->cpue-2002: -1.46575
+obs->cpue-2003: -1.61863
+obs->cpue-2004: -1.36457
+obs->cpue-2005: -1.6171
+obs->cpue-2006: -1.18817
+obs->cpue-2007: 0.741462
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 280.957
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.6512
+obs->caa-year-1999: 33.1189
+obs->caa-year-2000: 27.8962
+obs->caa-year-2001: 26.803
+obs->caa-year-2002: 25.7901
+obs->caa-year-2003: 31.0205
+obs->caa-year-2004: 31.8858
+obs->caa-year-2005: 28.5638
+obs->caa-year-2006: 25.9559
+obs->caa-year-2007: 28.9721
+obs->cpue-1998: -1.58
+obs->cpue-1999: -1.59127
+obs->cpue-2000: 0.00110932
+obs->cpue-2001: 3.02314
+obs->cpue-2002: -1.47061
+obs->cpue-2003: -1.61849
+obs->cpue-2004: -1.36201
+obs->cpue-2005: -1.61794
+obs->cpue-2006: -1.16504
+obs->cpue-2007: 0.818216
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 281.095
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.6663
+obs->caa-year-1999: 33.1202
+obs->caa-year-2000: 27.8883
+obs->caa-year-2001: 26.7987
+obs->caa-year-2002: 25.7848
+obs->caa-year-2003: 31.0151
+obs->caa-year-2004: 31.884
+obs->caa-year-2005: 28.5713
+obs->caa-year-2006: 25.9446
+obs->caa-year-2007: 28.9706
+obs->cpue-1998: -1.58462
+obs->cpue-1999: -1.59489
+obs->cpue-2000: 0.0254115
+obs->cpue-2001: 3.05863
+obs->cpue-2002: -1.47488
+obs->cpue-2003: -1.61835
+obs->cpue-2004: -1.3597
+obs->cpue-2005: -1.61852
+obs->cpue-2006: -1.14394
+obs->cpue-2007: 0.887414
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 281.221
+*end
+
+[objective_score]
+report.type: objective_function
+obs->caa-year-1998: 27.68
+obs->caa-year-1999: 33.1214
+obs->caa-year-2000: 27.8813
+obs->caa-year-2001: 26.7948
+obs->caa-year-2002: 25.78
+obs->caa-year-2003: 31.0102
+obs->caa-year-2004: 31.8824
+obs->caa-year-2005: 28.578
+obs->caa-year-2006: 25.9347
+obs->caa-year-2007: 28.9697
+obs->cpue-1998: -1.58852
+obs->cpue-1999: -1.59791
+obs->cpue-2000: 0.0473428
+obs->cpue-2001: 3.09051
+obs->cpue-2002: -1.47864
+obs->cpue-2003: -1.61822
+obs->cpue-2004: -1.35758
+obs->cpue-2005: -1.6189
+obs->cpue-2006: -1.12461
+obs->cpue-2007: 0.950185
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 0
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 281.336
+*end
+

@@ -6,7 +6,7 @@ minimiser GammaDiff
 type numerical_differences
 iterations 1000
 evaluations 4000
-tolerance 0.002
+tolerance 0.0002
 covariance false
 
 @minimiser DE
@@ -27,9 +27,9 @@ df 4
 #Profile
 @Profile R0
 parameter Process[Recruitment].R0
-N  10
-lower_bound  100000
-upper_bound  400000
+N  20
+lower_bound   100000
+upper_bound  1000000
 
 #Catchability
 @catchability CPUEq
@@ -46,7 +46,7 @@ prior Uniform
 parameter process[Recruitment].R0
 lower_bound 1e4
 upper_bound 1e7
-prior Uniform-log
+prior Uniform
 
 @estimate
 parameter selectivity[FishingSel].a50

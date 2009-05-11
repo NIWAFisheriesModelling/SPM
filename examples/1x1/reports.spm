@@ -29,13 +29,6 @@ year 2008
 @report Objective_Score
 type objective_function
 
-@report estimate
-type estimate_value
-file_name MPD.dat
-
-@report estimate-summary
-type estimate_summary
-
 @report Maturation-selectivity
 type selectivity
 selectivity Maturation
@@ -43,3 +36,17 @@ selectivity Maturation
 @report FishingSel-selectivity
 type selectivity
 selectivity FishingSel
+
+@report estimate-summary
+type estimate_summary
+
+@report estimate
+type estimate_value
+file_name MPD.dat
+
+@report estimate2
+type estimate_value
+
+@report Objective_Score
+type objective_function
+file_name objective.dat
