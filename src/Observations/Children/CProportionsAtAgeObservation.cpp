@@ -284,7 +284,7 @@ void CProportionsAtAgeObservation::execute() {
         }
         // rescale everything back to = 1.0
         for (int i = 0; i < iArraySize; ++i) {
-          saveComparison((*mvPropPtr).first, vExpected[i], vObserved[i]/dN, dErrorValue, 0.0);
+          saveComparison((*mvPropPtr).first, vExpected[i], vObserved[i]/dN, dN, 0.0);
         }
 
       } else {
@@ -296,7 +296,7 @@ void CProportionsAtAgeObservation::execute() {
             dCurrentProp = 0.0;
           double dTemp = pLikelihood->getResult(dCurrentProp, (*mvPropPtr).second[i], dErrorValue, dProcessError, dDelta);
           dScore += dTemp;
-          saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], dErrorValue, dTemp);
+          saveComparison((*mvPropPtr).first, dCurrentProp, ((*mvPropPtr).second)[i], pLikelihood->adjustErrorValue(dProcessError, dErrorValue), dTemp);
         }
       }
 

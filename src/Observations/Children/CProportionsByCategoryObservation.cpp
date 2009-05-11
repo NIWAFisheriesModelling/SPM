@@ -270,13 +270,13 @@ void CProportionsByCategoryObservation::execute() {
 
       if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
         double dTemp = pLikelihood->simulateObserved(dExpected, dErrorValue, dProcessError, dDelta);
-        saveComparison((*mvPropPtr).first, dExpected, dTemp, dErrorValue, 0.0);
+        saveComparison((*mvPropPtr).first, dExpected, dTemp, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), 0.0);
 
       } else {
         double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);
         dScore += dTemp;
         // Store results of calculations so they can be used by the reports
-        saveComparison((*mvPropPtr).first, dExpected, dObserved, dErrorValue, dTemp);
+        saveComparison((*mvPropPtr).first, dExpected, dObserved, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), dTemp);
       }
     }
 

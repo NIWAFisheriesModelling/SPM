@@ -164,12 +164,12 @@ void CAbundanceObservation::execute() {
       // Simulate or Generate Result?
       if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
         double dTemp =  pLikelihood->simulateObserved(dExpectedTotal, dErrorValue, dProcessError, dDelta);
-        saveComparison((*mPropPtr).first, dExpectedTotal, dTemp, dErrorValue, 0.0);
+        saveComparison((*mPropPtr).first, dExpectedTotal, dTemp, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), 0.0);
 
       } else {
         double dTemp = pLikelihood->getResult(dExpectedTotal, (*mPropPtr).second, dErrorValue, dProcessError, dDelta);
         dScore += dTemp;
-        saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, dErrorValue, dTemp);
+        saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), dTemp);
       }
 
       mPropPtr++;
