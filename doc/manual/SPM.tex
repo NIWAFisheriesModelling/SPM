@@ -34,7 +34,17 @@
 
 % Package for including and pretty printing of external config files and program code
 \usepackage{listings} 
-\lstset{basicstyle=\ttfamily\small,columns=fullflexible} %10pt courier, non-aligned columns
+\lstset{ %
+basicstyle=\ttfamily\footnotesize,
+breaklines=true,
+columns=fullflexible,
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+tabsize=2,			                % sets default tabsize to 2 spaces
+breakatwhitespace=false,	        % sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)}          % if you want to add a comment within your code
+}
 
 % Allow colour for HTML links
 \usepackage{color}
