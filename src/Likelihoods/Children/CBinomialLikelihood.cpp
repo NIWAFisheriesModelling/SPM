@@ -77,8 +77,8 @@ void CBinomialLikelihood::simulateObserved(vector<double> &observed, vector<doub
     }
 
     // Calculate Result
-    errorValue[i] = adjustErrorValue(processError[i], errorValue[i]);
-    double dObserved    = pRandom->getRandomBinomial(expected[i], errorValue[i]);
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+    double dObserved    = pRandom->getRandomBinomial(expected[i], dErrorValue);
 
     observed.push_back(dObserved);
   }
