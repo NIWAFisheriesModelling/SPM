@@ -1,18 +1,20 @@
+# Model structure
 @model
 nrows 1
 ncols 1
 layer Base
 categories immature mature
 min_age 1
-max_age 50
+max_age 35
 age_plus_group True
 initial_year 1994
-current_year 2008
+current_year 2007
 final_year 2108
 cell_length 1
 initialisation_phases Phase1 Phase2
 time_steps step_one step_two
 
+# Initalisation
 @initialisation_phase Phase1
 years 200
 processes Recruitment Maturation halfM halfM Ageing
@@ -21,6 +23,7 @@ processes Recruitment Maturation halfM halfM Ageing
 years 1
 processes Recruitment Maturation halfM halfM Ageing
 
+# Annual cycle
 @time_step step_one
 processes Recruitment Maturation halfM fishing halfM
 
@@ -114,7 +117,7 @@ type numeric
 type numeric
 @include "maps/Fishing_2007.map"
 
-# Definition of selecivities
+# Definition of selectivities
 @selectivity One
 type constant
 c 1
@@ -131,6 +134,7 @@ type logistic
 a50 8
 ato95 3
 
+# Include external files
 @include "estimation.spm"
 @include "observations.spm"
 @include "reports.spm"

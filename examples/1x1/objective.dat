@@ -11,11 +11,11 @@ obs->caa-year-2005: 28.2634
 obs->caa-year-2006: 26.6007
 obs->caa-year-2007: 29.3998
 obs->cpue-1998: -1.2172
-obs->cpue-1999: -1.28855
-obs->cpue-2000: -0.773046
+obs->cpue-1999: -1.28856
+obs->cpue-2000: -0.773044
 obs->cpue-2001: 1.78403
 obs->cpue-2002: -1.2528
-obs->cpue-2003: -1.61289
+obs->cpue-2003: -1.61288
 obs->cpue-2004: -1.42012
 obs->cpue-2005: -1.49102
 obs->cpue-2006: -1.61105

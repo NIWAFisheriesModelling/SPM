@@ -26,9 +26,6 @@ type partition
 time_step step_two
 year 2008
 
-@report Objective_Score
-type objective_function
-
 @report Maturation-selectivity
 type selectivity
 selectivity Maturation
@@ -37,15 +34,15 @@ selectivity Maturation
 type selectivity
 selectivity FishingSel
 
+@report Objective_Score
+type objective_function
+
 @report estimate-summary
 type estimate_summary
 
-@report estimate
-type estimate_value
-file_name MPD.dat
-
-@report estimate2
-type estimate_value
+@report estimate-values
+type estimate_summary
+file_name estimate-values.dat
 
 @report Objective_Score
 type objective_function
