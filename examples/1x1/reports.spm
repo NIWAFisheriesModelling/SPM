@@ -34,6 +34,9 @@ selectivity Maturation
 type selectivity
 selectivity FishingSel
 
+@report Covariance
+type covariance
+
 @report Objective_Score
 type objective_function
 
