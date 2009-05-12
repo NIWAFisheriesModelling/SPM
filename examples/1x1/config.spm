@@ -67,55 +67,55 @@ selectivities Maturation
 # Definition of layers
 @layer Base
 type numeric
-@include "maps/Base.map"
+@include "layers/Base.spm"
 
 @layer constant
 type numeric
-@include "maps/constant.map"
+@include "layers/constant.spm"
 
 @layer SSRU
 type categorical
-@include "maps/SSRU.map"
+@include "layers/SSRU.spm"
 
 @layer Fishing_1998
 type numeric
-@include "maps/Fishing_1998.map"
+@include "layers/Fishing_1998.spm"
 
 @layer Fishing_1999
 type numeric
-@include "maps/Fishing_1999.map"
+@include "layers/Fishing_1999.spm"
 
 @layer Fishing_2000
 type numeric
-@include "maps/Fishing_2000.map"
+@include "layers/Fishing_2000.spm"
 
 @layer Fishing_2001
 type numeric
-@include "maps/Fishing_2001.map"
+@include "layers/Fishing_2001.spm"
 
 @layer Fishing_2002
 type numeric
-@include "maps/Fishing_2002.map"
+@include "layers/Fishing_2002.spm"
 
 @layer Fishing_2003
 type numeric
-@include "maps/Fishing_2003.map"
+@include "layers/Fishing_2003.spm"
 
 @layer Fishing_2004
 type numeric
-@include "maps/Fishing_2004.map"
+@include "layers/Fishing_2004.spm"
 
 @layer Fishing_2005
 type numeric
-@include "maps/Fishing_2005.map"
+@include "layers/Fishing_2005.spm"
 
 @layer Fishing_2006
 type numeric
-@include "maps/Fishing_2006.map"
+@include "layers/Fishing_2006.spm"
 
 @layer Fishing_2007
 type numeric
-@include "maps/Fishing_2007.map"
+@include "layers/Fishing_2007.spm"
 
 # Definition of selectivities
 @selectivity One
