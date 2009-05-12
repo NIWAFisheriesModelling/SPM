@@ -371,9 +371,9 @@ Note that this requires that $N_{process\_ error} > 0$, but we allow the special
 
 For both the c.v. and $N$ process errors, the process error has more effect on small errors than on large ones. Be clear that a large value for the $N$ process error means a small process error.
 
-\subsection{Simulating observations}
+\subsection{\I{Simulating observations}\label{sec:simulation-observations}}
 
-\SPM\ can generate simulated observations for a given model with given parameter values. Simulated observations are randomly distributed values, generated according to the error assumptions defined for each observation, around fits calculated from one or more sets of the 'true' parameter values. Simulating from a set of parameters can be used to generate observations from an operating model or as a form of parametric bootstrap. 
+\SPM\ can generate simulated observations for a given model with given parameter values (using \texttt{spm -s}). Simulated observations are randomly distributed values, generated according to the error assumptions defined for each observation, around fits calculated from one or more sets of the 'true' parameter values. Simulating from a set of parameters can be used to generate observations from an operating model or as a form of parametric bootstrap. 
 
 \SPM\ generates simulated observations for the observations defined in the \config\ with \commandlabsubarg{observation}{simulate}{true}. Note that observations with \commandlabsubarg{Observation}{likelihood}{none} cannot be used to simulate observations.
 

@@ -13,7 +13,7 @@ The population section consists of several components, including;
   \item The annual cycle (time steps and processes that are applied in each time step)\index{Annual cycle}
   \item The specifications and parameters of the processes;
   \begin{itemize}
-    \item Population processes (i.e., processes that add, remove, or shift numbers between ages and categories)
+    \item Population processes (i.e., processes that add, remove individuals to or from the partition, or shift numbers between ages and categories in the partition)
     \item Spatial processes (i.e., processes that move or shift cohorts between spatial locations but do not alter their ages or categories)
   \end{itemize}
   \item Layers (used by processes, observations and reports) and their definitions
@@ -52,7 +52,7 @@ The population structure in \SPM\ is represented by a matrix containing an arbit
 
 Within each $(i,j)$ element of the spatial grid element (termed spatial \emph{cell}), the population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
 
-The names and number of categories are user defined, but there  just be at least one category in any model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, and the last age may optionally be a plus group.
+The names and number of categories are user defined, but there  just be at least one category defined for a model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, and the last age may optionally be a plus group.
 
 Hence, the definition of the population structure includes;
 \begin{itemize}
@@ -95,7 +95,7 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Biomass layers}}: The biomass layer is the sum of the biomass of individuals within cell $a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$
+\item {\I{Biomass layers}}: The biomass layer \NYI\ is the sum of the biomass of individuals within cell $a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$
 \begin{equation}
   N(a) = \sum\limits_{k} \sum\limits_l w_{k,l} S_l \ \text{element}(i,j,k,l) 
 \end{equation}
@@ -107,13 +107,13 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Biomass-density layers}}: The biomass-density layer is the density of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$,
+\item {\I{Biomass-density layers}}: The biomass-density layer \NYI\ is the density of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$,
 \begin{equation}
   N(a) = \frac{1}{A_a} \sum\limits_{k} \sum\limits_l w_{k,l} S_l \ \text{element}(i,j,k,l)
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. 
+\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer} \NYI\. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process.
 \end{enumerate}
 
 However, there are  exceptions to this rule --- layers of type biomass, quantity, and distance are calculated automatically by \SPM\ as required. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively.
@@ -135,25 +135,27 @@ The time sequence of the model is defined in three parts;
 
 The annual cycle is implemented as a set of processes that occur, in a user-defined order, within each year. User-defined time steps are used to break the annual cycle into separate components, and allow observations to be associated with different sets of processes. Any number of processes can occur within each time step, in any order and can occur multiple times within each time step. Note that time steps are not implemented during the initialisation phases, and that the annual cycle in the initialisation phases can be different from that run during the model years.
 
-\subsubsection{\I{Model initialisation}}
+\subsubsection{\I{Initialisation}}
 
-\SPM\ initialises the initial equilibrium state as an iterative process, because a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can also be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. 
+Model initialisation can occur in several phases\index{Initialisation!phases}, each which iterates through a number of years carrying out the population and/or spatial processes defined for that phase. At the end of the initialisation step, \SPM\ runs through the model years carrying out processes in the order defined in the annual cycle, and can evaluate expected values of observations in order to calculate likelihoods, project forward to determine future states \NYI, or simulate observations from the current state.
 
-The initialisation part can consist of one or more phases\index{Initialisation ! phases}, with each phase occurring for at least one year. Within each phase, the processes defined for that phase are carried out, and use as the starting point for the following phase, or if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) seeded with a zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail. 
+\SPM\ initialises the initial equilibrium state as an iterative process, because a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can take many iterations, and be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. 
 
-Hence, you need to define;
+In each initialisation phase, the processes defined for that phase are carried out and used as the starting point for the following phase or, if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) set at zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail if used in the first phase of an initialisation. 
+
+The multi-phase iteration also allows the user to determine if the initialisation has converged in a particular model run. Here, add an additional initialisation phase for, say, $1$ year as the last initialisation phase (with the same processes applied). Then, using the initialisation reports (\commandlabsubarg{report}{type}{initialisation\_phase}), print a copy of the partition just before and just after that phase. If the initialisation has converged to an equilibrium state, then the partition at both these time intervals will be the same.
+
+Hence, for initialisation you need to define;
 \begin{itemize}
   \item The initialisation phases
   \item The number of years in each phase and the processes to apply in each
 \end{itemize}
 
-Model initialisation can occur in several phases, each which iterates through a number of years carrying out the population and/or spatial processes defined for that phase. Analytical initialisation is not implemented in \SPM, hence equilibrium and initial population states must be evaluated iteratively. At the end of the initialisation, \SPM\ runs through the model years carrying out processes in the order defined in the annual cycle, and can evaluate expected values of observations in order to calculate likelihoods, project forward to determine future states, or simulate observations from the current state.
-
 \subsubsection{\I{Model years}}
 
 Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. 
 
-Processes are carried out in the order specified within each time step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. The projection part then extends the run time up to the end of year \argument{final}. 
+Processes are carried out in the order specified within each time step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. The projection part \NYI\ then extends the run time up to the end of year \argument{final}. 
 
 \begin{itemize}
   \item The time steps and the processes applied in each
@@ -162,13 +164,13 @@ Processes are carried out in the order specified within each time step, and can 
   \item The final year (i.e., the model projection end year)
 \end{itemize}
 
-\subsubsection{\I{Projections}}
+\subsubsection{\I{Projections}\label{sec:projections}}
 
-To be added...
+\SPM can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the partition is run from \argument{current} to \argument{final}. 
 
 \subsection{\I{Processes}}
 
-Processes produce changes in the model partition, by adding, removing or moving individuals between spatial cells (movement processes), and ages or categories (population processes). These include processes such as recruitment, mortality, ageing, and movements.
+Processes produce changes in the model partition, by adding, removing or moving individuals between spatial cells (movement processes), and ages or categories (population processes). These include processes such as recruitment, mortality, ageing, and various forms of movement.
 
 \SPM\ has two types of processes, \emph{population}\index{Population processes} and \emph{movement}\index{Movement processes} processes. Population processes are those processes which modify, move or otherwise change the numbers of individuals \emph{within} a spatial cell, i.e., they do not affect the spatial location of a cohort. Movement processes, on the other hand, move, shift or otherwise modify cohorts \emph{between} spatial cells, but do not affect the age or category of the numbers in each cohort. 
 
@@ -178,8 +180,8 @@ Each of these processes is carried out in the user-defined prescribed order when
 
 \SPM\ implements three different types of movement processes\index{Movement};
 \begin{enumerate}
-	\item  A migration movement rate\index{Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
-	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}.
+	\item  A migration movement rate\index{Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. \NYI
+	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. \NYI
 	\item Movement parametrised as a probability density function\index{Preference movement}. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
@@ -187,7 +189,7 @@ An \SPM\ model can be parametrised by both population processes (for example, ag
 
 \subsection{\I{Population processes}}
 
-Population processes are those processes that change the population state of individuals, but retain their location. 
+Population processes are those processes that change the population state of individuals, but retain their location. The population processes are described below.
 
 \subsubsection{\I{Recruitment}}
 
@@ -202,12 +204,22 @@ For each cell where cell$(i,j)$ is a member of some layer $L_R$, the  number of 
 
 where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and $n$ is the number of spatial locations where recruitment occurs. 
 
-In the constant recruitment process, $R_y$, the number of recruits in year $y$ is simply the product of the average recruitment $R_0$ and the annual year class strength multiplier, $YCS$, i.e.,
+In the constant recruitment process, $R_y$, the number of recruits in year $y$ is simply the average recruitment $R_0$, i.e.,
 \begin{equation}
-  R_y = R_0 \times YCS_{y-offset}
+  R_y = R_0
 \end{equation}
 
-where $offset$ if the number of years offset to link the year class with the year of spawning.
+For example, to specify a constant recruitment process, where individuals are added to the category `immature' at $age=1$, and the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{recruitment}, then the syntax is,
+
+\begin{verbatim}
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 500000
+ages 1
+layer recruitment
+\end{verbatim}
 
 In the Beverton-Holt recruitment process, $R_y$, the number of recruits in year $y$ is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
 \begin{equation}
@@ -233,9 +245,19 @@ except that in the case of the plus group (if defined),
   \text{element}(i,j,k,age_{max}) \leftarrow \text{element}(i,j,k,age_{max}) + \text{element}(i,j,k,age_{max-1}).
 \end{equation}
 
+For example, to apply ageing to the categories \texttt{immature} and \texttt{mature}, then the syntax is,
+
+\begin{verbatim}
+@process Ageing
+type ageing
+categories immature mature
+\end{verbatim}
+
+Note that ageing is \emph{not} applied by \SPM\ by default. As with other processes, \SPM\ will not apply ageing unless its defined and specified as a process within the annual cycle. Hence, it is possible to specify a model where a category is not aged. \SPM\ will not check or otherwise warn if there is a category defined where ageing is not applied.
+
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-Four types of mortality processes are permissible in \SPM, constant, annual-rate, event, or biomass-event. These processes remove individuals from the partition, either as a rate (for constant or annual-rate), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural natural mortality (e.g., as a constant or annual-rate), then some event mortality in sequence. It is up to the user to specify how this happens.
+Four types of mortality processes are permissible in \SPM, constant, annual-rate \NYI, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annual-rate), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not (yet) implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural natural mortality (e.g., as a constant or annual-rate), then some event mortality in sequence. It is up to the user to specify how this happens.
 
 Mortalities as rates can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative natural mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity-at-age, and the mortality rate. 
 
@@ -251,9 +273,27 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 
 Mortality for the annual rate is similar, except that the rate applied in each year is defined as a separate value. 
 
+For example, to specify an constant annual mortality rate ($M=0.2$) for categories `immature' and `mature', then, 
+
+\begin{verbatim}
+@process NaturalMortality
+type constant_mortality_rate
+categories immature mature
+M 0.2 0.2
+selectivities One One
+\end{verbatim}
+
+Note that the mortality rate process requires a selectivity. To apply the same mortality rate over all age classes, use a selectivity defined as $S_i=1.0$ for all ages $i$, e.g.,
+
+\begin{verbatim}
+@selectivity One
+type constant
+c 1
+\end{verbatim}
+
 The event mortality types\index{Event mortality} act in a similar manner, except that it removes a specified abundance (number of individuals) or biomass from the partition, rather than applying a mortality rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
-The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate.
+The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate. Event mortality processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be removed. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in defined categories (after applying selectivities). See Section \ref{sec:penalties} for more information on specifying penalties.
 
 For example, the event mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
 
@@ -280,23 +320,67 @@ And the number removed $R$ from each age $l$ in category $k$ is,
   R(k,l) = UV(k,l)
 \end{equation}
 
-Similarly, the biomass-event mortality type is applied as \ldots \textbf{to be added}.
+For example, to specify fishing mortality based on spatially explicit catches (and given for each year as a layer, `Catch2000', `Catch2001', etc,.) over categories `immature' and 'mature' with selectivity `FishingSel' and assuming a maximum possible exploitation rate of 0.7, then the syntax is,
+
+\begin{verbatim}
+@process Fishing
+type event_mortality
+categories immature mature
+years 2000 2001 2002
+layers Catch2000 Catch2001 Catch2002
+U_max 0.70
+selectivities FishingSel FishingSel FishingSel
+penalty event_mortality_penalty
+\end{verbatim}
+
+%Similarly, the biomass-event mortality type is applied as \ldots \textbf{to be added}.
 
 \subsubsection{\I{Category transition}s}
 
 Category transition processes move individuals between categories. \SPM\ implements two types, the total number and a rate. 
 
-The transition type moves a number $n$ between a source and sink category. The transition process with selectivity $S$ for source category $a$ and sink category $b$ is,
+The category transition process moves a number $n$ between some source and sink category (or categories). This process may be used, for example, to implement a 'tagging' process for mark-recapture data. We define the transition process with selectivity $S$ for source category $a$ and sink category $b$ as,
+
 \begin{equation}\begin{split}
   & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l) \\
   & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l)
 \end{split}\end{equation}
+
+Category transition processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be moved. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in the source category (after applying the selectivity) available to be moved. See Section \ref{sec:penalties} for more information on specifying penalties.
+
+If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, , then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
+
+\begin{verbatim}
+@process tagging
+type category_transition
+from immature mature
+selectivities tagging-Sel tagging-Sel
+to immature-tag mature-tag
+years 2001 2002 2003
+layers TagRelease2001 TagRelease2002 TagRelease2003
+penalty tag_release_penalty
+\end{verbatim}
+
+Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories.
 
 The transition rate type moves a proportion $p$ between a source and sink category. The transition rate process with selectivity $S$ for source category $a$ and sink category $b$ is,
 \begin{equation}\begin{split}
   & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - pS_l \times \text{element}(i,j,a,l) \\
   & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + pS_l \times \text{element}(i,j,a,l)
 \end{split}\end{equation}
+
+If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. \SPM\ treats each pair of categories as an independent transition --- but note that these are applied in order that they are specified. For example, to `mature' males and females in a model with four categories \texttt{male-immature}, \texttt{female-immature}, \texttt{male-mature}, and \texttt{female-mature}, then you might define a category transition process \texttt{maturation} with selectivities \texttt{male-maturity} and \texttt{female-maturity}, as,
+
+\begin{verbatim}
+@process maturation
+type category_transition_rate
+from male-immature female-immature
+to male-mature female-mature
+proportions 1.0 1.0
+selectivities male-maturity female-maturity
+\end{verbatim}
+
+Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
 
 \subsection{\I{Movement processes}}
 
@@ -321,11 +405,11 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 
 \subsubsection{\I{Migration movement}}
 
-The migration process moves individuals from one location to another. A migration can involve one or more categories and movement at age is defined as some proportion multiplies by a selectivity. Migrations are limited in scope to move individuals from one cell to another, and are available to allow compatibility with limited space models such as CASAL \cite{1388}.
+The migration process \NYI\ moves individuals from one location to another. A migration can involve one or more categories and movement at age is defined as some proportion multiplies by a selectivity. Migrations are limited in scope to move individuals from one cell to another, and are available to allow compatibility with limited space models such as CASAL \cite{1388}.
 
 \subsubsection{\I{Adjacent cell movement}}
 
-The adjacent cell movement simply moves a proportion of individuals to neighbouring cells. It can be applied to a limited range of spatial locations by associating it with a layer.
+The adjacent cell movement \NYI\ simply moves a proportion of individuals to neighbouring cells. It can be applied to a limited range of spatial locations by associating it with a layer.
 
 \subsubsection{\I{Preference movement}}
 
@@ -409,9 +493,19 @@ Derived quantities are values, calculated by \SPM\ as required, that have a sing
 
 Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. In this example, the spawning stock biomass could be defined as the abundance or biomass of a part of the population at some point in the annual cycle, for selected ages and categories. Derived quantities are described further in the population section (Section \ref{sec:population-section}).
 
-\subsection{\I{Size-at-age}\label{sec:size-at-age}}
+For example, to define a derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time step over areas defined by a layer as the spawning ground but counting all `mature' individuals, we might use the syntax,
 
-This is used to determine length frequencies and hence biomass (using a size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
+\begin{verbatim}
+@derived_quantity SSB
+categories mature
+selectivity One
+time_step 1
+layer spawning_ground
+\end{verbatim}
+
+\subsection{\I{Size-at-age relationship}\label{sec:size-at-age}}
+
+Size-at-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
 
 \begin{description}
 \item{von Bertalanffy}\index{von Bertalanffy growth curve} where size at age is defined as,
@@ -437,9 +531,10 @@ The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Sc
 
 The model can incorporate changes in size-at-age during the year (i.e., growth between fish birthdays) by specifying the growth proportions for each time step of the annual cycle.
 
-\subsection{\I{Mean weight}\label{sec:mean-weight}}
+\subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
 
-The size-weight parameters $a$ and $b$ is calculated as either,
+The size-weight relationship \NYI, with parameters $a$ and $b$, is calculated as either,
+
 \begin{itemize}
   \item{None:} A relationship where the weight of each individual is exactly 1 
   \item{Basic:}\index{Basic size-weight relationship} The more usual size-weight relationship, where 
@@ -452,10 +547,10 @@ Be careful about the scale of $a$ --- this is easily specified incorrectly. If y
 
 If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
 \begin{equation}
-	\text{mean weight}=a \times (\text{mean size at age})^b \times \left( 1+\text{cv}^2 \right)^{\frac{b(b-1)}{2}}
+	\text{mean weight}=a \times (\text{mean size at age})^b \times \left( 1+\text{c}^2 \right)^{\frac{b(b-1)}{2}}
 \end{equation}
 
-where cv is the c.v. of sizes-at-age.
+where $c$ is the c.v. of sizes-at-age.
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
@@ -465,9 +560,9 @@ A selectivity is a function with a different value for each age class (i.e., for
 
 A selectivity is always defined to apply just to one category of the population (i.e, row of the partition). To apply the same selectivity to more than one category, the you need to specify the categories that it applied to.
 
-Note that selectivities are indexed by age, with indices from min\_age to max\_age. For example, you might have an age-based selectivity that was logistic with 50\% mark at age 5 and 95\% mark at age 7. This would be defined by the \subcommand{Type}=\argument{Logistic} with parameters $a_{50}=5$ and $a_{to95}=(7-5)=2$. Then the value of the selectivity at age $x=3$ is therefore $0.95$.
+Note that selectivities are indexed by age, with indices from \argument{min\_age} to \argument{max\_age}. For example, you might have an age-based selectivity that was logistic with $50\%$ selected at age $5$ and $95\%$ selected at age $7$. This would be defined by the \subcommand{type}=\argument{logistic} with parameters $a_{50}=5$ and $a_{to95}=(7-5)=2$. Then the value of the selectivity at age $x=7$ is $0.95$ and the selectivity at $x=3$ is $0.05$.
 
-Note that the function values for some choices of parameters for some selectivities can result in an computer numeric overflow error (i.e., the number calculated from parameter values is either too large or too small to be represented in computer memory). \SPM\ implements range checks on some parameters to test for a possible numeric overflow error before attempting to calculate function values. For example, the logistic selectivity is implemented such that if $(a50-x)/ato_95 > 5$ then the value of the selectivity at $x=0$, i.e., for $a50=5$, $ato_95=0.1$, then the value of the selectivity at $x=1$, without range checking would be $7.1x10-52$. With range checking, that value is $0$ (as $(a50 x)/ato_95=40 > 5$).
+Note that the function values for some choices of parameters for some selectivities can result in an computer numeric overflow error (i.e., the number calculated from parameter values is either too large or too small to be represented in computer memory). \SPM\ implements range checks on some parameters to test for a possible numeric overflow error before attempting to calculate function values. For example, the logistic selectivity is implemented such that if $(a50-x)/ato_95 > 5$ then the value of the selectivity at $x=0$, i.e., for $a50=5$, $ato_95=0.1$, then the value of the selectivity at $x=1$, without range checking would be $7.1 \times 10^{-52}$. With range checking, that value is $0$ (as $(a50 x)/ato_95=40 > 5$).
 
 The available selectivities are;
 

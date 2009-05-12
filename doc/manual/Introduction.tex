@@ -22,9 +22,9 @@ Copyright \copyright 2008-\SourceControlYearDoc, \href{http://www.niwa.co.nz}{\O
 
 \subsection{\I{System requirements}}
 
-\SPM\ is available for most IBM compatible machines running \I{Linux} and from the command prompt under most \I{Microsoft Windows} operating systems.
+\SPM\ is available for most IBM compatible machines running 32-bit or 64-bit \I{Linux} and most recent 32-bit \I{Microsoft Windows} operating systems.
 
-Several of \SPM s tasks are highly computer intensive and a fast, powerful processor is recommended. We recommend a minimum of 10 megabytes of free RAM (although, depending on the scope of the problem, you may need much more). Some of \SPM s tasks can be multi-threaded, and hence multi-core machines may perform some tasks considerably quicker than single core processors. The program itself requires only a few megabytes of hard-disk space but output files can consume large amounts of disk space. Depending on number and type of user output requests, the output could range from a few hundred kilobytes to several hundred megabytes. However, we note that, depending on the model implemented, some of \SPM s tasks can take a considerable amount of time.
+Several of \SPM s tasks are highly computer intensive and a fast processor is recommended. We recommend a minimum of 10 megabytes of free RAM (although, depending on the scope of the problem, you may need much more). Some of \SPM s tasks can be multi-threaded, and hence multi-core machines may perform some tasks considerably quicker than single core processors. The program itself requires only a few megabytes of hard-disk space but output files can consume large amounts of disk space. Depending on number and type of user output requests, the output could range from a few hundred kilobytes to several hundred megabytes. However, we note that, depending on the model implemented, some of \SPM s tasks can take a considerable amount of time.
 
 \subsection{\I{Necessary files}}
 
@@ -44,6 +44,6 @@ No software other than the appropriate operating system or emulation package is 
 
 \SPM\ uses two minimisers --- the first is closely based on the main algorithm of \cite{779}, and which which uses finite difference gradients\index{Finite differences minimiser}, and the second is an implementation of the differential evolution solver\index{Differential evolution minimiser} \citep{1442}, and based on code by \href{mailto:<godwin@pushcorp.com>}{Lester E. Godwin} of \href{http://www.pushcorp.com}{PushCorp, Inc.} The random number generator\index{Random number generator} used by \SPM\ uses an implementation of the Mersenne twister random number generator \citep{796}. This, the command line functionality, matrix operations, and a number of other functions use the \href{http://www.boost.org/}{BOOST} C++ library (Version 1.38.0)\index{BOOST C++ library}.
 
-Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code\index{\SPM\ source code} for \SPM\ is available on request.
+Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code\index{\SPM\ source code} for \SPM\ is available either as a part of the installation, or on request from the \authors.
 
 

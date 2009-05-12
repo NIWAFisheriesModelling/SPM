@@ -47,7 +47,7 @@ All parameters are estimated within bounds\index{Bounds}. For each parameter to 
 
 \subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
-Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}\index{Differential evolution minimiser}.
+Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) the optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}, the differential evolution minimiser \index{Differential evolution minimiser}.
 
 \subsubsection{\I{The numerical differences minimiser}}
 
@@ -76,33 +76,25 @@ Also note that if an estimated parameter has equal lower and upper bounds, it wi
 
 The differential evolution minimiser is a simple population based, stochastic function minimizer, but is claimed to be quite powerful in solving minimisation problems. It is a method of mathematical optimization of multidimensional functions and belongs to the class of evolution strategy optimizers. Initially, the procedure randomly generates and evaluates a number of solution vectors (the population size), each with $p$ parameters. Then, for each generation (iteration), the algorithm creates a candidate solution for each existing solution by random mutation and uniform crossover. The random mutation generates a new solution by multiplying the difference between two randomly selected solution vectors by some scale factor, then adding the result to a third vector. Then an element-wise crossover takes place with probability $P_{cr}$, to generate a potential candidate solution. If this is better than the initial solution vector, it replaces it, otherwise the original solution is retained. The algorithm is terminated after either a predefined number of generations (\argument{max\_generations}) or when the maximum difference between the scaled individual parameters from the candidate solutions from all populations is less than some predefined amount \argument{tolerance}.
 
-The differential evolution minimiser can be good at finding global minimums in surfaces that may have local minima. However, the speed of the minimiser, and the ability to find a good minima depend on the number of initial 'populations'. Some authors recommend that the number of populations be set at about $10*p$, where $p$ is the number of free parameters. However, depending on your problem, you may find that less will suffice.
+The differential evolution minimiser can be good at finding global minimums in surfaces that may have local minima. However, the speed of the minimiser, and the ability to find a good minima depend on the number of initial `populations'. Some authors recommend that the number of populations be set at about $10*p$, where $p$ is the number of free parameters. However, depending on your problem, you may find that you may need more, or that less will suffice.
 
-We note that there is no proof of convergence for the differential evolution solver, but several papers have found it to be an efficient method of solving multidimensional problems. Our (limited) experience suggests that it often finds a better minima, and is usually significantly faster at finding that solution when compared with the numerical differences minimiser. Comparisons with auto-differentiation minimisers or other more sophisticated algorithms have not been made. 
+We note that there is no proof of convergence for the differential evolution solver, but several papers have found it to be an efficient method of solving multidimensional problems. Our (limited) experience suggests that it can often find a better minima and may be faster or longer (depending on the actual mode specification) at finding a solution when compared with the numerical differences minimiser. Comparisons with auto-differentiation minimisers or other more sophisticated algorithms have not been made. 
 
 \subsection{\I{Posterior profiles}\label{sec:estimate-profiles}}
 
 If profiles are requested \texttt{spm -p}, \SPM\ will first calculate a point estimate. For each scalar parameter or, in the case of vectors or selectivities, the element of the parameter to be profiled, \SPM\ will fix its value at a sequence of $n$ evenly spaced numbers between specified bounds $l$ and $u$, and calculate a point estimate at each value. 
 
-By default $n=10$, and $(l, u)=($lower bound on parameter plus $(range/(2n))$, upper bound on parameter less $(range/(2n))$. Each minimisation starts at the final parameter values from the previous resulting value of the parameter being profiled. \SPM\ will report the objective function for each parameter value and all the parameter estimates. The initial point estimate is also inserted into the profile (note that this can serve as a check that none of the other points along the profile have a better objective function value than the initial `minimum').
+By default $n=10$, and $(l, u)=($lower bound on parameter plus $(range/(2n))$, upper bound on parameter less $(range/(2n))$. Each minimisation starts at the final parameter values from the previous resulting value of the parameter being profiled. \SPM\ will report the objective function for each parameter value. Note that an initial point estimate should be compared with the profile, not least to check check that none of the other points along the profile have a better objective function value than the initial `minimum'.
 
 You specify which parameters are to be profiled, and optionally $n$, $l$, and $u$ values for each. In the case of vector parameters, you will also need to specify the element of the vector being profiled. 
 
-TODO: Check the following para
+You can also supply the initial starting point for the estimation using \texttt{spm -i \emph{file}} --- this may improve the minimiser performance for the profiles.
 
-You can also supply the initial point estimate using \texttt{spm -i}, so that \SPM\ doesn't need to do the first minimisation. Be aware that you are supplying the point estimate, not the minimiser starting point to get to the point estimate (as in other situations where \texttt{spm -i} is used).
-
-TODO: Check the following para
-
-If you have specified multi-phase estimation, it is only used for the initial point estimate. Subsequent minimisations are done single-phase, as they should start reasonably close to the endpoint and so shouldn't need multiple phases.
-
-TODO: Check the following para for syntax
-
-If you get an implausible profile, it may be a result of not using enough iterations in the minimiser (in this case, increase \commandsub{minimiser}{max\_iterations} and/or \commandsub{minimiser}{max\_evaluations} and retry), or the convergence criteria may not be strong enough (try setting \commandsub{minimiser}{tolerance} to a smaller value).
+If you get an implausible profile, it may be a result of not using enough iterations in the minimiser or a poor choice of minimiser control variables (e.g., the minimiser tolerance). It also may be useful to try both if the minimisers in \SPM\ and compare the results.
 
 \subsection{\I{Bayesian estimation}\label{sec:estimate-MCMC}}
 
-\SPM\ can use a \I{Monte Carlo Markov Chain}\index{MCMC} to generate a sample from the posterior distribution of the estimated parameters \texttt{spm -m} and output the sampled values to a file (optionally only every $n$th set of values).
+\SPM\ can use a \I{Monte Carlo Markov Chain}\index{MCMC} \NYI\ to generate a sample from the posterior distribution of the estimated parameters \texttt{spm -m} and output the sampled values to a file (optionally only every $n$th set of values).
 
 As \SPM\ has no post-processing capabilities. \SPM\ cannot produce MCMC convergence diagnostics (use a package such as \href{http://www.public-health.uiowa.edu/boa}{BOA}) or plot/summarize the posterior distributions of the output quantities (for example, using a general-purpose statistical or spreadsheet package such as \href{http://www.insightful.com}{S-Plus}, \href{http://www.r-project.org}{\R}, or \href{http://www.microsoft.com}{Microsoft Excel}).
 
@@ -128,9 +120,7 @@ There are two options for the starting point of the Markov Chain:
 
 \begin{itemize}
 \item Start from the point estimate.
-
 \item Start from a random point near the point estimate (the point is generated from a multivariate normal distribution, centred on the point estimate, with covariance equal to the inverse Hessian times a user-specified constant). This is done to prevent the chain from getting `stuck' at the point estimate.)
-
 \item Start from a point specified by the user with \texttt{spm -i}.
 \end{itemize}
 
@@ -138,8 +128,7 @@ The chain moves in natural space, i.e., no transformations are applied to the es
 
 \begin{itemize}
 \item The covariance matrix is taken as the inverse of the approximate Hessian from the quasi-Newton minimiser.
-
-\item The covariance matrix is modified so as to decrease all correlations greater than \commandsub{MCMC}{max\_correlation} down to \commandsub{MCMC}{max\_correlation}, and similarly to increase all correlations less than  -\commandsub{MCMC}{max\_correlation} up to -\commandsub{MCMC}{max\_correlation} (the \commandsub{MCMC}{max\_correlation} parameter defaults to 0.8). This should help to avoid getting 'stuck' in a lower-dimensional subspace.
+\item The covariance matrix is modified so as to decrease all correlations greater than \commandsub{MCMC}{max\_correlation} down to \commandsub{MCMC}{max\_correlation}, and similarly to increase all correlations less than  -\commandsub{MCMC}{max\_correlation} up to -\commandsub{MCMC}{max\_correlation} (the \commandsub{MCMC}{max\_correlation} parameter defaults to 0.8). This should help to avoid getting `stuck' in a lower-dimensional subspace.
 
 \item The covariance matrix is then modified either by,
 
@@ -151,21 +140,23 @@ The chain moves in natural space, i.e., no transformations are applied to the es
 \]
 for $i \ne j$, and ${\mathop{\rm var}} \left( i \right)^\prime   = k$
 
-\item if \commandsubarg{MCMC}{adjustment\_method}{correlation}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{min\_diff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=min\_diff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the ith parameter and all other parameters.
+\item if \commandsubarg{MCMC}{adjustment\_method}{correlation}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{min\_diff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=min\_diff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the $i$th parameter and all other parameters.
 \end{itemize}
 
-This allows each estimated parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{MCMC}{min\_diff} parameter defaults to 0.0001.
+This allows each estimated parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{MCMC}{min\_diff} parameter defaults to $0.0001$.
 
 \item The \commandsub{MCMC}{step\_size} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of estimated parameters, as recommended by Gelman et al. \citep{823}, though some experimentation suggested that this may be too high and can lead to a low acceptance rate. 
 \end{itemize}
 
 The proposal distribution can also change adaptively during the chain, using two different mechanisms. Both are offered as means of improving the convergence properties of the chain. It is important to note that any adaptive behaviour must finish before the end of the burn-in period, i.e., the proposal distribution must be finalised before the kept portion of the chain starts (\SPM\ enforces this). The adaptive mechanisms are as follows: 
 
-1.	You can request that the step size change adaptively at one or more sample numbers. At each adaptation, the step size is doubled if the acceptance rate since the last adaptation is more than 0.5, or halved if the acceptance rate is less than 0.2. (See Gelman et al. 1995 for justification.) The new step size is recorded in the objectives file. 
+\begin{enumerate}
+\item You can request that the step size change adaptively at one or more sample numbers. At each adaptation, the step size is doubled if the acceptance rate since the last adaptation is more than $0.5$, or halved if the acceptance rate is less than $0.2$. (See Gelman et al. \citep{823} for justification.)
 
-2.	You can request that the entire covariance matrix change adaptively at one or more sample numbers. At each adaptation, it is replaced with a matrix based on the sample covariance of an earlier section of the chain. The theory here is that the covariance of a portion of chain could potentially be a better estimate of the covariance of the posterior distribution than the inverse Hessian.
+\item You can request that the entire covariance matrix change adaptively at one or more sample numbers. At each adaptation, it is replaced with a matrix based on the sample covariance of an earlier section of the chain. The theory here is that the covariance of a portion of chain could potentially be a better estimate of the covariance of the posterior distribution than the inverse Hessian.
+\end{enumerate}
 
-	The procedure used to choose the sample of points is as follows. First, all points on the chain so far are taken. All points in an initial user-specified period are discarded. The assumption is that the chain will have started moving during this period - if this is incorrect and the chain has still not moved by the end of this period, it is a fatal error and SPM stops. The remaining set of points must contain at least some user-specified number of transitions - if this is incorrect and the chain has not moved this often, it is again a fatal error. If this test is passed, the set of points is systematically sub-sampled down to 1000 points (it must be at least this long to start with).
+The procedure used to choose the sample of points is as follows. First, all points on the chain so far are taken. All points in an initial user-specified period are discarded. The assumption is that the chain will have started moving during this period - if this is incorrect and the chain has still not moved by the end of this period, it is a fatal error and \SPM\ stops. The remaining set of points must contain at least some user-specified number of transitions - if this is incorrect and the chain has not moved this often, it is again a fatal error. If this test is passed, the set of points is systematically sub-sampled down to 1000 points (it must be at least this long to start with).
 
 The variance-covariance matrix of this sub-sample of chain is calculated. As above, correlations greater than \commandsub{MCMC}{MaxCor} are reduced to \commandsub{MCMC}{MaxCor}, correlations less than \commandsub{MCMC}{MaxCor} are increased to  \commandsub{MCMC}{MaxCor}, and very small non-zero variances are increased (\commandsub{MCMC}{CovarianceAdjustment} and \commandsub{MCMC}{MinDiff}. The result is the new variance-covariance matrix of the proposal distribution.
 
@@ -173,17 +164,15 @@ The step size parameter is now on a completely different scale, and must also be
 
 All modified versions of the covariance matrix are printed to the standard output, but only the initial covariance matrix (inverse Hessian) is saved to the objectives file. The number of covariance modifications by each iteration is recorded as a column on the objectives file. 
 
-The probability of acceptance for each jump is 0 if it would move out of the bounds, or 1 if it improves the posterior, or (new posterior/old posterior) otherwise. 
+The probability of acceptance for each jump is $0$ if it would move out of the bounds, or $1$ if it improves the posterior, or (new posterior/old posterior) otherwise. 
 
-You can specify how often the position of the chain is recorded using the keep parameter. For example, with keep 10, only every 10th sample is written to file. 
+You can specify how often the position of the chain is recorded using the keep parameter. For example, with keep $10$, only every $10$th sample is written recorded. 
 
-You have the option to specify that some of the estimated parameters are fixed during MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. If you specify the start of the chain using \texttt{spm -i}, these fixed parameters are set to the values in the file.
+You have the option to specify that some of the estimated parameters are fixed during the MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. If you specify the start of the chain using \texttt{spm -i}, these fixed parameters are set to the values in the file.
 
-A multivariate $t$ distribution is available as an alternative to the multivariate normal proposal distribution. If you request multivariate $t$ proposals, you may want to change the degrees of freedom from the default of 4. As the degrees of freedom decrease, the $t$ distribution becomes more heavy tailed. This may lead to better convergence properties.
+A multivariate $t$ distribution is available as an alternative to the multivariate normal proposal distribution. If you request multivariate $t$ proposals, you may want to change the degrees of freedom from the default of $4$. As the degrees of freedom decrease, the $t$ distribution becomes more heavy tailed. This may lead to better convergence properties.
 
-Given a posterior (sub)sample, \SPM\ can calculate a list of output quantities for each sample point (see Section XXX). These quantities can be dumped into a file (using \texttt{spm -v}) and read into an external software package where the posterior distributions can be plotted and/or summarised. 
-
-The posterior sample can also be used for projections (Section XXX) or simulations (Section XXX), allowing the parameter uncertainty, as expressed in the posterior distribution, can be included into the risk or other output estimates.
+The posterior sample can also be used for projections (Section \ref{sec:projections}) or simulations (Section {sec:simulation-observations}) with the values supplied using \texttt{spm -i \emph{file}}.
 
 \subsection{Priors\label{sec:priors}}
 
