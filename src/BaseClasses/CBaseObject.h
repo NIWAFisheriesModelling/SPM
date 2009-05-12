@@ -12,6 +12,7 @@
 
 // Global Headers
 #include <map>
+#include <vector>
 
 // Local Headers
 #include "ParameterList/CParameterList.h"
@@ -21,6 +22,7 @@
 
 // Namespaces
 using std::map;
+using std::vector;
 
 //**********************************************************************
 //

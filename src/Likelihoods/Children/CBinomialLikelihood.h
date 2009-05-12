@@ -22,8 +22,10 @@ public:
   CBinomialLikelihood();
   virtual                     ~CBinomialLikelihood();
   double                      adjustErrorValue(double processError, double errorValue);
-  double                      getResult(double expected, double observed, double errorValue, double processError, double delta);
-  double                      simulateObserved(double expected, double errorValue, double processError, double delta);
+  void                        getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+                                vector<double> &errorValue, vector<double> &processError, double delta);
+  void                        simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+                                vector<double> &processError, double delta);
 };
 
 #endif /* CBINOMIALLIKELIHOOD_H_ */

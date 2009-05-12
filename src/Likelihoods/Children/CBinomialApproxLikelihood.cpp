@@ -31,38 +31,50 @@ double CBinomialApproxLikelihood::adjustErrorValue(double processError, double e
 }
 
 //**********************************************************************
-// double CBinomialApproxLikelihood::getResult(double expected, double observed, double errorValue,
-//                                                                    double processError, double delta)
+// void CBinomialApproxLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+//    vector<double> &errorValue, vector<double> &processError, double delta)
 // Get the result from our likelihood
 //**********************************************************************
-double CBinomialApproxLikelihood::getResult(double expected, double observed, double errorValue,
-                                                                double processError, double delta) {
-  //Add in process error if defined
-  errorValue = adjustErrorValue(processError, errorValue);
+void CBinomialApproxLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+    vector<double> &errorValue, vector<double> &processError, double delta) {
 
-  double dStdError = sqrt((CMath::zeroFun(expected,delta) * CMath::zeroFun(1.0-expected,delta))/errorValue);
-  double dTemp = log(dStdError) + 0.5 * pow((observed - expected)/dStdError,2.0);
+  // Loop through expected values
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Calculate Scores
+    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
+    double dStdError    = sqrt((CMath::zeroFun(expected[i],delta) * CMath::zeroFun(1.0-expected[i],delta))/dErrorValue);
+    double dScore       = log(dStdError) + 0.5 * pow((observed[i] - expected[i])/dStdError,2.0);
 
-  return dTemp;
+    scores.push_back(dScore);
+  }
 }
 
 //**********************************************************************
 // double CBinomialApproxLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
 // Simulate observed value from our observation
 //**********************************************************************
-double CBinomialApproxLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  // Should never happen ...
-  if(expected < 0.0)
-    return 0.0;
+void CBinomialApproxLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+    vector<double> &processError, double delta) {
 
- //Add in process error if defined
-  errorValue = adjustErrorValue(processError, errorValue);
-
-  //Get random number
+  // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
-  double result = pRandom->getRandomBinomial(expected, errorValue);
 
-  return result;
+  observed.clear();
+
+  // Loop through our expected values
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Check for invalid values
+    if (expected[i] < 0.0) {
+      observed.push_back(0.0);
+      continue;
+    }
+
+    // Calculate Observed
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+    double dObserved = pRandom->getRandomBinomial(expected[i], dErrorValue);
+
+    observed.push_back(dObserved);
+  }
 }
 
 //**********************************************************************

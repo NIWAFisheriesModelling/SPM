@@ -18,20 +18,6 @@ CPseudoLikelihood::CPseudoLikelihood() {
 }
 
 //**********************************************************************
-// double CPseudoLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
-// Simulate our Likelihood
-//**********************************************************************
-double CPseudoLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  try {
-    throw string("Cannot use Pseudo-Likelihood during simulation");
-
-  } catch (string Ex) {
-    Ex = "CPseudoLikelihood.simulateObserved()->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // CPseudoLikelihood::~CPseudoLikelihood()
 // Destructor
 //**********************************************************************

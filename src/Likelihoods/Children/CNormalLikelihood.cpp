@@ -35,36 +35,47 @@ double CNormalLikelihood::adjustErrorValue(double processError, double errorValu
 //                                                            double processError, double delta)
 // Get result from likelihood for our observation
 //**********************************************************************
-double CNormalLikelihood::getResult(double expected, double observed, double errorValue,
-                                                            double processError, double delta) {
+void CNormalLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+    vector<double> &errorValue, vector<double> &processError, double delta) {
 
-  //Add in process error if defined
-  errorValue = adjustErrorValue(processError, errorValue);
+  // Loop through expected
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Calculate score
+    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
+    double dSigma       = dErrorValue*expected[i];
+    double dScore       = (observed[i]-expected[i]) / CMath::zeroFun(dErrorValue*expected[i],delta);
+    dScore              = log(dSigma) + 0.5 * (dScore * dScore);
 
-  double dSigma = errorValue*expected;
-  double dTemp = (observed-expected) / CMath::zeroFun(errorValue*expected,delta);
-  dTemp = log(dSigma) + 0.5 * (dTemp * dTemp);
-
-  return dTemp;
+    scores.push_back(dScore);
+  }
 }
 
 //**********************************************************************
 // double CNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
 // Simulate observed value for our observation
 //**********************************************************************
-double CNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  // Should never happen ...
-  if(expected <= 0.0)
-    return 0.0;
+void CNormalLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+    vector<double> &processError, double delta) {
 
- //Add in process error if defined
-  errorValue = adjustErrorValue(processError, errorValue);
-
-  //Get random number
+  // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
-  double result = pRandom->getRandomNormal(expected, (expected*errorValue));
 
-  return result;
+  observed.clear();
+
+  // Loop through expected
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Check expected
+    if(expected[i] <= 0.0) {
+      observed.push_back(0.0);
+      continue;
+    }
+
+    // Calculate observed
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+    double dObserved   = pRandom->getRandomNormal(expected[i], (expected[i]*dErrorValue));
+
+    observed.push_back(dObserved);
+  }
 }
 
 //**********************************************************************

@@ -133,8 +133,14 @@ void CAbundanceObservation::execute() {
   try {
 #endif
     // Variables
-             dScore           = 0.0;
-    double   dExpectedTotal   = 0.0;
+                        dScore           = 0.0;
+    double              dExpectedTotal   = 0.0;
+    vector<string>      vKeys;
+    vector<double>      vExpected;
+    vector<double>      vObserved;
+    vector<double>      vProcessError;
+    vector<double>      vErrorValue;
+    vector<double>      vScores;
 
     // Base
     CObservation::execute();
@@ -161,18 +167,32 @@ void CAbundanceObservation::execute() {
       dExpectedTotal *= pCatchability->getQ();
       double dErrorValue = mErrorValue[(*mPropPtr).first];
 
-      // Simulate or Generate Result?
-      if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
-        double dTemp =  pLikelihood->simulateObserved(dExpectedTotal, dErrorValue, dProcessError, dDelta);
-        saveComparison((*mPropPtr).first, dExpectedTotal, dTemp, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), 0.0);
-
-      } else {
-        double dTemp = pLikelihood->getResult(dExpectedTotal, (*mPropPtr).second, dErrorValue, dProcessError, dDelta);
-        dScore += dTemp;
-        saveComparison((*mPropPtr).first, dExpectedTotal, (*mPropPtr).second, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), dTemp);
-      }
+      // Store our Values
+      vKeys.push_back((*mPropPtr).first);
+      vExpected.push_back(dExpectedTotal);
+      vObserved.push_back((*mPropPtr).second);
+      vErrorValue.push_back(dErrorValue);
+      vProcessError.push_back(dProcessError);
 
       mPropPtr++;
+    }
+
+    // Simulate or Generate Result?
+    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+      // Simulate our values, then save them
+      pLikelihood->simulateObserved(vObserved, vExpected, vErrorValue, vProcessError, dDelta);
+      for (int i = 0; i < (int)vObserved.size(); ++i)
+        saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
+
+    } else { // Generate Score
+      dScore = 0.0;
+
+      // Generate Results and save them
+      pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
+      for (int i = 0; i < (int)vScores.size(); ++i) {
+        dScore += vScores[i];
+        saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vScores[i]);
+      }
     }
 
 #ifndef OPTIMIZE

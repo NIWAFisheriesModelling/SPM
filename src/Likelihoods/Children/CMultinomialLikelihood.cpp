@@ -33,26 +33,91 @@ double CMultinomialLikelihood::adjustErrorValue(double processError, double erro
   return errorValue;
 }
 //**********************************************************************
-// double CMultinomialLikelihood::getResult(double expected, double observed, double errorValue,
-//                                                              double processError, double delta)
+// void CMultinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+//     vector<double> &errorValue, vector<double> &processError, double delta)
 // Get the result from our likelihood for the observation
 //**********************************************************************
-double CMultinomialLikelihood::getResult(double expected, double observed, double errorValue,
-                                                                double processError, double delta) {
+void CMultinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+    vector<double> &errorValue, vector<double> &processError, double delta) {
 
-  errorValue = adjustErrorValue(processError, errorValue);
+  // Loop through expected
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Calculate score
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+    double dScore      = CMath::lnFactorial(dErrorValue * observed[i])
+                         - dErrorValue * observed[i] * log(CMath::zeroFun(expected[i],delta));
 
-  double dTemp = CMath::lnFactorial(errorValue * observed)
-                 - errorValue * observed * log(CMath::zeroFun(expected,delta));
-  return dTemp;
+    scores.push_back(dScore);
+  }
 }
 
 //**********************************************************************
-// double CMultinomialLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
+// void CMultinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+//     vector<double> &processError, double delta)
 // Simulate observed value for our observation
 //**********************************************************************
-double CMultinomialLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  return expected;
+void CMultinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+    vector<double> &processError, double delta) {
+
+  observed.clear();
+
+  // Loop through expected
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    observed.push_back(expected[i]);
+  }
+  /*
+   *                                                          // this section should just rescale any returned values to sum to 1?
+        // instance the random number generator
+        CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+        // get the multinomial N value
+        double dN = std::ceil(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
+        //declare a vector to hold vector of results (simulated observed values)
+        std::vector<double> vObserved(iArraySize, 0.0);
+        //declare a vector to hold vector of expected values
+        std::vector<double> vExpected(iArraySize, 0.0);
+        // iteratate through errorvalue numbers
+        for(int i = 0; i< (int)dN; i++) {
+          // get a random uniform
+          double dRandomNumber = pRandom -> getRandomUniform_01();
+          // create a holder for the cumulative sum of expected values
+          double dCumulativeSumExpected = 0.0;
+          // iterate through the proportions..
+          for (int j = 0; j < iArraySize; ++j) {
+            if(!CComparer::isZero(dRunningTotal))
+              vExpected[j] = pAgeResults[j] / dRunningTotal;
+            else
+              vExpected[j] = 0.0;
+            // update the running total
+            dCumulativeSumExpected = dCumulativeSumExpected + vExpected[j];
+            // compare with random number
+            if(dRandomNumber  <= dCumulativeSumExpected) {
+              vObserved[j]++;
+              break;
+            }
+          }
+        }
+   */
+}
+
+//**********************************************************************
+// double CMultinomialLikelihood::getInitialScore(vector<string> &keys, vector<double> &processError, vector<double> &errorValue)
+// Get Initial Score
+//**********************************************************************
+double CMultinomialLikelihood::getInitialScore(vector<string> &keys, vector<double> &processError, vector<double> &errorValue) {
+
+  double dScore   = 0.0;
+  string sLastKey = "";
+
+  for (int i = 0; i < (int)keys.size(); ++i) {
+    // Only once per key
+    if (keys[i] == sLastKey)
+      continue;
+
+    dScore    += -CMath::lnFactorial(adjustErrorValue(processError[i], errorValue[i]));
+    sLastKey  = keys[i];
+  }
+
+  return dScore;
 }
 
 //**********************************************************************

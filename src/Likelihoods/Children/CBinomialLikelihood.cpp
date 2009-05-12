@@ -34,41 +34,54 @@ double CBinomialLikelihood::adjustErrorValue(double processError, double errorVa
 }
 
 //**********************************************************************
-// double CBinomialLikelihood::getResult(double expected, double observed, double errorValue, double processError, double delta)
+// void CBinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+//     vector<double> &errorValue, vector<double> &processError, double delta)
 // Calculate the Result of this Likelihood
 //**********************************************************************
-double CBinomialLikelihood::getResult(double expected, double observed, double errorValue, double processError,
-    double delta) {
+void CBinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
+    vector<double> &errorValue, vector<double> &processError, double delta) {
 
-  errorValue = adjustErrorValue(processError, errorValue);
+  // Loop through expected values
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Calculate Result
+    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
+    double dScore       = CMath::lnFactorial(dErrorValue)
+                           - CMath::lnFactorial(dErrorValue * (1.0 - observed[i]))
+                           - CMath::lnFactorial(dErrorValue * observed[i])
+                           + dErrorValue * observed[i] * log(CMath::zeroFun(expected[i], delta))
+                           + dErrorValue * (1.0 - observed[i]) * log(CMath::zeroFun(1.0 - expected[i], delta));
 
-  double dTemp = CMath::lnFactorial(errorValue)
-                 - CMath::lnFactorial(errorValue * (1.0 - observed))
-                 - CMath::lnFactorial(errorValue * observed)
-                 + errorValue * observed * log(CMath::zeroFun(expected, delta))
-                 + errorValue * (1.0 - observed) * log(CMath::zeroFun(1.0 - expected, delta));
-
-  return -dTemp;
+    scores.push_back(-dScore);
+  }
 }
 
 //**********************************************************************
-// double CBinomialLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
-//
+// void CBinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+//     vector<double> &processError, double delta)
+// Simulate our Observed values
 //**********************************************************************
-double CBinomialLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta) {
-  // Should never happen ...
-  if(expected < 0.0)
-    return 0.0;
+void CBinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
+    vector<double> &processError, double delta) {
 
-
- //Add in process error if defined
-  errorValue = adjustErrorValue(processError, errorValue);
-
-  //Get random number
+  // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
-  double result = pRandom->getRandomBinomial(expected, errorValue);
 
-  return result;
+  observed.clear();
+
+  // Loop through expected
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Check for valid expected
+    if (expected[i] < 0.0) {
+      observed.push_back(0.0);
+      continue;
+    }
+
+    // Calculate Result
+    errorValue[i] = adjustErrorValue(processError[i], errorValue[i]);
+    double dObserved    = pRandom->getRandomBinomial(expected[i], errorValue[i]);
+
+    observed.push_back(dObserved);
+  }
 }
 
 //**********************************************************************

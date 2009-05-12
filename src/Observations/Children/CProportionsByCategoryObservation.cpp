@@ -215,13 +215,18 @@ void CProportionsByCategoryObservation::execute() {
   // Base
   CObservation::execute();
 
-  // Reset our Score
-  dScore = 0.0;
+  // Variables
+  int                 iSquareAgeOffset   = iMinAge - pWorld->getMinAge();
+  vector<string>      vKeys;
+  vector<double>      vExpected;
+  vector<double>      vObserved;
+  vector<double>      vProcessError;
+  vector<double>      vErrorValue;
+  vector<double>      vScores;
+                      dScore = 0.0;
 
   // Execute the World View to get a Snapshot
   pWorldView->execute();
-
-  int    iSquareAgeOffset   = iMinAge - pWorld->getMinAge();
 
   // Loop through our propotions
   map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
@@ -265,19 +270,12 @@ void CProportionsByCategoryObservation::execute() {
       if (!CComparer::isZero(pCombinedAgeResults[i]))
         dExpected = pAgeResults[i]/pCombinedAgeResults[i];
 
-      double dObserved  = (*mvPropPtr).second[i] ;
-      double dErrorValue  = mvErrorValue[(*mvPropPtr).first][i];
-
-      if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
-        double dTemp = pLikelihood->simulateObserved(dExpected, dErrorValue, dProcessError, dDelta);
-        saveComparison((*mvPropPtr).first, dExpected, dTemp, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), 0.0);
-
-      } else {
-        double dTemp = pLikelihood->getResult(dExpected, dObserved, dErrorValue, dProcessError, dDelta);
-        dScore += dTemp;
-        // Store results of calculations so they can be used by the reports
-        saveComparison((*mvPropPtr).first, dExpected, dObserved, pLikelihood->adjustErrorValue(dProcessError, dErrorValue), dTemp);
-      }
+      // Store the items we want to calculate scores for
+      vKeys.push_back((*mvPropPtr).first);
+      vExpected.push_back(dExpected);
+      vObserved.push_back((*mvPropPtr).second[i]);
+      vProcessError.push_back(dProcessError);
+      vErrorValue.push_back(mvErrorValue[(*mvPropPtr).first][i]);
     }
 
     // Clear Our Age Results
@@ -289,6 +287,23 @@ void CProportionsByCategoryObservation::execute() {
     mvPropPtr++;
   }
 
+  // Simulate or Generate Result?
+  if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+    // Simulate our values, then save them
+    pLikelihood->simulateObserved(vObserved, vExpected, vErrorValue, vProcessError, dDelta);
+    for (int i = 0; i < (int)vObserved.size(); ++i)
+      saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
+
+  } else { // Generate Score
+    dScore = 0.0;
+
+    // Generate Results and save them
+    pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
+    for (int i = 0; i < (int)vScores.size(); ++i) {
+      dScore += vScores[i];
+      saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vScores[i]);
+    }
+  }
 }
 
 //**********************************************************************
