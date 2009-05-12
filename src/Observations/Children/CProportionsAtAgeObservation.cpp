@@ -281,7 +281,7 @@ void CProportionsAtAgeObservation::execute() {
       pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vScores.size(); ++i) {
         dScore += vScores[i];
-        saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], vScores[i]);
+        saveComparison(vKeys[i], vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
       }
     }
 
