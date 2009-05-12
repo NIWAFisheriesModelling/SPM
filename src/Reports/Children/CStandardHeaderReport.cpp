@@ -124,7 +124,7 @@ void CStandardHeaderReport::end() {
   double elapsed_time = static_cast<double>(time(NULL)-tmeStart);
   if(elapsed_time < 60) {
     int P = (int) floor(log10(elapsed_time))+4;
-    cerr << "Total elapsed time: " << std::setprecision(P) << elapsed_time << (elapsed_time==1?" second":" seconds") << endl;
+    cerr << "Total elapsed time: " << std::setprecision(P) << fmax(1,elapsed_time) << (elapsed_time<=1?" second":" seconds") << endl;
   } else if((elapsed_time/60.0) < 60) {
     elapsed_time /= 60.0;
     int P = (int) floor(log10(elapsed_time))+4;
