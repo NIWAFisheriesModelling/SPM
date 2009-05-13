@@ -247,6 +247,7 @@
 #define PARAM_OBJECTIVE_FUNCTION                  "objective_function"
 #define PARAM_OBS                                 "obs"
 #define PARAM_OBSERVATION                         "observation"
+#define PARAM_OBSERVATION_DEFINITION              "observation_definition"
 #define PARAM_OBSERVATIONS                        "observations"
 #define PARAM_ONE                                 "1 (one)"
 #define PARAM_ONE_THOUSAND                        "1,000"

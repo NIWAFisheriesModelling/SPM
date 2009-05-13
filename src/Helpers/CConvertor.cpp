@@ -10,6 +10,7 @@
 // Global Headers
 #include <sstream>
 #include <iostream>
+#include <iomanip>
 
 // Local Headers
 #include "CConvertor.h"
@@ -26,7 +27,7 @@ using std::endl;
 //**********************************************************************
 string CConvertor::doubleToString(double value) {
   ostringstream o;
-  if (!(o << value))
+  if (!(o << std::fixed << std::setprecision(10) << value))
     return "";
   return o.str();
 }
