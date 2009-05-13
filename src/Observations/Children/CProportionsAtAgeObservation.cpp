@@ -270,7 +270,7 @@ void CProportionsAtAgeObservation::execute() {
     // Simulate or Generate Result?
     if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
       // Simulate our values, then save them
-      pLikelihood->simulateObserved(vObserved, vExpected, vErrorValue, vProcessError, dDelta);
+      pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vObserved.size(); ++i)
         saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
 

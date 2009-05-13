@@ -228,7 +228,7 @@ void CProportionsByCategoryObservation::execute() {
   // Execute the World View to get a Snapshot
   pWorldView->execute();
 
-  // Loop through our propotions
+  // Loop through our proportions
   map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
   while (mvPropPtr != mvProportionMatrix.end()) {
     // Get Square for this Area
@@ -290,7 +290,7 @@ void CProportionsByCategoryObservation::execute() {
   // Simulate or Generate Result?
   if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
     // Simulate our values, then save them
-    pLikelihood->simulateObserved(vObserved, vExpected, vErrorValue, vProcessError, dDelta);
+    pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
     for (int i = 0; i < (int)vObserved.size(); ++i)
       saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
 
