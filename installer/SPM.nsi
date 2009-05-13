@@ -76,7 +76,7 @@ FunctionEnd
 ; Welcome page
 !insertmacro MUI_PAGE_WELCOME
 ; License page
-!insertmacro MUI_PAGE_LICENSE "../src/CPLv1.0.txt"
+!insertmacro MUI_PAGE_LICENSE "CPLv1.0.txt"
 ;Components page
 !insertmacro MUI_PAGE_COMPONENTS
 ; Directory page
