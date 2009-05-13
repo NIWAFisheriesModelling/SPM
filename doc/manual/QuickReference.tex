@@ -323,6 +323,9 @@
 \defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
 \par\defComLab{catchability}{Define a catchability constant with \argument{label}}\par\par
 \defSub{q} {Value of the q parameter}
+\par\defComLab{penalty}{Define a penalty with \argument{label}}\par\par
+\defSub{log\_scale} {Defines if the penalty in calculated in log space}
+\defSub{multiplier} {Penalty multiplier}
 \subsection{Observation command and subcommand syntax}\par
 \defComLab{observation}{Define an observation}\par\par
 \defSub{type} {Define the type of observation}
@@ -508,6 +511,10 @@
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{observation}}\par
+\defSub{observation} {Define the label of the observation to print}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\par\textbf{\commandlabsubarg{report}{type}{observation\_definition}}\par
 \defSub{observation} {Define the label of the observation to print}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}

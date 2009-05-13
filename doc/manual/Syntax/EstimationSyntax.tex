@@ -375,4 +375,14 @@ The \commandlabsubarg{ageing\_error}{type}{none} has no other subcommands.
 
 \subsection{Defining penalties}
 
-To be written...
+\defComLab{penalty}{Define a penalty with \argument{label}}
+
+\defSub{log\_scale} {Defines if the penalty in calculated in log space}
+\defType{Switch}
+\defDefault{False}
+\defValue{Defines if the value of the penalty is calculated as the squared difference or the squared difference in log space}
+
+\defSub{multiplier} {Penalty multiplier}
+\defType{Constant}
+\defDefault{1.0}
+\defValue{Defines the penalty multiplier}

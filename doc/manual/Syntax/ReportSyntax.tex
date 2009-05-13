@@ -15,6 +15,7 @@ The report types available are,
   \item Print the objective function values
   \item Print the covariance matrix
   \item Print an observation values, fits, and residuals
+  \item Print a simulated observation definition suitable for use in a \SPM\ \config.
   \item Print a layer
   \item Print a derived view via a categorical layer
   \item Print a selectivity's values
@@ -162,6 +163,23 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defValue{Either True of False}
 
 \subsubsection[Print a summary of the an observation, including fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
+
+\defSub{observation} {Define the label of the observation to print}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{Observation}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a observation definition using simulated values]{\commandlabsubarg{report}{type}{observation\_definition}}
 
 \defSub{observation} {Define the label of the observation to print}
 \defType{String}

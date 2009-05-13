@@ -65,6 +65,12 @@ Prints out the area (from the observation categorical layer), observed values (a
 
 Note that constants in likelihoods are often ignored in the objective function score of individual points. Hence, the total score from an observation equals the contribution of the objective function scores from each individual point plus a constant term (if applicable). In likelihoods without a constant term, then the total score from an observation will equal the contribution of the objective function scores from each individual point.
 
+If simulating, then the contribution to the objective function of each observation is reported as zero. 
+
+\subsection{\I{Printing simulated observations}}\index{Reports ! Simulated observations}
+
+Prints out a complete observation definition in a form suitable for use in a \SPM\ \config, reproducing the command and subcommands from the \config, but with the observations replaced with simulated values.
+
 \subsection{\I{Printing layers}}\index{Reports ! Layers}
 
 Prints the values in the layer (including user supplied layers, abundance and biomass layers, and meta-layers) for a given year and at the end of a given time step. 
