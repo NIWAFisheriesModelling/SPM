@@ -1,0 +1,360 @@
+#[caa-1998]
+#report.type: observation_definition
+#observation.label: caa-year-1998
+@observation caa-year-1998
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 1998 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0416666667 0.0000000000 0.0833333333 0.1250000000 0.0833333333 0.0833333333 0.0416666667 0.0416666667 0.0416666667 0.0833333333 0.0833333333 0.0833333333 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 343.0000000000 
+#end
+
+#[caa-1999]
+#report.type: observation_definition
+#observation.label: caa-year-1999
+@observation caa-year-1999
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 1999 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.1250000000 0.0000000000 0.2083333333 0.0833333333 0.0416666667 0.0416666667 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.1666666667 0.0000000000 0.0416666667 0.0833333333 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 564.0000000000 
+#end
+
+#[caa-2000]
+#report.type: observation_definition
+#observation.label: caa-year-2000
+@observation caa-year-2000
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2000 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0000000000 0.0800000000 0.0800000000 0.0400000000 0.2000000000 0.1200000000 0.0000000000 0.0400000000 0.0400000000 0.0000000000 0.0400000000 0.0000000000 0.0400000000 0.0400000000 0.1600000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 
+error_value all 651.0000000000 
+#end
+
+#[caa-2001]
+#report.type: observation_definition
+#observation.label: caa-year-2001
+@observation caa-year-2001
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2001 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0400000000 0.0000000000 0.1200000000 0.1200000000 0.0800000000 0.0800000000 0.0800000000 0.0400000000 0.0800000000 0.0000000000 0.0000000000 0.0800000000 0.0400000000 0.0000000000 0.0000000000 0.0400000000 0.0000000000 0.0000000000 0.0000000000 0.0800000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0800000000 
+error_value all 840.0000000000 
+#end
+
+#[caa-2002]
+#report.type: observation_definition
+#observation.label: caa-year-2002
+@observation caa-year-2002
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2002 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.0833333333 0.0416666667 0.0000000000 0.1666666667 0.1250000000 0.0833333333 0.0000000000 0.0416666667 0.0416666667 0.1250000000 0.0000000000 0.0416666667 0.0000000000 0.0833333333 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 598.0000000000 
+#end
+
+#[caa-2003]
+#report.type: observation_definition
+#observation.label: caa-year-2003
+@observation caa-year-2003
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2003 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0416666667 0.0000000000 0.0833333333 0.0416666667 0.0416666667 0.0416666667 0.0833333333 0.0833333333 0.0416666667 0.0833333333 0.0416666667 0.0416666667 0.0416666667 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.0833333333 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 
+error_value all 456.0000000000 
+#end
+
+#[caa-2004]
+#report.type: observation_definition
+#observation.label: caa-year-2004
+@observation caa-year-2004
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2004 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0416666667 0.0416666667 0.0000000000 0.0833333333 0.1250000000 0.1250000000 0.1250000000 0.0416666667 0.0416666667 0.0416666667 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.0416666667 0.0000000000 0.0416666667 0.0416666667 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 538.0000000000 
+#end
+
+#[caa-2005]
+#report.type: observation_definition
+#observation.label: caa-year-2005
+@observation caa-year-2005
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2005 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.1250000000 0.1666666667 0.0416666667 0.1250000000 0.0416666667 0.0000000000 0.0000000000 0.0416666667 0.0000000000 0.0416666667 0.1666666667 0.0416666667 0.0000000000 0.0000000000 0.0416666667 0.0416666667 0.0416666667 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 438.0000000000 
+#end
+
+#[caa-2006]
+#report.type: observation_definition
+#observation.label: caa-year-2006
+@observation caa-year-2006
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2006 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0000000000 0.0400000000 0.0400000000 0.0400000000 0.1200000000 0.1200000000 0.0800000000 0.0400000000 0.1200000000 0.0800000000 0.0000000000 0.0400000000 0.0400000000 0.0400000000 0.0000000000 0.0000000000 0.0400000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0800000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 817.0000000000 
+#end
+
+#[caa-2007]
+#report.type: observation_definition
+#observation.label: caa-year-2007
+@observation caa-year-2007
+age_plus_group true 
+categories immature mature 
+delta 1e-11 
+layer ssru 
+likelihood multinomial 
+max_age 35 
+min_age 1 
+process_error 25 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type proportions_at_age 
+year 2007 
+obs all 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0800000000 0.0800000000 0.0800000000 0.0400000000 0.1600000000 0.0800000000 0.1200000000 0.0400000000 0.0400000000 0.0000000000 0.0400000000 0.1200000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0400000000 0.0000000000 0.0400000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.0000000000 
+error_value all 915.0000000000 
+#end
+
+#[cpue-1998]
+#report.type: observation_definition
+#observation.label: cpue-1998
+@observation cpue-1998
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 1998 
+obs all 67.6810003780 
+error_value all 0.2000000000 
+#end
+
+#[cpue-1999]
+#report.type: observation_definition
+#observation.label: cpue-1999
+@observation cpue-1999
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 1999 
+obs all 158.1622313185 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2000]
+#report.type: observation_definition
+#observation.label: cpue-2000
+@observation cpue-2000
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2000 
+obs all 73.5955405935 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2001]
+#report.type: observation_definition
+#observation.label: cpue-2001
+@observation cpue-2001
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2001 
+obs all 125.1232288605 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2002]
+#report.type: observation_definition
+#observation.label: cpue-2002
+@observation cpue-2002
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2002 
+obs all 133.0897228057 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2003]
+#report.type: observation_definition
+#observation.label: cpue-2003
+@observation cpue-2003
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2003 
+obs all 127.4154339574 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2004]
+#report.type: observation_definition
+#observation.label: cpue-2004
+@observation cpue-2004
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2004 
+obs all 122.3718494400 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2005]
+#report.type: observation_definition
+#observation.label: cpue-2005
+@observation cpue-2005
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2005 
+obs all 113.3311802965 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2006]
+#report.type: observation_definition
+#observation.label: cpue-2006
+@observation cpue-2006
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2006 
+obs all 80.9742587995 
+error_value all 0.2000000000 
+#end
+
+#[cpue-2007]
+#report.type: observation_definition
+#observation.label: cpue-2007
+@observation cpue-2007
+catchability cpueq 
+categories immature mature 
+layer ssru 
+likelihood lognormal 
+selectivities fishingsel fishingsel 
+time_step step_one 
+type abundance 
+year 2007 
+obs all 111.6820880106 
+error_value all 0.2000000000 
+#end
+

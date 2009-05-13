@@ -50,3 +50,5 @@ file_name estimate-values.dat
 @report Objective_Score
 type objective_function
 file_name objective.dat
+
+@include "simulation-reports.spm"

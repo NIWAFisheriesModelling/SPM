@@ -1,0 +1,120 @@
+@report CAA-1998
+type observation_definition
+observation CAA-year-1998
+file_name simulated_observations.spm
+overwrite True
+
+@report CAA-1999
+type observation_definition
+observation CAA-year-1999
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2000
+type observation_definition
+observation CAA-year-2000
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2001
+type observation_definition
+observation CAA-year-2001
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2002
+type observation_definition
+observation CAA-year-2002
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2003
+type observation_definition
+observation CAA-year-2003
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2004
+type observation_definition
+observation CAA-year-2004
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2005
+type observation_definition
+observation CAA-year-2005
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2006
+type observation_definition
+observation CAA-year-2006
+file_name simulated_observations.spm
+overwrite False
+
+@report CAA-2007
+type observation_definition
+observation CAA-year-2007
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-1998
+type observation_definition
+observation CPUE-1998
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-1999
+type observation_definition
+observation CPUE-1999
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2000
+type observation_definition
+observation CPUE-2000
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2001
+type observation_definition
+observation CPUE-2001
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2002
+type observation_definition
+observation CPUE-2002
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2003
+type observation_definition
+observation CPUE-2003
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2004
+type observation_definition
+observation CPUE-2004
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2005
+type observation_definition
+observation CPUE-2005
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2006
+type observation_definition
+observation CPUE-2006
+file_name simulated_observations.spm
+overwrite False
+
+@report CPUE-2007
+type observation_definition
+observation CPUE-2007
+file_name simulated_observations.spm
+overwrite False
+
