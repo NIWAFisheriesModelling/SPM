@@ -11,6 +11,7 @@
 
 // Local headers
 #include "../CLikelihood.h"
+#include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
 //**********************************************************************
 //
@@ -21,12 +22,12 @@ public:
   // Functions
   CMultinomialLikelihood();
   virtual                     ~CMultinomialLikelihood();
-  double                      adjustErrorValue(double processError, double errorValue);
-  void                        getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-                                vector<double> &errorValue, vector<double> &processError, double delta);
-  void                        simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-                                vector<double> &processError, double delta);
-  double                      getInitialScore(vector<string> &keys, vector<double> &processError, vector<double> &errorValue);
+  double                      adjustErrorValue(const double processError, const double errorValue);
+  void                        getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta);
+  void                        simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta);
+  double                      getInitialScore(const vector<string> &keys, const vector<double> &processError, const vector<double> &errorValue);
 };
 
 #endif /* CMULTINOMIALLIKELIHOOD_H_ */

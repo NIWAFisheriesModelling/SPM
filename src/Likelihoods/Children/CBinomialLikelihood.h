@@ -21,11 +21,11 @@ class CBinomialLikelihood: public CLikelihood {
 public:
   CBinomialLikelihood();
   virtual                     ~CBinomialLikelihood();
-  double                      adjustErrorValue(double processError, double errorValue);
-  void                        getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-                                vector<double> &errorValue, vector<double> &processError, double delta);
-  void                        simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-                                vector<double> &processError, double delta);
+  double                      adjustErrorValue(const double processError, const double errorValue);
+  void                        getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta);
+  void                        simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta);
 };
 
 #endif /* CBINOMIALLIKELIHOOD_H_ */

@@ -22,10 +22,10 @@ CMultinomialLikelihood::CMultinomialLikelihood() {
 }
 
 //**********************************************************************
-// double CMultinomialLikelihood::adjustErrorValue(double processError, double errorValue)
+// double CMultinomialLikelihood::adjustErrorValue(const double processError, const double errorValue)
 // Adjust error value based on process error
 //**********************************************************************
-double CMultinomialLikelihood::adjustErrorValue(double processError, double errorValue) {
+double CMultinomialLikelihood::adjustErrorValue(const double processError, const double errorValue) {
   // adjust for N process error
   if( (errorValue > 0.0) && (processError > 0.0) )
     return (1.0/(1.0/errorValue + 1.0/processError));
@@ -33,12 +33,12 @@ double CMultinomialLikelihood::adjustErrorValue(double processError, double erro
   return errorValue;
 }
 //**********************************************************************
-// void CMultinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-//     vector<double> &errorValue, vector<double> &processError, double delta)
+// void CMultinomialLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+//    const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Get the result from our likelihood for the observation
 //**********************************************************************
-void CMultinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-    vector<double> &errorValue, vector<double> &processError, double delta) {
+void CMultinomialLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
@@ -52,58 +52,62 @@ void CMultinomialLikelihood::getResult(vector<double> &scores, vector<double> &e
 }
 
 //**********************************************************************
-// void CMultinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-//     vector<double> &processError, double delta)
+// void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+//    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Simulate observed value for our observation
 //**********************************************************************
-void CMultinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-    vector<double> &processError, double delta) {
+void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
-  observed.clear();
+  // declare local variables
+  int iKeyStart = 0;
+  string sLastKey = "";
 
-  // Loop through expected
-  for (int i = 0; i < (int)expected.size(); ++i) {
-    observed.push_back(expected[i]);
-  }
-  /*
-   *                                                          // this section should just rescale any returned values to sum to 1?
-        // instance the random number generator
-        CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
-        // get the multinomial N value
-        double dN = std::ceil(pLikelihood->adjustErrorValue(dProcessError, dErrorValue));
-        //declare a vector to hold vector of results (simulated observed values)
-        std::vector<double> vObserved(iArraySize, 0.0);
-        //declare a vector to hold vector of expected values
-        std::vector<double> vExpected(iArraySize, 0.0);
-        // iteratate through errorvalue numbers
-        for(int i = 0; i< (int)dN; i++) {
-          // get a random uniform
+  // instance the random number generator
+  CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
+
+  // set all observed values to zero
+  for (int i = 0; i < (int)observed.size(); ++i)
+    observed[i] = 0.0;
+
+  // calculate the multinomial samples
+  for (int i = iKeyStart; i < (int)expected.size(); ++i) {
+    for (int j = iKeyStart; j < (int)expected.size(); ++j) {
+      if (keys[j] != sLastKey) {
+        // new group start
+        sLastKey = keys[j];
+        iKeyStart = j;
+        double dN = ceil(adjustErrorValue(processError[j], errorValue[j]));
+        // sample N times
+        for (int k = 0; k < dN; ++k) {
           double dRandomNumber = pRandom -> getRandomUniform_01();
-          // create a holder for the cumulative sum of expected values
           double dCumulativeSumExpected = 0.0;
-          // iterate through the proportions..
-          for (int j = 0; j < iArraySize; ++j) {
-            if(!CComparer::isZero(dRunningTotal))
-              vExpected[j] = pAgeResults[j] / dRunningTotal;
-            else
-              vExpected[j] = 0.0;
-            // update the running total
-            dCumulativeSumExpected = dCumulativeSumExpected + vExpected[j];
-            // compare with random number
-            if(dRandomNumber  <= dCumulativeSumExpected) {
-              vObserved[j]++;
-              break;
+          for (int l = 0; l < (int)expected.size(); ++l) {
+            if (keys[l] == sLastKey) {
+              dCumulativeSumExpected += expected[l];
+              if (dRandomNumber <= dCumulativeSumExpected) {
+                observed[l]++;
+                break;
+              }
             }
           }
         }
-   */
+      }
+    }
+  }
+
+  // rescale to sum to one by key
+  for (int i = 0; i < (int)observed.size(); ++i)
+    observed[i] = observed[i] / ceil(adjustErrorValue(processError[i], errorValue[i]));
 }
 
 //**********************************************************************
-// double CMultinomialLikelihood::getInitialScore(vector<string> &keys, vector<double> &processError, vector<double> &errorValue)
+// double CMultinomialLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &processError,
+//    const vector<double> &errorValue) {
 // Get Initial Score
 //**********************************************************************
-double CMultinomialLikelihood::getInitialScore(vector<string> &keys, vector<double> &processError, vector<double> &errorValue) {
+double CMultinomialLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &processError,
+    const vector<double> &errorValue) {
 
   double dScore   = 0.0;
   string sLastKey = "";

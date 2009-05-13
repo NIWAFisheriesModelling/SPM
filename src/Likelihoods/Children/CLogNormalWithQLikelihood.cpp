@@ -22,10 +22,10 @@ CLogNormalWithQLikelihood::CLogNormalWithQLikelihood() {
 }
 
 //**********************************************************************
-// double CLogNormalWithQLikelihood::adjustErrorValue(double processError, double errorValue)
+// double CLogNormalWithQLikelihood::adjustErrorValue(const double processError, const double errorValue)
 // Adjust our ErrorValue based on Process Error
 //**********************************************************************
-double CLogNormalWithQLikelihood::adjustErrorValue(double processError, double errorValue) {
+double CLogNormalWithQLikelihood::adjustErrorValue(const double processError, const double errorValue) {
   // adjust for c.v. process error
   if(processError > 0.0)
     return (sqrt(errorValue*errorValue + processError*processError));
@@ -34,12 +34,12 @@ double CLogNormalWithQLikelihood::adjustErrorValue(double processError, double e
 }
 
 //**********************************************************************
-// void CLogNormalWithQLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-//     vector<double> &errorValue, vector<double> &processError, double delta)
+// void CLogNormalWithQLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+//     const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Get the result from our likelihood for the observation
 //**********************************************************************
-void CLogNormalWithQLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-    vector<double> &errorValue, vector<double> &processError, double delta) {
+void CLogNormalWithQLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
@@ -54,12 +54,12 @@ void CLogNormalWithQLikelihood::getResult(vector<double> &scores, vector<double>
 }
 
 //**********************************************************************
-// void CLogNormalWithQLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-//     vector<double> &processError, double delta)
+// void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+//    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Simulate our observed values
 //**********************************************************************
-void CLogNormalWithQLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-    vector<double> &processError, double delta) {
+void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();

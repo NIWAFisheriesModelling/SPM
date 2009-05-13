@@ -20,12 +20,13 @@ class CLikelihood: public CBaseObject {
 public:
   CLikelihood();
   virtual ~CLikelihood();
-  virtual double              adjustErrorValue(double processError, double errorValue) = 0;
-  virtual void                getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-                                vector<double> &errorValue, vector<double> &processError, double delta) = 0;
-  virtual void                simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-                                vector<double> &processError, double delta) = 0;
-  virtual double              getInitialScore(vector<string> &keys, vector<double> &processError, vector<double> &errorValue) { return 0; }
+  virtual double              adjustErrorValue(const double processError, const double errorValue) = 0;
+  virtual void                getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta) = 0;
+  virtual void                simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta) = 0;
+  virtual double              getInitialScore(const vector<string> &keys, const vector<double> &processError,
+                                const vector<double> &errorValue) { return 0; }
 };
 
 #endif /* CLIKELIHOOD_H_ */

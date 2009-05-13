@@ -19,10 +19,10 @@ CNormalLikelihood::CNormalLikelihood() {
 }
 
 //**********************************************************************
-// double CNormalLikelihood::adjustErrorValue(double processError, double errorValue)
+// double CNormalLikelihood::adjustErrorValue(const double processError, const double errorValue) {
 // Adjust our error value based on process error.
 //**********************************************************************
-double CNormalLikelihood::adjustErrorValue(double processError, double errorValue) {
+double CNormalLikelihood::adjustErrorValue(const double processError, const double errorValue) {
   // adjust for c.v. process error
   if(processError > 0.0)
     return (sqrt(errorValue*errorValue + processError*processError));
@@ -31,12 +31,12 @@ double CNormalLikelihood::adjustErrorValue(double processError, double errorValu
 }
 
 //**********************************************************************
-// double CNormalLikelihood::getResult(double expected, double observed, double errorValue,
-//                                                            double processError, double delta)
+// void CNormalLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+//    const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Get result from likelihood for our observation
 //**********************************************************************
-void CNormalLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-    vector<double> &errorValue, vector<double> &processError, double delta) {
+void CNormalLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
@@ -51,11 +51,12 @@ void CNormalLikelihood::getResult(vector<double> &scores, vector<double> &expect
 }
 
 //**********************************************************************
-// double CNormalLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
+// void CNormalLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+//     const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Simulate observed value for our observation
 //**********************************************************************
-void CNormalLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-    vector<double> &processError, double delta) {
+void CNormalLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();

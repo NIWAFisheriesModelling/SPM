@@ -22,10 +22,10 @@ CBinomialLikelihood::CBinomialLikelihood() {
 }
 
 //**********************************************************************
-// double CBinomialLikelihood::adjustErrorValue(double processError, double errorValue)
+// double CBinomialLikelihood::adjustErrorValue(const double processError, const double errorValue)
 // Adjust our ErrorValue based on process error
 //**********************************************************************
-double CBinomialLikelihood::adjustErrorValue(double processError, double errorValue) {
+double CBinomialLikelihood::adjustErrorValue(const double processError, const double errorValue) {
   // adjust for N process error
   if( (errorValue > 0.0) && (processError > 0.0) )
     return (1.0/(1.0/errorValue + 1.0/processError));
@@ -34,12 +34,12 @@ double CBinomialLikelihood::adjustErrorValue(double processError, double errorVa
 }
 
 //**********************************************************************
-// void CBinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-//     vector<double> &errorValue, vector<double> &processError, double delta)
+// void CBinomialLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+//    const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Calculate the Result of this Likelihood
 //**********************************************************************
-void CBinomialLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-    vector<double> &errorValue, vector<double> &processError, double delta) {
+void CBinomialLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Loop through expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
@@ -56,12 +56,12 @@ void CBinomialLikelihood::getResult(vector<double> &scores, vector<double> &expe
 }
 
 //**********************************************************************
-// void CBinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-//     vector<double> &processError, double delta)
+// void CBinomialLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
+//    const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Simulate our Observed values
 //**********************************************************************
-void CBinomialLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-    vector<double> &processError, double delta) {
+void CBinomialLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
+    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();

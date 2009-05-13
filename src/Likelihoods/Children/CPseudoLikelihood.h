@@ -20,11 +20,11 @@ class CPseudoLikelihood: public CLikelihood {
 public:
   CPseudoLikelihood();
   virtual                     ~CPseudoLikelihood();
-  double                      adjustErrorValue(double processError, double errorValue) { return 0; }
-  void                        getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-                                vector<double> &errorValue, vector<double> &processError, double delta) { }
-  void                        simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-                                vector<double> &processError, double delta) { }
+  double                      adjustErrorValue(const double processError, const double errorValue) { return 0; }
+  void                        getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta) { }
+  void                        simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
+                                const vector<double> &errorValue, const vector<double> &processError, const double delta) { };
 };
 
 #endif /* CPSEUDOLIKELIHOOD_H_ */

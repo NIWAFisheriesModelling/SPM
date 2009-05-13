@@ -19,10 +19,10 @@ CBinomialApproxLikelihood::CBinomialApproxLikelihood() {
 }
 
 //**********************************************************************
-// double CBinomialApproxLikelihood::adjustErrorValue(double processError, double errorValue)
+// double CBinomialApproxLikelihood::adjustErrorValue(const double processError, const double errorValue)
 // Adjust our error value based on process error
 //**********************************************************************
-double CBinomialApproxLikelihood::adjustErrorValue(double processError, double errorValue) {
+double CBinomialApproxLikelihood::adjustErrorValue(const double processError, const double errorValue) {
   // adjust for N process error
   if( (errorValue > 0.0) && (processError > 0.0) )
     return (1.0/(1.0/errorValue + 1.0/processError));
@@ -31,12 +31,12 @@ double CBinomialApproxLikelihood::adjustErrorValue(double processError, double e
 }
 
 //**********************************************************************
-// void CBinomialApproxLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-//    vector<double> &errorValue, vector<double> &processError, double delta)
+// void CBinomialApproxLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+//    const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Get the result from our likelihood
 //**********************************************************************
-void CBinomialApproxLikelihood::getResult(vector<double> &scores, vector<double> &expected, vector<double> &observed,
-    vector<double> &errorValue, vector<double> &processError, double delta) {
+void CBinomialApproxLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
+    const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Loop through expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
@@ -50,11 +50,12 @@ void CBinomialApproxLikelihood::getResult(vector<double> &scores, vector<double>
 }
 
 //**********************************************************************
-// double CBinomialApproxLikelihood::simulateObserved(double expected, double errorValue, double processError, double delta)
+// void CBinomialApproxLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+//    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta)
 // Simulate observed value from our observation
 //**********************************************************************
-void CBinomialApproxLikelihood::simulateObserved(vector<double> &observed, vector<double> &expected, vector<double> &errorValue,
-    vector<double> &processError, double delta) {
+void CBinomialApproxLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
+    const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
   // Variables
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
