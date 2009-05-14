@@ -77,6 +77,8 @@ void CLogNormalLikelihood::simulateObserved(const vector<string> &keys, vector<d
     double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
     double dObserved    = pRandom->getRandomLogNormal(expected[i], dErrorValue);
 
+    // TODO: each key sums to 1.0
+
     observed.push_back(dObserved);
   }
 }

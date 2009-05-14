@@ -296,6 +296,7 @@
 #define PARAM_SIMULATE                            "simulate"
 #define PARAM_SIZE_WEIGHT                         "size_weight"
 #define PARAM_SIZE_WEIGHTS                        "size_weights"
+#define PARAM_SPATIAL_MAP                         "spatial_map"
 #define PARAM_STANDARDISE_YCS_YEAR_RANGE          "standardise_ycs_year_range"
 #define PARAM_SQUARE                              "square"
 #define PARAM_SQUARE_UNIFORM                      "square_uniform"

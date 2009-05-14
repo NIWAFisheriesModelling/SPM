@@ -23,6 +23,7 @@
 #include "../Children/CParameterListReport.h"
 #include "../Children/CCovarianceReport.h"
 #include "../Children/CObservationDefinitionReport.h"
+#include "../Children/CSpatialMapReport.h"
 
 //**********************************************************************
 //
@@ -58,6 +59,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CCovarianceReport();
   else if (type == PARAM_OBSERVATION_DEFINITION)
     pReporter = new CObservationDefinitionReport();
+  else if (type == PARAM_SPATIAL_MAP)
+    pReporter = new CSpatialMapReport();
   else
     throw string("Unknown type: " + type);
 
