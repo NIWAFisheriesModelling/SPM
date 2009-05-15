@@ -133,6 +133,7 @@ src/Reports/Children/CParameterListReport.cpp
 src/Reports/Children/CPartitionReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
 src/Reports/Children/CSelectivityReport.cpp
+src/Reports/Children/CSpatialMapReport.cpp
 src/Reports/Children/CStandardHeaderReport.cpp
 src/Reports/Children/CWorldStateReport.cpp
 src/Reports/CReportManager.cpp
