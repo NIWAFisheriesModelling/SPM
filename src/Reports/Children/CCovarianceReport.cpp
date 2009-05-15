@@ -35,6 +35,9 @@ void CCovarianceReport::execute() {
   CMinimizerManager *pManager = CMinimizerManager::Instance();
   CMinimizer *pMinimizer = pManager->getMinimizer();
   if (pMinimizer == 0)
+      return;
+
+  if(!(pMinimizer->getBuildCovariance()))
     return;
 
   this->start();
@@ -54,7 +57,7 @@ void CCovarianceReport::execute() {
 
   cout << "Covariance:\n";
   if (pMinimizer->getCovarianceError()) {
-    cout << "Covariance creationg failed. Hessian was un-invertable\n";
+    cout << "Covariance creation failed. Hessian was un-invertable\n";
   } else {
     for (int i = 0; i < iCount; ++i) {
       for (int j = 0; j < iCount; ++j) {
@@ -63,8 +66,6 @@ void CCovarianceReport::execute() {
       cout << "\n";
     }
   }
-
-
 
   cout << "*end\n" << endl;
 
