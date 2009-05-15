@@ -36,7 +36,7 @@ void CSpatialMapReport::execute() {
 
   for (int i = 0; i < pWorld->getHeight(); ++i) {
     for (int j = 0; j < pWorld->getWidth(); ++j) {
-      cout << "R" << i << ":C" << j << " ";
+      cout << "r" << (i+1) << "-c" << (j+1) << " ";
     }
     cout << "\n";
   }
