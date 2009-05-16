@@ -70,10 +70,10 @@ In manual, but not in SPM
   ageing_error
   include
   joint_selectivity
-  pseudo-observation
   size_at_age
   linf
   mcmc_fixed
+  ageing_error
   by_length
   correlation_adjustment_diff
   correlation_adjustment_method
@@ -107,6 +107,5 @@ In manual, but not in SPM
   migration_movement
   normal_by_sd
   off_by_one
-  spatial_map
   von_bertalanffy
   weight_at_size
