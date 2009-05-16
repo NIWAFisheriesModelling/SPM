@@ -103,6 +103,13 @@ void CObservation::validate() {
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
+    //Check length of categories and selectivites are equal
+    unsigned iCategoryNamesSize = vCategoryNames.size();
+    unsigned iSelectivityNamesSize = vSelectivityNames.size();
+
+    if (iCategoryNamesSize != iSelectivityNamesSize)
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
     // If we are going to simulate the observation, then it
     // cannot be a pseudo observation
     if ( (bSimulate) && (sLikelihood == PARAM_PSEUDO) )
