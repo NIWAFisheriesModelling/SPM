@@ -71,8 +71,12 @@ void CAbundanceObservation::validate() {
     if ((vErrorValues.size() % 2) != 0)
       CError::errorPairs(PARAM_ERROR_VALUE);
 
-    for (int i = 0; i < (int)vErrorValues.size(); i+=2)
+    for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
+      // Check for negative values
+      if(mErrorValue[vErrorValues[i]] < 0.0)
+        CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+    }
 
     // Validate our vErrorValues's to make sure we have the right amount for our
     // Observations

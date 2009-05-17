@@ -103,6 +103,9 @@ void CProportionsByCategoryObservation::validate() {
     for (int i = 0; i < (int)vErrorValues.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
         mvErrorValue[vErrorValues[i]].push_back(CConvertor::stringToDouble(vErrorValues[i+j+1]));
+        // Check for negative values
+        if(CConvertor::stringToDouble(vErrorValues[i+j+1]) < 0.0)
+          CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
       }
     }
 

@@ -96,8 +96,12 @@ void CProportionsAtAgeObservation::validate() {
     if ((vErrorValues.size() % 2) != 0)
       throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
 
-    for (int i = 0; i < (int)vErrorValues.size(); i+=2)
+    for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
+      // Check for negative values
+      if(mErrorValue[vErrorValues[i]] < 0.0)
+        CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+    }
 
     // TODO: Make mErrorValue a map of vectors and replicate the N's to the same length
     // as OBS. One of the likelihoods requires a vector while the other doesn't.
