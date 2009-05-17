@@ -13,6 +13,7 @@
 #include "../Processes/CProcessManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/CComparer.h"
+#include "../Helpers/CMath.h"
 
 //**********************************************************************
 // CPenalty::CPenalty()
@@ -60,7 +61,10 @@ void CPenalty::trigger(string Label, double Value1, double Value2) {
     double dValue = 0.0;
 
     if(bLogScale) {
-      dValue = (log(Value1) - log(Value2)) * (log(Value1) - log(Value2)) *dMultiplier;
+      // Ensure values are not zero
+      dValue = (log(CMath::zeroFun(Value1,DELTA)) - log(CMath::zeroFun(Value2,DELTA))) *
+               (log(CMath::zeroFun(Value1,DELTA)) - log(CMath::zeroFun(Value2,DELTA))) *
+               dMultiplier;
     } else {
       dValue = (Value1 - Value2) * (Value1 - Value2) * dMultiplier;
     }
