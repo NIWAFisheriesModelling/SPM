@@ -89,6 +89,15 @@ void CDESolver::runEstimation() {
       vStartValues.push_back(pEstimate->getValue());
     }
 
+    // Check start value between bounds
+    for (int i = 0; i < (int)vStartValues.size(); ++i) {
+      if (vStartValues[i] < vLowerBounds[i])
+        throw string(GAMMADIFF_LESS_START_LOWER_BOUND);
+      if (vStartValues[i] > vUpperBounds[i])
+        throw string(GAMMADIFF_GREATER_START_UPPER_BOUND);
+    }
+
+
     clDESolver.Setup(vStartValues, vLowerBounds, vUpperBounds, stBest1Exp, dDifferenceScale, dCrossoverProbability);
 
     if (clDESolver.Solve(iMaxGenerations)) {
