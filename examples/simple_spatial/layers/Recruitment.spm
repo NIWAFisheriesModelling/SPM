@@ -1,0 +1,9 @@
+# Recruitment (depth > 0 and <= 800 m) map
+@layer Recruitment
+type Numeric
+data 0 0 0 1 1 1 1 0 0 0
+data 0 0 0 1 1 0 0 0 0 0
+data 0 1 1 0 0 0 0 0 0 0
+data 0 0 0 0 0 0 0 0 0 0
+data 0 0 0 0 0 0 0 0 0 0
+data 0 0 0 0 0 0 0 0 0 0

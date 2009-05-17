@@ -1,0 +1,48 @@
+# CPUE (2004)
+@observation cpue-2004
+type abundance
+year 2004
+time_step one
+categories immature mature
+selectivities FishingSel FishingSel
+layer cell
+catchability CPUEq
+obs r1-c5 36.2867506266889
+obs r1-c6 46.8170582981978
+obs r1-c7 48.8205542199715
+obs r2-c5 25.6999130675116
+obs r2-c6 1.05642983041729
+obs r3-c4 15.2233252220405
+obs r3-c5 34.958821253089
+obs r3-c6 19.0040364811495
+obs r4-c3 20.7138918551009
+obs r4-c4 11.6746931017647
+obs r4-c5 17.2484646100506
+obs r4-c6 15.3453345008241
+obs r5-c4 14.3212316416374
+obs r5-c5 12.6759016898863
+obs r5-c6 13.5373429751288
+obs r5-c7 56.6335084640708
+error_value r1-c5 0.236308209793762
+error_value r1-c6 0.217511681969794
+error_value r1-c7 0.269110842571864
+error_value r2-c5 0.460793998426014
+error_value r2-c6 28.327990887605
+error_value r3-c4 0.301896355666026
+error_value r3-c5 0.292150954034161
+error_value r3-c6 0.302716340488151
+error_value r4-c3 0.282470992735993
+error_value r4-c4 0.425465732180749
+error_value r4-c5 0.423457165217197
+error_value r4-c6 0.370090292155043
+error_value r5-c4 0.485949961021889
+error_value r5-c5 0.357448894919664
+error_value r5-c6 0.524674500838676
+error_value r5-c7 0.372195513803759
+likelihood lognormal
+delta 1e-11
+#process_error 0.2
+
+@report cpue-2004
+type observation
+observation cpue-2004

@@ -1,0 +1,186 @@
+# The reports/outputs
+
+@report random_seed
+type random_number_seed
+
+@report spatial-map
+type spatial_map
+
+#@report SSRU-2002
+#type layer_derived_view
+#year 2002
+#time_step one
+#layer SSRU
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report initialisation-phase2
+type initialisation
+initialisation_phase Phase2
+
+@report initialisation-phase3
+type initialisation
+initialisation_phase Phase3
+
+@report state-1995-1
+type partition
+time_step one
+year 1995
+
+@report state-1996-1
+type partition
+time_step one
+year 1996
+
+@report state-1997-1
+type partition
+time_step one
+year 1997
+
+@report state-1998-1
+type partition
+time_step one
+year 1998
+
+@report state-1999-1
+type partition
+time_step one
+year 1999
+
+@report state-2000-1
+type partition
+time_step one
+year 2000
+
+@report state-2001-1
+type partition
+time_step one
+year 2001
+
+@report state-2002-1
+type partition
+time_step one
+year 2002
+
+@report state-2003-1
+type partition
+time_step one
+year 2003
+
+@report state-2004-1
+type partition
+time_step one
+year 2004
+
+@report state-2005-1
+type partition
+time_step one
+year 2005
+
+@report state-2006-1
+type partition
+time_step one
+year 2006
+
+@report state-2007-1
+type partition
+time_step one
+year 2007
+
+@report state-1995-2
+type partition
+time_step two
+year 1995
+
+@report state-1996-2
+type partition
+time_step two
+year 1996
+
+@report state-1997-2
+type partition
+time_step two
+year 1997
+
+@report state-1998-2
+type partition
+time_step two
+year 1998
+
+@report state-1999-2
+type partition
+time_step two
+year 1999
+
+@report state-2000-2
+type partition
+time_step two
+year 2000
+
+@report state-2001-2
+type partition
+time_step two
+year 2001
+
+@report state-2002-2
+type partition
+time_step two
+year 2002
+
+@report state-2003-2
+type partition
+time_step two
+year 2003
+
+@report state-2004-2
+type partition
+time_step two
+year 2004
+
+@report state-2005-2
+type partition
+time_step two
+year 2005
+
+@report state-2006-2
+type partition
+time_step two
+year 2006
+
+@report state-2007-2
+type partition
+time_step two
+year 2007
+
+#@report SSB
+#type derived_quantity
+#derived_quantity SSB
+
+@report estimate-summary
+type estimate_summary
+
+@report objective
+type objective_function
+
+@report Maturation
+type selectivity
+selectivity Maturation
+
+@report FishingSel
+type selectivity
+selectivity FishingSel
+
+@report covariance
+type covariance
+
+@report estimate-mpd
+type estimate_value
+
+@report estimate
+type estimate_value
+file_name MPD.dat
+
+@include "simulation_reports.spm"
+

@@ -1,0 +1,36 @@
+# CPUE (2001)
+@observation cpue-2001
+type abundance
+year 2001
+time_step one
+categories immature mature
+selectivities FishingSel FishingSel
+layer cell
+catchability CPUEq
+obs r1-c5 43.2348863586704
+obs r1-c6 49.5201919657782
+obs r2-c5 6.79535933283176
+obs r3-c5 38.9676919185155
+obs r3-c6 20.5658594686231
+obs r4-c4 8.54802227136508
+obs r4-c5 11.2779488368765
+obs r4-c6 26.0878100555367
+obs r5-c4 6.77226222104874
+obs r5-c5 2.66179783567231
+error_value r1-c5 0.181265768137274
+error_value r1-c6 0.157919111913146
+error_value r2-c5 0.592216134412368
+error_value r3-c5 0.40675617526139
+error_value r3-c6 0.293731621531471
+error_value r4-c4 0.440807556672064
+error_value r4-c5 0.561085822723676
+error_value r4-c6 0.351051578290193
+error_value r5-c4 0.779632778787088
+error_value r5-c5 1.09364229654086
+likelihood lognormal
+delta 1e-11
+#process_error 0.2
+
+@report cpue-2001
+type observation
+observation cpue-2001
