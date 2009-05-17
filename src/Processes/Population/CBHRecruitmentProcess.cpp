@@ -34,9 +34,9 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
-  registerEstimable(PARAM_R0, &dSigmaR);
-  registerEstimable(PARAM_R0, &dSteepness);
-  registerEstimable(PARAM_R0, &dRho);
+  registerEstimable(PARAM_SIGMA_R, &dSigmaR);
+  registerEstimable(PARAM_STEEPNESS, &dSteepness);
+  registerEstimable(PARAM_RHO, &dRho);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_R0);
