@@ -36,6 +36,10 @@ IF (WIN32)
 ELSE (WIN32)
   SET(BOOST_LIBS "/opt/usr/boost_1_38_0/libs")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
+  SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
+  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized")
   SET(MAIN_LIBRARIES
     boost_system-gcc41-mt-1_38
     boost_filesystem-gcc41-mt-1_38
