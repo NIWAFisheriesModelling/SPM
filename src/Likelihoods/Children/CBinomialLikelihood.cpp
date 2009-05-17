@@ -13,6 +13,7 @@
 // Local headers
 #include "CBinomialLikelihood.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CBinomialLikelihood::CBinomialLikelihood()
@@ -70,15 +71,24 @@ void CBinomialLikelihood::simulateObserved(const vector<string> &keys, vector<do
 
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
-    // Check for valid expected
-    if (expected[i] < 0.0) {
+
+std::cerr << "Exp: " << expected[i] << " Sim: ";
+
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+
+    // Check for invalid values
+    if (errorValue[i] < 0.0)
+      CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+
+    if (expected[i] <= 0.0 || dErrorValue <=0.0) {
       observed.push_back(0.0);
       continue;
     }
 
     // Calculate Result
-    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
     double dObserved    = pRandom->getRandomBinomial(expected[i], dErrorValue);
+
+std::cerr << dObserved << "\n";
 
     observed.push_back(dObserved);
   }

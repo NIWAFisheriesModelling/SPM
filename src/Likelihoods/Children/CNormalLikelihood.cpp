@@ -65,14 +65,16 @@ void CNormalLikelihood::simulateObserved(const vector<string> &keys, vector<doub
 
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
-    // Check expected
-    if(expected[i] <= 0.0) {
+
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+
+    // Check for invalid values
+    if (expected[i] <= 0.0 || dErrorValue <=0.0) {
       observed.push_back(0.0);
       continue;
     }
 
     // Calculate observed
-    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
     double dObserved   = pRandom->getRandomNormal(expected[i], (expected[i]*dErrorValue));
 
     observed.push_back(dObserved);

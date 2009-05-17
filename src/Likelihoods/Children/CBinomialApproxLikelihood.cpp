@@ -10,6 +10,7 @@
 // Local headers
 #include "CBinomialApproxLikelihood.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CBinomialApproxLikelihood::CBinomialApproxLikelihood()
@@ -64,14 +65,19 @@ void CBinomialApproxLikelihood::simulateObserved(const vector<string> &keys, vec
 
   // Loop through our expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
+
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+
     // Check for invalid values
-    if (expected[i] < 0.0) {
+    if (errorValue[i] < 0.0)
+      CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+
+    if (expected[i] <= 0.0 || dErrorValue <=0.0) {
       observed.push_back(0.0);
       continue;
     }
 
     // Calculate Observed
-    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
     double dObserved = pRandom->getRandomBinomial(expected[i], dErrorValue);
 
     observed.push_back(dObserved);

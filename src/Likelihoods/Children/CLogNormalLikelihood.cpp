@@ -10,6 +10,7 @@
 // Local headers
 #include "CLogNormalLikelihood.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CLogNormalLikelihood::CLogNormalLikelihood()
@@ -67,14 +68,15 @@ void CLogNormalLikelihood::simulateObserved(const vector<string> &keys, vector<d
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
 
-    // Should never happen ...
-    if (expected[i] <= 0.0) {
-      observed.push_back(0.0);
+    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
+
+    // Check for invalid values
+    if (expected[i] <= 0.0 || dErrorValue <=0.0) {
+      observed.push_back(DELTA);
       continue;
     }
 
     // Calculate Score
-    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
     double dObserved    = pRandom->getRandomLogNormal(expected[i], dErrorValue);
 
     // TODO: each key sums to 1.0

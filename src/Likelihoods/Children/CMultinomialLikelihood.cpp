@@ -13,6 +13,7 @@
 // Local headers
 #include "CMultinomialLikelihood.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CMultinomialLikelihood::CMultinomialLikelihood()
