@@ -105,7 +105,7 @@ double CRandomNumberGenerator::getRandomBinomial(double p, double N) {
 
   double dCount = 0;
 
-  for(int i; i < std::ceil(N); i++) {
+  for(int i = 0; i < std::ceil(N); i++) {
     double dTemp = getRandomUniform_01();
     if (dTemp <= p)
       dCount++;
