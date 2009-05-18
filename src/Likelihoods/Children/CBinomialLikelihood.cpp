@@ -72,8 +72,6 @@ void CBinomialLikelihood::simulateObserved(const vector<string> &keys, vector<do
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
 
-std::cerr << "Exp: " << expected[i] << " Sim: ";
-
     double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
 
     // Check for invalid values
@@ -87,8 +85,6 @@ std::cerr << "Exp: " << expected[i] << " Sim: ";
 
     // Calculate Result
     double dObserved    = pRandom->getRandomBinomial(expected[i], dErrorValue);
-
-std::cerr << dObserved << "\n";
 
     observed.push_back(dObserved);
   }
