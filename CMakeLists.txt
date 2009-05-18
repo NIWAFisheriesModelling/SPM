@@ -49,7 +49,7 @@ ELSE (WIN32)
     pthread
     )
   SET(TEST_LIBRARIES
-    libboost_unit_test_framework-gcc41-mt-1_38
+    boost_unit_test_framework-gcc41-mt-1_38
   )
 ENDIF (WIN32)
 
