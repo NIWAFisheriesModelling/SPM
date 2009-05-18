@@ -39,8 +39,6 @@
 using std::cout;
 using std::endl;
 
-// TODO: Add each manager to a vector<CBaseManager*> and iterate to build/validate etc.
-
 //**********************************************************************
 // CRuntimeThread::CRuntimeThread()
 // Default Constructor
@@ -260,15 +258,13 @@ void CRuntimeThread::startModel() {
 // Clone our Parameter
 //**********************************************************************
 void CRuntimeThread::clone(CRuntimeThread *Thread) {
-  // TODO: Re-Do This Function for threading
-
+  // TODO: Write clone function for multi-threading
   /*pCatchabilityManager->clone(Thread->pCatchabilityManager);
   pDerivedQuantityManager->clone(Thread->pDerivedQuantityManager);
   pEstimateManager->clone(Thread->pEstimateManager);
   pInitializationManager->clone(Thread->pInitializationManager);
   pLayerManager->clone(Thread->pLayerManager);
   pMinimizerManager->clone(Thread->pMinimizerManager);
-  // pObjectiveFunction->clone(Thread->pObjectiveFunction); // TODO: Do we need this?
   pObservationManager->clone(Thread->pObservationManager);
   pPenaltyManager->clone(Thread->pPenaltyManager);
   pPreferenceFunctionManager->clone(Thread->pPreferenceFunctionManager);
@@ -278,7 +274,9 @@ void CRuntimeThread::clone(CRuntimeThread *Thread) {
   pReporterManager->clone(Thread->pReporterManager);
   pSelectivityManager->clone(Thread->pSelectivityManager);
   pTimeStepManager->clone(Thread->pTimeStepManager);
-  pWorld->clone(Thread->pWorld);*/
+  pWorld->clone(Thread->pWorld);
+  pObjectiveFunction->clone();
+  */
 }
 
 //**********************************************************************

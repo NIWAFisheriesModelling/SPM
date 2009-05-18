@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE( BetaPrior ) {
   pPrior->validate();
 
   // Check results
-  // TODO: Add good parameters so we can finish unit tests
+  // TODO: Alistair - Add good parameters so we can finish unit tests
 //  BOOST_CHECK_EQUAL(pPrior->getResult(1.0), 0.0);
 //  BOOST_CHECK_EQUAL(pPrior->getResult(2.0), 0.0);
 //  BOOST_CHECK_EQUAL(pPrior->getResult(3.0), 0.0);

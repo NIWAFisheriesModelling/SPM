@@ -41,7 +41,7 @@ void CCategoryTransitionRateProcess::validate() {
     CProcess::validate();
 
     // Populate our variables
-    sLayer  = pParameterList->getString(PARAM_LAYER,true,""); //TODO: add as a multiplicative layer (somehow...)
+    sLayer  = pParameterList->getString(PARAM_LAYER,true,"");
 
     pParameterList->fillVector(vFrom, PARAM_FROM);
     pParameterList->fillVector(vTo, PARAM_TO);
@@ -129,8 +129,9 @@ void CCategoryTransitionRateProcess::execute() {
             if(CComparer::isZero(dCurrent))
                continue;
 
-            // TODO: Add Multiplayer for layer here
-            // dCurrent *= LOG(pLayer->getValue(i, j));
+            // Multiplayer layer
+            if (pLayer != 0)
+              dCurrent *= log(pLayer->getValue(i, j));
 
             dCurrent = dCurrent * vProportions[k] * vSelectivities[k]->getResult(l);
             pBaseSquare->subValue(vFromIndex[k], l, dCurrent);

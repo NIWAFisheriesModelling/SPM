@@ -34,7 +34,6 @@ void CMetaLayer::validate() {
     pParameterList->fillVector(vYears, PARAM_YEARS);
     pParameterList->fillVector(vLayerNames, PARAM_LAYER);
 
-    // TODO: Add more validation for vector sizes
     throw string("Object not yet implemented");
 
   } catch (string Ex) {
@@ -49,7 +48,7 @@ void CMetaLayer::validate() {
 //**********************************************************************
 void CMetaLayer::build() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CMetaLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -20,6 +20,7 @@
 #include "../Helpers/CConvertor.h"
 #include "../Translations/Translations.h"
 #include "../BaseClasses/CBaseObject.h"
+#include "../AgeingError/Factory/CAgeingErrorFactory.h"
 #include "../Catchabilities/Factory/CCatchabilityFactory.h"
 #include "../DerivedQuantities/Factory/CDerivedQuantityFactory.h"
 #include "../Estimates/Factory/CEstimateFactory.h"
@@ -125,6 +126,8 @@ void CConfigurationLoader::processSection() {
   try {
     if (sSection == PARAM_MODEL)
       pBaseObject = CWorld::Instance();
+    else if (sSection == PARAM_AGEING_ERROR)
+      pBaseObject = CAgeingErrorFactory::buildAgeingError(sType);
     else if (sSection == PARAM_CATCHABILITY)
       pBaseObject = CCatchabilityFactory::buildCatchability(sType);
     else if (sSection == PARAM_DERIVED_QUANTITY)
