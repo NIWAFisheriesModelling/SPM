@@ -34,12 +34,13 @@ IF (WIN32)
   )
   SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
 ELSE (WIN32)
-  SET(BOOST_LIBS "/opt/usr/boost_1_38_0/libs")
+  SET(BOOST_LIBS "/opt/boost138/usr/lib64")
+  SET(BOOST_HEADERS "/opt/boost138/usr/include")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
-  SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(MAIN_LIBRARIES
     boost_system-gcc41-mt-1_38
     boost_filesystem-gcc41-mt-1_38
@@ -215,6 +216,11 @@ src/Helpers/CComparer.cpp
 src/Helpers/CError.cpp
 src/Helpers/CMath.cpp
 src/Helpers/CConvertor.cpp
+src/AgeingError/CAgeingError.cpp
+src/AgeingError/CAgeingErrorManager.cpp
+src/AgeingError/Children/CNormalAgeingError.cpp
+src/AgeingError/Children/COffByOneAgeingError.cpp
+src/AgeingError/Factory/CAgeingErrorFactory.cpp
 )
 
 ADD_EXECUTABLE(${TEST_NAME}
