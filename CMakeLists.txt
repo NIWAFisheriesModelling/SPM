@@ -21,8 +21,8 @@ IF (WIN32)
   SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
   SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
-  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized")
+  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0")
   ADD_CUSTOM_TARGET(icon ALL
     COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
   )
@@ -38,8 +38,8 @@ ELSE (WIN32)
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
   SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -Wno-uninitialized")
-  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -Wno-uninitialized")
+  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0")
   SET(MAIN_LIBRARIES
     boost_system-gcc41-mt-1_38
     boost_filesystem-gcc41-mt-1_38
