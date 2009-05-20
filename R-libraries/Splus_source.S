@@ -560,7 +560,7 @@ function(corners)
 }
 "spm.binary.version"<-
 function() {
-return("1.00-2009-04-30")
+return("1.00-2009-05-18")
 }
 "spm.convert.to.lines"<-
 function(filename)
