@@ -11,6 +11,7 @@
 
 // Local headers
 #include "../BaseClasses/CBaseValidate.h"
+#include "../BaseClasses/CBaseBuild.h"
 
 //**********************************************************************
 //
@@ -21,7 +22,21 @@ public:
   // Functions
   CAgeingError();
   virtual                     ~CAgeingError();
-  void                        validate() { }
+  void                        validate();
+  void                        build() { };
+  void                        execute() { };
+  int                         getMinAge() { return iMinAge; }
+  int                         getMaxAge() { return iMaxAge; }
+  bool                        getAgePlusGroup() { return bAgePlusGroup; }
+
+
+protected:
+  int                       iMaxAge;
+  int                       iMinAge;
+  bool                      bAgePlusGroup;
+  int                       iNAges;
+  vector<vector<double> >   mMisMatrix;
+
 };
 
 #endif /* CAGEINGERROR_H_ */

@@ -21,6 +21,14 @@ public:
   // Functions
   CNormalAgeingError();
   virtual                     ~CNormalAgeingError();
+  void                        validate();
+  void                        build();
+  void                        execute(vector<double> vExpected);
+
+protected:
+  double                      dCV;
+  int                         iK;
+
 };
 
 #endif /* CNORMALAGEINGERROR_H_ */

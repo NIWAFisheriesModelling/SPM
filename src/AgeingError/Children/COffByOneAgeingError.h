@@ -20,6 +20,15 @@ public:
   // Functions
   COffByOneAgeingError();
   virtual                     ~COffByOneAgeingError();
+  void                        validate();
+  void                        build();
+  void                        execute(vector<double> vExpected);
+
+protected:
+  double                      dP1;
+  double                      dP2;
+  int                         iK;
+
 };
 
 #endif /* COFFBYONEAGEINGERROR_H_ */
