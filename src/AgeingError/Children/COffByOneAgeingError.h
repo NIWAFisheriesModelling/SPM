@@ -22,7 +22,7 @@ public:
   virtual                     ~COffByOneAgeingError();
   void                        validate();
   void                        build();
-  void                        execute(vector<double> vExpected);
+  void                        execute(vector<double> &vExpected);
 
 protected:
   double                      dP1;

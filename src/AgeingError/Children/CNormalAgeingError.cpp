@@ -36,8 +36,8 @@ void CNormalAgeingError::validate() {
     iK       = pParameterList->getInt(PARAM_K,true,0);
 
     // TODO: Complete validation - error messages need to be better phrased
-    if (iK < iMinAge)
-      throw("k needs to be a value at least the same as the minimum age in the model"); //TODO: Better error message
+    if (dCV <= 0)
+      throw("CV must be a non-negative value"); //TODO: Better error message
     if (iK > iMaxAge)
       throw("k cannot be larger that the maximum age in the model"); //TODO: Better error message
 
@@ -68,7 +68,7 @@ void CNormalAgeingError::build() {
 // CNormalAgeingError::execute()
 // Apply ageing error
 //**********************************************************************
-void CNormalAgeingError::execute(vector<double> vExpected) {
+void CNormalAgeingError::execute(vector<double> &vExpected) {
 
   try {
     vector<double> vResult(vExpected.size(),0);
@@ -95,3 +95,4 @@ void CNormalAgeingError::execute(vector<double> vExpected) {
 //**********************************************************************
 CNormalAgeingError::~CNormalAgeingError() {
 }
+

@@ -39,12 +39,14 @@ void COffByOneAgeingError::validate() {
     iK       = pParameterList->getInt(PARAM_K,true,0);
 
     // TODO: Complete validation - error messages need to be better phrased
-    if (iK < iMinAge)
-      throw("k needs to be a value at least the same as the minimum age in the model"); //TODO: Better error message
     if (iK > iMaxAge)
       throw("k cannot be larger that the maximum age in the model"); //TODO: Better error message
     if ((dP1+dP2) > 1.0)
        throw("The sum of p1 and p2 combined must be less than 1.0"); //TODO: Better error message
+    if ((dP1) < 0.0)
+       throw("p1 must be a non-negative number"); //TODO: Better error message
+  if ((dP2) < 0.0)
+       throw("p2 must be a non-negative number"); //TODO: Better error message
 
     // Register our variables as estimable
     //registerEstimable(PARAM_P1,dP1);
@@ -66,23 +68,23 @@ void COffByOneAgeingError::build() {
     mMisMatrix[0][0] = 1 - dP2;
     mMisMatrix[0][1] = dP2;
 
-    for (int i = 1; i < iNAges; ++i) {
+    for (int i = 0; i < iNAges; ++i) {
       mMisMatrix[i][i-1] = 1 - dP2;
       mMisMatrix[i][i]   = 1 - (dP1 + dP2);
       mMisMatrix[i][i+1] = dP2;
     }
 
-    mMisMatrix[iNAges][iNAges - 1] = dP1;
+    mMisMatrix[iNAges - 1][iNAges - 2] = dP1;
 
     if(bAgePlusGroup) {
-      mMisMatrix[iNAges][iNAges] = 1 - dP1;
+      mMisMatrix[iNAges - 1][iNAges -1] = 1 - dP1;
     } else {
-      mMisMatrix[iNAges][iNAges] = 1 - (dP1 + dP2);
+      mMisMatrix[iNAges - 1][iNAges - 1] = 1 - (dP1 + dP2);
     }
 
-    if (iK > 0) {
-      for (int i = 0; i < iK; ++i) {
-        for(int j = 0; j < iK; ++j) {
+    if (iK > iMinAge) {
+      for (int i = 0; i < (iK - iMinAge); ++i) {
+        for(int j = 0; j < (iK - iMinAge); ++j) {
           mMisMatrix[i][j] <- 0;
         }
         mMisMatrix[i][i]<-1;
@@ -98,7 +100,7 @@ void COffByOneAgeingError::build() {
 // COffByOneAgeingError::execute()
 // Apply ageing error
 //**********************************************************************
-void COffByOneAgeingError::execute(vector<double> vExpected) {
+void COffByOneAgeingError::execute(vector<double> &vExpected) {
 
   try {
     vector<double> vResult(vExpected.size(),0);
@@ -125,3 +127,98 @@ void COffByOneAgeingError::execute(vector<double> vExpected) {
 //**********************************************************************
 COffByOneAgeingError::~COffByOneAgeingError() {
 }
+
+/*
+# Off By One ageing error
+
+OffByOne<-function(min.age,max.age,dP1,dP2,iK,bAgePlusGroup=T) {
+  iNAges <- max.age - min.age + 1
+  mMisMatrix<-matrix(0,nrow=iNAges,ncol=iNAges)
+  mMisMatrix[1,1] <- 1 - dP2
+  mMisMatrix[1,2] <- dP2
+  for(i in 2:(iNAges-1)) {
+    mMisMatrix[i,i-1] <- dP1
+    mMisMatrix[i,i]   <- 1 - (dP1 + dP2)
+    mMisMatrix[i,i+1] <- dP2
+  }
+  mMisMatrix[iNAges,iNAges-1] <- dP1
+  if(bAgePlusGroup) {
+    mMisMatrix[iNAges,iNAges]<- 1 - dP1
+  } else {
+    mMisMatrix[iNAges,iNAges] <- 1 - (dP1 + dP2)
+  }
+  if((iK - min.age)>0) {
+    for (i in 1:(iK - min.age)){
+      for(j in 1:iNAges) {
+        mMisMatrix[i,j] <- 0;
+      }
+      mMisMatrix[i,i]<-1
+    }
+  }
+  return(mMisMatrix)
+}
+
+execute <- function(vExpected, mMisMatrix) {
+  vResult<-rep(0,length(vExpected))
+  for(i in 1:nrow(mMisMatrix)) {
+    for(j in 1:ncol(mMisMatrix)) {
+      vResult[j] <- vResult[j] + vExpected[i] * mMisMatrix[i,j]
+    }
+  }
+  return(vResult)
+}
+
+Expected<-c(10,20,30,20,15,5)
+mMisMatrix<-OffByOne(min.age=3,max.age=8,dP1=0.05,dP2=0.10,iK=4,bAgePlusGroup=T)
+#     [,1] [,2] [,3] [,4] [,5] [,6]
+#[1,] 1.00 0.00 0.00 0.00 0.00 0.00
+#[2,] 0.05 0.85 0.10 0.00 0.00 0.00
+#[3,] 0.00 0.05 0.85 0.10 0.00 0.00
+#[4,] 0.00 0.00 0.05 0.85 0.10 0.00
+#[5,] 0.00 0.00 0.00 0.05 0.85 0.10
+#[6,] 0.00 0.00 0.00 0.00 0.05 0.95
+
+execute(Expected,mMisMatrix)
+#[1] 11.00 18.50 28.50 20.75 15.00  6.25
+
+
+mMisMatrix<-OffByOne(min.age=3,max.age=8,dP1=0.05,dP2=0.10,iK=4,bAgePlusGroup=F)
+#     [,1] [,2] [,3] [,4] [,5] [,6]
+#[1,] 1.00 0.00 0.00 0.00 0.00 0.00
+#[2,] 0.05 0.85 0.10 0.00 0.00 0.00
+#[3,] 0.00 0.05 0.85 0.10 0.00 0.00
+#[4,] 0.00 0.00 0.05 0.85 0.10 0.00
+#[5,] 0.00 0.00 0.00 0.05 0.85 0.10
+#[6,] 0.00 0.00 0.00 0.00 0.05 0.85
+
+execute(Expected,mMisMatrix)
+#[1] 11.00 18.50 28.50 20.75 15.00  5.75
+
+
+mMisMatrix<-OffByOne(min.age=3,max.age=8,dP1=0.05,dP2=0.10,iK=0,bAgePlusGroup=T)
+#     [,1] [,2] [,3] [,4] [,5] [,6]
+#[1,] 0.90 0.10 0.00 0.00 0.00 0.00
+#[2,] 0.05 0.85 0.10 0.00 0.00 0.00
+#[3,] 0.00 0.05 0.85 0.10 0.00 0.00
+#[4,] 0.00 0.00 0.05 0.85 0.10 0.00
+#[5,] 0.00 0.00 0.00 0.05 0.85 0.10
+#[6,] 0.00 0.00 0.00 0.00 0.05 0.95
+
+execute(Expected,mMisMatrix)
+#[1] 10.00 19.50 28.50 20.75 15.00  6.25
+
+
+mMisMatrix<-OffByOne(min.age=3,max.age=8,dP1=0.05,dP2=0.10,iK=3,bAgePlusGroup=F)
+#     [,1] [,2] [,3] [,4] [,5] [,6]
+#[1,] 0.90 0.10 0.00 0.00 0.00 0.00
+#[2,] 0.05 0.85 0.10 0.00 0.00 0.00
+#[3,] 0.00 0.05 0.85 0.10 0.00 0.00
+#[4,] 0.00 0.00 0.05 0.85 0.10 0.00
+#[5,] 0.00 0.00 0.00 0.05 0.85 0.10
+#[6,] 0.00 0.00 0.00 0.00 0.05 0.85
+
+execute(Expected,mMisMatrix)
+#[1] 10.00 19.50 28.50 20.75 15.00  5.75
+
+
+*/
