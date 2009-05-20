@@ -371,6 +371,21 @@ Note that this requires that $N_{process\_ error} > 0$, but we allow the special
 
 For both the c.v. and $N$ process errors, the process error has more effect on small errors than on large ones. Be clear that a large value for the $N$ process error means a small process error.
 
+\subsection{\I{Ageing error}}
+
+\SPM\ can apply ageing error age frequency observations. Ageing error is applied to the expected values for proportions-at-age observations. The ageing error is applied as a misclassification matrix, which has the effect of 'smearing' the age frequencies. These are used in calculating the fits to the observed values, and hence tio contribution to the total objective function. 
+
+Ageing error is optional, and if it is used, it may be omitted for any individual time series. Different ageing error models may be applied for different observation commands.
+
+The ageing error models implemented are; 
+\begin{enumerate}
+  \item{None}  The default model is to apply no ageing error.
+  \item{Off by one} Proportion $p_1$ of individuals of each age $a$ are misclassified as age $a-1$ and proportion $p_2$ are misclassified as age $a+1$. Individuals of age $a < k$ are not misclassified. If there is no plus group in the population model, then proportion $p_2$ fish of the oldest age class will 'fall off the edge' and disappear. 
+  \item{Normal} Individuals of age $a$ are classified as ages which are normally distributed with mean $a$ and constant c.v. $c$. As above, if there is no plus group in the population model, some individuals of the older age classes may disappear. If $c$ is high enough, some of the younger age classes may 'fall off the other edge'. Individuals of age $a < k$ are not misclassified.
+\end{enumerate}
+
+Note that the expected values (fits) reported by \SPM\ for observations with ageing error will have had the ageing error applied. 
+
 \subsection{\I{Simulating observations}\label{sec:simulation-observations}}
 
 \SPM\ can generate simulated observations for a given model with given parameter values (using \texttt{spm -s}). Simulated observations are randomly distributed values, generated according to the error assumptions defined for each observation, around fits calculated from one or more sets of the 'true' parameter values. Simulating from a set of parameters can be used to generate observations from an operating model or as a form of parametric bootstrap. 

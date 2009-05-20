@@ -317,53 +317,6 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the standard deviation of the Beta prior}
 
-\subsection{Defining ageing error}
-
-Three methods for including ageing error into estimation with observations are, 
- 
-\begin{itemize}
-	\item None
-	\item Normal
-	\item Off-by-one
-\end{itemize}
-
-Each type of ageing error requires a set of subcommands and arguments specific to its type.
-
-\defComLab{ageing\_error}{Define ageing error with \argument{label}}
-
-\defSub{type} {The type of ageing error}
-\defType{String}
-\defDefault{None}
-\defValue{Defines the type of ageing error to use, currently only `none' and the normal is defined}
-
-\subsubsection[No ageing error]{\commandlabsubarg{ageing\_error}{type}{none}} 
-
-The \commandlabsubarg{ageing\_error}{type}{none} has no other subcommands.
-
-\subsubsection[Normal ageing error]{\commandlabsubarg{ageing\_error}{type}{normal}} 
-
-\defSub{cv} {Parameter of the normal ageing error model}
-\defType{Constant}
-\defDefault{None}
-\defValue{Define the c.v. of misclassification}
-
-\subsubsection[Off-by-one ageing error]{\commandlabsubarg{ageing\_error}{type}{off\_by\_one}} 
-
-\defSub{k} {The $k$ parameter of the off-by-one ageing error model}
-\defType{Integer}
-\defDefault{0}
-\defValue{$p_1$ and $p_2$ define the proportions of misclassification down and up by 1 year respectively. $k$ defines the minimum age of fish which can be misclassified --- fish under age $k$ have no ageing error}
-
-\defSub{p1} {The $p_1$ parameter of the off-by-one ageing error model}
-\defType{Constant}
-\defDefault{None}
-\defValue{$p_1$ and $p_2$ define the proportions of misclassification down and up by 1 year respectively. $k$ defines the minimum age of fish which can be misclassified --- fish under age $k$ have no ageing error}
-
-\defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
-\defType{Constant}
-\defDefault{None}
-\defValue{$p_1$ and $p_2$ define the proportions of misclassification down and up by 1 year respectively. $k$ defines the minimum age of fish which can be misclassified --- fish under age $k$ have no ageing error}
-
 \subsection{Defining catchability constants}
 
 \defComLab{catchability}{Define a catchability constant with \argument{label}}

@@ -312,15 +312,6 @@
 \defSub{B}{The upper value of the range parameter $B$ of the Beta prior}
 \defSub{mu}{Defines the mean $\mu$ of the Beta prior}
 \defSub{sd}{Defines the standard deviation $\sigma$ of the Beta prior}
-\par\defComLab{ageing\_error}{Define ageing error with \argument{label}}\par\par
-\defSub{type} {The type of ageing error}
-\par\textbf{\commandlabsubarg{ageing\_error}{type}{none}}\par
-\par\textbf{\commandlabsubarg{ageing\_error}{type}{normal}}\par
-\defSub{cv} {Parameter of the normal ageing error model}
-\par\textbf{\commandlabsubarg{ageing\_error}{type}{off\_by\_one}}\par
-\defSub{k} {The $k$ parameter of the off-by-one ageing error model}
-\defSub{p1} {The $p_1$ parameter of the off-by-one ageing error model}
-\defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
 \par\defComLab{catchability}{Define a catchability constant with \argument{label}}\par\par
 \defSub{q} {Value of the q parameter}
 \par\defComLab{penalty}{Define a penalty with \argument{label}}\par\par
@@ -409,6 +400,16 @@
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
 \defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\par\defComLab{ageing\_error}{Define ageing error with \argument{label}}\par\par
+\defSub{type} {The type of ageing error}
+\par\textbf{\commandlabsubarg{ageing\_error}{type}{none}}\par
+\par\textbf{\commandlabsubarg{ageing\_error}{type}{normal}}\par
+\defSub{cv} {Parameter of the normal ageing error model}
+\defSub{k} {The $k$ parameter of the normal ageing error model}
+\par\textbf{\commandlabsubarg{ageing\_error}{type}{off\_by\_one}}\par
+\defSub{p1} {The $p_1$ parameter of the off-by-one ageing error model}
+\defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
+\defSub{k} {The $k$ parameter of the off-by-one ageing error model}
 \subsection{Report command and subcommand syntax}\par
 \defComLab{report}{Define an output report}\par\par
 \defSub{type} {Define the type of report}
