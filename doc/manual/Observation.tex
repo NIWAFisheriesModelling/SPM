@@ -18,7 +18,7 @@ The definitions for each type of observation are described below, including how 
 
 Proportions-at-age observations are observations of either the relative number of individuals at age or relative biomass at age. 
 
-The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. 
+The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Note that the observations at age can include a plus group, which must be less than or equal to the maximum age defined for the partition.
 
 The age range must be ages defined in the partition (i.e., between \commandsub{model}{min\_age} and \commandsub{model}{max\_age} inclusive), but the upper end of the age range can optionally be a plus group --- which may or may not be the same as the plus group defined for the partition. 
 
@@ -40,7 +40,7 @@ categories male female
 
 \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
 
-Otherwise, to provide proportions for multiple categories simultaneously, you need to spe3cify which categories are aggregated and which are separate. \SPM\ uses a $:$ symbol to denote those categories to are separate. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
+Otherwise, to provide proportions for multiple categories simultaneously, you need to specify which categories are aggregated and which are separate. \SPM\ uses a $:$ symbol to denote those categories to separate. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
 
 \begin{verbatim}
 categories male : female

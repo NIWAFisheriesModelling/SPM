@@ -3,8 +3,6 @@ In SPM, but not in manual
   0 (zero)
   1 (one)
   1,000
-  adapt_at
-  adaptive_stepsize
   age
   age_index
   area
@@ -15,73 +13,55 @@ In SPM, but not in manual
   column
   column_index
   command
-  current
   enabled_estimates
   estimable
   estimates
-  final
   flagged_penalties
   function
   height
   hex
   hex_uniform
   index
-  initial
   label
-  layer_categories
   layer_height
-  layer_max
-  layer_min
-  layer_type
   layer_width
   method
   multinomial
   normal_by_stdev
   normal_log
-  normalise
   objective
-  observations
   profiles
-  projection_years
   proportion
   proportion_time-step
-  proposal_t
-  r
-  recruitment
   rescale
   row
   row_index
   run_mode
-  run_years
   scores_index
   size_weights
-  square
   square_uniform
-  start_year
-  step
   total_score
-  u
   value
   width
 
 
 
 In manual, but not in SPM
-  ageing_error
   include
   joint_selectivity
   size_at_age
   linf
   mcmc_fixed
-  ageing_error
   by_length
   correlation_adjustment_diff
   correlation_adjustment_method
+  df
   distribution
   estimation_phase
   growth_proportions
   initialisation_layer
   k
+  keep
   max_correlation
   p1
   p2
@@ -94,6 +74,7 @@ In manual, but not in SPM
   size_at_age
   sizes
   source_layer
+  start
   t0
   tau1
   tau2
@@ -101,11 +82,11 @@ In manual, but not in SPM
   metropolis_hastings
   schnute
   adjacent_cell_movement
+  basic
   biomass_event_mortality
   event_mortality_at_age
   iterative
   migration_movement
   normal_by_sd
-  off_by_one
   von_bertalanffy
   weight_at_size
