@@ -87,6 +87,7 @@ src/CRuntimeController.cpp
 src/DerivedQuantities/CDerivedQuantity.cpp
 src/DerivedQuantities/CDerivedQuantityManager.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.cpp
+src/Distributions/CNormalDistribution.cpp
 src/Estimates/CEstimate.cpp
 src/Estimates/CEstimateManager.cpp
 src/Estimates/Factory/CEstimateFactory.cpp
