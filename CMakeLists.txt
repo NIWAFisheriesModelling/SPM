@@ -260,6 +260,8 @@ src/Likelihoods/Children/CBinomialLikelihood.Test.cpp
 src/Observations/Children/CAbundanceObservation.Test.cpp
 src/Observations/Children/CProportionsAtAgeObservation.Test.cpp
 src/Observations/Children/CProportionsByCategoryObservation.Test.cpp
+src/Observations/Children/CProportionsAtAgeObservationWithOffByOne.Test.cpp
+src/Observations/Children/CProportionsAtAgeObservationWithNormal.Test.cpp
 src/Observations/Factory/CObservationFactory.Test.cpp
 src/TimeSteps/Factory/CTimeStepFactory.Test.cpp
 src/Minimizers/Factory/CMinimizerFactory.Test.cpp
