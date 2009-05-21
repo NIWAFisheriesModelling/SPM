@@ -46,9 +46,9 @@ void COffByOneAgeingError::validate() {
       throw("k cannot be larger that the maximum age in the model"); //TODO: Better error message
     if ((dP1+dP2) >= 1.0)
        throw("The sum of p1 and p2 combined must be less than 1.0"); //TODO: Better error message
-    if ((dP1) < 0.0)
+    if (dP1 < 0.0)
        throw("p1 must be a non-negative number"); //TODO: Better error message
-  if ((dP2) < 0.0)
+  if (dP2 < 0.0)
        throw("p2 must be a non-negative number"); //TODO: Better error message
 
   } catch (string Ex) {
@@ -129,43 +129,6 @@ COffByOneAgeingError::~COffByOneAgeingError() {
 
 /*
 # Off By One ageing error
-
-OffByOne<-function(min.age,max.age,dP1,dP2,iK,bAgePlusGroup=T) {
-  iNAges <- max.age - min.age + 1
-  mMisMatrix<-matrix(0,nrow=iNAges,ncol=iNAges)
-  mMisMatrix[1,1] <- 1 - dP2
-  mMisMatrix[1,2] <- dP2
-  for(i in 2:(iNAges-1)) {
-    mMisMatrix[i,i-1] <- dP1
-    mMisMatrix[i,i]   <- 1 - (dP1 + dP2)
-    mMisMatrix[i,i+1] <- dP2
-  }
-  mMisMatrix[iNAges,iNAges-1] <- dP1
-  if(bAgePlusGroup) {
-    mMisMatrix[iNAges,iNAges]<- 1 - dP1
-  } else {
-    mMisMatrix[iNAges,iNAges] <- 1 - (dP1 + dP2)
-  }
-  if((iK - min.age)>0) {
-    for (i in 1:(iK - min.age)){
-      for(j in 1:iNAges) {
-        mMisMatrix[i,j] <- 0;
-      }
-      mMisMatrix[i,i]<-1
-    }
-  }
-  return(mMisMatrix)
-}
-
-execute <- function(vExpected, mMisMatrix) {
-  vResult<-rep(0,length(vExpected))
-  for(i in 1:nrow(mMisMatrix)) {
-    for(j in 1:ncol(mMisMatrix)) {
-      vResult[j] <- vResult[j] + vExpected[i] * mMisMatrix[i,j]
-    }
-  }
-  return(vResult)
-}
 
 Expected<-c(10,20,30,20,15,5)
 mMisMatrix<-OffByOne(min.age=3,max.age=8,dP1=0.05,dP2=0.10,iK=4,bAgePlusGroup=T)

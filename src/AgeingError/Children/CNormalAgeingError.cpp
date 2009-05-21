@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CNormalAgeingError.h"
+#include "../../Distributions/CNormalDistribution.h"
 
 //**********************************************************************
 // CNormalAgeingError::CNormalAgeingError()
@@ -57,6 +58,31 @@ void CNormalAgeingError::build() {
 
   try {
 
+    // Variables
+    CNormalDistribution *pNormal = CNormalDistribution::Instance();
+
+    for (int i = 0; i < iNAges; i++) {
+      double dAge = iMinAge + i;
+      for (int j = 0; j < iNAges; ++j) {
+        double dMinAgeClass = (iMinAge + j) - 0.5;
+        if (j == 0)
+          mMisMatrix[i][j] = pNormal->getCDF(dMinAgeClass + 1, dAge, dAge * dCV);
+        else if ((j == (iNAges - 1)) && bAgePlusGroup)
+          mMisMatrix[i][j] = 1 - pNormal->getCDF(dMinAgeClass, dAge, dAge * dCV);
+        else
+          mMisMatrix[i][j] = pNormal->getCDF(dMinAgeClass + 1, dAge, dAge * dCV)
+                             - pNormal->getCDF(dMinAgeClass, dAge, dAge * dCV);
+      }
+    }
+    if (iK > iMinAge) {
+      for (int i = 0; i < (iK - iMinAge); ++i) {
+        for(int j = 0; j < (iK - iMinAge); ++j) {
+          mMisMatrix[i][j] = 0;
+        }
+        mMisMatrix[i][i] = 1;
+      }
+    }
+
   } catch (string Ex) {
     Ex = "CNormalAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -68,7 +94,6 @@ void CNormalAgeingError::build() {
 // Apply ageing error
 //**********************************************************************
 void CNormalAgeingError::getExpected(vector<double> &expected) {
-
   try {
     vector<double> vResult(expected.size(),0);
 
@@ -97,49 +122,6 @@ CNormalAgeingError::~CNormalAgeingError() {
 
 /*
  # Normal ageing error
-
-NormalCDF<-function(x,mu,sigma) {
-  # See Boost for a normal cdf function
-  # this return the probability of value <= x, given the mean and sigma of a normal distribution
-  pnorm(x,mu,sigma)
-}
-
-Normal<-function(min.age,max.age,dCV,iK,bAgePlusGroup=T) {
-  iNAges <- max.age - min.age + 1
-  mMisMatrix<-matrix(0,nrow=iNAges,ncol=iNAges)
-
-  for(i in 1:iNAges) {
-    dAge <- min.age + i - 1
-    for(j in 1:iNAges) {
-      dMinAgeClass <- (j + min.age - 1) - 0.5
-      if(j == 1)
-        mMisMatrix[i,j] <- NormalCDF(dMinAgeClass+1,dAge,dAge*dCV)
-      else if(j == iNAges && bAgePlusGroup)
-        mMisMatrix[i,j] <- 1 - NormalCDF(dMinAgeClass,dAge,dAge*dCV)
-      else
-        mMisMatrix[i,j] <- NormalCDF(dMinAgeClass+1,dAge,dAge*dCV) - NormalCDF(dMinAgeClass,dAge,dAge*dCV)
-    }
-  }
-  if((iK - min.age)>0) {
-    for (i in 1:(iK - min.age)){
-      for(j in 1:iNAges) {
-        mMisMatrix[i,j] <- 0;
-      }
-      mMisMatrix[i,i]<-1
-    }
-  }
-  return(mMisMatrix)
-}
-
-execute <- function(vExpected, mMisMatrix) {
-  vResult<-rep(0,length(vExpected))
-  for(i in 1:nrow(mMisMatrix)) {
-    for(j in 1:ncol(mMisMatrix)) {
-      vResult[j] <- vResult[j] + vExpected[i] * mMisMatrix[i,j]
-    }
-  }
-  return(vResult)
-}
 
 Expected<-c(10,20,30,20,15,5)
 
