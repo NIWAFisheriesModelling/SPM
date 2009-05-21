@@ -13,7 +13,7 @@ svn revert src/Version.h
 rem Strip and place in local directories
 strip spm.exe
 COPY spm.exe /Y c:\Windows\batch\spm.exe
-COPY spm_UnOptimised.exe /Y c:\Windows\batch\spm_UnOptimised.exe
+COPY spm_unoptimised.exe /Y c:\Windows\batch\spm_unoptimised.exe
 rem Update the Text[pad syntax file
 COPY /Y doc\manual\SPM.syn "C:\Program Files\TextPad 5\Samples\SPM.syn"
 
@@ -39,4 +39,4 @@ call makeInstall.bat > makeInstall.log
 cd ..
 
 spm -v
-spm_UnitTests.exe
+spm_unittests.exe
