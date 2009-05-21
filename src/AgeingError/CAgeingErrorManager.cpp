@@ -7,11 +7,18 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global headers
+#include <iostream>
+
 // Local headers
 #include "CAgeingErrorManager.h"
 #include "CAgeingError.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Singleton Variable
 boost::thread_specific_ptr<CAgeingErrorManager> CAgeingErrorManager::clInstance;
@@ -115,4 +122,7 @@ void CAgeingErrorManager::build() {
 // Destructor
 //**********************************************************************
 CAgeingErrorManager::~CAgeingErrorManager() {
+  foreach(CAgeingError *ageingError, vAgeingErrors) {
+    delete ageingError;
+  }
 }

@@ -85,7 +85,6 @@ void CNormalAgeingError::getExpected(vector<double> &expected) {
     Ex = "CNormalAgeingError.getExpected(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-
 }
 
 //**********************************************************************

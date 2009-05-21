@@ -27,6 +27,7 @@ public:
   int                         getMinAge() { return iMinAge; }
   int                         getMaxAge() { return iMaxAge; }
   bool                        getAgePlusGroup() { return bAgePlusGroup; }
+  vector<vector<double> >     getMisMatrix() {return mMisMatrix; }
 
 
 protected:

@@ -44,7 +44,7 @@ void COffByOneAgeingError::validate() {
     // TODO: Complete validation - error messages need to be better phrased
     if (iK > iMaxAge)
       throw("k cannot be larger that the maximum age in the model"); //TODO: Better error message
-    if ((dP1+dP2) > 1.0)
+    if ((dP1+dP2) >= 1.0)
        throw("The sum of p1 and p2 combined must be less than 1.0"); //TODO: Better error message
     if ((dP1) < 0.0)
        throw("p1 must be a non-negative number"); //TODO: Better error message
@@ -67,8 +67,8 @@ void COffByOneAgeingError::build() {
     mMisMatrix[0][0] = 1 - dP2;
     mMisMatrix[0][1] = dP2;
 
-    for (int i = 0; i < iNAges; ++i) {
-      mMisMatrix[i][i-1] = 1 - dP2;
+    for (int i = 1; i < (iNAges-1); ++i) {
+      mMisMatrix[i][i-1] = dP1;
       mMisMatrix[i][i]   = 1 - (dP1 + dP2);
       mMisMatrix[i][i+1] = dP2;
     }
@@ -89,6 +89,7 @@ void COffByOneAgeingError::build() {
         mMisMatrix[i][i] = 1;
       }
     }
+
   } catch (string Ex) {
     Ex = "COffByOneAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
