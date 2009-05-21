@@ -16,6 +16,7 @@ The report types available are,
   \item Print the covariance matrix
   \item Print an observation values, fits, and residuals
   \item Print a simulated observation definition suitable for use in a \SPM\ \config.
+  \item Print the ageing error misclassification matrix
   \item Print a layer
   \item Print a derived view via a categorical layer
   \item Print a selectivity's values
@@ -184,7 +185,24 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{observation} {Define the label of the observation to print}
 \defType{String}
 \defDefault{None}
-\defValue{A valid label from \command{Observation}}
+\defValue{A valid label from \command{observation}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{None}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print an ageing error misclassification matrix]{\commandlabsubarg{report}{type}{ageing\_error}}
+
+\defSub{ageing\_error} {Define the label of the ageing\_error misclassification matrix}
+\defType{String}
+\defDefault{None}
+\defValue{A valid label from \command{ageing\_error}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
