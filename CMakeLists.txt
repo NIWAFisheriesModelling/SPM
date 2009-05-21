@@ -181,6 +181,7 @@ src/Profiles/CProfileManager.cpp
 src/Profiles/Factory/CProfileFactory.cpp
 src/RandomNumberGenerator/CRandomNumberGenerator.cpp
 src/Reports/Children/Base/CFileReport.cpp
+src/Reports/Children/CAgeingErrorReport.cpp
 src/Reports/Children/CCovarianceReport.cpp
 src/Reports/Children/CDerivedQuantityReport.cpp
 src/Reports/Children/CEstimateSummaryReport.cpp
