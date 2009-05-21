@@ -24,6 +24,7 @@
 #include "../Children/CCovarianceReport.h"
 #include "../Children/CObservationDefinitionReport.h"
 #include "../Children/CSpatialMapReport.h"
+#include "../Children/CAgeingErrorReport.h"
 
 //**********************************************************************
 //
@@ -61,6 +62,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CObservationDefinitionReport();
   else if (type == PARAM_SPATIAL_MAP)
     pReporter = new CSpatialMapReport();
+  else if (type == PARAM_AGEING_ERROR)
+    pReporter = new CAgeingErrorReport();
   else
     throw string("Unknown type: " + type);
 

@@ -13,6 +13,7 @@
 // Local Headers
 #include "CRuntimeThread.h"
 #include "../BaseClasses/CBaseManager.h"
+#include "../AgeingError/CAgeingErrorManager.h"
 #include "../Catchabilities/CCatchabilityManager.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../Estimates/CEstimateManager.h"
@@ -48,6 +49,7 @@ CRuntimeThread::CRuntimeThread() {
   // Add our managers to the Vector
   vManagers.push_back(CWorld::Instance());
   vManagers.push_back(CProcessManager::Instance());
+  vManagers.push_back(CAgeingErrorManager::Instance());
   vManagers.push_back(CCatchabilityManager::Instance());
   vManagers.push_back(CDerivedQuantityManager::Instance());
   vManagers.push_back(CEstimateManager::Instance());
@@ -303,5 +305,6 @@ CRuntimeThread::~CRuntimeThread() {
   CEstimateManager::Destroy();
   CDerivedQuantityManager::Destroy();
   CCatchabilityManager::Destroy();
+  CAgeingErrorManager::Destroy();
   CWorld::Destroy();
 }
