@@ -183,7 +183,7 @@ void CProportionsAtAgeObservation::build() {
     CObservation::build();
 
     // Ageing Error
-    if (sAgeingError !="")
+    if (sAgeingError != "")
       pAgeingError = CAgeingErrorManager::Instance()->getAgeingError(sAgeingError);
 
     // Create Array of Age Results
