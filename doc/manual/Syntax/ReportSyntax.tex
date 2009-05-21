@@ -30,31 +30,31 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{type} {Define the type of report}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid type of report}
 
 \subsubsection[Print the spatial co-ordinates of each spatial cell (i.e., row and column labels of each spatial cell) of the spatial structure]{\commandlabsubarg{report}{type}{spatial\_map}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \subsubsection[Print the partition]{\commandlabsubarg{report}{type}{partition}}
 
 \defSub{year} {Define the year that the partition report applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the partition report applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -66,12 +66,12 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{initialisation\_phase} {Define the phase of initialisation that the partition report applies to}
 \defType{string}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid phase label, from \command{initialisation\_phase}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -83,12 +83,12 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{process} {Define the label of the process to summarise}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{process}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -100,12 +100,12 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{derived\_quantity} {Define the label of the derived quantity to print}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{derived\_quantity}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -117,7 +117,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -131,7 +131,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -143,7 +143,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -155,7 +155,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -167,12 +167,12 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{observation} {Define the label of the observation to print}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{Observation}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -184,12 +184,12 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{observation} {Define the label of the observation to print}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{observation}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -201,12 +201,12 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{ageing\_error} {Define the label of the ageing\_error misclassification matrix}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{ageing\_error}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -218,22 +218,22 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{layer} {Define the label of the layer to print}
 \defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{Layer}}
+\defDefault{No default}
+\defValue{A valid label from \command{layer}}
 
 \defSub{year} {Define the year for the printing of the layer}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -245,22 +245,22 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{layer} {Define the label of the layer to print}
 \defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{Layer}}
+\defDefault{No default}
+\defValue{A valid label from \command{layer}}
 
 \defSub{year} {Define the year for the printing of the layer}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -272,22 +272,22 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{selectivity} {Define the label of the selectivity to print}
 \defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{Selectivity}}
+\defDefault{No default}
+\defValue{A valid label from \command{selectivity}}
 
 \defSub{year} {Define the year for the printing of the selectivity}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the selectivity}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -299,7 +299,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
@@ -311,17 +311,17 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{size\_weight} {Define the label of the size-weight relationship print}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{size\_weight}}
 
 \defSub{sizes} {Define the label of the size-weight relationship print}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Values of sizes to calculate the size-weight relationship for}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}

@@ -2,33 +2,33 @@
 
 \subsection{Estimation methods}
 
-\defCom{Estimation} 
+\defCom{Estimation}
 
 \defSub{minimiser} {The label of the minimiser to use, if doing a point estimate}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label from \command{minimiser}}
 
 \defSub{MCMC} {The label of the MCMC to use, of doing an MCMC}
 \defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{MCMC}}
+\defDefault{No default}
+\defValue{A valid label from \command{mcmc}}
 
 \defSub{profile} {The labels of the profiles to use, if doing a profile}
 \defType{String}
-\defDefault{None}
-\defValue{A valid label from \command{MPD}}
+\defDefault{No default}
+\defValue{A valid label from \command{mpd}}
 
 \defSub{random\_seed}{Defines the random number generator seed}
 \defArg{value}{The random number generator seed value}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{An integer between 0 and 10000 inclusive}
 
 \subsection{Point estimation}
 
-Two methods of minimising when doing a point estimate are, 
- 
+Two methods of minimising when doing a point estimate are,
+
 \begin{itemize}
 	\item Numerical differences minimiser
   \item Differential evolution minimiser
@@ -41,7 +41,7 @@ Note that point estimates are required for
   \item To generate the starting values and covariance matrix for an MCMC
   \item To calculate the point estimates for profiles
 \end{itemize}
-  
+
 Each type of minimiser requires a set of subcommands and arguments specific to that minimiser. Different minimisers can be called for different model runs or for different run modes (i.e., MCMC, MPDs, or profiles).
 
 \defComLab{Minimiser}{Define the an minimiser estimator with label}
@@ -49,9 +49,9 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defSub{type} {Define the type of minimiser}
 \defType{String}
 \defDefault{numerical\_differences}
-\defValue{A valid type of minimiser, either numerical\_differences or DE\_solver}
+\defValue{A valid type of minimiser, either numerical\_differences or de\_solver}
 
-\subsubsection[Numerical differences minimiser]{\commandlabsubarg{minimiser}{type}{numerical\_differences}} 
+\subsubsection[Numerical differences minimiser]{\commandlabsubarg{minimiser}{type}{numerical\_differences}}
 
 \defSub{iterations} {Define the maximum number of iterations for the minimiser}
 \defType{Integer}
@@ -78,7 +78,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{True}
 \defValue{Either true of false}
 
-\subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{DE\_solver}} 
+\subsubsection[Differential evolution minimiser]{\commandlabsubarg{minimiser}{type}{de\_solver}}
 
 \defSub{population\_size} {Define the minimisers number of populations to generate}
 \defType{Integer}
@@ -114,14 +114,14 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 
 Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain using Metropolis-Hastings
 
-\defComLab{MCMC}{Define the MCMC estimation arguments}
+\defComLab{mcmc}{Define the MCMC estimation arguments}
 
 \defSub{type} {Define the method of MCMC}
 \defType{String}
-\defDefault{Metropolis\_Hastings}
+\defDefault{metropolis\_hastings}
 \defValue{A valid type of MCMC, currently only Metropolis-Hastings is available}
 
-\subsubsection[Metropolis-Hastings]{\commandsubarg{MCMC}{type}{Metropolis\_Hastings}} 
+\subsubsection[Metropolis-Hastings]{\commandsubarg{mcmc}{type}{metropolis\_hastings}}
 
 \defSub{start} {Covariance multiplier for the starting point of the Markov chain}
 \defType{Constant}
@@ -130,7 +130,7 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 \defSub{length} {Length of the Markov chain}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the length of the Markov chain (as a number of iterations)}
 
 \defSub{keep} {Spacing between recorded values in the chain}
@@ -174,7 +174,7 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 \defSub{parameter} {Name of the parameter to be profiled}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the name of the parameter to be profiled}
 
 \defSub{n} {Number of values at which to profile the parameter}
@@ -184,12 +184,12 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 \defSub{lower\_bound} {lower bound on parameter}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the lower bound on the range of the parameter to profile}
 
 \defSub{upper\_bound} {Upper bound on parameter}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the upper bound on the range of the parameter to profile}
 
 \subsection{Defining the parameters to be estimated and their priors}
@@ -197,12 +197,12 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defComArg{estimate}{parameter\_name}{Estimate an estimable parameter}
 \defArg{parameter\_name}{The \SPM\ name of the parameter to estimate}
 \defType{string}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid \SPM\ parameter name}
 
 \defSub{same}{Names of the other parameters which are constrained to have the same value}
 \defType{String Vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the names of all the other parameters which are constrained to have the same value as this parameter}
 
 \defSub{estimation\_phase}{Phase at which this parameter should be estimated, in point estimation}
@@ -212,15 +212,15 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 
 \defSub{lower\_bound}{Lower bounds on this parameter}
 \defType{Constant vector, of length equal to the parameter length}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the lower bound(s) on this parameter}
 
 \defSub{upper\_bound}{Upper bound on this parameter}
 \defType{Constant vector, of length equal to the parameter length}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the upper bound(s) on this parameter}
 
-\defSub{MCMC\_fixed}{Should this parameter be fixed during MCMC?}
+\defSub{mcmc\_fixed}{Should this parameter be fixed during MCMC?}
 \defType{Switch}
 \defDefault{False}
 \defValue{Define this parameter as fixed during MCMC (i.e., considered a constant for the MCMC)}
@@ -248,18 +248,18 @@ The available priors are,
 
 \defSub{type} {Define the type of prior}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid type of prior}
 
-\subsubsection[Uniform prior]{\commandlabsubarg{prior}{type}{uniform}} 
+\subsubsection[Uniform prior]{\commandlabsubarg{prior}{type}{uniform}}
 
 The command \commandlabsubarg{prior}{type}{uniform} has no other subcommands.
 
-\subsubsection[Uniform-log prior]{\commandlabsubarg{prior}{type}{uniform\_log}} 
+\subsubsection[Uniform-log prior]{\commandlabsubarg{prior}{type}{uniform\_log}}
 
 The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommands.
 
-\subsubsection[Normal prior]{\commandlabsubarg{prior}{type}{normal}} 
+\subsubsection[Normal prior]{\commandlabsubarg{prior}{type}{normal}}
 
 \defSub{mu}{Defines the mean $\mu$ of the normal prior}
 \defType{Constant}
@@ -271,7 +271,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the c.v. of the normal prior}
 
-\subsubsection[Normal-by-sd prior]{\commandlabsubarg{prior}{type}{normal\_by\_sd}} 
+\subsubsection[Normal-by-sd prior]{\commandlabsubarg{prior}{type}{normal\_by\_sd}}
 
 \defSub{mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
 \defType{Constant}
@@ -283,7 +283,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the standard deviation of the normal by standard deviation prior}
 
-\subsubsection[Lognormal prior]{\commandlabsubarg{prior}{type}{lognormal}} 
+\subsubsection[Lognormal prior]{\commandlabsubarg{prior}{type}{lognormal}}
 
 \defSub{mu}{Defines the mean $\mu$ of the lognormal prior}
 \defType{Constant}
@@ -295,14 +295,14 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the c.v. of the lognormal prior}
 
-\subsubsection[Beta prior]{\commandlabsubarg{prior}{type}{beta}} 
+\subsubsection[Beta prior]{\commandlabsubarg{prior}{type}{beta}}
 
-\defSub{A}{The lower value of the range parameter $A$ of the Beta prior}
+\defSub{a}{The lower value of the range parameter $A$ of the Beta prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the lower value of the range parameter $A$ of the Beta prior}
 
-\defSub{B}{The upper value of the range parameter $B$ of the Beta prior}
+\defSub{b}{The upper value of the range parameter $B$ of the Beta prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the upper value of the range parameter $B$ of the Beta prior}
@@ -323,7 +323,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 
 \defSub{q} {Value of the q parameter}
 \defType{Estimable}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the value of the catchability $q$ parameter, a real positive number}
 
 \subsection{Defining penalties}

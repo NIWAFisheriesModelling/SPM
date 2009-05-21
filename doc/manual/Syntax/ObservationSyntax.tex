@@ -18,19 +18,19 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{type} {Define the type of observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid type of observation}
 
 \subsubsection[Event mortality-at-age]{\commandlabsubarg{observation}{type}{event\_mortality\_at\_age}}
 
 \defSub{year} {Define the year that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{process\_label} {Define the label of the event mortality process}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid label of \command{process} where \commandlabsubarg{process}{type}{event\_mortality}}
 
 \defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -40,12 +40,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{min\_age} {Define the minimum age for the observation}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
 
 \defSub{max\_age} {Define the maximum age for the observation}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
 
 \defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
@@ -55,12 +55,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. Must be a layer of type=categorical}
 
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
 \defType{Constant vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
 \defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
@@ -70,12 +70,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
 \defSub{likelihood}{Define the likelihood for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid likelihood}
 
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
@@ -97,12 +97,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{year} {Define the year that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -112,22 +112,22 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{categories} {Define the categories}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
 \defSub{min\_age} {Define the minimum age for the observation}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
 
 \defSub{max\_age} {Define the maximum age for the observation}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
 
 \defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
@@ -135,19 +135,19 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{True}
 \defValue{Either true or false}
 
-\defSub{ageing\_error} {Define the label of the ageing-error matrix to be applied}
+\defSub{ageing\_error} {Define the label of the ageing-error matrix to be applied (if any)}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid ageing error label}
 
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. Must be a layer of type=categorical}
 
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
 \defType{Constant vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
 \defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
@@ -157,12 +157,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
 \defSub{likelihood}{Define the likelihood for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid likelihood}
 
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
@@ -184,12 +184,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{year} {Define the year that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -199,32 +199,32 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{categories} {Define the categories}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
 \defSub{categories2} {Define the categories}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
 \defSub{selectivities2} {Define the selectivities applied to each category}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
 \defSub{min\_age} {Define the minimum age for the observation}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
 
 \defSub{max\_age} {Define the maximum age for the observation}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
 
 \defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
@@ -234,27 +234,27 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{ageing\_error} {Define the label of the ageing-error matrix to be applied}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid ageing error label}
 
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. Must be a categorical layer}
 
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defType{Constant vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
 \defSub{likelihood}{Define the likelihood for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid likelihood}
 
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
@@ -276,12 +276,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{year} {Define the year that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -291,37 +291,37 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{catchability} {Define the catchability constant label for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid \command{catchability} label}
 
 \defSub{categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. Must be a categorical layer}
 
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defType{Constant vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
 \defSub{likelihood}{Define the likelihood for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid likelihood}
 
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
@@ -343,12 +343,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{year} {Define the year that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the observation applies to}
 \defType{Integer}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid time-step}
 
 \defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
@@ -358,37 +358,37 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \defSub{catchability} {Define the catchability constant label for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid \command{catchability} label}
 
 \defSub{categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
 \defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. Must be a categorical layer}
 
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defType{Constant vector}
-\defDefault{None}
+\defDefault{No default}
 \defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
 
 \defSub{likelihood}{Define the likelihood for the observation}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{A valid likelihood}
 
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
@@ -408,8 +408,8 @@ Each type of observation requires a set of subcommands and arguments specific to
 
 \subsection{Defining ageing error}
 
-Three methods for including ageing error into estimation with observations are, 
- 
+Three methods for including ageing error into estimation with observations are,
+
 \begin{itemize}
 	\item None
 	\item Normal
@@ -422,18 +422,18 @@ Each type of ageing error requires a set of subcommands and arguments specific t
 
 \defSub{type} {The type of ageing error}
 \defType{String}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Defines the type of ageing error to use}
 
-\subsubsection[No ageing error]{\commandlabsubarg{ageing\_error}{type}{none}} 
+\subsubsection[No ageing error]{\commandlabsubarg{ageing\_error}{type}{none}}
 
 The \commandlabsubarg{ageing\_error}{type}{none} has no other subcommands.
 
-\subsubsection[Normal ageing error]{\commandlabsubarg{ageing\_error}{type}{normal}} 
+\subsubsection[Normal ageing error]{\commandlabsubarg{ageing\_error}{type}{normal}}
 
 \defSub{cv} {Parameter of the normal ageing error model}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{Define the c.v. of misclassification}
 
 \defSub{k} {The $k$ parameter of the normal ageing error model}
@@ -441,16 +441,16 @@ The \commandlabsubarg{ageing\_error}{type}{none} has no other subcommands.
 \defDefault{0}
 \defValue{$cv$ defines the proportions of misclassification down and up using the normal model. $k$ defines the minimum age of fish which can be misclassified --- fish under age $k$ have no ageing error}
 
-\subsubsection[Off-by-one ageing error]{\commandlabsubarg{ageing\_error}{type}{off\_by\_one}} 
+\subsubsection[Off-by-one ageing error]{\commandlabsubarg{ageing\_error}{type}{off\_by\_one}}
 
 \defSub{p1} {The $p_1$ parameter of the off-by-one ageing error model}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{$p_1$ and $p_2$ define the proportions of misclassification down and up by 1 year respectively. $k$ defines the minimum age of fish which can be misclassified --- fish under age $k$ have no ageing error}
 
 \defSub{p2} {The $p_2$ parameter of the off-by-one ageing error model}
 \defType{Constant}
-\defDefault{None}
+\defDefault{No default}
 \defValue{$p_1$ and $p_2$ define the proportions of misclassification down and up by 1 year respectively. $k$ defines the minimum age of fish which can be misclassified --- fish under age $k$ have no ageing error}
 
 \defSub{k} {The $k$ parameter of the off-by-one ageing error model}

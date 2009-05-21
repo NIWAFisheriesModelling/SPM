@@ -390,7 +390,7 @@ Note that the expected values (fits) reported by \SPM\ for observations with age
 
 \SPM\ can generate simulated observations for a given model with given parameter values (using \texttt{spm -s}). Simulated observations are randomly distributed values, generated according to the error assumptions defined for each observation, around fits calculated from one or more sets of the 'true' parameter values. Simulating from a set of parameters can be used to generate observations from an operating model or as a form of parametric bootstrap. 
 
-\SPM\ generates simulated observations for the observations defined in the \config\ with \commandlabsubarg{observation}{simulate}{true}. Note that observations with \commandlabsubarg{Observation}{likelihood}{none} cannot be used to simulate observations.
+\SPM\ generates simulated observations for the observations defined in the \config\ with \commandlabsubarg{observation}{simulate}{true}. Note that observations with \commandlabsubarg{observation}{likelihood}{none} cannot be used to simulate observations.
 
 The procedure \SPM\ uses for simulating observations is to first run using the `true' parameter values and generate the expected values. Then, if a set of observations uses ageing error, ageing error is applied. Finally a random value for each observed value is generated based on (i) the expected values, (ii) the type of likelihood specified, and (iii) the variability parameters (e.g., \subcommand{error\_value} and \subcommand{process\_error}). 
 

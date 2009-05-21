@@ -50,8 +50,6 @@ In manual, but not in SPM
   include
   joint_selectivity
   size_at_age
-  linf
-  mcmc_fixed
   by_length
   correlation_adjustment_diff
   correlation_adjustment_method
@@ -61,7 +59,9 @@ In manual, but not in SPM
   growth_proportions
   initialisation_layer
   keep
+  l_inf
   max_correlation
+  mcmc_fixed
   process_label
   proportion_time_step
   proposal_distribution
@@ -76,14 +76,14 @@ In manual, but not in SPM
   tau1
   tau2
   time_step_proportion
-  metropolis_hastings
-  schnute
   adjacent_cell_movement
   basic
   biomass_event_mortality
   event_mortality_at_age
   iterative
+  metropolis_hastings
   migration_movement
   normal_by_sd
+  schnute
   von_bertalanffy
   weight_at_size

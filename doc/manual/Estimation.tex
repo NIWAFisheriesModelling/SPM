@@ -130,24 +130,24 @@ The chain moves in natural space, i.e., no transformations are applied to the es
 
 \begin{itemize}
 \item The covariance matrix is taken as the inverse of the approximate Hessian from the quasi-Newton minimiser.
-\item The covariance matrix is modified so as to decrease all correlations greater than \commandsub{MCMC}{max\_correlation} down to \commandsub{MCMC}{max\_correlation}, and similarly to increase all correlations less than  -\commandsub{MCMC}{max\_correlation} up to -\commandsub{MCMC}{max\_correlation} (the \commandsub{MCMC}{max\_correlation} parameter defaults to 0.8). This should help to avoid getting `stuck' in a lower-dimensional subspace.
+\item The covariance matrix is modified so as to decrease all correlations greater than \commandsub{mcmc}{max\_correlation} down to \commandsub{mcmc}{max\_correlation}, and similarly to increase all correlations less than  -\commandsub{mcmc}{max\_correlation} up to -\commandsub{mcmc}{max\_correlation} (the \commandsub{mcmc}{max\_correlation} parameter defaults to 0.8). This should help to avoid getting `stuck' in a lower-dimensional subspace.
 
 \item The covariance matrix is then modified either by,
 
 \begin{itemize}
-\item if \commandsubarg{MCMC}{adjustment\_method}{covariance}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{min\_diff} times the difference between the parameters' lower and upper bound, then the variance is changed, without changing the associated correlations, to $k=$min\_diff$(upper\_bound_i-lower\_bound_i)$. This is done by setting \[
+\item if \commandsubarg{mcmc}{adjustment\_method}{covariance}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{mcmc}{min\_difference} times the difference between the parameters' lower and upper bound, then the variance is changed, without changing the associated correlations, to $k=$min\_diff$(upper\_bound_i-lower\_bound_i)$. This is done by setting \[
 {\mathop{\rm Cov}\nolimits} \left( {i,j} \right)^\prime   = {{{\mathop{\rm sqrt}\nolimits} \left( k \right){\mathop{\rm Cov}\nolimits} \left( {i,j} \right)} \mathord{\left/
 {\vphantom {{{\mathop{\rm sqrt}\nolimits} \left( k \right){\mathop{\rm Cov}\nolimits} \left( {i,j} \right)} {{\mathop{\rm sd}\nolimits} \left( i \right)}}} \right.
 \kern-\nulldelimiterspace} {{\mathop{\rm sd}\nolimits} \left( i \right)}}
 \]
 for $i \ne j$, and ${\mathop{\rm var}} \left( i \right)^\prime   = k$
 
-\item if \commandsubarg{MCMC}{adjustment\_method}{correlation}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{MCMC}{min\_diff} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=min\_diff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the $i$th parameter and all other parameters.
+\item if \commandsubarg{mcmc}{adjustment\_method}{correlation}: that if the variance of the $i$th parameter is non-zero and less than \commandsub{mcmc}{min\_difference} times the difference between the parameters' lower and upper bound, then its variance is changed to $k=min\_diff(upper\_bound_i-lower\_bound_i)$. This differs from (i) above in that the effect of this option is that it also modifies the resulting correlations between the $i$th parameter and all other parameters.
 \end{itemize}
 
-This allows each estimated parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{MCMC}{min\_diff} parameter defaults to $0.0001$.
+This allows each estimated parameter to move in the MCMC even if its variance is very small according to the inverse Hessian. In both cases, the \commandsub{mcmc}{min\_difference} parameter defaults to $0.0001$.
 
-\item The \commandsub{MCMC}{step\_size} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of estimated parameters, as recommended by Gelman et al. \citep{823}, though some experimentation suggested that this may be too high and can lead to a low acceptance rate. 
+\item The \commandsub{mcmc}{step\_size} (a scalar factor applied to the covariance matrix to improve the acceptance probability) is chosen by the user. The default is $2.4d^{-0.5}$ where $d$ is the number of estimated parameters, as recommended by Gelman et al. \citep{823}, though some experimentation suggested that this may be too high and can lead to a low acceptance rate. 
 \end{itemize}
 
 The proposal distribution can also change adaptively during the chain, using two different mechanisms. Both are offered as means of improving the convergence properties of the chain. It is important to note that any adaptive behaviour must finish before the end of the burn-in period, i.e., the proposal distribution must be finalised before the kept portion of the chain starts (\SPM\ enforces this). The adaptive mechanisms are as follows: 
@@ -160,7 +160,7 @@ The proposal distribution can also change adaptively during the chain, using two
 
 The procedure used to choose the sample of points is as follows. First, all points on the chain so far are taken. All points in an initial user-specified period are discarded. The assumption is that the chain will have started moving during this period - if this is incorrect and the chain has still not moved by the end of this period, it is a fatal error and \SPM\ stops. The remaining set of points must contain at least some user-specified number of transitions - if this is incorrect and the chain has not moved this often, it is again a fatal error. If this test is passed, the set of points is systematically sub-sampled down to 1000 points (it must be at least this long to start with).
 
-The variance-covariance matrix of this sub-sample of chain is calculated. As above, correlations greater than \commandsub{MCMC}{MaxCor} are reduced to \commandsub{MCMC}{MaxCor}, correlations less than \commandsub{MCMC}{MaxCor} are increased to  \commandsub{MCMC}{MaxCor}, and very small non-zero variances are increased (\commandsub{MCMC}{CovarianceAdjustment} and \commandsub{MCMC}{MinDiff}. The result is the new variance-covariance matrix of the proposal distribution.
+The variance-covariance matrix of this sub-sample of chain is calculated. As above, correlations greater than \commandsub{mcmc}{max\_correlation} are reduced to \commandsub{mcmc}{max\_correlation}, correlations less than \commandsub{mcmc}{max\_correlation} are increased to  \commandsub{mcmc}{max\_correlation}, and very small non-zero variances are increased (\commandsub{mcmc}{covariance\_adjustment} and \commandsub{mcmc}{min\_difference}. The result is the new variance-covariance matrix of the proposal distribution.
 
 The step size parameter is now on a completely different scale, and must also be reset. It is set to a user-specified value (which may or may not be the same as the initial step size). We recommend that some of the step size adaptations are set to occur after this, so that the step size can be readjusted to an appropriate value which gives good acceptance probabilities with the new matrix. 
 
