@@ -211,21 +211,21 @@ BOOST_FIXTURE_TEST_CASE( ProportionsByCategoryObservation_Simulate, C3x3_Fixture
   pComparison = vComparisons[1];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areaa");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 1100);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.92818181818181822);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.93545454545454543);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.93721304526735716);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[2];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areaa");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 1200);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.24083333333333334);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.24166666666666667);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.24892230690790682);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
   pComparison = vComparisons[3];
   BOOST_CHECK_EQUAL(pComparison->sKey, "areab");
   BOOST_CHECK_EQUAL(pComparison->dErrorValue, 1200);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.97666666666666668);
+  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 0.97583333333333333);
   BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 0.97524381095273815);
   BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
 
