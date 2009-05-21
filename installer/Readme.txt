@@ -32,6 +32,9 @@ and modifies the system registry to,
 (iii) Register the uninstall information required for Microsoft Windows
       to uninstall SPM.
 
+Note that, depending on your system setup, you may need to reboot after
+installing to re-initialise the system PATH. 
+
 Or
 
 Manually copy the SPM executable to a location of your choice.
