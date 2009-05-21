@@ -19,6 +19,7 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
 #include "../../AgeingError/CAgeingErrorManager.h"
+#include "../../AgeingError/CAgeingError.h"
 
 // Using
 using std::cout;
@@ -232,13 +233,13 @@ void CProportionsAtAgeObservation::execute() {
 
       //apply ageing error
       if (pAgeingError != 0) {
-        vector<double> vTemp(pWorld->getWidth(),0);
-        for (int i = 0; i < (int)pWorld->getHeight(); ++i) {
-          for (int j = 0; j < (int)pWorld->getWidth(); ++j) {
+        vector<double> vTemp(pBaseSquare->getWidth(),0);
+        for (int i = 0; i < (int)pBaseSquare->getHeight(); ++i) {
+          for (int j = 0; j < (int)pBaseSquare->getWidth(); ++j) {
             vTemp[j] = pBaseSquare->getValue(i, j);
           }
-          //pAgeingError->getExpected(vTemp);
-          for (int j = 0; j < (int)pWorld->getWidth(); ++j) {
+          pAgeingError->getExpected(vTemp);
+          for (int j = 0; j < (int)pBaseSquare->getWidth(); ++j) {
             pBaseSquare->setValue(i,j,vTemp[j]);
           }
         }
