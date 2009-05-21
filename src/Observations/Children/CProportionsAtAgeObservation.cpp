@@ -230,6 +230,20 @@ void CProportionsAtAgeObservation::execute() {
       // Get Square for this Area
       pBaseSquare = pWorldView->getSquare((*mvPropPtr).first);
 
+      //apply ageing error
+      if (pAgeingError != 0) {
+        vector<double> vTemp(pWorld->getWidth(),0);
+        for (int i = 0; i < (int)pWorld->getHeight(); ++i) {
+          for (int j = 0; j < (int)pWorld->getWidth(); ++j) {
+            vTemp[j] = pBaseSquare->getValue(i, j);
+          }
+          //pAgeingError->getExpected(vTemp);
+          for (int j = 0; j < (int)pWorld->getWidth(); ++j) {
+            pBaseSquare->setValue(i,j,vTemp[j]);
+          }
+        }
+      }
+
       // Loop Through Ages in that square and add them to count
       for (int i = 0; i < iArraySize; ++i) {
         // Loop Through Categories
