@@ -5,9 +5,9 @@ project(SPM)
 # cmake -G "MinGW Makefiles"
 # mingw32-make all
 
-SET(LIBRARY_NAME SimFish)
-SET(MAIN_NAME spm_UnOptimised)
-SET(TEST_NAME spm_UnitTests)
+SET(LIBRARY_NAME simfish)
+SET(MAIN_NAME spm_unoptimised)
+SET(TEST_NAME spm_unittests)
 SET(OPTI_NAME spm)
 
 # Assumptions
