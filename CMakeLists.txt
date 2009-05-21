@@ -274,6 +274,7 @@ src/PreferenceFunctions/Children/CConstantPreferenceFunction.Test.cpp
 src/PreferenceFunctions/Factory/CPreferenceFunctionFactory.Test.cpp
 src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
 src/InitializationPhases/Factory/CInitializationPhaseFactory.Test.cpp
+src/RandomNumberGenerator/CRandomNumberGenerator.Test.cpp
 src/Main
 )
 
