@@ -10,32 +10,31 @@
 #define CAGEINGERROR_H_
 
 // Local headers
-#include "../BaseClasses/CBaseValidate.h"
 #include "../BaseClasses/CBaseBuild.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CAgeingError : public CBaseValidate {
+class CAgeingError : public CBaseBuild {
 public:
   // Functions
   CAgeingError();
   virtual                     ~CAgeingError();
   void                        validate();
   void                        build() { };
-  void                        execute() { };
+  virtual void                getExpected(vector<double> &expected) { }
   int                         getMinAge() { return iMinAge; }
   int                         getMaxAge() { return iMaxAge; }
   bool                        getAgePlusGroup() { return bAgePlusGroup; }
 
 
 protected:
-  int                       iMaxAge;
-  int                       iMinAge;
-  bool                      bAgePlusGroup;
-  int                       iNAges;
-  vector<vector<double> >   mMisMatrix;
+  int                         iMaxAge;
+  int                         iMinAge;
+  bool                        bAgePlusGroup;
+  int                         iNAges;
+  vector<vector<double> >     mMisMatrix;
 
 };
 

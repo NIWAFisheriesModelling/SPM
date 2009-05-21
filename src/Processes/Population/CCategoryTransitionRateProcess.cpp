@@ -23,6 +23,10 @@
 // Default constructor
 //**********************************************************************
 CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
+
+  // Variables
+  pLayer = 0;
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FROM);
   pParameterList->registerAllowed(PARAM_TO);

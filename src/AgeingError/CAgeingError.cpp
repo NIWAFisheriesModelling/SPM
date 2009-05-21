@@ -23,26 +23,21 @@ CAgeingError::CAgeingError() {
 //**********************************************************************
 void CAgeingError::validate() {
   try {
+    CBaseBuild::validate();
 
     // Get Variables from World
-    CWorld *pWorld    = CWorld::Instance();
     iMinAge           = pWorld->getMinAge();
     iMaxAge           = pWorld->getMaxAge();
     bAgePlusGroup     = pWorld->getAgePlusGroup();
-    iNAges            = iMaxAge - iMinAge + 1;
+    iNAges            = pWorld->getAgeSpread();
 
     vector<double> vTemp(iNAges,0);
 
-    for (int i = 0; i < iNAges; ++i) {
+    for (int i = 0; i < iNAges; ++i)
       mMisMatrix.push_back(vTemp);
-    }
 
-    for (int i = 0; i < iNAges; ++i) {
-      for (int j = 0; j < iNAges; ++j) {
-        if(i==j)
-          mMisMatrix[i][j] = 1;
-      }
-    }
+    for (int i = 0; i < iNAges; ++i)
+      mMisMatrix[i][i] = 1;
 
   } catch (string Ex) {
     Ex = "CAgeingError.validate(" + getLabel() + ")->" + Ex;

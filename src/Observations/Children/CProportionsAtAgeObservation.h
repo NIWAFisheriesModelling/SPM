@@ -13,6 +13,9 @@
 #include "../CObservation.h"
 #include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
+// Forward Declaration
+class CAgeingError;
+
 //**********************************************************************
 //
 //
@@ -22,14 +25,6 @@ public:
   // Functions
   CProportionsAtAgeObservation();
   virtual                    ~CProportionsAtAgeObservation();
-//  int                        getProportionCount() { return (int)mvProportionMatrix.size(); }
-//  string                     getProportionKey(int index);
-//  int                        getProportionKeyValueCount(string key);
-//  double                     getProportionValue(string key, int index);
-//  int                        getMinAge() { return iMinAge; }
-//  int                        getMaxAge() { return iMaxAge; }
-//  bool                       getAgePlus() { return bAgePlus; }
-//  bool                       getRescale() { return bRescale; }
   void                       validate();
   void                       build();
   void                       execute();
@@ -48,6 +43,8 @@ protected:
   double                     dTolerance;
   double                     dProportionTimeStep;
   double                     dProcessError;
+  string                     sAgeingError;
+  CAgeingError               *pAgeingError;
 };
 
 #endif /*CPROPORTIONSATAGE_H_*/

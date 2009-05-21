@@ -27,8 +27,9 @@ public:
   // Functions
   void                        clone(CAgeingErrorManager *Manager);
   void                        addAgeingError(CAgeingError *ageingError);
+  CAgeingError*               getAgeingError(string label);
   void                        validate();
-  void                        build() { }
+  void                        build();
   virtual                     ~CAgeingErrorManager();
 
 protected:

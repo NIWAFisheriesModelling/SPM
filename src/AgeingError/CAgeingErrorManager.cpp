@@ -10,6 +10,8 @@
 // Local headers
 #include "CAgeingErrorManager.h"
 #include "CAgeingError.h"
+#include "../Helpers/ForEach.h"
+#include "../Helpers/CError.h"
 
 // Singleton Variable
 boost::thread_specific_ptr<CAgeingErrorManager> CAgeingErrorManager::clInstance;
@@ -58,11 +60,54 @@ void CAgeingErrorManager::addAgeingError(CAgeingError *ageingError) {
 }
 
 //**********************************************************************
+// CAgeingError* CAgeingErrorManager::getAgeingError(string label)
+// Get our Ageing Error
+//**********************************************************************
+CAgeingError* CAgeingErrorManager::getAgeingError(string label) {
+  try {
+    foreach(CAgeingError *ageingError, vAgeingErrors) {
+      if (ageingError->getLabel() == label)
+        return ageingError;
+    }
+
+    CError::errorUnknown(PARAM_AGEING_ERROR, label);
+
+  } catch (string Ex) {
+    Ex = "CAgeingErrorManager.getAgeingError(" + label + ")->" + Ex;
+    throw Ex;
+  }
+
+  return 0;
+}
+
+//**********************************************************************
 // void CAgeingErrorManager::validate()
 // Validate our Ageing Errors
 //**********************************************************************
 void CAgeingErrorManager::validate() {
+  try {
+    foreach(CAgeingError *ageingError, vAgeingErrors) {
+      ageingError->validate();
+    }
+  } catch (string Ex) {
+    Ex = "CAgeingErrorManager.validate()->" + Ex;
+    throw Ex;
+  }
+}
 
+//**********************************************************************
+// void CAgeingErrorManager::build()
+// Build our AgeingErrors
+//**********************************************************************
+void CAgeingErrorManager::build() {
+  try {
+    foreach(CAgeingError *ageingError, vAgeingErrors) {
+      ageingError->build();
+    }
+  } catch (string Ex) {
+    Ex = "CAgeingErrorManager.build()->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

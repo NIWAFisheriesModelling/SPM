@@ -17,11 +17,14 @@
 //**********************************************************************
 COffByOneAgeingError::COffByOneAgeingError() {
 
-    // Register user allowed parameters
-    pParameterList->registerAllowed(PARAM_P1);
-    pParameterList->registerAllowed(PARAM_P2);
-    pParameterList->registerAllowed(PARAM_K);
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_P1);
+  pParameterList->registerAllowed(PARAM_P2);
+  pParameterList->registerAllowed(PARAM_K);
 
+  // Register our variables as estimable
+  registerEstimable(PARAM_P1,&dP1);
+  registerEstimable(PARAM_P2,&dP2);
 }
 
 //**********************************************************************
@@ -47,10 +50,6 @@ void COffByOneAgeingError::validate() {
        throw("p1 must be a non-negative number"); //TODO: Better error message
   if ((dP2) < 0.0)
        throw("p2 must be a non-negative number"); //TODO: Better error message
-
-    // Register our variables as estimable
-    //registerEstimable(PARAM_P1,dP1);
-    //registerEstimable(PARAM_P2,dP2);
 
   } catch (string Ex) {
     Ex = "COffByOneAgeingError.validate(" + getLabel() + ")->" + Ex;
@@ -85,9 +84,9 @@ void COffByOneAgeingError::build() {
     if (iK > iMinAge) {
       for (int i = 0; i < (iK - iMinAge); ++i) {
         for(int j = 0; j < (iK - iMinAge); ++j) {
-          mMisMatrix[i][j] <- 0;
+          mMisMatrix[i][j] = 0;
         }
-        mMisMatrix[i][i]<-1;
+        mMisMatrix[i][i] = 1;
       }
     }
   } catch (string Ex) {
@@ -97,25 +96,24 @@ void COffByOneAgeingError::build() {
 }
 
 //**********************************************************************
-// COffByOneAgeingError::execute()
+// void COffByOneAgeingError::getExpected(vector<double> &expected)
 // Apply ageing error
 //**********************************************************************
-void COffByOneAgeingError::execute(vector<double> &vExpected) {
-
+void COffByOneAgeingError::getExpected(vector<double> &expected) {
   try {
-    vector<double> vResult(vExpected.size(),0);
+    vector<double> vResult(expected.size(),0);
 
     for (int i = 0; i < (int)mMisMatrix.size(); ++i) {
       for (int j = 0; j < (int)mMisMatrix[i].size(); ++j) {
-        vResult[j] += vExpected[i] * mMisMatrix[i][j];
+        vResult[j] += expected[i] * mMisMatrix[i][j];
       }
     }
 
-    for (int i = 0; i < (int)vExpected.size(); ++i)
-      vExpected[i] = vResult[i];
+    for (int i = 0; i < (int)expected.size(); ++i)
+      expected[i] = vResult[i];
 
   } catch (string Ex) {
-    Ex = "COffByOneAgeingError.execute(" + getLabel() + ")->" + Ex;
+    Ex = "COffByOneAgeingError.getExpected(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 
