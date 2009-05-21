@@ -68,7 +68,7 @@ void CProportionsAtAgeObservation::validate() {
     dTolerance          = pParameterList->getDouble(PARAM_TOLERANCE,true,0.001);
     dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP,true,1.0);
     dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
-    sAgeingError        = pParameterList->getString(PARAM_AGEING_ERROR, true, PARAM_NONE);
+    sAgeingError        = pParameterList->getString(PARAM_AGEING_ERROR, true, "");
 
     if (iMinAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
@@ -182,7 +182,8 @@ void CProportionsAtAgeObservation::build() {
     CObservation::build();
 
     // Ageing Error
-    pAgeingError = CAgeingErrorManager::Instance()->getAgeingError(sAgeingError);
+    if (sAgeingError !="")
+      pAgeingError = CAgeingErrorManager::Instance()->getAgeingError(sAgeingError);
 
     // Create Array of Age Results
     iArraySize = (iMaxAge+1) - iMinAge;
