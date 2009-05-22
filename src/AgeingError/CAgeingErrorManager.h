@@ -30,6 +30,7 @@ public:
   CAgeingError*               getAgeingError(string label);
   void                        validate();
   void                        build();
+  void                        rebuild();
   virtual                     ~CAgeingErrorManager();
 
 protected:

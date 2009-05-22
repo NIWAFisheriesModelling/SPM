@@ -31,16 +31,43 @@ void CAgeingError::validate() {
     bAgePlusGroup     = pWorld->getAgePlusGroup();
     iNAges            = pWorld->getAgeSpread();
 
-    vector<double> vTemp(iNAges,0);
-
-    for (int i = 0; i < iNAges; ++i)
-      mMisMatrix.push_back(vTemp);
-
-    for (int i = 0; i < iNAges; ++i)
-      mMisMatrix[i][i] = 1;
-
   } catch (string Ex) {
     Ex = "CAgeingError.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CAgeingError::build()
+// Build our Ageing Error
+//**********************************************************************
+void CAgeingError::build() {
+  try {
+
+    // Build 2D Matrix
+    mMisMatrix.resize(iNAges);
+
+    for (int i = 0; i < iNAges; ++i)
+      mMisMatrix[i].resize(iNAges, 0);
+
+  } catch (string Ex) {
+    Ex = "CAgeingError.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CAgeingError::rebuild()
+// Rebuild our Ageing Error
+//**********************************************************************
+void CAgeingError::rebuild() {
+  try {
+    for (int i = 0; i < (int)mMisMatrix.size(); ++i)
+      for (int j = 0; j < (int)mMisMatrix[i].size(); ++j)
+        mMisMatrix[i][j] = 0;
+
+  } catch (string Ex) {
+    Ex = "CAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

@@ -55,23 +55,39 @@ void CNormalAgeingError::validate() {
 // Validate the ageing error
 //**********************************************************************
 void CNormalAgeingError::build() {
-
   try {
+    // Base
+    CAgeingError::build();
 
-    // Variables
-    CNormalDistribution *pNormal = CNormalDistribution::Instance();
+    // Rebuild
+    rebuild();
+
+  } catch (string Ex) {
+    Ex = "CNormalAgeingError.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CNormalAgeingError::rebuild()
+// Rebuild Normal Ageing Error
+//**********************************************************************
+void CNormalAgeingError::rebuild() {
+  try {
+    // Base
+    CAgeingError::rebuild();
 
     for (int i = 0; i < iNAges; i++) {
       double dAge = iMinAge + i;
       for (int j = 0; j < iNAges; ++j) {
         double dMinAgeClass = (iMinAge + j) - 0.5;
         if (j == 0)
-          mMisMatrix[i][j] = pNormal->getCDF(dMinAgeClass + 1, dAge, dAge * dCV);
+          mMisMatrix[i][j] = CNormalDistribution::getCDF(dMinAgeClass + 1, dAge, dAge * dCV);
         else if ((j == (iNAges - 1)) && bAgePlusGroup)
-          mMisMatrix[i][j] = 1 - pNormal->getCDF(dMinAgeClass, dAge, dAge * dCV);
+          mMisMatrix[i][j] = 1 - CNormalDistribution::getCDF(dMinAgeClass, dAge, dAge * dCV);
         else
-          mMisMatrix[i][j] = pNormal->getCDF(dMinAgeClass + 1, dAge, dAge * dCV)
-                             - pNormal->getCDF(dMinAgeClass, dAge, dAge * dCV);
+          mMisMatrix[i][j] = CNormalDistribution::getCDF(dMinAgeClass + 1, dAge, dAge * dCV)
+                             - CNormalDistribution::getCDF(dMinAgeClass, dAge, dAge * dCV);
       }
     }
     if (iK > iMinAge) {
@@ -82,9 +98,8 @@ void CNormalAgeingError::build() {
         mMisMatrix[i][i] = 1;
       }
     }
-
   } catch (string Ex) {
-    Ex = "CNormalAgeingError.build(" + getLabel() + ")->" + Ex;
+    Ex = "CNormalAgeingError.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

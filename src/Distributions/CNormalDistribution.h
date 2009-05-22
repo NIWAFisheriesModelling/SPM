@@ -9,33 +9,18 @@
 #ifndef CNORMALDISTRIBUTION_H_
 #define CNORMALDISTRIBUTION_H_
 
-// Global Headers
-#include <boost/math/distributions/normal.hpp>
-
-// Local headers
-#include "../BaseClasses/CBaseManager.h"
-
-using boost::math::normal;
-
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CNormalDistribution: public CBaseManager {
+class CNormalDistribution {
 public:
-  static CNormalDistribution* Instance();
-  static void                 Destroy();
-  void                        validate();
-  void                        build();
-  double                      getCDF(double x, double mu, double sigma);
+  static double               getCDF(double x, double mu, double sigma);
 
 protected:
   // Functions
-  CNormalDistribution();
-  virtual                     ~CNormalDistribution();
-
-private:
-  static CNormalDistribution* clInstance;
+  CNormalDistribution() { };
+  virtual                     ~CNormalDistribution() { };
 };
 
 #endif /* CNORMALDISTRIBUTION_H_ */

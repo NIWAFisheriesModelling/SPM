@@ -118,6 +118,22 @@ void CAgeingErrorManager::build() {
 }
 
 //**********************************************************************
+// void CAgeingErrorManager::rebuild()
+// Rebuild our ageing errors
+//**********************************************************************
+void CAgeingErrorManager::rebuild() {
+  try {
+    foreach(CAgeingError *ageingError, vAgeingErrors) {
+      ageingError->rebuild();
+    }
+
+  } catch (string Ex) {
+    Ex = "CAgeingErrorManager.rebuild()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
 // CAgeingErrorManager::~CAgeingErrorManager()
 // Destructor
 //**********************************************************************

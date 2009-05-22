@@ -23,6 +23,7 @@ public:
   virtual                     ~CNormalAgeingError();
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        getExpected(vector<double> &expected);
 
 protected:

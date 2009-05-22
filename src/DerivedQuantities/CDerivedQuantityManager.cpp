@@ -124,6 +124,24 @@ void CDerivedQuantityManager::build() {
 }
 
 //**********************************************************************
+// void CDerivedQuantityManager::rebuild()
+// ReBuild our Derived Quantities
+//**********************************************************************
+void CDerivedQuantityManager::rebuild() {
+  try {
+
+    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+      DerivedQuantity->rebuild();
+    }
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantityManager.rebuild()->" + Ex;
+    throw Ex;
+  }
+}
+
+
+//**********************************************************************
 // void CDerivedQuantityManager::execute()
 // Execute Derived Quantities
 //**********************************************************************

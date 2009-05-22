@@ -62,8 +62,29 @@ void COffByOneAgeingError::validate() {
 // Validate the ageing error
 //**********************************************************************
 void COffByOneAgeingError::build() {
-
   try {
+    // Base
+    CAgeingError::build();
+
+    // Rebuild
+    rebuild();
+
+  } catch (string Ex) {
+    Ex = "COffByOneAgeingError.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// voidCOffByOneAgeingError::rebuild()
+// Validate the ageing error
+//**********************************************************************
+void COffByOneAgeingError::rebuild() {
+  try {
+    // Base
+    CAgeingError::rebuild();
+
+    // Rebuild cache
     mMisMatrix[0][0] = 1 - dP2;
     mMisMatrix[0][1] = dP2;
 
@@ -91,7 +112,7 @@ void COffByOneAgeingError::build() {
     }
 
   } catch (string Ex) {
-    Ex = "COffByOneAgeingError.build(" + getLabel() + ")->" + Ex;
+    Ex = "COffByOneAgeingError.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

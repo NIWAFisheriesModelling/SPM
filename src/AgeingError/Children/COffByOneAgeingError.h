@@ -22,6 +22,7 @@ public:
   virtual                     ~COffByOneAgeingError();
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        getExpected(vector<double> &expected);
 
 protected:

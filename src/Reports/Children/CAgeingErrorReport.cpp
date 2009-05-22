@@ -68,13 +68,12 @@ void CAgeingErrorReport::build() {
 void CAgeingErrorReport::execute() {
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
+    return;
 
   this->start();
 
   // Work our how many viable ages we have.
-  int iSpread = (pWorld->getMaxAge() - pWorld->getMinAge()) + 1;
+  int iSpread = pWorld->getAgeSpread();
   int iMinAge = pWorld->getMinAge();
 
   // Output Header

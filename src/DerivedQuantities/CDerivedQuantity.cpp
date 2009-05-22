@@ -122,6 +122,25 @@ void CDerivedQuantity::build() {
 }
 
 //**********************************************************************
+// void CDerivedQuantity::rebuild()
+// Rebuild our Derived Quantity
+//**********************************************************************
+void CDerivedQuantity::rebuild() {
+  try {
+
+    // Clear our Values
+    vValues.clear();
+
+    // Push Def
+    vValues.push_back(0.0);
+
+  } catch (string Ex) {
+    Ex = "CDerivedQuantity.rebuild()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
 // void CDerivedQuantity::execute()
 // Execute our Derived Quantity
 //**********************************************************************
