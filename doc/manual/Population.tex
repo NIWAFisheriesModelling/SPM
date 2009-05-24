@@ -499,9 +499,9 @@ time_step 1
 layer spawning_ground
 \end{verbatim}
 
-\subsection{\I{Size-at-age relationship}\label{sec:size-at-age}}
+\subsection{\I{Size-age relationship}\label{sec:size-at-age}}
 
-Size-at-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
+Size-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
 
 \begin{description}
 \item{von Bertalanffy}\index{von Bertalanffy growth curve} where size at age is defined as,
@@ -539,7 +539,7 @@ The size-weight relationship \NYI, with parameters $a$ and $b$, is calculated as
   \end{equation}
 \end{itemize}
   
-Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an option \commandlabsubarg{report}{type}{weight\_at\_size} (see Section \ref{sec:report-weight-at-size}) that can be used to help check that the units specified are plausible.
+Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an option \commandlabsubarg{report}{type}{size\_weight} (see Section \ref{sec:report-weight-at-size}) that can be used to help check that the units specified are plausible.
 
 If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
 \begin{equation}

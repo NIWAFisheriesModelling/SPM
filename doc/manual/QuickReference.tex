@@ -9,7 +9,7 @@
 \defSub{max\_age}{Maximum age of the population}
 \defSub{age\_plus\_group}{Define the largest age as a plus group}
 \defSub{cell\_length}{The length (distance) of one side of a cell}
-\defSub{size\_at\_age}{Define the label of the associated size-at-age relationship for each category}
+\defSub{age\_size}{Define the label of the associated size-at-age relationship for each category}
 \defSub{initialisation\_phases}{Define the labels of the phases of the initialisation}
 \defSub{initial\_year}{Define the first year of the model, immediately following initialisation}
 \defSub{current\_year}{Define the current year of the model}
@@ -66,7 +66,7 @@
 \defSub{penalty} {Define the event mortality penalty label}
 \par\textbf{\commandlabsubarg{process}{type}{biomass\_event\_mortality}}\par
 \defSub{categories}{Define the categories that the event mortality is applied to}
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
 \defSub{years}{Define the years where the mortality event is applied}
 \defSub{layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defSub{u\_max} {Define the maximum exploitation rate}
@@ -137,7 +137,7 @@
 \defSub{layer} {Defines the layer which supplies the preference function independent variable}
 \defSub{categories} {Define the categories are used to calculate the biomass}
 \defSub{selectivities} {Define the selectivities applied to each category}
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defSub{alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
 \defSub{lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
@@ -154,14 +154,14 @@
 \par\textbf{\commandlabsubarg{layer}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the biomass}
 \defSub{selectivities} {Define the selectivities applied to each category}
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \par\textbf{\commandlabsubarg{layer}{type}{abundance\_density}}\par
 \defSub{categories} {Define the categories are used to calculate the abundance}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \par\textbf{\commandlabsubarg{layer}{type}{biomass\_density}}\par
 \defSub{categories} {Define the categories are used to calculate the biomass}
 \defSub{selectivities} {Define the selectivities applied to each category}
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \par\textbf{\commandlabsubarg{layer}{type}{meta}}\par
 \defSub{years} {Define the years}
 \defSub{layers} {Define the layer labels for each of the years}
@@ -179,10 +179,10 @@
 \defSub{selectivities} {Define the selectivities}
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
 \defSub{layer} {Name of the layer}
-\par\defComLab{size\_at\_age} {Define a size-at-age relationship with label}\par
+\par\defComLab{age\_size} {Define a size-age relationship with label}\par
 \defSub{type} {Define the type of relationship}
-\par\textbf{\commandlabsubarg{size\_at\_age}{type}{von\_bertalanffy}}\par
-\defSub{l\_inf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
+\par\textbf{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}\par
+\defSub{linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
 \defSub{k} {Define the $k$ parameter of the von Bertalanffy relationship}
 \defSub{t0} {Define the $t_0$ parameter of the von Bertalanffy relationship}
 \defSub{distribution} {Define the distribution of sizes-at-age around the mean}
@@ -190,7 +190,7 @@
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
 \defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
-\par\textbf{\commandlabsubarg{size\_at\_age}{type}{schnute}}\par
+\par\textbf{\commandlabsubarg{age\_size}{type}{schnute}}\par
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
 \defSub{y2} {Define the $y_2$ parameter of the Schnute relationship}
 \defSub{tau1} {Define the $\tau_1$ parameter of the Schnute relationship}
@@ -202,7 +202,7 @@
 \defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \par\defComLab{size\_weight} {Define a size-weight relationship with label}\par
-\defSub{Type} {Define the type of relationship}
+\defSub{type} {Define the type of relationship}
 \par\textbf{\commandlabsubarg{size\_weight}{type}{none}}\par
 \par\textbf{\commandlabsubarg{size\_weight}{type}{basic}}\par
 \defSub{a} {Define the $a$ parameter of the basic relationship}
@@ -477,7 +477,7 @@
 \par\textbf{\commandlabsubarg{report}{type}{random\_number\_seed}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
-\par\textbf{\commandlabsubarg{report}{type}{weight\_at\_size}}\par
+\par\textbf{\commandlabsubarg{report}{type}{size\_weight}}\par
 \defSub{size\_weight} {Define the label of the size-weight relationship print}
 \defSub{sizes} {Define the label of the size-weight relationship print}
 \defSub{file\_name} {Define the name of the output file where the report is written}

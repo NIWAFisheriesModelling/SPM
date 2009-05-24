@@ -44,7 +44,7 @@
 \defDefault{1}
 \defValue{A positive real number}
 
-\defSub{size\_at\_age}{Define the label of the associated size-at-age relationship for each category}
+\defSub{age\_size}{Define the label of the associated size-at-age relationship for each category}
 \defType{Vector of strings, of length $1\ldots n_{categories}$}
 \defDefault{No default}
 \defValue{Label names must be unique}
@@ -334,10 +334,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the event mortality is applied to}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Valid labels from \command{size\_at\_age}}
+\defValue{Valid labels from \command{age\_size}}
 
 \defSub{years}{Define the years where the mortality event is applied}
 \defType{Integer vector}
@@ -647,10 +647,10 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Valid labels from \command{size\_at\_age}}
+\defValue{Valid labels from \command{age\_size}}
 
 \defSub{alpha} {Defines the multiplicative constant $\alpha$}
 \defType{Estimable}
@@ -728,10 +728,10 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Valid labels from \command{size\_at\_age}}
+\defValue{Valid labels from \command{age\_size}}
 
 \subsubsection[Abundance-density]{\commandlabsubarg{layer}{type}{abundance\_density}}
 
@@ -757,10 +757,10 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{size\_at\_age}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
+\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Valid labels from \command{size\_at\_age}}
+\defValue{Valid labels from \command{age\_size}}
 
 \subsubsection[Meta-layer]{\commandlabsubarg{layer}{type}{meta}}
 
@@ -843,7 +843,7 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell biomass multiplied by the value of the layer.}
 
-\subsection{Size-at-age}
+\subsection{Size-age relationship}
 
 The individual types of size-at-age relationship available are,
 
@@ -852,16 +852,16 @@ The individual types of size-at-age relationship available are,
 	\item Schnute
 \end{itemize}
 
-\defComLab{size\_at\_age} {Define a size-at-age relationship with label}
+\defComLab{age\_size} {Define a size-age relationship with label}
 
 \defSub{type} {Define the type of relationship}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid type of size-at-age relationship}
 
-\subsubsection[von Bertalanffy]{\commandlabsubarg{size\_at\_age}{type}{von\_bertalanffy}}
+\subsubsection[von Bertalanffy]{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}
 
-\defSub{l\_inf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
+\defSub{linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
 \defType{Estimable}
 \defDefault{No default}
 \defValue{A positive real number}
@@ -901,7 +901,7 @@ The individual types of size-at-age relationship available are,
 \defDefault{No default}
 \defValue{A valid label from \command{size\_weight}}
 
-\subsubsection[Schnute]{\commandlabsubarg{size\_at\_age}{type}{schnute}}
+\subsubsection[Schnute]{\commandlabsubarg{age\_size}{type}{schnute}}
 
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
 \defType{Estimable}
@@ -964,7 +964,7 @@ The individual types of size-weight relationship available are,
 
 \defComLab{size\_weight} {Define a size-weight relationship with label}
 
-\defSub{Type} {Define the type of relationship}
+\defSub{type} {Define the type of relationship}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid type of size-weight relationship}
