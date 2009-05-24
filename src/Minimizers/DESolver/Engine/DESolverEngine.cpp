@@ -230,7 +230,7 @@ bool DESolverEngine::generateGradient() {
 
   CConfiguration *pConfig = CConfiguration::Instance();
 
-  double dConvergenceCheck;
+  double dConvergenceCheck = 0;
   for (int i = 0; i < iVectorSize; ++i) {
     // Create Vars
     double dMin   = 1.0E20;

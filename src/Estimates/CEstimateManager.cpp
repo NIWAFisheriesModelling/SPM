@@ -287,6 +287,8 @@ void CEstimateManager::validate() {
         CError::errorDuplicate(PARAM_PARAMETER, (*vPtr)->getParameter());
       vPtr++;
     }
+    //TODO: Check for duplicates in 'same' subcommands across and between @estimates
+
 
   } catch (string Ex) {
     Ex = "CEstimateManager.validate()->" + Ex;

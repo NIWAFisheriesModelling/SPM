@@ -25,6 +25,8 @@
 #include "../Children/CObservationDefinitionReport.h"
 #include "../Children/CSpatialMapReport.h"
 #include "../Children/CAgeingErrorReport.h"
+#include "../Children/CSizeWeightReport.h"
+#include "../Children/CAgeSizeReport.h"
 
 //**********************************************************************
 //
@@ -64,6 +66,10 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CSpatialMapReport();
   else if (type == PARAM_AGEING_ERROR)
     pReporter = new CAgeingErrorReport();
+  else if (type == PARAM_SIZE_WEIGHT)
+    pReporter = new CSizeWeightReport();
+  else if (type == PARAM_AGE_SIZE)
+    pReporter = new CAgeSizeReport();
   else
     throw string("Unknown type: " + type);
 

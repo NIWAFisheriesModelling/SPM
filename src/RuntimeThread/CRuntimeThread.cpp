@@ -30,6 +30,8 @@
 #include "../RandomNumberGenerator/CRandomNumberGenerator.h"
 #include "../Reports/CReportManager.h"
 #include "../Selectivities/CSelectivityManager.h"
+#include "../SizeWeight/CSizeWeightManager.h"
+#include "../AgeSize/CAgeSizeManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
 
 //#include "../TimeSteps/CTimeStep.h"
@@ -50,6 +52,8 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CWorld::Instance());
   vManagers.push_back(CProcessManager::Instance());
   vManagers.push_back(CAgeingErrorManager::Instance());
+  vManagers.push_back(CSizeWeightManager::Instance());
+  vManagers.push_back(CAgeSizeManager::Instance());
   vManagers.push_back(CCatchabilityManager::Instance());
   vManagers.push_back(CDerivedQuantityManager::Instance());
   vManagers.push_back(CEstimateManager::Instance());
@@ -305,6 +309,8 @@ CRuntimeThread::~CRuntimeThread() {
   CEstimateManager::Destroy();
   CDerivedQuantityManager::Destroy();
   CCatchabilityManager::Destroy();
+  CAgeSizeManager::Destroy();
+  CSizeWeightManager::Destroy();
   CAgeingErrorManager::Destroy();
   CWorld::Destroy();
 }

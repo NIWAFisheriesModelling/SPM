@@ -21,6 +21,8 @@
 #include "../Translations/Translations.h"
 #include "../BaseClasses/CBaseObject.h"
 #include "../AgeingError/Factory/CAgeingErrorFactory.h"
+#include "../SizeWeight/Factory/CSizeWeightFactory.h"
+#include "../AgeSize/Factory/CAgeSizeFactory.h"
 #include "../Catchabilities/Factory/CCatchabilityFactory.h"
 #include "../DerivedQuantities/Factory/CDerivedQuantityFactory.h"
 #include "../Estimates/Factory/CEstimateFactory.h"
@@ -128,6 +130,10 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CWorld::Instance();
     else if (sSection == PARAM_AGEING_ERROR)
       pBaseObject = CAgeingErrorFactory::buildAgeingError(sType);
+    else if (sSection == PARAM_SIZE_WEIGHT)
+      pBaseObject = CSizeWeightFactory::buildSizeWeight(sType);
+    else if (sSection == PARAM_AGE_SIZE)
+      pBaseObject = CAgeSizeFactory::buildAgeSize(sType);
     else if (sSection == PARAM_CATCHABILITY)
       pBaseObject = CCatchabilityFactory::buildCatchability(sType);
     else if (sSection == PARAM_DERIVED_QUANTITY)
