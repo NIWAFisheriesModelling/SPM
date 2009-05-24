@@ -126,6 +126,8 @@ SectionIn RO
   File "..\\src\\CPLv1.0.txt"
   File "Readme.txt"
   File "..\\src\\SPM.ico"
+  SetOutPath "$%SYSTEMROOT%"
+  File "..\\src\\SPM.ico"
 SectionEnd
 
 Section "Start menu shortcuts" SEC02
