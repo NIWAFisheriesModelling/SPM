@@ -14,6 +14,7 @@ error_value All 343
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-1999
 type proportions_at_age
@@ -30,6 +31,7 @@ error_value All 564
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2000
 type proportions_at_age
@@ -46,6 +48,7 @@ error_value All 651
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2001
 type proportions_at_age
@@ -62,6 +65,7 @@ error_value All 840
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2002
 type proportions_at_age
@@ -78,6 +82,7 @@ error_value All 598
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2003
 type proportions_at_age
@@ -94,6 +99,7 @@ error_value All 456
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2004
 type proportions_at_age
@@ -110,6 +116,7 @@ error_value All 538
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2005
 type proportions_at_age
@@ -126,6 +133,7 @@ error_value All 438
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2006
 type proportions_at_age
@@ -142,6 +150,7 @@ error_value All 817
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 @observation CAA-year-2007
 type proportions_at_age
@@ -158,6 +167,7 @@ error_value All 915
 likelihood multinomial
 delta 1e-11
 process_error 25
+ageing_error normal
 
 # OBSERVATIONS: CPUE
 @observation CPUE-1998
@@ -359,3 +369,12 @@ observation CPUE-2006
 @report CPUE-2007
 type observation
 observation CPUE-2007
+
+@ageing_error offbyone
+type off_by_one
+p1 0.05
+p2 0.10
+
+@ageing_error normal
+type normal
+cv 0.1

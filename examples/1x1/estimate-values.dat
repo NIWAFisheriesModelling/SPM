@@ -1,28 +1,22 @@
 [estimate-values]
 report.type: estimate_summary
-parameter: catchability[cpueq].q
-lower_bound: 1e-010
-upper_bound: 0.1
-prior: uniform
-value: 0.000137562
-
 parameter: process[recruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
 prior: uniform
-value: 352248
+value: 448429
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
 upper_bound: 20
 prior: uniform
-value: 8.63117
+value: 8.45764
 
 parameter: selectivity[fishingsel].ato95
 lower_bound: 0.01
 upper_bound: 50
 prior: uniform
-value: 3.30029
+value: 3.19555
 
 *end
 

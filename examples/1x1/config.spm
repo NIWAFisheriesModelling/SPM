@@ -39,7 +39,7 @@ categories immature mature
 type constant_recruitment
 categories immature
 proportions 1.0
-R0 500000
+R0 550000
 ages 1
 
 @process halfM
@@ -126,7 +126,7 @@ c 1
 type logistic_producing
 L 5
 H 30
-a50 8
+a50 10
 ato95 3
 
 @selectivity FishingSel

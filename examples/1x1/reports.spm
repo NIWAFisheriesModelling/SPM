@@ -51,4 +51,8 @@ file_name estimate-values.dat
 type objective_function
 file_name objective.dat
 
+@report AgeError
+type Ageing_error
+ageing_error normal
+
 @include "simulation-reports.spm"
