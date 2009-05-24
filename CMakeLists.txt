@@ -72,6 +72,12 @@ src/AgeingError/CAgeingErrorManager.cpp
 src/AgeingError/Children/CNormalAgeingError.cpp
 src/AgeingError/Children/COffByOneAgeingError.cpp
 src/AgeingError/Factory/CAgeingErrorFactory.cpp
+src/AgeSize/CAgeSize.cpp
+src/AgeSize/CAgeSizeManager.cpp
+src/AgeSize/Children/CNoneAgeSize.cpp
+src/AgeSize/Children/CSchnuteAgeSize.cpp
+src/AgeSize/Children/CVonBertalanffyAgeSize.cpp
+src/AgeSize/Factory/CAgeSizeFactory.cpp
 src/BaseClasses/CBaseBuild.cpp
 src/BaseClasses/CBaseExecute.cpp
 src/BaseClasses/CBaseManager.cpp
@@ -183,6 +189,7 @@ src/Profiles/Factory/CProfileFactory.cpp
 src/RandomNumberGenerator/CRandomNumberGenerator.cpp
 src/Reports/Children/Base/CFileReport.cpp
 src/Reports/Children/CAgeingErrorReport.cpp
+src/Reports/Children/CAgeSizeReport.cpp
 src/Reports/Children/CCovarianceReport.cpp
 src/Reports/Children/CDerivedQuantityReport.cpp
 src/Reports/Children/CEstimateSummaryReport.cpp
@@ -196,6 +203,7 @@ src/Reports/Children/CParameterListReport.cpp
 src/Reports/Children/CPartitionReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
 src/Reports/Children/CSelectivityReport.cpp
+src/Reports/Children/CSizeWeightReport.cpp
 src/Reports/Children/CSpatialMapReport.cpp
 src/Reports/Children/CStandardHeaderReport.cpp
 src/Reports/Children/CWorldStateReport.cpp
@@ -216,6 +224,11 @@ src/Selectivities/Children/CLogisticSelectivity.cpp
 src/Selectivities/CSelectivity.cpp
 src/Selectivities/CSelectivityManager.cpp
 src/Selectivities/Factory/CSelectivityFactory.cpp
+src/SizeWeight/CSizeWeight.cpp
+src/SizeWeight/CSizeWeightManager.cpp
+src/SizeWeight/Children/CBasicSizeWeight.cpp
+src/SizeWeight/Children/CNoneSizeWeight.cpp
+src/SizeWeight/Factory/CSizeWeightFactory.cpp
 src/TimeSteps/CTimeStep.cpp
 src/TimeSteps/CTimeStepManager.cpp
 src/TimeSteps/Factory/CTimeStepFactory.cpp
