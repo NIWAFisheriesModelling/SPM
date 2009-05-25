@@ -59,7 +59,6 @@
 #define ERROR_QTY_MORE_PROPORTIONS          "Too many proportions: "
 #define ERROR_VALID_SQUARES_WITH_LAYER      "No spatial cells are valid with layer applied"
 
-
 //**********************************************************************
 // BASE CONFIGURATION
 //
@@ -67,6 +66,7 @@
 // Configuration File Syntax Strings
 #define CONFIG_ARRAY_END                    "]"
 #define CONFIG_ARRAY_START                  "["
+#define CONFIG_END_REPORT                   "*end"
 #define CONFIG_FALSE                        "false"
 #define CONFIG_FALSE_SHORT                  "f"
 #define CONFIG_INCLUDE                      "@include"
