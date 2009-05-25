@@ -10,6 +10,7 @@
 // Local headers
 #include "CNoneAgeSize.h"
 #include "../../Helpers/CError.h"
+#include "../../SizeWeight/CSizeWeight.h"
 
 //**********************************************************************
 // CNoneAgeSize::CNoneAgeSize()
@@ -63,6 +64,21 @@ void CNoneAgeSize::rebuild() {
 
   } catch (string Ex) {
     Ex = "CNoneAgeSize.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// double CNoneAgeSize::getMeanWeight(double &size)
+// Apply size-weight relationship
+//**********************************************************************
+double CNoneAgeSize::getMeanWeight(double &age) {
+  try {
+
+    return 1;
+
+  } catch (string Ex) {
+    Ex = "CNoneAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

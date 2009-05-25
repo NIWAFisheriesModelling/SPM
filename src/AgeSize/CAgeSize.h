@@ -11,6 +11,7 @@
 
 // Local headers
 #include "../BaseClasses/CBaseBuild.h"
+#include "../SizeWeight/CSizeWeightManager.h"
 
 //**********************************************************************
 //
@@ -25,6 +26,7 @@ public:
   void                        build();
   virtual void                rebuild();
   virtual double              getMeanSize(double &age) { return 1; }
+  virtual double              getMeanWeight(double &age) {return 1; };
 
 };
 

@@ -10,6 +10,7 @@
 // Local headers
 #include "CSchnuteAgeSize.h"
 #include "../../Helpers/CError.h"
+#include "../../SizeWeight/CSizeWeight.h"
 
 //**********************************************************************
 // CSchnuteAgeSize::CSchnuteAgeSize()
@@ -35,6 +36,7 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
   pParameterList->registerAllowed(PARAM_B);
   pParameterList->registerAllowed(PARAM_CV);
   pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 }
 
 //**********************************************************************
@@ -73,6 +75,10 @@ void CSchnuteAgeSize::build() {
   try {
     // Base
     CAgeSize::build();
+
+    sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
+    pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
 
     // Rebuild
     rebuild();
@@ -128,6 +134,24 @@ double CSchnuteAgeSize::getMeanSize(double &age) {
 
   } catch (string Ex) {
     Ex = "CSchnuteAgeSize.getMeanSize(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// double CSchnuteAgeSize::getMeanWeight(double &size)
+// Apply size-weight relationship
+//**********************************************************************
+double CSchnuteAgeSize::getMeanWeight(double &age) {
+  try {
+
+    double dSize = this->getMeanSize(age);
+    double dWeight = pSizeWeight->getMeanWeight(dSize);
+    return dWeight;
+    return(dSize);
+
+  } catch (string Ex) {
+    Ex = "CSchnuteAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

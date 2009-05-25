@@ -24,6 +24,7 @@ public:
   void                        build();
   void                        rebuild();
   double                      getMeanSize(double &age);
+  double                      getMeanWeight(double &age);
 
 protected:
   double                      dLinf;
@@ -31,6 +32,8 @@ protected:
   double                      dT0;
   double                      dCV;
   std::string                 sDistribution;
+  string                      sSizeWeight;
+  CSizeWeight*                pSizeWeight;
 
 };
 

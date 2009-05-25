@@ -23,6 +23,7 @@ CAgeSize::CAgeSize() {
 //**********************************************************************
 void CAgeSize::validate() {
   try {
+
     CBaseBuild::validate();
 
   } catch (string Ex) {
@@ -50,7 +51,6 @@ void CAgeSize::build() {
 //**********************************************************************
 void CAgeSize::rebuild() {
   try {
-
 
   } catch (string Ex) {
     Ex = "CAgeSize.build(" + getLabel() + ")->" + Ex;

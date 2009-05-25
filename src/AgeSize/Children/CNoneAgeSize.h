@@ -24,6 +24,7 @@ public:
   void                        build();
   void                        rebuild();
   double                      getMeanSize(double &size) { return 1; };
+  double                      getMeanWeight(double &age);
 
 };
 

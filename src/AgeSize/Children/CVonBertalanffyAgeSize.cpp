@@ -10,6 +10,7 @@
 // Local headers
 #include "CVonBertalanffyAgeSize.h"
 #include "../../Helpers/CError.h"
+#include "../../SizeWeight/CSizeWeight.h"
 
 //**********************************************************************
 // CVonBertalanffyAgeSize::CVonBertalanffyAgeSize()
@@ -29,6 +30,8 @@ CVonBertalanffyAgeSize::CVonBertalanffyAgeSize() {
   pParameterList->registerAllowed(PARAM_T0);
   pParameterList->registerAllowed(PARAM_CV);
   pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
+
 
 }
 
@@ -73,6 +76,10 @@ void CVonBertalanffyAgeSize::build() {
     // Base
     CAgeSize::build();
 
+    sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
+    pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
+
     // Rebuild
     rebuild();
 
@@ -116,6 +123,23 @@ double CVonBertalanffyAgeSize::getMeanSize(double &age) {
 
   } catch (string Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanSize(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// double CVonBertalanffyAgeSize::getMeanWeight(double &size)
+// Apply size-weight relationship
+//**********************************************************************
+double CVonBertalanffyAgeSize::getMeanWeight(double &age) {
+  try {
+
+    double dSize = this->getMeanSize(age);
+    double dWeight = pSizeWeight->getMeanWeight(dSize);
+    return dWeight;
+
+  } catch (string Ex) {
+    Ex = "CVonBertalanffyAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
