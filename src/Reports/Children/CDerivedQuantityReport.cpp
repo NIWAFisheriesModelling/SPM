@@ -35,7 +35,7 @@ void CDerivedQuantityReport::execute() {
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
   cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   cout << "# Not Yet Implemented" << "\n";
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
 
   this->end();
 }

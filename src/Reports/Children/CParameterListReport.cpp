@@ -116,7 +116,7 @@ void CParameterListReport::execute() {
     cout << endl;
   }
 
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
 
   this->end();
 }

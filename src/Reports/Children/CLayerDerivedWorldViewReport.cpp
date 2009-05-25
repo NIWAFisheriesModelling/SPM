@@ -132,7 +132,7 @@ void CLayerDerivedWorldViewReport::execute() {
     mPtr++;
   }
 
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
 
   // End IO
   this->end();

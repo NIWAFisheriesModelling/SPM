@@ -50,7 +50,7 @@ void CEstimateSummaryReport::execute() {
     cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n\n";
   }
 
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
 
   // End IO
   this->end();

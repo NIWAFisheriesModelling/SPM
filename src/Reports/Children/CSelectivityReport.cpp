@@ -92,7 +92,7 @@ void CSelectivityReport::execute() {
   for (int i = 1; i < iSpread; ++i)
     cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << pSelectivity->getResult(i);
   cout << "\n";
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
 
   this->end();
 }

@@ -118,7 +118,7 @@ void CWorldStateReport::execute() {
       }
     }
 
-    cout << "*end\n" << endl;
+    cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
   } catch (string Ex) {

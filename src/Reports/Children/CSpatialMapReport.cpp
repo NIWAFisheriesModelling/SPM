@@ -41,7 +41,7 @@ void CSpatialMapReport::execute() {
     cout << "\n";
   }
 
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
   this->end();
 }
 

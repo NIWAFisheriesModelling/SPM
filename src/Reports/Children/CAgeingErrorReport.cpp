@@ -95,8 +95,7 @@ void CAgeingErrorReport::execute() {
     }
     cout << mMisMatrix[i][iSpread-1] << "\n";
   }
-  cout << "\n";
-  cout << "*end\n" << endl;
+  cout << CONFIG_END_REPORT << "\n" << endl;
 
   this->end();
 }
