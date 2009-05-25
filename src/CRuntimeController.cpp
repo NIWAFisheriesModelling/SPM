@@ -349,7 +349,7 @@ void CRuntimeController::initEstimationThread() {
   pThread->setTerminate(false);
 
   // Execute
-  // ToDo: Complete Minimizer Pool
+  // TODO: (Scott) Implement Minimizer Pool
   //pThread->executeEstimation();
 
   delete pThread;

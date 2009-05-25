@@ -18,6 +18,7 @@
 #include "../Children/CNormalPrior.h"
 #include "../Children/CUniformLogPrior.h"
 #include "../Children/CUniformPrior.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CPrior* CPriorFactory::buildPrior(string type, bool registerWithManager)
@@ -42,7 +43,7 @@ CPrior* CPriorFactory::buildPrior(string type, bool registerWithManager) {
   else if (type == PARAM_UNIFORM)
     pPrior = new CUniformPrior();
   else
-    throw string("Unknown type: " + type); // TODO: FIX THIS
+    CError::errorUnknown(PARAM_PRIOR, type);
 
   if (registerWithManager)
     CPriorManager::Instance()->addPrior(pPrior);

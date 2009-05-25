@@ -11,6 +11,7 @@
 #include "CPartitionReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CPartitionReport::CPartitionReport()
@@ -39,7 +40,11 @@ void CPartitionReport::validate() {
     iYear       = pParameterList->getInt(PARAM_YEAR);
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
 
-    // ToDO: Validate Year is valid in our run
+    // Validate Year Range
+    if (iYear < pWorld->getInitialYear())
+      CError::errorLessThan(PARAM_YEAR, PARAM_INITIAL_YEAR);
+    else if (iYear > pWorld->getCurrentYear())
+      CError::errorGreaterThan(PARAM_YEAR, PARAM_CURRENT_YEAR);
 
   } catch (string Ex) {
     Ex = "CPartitionReporter.validate(" + getLabel() + ")->" + Ex;

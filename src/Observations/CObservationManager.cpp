@@ -97,12 +97,12 @@ CObservation* CObservationManager::getObservation(string label) {
 //**********************************************************************
 void CObservationManager::clone(CObservationManager *Manager) {
   try {
-
+    // TODO: (Scott) Implement clone function
+    throw string("Not yet implemented");
 //    for (int i = 0; i < Manager->getObservationCount(); ++i) {
 //      CObservation *pObservation = Manager->getObservation(i);
 //      vObservationList.push_back(pObservation->clone());
 //    }
-    // TODO: Fix Clones
 
   } catch (string Ex) {
     Ex = "CObservationManager.clone()->" + Ex;

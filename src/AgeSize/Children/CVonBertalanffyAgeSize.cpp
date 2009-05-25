@@ -46,19 +46,18 @@ void CVonBertalanffyAgeSize::validate() {
     dK              = pParameterList->getDouble(PARAM_K);
     dT0             = pParameterList->getDouble(PARAM_T0);
     dCV             = pParameterList->getDouble(PARAM_CV,true,0);
-    //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION,true,"normal");
+    sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION,true, PARAM_NORMAL);
 
-    // TODO: Complete validation - error messages need to be better phrased
+    // Validate
     if (dLinf <= 0)
-      throw("Linf must be non-negative"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_LINF, PARAM_ZERO);
     if (dK <= 0)
-      throw("k must be non-negative"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_K, PARAM_ZERO);
     if (dCV <= 0)
-      throw("cv must be non-negative"); //TODO: Better error message
-    //if (sDistribution != "normal" || sDistribution != "lognormal")
-    //  throw("Distribution must be either 'normal' or 'lognormal'"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
 
-
+    if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
+      CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
   } catch (string Ex) {
     Ex = "CVonBertalanffyAgeSize.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

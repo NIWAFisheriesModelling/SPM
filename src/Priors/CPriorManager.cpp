@@ -96,12 +96,13 @@ CPrior* CPriorManager::getPrior(int index) {
 //**********************************************************************
 void CPriorManager::clone(CPriorManager *Manager) {
   try {
+    // TODO: (Scott) Implement clone function
+    throw string("Not yet implemented");
 
 //    for (int i = 0; i < Manager->getPriorCount(); ++i) {
 //      CPrior *pPrior = Manager->getPrior(i);
 //      vPriorList.push_back(pPrior->clone());
 //    }
-    // TODO: Fix Clones
   } catch (string Ex) {
     Ex = "CPriorManager.clone()->" + Ex;
     throw Ex;

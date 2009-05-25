@@ -24,9 +24,9 @@ public:
   CProfile();
   virtual                    ~CProfile();
   CProfile*                  clone() { return (new CProfile(*this)); }
-  double                     getStep() { return dStep; }
-  double                     getL() { return dL; }
-  double                     getU() { return dU; }
+  double                     getStepSize() { return dStepSize; }
+  double                     getLowerBound() { return dLowerBound; }
+  double                     getUpperBound() { return dUpperBound; }
   string                     getParameter() { return sParameter; }
   double                     getCurrent() { return dCurrent; }
   void                       setEnabled();
@@ -37,10 +37,10 @@ public:
 
 protected:
   // Variables
-  int                        iN;
-  double                     dStep;
-  double                     dL;
-  double                     dU;
+  int                        iSteps;
+  double                     dStepSize;
+  double                     dLowerBound;
+  double                     dUpperBound;
   double                     dCurrent;
   string                     sParameter;
   CEstimate*                 pTarget;

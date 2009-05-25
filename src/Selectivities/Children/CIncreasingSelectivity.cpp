@@ -40,7 +40,7 @@ void CIncreasingSelectivity::validate() {
 
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // TODO: Complete validation - error messages need to be better phrased
+    // Validate
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
     if (iL < pWorld->getMinAge())
@@ -50,10 +50,10 @@ void CIncreasingSelectivity::validate() {
     if (iH <= iL)
       CError::errorLessThanEqualTo(PARAM_H, PARAM_L);
     if ((int)vVs.size() != (iH - iL + 1))
-       throw string("You need to supply the correct number of entries for V"); //TODO: Better error message
+      CError::errorListNotSize(PARAM_V, (iH - iL + 1));
     for (int i = 0; i < (int)vVs.size(); ++i) {
       if ((vVs[i] > 1.0) || (vVs[i] < 0.0))
-        throw string("Vs should be be between 0 and 1"); //TODO: Better error message
+        CError::errorNotBetween(PARAM_V, PARAM_ZERO, PARAM_ONE);
     }
 
     // Register Estimables

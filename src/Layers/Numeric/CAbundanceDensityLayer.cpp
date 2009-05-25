@@ -10,6 +10,8 @@
 // Local headers
 #include "CAbundanceDensityLayer.h"
 
+// TODO: (Alistair) Implement Abundance Density Layer
+
 //**********************************************************************
 // CAbundanceDensityLayer::CAbundanceDensityLayer()
 // Default Constructor
@@ -27,7 +29,7 @@ CAbundanceDensityLayer::CAbundanceDensityLayer() {
 //**********************************************************************
 double CAbundanceDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CAbundanceDensityLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -61,7 +63,7 @@ void CAbundanceDensityLayer::validate() {
 //**********************************************************************
 void CAbundanceDensityLayer::build() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CAbundanceDensityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

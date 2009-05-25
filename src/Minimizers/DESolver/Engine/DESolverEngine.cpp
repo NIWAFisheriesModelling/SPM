@@ -175,7 +175,7 @@ bool DESolverEngine::Solve(int maxGenerations) {
 
   for (int i = 0; i < maxGenerations; ++i) {
     if(!(pConfig->getQuietMode()))
-      cerr << "DE_Solver: Current generation = " << (i+1) << "\n"; //TODO: Add to translation file
+      cerr << DESOLVER_CURRENT_GENERATION << (i+1) << "\n";
     for (int j = 0; j < iPopulationSize; ++j) {
       // Build our Trial Solution
       (this->*calcTrialSolution)(j);
@@ -209,7 +209,7 @@ bool DESolverEngine::Solve(int maxGenerations) {
     } // end for()
 
     // If we have a new Best, lets generate a gradient.
-    if ((bNewBestEnergy) || ((i % 5) == 0) ) // TODO: Remove this?
+    if (bNewBestEnergy)
       if (generateGradient()) {
         iGenerations = i;
         return true; // Convergence!

@@ -55,7 +55,8 @@ void CSizeWeightManager::Destroy() {
 // Clone our Ageing Errors
 //**********************************************************************
 void CSizeWeightManager::clone(CSizeWeightManager *Manager) {
-  // TODO: Implement Ageing Error Manager Clone
+  // TODO: (Scott) Implement Clone Function
+  throw string("Not yet implemented (CSizeWeightManager::clone)");
 }
 
 //**********************************************************************

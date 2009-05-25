@@ -10,6 +10,7 @@
 // Local headers
 #include "CEstimateFactory.h"
 #include "../CEstimateManager.h"
+#include "../../Helpers/CError.h"
 
 
 //**********************************************************************
@@ -23,7 +24,7 @@ CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager
   if (type == "")
     pEstimate = new CEstimate();
   else
-    throw string("unknown type: " + type); // TODO: FIX THIS
+    CError::errorUnknown(PARAM_ESTIMATE, type);
 
   if (registerWithManager)
     CEstimateManager::Instance()->addEstimate(pEstimate);

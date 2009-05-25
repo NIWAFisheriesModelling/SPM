@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CLogisticSelectivity.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CLogisticSelectivity::CLogisticSelectivity()
@@ -41,7 +42,7 @@ void CLogisticSelectivity::validate() {
     dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
     if (dAlpha <= 0)
-      throw("Alpha must be positive"); // TODO: better error messages
+      CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;

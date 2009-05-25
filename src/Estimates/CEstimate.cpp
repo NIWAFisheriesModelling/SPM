@@ -134,6 +134,18 @@ void CEstimate::loadValue(int index) {
 }
 
 //**********************************************************************
+// void CEstimate::fillSameVector(vector<string> &sames)
+// Fill a Vector with our "Same" parameters
+//**********************************************************************
+void CEstimate::fillSameVector(vector<string> &sames) {
+  sames.clear();
+
+  foreach(string Same, vSameList) {
+    sames.push_back(Same);
+  }
+}
+
+//**********************************************************************
 // void CEstimate::validate()
 // validate
 //**********************************************************************
@@ -153,6 +165,14 @@ void CEstimate::validate() {
     // Validate
     if (dUpperBound < dLowerBound)
       CError::errorLessThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
+
+    // Check For Duplicate Sames
+    map<string, int>  mSames;
+    foreach(string Same, vSameList) {
+      mSames[Same]++;
+      if (mSames[Same] > 1)
+        CError::errorDuplicate(PARAM_SAME, Same);
+    }
 
   } catch (string Ex) {
     Ex = "CEstimate.validate(" + sParameter + ")->" + Ex;

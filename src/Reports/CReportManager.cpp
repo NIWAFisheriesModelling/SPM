@@ -64,7 +64,8 @@ void CReportManager::addReporter(CReport *value) {
 // Clone our reporters
 //**********************************************************************
 void CReportManager::clone(CReportManager *Manager) {
-  // TODO: Implement Clone Function
+  // TODO: (Scott) Implement Clone Function
+  throw string("Not yet implemented (CReportManager::clone)");
 }
 
 //**********************************************************************

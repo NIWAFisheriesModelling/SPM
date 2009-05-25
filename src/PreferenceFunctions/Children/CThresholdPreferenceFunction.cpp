@@ -12,6 +12,8 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 
+// TODO: (Alistair) Implement Categories and Selectivities
+
 //**********************************************************************
 // CThresholdPreferenceFunction::CThresholdPreferenceFunction()
 // Default Constructor

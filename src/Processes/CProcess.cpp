@@ -86,31 +86,6 @@ void CProcess::build() {
       vCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
     }
 
-    // Do We need to get our Layer Pointer?
-    // TODO: Remove this
-//    if ( (pLayer == 0) && (bDependsOnLayer) ) {
-//      // Assign
-//      CLayerManager *pLayerManager = CLayerManager::Instance();
-//      pLayer = pLayerManager->getNumericLayer(getLayerName());
-//
-//      // If we are using Min/Max, Set Them
-//      if ( (dLayerMin >= 0.0) && (dLayerMax >= 0.0) )
-//        pLayer->setMinMax(dLayerMin, dLayerMax);
-//
-//      // Check No. Valid Spots
-//      iNumberOfValidLayerSpots = pLayer->countValidSpaces();
-//      if (iNumberOfValidLayerSpots == 0)
-//        throw string(ERROR_VALID_SQUARES_WITH_LAYER);
-//
-//      pLayer->defaultMinMax();
-//    }
-
-//    // Get Penalty
-//    if ( (pPenalty == 0) && (sPenalty != "") ) {
-//      CPenaltyManager *pPenaltyManager = CPenaltyManager::Instance();
-//      pPenalty = pPenaltyManager->getPenalty(sPenalty);
-//    }
-
     // Setup Vars
     iBaseColCount   = pWorld->getBaseSquare(0, 0)->getWidth();
 

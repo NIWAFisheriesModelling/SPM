@@ -55,7 +55,8 @@ void CAgeSizeManager::Destroy() {
 // Clone our Ageing Errors
 //**********************************************************************
 void CAgeSizeManager::clone(CAgeSizeManager *Manager) {
-  // TODO: Implement Ageing Error Manager Clone
+  // TODO: (Scott) Implement Clone Function
+  throw string("Not yet implemented (CAgeSizeManager::clone)");
 }
 
 //**********************************************************************

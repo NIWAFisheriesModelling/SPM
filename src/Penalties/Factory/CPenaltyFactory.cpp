@@ -12,6 +12,7 @@
 #include "../CPenaltyManager.h"
 #include "../../Translations/Translations.h"
 #include "../CPenalty.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CPenalty* CPenaltyFactory::buildPenalty(string type, bool registerWithManager = true)
@@ -24,7 +25,7 @@ CPenalty* CPenaltyFactory::buildPenalty(string type, bool registerWithManager) {
   if (type == "")
     pPenalty = new CPenalty();
   else
-    throw string("Unknown type: " + type); // TODO: FIX THIS
+    CError::errorUnknown(PARAM_PENALTY, type);
 
   if (registerWithManager)
     CPenaltyManager::Instance()->addPenalty(pPenalty);

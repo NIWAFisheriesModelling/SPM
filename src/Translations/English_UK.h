@@ -22,6 +22,7 @@
 #define ERROR_LESS_EQUAL_TO                 " is less than or equal to "
 #define ERROR_LESS_THAN                     " is less than "
 #define ERROR_LIST_EQUAL_SIZE               " list must be same size as "
+#define ERROR_LIST_NOT_SIZE                 " list must have size of "
 #define ERROR_MISSING                       "Missing "
 #define ERROR_MUST_BE_PAIRED                " must be entered as pairs"
 #define ERROR_NO_MATCHING                   " has no matching "
@@ -31,6 +32,7 @@
 #define ERROR_TOO_HIGH                      " is too high"
 #define ERROR_TOO_MUCH                      "Too much "
 #define ERROR_UNKNOWN                       "Unknown "
+#define ERROR_BETWEEN                       " is not between values: "
 
 // Specific Error Codes
 #define ERROR_BAD_CAST_WOLD_SQUARE          "Cannot convert to WorldSquare"
@@ -111,6 +113,12 @@
 #define GAMMADIFF_RETURN_VALUE_UNKNOWN            "Fatal error, unknown return value = "
 #define GAMMADIFF_LESS_START_LOWER_BOUND          "Start value is less than lower bound"
 #define GAMMADIFF_GREATER_START_UPPER_BOUND       "Start value is greater than upper bound"
+
+//**********************************************************************
+// DESOLVER
+//
+//**********************************************************************
+#define DESOLVER_CURRENT_GENERATION               "DE_Solver: Current generation = "
 
 //**********************************************************************
 // PARAMETERS
@@ -293,6 +301,7 @@
 #define PARAM_SSB                                 "ssb"
 #define PARAM_SSB_OFFSET                          "ssb_offset"
 #define PARAM_STEP_SIZE                           "step_size"
+#define PARAM_STEPS                               "steps"
 #define PARAM_STEEPNESS                           "steepness"
 #define PARAM_STRING                              "categorical"
 #define PARAM_T0                                  "t0"

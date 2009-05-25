@@ -14,7 +14,7 @@
 #include "../Children/CAbundanceObservation.h"
 #include "../Children/CProportionsAtAgeObservation.h"
 #include "../Children/CProportionsByCategoryObservation.h"
-
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CObservation* CObservationFactory::buildObservation(string type, bool registerWithManager)
@@ -31,7 +31,7 @@ CObservation* CObservationFactory::buildObservation(string type, bool registerWi
   else if (type == PARAM_PROPORTIONS_BY_CATEGORY)
     pObservation = new CProportionsByCategoryObservation();
   else
-    throw string("Unknown type: " + type); // TODO: FIX ME
+    CError::errorUnknown(PARAM_OBSERVATION, type);
 
   if (registerWithManager)
     CObservationManager::Instance()->addObservation(pObservation);

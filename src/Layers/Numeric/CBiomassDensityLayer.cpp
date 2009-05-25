@@ -10,6 +10,8 @@
 // Local headers
 #include "CBiomassDensityLayer.h"
 
+// TODO: (Alistair) Implement Biomass Density Layer
+
 //**********************************************************************
 // CBiomassDensityLayer::CBiomassDensityLayer()
 // Default constructor
@@ -28,7 +30,7 @@ CBiomassDensityLayer::CBiomassDensityLayer() {
 //**********************************************************************
 double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
   try {
-    throw string("Not yet implemented"); // TODO: Implementt this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CBiomassDensityLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -65,7 +67,7 @@ void CBiomassDensityLayer::validate() {
 //**********************************************************************
 void CBiomassDensityLayer::build() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CBiomassDensityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -23,8 +23,12 @@ public:
 	virtual                    ~CDistanceLayer();
 	CLayer*                    clone() { return (new CDistanceLayer(*this)); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  double                     getCellLength() { return dCellLength; }
+  void                       validate();
   void                       build();
 
+protected:
+  double                    dCellLength;
 };
 
 #endif /*CDISTANCELAYER_H_*/

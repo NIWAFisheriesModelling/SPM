@@ -47,6 +47,24 @@ double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int
 }
 
 //**********************************************************************
+// void CDistanceLayer::validate()
+// Validate our Distance Lyer
+//**********************************************************************
+void CDistanceLayer::validate() {
+  try {
+    // Base
+    CNumericLayer::validate();
+
+    // Assign parameters
+    dCellLength       = pWorld->getCellLength();
+
+  } catch (string Ex) {
+    Ex = "CDistanceLayer.validate()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
 // void CDistanceLayer::build()
 // build
 //**********************************************************************

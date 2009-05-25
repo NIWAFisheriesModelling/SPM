@@ -16,6 +16,7 @@
 // Local Headers
 #include "CMinimizer.h"
 #include "../Estimates/CEstimateManager.h"
+#include "../Helpers/CError.h"
 
 // Using
 using std::cout;
@@ -74,7 +75,7 @@ void CMinimizer::buildCovarianceMatrix() {
 //**********************************************************************
 double CMinimizer::getCovarianceValue(int row, int col) {
   if ( (mxCovariance.size1() == 0) || (mxCovariance.size2() == 0) )
-    throw string("Covariance Matrix has not been set"); // TODO: Translate
+    CError::errorMissing(PARAM_COVARIANCE);
 
   return mxCovariance(row, col);
 }

@@ -19,6 +19,8 @@
 // Namespace
 using namespace std;
 
+// TODO: (Scott) Add Text to Translation File
+
 //**********************************************************************
 // GammaDiffEngine::GammaDiffEngine()
 // Default Constructor
@@ -158,11 +160,11 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
       buildCurrentValues();
       dScore = objective(vCurrentValues);
       if(!(pConfig->getQuietMode())) {
-        cerr << "Current estimates: ";  //TODO: add to translation file
+        cerr << "Current estimates: ";
         for (int i = 0; i < iVectorSize; ++i) {
           cerr << vCurrentValues[i] << " ";
         }
-        cerr << "\nObjective function value: " << dScore << "\n"; //TODO: add to translation file
+        cerr << "\nObjective function value: " << dScore << "\n";
       }
       dScore += dPenalty; // Bound penalty
     }

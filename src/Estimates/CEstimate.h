@@ -36,6 +36,7 @@ public:
   int                        getValueCount() { return (int)vValueList.size(); }
   void                       loadValue(int index);
   double                     getPriorScore();
+  void                       fillSameVector(vector<string> &sames);
   void                       validate();
 	void                       build();
 

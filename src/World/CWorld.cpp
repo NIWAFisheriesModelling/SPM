@@ -109,8 +109,8 @@ void CWorld::validate() {
 
     // Load our Variable values
     dCellLength       = pParameterList->getDouble(PARAM_CELL_LENGTH,true,1.0);
-    iHeight           = pParameterList->getInt(PARAM_NROWS); // TODO: Change to N_ROWS or Better
-    iWidth            = pParameterList->getInt(PARAM_NCOLS); // TODO: Change to N_COLS or Better
+    iHeight           = pParameterList->getInt(PARAM_NROWS);
+    iWidth            = pParameterList->getInt(PARAM_NCOLS);
     sBaseLayer        = pParameterList->getString(PARAM_LAYER);
     iMinAge           = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge           = pParameterList->getInt(PARAM_MAX_AGE);

@@ -274,21 +274,31 @@ void CEstimateManager::validate() {
     }
 
     // Variables
-    vector<CEstimate*>::iterator  vPtr;
-    map<string, int>              mParameterList;
+    map<string, int>              mParameters;
 
     // Check for Duplicate Estimates
-    vPtr = vEstimateList.begin();
-    while (vPtr != vEstimateList.end()) {
-      string sParam = (*vPtr)->getParameter();
-      mParameterList[sParam] += 1;
+    foreach(CEstimate *Estimate, vEstimateList) {
+      string sParameter = Estimate->getParameter();
+      mParameters[sParameter]++;
 
-      if (mParameterList[sParam] > 1)
-        CError::errorDuplicate(PARAM_PARAMETER, (*vPtr)->getParameter());
-      vPtr++;
+      if (mParameters[sParameter] > 1)
+        CError::errorDuplicate(PARAM_PARAMETER, sParameter);
     }
-    //TODO: Check for duplicates in 'same' subcommands across and between @estimates
 
+    // Check For Duplicate Sames Across Estimates
+    map<string, int> mSames;
+    vector<string> vSames;
+
+    // Get Sames and Check Against Map
+    foreach(CEstimate *Estimate, vEstimateList) {
+      Estimate->fillSameVector(vSames);
+
+      foreach(string Same, vSames) {
+        mSames[Same]++;
+        if (mSames[Same] > 1)
+          CError::errorDuplicate(PARAM_SAME, Same);
+      }
+    }
 
   } catch (string Ex) {
     Ex = "CEstimateManager.validate()->" + Ex;

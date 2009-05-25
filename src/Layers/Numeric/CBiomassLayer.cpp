@@ -9,6 +9,9 @@
 
 // Local headers
 #include "CBiomassLayer.h"
+#include "../../Helpers/CError.h"
+
+// TODO: (Alistair) Implement Biomass Layer
 
 //**********************************************************************
 // CBiomassLayer::CBiomassLayer()
@@ -28,7 +31,7 @@ CBiomassLayer::CBiomassLayer() {
 //**********************************************************************
 double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CBiomassLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -51,8 +54,13 @@ void CBiomassLayer::validate() {
     pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vSizeWeights, PARAM_SIZE_WEIGHTS);
 
-    // TODO: Add Vector size checks against each other
-    throw string("Not yet implemented"); // TODO: Implement this
+    // Validate
+    if (vCategories.size() != vSelectivities.size())
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+    if (vSizeWeights.size() != vCategories.size())
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SIZE_WEIGHTS);
+
+    throw string("Not yet implemented");
 
   } catch (string Ex) {
     Ex = "CBiomassLayer.validate(" + getLabel() + ")->" + Ex;
@@ -67,7 +75,7 @@ void CBiomassLayer::validate() {
 //**********************************************************************
 void CBiomassLayer::build() {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CBiomassLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;

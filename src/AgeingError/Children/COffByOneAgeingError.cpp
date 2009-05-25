@@ -41,15 +41,15 @@ void COffByOneAgeingError::validate() {
     dP2      = pParameterList->getDouble(PARAM_P2);
     iK       = pParameterList->getInt(PARAM_K,true,0);
 
-    // TODO: Complete validation - error messages need to be better phrased
+    // Validate parameters
     if (iK > iMaxAge)
-      throw("k cannot be larger that the maximum age in the model"); //TODO: Better error message
+      CError::errorGreaterThan(PARAM_K, PARAM_MAX_AGE);
     if ((dP1+dP2) >= 1.0)
-       throw("The sum of p1 and p2 combined must be less than 1.0"); //TODO: Better error message
+      CError::errorSumGreaterThanEqualTo(PARAM_P1, PARAM_P2, PARAM_ONE);
     if (dP1 < 0.0)
-       throw("p1 must be a non-negative number"); //TODO: Better error message
-  if (dP2 < 0.0)
-       throw("p2 must be a non-negative number"); //TODO: Better error message
+      CError::errorLessThan(PARAM_P1, PARAM_ZERO);
+    if (dP2 < 0.0)
+      CError::errorLessThan(PARAM_P2, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "COffByOneAgeingError.validate(" + getLabel() + ")->" + Ex;

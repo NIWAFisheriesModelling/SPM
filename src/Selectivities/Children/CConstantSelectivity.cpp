@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CConstantSelectivity.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CConstantSelectivity::CConstantSelectivity()
@@ -48,7 +49,7 @@ double CConstantSelectivity::getResult(int Index) {
 #ifndef OPTIMIZE
   try {
     if ((Index+pWorld->getMinAge()) > pWorld->getMaxAge())
-      throw string("index too high"); // TODO Add CERror
+      CError::errorSumGreaterThan(PARAM_INDEX, PARAM_MIN_AGE, PARAM_MAX_AGE);
   } catch (string Ex) {
     Ex = "CConstantSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

@@ -98,13 +98,13 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label) {
 //**********************************************************************
 void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager) {
   try {
-
+    // TODO: (Scott) Implement Clone Function
+    throw string("Not yet implemented");
     // Copy our Directed Processes
 //    for (int i = 0; i < Manager->getProcessCount(); ++i) {
 //      CPreferenceFunction *pProcess = Manager->getProcess(i);
 //      vPreferenceFunctions.push_back(pProcess->clone());
 //    }
-    // TODO: Fix up Clone Functions here
 
   } catch (string Ex) {
     Ex = "CPreferenceFunctionManager.clone()->" + Ex;

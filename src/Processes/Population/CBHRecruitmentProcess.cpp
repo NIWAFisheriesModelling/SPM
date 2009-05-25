@@ -77,7 +77,7 @@ void CBHRecruitmentProcess::validate() {
     pParameterList->fillVector(vAgesList, PARAM_AGES);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
     pParameterList->fillVector(vYCSYears, PARAM_YCS_YEARS);
-    pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE);
+    pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
     pParameterList->fillVector(vAgesList, PARAM_AGES);
@@ -105,17 +105,29 @@ void CBHRecruitmentProcess::validate() {
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
-    //Check that exactly 2 values for vStandardiseYCSYearRange supplied
+    //***************************************************
+    // Validate the Standardise YCS Year Range
+    if(vStandardiseYCSYearRange.size() == 0) {
+      vStandardiseYCSYearRange.push_back(pWorld->getInitialYear());
+      vStandardiseYCSYearRange.push_back(pWorld->getCurrentYear());
+    }
+
     if(vStandardiseYCSYearRange.size() != 2)
-      CError::errorListSameSize(PARAM_STANDARDISE_YCS_YEAR_RANGE, "2"); //TODO: Better error message
-      //TODO: vStandardiseYCSYearRange are in range Initial to Current years
-      //TODO: set vStandardiseYCSYearRange to default to initial to current
+      CError::errorListNotSize(PARAM_STANDARDISE_YCS_YEAR_RANGE, 2);
+
+    if (vStandardiseYCSYearRange[0] < vStandardiseYCSYearRange[1])
+      CError::errorElementLessThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, 1, 2);
+
+    if (vStandardiseYCSYearRange[0] < pWorld->getInitialYear())
+      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, PARAM_INITIAL_YEAR);
+    if (vStandardiseYCSYearRange[1] > pWorld->getCurrentYear())
+      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, PARAM_CURRENT_YEAR);
 
     //Check that a value of YCSValues supplied for each YCSYear
     if(vYCSYears.size() != vYCSValues.size())
       CError::errorListSameSize(PARAM_YCS_YEARS, PARAM_YCS_VALUES);
 
-    // Loop Through YCSYears and "add the offset" //TODO: YCS_YEARS and the SSBOffset ... needs more thought
+    // Loop Through YCSYears and "add the offset" //TODO: (Alistair) YCS_YEARS and the SSBOffset ... needs more thought
     for (int i = 0; i < (int)vYCSYears.size(); ++i)
       vYCSYears[i] -= iSSBOffset;
 
@@ -183,7 +195,7 @@ void CBHRecruitmentProcess::execute() {
     CProcess::execute();
 
     // Setup Our Variables
-    double dAmountPer = dR0; // TODO: multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship
+    double dAmountPer = dR0; // TODO: (Alistair) multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship
 
     if (pLayer != 0) {
       double dTotal = 0.0;

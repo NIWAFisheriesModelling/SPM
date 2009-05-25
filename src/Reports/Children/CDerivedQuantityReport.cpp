@@ -31,7 +31,7 @@ void CDerivedQuantityReport::execute() {
 
   this->start();
 
-  // TODO: Add Observation Writing Stuff Cout
+  // Write Information
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
   cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   cout << "# Not Yet Implemented" << "\n";

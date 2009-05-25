@@ -9,6 +9,7 @@
 
 // Local headers
 #include "CAllValuesSelectivity.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CAllValuesSelectivity::CAllValuesSelectivity()
@@ -31,9 +32,9 @@ void CAllValuesSelectivity::validate() {
     // Fill our vector
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // TODO: Complete validation
-    if ((int)vVs.size() !=  ((pWorld->getMaxAge()+1) - pWorld->getMinAge()))
-      throw string("Too many/not enough values in V. Supply exactly one value of V for every age classs in the model"); // TODO ADD CError
+    // Make sure we have same amount of V's as Age Spread
+    if ((int)vVs.size() !=  pWorld->getAgeSpread())
+      CError::errorListSameSize(PARAM_V, PARAM_AGES);
 
     // Register the Vs as estimable
     for (int i = 0; i < (int)vVs.size(); ++i)

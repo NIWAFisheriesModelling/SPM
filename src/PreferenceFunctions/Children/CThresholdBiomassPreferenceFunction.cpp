@@ -10,6 +10,8 @@
 // Local headers
 #include "CThresholdBiomassPreferenceFunction.h"
 
+// TODO: (Alistair) Implement Threshold Biomass Preference Function
+
 //**********************************************************************
 // CThresholdBiomassPreferenceFunction::CThresholdBiomassPreferenceFunction(
 //            CThresholdBiomassPreferenceFunction *Process)
@@ -60,7 +62,7 @@ void CThresholdBiomassPreferenceFunction::validate() {
 double CThresholdBiomassPreferenceFunction::getResult(int RIndex, int CIndex, int
     TRIndex, int TCIndex) {
   try {
-    throw string("Not yet implemented"); // TODO: Implement this
+    throw string("Not yet implemented");
   } catch (string Ex) {
     Ex = "CThresholdBiomassPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;

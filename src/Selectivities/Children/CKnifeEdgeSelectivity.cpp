@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CKnifeEdgeSelectivity.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CKnifeEdgeSelectivity::CKnifeEdgeSelectivity()
@@ -38,7 +39,7 @@ void CKnifeEdgeSelectivity::validate() {
     dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
     if (dAlpha <= 0)
-      throw("Alpha must be positive"); // TODO: better error messages
+      CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CKnifeedgeSelectivity.validate(" + getLabel() + ")->" + Ex;
@@ -54,7 +55,7 @@ double CKnifeEdgeSelectivity::getResult(int Param) {
 #ifndef OPTIMIZE
   try {
     if ((Param + pWorld->getMinAge()) > pWorld->getMaxAge())
-      throw string("Param too high"); // TODO ADD CError
+      CError::errorTooHigh(PARAM_PARAMETER);
 #endif
 
     // Get the column Index for the passed in Age

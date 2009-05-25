@@ -76,10 +76,8 @@ void CUniformMovementProcess::execute() {
         pBaseSquare = pWorld->getBaseSquare(i, j);
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
-        // Check if this square is ok
-        //if (!checkUsableBaseSquare(i, j))
-          //continue;
-        // TODO: Fix this
+        if (!pBaseSquare->getEnabled())
+          continue;
 
         // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {

@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CDoubleNormalSelectivity.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CDoubleNormalSelectivity::CDoubleNormalSelectivity()
@@ -44,9 +45,11 @@ void CDoubleNormalSelectivity::validate() {
     dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
     if (dAlpha <= 0)
-      throw("Alpha must be positive"); // TODO: better error messages
-    if ((dSigmaL <= 0) || (dSigmaR <= 0 ))
-      throw("Non-positive values for sigma_l or sigma_r are not allowed");  // TODO: better phrased error message
+      CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
+    if (dSigmaL <= 0)
+      CError::errorLessThanEqualTo(PARAM_SIGMA_L, PARAM_ZERO);
+    if (dSigmaR <= 0 )
+      CError::errorLessThanEqualTo(PARAM_SIGMA_R, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CDoublenormalSelectivity.validate(" + getLabel() + ")->" + Ex;

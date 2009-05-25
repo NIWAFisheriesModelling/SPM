@@ -39,9 +39,7 @@
 #include "../TimeSteps/Factory/CTimeStepFactory.h"
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Reports/Factory/CReportFactory.h"
-
 #include "../Estimates/CEstimateManager.h"
-// TODO: Finish this structure
 #include "../MCMC/CMCMC.h"
 
 // Using
@@ -250,9 +248,7 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
 // Load the configuration file into memory
 //**********************************************************************
 void CConfigurationLoader::loadConfigIntoCache(string FileName) {
-  // TODO: Add quote handling on strings to have them entered as a single entry
-  // e.g. param "option one" "option two"
-  // TODO: Re-write this tidier
+  // TODO: (Scott) Re-Write this function
 
   try {
     if (FileName == "")
@@ -311,17 +307,16 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         // Find First "
         iIndex = (int)sLine.find_first_of("\"");
         if (iIndex == -1)
-          throw string("@include file name should be surrounded by quotes"); //TODO: Add to translation file
+          throw string("@include file name should be surrounded by quotes");
         // get line from First " (+1) onwards
         string sIncludeFile = sLine.substr(iIndex+1, sLine.length()-iIndex);
 
         // Remove last "
         iIndex = (int)sIncludeFile.find_first_of("\"");
         if (iIndex == -1)
-          throw string("@include file name is missing a closing quote");  //TODO: Add to translation file
+          throw string("@include file name is missing a closing quote");
         sIncludeFile = sIncludeFile.substr(0, iIndex);
 
-        // TODO: Fix This
         // Check if it's absolute or relative
         if ( (sIncludeFile.substr(0, 1) == "/") || (sIncludeFile.substr(1, 1) == ":") )
           loadConfigIntoCache(sIncludeFile); // Absolute

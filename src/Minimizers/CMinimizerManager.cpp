@@ -98,10 +98,9 @@ void CMinimizerManager::validate() {
         pMinimizer = Minimizer;
     }
 
+    // See if we have a valid minimizer defined
     if (pMinimizer == 0)
-      throw string("TRANSLATE ME: Unknown minimizer: " + sMinimizer); // TODO: Translate this
-
-    //pMinimizer->validate();
+      CError::errorUnknown(PARAM_MINIMIZER, sMinimizer);
 
   } catch (string Ex) {
     Ex = "CMinimizerManager.validate()->" + Ex;

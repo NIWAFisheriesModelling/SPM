@@ -56,7 +56,7 @@ void CSchnuteAgeSize::validate() {
     dCV             = pParameterList->getDouble(PARAM_CV,true,0);
     //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION,true,"normal");
 
-    // TODO: Complete validation
+    // TODO: (Alistair) Complete validation
 
 
   } catch (string Ex) {

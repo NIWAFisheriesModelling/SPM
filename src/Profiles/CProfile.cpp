@@ -16,8 +16,6 @@
 #include "../Helpers/CError.h"
 #include "../Helpers/CComparer.h"
 
-// TODO: Refactor variable names to full versions
-
 //**********************************************************************
 // CProfile::CProfile()
 // Default Constructor
@@ -25,10 +23,10 @@
 CProfile::CProfile() {
 
   // Vars
-  iN            = 0;
-  dStep         = 0.0;
-  dL            = 0.0;
-  dU            = 0.0;
+  iSteps        = 0;
+  dStepSize     = 0.0;
+  dLowerBound   = 0.0;
+  dUpperBound   = 0.0;
   dCurrent      = 0.0;
   sParameter    = "";
   pTarget       = 0;
@@ -36,7 +34,7 @@ CProfile::CProfile() {
   // Register Params
   pParameterList->registerAllowed(PARAM_LOWER_BOUND);
   pParameterList->registerAllowed(PARAM_UPPER_BOUND);
-  pParameterList->registerAllowed(PARAM_N);
+  pParameterList->registerAllowed(PARAM_STEPS);
   pParameterList->registerAllowed(PARAM_PARAMETER);
 }
 
@@ -47,13 +45,13 @@ CProfile::CProfile() {
 bool CProfile::doStep() {
   try {
     // Increase Current Value
-    if (CComparer::isZero(dCurrent) && (!CComparer::isZero(dL)))
-      dCurrent = dL;
+    if (CComparer::isZero(dCurrent) && (!CComparer::isZero(dLowerBound)))
+      dCurrent = dLowerBound;
     else
-      dCurrent += dStep;
+      dCurrent += dStepSize;
 
     // Check
-    if (dCurrent > dU)
+    if (dCurrent > dUpperBound)
       return false; // Finished
 
     // Set Value
@@ -92,17 +90,17 @@ void CProfile::validate() {
     CBaseBuild::validate();
 
     // Get our Parameters
-    dL          = pParameterList->getDouble(PARAM_LOWER_BOUND);
-    dU          = pParameterList->getDouble(PARAM_UPPER_BOUND);
-    iN          = pParameterList->getInt(PARAM_N,true,10);
+    dLowerBound = pParameterList->getDouble(PARAM_LOWER_BOUND);
+    dUpperBound = pParameterList->getDouble(PARAM_UPPER_BOUND);
+    iSteps      = pParameterList->getInt(PARAM_STEPS,true,10);
     sParameter  = pParameterList->getString(PARAM_PARAMETER);
 
-    if ((dL-dU) > ZERO) // Lower Bound Must be < Upper Bound
+    if ((dLowerBound-dUpperBound) > ZERO) // Lower Bound Must be < Upper Bound
       CError::errorGreaterThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
-    if (iN <= 1) // N is number of steps
-      CError::errorLessThanEqualTo(PARAM_N, PARAM_ONE);
+    if (iSteps <= 1)
+      CError::errorLessThanEqualTo(PARAM_STEPS, PARAM_ONE);
 
-    dStep = (dU - dL)/((double)(iN - 1));
+    dStepSize = (dUpperBound - dLowerBound)/((double)(iSteps - 1));
 
   } catch (string Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;

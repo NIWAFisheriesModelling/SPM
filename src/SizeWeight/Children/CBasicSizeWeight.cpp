@@ -35,12 +35,11 @@ void CBasicSizeWeight::validate() {
     dA      = pParameterList->getDouble(PARAM_A);
     dB      = pParameterList->getDouble(PARAM_B);
 
-    // TODO: Complete validation - error messages need to be better phrased
+    // Validate
     if (dA <= 0)
-      throw("a must be non-negative"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_A, PARAM_ZERO);
     if (dB <= 0)
-      throw("b must be non-negative"); //TODO: Better error message
-
+      CError::errorLessThanEqualTo(PARAM_B, PARAM_ZERO);
 
   } catch (string Ex) {
     Ex = "CBasicSizeWeight.validate(" + getLabel() + ")->" + Ex;

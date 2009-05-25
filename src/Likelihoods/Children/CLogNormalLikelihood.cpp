@@ -79,7 +79,7 @@ void CLogNormalLikelihood::simulateObserved(const vector<string> &keys, vector<d
     // Calculate Score
     double dObserved    = pRandom->getRandomLogNormal(expected[i], dErrorValue);
 
-    // TODO: each key sums to 1.0
+    // TODO: (Alistair) each key sums to 1.0 (Better description please)
 
     observed.push_back(dObserved);
   }

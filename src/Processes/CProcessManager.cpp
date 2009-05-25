@@ -103,11 +103,12 @@ void CProcessManager::fillVector(vector<CProcess*> &list, vector<string> &labels
 //**********************************************************************
 void CProcessManager::clone(CProcessManager *Manager) {
   try {
+    // TODO: (Scott) Implement clone function
+    throw string("Not yet implemented");
 //    for (int i = 0; i < Manager->getProcessCount(); ++i) {
 //      CProcess *pProcess = Manager->getProcess(i);
 //      vProcessList.push_back(pProcess->clone());
 //    }
-    // TODO: Fix clone methods here
   } catch (string Ex) {
     Ex = "CProcessManager.clone()->" + Ex;
     throw Ex;

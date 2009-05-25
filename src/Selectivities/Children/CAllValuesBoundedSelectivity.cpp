@@ -12,6 +12,7 @@
 
 // Local headers
 #include "CAllValuesBoundedSelectivity.h"
+#include "../../Helpers/CError.h"
 
 // Usong
 using std::cout;
@@ -43,15 +44,15 @@ void CAllValuesBoundedSelectivity::validate() {
 
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // TODO: Complete validation - error messages need to be better phrased
+    // Validate
     if (iL < pWorld->getMinAge())
-      throw("L needs to be a value at least the same as the minimum age in the model"); //TODO: Better error message
+      CError::errorLessThan(PARAM_L, PARAM_MIN_AGE);
     if (iL > pWorld->getMaxAge())
-      throw("L cannot be larger that the maximum age in the model"); //TODO: Better error message
+      CError::errorGreaterThan(PARAM_L, PARAM_MAX_AGE);
     if (iH <= iL)
-       throw("L must be less than H"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_H, PARAM_L);
     if ((int)vVs.size() != (iH - iL))
-       throw("You need to supply the correct number of entries for V"); //TODO: Better error message
+      CError::errorListNotSize(PARAM_V, (iH - iL));
 
     // Register our vector as estimable
     for (int i = 0; i < (int)vVs.size(); ++i)

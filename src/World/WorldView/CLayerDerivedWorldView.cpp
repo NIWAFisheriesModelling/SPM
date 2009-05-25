@@ -10,6 +10,7 @@
 #include "CLayerDerivedWorldView.h"
 #include "../../Layers/String/CStringLayer.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Helpers/CError.h"
 #include "../CWorldSquare.h"
 
 //**********************************************************************
@@ -30,7 +31,8 @@ CLayerDerivedWorldView::CLayerDerivedWorldView(CStringLayer *sourceLayer) {
 CWorldSquare* CLayerDerivedWorldView::getSquare(string area) {
   try {
     if (mView[area] == 0)
-      throw string("Area doesn't exist"); // TODO: Add proper error message
+      CError::errorUnknown(PARAM_AREA, area);
+
   } catch (string Ex) {
     Ex = "CLayerDerivedWorldView.getSquare(" + area + ")->" + Ex;
     throw Ex;
@@ -40,8 +42,8 @@ CWorldSquare* CLayerDerivedWorldView::getSquare(string area) {
 }
 
 //**********************************************************************
-//
-//
+// void CLayerDerivedWorldView::cleanUp()
+// Clean up Our Area-Cache
 //**********************************************************************
 void CLayerDerivedWorldView::cleanUp() {
   // Free Memory

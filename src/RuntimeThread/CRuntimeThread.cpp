@@ -264,7 +264,8 @@ void CRuntimeThread::startModel() {
 // Clone our Parameter
 //**********************************************************************
 void CRuntimeThread::clone(CRuntimeThread *Thread) {
-  // TODO: Write clone function for multi-threading
+  // TODO: (Scott) Implement clone function
+  throw string("Not yet implemented");
   /*pCatchabilityManager->clone(Thread->pCatchabilityManager);
   pDerivedQuantityManager->clone(Thread->pDerivedQuantityManager);
   pEstimateManager->clone(Thread->pEstimateManager);

@@ -88,8 +88,19 @@ void CEventMortalityProcess::validate() {
     if (dUMax <= TRUE_ZERO)
       CError::errorLessThanEqualTo(PARAM_U_MAX, PARAM_ZERO);
 
-    // TODO: Check for vectors to be the same size
-    // TODO: Check for duplicate years
+    if (vCategoryList.size() != vSelectivityList.size())
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+    if (vYearsList.size() != vLayersList.size())
+      CError::errorListSameSize(PARAM_YEARS, PARAM_LAYERS);
+
+    // Duplicate Year check
+    map<int, int> mYears;
+    foreach(int Year, vYearsList) {
+      mYears[Year]++;
+
+      if (mYears[Year] > 1)
+        CError::errorDuplicate(PARAM_YEAR, CConvertor::intToString(Year));
+    }
 
   } catch(string Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;

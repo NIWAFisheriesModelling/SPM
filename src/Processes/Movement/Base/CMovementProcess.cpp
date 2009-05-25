@@ -114,9 +114,8 @@ void CMovementProcess::doMove(int RIndex, int CIndex, int SRIndex, int SCIndex, 
     pTargetBase = pWorld->getBaseSquare( RIndex, CIndex);
 
     // Check if Target-Base Is Usable
-    //if (!checkUsableSquare(pTargetBase, RIndex, CIndex))
-      //return;
-    // TODO: Un-Comment This
+    if (!pTargetBase->getEnabled())
+      return;
 
     // Get Target Diff
     pTargetDiff = pWorld->getDifferenceSquare( RIndex, CIndex);

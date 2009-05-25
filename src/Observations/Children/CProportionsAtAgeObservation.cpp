@@ -86,7 +86,7 @@ void CProportionsAtAgeObservation::validate() {
     pParameterList->fillVector(vOBS, PARAM_OBS);
 
     if ((vOBS.size() % (iAgeSpread+1)) != 0)
-      throw string("OBS not right amount"); //TODO: better error message
+      CError::errorListNotSize(PARAM_OBS, iAgeSpread);
 
     for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
@@ -108,7 +108,7 @@ void CProportionsAtAgeObservation::validate() {
         CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
     }
 
-    // TODO: Make mErrorValue a map of vectors and replicate the N's to the same length
+    // TODO: (Scott) Make mErrorValue a map of vectors and replicate the N's to the same length
     // as OBS. One of the likelihoods requires a vector while the other doesn't.
 
     // Loop Through our Partitions

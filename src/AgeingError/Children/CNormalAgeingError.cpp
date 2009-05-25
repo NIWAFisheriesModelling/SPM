@@ -10,6 +10,7 @@
 // Local headers
 #include "CNormalAgeingError.h"
 #include "../../Distributions/CNormalDistribution.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CNormalAgeingError::CNormalAgeingError()
@@ -38,11 +39,11 @@ void CNormalAgeingError::validate() {
     dCV      = pParameterList->getDouble(PARAM_CV);
     iK       = pParameterList->getInt(PARAM_K,true,0);
 
-    // TODO: Complete validation - error messages need to be better phrased
+    // Validate
     if (dCV <= 0)
-      throw("CV must be a non-negative value"); //TODO: Better error message
+      CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
     if (iK > iMaxAge)
-      throw("k cannot be larger that the maximum age in the model"); //TODO: Better error message
+      CError::errorGreaterThan(PARAM_K, PARAM_MAX_AGE);
 
   } catch (string Ex) {
     Ex = "CNormalError.validate(" + getLabel() + ")->" + Ex;

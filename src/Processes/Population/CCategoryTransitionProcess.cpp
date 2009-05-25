@@ -22,8 +22,6 @@
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "CCategoryTransitionProcess.h"
 
-//TODO: Scott to look over and check
-
 //**********************************************************************
 // CCategoryTransitionProcess::CCategoryTransitionProcess()
 // Default Constructor
@@ -85,9 +83,15 @@ void CCategoryTransitionProcess::validate() {
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
     pParameterList->fillVector(vLayersList, PARAM_LAYERS);
 
-    // TODO: Check for vectors to be the same size
-    // TODO: Check for duplicate years
-    // TODO: Better error messages
+    // Check for Duplicate Year
+    map<int, int> mYears;
+    foreach(int Year, vYearsList) {
+      mYears[Year]++;
+
+      if (mYears[Year] > 1)
+        CError::errorDuplicate(PARAM_YEAR, CConvertor::intToString(Year));
+    }
+
     if (getCategoryCount() != getSelectivityCount())
       CError::errorListSameSize(PARAM_FROM, PARAM_SELECTIVITIES);
     if (getCategoryCount() != getCategoryToCount())

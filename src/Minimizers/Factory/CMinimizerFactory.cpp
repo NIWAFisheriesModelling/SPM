@@ -13,6 +13,7 @@
 #include "../../Translations/Translations.h"
 #include "../DESolver/CDESolver.h"
 #include "../GammaDiff/CGammaDiff.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CMinimizer* CMinimizerFactory::buildMinimizer(string type)
@@ -27,7 +28,7 @@ CMinimizer* CMinimizerFactory::buildMinimizer(string type, bool registerWithMana
   else if (type == PARAM_DE_SOLVER)
     pMinimizer = new CDESolver();
   else
-    throw string("Unknown type: "+ type); // TODO: FIX THIS
+    CError::errorUnknown(PARAM_MINIMIZER, type);
 
   if (registerWithManager)
     CMinimizerManager::Instance()->addMinimizer(pMinimizer);

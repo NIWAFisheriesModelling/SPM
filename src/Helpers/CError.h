@@ -36,10 +36,14 @@ public:
   static void           errorNoMatch(string type, string value, string type2);
   static void           errorDuplicate(string type, string label);
   static void           errorListSameSize(string type, string type2);
+  static void           errorListNotSize(string type, int size);
   static void           errorTooHigh(string type);
   static void           errorTooMuch(string type);
   static void           errorNotEnough(string type);
-
+  static void           errorNotBetween(string middle, string low, string high);
+  static void           errorElementLessThan(string type, int lessIndex, int moreIndex);
+  static void           errorSumGreaterThanEqualTo(string val1, string val2, string less);
+  static void           errorSumGreaterThan(string val1, string val2, string less);
   // Functions
   CError() { }
   virtual ~CError() { }
