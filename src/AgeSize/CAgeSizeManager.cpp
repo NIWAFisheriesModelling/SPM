@@ -97,6 +97,18 @@ void CAgeSizeManager::validate() {
     foreach(CAgeSize *AgeSize, vAgeSizes) {
       AgeSize->validate();
     }
+
+    // Look for Duplicate Labels
+    map<string, int>            mLabelList;
+    foreach(CAgeSize *AgeSize, vAgeSizes) {
+      // Increase Count for this label
+      mLabelList[AgeSize->getLabel()] += 1;
+
+      // Check if we have more than 1
+      if (mLabelList[AgeSize->getLabel()] > 1)
+        CError::errorDuplicate(PARAM_AGE_SIZE, AgeSize->getLabel());
+    }
+
   } catch (string Ex) {
     Ex = "CAgeSizeManager.validate()->" + Ex;
     throw Ex;
