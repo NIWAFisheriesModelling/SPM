@@ -97,6 +97,19 @@ void CAgeingErrorManager::validate() {
     foreach(CAgeingError *ageingError, vAgeingErrors) {
       ageingError->validate();
     }
+
+    // Look for Duplicate Labels
+    map<string, int>            mLabelList;
+    foreach(CAgeingError *ageingError, vAgeingErrors) {
+      // Increase Count for this label
+      mLabelList[ageingError->getLabel()] += 1;
+
+      // Check if we have more than 1
+      if (mLabelList[ageingError->getLabel()] > 1)
+        CError::errorDuplicate(PARAM_AGEING_ERROR, ageingError->getLabel());
+    }
+
+
   } catch (string Ex) {
     Ex = "CAgeingErrorManager.validate()->" + Ex;
     throw Ex;
