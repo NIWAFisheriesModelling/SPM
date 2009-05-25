@@ -97,6 +97,17 @@ void CSizeWeightManager::validate() {
     foreach(CSizeWeight *SizeWeight, vSizeWeights) {
       SizeWeight->validate();
     }
+    // Look for Duplicate Labels
+    map<string, int>            mLabelList;
+    foreach(CSizeWeight *SizeWeight, vSizeWeights) {
+      // Increase Count for this label
+      mLabelList[SizeWeight->getLabel()] += 1;
+
+      // Check if we have more than 1
+      if (mLabelList[SizeWeight->getLabel()] > 1)
+        CError::errorDuplicate(PARAM_SIZE_WEIGHT, SizeWeight->getLabel());
+    }
+
   } catch (string Ex) {
     Ex = "CSizeWeightManager.validate()->" + Ex;
     throw Ex;
