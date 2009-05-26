@@ -243,11 +243,11 @@ void CProportionsByCategoryObservation::execute() {
       // Loop Through Categories
       for (int j = 0; j < (int)vCategories.size(); ++j) {
         double dSelectResult = vSelectivities[j]->getResult(i);
-        pAgeResults[i] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+        pAgeResults[i] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
       }
       for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
         double dSelectResult = vTargetSelectivities[j]->getResult(i);
-        pCombinedAgeResults[i] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
+        pCombinedAgeResults[i] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
       }
     }
 
@@ -258,11 +258,11 @@ void CProportionsByCategoryObservation::execute() {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult(i);
-          pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(i, vCategories[j]);
+          pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
         }
         for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
           double dSelectResult = vTargetSelectivities[j]->getResult(i);
-          pCombinedAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(i, vTargetCategories[j]);
+          pCombinedAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
         }
       }
     }

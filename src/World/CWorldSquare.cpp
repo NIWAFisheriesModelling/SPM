@@ -162,10 +162,10 @@ void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
 }
 
 //**********************************************************************
-// double CWorldSquare::getPopulation()
+// double CWorldSquare::getAbundance()
 // get Population for this square
 //**********************************************************************
-double CWorldSquare::getPopulation() {
+double CWorldSquare::getAbundance() {
   // Variables
   double dRet = 0.0;
 
@@ -180,7 +180,7 @@ double CWorldSquare::getPopulation() {
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CWorldSquare.getPopulation()->" + Ex;
+    Ex = "CWorldSquare.getAbundance()->" + Ex;
     throw Ex;
   }
 #endif
@@ -189,10 +189,10 @@ double CWorldSquare::getPopulation() {
 }
 
 //**********************************************************************
-// double CWorldSquare::getPopulationForAge(int AgeIndex)
+// double CWorldSquare::getAbundanceForAge(int AgeIndex)
 // Get Population for Age across all categories
 //**********************************************************************
-double CWorldSquare::getPopulationForAge(int AgeIndex) {
+double CWorldSquare::getAbundanceForAge(int AgeIndex) {
   // Variables
   double dRet = 0.0;
 
@@ -209,7 +209,7 @@ double CWorldSquare::getPopulationForAge(int AgeIndex) {
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CWorldSquare.getPopulationForAge()->" + Ex;
+    Ex = "CWorldSquare.getAbundanceForAge()->" + Ex;
     throw Ex;
   }
 #endif
@@ -218,10 +218,10 @@ double CWorldSquare::getPopulationForAge(int AgeIndex) {
 }
 
 //**********************************************************************
-// double CWorldSquare::getPopulationInCategoryForAge(int AgeIndex, int CategoryIndex)
+// double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryIndex)
 // Get Population for an Age and Category
 //**********************************************************************
-double CWorldSquare::getPopulationInCategoryForAge(int AgeIndex, int CategoryIndex) {
+double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryIndex) {
   // Variables
   double dRet = 0.0;
 
@@ -241,7 +241,7 @@ double CWorldSquare::getPopulationInCategoryForAge(int AgeIndex, int CategoryInd
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CWorldSquare.getPopulationForAge()->" + Ex;
+    Ex = "CWorldSquare.getAbundanceForAge()->" + Ex;
     throw Ex;
   }
 #endif
@@ -250,10 +250,10 @@ double CWorldSquare::getPopulationInCategoryForAge(int AgeIndex, int CategoryInd
 }
 
 //**********************************************************************
-// double CWorldSquare::getPopulationForCategory(int CategoryIndex)
+// double CWorldSquare::getAbundanceForCategory(int CategoryIndex)
 // Get Population for a Category
 //**********************************************************************
-double CWorldSquare::getPopulationForCategory(int CategoryIndex) {
+double CWorldSquare::getAbundanceForCategory(int CategoryIndex) {
   // Variables
   double dRet = 0.0;
 
@@ -270,7 +270,7 @@ double CWorldSquare::getPopulationForCategory(int CategoryIndex) {
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
-    Ex = "CWorldSquare.getPopulationForCategory()->" + Ex;
+    Ex = "CWorldSquare.getAbundanceForCategory()->" + Ex;
     throw Ex;
   }
 #endif

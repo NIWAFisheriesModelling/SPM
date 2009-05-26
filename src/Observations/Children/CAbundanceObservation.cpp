@@ -162,7 +162,7 @@ void CAbundanceObservation::execute() {
       for (int i = 0; i < (int)vCategories.size(); ++i)
         for (int j = 0; j < pSquare->getWidth(); ++j) {
           double dSelectResult = vSelectivities[i]->getResult(j);
-          dExpectedTotal += dSelectResult * pSquare->getPopulationInCategoryForAge(j, vCategories[i]);
+          dExpectedTotal += dSelectResult * pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
         }
 
       // Note: dExpectedTotal is total number of fish the model has for that

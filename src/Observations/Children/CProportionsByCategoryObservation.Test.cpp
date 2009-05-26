@@ -123,7 +123,7 @@ BOOST_FIXTURE_TEST_CASE( ProportionsByCategoryObservation, C3x3_Fixture ) {
     for (int j = 0; j < 3; ++j) {
       CWorldSquare *pSquare = getSquare(i,j);
 
-      BOOST_CHECK_EQUAL(pSquare->getPopulation(), 19763.846570928898);
+      BOOST_CHECK_EQUAL(pSquare->getAbundance(), 19763.846570928898);
 
       // Our Expected Results
       double immature[] = { 111.11111111111111, 333.33333333333337, 666.66666666666674, 777.77777777777783, 1083.3333333333333,
@@ -268,7 +268,7 @@ BOOST_FIXTURE_TEST_CASE( ProportionsByCategoryObservation_Simulate, C3x3_Fixture
     for (int j = 0; j < 3; ++j) {
       CWorldSquare *pSquare = getSquare(i,j);
 
-      BOOST_CHECK_EQUAL(pSquare->getPopulation(), 19763.846570928898);
+      BOOST_CHECK_EQUAL(pSquare->getAbundance(), 19763.846570928898);
 
       // Our Expected Results
       double immature[] = { 111.11111111111111, 333.33333333333337, 666.66666666666674, 777.77777777777783, 1083.3333333333333,

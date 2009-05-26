@@ -40,7 +40,7 @@ BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_EQUAL(pSquare->getPopulation(), 177874.61913836008);
+  BOOST_CHECK_EQUAL(pSquare->getAbundance(), 177874.61913836008);
 
   // Our Expected Results
   double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9750,

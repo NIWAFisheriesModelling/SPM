@@ -250,7 +250,7 @@ void CProportionsAtAgeObservation::execute() {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult((i+iSquareAgeOffset));
-          pAgeResults[i] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+          pAgeResults[i] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
         }
       }
 
@@ -261,7 +261,7 @@ void CProportionsAtAgeObservation::execute() {
           // Loop Through Categories
           for (int j = 0; j < (int)vCategories.size(); ++j) {
             double dSelectResult = vSelectivities[j]->getResult(i);
-            pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getPopulationInCategoryForAge(i, vCategories[j]);
+            pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
           }
         }
       }

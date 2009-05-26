@@ -39,7 +39,7 @@ BOOST_FIXTURE_TEST_CASE( CategoryTransitionRateProcess, C1x1_Fixture ) {
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK(CComparer::isEqual(pSquare->getPopulation(), 1500.0));
+  BOOST_CHECK(CComparer::isEqual(pSquare->getAbundance(), 1500.0));
 
   // Our Expected Results
   double immature[] = { 100.0, 100.0, 100.0, 100.0, 97.5,

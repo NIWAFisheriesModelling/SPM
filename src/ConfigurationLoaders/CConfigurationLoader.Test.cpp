@@ -45,7 +45,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_NoEstimateValues, C1x1_Fixture ) {
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_EQUAL(pSquare->getPopulation(), 177874.61913836008);
+  BOOST_CHECK_EQUAL(pSquare->getAbundance(), 177874.61913836008);
 
   // Our Expected Results
   double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9750,
@@ -133,7 +133,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
   // Check Results - Population structure
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_EQUAL(pSquare->getPopulation(), 182459.75564988534);
+  BOOST_CHECK_EQUAL(pSquare->getAbundance(), 182459.75564988534);
 
   // Our Expected Results
   double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9650,
@@ -225,7 +225,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
   // Check Results - Population structure
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_EQUAL(pSquare->getPopulation(), 177874.61913836008);
+  BOOST_CHECK_EQUAL(pSquare->getAbundance(), 177874.61913836008);
 
   // Our Expected Results
   double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9750,

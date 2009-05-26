@@ -45,7 +45,7 @@ BOOST_FIXTURE_TEST_CASE( Derived_Quantity, C1x1_Fixture ) {
   CWorldSquare            *pSquare      = getSquare();
 
   // Check Results
-  BOOST_CHECK_EQUAL(pSquare->getPopulation(), pQuantity->getValue(0));
+  BOOST_CHECK_EQUAL(pSquare->getAbundance(), pQuantity->getValue(0));
   BOOST_CHECK_EQUAL(pQuantity->getValue(1), 1400.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(2), 1300.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(3), 1200.0);

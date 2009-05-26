@@ -33,7 +33,7 @@ BOOST_FIXTURE_TEST_CASE( AgeingProcess, C1x1_Fixture ) {
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_EQUAL(pSquare->getPopulation(), 1500.0);
+  BOOST_CHECK_EQUAL(pSquare->getAbundance(), 1500.0);
 
   // Immature only should've aged
   for (int i = 0; i < 9; ++i)
