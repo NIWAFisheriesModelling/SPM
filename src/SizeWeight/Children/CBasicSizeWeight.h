@@ -20,6 +20,7 @@ public:
   // Functions
   CBasicSizeWeight();
   virtual                     ~CBasicSizeWeight();
+  CSizeWeight*                clone() { return new CBasicSizeWeight(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();

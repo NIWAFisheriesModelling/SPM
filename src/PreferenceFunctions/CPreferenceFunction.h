@@ -23,6 +23,7 @@ class CPreferenceFunction : public CBaseBuild {
 public:
   CPreferenceFunction();
   virtual                     ~CPreferenceFunction();
+  virtual CPreferenceFunction* clone() = 0;
   string                     getLayerName() { return sLayerName; }
   double                     getAlpha() { return dAlpha; }
   virtual double             getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) = 0;

@@ -21,6 +21,7 @@ public:
   // Functions
 	CNormalPreferenceFunction();
 	virtual                    ~CNormalPreferenceFunction();
+	CPreferenceFunction*       clone() { return new CNormalPreferenceFunction(*this); }
 	double                     getMu() { return dMu; }
   double                     getSigma() { return dSigma; }
 	double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);

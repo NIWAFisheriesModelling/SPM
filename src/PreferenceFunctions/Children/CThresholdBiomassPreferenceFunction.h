@@ -24,8 +24,9 @@ public:
   // Functions
   CThresholdBiomassPreferenceFunction();
   virtual                     ~CThresholdBiomassPreferenceFunction();
-  double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void                       validate();
+  CPreferenceFunction*        clone() { return new CThresholdBiomassPreferenceFunction(*this); }
+  double                      getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                        validate();
 
 protected:
   // Variables

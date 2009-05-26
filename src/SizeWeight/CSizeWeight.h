@@ -21,10 +21,11 @@ public:
   // Functions
   CSizeWeight();
   virtual                     ~CSizeWeight();
+  virtual CSizeWeight*        clone() = 0;
   void                        validate();
   void                        build();
   virtual void                rebuild();
-  virtual double              getMeanWeight(double &size) { return 1; };
+  virtual double              getMeanWeight(double &size) = 0;
   int                         getMinAge() { return iMinAge; }
   int                         getMaxAge() { return iMaxAge; }
   bool                        getAgePlusGroup() { return bAgePlusGroup; }

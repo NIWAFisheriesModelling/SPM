@@ -21,6 +21,7 @@ public:
   // Functions
   CAgeingError();
   virtual                     ~CAgeingError();
+  virtual CAgeingError*       clone() { return new CAgeingError(*this); }
   void                        validate();
   void                        build();
   virtual void                rebuild();

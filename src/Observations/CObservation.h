@@ -36,6 +36,7 @@ public:
   // Functions
 	CObservation();
 	virtual                    ~CObservation();
+	virtual CObservation*      clone() = 0;
   int                        getYear() { return iYear; }
   int                        getTimeStep() { return iTimeStep; }
   string                     getLayer() { return sLayer; }

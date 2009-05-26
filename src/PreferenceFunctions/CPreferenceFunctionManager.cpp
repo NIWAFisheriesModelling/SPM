@@ -97,18 +97,9 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label) {
 // Load our Process Manager From Another One. Multi-Threaded Thing
 //**********************************************************************
 void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager) {
-  try {
-    // TODO: (Scott) Implement Clone Function
-    throw string("Not yet implemented");
-    // Copy our Directed Processes
-//    for (int i = 0; i < Manager->getProcessCount(); ++i) {
-//      CPreferenceFunction *pProcess = Manager->getProcess(i);
-//      vPreferenceFunctions.push_back(pProcess->clone());
-//    }
 
-  } catch (string Ex) {
-    Ex = "CPreferenceFunctionManager.clone()->" + Ex;
-    throw Ex;
+  foreach(CPreferenceFunction *preferenceFunction, Manager->vPreferenceFunctions) {
+    vPreferenceFunctions.push_back(preferenceFunction->clone());
   }
 }
 

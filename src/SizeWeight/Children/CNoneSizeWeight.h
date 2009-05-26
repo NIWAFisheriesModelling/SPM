@@ -20,6 +20,7 @@ public:
   // Functions
   CNoneSizeWeight();
   virtual                     ~CNoneSizeWeight();
+  CSizeWeight*                clone() { return new CNoneSizeWeight(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();

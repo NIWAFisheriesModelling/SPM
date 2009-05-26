@@ -20,6 +20,7 @@ public:
   // Functions
   CVonBertalanffyAgeSize();
   virtual                     ~CVonBertalanffyAgeSize();
+  CAgeSize*                   clone() { return new CVonBertalanffyAgeSize(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();

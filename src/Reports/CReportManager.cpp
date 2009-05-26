@@ -64,8 +64,10 @@ void CReportManager::addReporter(CReport *value) {
 // Clone our reporters
 //**********************************************************************
 void CReportManager::clone(CReportManager *Manager) {
-  // TODO: (Scott) Implement Clone Function
-  throw string("Not yet implemented (CReportManager::clone)");
+
+  foreach(CReport *report, Manager->vReporters) {
+    vReporters.push_back(report->clone());
+  }
 }
 
 //**********************************************************************

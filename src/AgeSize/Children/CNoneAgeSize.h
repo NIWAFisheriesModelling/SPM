@@ -20,6 +20,7 @@ public:
   // Functions
   CNoneAgeSize();
   virtual                     ~CNoneAgeSize();
+  CAgeSize*                   clone() { return new CNoneAgeSize(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();

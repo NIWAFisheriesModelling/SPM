@@ -55,8 +55,10 @@ void CSizeWeightManager::Destroy() {
 // Clone our Ageing Errors
 //**********************************************************************
 void CSizeWeightManager::clone(CSizeWeightManager *Manager) {
-  // TODO: (Scott) Implement Clone Function
-  throw string("Not yet implemented (CSizeWeightManager::clone)");
+
+  foreach(CSizeWeight *sizeWeight, Manager->vSizeWeights) {
+    vSizeWeights.push_back(sizeWeight->clone());
+  }
 }
 
 //**********************************************************************

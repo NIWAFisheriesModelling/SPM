@@ -21,6 +21,7 @@ public:
   // Functions
 	CConstantPreferenceFunction();
 	virtual                    ~CConstantPreferenceFunction();
+	CPreferenceFunction*       clone() { return new CConstantPreferenceFunction(*this); }
 	double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
 };
 

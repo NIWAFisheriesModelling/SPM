@@ -21,6 +21,7 @@ public:
   // Functions
 	CDoubleNormalPreferenceFunction();
 	virtual                    ~CDoubleNormalPreferenceFunction();
+	CPreferenceFunction*       clone() { return new CDoubleNormalPreferenceFunction(*this); }
 	double                     getSigmaL() { return dSigmaL; }
 	double                     getSigmaR() { return dSigmaR; }
   double                     getMu() { return dMu; }

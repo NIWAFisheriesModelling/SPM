@@ -20,11 +20,12 @@ class CThresholdPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
 	CThresholdPreferenceFunction();
-	virtual                    ~CThresholdPreferenceFunction();
-  double                     getN() { return dN; }
-  double                     getLambda() { return dLambda; }
-  double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
-  void                       validate();
+	virtual                     ~CThresholdPreferenceFunction();
+	CPreferenceFunction*        clone() { return new CThresholdPreferenceFunction(*this); }
+  double                      getN() { return dN; }
+  double                      getLambda() { return dLambda; }
+  double                      getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
+  void                        validate();
 
 protected:
   // Variables

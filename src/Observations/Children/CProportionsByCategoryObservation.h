@@ -19,29 +19,30 @@
 class CProportionsByCategoryObservation : public CObservation {
 public:
   CProportionsByCategoryObservation();
-  virtual                    ~CProportionsByCategoryObservation();
-  void                       validate();
-  void                       build();
-  void                       execute();
+  virtual                     ~CProportionsByCategoryObservation();
+  CObservation*               clone() { return new CProportionsByCategoryObservation(*this); }
+  void                        validate();
+  void                        build();
+  void                        execute();
 
 protected:
   // Variables
   map<string, vector<double> > mvProportionMatrix;
   map<string, vector<double> > mvErrorValue;
-  vector<string>             vTargetCategoryNames;
-  vector<int>                vTargetCategories;
+  vector<string>              vTargetCategoryNames;
+  vector<int>                 vTargetCategories;
 
-  double                     *pAgeResults;
-  double                     *pCombinedAgeResults;
-  int                        iMinAge;
-  int                        iMaxAge;
-  int                        iArraySize;
-  bool                       bAgePlus;
-  vector<string>             vTargetSelectivityNames;
-  vector<CSelectivity*>      vTargetSelectivities;
-  double                     dDelta;
-  double                     dProportionTimeStep;
-  double                     dProcessError;
+  double                      *pAgeResults;
+  double                      *pCombinedAgeResults;
+  int                         iMinAge;
+  int                         iMaxAge;
+  int                         iArraySize;
+  bool                        bAgePlus;
+  vector<string>              vTargetSelectivityNames;
+  vector<CSelectivity*>       vTargetSelectivities;
+  double                      dDelta;
+  double                      dProportionTimeStep;
+  double                      dProcessError;
 };
 
 #endif /*CPROPORTIONSBYCATEGORYOBSERVATION_H_*/

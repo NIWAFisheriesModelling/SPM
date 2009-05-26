@@ -23,10 +23,11 @@ class CAbundanceObservation : public CObservation {
 public:
   // Functions
   CAbundanceObservation();
-  virtual                    ~CAbundanceObservation();
-  void                       validate();
-  void                       build();
-  void                       execute();
+  virtual                     ~CAbundanceObservation();
+  CObservation*               clone() { return new CAbundanceObservation(*this); }
+  void                        validate();
+  void                        build();
+  void                        execute();
 
 protected:
   // Variables

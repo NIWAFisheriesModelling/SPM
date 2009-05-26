@@ -27,6 +27,7 @@
 #include "../Children/CAgeingErrorReport.h"
 #include "../Children/CSizeWeightReport.h"
 #include "../Children/CAgeSizeReport.h"
+#include "../Children/CLayerReport.h"
 
 //**********************************************************************
 //
@@ -70,6 +71,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CSizeWeightReport();
   else if (type == PARAM_AGE_SIZE)
     pReporter = new CAgeSizeReport();
+  else if (type == PARAM_LAYER)
+    pReporter = new CLayerReport();
   else
     throw string("Unknown type: " + type);
 

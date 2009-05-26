@@ -22,11 +22,12 @@ public:
   // Functions
   CAgeSize();
   virtual                     ~CAgeSize();
+  virtual CAgeSize*           clone() = 0;
   void                        validate();
   void                        build();
   virtual void                rebuild();
-  virtual double              getMeanSize(double &age) { return 1; }
-  virtual double              getMeanWeight(double &age) {return 1; };
+  virtual double              getMeanSize(double &age) = 0;
+  virtual double              getMeanWeight(double &age) = 0;
 
 };
 

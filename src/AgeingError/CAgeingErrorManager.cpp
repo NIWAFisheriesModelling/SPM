@@ -52,11 +52,13 @@ void CAgeingErrorManager::Destroy() {
 
 //**********************************************************************
 // void CAgeingErrorManager::clone(CAgeingErrorManager *Manager)
-// Clone our Ageing Errors
+// Clone our Ageing Errors for multi-threaded use
 //**********************************************************************
 void CAgeingErrorManager::clone(CAgeingErrorManager *Manager) {
-  // TODO: (Scott) Implement clone function
-  throw string("Not yet implemented (CAgeingErrorManager::clone)");
+
+  foreach(CAgeingError *ageingError, Manager->vAgeingErrors) {
+    vAgeingErrors.push_back(ageingError->clone());
+  }
 }
 
 //**********************************************************************

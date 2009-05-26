@@ -20,6 +20,7 @@ public:
   // Functions
   CSchnuteAgeSize();
   virtual                     ~CSchnuteAgeSize();
+  CAgeSize*                   clone() { return new CSchnuteAgeSize(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();

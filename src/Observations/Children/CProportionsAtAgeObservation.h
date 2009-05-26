@@ -25,6 +25,7 @@ public:
   // Functions
   CProportionsAtAgeObservation();
   virtual                    ~CProportionsAtAgeObservation();
+  CObservation*               clone() { return new CProportionsAtAgeObservation(*this); }
   void                       validate();
   void                       build();
   void                       execute();

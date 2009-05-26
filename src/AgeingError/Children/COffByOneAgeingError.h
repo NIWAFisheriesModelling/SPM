@@ -20,6 +20,7 @@ public:
   // Functions
   COffByOneAgeingError();
   virtual                     ~COffByOneAgeingError();
+  CAgeingError*               clone() { return new COffByOneAgeingError(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();

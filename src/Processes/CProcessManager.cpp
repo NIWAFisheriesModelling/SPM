@@ -102,16 +102,9 @@ void CProcessManager::fillVector(vector<CProcess*> &list, vector<string> &labels
 // Clone the manager passed in as a parameter
 //**********************************************************************
 void CProcessManager::clone(CProcessManager *Manager) {
-  try {
-    // TODO: (Scott) Implement clone function
-    throw string("Not yet implemented");
-//    for (int i = 0; i < Manager->getProcessCount(); ++i) {
-//      CProcess *pProcess = Manager->getProcess(i);
-//      vProcessList.push_back(pProcess->clone());
-//    }
-  } catch (string Ex) {
-    Ex = "CProcessManager.clone()->" + Ex;
-    throw Ex;
+
+  foreach(CProcess *process, Manager->vProcessList) {
+    vProcessList.push_back(process->clone());
   }
 }
 
