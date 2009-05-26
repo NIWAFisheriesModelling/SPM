@@ -196,6 +196,7 @@ src/Reports/Children/CEstimateSummaryReport.cpp
 src/Reports/Children/CEstimateValueReport.cpp
 src/Reports/Children/CInitializationReport.cpp
 src/Reports/Children/CLayerDerivedWorldViewReport.cpp
+src/Reports/Children/CLayerReport.cpp
 src/Reports/Children/CObjectiveFunctionReport.cpp
 src/Reports/Children/CObservationDefinitionReport.cpp
 src/Reports/Children/CObservationReport.cpp

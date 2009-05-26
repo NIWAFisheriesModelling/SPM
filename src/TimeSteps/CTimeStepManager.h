@@ -41,6 +41,7 @@ public:
 //  CTimeStep*                  getTimeStep(int index);
   void                        loadTimeStepOrder(vector<string> &order);
   int                         getTimeStepOrderIndex(string label);
+  string                      getFirstTimeStepLabel();
   int                         getCurrentYear() {return iCurrentYear;}
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
   void                        clone(CTimeStepManager *Manager);

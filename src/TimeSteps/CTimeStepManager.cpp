@@ -104,6 +104,24 @@ int CTimeStepManager::getTimeStepOrderIndex(string label) {
 
   return 0;
 }
+
+//**********************************************************************
+// string getFirstTimeStepLabel()
+// Get the label of the first TimeStep in our Order
+//**********************************************************************
+string CTimeStepManager::getFirstTimeStepLabel() {
+  try {
+
+    return (vTimeSteps[0]->getLabel());
+
+  } catch (string Ex) {
+    Ex = "CTimeStepManager.getFirstTimeStep()->" + Ex;
+    throw Ex;
+  }
+
+  return 0;
+}
+
 //**********************************************************************
 // void CTimeStepManager::clone(CTimeStepManager *Manager)
 // Clone the TimeStepManager with the parameter

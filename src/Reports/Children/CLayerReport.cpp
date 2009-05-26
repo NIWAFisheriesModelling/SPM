@@ -41,8 +41,8 @@ void CLayerReport::validate() {
     CFileReport::validate();
 
     // Assign Variables
-    iYear       = pParameterList->getInt(PARAM_YEAR);
-    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
+    iYear       = pParameterList->getInt(PARAM_YEAR,true,pWorld->getInitialYear());
+    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
     sLayer      = pParameterList->getString(PARAM_LAYER);
 
     // Validate Year Range
@@ -67,7 +67,12 @@ void CLayerReport::build() {
     CFileReport::build();
 
     // Populate TimeStepIndex
-    iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
+    if (sTimeStep != "")
+      iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
+    else {
+      iTimeStep = 0;
+      sTimeStep = pTimeStepManager->getFirstTimeStepLabel();
+    }
     pLayer    = pLayerManager->getNumericLayer(sLayer);
 
   } catch (string Ex) {

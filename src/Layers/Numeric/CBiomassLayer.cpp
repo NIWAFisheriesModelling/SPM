@@ -1,81 +1,92 @@
 //============================================================================
 // Name        : CBiomassLayer.cpp
 // Author      : S.Rasmussen
-// Date        : 16/01/2009
-// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Date        : 28/02/2008
+// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+// $Date: 2009-02-24 13:21:30 +1300 (Tue, 24 Feb 2009) $
 //============================================================================
 
-// Local headers
+// Local Headers
 #include "CBiomassLayer.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../World/CWorld.h"
+#include "../../Selectivities/CSelectivity.h"
 #include "../../Helpers/CError.h"
-
-// TODO: (Alistair) Implement Biomass Layer
+#include "../../Helpers/ForEach.h"
 
 //**********************************************************************
 // CBiomassLayer::CBiomassLayer()
-// Default constructor
+// Default Constructor
 //**********************************************************************
 CBiomassLayer::CBiomassLayer() {
+  // Variables
+  pWorld = CWorld::Instance();
 
-  // Register allowed parameters
+  // Register User allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
-  pParameterList->registerAllowed(PARAM_SIZE_WEIGHTS);
 }
 
 //**********************************************************************
-// double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
-// get the value from our layer
+// void CBiomassLayer::addCategory(string value)
+// Add A Category to our Biomass Layer
 //**********************************************************************
-double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
-  try {
-    throw string("Not yet implemented");
-  } catch (string Ex) {
-    Ex = "CBiomassLayer.getValue(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+void CBiomassLayer::addCategory(string value) {
+  vCategoryNames.push_back(value);
+}
 
-  return 0;
+//**********************************************************************
+// void CBiomassLayer::addSelectivity(string value)
+// Add a selectivity to our list.
+//**********************************************************************
+void CBiomassLayer::addSelectivity(string value) {
+  vSelectivityNames.push_back(value);
 }
 
 //**********************************************************************
 // void CBiomassLayer::validate()
-// Validate the layer
+// Validate
 //**********************************************************************
 void CBiomassLayer::validate() {
-  try {
-    // Base
-    CNumericLayer::validate();
+ try {
+   // Base Validate
+   CNumericLayer::validate();
 
-    // Get our parameters
-    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
-    pParameterList->fillVector(vSizeWeights, PARAM_SIZE_WEIGHTS);
+   // Populate our Parameters
+   pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
+   pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
-    // Validate
-    if (vCategories.size() != vSelectivities.size())
-      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
-    if (vSizeWeights.size() != vCategories.size())
-      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SIZE_WEIGHTS);
+   // Check For Duplicate Categories.
+   map<string, int> mList;
+   foreach(string Category, vCategoryNames) {
+     mList[Category] += 1;
+     if (mList[Category] > 1)
+       CError::errorDuplicate(PARAM_CATEGORY, Category);
+   }
 
-    throw string("Not yet implemented");
+   if(vCategoryNames.size() != vSelectivityNames.size())
+     CError::errorListSameSize(PARAM_CATEGORIES,PARAM_SELECTIVITIES);
 
-  } catch (string Ex) {
-    Ex = "CBiomassLayer.validate(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-
+ } catch (string Ex) {
+   Ex = "CBiomassLayer.validate(" + getLabel() + ")->" + Ex;
+   throw Ex;
+ }
 }
 
 //**********************************************************************
 // void CBiomassLayer::build()
-// Build our layer
+// Build
 //**********************************************************************
 void CBiomassLayer::build() {
   try {
-    throw string("Not yet implemented");
+    // Build Selectivities
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
+
+    // Build Categories
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
   } catch (string Ex) {
     Ex = "CBiomassLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -83,9 +94,37 @@ void CBiomassLayer::build() {
 }
 
 //**********************************************************************
+// double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
+// get Value
+//**********************************************************************
+double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
+#ifndef OPTIMIZE
+  try {
+#endif
+
+    double  dResult = 0;
+
+    for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
+      for (int j = 0; j < (int)vCategories.size(); ++j) {
+         dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getPopulationInCategoryForAge(i, j);
+      }
+    }
+
+    return dResult;
+
+#ifndef OPTIMIZE
+  } catch (string Ex) {
+    Ex = "CBiomassLayer.getValue(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
+  return 0.0;
+#endif
+}
+
+//**********************************************************************
 // CBiomassLayer::~CBiomassLayer()
-// Destructor
+// Default De-Constructor
 //**********************************************************************
 CBiomassLayer::~CBiomassLayer() {
-
 }

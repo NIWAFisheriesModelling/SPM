@@ -65,6 +65,9 @@ void CAbundanceLayer::validate() {
        CError::errorDuplicate(PARAM_CATEGORY, Category);
    }
 
+   if(vCategoryNames.size() != vSelectivityNames.size())
+     CError::errorListSameSize(PARAM_CATEGORIES,PARAM_SELECTIVITIES);
+
  } catch (string Ex) {
    Ex = "CAbundanceLayer.validate(" + getLabel() + ")->" + Ex;
    throw Ex;
@@ -99,7 +102,15 @@ double CAbundanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, in
   try {
 #endif
 
-    return pWorld->getBaseSquare(RowIndex, ColIndex)->getPopulation();
+    double  dResult = 0;
+
+    for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
+      for (int j = 0; j < (int)vCategories.size(); ++j) {
+         dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getPopulationInCategoryForAge(i, j);
+      }
+    }
+
+    return dResult;
 
 #ifndef OPTIMIZE
   } catch (string Ex) {
