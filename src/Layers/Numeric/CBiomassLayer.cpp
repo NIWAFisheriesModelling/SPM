@@ -106,7 +106,7 @@ double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int 
 
     for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
       for (int j = 0; j < (int)vCategories.size(); ++j) {
-         dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, j);
+         dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
       }
     }
 
