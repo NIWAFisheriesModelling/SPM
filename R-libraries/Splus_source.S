@@ -227,6 +227,18 @@ function(file,path=""){
       res$"observation"[[counter$"observation"]]<-temp
       names(res$"observation")[counter$"observation"]<-report.label[i]
     }
+    if(report.type[i]=="spatial_map") {
+      if(!("spatial_map" %in% names(res))) {
+        res$"spatial_map"<-list() #create an entry if it doesn't already exist
+      }
+      # update counter
+      counter$"spatial_map"<-counter$"spatial_map"+1
+      # extract report
+      temp<-extract.spatial.map(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
+      # add to results
+      res$"spatial_map"[[counter$"spatial_map"]]<-temp
+      names(res$"spatial_map")[counter$"spatial_map"]<-report.label[i]
+    }
     if(report.type[i]=="layer") {
       if(!("layer" %in% names(res))) {
         res$"layer"<-list() #create an entry if it doesn't already exist
@@ -288,6 +300,29 @@ function(file,path=""){
       names(res$"weight_at_size")[counter$"weight_at_size"]<-report.label[i]
     }
   }
+  return(res)
+}
+"extract.ageingerrro" <-
+function(file,path="",lines){
+  if(missing(lines)) {
+    if(missing(path)) path<-""
+    filename<-spm.make.filename(path=path,file=file)
+    res<-read.table(filename,skip=1,sep=",",header=T,na.strings="-1.#IND")
+  }
+  index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
+  index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
+  if(index.start >= index.end) stop("Error")
+  res<-list()
+  res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
+  res$report.type<-substring(lines[index.start+1],14)
+  res$type<-substring(lines[index.start+2],20)
+  col.labs<-spm.string.to.vector.of.words(lines[3+index.start],sep=",")
+  values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)],sep=",")
+  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
+  names(values)<-col.labs
+  values$ages<-as.numeric(as.character(values$ages))
+  values<-apply(values,2,as.numeric)
+  res$data<-values
   return(res)
 }
 "extract.derivedquantity" <-
@@ -516,6 +551,25 @@ function(file,path="",lines){
   return(res)
 }
 
+"extract.spatial.map" <-
+function(file,path="",lines){
+  if(missing(lines)) {
+    if(missing(path)) path<-""
+    filename<-spm.make.filename(path=path,file=file)
+    res<-read.table(filename,skip=1,sep=",",header=T,na.strings="-1.#IND")
+  }
+  index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
+  index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
+  if(index.start >= index.end) stop("Error")
+  values<-spm.string.to.vector.of.words(lines[(3+index.start):(index.end-1)],sep=" ")
+  nrows<-length((3+index.start):(index.end-1))
+  values<-matrix(values,nrow=nrows,byrow=FALSE)
+  res<-list()
+  res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
+  res$report.type<-substring(lines[index.start+1],14)
+  res$data<-values
+  return(res)
+}
 "spm.area"<-
 function(corners)
 {
@@ -560,7 +614,7 @@ function(corners)
 }
 "spm.binary.version"<-
 function() {
-return("1.00-2009-05-21")
+return("1.00-2009-06-05")
 }
 "spm.convert.to.lines"<-
 function(filename)
@@ -767,7 +821,7 @@ function(string, words = 1)
 }
 "spm.report.types" <-
 function() {
-  return(c("initialisation","partition","process","derived_quantity","estimate_value","estimate_summary","objective_function","observation","layer","selectivity","random_number_seed","weight_at_size","layer_derived_view"))
+  return(c("initialisation","partition","process","derived_quantity","estimate_value","estimate_summary","objective_function","observation","layer","selectivity","random_number_seed","weight_at_size","layer_derived_view","spatial_map"))
 }
 
 "spm.string.to.vector.of.numbers"<-

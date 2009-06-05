@@ -126,6 +126,18 @@ function(file,path=""){
       res$"observation"[[counter$"observation"]]<-temp
       names(res$"observation")[counter$"observation"]<-report.label[i]
     }
+    if(report.type[i]=="spatial_map") {
+      if(!("spatial_map" %in% names(res))) {
+        res$"spatial_map"<-list() #create an entry if it doesn't already exist
+      }
+      # update counter
+      counter$"spatial_map"<-counter$"spatial_map"+1
+      # extract report
+      temp<-extract.spatial.map(lines=line[index[i]:(index[i+1]-1)]) # lines from index to the start (-1) of the next report
+      # add to results
+      res$"spatial_map"[[counter$"spatial_map"]]<-temp
+      names(res$"spatial_map")[counter$"spatial_map"]<-report.label[i]
+    }
     if(report.type[i]=="layer") {
       if(!("layer" %in% names(res))) {
         res$"layer"<-list() #create an entry if it doesn't already exist

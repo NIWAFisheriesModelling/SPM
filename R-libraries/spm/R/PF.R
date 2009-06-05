@@ -37,20 +37,24 @@ function(x,alpha,lambda,rescale=T) {
 function(x,alpha,a50,ato95,rescale=T) {
   pow<-function(x,y) return(x^y)
   temp<-(a50-x)/ato95
-  res<-1.0-(1.0/(1.0+pow(19.0,temp)))
-  res<-res^alpha
-  if(rescale) res<-res/max(res)
-  return(res)
+  result<-ifelse(temp > 5.0,0,-1)
+  result<-ifelse(temp < -5.0,1,result)
+  result[result<0]<-1.0/(1.0+pow(19.0,temp[result<0]))
+  result<-(1-result) ^ alpha
+  if(rescale) result<-result/max(result)
+  return(result)
 }
 
 "PFlogistic" <-
 function(x,alpha,a50,ato95,rescale=T) {
   pow<-function(x,y) return(x^y)
   temp<-(a50-x)/ato95
-  res<-1.0/(1.0+pow(19.0,temp))
-  res<-res ^alpha
-  if(rescale) res<-res/max(res)
-  return(res)
+  result<-ifelse(temp > 5.0,0,-1)
+  result<-ifelse(temp < -5.0,1,result)
+  result[result<0]<-1.0/(1.0+pow(19.0,temp[result<0]))
+  result<-result ^ alpha
+  if(rescale) result<-result/max(result)
+  return(result)
 }
 
 "PFnormal" <-
