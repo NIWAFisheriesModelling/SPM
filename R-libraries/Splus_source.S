@@ -42,20 +42,24 @@ function(x,alpha,lambda,rescale=T) {
 function(x,alpha,a50,ato95,rescale=T) {
   pow<-function(x,y) return(x^y)
   temp<-(a50-x)/ato95
-  res<-1.0-(1.0/(1.0+pow(19.0,temp)))
-  res<-res^alpha
-  if(rescale) res<-res/max(res)
-  return(res)
+  result<-ifelse(temp > 5.0,0,-1)
+  result<-ifelse(temp < -5.0,1,result)
+  result[result<0]<-1.0/(1.0+pow(19.0,temp[result<0]))
+  result<-(1-result) ^ alpha
+  if(rescale) result<-result/max(result)
+  return(result)
 }
 
 "PFlogistic" <-
 function(x,alpha,a50,ato95,rescale=T) {
   pow<-function(x,y) return(x^y)
   temp<-(a50-x)/ato95
-  res<-1.0/(1.0+pow(19.0,temp))
-  res<-res ^alpha
-  if(rescale) res<-res/max(res)
-  return(res)
+  result<-ifelse(temp > 5.0,0,-1)
+  result<-ifelse(temp < -5.0,1,result)
+  result[result<0]<-1.0/(1.0+pow(19.0,temp[result<0]))
+  result<-result ^ alpha
+  if(rescale) result<-result/max(result)
+  return(result)
 }
 
 "PFnormal" <-
@@ -561,8 +565,8 @@ function(file,path="",lines){
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  values<-spm.string.to.vector.of.words(lines[(3+index.start):(index.end-1)],sep=" ")
-  nrows<-length((3+index.start):(index.end-1))
+  values<-spm.string.to.vector.of.words(lines[(2+index.start):(index.end-1)],sep=" ")
+  nrows<-length((2+index.start):(index.end-1))
   values<-matrix(values,nrow=nrows,byrow=FALSE)
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
