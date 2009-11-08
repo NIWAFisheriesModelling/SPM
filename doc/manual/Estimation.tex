@@ -84,11 +84,11 @@ We note that there is no proof of convergence for the differential evolution sol
 
 \subsection{\I{Posterior profiles}\label{sec:estimate-profiles}}
 
-If profiles are requested \texttt{spm -p}, \SPM\ will first calculate a point estimate. For each scalar parameter or, in the case of vectors or selectivities, the element of the parameter to be profiled, \SPM\ will fix its value at a sequence of $n$ evenly spaced numbers between specified bounds $l$ and $u$, and calculate a point estimate at each value. 
+If profiles are requested \texttt{spm -p}, \SPM\ will first calculate a point estimate. For each scalar parameter or, in the case of vectors or selectivities, the element of the parameter to be profiled, \SPM\ will fix its value at a sequence of $n$ evenly spaced numbers ($step$) between a specified lower and upper bounds $l$ and $u$, and calculate a point estimate at each value. 
 
-By default $n=10$, and $(l, u)=($lower bound on parameter plus $(range/(2n))$, upper bound on parameter less $(range/(2n))$. Each minimisation starts at the final parameter values from the previous resulting value of the parameter being profiled. \SPM\ will report the objective function for each parameter value. Note that an initial point estimate should be compared with the profile, not least to check that none of the other points along the profile have a better objective function value than the initial `minimum'.
+By default $step=10$, and $(l, u)=($lower bound on parameter plus $(range/(2n))$, upper bound on parameter less $(range/(2n))$. Each minimisation starts at the final parameter values from the previous resulting value of the parameter being profiled. \SPM\ will report the objective function for each parameter value. Note that an initial point estimate should be compared with the profile, not least to check that none of the other points along the profile have a better objective function value than the initial `minimum'.
 
-You specify which parameters are to be profiled, and optionally $n$, $l$, and $u$ values for each. In the case of vector parameters, you will also need to specify the element of the vector being profiled. 
+You specify which parameters are to be profiled, and optionally the number of steps, lower bound, and upper bound for each. In the case of vector parameters, you will also need to specify the element of the vector being profiled. 
 
 You can also supply the initial starting point for the estimation using \texttt{spm -i \emph{file}} --- this may improve the minimiser performance for the profiles.
 

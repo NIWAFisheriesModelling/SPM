@@ -50,6 +50,7 @@ In SPM, but not in manual
 In manual, but not in SPM
   include
   joint_selectivity
+  age_sizes
   by_length
   correlation_adjustment_diff
   correlation_adjustment_method

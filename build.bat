@@ -45,4 +45,4 @@ call makeInstall.bat > makeInstall.log
 cd ..
 
 spm -v
-spm_unittests.exe
+spm_unittests.exe --report_level=short
