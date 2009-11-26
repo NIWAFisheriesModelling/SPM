@@ -15,11 +15,11 @@
 
 // Local headers
 #include "CParameterList.h"
-#include "../../Helpers/ForEach.h"
-#include "../../Helpers/CComparer.h"
-#include "../../Helpers/CConvertor.h"
-#include "../../Helpers/CError.h"
-#include "../../Translations/Translations.h"
+//#include "../../Helpers/ForEach.h"
+//#include "../../Helpers/CComparer.h"
+//#include "../../Helpers/CConvertor.h"
+//#include "../../Helpers/CError.h"
+#include "../Translations/Translations.h"
 
 // Using
 using std::map;
@@ -48,7 +48,7 @@ void CParameterList::registerAllowed(string name) {
 // Add a parameter
 //**********************************************************************
 void CParameterList::addParameter(string name, string value) {
-  mParameters[name].push_back(value);
+   mParameters[name].push_back(value);
 }
 
 //**********************************************************************
@@ -57,22 +57,22 @@ void CParameterList::addParameter(string name, string value) {
 //**********************************************************************
 void CParameterList::checkInvalidParameters() {
 
-  map<string, vector<string> >::iterator mvPtr = mParameters.begin();
-  while (mvPtr != mParameters.end()) {
-    bool bMatch = false;
+  //map<string, vector<string> >::iterator mvPtr = mParameters.begin();
+  //while (mvPtr != mParameters.end()) {
+  //  bool bMatch = false;
 
-    foreach(string Parameter, vAllowedParameters) {
-      if (Parameter == (*mvPtr).first) {
-        bMatch = true;
-        break;
-      }
-    }
+  //  foreach(string Parameter, vAllowedParameters) {
+  //    if (Parameter == (*mvPtr).first) {
+  //      bMatch = true;
+  //      break;
+  //    }
+  //  }
 
-    if (!bMatch)
-      throw string("Unknown subcommand :" + (*mvPtr).first);
+  //  if (!bMatch)
+  //    throw string("Unknown subcommand :" + (*mvPtr).first);
 
-    mvPtr++;
-  }
+  //  mvPtr++;
+  //}
 }
 
 //**********************************************************************
@@ -83,13 +83,13 @@ string CParameterList::getString(string name, bool optional, string defaultValue
   if (!hasParameter(name))
     if (optional)
       return defaultValue;
-    else
-      CError::errorMissing(name);
+  //  else
+  //    CError::errorMissing(name);
 
-  if ((int)mParameters[name].size() == 0)
-    CError::errorMissing(name);
-  if ((int)mParameters[name].size() > 1)
-    CError::errorTooMuch(name);
+  //if ((int)mParameters[name].size() == 0)
+  //  CError::errorMissing(name);
+  //if ((int)mParameters[name].size() > 1)
+  //  CError::errorTooMuch(name);
 
   return mParameters[name][0];
 }
@@ -106,7 +106,7 @@ double CParameterList::getDouble(string name, bool optional, double defaultValue
   string sValue = getString(name, optional);
   // If we have one
   if (sValue != "")
-    dReturn = CConvertor::stringToDouble(sValue);
+    dReturn = 0.01; //CConvertor::stringToDouble(sValue);RB
 
   return dReturn;
 }
@@ -123,7 +123,7 @@ int CParameterList::getInt(string name, bool optional, int defaultValue) {
   string sValue = getString(name, optional);
   // If we have one
   if (sValue != "")
-    iReturn = CConvertor::stringToInt(sValue);
+    iReturn = 0.1;//CConvertor::stringToInt(sValue); RB
 
   return iReturn;
 }
@@ -158,8 +158,8 @@ void CParameterList::fillVector(vector<string> &list, string name, bool optional
   if (!hasParameter(name))
     if (optional)
       return;
-    else
-      CError::errorMissing(name);
+    //else
+    //  CError::errorMissing(name);
 
   // Clear the List
   list.clear();
@@ -179,16 +179,19 @@ void CParameterList::fillVector(vector<double> &list, string name, bool optional
   if (!hasParameter(name))
     if (optional)
       return;
-    else
-      CError::errorMissing(name);
+    //else
+    //  CError::errorMissing(name);
 
   // Clear List
   list.clear();
 
   vector<string>::iterator vPtr = mParameters[name].begin();
   while (vPtr != mParameters[name].end()) {
-    list.push_back(CConvertor::stringToDouble((*vPtr)));
-    vPtr++;
+	  string str=(*vPtr);
+	  const char* ch=str.c_str();
+	  double d=atof(ch);
+     list.push_back(d);//CConvertor::stringToDouble((*vPtr))); RB
+     vPtr++;
   }
 }
 
@@ -200,16 +203,21 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
   if (!hasParameter(name))
     if (optional)
       return;
-    else
-      CError::errorMissing(name);
+    //else
+    //  CError::errorMissing(name);
 
   // Clear the list
   list.clear();
 
   vector<string>::iterator vPtr = mParameters[name].begin();
   while (vPtr != mParameters[name].end()) {
-    list.push_back(CConvertor::stringToInt((*vPtr)));
-    vPtr++;
+	  string str=(*vPtr);
+	  const char* ch=str.c_str();
+	  int d=atoi(ch);
+     list.push_back(d);// RB
+     vPtr++;
+    //list.push_back(1.0);//CConvertor::stringToInt((*vPtr)));RB
+    //vPtr++;
   }
 
 }
@@ -233,14 +241,14 @@ void CParameterList::fillDefinedParameterVector(vector<string> &list) {
 //
 //**********************************************************************
 void CParameterList::fillArray(double *array, int length, string name, int offset) {
-  if (!hasParameter(name))
-    CError::errorMissing(name);
+  //if (!hasParameter(name))
+  //  CError::errorMissing(name);
 
-  if (((int)mParameters[name].size()-offset) != length)
-    CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
+  //if (((int)mParameters[name].size()-offset) != length)
+  //  CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
 
   for (int i = offset; i < (int)mParameters[name].size(); ++i)
-    array[i-offset] = CConvertor::stringToDouble(mParameters[name][i]);
+    array[i-offset] = 0.05;//CConvertor::stringToDouble(mParameters[name][i]);RB
 }
 
 //**********************************************************************
@@ -248,11 +256,11 @@ void CParameterList::fillArray(double *array, int length, string name, int offse
 //
 //**********************************************************************
 void CParameterList::fillArray(string *array, int length, string name, int offset) {
-  if (!hasParameter(name))
-    CError::errorMissing(name);
+  //if (!hasParameter(name))
+  //  CError::errorMissing(name);
 
-  if (((int)mParameters[name].size()-offset) != length)
-    CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
+  //if (((int)mParameters[name].size()-offset) != length)
+  //  CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
 
   for (int i = offset; i < (int)mParameters[name].size(); ++i)
     array[i-offset] = mParameters[name][i];
@@ -265,8 +273,8 @@ void CParameterList::fillArray(string *array, int length, string name, int offse
 bool CParameterList::hasParameter(string name) {
   map<string, vector<string> >::iterator mPtr = mParameters.begin();
   while (mPtr != mParameters.end()) {
-    if (CComparer::isSame(name, (*mPtr).first, true))
-      return true;
+    //if (CComparer::isSame(name, (*mPtr).first, true))
+    //  return true;
 
     mPtr++;
   }
@@ -283,8 +291,8 @@ int CParameterList::countMatches(string name) {
 
   map<string, vector<string> >::iterator mPtr = mParameters.begin();
   while (mPtr != mParameters.end()) {
-    if (CComparer::isSame(name, (*mPtr).first, true))
-      iMatch++;
+    //if (CComparer::isSame(name, (*mPtr).first, true))
+    //  iMatch++;
     mPtr++;
   }
 
@@ -296,8 +304,8 @@ int CParameterList::countMatches(string name) {
 // Count how many values are assigned to this parameter
 //**********************************************************************
 int CParameterList::countParameterValues(string name) {
-  if (!hasParameter(name))
-    CError::errorMissing(name);
+  //if (!hasParameter(name))
+  //  CError::errorMissing(name);
 
   return (int)mParameters[name].size();
 }
@@ -309,17 +317,17 @@ int CParameterList::countParameterValues(string name) {
 string CParameterList::getMatchFullName(string name, int matchNumber = 1) {
   map<string, vector<string> >::iterator mPtr = mParameters.begin();
   while (mPtr != mParameters.end()) {
-    if (CComparer::isSame(name, (*mPtr).first, true)) {
-      matchNumber--;
+    //if (CComparer::isSame(name, (*mPtr).first, true)) {
+    //  matchNumber--;
 
-      if (matchNumber == 0)
-        return (*mPtr).first;
-    }
+    //  if (matchNumber == 0)
+    //    return (*mPtr).first;
+    //}
 
     mPtr++;
   }
 
-  CError::errorMissing(name);
+  //CError::errorMissing(name);
   return "";
 }
 
