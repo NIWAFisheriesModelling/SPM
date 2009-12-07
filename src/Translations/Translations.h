@@ -16,9 +16,6 @@
 
 #if LANGUAGE == LANGUAGE_UK
 #include "English_UK.h"
-
-#elif LANGUAGE == LANGUAGE_USA
-#include "English_USA.h"
 #endif
 
 #endif /* TRANSLATIONS_H_ */

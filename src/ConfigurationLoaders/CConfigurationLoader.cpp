@@ -337,9 +337,9 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         sLine = "";
       }
 
-      // Lowercase line
-      for (unsigned i = 0; i < sLine.length(); ++i)
-        sLine[i] = tolower(sLine[i]);
+      // // Lowercase line
+      //for (unsigned i = 0; i < sLine.length(); ++i)
+      //  sLine[i] = tolower(sLine[i]);
       // Remove trailing spaces caused by Comments
       int iLastNotSpace = sLine.find_last_not_of(" ");
       sLine = sLine.substr(0, (iLastNotSpace+1));
@@ -418,9 +418,9 @@ void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &para
     string  sLine         = line;
     int     iFirstSpace   = -1;
 
-    // Lowercase sline
-    for (unsigned i = 0; i < sLine.length(); ++i)
-      sLine[i] = tolower(sLine[i]);
+    // // Lowercase sline
+    // for (unsigned i = 0; i < sLine.length(); ++i)
+    //  sLine[i] = tolower(sLine[i]);
 
     iFirstSpace = sLine.find_first_of(CONFIG_SEPERATOR_ESTIMATE_VALUES);
     if (iFirstSpace == -1) {
