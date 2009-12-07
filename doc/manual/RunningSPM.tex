@@ -16,7 +16,7 @@ To use \SPM, open a console (i.e., the command prompt) window (Microsoft Windows
 
 The \config\ is made up of four broad sections; the description of the population structure and parameters (the population section), the estimation methods and variables (the estimation section), the observations and their associated likelihoods (the observation section), and the outputs and reports that \SPM\ will return (the report section). The \config\ is made up of a number of commands (many with subcommands) which specify various options for each of these components.
 
-The command and subcommand definitions in the \config\ can be extensive, and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{\emph{file}}. The command causes an external file, \argument{\emph{file}}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point\index{Including external files}. The file name must be a complete file name with extension, but can use either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands --- but be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
+The command and subcommand definitions in the \config\ can be extensive (especially when you have a model with a large spatial structures that has many layers and/or observations), and can result in a \config\ that is long and difficult to navigate. To aid readability and flexibility, we can use the \config\ command \command{include} \texttt{\emph{file}}. The command causes an external file, \argument{\emph{file}}, to be read and processed, exactly as if its contents had been inserted in the main \config\ at that point\index{Including external files}. The file name must be a complete file name with extension, but can use either a relative or absolute path as part of its name. Note that included files can also contain \command{include} commands --- but be careful that you do not set up a recursive state. See Section \ref{sec:general-syntax} for more detail.
 
 \subsection{\I{Redirecting standard output}\label{sec:redirecting-stdout}}
 
@@ -82,7 +82,7 @@ In addition, the following are optional arguments\index{Optional command line ar
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
 
-The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. 
+The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. Note that the commands, subcommands, anarguments, and labels of \SPM\ are case sensitive. 
 
 \subsubsection{Commands}\index{Commands}
 
@@ -145,7 +145,7 @@ Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between
 
 There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). Note, however, that the \command{include} is the only exception to this rule. See Section \ref{sec:general-syntax})\index{Command ! Include files} for details of the use of \command{include}. 
 
-In general, commands, sub-commands, and arguments in the parameter files are case insensitive. But note, however, that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
+Note that commands, sub-commands, and arguments in the parameter files are case sensitive. Also note that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
 
 \subsubsection{Commenting out lines}\index{Comments}\index{Commenting \config}
 
