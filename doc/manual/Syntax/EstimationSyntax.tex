@@ -2,14 +2,14 @@
 
 \subsection{Estimation methods}
 
-\defCom{Estimation}
+\defCom{estimation}
 
 \defSub{minimiser} {The label of the minimiser to use, if doing a point estimate}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid label from \command{minimiser}}
 
-\defSub{MCMC} {The label of the MCMC to use, of doing an MCMC}
+\defSub{mcmc} {The label of the MCMC to use, of doing an MCMC}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid label from \command{mcmc}}
@@ -44,7 +44,7 @@ Note that point estimates are required for
 
 Each type of minimiser requires a set of subcommands and arguments specific to that minimiser. Different minimisers can be called for different model runs or for different run modes (i.e., MCMC, MPDs, or profiles).
 
-\defComLab{Minimiser}{Define the an minimiser estimator with label}
+\defComLab{minimiser}{Define the an minimiser estimator with label}
 
 \defSub{type} {Define the type of minimiser}
 \defType{String}

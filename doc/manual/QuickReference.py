@@ -23,7 +23,7 @@ SYNTAX_OUTFILE.write("; ========================================================
 SYNTAX_OUTFILE.write("C=1\n")
 SYNTAX_OUTFILE.write("[Syntax]\n")
 SYNTAX_OUTFILE.write("Namespace1 = 6\n")
-SYNTAX_OUTFILE.write("IgnoreCase = Yes\n")
+SYNTAX_OUTFILE.write("IgnoreCase = No\n")
 SYNTAX_OUTFILE.write("KeyWordLength = 0\n")
 SYNTAX_OUTFILE.write("BracketChars = ([])\n")
 SYNTAX_OUTFILE.write("OperatorChars = -+*/!~%^&|=$:!_<>\n")
@@ -51,7 +51,7 @@ SYNTAX_OUTFILE.write("CharEsc = \\ \n")
 
 Keywords1 = []
 Keywords2 = []
-Keywords3 = ["F","False","T","True"]
+Keywords3 = ["F","False","T","True","t","f","true","false"]
 Keywords4 = []
 Keywords5 = []
 Keywords6 = []
