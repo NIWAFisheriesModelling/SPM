@@ -5,7 +5,7 @@ project(SPM)
 # cmake -G "MinGW Makefiles"
 # mingw32-make all
 
-SET(LIBRARY_NAME simfish)
+SET(LIBRARY_NAME _spm)
 SET(MAIN_NAME spm_unoptimised)
 SET(TEST_NAME spm_unittests)
 SET(OPTI_NAME spm)
@@ -303,7 +303,7 @@ ADD_EXECUTABLE(${OPTI_NAME}
  src/Main
  )
 
-# Build SimFish library
+# Build lspm library
 ADD_LIBRARY(${LIBRARY_NAME} ${SOURCE_FILES} )
 SET_TARGET_PROPERTIES(${LIBRARY_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_OPTIONS_LIBR} LINK_FLAGS ${LINK_OPTIONS})
 
