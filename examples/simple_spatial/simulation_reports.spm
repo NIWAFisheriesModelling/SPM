@@ -58,63 +58,63 @@ observation CAA-2007
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-1998
+@report cpue-1998
 type observation_definition
-observation CPUE-1998
+observation cpue-1998
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-1999
+@report cpue-1999
 type observation_definition
-observation CPUE-1999
+observation cpue-1999
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2000
+@report cpue-2000
 type observation_definition
-observation CPUE-2000
+observation cpue-2000
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2001
+@report cpue-2001
 type observation_definition
-observation CPUE-2001
+observation cpue-2001
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2002
+@report cpue-2002
 type observation_definition
-observation CPUE-2002
+observation cpue-2002
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2003
+@report cpue-2003
 type observation_definition
-observation CPUE-2003
+observation cpue-2003
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2004
+@report cpue-2004
 type observation_definition
-observation CPUE-2004
+observation cpue-2004
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2005
+@report cpue-2005
 type observation_definition
-observation CPUE-2005
+observation cpue-2005
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2006
+@report cpue-2006
 type observation_definition
-observation CPUE-2006
+observation cpue-2006
 file_name simulated_observations.spm
 overwrite False
 
-@report CPUE-2007
+@report cpue-2007
 type observation_definition
-observation CPUE-2007
+observation cpue-2007
 file_name simulated_observations.spm
 overwrite False
 

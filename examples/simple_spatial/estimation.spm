@@ -1,21 +1,21 @@
 # Estimation.spm
 
-@Estimation
+@estimation
 minimiser GammaDiff
 
-@Minimiser GammaDiff
+@minimiser GammaDiff
 type numerical_differences
 tolerance 0.002 #The default is 0.002
 covariance True
 
-@Minimiser DE
-type DE_Solver
+@minimiser DE
+type de_solver
 covariance False
 tolerance 0.02 #The default is 0.002
 population_size 250
 
 # MCMC
-@MCMC MH
+@mcmc MH
 minimiser GammaDiff
 type metropolis_hastings
 length 1500000
@@ -29,9 +29,9 @@ df 4
 #stepsize 0.01
 
 # ESTIMATION PROFILING
-#@Profile R0
-#parameter Process[recruitment].R0
-#N  10
+#@profile R0
+#parameter process[Recruitment].r0
+#n  10
 #lower_bound  1e5
 #upper_bound  1e8
 
@@ -85,13 +85,13 @@ upper_bound 5000
 prior Uniform
 
 @estimate
-parameter  preference_function[MatureDepth].sigma_L
+parameter  preference_function[MatureDepth].sigma_l
 lower_bound    1
 upper_bound 5000
 prior Uniform
 
 @estimate
-parameter  preference_function[MatureDepth].sigma_R
+parameter  preference_function[MatureDepth].sigma_r
 lower_bound     1
 upper_bound 10000
 prior Uniform
@@ -133,7 +133,7 @@ upper_bound 15
 prior Uniform
 
 @estimate
-parameter  process[Recruitment].R0
+parameter  process[Recruitment].r0
 lower_bound 1e5
 upper_bound 1e7
 prior Uniform

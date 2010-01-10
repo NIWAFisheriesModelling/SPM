@@ -140,11 +140,15 @@ bool CParameterList::getBool(string name, bool optional, bool defaultValue) {
   if ( (value == "") && (optional) )
     return defaultValue;
 
+  // Convert to lower case for matching
+  string sValue = value;
+  for (unsigned i = 0; i < sValue.length(); ++i)
+    sValue[i] = tolower(sValue[i]);
   // Check for False/F match
-  if ( (value == CONFIG_FALSE) || (value == CONFIG_FALSE_SHORT) )
+  if ( (sValue == CONFIG_FALSE) || (sValue == CONFIG_FALSE_SHORT) )
     return false;
   // Check for true/T match
-  if ( (value == CONFIG_TRUE) || (value == CONFIG_TRUE_SHORT) )
+  if ( (sValue == CONFIG_TRUE) || (sValue == CONFIG_TRUE_SHORT) )
     return true;
 
   throw string(value + ERROR_NOT_BOOLEAN + name);

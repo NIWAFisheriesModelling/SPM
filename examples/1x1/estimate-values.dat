@@ -1,21 +1,21 @@
 [estimate-values]
 report.type: estimate_summary
-parameter: process[recruitment].r0
+parameter: process[Recruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: uniform
+prior: Uniform
 value: 448429
 
-parameter: selectivity[fishingsel].a50
+parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: uniform
+prior: Uniform
 value: 8.45764
 
-parameter: selectivity[fishingsel].ato95
+parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: uniform
+prior: Uniform
 value: 3.19555
 
 *end

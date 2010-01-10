@@ -11,14 +11,14 @@
 #define ESTIMATION_H_
 
 const string basic_estimation =
-  "@Estimation\n"
+  "@estimation\n"
   "minimiser gammadiff\n"
-  "@Minimiser GammaDiff\n"
+  "@minimiser gammadiff\n"
   "type numerical_differences\n"
   "tolerance 0.002\n"
   "covariance False\n"
-  "@Minimiser DE\n"
-  "type DE_Solver\n"
+  "@minimiser de\n"
+  "type de_solver\n"
   "covariance False\n"
   "@estimate\n"
   "parameter process[category_transition_rate].proportions(0)\n"

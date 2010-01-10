@@ -1,6 +1,6 @@
 # Fishing (1998)
 @layer Catch1998
-type Numeric
+type numeric
 data 0 0 0 0 0 0 0 0 0 0
 data 0 0 0 0 373 0 0 0 0 0
 data 0 0 0 0 499 381 0 0 0 0

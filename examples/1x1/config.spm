@@ -25,7 +25,7 @@ processes Recruitment Maturation halfM halfM Ageing
 
 # Annual cycle
 @time_step step_one
-processes Recruitment Maturation halfM fishing halfM
+processes Recruitment Maturation halfM Fishing halfM
 
 @time_step step_two
 processes Ageing
@@ -39,13 +39,13 @@ categories immature mature
 type constant_recruitment
 categories immature
 proportions 1.0
-R0 550000
+r0 550000
 ages 1
 
 @process halfM
 type constant_mortality_rate
 categories immature mature
-M 0.065 0.065
+m 0.065 0.065
 selectivities One One
 
 @process Fishing
@@ -53,7 +53,7 @@ type event_mortality
 categories immature mature
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
-U_max 0.99
+u_max 0.99
 selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 
@@ -124,8 +124,8 @@ c 1
 
 @selectivity Maturation
 type logistic_producing
-L 5
-H 30
+l 5
+h 30
 a50 10
 ato95 3
 

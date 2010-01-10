@@ -10,12 +10,12 @@ tolerance 0.0002
 covariance true
 
 @minimiser DE
-type DE_Solver
+type de_solver
 population_size 350
 tolerance 0.0002
 covariance false
 
-@MCMC
+@mcmc
 start 1
 length 1500000
 keep 1000
@@ -25,8 +25,8 @@ proposal_t True
 df 4
 
 #Profile
-@Profile R0
-parameter Process[Recruitment].R0
+@profile R0
+parameter process[Recruitment].r0
 steps  20
 lower_bound   100000
 upper_bound  1000000
@@ -43,7 +43,7 @@ upper_bound 1e-1
 prior Uniform
 }
 @estimate
-parameter process[Recruitment].R0
+parameter process[Recruitment].r0
 lower_bound 1e4
 upper_bound 1e7
 prior Uniform

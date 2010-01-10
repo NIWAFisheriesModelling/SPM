@@ -13,8 +13,8 @@
 const string logistic_producing =
   "@selectivity logistic_producing\n"
   "type logistic_producing\n"
-  "L 5\n"
-  "H 30\n"
+  "l 5\n"
+  "h 30\n"
   "a50 8\n"
   "ato95 3\n";
 

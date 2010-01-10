@@ -132,9 +132,9 @@ void CParamParser::parseAbsoluteCommand() {
 //**********************************************************************
 string CParamParser::UpperToLower(string Input) {
 
-  for (int i=0;i< (int)strlen(Input.c_str());i++)
-     if (Input[i] >= 0x41 && Input[i] <= 0x5A)
-      Input[i] = Input[i] + 0x20;
+//  for (int i=0;i< (int)strlen(Input.c_str());i++)
+//     if (Input[i] >= 0x41 && Input[i] <= 0x5A)
+//      Input[i] = Input[i] + 0x20;
 
   return Input;
 }

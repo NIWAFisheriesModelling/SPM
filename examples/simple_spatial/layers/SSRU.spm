@@ -1,6 +1,6 @@
 # SSRUs
 @layer SSRU
-type Categorical
+type categorical
 data Other Other Other 881M 881J 881L 882B 882C 882D 882D
 data Other Other Other 881M 881J 881K 882A 882B 882C 882D
 data Other Other 881F 881H 881H 881I 882A 882B 882B 882C

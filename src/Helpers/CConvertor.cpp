@@ -75,10 +75,14 @@ int CConvertor::stringToInt(string value) {
 //**********************************************************************
 bool CConvertor::stringToBool(string value) {
   bool bRet = false;
+  string sValue = value;
 
-  if ( (value == "true") || (value == "t") )
+  for (unsigned i = 0; i < sValue.length(); ++i)
+    sValue[i] = tolower(sValue[i]);
+
+  if ( (sValue == "true") || (sValue == "t") )
     bRet = true;
-  else if ( (value == "false") || (value == "f"))
+  else if ( (sValue == "false") || (sValue == "f"))
     bRet = false;
   else
     throw string("Unknown boolean (true/false): " + value);
@@ -96,8 +100,8 @@ void CConvertor::stringToVectorByNewline(string value, vector<string> &lines) {
   int     iFirstSpace   = -1;
 
   // Lowercase sline
-  for (unsigned i = 0; i < sLine.length(); ++i)
-    sLine[i] = tolower(sLine[i]);
+//  for (unsigned i = 0; i < sLine.length(); ++i)
+//    sLine[i] = tolower(sLine[i]);
 
   iFirstSpace = sLine.find_first_of('\n');
   if (iFirstSpace == -1) {

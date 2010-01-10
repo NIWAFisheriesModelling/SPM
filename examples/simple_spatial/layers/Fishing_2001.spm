@@ -1,6 +1,6 @@
 # Fishing (2001)
 @layer Catch2001
-type Numeric
+type numeric
 data 0 0 0 0 2653 6676 0 0 0 0
 data 0 0 0 0 248 0 0 0 0 0
 data 0 0 0 0 6094.79259186841 3481 0 0 0 0

@@ -9,7 +9,7 @@ max_age 30
 age_plus_group True
 initialisation_phases Phase1 Phase2 Phase3
 initial_year 1995
-Current_year 2007
+current_year 2007
 final_year 2107
 cell_length 100
 time_steps one two
@@ -29,7 +29,7 @@ processes Recruitment Maturation halfM halfM MoveImmature MoveMature Ageing
 
 # Annual Cycle
 @time_step one # Summer
-processes Recruitment Maturation halfM fishing halfM
+processes Recruitment Maturation halfM Fishing halfM
 
 @time_step two # Winter
 processes MoveImmature MoveMature Ageing
@@ -47,7 +47,15 @@ type ageing
 categories immature mature
 
 @process Recruitment
-type BH_recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+r0 1e6
+ages 1
+
+{
+@process Recruitment
+type bh_recruitment
 categories immature
 proportions 1.0
 r0 1e6
@@ -56,16 +64,16 @@ steepness 0.75
 sigma_r 0.6
 rho 0.1
 layer Recruitment
-SSB SSB
-YCS_values 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0
-YCS_years 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
-SSB_offset 1
-standardise_YCS_year_range 1993 2005
-
+ssb SSB
+ycs_values 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0
+ycs_years 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
+ssb_offset 1
+standardise_ycs_year_range 1993 2005
+}
 @process halfM
 type constant_mortality_rate
 categories immature mature
-M 0.065 0.065
+m 0.065 0.065
 selectivities One One
 
 @process Fishing
@@ -73,8 +81,8 @@ type event_mortality
 categories immature mature
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 layers Catch1998 Catch1999 Catch2000 Catch2001 Catch2002 Catch2003 Catch2004 Catch2005 Catch2006 Catch2007
-U_max 0.99
-selectivities FishingSel FishingSel FishingSel
+u_max 0.99
+selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 
 @process Maturation
@@ -166,8 +174,8 @@ c 1
 
 @selectivity Maturation
 type logistic_producing
-L 5
-H 30
+l 5
+h 30
 a50 12.2
 ato95 2.8
 

@@ -1,6 +1,6 @@
 # Base cell reference map
-@layer Cell
-type Categorical
+@layer cell
+type categorical
 data r1-c1 r1-c2 r1-c3 r1-c4 r1-c5 r1-c6 r1-c7 r1-c8 r1-c9 r1-c10
 data r2-c1 r2-c2 r2-c3 r2-c4 r2-c5 r2-c6 r2-c7 r2-c8 r2-c9 r2-c10
 data r3-c1 r3-c2 r3-c3 r3-c4 r3-c5 r3-c6 r3-c7 r3-c8 r3-c9 r3-c10

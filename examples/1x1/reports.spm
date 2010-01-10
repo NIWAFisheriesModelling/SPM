@@ -52,7 +52,7 @@ type objective_function
 file_name objective.dat
 
 @report AgeError
-type Ageing_error
+type ageing_error
 ageing_error normal
 
 @include "simulation-reports.spm"

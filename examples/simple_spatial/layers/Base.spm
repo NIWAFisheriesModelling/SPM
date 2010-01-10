@@ -1,6 +1,6 @@
 # Base map
 @layer Base
-type Numeric
+type numeric
 data 0 0 0 1 1 1 1 0 0 0
 data 0 0 0 1 1 1 1 1 0 0
 data 0 1 1 1 1 1 1 1 1 0

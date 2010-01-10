@@ -14,7 +14,7 @@ const string basic_1x1 =
   "@model\n"
   "nrows 1\n"
   "ncols 1\n"
-  "layer Base\n"
+  "layer base\n"
   "categories immature mature spawning\n"
   "min_age 1\n"
   "max_age 10\n"

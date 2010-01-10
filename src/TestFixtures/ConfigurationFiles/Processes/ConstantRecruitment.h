@@ -15,7 +15,7 @@ const string constant_recruitment =
   "type constant_recruitment\n"
   "categories immature\n"
   "proportions 1.0\n"
-  "R0 100\n"
+  "r0 100\n"
   "ages 1\n";
 
 const string constant_recruitment_all_ages =
@@ -23,7 +23,7 @@ const string constant_recruitment_all_ages =
   "type constant_recruitment\n"
   "categories immature immature immature immature immature\n"
   "proportions 0.1 0.2 0.3 0.1 0.3\n"
-  "R0 10000\n"
+  "r0 10000\n"
   "ages 1 2 3 4 5\n";
 
 #endif /* CONSTANTRECRUITMENT_H_ */

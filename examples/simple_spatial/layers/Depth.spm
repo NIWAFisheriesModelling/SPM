@@ -1,6 +1,6 @@
 # Bathemetric (depth) data
 @layer Depth
-type Numeric
+type numeric
 data 0 0 0 594 548 552 600 0 0 0
 data 0 0 0 528.5 434 1616 3749 4154 0 0
 data 0 487 499 1814 2092 3545 4137 4191 4356 0
