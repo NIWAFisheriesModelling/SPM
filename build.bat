@@ -12,7 +12,7 @@ svn revert src/Version.h
 
 rem Strip and place in local directories
 strip spm.exe
-rem COPY spm.exe /Y c:\Windows\batch\spm.exe
+COPY spm.exe /Y c:\Windows\batch\spm.exe
 rem COPY spm_unoptimised.exe /Y c:\Windows\batch\spm_unoptimised.exe
 
 rem Update the Textpad syntax file
@@ -44,5 +44,9 @@ cd installer
 call makeInstall.bat > makeInstall.log
 cd ..
 
+rem remove spm from batch directory
+del c:\Windows\batch\spm.exe
+
+rem Unit tests
 spm -v
 spm_unittests.exe --report_level=short

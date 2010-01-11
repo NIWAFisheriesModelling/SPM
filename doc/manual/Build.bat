@@ -1,5 +1,5 @@
 svn_version --path ..\ --format tex --recursive --quiet --suffix Doc
-spm -v > SPMversion.tex
+"../../spm" -v > SPMversion.tex
 python QuickReference.py
 "C:\Program Files\MiKTeX 2.7\miktex\bin\pdflatex.exe" SPM
 "C:\Program Files\MiKTeX 2.7\miktex\bin\bibtex.exe" SPM
