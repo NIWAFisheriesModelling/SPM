@@ -10,12 +10,12 @@
 #define CPARAMETERLIST_H_
 
 // Global Headers
-#include <map>
 #include <vector>
 #include <string>
 
+#include "CParameterStorage.h"
+
 // Using
-using std::map;
 using std::vector;
 using std::string;
 
@@ -31,6 +31,7 @@ public:
   void                        addParameter(string name, string value);
   void                        registerAllowed(string name);
   string                      getString(string name, bool optional = false, string defaultValue = "");
+  string                      getMultiStrings(string name, bool optional=false, string defaultValue="");
   double                      getDouble(string name, bool optional = false, double defaultValue = 0.0);
   int                         getInt(string name, bool optional = false, int defaultValue = 0);
   bool                        getBool(string name, bool optional = false, bool defaultValue = true);
@@ -48,7 +49,7 @@ public:
 
 protected:
   // Variables
-  map<string, vector<string> >  mParameters;
+  CParameterStorage          mParameters;
   vector<string>                vAllowedParameters;
 };
 
