@@ -1,18 +1,17 @@
 \documentclass[a4paper,11pt,twoside,pdftex]{article}
 
+% Caption package for formating figure and label captions
+\usepackage[font=bf,format=hang,labelsep=colon,justification=justified,singlelinecheck=false,compatibility=false]{caption}
+
 % Misc packages
 \usepackage{ifthen} % for conditional expressions
 \usepackage{float} % for floating tables and graphics
 \usepackage{setspace} % for defining spacing between lines
 \usepackage{cmap} % allow searching in pdf documents
 
-% Caption package for formating figure and label captions
-\usepackage[font=bf,format=hang,labelsep=colon,justification=justified,singlelinecheck=false]{caption}
-
 % hyperref for HTML links within pdf 
-%EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
-\usepackage[a4paper,bookmarks=true,bookmarksopen=false,bookmarksnumbered=true,
-%            pdfpagemode=UseNone,
+% EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
+\usepackage[bookmarks=true,bookmarksopen=false,bookmarksnumbered=true,
             pdfpagelayout=TwoPageRight,
             pdftitle={Spatial Population Model (SPM) Users Manual}, 
             pdfauthor={Alistair Dunn; Scott Rasmussen}, 
@@ -205,7 +204,7 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \vspace{3cm}
 \begin{figure}[htp]
   \begin{center}
-   \includegraphics[height=8cm,width=8cm]{figures/SPM}
+   \includegraphics[height=8cm,width=8cm]{Figures/SPM}
   \end{center}
 \end{figure}
 
