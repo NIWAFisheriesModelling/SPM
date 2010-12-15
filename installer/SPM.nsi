@@ -38,6 +38,12 @@ Function .onInit
   StrCmp $R0 0 +3
     MessageBox MB_OK|MB_ICONEXCLAMATION "The ${PRODUCT_NAME} installer is already running."
     Abort
+  ; Check if user has administrator rights
+  xtInfoPlugin::IsAdministrator
+  Pop $9 ; "true" if the current user has administrator rights, otherwise it is "false"
+  StrCmp $9 true +3
+    MessageBox MB_OK|MB_ICONEXCLAMATION "You do not appear to have Administrator rights on this machine. Aborting installation."
+    Abort
   ;Check earlier installation
   init.restart:
   ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "UninstallString"
