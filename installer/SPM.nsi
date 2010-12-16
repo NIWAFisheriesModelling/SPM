@@ -20,7 +20,11 @@ BrandingText "http://www.niwa.co.nz"
 !include Modules\EnvVarUpdate.nsh
 !include Modules\fileassoc.nsh
 !include "WordFunc.nsh"
-  !insertmacro VersionCompare
+!insertmacro VersionCompare
+
+; Define multiuser install options
+!define MULTIUSER_EXECUTIONLEVEL Highest
+!include "MultiUser.nsh"
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "SPM"
@@ -38,12 +42,14 @@ Function .onInit
   StrCmp $R0 0 +3
     MessageBox MB_OK|MB_ICONEXCLAMATION "The ${PRODUCT_NAME} installer is already running."
     Abort
-  ; Check if user has administrator rights
-  xtInfoPlugin::IsAdministrator
-  Pop $9 ; "true" if the current user has administrator rights, otherwise it is "false"
-  StrCmp $9 true +3
-    MessageBox MB_OK|MB_ICONEXCLAMATION "You do not appear to have Administrator rights on this machine. Aborting installation."
-    Abort
+  ;Check for admin rights
+  UserInfo::GetOriginalAccountType
+  Pop $0
+  StrCmp $0 "Admin" +3 0
+		MessageBox MB_OK "You need to have adminstrator right to install $PRODUCT_NAME. Aborting install."
+		abort
+  ;Force install for all users
+  !insertmacro MULTIUSER_INIT
   ;Check earlier installation
   init.restart:
   ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "UninstallString"
@@ -155,8 +161,8 @@ SectionEnd
 !define APP_HOME $INSTDIR
 Section "Modify path for SPM" SEC04
   ; update path to install directory
-  ${EnvVarUpdate} $0 "PATH" "R" "HKCU" "$INSTDIR"  ; Remove path of old rev
-  ${EnvVarUpdate} $0 "PATH" "A" "HKCU" "$INSTDIR"  ; Append the new one
+  ${EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR"  ; Remove path of old rev
+  ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR"  ; Append the new one
 SectionEnd
 
 Section /o "Copy example files" SEC05
@@ -227,6 +233,7 @@ Function un.onUninstSuccess
 FunctionEnd
 
 Function un.onInit
+  !insertmacro MULTIUSER_UNINIT
   MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 "Are you sure you want to completely remove $(^Name) and all of its components?" IDYES +2
   Abort
 FunctionEnd
@@ -255,7 +262,7 @@ Section Uninstall
   RMDir "$SMPROGRAMS\$ICONS_GROUP"
   RMDir "$INSTDIR"
 
-  ${un.EnvVarUpdate} $0 "PATH" "R" "HKCU" "$INSTDIR"      ; Remove path of latest rev
+  ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR"      ; Remove path of latest rev
 
   !insertmacro APP_UNASSOCIATE "SPM" "SPM.textfile"
 
