@@ -8,12 +8,12 @@
 //============================================================================
 
 // Global headers
+#include <map>
 #include <vector>
 #include <string>
 #include <iostream>
 
 // Local headers
-#include "CParameterStorage.h"
 #include "CParameterList.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CComparer.h"
@@ -22,6 +22,7 @@
 #include "../../Translations/Translations.h"
 
 // Using
+using std::map;
 using std::vector;
 using std::string;
 using std::cout;
@@ -47,16 +48,7 @@ void CParameterList::registerAllowed(string name) {
 // Add a parameter
 //**********************************************************************
 void CParameterList::addParameter(string name, string value) {
-   //mParameters[name].push_back(value);
-	int i=mParameters.find(name);
-	if (i<0){
-		i=(int)mParameters.size();
-		mParameters.push_in(name,i);
-		mParameters.push_in(value,i);
-	}
-	else{
-		mParameters.push_in(value,i);
-	}
+  mParameters[name].push_back(value);
 }
 
 //**********************************************************************
@@ -65,36 +57,21 @@ void CParameterList::addParameter(string name, string value) {
 //**********************************************************************
 void CParameterList::checkInvalidParameters() {
 
-  //map<string, vector<string> >::iterator mvPtr = mParameters.begin();
-  //while (mvPtr != mParameters.end()) {
-  //  bool bMatch = false;
-
-  //  foreach(string Parameter, vAllowedParameters) {
-  //    if (Parameter == (*mvPtr).first) {
-  //      bMatch = true;
-  //      break;
-  //    }
-  //  }
-
-  //  if (!bMatch)
-  //    throw string("Unknown subcommand :" + (*mvPtr).first);
-
-  //  mvPtr++;
-  //}
-	bool inBlock=false;
-	for (int i=0;i<(int)mParameters.size();i++){
+  map<string, vector<string> >::iterator mvPtr = mParameters.begin();
+  while (mvPtr != mParameters.end()) {
     bool bMatch = false;
-		string str=mParameters[i][0];
-		//if (str==DATA_BLOCK_START) inBlock=true;
-		//if (str==DATA_BLOCK_END) inBlock=false;
-		if (inBlock) continue;
-		for (int j=0;j<(int)vAllowedParameters.size();j++){
-			if (str!=vAllowedParameters[j]) continue;
+
+    foreach(string Parameter, vAllowedParameters) {
+      if (Parameter == (*mvPtr).first) {
         bMatch = true;
         break;
       }
+    }
+
     if (!bMatch)
-         throw string("Unknown subcommand :" + str);
+      throw string("Unknown subcommand :" + (*mvPtr).first);
+
+    mvPtr++;
   }
 }
 
@@ -115,34 +92,6 @@ string CParameterList::getString(string name, bool optional, string defaultValue
     CError::errorTooMuch(name);
 
   return mParameters[name][0];
-}
-
-//**********************************************************************
-// string CParameterList::getMultiStrings(string name)
-// Return the multi-values of the parameter
-//**********************************************************************
-string CParameterList::getMultiStrings(string name, bool optional, string defaultValue) {
-  if (!hasParameter(name))
-    if (optional)
-      return defaultValue;
-    else
-      CError::errorMissing(name);
-
-  if ((int)mParameters[name].size() == 0)
-    CError::errorMissing(name);
-  if ((int)mParameters[name].size() > 1)
-    CError::errorTooMuch(name);
-
-   vector<string> strs;
-	fillVector(strs,name);
-	if (!(int)strs.size()) return defaultValue;
-	string str=strs[0];
-	if ((int)strs.size()<=1) return str;
-	for (int i=1; i<(int)strs.size(); i++){
-		str+=" "+strs[i];
-	}
-	return str;
-
 }
 
 //**********************************************************************
@@ -219,12 +168,11 @@ void CParameterList::fillVector(vector<string> &list, string name, bool optional
   // Clear the List
   list.clear();
 
-  //vector<string>::iterator vPtr = mParameters[name].begin();
-  //while (vPtr != mParameters[name].end()) {
-  //  list.push_back((*vPtr));
-  //  vPtr++;
-  //}
-  list=mParameters[name];
+  vector<string>::iterator vPtr = mParameters[name].begin();
+  while (vPtr != mParameters[name].end()) {
+    list.push_back((*vPtr));
+    vPtr++;
+  }
 }
 
 //**********************************************************************
@@ -241,14 +189,10 @@ void CParameterList::fillVector(vector<double> &list, string name, bool optional
   // Clear List
   list.clear();
 
-  //vector<string>::iterator vPtr = mParameters[name].begin();
-  //while (vPtr != mParameters[name].end()) {
-  //   list.push_back(CConvertor::stringToDouble(*vPtr));
-  //   vPtr++;
-  //}
-  vector<string> strs=mParameters[name];
-  for (int i=0;i<(int)strs.size();i++){
-     list.push_back(CConvertor::stringToDouble(mParameters[name][i]));
+  vector<string>::iterator vPtr = mParameters[name].begin();
+  while (vPtr != mParameters[name].end()) {
+    list.push_back(CConvertor::stringToDouble((*vPtr)));
+    vPtr++;
   }
 }
 
@@ -266,14 +210,10 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
   // Clear the list
   list.clear();
 
-  //vector<string>::iterator vPtr = mParameters[name].begin();
-  //while (vPtr != mParameters[name].end()) {
-  //  list.push_back(CConvertor::stringToInt(*vPtr));
-  //  vPtr++;
-  //}
-  vector<string> strs=mParameters[name];
-  for (int i=0;i<(int)strs.size();i++){
-     list.push_back(CConvertor::stringToInt(mParameters[name][i]));
+  vector<string>::iterator vPtr = mParameters[name].begin();
+  while (vPtr != mParameters[name].end()) {
+    list.push_back(CConvertor::stringToInt((*vPtr)));
+    vPtr++;
   }
 
 }
@@ -285,14 +225,10 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
 void CParameterList::fillDefinedParameterVector(vector<string> &list) {
   list.clear();
 
-  //map<string, vector<string> >::iterator mvPtr = mParameters.begin();
-  //while (mvPtr != mParameters.end()) {
-  //  list.push_back( (*mvPtr).first );
-  //  mvPtr++;
-  //}
-
-  for (int i=0;i<(int)mParameters.size();i++){
-	  list.push_back(mParameters[i][0]);
+  map<string, vector<string> >::iterator mvPtr = mParameters.begin();
+  while (mvPtr != mParameters.end()) {
+    list.push_back( (*mvPtr).first );
+    mvPtr++;
   }
 }
 
@@ -331,19 +267,12 @@ void CParameterList::fillArray(string *array, int length, string name, int offse
 // Do we have this parameter?
 //**********************************************************************
 bool CParameterList::hasParameter(string name) {
-  //map<string, vector<string> >::iterator mPtr = mParameters.begin();
-  //while (mPtr != mParameters.end()) {
-  //if (CComparer::isSame(name, (*mPtr).first, true))
-  //return true;
+  map<string, vector<string> >::iterator mPtr = mParameters.begin();
+  while (mPtr != mParameters.end()) {
+    if (CComparer::isSame(name, (*mPtr).first, true))
+      return true;
 
-  //  mPtr++;
-  //}
-	bool inBlock=false;
-	for (int i=0;i<(int)mParameters.size();i++){
-      string sub=mParameters[i][0];
-		//if (sub==DATA_BLOCK_START) inBlock=true;
-		//if (sub==DATA_BLOCK_END) inBlock=false;
-		if (!inBlock&&name==sub) return true;  //replace name==sub with CComparer::isSame(...)
+    mPtr++;
   }
 
   return false;
@@ -356,16 +285,11 @@ bool CParameterList::hasParameter(string name) {
 int CParameterList::countMatches(string name) {
   int iMatch = 0;
 
-  //map<string, vector<string> >::iterator mPtr = mParameters.begin();
-  //while (mPtr != mParameters.end()) {
-  //  if (CComparer::isSame(name, (*mPtr).first, true))
-  //    iMatch++;
-  //  mPtr++;
-  //}
-
-  for (int i=0;i<(int)mParameters.size();i++){
-    if (CComparer::isSame(name, mParameters[i][0], true))
+  map<string, vector<string> >::iterator mPtr = mParameters.begin();
+  while (mPtr != mParameters.end()) {
+    if (CComparer::isSame(name, (*mPtr).first, true))
       iMatch++;
+    mPtr++;
   }
 
   return iMatch;
@@ -387,26 +311,18 @@ int CParameterList::countParameterValues(string name) {
 // Get the Match full (absolute) name
 //**********************************************************************
 string CParameterList::getMatchFullName(string name, int matchNumber = 1) {
-  //map<string, vector<string> >::iterator mPtr = mParameters.begin();
-  //while (mPtr != mParameters.end()) {
-  //  if (CComparer::isSame(name, (*mPtr).first, true)) {
-  //    matchNumber--;
-
-  //    if (matchNumber == 0)
-  //      return (*mPtr).first;
-  //  }
-
-  //  mPtr++;
-  //}
-
-  for (int i=0;i<(int)mParameters.size();i++){
-    if (CComparer::isSame(name, mParameters[i][0], true)) {
+  map<string, vector<string> >::iterator mPtr = mParameters.begin();
+  while (mPtr != mParameters.end()) {
+    if (CComparer::isSame(name, (*mPtr).first, true)) {
       matchNumber--;
 
       if (matchNumber == 0)
-        return mParameters[i][0];
-	 }
+        return (*mPtr).first;
+    }
+
+    mPtr++;
   }
+
   CError::errorMissing(name);
   return "";
 }
