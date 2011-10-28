@@ -13,11 +13,11 @@ SET(OPTI_NAME spm)
 # Assumptions
 # Compiled with MinGW under Windows, where,
 #   MinGW is in c:\Program Files
-#   Boost libraries are located in C:/Progra~1/MingW/boost_libs
-#   Boost header files are located in C:/Progra~1/MinGW/include/boost/
+#   Boost libraries are located in C:/Progra~2/MingW/boost_libs
+#   Boost header files are located in C:/Progra~2/MinGW/include/boost/
 
 IF (WIN32)
-  SET(BOOST_LIBS "C:/Progra~1/MingW/boost_libs")
+  SET(BOOST_LIBS "C:/Progra~2/MingW/boost_libs")
   SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
   SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
@@ -27,12 +27,12 @@ IF (WIN32)
     COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
   )
   SET(MAIN_LIBRARIES
-    libboost_system-mgw34-mt-1_38
-    libboost_filesystem-mgw34-mt-1_38
-    libboost_thread-mgw34-mt-1_38
-    libboost_program_options-mgw34-mt-1_38
+    libboost_system-mgw45-mt-1_47
+    libboost_filesystem-mgw45-mt-1_47
+    libboost_thread-mgw45-mt-1_47
+    libboost_program_options-mgw45-mt-1_47
   )
-  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw34-mt-sd-1_38)
+  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw45-mt-sd-1_47)
 ELSE (WIN32)
   SET(BOOST_LIBS "/opt/boost138/usr/lib64")
   SET(BOOST_HEADERS "/opt/boost138/usr/include")

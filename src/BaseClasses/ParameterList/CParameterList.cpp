@@ -80,11 +80,13 @@ void CParameterList::checkInvalidParameters() {
 // Return the value of the parameter
 //**********************************************************************
 string CParameterList::getString(string name, bool optional, string defaultValue) {
-  if (!hasParameter(name))
-    if (optional)
+  if (!hasParameter(name)) {
+    if (optional) {
       return defaultValue;
-    else
+    } else {
       CError::errorMissing(name);
+    }
+  }
 
   if ((int)mParameters[name].size() == 0)
     CError::errorMissing(name);
@@ -159,11 +161,13 @@ bool CParameterList::getBool(string name, bool optional, bool defaultValue) {
 // Fill the vector with strings from our parameter list
 //**********************************************************************
 void CParameterList::fillVector(vector<string> &list, string name, bool optional) {
-  if (!hasParameter(name))
-    if (optional)
+  if (!hasParameter(name)) {
+    if (optional) {
       return;
-    else
+    } else {
       CError::errorMissing(name);
+    }
+  }
 
   // Clear the List
   list.clear();
@@ -180,11 +184,13 @@ void CParameterList::fillVector(vector<string> &list, string name, bool optional
 // Fill Vector with Doubles
 //**********************************************************************
 void CParameterList::fillVector(vector<double> &list, string name, bool optional) {
-  if (!hasParameter(name))
-    if (optional)
+  if (!hasParameter(name)) {
+    if (optional) {
       return;
-    else
+    } else {
       CError::errorMissing(name);
+    }
+  }
 
   // Clear List
   list.clear();
@@ -201,11 +207,13 @@ void CParameterList::fillVector(vector<double> &list, string name, bool optional
 // Fill Vector with Ints
 //**********************************************************************
 void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
-  if (!hasParameter(name))
-    if (optional)
+  if (!hasParameter(name)) {
+    if (optional) {
       return;
-    else
+    } else {
       CError::errorMissing(name);
+    }
+  }
 
   // Clear the list
   list.clear();

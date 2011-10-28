@@ -17,6 +17,7 @@ To build SPM from the source files
 To build the Microdoft Windows version of SPM uing MinGW gcc, issue 
 the following commands in the SPM/ directory
 
+> rm CMakeCache.txt
 > cmake -G "MinGW Makefiles"
 > mingw32-make all
 > strip spm.exe

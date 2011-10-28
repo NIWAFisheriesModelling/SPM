@@ -103,7 +103,7 @@ void CObservationDefinitionReport::execute() {
 
   // Print Error Values
   sLastKey = "";
-  bool bWriteErrorValue;
+  bool bWriteErrorValue = false;
   foreach(SComparison *Comparison, vComparisons) {
     if (sLastKey != Comparison->sKey) {
       cout << "\n" << PARAM_ERROR_VALUE << " " << Comparison->sKey << " ";
