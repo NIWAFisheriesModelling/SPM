@@ -17,7 +17,7 @@ SET(OPTI_NAME spm)
 #   Boost header files are located in C:/Progra~2/MinGW/include/boost/
 
 IF (WIN32)
-  SET(BOOST_LIBS "C:/Progra~2/MingW/boost_libs")
+  SET(BOOST_LIBS "D:/Programming/boost/boost_1_48_0/boost_1_48_0/stage/lib")
   SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
   SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0")
@@ -27,12 +27,12 @@ IF (WIN32)
     COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
   )
   SET(MAIN_LIBRARIES
-    libboost_system-mgw46-mt-1_48
-    libboost_filesystem-mgw46-mt-1_48
-    libboost_thread-mgw46-mt-1_48
-    libboost_program_options-mgw46-mt-1_48
+    boost_system-mgw46-mt-s-1_48
+    boost_filesystem-mgw46-mt-s-1_48
+    boost_thread-mgw46-mt-s-1_48
+    boost_program_options-mgw46-mt-s-1_48
   )
-  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw46-mt-sd-1_48)
+  SET(TEST_LIBRARIES boost_unit_test_framework-mgw46-mt-sd-1_48)
 ELSE (WIN32)
   SET(BOOST_LIBS "/opt/boost138/usr/lib64")
   SET(BOOST_HEADERS "/opt/boost138/usr/include")
