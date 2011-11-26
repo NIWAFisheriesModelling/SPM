@@ -57,7 +57,7 @@ void CAnnualMortalityRateProcess::validate() {
     if (vCategoryNames.size() != vSelectivityNames.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAnnualMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -83,7 +83,7 @@ void CAnnualMortalityRateProcess::build() {
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAnnualMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -140,7 +140,7 @@ void CAnnualMortalityRateProcess::execute() {
     } // for i
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAnnualMortalityRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -46,7 +46,7 @@ double* CParamParser::parseCommand(string Command) {
 
     return pRet;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CParamParser.parseCommand(" + sCommand + ")->" + Ex;
     throw Ex;
   }
@@ -120,7 +120,7 @@ void CParamParser::parseAbsoluteCommand() {
     }
     throw string(ERROR_INVALID_FORMAT + sCommand);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CParamParser.parseAbsoluteCommand()->" + Ex;
     throw Ex;
   }

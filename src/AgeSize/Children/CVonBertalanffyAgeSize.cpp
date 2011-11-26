@@ -61,7 +61,7 @@ void CVonBertalanffyAgeSize::validate() {
 
     if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
       CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -83,7 +83,7 @@ void CVonBertalanffyAgeSize::build() {
     // Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -98,7 +98,7 @@ void CVonBertalanffyAgeSize::rebuild() {
     // Base
     CAgeSize::rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -114,17 +114,18 @@ double CVonBertalanffyAgeSize::getMeanSize(double &age) {
     if ((-dK * (age - dT0)) > 10)
       throw("Fatal error in age-size relationship: exp(-k*(age-t0)) is enormous. The k or t0 parameters are probably wrong.");
 
-    double dSize = dLinf * (1 - exp(-dK * (age - dT0)));
-
-    if (dSize < 0)
-      return 0.0;
-    else
-      return(dSize);
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanSize(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+
+
+  double dSize = dLinf * (1 - exp(-dK * (age - dT0)));
+
+  if (dSize < 0)
+    return 0.0;
+
+  return dSize;
 }
 
 //**********************************************************************
@@ -132,16 +133,18 @@ double CVonBertalanffyAgeSize::getMeanSize(double &age) {
 // Apply size-weight relationship
 //**********************************************************************
 double CVonBertalanffyAgeSize::getMeanWeight(double &age) {
+  double dWeight = 0;
+
   try {
-
     double dSize = this->getMeanSize(age);
-    double dWeight = pSizeWeight->getMeanWeight(dSize);
-    return dWeight;
+    dWeight = pSizeWeight->getMeanWeight(dSize);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+
+  return dWeight;
 }
 
 //**********************************************************************

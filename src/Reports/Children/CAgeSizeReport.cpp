@@ -43,9 +43,9 @@ void CAgeSizeReport::validate() {
 
     //TODO (Alistair) Validate allowed ages (>=0)
 
-  } catch (string ex) {
-    ex = "CAgeSizeReport.validate(" + getLabel() + ")->" + ex;
-    throw ex;
+  } catch (string &Ex) {
+    Ex = "CAgeSizeReport.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 
@@ -62,7 +62,7 @@ void CAgeSizeReport::build() {
     CAgeSizeManager *pManager = CAgeSizeManager::Instance();
     pAgeSize = pManager->getAgeSize(sAgeSize);
 
-  } catch (string ex) {
+  } catch (string & ex) {
     ex = "CAgeSizeReport.build(" + getLabel() + ")->" + ex;
     throw ex;
   }

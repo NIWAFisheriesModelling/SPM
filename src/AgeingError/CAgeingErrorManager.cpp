@@ -82,7 +82,7 @@ CAgeingError* CAgeingErrorManager::getAgeingError(string label) {
 
     CError::errorUnknown(PARAM_AGEING_ERROR, label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingErrorManager.getAgeingError(" + label + ")->" + Ex;
     throw Ex;
   }
@@ -112,7 +112,7 @@ void CAgeingErrorManager::validate() {
     }
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingErrorManager.validate()->" + Ex;
     throw Ex;
   }
@@ -127,7 +127,7 @@ void CAgeingErrorManager::build() {
     foreach(CAgeingError *ageingError, vAgeingErrors) {
       ageingError->build();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingErrorManager.build()->" + Ex;
     throw Ex;
   }
@@ -143,7 +143,7 @@ void CAgeingErrorManager::rebuild() {
       ageingError->rebuild();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingErrorManager.rebuild()->" + Ex;
     throw Ex;
   }

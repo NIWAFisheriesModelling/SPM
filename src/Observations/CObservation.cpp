@@ -115,7 +115,7 @@ void CObservation::validate() {
     if ( (bSimulate) && (sLikelihood == PARAM_PSEUDO) )
       throw string("Simulate must be false if likelihood is: " + string(PARAM_PSEUDO));
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -157,7 +157,7 @@ void CObservation::build() {
     else
       bSimulationRunMode = false;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

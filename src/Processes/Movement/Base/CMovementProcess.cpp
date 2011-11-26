@@ -40,7 +40,7 @@ void CMovementProcess::setMethod(string value) {
       else
         bHexMode = false;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.setMethod()->" + Ex;
     throw Ex;
   }
@@ -65,7 +65,7 @@ void CMovementProcess::validate() {
     if ( (sMethod != PARAM_SQUARE_UNIFORM) && (sMethod != PARAM_HEX_UNIFORM) )
       CError::errorUnknown(PARAM_METHOD, sMethod);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -78,7 +78,7 @@ void CMovementProcess::validate() {
 void CMovementProcess::build() {
   try {
     CProcess::build();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -95,7 +95,7 @@ void CMovementProcess::execute() {
 
     CProcess::execute();
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -125,7 +125,7 @@ void CMovementProcess::doMove(int RIndex, int CIndex, int SRIndex, int SCIndex, 
     pBaseSquare->subValue(SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.doMove(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -149,7 +149,7 @@ void CMovementProcess::moveUp(int RIndex, int CIndex, int SRIndex, int SCIndex, 
     doMove( (RIndex-1), CIndex, SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.moveUp(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -173,7 +173,7 @@ void CMovementProcess::moveDown(int RIndex, int CIndex, int SRIndex, int SCIndex
     doMove( (RIndex+1), CIndex, SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.moveDown(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -197,7 +197,7 @@ void CMovementProcess::moveLeft(int RIndex, int CIndex, int SRIndex, int SCIndex
     doMove(RIndex, (CIndex-1), SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.moveLeft(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -220,7 +220,7 @@ void CMovementProcess::moveRight(int RIndex, int CIndex, int SRIndex, int SCInde
     doMove(RIndex, (CIndex+1), SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.moveRight(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -246,7 +246,7 @@ void CMovementProcess::moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCInd
     doMove( (RIndex-1), (CIndex-1), SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.moveLeftUp(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -272,7 +272,7 @@ void CMovementProcess::moveLeftDown(int RIndex, int CIndex, int SRIndex, int SCI
     doMove( (RIndex+1), (CIndex-1), SRIndex, SCIndex, Qty);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMovementProcess.moveLeftDown(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

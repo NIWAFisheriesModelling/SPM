@@ -41,7 +41,7 @@ void CTimeStep::validate() {
     // Populate our parameters
     pParameterList->fillVector(vProcessNames, PARAM_PROCESSES);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CTimeStep.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -57,7 +57,7 @@ void CTimeStep::build() {
     CProcessManager *pProcessManager = CProcessManager::Instance();
     pProcessManager->fillVector(vProcesses, vProcessNames);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CTimeStep.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -78,7 +78,7 @@ void CTimeStep::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CTimeStep.execute()->" + Ex;
     throw Ex;
   }

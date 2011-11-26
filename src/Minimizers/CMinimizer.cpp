@@ -92,7 +92,7 @@ void CMinimizer::validate() {
     // Assign our param
     bCovariance         = pParameterList->getBool(PARAM_COVARIANCE,true,true);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMinimizer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

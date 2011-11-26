@@ -83,7 +83,7 @@ CObservation* CObservationManager::getObservation(string label) {
 
     CError::errorUnknown(PARAM_OBSERVATION, label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservationManager.getObservation()->" + Ex;
     throw Ex;
   }
@@ -130,7 +130,7 @@ void CObservationManager::validate() {
     }
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservationManager.validate()->" + Ex;
     throw Ex;
   }
@@ -148,7 +148,7 @@ void CObservationManager::build() {
       Observation->build();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservationManager.build()->" + Ex;
     throw Ex;
   }
@@ -166,7 +166,7 @@ void CObservationManager::execute(int year, int step) {
         Observation->execute();
       }
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservationManager.execute()->" + Ex;
     throw Ex;
   }

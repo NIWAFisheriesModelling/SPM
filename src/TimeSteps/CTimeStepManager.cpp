@@ -97,7 +97,7 @@ int CTimeStepManager::getTimeStepOrderIndex(string label) {
 
     CError::errorUnknown(PARAM_TIME_STEP, label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CTimeStepManager.getTimeStepOrderIndex()->" + Ex;
     throw Ex;
   }
@@ -114,7 +114,7 @@ string CTimeStepManager::getFirstTimeStepLabel() {
 
     return (vTimeSteps[0]->getLabel());
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CTimeStepManager.getFirstTimeStep()->" + Ex;
     throw Ex;
   }
@@ -133,7 +133,7 @@ void CTimeStepManager::clone(CTimeStepManager *Manager) {
       vTimeSteps.push_back(pTimeStep->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CTimeStepManager.clone()->" + Ex;
     throw Ex;
   }
@@ -153,7 +153,7 @@ void CTimeStepManager::validate() {
       TimeStep->validate();
     }
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CTimeStepManager.validate()->" + Ex;
     throw Ex;
   }
@@ -181,7 +181,7 @@ void CTimeStepManager::build() {
     pDerivedQuantityManager   = CDerivedQuantityManager::Instance();
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CTimeStepManager.build()->" + Ex;
     throw Ex;
   }

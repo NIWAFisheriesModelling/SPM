@@ -37,7 +37,7 @@ void CUniformMovementProcess::validate() {
     if (getCategoryCount() != getSelectivityCount())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CUniformMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -52,7 +52,7 @@ void CUniformMovementProcess::build() {
     // Base Building
     CMovementProcess::build();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CUniformMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -109,7 +109,7 @@ void CUniformMovementProcess::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CUniformMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

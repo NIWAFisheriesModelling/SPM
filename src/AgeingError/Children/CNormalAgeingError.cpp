@@ -45,7 +45,7 @@ void CNormalAgeingError::validate() {
     if (iK > iMaxAge)
       CError::errorGreaterThan(PARAM_K, PARAM_MAX_AGE);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNormalError.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -63,7 +63,7 @@ void CNormalAgeingError::build() {
     // Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNormalAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -99,7 +99,7 @@ void CNormalAgeingError::rebuild() {
         mMisMatrix[i][i] = 1;
       }
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNormalAgeingError.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -122,7 +122,7 @@ void CNormalAgeingError::getExpected(vector<double> &expected) {
     for (int i = 0; i < (int)expected.size(); ++i)
       expected[i] = vResult[i];
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNormalAgeingError.getExpected(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

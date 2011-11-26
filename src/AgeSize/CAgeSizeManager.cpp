@@ -82,7 +82,7 @@ CAgeSize* CAgeSizeManager::getAgeSize(string label) {
 
     CError::errorUnknown(PARAM_SIZE_WEIGHT, label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSizeManager.getAgeSize(" + label + ")->" + Ex;
     throw Ex;
   }
@@ -111,7 +111,7 @@ void CAgeSizeManager::validate() {
         CError::errorDuplicate(PARAM_AGE_SIZE, AgeSize->getLabel());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSizeManager.validate()->" + Ex;
     throw Ex;
   }
@@ -126,7 +126,7 @@ void CAgeSizeManager::build() {
     foreach(CAgeSize *AgeSize, vAgeSizes) {
       AgeSize->build();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSizeManager.build()->" + Ex;
     throw Ex;
   }
@@ -142,7 +142,7 @@ void CAgeSizeManager::rebuild() {
       AgeSize->rebuild();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSizeManager.rebuild()->" + Ex;
     throw Ex;
   }

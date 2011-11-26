@@ -84,7 +84,7 @@ int main(int argc, char * argv[]) {
       pRuntime->run();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     cerr << "[ERROR] SPM has encountered a problem" << endl;
 
     // Un-Wind our Exception Stack

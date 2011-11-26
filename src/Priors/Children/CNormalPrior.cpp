@@ -33,7 +33,7 @@ void CNormalPrior::validate() {
     dMu   = pParameterList->getDouble(PARAM_MU);
     dCv   = pParameterList->getDouble(PARAM_CV);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNormalPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -51,7 +51,7 @@ double CNormalPrior::getResult(double Param) {
     return 0.5 * ((Param-dMu)/(dCv*dMu)) * ((Param-dMu)/(dCv*dMu));
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNormalPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

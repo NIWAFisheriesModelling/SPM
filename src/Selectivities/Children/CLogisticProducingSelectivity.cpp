@@ -48,7 +48,7 @@ void CLogisticProducingSelectivity::validate() {
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLogisticProducingSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -82,7 +82,7 @@ double CLogisticProducingSelectivity::calculateResult(int Age) {
     return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLogisticProducingSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

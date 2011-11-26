@@ -41,7 +41,7 @@ void CKnifeEdgeSelectivity::validate() {
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CKnifeedgeSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,7 +65,7 @@ double CKnifeEdgeSelectivity::getResult(int Param) {
       return (dAlpha);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CKnifeedgeSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -37,7 +37,7 @@ void CInitializationReport::validate() {
     // Populate vars
     sInitializationPhase = pParameterList->getString(PARAM_INITIALIZATION_PHASE);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInitializationReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -55,7 +55,7 @@ void CInitializationReport::build() {
     pInitializationPhaseManager = CInitializationPhaseManager::Instance();
     iInitializationPhaseIndex   = pInitializationPhaseManager->getInitializationPhaseOrderIndex(sInitializationPhase);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInitializationReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -121,7 +121,7 @@ void CInitializationReport::execute() {
   cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPartitionReporter.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

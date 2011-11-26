@@ -25,7 +25,7 @@ void CPrior::validate() {
   try {
     // Base
     CBaseValidate::validate();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

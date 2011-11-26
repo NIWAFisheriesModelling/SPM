@@ -30,7 +30,7 @@ CAbundanceDensityLayer::CAbundanceDensityLayer() {
 double CAbundanceDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceDensityLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -51,7 +51,7 @@ void CAbundanceDensityLayer::validate() {
     pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceDensityLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -64,7 +64,7 @@ void CAbundanceDensityLayer::validate() {
 void CAbundanceDensityLayer::build() {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceDensityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

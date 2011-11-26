@@ -69,7 +69,7 @@ void CCategoryTransitionRateProcess::validate() {
       registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCategoryTransitionRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -101,7 +101,7 @@ void CCategoryTransitionRateProcess::build() {
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCategoryTransitionRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -144,7 +144,7 @@ void CCategoryTransitionRateProcess::execute() {
         }
       }
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCategoryTransitionRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

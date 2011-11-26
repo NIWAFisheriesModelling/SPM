@@ -81,7 +81,7 @@ int CSelectivityManager::getSelectivityIndex(string Label) {
 
     CError::errorUnknown(PARAM_SELECTIVITY, Label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSelectivityManager.getSelectivityIndex()->" + Ex;
     throw Ex;
   }
@@ -104,7 +104,7 @@ CSelectivity* CSelectivityManager::getSelectivity(string Label) {
 
     CError::errorUnknown(PARAM_SELECTIVITY, Label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSelectivityManager.getSelectivity()->" + Ex;
     throw Ex;
   }
@@ -123,7 +123,7 @@ void CSelectivityManager::clone(CSelectivityManager *Manager) {
       vSelectivities.push_back(Selectivity->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSelectivityManager.clone()->" + Ex;
     throw Ex;
   }
@@ -148,7 +148,7 @@ void CSelectivityManager::validate() {
       if (mSelectivityList[Selectivity->getLabel()] > 1)
         CError::errorDuplicate(PARAM_SELECTIVITY, Selectivity->getLabel());
     }
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex  = "CSelectivityManager.validate()->" + Ex;
     throw Ex;
   }
@@ -169,7 +169,7 @@ void CSelectivityManager::build() {
     }
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex  = "CSelectivityManager.build()->" + Ex;
     throw Ex;
   }
@@ -191,7 +191,7 @@ void CSelectivityManager::rebuild() {
     }
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex  = "CSelectivityManager.rebuild()->" + Ex;
     throw Ex;
   }

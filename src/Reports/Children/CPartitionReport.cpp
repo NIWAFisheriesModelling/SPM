@@ -46,7 +46,7 @@ void CPartitionReport::validate() {
     else if (iYear > pWorld->getCurrentYear())
       CError::errorGreaterThan(PARAM_YEAR, PARAM_CURRENT_YEAR);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPartitionReporter.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,7 +65,7 @@ void CPartitionReport::build() {
     // Populate TimeStepIndex
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPartitionReporter.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -134,7 +134,7 @@ void CPartitionReport::execute() {
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPartitionReporter.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

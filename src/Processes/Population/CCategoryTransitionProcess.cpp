@@ -99,7 +99,7 @@ void CCategoryTransitionProcess::validate() {
     if (getYearsCount() != getLayersCount())
       CError::errorListSameSize(PARAM_YEARS, PARAM_LAYERS);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CCategoryTransitionProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -133,7 +133,7 @@ void CCategoryTransitionProcess::build() {
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CCategoryTransitionProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -223,7 +223,7 @@ void CCategoryTransitionProcess::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CCategoryTransitionProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -63,7 +63,7 @@ void CDoubleExponentialSelectivity::validate() {
     if (dY2 < 0)
       CError::errorLessThan(PARAM_Y2, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleExponentialSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -88,7 +88,7 @@ double CDoubleExponentialSelectivity::calculateResult(int Age) {
   return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleExponentialSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

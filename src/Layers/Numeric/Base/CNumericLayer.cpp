@@ -37,7 +37,7 @@ void CNumericLayer::setValue(int X, int Y, double Value) {
   try {
     CError::errorSupported(PARAM_FUNCTION);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNumericLayer.setValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -79,7 +79,7 @@ void CNumericLayer::validate() {
     for (int i = 0; i < iHeight; ++i)
       pGrid[i] = new double[iWidth];
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNumericLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -36,7 +36,7 @@ void CBaseValidate::validate() {
     // Validate known parameters against bad ones
     pParameterList->checkInvalidParameters();
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CBaseValidate.validate(" + getLabel() + ")->" + Ex; // No label defined yet.
     throw Ex;
   }

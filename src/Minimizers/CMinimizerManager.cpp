@@ -102,7 +102,7 @@ void CMinimizerManager::validate() {
     if (pMinimizer == 0)
       CError::errorUnknown(PARAM_MINIMIZER, sMinimizer);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMinimizerManager.validate()->" + Ex;
     throw Ex;
   }
@@ -120,7 +120,7 @@ void CMinimizerManager::build() {
 
     pMinimizer->build();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMinimizerManager.build()->" + Ex;
     throw Ex;
   }
@@ -139,7 +139,7 @@ void CMinimizerManager::execute() {
     if(pMinimizer->getBuildCovariance())
       pMinimizer->buildCovarianceMatrix();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMinimizerManager.execute()->" + Ex;
     throw Ex;
   }

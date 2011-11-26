@@ -40,7 +40,7 @@ void CAllValuesSelectivity::validate() {
     for (int i = 0; i < (int)vVs.size(); ++i)
       registerEstimable(PARAM_V, i, &vVs[i]);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAllValuesSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -46,7 +46,7 @@ void CLayerDerivedWorldViewReport::validate() {
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
     sLayer      = pParameterList->getString(PARAM_LAYER);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerDerivedWorldViewReport.validate(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -76,7 +76,7 @@ void CLayerDerivedWorldViewReport::build() {
       for (int j = 0; j < pLayer->getWidth(); ++j)
         mAreas[pLayer->getValue(i,j)]++;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerDerivedWorldViewReport.build(" + sLabel + ")->" + Ex;
     throw Ex;
   }

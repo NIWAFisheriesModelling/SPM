@@ -68,12 +68,12 @@ CProfile* CProfileManager::getProfile(int index) {
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-    return vProfileList[index];
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.getProfile()->" + Ex;
     throw Ex;
   }
+
+  return vProfileList[index];
 }
 
 //**********************************************************************
@@ -88,7 +88,7 @@ void CProfileManager::clone(CProfileManager *Manager) {
       vProfileList.push_back(pProfile->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.clone()->" + Ex;
     throw Ex;
   }
@@ -122,7 +122,7 @@ void CProfileManager::validate() {
     foreach(CProfile *Profile, vProfileList) {
       Profile->validate();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.validate()->" + Ex;
     throw Ex;
   }
@@ -143,7 +143,7 @@ void CProfileManager::build() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.build()->" + Ex;
     throw Ex;
   }
@@ -158,9 +158,7 @@ void CProfileManager::execute() {
   try {
     // Variables
     CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
-    vector<CProfile*>::iterator vPtr = vProfileList.begin();
-
-    CReportManager *pReporter = CReportManager::Instance();
+    CReportManager 	  *pReporter  = CReportManager::Instance();
 
     // Save our Current State
     saveState();
@@ -184,7 +182,7 @@ void CProfileManager::execute() {
       Profile->setEnabled(false);
       resetState();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.execute()->" + Ex;
     throw Ex;
   }
@@ -202,7 +200,7 @@ void CProfileManager::saveState() {
     for (int i = 0; i < iCount; ++i)
       vCurrentState.push_back(pEstimateManager->getEstimate(i)->getValue());
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.saveState()->" + Ex;
     throw Ex;
   }
@@ -226,7 +224,7 @@ void CProfileManager::resetState() {
       if (pEstimateManager->getEstimate(i)->getEnabled())
         pEstimateManager->getEstimate(i)->setValue(vCurrentState[i]);
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfileManager.resetState()->" + Ex;
     throw Ex;
   }

@@ -91,12 +91,12 @@ int CInitializationPhaseManager::getInitializationPhaseOrderIndex(string label) 
         return i;
 
     CError::errorUnknown(PARAM_INITIALIZATION_PHASE, label);
-    return -1;
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInitializationPhaseManager.getInitializationPhaseOrderIndex(" + label + ")->" + Ex;
     throw Ex;
   }
+
+  return -1;
 }
 
 //**********************************************************************
@@ -110,7 +110,7 @@ void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager) {
       vInitializationPhases.push_back(pInitializationPhase->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInitialisationManager.clone()->" + Ex;
     throw Ex;
   }
@@ -126,7 +126,7 @@ void CInitializationPhaseManager::validate() {
       InitializationPhase->validate();
     }
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CInitialisationManager.validate()->" + Ex;
     throw Ex;
   }
@@ -146,7 +146,7 @@ void CInitializationPhaseManager::build() {
     // Variables
     pReportManager = CReportManager::Instance();
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CInitialisationManager.build()->" + Ex;
     throw Ex;
   }

@@ -51,7 +51,7 @@ void CLayerReport::validate() {
     else if (iYear > pWorld->getCurrentYear())
       CError::errorGreaterThan(PARAM_YEAR, PARAM_CURRENT_YEAR);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -75,7 +75,7 @@ void CLayerReport::build() {
     }
     pLayer    = pLayerManager->getNumericLayer(sLayer);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -113,7 +113,7 @@ void CLayerReport::execute() {
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -26,7 +26,7 @@ void CAgeSize::validate() {
 
     CBaseBuild::validate();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSize.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -39,7 +39,7 @@ void CAgeSize::validate() {
 void CAgeSize::build() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -52,7 +52,7 @@ void CAgeSize::build() {
 void CAgeSize::rebuild() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

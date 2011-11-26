@@ -57,7 +57,7 @@ bool CProfile::doStep() {
     // Set Value
     pTarget->setValue(dCurrent);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfile.doStep(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -74,7 +74,7 @@ void CProfile::setEnabled(bool value) {
     // If this is enabled, we want to disable the estimation
     // of our target
     pTarget->setEnabled(!value);
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfile.setEnabled(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -102,7 +102,7 @@ void CProfile::validate() {
 
     dStepSize = (dUpperBound - dLowerBound)/((double)(iSteps - 1));
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfile.validate(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -119,7 +119,7 @@ void CProfile::build() {
       CEstimateManager *pEstimateManager = CEstimateManager::Instance();
       pTarget = pEstimateManager->getEstimate(sParameter);
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProfile.build(" + getParameter() + ")->" + Ex;
     throw Ex;
   }

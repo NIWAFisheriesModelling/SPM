@@ -36,7 +36,7 @@ void CAgeingErrorReport::validate() {
 
     sAgeingError = pParameterList->getString(PARAM_AGEING_ERROR);
 
-  } catch (string ex) {
+  } catch (string & ex) {
     ex = "CAgeingErrorReport.validate(" + getLabel() + ")->" + ex;
     throw ex;
   }
@@ -55,9 +55,9 @@ void CAgeingErrorReport::build() {
     CAgeingErrorManager *pManager = CAgeingErrorManager::Instance();
     pAgeingError = pManager->getAgeingError(sAgeingError);
 
-  } catch (string ex) {
-    ex = "CAgeingErrorReport.build(" + getLabel() + ")->" + ex;
-    throw ex;
+  } catch (string &Ex) {
+    Ex = "CAgeingErrorReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 

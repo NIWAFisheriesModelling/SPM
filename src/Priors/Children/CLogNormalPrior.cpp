@@ -33,7 +33,7 @@ void CLogNormalPrior::validate() {
     dMu   = pParameterList->getDouble(PARAM_MU);
     dCv   = pParameterList->getDouble(PARAM_CV);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLogNormalPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -54,7 +54,7 @@ double CLogNormalPrior::getResult(double Param) {
     return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLogNormalPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

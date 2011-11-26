@@ -37,7 +37,7 @@ void CBetaPrior::validate() {
     dA      = pParameterList->getDouble(PARAM_A);
     dB      = pParameterList->getDouble(PARAM_B);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBetaPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,7 +62,7 @@ double CBetaPrior::getResult(double Param) {
     return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBetaPrior.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

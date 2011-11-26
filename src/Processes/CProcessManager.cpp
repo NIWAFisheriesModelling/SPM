@@ -76,7 +76,7 @@ CProcess* CProcessManager::getProcess(string Label) {
     CError::errorUnknown(PARAM_PROCESS, Label);
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CProcessManager.getProcess()->" + Ex;
     throw Ex;
   }
@@ -127,7 +127,7 @@ void CProcessManager::validate() {
         CError::errorDuplicate(PARAM_LABEL, Process->getLabel());
     }
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CProcessManager.validate()->" + Ex;
     throw Ex;
   }
@@ -148,7 +148,7 @@ void CProcessManager::build() {
     }
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CProcessManager.buildProcesses()->" + Ex;
     throw Ex;
   }
@@ -170,7 +170,7 @@ void CProcessManager::rebuild() {
     }
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CProcessManager.buildProcesses()->" + Ex;
     throw Ex;
   }

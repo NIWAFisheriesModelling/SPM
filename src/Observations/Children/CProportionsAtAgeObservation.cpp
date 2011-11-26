@@ -167,7 +167,7 @@ void CProportionsAtAgeObservation::validate() {
 
       vNPtr++;
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProportionsAtAgeObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -194,7 +194,7 @@ void CProportionsAtAgeObservation::build() {
     for (int i = 0; i < iArraySize; ++i)
       pAgeResults[i] = 0.0;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProportionsAtAgeObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -313,7 +313,7 @@ void CProportionsAtAgeObservation::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProportionsAtAgeObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

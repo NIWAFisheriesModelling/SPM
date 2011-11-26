@@ -47,7 +47,7 @@ void CExponentialPreferenceFunction::validate() {
     // Assign Variables
     dLambda = pParameterList->getDouble(PARAM_LAMBDA);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CExponentialPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,7 +65,7 @@ double CExponentialPreferenceFunction::getResult(int RIndex, int CIndex, int TRI
     return CMath::zeroFun(pow(exp(-dLambda * pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex)),dAlpha),ZERO);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CExponentialPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

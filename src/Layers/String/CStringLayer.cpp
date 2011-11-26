@@ -36,7 +36,7 @@ string CStringLayer::getValue(int RowIndex, int ColIndex) {
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CStringLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -87,7 +87,7 @@ void CStringLayer::validate() {
     if (((iRow+1) != iHeight) || (iCol != iWidth))
       CError::errorNotEnough(PARAM_DATA);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CStringLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

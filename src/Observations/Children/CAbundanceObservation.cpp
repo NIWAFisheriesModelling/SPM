@@ -103,7 +103,7 @@ void CAbundanceObservation::validate() {
       mErrorValuePtr++;
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -122,7 +122,7 @@ void CAbundanceObservation::build() {
     CCatchabilityManager *pCatchabilityManager = CCatchabilityManager::Instance();
     pCatchability = pCatchabilityManager->getCatchability(sCatchability);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -200,7 +200,7 @@ void CAbundanceObservation::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceObservation.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

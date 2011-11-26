@@ -51,7 +51,7 @@ double CDESolverCallback::EnergyFunction(vector<double> vTrialValues) {
     // Workout our Objective Score
     pObjectiveFunction->execute();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDESolverCallback.EnergyFunction()->" + Ex;
     throw Ex;
   }

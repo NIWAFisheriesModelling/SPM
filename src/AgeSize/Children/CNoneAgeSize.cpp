@@ -33,7 +33,7 @@ void CNoneAgeSize::validate() {
     // Base
     CAgeSize::validate();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNoneAgeSize.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -49,7 +49,7 @@ void CNoneAgeSize::build() {
     // Base
     CAgeSize::build();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNoneAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -62,7 +62,7 @@ void CNoneAgeSize::build() {
 void CNoneAgeSize::rebuild() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNoneAgeSize.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -73,14 +73,7 @@ void CNoneAgeSize::rebuild() {
 // Apply size-weight relationship
 //**********************************************************************
 double CNoneAgeSize::getMeanWeight(double &age) {
-  try {
-
-    return 1;
-
-  } catch (string Ex) {
-    Ex = "CNoneAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+  return 1;
 }
 
 //**********************************************************************

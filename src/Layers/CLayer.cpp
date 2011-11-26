@@ -32,7 +32,7 @@ void CLayer::validate() {
     iWidth            = pWorld->getWidth();
     iHeight           = pWorld->getHeight();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

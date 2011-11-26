@@ -39,7 +39,7 @@ void CCompleteWorldView::build() {
           vWorldSquares.push_back(pSquare);
       }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCompleteWorldView.build()->" + Ex;
     throw Ex;
   }

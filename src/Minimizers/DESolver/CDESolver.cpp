@@ -52,7 +52,7 @@ void CDESolver::validate() {
     dTolerance              = pParameterList->getDouble(PARAM_TOLERANCE,true,0.01);
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDESolver.validate()->" + Ex;
     throw Ex;
   }
@@ -107,7 +107,7 @@ void CDESolver::runEstimation() {
       cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations\n";
       cerr << "Failed to converge, ran out of generations\n" << endl;
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDESolverInterface.runEstimation()->" + Ex;
     throw Ex;
   }

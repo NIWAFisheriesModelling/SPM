@@ -60,7 +60,7 @@ void CAllValuesBoundedSelectivity::validate() {
 
     iMinAge = pWorld->getMinAge();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAllValuesBoundedSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

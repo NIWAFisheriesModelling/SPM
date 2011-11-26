@@ -41,7 +41,7 @@ void CGammaDiff::validate() {
     dGradientTolerance  = pParameterList->getDouble(PARAM_TOLERANCE,true,0.002);
     dStepSize           = pParameterList->getDouble(PARAM_STEP_SIZE,true,1e-6);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CGammaDiff.validate()->" + Ex;
     throw Ex;
   }
@@ -91,7 +91,7 @@ void CGammaDiff::runEstimation() {
       cout << endl;
     }*/
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CGammaDiff.runEstimation()->" + Ex;
     throw Ex;
   }

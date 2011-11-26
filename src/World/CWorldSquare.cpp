@@ -71,7 +71,7 @@ double CWorldSquare::getValue(int RowIndex, int ColIndex) {
     return pGrid[RowIndex][ColIndex];
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldSquare.getValue->" + Ex;
     throw Ex;
   }
@@ -100,7 +100,7 @@ void CWorldSquare::setValue(int RowIndex, int ColIndex, double Value) {
     pGrid[RowIndex][ColIndex] = Value;
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorldSquare.setValue->" + Ex;
     throw Ex;
   }
@@ -127,7 +127,7 @@ void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
     pGrid[RowIndex][ColIndex] += Value;
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorldSquare.addValue->" + Ex;
     throw Ex;
   }
@@ -154,7 +154,7 @@ void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
     pGrid[RowIndex][ColIndex] -= Value;
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorldSquare.subValue->" + Ex;
     throw Ex;
   }
@@ -179,7 +179,7 @@ double CWorldSquare::getAbundance() {
         dRet += pGrid[i][j];
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldSquare.getAbundance()->" + Ex;
     throw Ex;
   }
@@ -208,7 +208,7 @@ double CWorldSquare::getAbundanceForAge(int AgeIndex) {
       dRet += pGrid[i][AgeIndex];
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldSquare.getAbundanceForAge()->" + Ex;
     throw Ex;
   }
@@ -240,7 +240,7 @@ double CWorldSquare::getAbundanceInCategoryForAge(int AgeIndex, int CategoryInde
     dRet = pGrid[CategoryIndex][AgeIndex];
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldSquare.getAbundanceForAge()->" + Ex;
     throw Ex;
   }
@@ -269,7 +269,7 @@ double CWorldSquare::getAbundanceForCategory(int CategoryIndex) {
       dRet += pGrid[CategoryIndex][i];
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldSquare.getAbundanceForCategory()->" + Ex;
     throw Ex;
   }
@@ -336,7 +336,7 @@ void CWorldSquare::build() {
     zeroGrid();
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldSquare.build()->" + Ex;
     throw Ex;
   }

@@ -64,7 +64,7 @@ void CEstimate::setValue(double value) {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimate.setValue()->" + Ex;
     throw Ex;
   }
@@ -81,7 +81,7 @@ double CEstimate::getValue() {
     if (pTarget == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimate.getValue()->" + Ex;
     throw Ex;
   }
@@ -106,7 +106,7 @@ double CEstimate::getPriorScore() {
     return pPrior->getResult((*pTarget));
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimate.getPriorScore(" + getParameter() + ")->" + Ex;
     throw Ex;
   }
@@ -127,7 +127,7 @@ void CEstimate::loadValue(int index) {
 
     setValue(vValueList[index]);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimate.loadValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -174,7 +174,7 @@ void CEstimate::validate() {
         CError::errorDuplicate(PARAM_SAME, Same);
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimate.validate(" + sParameter + ")->" + Ex;
     throw Ex;
   }
@@ -202,7 +202,7 @@ void CEstimate::build() {
       vSameIndex.push_back(clParser.parseCommand(Same));
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimate.build(" + sParameter + ")->" + Ex;
     throw Ex;
   }

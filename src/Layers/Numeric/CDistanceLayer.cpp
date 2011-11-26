@@ -32,7 +32,7 @@ double CDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDistanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -58,7 +58,7 @@ void CDistanceLayer::validate() {
     // Assign parameters
     dCellLength       = pWorld->getCellLength();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDistanceLayer.validate()->" + Ex;
     throw Ex;
   }
@@ -78,7 +78,7 @@ void CDistanceLayer::build() {
       }
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDistanceLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

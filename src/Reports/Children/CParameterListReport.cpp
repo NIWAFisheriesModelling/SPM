@@ -38,7 +38,7 @@ void CParameterListReport::validate() {
     // Get var
     sParameter = pParameterList->getString(PARAM_PARAMETER);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CParameterListReport.validate()->" + Ex;
     throw Ex;
   }
@@ -79,7 +79,7 @@ void CParameterListReport::build() {
     else
       CError::errorUnknown(PARAM_TYPE, sType);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CParameterListReport.build()->" + Ex;
     throw Ex;
   }

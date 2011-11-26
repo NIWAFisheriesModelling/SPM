@@ -68,7 +68,7 @@ void CBiomassLayer::validate() {
    if(vCategoryNames.size() != vSelectivityNames.size())
      CError::errorListSameSize(PARAM_CATEGORIES,PARAM_SELECTIVITIES);
 
- } catch (string Ex) {
+ } catch (string &Ex) {
    Ex = "CBiomassLayer.validate(" + getLabel() + ")->" + Ex;
    throw Ex;
  }
@@ -87,7 +87,7 @@ void CBiomassLayer::build() {
     // Build Categories
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -113,7 +113,7 @@ double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int 
     return dResult;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

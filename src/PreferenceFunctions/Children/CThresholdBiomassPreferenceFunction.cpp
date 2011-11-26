@@ -48,7 +48,7 @@ void CThresholdBiomassPreferenceFunction::validate() {
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CThresholdBiomassPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -63,11 +63,12 @@ double CThresholdBiomassPreferenceFunction::getResult(int RIndex, int CIndex, in
     TRIndex, int TCIndex) {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CThresholdBiomassPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 
+  return 0.0;
 }
 
 //**********************************************************************

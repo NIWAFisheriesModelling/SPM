@@ -27,7 +27,7 @@ void CCachedSelectivity::build() {
     // Call Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCachedSelectivity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -49,7 +49,7 @@ void CCachedSelectivity::rebuild() {
     for (int i = 0; i <= iTop; ++i) {
       vResults.push_back(calculateResult(i+iMinAge));
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCachedSelectivity.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

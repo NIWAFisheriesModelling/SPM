@@ -41,7 +41,7 @@ void CBasicSizeWeight::validate() {
     if (dB <= 0)
       CError::errorLessThanEqualTo(PARAM_B, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBasicSizeWeight.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -59,7 +59,7 @@ void CBasicSizeWeight::build() {
     // Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBasicSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -75,7 +75,7 @@ void CBasicSizeWeight::rebuild() {
     CSizeWeight::rebuild();
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBasicSizeWeight.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -86,16 +86,8 @@ void CBasicSizeWeight::rebuild() {
 // Apply size-weight relationship
 //**********************************************************************
 double CBasicSizeWeight::getMeanWeight(double &size) {
-  try {
-
     double weight = dA*pow(size,dB)*1000;
-
     return(weight);
-
-  } catch (string Ex) {
-    Ex = "CBasicSizeWeight.getMeanWeight(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
 }
 
 //**********************************************************************

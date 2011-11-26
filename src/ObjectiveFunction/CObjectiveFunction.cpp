@@ -68,7 +68,7 @@ SScore* CObjectiveFunction::getScore(int Index) {
     if (Index >= (int)vScoreList.size())
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_SCORES_INDEX);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObjectiveFunction.getScore()->" + Ex;
     throw Ex;
   }

@@ -26,7 +26,7 @@ void CUniformPrior::validate() {
     // Base
     CPrior::validate();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CUniformPrior.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

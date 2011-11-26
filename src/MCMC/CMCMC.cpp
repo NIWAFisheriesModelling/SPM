@@ -82,7 +82,7 @@ void CMCMC::addAdaptAt(int value) {
 void CMCMC::validate() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMCMC.validate()->" + Ex;
     throw Ex;
   }
@@ -95,7 +95,7 @@ void CMCMC::validate() {
 void CMCMC::build() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMCMC.build()->" + Ex;
     throw Ex;
   }
@@ -174,7 +174,7 @@ void CMCMC::execute() {
       Thread->setTerminate(true);
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
    Ex = "CMCMC.execute()->" + Ex;
    throw Ex;
   }

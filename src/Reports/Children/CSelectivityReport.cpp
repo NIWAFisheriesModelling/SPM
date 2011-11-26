@@ -36,9 +36,9 @@ void CSelectivityReport::validate() {
 
     sSelectivity = pParameterList->getString(PARAM_SELECTIVITY);
 
-  } catch (string ex) {
-    ex = "CSelectivityReport.validate(" + getLabel() + ")->" + ex;
-    throw ex;
+  } catch (string &Ex) {
+    Ex = "CSelectivityReport.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 
@@ -55,9 +55,9 @@ void CSelectivityReport::build() {
     CSelectivityManager *pManager = CSelectivityManager::Instance();
     pSelectivity = pManager->getSelectivity(sSelectivity);
 
-  } catch (string ex) {
-    ex = "CSelectivityReport.build(" + getLabel() + ")->" + ex;
-    throw ex;
+  } catch (string &Ex) {
+    Ex = "CSelectivityReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 

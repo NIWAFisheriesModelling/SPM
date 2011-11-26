@@ -46,7 +46,7 @@ void CThresholdPreferenceFunction::validate() {
     pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CThresholdPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -71,7 +71,7 @@ double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRInd
       dRet = 1.0;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CThresholdPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

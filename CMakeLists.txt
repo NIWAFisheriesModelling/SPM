@@ -19,20 +19,20 @@ SET(OPTI_NAME spm)
 IF (WIN32)
   SET(BOOST_LIBS "C:/Progra~2/MingW/boost_libs")
   SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
-  SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0")
-  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0")
+  SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DTEST -O0 -g3 -Wall -fmessage-length=0")
   ADD_CUSTOM_TARGET(icon ALL
     COMMAND windres --output ${PROJECT_SOURCE_DIR}/icon.o --input ${PROJECT_SOURCE_DIR}/src/spm.rc
   )
   SET(MAIN_LIBRARIES
-    libboost_system-mgw45-mt-1_47
-    libboost_filesystem-mgw45-mt-1_47
-    libboost_thread-mgw45-mt-1_47
-    libboost_program_options-mgw45-mt-1_47
+    libboost_system-mgw46-mt-1_48
+    libboost_filesystem-mgw46-mt-1_48
+    libboost_thread-mgw46-mt-1_48
+    libboost_program_options-mgw46-mt-1_48
   )
-  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw45-mt-sd-1_47)
+  SET(TEST_LIBRARIES libboost_unit_test_framework-mgw46-mt-sd-1_48)
 ELSE (WIN32)
   SET(BOOST_LIBS "/opt/boost138/usr/lib64")
   SET(BOOST_HEADERS "/opt/boost138/usr/include")

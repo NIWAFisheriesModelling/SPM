@@ -47,7 +47,7 @@ void CInitializationPhase::validate() {
     iYears  = pParameterList->getInt(PARAM_YEARS);
     pParameterList->fillVector(vProcessNames, PARAM_PROCESSES);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CInitializationPhase.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -63,7 +63,7 @@ void CInitializationPhase::build() {
     CProcessManager *pProcessManager = CProcessManager::Instance();
     pProcessManager->fillVector(vProcesses, vProcessNames);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInitializationPhase.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

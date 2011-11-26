@@ -92,7 +92,7 @@ void CWorld::clone(CWorld *World) {
     dCellLength                 = World->getCellLength();
     sBaseLayer                  = World->getBaseLayer();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorld.clone()->" + Ex;
     throw Ex;
   }
@@ -133,7 +133,7 @@ void CWorld::validate() {
     if (dCellLength <= ZERO )
       CError::errorLessThan(PARAM_CELL_LENGTH, PARAM_ZERO);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorld.validateWorld->" + Ex;
     throw Ex;
   }
@@ -199,7 +199,7 @@ void CWorld::build() {
         throw string(ERROR_VALID_SQUARES_WITH_LAYER);
     }
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorld.buildWorld()->" + Ex;
     throw Ex;
   }
@@ -244,7 +244,7 @@ CWorldSquare* CWorld::getBaseSquare(int RowIndex, int ColIndex) {
 
     return pPtr;
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorld.getBaseSquare()->" + Ex;
     throw Ex;
   }
@@ -268,7 +268,7 @@ CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
     return &pDifferenceGrid[RowIndex][ColIndex];
 
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorld.getDifferenceSquare()->" + Ex;
     throw Ex;
   }
@@ -291,7 +291,7 @@ int CWorld::getCategoryIndexForName(string Name) {
 
     CError::errorUnknown(PARAM_CATEGORY, Name);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorld.getCategoryNameForIndex()->" + Ex;
     throw Ex;
   }
@@ -333,7 +333,7 @@ void CWorld::mergeDifferenceGrid() {
         pDifferenceGrid[i][j].zeroGrid();
       }
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CWorld.mergeDifferenceGrid->" + Ex;
     throw Ex;
   }
@@ -355,7 +355,7 @@ void CWorld::zeroGrid() {
         pGrid[i][j].zeroGrid();
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorld.zeroGrid()->" + Ex;
     throw Ex;
   }

@@ -40,7 +40,7 @@ void CLogisticPreferenceFunction::validate() {
     dA50    = pParameterList->getDouble(PARAM_A50);
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLogisticPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -69,7 +69,7 @@ double CLogisticPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
       dRet  = 1.0/(1.0+pow(19.0,dTemp));
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLogisticPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

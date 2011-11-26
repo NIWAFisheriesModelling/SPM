@@ -31,7 +31,7 @@ void CBaseBuild::validate() {
     iWorldWidth          = pWorld->getWidth();
     iWorldHeight         = pWorld->getHeight();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBaseBuild.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

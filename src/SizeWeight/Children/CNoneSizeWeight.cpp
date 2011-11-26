@@ -31,7 +31,7 @@ void CNoneSizeWeight::validate() {
     CSizeWeight::validate();
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNoneSizeWeight.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -49,7 +49,7 @@ void CNoneSizeWeight::build() {
     // Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNoneSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -65,7 +65,7 @@ void CNoneSizeWeight::rebuild() {
     CSizeWeight::rebuild();
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CNoneSizeWeight.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

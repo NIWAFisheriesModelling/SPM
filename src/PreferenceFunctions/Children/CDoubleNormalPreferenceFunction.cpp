@@ -43,7 +43,7 @@ void CDoubleNormalPreferenceFunction::validate() {
     dSigmaR = pParameterList->getDouble(PARAM_SIGMA_R);
     dMu     = pParameterList->getDouble(PARAM_MU);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleNormalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -66,7 +66,7 @@ double CDoubleNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TR
       dRet = pow(2.0,-((dLayerValue-dMu)/dSigmaR * (dLayerValue-dMu)/dSigmaR));
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleNormalPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

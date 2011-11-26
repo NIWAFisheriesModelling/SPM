@@ -31,7 +31,7 @@ void CAgeingError::validate() {
     bAgePlusGroup     = pWorld->getAgePlusGroup();
     iNAges            = pWorld->getAgeSpread();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingError.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -50,7 +50,7 @@ void CAgeingError::build() {
     for (int i = 0; i < iNAges; ++i)
       mMisMatrix[i].resize(iNAges, 0);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -66,7 +66,7 @@ void CAgeingError::rebuild() {
       for (int j = 0; j < (int)mMisMatrix[i].size(); ++j)
         mMisMatrix[i][j] = 0;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

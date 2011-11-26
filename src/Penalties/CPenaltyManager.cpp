@@ -75,12 +75,12 @@ CPenalty* CPenaltyManager::getPenalty(string Label) {
     }
 
     CError::errorUnknown(PARAM_PENALTY, Label);
-    return 0;
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenaltyManager.getPenalty()->" + Ex;
     throw Ex;
   }
+
+  return 0;
 }
 
 //**********************************************************************
@@ -94,12 +94,12 @@ CPenalty* CPenaltyManager::getPenalty(int index) {
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-    return vPenaltyList[index];
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenaltyManager.getPenalty()->" + Ex;
     throw Ex;
   }
+
+  return vPenaltyList[index];
 }
 
 //**********************************************************************
@@ -138,7 +138,7 @@ SFlaggedPenalty* CPenaltyManager::getFlaggedPenalty(int Index) {
     return vFlaggedPenaltyList[Index];
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenaltyManager.getFlaggedPenalty()->" + Ex;
     throw Ex;
   }
@@ -158,7 +158,7 @@ void CPenaltyManager::clone(CPenaltyManager *Manager) {
       vPenaltyList.push_back( new CPenalty(*pPenalty) );
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenaltyManager.clone()->" + Ex;
     throw Ex;
   }
@@ -174,7 +174,7 @@ void CPenaltyManager::validate() {
       Penalty->validate();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenaltyManager.validate()->" + Ex;
     throw Ex;
   }

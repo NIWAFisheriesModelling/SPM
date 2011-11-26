@@ -39,7 +39,7 @@ void CInverseLogisticPreferenceFunction::validate() {
     dA50    = pParameterList->getDouble(PARAM_A50);
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInverseLogisticPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -68,7 +68,7 @@ double CInverseLogisticPreferenceFunction::getResult(int RIndex, int CIndex, int
       dRet  = 1.0-(1.0/(1.0+pow(19.0,dTemp)));
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CInverseLogisticPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

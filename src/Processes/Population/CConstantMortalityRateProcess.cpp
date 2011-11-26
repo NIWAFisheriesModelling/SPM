@@ -58,7 +58,7 @@ void CConstantMortalityRateProcess::validate() {
     if (getCategoryCount() != (int)vMortalityRates.size())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_M);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -93,7 +93,7 @@ void CConstantMortalityRateProcess::build() {
     // Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantMortalityRateProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -138,7 +138,7 @@ void CConstantMortalityRateProcess::rebuild() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantMortalityRateProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -191,7 +191,7 @@ void CConstantMortalityRateProcess::execute() {
     }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantMortalityRateProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

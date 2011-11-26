@@ -38,7 +38,7 @@ void CObservationDefinitionReport::validate() {
     // Get Params
     sObservation = pParameterList->getString(PARAM_OBSERVATION);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservationDefinitionReport.validate(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -136,7 +136,7 @@ void CObservationDefinitionReport::build() {
     // Get our Obs
     pObservation = CObservationManager::Instance()->getObservation(sObservation);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CObservationDefinitionReport.build(" + sLabel + ")->" + Ex;
     throw Ex;
   }

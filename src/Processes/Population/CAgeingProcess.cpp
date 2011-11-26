@@ -33,7 +33,7 @@ void CAgeingProcess::validate() {
     // populate our vector
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CAgeingProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -52,7 +52,7 @@ void CAgeingProcess::build() {
     // This Is because of the age_plus concept
     iBaseColCount--;
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CAgeingProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -98,7 +98,7 @@ void CAgeingProcess::execute() {
       }
     }
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CAgeingProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

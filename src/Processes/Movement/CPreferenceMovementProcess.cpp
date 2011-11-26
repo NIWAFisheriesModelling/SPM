@@ -49,7 +49,7 @@ void CPreferenceMovementProcess::validate() {
     pParameterList->fillVector(vDirectedProcessList, PARAM_PREFERENCE_FUNCTIONS);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -85,7 +85,7 @@ void CPreferenceMovementProcess::build() {
       pLayer->build();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -174,7 +174,7 @@ void CPreferenceMovementProcess::execute() {
         }
       }
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

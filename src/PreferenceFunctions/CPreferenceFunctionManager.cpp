@@ -64,7 +64,7 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(int index) {
 
     return vPreferenceFunctions[index];
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceFunctionManager.getProcess()->" + Ex;
   }
 
@@ -85,7 +85,7 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label) {
 
     CError::errorUnknown(PARAM_PROCESS, Label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceFunctionManager.getProcess()->" + Ex;
     throw Ex;
   }
@@ -116,7 +116,7 @@ void CPreferenceFunctionManager::validate() {
       vPtr++;
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceFunctionManager.validate()->" + Ex;
     throw Ex;
   }
@@ -135,7 +135,7 @@ void CPreferenceFunctionManager::build() {
       vPtr++;
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceFunctionManager.build()->" + Ex;
     throw Ex;
   }

@@ -121,7 +121,7 @@ double CRandomNumberGenerator::getRandomBinomial(double p, double N) {
 void CRandomNumberGenerator::validate() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CRandomNumberGenerator.validate()->" + Ex;
     throw Ex;
   }
@@ -134,7 +134,7 @@ void CRandomNumberGenerator::validate() {
 void CRandomNumberGenerator::build() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CRandomNumberGenerator.build()->" + Ex;
     throw Ex;
   }

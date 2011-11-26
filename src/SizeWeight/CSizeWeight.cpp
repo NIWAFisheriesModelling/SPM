@@ -31,7 +31,7 @@ void CSizeWeight::validate() {
     bAgePlusGroup     = pWorld->getAgePlusGroup();
     iNAges            = pWorld->getAgeSpread();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeight.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -44,7 +44,7 @@ void CSizeWeight::validate() {
 void CSizeWeight::build() {
   try {
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -58,7 +58,7 @@ void CSizeWeight::rebuild() {
   try {
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeight.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -53,7 +53,7 @@ void CDerivedQuantityManager::clone(CDerivedQuantityManager *Manager) {
       vDerivedQuantities.push_back(Quantity->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantityManager.clone()->" + Ex;
     throw Ex;
   }
@@ -81,7 +81,7 @@ CDerivedQuantity* CDerivedQuantityManager::getDerivedQuantity(string label) {
 
     CError::errorUnknown(PARAM_DERIVED_QUANTITY, label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantityManager.validate()->" + Ex;
     throw Ex;
   }
@@ -100,7 +100,7 @@ void CDerivedQuantityManager::validate() {
       DerivedQuantity->validate();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantityManager.validate()->" + Ex;
     throw Ex;
   }
@@ -117,7 +117,7 @@ void CDerivedQuantityManager::build() {
       DerivedQuantity->build();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantityManager.build()->" + Ex;
     throw Ex;
   }
@@ -134,7 +134,7 @@ void CDerivedQuantityManager::rebuild() {
       DerivedQuantity->rebuild();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantityManager.rebuild()->" + Ex;
     throw Ex;
   }

@@ -83,7 +83,7 @@ void CReportManager::validate() {
       Reporter->validate();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "ReporterManager.validate()->" + Ex;
     throw Ex;
   }
@@ -110,7 +110,7 @@ void CReportManager::build() {
       }
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CReporterManager.build()" + Ex;
     throw Ex;
   }

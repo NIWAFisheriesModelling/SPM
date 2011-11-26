@@ -55,7 +55,7 @@ double CDerivedQuantity::getValue(int offset) {
     if (offset < 0)
       CError::errorLessThan(PARAM_VALUE, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantity.getValue()->" + Ex;
     throw Ex;
   }
@@ -90,7 +90,7 @@ void CDerivedQuantity::validate() {
 
     pWorldView->validate();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -115,7 +115,7 @@ void CDerivedQuantity::build() {
 
     pWorldView->build();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -134,7 +134,7 @@ void CDerivedQuantity::rebuild() {
     // Push Def
     vValues.push_back(0.0);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDerivedQuantity.rebuild()->" + Ex;
     throw Ex;
   }

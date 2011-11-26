@@ -52,7 +52,7 @@ double* CBaseObject::getEstimableVariable(string name) {
     if (mEstimables[name] == 0)
       CError::errorUnknown(PARAM_ESTIMABLE, name);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBaseObject.getEstimableVariable()->" + Ex;
     throw Ex;
   }

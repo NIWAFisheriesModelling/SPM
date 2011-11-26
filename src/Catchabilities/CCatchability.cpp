@@ -34,7 +34,7 @@ void CCatchability::validate() {
     // Populate Vars
     dQ  = pParameterList->getDouble(PARAM_Q);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCatchability.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

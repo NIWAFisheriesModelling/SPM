@@ -60,7 +60,7 @@ void CIncreasingSelectivity::validate() {
     for (int i = 0; i < (int)vVs.size(); ++i)
       registerEstimable(PARAM_V, i, &vVs[i]);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CIncreasingSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -91,7 +91,7 @@ double CIncreasingSelectivity::calculateResult(int Age) {
     return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CIncreasingSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

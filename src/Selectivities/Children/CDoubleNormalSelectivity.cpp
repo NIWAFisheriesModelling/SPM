@@ -51,7 +51,7 @@ void CDoubleNormalSelectivity::validate() {
     if (dSigmaR <= 0 )
       CError::errorLessThanEqualTo(PARAM_SIGMA_R, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoublenormalSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -76,7 +76,7 @@ double CDoubleNormalSelectivity::calculateResult(int Age) {
     return dRet;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleNormalSelectivity.calculateResult()->" + Ex;
     throw Ex;
   }

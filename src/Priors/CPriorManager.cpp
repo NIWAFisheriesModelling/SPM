@@ -64,7 +64,7 @@ CPrior* CPriorManager::getPrior(string Label) {
 
     CError::errorUnknown(PARAM_PRIOR, Label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPriorManager.getPrior()->" + Ex;
     throw Ex;
   }
@@ -81,13 +81,12 @@ CPrior* CPriorManager::getPrior(int index) {
       CError::errorGreaterThanEqualTo(PARAM_INDEX, PARAM_PRIOR);
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
-
-    return vPriorList[index];
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPriorManager.getPrior()->" + Ex;
     throw Ex;
   }
+
+  return vPriorList[index];
 }
 
 //**********************************************************************
@@ -112,7 +111,7 @@ void CPriorManager::validate() {
     }
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPriorManager.validate()->" + Ex;
     throw Ex;
   }

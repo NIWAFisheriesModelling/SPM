@@ -140,7 +140,7 @@ void CProportionsByCategoryObservation::validate() {
       vNPtr++;
     }*/
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProportionsByCategoryObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -203,7 +203,7 @@ void CProportionsByCategoryObservation::build() {
       vNPtr++;
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProportionsByCategoryObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

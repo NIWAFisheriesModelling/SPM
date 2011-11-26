@@ -82,7 +82,7 @@ CSizeWeight* CSizeWeightManager::getSizeWeight(string label) {
 
     CError::errorUnknown(PARAM_SIZE_WEIGHT, label);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeightManager.getSizeWeight(" + label + ")->" + Ex;
     throw Ex;
   }
@@ -110,7 +110,7 @@ void CSizeWeightManager::validate() {
         CError::errorDuplicate(PARAM_SIZE_WEIGHT, SizeWeight->getLabel());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeightManager.validate()->" + Ex;
     throw Ex;
   }
@@ -125,7 +125,7 @@ void CSizeWeightManager::build() {
     foreach(CSizeWeight *SizeWeight, vSizeWeights) {
       SizeWeight->build();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeightManager.build()->" + Ex;
     throw Ex;
   }
@@ -141,7 +141,7 @@ void CSizeWeightManager::rebuild() {
       SizeWeight->rebuild();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CSizeWeightManager.rebuild()->" + Ex;
     throw Ex;
   }

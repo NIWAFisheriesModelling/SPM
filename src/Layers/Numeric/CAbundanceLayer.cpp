@@ -68,7 +68,7 @@ void CAbundanceLayer::validate() {
    if(vCategoryNames.size() != vSelectivityNames.size())
      CError::errorListSameSize(PARAM_CATEGORIES,PARAM_SELECTIVITIES);
 
- } catch (string Ex) {
+ } catch (string &Ex) {
    Ex = "CAbundanceLayer.validate(" + getLabel() + ")->" + Ex;
    throw Ex;
  }
@@ -87,7 +87,7 @@ void CAbundanceLayer::build() {
     // Build Categories
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -113,7 +113,7 @@ double CAbundanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, in
     return dResult;
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CAbundanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

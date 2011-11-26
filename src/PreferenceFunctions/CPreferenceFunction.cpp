@@ -42,7 +42,7 @@ void CPreferenceFunction::validate() {
     sLayerName  = pParameterList->getString(PARAM_LAYER);
     dAlpha      = pParameterList->getDouble(PARAM_ALPHA);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -58,7 +58,7 @@ void CPreferenceFunction::build() {
     CLayerManager *pLayerManager = CLayerManager::Instance();
     pLayer = pLayerManager->getNumericLayer(sLayerName);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

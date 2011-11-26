@@ -39,7 +39,7 @@ double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
     dRet = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantPreferenceFunction.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -35,7 +35,7 @@ void CConstantSelectivity::validate() {
     // Populate our variables
     dC = pParameterList->getDouble(PARAM_C);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -50,7 +50,7 @@ double CConstantSelectivity::getResult(int Index) {
   try {
     if ((Index+pWorld->getMinAge()) > pWorld->getMaxAge())
       CError::errorSumGreaterThan(PARAM_INDEX, PARAM_MIN_AGE, PARAM_MAX_AGE);
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConstantSelectivity.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

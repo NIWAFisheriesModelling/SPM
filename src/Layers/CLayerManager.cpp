@@ -66,12 +66,12 @@ CLayer* CLayerManager::getLayer(int index) {
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-    return vLayerList[index];
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerManager.gerLayer()->" + Ex;
     throw Ex;
   }
+
+  return vLayerList[index];
 }
 
 //**********************************************************************
@@ -95,7 +95,7 @@ CNumericLayer* CLayerManager::getNumericLayer(string Label) {
 
     CError::errorUnknown(PARAM_LAYER, Label);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CLayerManager.getNumericLayer()->" + Ex;
     throw Ex;
   }
@@ -136,7 +136,7 @@ CStringLayer* CLayerManager::getStringLayer(string Label) {
 
     CError::errorUnknown(PARAM_LAYER, Label);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CLayerManager.getStringLayer()->" + Ex;
     throw Ex;
   }
@@ -155,7 +155,7 @@ void CLayerManager::clone(CLayerManager *Manager) {
       vLayerList.push_back( pLayer->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerManager.clone()->" + Ex;
     throw Ex;
   }
@@ -183,7 +183,7 @@ void CLayerManager::validate() {
         CError::errorDuplicate(PARAM_LAYER, Layer->getLabel());
     }
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CLayerManager.validate->" + Ex;
     throw Ex;
   }
@@ -198,7 +198,7 @@ void CLayerManager::build() {
     foreach(CLayer *Layer, vLayerList) {
       Layer->build();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerManager.build()->" + Ex;
     throw Ex;
   }

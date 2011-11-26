@@ -100,7 +100,7 @@ void CConfigurationLoader::loadConfigFile(bool skipLoadingFile) {
     }
 
     processSection();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConfigurationLoad.loadConfigFile()->" + Ex;
     throw Ex;
   }
@@ -169,7 +169,7 @@ void CConfigurationLoader::processSection() {
     else
       CError::errorUnknown(PARAM_SECTION, sSection);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex += string(" - ") + sSection;
     throw Ex;
   }
@@ -237,7 +237,7 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
           Object->addParameter(sName, sValue);
       } while (iNxtSpace > 0);
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConfigurationLoader.assignParameters()->" + Ex;
     throw Ex;
   }
@@ -348,7 +348,7 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         vLines.push_back(sLine);
     }
     fConfig.close();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConfigurationLoader.loadConfigIntoCache(" + FileName +")->" + Ex;
     throw Ex;
   }
@@ -398,7 +398,7 @@ void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
     // Now we've loaded correctly. Flag Configuration
     pConfig->setUseEstimateValues(true);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConfigurationLoader.loadEstimateValuesFile()->" + Ex;
     throw Ex;
   }
@@ -440,7 +440,7 @@ void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &para
     if (sLine.length() > 0)
       parameters.push_back(sLine);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CConfigurationLoader.splitLineIntoVector()->" + Ex;
     throw Ex;
   }

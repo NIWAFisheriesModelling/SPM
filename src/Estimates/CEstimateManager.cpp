@@ -94,7 +94,7 @@ int CEstimateManager::getEnabledEstimateCount() {
 
     return iEnabled;
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.getEnabledEstimateCount()->" + Ex;
     throw Ex;
   }
@@ -128,7 +128,7 @@ CEstimate* CEstimateManager::getEnabledEstimate(int Index) {
 
     throw string(ERROR_INVALID_IDX + CConvertor::intToString(Index));
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.getEnabledEstimate()->" + Ex;
     throw Ex;
   }
@@ -147,7 +147,7 @@ CEstimate* CEstimateManager::getEstimate(int Index) {
     if (Index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.getEnabledEstimate()->" + Ex;
     throw Ex;
   }
@@ -180,7 +180,7 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
 
     CError::errorUnknown(PARAM_ESTIMATE, Parameter);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.getEstimate()->" + Ex;
     throw Ex;
   }
@@ -204,7 +204,7 @@ void CEstimateManager::addEstimateValue(string estimate, double value) {
 
     CError::errorUnknown(PARAM_ESTIMATE, estimate);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.addEstimateValue()->" + Ex;
     throw Ex;
   }
@@ -219,12 +219,12 @@ int CEstimateManager::getEstimateValueCount() {
     if (vEstimateList.size() == 0)
       CError::errorMissing(PARAM_ESTIMATES);
 
-    return vEstimateList[0]->getValueCount();
-
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.getEstimateValueCount()->" + Ex;
     throw Ex;
   }
+
+  return vEstimateList[0]->getValueCount();
 }
 
 //**********************************************************************
@@ -237,7 +237,7 @@ void CEstimateManager::loadEstimateValues(int index) {
       Estimate->loadValue(index);
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.loadEstimateValues()->" + Ex;
     throw Ex;
   }
@@ -256,7 +256,7 @@ void CEstimateManager::clone(CEstimateManager *Manager) {
       vEstimateList.push_back(pEstimate->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.clone()->" + Ex;
     throw Ex;
   }
@@ -300,7 +300,7 @@ void CEstimateManager::validate() {
       }
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.validate()->" + Ex;
     throw Ex;
   }
@@ -319,7 +319,7 @@ void CEstimateManager::build() {
       vPtr++;
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CEstimateManager.build()->" + Ex;
     throw Ex;
   }

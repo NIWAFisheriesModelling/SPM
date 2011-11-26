@@ -50,7 +50,7 @@ double CGammaDiffCallback::operator()(const vector<double>& Parameters) {
     pObjectiveFunction->execute();
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBetaDiffCallback.operator()->" + Ex;
     throw Ex;
   }

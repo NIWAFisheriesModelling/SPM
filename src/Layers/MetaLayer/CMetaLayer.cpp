@@ -36,7 +36,7 @@ void CMetaLayer::validate() {
 
     throw string("Object not yet implemented");
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMetaLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -49,7 +49,7 @@ void CMetaLayer::validate() {
 void CMetaLayer::build() {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CMetaLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

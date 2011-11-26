@@ -51,7 +51,7 @@ void COffByOneAgeingError::validate() {
     if (dP2 < 0.0)
       CError::errorLessThan(PARAM_P2, PARAM_ZERO);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "COffByOneAgeingError.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -69,7 +69,7 @@ void COffByOneAgeingError::build() {
     // Rebuild
     rebuild();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "COffByOneAgeingError.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -111,7 +111,7 @@ void COffByOneAgeingError::rebuild() {
       }
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "COffByOneAgeingError.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -134,7 +134,7 @@ void COffByOneAgeingError::getExpected(vector<double> &expected) {
     for (int i = 0; i < (int)expected.size(); ++i)
       expected[i] = vResult[i];
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "COffByOneAgeingError.getExpected(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

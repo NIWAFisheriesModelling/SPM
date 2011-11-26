@@ -27,7 +27,7 @@ CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
 void CBiomassEventMortalityProcess::validate() {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -40,7 +40,7 @@ void CBiomassEventMortalityProcess::validate() {
 void CBiomassEventMortalityProcess::build() {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -53,7 +53,7 @@ void CBiomassEventMortalityProcess::build() {
 void CBiomassEventMortalityProcess::execute() {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

@@ -223,7 +223,7 @@ void CRuntimeController::loadConfiguration() {
     clLoader.loadConfigFile();
     clLoader.loadEstimateValuesFile();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CRuntimeController.loadConfiguration()->" + Ex;
     throw Ex;
   }
@@ -281,10 +281,11 @@ void CRuntimeController::run() {
           break;
         default:
           CError::errorUnknown(PARAM_RUN_MODE, "");
+          break;
       }
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CRuntimeController.run()->" + Ex;
     throw Ex;
   }
@@ -314,7 +315,7 @@ void CRuntimeController::startEstimation() {
     // Wait for all threads to finish.
 //    threads.join_all();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CRuntimeController.startEstimation()->" + Ex;
     throw Ex;
   }
@@ -381,7 +382,7 @@ void CRuntimeController::startMCMC() {
     // Wait for Threads to finish.
     threads.join_all();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CRuntimeController.startMCMC()->" + Ex;
     throw Ex;
   }

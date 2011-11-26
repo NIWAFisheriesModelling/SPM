@@ -66,7 +66,7 @@ void CProcess::validate() {
       mList.clear();
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -89,7 +89,7 @@ void CProcess::build() {
     // Setup Vars
     iBaseColCount   = pWorld->getBaseSquare(0, 0)->getWidth();
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -115,7 +115,7 @@ void CProcess::execute() {
 //    }
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

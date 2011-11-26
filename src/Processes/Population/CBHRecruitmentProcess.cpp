@@ -145,7 +145,7 @@ void CBHRecruitmentProcess::validate() {
       CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
 
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBHRecruitment.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -177,7 +177,7 @@ void CBHRecruitmentProcess::build() {
     if (vAgesIndex.size() != vProportionList.size())
       CError::errorListSameSize(PARAM_AGES, PARAM_PROPORTIONS);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBHRecruitment.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -230,7 +230,7 @@ void CBHRecruitmentProcess::execute() {
       }
     }
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CBHRecruitment.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

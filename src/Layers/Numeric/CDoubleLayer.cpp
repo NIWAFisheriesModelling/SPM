@@ -46,7 +46,7 @@ double CDoubleLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int T
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -71,7 +71,7 @@ void CDoubleLayer::setValue(int Row, int Col, double Value) {
     if (Col <= 0)
       CError::errorLessThanEqualTo(PARAM_COLUMN, PARAM_ZERO);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CDoubleLayer.addValue()->" + Ex;
     throw Ex;
   }
@@ -118,7 +118,7 @@ void CDoubleLayer::validate() {
     if (((iRow+1) != iHeight) || (iCol != iWidth))
       CError::errorNotEnough(PARAM_DATA);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CDoubleLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -151,7 +151,7 @@ void CDoubleLayer::build() {
       }
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CDoubleLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

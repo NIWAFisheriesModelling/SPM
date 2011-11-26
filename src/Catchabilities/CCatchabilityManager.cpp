@@ -69,7 +69,7 @@ CCatchability* CCatchabilityManager::getCatchability(string label) {
     CError::errorUnknown(PARAM_CATCHABILITY, label);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCatchabilityManager.getQ()->" + Ex;
     throw Ex;
   }
@@ -88,7 +88,7 @@ void CCatchabilityManager::clone(CCatchabilityManager *Manager) {
       vCatchabilities.push_back(Catchability->clone());
     }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCatchabilityManager.clone()->" + Ex;
     throw Ex;
   }
@@ -103,7 +103,7 @@ void CCatchabilityManager::validate() {
     foreach(CCatchability *Catchability, vCatchabilities) {
       Catchability->validate();
     }
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CCatchabilityManager.validate()->" + Ex;
     throw Ex;
   }

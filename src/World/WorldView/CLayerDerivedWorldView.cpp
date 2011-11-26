@@ -33,7 +33,7 @@ CWorldSquare* CLayerDerivedWorldView::getSquare(string area) {
     if (mView[area] == 0)
       CError::errorUnknown(PARAM_AREA, area);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerDerivedWorldView.getSquare(" + area + ")->" + Ex;
     throw Ex;
   }
@@ -70,7 +70,7 @@ void CLayerDerivedWorldView::build() {
           mvAreas[pSourceLayer->getValue(i,j)].push_back(pSquare);
       }
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CLayerDerivedWorldView.build()->" + Ex;
     throw Ex;
   }

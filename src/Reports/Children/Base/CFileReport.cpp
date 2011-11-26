@@ -40,7 +40,7 @@ void CFileReport::validate() {
     bOverwrite  = pParameterList->getBool(PARAM_OVERWRITE, true, true);
 
     fFile = new ofstream();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CFileReporter.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

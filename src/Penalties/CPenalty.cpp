@@ -38,7 +38,7 @@ void CPenalty::validate() {
     dMultiplier   = pParameterList->getDouble(PARAM_MULTIPLIER, true, 1.0);
     bLogScale     = pParameterList->getBool(PARAM_LOG_SCALE, true, false);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenalty.validate(" + sLabel + ")->" + Ex;
     throw Ex;
   }
@@ -74,7 +74,7 @@ void CPenalty::trigger(string Label, double Value1, double Value2) {
     pPenaltyManager->flagPenalty(sFullLabel, dValue);
 
 #ifndef OPTIMIZE
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CPenalty.execute(" + sLabel + ")->" + Ex;
     throw Ex;
   }

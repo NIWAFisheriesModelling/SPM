@@ -38,7 +38,7 @@ void CWorldStateReport::validate() {
     iYear       = pParameterList->getInt(PARAM_YEAR);
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldStateReporter.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -57,7 +57,7 @@ void CWorldStateReport::build() {
     // Populate TimeStepIndex
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldStateReporter.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -121,7 +121,7 @@ void CWorldStateReport::execute() {
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CWorldStateReporter.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

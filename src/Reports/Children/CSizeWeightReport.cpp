@@ -41,9 +41,9 @@ void CSizeWeightReport::validate() {
     // Get our list of sizes to evaluate
     pParameterList->fillVector(vSizeList, PARAM_SIZES);
 
-  } catch (string ex) {
-    ex = "CSizeWeightReport.validate(" + getLabel() + ")->" + ex;
-    throw ex;
+  } catch (string &Ex) {
+    Ex = "CSizeWeightReport.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 
@@ -60,9 +60,9 @@ void CSizeWeightReport::build() {
     CSizeWeightManager *pManager = CSizeWeightManager::Instance();
     pSizeWeight = pManager->getSizeWeight(sSizeWeight);
 
-  } catch (string ex) {
-    ex = "CSizeWeightReport.build(" + getLabel() + ")->" + ex;
-    throw ex;
+  } catch (string &Ex) {
+    Ex = "CSizeWeightReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 

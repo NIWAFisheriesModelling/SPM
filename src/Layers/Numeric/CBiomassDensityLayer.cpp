@@ -31,7 +31,7 @@ CBiomassDensityLayer::CBiomassDensityLayer() {
 double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassDensityLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -55,7 +55,7 @@ void CBiomassDensityLayer::validate() {
 
     throw string("Object not yet implemented");
 
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassDensityLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -68,7 +68,7 @@ void CBiomassDensityLayer::validate() {
 void CBiomassDensityLayer::build() {
   try {
     throw string("Not yet implemented");
-  } catch (string Ex) {
+  } catch (string &Ex) {
     Ex = "CBiomassDensityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

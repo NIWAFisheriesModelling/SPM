@@ -102,7 +102,7 @@ void CEventMortalityProcess::validate() {
         CError::errorDuplicate(PARAM_YEAR, CConvertor::intToString(Year));
     }
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -131,7 +131,7 @@ void CEventMortalityProcess::build() {
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -219,7 +219,7 @@ void CEventMortalityProcess::execute() {
       }
     }
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }

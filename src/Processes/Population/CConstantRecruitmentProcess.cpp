@@ -84,7 +84,7 @@ void CConstantRecruitmentProcess::validate() {
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CRecruitmentProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -116,7 +116,7 @@ void CConstantRecruitmentProcess::build() {
     if (vAgesIndex.size() != vProportionList.size())
       CError::errorListSameSize(PARAM_AGES, PARAM_PROPORTIONS);
 
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CRecruitmentProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -169,7 +169,7 @@ void CConstantRecruitmentProcess::execute() {
       }
     }
 #ifndef OPTIMIZE
-  } catch(string Ex) {
+  } catch(string &Ex) {
     Ex = "CRecruitmentProcess.execute(" + getLabel() +")->" + Ex;
     throw Ex;
   }
