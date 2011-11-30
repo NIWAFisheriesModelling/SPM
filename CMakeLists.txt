@@ -34,22 +34,22 @@ IF (WIN32)
   )
   SET(TEST_LIBRARIES boost_unit_test_framework-mgw46-mt-sd-1_48)
 ELSE (WIN32)
-  SET(BOOST_LIBS "/opt/boost138/usr/lib64")
-  SET(BOOST_HEADERS "/opt/boost138/usr/include")
+  SET(BOOST_LIBS "/opt/boost/boost_1_48_0/stage/lib")
+  SET(BOOST_HEADERS "/opt/boost/boost_1_48_0/")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
-  SET(COMPILE_OPTIONS_LIBR "-O0 -g3 -ggdb -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
-  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
-  SET(COMPILE_OPTIONS_OPTI "-DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
-  SET(COMPILE_OPTIONS_TEST "-DTEST -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DTEST -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(MAIN_LIBRARIES
-    boost_system-gcc41-mt-1_38
-    boost_filesystem-gcc41-mt-1_38
-    boost_thread-gcc41-mt-1_38
-    boost_program_options-gcc41-mt-1_38
+    boost_system
+    boost_filesystem
+    boost_thread
+    boost_program_options
     pthread
     )
   SET(TEST_LIBRARIES
-    boost_unit_test_framework-gcc41-mt-1_38
+    boost_unit_test_framework
   )
 ENDIF (WIN32)
 
