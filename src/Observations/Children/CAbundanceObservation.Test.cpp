@@ -58,51 +58,51 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
 
   SComparison *pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.10);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 60.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 59.291539712786701);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -2.2908024985886413);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.10, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 60.0, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 59.291539712786701, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, -2.2908024985886413, 1e-9);
 
   pComparison = vComparisons[1];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaB");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.12);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 40.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 39.527693141857796);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -2.1111820056961705);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.12, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 40.0, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 39.527693141857796, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, -2.1111820056961705, 1e-9);
 
   pComparison = vComparisons[2];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaC");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.13);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -2.0321732640789509);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.13, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, -2.0321732640789509, 1e-9);
 
   pComparison = vComparisons[3];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaD");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.14);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -1.9589737634997755);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.14, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, -1.9589737634997755, 1e-9);
 
   pComparison = vComparisons[4];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaE");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.15);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -1.890802286836925);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.15, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, -1.890802286836925, 1e-9);
 
   pComparison = vComparisons[5];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaF");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.16);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.0);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, -1.8270248374769187);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.16, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, -1.8270248374769187, 1e-9);
 
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 3; ++j) {
       CWorldSquare *pSquare = getSquare(i,j);
 
-      BOOST_CHECK_EQUAL(pSquare->getAbundance(), 19763.846570928898);
+      BOOST_CHECK_CLOSE(pSquare->getAbundance(), 19763.846570928898, 1e-9);
 
       // Our Expected Results
       double immature[] = { 111.11111111111111, 333.33333333333337, 666.66666666666674, 777.77777777777783, 1083.3333333333333,
@@ -115,38 +115,38 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
           0.0, 0.0, 0.0, 0.0, 0.0 };
 
       // Check Expected against model
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 0), immature[0]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 1), immature[1]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 2), immature[2]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 3), immature[3]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 4), immature[4]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 5), immature[5]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 6), immature[6]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 7), immature[7]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 8), immature[8]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 9), immature[9]);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 1), immature[1], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 2), immature[2], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 3), immature[3], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 4), immature[4], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 5), immature[5], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 6), immature[6], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 7), immature[7], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 8), immature[8], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 9), immature[9], 1e-9);
 
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 0), mature[0]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 1), mature[1]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 2), mature[2]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 3), mature[3]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 4), mature[4]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 5), mature[5]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 6), mature[6]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 7), mature[7]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 8), mature[8]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 9), mature[9]);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 0), mature[0], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 1), mature[1], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 2), mature[2], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 3), mature[3], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 4), mature[4], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 5), mature[5], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 6), mature[6], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 7), mature[7], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 8), mature[8], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 9), mature[9], 1e-9);
 
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 0), spawning[0]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 1), spawning[1]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 2), spawning[2]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 3), spawning[3]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 4), spawning[4]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 5), spawning[5]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 6), spawning[6]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 7), spawning[7]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 8), spawning[8]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 9), spawning[9]);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 0), spawning[0], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 1), spawning[1], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 2), spawning[2], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 3), spawning[3], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 4), spawning[4], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 5), spawning[5], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 6), spawning[6], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 7), spawning[7], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 8), spawning[8], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 9), spawning[9], 1e-9);
     }
   }
 }
@@ -182,51 +182,51 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation_Simulation, C3x3_Fixture ) {
 
   SComparison *pComparison = vComparisons[0];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.10);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 56.344205271053205);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 59.291539712786701);
-  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.10, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 56.344205271053205, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 59.291539712786701, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 0.0, 1e-9);
 
   pComparison = vComparisons[1];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaB");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.12);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 43.585975219738799);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 39.527693141857796);
-  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.12, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 43.585975219738799, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 39.527693141857796, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 0.0, 1e-9);
 
   pComparison = vComparisons[2];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaC");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.13);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 18.992451438215792);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.13, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 18.992451438215792, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 0.0, 1e-9);
 
   pComparison = vComparisons[3];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaD");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.14);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 20.150042264798603);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.14, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.150042264798603, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 0.0, 1e-9);
 
   pComparison = vComparisons[4];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaE");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.15);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 15.217887307033308);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.15, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 15.217887307033308, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 0.0, 1e-9);
 
   pComparison = vComparisons[5];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaF");
-  BOOST_CHECK_EQUAL(pComparison->dErrorValue, 0.16);
-  BOOST_CHECK_EQUAL(pComparison->dObservedValue, 27.559873204605019);
-  BOOST_CHECK_EQUAL(pComparison->dExpectedValue, 19.763846570928898);
-  BOOST_CHECK_EQUAL(pComparison->dScore, 0.0);
+  BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.16, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dObservedValue, 27.559873204605019, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 19.763846570928898, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 0.0, 1e-9);
 
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 3; ++j) {
       CWorldSquare *pSquare = getSquare(i,j);
 
-      BOOST_CHECK_EQUAL(pSquare->getAbundance(), 19763.846570928898);
+      BOOST_CHECK_CLOSE(pSquare->getAbundance(), 19763.846570928898, 1e-9);
 
       // Our Expected Results
       double immature[] = { 111.11111111111111, 333.33333333333337, 666.66666666666674, 777.77777777777783, 1083.3333333333333,
@@ -239,38 +239,38 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation_Simulation, C3x3_Fixture ) {
           0.0, 0.0, 0.0, 0.0, 0.0 };
 
       // Check Expected against model
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 0), immature[0]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 1), immature[1]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 2), immature[2]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 3), immature[3]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 4), immature[4]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 5), immature[5]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 6), immature[6]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 7), immature[7]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 8), immature[8]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(0, 9), immature[9]);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 1), immature[1], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 2), immature[2], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 3), immature[3], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 4), immature[4], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 5), immature[5], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 6), immature[6], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 7), immature[7], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 8), immature[8], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(0, 9), immature[9], 1e-9);
 
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 0), mature[0]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 1), mature[1]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 2), mature[2]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 3), mature[3]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 4), mature[4]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 5), mature[5]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 6), mature[6]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 7), mature[7]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 8), mature[8]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(1, 9), mature[9]);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 0), mature[0], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 1), mature[1], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 2), mature[2], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 3), mature[3], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 4), mature[4], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 5), mature[5], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 6), mature[6], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 7), mature[7], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 8), mature[8], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(1, 9), mature[9], 1e-9);
 
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 0), spawning[0]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 1), spawning[1]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 2), spawning[2]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 3), spawning[3]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 4), spawning[4]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 5), spawning[5]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 6), spawning[6]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 7), spawning[7]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 8), spawning[8]);
-      BOOST_CHECK_EQUAL(pSquare->getValue(2, 9), spawning[9]);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 0), spawning[0], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 1), spawning[1], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 2), spawning[2], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 3), spawning[3], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 4), spawning[4], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 5), spawning[5], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 6), spawning[6], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 7), spawning[7], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 8), spawning[8], 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getValue(2, 9), spawning[9], 1e-9);
     }
   }
 }

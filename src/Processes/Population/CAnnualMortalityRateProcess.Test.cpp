@@ -40,7 +40,7 @@ BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_EQUAL(pSquare->getAbundance(), 177874.61913836008);
+  BOOST_CHECK_CLOSE(pSquare->getAbundance(), 177874.61913836008, 1e-9);
 
   // Our Expected Results
   double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9750,
@@ -53,38 +53,38 @@ BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
       0.0, 0.0, 0.0, 0.0, 0.0 };
 
   // Check Expected against model
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 0), immature[0]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 1), immature[1]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 2), immature[2]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 3), immature[3]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 4), immature[4]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 5), immature[5]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 6), immature[6]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 7), immature[7]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 8), immature[8]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(0, 9), immature[9]);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 1), immature[1], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 2), immature[2], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 3), immature[3], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 4), immature[4], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 5), immature[5], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 6), immature[6], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 7), immature[7], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 8), immature[8], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(0, 9), immature[9], 1e-9);
 
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 0), mature[0]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 1), mature[1]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 2), mature[2]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 3), mature[3]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 4), mature[4]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 5), mature[5]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 6), mature[6]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 7), mature[7]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 8), mature[8]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(1, 9), mature[9]);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 0), mature[0], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 1), mature[1], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 2), mature[2], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 3), mature[3], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 4), mature[4], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 5), mature[5], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 6), mature[6], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 7), mature[7], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 8), mature[8], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(1, 9), mature[9], 1e-9);
 
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 0), spawning[0]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 1), spawning[1]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 2), spawning[2]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 3), spawning[3]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 4), spawning[4]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 5), spawning[5]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 6), spawning[6]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 7), spawning[7]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 8), spawning[8]);
-  BOOST_CHECK_EQUAL(pSquare->getValue(2, 9), spawning[9]);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 0), spawning[0], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 1), spawning[1], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 2), spawning[2], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 3), spawning[3], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 4), spawning[4], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 5), spawning[5], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 6), spawning[6], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 7), spawning[7], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 8), spawning[8], 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getValue(2, 9), spawning[9], 1e-9);
 }
 
 #endif

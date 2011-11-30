@@ -35,29 +35,29 @@ BOOST_FIXTURE_TEST_CASE( NormalPreferenceFunction_DoubleLayer, CLayer_Fixture ) 
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 0), 0.90432904762795996);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 1), 0.95628985183238169);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 2), 0.9888886374148611);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 3), 1.0);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 4), 0.9888886374148611);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 0.90432904762795996, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 1), 0.95628985183238169, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 2), 0.9888886374148611, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 3), 1.0, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 4), 0.9888886374148611, 1e-9);
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 0), 0.20008922132721632);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 1), 0.1513241918490256);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 2), 0.1119148729132336);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 3), 0.080939780454092253);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 4), 0.057244136911386245);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 0.20008922132721632, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 1), 0.1513241918490256, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 2), 0.1119148729132336, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 3), 0.080939780454092253, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 4), 0.057244136911386245, 1e-9);
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 0), 0.90432904762795996);
-  BOOST_CHECK_EQUAL(pPreference->getResult(1, 0, 0, 1), 0.95628985183238169);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 2, 0, 2), 0.9888886374148611);
-  BOOST_CHECK_EQUAL(pPreference->getResult(3, 0, 0, 3), 1.0);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 4, 0, 4), 0.9888886374148611);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 0.90432904762795996, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(1, 0, 0, 1), 0.95628985183238169, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 2, 0, 2), 0.9888886374148611, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(3, 0, 0, 3), 1.0, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 4, 0, 4), 0.9888886374148611, 1e-9);
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 0), 0.20008922132721632);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 1, 3, 1), 0.1513241918490256);
-  BOOST_CHECK_EQUAL(pPreference->getResult(2, 0, 3, 2), 0.1119148729132336);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 3, 3, 3), 0.080939780454092253);
-  BOOST_CHECK_EQUAL(pPreference->getResult(4, 0, 3, 4), 0.057244136911386245);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 0.20008922132721632, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 1, 3, 1), 0.1513241918490256, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(2, 0, 3, 2), 0.1119148729132336, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 3, 3, 3), 0.080939780454092253, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(4, 0, 3, 4), 0.057244136911386245, 1e-9);
 
   delete pPreference;
 }
@@ -80,29 +80,29 @@ BOOST_FIXTURE_TEST_CASE( NormalPreferenceFunction_DistanceLayer, CLayer_Fixture 
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 0), 0.64552404020250753);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 1), 0.70831907568050456);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 2), 0.76868051031375506);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 3), 0.8250176054826841);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 4), 0.87575167651593899);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 0.64552404020250753, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 1), 0.70831907568050456, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 2), 0.76868051031375506, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 3), 0.8250176054826841, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 4), 0.87575167651593899, 1e-9);
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 0), 0.8250176054826841);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 1), 0.83367221316986062);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 2), 0.85650708836363743);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 3), 0.8870459284254637);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 4), 0.91938868195811152);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 0.8250176054826841, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 1), 0.83367221316986062, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 2), 0.85650708836363743, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 3), 0.8870459284254637, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 4), 0.91938868195811152, 1e-9);
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 0, 0), 0.64552404020250753);
-  BOOST_CHECK_EQUAL(pPreference->getResult(1, 0, 0, 1), 0.7337072662727443);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 2, 0, 2), 0.64552404020250753);
-  BOOST_CHECK_EQUAL(pPreference->getResult(3, 0, 0, 3), 0.8870459284254637);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 4, 0, 4), 0.64552404020250753);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 0.64552404020250753, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(1, 0, 0, 1), 0.7337072662727443, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 2, 0, 2), 0.64552404020250753, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(3, 0, 0, 3), 0.8870459284254637, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 4, 0, 4), 0.64552404020250753, 1e-9);
 
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 0, 3, 0), 0.8250176054826841);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 1, 3, 1), 0.8250176054826841);
-  BOOST_CHECK_EQUAL(pPreference->getResult(2, 0, 3, 2), 0.78240214062551983);
-  BOOST_CHECK_EQUAL(pPreference->getResult(0, 3, 3, 3), 0.8250176054826841);
-  BOOST_CHECK_EQUAL(pPreference->getResult(4, 0, 3, 4), 0.88153549280571031);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 0.8250176054826841, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 1, 3, 1), 0.8250176054826841, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(2, 0, 3, 2), 0.78240214062551983, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 3, 3, 3), 0.8250176054826841, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(4, 0, 3, 4), 0.88153549280571031, 1e-9);
 
   delete pPreference;
 }
