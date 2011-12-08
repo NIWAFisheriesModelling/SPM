@@ -33,11 +33,6 @@ rem Install R library locally
 Rcmd INSTALL spm_1.00.tar.gz
 cd ..
 
-rem Install S library locally
-cd "c:\Program Files\sp2000\Library\SPM\
-"c:\Program Files\sp2000\cmd\Splus" /BATCH input.s
-cd "c:\Projects\General\SPM\"
-
 rem Make the installer
 rm -f Setup*.exe
 cd installer
