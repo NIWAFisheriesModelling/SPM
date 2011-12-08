@@ -17,7 +17,8 @@ SET(OPTI_NAME spm)
 #   Boost header files are located in C:/Progra~2/MinGW/include/boost/
 
 IF (WIN32)
-  SET(BOOST_LIBS "D:/Programming/boost/boost_1_48_0/boost_1_48_0/stage/lib")
+# SET(BOOST_LIBS "D:/Programming/boost/boost_1_48_0/boost_1_48_0/stage/lib")
+  SET(BOOST_LIBS "C:/Progra~1/boost/boost_1_48_0/stage/lib")
   SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
   SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0")
