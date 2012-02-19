@@ -338,8 +338,8 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
       }
 
       // // Lowercase line
-      //for (unsigned i = 0; i < sLine.length(); ++i)
-      //  sLine[i] = tolower(sLine[i]);
+      for (unsigned i = 0; i < sLine.length(); ++i)
+        sLine[i] = tolower(sLine[i]);
       // Remove trailing spaces caused by Comments
       int iLastNotSpace = sLine.find_last_not_of(" ");
       sLine = sLine.substr(0, (iLastNotSpace+1));
