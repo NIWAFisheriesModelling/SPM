@@ -117,7 +117,7 @@ var ICONS_GROUP
 ; MUI end ------
 
 Name "${PRODUCT_NAME} v${PRODUCT_VERSION}"
-OutFile "..//Setup_${PRODUCT_NAME}_${PRODUCT_VERSION}.exe"
+OutFile "..//Setup_${PRODUCT_NAME}.exe"
 InstallDir "$PROGRAMFILES\SPM"
 InstallDirRegKey HKLM "${PRODUCT_DIR_REGKEY}" ""
 ShowInstDetails show

@@ -1,14 +1,14 @@
 import os
 import string
+import linecache
 command = "..\\spm -v > version.txt"
 version=os.system(command)
-INFILE = open('version.txt','r')
+INFILE = open('version.txt','rt')
 FILE = open('version.nsi', 'w')
 FILE.write("!define PRODUCT_VERSION \"")
-
-for line in INFILE:
-  find = string.find(line,' ')
-  FILE.write(line[0:find])
+line = linecache.getline('version.txt', 1)
+find = line.find(' ')
+FILE.write(line[0:find])
 FILE.write("\"")
 INFILE.close()
-os.unlink('version.txt')
+#os.unlink('version.txt')
