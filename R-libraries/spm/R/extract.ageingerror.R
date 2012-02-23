@@ -1,4 +1,4 @@
-"extract.ageingerrro" <-
+"extract.ageingerror" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]

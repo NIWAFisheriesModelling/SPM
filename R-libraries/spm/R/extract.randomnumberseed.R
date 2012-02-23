@@ -1,5 +1,4 @@
 "extract.randomnumberseed" <-
-function(file,path="",lines){
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]

@@ -20,5 +20,3 @@ function(lines){
   res$data<-values
   return(res)
 }
-r1.1<-extract("estimate.log",PATH)
-r1.1$partition[[1]]
