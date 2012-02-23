@@ -1,17 +1,13 @@
 "extract.initialisationphase" <-
-function(file,path="",lines){
-  if(missing(lines)) {
-    if(missing(path)) path<-""
-    filename<-spm.make.filename(path=path,file=file)
-    res<-read.table(filename,skip=1,sep=",",header=T,na.strings="-1.#IND")
-  }
+function(lines){
+  if(missing(lines)) stop("ERROR: Missing argument lines")
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
 
   col.labs<-spm.string.to.vector.of.words(lines[3+index.start],sep=",")
   values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)])
-  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=FALSE))
+  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
   values$row<-as.numeric(as.character(values$row))
@@ -24,4 +20,5 @@ function(file,path="",lines){
   res$data<-values
   return(res)
 }
+
 
