@@ -11,6 +11,9 @@
 #include "CCovarianceReport.h"
 #include "../../Minimizers/CMinimizerManager.h"
 #include "../../Minimizers/CMinimizer.h"
+#include "../../Estimates/CEstimateManager.h"
+#include "../../Estimates/CEstimate.h"
+#include "../../Helpers/ForEach.h"
 
 //**********************************************************************
 // CCovarianceReport::CCovarianceReport()
@@ -46,6 +49,13 @@ void CCovarianceReport::execute() {
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
   cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
   int iCount = pMinimizer->getEstimateCount();
+
+  vector<CEstimate*> vEstimates;
+  CEstimateManager::Instance()->fillVector(vEstimates);
+  foreach(CEstimate *Estimate, vEstimates) {
+	  cout << Estimate->getParameter() << " ";
+  }
+  count << "\n"
 
   cout << "Hessian:\n";
   for (int i = 0; i < iCount; ++i) {
