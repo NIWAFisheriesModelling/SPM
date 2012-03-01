@@ -20,7 +20,7 @@ extract.covariance <- function (lines)
     res$report.type <- substring(lines[index.start + 1], 14)
     
     variables <- spm.string.to.vector.of.words(lines[index.start + 
-        2], sep = ",")
+        2], sep = " ")
     data <- spm.string.to.vector.of.words(lines[(index.hessian + 
         1):(index.cov -1)], sep = " ")
     if (length(data)==length(variables)^2) {
