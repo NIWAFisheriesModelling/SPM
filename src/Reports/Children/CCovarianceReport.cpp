@@ -53,9 +53,9 @@ void CCovarianceReport::execute() {
   vector<CEstimate*> vEstimates;
   CEstimateManager::Instance()->fillVector(vEstimates);
   foreach(CEstimate *Estimate, vEstimates) {
-	  cout << Estimate->getParameter() << " ";
+    cout << Estimate->getParameter() << " ";
   }
-  count << "\n"
+  cout << "\n";
 
   cout << "Hessian:\n";
   for (int i = 0; i < iCount; ++i) {
