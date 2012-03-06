@@ -8,16 +8,17 @@
 // Warning: This file is an atomatically generated file describing the source
 // control revision number, date, and time using svn_version.
 
-// Call: svn_version --quiet --format c++ m--path E:/Workspaces/NIWA/SPM/trunk/SPM --recursive --output E:/Workspaces/NIWA/SPM/trunk/SPM/src/Version.h 
-// Current working directory: E:\Workspaces\NIWA\SPM\trunk\SPM
+// Call: svn_version --quiet --format c++ m--path C:/Projects/Software/SPM --recursive --output C:/Projects/Software/SPM/src/Version.h 
+// Current working directory: C:\Projects\Software\SPM
 
 #ifndef VERSION_H_
 #define VERSION_H_
 
-#define SOURCE_CONTROL_REVISION 4399
-#define SOURCE_CONTROL_DATE "2011-10-28"
-#define SOURCE_CONTROL_YEAR "2011"
-#define SOURCE_CONTROL_MONTH "October"
-#define SOURCE_CONTROL_TIME "03:17:14"
-#define SOURCE_CONTROL_VERSION "2011-10-28-03:17:14 UTC (rev. 4399)"
+#define SOURCE_CONTROL_REVISION 4423
+#define SOURCE_CONTROL_DATE "2012-03-01"
+#define SOURCE_CONTROL_YEAR "2012"
+#define SOURCE_CONTROL_MONTH "March"
+#define SOURCE_CONTROL_TIME "20:42:35"
+#define SOURCE_CONTROL_SHORT_VERSION "2012-03-01(rev. 4423)"
+#define SOURCE_CONTROL_VERSION "2012-03-01-20:42:35 UTC (rev. 4423)"
 #endif
