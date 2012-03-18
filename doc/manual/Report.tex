@@ -2,7 +2,7 @@
 
 The report section specifies the printouts and other outputs from the model. \SPM\ does not, in general, produce any output unless requested by a valid report. 
 
-Reports from \SPM\ can be defined to print the spatial structure, partition and states objects at a particular point in time, as well as layers, observation summaries, estimated parameters and objective function values. See below for an more extensive list.
+Reports from \SPM\ can be defined to print the spatial structure, partition and states objects at a particular point in time, as well as layers, observation summaries, estimated parameters and objective function values. See below for a more extensive list.
 
 Reports from \SPM\ all conform to a standard style\index{Reports ! standard style} (with one exception --- the \texttt{estimate\_values} report, see below). The standard style is that reports are prefixed with a user-defined label in square brackets (e.g., \texttt{[...]}), with the second line indicating the type of report, and the report ending with the line \texttt{*end}. For example,
 
@@ -15,7 +15,7 @@ report.type: ...
 
 This syntax should make it easier for external packages to be configured to read \SPM\ output. The \texttt{extract} functions in the \R\ \texttt{spm} package uses this information to identify and read \SPM\ output.
 
-However, the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
+Notye that the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
 
 Reports, by default, are directed to standard out (see Section \ref{sec:redirecting-stdout}), but this default can be overwritten be specifying an output file (\commandlabsub{report}{file\_name}). Hence reports can be directed to separate files as required. Note that if an output file is defined, any data within it is deleted and replaced with the output from the report. To append data to an output file rather than replacing it, use the subcommand \commandlabsubarg{report}{overwrite}{false}.
 
@@ -35,11 +35,11 @@ Print the partition following an initialisation phase. This prints out, for each
 
 \subsection{\I{Printing a process summary}}\index{Reports ! Processes}
 
-Print a summary of a process. Depending ion the process, different summaries are produced. These typically detail the type of process, its parameters and other options, and any associated details.
+Print a summary of a process. Depending on the process, different summaries are produced. These typically detail the type of process, its parameters and other options, and any associated details.
 
 \subsection{\I{Printing derived quantities}}\index{Reports ! Derived quantities}
 
-Print out the a description of a derived parameter, and its values of a derived quantity as recorded in the model state, for each year of the model. In addition, the report prints out the values of the derived quantity at the end of each initialisation phase.
+Print out the description of the derived parameter, and the values of the derived quantity as recorded in the model state, for each year of the model. In addition, the report prints out the values of the derived quantity at the end of each initialisation phase.
 
 \subsection{\I{Printing the estimated parameters}}\index{Reports ! Estimated parameters}
 

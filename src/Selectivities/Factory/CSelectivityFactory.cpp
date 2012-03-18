@@ -20,6 +20,7 @@
 #include "../Children/CKnifeEdgeSelectivity.h"
 #include "../Children/CLogisticProducingSelectivity.h"
 #include "../Children/CLogisticSelectivity.h"
+#include "../Children/CInverseLogisticSelectivity.h"
 
 //**********************************************************************
 // CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
@@ -47,6 +48,8 @@ CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWi
     pSelectivity = new CLogisticProducingSelectivity();
   else if (type == PARAM_LOGISTIC)
     pSelectivity = new CLogisticSelectivity();
+  else if (type == PARAM_INVERSE_LOGISTIC)
+    pSelectivity = new CInverseLogisticSelectivity();
   else
     CError::errorUnknown(PARAM_TYPE, type);
 

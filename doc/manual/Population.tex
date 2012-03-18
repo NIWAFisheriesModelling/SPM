@@ -24,7 +24,7 @@ The population section consists of several components, including;
 
 The spatial structure of \SPM\ is represented by an $n_{rows} \times n_{cols}$ grid, with rows $i=1 \dots n_{rows}$ and columns $j=1 \ldots n_{cols}$. Each cell of this matrix records the population structure at that point in space, where the population structure is represented by an $n_{categories} \times n_{ages}$ rectangular matrix (with categories $k=1 \ldots n_{categories}$ and ages $l=1 \ldots n_{ages} = age_{min} \ldots age_{max}$. Hence we can describe any spatial and population element of the model as element$(i,j,k,l)$. We define, within the spatial grid ($n_{rows} \times n_{cols}$), locations where the population can and cannot potentially be present using a \emph{layer}. 
 
-\SPM\ implements a single spatial structure, a grid of \emph{square} cells (Figure \ref{fig:SquareSpatialStructure}) The spatial grid can be of an arbitrary size, but must be rectangular. 
+\SPM\ implements a single spatial structure, a grid of \emph{square} cells (Figure \ref{fig:SquareSpatialStructure}). The spatial grid can be of an arbitrary size, but must be rectangular. 
 
 The dimensions of the spatial grid are user defined but must be at least a $1 \times 1$ grid (i.e., a single spatial cell). But the largest spatial structure allowed by \SPM\ is a grid of $1000 \times 1000$ cells\index{Maximum size of the spatial grid}. Associated with the spatial structure is the one compulsory layer (see Section \ref{sec:layers}), the \emph{base layer}\index{Base layer}. This defines the locations where the population can and cannot potentially be present (e.g., in a marine model, the locations associated with the sea and not land) as values within the base layer that are greater than zero. There must be at least one cell in the spatial grid where the population can be present. In addition, the base layer also defines the relative \emph{area}\index{Cell area} of each spatial cell, as used for density calculations within \SPM.
 
@@ -39,7 +39,7 @@ Models are implemented as a grid of cells as a rectangular matrix. Distance betw
 
 Hence, the definition of the spatial structure includes;
 \begin{itemize}
-\item The type of spatial grid and its dimensions, $n_{rows}$ and $m_{cols}$
+\item The type of spatial grid and its dimensions, $n_{rows}$ and $n_{cols}$
 \item The label of a numeric layer to be used as the base layer (defining the locations where the population can be present as well as the area of each cell)
 \item The length (distance) of a side of the grid cell to be used as the scaler for distance calculations
 \end{itemize}
@@ -59,17 +59,17 @@ Hence, the definition of the population structure includes;
 
 \subsection{\I{Layers}\label{sec:layers}}
 
-\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n \times m$ matrix and can be either \emph{numeric} or \emph{categorical}. See Section \ref{sec:population-section} for further details.
+\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n_{rows} \times n_{cols}$ matrix and can be either \emph{numeric} or \emph{categorical}. See Section \ref{sec:population-section} for further details.
 
 Layers form a key underlying concept in \SPM. They comprise of a grid of known values, with a value for every spatial cell in the model. Layers are used by processes, observations, and outputs commands to supply spatially explicit covariates and any categorical groupings required. 
 
-Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ grid of values (with one exception --- the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. Typically they are provided by the user as a matrix of values, although abundance and distance layers can be calculated by \SPM\ as and when required. 
+Every model must define at least one layer, the base later $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ matrix of values (with one exception --- the distance layer, see below), where the value for each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other assumed quantity. Typically they are provided by the user as a matrix of values, although abundance and distance layers can be calculated by \SPM\ as and when required. 
 
 Within \SPM, layers are used in three contexts:
 \begin{enumerate}
 \item The base layer\index{Base layer}\index{Layers ! the base layer}: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if every element $L_B(i,j) \ge 0$. Further, positive values of the base layer $L_B$ represent the \emph{area} represented by that spatial cell. 
 \item \I{Covariate layers}: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates must be continuous (i.e., numeric) variables. Covariate layers must have values $\ge0$.
-\item \I{Classification layers}. A model may have many classification layers, and these are used as a classification or grouping variable for aggregating data over individual spatial cells $(i,j)$, e.g., statistical areas or management areas. Such layers are typically used to aggregate the population within cells into groups so-as to allow comparison with observations. The values in layers used as classification layers must be categorical.
+\item \I{Classification layers}: A model may have many classification layers, and these are used as a classification or grouping variable for aggregating data over individual spatial cells $(i,j)$, e.g., statistical areas or management areas. Such layers are typically used to aggregate the population within cells into groups so-as to allow comparison with observations. The values in layers used as classification layers must be categorical.
 \end{enumerate}
 
 Typically, layers are supplied by the user and are assumed known and constant. \SPM\ defines the following types of layer;
@@ -162,7 +162,7 @@ Processes are carried out in the order specified within each time step, and can 
 
 \subsubsection{\I{Projections}\label{sec:projections}}
 
-\SPM can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the partition is run from \argument{current} to \argument{final}. 
+\SPM\ can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the partition is run from \argument{current} to \argument{final}. 
 
 \subsection{\I{Processes}}
 
@@ -170,7 +170,8 @@ Processes produce changes in the model partition, by adding, removing or moving 
 
 \SPM\ has two types of processes, \emph{population}\index{Population processes} and \emph{movement}\index{Movement processes} processes. Population processes are those processes which modify, move or otherwise change the numbers of individuals \emph{within} a spatial cell, i.e., they do not affect the spatial location of a cohort. Movement processes, on the other hand, move, shift or otherwise modify cohorts \emph{between} spatial cells, but do not affect the age or category of the numbers in each cohort. 
 
-The population processes include recruitment\index{Recruitment}, ageing\index{Ageing},  mortality\index{Mortality} events (e.g., natural and exploitation) and category transition processes\index{Category transition} (i.e., processes that move individuals between categories, while preserving their age structure). See Section \ref{sec:population-section} for a complete list of available processes.
+The population processes include recruitment\index{Recruitment}, ageing\index{Ageing},  mortality\index{Mortality} events (e.g., natural and exploitation) and category transition processes\index{Category transition} (i.e., processes that move individuals between categories, while preserving their a
+ge structure). See Section \ref{sec:population-section} for a complete list of available processes.
 
 Each of these processes is carried out in the user-defined prescribed order when initialising the model, and then for a user-defined order in each year in the annual cycle\index{Annual cycle}.
 
@@ -189,7 +190,7 @@ Population processes are those processes that change the population state of ind
 
 \subsubsection{\I{Recruitment}}
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements two types of recruitment process, constant recruitment\index{Recruitment ! Constant} and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}. 
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements two types of recruitment process, constant recruitment\index{Recruitment ! Constant} and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203} \NYI. 
 
 In both of the recruitment process, a number of individuals are added to the partition at the age and categories specified. If more than one category is defined, then the proportions of individuals added across categories are user-defined. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
@@ -344,7 +345,7 @@ The category transition process moves a number $n$ between some source and sink 
 
 Category transition processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be moved. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in the source category (after applying the selectivity) available to be moved. See Section \ref{sec:penalties} for more information on specifying penalties.
 
-If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, , then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
+If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
 
 \begin{verbatim}
 @process tagging
@@ -487,7 +488,7 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
 
 Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Derived quantities are simply the count or sum of cells within some categories, after applying a selectivity, within cells defined by a layer.
 
-Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. In this example, the spawning stock biomass could be defined as the abundance or biomass of a part of the population at some point in the annual cycle, for selected ages and categories. Derived quantities are described further in the population section (Section \ref{sec:population-section}).
+Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. In this example, the spawning stock biomass could be defined as the abundance or biomass of a part of the population at some point in the annual cycle, for selected ages and categories.
 
 For example, to define a derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time step over areas defined by a layer as the spawning ground but counting all `mature' individuals, we might use the syntax,
 
@@ -550,7 +551,7 @@ where $c$ is the c.v. of sizes-at-age.
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
-A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section} or to modify the effects of processes on each age class \ref{sec:population-section}. \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities. See Section \ref{sec:selectivities} for more details.
+A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section} or to modify the effects of processes on each age class \ref{sec:population-section}. \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities.
 
 A selectivity is always defined to apply just to one category of the population (i.e, row of the partition). To apply the same selectivity to more than one category, then just repeat the selectivity for each category that it is applied to.
 
@@ -567,6 +568,7 @@ The available selectivities are;
   \item All values bounded
   \item Increasing
   \item Logistic
+	\item Inverse logistic
   \item Logistic-producing
   \item Double-normal
   \item Double-exponential
@@ -632,6 +634,14 @@ The increasing ogive has non-estimable parameters $L$ and $H$. The estimable par
 \end{equation}
  
 The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}+a_{to95}$. 
+
+\subsubsection[Inverse logistic]{\argument{inverse\_logistic}}
+
+\begin{equation}
+  f(x) = \alpha - \alpha / [1+19^{(a_{50}-x)/a_{to95}}]
+\end{equation}
+ 
+The inverse logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}-a_{to95}$. 
 
 \subsubsection[Logistic producing]{\argument{logistic\_producing}}
 

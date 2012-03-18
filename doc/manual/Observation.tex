@@ -145,7 +145,7 @@ and the $c_i$'s are the c.v.s for each age class $i$, and $Z \left(\theta,\delta
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
 
-\subsection{Proportions-by-category}
+\subsection{\I{Proportions-by-category}}
 
 Proportions-by-category observations are observations of either the relative number of individuals between categories within age classes, or relative biomass between categories within age classes. 
 
@@ -164,7 +164,7 @@ selectivities2 female-selectivity
 
 defines that the proportion of males in each age class as a proportion of males $+$ females. \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of male to male $+$ female within each of these age classes, after applying the selectivities at the year and time step specified. 
 
-The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
+The observations must be supplied using all or some of the values defined by a categorical layer. \SPM\ calculates the expected values by summing over the ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
 
@@ -184,7 +184,7 @@ categories male
 categories2 female
 min_age 1
 max_age 5
-obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
+obs A 0.01 0.05 0.10 0.20 0.20
 ...
 \end{verbatim}
 
@@ -197,8 +197,8 @@ categories male
 categories2 female
 min_age 1
 max_age 5
-obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
-obs B 0.02 0.06 0.10 0.21 0.18 0.02 0.05 0.15 0.20 0.01
+obs A 0.01 0.05 0.10 0.20 0.20
+obs B 0.02 0.06 0.10 0.21 0.18
 ...
 \end{verbatim}
 
@@ -252,7 +252,7 @@ where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent divi
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsection{Abundance}
+\subsection{\I{Abundance}}
 
 Abundance observations are observations of either a relative or absolute number of individuals from a set of categories after applying a selectivity. 
 
@@ -291,7 +291,7 @@ obs A 1000
 Or, for both $A$ and $B$ as,
 
 \begin{verbatim}
-@observation MyProportions
+@observation MyAbundance
 ...
 categories male
 obs A 1000
@@ -349,7 +349,7 @@ and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent divisi
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsection{Process error}
+\subsection{\I{Process error}}
 
 Additional `process error' can be defined for each set of observations. Additional process error has the effect of increasing the observation error in the data, and hence of decreasing the relative weight given to the data in the fitting process. 
 
@@ -377,11 +377,11 @@ For both the c.v. and $N$ process errors, the process error has more effect on s
 
 Ageing error is optional, and if it is used, it may be omitted for any individual time series. Different ageing error models may be applied for different observation commands. See Section \ref{sec:ageingerrorreport} for reporting the misclassification matrix.
 
-The ageing error models implemented are; 
+The ageing error models implemented are,
 \begin{enumerate}
-  \item{None}  The default model is to apply no ageing error.
-  \item{Off by one} Proportion $p_1$ of individuals of each age $a$ are misclassified as age $a-1$ and proportion $p_2$ are misclassified as age $a+1$. Individuals of age $a < k$ are not misclassified. If there is no plus group in the population model, then proportion $p_2$ fish of the oldest age class will 'fall off the edge' and disappear. 
-  \item{Normal} Individuals of age $a$ are classified as ages which are normally distributed with mean $a$ and constant c.v. $c$. As above, if there is no plus group in the population model, some individuals of the older age classes may disappear. If $c$ is high enough, some of the younger age classes may 'fall off the other edge'. Individuals of age $a < k$ are not misclassified.
+  \item{None}: The default model is to apply no ageing error.
+  \item{Off by one}: Proportion $p_1$ of individuals of each age $a$ are misclassified as age $a-1$ and proportion $p_2$ are misclassified as age $a+1$. Individuals of age $a < k$ are not misclassified. If there is no plus group in the population model, then proportion $p_2$ fish of the oldest age class will 'fall off the edge' and disappear. 
+  \item{Normal}: Individuals of age $a$ are classified as ages which are normally distributed with mean $a$ and constant c.v. $c$. As above, if there is no plus group in the population model, some individuals of the older age classes may disappear. If $c$ is high enough, some of the younger age classes may 'fall off the other edge'. Individuals of age $a < k$ are not misclassified.
 \end{enumerate}
 
 Note that the expected values (fits) reported by \SPM\ for observations with ageing error will have had the ageing error applied. 
@@ -414,12 +414,12 @@ Methods for generating the random error, and hence simulated values, depend on t
 
 Note that \SPM\ can report simulated observations using the usual observation report (\commandlabsubarg{report}{type}{observation}), but that when simulating the contribution to the objective function of each observation is reported as zero. The report \commandlabsubarg{report}{type}{observation\_definition} will print the complete observation definition in a form suitable for use in a \SPM\ \config. See Section \ref{sec:report-section} for more detail.
 
-\subsection{Pseudo-observations}
+\subsection{\I{Pseudo-observations}}
 
 \SPM\ can generate expected values for observations without them contributing to the total objective function. These are called pseudo-observations, and can be used to either generate the expected values from \SPM\ for reporting or diagnostic purposes. To define an observation as a pseudo-observation, use the command \commandlabsubarg{observation}{likelihood}{none}. Any observation type can be used as a pseudo-observation. Note that;
 
 \begin{itemize}
-  \item Output will only be generated if a report command \commandsubarg{report}{type}{observation} is specified.
+  \item Output will only be generated if a report command \commandlabsubarg{report}{type}{observation} is specified.
   \item The observed values should be supplied (even if they are `dummy' observation). These will be processed by \SPM\ as if they were actual observation values, and must conform to the validations carried out for the other types of likelihood. 
   \item The subcommands \subcommand{likelihood}, \subcommand{obs}, \subcommand{error\_value} and \subcommand{process\_error} have no effect when generating the expected values for the pseudo-observation.   
   \item \SPM\ cannot simulate from pseudo-observations.

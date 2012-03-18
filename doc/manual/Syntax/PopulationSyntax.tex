@@ -1001,6 +1001,7 @@ The individual selectivity functions available are,
 	\item All-values-bounded
 	\item Increasing
 	\item Logistic
+	\item InverseLogistic
 	\item Logistic-producing
 	\item Double-normal
 	\item Double-exponential
@@ -1076,6 +1077,23 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defValue{A vector of positive real numbers, of length equal to the number of age classes from $L$ to $H$}
 
 \subsubsection[Logistic]{\commandlabsubarg{selectivity}{type}{logistic}}
+
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{ato95} {Defines the $a_{to95}$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\subsubsection[InverseLogistic]{\commandlabsubarg{selectivity}{type}{inverse\_logistic}}
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}

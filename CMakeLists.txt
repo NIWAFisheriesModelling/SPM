@@ -223,6 +223,7 @@ src/Selectivities/Children/CIncreasingSelectivity.cpp
 src/Selectivities/Children/CKnifeEdgeSelectivity.cpp
 src/Selectivities/Children/CLogisticProducingSelectivity.cpp
 src/Selectivities/Children/CLogisticSelectivity.cpp
+src/Selectivities/Children/CInverseLogisticSelectivity.cpp
 src/Selectivities/CSelectivity.cpp
 src/Selectivities/CSelectivityManager.cpp
 src/Selectivities/Factory/CSelectivityFactory.cpp
@@ -287,6 +288,7 @@ src/Selectivities/Children/CDoubleNormalSelectivity.Test.cpp
 src/Selectivities/Children/CKnifeEdgeSelectivity.Test.cpp
 src/Selectivities/Children/CLogisticProducingSelectivity.Test.cpp
 src/Selectivities/Children/CLogisticSelectivity.Test.cpp
+src/Selectivities/Children/CInverseLogisticSelectivity.Test.cpp
 src/Selectivities/Factory/CSelectivityFactory.Test.cpp
 src/TestFixtures/C1x1_Fixture.cpp
 src/TestFixtures/C3x3_Fixture.cpp

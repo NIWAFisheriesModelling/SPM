@@ -24,6 +24,7 @@
 #include "../Children/CKnifeEdgeSelectivity.h"
 #include "../Children/CLogisticProducingSelectivity.h"
 #include "../Children/CLogisticSelectivity.h"
+#include "../Children/CInverseLogisticSelectivity.h"
 
 // Namespaces
 using namespace std;
@@ -182,6 +183,24 @@ BOOST_AUTO_TEST_CASE( Build_LogisticSelectivity) {
   BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_LOGISTIC, false));
 
   CLogisticSelectivity *pPtr = dynamic_cast<CLogisticSelectivity*>(pSelectivity);
+  BOOST_ASSERT(pPtr != 0);
+
+  CLogisticProducingSelectivity *pPtr2 = dynamic_cast<CLogisticProducingSelectivity*>(pSelectivity);
+  BOOST_ASSERT(pPtr2 == 0);
+
+  delete pSelectivity;
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+BOOST_AUTO_TEST_CASE( Build_InverseLogisticSelectivity) {
+  CSelectivity *pSelectivity = 0;
+
+  BOOST_REQUIRE_NO_THROW(pSelectivity = CSelectivityFactory::buildSelectivity(PARAM_INVERSE_LOGISTIC, false));
+
+  CInverseLogisticSelectivity *pPtr = dynamic_cast<CInverseLogisticSelectivity*>(pSelectivity);
   BOOST_ASSERT(pPtr != 0);
 
   CLogisticProducingSelectivity *pPtr2 = dynamic_cast<CLogisticProducingSelectivity*>(pSelectivity);
