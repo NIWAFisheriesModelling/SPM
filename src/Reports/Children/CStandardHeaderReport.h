@@ -27,7 +27,7 @@
 using std::string;
 
 // Version number
-#define VERSION "1.00"
+#define VERSION "1.1"
 
 //**********************************************************************
 //
