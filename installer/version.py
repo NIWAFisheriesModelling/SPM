@@ -1,7 +1,7 @@
 import os
 import string
 import linecache
-command = "..\\spm -v > version.txt"
+command = "..\\spm.exe -v > version.txt"
 version=os.system(command)
 INFILE = open('version.txt','rt')
 FILE = open('version.nsi', 'w')

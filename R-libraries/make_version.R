@@ -1,5 +1,5 @@
 # Get SPM Version
-VERSION<-system("spm -v",intern=TRUE)
+VERSION<-system("..\\spm.exe -v",intern=TRUE)
 VERSION<-substring(VERSION,1,regexpr(" ",VERSION)-1)
 version.number<-substring(VERSION,1,regexpr("-",VERSION)-1)
 version.date<-substring(VERSION,regexpr("-",VERSION)+1)
