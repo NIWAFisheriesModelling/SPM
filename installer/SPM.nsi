@@ -46,7 +46,7 @@ Function .onInit
   UserInfo::GetOriginalAccountType
   Pop $0
   StrCmp $0 "Admin" +3 0
-		MessageBox MB_OK "You need to have adminstrator right to install $PRODUCT_NAME. Aborting install."
+		MessageBox MB_OK "You need to have adminstrator right to install ${PRODUCT_NAME}. Aborting install."
 		abort
   ;Force install for all users
   !insertmacro MULTIUSER_INIT
@@ -172,7 +172,7 @@ SectionEnd
 
 Section /o "Copy the R library" SEC06
   SetOutPath "$INSTDIR"
-  File "..\\R-libraries\\spm_1.00.zip"
+  File "..\\R-libraries\\spm_1.1.zip"
 SectionEnd
 
 Section /o "Copy src files" SEC07
@@ -249,7 +249,7 @@ Section Uninstall
   Delete "$INSTDIR\spm.exe"
   Delete "$INSTDIR\Run SPM.lnk"
   Delete "$INSTDIR\Install.log"
-  Delete "$INSTDIR\spm_1.00.zip"
+  Delete "$INSTDIR\spm_1.1.zip"
   RmDir /r "$INSTDIR\source"
   RmDir /r "$INSTDIR\examples"
   
