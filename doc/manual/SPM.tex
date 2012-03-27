@@ -14,7 +14,7 @@
 \usepackage[bookmarks=true,bookmarksopen=false,bookmarksnumbered=true,
             pdfpagelayout=TwoPageRight,
             pdftitle={Spatial Population Model (SPM) Users Manual}, 
-            pdfauthor={Alistair Dunn; Scott Rasmussen}, 
+            pdfauthor={Alistair Dunn; Scott Rasmussen; Sophie Mormede}, 
             pdfsubject={Spatial Population Model},
             pdftex]{hyperref}
 \hypersetup{
@@ -135,6 +135,10 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \newcommand{\Bzero}{\emph{B}$_0$}
 \newcommand{\R}{\textbf{R}}
 \newcommand{\NYI}{(\emph{not yet implemented})}
+\newcommand{\TODO}{\color{red}\emph{To be implemented}}
+\newcommand{\TODOend}{\color{black}}
+\newcommand{\TOUNDO}{\color{green}\emph{To be removed from the code }}
+\newcommand{\TOUNDOend}{\color{black}}
 
 %quick index
 \newcommand{\I}[1]{#1\index{#1}}
@@ -173,9 +177,9 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \newcommand{\SPMName}{Spatial Population Model} %SPM long name
 \newcommand{\authors}{\href{mailto:"Alistair Dunn"<a.dunn@niwa.co.nz>?subject=SPM:}{authors}} %hyper ref for email
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.} %NIWA
-\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S. (\DocYear) \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
+\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S.; Mormede, S. (\DocYear) \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
 \title{\SPMName\ User Manual \\\SPM\ \VER} %Document title
-\author{Alistair Dunn, Scott Rasmussen}  %Document authors
+\author{Alistair Dunn, Scott Rasmussen, Sophie Mormede}  %Document authors
 \date{\DocDate} %Date of publication
 
 % Define \clearemptydoublepage so-as to have truly blank pages between sections

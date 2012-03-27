@@ -499,9 +499,25 @@ time_step 1
 layer spawning_ground
 \end{verbatim}
 
+\TOUNDO
+ Size at age are currently two modules. They need to be regrouped into a single module as per below
+
 \subsection{\I{Size-age relationship}\label{sec:size-at-age}}
 
 Size-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
+
+
+\subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
+
+\TOUNDOend
+
+\TODO
+
+\subsection{\I{Age-size-weight relationship}\label{sec:age-size-weight}}
+
+The age-size-weight relationship defines the size at age and weight at size (or age) of individuals within the model. There are two types of relationships defined in \SPM, both based on a size-at-age relationship and a seperate size-weight relationship (von-Bertalannfy and Schnute, combined with a length weight relationship). The size-at-age relationship is used to determine the size frequency, given and age, and then with size-weight relationship, a weight-at-age of individuals within an age/category.
+
+The two age-size relationship are,
 
 \begin{description}
 \item{von Bertalanffy}\index{von Bertalanffy growth curve} where size at age is defined as,
@@ -527,9 +543,8 @@ The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Sc
 
 The model can incorporate changes in size-at-age during the year (i.e., growth between fish birthdays) by specifying the growth proportions for each time step of the annual cycle.
 
-\subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
 
-The size-weight relationship \NYI, with parameters $a$ and $b$, is calculated as either,
+The size-weight relationship, with parameters $a$ and $b$, is calculated as either,
 
 \begin{itemize}
   \item{None:} A relationship where the weight of each individual is exactly 1 
@@ -539,7 +554,7 @@ The size-weight relationship \NYI, with parameters $a$ and $b$, is calculated as
   \end{equation}
 \end{itemize}
   
-Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an option \commandlabsubarg{report}{type}{size\_weight} (see Section \ref{sec:report-weight-at-size}) that can be used to help check that the units specified are plausible.
+Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an option \commandlabsubarg{report}{type}{age\_size\_weight} (see Section \ref{sec:report-age-size-weight}) that can be used to help check that the units specified are plausible.
 
 If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
 \begin{equation}
@@ -547,6 +562,8 @@ If you specify a distribution for the size-at-age relationship, then the mean we
 \end{equation}
 
 where $c$ is the c.v. of sizes-at-age.
+
+\TODOend
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
