@@ -195,8 +195,6 @@
 #define PARAM_GAMMADIFF                           "numerical_differences"
 #define PARAM_H                                   "h"
 #define PARAM_HEIGHT                              "height"
-#define PARAM_HEX                                 "hex"
-#define PARAM_HEX_UNIFORM                         "hex_uniform"
 #define PARAM_INCREASING                          "increasing"
 #define PARAM_INDEX                               "index"
 #define PARAM_INITIAL_YEAR                        "initial_year"
