@@ -17,33 +17,9 @@
 //**********************************************************************
 CMovementProcess::CMovementProcess() {
   // Vars
-  sMethod             = "";
   dProportion         = 0.0;
-  bHexMode            = false;
 
   registerEstimable(PARAM_PROPORTION, &dProportion);
-}
-
-//**********************************************************************
-// void CMovementProcess::setMethod(string value)
-// Set method, and Hex mode flag
-//**********************************************************************
-void CMovementProcess::setMethod(string value) {
-  try {
-    sMethod = value;
-
-    if (sMethod.length() < 3)
-      throw string(ERROR_LENGTH_METHOD);
-
-    if (sMethod.substr(0, 3) == PARAM_HEX)
-        bHexMode = true;
-      else
-        bHexMode = false;
-
-  } catch (string &Ex) {
-    Ex = "CMovementProcess.setMethod()->" + Ex;
-    throw Ex;
-  }
 }
 
 //**********************************************************************
@@ -56,14 +32,8 @@ void CMovementProcess::validate() {
     CProcess::validate();
 
     // Local Validation
-    if (getMethod() == "")
-      CError::errorMissing(PARAM_METHOD);
     if (getProportion() == 0.0)
       CError::errorMissing(PARAM_PROPORTION);
-
-    // Check For Valid Method
-    if ( (sMethod != PARAM_SQUARE_UNIFORM) && (sMethod != PARAM_HEX_UNIFORM) )
-      CError::errorUnknown(PARAM_METHOD, sMethod);
 
   } catch(string &Ex) {
     Ex = "CMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -227,57 +197,6 @@ void CMovementProcess::moveRight(int RIndex, int CIndex, int SRIndex, int SCInde
 #endif
 }
 
-//**********************************************************************
-// void CMovementProcess::moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty)
-// Move Amount of fish from World(RowIndex, ColIndex)
-//**********************************************************************
-void CMovementProcess::moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMIZE
-  try {
-#endif
-    // Can We Move Left?
-    if (CIndex == 0)
-      return;
-    // Can We Move Up?
-    if ( RIndex == 0)
-      return;
-
-    // Do it
-    doMove( (RIndex-1), (CIndex-1), SRIndex, SCIndex, Qty);
-
-#ifndef OPTIMIZE
-  } catch (string &Ex) {
-    Ex = "CMovementProcess.moveLeftUp(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-#endif
-}
-
-//**********************************************************************
-// void CMovementProcess::moveLeftDown(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty)
-// Move amount of fish from World(RowIndex, ColIndex)
-//**********************************************************************
-void CMovementProcess::moveLeftDown(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty) {
-#ifndef OPTIMIZE
-  try {
-#endif
-    // Can We Move Left?
-    if (CIndex == 0)
-      return;
-    // Can We Move Down
-    if ( RIndex == (iWorldHeight-1) )
-      return;
-
-    // Do it
-    doMove( (RIndex+1), (CIndex-1), SRIndex, SCIndex, Qty);
-
-#ifndef OPTIMIZE
-  } catch (string &Ex) {
-    Ex = "CMovementProcess.moveLeftDown(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-#endif
-}
 //**********************************************************************
 // CMovementProcess::~CMovementProcess()
 // Default De-Constructor

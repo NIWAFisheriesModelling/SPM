@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CUniformMovementProcess.h
+// Name        : CAdjacentCellMovementProcess.h
 // Author      : S.Rasmussen
 // Date        : 4/03/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CUNIFORMMOVEMENTPROCESS_H_
-#define CUNIFORMMOVEMENTPROCESS_H_
+#ifndef CADJACENTCELLMOVEMENTPROCESS_H_
+#define CADJACENTCELLMOVEMENTPROCESS_H_
 
 // Local Headers
 #include "Base/CMovementProcess.h"
@@ -16,15 +16,15 @@
 //
 //
 //**********************************************************************
-class CUniformMovementProcess : public CMovementProcess {
+class CAdjacentCellMovementProcess : public CMovementProcess {
 public:
-	CUniformMovementProcess();
-	virtual                    ~CUniformMovementProcess();
-	CProcess*                  clone() { return (new CUniformMovementProcess(*this)); }
-	void                       validate();
-	void                       build();
-	void                       execute();
+  CAdjacentCellMovementProcess();
+  virtual                    ~CAdjacentCellMovementProcess();
+  CProcess*                  clone() { return (new CAdjacentCellMovementProcess(*this)); }
+  void                       validate();
+  void                       build();
+  void                       execute();
 };
 
-#endif /*CUNIFORMMOVEMENTPROCESS_H_*/
+#endif /*CADJACENTCELLMOVEMENTPROCESS_H_*/
 

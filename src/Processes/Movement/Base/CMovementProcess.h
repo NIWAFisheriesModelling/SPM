@@ -19,18 +19,14 @@
 class CMovementProcess : public CProcess {
 public:
   // Functions
-	CMovementProcess();
-	virtual                    ~CMovementProcess();
-	void                       setHexMode(bool value) { bHexMode = value; }
-	bool                       getHexMode() { return bHexMode; }
-	void                       setMethod(string value);
-	string                     getMethod() { return sMethod; }
-	void                       setProportion(double value) { dProportion = value; }
-	double                     getProportion() { return dProportion; }
-	virtual CProcess*          clone() = 0;
-	virtual void               validate();
-	virtual void               build();
-	virtual void               execute();
+  CMovementProcess();
+  virtual                    ~CMovementProcess();
+  void                       setProportion(double value) { dProportion = value; }
+  double                     getProportion() { return dProportion; }
+  virtual CProcess*          clone() = 0;
+  virtual void               validate();
+  virtual void               build();
+  virtual void               execute();
 
 protected:
   // Functions
@@ -39,12 +35,8 @@ protected:
   void                       moveDown(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty);
   void                       moveLeft(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty);
   void                       moveRight(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty);
-  void                       moveLeftUp(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty);
-  void                       moveLeftDown(int RIndex, int CIndex, int SRIndex, int SCIndex, double Qty);
 
   // Variables
-  bool                       bHexMode;
-  string                     sMethod;
   double                     dProportion;
   CWorldSquare               *pTargetBase;
   CWorldSquare               *pTargetDiff;

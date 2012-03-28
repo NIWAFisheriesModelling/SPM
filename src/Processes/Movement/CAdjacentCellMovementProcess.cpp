@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CUniformMovementProcess.cpp
+// Name        : CAdjacentCellMovementProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 4/03/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -8,23 +8,23 @@
 //============================================================================
 
 // Local Headers
-#include "CUniformMovementProcess.h"
+#include "CAdjacentCellMovementProcess.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
 //**********************************************************************
-// CUniformMovementProcess::CUniformMovementProcess()
+// CAdjacentCellMovementProcess::CAdjacentCellMovementProcess()
 // Default Constructor
 //**********************************************************************
-CUniformMovementProcess::CUniformMovementProcess() {
+CAdjacentCellMovementProcess::CAdjacentCellMovementProcess() {
 }
 
 //**********************************************************************
-// void CUniformMovementProcess::validate()
+// void CAdjacentCellMovementProcess::validate()
 // validate
 //**********************************************************************
-void CUniformMovementProcess::validate() {
+void CAdjacentCellMovementProcess::validate() {
   try {
     // Base Validation
     CMovementProcess::validate();
@@ -38,31 +38,31 @@ void CUniformMovementProcess::validate() {
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
   } catch (string &Ex) {
-    Ex = "CUniformMovementProcess.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CAdjacentCellMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CUniformMovementProcess::build()
+// void CAdjacentCellMovementProcess::build()
 // build
 //**********************************************************************
-void CUniformMovementProcess::build() {
+void CAdjacentCellMovementProcess::build() {
   try {
     // Base Building
     CMovementProcess::build();
 
   } catch (string &Ex) {
-    Ex = "CUniformMovementProcess.build(" + getLabel() + ")->" + Ex;
+    Ex = "CAdjacentCellMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CUniformMovementProcess::execute()
+// void CAdjacentCellMovementProcess::execute()
 // execute
 //**********************************************************************
-void CUniformMovementProcess::execute() {
+void CAdjacentCellMovementProcess::execute() {
 #ifndef OPTIMIZE
   try {
 #endif
@@ -79,6 +79,8 @@ void CUniformMovementProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
+        //TODO: Only move individuals from cells that are defined by a layer. Currently this moves all cells
+
         // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
@@ -86,12 +88,7 @@ void CUniformMovementProcess::execute() {
             dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
             if(CComparer::isZero(dCurrent))
               continue;
-            dCurrent *= dProportion * vSelectivityIndex[k]->getResult(l);
-
-            if (bHexMode)
-              dCurrent /= 6;
-            else
-              dCurrent /= 4;
+            dCurrent *= 0.25 * dProportion * vSelectivityIndex[k]->getResult(l);
 
             // Move Up
             moveUp(i, j, vCategoryIndex[k], l, dCurrent);
@@ -99,10 +96,6 @@ void CUniformMovementProcess::execute() {
             moveLeft(i, j, vCategoryIndex[k], l, dCurrent);
             moveRight(i, j, vCategoryIndex[k], l, dCurrent);
 
-            if (bHexMode) {
-              moveLeftUp(i, j, vCategoryIndex[k], l, dCurrent);
-              moveLeftDown(i, j, vCategoryIndex[k], l, dCurrent);
-            }
           }
         }
       }
@@ -110,15 +103,15 @@ void CUniformMovementProcess::execute() {
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CUniformMovementProcess.execute(" + getLabel() + ")->" + Ex;
+    Ex = "CAdjacentCellMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 }
 
 //**********************************************************************
-// CUniformMovementProcess::~CUniformMovementProcess()
+// CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess()
 // Default De-Constructor
 //**********************************************************************
-CUniformMovementProcess::~CUniformMovementProcess() {
+CAdjacentCellMovementProcess::~CAdjacentCellMovementProcess() {
 }
