@@ -8,5 +8,5 @@ A suitable reference for this software is the SPM User Manual. Refer to the\n\
 SPM User Manual for a suggested citation.\n\n\
 \
 Copyright (c) National Institute of Water & Atmospheric Research (NIWA)\n\
-and the New Zealand Ministry of Fisheries (MFish). All rights reserved.\n\
+and the New Zealand Ministry for Primary Industries). All rights reserved.\n\
 See http://www.niwa.co.nz/ for more information.\n";
