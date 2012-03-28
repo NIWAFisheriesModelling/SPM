@@ -174,7 +174,7 @@ src/Processes/CProcessManager.cpp
 src/Processes/Factory/CProcessFactory.cpp
 src/Processes/Movement/Base/CMovementProcess.cpp
 src/Processes/Movement/CPreferenceMovementProcess.cpp
-src/Processes/Movement/CUniformMovementProcess.cpp
+src/Processes/Movement/CAdjacentCellMovementProcess.cpp
 src/Processes/Population/CAgeingProcess.cpp
 src/Processes/Population/CAnnualMortalityRateProcess.cpp
 src/Processes/Population/CBHRecruitmentProcess.cpp
