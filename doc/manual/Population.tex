@@ -253,9 +253,9 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-Four types of mortality processes are permissible in \SPM, constant, annual-rate \NYI, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annual-rate), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annual-rate), then some event mortality in sequence. It is up to the user to specify how this happens.
+Four types of mortality processes are permissible in \SPM, constant rate, annually varying rate \NYI, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annually varying), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
-Mortalities as rates can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative natural mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity-at-age, and the mortality rate. 
+Mortalities can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative  mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate.
 
 For example, let the mortality rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $M(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant morality rate $M$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
@@ -401,11 +401,11 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 
 \subsubsection{\I{Migration movement}}
 
-The migration process \NYI\ moves individuals from one location to another. A migration can involve one or more categories and movement at age is defined as some proportion multiplies by a selectivity. Migrations are limited in scope to move individuals from one cell to another, and are available to allow compatibility with limited space models such as CASAL \citep{1388}.
+The migration process \NYI\ moves individuals from one sets of locations to another set of locations. A migration can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity. Migrations are similar to the migration process used in some limited space models such as CASAL \citep{1388}.
 
 \subsubsection{\I{Adjacent cell movement}}
 
-The adjacent cell movement \NYI\ simply moves a proportion of individuals to neighbouring cells. It can be applied to a limited range of spatial locations by associating it with a layer.
+The adjacent cell movement \NYI\ simply moves a proportion of individuals in each cell to the neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity. 
 
 \subsubsection{\I{Preference movement}}
 
