@@ -178,6 +178,7 @@ src/Processes/Movement/CAdjacentCellMovementProcess.cpp
 src/Processes/Population/CAgeingProcess.cpp
 src/Processes/Population/CAnnualMortalityRateProcess.cpp
 src/Processes/Population/CBHRecruitmentProcess.cpp
+src/Processes/Population/CLocalBHRecruitmentProcess.cpp
 src/Processes/Population/CBiomassEventMortalityProcess.cpp
 src/Processes/Population/CCategoryTransitionProcess.cpp
 src/Processes/Population/CCategoryTransitionRateProcess.cpp

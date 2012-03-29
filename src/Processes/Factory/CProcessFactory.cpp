@@ -21,6 +21,7 @@
 #include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CBHRecruitmentProcess.h"
+#include "../Population/CLocalBHRecruitmentProcess.h"
 
 //**********************************************************************
 // CProcessFactory::CProcessFactory()
@@ -34,6 +35,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CConstantRecruitmentProcess();
   else if (type == PARAM_BH_RECRUITMENT)
     pProcess = new CBHRecruitmentProcess();
+  else if (type == PARAM_LOCAL_BH_RECRUITMENT)
+    pProcess = new CLocalBHRecruitmentProcess();
   else if (type == PARAM_AGEING)
     pProcess = new CAgeingProcess();
   else if (type == PARAM_CONSTANT_MORTALITY_RATE)
