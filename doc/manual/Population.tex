@@ -189,7 +189,9 @@ Population processes are those processes that change the population state of ind
 
 \subsubsection{\I{Recruitment}}
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant} and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}\NYI. 
+\TODO
+
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt} \citep{1203}\NYI, and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}\NYI. 
 
 In each recruitment process, the number of individuals are added to the partition is defined by the type of recruitment process and the form of the recruitment function. The allocation across each age is specified by a selectivity. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
@@ -228,6 +230,20 @@ SR(SSB) = \frac{SSB}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB}{B_0} \r
 \end{equation}
 
 Note that the Beverton-Holt recruitment process requires a value for $SSB$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the $SSB$ for the recruitment process.
+
+The local Beverton-Holt recruitment process assumes that each cell is a local population, and that the cells SSB determines that amount of recruitment to that cell. In the local Beverton-Holt recruitment process, $R_y$, the number of recruits in year in a cell $y$ is the product of the average recruitment $R_0$ for that cell, the annual year class strength multiplier (which is assumed to be the same for all cells), $YCS$, and the stock-recruit relationship i.e. for cell $i$,
+\begin{equation}
+  R_y^i = R_0^i \times YCS_{y-offset} \times SR(SSB^i{y-offset})
+\end{equation}
+
+where $offset$ if the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship, parametrised by the steepness, $h$, and initial biomass $B_0$
+\begin{equation}
+SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
+\end{equation}
+
+Note that the local Beverton-Holt recruitment process requires a value for $SSB$ to resolve the stock-recruitment relationship. Here, a layer (which probably should be an abundance or biomass layer) must be provided.
+
+\TODOend
 
 \subsubsection{\I{Ageing}\label{sec:ageing}}
 
