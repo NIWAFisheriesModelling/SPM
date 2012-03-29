@@ -124,6 +124,7 @@ The population processes available are,
 \begin{itemize}
 	\item Constant recruitment process
   \item Beverton-Holt stock-recruit relationship recruitment process
+  \item Local Beverton-Holt stock-recruit relationship recruitment process
 	\item Ageing process
 	\item Constant mortality rate process
 	\item Annually varying mortality rate process
@@ -243,6 +244,78 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String}
 \defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values.}
+
+\subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
+
+\defSub{r0} {Define a multiplier of \subcommand{r0\_layer} for calculating the total amount of recruitment at equilibrium abundance levels}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{Multiplier of \subcommand{r0\_layer} to calculate the total amount (in numbers) of recruitment applied across all categories at equilibrium abundances}
+
+\defSub{categories} {Define the categories into which recruitment occurs}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{proportions} {Define the proportion of recruitment that occurs into each category}
+\defType{Estimable vector of length \commandlabsub{process}{categories}}
+\defDefault{No default}
+\defValue{Proportion of the annual recruitment that is applied to each category}
+
+\defSub{ages} {Define the age within each category that receive recruitment}
+\defType{Integer vector}
+\defDefault{No default}
+\defValue{The age classes that receive recruitment}
+
+\defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{Steepness value between 0.2 and 1.0}
+
+\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
+\defType{Estimable}
+\defDefault{1.0}
+
+\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
+\defType{Estimable}
+\defDefault{0.0}
+
+\defSub{r0\_layer} {Define the label of the layer that defines the spawning stock biomass (SSB) for each cell in each year}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be a valid \command{layer} label}
+
+\defSub{ssb\_layer} {Define the label of the layer that defines the spawning stock biomass (SSB) for each cell in each year}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be a valid \command{layer} label}
+
+\defSub{b0\_layer} {Name of the layer that defines the initial or equilibrium spawning stock biomass ($B_0$) for each cell}
+\defType{String}
+\defDefault{No layer}
+\defValue{A valid layer as defined by \command{layer}.}
+
+\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
+\defType{Integer}
+\defDefault{No default}
+\defValue{Must be a value $\ge 0$}
+
+\defSub{ycs\_values} {YCS values}
+\defType{Estimable vector}
+\defDefault{No default}
+\defValue{Must be vector}
+\defNote{Special values can be used here, i.e., mean, all}
+
+\defSub{ycs\_years} {Years for year class strength values}
+\defType{Integer vector}
+\defDefault{No default}
+\defValue{Must be vector of length \subcommand{YCS\_values}}
+\defNote{Special year ranges (YYYY-YYYY) can be used}
+
+\defSub{standardise\_ycs\_year\_range} {Years for which the year class strength values are defined to have mean 1.0}
+\defType{Integer vector of length 2}
+\defDefault{No default}
+\defValue{Must be vector of length 2, with values of years between \commandsub{model}{initial} to \commandsub{model}{current}}
 
 \subsubsection[Ageing process]{\commandlabsubarg{process}{type}{ageing}}
 

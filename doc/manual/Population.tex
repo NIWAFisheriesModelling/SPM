@@ -191,21 +191,32 @@ Population processes are those processes that change the population state of ind
 
 \TODO
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt} \citep{1203}\NYI, and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}\NYI. 
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}. 
 
-In each recruitment process, the number of individuals are added to the partition is defined by the type of recruitment process and the form of the recruitment function. The allocation across each age is specified by a selectivity. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
+In the recruitment processes, the number of individuals are added to the partition is defined by the type of recruitment process and the form of the recruitment function. The allocation across each age is specified by a selectivity. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
-In the case of the constant and Beverton-Holt recruitments, then for each cell where cell$(i,j)$ is a member of some layer $L_R$, the  number of fish added in year $y$ is 
+For the constant and Beverton-Holt recruitments, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k(R_y / n) \frac{L_ij}{\sum_ij L_ij}
 \end{equation}
 
-where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, $n$ is the number of spatial locations where recruitment occurs, and the recruitment to each cell is scaled to be proportional to the value of the layer in that cell.
+where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, $n$ is the number of spatial locations where recruitment occurs, and the recruitment to each cell is scaled to be proportional to the value of the layer in that cell. See below for how $R_y$ is determined in each of these cases.
 
-In the constant recruitment process, $R_y$, the number of recruits in year $y$ is simply the average recruitment $R_0$, i.e.,
+In the local Beverton-Holt recruitment process, individuals are recruited to an individual cell, based on the local abundance or biomass (i.e., SSB). For each cell where cell$(i,j)$ is a member of some layer $L_R$, the number of individuals in that cell following recruitment in each year $y$ is 
+\begin{equation}
+  \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k R_y L_{ij}
+\end{equation}
+
+where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and the recruitment to each cell is the product of the Beverton-Holt stock recruitment relationship ($R_y$). 
+
+\paragraph{Constant Recruitment:}
+
+In the constant recruitment process the total number of recruits added each year is $R_y$, and is simply $R_0$, i.e.,
 \begin{equation}
   R_y = R_0
 \end{equation}
+
+It is equivalent to a Beverton-Holt recruitment process where steepness is set equal to one ($h=1$).
 
 For example, to specify a constant recruitment process, where individuals are added to the category `immature' at $age=1$, and the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{recruitment}, then the syntax is,
 
@@ -219,29 +230,65 @@ ages 1
 layer recruitment
 \end{verbatim}
 
-In the Beverton-Holt recruitment process, $R_y$, the number of recruits in year $y$ is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
+\paragraph{Beverton-Holt recruitment:}
+
+In the Beverton-Holt recruitment process the total number of recruits added each year is $R_y$, and is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
 \begin{equation}
   R_y = R_0 \times YCS_{y-offset} \times SR(SSB_{y-offset})
 \end{equation}
 
-where $offset$ if the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship, parametrised by the steepness, $h$,
+where $offset$ is the number of years offset to link the year class with the year of spawning $y$, and $SR$ is the Beverton-Holt stock-recruit relationship parametrised by the steepness $h$,
 \begin{equation}
-SR(SSB) = \frac{SSB}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB}{B_0} \right) \right)
+SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B_0} \right) \right)
 \end{equation}
 
-Note that the Beverton-Holt recruitment process requires a value for $SSB$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the $SSB$ for the recruitment process.
+Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, derived quantities (see Section \ref{sec:derived-quantities}) must be defined that provides both $B_0$ and the annual $SSB_y$ for the recruitment process.
 
-The local Beverton-Holt recruitment process assumes that each cell is a local population, and that the cells SSB determines that amount of recruitment to that cell. In the local Beverton-Holt recruitment process, $R_y$, the number of recruits in year in a cell $y$ is the product of the average recruitment $R_0$ for that cell, the annual year class strength multiplier (which is assumed to be the same for all cells), $YCS$, and the stock-recruit relationship i.e. for cell $i$,
+For example, to specify a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{recruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity of spawning stock biomass in each year, and recruits enter into the model the year following spawning, then,
+
+\begin{verbatim}
+@process Recruitment
+type BH_recruitment
+categories immature
+proportions 1.0
+R0 500000
+ages 1
+layer recruitment
+B0 1990_biomass
+SSB mature_biomass
+offset 1
+\end{verbatim}
+
+\paragraph{Local Beverton-Holt recruitment:}
+
+The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. 
+
+If the recruitment to cell $i$ is $R_y^i$, then $R_y^i$ is the product of the average recruitment $R_0^i$ for that cell, the annual year class strength multiplier (assumed to be the same for all cells in each year), and the stock-recruit relationship, i.e., 
 \begin{equation}
-  R_y^i = R_0^i \times YCS_{y-offset} \times SR(SSB^i{y-offset})
+  R_y^i = R_0^i \times YCS_{y-offset} \times SR(SSB_{y-offset}^i)
 \end{equation}
 
-where $offset$ if the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship, parametrised by the steepness, $h$, and initial biomass $B_0$
+where $offset$ is the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship parametrised by the steepness $h$ and initial biomass $B_0^i$
 \begin{equation}
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $SSB$ to resolve the stock-recruitment relationship. Here, a layer (which probably should be an abundance or biomass layer) must be provided.
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that should probably be abundance or biomass layers) must be provided that provide both $B_0$ and the annaul $SSB_y$ for the recruitment process.
+
+For example, to specify a local Beverton-Holt recruitment process where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the value of the layer \texttt{recruitment\_layer}, $B_0$ is a layer that specifies the biomass in each cell at the end of the initialisation period, $SSB_y$ is a meta-layer of spawning stock biomass for each year, and recruits enter into the model the year following spawning, then ,
+
+\begin{verbatim}
+@process Recruitment
+type local_BH_recruitment
+categories immature
+proportions 1.0
+R0 500000
+ages 1
+R0_layer recruitment_layer
+B0_layer B0_biomass_layer
+SSB_layer mature_biomass_layer
+offset 1
+\end{verbatim}
 
 \TODOend
 

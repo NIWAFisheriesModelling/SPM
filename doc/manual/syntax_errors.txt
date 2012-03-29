@@ -49,6 +49,7 @@ In manual, but not in SPM
   include
   joint_selectivity
   age_sizes
+  b0_layer
   by_length
   correlation_adjustment_diff
   correlation_adjustment_method

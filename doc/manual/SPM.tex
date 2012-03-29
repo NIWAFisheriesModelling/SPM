@@ -68,9 +68,9 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \usepackage{sectsty}
 \allsectionsfont{\sffamily\large} % Normal sized arial style section headings
 % Add a dot after section headings
-%\makeatletter
- %\def\@seccntformat#1{\csname the#1\endcsname.\quad}
-%\makeatother
+\makeatletter
+ \def\@seccntformat#1{\csname the#1\endcsname.\quad}
+\makeatother
 
 % Page style
 \usepackage{fancyhdr}
