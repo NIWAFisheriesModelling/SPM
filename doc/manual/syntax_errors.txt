@@ -19,8 +19,6 @@ In SPM, but not in manual
   flagged_penalties
   function
   height
-  hex
-  hex_uniform
   index
   label
   layer_height
