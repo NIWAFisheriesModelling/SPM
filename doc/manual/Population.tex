@@ -189,11 +189,11 @@ Population processes are those processes that change the population state of ind
 
 \subsubsection{\I{Recruitment}}
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements two types of recruitment process, constant recruitment\index{Recruitment ! Constant} and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203} \NYI. 
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant} and \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}\NYI. 
 
-In both of the recruitment process, a number of individuals are added to the partition at the age and categories specified. If more than one category is defined, then the proportions of individuals added across categories are user-defined. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
+In each recruitment process, the number of individuals are added to the partition is defined by the type of recruitment process and the form of the recruitment function. The allocation across each age is specified by a selectivity. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
-For each cell where cell$(i,j)$ is a member of some layer $L_R$, the  number of fish added in year $y$ is 
+In the case of the constant and Beverton-Holt recruitments, then for each cell where cell$(i,j)$ is a member of some layer $L_R$, the  number of fish added in year $y$ is 
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k(R_y / n) \frac{L_ij}{\sum_ij L_ij}
 \end{equation}
