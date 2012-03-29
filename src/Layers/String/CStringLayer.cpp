@@ -72,13 +72,15 @@ void CStringLayer::validate() {
       if (vData[i] == PARAM_DATA)
         continue;
 
-      if (iRow >= iHeight)
-        CError::errorTooMuch(PARAM_DATA);
-
+      // Read data and if enough on theis row, then start filling out the next row
       if (iCol >= iWidth) {
         iCol = 0;
         iRow++;
       }
+
+      // Read data and if too much data, report an error
+      if (iRow >= iHeight)
+        CError::errorTooMuch(PARAM_DATA);
 
       pGrid[iRow][iCol] = vData[i];
       iCol++;
