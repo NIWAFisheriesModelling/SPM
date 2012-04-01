@@ -149,6 +149,8 @@ src/Penalties/CPenalty.cpp
 src/Penalties/CPenaltyManager.cpp
 src/Penalties/Factory/CPenaltyFactory.cpp
 src/PreferenceFunctions/Children/CConstantPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CCategoricalMonotonicPreferenceFunction.cpp
+src/PreferenceFunctions/Children/CCategoricalPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CDoubleNormalPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CExponentialPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction.cpp

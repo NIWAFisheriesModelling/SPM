@@ -22,6 +22,8 @@
 #include "../Children/CNormalPreferenceFunction.h"
 #include "../Children/CThresholdBiomassPreferenceFunction.h"
 #include "../Children/CThresholdPreferenceFunction.h"
+#include "../Children/CCategoricalPreferenceFunction.h"
+#include "../Children/CCategoricalMonotonicPreferenceFunction.h"
 
 // Namespaces
 using namespace std;
@@ -161,6 +163,39 @@ BOOST_AUTO_TEST_CASE( Build_ThresholdPreferenceFunction) {
 
   delete pFunction;
 }
-#endif
 
+//**********************************************************************
+//
+//
+//**********************************************************************
+BOOST_AUTO_TEST_CASE( Build_CategoricalPreferenceFunction) {
+  CPreferenceFunction *pFunction = 0;
+  BOOST_REQUIRE_NO_THROW(pFunction = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_CATEGORICAL, false));
+
+  CCategoricalPreferenceFunction *pPtr = dynamic_cast<CCategoricalPreferenceFunction*>(pFunction);
+  BOOST_ASSERT(pPtr != 0);
+
+  CThresholdBiomassPreferenceFunction *pPtr2 = dynamic_cast<CThresholdBiomassPreferenceFunction*>(pFunction);
+  BOOST_ASSERT(pPtr2 == 0);
+
+  delete pFunction;
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+BOOST_AUTO_TEST_CASE( Build_CategoricalMonotonicPreferenceFunction) {
+  CPreferenceFunction *pFunction = 0;
+  BOOST_REQUIRE_NO_THROW(pFunction = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_CATEGORICAL_MONOTONIC, false));
+
+  CCategoricalMonotonicPreferenceFunction *pPtr = dynamic_cast<CCategoricalMonotonicPreferenceFunction*>(pFunction);
+  BOOST_ASSERT(pPtr != 0);
+
+  CThresholdBiomassPreferenceFunction *pPtr2 = dynamic_cast<CThresholdBiomassPreferenceFunction*>(pFunction);
+  BOOST_ASSERT(pPtr2 == 0);
+
+  delete pFunction;
+}
+#endif
 

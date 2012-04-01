@@ -20,6 +20,8 @@
 #include "../Children/CNormalPreferenceFunction.h"
 #include "../Children/CThresholdBiomassPreferenceFunction.h"
 #include "../Children/CThresholdPreferenceFunction.h"
+#include "../Children/CCategoricalPreferenceFunction.h"
+#include "../Children/CCategoricalMonotonicPreferenceFunction.h"
 
 //**********************************************************************
 // CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string type, bool registerWithManager)
@@ -45,6 +47,10 @@ CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string 
     pFunction = new CThresholdBiomassPreferenceFunction();
   else if (type == PARAM_THRESHOLD)
     pFunction = new CThresholdPreferenceFunction();
+  else if (type == PARAM_CATEGORICAL)
+    pFunction = new CCategoricalPreferenceFunction();
+  else if (type == PARAM_CATEGORICAL_MONOTONIC)
+    pFunction = new CCategoricalMonotonicPreferenceFunction();
   else
     CError::errorUnknown(PARAM_TYPE, type);
 
