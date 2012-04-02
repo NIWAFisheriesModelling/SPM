@@ -44,7 +44,7 @@ double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
     throw Ex;
   }
 #endif
-  //return dAlpha * dRet;
+
   return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }
 

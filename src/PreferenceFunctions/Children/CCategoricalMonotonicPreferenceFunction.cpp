@@ -111,7 +111,7 @@ double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex
   }
 #endif
 
-  return (dAlpha * dRet);
+  return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }
 //**********************************************************************
 // CCategoricalMonotonicPreferenceFunction::~CCategoricalMonotonicPreferenceFunction()

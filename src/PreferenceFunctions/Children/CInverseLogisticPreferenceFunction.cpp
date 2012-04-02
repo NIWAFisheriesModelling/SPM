@@ -74,7 +74,6 @@ double CInverseLogisticPreferenceFunction::getResult(int RIndex, int CIndex, int
   }
 #endif
 
-  //return (dAlpha * dRet);
   return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }
 

@@ -68,7 +68,6 @@ double CNormalPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex,
   }
 #endif
 
-  //return (dAlpha * dRet);
   return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }
 //**********************************************************************

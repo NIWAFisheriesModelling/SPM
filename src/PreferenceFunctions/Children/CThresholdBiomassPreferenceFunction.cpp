@@ -68,6 +68,7 @@ double CThresholdBiomassPreferenceFunction::getResult(int RIndex, int CIndex, in
     throw Ex;
   }
 
+  // return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
   return 0.0;
 }
 

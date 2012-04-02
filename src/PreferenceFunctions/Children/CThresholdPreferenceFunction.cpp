@@ -77,7 +77,6 @@ double CThresholdPreferenceFunction::getResult(int RIndex, int CIndex, int TRInd
   }
 #endif
 
-  //return (dAlpha * dRet);
   return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }
 //**********************************************************************

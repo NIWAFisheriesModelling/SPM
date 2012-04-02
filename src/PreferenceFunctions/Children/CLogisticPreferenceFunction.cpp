@@ -75,7 +75,6 @@ double CLogisticPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
   }
 #endif
 
-  //return (dAlpha * dRet);
   return CMath::zeroFun(pow(dRet,dAlpha),ZERO);
 }
 
