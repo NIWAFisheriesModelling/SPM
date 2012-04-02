@@ -105,8 +105,7 @@ double CCategoricalPreferenceFunction::getResult(int RIndex, int CIndex, int TRI
   }
 #endif
 
-  //return (dAlpha * dRet);
-  return dRet;
+  return (dAlpha * dRet);
 }
 //**********************************************************************
 // CCategoricalPreferenceFunction::~CCategoricalPreferenceFunction()

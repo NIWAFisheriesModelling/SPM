@@ -468,11 +468,13 @@ The migration process \NYI\ moves individuals from one sets of locations to anot
 
 \subsubsection{\I{Adjacent cell movement}}
 
-The adjacent cell movement \NYI\ simply moves a proportion of individuals in each cell to the neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity. 
+The adjacent cell movement simply moves a proportion of individuals in each cell to the neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity. 
 
 \subsubsection{\I{Preference movement}}
 
-Preference movements allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. Here, we use the term \emph{preference function}\index{Preference function} \citep{1366,1367} to describe the movement probability distributions. We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.The preference function movement process allows the number of parameters describing movement to to reduced, and results in a movement process that is some function of some underlying property of each location. For example, if we assume that movement between areas was a function of the Euclidean distance between areas, we could model movement between any two areas as a linear decay or exponential decay function \citep{1366}. Alternately, if distribution and density were correlated with bathymetric depth for a marine organism, we might model the movement and distribution as a function of depth. 
+Preference movements allows movement from any $cell(a) \rightarrow cell(b)$, for $\forall a,b \in L_B$ and is implemented as a function of the product of up to $n$ independent \emph{preference functions}. We define the probability of moving from any cell $a$ to any cell $b$, for all $a,b \in L_B$, as a function of the relative preference for that cell. Here, we use the term \emph{preference function}\index{Preference function} \citep{1366,1367} to describe the movement probability distributions. 
+
+We assume that the population and spatial extent are defined, and that there is a preference function that is a function of some (typically estimable) parameters and a spatially explicit set of known attributes.The preference function movement process allows the number of parameters describing movement to to reduced, and results in a movement process that is some function of some underlying property of each location. For example, if we assume that movement between areas was a function of the Euclidean distance between areas, we could model movement between any two areas as a linear decay or exponential decay function \citep{1366}. Alternately, if distribution and density were correlated with bathymetric depth for a marine organism, we might model the movement and distribution as a function of depth. 
 
 \subsubsection*{The total preference function\index{Total preference function}}
 
@@ -499,7 +501,7 @@ Preference functions of the first type are determined only by the parameters of 
 
 \subsubsection*{Preference functions\index{Preference function}}
 
-Preference functions in \SPM\ include constant, Normal, double-Normal, logistic, inverse-logistic, Exponential, and threshold. These are defined as,
+Preference functions in \SPM\ include constant, Normal, double-Normal, logistic, inverse-logistic, Exponential, threshold, categorical, and monotonic categorical. These are defined as,
 
 \begin{enumerate}
 \item The constant preference function\index{Constant preference function}\index{Preference function ! Constant} has dependent variable $x$ and has no parameters, and is defined as,
@@ -530,7 +532,7 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
   f(x | a_{50}, a_{to95}) =1- 1 / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
 
-\item The Exponential preference function\index{Exponential preference function}\index{Preference function ! Exponential} has dependent variable $x$ and parameters $\theta = (\lambda)$, and is defined as,
+\item The Exponential preference function\index{Exponential preference function}\index{Preference function ! Exponential} has dependent variable $x$ and parameter $\theta = (\lambda)$, and is defined as,
 \begin{equation}
   f(x | \lambda) =\exp(-\lambda x), \text{where $x \geq 0$ and $0$ otherwise}
 \end{equation}
@@ -543,6 +545,14 @@ f(x | \mu, \sigma) = 2^{-[(x- \mu)/\sigma ]^2}
     0, & \text{otherwise}
   \end{cases}
 \end{equation}
+
+\item The categorical preference function\index{Categorical preference function}\index{Preference function ! Categorical} has dependent variables $x_i$ and parameters $\theta = (\lambda_i)$, and is defined so that for each value $x_i$, there is a corresponding parameter $\lambda_i$. 
+
+Note that for the categorical preference function, the preference function is potentially over-parameterised if $\alpha \ne 1$. Typically the values of $x$ are supplied via a categorical layer, with $x_i$ representing the unique values of the layer.
+
+\item The monotonic categorical preference function\index{Monotonic categorical preference function}\index{Preference function ! Monotonic categorical} has dependent variables $x_i$ and parameters $\theta = (\hat{\lambda}_i)$. As for the categorical preference function, it is defined so that for each $x_i$, there is a corresponding parameter $\hat{\lambda}_i = \lambda_i$ for the first unique value of $x_i$ and  $\hat{\lambda}_i = \lambda_i+ \lambda_{i-1}$ otherwise, and that $\forall{i}, \lambda_i \ge=0 $.
+
+Note that for the monotonic categorical preference function, the preference function is potentially over-parameterised if $\alpha \ne 1$. Typically the values of $x$ are supplied via a categorical layer, with $x_i$ representing the unique values of the layer.
 
 \end{enumerate}
 
@@ -604,7 +614,7 @@ The two age-size relationship are,
 
 The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Schnute curve \citep{836} by $y_1$ and $y_2$, which are the mean sizes at reference ages $\tau_1$ and $\tau_2$, and $a$ and $b$ (when $b=1$, this reduces to the von Bertalanffy with $k=a$). 
 
-The model can incorporate changes in size-at-age during the year (i.e., growth between fish birthdays) by specifying the growth proportions for each time step of the annual cycle.
+The model can incorporate changes in size-at-age during the year (i.e., growth between birthdays) by specifying the growth proportions for each time step of the annual cycle.
 
 
 The size-weight relationship, with parameters $a$ and $b$, is calculated as either,

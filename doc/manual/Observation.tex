@@ -380,7 +380,7 @@ Ageing error is optional, and if it is used, it may be omitted for any individua
 The ageing error models implemented are,
 \begin{enumerate}
   \item{None}: The default model is to apply no ageing error.
-  \item{Off by one}: Proportion $p_1$ of individuals of each age $a$ are misclassified as age $a-1$ and proportion $p_2$ are misclassified as age $a+1$. Individuals of age $a < k$ are not misclassified. If there is no plus group in the population model, then proportion $p_2$ fish of the oldest age class will 'fall off the edge' and disappear. 
+  \item{Off by one}: Proportion $p_1$ of individuals of each age $a$ are misclassified as age $a-1$ and proportion $p_2$ are misclassified as age $a+1$. Individuals of age $a < k$ are not misclassified. If there is no plus group in the population model, then proportion $p_2$ of the oldest age class will 'fall off the edge' and disappear. 
   \item{Normal}: Individuals of age $a$ are classified as ages which are normally distributed with mean $a$ and constant c.v. $c$. As above, if there is no plus group in the population model, some individuals of the older age classes may disappear. If $c$ is high enough, some of the younger age classes may 'fall off the other edge'. Individuals of age $a < k$ are not misclassified.
 \end{enumerate}
 

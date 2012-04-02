@@ -21,6 +21,7 @@ In SPM, but not in manual
   height
   index
   label
+  labels
   layer_height
   layer_width
   method
@@ -40,6 +41,7 @@ In SPM, but not in manual
   square_uniform
   total_score
   value
+  values
   weights
   width
 
@@ -51,6 +53,8 @@ In manual, but not in SPM
   age_sizes
   b0_layer
   by_length
+  category_labels
+  category_values
   correlation_adjustment_diff
   correlation_adjustment_method
   df

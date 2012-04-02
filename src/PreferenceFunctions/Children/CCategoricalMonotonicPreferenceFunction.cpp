@@ -44,12 +44,10 @@ void CCategoricalMonotonicPreferenceFunction::validate() {
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
     for (int i = 1; i < (int)vValues.size(); i++) {
-      vValues[i] = vValues[i] - vValues[i-1];
       if(vValues[i] < 0) {
-        CError::errorLessThan(PARAM_CATEGORY_VALUES, PARAM_ZERO); // Strictly not a helpful error message: Should report that these values are not monotonically increasing.
+        CError::errorLessThan(PARAM_CATEGORY_VALUES, PARAM_ZERO); // TODO: Not a helpful error message: Should report that these values are not monotonically increasing.
       }
     }
-
     // TODO: Validate that the length of VALUES is the same as the length LABELS
     //       Validate that all VALUES are numeric
     //       Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
@@ -60,7 +58,6 @@ void CCategoricalMonotonicPreferenceFunction::validate() {
   // Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)
       registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
-
 
   } catch (string &Ex) {
     Ex = "CCategoricalMonotonicPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
@@ -102,9 +99,7 @@ double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex
 
     for (int i = 0; i < (int)vLabels.size(); i++) {
       if(vLabels[i] == sLayerValue) {
-        for (int j = 0; j < i; j++) {
-          dRet = dRet + vValues[j];
-        }
+        dRet = vValues[i];
         break;
       }
     }
@@ -116,8 +111,7 @@ double CCategoricalMonotonicPreferenceFunction::getResult(int RIndex, int CIndex
   }
 #endif
 
-  //return (dAlpha * dRet);
-  return dRet;
+  return (dAlpha * dRet);
 }
 //**********************************************************************
 // CCategoricalMonotonicPreferenceFunction::~CCategoricalMonotonicPreferenceFunction()

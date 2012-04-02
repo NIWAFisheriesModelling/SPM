@@ -34,7 +34,7 @@ The \config\ includes definitions of required layers and the estimation, observa
 
 To carry out a run of the model (to verify that the model runs without any syntax errors), use the command \texttt{spm -r -c config.spm}. Note that as \SPM\ looks for a file named \texttt{config.spm} by default, we can simplify the command to \texttt{spm -r}. 
 
-To run an estimate, and hence estimate the parameters defined in the file \texttt{estimation.spm} (the catchability constant $q$, recruitment $R_0$, and the fishing selectivity parameters $a_{50}$ and $a_{to95}$), use  \texttt{spm -e}. Here, we have piped the output to \texttt{estimate.log} using the command \texttt{spm -e > estimate.log}.  \SPM\ reports a the results of each iteration of the estimation, and ends with successful convergence,
+To run an estimate, and hence estimate the parameters defined in the file \texttt{estimation.spm} (the catchability constant $q$, recruitment $R_0$, and the selectivity parameters $a_{50}$ and $a_{to95}$), use  \texttt{spm -e}. Here, we have piped the output to \texttt{estimate.log} using the command \texttt{spm -e > estimate.log}.  \SPM\ reports a the results of each iteration of the estimation, and ends with successful convergence,
 \begin{verbatim}
 Convergence was successful
 Total elapsed time: 1 second

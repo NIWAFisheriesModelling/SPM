@@ -16,7 +16,7 @@ cat("Description: A set of R functions for extracting from SPM configuration fil
 cat("Maintainer: A Dunn <a.dunn@niwa.co.nz>\n",file=filename,append=TRUE)
 cat("License: CPL v1.0. See the SPM User Manual for license details.\n",file=filename,append=TRUE)
 cat("URL: http://www.niwa.co.nz\n",file=filename,append=TRUE)
-cat("Copyright: National Institute of Water & Atmospheric Research (NIWA), New Zealand Ministry of Fisheries (MFish).\n",file=filename,append=TRUE)
+cat("Copyright: National Institute of Water & Atmospheric Research (NIWA), New Zealand Ministry for Primary Industries.\n",file=filename,append=TRUE)
 
 # Make a man page for the library
 #filename<-"spm/man/spm-package.Rd"

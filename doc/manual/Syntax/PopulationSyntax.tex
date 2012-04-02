@@ -584,6 +584,8 @@ The individual preference functions available are,
 	\item Exponential
 	\item Threshold
 	\item Threshold-biomass
+	\item Categorical
+	\item Monotonic categorical
 \end{itemize}
 
 Each type of preference function requires a set of subcommands and arguments specific to that function.
@@ -763,6 +765,48 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defSub{lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
 \defType{Estimable}
 \defDefault{No default}
+
+\subsubsection[Categorical]{\commandlabsubarg{preference\_function}{type}{categorical}}
+
+\defSub{layer} {Defines the layer which supplies the preference function independent variable}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{alpha} {Defines the multiplicative constant $\alpha$}
+\defType{Estimable}
+\defDefault{No default}
+
+\defSub{category\_labels} {Defines the unique labels of \argument{layer} in order of their coefficients}
+\defType{String vector}
+\defDefault{No default}
+\defValue{A complete set of unique values of labels in \argument{layer} in order of \argument{category\_values}}
+
+\defSub{category\_values} {Defines the coefficients for each unique label of \argument{layer} in order of their labels}
+\defType{String vector}
+\defDefault{No default}
+\defValue{A complete set of values of labels in \argument{layer} in order of \argument{category\_labels}}
+
+\subsubsection[Monotonic categorical]{\commandlabsubarg{preference\_function}{type}{monotonic\_categorical}}
+
+\defSub{layer} {Defines the layer which supplies the preference function independent variable}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{alpha} {Defines the multiplicative constant $\alpha$}
+\defType{Estimable}
+\defDefault{No default}
+
+\defSub{category\_labels} {Defines the unique labels of \argument{layer} in order of their coefficients}
+\defType{String vector}
+\defDefault{No default}
+\defValue{A complete set of unique values of labels in \argument{layer} in order of \argument{category\_values}}
+
+\defSub{category\_values} {Defines the coefficients for each unique label of \argument{layer} in order of their labels}
+\defType{Numeric vector}
+\defDefault{No default}
+\defValue{A complete set of values of labels in \argument{layer} in order of \argument{category\_labels}. Each value of \argument{category\_values} must be greater than or equal to zero}
 
 \subsection{Layers}
 
