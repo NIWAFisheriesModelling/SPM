@@ -243,7 +243,7 @@ SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B
 
 Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, derived quantities (see Section \ref{sec:derived-quantities}) must be defined that provides both $B_0$ and the annual $SSB_y$ for the recruitment process. The recruits are distributed in the cells defined by a user-defined layer. 
 
-For example, to specify a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity of spawning stock biomass in each year, YCS is standardised to have mean one in the period 1998 to 2004, and recruits enter into the model two years following spawning, then,
+For example, to specify a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity of spawning stock biomass in each year, YCS is standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning, then,
 
 \begin{verbatim}
 @process Recruitment
@@ -252,15 +252,15 @@ categories immature
 proportions 1.0
 R0 500000
 steepness 0.75
-sigma_r 0.6 \NYI
-rho 0.6 \NYI
+sigma_r 0.6 [not actually used yet]
+rho 0.6 [not actually used yet]
 ages 1
 layer MyRecruitment
 B0 1990_biomass
 SSB mature_biomass
-standardise_years 1998-2004
-YCS_years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
-YCS          1    1    1    1    1    1    1    1    1    1    1    1  
+standardise_years 1994-2004
+YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+YCS          1    1    1    1    1    1    1    1    1    1    1    1    1    1   
 offset 2
 \end{verbatim}
 
@@ -268,7 +268,7 @@ Note that if not specified, $offset$ is set at the value of $ages$. This corresp
 
 \paragraph{Local Beverton-Holt recruitment:}
 
-The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. 
+The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. If desired, locally recruits can subsequently be subjected to movement (see Section \ref{sec:movement-processes}).
 
 If the recruitment to cell $i$ is $R_y^i$, then $R_y^i$ is the product of the average recruitment $R_0^i$ for that cell, the annual year class strength multiplier (assumed to be the same for all cells in each year), and the stock-recruit relationship, i.e., 
 \begin{equation}
@@ -280,9 +280,9 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that should probably be abundance or biomass layers) must be provided that provide both $B_0$ and the annual $SSB_y$ for the recruitment process.
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that should probably be abundance or biomass layers or a user-defined derived layer, see Section \ref{sec:derived-layers}) must be provided that provide both $B_0$ and the annaul $SSB_y$ for the recruitment process. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ as distributed relative to the recruitement layer \texttt{R0\_layer}.
 
-For example, to specify a local Beverton-Holt recruitment process where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the value of the layer \texttt{recruitment\_layer}, $B_0$ is a layer that specifies the biomass in each cell at the end of the initialisation period, $SSB_y$ is a meta-layer of spawning stock biomass for each year, and recruits enter into the model the year following spawning, then ,
+For example, to specify a local Beverton-Holt recruitment process where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{recruitment\_layer}, $B_0$ is a derived layer that specifies the biomass in each cell at the end of the initialisation period, $SSB_y$ is a derived layer or meta-layer of spawning stock biomass for each year, YCS is standardised over the 1994 to 2004 period, and recruits enter into the model the year following spawning, then,
 
 \begin{verbatim}
 @process Recruitment
@@ -290,12 +290,20 @@ type local_BH_recruitment
 categories immature
 proportions 1.0
 R0 500000
+steepness 0.75
+sigma_r 0.6 [not actually used yet]
+rho 0.6 [not actually used yet]
 ages 1
 R0_layer recruitment_layer
 B0_layer B0_biomass_layer
 SSB_layer mature_biomass_layer
+standardise_years 1994-2004
+YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 
+YCS          1    1    1    1    1    1    1    1    1    1    1    1    1    1
 offset 1
 \end{verbatim}
+
+Note that if not specificed, $offset$ is set at the value of $ages$. This corresponds to cases where recruitment happens after spawning. $Offset$ can be user-defined to a different value if needed, such as if recruitment happens in a timestep before spawning, and therefore the offset is $ages$ plus one. In the example above, $offset$ is equal to $ages$ and therefore could be omitted.
 
 \TODOend
 
@@ -448,7 +456,7 @@ selectivities male-maturity female-maturity
 
 Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
 
-\subsection{\I{Movement processes}}
+\subsection{\I{Movement processes}\label{sec:movement-processes}}
 
 Movement processes are those processes that move individuals between cells but retain their population state, and are defined such that,
 \begin{equation}
@@ -579,10 +587,15 @@ time_step 1
 layer spawning_ground
 \end{verbatim}
 
-\TOUNDO
- Size at age are currently two modules. They need to be regrouped into a single module as per below
+\TODO
+\subsection{\I{Derived layers and meta-layers}\label{sec:derived-layers}}
+\TODOend
+
 
 \subsection{\I{Size-age relationship}\label{sec:size-at-age}}
+
+\TOUNDO
+ Size at age are currently two modules. They need to be regrouped into a single module as per below
 
 Size-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
 
