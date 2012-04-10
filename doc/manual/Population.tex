@@ -18,7 +18,7 @@ The population section consists of several components, including;
   \item Layers (used by processes, observations and reports) and their definitions
   \item Selectivities
   \item Parameter values and their definitions
-  \item Derived quantities required as parameters for some processes (i.e., spawning stock biomass to resolve the spawner-recruit relationship in a recruitment process)
+  \item Derived layers, meta-layers and quantities required as parameters for some processes (i.e., spawning stock biomass to resolve the spawner-recruit relationship in a recruitment process)
 \end{itemize}
 
 \subsection{\I{Spatial structure}\label{sec:spatial-structure}}
@@ -69,7 +69,7 @@ Every model must define at least one layer, the base layer $L_B$. A layer is def
 Within \SPM, layers are used in three contexts:
 \begin{enumerate}
 \item The base layer\index{Base layer}\index{Layers ! the base layer}: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if every element $L_B(i,j) \ge 0$. Further, positive values of the base layer $L_B$ represent the \emph{area} represented by that spatial cell. 
-\item \I{Covariate layers}: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates must be continuous (i.e., numeric) variables. Covariate layers must have values $\ge0$.
+\item \I{Covariate layers}: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates can be numeric or categorical.
 \item \I{Classification layers}: A model may have many classification layers, and these are used as a classification or grouping variable for aggregating data over individual spatial cells $(i,j)$, e.g., statistical areas or management areas. Such layers are typically used to aggregate the population within cells into groups so-as to allow comparison with observations. The values in layers used as classification layers must be categorical.
 \end{enumerate}
 
@@ -78,7 +78,7 @@ Within \SPM, layers are used in three contexts:
 \begin{enumerate}
 \item{\I{Numeric layers}\label{numeric-layer}}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user.
 
-\item {\I{Categorical layers}\label{categorical-layer}}: A model may have many categorical layers, and these are used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas. Such layers are typically used to aggregate the population within cells into groups for comparing with observations. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
+\item {\I{Categorical layers}\label{categorical-layer}}: A model may have many categorical layers, and these can be used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas; or as covariates of a population or movement process. Such layers are typically used to aggregate the population within cells into groups for comparing with observations, or to apply specific movement characteristics. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
 
 \item {\I{Distance layers}}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance (where the grid type is \argument{square}). Here, the distance between cell $a$ and cell $b$ can be defined as,
 \begin{equation}
@@ -92,7 +92,7 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Biomass layers}}: The biomass layer \NYI\ is the sum of the biomass of individuals within cell $a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$
+\item {\I{Biomass layers}}: The biomass layer is the sum of the biomass of individuals within cell $a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$
 \begin{equation}
   N(a) = \sum\limits_{k} \sum\limits_l w_{k,l} S_l \ \text{element}(i,j,k,l) 
 \end{equation}
@@ -104,18 +104,17 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Biomass-density layers}}: The biomass-density layer \NYI\ is the density of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$,
+\item {\I{Biomass-density layers}}: The biomass-density layer is the density of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$,
 \begin{equation}
   N(a) = \frac{1}{A_a} \sum\limits_{k} \sum\limits_l w_{k,l} S_l \ \text{element}(i,j,k,l)
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer} \NYI. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process.
+\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process.
+
+\item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
+
 \end{enumerate}
-
-Note that layers of type biomass, quantity, and distance are calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
-
-Note that \SPM\ does not `edit' or otherwise change layers, including adding or otherwise combining layers that are supplied in the input parameter files.
 
 \subsection{\I{Time sequences}}
 
@@ -161,7 +160,7 @@ Processes are carried out in the order specified within each time step, and can 
 
 \subsubsection{\I{Projections}\label{sec:projections}}
 
-\SPM\ can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the partition is run from \argument{current} to \argument{final}. 
+\SPM\ can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the model is run from \argument{current} to \argument{final}. 
 
 \subsection{\I{Processes}}
 
@@ -176,8 +175,8 @@ Each of these processes is carried out in the user-defined prescribed order when
 
 \SPM\ implements three different types of movement processes\index{Movement};
 \begin{enumerate}
-	\item  A migration movement rate\index{Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. \NYI
-	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. \NYI
+	\item  A migration movement rate\index{Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
+	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. 
 	\item Movement parametrised as a probability density function\index{Preference movement}. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
@@ -188,8 +187,6 @@ An \SPM\ model can be parametrised by both population processes (for example, ag
 Population processes are those processes that change the population state of individuals, but retain their location. The population processes are described below.
 
 \subsubsection{\I{Recruitment}}
-
-\TODO
 
 Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}. 
 
@@ -230,6 +227,8 @@ ages 1
 layer recruitment
 \end{verbatim}
 
+\TODO
+
 \paragraph{Beverton-Holt recruitment:}
 
 In the Beverton-Holt recruitment process the total number of recruits added each year is $R_y$, and is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
@@ -242,9 +241,9 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B_0} \right) \right)
 \end{equation}
 
-Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, derived quantities (see Section \ref{sec:derived-quantities}) must be defined that provides both $B_0$ and the annual $SSB_y$ for the recruitment process.
+Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, derived quantities (see Section \ref{sec:derived-quantities}) must be defined that provides both $B_0$ and the annual $SSB_y$ for the recruitment process. The recruits are distributed in the cells defined by a user-defined layer. 
 
-For example, to specify a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{recruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity of spawning stock biomass in each year, and recruits enter into the model the year following spawning, then,
+For example, to specify a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity of spawning stock biomass in each year, YCS is standardised over the 1994 to 2004 period, and recruits enter into the model two years following spawning, then,
 
 \begin{verbatim}
 @process Recruitment
@@ -252,12 +251,20 @@ type BH_recruitment
 categories immature
 proportions 1.0
 R0 500000
+steepness 0.75
+sigma_r 0.6 \NYI
+rho 0.6 \NYI
 ages 1
-layer recruitment
+layer MyRecruitment
 B0 1990_biomass
 SSB mature_biomass
-offset 1
+standardise_years 1994-2004
+YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
+YCS          1    1    1    1    1    1    1    1    1    1    1    1    1    1    1    1  
+offset 2
 \end{verbatim}
+
+Note that if not specificed, $offset$ is set at the value of $ages$. This corresponds to cases where recruitment happens after spawning. $Offset$ can be user-defined to a different value if needed, such as if recruitment happens in a timestep before spawning, and therefore the offset is $ages$ plus one.
 
 \paragraph{Local Beverton-Holt recruitment:}
 
