@@ -31,7 +31,7 @@ The dimensions of the spatial grid are user defined but must be at least a $1 \t
 
 \begin{figure}[htp]
  \centering
-  \resizebox{\textwidth}{!}{\includegraphics[width=\textwidth]{Figures/SquareStructure}}
+	\includegraphics[width=0.66\textwidth]{Figures/SquareStructure}
   \caption{An illustration of the spatial structure}
   \label{fig:SquareSpatialStructure}
 \end{figure}
@@ -640,7 +640,7 @@ where $c$ is the c.v. of sizes-at-age.
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
-A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section} or to modify the effects of processes on each age class \ref{sec:population-section}. \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities.
+A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section}) or to modify the effects of processes on each age class (Section \ref{sec:population-section}). \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities.
 
 A selectivity is always defined to apply just to one category of the population (i.e, row of the partition). To apply the same selectivity to more than one category, then just repeat the selectivity for each category that it is applied to.
 
@@ -658,9 +658,9 @@ The available selectivities are;
   \item Increasing
   \item Logistic
 	\item Inverse logistic
-  \item Logistic-producing
-  \item Double-normal
-  \item Double-exponential
+  \item Logistic producing
+  \item Double normal
+  \item Double exponential
 \end{itemize}
 
 The available selectivities are described below.
