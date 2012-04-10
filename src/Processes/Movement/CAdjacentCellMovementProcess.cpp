@@ -79,7 +79,10 @@ void CAdjacentCellMovementProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        //TODO: Only move individuals from cells that are defined by a layer. Currently this moves all cells
+        //TODO: Need to move individuals from cells that are defined by a categorical layer. Currently this moves all cells
+        //      A seconds numeric layer defines the relative proportions to 'diffuse' So, instead of using 0.25 for
+        //      each of the up/down/left/right cells, make these proportional to the layer values in the top/bottom/left/right
+        //      cells.
 
         // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
