@@ -110,9 +110,13 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process.
+\TODO
+
+\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have excatly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). 
 
 \item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
+
+\TODOend
 
 \end{enumerate}
 
@@ -481,18 +485,45 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 
 \SPM\ implements three types of movement\index{Movement};
 \begin{enumerate}
-	\item  A migration movement rate of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. \NYI.
-	\item An adjacent cell movements, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. \NYI
+	\item  A migration movement rate of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}.
+	\item An adjacent cell movements, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. 
 	\item Movement parametrised as a probability density function. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
+\TODO
+
 \subsubsection{\I{Migration movement}}
 
-The migration process \NYI\ moves individuals from one sets of locations to another set of locations. A migration can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity. Migrations are similar to the migration process used in some limited space models such as CASAL \citep{1388}.
+The migration process moves individuals from one sets of locations (the emigration layer) to another set of locations (the immigration layer). A migration can involve one or more categories. The emigration at age is defined as some constant proportion multiplied by a selectivity and the removal layer applied as a proportion. The immigration at age is defined as the emigration at age distributed proportionally into the immigration layer. Migrations are similar to the migration process used in some limited space models such as CASAL \citep{1388}.
+
+For example, let the emigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $E(a,k,l)$, and given a value from an emigration layer $Le_a$  at $a$, a constant migration proportion $C$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+\begin{equation}
+  E(a,k,l) = \frac{C Le_a S_l }{\sum\limits_a Le_a}
+\end{equation}
+
+And let the immigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $I(a,k,l)$, and given a value from an immigration layer $Li_a$  at $a$, for some user-defined categories $k$ then, 
+\begin{equation}
+  I(a,k,l) = \frac{E(a,k,l) Li_a }{\sum\limits_a Li_a} 
+\end{equation}
 
 \subsubsection{\I{Adjacent cell movement}}
 
-The adjacent cell movement simply moves a proportion of individuals in each cell to the neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity. 
+The adjacent cell movement simply moves a proportion of individuals in each cell to the four neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations and/or as a gradient by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity and the diffusion layer as a proportion over the four adjoining cells. 
+
+For example, let the movement from cell $a$ to neighbouring cell $b$ in category $k$ and age $l$ be denoted $V(a,b,k,l)$, and given a value from layer $L_b$  at $b$, values from layer $L_n$ at the four neighbouring cells to $a$ (including cell $b$), a constant migration proportion $C$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+\begin{equation}
+  V(a,b,k,l) = \frac{C L_b S_l }{\sum\limits_4 L_n}
+\end{equation}
+
+The movement value of all cells into all their neighbouring cells are calculated simulatneously fromr the population layer at the time of movement, and the balance of all movements is returned.
+
+\TODOend
+
+\TOUNDO
+
+adjacent cell movement currently has a uniform diffusion process of 0.25 in each adjoining cell. Now it needs to be proportional to the values in the four adjoining cells.
+
+\TOUNDOend
 
 \subsubsection{\I{Preference movement}}
 
@@ -507,7 +538,7 @@ Movement in \SPM\ can be defined as a probability distribution based on an under
   P_x=f_1(\theta_1,P_1(x))^{\alpha_1} \times f_2(\theta_2,P_2(x))^{\alpha_2} \times f_3(\theta_3,P_3(x))^{\alpha_3} \times \cdots \times f_n(\theta_n,P_n(x))^{\alpha_n}
 \end{equation}
 
-where $\alpha_i$ is an arbitrary weighting factor for attribute $i$.
+where $\alpha_i$ is an arbitrary weighting factor for attribute $i$. In order to avoid overparametrisation, it is recommended that at least one $\alpha_i$ be fixed to the value of one.
 
 Then we define the probability of moving from cell $a$ to any cell $b$ (where $b$ is defined as the set of all possible cells, including $a$),
 \begin{equation}
@@ -596,38 +627,62 @@ time_step 1
 layer spawning_ground
 \end{verbatim}
 
-\TODO
 \subsection{\I{Derived layers and meta-layers}\label{sec:derived-layers}}
-\TODOend
 
+\TODO
+
+Derived layers are layers, calculated by \SPM\ at a specific user-defined time step and year(s), that have a single value for each cell of the model. For example, $B_0$ is a derived layer calculated once only at the last initialisation phase of the model as the spawning stock biomass at that time; or a mortality dependent layer is calculated every year based on a formula including other layers with the latest calculation over-riding previous results. Derived meta-layers are meta-layers, calculated by \SPM\ at a specific user-defined time step every year that the model runs, with all results retained as yearly-indexed layers.
+
+Both derived layers and derived meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  
+
+\begin{verbatim}
++ - * / exp log(e) sqrt ^2 pow(a,b) cos sin
+\end{verbatim}
+
+For example, density dependent mortality based on diet electivity can be implemented by applying a derived layer to a constant relationship mortality rate (see Section \ref{sec:mortality}). If predator $A$ of a previously-defined biomass layer $L_A$ has two potential preys $B$ and $C$ with estimable electivity parameters $E_B$ and $E_C$ respectively of initial values 0.9 and 0.1, and with previously-defined biomass layers $L_B$ and $L_C$ respectively, the mortality layer $Lm_B$ of prey $B$ due to predation by predator $A$ applied as a constant relationship mortality rate can be defined as,
+\begin{equation}
+Lm_B = L_A \frac{E_B L_B}{E_B L_B + E_C L_C}
+\end{equation}
+
+The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to pery $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomas layers of species $A$, $B$, and $C$ respectively at a specific timestep. These biomass layers as well as the mortality layer are updated each year by the model at the required timestep. The electivity parameters can be fixed or estimated by the model with the given initial values.
+
+\TODOend
 
 \subsection{\I{Size-age relationship}\label{sec:size-at-age}}
 
 \TOUNDO
- Size at age are currently two modules. They need to be regrouped into a single module as per below
+ 
+Size at age are currently two modules. They need to be regrouped into a single module as per below
 
 Size-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
 
+\TOUNDOend
 
 \subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
 
+\TOUNDO
+
+Same comment as above.
+
 \TOUNDOend
 
-\TODO
 
 \subsection{\I{Age-size-weight relationship}\label{sec:age-size-weight}}
 
-The age-size-weight relationship defines the size at age and weight at size (or age) of individuals within the model. There are two types of relationships defined in \SPM, both based on a size-at-age relationship and a seperate size-weight relationship (von-Bertalannfy and Schnute, combined with a length weight relationship). The size-at-age relationship is used to determine the size frequency, given and age, and then with size-weight relationship, a weight-at-age of individuals within an age/category.
+\TODO
 
-The two age-size relationship are,
+The age-size-weight relationship defines the size at age and weight at size (or age) of individuals within the model. There are three types of relationships defined in \SPM, based on no relationship, or on a size-at-age relationship and a seperate size-weight relationship (von-Bertalannfy and Schnute, combined with a length weight relationship). The size-at-age relationship is used to determine the size frequency, given and age, and then with size-weight relationship, a weight-at-age of individuals within an age/category. Using the none relationships for size at age and weight at size provides bimoass results in numbers rather than biomass.
+
+The three age-size relationship are,
 
 \begin{description}
-\item{von Bertalanffy}\index{von Bertalanffy growth curve} where size at age is defined as,
+\item {None:} where the size of each individual is exactly 1 for all ages, in which case the none relationship for size-weight should also be used.
+\item{von Bertalanffy:}\index{von Bertalanffy growth curve} where size at age is defined as,
 \begin{equation} 
 \bar{s}(age)= L_\infty \left( 1 - \exp \left( -k \left(age-t_0 \right) \right) \right)
 \end{equation}
 
-\item{Schnute}\index{Schnute growth curve} where size at age is defined as,
+\item{Schnute:}\index{Schnute growth curve} where size at age is defined as,
 \begin{equation}
 \bar{s}(age)=\displaystyle\begin{cases}
   \left[ y_1^b + (y_2^b - y_1^b) \dfrac{1-\exp \left(-a(age - \tau_1) \right)}{1-\exp \left(-a(\tau_2 - \tau_1) \right)} \right]^{1/b}, & \text{if $a\ne0$ and $b\ne0$} \\
