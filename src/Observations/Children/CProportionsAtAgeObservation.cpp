@@ -103,12 +103,19 @@ void CProportionsAtAgeObservation::validate() {
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
-      // Check for negative values
-      if(mErrorValue[vErrorValues[i]] < 0.0)
-        CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+      // Check for non-positive or negative values - depends on likelihood
+      if(sLikelihood==PARAM_LOGNORMAL) {
+        if(mErrorValue[vErrorValues[i]] < 0.0) {
+          CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+        }
+      } else if(sLikelihood==PARAM_MULTINOMIAL) {
+        if(mErrorValue[vErrorValues[i]] <= 0.0) {
+          CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+        }
+      }
     }
 
-    // TODO: (Scott) Make mErrorValue a map of vectors and replicate the N's to the same length
+    // TODO: Make mErrorValue a map of vectors and replicate the N's to the same length
     // as OBS. One of the likelihoods requires a vector while the other doesn't.
 
     // Loop Through our Partitions
