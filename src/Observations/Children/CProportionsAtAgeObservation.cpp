@@ -105,11 +105,11 @@ void CProportionsAtAgeObservation::validate() {
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
       // Check for non-positive or negative values - depends on likelihood
       if(sLikelihood==PARAM_LOGNORMAL) {
-        if(mErrorValue[vErrorValues[i]] < 0.0) {
-          CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+        if(mErrorValue[vErrorValues[i]] <= 0.0) {
+          CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
         }
       } else if(sLikelihood==PARAM_MULTINOMIAL) {
-        if(mErrorValue[vErrorValues[i]] <= 0.0) {
+        if(mErrorValue[vErrorValues[i]] < 0.0) {
           CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
         }
       }
