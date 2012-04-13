@@ -9,7 +9,7 @@
 \defDefault{No default}
 \defValue{A valid label from \command{minimiser}}
 
-\defSub{mcmc} {The label of the MCMC to use, of doing an MCMC}
+\defSub{mcmc} {The label of the MCMC to use, if doing an MCMC}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid label from \command{mcmc}}
@@ -125,7 +125,7 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defSub{start} {Covariance multiplier for the starting point of the Markov chain}
 \defType{Constant}
 \defDefault{0}
-\defValue{If 0, defines the starting point of the chain as the point estimate.	If >0, defines the starting point as randomly generated, with covariance matrix equal to the approximate covariance (inverse Hessian) times the value of this start parameter}
+\defValue{If 0, defines the starting point of the chain as the point estimate.	If $>0$, defines the starting point as randomly generated, with covariance matrix equal to the approximate covariance (inverse Hessian) times the value of this start parameter}
 
 \defSub{length} {Length of the Markov chain}
 \defType{Integer}
@@ -236,9 +236,9 @@ The available priors are,
 
 \begin{itemize}
   \item uniform
-  \item uniform-log
+  \item uniform log
   \item normal
-  \item normal-by-sd
+  \item normal by sd
   \item lognormal
   \item Beta
 \end{itemize}

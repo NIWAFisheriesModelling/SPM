@@ -112,7 +112,7 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 
 \TODO
 
-\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have excatly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). 
+\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have excatly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). Meta layers can be used in the place of layers, and \SPM will extract the layer corresponding to the year being run.
 
 \item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
 
@@ -262,10 +262,10 @@ ages 1
 layer MyRecruitment
 B0 1990_biomass
 SSB mature_biomass
-standardise_years 1994-2004
+standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
-YCS          1    1    1    1    1    1    1    1    1    1    1    1    1
-offset 2
+YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
+SSB_offset 2
 \end{verbatim}
 
 Note that if not specified, $offset$ is set at the value of $ages$. This corresponds to cases where recruitment happens after spawning. $Offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time step before spawning, and therefore the offset is $ages$ plus one.
@@ -301,10 +301,10 @@ ages 1
 R0_layer recruitment_layer
 B0_layer B0_biomass_layer
 SSB_layer mature_biomass_layer
-standardise_years 1994-2004
+standardise_ycs_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
-YCS          1    1    1    1    1    1    1    1    1    1    1    1    1
-offset 1
+YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
+SSB_offset 1
 \end{verbatim}
 
 Note that if not specificed, $offset$ is set at the value of $ages$. This corresponds to cases where recruitment happens after spawning. $Offset$ can be user-defined to a different value if needed, such as if recruitment happens in a timestep before spawning, and therefore the offset is $ages$ plus one. In the example above, $offset$ is equal to $ages$ and therefore could be omitted.
@@ -376,7 +376,7 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
   n'(a,k,l) = n(a,k,l) \exp \left({-M(a,k,l)}\right)
 \end{equation}
 
-Mortality for the annual rate\index{Annual mortality} is similar, except that the rate applied in each year the annual rate applies is defined as separate values of a constant morality rate $M$, a layer $L_a$, and a selectivity-at-age $S_l$. For example, if annual rates were applied between 1996 and 2000, five layers, values of M and selectivities would need to be provided to the model.
+Mortality for the annual rate\index{Annual mortality} is similar, except that the rate applied in each year the annual rate applies is defined as separate values of a constant morality rate $M$, a layer $L_a$, with a selectivity-at-age $S_l$ for each category considered. For example, if annual rates were applied to males and females between 1996 and 2000, five layers and values of M, and two categories and selectivities would need to be provided to the model.
 
 The event mortality types\index{Event mortality} act in a similar manner, except that it removes a specified abundance (number of individuals) or biomass from the partition, rather than applying a mortality rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
@@ -413,10 +413,10 @@ For example, to specify fishing mortality based on spatially explicit catches (a
 @process Fishing
 type event_mortality
 categories immature mature
-years 2000 2001 2002
-layers Catch2000 Catch2001 Catch2002
+years 2000 2001 2002 2003
+layers Catch2000 Catch2001 Catch2002 Catch2003
 U_max 0.70
-selectivities FishingSel FishingSel FishingSel
+selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}
 
@@ -496,9 +496,9 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 
 The migration process moves individuals from one sets of locations (the emigration layer) to another set of locations (the immigration layer). A migration can involve one or more categories. The emigration at age is defined as some constant proportion multiplied by a selectivity and the removal layer applied as a proportion. The immigration at age is defined as the emigration at age distributed proportionally into the immigration layer. Migrations are similar to the migration process used in some limited space models such as CASAL \citep{1388}.
 
-For example, let the emigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $E(a,k,l)$, and given a value from an emigration layer $Le_a$  at $a$, a constant migration proportion $C$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+For example, let the emigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $E(a,k,l)$, and given a value from an emigration layer $Le_a$  at $a$, a constant migration proportion $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
-  E(a,k,l) = \frac{C Le_a S_l }{\sum\limits_a Le_a}
+  E(a,k,l) = \frac{P Le_a S_l }{\sum\limits_a Le_a}
 \end{equation}
 
 And let the immigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $I(a,k,l)$, and given a value from an immigration layer $Li_a$  at $a$, for some user-defined categories $k$ then, 
@@ -510,9 +510,9 @@ And let the immigration applied to the population at cell $a$ in category $k$ an
 
 The adjacent cell movement simply moves a proportion of individuals in each cell to the four neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations and/or as a gradient by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity and the diffusion layer as a proportion over the four adjoining cells. 
 
-For example, let the movement from cell $a$ to neighbouring cell $b$ in category $k$ and age $l$ be denoted $V(a,b,k,l)$, and given a value from layer $L_b$  at $b$, values from layer $L_n$ at the four neighbouring cells to $a$ (including cell $b$), a constant migration proportion $C$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+For example, let the movement from cell $a$ to neighbouring cell $b$ in category $k$ and age $l$ be denoted $V(a,b,k,l)$, and given a value from layer $L_b$  at $b$, values from layer $L_n$ at the four neighbouring cells to $a$ (including cell $b$), a constant migration proportion $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
-  V(a,b,k,l) = \frac{C L_b S_l }{\sum\limits_4 L_n}
+  V(a,b,k,l) = \frac{P L_b S_l }{\sum\limits_4 L_n}
 \end{equation}
 
 The movement value of all cells into all their neighbouring cells are calculated simulatneously fromr the population layer at the time of movement, and the balance of all movements is returned.

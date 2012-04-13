@@ -6,7 +6,7 @@ The report types available are,
 
 \begin{enumerate}
   \item Print the map (i.e., row and column labels of each spatial cell) of the spatial structure
-  \item Print the partition for a year and time step
+  \item Print the partition at a specific timestep for any number of years
   \item Print the partition at the end of an initialisation
   \item Print a summary of a process
   \item Print a derived quantity
@@ -21,7 +21,7 @@ The report types available are,
   \item Print a derived view via a categorical layer
   \item Print a selectivity's values
   \item Print the random number seed
-  \item Print the weight-at-size using the size-weight relationship
+  \item Print the age-size-weight report
 \end{enumerate}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
@@ -42,10 +42,16 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \subsubsection[Print the partition]{\commandlabsubarg{report}{type}{partition}}
 
-\defSub{year} {Define the year that the partition report applies to}
-\defType{Integer}
+\TODO
+
+Changed from year to years so partition can be printed for any number of years at once
+
+\defSub{years} {Define the years that the partition report applies to}
+\defType{Integer vector or integer range}
 \defDefault{No default}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+\defValue{The expanded vector must be valid model years}
+
+\TODOend
 
 \defSub{time\_step} {Define the time-step that the partition report applies to}
 \defType{Integer}
@@ -309,13 +315,33 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \subsubsection[Print the weight-at-size]{\commandlabsubarg{report}{type}{size\_weight}}
 
+\TOUNDO
+
+This is superseded with the size-age-weight report below
+
 \defSub{size\_weight} {Define the label of the size-weight relationship print}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid label from \command{size\_weight}}
 
-\defSub{sizes} {Define the label of the size-weight relationship print}
-\defType{Constant}
+\TOUNDOend
+
+\subsubsection[Print the age-size-weight]{\commandlabsubarg{report}{type}{age\_size\_weight}}
+
+\TODO
+
+\defSub{age\_size\_weight} {Define the label of the age-size-weight relationship print}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid label from \command{age\_size\_weight}}
+
+\defSub{quantiles} {Define the labels of the size-at-age relationship print}
+\defType{Constant vector}
+\defDefault{No default}
+\defValue{Values of the quantiles on which to report the size-at-age relationship for}
+
+\defSub{sizes} {Define the labels of the size-weight relationship print}
+\defType{Constant vector}
 \defDefault{No default}
 \defValue{Values of sizes to calculate the size-weight relationship for}
 
@@ -328,3 +354,5 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defType{Switch}
 \defDefault{True}
 \defValue{Either True of False}
+
+\TODOend
