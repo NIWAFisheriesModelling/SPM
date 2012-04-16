@@ -173,10 +173,25 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
+\TOUNDO
+
 \defSub{ages} {Define the ages within each category that receive recruitment}
 \defType{Integer vector}
 \defDefault{No default}
 \defValue{The age classes that receive recruitment}
+
+\TOUNDOend
+
+\TODO
+
+Change ages as a vector to age as an integer applied to all categories. Also applies to other recruitment processes.
+
+\defSub{age} {Define the age that receive recruitment}
+\defType{Integer}
+\defDefault{No default}
+\defValue{The age classe that receive recruitment}
+
+\TODOend
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
@@ -200,10 +215,23 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
+\TOUNDO
+
 \defSub{ages} {Define the age within each category that receive recruitment}
 \defType{Integer vector}
 \defDefault{No default}
 \defValue{The age classes that receive recruitment}
+
+\TOUNDOend
+
+\TODO
+
+\defSub{age} {Define the age that receive recruitment}
+\defType{Integer}
+\defDefault{No default}
+\defValue{The age classe that receive recruitment}
+
+\TODOend
 
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
 \defType{Estimable}
@@ -252,7 +280,6 @@ Default changed.
 \defType{Estimable vector}
 \defDefault{No default}
 \defValue{Must be vector}
-\defNote{Special values can be used here, i.e., mean, all}
 
 \TODO
 
@@ -289,10 +316,10 @@ Changed name to be clearer.
 \defDefault{No default}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
-\defSub{ages} {Define the age within each category that receive recruitment}
-\defType{Integer vector}
+\defSub{age} {Define the age that receive recruitment}
+\defType{Integer}
 \defDefault{No default}
-\defValue{The age classes that receive recruitment}
+\defValue{The age classe that receive recruitment}
 
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
 \defType{Estimable}
@@ -336,7 +363,6 @@ Changed name to be clearer.
 \defType{Estimable vector, of length \subcommand{cys\_years} once expanded}
 \defDefault{No default}
 \defValue{Must be vector}
-\defNote{Special values can be used here, i.e., mean, all}
 
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
 \defType{Integer vector or integer range}

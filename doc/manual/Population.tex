@@ -227,7 +227,7 @@ type constant_recruitment
 categories immature
 proportions 1.0
 R0 500000
-ages 1
+age 1
 layer recruitment
 \end{verbatim}
 
@@ -258,7 +258,7 @@ R0 500000
 steepness 0.75
 sigma_r 0.6 [not actually used yet]
 rho 0.6 [not actually used yet]
-ages 1
+age 1
 layer MyRecruitment
 B0 1990_biomass
 SSB mature_biomass
@@ -268,7 +268,7 @@ YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 2
 \end{verbatim}
 
-Note that if not specified, $offset$ is set at the value of $ages$. This corresponds to cases where recruitment happens after spawning. $Offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time step before spawning, and therefore the offset is $ages$ plus one.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time step before spawning, and therefore the offset is $age$ plus one.
 
 \paragraph{Local Beverton-Holt recruitment:}
 
@@ -297,7 +297,7 @@ R0 500000
 steepness 0.75
 sigma_r 0.6 [not actually used yet]
 rho 0.6 [not actually used yet]
-ages 1
+age 1
 R0_layer recruitment_layer
 B0_layer B0_biomass_layer
 SSB_layer mature_biomass_layer
@@ -307,7 +307,7 @@ YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 1
 \end{verbatim}
 
-Note that if not specificed, $offset$ is set at the value of $ages$. This corresponds to cases where recruitment happens after spawning. $Offset$ can be user-defined to a different value if needed, such as if recruitment happens in a timestep before spawning, and therefore the offset is $ages$ plus one. In the example above, $offset$ is equal to $ages$ and therefore could be omitted.
+Note that if not specificed, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a timestep before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
 
 \TODOend
 
