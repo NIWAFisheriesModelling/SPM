@@ -91,6 +91,17 @@ void CProportionsAtAgeObservation::validate() {
     for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
         mvProportionMatrix[vOBS[i]].push_back(CConvertor::stringToDouble(vOBS[i+j+1]));
+        // Check for non-positive or negative values in our observations  - depends on likelihood
+        if(sLikelihood==PARAM_LOGNORMAL) {
+          // TODO: Scott - can you change this to ref mvProportionmatrix not stringToDouble(vOBS)?
+          if(CConvertor::stringToDouble(vOBS[i+j+1]) <= 0.0) {
+            CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
+          }
+        } else if(sLikelihood==PARAM_MULTINOMIAL) {
+          if(CConvertor::stringToDouble(vOBS[i+j+1]) < 0.0) {
+            CError::errorLessThan(PARAM_OBS, PARAM_ZERO);
+          }
+        }
       }
     }
 
@@ -103,7 +114,7 @@ void CProportionsAtAgeObservation::validate() {
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
-      // Check for non-positive or negative values - depends on likelihood
+      // Check for non-positive or negative values in the error - depends on likelihood
       if(sLikelihood==PARAM_LOGNORMAL) {
         if(mErrorValue[vErrorValues[i]] <= 0.0) {
           CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
@@ -115,7 +126,7 @@ void CProportionsAtAgeObservation::validate() {
       }
     }
 
-    // TODO: Make mErrorValue a map of vectors and replicate the N's to the same length
+    // TODO: Stott: Make mErrorValue a map of vectors and replicate the N's to the same length
     // as OBS. One of the likelihoods requires a vector while the other doesn't.
 
     // Loop Through our Partitions

@@ -58,8 +58,12 @@ void CAbundanceObservation::validate() {
     if ((vOBS.size() % 2) != 0)
       CError::errorPairs(PARAM_OBS);
 
-    for (int i = 0; i < (int)vOBS.size(); i+=2)
+    for (int i = 0; i < (int)vOBS.size(); i+=2) {
       mProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
+      // Check for non-positive values in our observation values (for all likihoods)
+      if(mProportionMatrix[vOBS[i]] <= 0.0)
+        CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
+    }
 
     if (dProcessError < 0)
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
@@ -73,9 +77,9 @@ void CAbundanceObservation::validate() {
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
       mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
-      // Check for negative values
-      if(mErrorValue[vErrorValues[i]] < 0.0)
-        CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+      // Check for non-positive values in our error values (for all likihoods)
+      if(mErrorValue[vErrorValues[i]] <= 0.0)
+        CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
     }
 
     // Validate our vErrorValues's to make sure we have the right amount for our
