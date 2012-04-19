@@ -119,6 +119,9 @@
 //
 //**********************************************************************
 #define DESOLVER_CURRENT_GENERATION               "DE_Solver: Current generation = "
+#define DESOLVERCONVERGENCE_CHECK                 "DE_Solver: Convergence check value = "
+#define DESOLVERCONVERGENCE_THRESHOLD             "DE_Solver: Convergence tolerance = "
+#define DESOLVERCONVERGENCE                       "DE_Solver: Convergence = "
 
 //**********************************************************************
 // PARAMETERS
