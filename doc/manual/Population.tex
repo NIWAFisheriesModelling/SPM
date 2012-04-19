@@ -112,7 +112,7 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 
 \TODO
 
-\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have excatly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). Meta layers can be used in the place of layers, and \SPM will extract the layer corresponding to the year being run.
+\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have exactly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). Meta layers can be used in the place of layers, and \SPM will extract the layer corresponding to the year being run.
 
 \item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
 
@@ -284,7 +284,7 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that should probably be abundance or biomass layers or a user-defined derived layer, see Section \ref{sec:derived-layers}) must be provided that provide both $B_0$ and the annaul $SSB_y$ for the recruitment process. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ as distributed relative to the recruitement layer \texttt{R0\_layer}.
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that should probably be abundance or biomass layers or a user-defined derived layer, see Section \ref{sec:derived-layers}) must be provided that provide both $B_0$ and the annual $SSB_y$ for the recruitment process. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ as distributed relative to the recruitment layer \texttt{R0\_layer}.
 
 For example, to specify a local Beverton-Holt recruitment process where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{recruitment\_layer}, $B_0$ is a derived layer that specifies the biomass in each cell at the end of the initialisation period, $SSB_y$ is a derived layer or meta-layer of spawning stock biomass for each year, YCS is standardised over the 1994 to 2004 period, and recruits enter into the model the year following spawning, then,
 
@@ -307,7 +307,7 @@ YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 1
 \end{verbatim}
 
-Note that if not specificed, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a timestep before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time step before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
 
 \TODOend
 
@@ -337,7 +337,7 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \TODO
 \begin{enumerate}
-\item Check that anually varying rate is actually implemented, although the text says it's not, the module is in there.
+\item Check that annually varying rate is actually implemented, although the text says it's not, the module is in there.
 \item Also currently constant rate is only calculated once (??). With derived layers it could be a constant formula but the layer changes every year and therefore it becomes an annually calculated rate.
 
 \end{enumerate}
@@ -346,7 +346,7 @@ The text below reflects these changes.
 
 Four types of mortality processes are permissible in \SPM, constant relationship rate, annually varying relationship rate, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annually varying relationships), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
-Mortalities can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative  mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey electivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
+Mortalities can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative  mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
 
 For example, to specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `immature' and `mature', then, 
 
@@ -515,7 +515,7 @@ For example, let the movement from cell $a$ to neighbouring cell $b$ in category
   V(a,b,k,l) = \frac{P L_b S_l }{\sum\limits_4 L_n}
 \end{equation}
 
-The movement value of all cells into all their neighbouring cells are calculated simulatneously fromr the population layer at the time of movement, and the balance of all movements is returned.
+The movement value of all cells into all their neighbouring cells are calculated simultaneously from the population layer at the time of movement, and the balance of all movements is returned.
 
 \TODOend
 
@@ -538,7 +538,7 @@ Movement in \SPM\ can be defined as a probability distribution based on an under
   P_x=f_1(\theta_1,P_1(x))^{\alpha_1} \times f_2(\theta_2,P_2(x))^{\alpha_2} \times f_3(\theta_3,P_3(x))^{\alpha_3} \times \cdots \times f_n(\theta_n,P_n(x))^{\alpha_n}
 \end{equation}
 
-where $\alpha_i$ is an arbitrary weighting factor for attribute $i$. In order to avoid overparametrisation, it is recommended that at least one $\alpha_i$ be fixed to the value of one.
+where $\alpha_i$ is an arbitrary weighting factor for attribute $i$. In order to avoid over-parametrisation, it is recommended that at least one $\alpha_i$ be fixed to the value of one.
 
 Then we define the probability of moving from cell $a$ to any cell $b$ (where $b$ is defined as the set of all possible cells, including $a$),
 \begin{equation}
@@ -639,12 +639,12 @@ Both derived layers and derived meta-layers are calculated based on user-defined
 + - * / exp log(e) sqrt ^2 pow(a,b) cos sin
 \end{verbatim}
 
-For example, density dependent mortality based on diet electivity can be implemented by applying a derived layer to a constant relationship mortality rate (see Section \ref{sec:mortality}). If predator $A$ of a previously-defined biomass layer $L_A$ has two potential preys $B$ and $C$ with estimable electivity parameters $E_B$ and $E_C$ respectively of initial values 0.9 and 0.1, and with previously-defined biomass layers $L_B$ and $L_C$ respectively, the mortality layer $Lm_B$ of prey $B$ due to predation by predator $A$ applied as a constant relationship mortality rate can be defined as,
+For example, density dependent mortality based on diet selectivity can be implemented by applying a derived layer to a constant relationship mortality rate (see Section \ref{sec:mortality}). If predator $A$ of a previously-defined biomass layer $L_A$ has two potential preys $B$ and $C$ with estimable selectivity parameters $E_B$ and $E_C$ respectively of initial values 0.9 and 0.1, and with previously-defined biomass layers $L_B$ and $L_C$ respectively, the mortality layer $Lm_B$ of prey $B$ due to predation by predator $A$ applied as a constant relationship mortality rate can be defined as,
 \begin{equation}
 Lm_B = L_A \frac{E_B L_B}{E_B L_B + E_C L_C}
 \end{equation}
 
-The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to pery $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomas layers of species $A$, $B$, and $C$ respectively at a specific timestep. These biomass layers as well as the mortality layer are updated each year by the model at the required timestep. The electivity parameters can be fixed or estimated by the model with the given initial values.
+The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to prey $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomass layers of species $A$, $B$, and $C$ respectively at a specific time step. These biomass layers as well as the mortality layer are updated each year by the model at the required time step. The selectivity parameters can be fixed or estimated by the model with the given initial values.
 
 \TODOend
 
@@ -671,7 +671,7 @@ Same comment as above.
 
 \TODO
 
-The age-size-weight relationship defines the size at age and weight at size (or age) of individuals within the model. There are three types of relationships defined in \SPM, based on no relationship, or on a size-at-age relationship and a seperate size-weight relationship (von-Bertalannfy and Schnute, combined with a length weight relationship). The size-at-age relationship is used to determine the size frequency, given and age, and then with size-weight relationship, a weight-at-age of individuals within an age/category. Using the none relationships for size at age and weight at size provides bimoass results in numbers rather than biomass.
+The age-size-weight relationship defines the size at age and weight at size (or age) of individuals within the model. There are three types of relationships defined in \SPM, based on no relationship, or on a size-at-age relationship and a separate size-weight relationship (von-Bertalanffy and Schnute, combined with a length weight relationship). The size-at-age relationship is used to determine the size frequency, given and age, and then with size-weight relationship, a weight-at-age of individuals within an age/category. Using the none relationships for size at age and weight at size provides biomass results in numbers rather than biomass.
 
 The three age-size relationship are,
 

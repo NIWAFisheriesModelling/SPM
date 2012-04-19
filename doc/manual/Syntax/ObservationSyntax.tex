@@ -310,9 +310,9 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defValue{A valid layer as defined by \command{layer}. Must be a categorical layer}
 
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
-\defType{Constant vector}
+\defType{Constant}
 \defDefault{No default}
-\defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
+\defValue{The label is valid value from the associated observation layer. It is followed by a value giving the abundance. This subcommand is repeated for each unique value of label}
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}
@@ -379,7 +379,7 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defSub{obs [label]}{Define the following data as observations for the categorical layer with value \argument{[label]}}
 \defType{Constant vector}
 \defDefault{No default}
-\defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
+\defValue{The label is valid value from the associated observation layer. It is followed by a value giving the biomass. This subcommand is repeated for each unique value of label}
 
 \defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
 \defType{Constant}

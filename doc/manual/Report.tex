@@ -15,7 +15,7 @@ report.type: ...
 
 This syntax should make it easier for external packages to be configured to read \SPM\ output. The \texttt{extract} functions in the \R\ \texttt{spm} package uses this information to identify and read \SPM\ output.
 
-Notye that the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
+Note that the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
 
 Reports, by default, are directed to standard out (see Section \ref{sec:redirecting-stdout}), but this default can be overwritten be specifying an output file (\commandlabsub{report}{file\_name}). Hence reports can be directed to separate files as required. Note that if an output file is defined, any data within it is deleted and replaced with the output from the report. To append data to an output file rather than replacing it, use the subcommand \commandlabsubarg{report}{overwrite}{false}.
 
@@ -94,12 +94,6 @@ Prints the values in the layer (including user supplied layers, abundance and bi
 \subsection{\I{Printing a derived view via a categorical layer}}\index{Reports ! Derived view}
 
 Prints a summary of the partition, as seen via a categorical layer. Here, values within the spatial cells of a partition are aggregated within the regions defined by the categorical layer for a given age range and given model categories.
-
-\TODO
-
-I tested this, asking for a report with a specific filename, but didn't get that file. Tested as well without a specific name for the report, and did not appear in estimate.log Not sure if this partition summary is working.
-
-\TODOend
 
 \subsection{\I{Printing selectivities}}\index{Reports ! Selectivities}
 

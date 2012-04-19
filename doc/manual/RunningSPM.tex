@@ -20,7 +20,7 @@ The command and subcommand definitions in the \config\ can be extensive (especia
 
 \subsection{\I{Redirecting standard output}\label{sec:redirecting-stdout}}
 
-\SPM\ uses the standard out\index{Standard out} to display run-time information. \I{Standard error} is not used by \SPM, but may be used by the operating system to report an error with \SPM. We suggest redirecting both the standard out and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. With the bash shell (on Linux systems), you can do this using the command structure,
+\SPM\ uses the standard output stream \texttt{standard output}\index{standard output} to display run-time information. The \I{standard error} stream is used by \SPM\ to output the program exit status and run-time errors. We suggest redirecting both the standard output and standard error into files\index{Redirecting standard out}\index{Redirecting standard error}. With the bash shell (on Linux systems), you can do this using the command structure,
 
 \begin{verbatim} (spm [arguments] > out) >& err &\end{verbatim}
 
@@ -32,7 +32,7 @@ On Microsoft Windows systems, you can redirect to standard output using,
 
 \begin{verbatim} spm [arguments] > out\end{verbatim}
 
-And, on some Microsoft Windows systems (e.g., the Professional version of WindowsXP), you can redirect to both standard output and standard error, using the syntax, 
+And, on some Microsoft Windows systems (e.g., Windows7), you can redirect to both standard output and standard error, using the syntax, 
 
 \begin{verbatim} spm [arguments] > out 2> err\end{verbatim}
 
@@ -82,7 +82,7 @@ In addition, the following are optional arguments\index{Optional command line ar
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
 
-The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. Note that the commands, subcommands, anarguments, and labels of \SPM\ are case sensitive. 
+The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. \TODO Note that the commands and subcommands are case insensitive, but arguments and labels are case sensitive. \TODOend
 
 \subsubsection{Commands}\index{Commands}
 
