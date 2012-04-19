@@ -69,7 +69,7 @@ void CParameterList::checkInvalidParameters() {
     }
 
     if (!bMatch)
-      throw string("Unknown subcommand :" + (*mvPtr).first);
+      throw string("Unknown subcommand: " + (*mvPtr).first);
 
     mvPtr++;
   }
