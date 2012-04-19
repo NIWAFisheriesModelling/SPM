@@ -156,7 +156,6 @@ src/PreferenceFunctions/Children/CExponentialPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CInverseLogisticPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CLogisticPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CNormalPreferenceFunction.cpp
-src/PreferenceFunctions/Children/CThresholdBiomassPreferenceFunction.cpp
 src/PreferenceFunctions/Children/CThresholdPreferenceFunction.cpp
 src/PreferenceFunctions/CPreferenceFunction.cpp
 src/PreferenceFunctions/CPreferenceFunctionManager.cpp
