@@ -55,4 +55,7 @@ file_name objective.dat
 type ageing_error
 ageing_error normal
 
+@report RNDseed
+type random_number_seed
+
 @include "simulation-reports.spm"
