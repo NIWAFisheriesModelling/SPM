@@ -66,7 +66,7 @@ function(x,alpha,mu,sigma,rescale=T) {
 }
 
 "PFthreshold" <-
-function(x,alpha,lambda,rescale=T) {
+function(x,alpha,N,lambda,rescale=T) {
   pow<-function(x,y) return(x^y)
   res<-1.0/(pow(x/N,lambda))
   res<-ifelse(x > N, res,1)^alpha
