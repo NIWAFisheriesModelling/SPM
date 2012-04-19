@@ -81,9 +81,9 @@ double CDoubleExponentialSelectivity::calculateResult(int Age) {
   double dRet = 0.0;
 
   if(Age <= dX0)
-    dRet = dY0 * pow((dY1 / dY0), ((double)Age - dX0)/(dX1 - dX0)) * dAlpha; //TODO: (Alistair) validate equation... haven't checked to see if it works with a dAlpha parameter
+    dRet = dAlpha * dY0 * pow((dY1 / dY0), ((double)Age - dX0)/(dX1 - dX0));
   else
-    dRet = dY0 * pow((dY2 / dY0), ((double)Age - dX0)/(dX2 - dX0)) * dAlpha; //TODO: (Alistair) validate equation... haven't checked to see if it works with a dAlpha parameter
+    dRet = dAlpha * dY0 * pow((dY2 / dY0), ((double)Age - dX0)/(dX2 - dX0));
 
   return dRet;
 
