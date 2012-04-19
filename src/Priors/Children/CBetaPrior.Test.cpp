@@ -26,24 +26,23 @@ BOOST_AUTO_TEST_CASE( BetaPrior ) {
   // Add parameters
   pPrior->addParameter(PARAM_LABEL, "prior");
   pPrior->addParameter(PARAM_MU, "5");
-  pPrior->addParameter(PARAM_SIGMA, "8");
-  pPrior->addParameter(PARAM_A, "0.1");
-  pPrior->addParameter(PARAM_B, "0.009");
+  pPrior->addParameter(PARAM_SIGMA, "1");
+  pPrior->addParameter(PARAM_A, "0");
+  pPrior->addParameter(PARAM_B, "10");
 
   // Validate and build
   pPrior->validate();
 
   // Check results
-  // TODO: (Alistair) Add suitable parameters to complete unit tests
-//  BOOST_CHECK_EQUAL(pPrior->getResult(1.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(2.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(3.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(4.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(5.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(6.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(7.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(8.0), 0.0);
-//  BOOST_CHECK_EQUAL(pPrior->getResult(9.0), 0.0);
+  BOOST_CHECK_CLOSE(pPrior->getResult(1.0), -24.169470350698415, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(2.0), -30.498475944637590, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(3.0), -33.489746814957655, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(4.0), -34.958592133827402, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(5.0), -35.407634073550206, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(6.0), -34.958592133827402, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(7.0), -33.489746814957655, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(8.0), -30.498475944637590, 1e-9);
+  BOOST_CHECK_CLOSE(pPrior->getResult(9.0), -24.169470350698415, 1e-9);
 
   // clear memory
   delete pPrior;

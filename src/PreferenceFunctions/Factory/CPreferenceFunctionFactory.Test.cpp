@@ -20,7 +20,6 @@
 #include "../Children/CInverseLogisticPreferenceFunction.h"
 #include "../Children/CLogisticPreferenceFunction.h"
 #include "../Children/CNormalPreferenceFunction.h"
-#include "../Children/CThresholdBiomassPreferenceFunction.h"
 #include "../Children/CThresholdPreferenceFunction.h"
 #include "../Children/CCategoricalPreferenceFunction.h"
 #include "../Children/CCategoricalMonotonicPreferenceFunction.h"
@@ -134,23 +133,6 @@ BOOST_AUTO_TEST_CASE( Build_NormalPreferenceFunction) {
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE( Build_ThresholdBiomassPreferenceFunction) {
-  CPreferenceFunction *pFunction = 0;
-  BOOST_REQUIRE_NO_THROW(pFunction = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_THRESHOLD_BIOMASS, false));
-
-  CThresholdBiomassPreferenceFunction *pPtr = dynamic_cast<CThresholdBiomassPreferenceFunction*>(pFunction);
-  BOOST_ASSERT(pPtr != 0);
-
-  CNormalPreferenceFunction *pPtr2 = dynamic_cast<CNormalPreferenceFunction*>(pFunction);
-  BOOST_ASSERT(pPtr2 == 0);
-
-  delete pFunction;
-}
-
-//**********************************************************************
-//
-//
-//**********************************************************************
 BOOST_AUTO_TEST_CASE( Build_ThresholdPreferenceFunction) {
   CPreferenceFunction *pFunction = 0;
   BOOST_REQUIRE_NO_THROW(pFunction = CPreferenceFunctionFactory::buildPreferenceFunction(PARAM_THRESHOLD, false));
@@ -158,7 +140,7 @@ BOOST_AUTO_TEST_CASE( Build_ThresholdPreferenceFunction) {
   CThresholdPreferenceFunction *pPtr = dynamic_cast<CThresholdPreferenceFunction*>(pFunction);
   BOOST_ASSERT(pPtr != 0);
 
-  CThresholdBiomassPreferenceFunction *pPtr2 = dynamic_cast<CThresholdBiomassPreferenceFunction*>(pFunction);
+  CLogisticPreferenceFunction *pPtr2 = dynamic_cast<CLogisticPreferenceFunction*>(pFunction);
   BOOST_ASSERT(pPtr2 == 0);
 
   delete pFunction;
@@ -175,7 +157,7 @@ BOOST_AUTO_TEST_CASE( Build_CategoricalPreferenceFunction) {
   CCategoricalPreferenceFunction *pPtr = dynamic_cast<CCategoricalPreferenceFunction*>(pFunction);
   BOOST_ASSERT(pPtr != 0);
 
-  CThresholdBiomassPreferenceFunction *pPtr2 = dynamic_cast<CThresholdBiomassPreferenceFunction*>(pFunction);
+  CLogisticPreferenceFunction *pPtr2 = dynamic_cast<CLogisticPreferenceFunction*>(pFunction);
   BOOST_ASSERT(pPtr2 == 0);
 
   delete pFunction;
@@ -192,7 +174,7 @@ BOOST_AUTO_TEST_CASE( Build_CategoricalMonotonicPreferenceFunction) {
   CCategoricalMonotonicPreferenceFunction *pPtr = dynamic_cast<CCategoricalMonotonicPreferenceFunction*>(pFunction);
   BOOST_ASSERT(pPtr != 0);
 
-  CThresholdBiomassPreferenceFunction *pPtr2 = dynamic_cast<CThresholdBiomassPreferenceFunction*>(pFunction);
+  CLogisticPreferenceFunction *pPtr2 = dynamic_cast<CLogisticPreferenceFunction*>(pFunction);
   BOOST_ASSERT(pPtr2 == 0);
 
   delete pFunction;

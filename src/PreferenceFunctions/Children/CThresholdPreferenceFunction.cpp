@@ -12,8 +12,6 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 
-// TODO: (Alistair) Implement Categories and Selectivities
-
 //**********************************************************************
 // CThresholdPreferenceFunction::CThresholdPreferenceFunction()
 // Default Constructor
@@ -42,9 +40,6 @@ void CThresholdPreferenceFunction::validate() {
     // Assign local variables
     dN        = pParameterList->getDouble(PARAM_N);
     dLambda   = pParameterList->getDouble(PARAM_LAMBDA);
-
-    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
 
   } catch (string &Ex) {
     Ex = "CThresholdPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

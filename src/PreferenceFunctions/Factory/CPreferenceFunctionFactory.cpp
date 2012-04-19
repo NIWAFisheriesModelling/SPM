@@ -18,7 +18,6 @@
 #include "../Children/CInverseLogisticPreferenceFunction.h"
 #include "../Children/CLogisticPreferenceFunction.h"
 #include "../Children/CNormalPreferenceFunction.h"
-#include "../Children/CThresholdBiomassPreferenceFunction.h"
 #include "../Children/CThresholdPreferenceFunction.h"
 #include "../Children/CCategoricalPreferenceFunction.h"
 #include "../Children/CCategoricalMonotonicPreferenceFunction.h"
@@ -43,8 +42,6 @@ CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string 
     pFunction = new CLogisticPreferenceFunction();
   else if (type == PARAM_NORMAL)
     pFunction = new CNormalPreferenceFunction();
-  else if (type == PARAM_THRESHOLD_BIOMASS)
-    pFunction = new CThresholdBiomassPreferenceFunction();
   else if (type == PARAM_THRESHOLD)
     pFunction = new CThresholdPreferenceFunction();
   else if (type == PARAM_CATEGORICAL)

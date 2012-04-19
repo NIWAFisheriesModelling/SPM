@@ -55,10 +55,11 @@ double CBetaPrior::getResult(double Param) {
     double dRet = 0.0;
 
     dV = (dMu - dA) / (dB - dA);
-    dT = (((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1;
+    dT = (((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1.0;
     dM = dT * dV;
-    dN = dT * (1 - dV);
-    dRet = (1-dM) * log(Param-dA) + (1-dN) * log(dB - Param);
+    dN = dT * (1.0 - dV);
+    dRet = ((1.0 - dM) * log(Param - dA)) + ((1.0 - dN) * log(dB - Param));
+
     return dRet;
 
 #ifndef OPTIMIZE
