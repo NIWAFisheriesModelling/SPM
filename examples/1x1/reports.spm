@@ -58,4 +58,10 @@ ageing_error normal
 @report RNDseed
 type random_number_seed
 
+@report SSRUs
+type layer_derived_view
+layer SSRU
+year 2007
+time_step step_one
+
 @include "simulation-reports.spm"
