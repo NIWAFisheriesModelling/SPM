@@ -85,7 +85,7 @@ void CConfigurationLoader::loadConfigFile(bool skipLoadingFile) {
       throw string("Empty configuration file");
 
     if (vLines[0].substr(0, 1) != CONFIG_SECTION_SYMBOL)
-      throw string("First statement (excluding comments) must be an @command");
+      throw string("The first statement in the input configuration file (excluding comments) must be an @command");
 
     vCurrentSection.push_back(vLines[0]);
     for (int i = 1; i < (int)vLines.size(); ++i) {
@@ -167,10 +167,10 @@ void CConfigurationLoader::processSection() {
     else if (sSection == PARAM_MCMC)
       pBaseObject = CMCMC::Instance();
     else
-      CError::errorUnknown(PARAM_SECTION, sSection);
+      CError::errorUnknown(PARAM_SECTION, "");
 
   } catch (string &Ex) {
-    Ex += string(" - ") + sSection;
+    Ex += string(": ") + sSection;
     throw Ex;
   }
 
@@ -307,14 +307,14 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         // Find First "
         iIndex = (int)sLine.find_first_of("\"");
         if (iIndex == -1)
-          throw string("@include file name should be surrounded by quotes");
+          throw string(string(CONFIG_INCLUDE) + string(" file name should be surrounded by quotes"));
         // get line from First " (+1) onwards
         string sIncludeFile = sLine.substr(iIndex+1, sLine.length()-iIndex);
 
         // Remove last "
         iIndex = (int)sIncludeFile.find_first_of("\"");
         if (iIndex == -1)
-          throw string("@include file name is missing a closing quote");
+          throw string(string(CONFIG_INCLUDE) + string(" file name is missing a closing quote"));
         sIncludeFile = sIncludeFile.substr(0, iIndex);
 
         // Check if it's absolute or relative
