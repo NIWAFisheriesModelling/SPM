@@ -6,11 +6,11 @@ type random_number_seed
 @report spatial-map
 type spatial_map
 
-#@report SSRU-2002
-#type layer_derived_view
-#year 2002
-#time_step one
-#layer SSRU
+@report SSRU-2002
+type layer_derived_view
+year 2002
+time_step one
+layer SSRU
 
 @report initialisation-phase1
 type initialisation
