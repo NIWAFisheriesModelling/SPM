@@ -69,18 +69,13 @@ void CLogNormalLikelihood::simulateObserved(const vector<string> &keys, vector<d
   for (int i = 0; i < (int)expected.size(); ++i) {
 
     double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
-
     // Check for invalid values
     if (expected[i] <= 0.0 || dErrorValue <=0.0) {
       observed.push_back(DELTA);
       continue;
     }
-
-    // Calculate Score
+    // Generate random observation
     double dObserved    = pRandom->getRandomLogNormal(expected[i], dErrorValue);
-
-    // TODO: (Alistair) each key sums to 1.0 (Better description please)
-
     observed.push_back(dObserved);
   }
 }
