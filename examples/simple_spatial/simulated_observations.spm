@@ -1,8 +1,8 @@
-#[CAA-1998]
+#[caa-1998]
 #report.type: observation_definition
-#observation.label: CAA-1998
-@observation CAA-1998
-age_plus_group True 
+#observation.label: caa-1998
+@observation caa-1998
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -10,7 +10,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -29,11 +29,11 @@ error_value r4-c4 37.9227053140
 error_value r4-c6 26.8518518519 
 #end
 
-#[CAA-1999]
+#[caa-1999]
 #report.type: observation_definition
-#observation.label: CAA-1999
-@observation CAA-1999
-age_plus_group True 
+#observation.label: caa-1999
+@observation caa-1999
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -41,7 +41,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -58,11 +58,11 @@ error_value r3-c5 45.4044117647
 error_value r3-c6 43.8423645320 
 #end
 
-#[CAA-2000]
+#[caa-2000]
 #report.type: observation_definition
-#observation.label: CAA-2000
-@observation CAA-2000
-age_plus_group True 
+#observation.label: caa-2000
+@observation caa-2000
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -70,7 +70,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -85,11 +85,11 @@ error_value r3-c5 44.2791762014
 error_value r3-c6 45.8123953099 
 #end
 
-#[CAA-2001]
+#[caa-2001]
 #report.type: observation_definition
-#observation.label: CAA-2001
-@observation CAA-2001
-age_plus_group True 
+#observation.label: caa-2001
+@observation caa-2001
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -97,7 +97,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -124,11 +124,11 @@ error_value r4-c6 43.9613526570
 error_value r5-c4 44.0191387560 
 #end
 
-#[CAA-2002]
+#[caa-2002]
 #report.type: observation_definition
-#observation.label: CAA-2002
-@observation CAA-2002
-age_plus_group True 
+#observation.label: caa-2002
+@observation caa-2002
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -136,7 +136,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -165,11 +165,11 @@ error_value r5-c5 41.2280701754
 error_value r5-c6 43.3687002653 
 #end
 
-#[CAA-2003]
+#[caa-2003]
 #report.type: observation_definition
-#observation.label: CAA-2003
-@observation CAA-2003
-age_plus_group True 
+#observation.label: caa-2003
+@observation caa-2003
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -177,7 +177,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -204,11 +204,11 @@ error_value r5-c6 45.7191780822
 error_value r5-c7 41.0714285714 
 #end
 
-#[CAA-2004]
+#[caa-2004]
 #report.type: observation_definition
-#observation.label: CAA-2004
-@observation CAA-2004
-age_plus_group True 
+#observation.label: caa-2004
+@observation caa-2004
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -216,7 +216,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -253,11 +253,11 @@ error_value r5-c6 42.8571428571
 error_value r5-c7 40.5303030303 
 #end
 
-#[CAA-2005]
+#[caa-2005]
 #report.type: observation_definition
-#observation.label: CAA-2005
-@observation CAA-2005
-age_plus_group True 
+#observation.label: caa-2005
+@observation caa-2005
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -265,7 +265,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -302,11 +302,11 @@ error_value r5-c6 44.9290060852
 error_value r5-c7 38.5844748858 
 #end
 
-#[CAA-2006]
+#[caa-2006]
 #report.type: observation_definition
-#observation.label: CAA-2006
-@observation CAA-2006
-age_plus_group True 
+#observation.label: caa-2006
+@observation caa-2006
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -314,7 +314,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -343,11 +343,11 @@ error_value r5-c7 37.5000000000
 error_value r6-c5 0.9803921569 
 #end
 
-#[CAA-2007]
+#[caa-2007]
 #report.type: observation_definition
-#observation.label: CAA-2007
-@observation CAA-2007
-age_plus_group True 
+#observation.label: caa-2007
+@observation caa-2007
+age_plus_group true 
 categories immature mature 
 delta 1e-11 
 layer cell 
@@ -355,7 +355,7 @@ likelihood multinomial
 max_age 30 
 min_age 1 
 process_error 50 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 tolerance 0.01 
 type proportions_at_age 
@@ -390,12 +390,12 @@ error_value r6-c5 26.8518518519
 #report.type: observation_definition
 #observation.label: cpue-1998
 @observation cpue-1998
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 1998 
@@ -417,12 +417,12 @@ error_value r4-c6 0.3962242139
 #report.type: observation_definition
 #observation.label: cpue-1999
 @observation cpue-1999
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 1999 
@@ -444,12 +444,12 @@ error_value r4-c6 0.9274623795
 #report.type: observation_definition
 #observation.label: cpue-2000
 @observation cpue-2000
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2000 
@@ -467,12 +467,12 @@ error_value r3-c6 0.2270844866
 #report.type: observation_definition
 #observation.label: cpue-2001
 @observation cpue-2001
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2001 
@@ -502,12 +502,12 @@ error_value r5-c5 1.0936422965
 #report.type: observation_definition
 #observation.label: cpue-2002
 @observation cpue-2002
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2002 
@@ -539,12 +539,12 @@ error_value r6-c5 0.4677105248
 #report.type: observation_definition
 #observation.label: cpue-2003
 @observation cpue-2003
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2003 
@@ -576,12 +576,12 @@ error_value r6-c5 1.3618270914
 #report.type: observation_definition
 #observation.label: cpue-2004
 @observation cpue-2004
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2004 
@@ -623,12 +623,12 @@ error_value r5-c7 0.3721955138
 #report.type: observation_definition
 #observation.label: cpue-2005
 @observation cpue-2005
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2005 
@@ -670,12 +670,12 @@ error_value r5-c7 0.4926895040
 #report.type: observation_definition
 #observation.label: cpue-2006
 @observation cpue-2006
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2006 
@@ -711,12 +711,12 @@ error_value r6-c5 0.1905426869
 #report.type: observation_definition
 #observation.label: cpue-2007
 @observation cpue-2007
-catchability CPUEq 
+catchability cpueq 
 categories immature mature 
 delta 1e-11 
 layer cell 
 likelihood lognormal 
-selectivities FishingSel FishingSel 
+selectivities fishingsel fishingsel 
 time_step one 
 type abundance 
 year 2007 
@@ -752,7 +752,7 @@ error_value r6-c5 0.0572016087
 #report.type: observation_definition
 #observation.label: mature-2002
 @observation mature-2002
-age_plus_group True 
+age_plus_group true 
 categories mature 
 categories2 immature 
 delta 1e-11 
@@ -760,8 +760,8 @@ layer cell
 likelihood binomial 
 max_age 30 
 min_age 1 
-selectivities FishingSel 
-selectivities2 FishingSel 
+selectivities fishingsel 
+selectivities2 fishingsel 
 time_step one 
 type proportions_by_category 
 year 2002 
@@ -795,7 +795,7 @@ error_value r6-c5 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.00000000
 #report.type: observation_definition
 #observation.label: mature-2003
 @observation mature-2003
-age_plus_group True 
+age_plus_group true 
 categories mature 
 categories2 immature 
 delta 1e-11 
@@ -803,8 +803,8 @@ layer cell
 likelihood binomial 
 max_age 30 
 min_age 1 
-selectivities FishingSel 
-selectivities2 FishingSel 
+selectivities fishingsel 
+selectivities2 fishingsel 
 time_step one 
 type proportions_by_category 
 year 2003 
@@ -836,7 +836,7 @@ error_value r6-c5 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.00000000
 #report.type: observation_definition
 #observation.label: mature-2004
 @observation mature-2004
-age_plus_group True 
+age_plus_group true 
 categories mature 
 categories2 immature 
 delta 1e-11 
@@ -844,8 +844,8 @@ layer cell
 likelihood binomial 
 max_age 30 
 min_age 1 
-selectivities FishingSel 
-selectivities2 FishingSel 
+selectivities fishingsel 
+selectivities2 fishingsel 
 time_step one 
 type proportions_by_category 
 year 2004 
@@ -883,7 +883,7 @@ error_value r5-c7 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.00000000
 #report.type: observation_definition
 #observation.label: mature-2005
 @observation mature-2005
-age_plus_group True 
+age_plus_group true 
 categories mature 
 categories2 immature 
 delta 1e-11 
@@ -891,8 +891,8 @@ layer cell
 likelihood binomial 
 max_age 30 
 min_age 1 
-selectivities FishingSel 
-selectivities2 FishingSel 
+selectivities fishingsel 
+selectivities2 fishingsel 
 time_step one 
 type proportions_by_category 
 year 2005 
@@ -932,7 +932,7 @@ error_value r5-c7 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.00000000
 #report.type: observation_definition
 #observation.label: mature-2006
 @observation mature-2006
-age_plus_group True 
+age_plus_group true 
 categories mature 
 categories2 immature 
 delta 1e-11 
@@ -940,8 +940,8 @@ layer cell
 likelihood binomial 
 max_age 30 
 min_age 1 
-selectivities FishingSel 
-selectivities2 FishingSel 
+selectivities fishingsel 
+selectivities2 fishingsel 
 time_step one 
 type proportions_by_category 
 year 2006 
@@ -969,7 +969,7 @@ error_value r5-c7 0.0000000000 0.0000000000 0.0000000000 0.0000000000 0.00000000
 #report.type: observation_definition
 #observation.label: mature-2007
 @observation mature-2007
-age_plus_group True 
+age_plus_group true 
 categories mature 
 categories2 immature 
 delta 1e-11 
@@ -977,8 +977,8 @@ layer cell
 likelihood binomial 
 max_age 30 
 min_age 1 
-selectivities FishingSel 
-selectivities2 FishingSel 
+selectivities fishingsel 
+selectivities2 fishingsel 
 time_step one 
 type proportions_by_category 
 year 2007 
