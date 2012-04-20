@@ -4,6 +4,7 @@ In SPM, but not in manual
   1 (one)
   1,000
   age_index
+  age_size
   area
   binomial
   binomial_approx
@@ -39,6 +40,7 @@ In SPM, but not in manual
   size_weights
   square_uniform
   standardise_ycs_year_range
+  threshold_biomass
   total_score
   value
   values
