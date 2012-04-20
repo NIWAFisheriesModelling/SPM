@@ -2,8 +2,11 @@ cmake_minimum_required(VERSION 2.6)
 project(SPM)
 
 # to run (Windows, Mingw32-gcc)
-# cmake -G "MinGW Makefiles"
-# mingw32-make all
+#   cmake -G "MinGW Makefiles"
+#   mingw32-make all
+# or Linux
+#   cmake -G "Unix Makefiles"
+#   make all
 
 SET(LIBRARY_NAME _spm)
 SET(MAIN_NAME spm_unoptimised)
@@ -35,22 +38,22 @@ IF (WIN32)
   )
   SET(TEST_LIBRARIES boost_unit_test_framework-mgw46-mt-sd-1_48)
 ELSE (WIN32)
-  SET(BOOST_LIBS "/opt/boost/boost_1_48_0/stage/lib")
-  SET(BOOST_HEADERS "/opt/boost/boost_1_48_0/")
+  SET(BOOST_LIBS "/opt/boost138/usr/lib64/")
+  SET(BOOST_HEADERS "/opt/boost138/usr/include/")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
   SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DTEST -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(MAIN_LIBRARIES
-    boost_system
-    boost_filesystem
-    boost_thread
-    boost_program_options
+    boost_system-gcc41-mt-1_38
+    boost_filesystem-gcc41-mt-1_38
+    boost_thread-gcc41-mt-1_38
+    boost_program_options-gcc41-mt-1_38
     pthread
     )
   SET(TEST_LIBRARIES
-    boost_unit_test_framework
+    boost_unit_test_framework-gcc41-mt-1_38
   )
 ENDIF (WIN32)
 
