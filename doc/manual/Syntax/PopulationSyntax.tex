@@ -654,7 +654,6 @@ The individual preference functions available are,
 	\item Inverse logistic
 	\item Exponential
 	\item Threshold
-	\item Threshold biomass
 	\item Categorical
 	\item Monotonic categorical
 \end{itemize}
@@ -787,16 +786,6 @@ I added the requirements for layers to be positive or strictly positive below. A
 \defDefault{No default}
 \defValue{A valid layer defined by \command{layer}}
 
-\defSub{categories} {Define the categories are used to calculate the abundance}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid categories from \commandsub{model}{categories}}
-
-\defSub{selectivities} {Define the selectivities applied to each category}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid selectivity labels from \command{selectivity}}
-
 \defSub{alpha} {Defines the multiplicative constant $\alpha$}
 \defType{Estimable}
 \defDefault{No default}
@@ -806,40 +795,6 @@ I added the requirements for layers to be positive or strictly positive below. A
 \defDefault{No default}
 
 \defSub{lambda} {Defines the $\lambda$ parameter of the threshold preference function}
-\defType{Estimable}
-\defDefault{No default}
-
-\subsubsection[Threshold-biomass]{\commandlabsubarg{preference\_function}{type}{threshold\_biomass}}
-
-\defSub{layer} {Defines the layer which supplies the preference function independent variable}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid layer defined by \command{layer}}
-
-\defSub{categories} {Define the categories are used to calculate the biomass}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid categories from \commandsub{model}{categories}}
-
-\defSub{selectivities} {Define the selectivities applied to each category}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid selectivity labels from \command{selectivity}}
-
-\defSub{age\_size}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid labels from \command{age\_size}}
-
-\defSub{alpha} {Defines the multiplicative constant $\alpha$}
-\defType{Estimable}
-\defDefault{No default}
-
-\defSub{biomass} {Defines the $B$ biomass parameter of the threshold biomass preference function}
-\defType{Estimable}
-\defDefault{No default}
-
-\defSub{lambda} {Defines the $\lambda$ parameter of the threshold biomass preference function}
 \defType{Estimable}
 \defDefault{No default}
 
