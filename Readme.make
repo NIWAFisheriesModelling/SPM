@@ -17,24 +17,26 @@ To build SPM from the source files
 To build the Microdoft Windows version of SPM uing MinGW gcc, issue 
 the following commands in the SPM/ directory
 
-> rm CMakeCache.txt
-# might need to rename C:\Rtools to something else before running the next line
 > cmake -G "MinGW Makefiles"
-# if you have renamed Rtools, name it back to Rtools (compatibility issue)
 > mingw32-make all
 > strip spm.exe
 
+For Linux systems using gcc, issue the folloowing commands
+
+> cmake -G "Unix Makefiles"
+> make all
+> strip spm
+
 Note that you will need the BOOST (version 1.48.0) libraries and header
 files installed. Currently, the locations of these are hard-coded in the 
-CMake CMakeLists.txt file. You may need to edit the paths for these 
+CMake CMakeLists.txt file. You will need to edit the paths for these 
 libraries in order for SPM to compile.
 
 Other compilers may work, but we have not tested compilation using 
-anything other than MinGW gcc versions 4.6.1
+anything other than MinGW and Linux gcc versions 4.6.1
 
 Contact
 =======
 
 For more information about SPM, please read the SPM User Manual or contact
 the authors.
-
