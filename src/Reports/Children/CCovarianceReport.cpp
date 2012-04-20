@@ -67,7 +67,7 @@ void CCovarianceReport::execute() {
 
   cout << "Covariance:\n";
   if (pMinimizer->getCovarianceError()) {
-    cout << "Covariance creation failed. Hessian was un-invertable\n";
+    cout << "Covariance creation failed. Hessian was not invertable\n";
   } else {
     for (int i = 0; i < iCount; ++i) {
       for (int j = 0; j < iCount; ++j) {
