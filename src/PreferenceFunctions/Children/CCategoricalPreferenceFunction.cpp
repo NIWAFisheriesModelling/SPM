@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CCategoricalPreferenceFunction.cpp
-// Author      : S.Rasmussen
-// Date        : 16/03/2008
+// Author      : A.Dunn
+// Date        : 20/04/2012
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
@@ -12,6 +12,7 @@
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/String/CStringLayer.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 //TODO: Check that this class/functions work correctly
 
@@ -24,9 +25,6 @@ CCategoricalPreferenceFunction::CCategoricalPreferenceFunction() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORY_VALUES);
   pParameterList->registerAllowed(PARAM_CATEGORY_LABELS);
-  pParameterList->registerAllowed(PARAM_CATEGORIES);
-  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
-
 }
 
 //**********************************************************************
@@ -41,12 +39,12 @@ void CCategoricalPreferenceFunction::validate() {
     // Assign local variables
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
-    // TODO: Validate that the length of VALUES is the same as the length LABELS
-    //       Validate that all VALUES are numeric
+
+    if (vValues.size() != vLabels.size())
+      CError::errorListSameSize(PARAM_CATEGORY_VALUES, PARAM_CATEGORY_LABELS);
+    // TODO: Validate that all VALUES are numeric
     //       Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
     //       Validate that the layer is a string layer
-    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
 
   // Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)
@@ -89,7 +87,7 @@ double CCategoricalPreferenceFunction::getResult(int RIndex, int CIndex, int TRI
 #endif
     //TODO: Scott to check code for efficiency
     //Function should identify the label, and then return the corresponding value
-    sLayerValue = pLayer->getValue(RIndex, CIndex);
+    sLayerValue = pLayer->getValue(TRIndex, TCIndex);
 
     for (int i = 0; i < (int)vLabels.size(); i++) {
       if(vLabels[i] == sLayerValue) {
