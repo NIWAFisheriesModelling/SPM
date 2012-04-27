@@ -1,0 +1,61 @@
+SPM (Spatial Population Model)
+Call: spm -r 
+Date: Fri Apr 27 14:24:52 2012
+v1.1-2012-04-27 (rev. 4497). Copyright (c) 2008-2012, NIWA
+User name: dunn
+Machine name: NIWA-34253 (Windows_NT, PID=6068)
+
+[1994_timestep_one]
+report.type: partition
+partition.year: 1994
+partition.time_step: one
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,6.25,0,0,0,0
+1,2,immature,6.25,0,0,0,0
+1,3,immature,6.25,0,0,0,0
+2,1,immature,12.5,0,0,0,0
+2,2,immature,12.5,0,0,0,0
+2,3,immature,12.5,0,0,0,0
+3,1,immature,18.75,0,0,0,0
+3,2,immature,18.75,0,0,0,0
+3,3,immature,6.25,0,0,0,0
+*end
+
+[1995_timestep_one]
+report.type: partition
+partition.year: 1995
+partition.time_step: one
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,12.5,0,0,0,0
+1,2,immature,12.5,0,0,0,0
+1,3,immature,12.5,0,0,0,0
+2,1,immature,25,0,0,0,0
+2,2,immature,25,0,0,0,0
+2,3,immature,25,0,0,0,0
+3,1,immature,37.5,0,0,0,0
+3,2,immature,37.5,0,0,0,0
+3,3,immature,12.5,0,0,0,0
+*end
+
+[1996_timestep_one]
+report.type: partition
+partition.year: 1996
+partition.time_step: one
+row,column,category,age[1],age[2],age[3],age[4],age[5]
+1,1,immature,18.75,0,0,0,0
+1,2,immature,18.75,0,0,0,0
+1,3,immature,18.75,0,0,0,0
+2,1,immature,37.5,0,0,0,0
+2,2,immature,37.5,0,0,0,0
+2,3,immature,37.5,0,0,0,0
+3,1,immature,56.25,0,0,0,0
+3,2,immature,56.25,0,0,0,0
+3,3,immature,18.75,0,0,0,0
+*end
+
+[objective_score]
+report.type: objective_function
+total_score: 0
+*end
+
+Completed

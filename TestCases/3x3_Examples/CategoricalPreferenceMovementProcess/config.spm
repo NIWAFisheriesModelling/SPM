@@ -1,0 +1,66 @@
+# Spatial structure
+@model
+nrows 3
+ncols 3
+layer Base
+categories immature
+min_age 1
+max_age 5
+age_plus_group True
+initial_year 1994
+current_year 1996
+final_year 100
+cell_length 1
+time_steps One
+
+@time_step One
+processes Recruitment PrefMoveOne
+
+@process PrefMoveOne
+type preference
+categories immature
+preference_functions categorical_preference
+
+@process Recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+R0 100
+ages 1
+
+@preference_function categorical_preference
+type categorical
+layer categorical_layer
+alpha 1
+category_labels A B C
+category_values 1 2 3
+
+@layer base
+type numeric
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer categorical_layer
+type categorical
+data A A A
+data B B B
+data C C A
+
+@report 1994_TimeStep_One
+type partition
+time_step one
+year 1994
+
+@report 1995_TimeStep_One
+type partition
+time_step one
+year 1995
+
+@report 1996_TimeStep_One
+type partition
+time_step one
+year 1996
+
+@report Objective_Score
+type objective_function
