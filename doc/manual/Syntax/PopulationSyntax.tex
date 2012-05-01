@@ -960,12 +960,12 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defValue{A vector of values of length equal to the number of elements defined for the spatial and temporal structure}
 \defCondition{\commandlabsubarg{layer}{type}{meta} has to have either \subcommand{layers} or \subcommand{data} but not both}
 
-\TODOend 
-
-\defSub{initialisation\_layer} {Define the layer label to use during the initialisation}
-\defType{String}
+\defSub{initialisation\_layers} {Define the layers label to use during the initialisation}
+\defType{String vector, of length the number of initialisation phases}
 \defDefault{No default}
 \defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
+
+\TODOend 
 
 \defSub{projection\_layer} {Define the layer label to use during the projection}
 \defType{String}
