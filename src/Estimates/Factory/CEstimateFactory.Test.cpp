@@ -35,8 +35,7 @@ BOOST_AUTO_TEST_CASE( Build_Estimate ) {
 //**********************************************************************
 BOOST_AUTO_TEST_CASE( Build_Estimate_PARAM_INVALID ) {
   // Try to Build Invalid Estimate
-  CEstimate *pInvalid = 0;
-  BOOST_REQUIRE_THROW(pInvalid = CEstimateFactory::buildEstimate(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CEstimateFactory::buildEstimate(PARAM_ZERO, false), string);
 }
 
 #endif

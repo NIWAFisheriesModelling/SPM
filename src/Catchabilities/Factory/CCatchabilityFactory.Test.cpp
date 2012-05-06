@@ -35,8 +35,7 @@ BOOST_AUTO_TEST_CASE(Build_Catchability) {
 //**********************************************************************
 BOOST_AUTO_TEST_CASE(Build_Catchability_PARAM_INVALID) {
   // Try to Build Invalid Estimate
-  CCatchability *pInvalid = 0;
-  BOOST_REQUIRE_THROW(pInvalid = CCatchabilityFactory::buildCatchability(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CCatchabilityFactory::buildCatchability(PARAM_ZERO, false), string);
 }
 
 #endif

@@ -72,10 +72,10 @@ void CRuntimeController::Destroy() {
 }
 
 //**********************************************************************
-// bool CRuntimeController::parseCommandLine(int argc, char* argv[])
+// bool CRuntimeController::parseCommandLine(int argc, const char* argv[])
 // Parse out command line
 //**********************************************************************
-void CRuntimeController::parseCommandLine(int argc, char* argv[]) {
+void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
 
   // Build some hidden options
   options_description oHidden("Hidden");

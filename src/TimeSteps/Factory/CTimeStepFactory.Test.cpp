@@ -35,8 +35,7 @@ BOOST_AUTO_TEST_CASE( Build_TimeStep ) {
 //**********************************************************************
 BOOST_AUTO_TEST_CASE( Build_TimeStep_PARAM_INVALID ) {
   // Try to Build Invalid Estimate
-  CTimeStep *pInvalid = 0;
-  BOOST_REQUIRE_THROW(pInvalid = CTimeStepFactory::buildTimeStep(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CTimeStepFactory::buildTimeStep(PARAM_ZERO, false), string);
 }
 
 #endif

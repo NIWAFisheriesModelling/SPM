@@ -199,7 +199,8 @@ void CLocalBHRecruitmentProcess::execute() {
     CProcess::execute();
 
     // Setup Our Variables
-    double dAmountPer = dR0; // TODO: (Alistair) multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship
+    // TODO: (Alistair) multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship
+//    double dAmountPer = dR0;
 
     // TODO: Rewrite this so is works for local recruitment
  /*   if (pLayer != 0) {

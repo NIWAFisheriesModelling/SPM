@@ -28,7 +28,7 @@ C1x1_Fixture::C1x1_Fixture() {
 
   CConvertor::stringToVectorByNewline(basic_1x1, vConfiguration);
 
-  char *argv[] = { "C:\\Temp\\spm.exe", "-r" };
+  const char *argv[] = { "C:\\Temp\\spm.exe", "-r" };
   CRuntimeController::Instance()->parseCommandLine(2, argv);
 
   sTimeStep = "@time_step step_one\n";

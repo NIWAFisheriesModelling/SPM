@@ -35,8 +35,7 @@ BOOST_AUTO_TEST_CASE( Build_InitializationPhase ) {
 //**********************************************************************
 BOOST_AUTO_TEST_CASE( Build_InitializationPhase_PARAM_INVALID ) {
   // Try to Build Invalid Estimate
-  CInitializationPhase *pInvalid = 0;
-  BOOST_REQUIRE_THROW(pInvalid = CInitializationPhaseFactory::buildInitializationPhase(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CInitializationPhaseFactory::buildInitializationPhase(PARAM_ZERO, false), string);
 }
 
 #endif

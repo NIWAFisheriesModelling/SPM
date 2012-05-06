@@ -54,7 +54,7 @@ int main(int argc, char * argv[]) {
 
   // Try to Parse the command line.
   try {
-    pRuntime->parseCommandLine(argc, argv);
+    pRuntime->parseCommandLine(argc, (const char **)argv);
 
   } catch(string &Ex) {
     clReporter.start();

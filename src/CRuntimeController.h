@@ -59,7 +59,7 @@ public:
   static void                Destroy();
 
   // Functions
-  void                       parseCommandLine(int argc, char* argv[]);
+  void                       parseCommandLine(int argc, const char* argv[]);
   string                     getCommandLineOptions() { return sCommandLineOptions; }
   void                       setRunMode(ERunMode value) { eRunMode = value; }
   ERunMode                   getRunMode() { return eRunMode; }

@@ -35,8 +35,7 @@ BOOST_AUTO_TEST_CASE(Build_Penalty) {
 //**********************************************************************
 BOOST_AUTO_TEST_CASE(Build_InvalidPenalty) {
 
-  CPenalty *pPenalty = 0;
-  BOOST_REQUIRE_THROW(pPenalty = CPenaltyFactory::buildPenalty(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CPenaltyFactory::buildPenalty(PARAM_ZERO, false), string);
 }
 
 #endif

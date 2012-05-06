@@ -35,8 +35,7 @@ BOOST_AUTO_TEST_CASE(Build_DerivedQuantity) {
 //**********************************************************************
 BOOST_AUTO_TEST_CASE(Build_DerivedQuantity_PARAM_INVALID) {
   // Try to Build Invalid Estimate
-  CDerivedQuantity *pInvalid = 0;
-  BOOST_REQUIRE_THROW(pInvalid = CDerivedQuantityFactory::buildDerivedQuantity(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CDerivedQuantityFactory::buildDerivedQuantity(PARAM_ZERO, false), string);
 }
 
 #endif
