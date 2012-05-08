@@ -82,7 +82,7 @@ In addition, the following are optional arguments\index{Optional command line ar
 
 \subsection{Constructing an \SPM\ \config \label{constructing-spm-config}}\index{Input configuration file syntax}
 
-The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. \TODO Note that the commands and subcommands are case insensitive, but arguments and labels are case sensitive. \TODOend
+The model definition, parameters, observations, and reports are specified in an \config. The  population section is described in Section \ref{sec:population-section} and the population commands in Section \ref{sec:population-syntax}. Similarly, the estimation section is described in Section \ref{sec:estimation-section} and its commands in Section \ref{sec:estimation-syntax}, and in Section \ref{sec:report-section} and Section \ref{sec:report-syntax} for the report and report commands. 
 
 \subsubsection{Commands}\index{Commands}
 
@@ -108,10 +108,7 @@ The arguments for a subcommand are either\index{Subcommand argument type},
 \item \textbf{switch} true/false 
 \item \textbf{integer} an integer number
 \item \textbf{integer vector} a vector of integer numbers
-
-\TODO
 \item \textbf{integer range} a range of integer numbers separated by - and / or spaces (for example 1994 - 1996 2000 is expanded to an integer vector of values 1994 1995 1996 2000)
-\TODOend
 \item \textbf{constant} a real number (i.e., double)
 \item \textbf{constant vector} a vector of real numbers (i.e., vector of doubles)
 \item \textbf{estimable} a real number that can be estimated (i.e., estimable double)
@@ -149,7 +146,7 @@ Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between
 
 There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). Note, however, that the \command{include} is the only exception to this rule. See Section \ref{sec:general-syntax})\index{Command ! Include files} for details of the use of \command{include}. 
 
-Note that commands, sub-commands, and arguments in the parameter files are case sensitive. Also note that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
+Note that in the \config, commands, sub-commands, and arguments are not case sensitive. However, labels and variable values are case sensitive. Also note that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
 
 \subsubsection{Commenting out lines}\index{Comments}\index{Commenting \config}
 
