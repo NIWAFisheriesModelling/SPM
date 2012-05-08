@@ -48,7 +48,6 @@ void CBaseObject::registerEstimable(string name, int index, double *variable) {
 // Get Our Estimable Variable
 //**********************************************************************
 double* CBaseObject::getEstimableVariable(string name) {
-#ifndef OPTIMIZE
   try {
     name = CConvertor::stringToLowercase(name);
 
@@ -59,7 +58,6 @@ double* CBaseObject::getEstimableVariable(string name) {
     Ex = "CBaseObject.getEstimableVariable()->" + Ex;
     throw Ex;
   }
-#endif
 
   return mEstimables[name];
 }

@@ -86,7 +86,6 @@ void CParamParser::parseAbsoluteCommand() {
     sVariable   = sCommand.substr( iIndex2, (sCommand.length() - iIndex2) );
 
     sType = CConvertor::stringToLowercase(sType);
-    sVariable = CConvertor::stringToLowercase(sVariable);
 
     // Processes
     if (sType == PARAM_PROCESS) {
