@@ -11,6 +11,7 @@
 // Global Includes
 #include <boost/test/unit_test.hpp>
 #include <string>
+#include <boost/lexical_cast.hpp>
 
 // Local Includes
 #include "../Factory/CSelectivityFactory.h"
@@ -29,7 +30,7 @@ BOOST_FIXTURE_TEST_CASE( AllValuesSelectivity, CWorld_Fixture ) {
   pSelectivity->addParameter(PARAM_LABEL, "selectivity");
 
   for (int i = 0; i < 20; ++i)
-    pSelectivity->addParameter(PARAM_V, CConvertor::intToString(i*2));
+    pSelectivity->addParameter(PARAM_V, boost::lexical_cast<string>(i*2));
 
   pSelectivity->validate();
   BOOST_REQUIRE_NO_THROW(pSelectivity->validate());
