@@ -46,11 +46,11 @@ void CCategoricalMonotonicPreferenceFunction::validate() {
     }
     if (vValues.size() != vLabels.size())
       CError::errorListSameSize(PARAM_CATEGORY_VALUES, PARAM_CATEGORY_LABELS);
-    // TODO: Validate that all VALUES are numeric
+    // TODO:
     //       Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
-    //       Validate that the layer is a string layer
+    //       Check For Duplicate Labels.
 
-  // Register estimables
+// Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)
       registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
 
