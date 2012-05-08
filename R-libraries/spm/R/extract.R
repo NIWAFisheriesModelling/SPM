@@ -191,7 +191,7 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
             res$covariance[[counter$covariance]] <- temp
             names(res$covariance)[counter$covariance] <- report.label[i]
         }
-        else if (ignore.unknown==TRUE) {
+        else if (ignore.unknown==FALSE) {
           stop(paste("ERROR: Unknown report type (report.type=",report.type[i],")"))
         }
     }
