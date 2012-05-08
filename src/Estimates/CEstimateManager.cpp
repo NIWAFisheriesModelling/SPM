@@ -164,7 +164,7 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
   try {
     // Variables
     vector<CEstimate*>::iterator vPtr           = vEstimateList.begin();
-    string                       sParam         = CConvertor::stringToLowercase(Parameter);
+    string                       sParam         = Parameter;
     string                       sParam2        = "";
 
     // Loop Through

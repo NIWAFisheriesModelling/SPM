@@ -95,7 +95,8 @@ void CProportionsAtAgeObservation::validate() {
         // Check for non-positive or negative values in our observations  - depends on likelihood
         if(sLikelihood==PARAM_LOGNORMAL) {
           // TODO: Scott - can you change this to ref mvProportionmatrix not stringToDouble(vOBS)?
-          if(boost::lexical_cast<double>(vOBS[i+j+1]) <= 0.0) {
+          if ((*mvProportionMatrix[vOBS[i]].rbegin()) <= 0.0 ) {
+//          if(boost::lexical_cast<double>(vOBS[i+j+1]) <= 0.0) {
             CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
           }
         } else if(sLikelihood==PARAM_MULTINOMIAL) {
