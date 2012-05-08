@@ -20,14 +20,13 @@ class CParamParser : public CBaseObject {
 public:
   // Functions
   CParamParser();
-	virtual                    ~CParamParser();
-	double*                    parseCommand(string Command);
+  virtual                    ~CParamParser();
+  double*                    parseCommand(string Command);
 
 protected:
   // Functions
   void                      parseAbsoluteCommand();
   void                      convertAbsoluteCommand();
-  string                    UpperToLower(string Input);
 
   // Variables
   string                     sCommand;

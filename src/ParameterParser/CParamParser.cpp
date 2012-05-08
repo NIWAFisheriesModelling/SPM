@@ -37,7 +37,7 @@ CParamParser::CParamParser() {
 double* CParamParser::parseCommand(string Command) {
   try {
     // Set Local Cmd
-    sCommand = UpperToLower(Command);
+    sCommand = Command;
 
     // Parse
     parseAbsoluteCommand();
@@ -86,6 +86,7 @@ void CParamParser::parseAbsoluteCommand() {
     sVariable   = sCommand.substr( iIndex2, (sCommand.length() - iIndex2) );
 
     sType = CConvertor::stringToLowercase(sType);
+    sVariable = CConvertor::stringToLowercase(sVariable);
 
     // Processes
     if (sType == PARAM_PROCESS) {
@@ -127,19 +128,6 @@ void CParamParser::parseAbsoluteCommand() {
     Ex = "CParamParser.parseAbsoluteCommand()->" + Ex;
     throw Ex;
   }
-}
-
-//**********************************************************************
-// string CParamParser::UpperToLower(string Input)
-// Convert String From Uppercase To Lowercase
-//**********************************************************************
-string CParamParser::UpperToLower(string Input) {
-
-//  for (int i=0;i< (int)strlen(Input.c_str());i++)
-//     if (Input[i] >= 0x41 && Input[i] <= 0x5A)
-//      Input[i] = Input[i] + 0x20;
-
-  return Input;
 }
 
 //**********************************************************************
