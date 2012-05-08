@@ -7,7 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local Includes
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CBaseObject.h"
 #include "../Helpers/CConvertor.h"
 #include "../Helpers/CComparer.h"
@@ -37,7 +39,7 @@ void CBaseObject::registerEstimable(string name, double *variable) {
 // Register variable as estimable with an index (used for Vectors)
 //**********************************************************************
 void CBaseObject::registerEstimable(string name, int index, double *variable) {
-  string newName = name + string("(") + CConvertor::intToString(index) + string(")");
+  string newName = name + string("(") + boost::lexical_cast<string>(index) + string(")");
   mEstimables[newName] = variable;
 }
 

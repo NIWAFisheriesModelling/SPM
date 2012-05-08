@@ -18,6 +18,7 @@
 #include "../Catchabilities/CCatchabilityManager.h"
 #include "../Catchabilities/CCatchability.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/CConvertor.h"
 
 //**********************************************************************
 // CParamParser::CParamParser()
@@ -83,6 +84,8 @@ void CParamParser::parseAbsoluteCommand() {
     sLabel      = sCommand.substr(iIndex, (iIndex2-iIndex));
     iIndex2 += 2; // Move past "]."
     sVariable   = sCommand.substr( iIndex2, (sCommand.length() - iIndex2) );
+
+    sType = CConvertor::stringToLowercase(sType);
 
     // Processes
     if (sType == PARAM_PROCESS) {

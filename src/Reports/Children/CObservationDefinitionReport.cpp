@@ -7,7 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CObservationDefinitionReport.h"
 #include "../../Observations/CObservation.h"
 #include "../../Observations/CObservationManager.h"
@@ -98,7 +100,7 @@ void CObservationDefinitionReport::execute() {
       sLastKey = Comparison->sKey;
     }
 
-    cout << CConvertor::doubleToString(Comparison->dObservedValue) << " ";
+    cout << boost::lexical_cast<string>(Comparison->dObservedValue) << " ";
   }
 
   // Print Error Values
@@ -112,7 +114,7 @@ void CObservationDefinitionReport::execute() {
     }
 
     if (bWriteErrorValue)
-      cout << CConvertor::doubleToString(Comparison->dErrorValue) << " ";
+      cout << boost::lexical_cast<string>(Comparison->dErrorValue) << " ";
 
     if (pList->getString(PARAM_TYPE) == PARAM_PROPORTIONS_AT_AGE)
       bWriteErrorValue = false;

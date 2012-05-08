@@ -7,7 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CError.h"
 #include "CConvertor.h"
 #include "../Translations/Translations.h"
@@ -157,7 +159,7 @@ void CError::errorListSameSize(string type, string type2) {
 // List mush have size of 'size'
 //**********************************************************************
 void CError::errorListNotSize(string type, int size) {
-  string sException = type + ERROR_LIST_NOT_SIZE + CConvertor::intToString(size);
+  string sException = type + ERROR_LIST_NOT_SIZE + boost::lexical_cast<string>(size);
   throw sException;
 }
 
@@ -202,9 +204,9 @@ void CError::errorNotBetween(string middle, string low, string high) {
 // Element less is less than element more
 //**********************************************************************
 void CError::errorElementLessThan(string type, int lessIndex, int moreIndex) {
-  string sException = type + string(" ") + PARAM_VALUE + string(" ") + CConvertor::intToString(lessIndex);
+  string sException = type + string(" ") + PARAM_VALUE + string(" ") + boost::lexical_cast<string>(lessIndex);
   sException += ERROR_LESS_THAN;
-  sException += CConvertor::intToString(moreIndex);
+  sException += boost::lexical_cast<string>(moreIndex);
   throw sException;
 }
 

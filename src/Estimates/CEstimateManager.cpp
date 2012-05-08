@@ -10,6 +10,7 @@
 // Global Header
 #include <fstream>
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local Headers
 #include "CEstimateManager.h"
@@ -126,7 +127,7 @@ CEstimate* CEstimateManager::getEnabledEstimate(int Index) {
         return vEstimateList[i];
     }
 
-    throw string(ERROR_INVALID_IDX + CConvertor::intToString(Index));
+    throw string(ERROR_INVALID_IDX + boost::lexical_cast<string>(Index));
 
   } catch (string &Ex) {
     Ex = "CEstimateManager.getEnabledEstimate()->" + Ex;
@@ -163,7 +164,7 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
   try {
     // Variables
     vector<CEstimate*>::iterator vPtr           = vEstimateList.begin();
-    string                       sParam         = Parameter;
+    string                       sParam         = CConvertor::stringToLowercase(Parameter);
     string                       sParam2        = "";
 
     // Loop Through

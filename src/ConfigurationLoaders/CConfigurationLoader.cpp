@@ -10,6 +10,7 @@
 // Global Headers
 #include <fstream>
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local Headers
 #include "CConfigurationLoader.h"
@@ -252,12 +253,12 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
           }
 
           if (isRange) {
-            int firstNumber  = CConvertor::stringToInt(sValue.substr(0, iRangeSpacerIndex));
-            int secondNumber = CConvertor::stringToInt(sValue.substr(iRangeSpacerIndex+1, sValue.length()));
+            int firstNumber  = boost::lexical_cast<int>(sValue.substr(0, iRangeSpacerIndex));
+            int secondNumber = boost::lexical_cast<int>(sValue.substr(iRangeSpacerIndex+1, sValue.length()));
 
             // Now, add our range
             for (int i = firstNumber; i <= secondNumber; ++i)
-              Object->addParameter(sName, CConvertor::intToString(i));
+              Object->addParameter(sName, boost::lexical_cast<string>(i));
 
             continue;
           }
@@ -417,7 +418,7 @@ void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
         CError::errorListSameSize(PARAM_VALUE, PARAM_ESTIMATE);
 
       for(int i = 0; i < (int)vValues.size(); ++i)
-        pEstimateManager->addEstimateValue(vEstimates[i], CConvertor::stringToDouble(vValues[i]));
+        pEstimateManager->addEstimateValue(vEstimates[i], boost::lexical_cast<double>(vValues[i]));
     }
 
     // Now we've loaded correctly. Flag Configuration

@@ -7,7 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local Headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CAbundanceObservation.h"
 #include "../../Catchabilities/CCatchabilityManager.h"
 #include "../../Catchabilities/CCatchability.h"
@@ -59,7 +61,7 @@ void CAbundanceObservation::validate() {
       CError::errorPairs(PARAM_OBS);
 
     for (int i = 0; i < (int)vOBS.size(); i+=2) {
-      mProportionMatrix[vOBS[i]] = CConvertor::stringToDouble(vOBS[i+1]);
+      mProportionMatrix[vOBS[i]] = boost::lexical_cast<double>(vOBS[i+1]);
       // Check for non-positive values in our observation values (for all likihoods)
       if(mProportionMatrix[vOBS[i]] <= 0.0)
         CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
@@ -76,7 +78,7 @@ void CAbundanceObservation::validate() {
       CError::errorPairs(PARAM_ERROR_VALUE);
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
-      mErrorValue[vErrorValues[i]] = CConvertor::stringToDouble(vErrorValues[i+1]);
+      mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
       // Check for non-positive values in our error values (for all likihoods)
       if(mErrorValue[vErrorValues[i]] <= 0.0)
         CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);

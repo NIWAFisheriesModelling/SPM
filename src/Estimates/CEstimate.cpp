@@ -7,7 +7,9 @@
 // $Date$
 //============================================================================
 
-// Local headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CEstimate.h"
 #include "../ParameterParser/CParamParser.h"
 #include "../Priors/CPriorManager.h"
@@ -121,9 +123,9 @@ double CEstimate::getPriorScore() {
 void CEstimate::loadValue(int index) {
   try {
     if (index < 0)
-      throw string(ERROR_INVALID_IDX + CConvertor::intToString(index));
+      throw string(ERROR_INVALID_IDX + boost::lexical_cast<string>(index));
     if (index >= (int)vValueList.size())
-      throw string(ERROR_INVALID_IDX + CConvertor::intToString(index));
+      throw string(ERROR_INVALID_IDX + boost::lexical_cast<string>(index));
 
     setValue(vValueList[index]);
 

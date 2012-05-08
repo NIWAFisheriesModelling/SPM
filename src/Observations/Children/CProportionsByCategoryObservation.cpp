@@ -10,6 +10,7 @@
 // Global Headers
 #include <iostream>
 #include <limits>
+#include <boost/lexical_cast.hpp>
 
 // Local Headers
 #include "CProportionsByCategoryObservation.h"
@@ -84,7 +85,7 @@ void CProportionsByCategoryObservation::validate() {
 
     for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
-        mvProportionMatrix[vOBS[i]].push_back(CConvertor::stringToDouble(vOBS[i+j+1]));
+        mvProportionMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
       }
     }
 
@@ -102,9 +103,9 @@ void CProportionsByCategoryObservation::validate() {
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
-        mvErrorValue[vErrorValues[i]].push_back(CConvertor::stringToDouble(vErrorValues[i+j+1]));
+        mvErrorValue[vErrorValues[i]].push_back(boost::lexical_cast<double>(vErrorValues[i+j+1]));
         // Check for negative values
-        if(CConvertor::stringToDouble(vErrorValues[i+j+1]) < 0.0)
+        if(boost::lexical_cast<double>(vErrorValues[i+j+1]) < 0.0)
           CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
       }
     }

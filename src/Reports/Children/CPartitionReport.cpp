@@ -7,7 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local header
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CPartitionReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Helpers/CConvertor.h"
@@ -95,7 +97,7 @@ void CPartitionReport::execute() {
     // Print Out
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << CConvertor::intToString(iYear) << "\n";
+    cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
     cout << PARAM_PARTITION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
     cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;

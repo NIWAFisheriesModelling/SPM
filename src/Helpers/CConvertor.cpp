@@ -25,49 +25,49 @@ using std::endl;
 // string CConvertor::doubleToString(double value)
 // Convert from double to string
 //**********************************************************************
-string CConvertor::doubleToString(double value) {
-  ostringstream o;
-  if (!(o << std::fixed << std::setprecision(10) << value))
-    return "";
-  return o.str();
-}
+//string CConvertor::doubleToString(double value) {
+//  ostringstream o;
+//  if (!(o << std::fixed << std::setprecision(10) << value))
+//    return "";
+//  return o.str();
+//}
 
 //**********************************************************************
 // string CConvertor::intToString(int value)
 // Convert from int to string
 //**********************************************************************
-string CConvertor::intToString(int value) {
-  ostringstream o;
-  if (!(o << value))
-    return "";
-  return o.str();
-}
+//string CConvertor::intToString(int value) {
+//  ostringstream o;
+//  if (!(o << value))
+//    return "";
+//  return o.str();
+//}
 
 //**********************************************************************
 // double CConvertor::stringToDouble(string value)
 // Convert from string to double
 //**********************************************************************
-double CConvertor::stringToDouble(string value) {
-  double dRet = 0.0;
-  stringstream myStream(value);
-  if (!(myStream >> dRet) || ((int)myStream.peek() != (int)std::string::npos))
-    throw string("Invalid double: " + value);
-
-  return dRet;
-}
+//double CConvertor::stringToDouble(string value) {
+//  double dRet = 0.0;
+//  stringstream myStream(value);
+//  if (!(myStream >> dRet) || ((int)myStream.peek() != (int)std::string::npos))
+//    throw string("Invalid double: " + value);
+//
+//  return dRet;
+//}
 
 //**********************************************************************
 // int CConvertor::stringToInt(string value)
 // Convert from string to int
 //**********************************************************************
-int CConvertor::stringToInt(string value) {
-  int iRet = 0;
-  stringstream myStream(value);
-  if (!(myStream >> iRet) || myStream.peek()!= (int)std::string::npos)
-    throw string("Invalid integer: " + value);
-
-  return iRet;
-}
+//int CConvertor::stringToInt(string value) {
+//  int iRet = 0;
+//  stringstream myStream(value);
+//  if (!(myStream >> iRet) || myStream.peek()!= (int)std::string::npos)
+//    throw string("Invalid integer: " + value);
+//
+//  return iRet;
+//}
 
 //**********************************************************************
 //

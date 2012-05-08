@@ -9,6 +9,7 @@
 
 // Global Headers
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local headers
 #include "CEventMortalityProcess.h"
@@ -99,7 +100,7 @@ void CEventMortalityProcess::validate() {
       mYears[Year]++;
 
       if (mYears[Year] > 1)
-        CError::errorDuplicate(PARAM_YEAR, CConvertor::intToString(Year));
+        CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }
 
   } catch(string &Ex) {

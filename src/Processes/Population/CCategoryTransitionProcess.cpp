@@ -7,7 +7,9 @@
 // $Date$
 //============================================================================
 
-// Local Headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
@@ -89,7 +91,7 @@ void CCategoryTransitionProcess::validate() {
       mYears[Year]++;
 
       if (mYears[Year] > 1)
-        CError::errorDuplicate(PARAM_YEAR, CConvertor::intToString(Year));
+        CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }
 
     if (getCategoryCount() != getSelectivityCount())

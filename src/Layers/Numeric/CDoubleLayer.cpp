@@ -9,6 +9,7 @@
 
 // Global Headers
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local Includes
 #include "CDoubleLayer.h"
@@ -113,7 +114,7 @@ void CDoubleLayer::validate() {
       if (iRow >= iHeight)
         CError::errorTooMuch(PARAM_DATA);
 
-      pGrid[iRow][iCol] = CConvertor::stringToDouble(vData[i]);
+      pGrid[iRow][iCol] = boost::lexical_cast<double>(vData[i]);
       iCol++;
     }
 

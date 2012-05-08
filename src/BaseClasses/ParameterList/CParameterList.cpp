@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local headers
 #include "CParameterList.h"
@@ -108,7 +109,7 @@ double CParameterList::getDouble(string name, bool optional, double defaultValue
   string sValue = getString(name, optional);
   // If we have one
   if (sValue != "")
-    dReturn = CConvertor::stringToDouble(sValue);
+    dReturn = boost::lexical_cast<double>(sValue);
 
   return dReturn;
 }
@@ -125,7 +126,7 @@ int CParameterList::getInt(string name, bool optional, int defaultValue) {
   string sValue = getString(name, optional);
   // If we have one
   if (sValue != "")
-    iReturn = CConvertor::stringToInt(sValue);
+    iReturn = boost::lexical_cast<int>(sValue);
 
   return iReturn;
 }
@@ -197,7 +198,7 @@ void CParameterList::fillVector(vector<double> &list, string name, bool optional
 
   vector<string>::iterator vPtr = mParameters[name].begin();
   while (vPtr != mParameters[name].end()) {
-    list.push_back(CConvertor::stringToDouble((*vPtr)));
+    list.push_back(boost::lexical_cast<double>((*vPtr)));
     vPtr++;
   }
 }
@@ -220,7 +221,7 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
 
   vector<string>::iterator vPtr = mParameters[name].begin();
   while (vPtr != mParameters[name].end()) {
-    list.push_back(CConvertor::stringToInt((*vPtr)));
+    list.push_back(boost::lexical_cast<int>((*vPtr)));
     vPtr++;
   }
 
@@ -252,7 +253,7 @@ void CParameterList::fillArray(double *array, int length, string name, int offse
     CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
 
   for (int i = offset; i < (int)mParameters[name].size(); ++i)
-    array[i-offset] = CConvertor::stringToDouble(mParameters[name][i]);
+    array[i-offset] = boost::lexical_cast<double>(mParameters[name][i]);
 }
 
 //**********************************************************************
