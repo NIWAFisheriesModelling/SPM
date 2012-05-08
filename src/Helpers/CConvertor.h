@@ -30,6 +30,7 @@ public:
   static int            stringToInt(string value);
   static bool           stringToBool(string value);
   static void           stringToVectorByNewline(string value, vector<string> &lines);
+  static string         stringToLowercase(string value);
 
 private:
   // Functions

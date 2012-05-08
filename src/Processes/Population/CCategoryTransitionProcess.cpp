@@ -75,7 +75,7 @@ void CCategoryTransitionProcess::validate() {
     CProcess::validate();
 
     // Get our Parameters
-    sPenalty  = pParameterList->getString(PARAM_PENALTY);
+    sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_FROM);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);

@@ -30,23 +30,23 @@ proportions 1.0
 R0 100
 ages 1
 
-@layer base
+@layer Base
 type numeric
 data 1
 
 @report 1994_TimeStep_One
 type partition
-time_step one
+time_step One
 year 1994
 
 @report 1995_TimeStep_One
 type partition
-time_step one
+time_step One
 year 1995
 
 @report 1996_TimeStep_One
 type partition
-time_step one
+time_step One
 year 1996
 
 @report Objective_Score

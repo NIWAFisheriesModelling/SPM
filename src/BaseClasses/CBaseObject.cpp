@@ -48,6 +48,7 @@ void CBaseObject::registerEstimable(string name, int index, double *variable) {
 double* CBaseObject::getEstimableVariable(string name) {
 #ifndef OPTIMIZE
   try {
+    name = CConvertor::stringToLowercase(name);
 
     if (mEstimables[name] == 0)
       CError::errorUnknown(PARAM_ESTIMABLE, name);

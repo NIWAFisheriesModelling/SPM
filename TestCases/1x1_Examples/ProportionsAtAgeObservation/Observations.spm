@@ -5,7 +5,7 @@ data 881A
 @observation proportions_at_age_1994
 type proportions_at_age
 year 1994
-time_step one
+time_step One
 categories immature mature
 selectivities One One
 min_age 1
@@ -21,7 +21,7 @@ delta 1e-11
 @observation proportions_at_age_1995
 type proportions_at_age
 year 1995
-time_step one
+time_step One
 categories immature mature
 selectivities One One
 min_age 1

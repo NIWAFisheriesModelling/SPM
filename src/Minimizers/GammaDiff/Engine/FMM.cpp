@@ -2,7 +2,7 @@
 // Name        : FMM.cpp
 // Author      : S.Rasmussen
 // Date        : 21/08/2008
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
@@ -397,8 +397,8 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     }
 
     if(!(pConfig->getQuietMode())) {
-      cerr << FMM_CONVERGENCE_CHECK << dCurrentTolerance << "\n";
-      cerr << FMM_CONVERGENCE_THRESHOLD << dGradTol << "\n" << endl;
+      cerr << FMM_CONVERGENCE_CHECK << (double)dCurrentTolerance << "\n";
+      cerr << FMM_CONVERGENCE_THRESHOLD << (double)dGradTol << "\n" << endl;
     }
 
     if (dCurrentTolerance <= dGradTol) {

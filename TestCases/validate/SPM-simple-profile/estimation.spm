@@ -30,7 +30,7 @@ df 4
 # ESTIMATION PROFILING
 @profile FishingSel.a50
 parameter selectivity[FishingSel].a50
-n  11
+steps  11
 lower_bound   5
 upper_bound  15
 

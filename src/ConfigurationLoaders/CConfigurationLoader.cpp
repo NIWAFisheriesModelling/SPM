@@ -119,10 +119,13 @@ void CConfigurationLoader::processSection() {
   if (iSpaceLocation > 0)
     sSection = sSection.substr(0, iSpaceLocation);
 
+  sSection = CConvertor::stringToLowercase(sSection);
+
   // Based on the @section, we want to get a Base Object
   CBaseObject *pBaseObject    = 0;
 
   string sType = getTypeFromCurrentSection();
+
   try {
     if (sSection == PARAM_MODEL)
       pBaseObject = CWorld::Instance();
@@ -188,7 +191,8 @@ string CConfigurationLoader::getTypeFromCurrentSection() {
 
     if (iTypeLocation == 0) {
       int iSpaceLocation = vCurrentSection[i].find_first_of(' ');
-      return vCurrentSection[i].substr(iSpaceLocation+1, vCurrentSection[i].length()-iSpaceLocation);
+      string sType = vCurrentSection[i].substr(iSpaceLocation+1, vCurrentSection[i].length()-iSpaceLocation);
+      return CConvertor::stringToLowercase(sType);
     }
   }
 
@@ -220,7 +224,7 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
       }
 
       // Get variable name
-      string sName = sCurrentLine.substr(0, iSpaceLocation);
+      string sName = CConvertor::stringToLowercase(sCurrentLine.substr(0, iSpaceLocation));
 
       // Setup variables
       int iNxtSpace = 0;
@@ -232,9 +236,35 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
         string sValue = sCurrentLine.substr(iSpaceLocation, iNxtSpace-iSpaceLocation);
         iSpaceLocation = iNxtSpace + 1;
 
-        // Add the parameter
-        if (sValue != "")
-          Object->addParameter(sName, sValue);
+        if (sValue == "")
+          continue;
+
+        // Check if the value is a range (e.g 1999-2010)
+        int iRangeSpacerIndex = sValue.find('-');
+        if (iRangeSpacerIndex > 0) {
+          // Make sure it's all numerical
+          bool isRange = true;
+          for (unsigned i = 0; i < sValue.length(); ++i) {
+            if (!isdigit(sValue[i]) && sValue[i] != '-') {
+              isRange = false;
+              break;
+            }
+          }
+
+          if (isRange) {
+            int firstNumber  = CConvertor::stringToInt(sValue.substr(0, iRangeSpacerIndex));
+            int secondNumber = CConvertor::stringToInt(sValue.substr(iRangeSpacerIndex+1, sValue.length()));
+
+            // Now, add our range
+            for (int i = firstNumber; i <= secondNumber; ++i)
+              Object->addParameter(sName, CConvertor::intToString(i));
+
+            continue;
+          }
+        }
+
+        Object->addParameter(sName, sValue);
+
       } while (iNxtSpace > 0);
     }
   } catch (string &Ex) {
@@ -248,8 +278,6 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
 // Load the configuration file into memory
 //**********************************************************************
 void CConfigurationLoader::loadConfigIntoCache(string FileName) {
-  // TODO: (Scott) Re-Write this function
-
   try {
     if (FileName == "")
       throw string(ERROR_INVALID_FILE_NAME);
@@ -337,9 +365,6 @@ void CConfigurationLoader::loadConfigIntoCache(string FileName) {
         sLine = "";
       }
 
-      // // Lowercase line
-      for (unsigned i = 0; i < sLine.length(); ++i)
-        sLine[i] = tolower(sLine[i]);
       // Remove trailing spaces caused by Comments
       int iLastNotSpace = sLine.find_last_not_of(" ");
       sLine = sLine.substr(0, (iLastNotSpace+1));
@@ -417,10 +442,6 @@ void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &para
     // Variables
     string  sLine         = line;
     int     iFirstSpace   = -1;
-
-    // // Lowercase sline
-    // for (unsigned i = 0; i < sLine.length(); ++i)
-    //  sLine[i] = tolower(sLine[i]);
 
     iFirstSpace = sLine.find_first_of(CONFIG_SEPERATOR_ESTIMATE_VALUES);
     if (iFirstSpace == -1) {

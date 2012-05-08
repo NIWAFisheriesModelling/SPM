@@ -122,3 +122,13 @@ void CConvertor::stringToVectorByNewline(string value, vector<string> &lines) {
     lines.push_back(sLine);
 }
 
+//**********************************************************************
+// string CConvertor::stringToLowercase(string value)
+// Convert a string to lowercase
+//**********************************************************************
+string CConvertor::stringToLowercase(string value) {
+  for (unsigned i = 0; i < value.length(); ++i)
+    value[i] = tolower(value[i]);
+
+  return value;
+}

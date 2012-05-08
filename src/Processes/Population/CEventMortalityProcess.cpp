@@ -76,7 +76,7 @@ void CEventMortalityProcess::validate() {
 
     // Get our Parameters
     dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
-    sPenalty  = pParameterList->getString(PARAM_PENALTY);
+    sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);

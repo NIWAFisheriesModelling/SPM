@@ -279,6 +279,9 @@ void CRuntimeController::run() {
         case RUN_MODE_SIMULATION:
           pBaseThread->executeSimulationRun();
           break;
+        case RUN_MODE_FORWARD_PROJECTION:
+          cout << "Forward projections are not yet implemented" << endl;
+          break;
         default:
           CError::errorUnknown(PARAM_RUN_MODE, "");
           break;
@@ -382,9 +385,10 @@ void CRuntimeController::startMCMC() {
     // Wait for Threads to finish.
     threads.join_all();
 
-  } catch (string &Ex) {
-    Ex = "CRuntimeController.startMCMC()->" + Ex;
-    throw Ex;
+
+  } catch (string &ex) {
+    ex = "CRuntimeController.startMCMC()->" + ex;
+    throw ex;
   }
 }
 
@@ -394,32 +398,40 @@ void CRuntimeController::startMCMC() {
 //**********************************************************************
 void CRuntimeController::initMCMCThread() {
 
-  CRuntimeController  *pThis    = CRuntimeController::Instance();
-  CRuntimeThread      *pThread  = 0;
-  pThread             = new CRuntimeThread();
+  try {
 
-  if (true) {
-    // Clone
-    lock lk(pThis->runtimeLock);
-    pThread->clone(pThis->pBaseThread);
+    CRuntimeController  *pThis    = CRuntimeController::Instance();
+    CRuntimeThread      *pThread  = 0;
+    pThread             = new CRuntimeThread();
 
-    // Register with Publisher (MCMC)
-    CMCMC *pMCMC = CMCMC::Instance();
-    pMCMC->addThread(pThread);
+    if (true) {
+      // Clone
+      lock lk(pThis->runtimeLock);
+      pThread->clone(pThis->pBaseThread);
+
+      // Register with Publisher (MCMC)
+      CMCMC *pMCMC = CMCMC::Instance();
+      pMCMC->addThread(pThread);
+    }
+
+    // Validate and Build
+    pThread->validate();
+    pThread->build();
+
+    // Setup Vars
+    pThread->setWaiting(true);
+    pThread->setTerminate(false);
+
+    // Execute
+    pThread->executeMCMC();
+
+    delete pThread;
+
+  } catch (string &ex) {
+    ex = "CRuntimeController.initMCMCThread()-> " + ex;
+    cout << "[EXCEPTION] " << ex << endl;
+    return;
   }
-
-  // Validate and Build
-  pThread->validate();
-  pThread->build();
-
-  // Setup Vars
-  pThread->setWaiting(true);
-  pThread->setTerminate(false);
-
-  // Execute
-  pThread->executeMCMC();
-
-  delete pThread;
 }
 
 //**********************************************************************
