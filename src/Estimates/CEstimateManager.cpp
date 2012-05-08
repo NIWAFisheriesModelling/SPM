@@ -172,8 +172,8 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
       // Make sure both commands are relative
       sParam2 = (*vPtr)->getParameter();
 
-      // Check For Match
-      if (sParam == sParam2)
+      // Check For Match (ignore case)
+      if (CConvertor::stringToLowercase(sParam) == CConvertor::stringToLowercase(sParam2))
         return (*vPtr);
 
       vPtr++;
