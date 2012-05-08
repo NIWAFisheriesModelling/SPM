@@ -12,6 +12,10 @@
 // Local headers
 #include "Base/CNumericLayer.h"
 
+// Classes
+class CWorld;
+class CSelectivity;
+
 //**********************************************************************
 //
 //
@@ -20,16 +24,23 @@ class CAbundanceDensityLayer : public CNumericLayer {
 public:
   // Functions
   CAbundanceDensityLayer();
-  virtual                     ~CAbundanceDensityLayer();
+  virtual                    ~CAbundanceDensityLayer();
   CLayer*                    clone() { return (new CAbundanceDensityLayer(*this)); }
+  void                       addCategory(string value);
+  int                        getCategoryCount() { return (int)vCategoryNames.size(); }
+  void                       addSelectivity(string value);
+  int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       validate();
   void                       build();
 
 protected:
   // Variables
-  vector<string>              vCategories;
-  vector<string>              vSelectivities;
+  CWorld                     *pWorld;
+  vector<string>             vCategoryNames;
+  vector<int>                vCategories;
+  vector<string>             vSelectivityNames;
+  vector<CSelectivity*>      vSelectivities;
 };
 
 #endif /* CABUNDANCEDENSITYLAYER_H_ */
