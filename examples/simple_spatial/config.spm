@@ -167,6 +167,16 @@ ato95 0.436736
 @layer Distance
 type distance
 
+@layer Abundance
+type abundance
+categories mature
+selectivities One
+
+@layer Abundance-density
+type abundance_density
+categories mature
+selectivities One
+
 # Definition of selectivities
 @selectivity One
 type constant
