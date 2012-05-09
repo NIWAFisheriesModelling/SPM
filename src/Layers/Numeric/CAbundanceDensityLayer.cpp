@@ -12,8 +12,11 @@
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../World/CWorld.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CAbundanceDensityLayer::CAbundanceDensityLayer()
@@ -87,6 +90,12 @@ void CAbundanceDensityLayer::build() {
     // Build Categories
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
+     // Get our base Layer Pointer
+    sBaseLayer = pWorld->getBaseLayer();
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sBaseLayer);
+
+
   } catch (string &Ex) {
     Ex = "CAbundanceDensityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -109,10 +118,8 @@ double CAbundanceDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRo
          dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
       }
     }
-    //TODO: Scott - Get the value of the cell in the base layer (i.e., the area)
-    //              Divide the abundance by the base layer value to get density
 
-    return dResult;
+    return dResult/CMath::zeroFun(pLayer->getValue(RowIndex, ColIndex), ZERO);
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {

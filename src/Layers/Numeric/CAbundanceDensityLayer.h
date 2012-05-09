@@ -41,6 +41,10 @@ protected:
   vector<int>                vCategories;
   vector<string>             vSelectivityNames;
   vector<CSelectivity*>      vSelectivities;
+  string                     sBaseLayer;
+  CNumericLayer              *pLayer;
+
+
 };
 
 #endif /* CABUNDANCEDENSITYLAYER_H_ */
