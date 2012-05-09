@@ -9,34 +9,42 @@
 
 // Local headers
 #include "CBiomassDensityLayer.h"
-
-// TODO: (Alistair) Implement Biomass Density Layer
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../World/CWorld.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Helpers/CMath.h"
 
 //**********************************************************************
 // CBiomassDensityLayer::CBiomassDensityLayer()
-// Default constructor
+// Default Constructor
 //**********************************************************************
 CBiomassDensityLayer::CBiomassDensityLayer() {
+  // Variables
+  pWorld = CWorld::Instance();
 
-  // Register user allowed parameters
+  // Register User allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
-  pParameterList->registerAllowed(PARAM_SIZE_WEIGHTS);
 }
 
 //**********************************************************************
-// double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
-// Get the value from our layer
+// void CBiomassDensityLayer::addCategory(string value)
+// Add A Category to our Biomass Layer
 //**********************************************************************
-double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
-  try {
-    throw string("Not yet implemented");
-  } catch (string &Ex) {
-    Ex = "CBiomassDensityLayer.getValue(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
+void CBiomassDensityLayer::addCategory(string value) {
+  vCategoryNames.push_back(value);
+}
 
-  return 0;
+//**********************************************************************
+// void CBiomassDensityLayer::addSelectivity(string value)
+// Add a selectivity to our list.
+//**********************************************************************
+void CBiomassDensityLayer::addSelectivity(string value) {
+  vSelectivityNames.push_back(value);
 }
 
 //**********************************************************************
@@ -44,16 +52,24 @@ double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow,
 // Validate the layer
 //**********************************************************************
 void CBiomassDensityLayer::validate() {
-  try {
-    // Base
-    CNumericLayer::validate();
+ try {
+   // Base validate
+   CNumericLayer::validate();
 
-    // Populate our parameters
-    pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivities, PARAM_SELECTIVITIES);
-    pParameterList->fillVector(vSizeWeights, PARAM_SIZE_WEIGHTS);
+   // Populate our Parameters
+   pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
+   pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
-    throw string("Object not yet implemented");
+   // Check For Duplicate Categories.
+   map<string, int> mList;
+   foreach(string Category, vCategoryNames) {
+     mList[Category] += 1;
+     if (mList[Category] > 1)
+       CError::errorDuplicate(PARAM_CATEGORY, Category);
+   }
+
+   if(vCategoryNames.size() != vSelectivityNames.size())
+     CError::errorListSameSize(PARAM_CATEGORIES,PARAM_SELECTIVITIES);
 
   } catch (string &Ex) {
     Ex = "CBiomassDensityLayer.validate(" + getLabel() + ")->" + Ex;
@@ -67,7 +83,19 @@ void CBiomassDensityLayer::validate() {
 //**********************************************************************
 void CBiomassDensityLayer::build() {
   try {
-    throw string("Not yet implemented");
+    // Build Selectivities
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
+
+    // Build Categories
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
+     // Get our base Layer Pointer
+    sBaseLayer = pWorld->getBaseLayer();
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sBaseLayer);
+
+
   } catch (string &Ex) {
     Ex = "CBiomassDensityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -75,9 +103,38 @@ void CBiomassDensityLayer::build() {
 }
 
 //**********************************************************************
+// double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
+// get Value
+//**********************************************************************
+double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0) {
+#ifndef OPTIMIZE
+  try {
+#endif
+
+    double  dResult = 0;
+
+    for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
+      for (int j = 0; j < (int)vCategories.size(); ++j) {
+         //dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getBiomassInCategoryForAge(i, vCategories[j]);
+         dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
+      }
+    }
+
+    return dResult/CMath::zeroFun(pLayer->getValue(RowIndex, ColIndex), ZERO);
+
+#ifndef OPTIMIZE
+  } catch (string &Ex) {
+    Ex = "CBiomassDensityLayer.getValue(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
+  return 0.0;
+#endif
+}
+
+//**********************************************************************
 // CBiomassDensityLayer::~CBiomassDensityLayer()
 // Destructor
 //**********************************************************************
 CBiomassDensityLayer::~CBiomassDensityLayer() {
-
 }

@@ -4,7 +4,7 @@
 // Date        : 28/02/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
-// $Date: 2009-02-24 13:21:30 +1300 (Tue, 24 Feb 2009) $
+// $Date: 2012-02-22 14:44:59 +1300 (Wed, 22 Feb 2012) $
 //============================================================================
 
 // Local Headers
@@ -106,6 +106,7 @@ double CBiomassLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int 
 
     for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
       for (int j = 0; j < (int)vCategories.size(); ++j) {
+         // dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getBiomassInCategoryForAge(i, vCategories[j]);
          dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
       }
     }

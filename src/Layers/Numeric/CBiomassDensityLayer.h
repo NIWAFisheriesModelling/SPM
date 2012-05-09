@@ -12,24 +12,39 @@
 // Local headers
 #include "Base/CNumericLayer.h"
 
+// Classes
+class CWorld;
+class CSelectivity;
+
 //**********************************************************************
 //
 //
 //**********************************************************************
 class CBiomassDensityLayer : public CNumericLayer {
 public:
+  // Functions
   CBiomassDensityLayer();
-  virtual                     ~CBiomassDensityLayer();
+  virtual                    ~CBiomassDensityLayer();
   CLayer*                    clone() { return (new CBiomassDensityLayer(*this)); }
+  void                       addCategory(string value);
+  int                        getCategoryCount() { return (int)vCategoryNames.size(); }
+  void                       addSelectivity(string value);
+  int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                       validate();
   void                       build();
 
 protected:
   // Variables
-  vector<string>              vCategories;
-  vector<string>              vSelectivities;
-  vector<string>              vSizeWeights;
+  CWorld                     *pWorld;
+  vector<string>             vCategoryNames;
+  vector<int>                vCategories;
+  vector<string>             vSelectivityNames;
+  vector<CSelectivity*>      vSelectivities;
+  string                     sBaseLayer;
+  CNumericLayer              *pLayer;
+
+
 };
 
 #endif /* CBIOMASSDENSITYLAYER_H_ */
