@@ -21,7 +21,6 @@ In SPM, but not in manual
   height
   index
   label
-  labels
   layer_height
   layer_width
   method
@@ -43,7 +42,6 @@ In SPM, but not in manual
   threshold_biomass
   total_score
   value
-  values
   weights
   width
 
@@ -57,15 +55,13 @@ In manual, but not in SPM
   b0
   b0_layer
   by_length
-  category_labels
-  category_values
   correlation_adjustment_diff
   correlation_adjustment_method
   df
   estimation_phase
   formula
   growth_proportions
-  initialisation_layer
+  initialisation_layers
   keep
   max_correlation
   mcmc_fixed
