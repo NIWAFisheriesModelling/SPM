@@ -22,7 +22,7 @@
 #include "../Children/CLayerDerivedWorldViewReport.h"
 #include "../Children/CParameterListReport.h"
 #include "../Children/CCovarianceReport.h"
-#include "../Children/CObservationDefinitionReport.h"
+#include "../Children/CSimulatedObservationReport.h"
 #include "../Children/CSpatialMapReport.h"
 #include "../Children/CAgeingErrorReport.h"
 #include "../Children/CSizeWeightReport.h"
@@ -61,8 +61,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CParameterListReport();
   else if (type == PARAM_COVARIANCE)
     pReporter = new CCovarianceReport();
-  else if (type == PARAM_OBSERVATION_DEFINITION)
-    pReporter = new CObservationDefinitionReport();
+  else if (type == PARAM_SIMULATED_OBSERVATION)
+    pReporter = new CSimulatedObservationReport();
   else if (type == PARAM_SPATIAL_MAP)
     pReporter = new CSpatialMapReport();
   else if (type == PARAM_AGEING_ERROR)

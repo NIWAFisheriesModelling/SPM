@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CObservationDefinitionReport.cpp
+// Name        : CSimulatedObservationReport.cpp
 // Author      : S.Rasmussen
 // Date        : 13/05/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -10,17 +10,17 @@
 // Headers
 #include <boost/lexical_cast.hpp>
 
-#include "CObservationDefinitionReport.h"
+#include "CSimulatedObservationReport.h"
 #include "../../Observations/CObservation.h"
 #include "../../Observations/CObservationManager.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CConvertor.h"
 
 //**********************************************************************
-// CObservationDefinitionReport::CObservationDefinitionReport()
+// CSimulatedObservationReport::CSimulatedObservationReport()
 // Default Constructor
 //**********************************************************************
-CObservationDefinitionReport::CObservationDefinitionReport() {
+CSimulatedObservationReport::CSimulatedObservationReport() {
   // Variables
   eExecutionState   = STATE_FINALIZATION;
 
@@ -29,10 +29,10 @@ CObservationDefinitionReport::CObservationDefinitionReport() {
 }
 
 //**********************************************************************
-// void CObservationDefinitionReport::validate()
+// void CSimulatedObservationReport::validate()
 // Validate our Observation Report
 //**********************************************************************
-void CObservationDefinitionReport::validate() {
+void CSimulatedObservationReport::validate() {
   try {
     // Base
     CFileReport::validate();
@@ -41,21 +41,19 @@ void CObservationDefinitionReport::validate() {
     sObservation = pParameterList->getString(PARAM_OBSERVATION);
 
   } catch (string &Ex) {
-    Ex = "CObservationDefinitionReport.validate(" + sLabel + ")->" + Ex;
+    Ex = "CSimulatedObservationReport.validate(" + sLabel + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CObservationDefinitionReport::execute()
+// void CSimulatedObservationReport::execute()
 // Execute our Print State
 //**********************************************************************
-void CObservationDefinitionReport::execute() {
+void CSimulatedObservationReport::execute() {
   // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
-        return;
+  if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+    return;
 
   this->start();
 
@@ -127,10 +125,10 @@ void CObservationDefinitionReport::execute() {
 }
 
 //**********************************************************************
-// void CObservationDefinitionReport::build()
+// void CSimulatedObservationReport::build()
 // Build our Observation Report
 //**********************************************************************
-void CObservationDefinitionReport::build() {
+void CSimulatedObservationReport::build() {
   try {
     // Base
     CFileReport::build();
@@ -139,14 +137,14 @@ void CObservationDefinitionReport::build() {
     pObservation = CObservationManager::Instance()->getObservation(sObservation);
 
   } catch (string &Ex) {
-    Ex = "CObservationDefinitionReport.build(" + sLabel + ")->" + Ex;
+    Ex = "CSimulatedObservationReport.build(" + sLabel + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// CObservationDefinitionReport::~CObservationDefinitionReport()
+// CSimulatedObservationReport::~CSimulatedObservationReport()
 // Destructor
 //**********************************************************************
-CObservationDefinitionReport::~CObservationDefinitionReport() {
+CSimulatedObservationReport::~CSimulatedObservationReport() {
 }
