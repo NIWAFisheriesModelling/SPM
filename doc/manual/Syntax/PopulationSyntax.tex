@@ -402,12 +402,6 @@ Changed name to be clearer.
 
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
 
-\TODO 
-
-Name changed from layer to layers, needs to be one per year.
-
-\TODOend
-
 \defSub{years} {Define the years when the mortality rates are applied}
 \defType{Integer vector or integer range}
 \defDefault{No default}
@@ -428,10 +422,10 @@ Name changed from layer to layers, needs to be one per year.
 \defDefault{No default}
 \defValue{A vector of valid selectivity labels defined by \command{selectivity}}
 
-\defSub{layers} {Name of the layers to be applied each year}
-\defType{String vector, of length \subcommand{years} once expanded}
+\defSub{layer} {Name of the multiplicative layer to be applied to $M$}
+\defType{String}
 \defDefault{No layer}
-\defValue{A vector of valid layers as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. Note that the layer values must be non-negative}
+\defValue{A valid numeric layer as defined by \command{layer}. Note that the layer values must be non-negative}
 
 \subsubsection[Event mortality process]{\commandlabsubarg{process}{type}{event\_mortality}}
 

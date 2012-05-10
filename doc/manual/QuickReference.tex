@@ -74,7 +74,7 @@
 \defSub{m} {Define the mortality rate to be applied for each year}
 \defSub{categories} {Define the categories that mortality is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
-\defSub{layers} {Name of the layers to be applied each year}
+\defSub{layer} {Name of the multiplicative layer to be applied to $M$}
 \par\textbf{\commandlabsubarg{process}{type}{event\_mortality}}\par
 \defSub{categories} {Define the categories that the event mortality is applied to}
 \defSub{years} {Define the years where the mortality even is applied}
@@ -372,7 +372,7 @@
 \defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
 \par\textbf{\commandlabsubarg{observation}{type}{proportions\_at\_age}}\par
 \defSub{year} {Define the year that the observation applies to}
 \defSub{time\_step} {Define the time-step that the observation applies to}
@@ -390,7 +390,7 @@
 \defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
 \par\textbf{\commandlabsubarg{observation}{type}{proportions\_by\_category}}\par
 \defSub{year} {Define the year that the observation applies to}
 \defSub{time\_step} {Define the time-step that the observation applies to}
@@ -409,7 +409,7 @@
 \defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
 \par\textbf{\commandlabsubarg{observation}{type}{abundance}}\par
 \defSub{year} {Define the year that the observation applies to}
 \defSub{time\_step} {Define the time-step that the observation applies to}
@@ -423,7 +423,7 @@
 \defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
 \par\textbf{\commandlabsubarg{observation}{type}{biomass}}\par
 \defSub{year} {Define the year that the observation applies to}
 \defSub{time\_step} {Define the time-step that the observation applies to}
@@ -437,7 +437,7 @@
 \defSub{likelihood}{Define the likelihood for the observation}
 \defSub{delta}{Define the delta robustifying constant for the likelihood}
 \defSub{process\_error}{Define the process error term}
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
 \par\defComLab{ageing\_error}{Define ageing error with \argument{label}}\par\par
 \defSub{type} {The type of ageing error}
 \par\textbf{\commandlabsubarg{ageing\_error}{type}{none}}\par

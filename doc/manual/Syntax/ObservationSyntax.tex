@@ -88,10 +88,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{No process error}
 \defValue{A non-negative real number}
 
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\defType{Switch}
-\defDefault{True}
-\defValue{True/False}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid likelihood, except not \texttt{none}. Note that this command is ignored if the observation is not a pseudo-observation}
 
 \subsubsection[Proportions at age]{\commandlabsubarg{observation}{type}{proportions\_at\_age}}
 
@@ -175,10 +175,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{No process error}
 \defValue{A non-negative real number}
 
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\defType{Switch}
-\defDefault{True}
-\defValue{True/False}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid likelihood, except not \texttt{none}. Note that this command is ignored if the observation is not a pseudo-observation}
 
 \subsubsection[Proportions by category]{\commandlabsubarg{observation}{type}{proportions\_by\_category}}
 
@@ -267,10 +267,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{No process error}
 \defValue{A non-negative real number}
 
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\defType{Switch}
-\defDefault{True}
-\defValue{True/False}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid likelihood, except not \texttt{none}. Note that this command is ignored if the observation is not a pseudo-observation}
 
 \subsubsection[Abundance]{\commandlabsubarg{observation}{type}{abundance}}
 
@@ -334,10 +334,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{No process error}
 \defValue{A non-negative real number}
 
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\defType{Switch}
-\defDefault{True}
-\defValue{True/False}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid likelihood, except not \texttt{none}. Note that this command is ignored if the observation is not a pseudo-observation}
 
 \subsubsection[Biomass]{\commandlabsubarg{observation}{type}{biomass}}
 
@@ -401,10 +401,10 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{0}
 \defValue{A non-negative real number}
 
-\defSub{simulate}{Defines if this observation should be simulated when doing simulations}
-\defType{Switch}
-\defDefault{True}
-\defValue{True/False}
+\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid likelihood, except not \texttt{none}. Note that this command is ignored if the observation is not a pseudo-observation}
 
 \subsection{Defining ageing error}
 

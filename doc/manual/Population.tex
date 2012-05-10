@@ -335,27 +335,18 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-\TODO
-\begin{enumerate}
-\item Check that annually varying rate is actually implemented, although the text says it's not, the module is in there.
-\item Also currently constant rate is only calculated once (??). With derived layers it could be a constant formula but the layer changes every year and therefore it becomes an annually calculated rate.
+Four types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
-\end{enumerate}
-The text below reflects these changes.
-\TODOend
+Mortality can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. Here, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
 
-Four types of mortality processes are permissible in \SPM, constant relationship rate, annually varying relationship rate, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annually varying relationships), or as a total number (abundance) or biomass of individuals (for event or biomass-event). \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
-
-Mortalities can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. The multiplicative  mortality method defines that the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
-
-For example, to specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `immature' and `mature', then, 
+For example, to specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
 
 \begin{verbatim}
 @process NaturalMortality
 type constant_mortality_rate
-categories immature mature
-M 0.2 0.2
+categories male female
 selectivities One One
+M 0.2 0.2
 \end{verbatim}
 
 Note that the mortality rate process requires a selectivity. To apply the same mortality rate over all age classes, use a selectivity defined as $S_i=1.0$ for all ages $i$, e.g.,
@@ -366,7 +357,7 @@ type constant
 c 1
 \end{verbatim}
 
-An additional constant relationship rate could also be defined as a function of a layer. For example, let the mortality rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $M(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant morality rate $M$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+A constant rate could also be defined as a multiplier of a layer. For example, let the mortality rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $M(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant mortality rate $M$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
   M(a,k,l) = ML_a S_l 
 \end{equation}
@@ -376,9 +367,18 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
   n'(a,k,l) = n(a,k,l) \exp \left({-M(a,k,l)}\right)
 \end{equation}
 
-Mortality for the annual rate\index{Annual mortality} is similar, except that the rate applied in each year the annual rate applies is defined as separate values of a constant morality rate $M$, a layer $L_a$, with a selectivity-at-age $S_l$ for each category considered. For example, if annual rates were applied to males and females between 1996 and 2000, five layers and values of M, and two categories and selectivities would need to be provided to the model.
+Mortality for the annual rate\index{Annual mortality} is similar to the constant rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
 
-The event mortality types\index{Event mortality} act in a similar manner, except that it removes a specified abundance (number of individuals) or biomass from the partition, rather than applying a mortality rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
+\begin{verbatim}
+@process AnnualMortality
+type annual_mortality_rate
+categories male female
+selectivities One One
+years 1996 1997 1998 1999 2000
+M 0.20 0.15 0.22 0.25 0.21
+\end{verbatim}
+
+The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
 The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate. Event mortality processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be removed. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in defined categories (after applying selectivities). See Section \ref{sec:penalties} for more information on specifying penalties.
 

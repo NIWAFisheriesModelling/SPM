@@ -464,8 +464,6 @@ Note that the expected values (fits) reported by \SPM\ for observations with age
 
 \SPM\ can generate simulated observations for a given model with given parameter values (using \texttt{spm -s}). Simulated observations are randomly distributed values, generated according to the error assumptions defined for each observation, around fits calculated from one or more sets of the 'true' parameter values. Simulating from a set of parameters can be used to generate observations from an operating model or as a form of parametric bootstrap. 
 
-\SPM\ generates simulated observations for the observations defined in the \config\ with \commandlabsubarg{observation}{simulate}{true}. Note that observations with \commandlabsubarg{observation}{likelihood}{none} cannot be used to simulate observations.
-
 The procedure \SPM\ uses for simulating observations is to first run using the `true' parameter values and generate the expected values. Then, if a set of observations uses ageing error, ageing error is applied. Finally a random value for each observed value is generated based on (i) the expected values, (ii) the type of likelihood specified, and (iii) the variability parameters (e.g., \subcommand{error\_value} and \subcommand{process\_error}). 
 
 Methods for generating the random error, and hence simulated values, depend on the specific likelihood type of each observation. 
@@ -490,11 +488,15 @@ Note that \SPM\ will report simulated observations using the usual observation r
 
 \subsection{\I{Pseudo-observations}}
 
-\SPM\ can generate expected values for observations without them contributing to the total objective function. These are called pseudo-observations, and can be used to either generate the expected values from \SPM\ for reporting or diagnostic purposes. To define an observation as a pseudo-observation, use the command \commandlabsubarg{observation}{likelihood}{none}. Any observation type can be used as a pseudo-observation. Note that;
+\SPM\ can generate expected values for observations without them contributing to the total objective function. These are called pseudo-observations, and can be used to either generate the expected values from \SPM\ for reporting or diagnostic purposes. To define an observation as a pseudo-observation, use the command \commandlabsubarg{observation}{likelihood}{none}. Any observation type can be used as a pseudo-observation. \SPM\ can also generate simulated observations from pseudo-observations. Note that;
 
 \begin{itemize}
   \item Output will only be generated if a report command \commandlabsubarg{report}{type}{observation} is specified.
   \item The observed values should be supplied (even if they are `dummy' observation). These will be processed by \SPM\ as if they were actual observation values, and must conform to the validations carried out for the other types of likelihood. 
   \item The subcommands \subcommand{likelihood}, \subcommand{obs}, \subcommand{error\_value} and \subcommand{process\_error} have no effect when generating the expected values for the pseudo-observation.   
-  \item \SPM\ cannot simulate from pseudo-observations.
+  \item When simulating observations, \SPM\ needs the subcommand \subcommand{simulation\_likelihood} to tell it what sort of likelihood to use. In this case, the \subcommand{obs}, \subcommand{error\_value} and \subcommand{process\_error} are used to determine the appropriate terms to use for the likelihood when simulating.
 \end{itemize}
+
+
+
+
