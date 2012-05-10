@@ -33,7 +33,8 @@ CObservation::CObservation() {
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_LIKELIHOOD);
-  pParameterList->registerAllowed(PARAM_SIMULATE);
+  pParameterList->registerAllowed(PARAM_SIMULATION_LIKELIHOOD);
+
 }
 
 //**********************************************************************
@@ -59,8 +60,8 @@ string CObservation::getSelectivity(int index) {
 void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score) {
 
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
-      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+      if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
         return;
 
   SComparison *pComparison = new SComparison();
@@ -98,7 +99,15 @@ void CObservation::validate() {
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
     sLayer      = pParameterList->getString(PARAM_LAYER);
     sLikelihood = pParameterList->getString(PARAM_LIKELIHOOD);
-    bSimulate   = pParameterList->getBool(PARAM_SIMULATE, true, true);
+
+    if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
+      if(sLikelihood == PARAM_PSEUDO) {
+        sSimulationLikelihood = pParameterList->getString(PARAM_SIMULATION_LIKELIHOOD);
+        sLikelihood = sSimulationLikelihood;
+      } else {
+        sSimulationLikelihood = sLikelihood;
+      }
+    }
 
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
@@ -109,11 +118,6 @@ void CObservation::validate() {
 
     if (iCategoryNamesSize != iSelectivityNamesSize)
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
-
-    // If we are going to simulate the observation, then it
-    // cannot be a pseudo observation
-    if ( (bSimulate) && (sLikelihood == PARAM_PSEUDO) )
-      throw string("Simulate must be false if likelihood is: " + string(PARAM_PSEUDO));
 
   } catch (string &Ex) {
     Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;

@@ -204,12 +204,12 @@ src/Reports/Children/CInitializationReport.cpp
 src/Reports/Children/CLayerDerivedWorldViewReport.cpp
 src/Reports/Children/CLayerReport.cpp
 src/Reports/Children/CObjectiveFunctionReport.cpp
-src/Reports/Children/CObservationDefinitionReport.cpp
 src/Reports/Children/CObservationReport.cpp
 src/Reports/Children/CParameterListReport.cpp
 src/Reports/Children/CPartitionReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
 src/Reports/Children/CSelectivityReport.cpp
+src/Reports/Children/CSimulatedObservationReport.cpp
 src/Reports/Children/CSizeWeightReport.cpp
 src/Reports/Children/CSpatialMapReport.cpp
 src/Reports/Children/CStandardHeaderReport.cpp

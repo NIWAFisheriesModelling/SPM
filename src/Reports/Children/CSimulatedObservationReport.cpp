@@ -57,9 +57,9 @@ void CSimulatedObservationReport::execute() {
 
   this->start();
 
-  cout << "#" << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << "#" << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << "#" << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
+  cout << CONFIG_SINGLE_COMMENT << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+  cout << CONFIG_SINGLE_COMMENT << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+  cout << CONFIG_SINGLE_COMMENT << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
 
   CParameterList *pList = pObservation->getParameterList();
 
@@ -72,7 +72,19 @@ void CSimulatedObservationReport::execute() {
   // Loop through and print values
   vector<string> vValues;
   foreach(string Parameter, vDefinedParameters) {
-    if ( (Parameter == PARAM_OBS) || (Parameter == PARAM_ERROR_VALUE) || (Parameter == PARAM_LABEL))
+    if ( CConvertor::stringToLowercase(Parameter) == PARAM_LIKELIHOOD ) {
+
+      if ( pList->getString(PARAM_LIKELIHOOD) == PARAM_PSEUDO ) {
+        cout << PARAM_LIKELIHOOD << " " << pList->getString(PARAM_SIMULATION_LIKELIHOOD) << endl;
+        cout << CONFIG_SINGLE_COMMENT << PARAM_SIMULATION_LIKELIHOOD << " " << pList->getString(PARAM_SIMULATION_LIKELIHOOD) << endl;
+      } else {
+        cout << PARAM_LIKELIHOOD << " " << pList->getString(PARAM_LIKELIHOOD) << endl;
+      }
+
+      continue;
+    }
+
+    if ( (Parameter == PARAM_OBS) || (Parameter == PARAM_ERROR_VALUE) || (Parameter == PARAM_LABEL) || (Parameter == PARAM_SIMULATION_LIKELIHOOD))
       continue;
 
     pList->fillVector(vValues, Parameter);

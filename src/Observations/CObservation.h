@@ -34,9 +34,9 @@ class CSelectivity;
 class CObservation : public CBaseExecute {
 public:
   // Functions
-	CObservation();
-	virtual                    ~CObservation();
-	virtual CObservation*      clone() = 0;
+  CObservation();
+  virtual                    ~CObservation();
+  virtual CObservation*      clone() = 0;
   int                        getYear() { return iYear; }
   int                        getTimeStep() { return iTimeStep; }
   string                     getLayer() { return sLayer; }
@@ -45,8 +45,8 @@ public:
   double                     getScore() { return dScore; }
   void                       fillComparisons(vector<SComparison*> &comparisons);
   virtual void               validate();
-	virtual void               build();
-	virtual void               execute();
+  virtual void               build();
+  virtual void               execute();
 
 protected:
   // Functions
@@ -66,8 +66,8 @@ protected:
   vector<SComparison*>       vComparisons;
   CLayerDerivedWorldView     *pWorldView;
   string                     sLikelihood;
+  string                     sSimulationLikelihood;
   CLikelihood                *pLikelihood;
-  bool                       bSimulate;
   bool                       bSimulationRunMode;
 
 };
