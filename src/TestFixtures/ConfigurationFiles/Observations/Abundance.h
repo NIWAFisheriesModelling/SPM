@@ -56,7 +56,6 @@ const string abundance_observation_simulate =
   "error_value AreaE 0.15\n"
   "error_value AreaF 0.16\n"
   "likelihood lognormal\n"
-  "simulate true\n"
   "delta 1e-11\n";
 
 #endif /* ABUNDANCE_H_ */
