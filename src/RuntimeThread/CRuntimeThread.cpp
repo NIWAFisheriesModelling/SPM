@@ -233,12 +233,14 @@ void CRuntimeThread::executeMCMC() {
 // Execute a Simulation Run
 //**********************************************************************
 void CRuntimeThread::executeSimulationRun() {
-  // Validate, Build, Start
-  startModel();
-
-  // Change State
-  eCurrentState = STATE_FINALIZATION;
-  CReportManager::Instance()->execute(eCurrentState);
+  for (int i=0; i < CConfiguration::Instance()->getSimulationCandidates(); ++i) {
+    // Validate, Build, Start
+    startModel();
+    // Change State
+    eCurrentState = STATE_FINALIZATION;
+    CReportManager::Instance()->execute(eCurrentState);
+    rebuild();
+  }
 }
 
 //**********************************************************************
