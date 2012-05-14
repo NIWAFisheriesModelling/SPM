@@ -11,6 +11,22 @@ type partition
 time_step step_one
 year 1994
 
+@report state-1994-2
+type partition
+time_step step_two
+year 1994
+
+@report state-1994-3
+type partition
+time_step step_three
+year 1994
+
+@report state-1995-1
+type partition
+time_step step_one
+year 1995
+
+
 @report state-1998-1
 type partition
 time_step step_one

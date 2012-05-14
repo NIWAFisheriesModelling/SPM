@@ -12,7 +12,7 @@ current_year 2007
 final_year 2108
 cell_length 1
 initialisation_phases Phase1 Phase2
-time_steps step_one step_two
+time_steps step_one step_two step_three
 
 # Initalisation
 @initialisation_phase Phase1
@@ -30,6 +30,9 @@ processes Recruitment Maturation halfM Fishing halfM
 @time_step step_two
 processes Ageing
 
+@time_step step_three
+processes Disease
+
 # Population processes
 @process Ageing
 type ageing
@@ -46,6 +49,13 @@ ages 1
 type constant_mortality_rate
 categories immature mature
 m 0.065 0.065
+selectivities One One
+
+@process Disease
+type annual_mortality_rate
+categories immature mature
+years 1994-1995
+m 0.1 0.2
 selectivities One One
 
 @process Fishing
