@@ -100,7 +100,7 @@ void CConstantMortalityRateProcess::build() {
 }
 
 //**********************************************************************
-// void CNaturalMortalityProcess::rebuild()
+// void CConstantMortalityProcess::rebuild()
 // Rebuild
 //**********************************************************************
 void CConstantMortalityRateProcess::rebuild() {
