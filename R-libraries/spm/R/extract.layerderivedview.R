@@ -15,6 +15,8 @@ function(lines){
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
   res$data<-values
+  res$year<-substring(lines[index.start+2],17)
+  res$"time_step"<-substring(lines[index.start+3],22)
   return(res)
 }
 
