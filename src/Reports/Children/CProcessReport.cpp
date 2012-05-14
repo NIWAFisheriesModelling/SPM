@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CParameterListReport.cpp
+// Name        : CProcessReport.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -8,38 +8,40 @@
 //============================================================================
 
 // Local headers
-#include "CParameterListReport.h"
+#include "CProcessReport.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Processes/CProcessManager.h"
 #include "../../Processes/CProcess.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../Selectivities/CSelectivity.h"
 
 //**********************************************************************
-// CParameterListReport::CParameterListReport()
+// CProcessReport::CProcessReport()
 // Constructor
 //**********************************************************************
-CParameterListReport::CParameterListReport() {
+CProcessReport::CProcessReport() {
   // Variables
   eExecutionState   = STATE_FINALIZATION;
 
   // Reg
-  pParameterList->registerAllowed(PARAM_PARAMETER);
+  pParameterList->registerAllowed(PARAM_PROCESS);
 }
 
 //**********************************************************************
-// void CParameterListReport::validate()
+// void CProcessReport::validate()
 // Validate our Parameter List
 //**********************************************************************
-void CParameterListReport::validate() {
+void CProcessReport::validate() {
   try {
     // Base
     CFileReport::validate();
 
     // Get var
-    sParameter = pParameterList->getString(PARAM_PARAMETER);
+    sParameter = pParameterList->getString(PARAM_PROCESS);
 
   } catch (string &Ex) {
-    Ex = "CParameterListReport.validate()->" + Ex;
+    Ex = "CProcessReport.validate()->" + Ex;
     throw Ex;
   }
 }
@@ -48,7 +50,7 @@ void CParameterListReport::validate() {
 //
 //
 //**********************************************************************
-void CParameterListReport::build() {
+void CProcessReport::build() {
   try {
     // Base
     CFileReport::build();
@@ -78,18 +80,17 @@ void CParameterListReport::build() {
       pTarget = CProcessManager::Instance()->getProcess(sLabel);
     else
       CError::errorUnknown(PARAM_TYPE, sType);
-
   } catch (string &Ex) {
-    Ex = "CParameterListReport.build()->" + Ex;
+    Ex = "CProcessReport.build()->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CParameterListReport::execute()
+// void CProcessReport::execute()
 // Execute our Report
 //**********************************************************************
-void CParameterListReport::execute() {
+void CProcessReport::execute() {
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -101,6 +102,7 @@ void CParameterListReport::execute() {
 
   cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
   cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+  cout << PARAM_PROCESS << CONFIG_RATIO_SEPARATOR << " " << sParameter << "\n";
 
   vector<string> vDefinedParameters;
   pList->fillDefinedParameterVector(vDefinedParameters);
@@ -122,8 +124,8 @@ void CParameterListReport::execute() {
 }
 
 //**********************************************************************
-// CParameterListReport::~CParameterListReport()
+// CProcessReport::~CProcessReport()
 // Destructor
 //**********************************************************************
-CParameterListReport::~CParameterListReport() {
+CProcessReport::~CProcessReport() {
 }

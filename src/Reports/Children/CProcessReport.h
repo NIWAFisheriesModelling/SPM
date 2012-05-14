@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CParameterListReport.h
+// Name        : CProcessReport.h
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CPARAMETERLISTREPORT_H_
-#define CPARAMETERLISTREPORT_H_
+#ifndef CPROCESSREPORT_H_
+#define CPROCESSREPORT_H_
 
 // Local headers
 #include "Base/CFileReport.h"
@@ -16,11 +16,11 @@
 //
 //
 //**********************************************************************
-class CParameterListReport: public CFileReport {
+class CProcessReport: public CFileReport {
 public:
-  CParameterListReport();
-  virtual                     ~CParameterListReport();
-  CReport*                    clone() { return new CParameterListReport(*this); }
+  CProcessReport();
+  virtual                     ~CProcessReport();
+  CReport*                    clone() { return new CProcessReport(*this); }
   void                        validate();
   void                        build();
   void                        execute();
@@ -30,4 +30,4 @@ protected:
   CBaseObject                 *pTarget;
 };
 
-#endif /* CPARAMETERLISTREPORT_H_ */
+#endif /* CPROCESSREPORT_H_ */
