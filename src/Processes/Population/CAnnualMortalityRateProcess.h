@@ -34,7 +34,7 @@ public:
 protected:
   // Variables
   vector<int>                 vYears;
-  vector<double>              vMs;
+  vector<double>              vMortalityRates;
   vector<string>              vCategoryNames;
   vector<int>                 vCategories;
   vector<string>              vSelectivityNames;
