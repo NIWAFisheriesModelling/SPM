@@ -55,31 +55,9 @@ void CProcessReport::build() {
     // Base
     CFileReport::build();
 
-    // Split our Parameter into type
-    // Variables
-    int             iIndex            = (int)sParameter.find_first_of(CONFIG_ARRAY_START);
-    int             iIndex2           = (int)sParameter.find_first_of(CONFIG_ARRAY_END);
-    string          sType             = "";
-    string          sLabel            = "";
-
-    // Find the . between the label and variable
-    if (iIndex == 0)
-      throw string(ERROR_FORMAT_PARAMETER);
-    if (iIndex == -1)
-      CError::errorMissing(CONFIG_ARRAY_START);
-    if (iIndex2 == -1)
-      CError::errorMissing(CONFIG_ARRAY_END);
-
-    sType       = sParameter.substr(0, iIndex);
-    iIndex++; // move past "["
-    sLabel      = sParameter.substr(iIndex, (iIndex2-iIndex));
-
-
     // Now grab our variable
-    if (sType == PARAM_PROCESS)
-      pTarget = CProcessManager::Instance()->getProcess(sLabel);
-    else
-      CError::errorUnknown(PARAM_TYPE, sType);
+    pTarget = CProcessManager::Instance()->getProcess(sParameter);
+
   } catch (string &Ex) {
     Ex = "CProcessReport.build()->" + Ex;
     throw Ex;
