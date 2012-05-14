@@ -41,7 +41,7 @@ void CPartitionReport::validate() {
     // Assign Variables
     pParameterList->fillVector(vYear, PARAM_YEARS);
     //iYear       = pParameterList->getInt(PARAM_YEAR);
-    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
+    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
 
     // Validate Year Range
     for (int i = 0; i < (int)vYear.size(); ++i) {
@@ -49,7 +49,7 @@ void CPartitionReport::validate() {
         CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
       else if (boost::lexical_cast<double>(vYear[i]) > pWorld->getCurrentYear())
         CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
-      }
+    }
 
   } catch (string &Ex) {
     Ex = "CPartitionReporter.validate(" + getLabel() + ")->" + Ex;
@@ -68,7 +68,12 @@ void CPartitionReport::build() {
     CFileReport::build();
 
     // Populate TimeStepIndex
-    iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
+    if (sTimeStep != "")
+      iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
+    else {
+      iTimeStep = 0;
+      sTimeStep = pTimeStepManager->getFirstTimeStepLabel();
+    }
 
   } catch (string &Ex) {
     Ex = "CPartitionReporter.build(" + getLabel() + ")->" + Ex;

@@ -7,12 +7,17 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+//Headers
+#include <boost/lexical_cast.hpp>
+
 // Local headers
 #include "CLayerDerivedWorldViewReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/String/CStringLayer.h"
 #include "../../World/WorldView/CLayerDerivedWorldView.h"
+#include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport()
@@ -28,7 +33,7 @@ CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport() {
 
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_LAYER);
-  pParameterList->registerAllowed(PARAM_YEAR);
+  pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_TIME_STEP);
 }
 
@@ -42,9 +47,18 @@ void CLayerDerivedWorldViewReport::validate() {
     CFileReport::validate();
 
     // Assign Variables
-    iYear       = pParameterList->getInt(PARAM_YEAR);
-    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
+    pParameterList->fillVector(vYear, PARAM_YEARS);
+    //iYear       = pParameterList->getInt(PARAM_YEAR,true,pWorld->getInitialYear());
+    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
     sLayer      = pParameterList->getString(PARAM_LAYER);
+
+    // Validate Year Range
+    for (int i = 0; i < (int)vYear.size(); ++i) {
+      if (boost::lexical_cast<double>(vYear[i]) < pWorld->getInitialYear())
+        CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
+      else if (boost::lexical_cast<double>(vYear[i]) > pWorld->getCurrentYear())
+        CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
+    }
 
   } catch (string &Ex) {
     Ex = "CLayerDerivedWorldViewReport.validate(" + sLabel + ")->" + Ex;
@@ -60,6 +74,14 @@ void CLayerDerivedWorldViewReport::build() {
   try {
     // Base
     CFileReport::build();
+
+    // Populate TimeStepIndex
+    if (sTimeStep != "")
+      iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
+    else {
+      iTimeStep = 0;
+      sTimeStep = pTimeStepManager->getFirstTimeStepLabel();
+    }
 
     // Get our Layer
     pLayer = pLayerManager->getStringLayer(sLayer);
@@ -88,54 +110,60 @@ void CLayerDerivedWorldViewReport::build() {
 //**********************************************************************
 void CLayerDerivedWorldViewReport::execute() {
 
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    return;
-  if (iYear != pTimeStepManager->getCurrentYear())
-    return;
-  if (iTimeStep != pTimeStepManager->getCurrentTimeStep())
-    return;
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
+    for (int i = 0; i < (int)vYear.size(); ++i) {
+      iYear = boost::lexical_cast<double>(vYear[i]);
+      if (iYear == pTimeStepManager->getCurrentYear()) {
+        if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
 
-  pWorldView->execute();
+          pWorldView->execute();
 
-  // Start IO
-  this->start();
+          // Start IO
+          this->start();
 
-  // Start Output
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << PARAM_AREA << CONFIG_SEPERATOR_ESTIMATE_VALUES;
-  cout << PARAM_CATEGORY;
-  for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {
-    cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << PARAM_AGE;
-    cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
-  }
-  cout << "\n";
+          // Start Output
+          cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+          cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+          cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
+          cout << PARAM_PARTITION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
-  map<string, int>::iterator mPtr = mAreas.begin();
-  while (mPtr != mAreas.end()) {
-    pBaseSquare = pWorldView->getSquare((*mPtr).first);
+          cout << PARAM_AREA << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+          cout << PARAM_CATEGORY;
+          for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {
+            cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << PARAM_AGE;
+            cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
+          }
+          cout << "\n";
 
-    int iSquareHeight = pBaseSquare->getHeight();
-    int iSquareWidth  = pBaseSquare->getWidth();
+          map<string, int>::iterator mPtr = mAreas.begin();
+          while (mPtr != mAreas.end()) {
+            pBaseSquare = pWorldView->getSquare((*mPtr).first);
 
-    // Loop Through
-    for (int i = 0; i < iSquareHeight; ++i) {
-      cout << (*mPtr).first << CONFIG_SEPERATOR_ESTIMATE_VALUES << pWorld->getCategoryNameForIndex(i);
-      for (int j = 0; j < iSquareWidth; ++j) {
-        cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << pBaseSquare->getValue(i, j);
+            int iSquareHeight = pBaseSquare->getHeight();
+            int iSquareWidth  = pBaseSquare->getWidth();
+
+            // Loop Through
+            for (int i = 0; i < iSquareHeight; ++i) {
+              cout << (*mPtr).first << CONFIG_SEPERATOR_ESTIMATE_VALUES << pWorld->getCategoryNameForIndex(i);
+              for (int j = 0; j < iSquareWidth; ++j) {
+                cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << pBaseSquare->getValue(i, j);
+              }
+              cout << "\n";
+            }
+
+            mPtr++;
+          }
+
+        cout << CONFIG_END_REPORT << "\n" << endl;
       }
-      cout << "\n";
     }
-
-    mPtr++;
+    // End IO
+    this->end();
   }
-
-  cout << CONFIG_END_REPORT << "\n" << endl;
-
-  // End IO
-  this->end();
 }
 
 //**********************************************************************
