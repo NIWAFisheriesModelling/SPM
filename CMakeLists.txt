@@ -213,7 +213,6 @@ src/Reports/Children/CSimulatedObservationReport.cpp
 src/Reports/Children/CSizeWeightReport.cpp
 src/Reports/Children/CSpatialMapReport.cpp
 src/Reports/Children/CStandardHeaderReport.cpp
-src/Reports/Children/CWorldStateReport.cpp
 src/Reports/CReport.cpp
 src/Reports/CReportManager.cpp
 src/Reports/Factory/CReportFactory.cpp
