@@ -1,4 +1,3 @@
-
 @report initialisation-phase1
 type initialisation
 initialisation_phase Phase1
@@ -57,7 +56,11 @@ type random_number_seed
 @report SSRUs
 type layer_derived_view
 layer SSRU
-year 2007
+years 1994-2007
 time_step step_one
+
+@report Fishing_2005
+type layer
+layer Fishing_2005
 
 @include "simulation-reports.spm"

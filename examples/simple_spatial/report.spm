@@ -8,7 +8,7 @@ type spatial_map
 
 @report SSRU-2002
 type layer_derived_view
-year 2002
+years 2002
 time_step one
 layer SSRU
 

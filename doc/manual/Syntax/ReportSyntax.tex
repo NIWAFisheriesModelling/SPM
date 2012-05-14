@@ -1,6 +1,6 @@
 \section{Report command and subcommand syntax\label{sec:report-syntax}}
 
-\subsection{Reports}
+\subsection{Available reports}
 
 The report types available are,
 
@@ -25,6 +25,8 @@ The report types available are,
 \end{enumerate}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
+
+\subsection{Report commands and subcommands}
 
 \defComLab{report}{Define an output report}
 
@@ -223,12 +225,12 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{year} {Define the year for the printing of the layer}
 \defType{Integer}
-\defDefault{No default}
+\defDefault{The first year of the model, \commandsub{model}{initial\_year}}
 \defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defType{Integer}
-\defDefault{No default}
+\defDefault{The first time-step of the model}
 \defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
@@ -246,16 +248,16 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{layer} {Define the label of the layer to print}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid label from \command{layer}}
+\defValue{A valid label from \command{layer} of type \texttt{categorical}}
 
-\defSub{year} {Define the year for the printing of the layer}
+\defSub{years} {Define the years for the printing of the layer}
 \defType{Integer}
 \defDefault{No default}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+\defValue{A vector of positive integers between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defType{Integer}
-\defDefault{No default}
+\defDefault{The first time-step of the model}
 \defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
