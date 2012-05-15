@@ -110,37 +110,6 @@ void CProportionsByCategoryObservation::validate() {
       }
     }
 
-    // Loop Through our Partitions
-    /*map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
-    while (vPropPtr != mvProportionMatrix.end()) {
-      // Validate Sizes of proportions
-      if (iAgeSpread > (int)((*vPropPtr).second).size())
-        throw string(ERROR_QTY_LESS_PROPORTIONS + (*vPropPtr).first);
-      if (iAgeSpread < (int)((*vPropPtr).second).size())
-        throw string(ERROR_QTY_MORE_PROPORTIONS + (*vPropPtr).first);
-
-      // Loop Through Proportions, Ensuring they lie between 0.0 and 1.0
-      vector<double>::iterator vPtr2 = ((*vPropPtr).second).begin();
-      while (vPtr2 != ((*vPropPtr).second).end()) {
-        if(!CComparer::isBetween((*vPtr2),0.0,1.0))
-          throw string((*vPropPtr).first + ERROR_BETWEEN_ZERO_ONE);
-        vPtr2++;
-      }
-      vPropPtr++;
-    }
-
-    // Loop Through our Partitions
-    map<string, vector<double> >::iterator vNPtr = mvN.begin();
-    while (vNPtr != mvN.end()) {
-      // Validate Sizes of Ns
-      if (iAgeSpread > (int)((*vNPtr).second).size())
-        throw string(ERROR_QTY_LESS_N + (*vNPtr).first);
-      if (iAgeSpread < (int)((*vNPtr).second).size())
-        throw string(ERROR_QTY_MORE_N + (*vNPtr).first);
-
-      vNPtr++;
-    }*/
-
   } catch (string &Ex) {
     Ex = "CProportionsByCategoryObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
