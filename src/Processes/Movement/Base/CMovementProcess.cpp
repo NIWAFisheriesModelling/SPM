@@ -17,7 +17,7 @@
 //**********************************************************************
 CMovementProcess::CMovementProcess() {
   // Vars
-  dProportion         = 0.0;
+  dProportion         = -1.0;
   registerEstimable(PARAM_PROPORTION, &dProportion);
 }
 
@@ -31,7 +31,7 @@ void CMovementProcess::validate() {
     CProcess::validate();
 
     // Local Validation
-    if (getProportion() == 0.0)
+    if (getProportion() == -1.0)
       CError::errorMissing(PARAM_PROPORTION);
 
   } catch(string &Ex) {
