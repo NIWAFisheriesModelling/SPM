@@ -30,13 +30,13 @@ categories all
 type constant_recruitment
 categories all
 proportions 1.0
-R0 100
+r0 100
 ages 1
 
 @process M
 type constant_mortality_rate
 categories all
-M 0.13
+m 0.13
 selectivities One
 
 @process Move1
