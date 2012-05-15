@@ -29,6 +29,7 @@ public:
 
 protected:
   // Variables
+  double                        dSourceLayerMax;
   CNumericLayer                 *pSourceLayer;
   CNumericLayer                 *pSinkLayer;
   vector<string>                vCategoryNames;

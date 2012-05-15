@@ -106,6 +106,38 @@ void CMigrationMovementProcess::execute() {
   try {
 #endif
 
+    CMovementProcess::execute();
+
+// iterate over source layer and calc. max_layer_source_value
+// iterate over sink layer and calc. total_layer_sink_value
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
+        // Get Current Squares
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        pDiff       = pWorld->getDifferenceSquare(i, j);
+
+        if (!pBaseSquare->getEnabled())
+          continue;
+
+        //dSourceLayerMax = max(dSourceLayerMax, pSourceLayer->getValue(i, j));
+        //dSinkLayerTotal += pSinkLayer->getValue(i, j);
+      }
+    }
+
+// iterate over the world, and get
+//    number at age and category value
+//    multiply by source layer/max_layer_value
+//    multiply by selectivity
+//  and sum the result for age and category (call total)
+
+
+
+
+// iterate over the world, and allocate total to
+//   all cells with proportion sink layer value / total
+//
+
+
 #ifndef OPTIMIZE
   } catch (string &Ex) {
     Ex = "CMigrationMovementProcess.execute(" + getLabel() + ")->" + Ex;
