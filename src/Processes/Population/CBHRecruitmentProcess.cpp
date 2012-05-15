@@ -42,7 +42,7 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_R0);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
-  pParameterList->registerAllowed(PARAM_AGES);
+  pParameterList->registerAllowed(PARAM_AGE);
   pParameterList->registerAllowed(PARAM_STEEPNESS);
   pParameterList->registerAllowed(PARAM_SIGMA_R);
   pParameterList->registerAllowed(PARAM_RHO);
@@ -66,6 +66,7 @@ void CBHRecruitmentProcess::validate() {
 
     // Assign our variables
     dR0           = pParameterList->getDouble(PARAM_R0);
+    iAge          = pParameterList->getInt(PARAM_AGE);
     dSteepness    = pParameterList->getDouble(PARAM_STEEPNESS,true,1.0);
     dSigmaR       = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
     dRho          = pParameterList->getDouble(PARAM_RHO,true,0.0);
@@ -74,27 +75,21 @@ void CBHRecruitmentProcess::validate() {
     sLayer        = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
-    pParameterList->fillVector(vAgesList, PARAM_AGES);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
     pParameterList->fillVector(vYCSYears, PARAM_YCS_YEARS);
     pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
-    pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
-    pParameterList->fillVector(vAgesList, PARAM_AGES);
 
-    // The 3 Vectors must be same size
+    // The 2 Vectors must be same size
     unsigned iCategorySize    = vCategoryList.size();
     unsigned iProportionSize  = vProportionList.size();
-    unsigned iAgesSize        = vAgesList.size();
 
     if (iCategorySize != iProportionSize)
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_PROPORTION);
-    else if (iCategorySize != iAgesSize)
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_AGES);
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     // Register our Proportions as Estimable
     for (int i = 0; i < (int)vProportionList.size(); ++i)
-      registerEstimable(PARAM_PROPORTION, i, &vProportionList[i]);
+      registerEstimable(PARAM_PROPORTIONS, i, &vProportionList[i]);
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
@@ -165,17 +160,11 @@ void CBHRecruitmentProcess::build() {
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
     // Populate Our Ages Index
-    if (vAgesIndex.size() <= 0) {
-      foreach(int Age, vAgesList) {
-        vAgesIndex.push_back(pWorld->getColIndexForAge(Age));
-      }
-    }
+    iAgeIndex = pWorld->getColIndexForAge(iAge);
 
     // Validate our Vectors are all same size
-    if (vAgesIndex.size() != vCategoryIndex.size())
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_AGES);
-    if (vAgesIndex.size() != vProportionList.size())
-      CError::errorListSameSize(PARAM_AGES, PARAM_PROPORTIONS);
+    if (vCategoryIndex.size() != vProportionList.size())
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
   } catch (string &Ex) {
     Ex = "CBHRecruitment.build(" + getLabel() + ")->" + Ex;
@@ -195,7 +184,7 @@ void CBHRecruitmentProcess::execute() {
     CProcess::execute();
 
     // Setup Our Variables
-    double dAmountPer = dR0; // TODO: (Alistair) multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship
+    double dAmountPer = dR0; // TODO: Multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship, and SSB/BO
 
     if (pLayer != 0) {
       double dTotal = 0.0;
@@ -226,7 +215,7 @@ void CBHRecruitmentProcess::execute() {
 
         // Loop Through the Categories and Ages we have and Recruit
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-          pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (value * vProportionList[k]) );
+          pDiff->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportionList[k]) );
       }
     }
 #ifndef OPTIMIZE

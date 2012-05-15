@@ -29,8 +29,8 @@ protected:
   // Variables
   vector<double>              vProportionList;
   double                      dR0;
-  vector<int>                 vAgesList;
-  vector<int>                 vAgesIndex;
+  int                         iAge;
+  int                         iAgeIndex;
   double                      dSteepness;
   double                      dSigmaR;
   double                      dRho;
