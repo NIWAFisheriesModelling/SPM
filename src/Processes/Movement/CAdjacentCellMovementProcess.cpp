@@ -113,11 +113,6 @@ void CAdjacentCellMovementProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        //TODO: Need to move individuals from cells that are defined by a categorical layer. Currently this moves all cells
-        //      A seconds numeric layer defines the relative proportions to 'diffuse' So, instead of using 0.25 for
-        //      each of the up/down/left/right cells, make these proportional to the layer values in the top/bottom/left/right
-        //      cells.
-
         // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
@@ -145,10 +140,10 @@ void CAdjacentCellMovementProcess::execute() {
                 dLayerValueUp = 0.0;
               dLayerTotal = dLayerValueUp + dLayerValueDown + dLayerValueLeft + dLayerValueRight;
               if(dLayerTotal > 0.0) {
-                dLayerValueUp = dLayerValueUp/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueDown = dLayerValueDown/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueLeft = dLayerValueLeft/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueRight = dLayerValueRight/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
+                dLayerValueUp = dCurrent * dLayerValueUp/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
+                dLayerValueDown = dCurrent * dLayerValueDown/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
+                dLayerValueLeft = dCurrent * dLayerValueLeft/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
+                dLayerValueRight = dCurrent * dLayerValueRight/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
               } else {
                 dLayerValueUp = 0.0;
                 dLayerValueDown = 0.0;
@@ -157,10 +152,10 @@ void CAdjacentCellMovementProcess::execute() {
               }
              // or if no layer defined, then just move 1/4 each way
             } else {
-              dLayerValueUp = 0.25 * dProportion * vSelectivityIndex[k]->getResult(l);;
-              dLayerValueDown = 0.25 * dProportion * vSelectivityIndex[k]->getResult(l);;
-              dLayerValueLeft = 0.25 * dProportion * vSelectivityIndex[k]->getResult(l);;
-              dLayerValueRight = 0.25 * dProportion * vSelectivityIndex[k]->getResult(l);;
+              dLayerValueUp = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
+              dLayerValueDown = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
+              dLayerValueLeft = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
+              dLayerValueRight = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
             }
             // Move
             moveUp(i, j, vCategoryIndex[k], l, dLayerValueUp);
