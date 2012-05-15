@@ -506,9 +506,11 @@ And let the immigration applied to the population at cell $a$ in category $k$ an
   I(a,k,l) = \frac{E(a,k,l) Li_a }{\sum\limits_a Li_a} 
 \end{equation}
 
+\TODOend
+
 \subsubsection{\I{Adjacent cell movement}}
 
-The adjacent cell movement simply moves a proportion of individuals in each cell to the four neighbouring cells, and mimics a simple diffusion process. It can be applied to a limited range of spatial locations and/or as a gradient by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity and the diffusion layer as a proportion over the four adjoining cells. 
+The adjacent cell movement moves a proportion of individuals in each cell to its four neighbouring cells, and hence mimics a simple diffusion process. It can be applied to a limited range of spatial locations and/or as a gradient by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity and the diffusion layer as a proportion over the four adjoining cells. If no layer is supplied, the process moves the population equally to the adjacent cells (i.e., a constant 0.25 proportion is assumed for each of the adjacent cells).
 
 For example, let the movement from cell $a$ to neighbouring cell $b$ in category $k$ and age $l$ be denoted $V(a,b,k,l)$, and given a value from layer $L_b$  at $b$, values from layer $L_n$ at the four neighbouring cells to $a$ (including cell $b$), a constant migration proportion $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
@@ -516,14 +518,6 @@ For example, let the movement from cell $a$ to neighbouring cell $b$ in category
 \end{equation}
 
 The movement value of all cells into all their neighbouring cells are calculated simultaneously from the population layer at the time of movement, and the balance of all movements is returned.
-
-\TODOend
-
-\TOUNDO
-
-adjacent cell movement currently has a uniform diffusion process of 0.25 in each adjoining cell. Now it needs to be proportional to the values in the four adjoining cells.
-
-\TOUNDOend
 
 \subsubsection{\I{Preference movement}}
 

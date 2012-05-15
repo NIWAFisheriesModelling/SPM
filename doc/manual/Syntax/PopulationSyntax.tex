@@ -1,11 +1,5 @@
 \section{Population command and subcommand syntax\label{sec:population-syntax}}
 
-\TODO
-
-Throughout, years changed from integer vector to integer vector or integer range. Also added some forced lengths throughout (selectivities same as categories etc).
-
-\TODOend
-
 \subsection{Model structure}
 
 \defCom{model}{Define the spatial structure, population structure, annual cycle, and model years}
@@ -173,25 +167,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
-\TOUNDO
-
-\defSub{ages} {Define the ages within each category that receive recruitment}
-\defType{Integer vector}
-\defDefault{No default}
-\defValue{The age classes that receive recruitment}
-
-\TOUNDOend
-
-\TODO
-
-Change ages as a vector to age as an integer applied to all categories. Also applies to other recruitment processes.
-
-\defSub{age} {Define the age that receive recruitment}
+\defSub{age} {Define the age that receives recruitment}
 \defType{Integer}
 \defDefault{No default}
-\defValue{The age classe that receive recruitment}
-
-\TODOend
+\defValue{The age class that receives recruitment}
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
@@ -597,32 +576,27 @@ This is already included in the source\_layer.
 
 \TOUNDOend
 
-
 \subsubsection[Adjacent cell movement]{\commandlabsubarg{process}{type}{adjacent\_cell\_movement}}
-
-\TODO
 
 \defSub{categories} {Define the categories that the adjacent cell movement event is applied to}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\defSub{layer} {Define the label of a gradient layer that defines the the relative strength of movement to adjacent cells}
-\defType{String}
-\defDefault{Default 1 in every cell, equivalent to uniform diffusion}
-\defValue{A valid layer defined by \command{layer}}
-
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defType{String vector, of length \subcommand{categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
-\defSub{proportions} {Define the constant multiplier for the total proportion that moves from each cell to the neighbouring cell}
+\defSub{layer} {Define the label of a gradient layer that defines the the relative strength of movement to adjacent cells}
+\defType{String}
+\defDefault{Default 1 in every cell, equivalent to uniform diffusion}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{proportion} {Define the constant multiplier for the proportion that moves from each cell to the neighbouring cell}
 \defType{Estimable}
 \defDefault{No default}
 \defValue{A real number between 0 and 1, inclusive.}
-
-\TODOend
 
 \subsubsection[Preference movement]{\commandlabsubarg{process}{type}{preference}}
 

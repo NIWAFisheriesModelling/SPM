@@ -3,6 +3,7 @@ In SPM, but not in manual
   0 (zero)
   1 (one)
   1,000
+  adjacent_cell
   age_index
   age_size
   area
@@ -24,12 +25,12 @@ In SPM, but not in manual
   layer_height
   layer_width
   method
+  migration
   multinomial
   normal_by_stdev
   normal_log
   objective
   profiles
-  proportion
   proportion_time-step
   rescale
   row
