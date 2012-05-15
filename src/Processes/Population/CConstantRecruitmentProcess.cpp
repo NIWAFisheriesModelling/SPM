@@ -39,7 +39,7 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_R0);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
-  pParameterList->registerAllowed(PARAM_AGES);
+  pParameterList->registerAllowed(PARAM_AGE);
   pParameterList->registerAllowed(PARAM_LAYER);
 
 }
@@ -55,21 +55,18 @@ void CConstantRecruitmentProcess::validate() {
 
     // Populate our Variables
     dR0         = pParameterList->getDouble(PARAM_R0);
+    dAge        = pParameterList->getInt(PARAM_AGE);
     sLayer      = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
-    pParameterList->fillVector(vAgesList, PARAM_AGES);
 
-    // The 3 Vectors must be same size
+    // The 2 Vectors must be same size
     unsigned iCategorySize    = vCategoryList.size();
     unsigned iProportionSize  = vProportionList.size();
-    unsigned iAgesSize        = vAgesList.size();
 
     if (iCategorySize != iProportionSize)
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_PROPORTION);
-    else if (iCategorySize != iAgesSize)
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_AGES);
 
     // Register our Proportions as Estimable
     for (int i = 0; i < (int)vProportionList.size(); ++i)
@@ -103,18 +100,12 @@ void CConstantRecruitmentProcess::build() {
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
-    // Populate Our Ages Index
-    if (vAgesIndex.size() <= 0) {
-      foreach(int Age, vAgesList) {
-        vAgesIndex.push_back(pWorld->getColIndexForAge(Age));
-      }
-    }
+    // Populate Our Age Index
+    dAgeIndex = pWorld->getColIndexForAge(dAge);
 
     // Validate our Vectors are all same size
-    if (vAgesIndex.size() != vCategoryIndex.size())
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_AGES);
-    if (vAgesIndex.size() != vProportionList.size())
-      CError::errorListSameSize(PARAM_AGES, PARAM_PROPORTIONS);
+    if (vProportionList.size() != vCategoryIndex.size())
+      CError::errorListSameSize(PARAM_CATEGORY, PARAM_PROPORTIONS);
 
   } catch(string &Ex) {
     Ex = "CRecruitmentProcess.build(" + getLabel() + ")->" + Ex;
@@ -165,7 +156,7 @@ void CConstantRecruitmentProcess::execute() {
 
         // Loop Through the Categories and Ages we have and Recruit
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-          pDiff->addValue(vCategoryIndex[k], vAgesIndex[k], (value * vProportionList[k]) );
+          pDiff->addValue(vCategoryIndex[k], dAgeIndex, (value * vProportionList[k]) );
       }
     }
 #ifndef OPTIMIZE
@@ -182,6 +173,4 @@ void CConstantRecruitmentProcess::execute() {
 //**********************************************************************
 CConstantRecruitmentProcess::~CConstantRecruitmentProcess() {
   vProportionList.clear();
-  vAgesList.clear();
-  vAgesIndex.clear();
 }

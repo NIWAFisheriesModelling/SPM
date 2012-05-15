@@ -33,8 +33,8 @@ protected:
   // Variables
   vector<double>             vProportionList;
   double                     dR0;
-  vector<int>                vAgesList;
-  vector<int>                vAgesIndex;
+  int                        dAge;
+  int                        dAgeIndex;
   string                     sLayer;
   CNumericLayer              *pLayer;
 };
