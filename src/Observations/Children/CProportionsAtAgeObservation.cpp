@@ -126,13 +126,6 @@ void CProportionsAtAgeObservation::validate() {
       }
     }
 
-    // TODO: Scott:
-    // 1. Make mErrorValue a map of vectors and replicate the N's to the same length as OBS ... I think this might already have been done?
-    // 2. The multinomial requires that the user input exacly ONE N for each vector of OBS.
-    //    while for lognormal, there needs to be EITHER (1) a one-to-one match for each OBS and errorvalue.
-    //                                                  (2) ONE errorvalue only
-    //    Can we implement a check here to ensure that this is what is supplied
-
     // Loop Through our Partitions
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
     while (vPropPtr != mvProportionMatrix.end()) {
