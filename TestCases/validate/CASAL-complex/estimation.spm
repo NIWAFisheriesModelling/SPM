@@ -1,11 +1,12 @@
 # ESTIMATION
 @estimation
-minimiser  gammadiff
+minimiser DE
 
 @minimiser gammadiff
 type numerical_differences
 tolerance 0.002
 iterations 1000
+step_size 0.0001
 covariance False
 
 @minimiser DE
