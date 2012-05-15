@@ -13,6 +13,8 @@
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
 #include "../Movement/CPreferenceMovementProcess.h"
+#include "../Movement/CAdjacentCellMovementProcess.h"
+#include "../Movement/CMigrationMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
 #include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
@@ -49,8 +51,12 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CCategoryTransitionProcess();
   else if (type == PARAM_CATEGORY_TRANSITION_RATE)
     pProcess = new CCategoryTransitionRateProcess();
-  else if (type == PARAM_PREFERENCE)
+  else if (type == PARAM_PREFERENCE_MOVEMENT)
     pProcess = new CPreferenceMovementProcess();
+  else if (type == PARAM_ADJACENT_CELL_MOVEMENT)
+    pProcess = new CAdjacentCellMovementProcess();
+  else if (type == PARAM_MIGRATION_MOVEMENT)
+    pProcess = new CMigrationMovementProcess();
   else
     CError::errorUnknown(PARAM_PROCESS, type);
 
