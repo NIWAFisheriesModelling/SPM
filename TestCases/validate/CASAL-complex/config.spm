@@ -17,7 +17,7 @@ time_steps one two three
 # Initialisation
 @initialisation_phase Phase1
 years 200
-processes halfM halfM recruitment ageing
+processes halfM halfM Recruitment Ageing
 
 # Annual Cycle
 @time_step one

@@ -32,7 +32,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1992
 obs All 1.50
@@ -44,7 +44,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1993
 obs All 1.10
@@ -56,7 +56,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1994
 obs All 0.93
@@ -68,7 +68,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1995
 obs All 1.33
@@ -80,7 +80,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1996
 obs All 1.53
@@ -92,7 +92,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1997
 obs All 0.90
@@ -104,7 +104,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1998
 obs All 0.68
@@ -116,7 +116,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 1999
 obs All 0.75
@@ -128,7 +128,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 2000
 obs All 0.57
@@ -140,7 +140,7 @@ catchability chatCPUEq
 layer Cell
 time_step one
 categories male female
-selectivities chatFselmale chatFselFemale
+selectivities chatFselMale chatFselFemale
 likelihood lognormal
 year 2001
 obs All 1.23
@@ -153,7 +153,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1992
 obs All 4180
@@ -165,7 +165,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1993
 obs All 2950
@@ -177,7 +177,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1994
 obs All 3353
@@ -189,7 +189,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1995
 obs All 3303
@@ -201,7 +201,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1996
 obs All 2457
@@ -213,7 +213,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1997
 obs All 2811
@@ -225,7 +225,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1998
 obs All 2873
@@ -237,7 +237,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 1999
 obs All 2302
@@ -249,7 +249,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 2000
 obs All 2090
@@ -261,7 +261,7 @@ catchability chatTANq
 layer Cell
 time_step one
 categories male female
-selectivities chatTANselmale chatTANselFemale
+selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
 year 2001
 obs All 1589
@@ -500,20 +500,20 @@ q 0.205139
 parameter catchability[chatCPUEq].q
 lower_bound 1e-8
 upper_bound 10
-prior uniform-log
+prior uniform_log
 
 @estimate
 parameter catchability[chatTANq].q
 lower_bound 1e-2
 upper_bound 1
-prior uniform-log
+prior uniform_log
 
 #FREE PARAMETERS
 @estimate
-parameter process[recruitment].R0
+parameter process[Recruitment].R0
 lower_bound 10000
 upper_bound 150000
-prior uniform-log
+prior uniform_log
 
 @estimate
 parameter selectivity[chatTANselMale].a50
@@ -525,7 +525,7 @@ prior uniform
 parameter selectivity[chatTANselMale].ato95
 lower_bound 0
 upper_bound 30
-prior Uniform
+prior uniform
 
 @estimate
 parameter selectivity[chatTANselFemale].a50
@@ -537,13 +537,13 @@ prior uniform
 parameter selectivity[chatTANselFemale].ato95
 lower_bound 0
 upper_bound 30
-prior Uniform
+prior uniform
 
 @estimate
 parameter selectivity[chatTANselFemale].alpha
 lower_bound 0.2
 upper_bound 5
-prior Uniform
+prior uniform
 
 @estimate
 parameter selectivity[chatFselMale].a50
@@ -555,7 +555,7 @@ prior uniform
 parameter selectivity[chatFselMale].ato95
 lower_bound 0
 upper_bound 30
-prior Uniform
+prior uniform
 
 @estimate
 parameter selectivity[chatFselFemale].a50
@@ -567,16 +567,16 @@ prior uniform
 parameter selectivity[chatFselFemale].ato95
 lower_bound 0
 upper_bound 30
-prior Uniform
+prior uniform
 
 @estimate
 parameter selectivity[chatFselFemale].alpha
 lower_bound 0.2
 upper_bound 5
-prior Uniform
+prior uniform
 
-@prior Uniform-log
+@prior uniform_log
 type uniform_log
 
-@prior Uniform
+@prior uniform
 type uniform
