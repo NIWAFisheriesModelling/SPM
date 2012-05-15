@@ -64,6 +64,8 @@ void CCategoryTransitionRateProcess::validate() {
     for (int i = 0; i < (int)vProportions.size(); ++i) {
       if (vProportions[i] > 1.0)
         CError::errorGreaterThan(PARAM_PROPORTIONS, PARAM_ONE);
+      if (vProportions[i] < 0.0)
+        CError::errorLessThan(PARAM_PROPORTIONS, PARAM_ZERO);
 
       // Register estimables
       registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
