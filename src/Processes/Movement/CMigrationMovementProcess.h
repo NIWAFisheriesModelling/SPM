@@ -21,9 +21,22 @@ public:
   CMigrationMovementProcess();
   virtual                    ~CMigrationMovementProcess();
   CProcess*                  clone() { return (new CMigrationMovementProcess(*this)); }
+  int                        getCategoryCount() { return (int)vCategoryNames.size(); }
+  int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }
   void                       validate();
   void                       build();
   void                       execute();
+
+protected:
+  // Variables
+  CNumericLayer                 *pSourceLayer;
+  CNumericLayer                 *pSinkLayer;
+  vector<string>                vCategoryNames;
+  vector<int>                   vCategories;
+  vector<string>                vSelectivityNames;
+  vector<CSelectivity*>         vSelectivities;
+  string                        sSourceLayer;
+  string                        sSinkLayer;
 };
 
 #endif /*CMIGRATIONMOVEMENTPROCESS_H_*/

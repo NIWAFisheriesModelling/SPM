@@ -39,12 +39,16 @@ CAdjacentCellMovementProcess::CAdjacentCellMovementProcess() {
 //**********************************************************************
 void CAdjacentCellMovementProcess::validate() {
   try {
-    // Base Validation
-    CMovementProcess::validate();
 
     // Get our Variables
+    sLayer = pParameterList->getString(PARAM_LAYER);
+    dProportion = pParameterList->getDouble(PARAM_PROPORTION);
+
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+
+    // Base Validation
+    CMovementProcess::validate();
 
     // Local Validation
     if (getCategoryCount() == 0)
@@ -52,7 +56,7 @@ void CAdjacentCellMovementProcess::validate() {
     if (getSelectivityCount() == 0)
       CError::errorMissing(PARAM_SELECTIVITIES);
     if (getCategoryCount() != getSelectivityCount())
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
     if (getProportion() < 0.0)
       CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);

@@ -9,7 +9,10 @@
 
 // Local Headers
 #include "CMigrationMovementProcess.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Layers/CLayerManager.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 
@@ -18,6 +21,17 @@
 // Default Constructor
 //**********************************************************************
 CMigrationMovementProcess::CMigrationMovementProcess() {
+
+    //Default values
+    pSourceLayer = 0;
+    pSinkLayer = 0;
+
+    // Register user allowed parameters
+    pParameterList->registerAllowed(PARAM_CATEGORIES);
+    pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+    pParameterList->registerAllowed(PARAM_PROPORTION);
+    pParameterList->registerAllowed(PARAM_SINK_LAYER);
+    pParameterList->registerAllowed(PARAM_SOURCE_LAYER);
 }
 
 //**********************************************************************
@@ -26,6 +40,16 @@ CMigrationMovementProcess::CMigrationMovementProcess() {
 //**********************************************************************
 void CMigrationMovementProcess::validate() {
   try {
+
+    // Get our Variables
+    sSinkLayer = pParameterList->getString(PARAM_SINK_LAYER);
+    sSourceLayer = pParameterList->getString(PARAM_SOURCE_LAYER);
+
+    dProportion = pParameterList->getDouble(PARAM_PROPORTION);
+
+    pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+
     // Base Validation
     CMovementProcess::validate();
 
@@ -35,7 +59,12 @@ void CMigrationMovementProcess::validate() {
     if (getSelectivityCount() == 0)
       CError::errorMissing(PARAM_SELECTIVITIES);
     if (getCategoryCount() != getSelectivityCount())
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
+    if (getProportion() < 0.0)
+      CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);
+    if (getProportion() > 1.0)
+      CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
   } catch (string &Ex) {
     Ex = "CMigrationMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -51,6 +80,16 @@ void CMigrationMovementProcess::build() {
   try {
     // Base Building
     CMovementProcess::build();
+
+    // Get selectivities and categories.
+    CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
+    // Get our Layers
+    if (sSinkLayer != "")
+      pSinkLayer = CLayerManager::Instance()->getNumericLayer(sSinkLayer);
+    if (sSourceLayer != "")
+      pSourceLayer = CLayerManager::Instance()->getNumericLayer(sSourceLayer);
 
   } catch (string &Ex) {
     Ex = "CMigrationMovementProcess.build(" + getLabel() + ")->" + Ex;
