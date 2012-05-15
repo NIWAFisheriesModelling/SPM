@@ -40,17 +40,12 @@ BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_CLOSE(pSquare->getAbundance(), 177874.61913836008, 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getAbundance(), 123111.96087489632, 1e-9);
 
   // Our Expected Results
-  double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9750,
-      9374.6396864256385, 8575.7310444490504, 7235.2503281738609, 5589.9419987755718, 13665.867666534466 };
-
-  double mature[] = { 0.0, 0.0, 0.0, 0.0, 247.5,
-      628.03764906892934, 1418.3267871019095, 2817.0091157876313, 4750.0436251387227, 96822.271236904286 };
-
-  double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0,
-      0.0, 0.0, 0.0, 0.0, 0.0 };
+  double immature[] = { 1000.0, 3000.0, 6000.0, 7000.0, 9750, 9374.6396864256385, 8575.7310444490504, 7235.2503281738609, 5589.9419987755718, 13665.867666534466 };
+  double mature[] = { 0.0, 0.0, 0.0, 0.0, 247.73413441347478, 616.6320434100403, 1377.125631362529, 2596.3021860433082, 3982.7175101270723, 43100.018645181306 };
+  double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
   // Check Expected against model
   BOOST_CHECK_CLOSE(pSquare->getValue(0, 0), immature[0], 1e-9);

@@ -24,6 +24,20 @@ public:
   void                       validate();
   void                       build();
   void                       execute();
+
+protected:
+  // Variables
+  double                        dLayerTotal;
+  double                        dLayerValueUp;
+  double                        dLayerValueDown;
+  double                        dLayerValueLeft;
+  double                        dLayerValueRight;
+  CNumericLayer                 *pLayer;
+  vector<string>                vCategoryNames;
+  vector<int>                   vCategories;
+  vector<string>                vSelectivityNames;
+  vector<CSelectivity*>         vSelectivities;
+  string                        sLayer;
 };
 
 #endif /*CADJACENTCELLMOVEMENTPROCESS_H_*/
