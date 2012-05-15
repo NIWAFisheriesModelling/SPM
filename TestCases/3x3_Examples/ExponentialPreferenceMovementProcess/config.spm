@@ -1,31 +1,31 @@
-# Spatial structure
+# spatial structure
 @model
 nrows 3
 ncols 3
-layer Base
+layer base
 categories immature
 min_age 1
 max_age 5
-age_plus_group True
+age_plus_group true
 initial_year 1994
 current_year 1996
 final_year 100
 cell_length 1
-time_steps One
+time_steps one
 
-@time_step One
-processes Recruitment PrefMoveOne
+@time_step one
+processes recruitment prefmoveone
 
-@process PrefMoveOne
+@process prefmoveone
 type preference
 categories immature
 preference_functions exponential_preference
 
-@process Recruitment
+@process recruitment
 type constant_recruitment
 categories immature
 proportions 1.0
-R0 100
+r0 100
 ages 1
 layer recruit
 
@@ -53,20 +53,20 @@ data 1 2 3
 data 4 5 6
 data 7 8 9
 
-@report 1994_TimeStep_One
+@report 1994_timestep_one
 type partition
 time_step one
-year 1994
+years 1994
 
-@report 1995_TimeStep_One
+@report 1995_timestep_one
 type partition
 time_step one
-year 1995
+years 1995
 
-@report 1996_TimeStep_One
+@report 1996_timestep_one
 type partition
 time_step one
-year 1996
+years 1996
 
-@report Objective_Score
+@report objective_score
 type objective_function
