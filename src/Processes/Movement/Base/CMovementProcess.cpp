@@ -18,7 +18,6 @@
 CMovementProcess::CMovementProcess() {
   // Vars
   dProportion         = 0.0;
-
   registerEstimable(PARAM_PROPORTION, &dProportion);
 }
 
@@ -182,7 +181,7 @@ void CMovementProcess::moveRight(int RIndex, int CIndex, int SRIndex, int SCInde
 #ifndef OPTIMIZE
   try {
 #endif
-    // Can We Move Left?
+    // Can We Move Right?
     if ( CIndex == (iWorldWidth-1) )
       return;
 
