@@ -69,36 +69,44 @@ void CProcessReport::build() {
 // Execute our Report
 //**********************************************************************
 void CProcessReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
 
-  this->start();
+  try {
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
-  CParameterList *pList = pTarget->getParameterList();
+    this->start();
 
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << PARAM_PROCESS << CONFIG_RATIO_SEPARATOR << " " << sParameter << "\n";
+    CParameterList *pList = pTarget->getParameterList();
 
-  vector<string> vDefinedParameters;
-  pList->fillDefinedParameterVector(vDefinedParameters);
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_PROCESS << CONFIG_RATIO_SEPARATOR << " " << sParameter << "\n";
 
-  vector<string> vValues;
-  foreach(string Parameter, vDefinedParameters) {
-    pList->fillVector(vValues, Parameter);
+    vector<string> vDefinedParameters;
+    pList->fillDefinedParameterVector(vDefinedParameters);
 
-    cout << Parameter << " ";
-    foreach(string Value, vValues) {
-      cout << Value << " ";
+    vector<string> vValues;
+    foreach(string Parameter, vDefinedParameters) {
+      pList->fillVector(vValues, Parameter);
+
+      cout << Parameter << " ";
+      foreach(string Value, vValues) {
+        cout << Value << " ";
+      }
+      cout << endl;
     }
-    cout << endl;
+
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CProcessReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 
-  cout << CONFIG_END_REPORT << "\n" << endl;
-
-  this->end();
 }
 
 //**********************************************************************

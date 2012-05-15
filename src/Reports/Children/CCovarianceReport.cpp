@@ -29,57 +29,63 @@ CCovarianceReport::CCovarianceReport() {
 // Execute
 //**********************************************************************
 void CCovarianceReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+
+  try {
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
+
+    // Get our Minimizer
+    CMinimizerManager *pManager = CMinimizerManager::Instance();
+    CMinimizer *pMinimizer = pManager->getMinimizer();
+    if (pMinimizer == 0)
+        return;
+
+    if(!(pMinimizer->getBuildCovariance()))
       return;
 
-  // Get our Minimizer
-  CMinimizerManager *pManager = CMinimizerManager::Instance();
-  CMinimizer *pMinimizer = pManager->getMinimizer();
-  if (pMinimizer == 0)
-      return;
+    this->start();
 
-  if(!(pMinimizer->getBuildCovariance()))
-    return;
+    // Write The Report
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    int iCount = pMinimizer->getEstimateCount();
 
-  this->start();
-
-  // Write The Report
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  int iCount = pMinimizer->getEstimateCount();
-
-  vector<CEstimate*> vEstimates;
-  CEstimateManager::Instance()->fillVector(vEstimates);
-  foreach(CEstimate *Estimate, vEstimates) {
-    cout << Estimate->getParameter() << " ";
-  }
-  cout << "\n";
-
-  cout << "Hessian:\n";
-  for (int i = 0; i < iCount; ++i) {
-      for (int j = 0; j < iCount; ++j) {
-        cout << pMinimizer->getHessianValue(i, j) << " ";
-      }
-      cout << "\n";
+    vector<CEstimate*> vEstimates;
+    CEstimateManager::Instance()->fillVector(vEstimates);
+    foreach(CEstimate *Estimate, vEstimates) {
+      cout << Estimate->getParameter() << " ";
     }
+    cout << "\n";
 
-  cout << "Covariance:\n";
-  if (pMinimizer->getCovarianceError()) {
-    cout << "Covariance creation failed. Hessian was not invertable\n";
-  } else {
+    cout << "Hessian:\n";
     for (int i = 0; i < iCount; ++i) {
-      for (int j = 0; j < iCount; ++j) {
-        cout << pMinimizer->getCovarianceValue(i, j) << " ";
+        for (int j = 0; j < iCount; ++j) {
+          cout << pMinimizer->getHessianValue(i, j) << " ";
+        }
+        cout << "\n";
       }
-      cout << "\n";
+
+    cout << "Covariance:\n";
+    if (pMinimizer->getCovarianceError()) {
+      cout << "Covariance creation failed. Hessian was not invertable\n";
+    } else {
+      for (int i = 0; i < iCount; ++i) {
+        for (int j = 0; j < iCount; ++j) {
+          cout << pMinimizer->getCovarianceValue(i, j) << " ";
+        }
+        cout << "\n";
+      }
     }
+
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
+  } catch (string &Ex) {
+    Ex = "CCovarianceReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
-
-  cout << CONFIG_END_REPORT << "\n" << endl;
-
-  this->end();
 }
 
 //**********************************************************************

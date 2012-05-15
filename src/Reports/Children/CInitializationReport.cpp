@@ -122,7 +122,7 @@ void CInitializationReport::execute() {
 
     this->end();
   } catch (string &Ex) {
-    Ex = "CPartitionReporter.execute(" + getLabel() + ")->" + Ex;
+    Ex = "CInitialisationReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

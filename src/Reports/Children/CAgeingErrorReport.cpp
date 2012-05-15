@@ -66,38 +66,46 @@ void CAgeingErrorReport::build() {
 // Execute
 //**********************************************************************
 void CAgeingErrorReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    return;
+  try {
 
-  this->start();
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      return;
 
-  // Work our how many viable ages we have.
-  int iSpread = pWorld->getAgeSpread();
-  int iMinAge = pWorld->getMinAge();
+    this->start();
 
-  // Output Header
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << PARAM_AGEING_ERROR << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sAgeingError << "\n";
+    // Work our how many viable ages we have.
+    int iSpread = pWorld->getAgeSpread();
+    int iMinAge = pWorld->getMinAge();
 
-  cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
-  for (int i = 1; i < iSpread; ++i)
-    cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
-  cout << "\n";
+    // Output Header
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_AGEING_ERROR << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sAgeingError << "\n";
 
-  vector<vector<double> > mMisMatrix = pAgeingError->getMisMatrix();
+    cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
+    for (int i = 1; i < iSpread; ++i)
+      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
+    cout << "\n";
 
-  for (int i = 0; i < iSpread; ++i) {
-    cout << i+1 << CONFIG_RATIO_SEPARATOR << " ";
-    for (int j = 0; j < (iSpread - 1); ++j) {
-      cout << mMisMatrix[i][j] << CONFIG_SEPERATOR_ESTIMATE_VALUES << " ";
+    vector<vector<double> > mMisMatrix = pAgeingError->getMisMatrix();
+
+    for (int i = 0; i < iSpread; ++i) {
+      cout << i+1 << CONFIG_RATIO_SEPARATOR << " ";
+      for (int j = 0; j < (iSpread - 1); ++j) {
+        cout << mMisMatrix[i][j] << CONFIG_SEPERATOR_ESTIMATE_VALUES << " ";
+      }
+      cout << mMisMatrix[i][iSpread-1] << "\n";
     }
-    cout << mMisMatrix[i][iSpread-1] << "\n";
-  }
-  cout << CONFIG_END_REPORT << "\n" << endl;
+    cout << CONFIG_END_REPORT << "\n" << endl;
 
-  this->end();
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CAgeingErrorReport.execute(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
 }
 
 //**********************************************************************

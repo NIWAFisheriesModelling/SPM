@@ -29,52 +29,60 @@ CEstimateValueReport::CEstimateValueReport() {
 //
 //**********************************************************************
 void CEstimateValueReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
 
-  // Check if File Already Exists for overwrite
-  // If file already exists, and we not overwriting we don't
-  // want to re-write the original header
-  if ( (sFileName != "") && (!bOverwrite) ) {
-    struct stat stFileInfo;
-    int intStat = stat(sFileName.c_str(),&stFileInfo);
+  try {
 
-    if (intStat == 0) // File Exists
-      bWrittenHeader = true; // Don't write the header
-  }
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
-  // Start IO
-  this->start();
+    // Check if File Already Exists for overwrite
+    // If file already exists, and we not overwriting we don't
+    // want to re-write the original header
+    if ( (sFileName != "") && (!bOverwrite) ) {
+      struct stat stFileInfo;
+      int intStat = stat(sFileName.c_str(),&stFileInfo);
 
-  // Variables
-  CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-  int              iCount            = pEstimateManager->getEstimateCount();
+      if (intStat == 0) // File Exists
+        bWrittenHeader = true; // Don't write the header
+    }
 
-  if (!bWrittenHeader) {
-    bWrittenHeader = true;
+    // Start IO
+    this->start();
 
-    // Output Header
+    // Variables
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+    int              iCount            = pEstimateManager->getEstimateCount();
+
+    if (!bWrittenHeader) {
+      bWrittenHeader = true;
+
+      // Output Header
+      for (int i = 0; i < iCount; ++i) {
+        CEstimate *pEstimate = pEstimateManager->getEstimate(i);
+        cout << pEstimate->getParameter();
+
+        if((i+1)<iCount)
+          cout << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      }
+      cout << "\n";
+    }
+
     for (int i = 0; i < iCount; ++i) {
       CEstimate *pEstimate = pEstimateManager->getEstimate(i);
-      cout << pEstimate->getParameter();
-
-      if((i+1)<iCount)
-        cout << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      cout << pEstimate->getValue();
+      if((i+1)<iCount) cout << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     }
-    cout << "\n";
-  }
+    cout << endl;
 
-  for (int i = 0; i < iCount; ++i) {
-    CEstimate *pEstimate = pEstimateManager->getEstimate(i);
-    cout << pEstimate->getValue();
-    if((i+1)<iCount) cout << CONFIG_SEPERATOR_ESTIMATE_VALUES;
-  }
-  cout << endl;
+    // End IO
+    this->end();
 
-  // End IO
-  this->end();
+  } catch (string &Ex) {
+    Ex = "CEstimateValueReport.execute(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

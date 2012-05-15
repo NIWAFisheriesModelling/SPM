@@ -41,7 +41,7 @@ void CFileReport::validate() {
 
     fFile = new ofstream();
   } catch (string &Ex) {
-    Ex = "CFileReporter.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CFileReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

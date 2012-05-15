@@ -25,6 +25,8 @@ CObjectiveFunctionReport::CObjectiveFunctionReport() {
 // Execute
 //**********************************************************************
 void CObjectiveFunctionReport::execute() {
+try {
+
   // Check for correct state
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -46,7 +48,13 @@ void CObjectiveFunctionReport::execute() {
 
   cout << PARAM_TOTAL_SCORE << ": " << pObjectiveFunction->getScore() << "\n";
   cout << CONFIG_END_REPORT << "\n" << endl;
+
   this->end();
+
+  } catch (string &Ex) {
+    Ex = "CObjectiveFunctionReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

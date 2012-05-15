@@ -66,36 +66,43 @@ void CObservationReport::build() {
 // Execute our Print State
 //**********************************************************************
 void CObservationReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
-        return;
 
-  this->start();
+  try {
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+          return;
 
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
+    this->start();
 
-  vector<SComparison*> vComparisons;
-  pObservation->fillComparisons(vComparisons);
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
 
-  cout << "area,observed,expected,residual,errorvalue,score\n";
+    vector<SComparison*> vComparisons;
+    pObservation->fillComparisons(vComparisons);
 
-  foreach(SComparison *Comparison, vComparisons) {
-    double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
-    cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES
-         << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
-         << Comparison->dExpectedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
-         << dResidual << CONFIG_SEPERATOR_ESTIMATE_VALUES
-         << Comparison->dErrorValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
-         << Comparison->dScore << "\n";
+    cout << "area,observed,expected,residual,errorvalue,score\n";
+
+    foreach(SComparison *Comparison, vComparisons) {
+      double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
+      cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES
+           << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+           << Comparison->dExpectedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+           << dResidual << CONFIG_SEPERATOR_ESTIMATE_VALUES
+           << Comparison->dErrorValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+           << Comparison->dScore << "\n";
+    }
+
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CObservationReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
-
-  cout << CONFIG_END_REPORT << "\n" << endl;
-
-  this->end();
 }
 
 //**********************************************************************

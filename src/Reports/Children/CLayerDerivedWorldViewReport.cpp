@@ -109,11 +109,14 @@ void CLayerDerivedWorldViewReport::build() {
 // Execute our Layer Derived World View
 //**********************************************************************
 void CLayerDerivedWorldViewReport::execute() {
-
+  try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
         return;
+
+    // Start IO
+    this->start();
 
     for (int i = 0; i < (int)vYear.size(); ++i) {
       iYear = boost::lexical_cast<double>(vYear[i]);
@@ -121,9 +124,6 @@ void CLayerDerivedWorldViewReport::execute() {
         if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
 
           pWorldView->execute();
-
-          // Start IO
-          this->start();
 
           // Start Output
           cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
@@ -157,12 +157,16 @@ void CLayerDerivedWorldViewReport::execute() {
 
             mPtr++;
           }
-
-        cout << CONFIG_END_REPORT << "\n" << endl;
+          cout << CONFIG_END_REPORT << "\n" << endl;
+        }
       }
     }
     // End IO
     this->end();
+
+  } catch (string &Ex) {
+    Ex = "CLayerDerivedViewReport.execute(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 }
 

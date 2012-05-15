@@ -52,7 +52,7 @@ void CPartitionReport::validate() {
     }
 
   } catch (string &Ex) {
-    Ex = "CPartitionReporter.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CPartitionReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -76,7 +76,7 @@ void CPartitionReport::build() {
     }
 
   } catch (string &Ex) {
-    Ex = "CPartitionReporter.build(" + getLabel() + ")->" + Ex;
+    Ex = "CPartitionReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -92,12 +92,11 @@ void CPartitionReport::execute() {
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
         return;
 
+    this->start();
     for (int i = 0; i < (int)vYear.size(); ++i) {
       iYear = boost::lexical_cast<double>(vYear[i]);
       if (iYear == pTimeStepManager->getCurrentYear()) {
         if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
-
-          this->start();
 
           // Variables
           int         iSquareHeight   = -1;
@@ -145,11 +144,11 @@ void CPartitionReport::execute() {
           cout << CONFIG_END_REPORT << "\n" << endl;
         }
       }
-      this->end();
     }
+    this->end();
 
   } catch (string &Ex) {
-    Ex = "CPartitionReporter.execute(" + getLabel() + ")->" + Ex;
+    Ex = "CPartitionReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

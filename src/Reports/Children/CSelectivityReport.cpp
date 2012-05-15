@@ -66,35 +66,42 @@ void CSelectivityReport::build() {
 // Execute
 //**********************************************************************
 void CSelectivityReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
 
-  this->start();
+  try {
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
-  // Work our how many viable ages we have.
-  int iSpread = (pWorld->getMaxAge() - pWorld->getMinAge()) + 1;
-  int iMinAge = pWorld->getMinAge();
+    this->start();
 
-  // Output Header
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << PARAM_SELECTIVITY << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sSelectivity << "\n";
+    // Work our how many viable ages we have.
+    int iSpread = (pWorld->getMaxAge() - pWorld->getMinAge()) + 1;
+    int iMinAge = pWorld->getMinAge();
 
-  cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
-  for (int i = 1; i < iSpread; ++i)
-    cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
-  cout << "\n";
+    // Output Header
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_SELECTIVITY << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sSelectivity << "\n";
 
-  cout << "values" << CONFIG_RATIO_SEPARATOR << " ";
-  cout << pSelectivity->getResult(0);
-  for (int i = 1; i < iSpread; ++i)
-    cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << pSelectivity->getResult(i);
-  cout << "\n";
-  cout << CONFIG_END_REPORT << "\n" << endl;
+    cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
+    for (int i = 1; i < iSpread; ++i)
+      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
+    cout << "\n";
 
-  this->end();
+    cout << "values" << CONFIG_RATIO_SEPARATOR << " ";
+    cout << pSelectivity->getResult(0);
+    for (int i = 1; i < iSpread; ++i)
+      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << pSelectivity->getResult(i);
+    cout << "\n";
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CSelectivityReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

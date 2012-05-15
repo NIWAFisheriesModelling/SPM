@@ -26,34 +26,42 @@ CEstimateSummaryReport::CEstimateSummaryReport() {
 // Execute print state
 //**********************************************************************
 void CEstimateSummaryReport::execute() {
-  // Check Run-Mode
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
 
-  // Start IO
-  this->start();
+  try {
+    // Check Run-Mode
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
-  // Get Estimates
-  vector<CEstimate*> vEstimates;
-  CEstimateManager::Instance()->fillVector(vEstimates);
+    // Start IO
+    this->start();
 
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    // Get Estimates
+    vector<CEstimate*> vEstimates;
+    CEstimateManager::Instance()->fillVector(vEstimates);
 
-  foreach(CEstimate *Estimate, vEstimates) {
-    cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";
-    cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
-    cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
-    cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
-    cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n\n";
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+
+    foreach(CEstimate *Estimate, vEstimates) {
+      cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";
+      cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
+      cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
+      cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
+      cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n\n";
+    }
+
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    // End IO
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CEstimateSummaryReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 
-  cout << CONFIG_END_REPORT << "\n" << endl;
-
-  // End IO
-  this->end();
 }
 
 //**********************************************************************

@@ -24,20 +24,27 @@ CDerivedQuantityReport::CDerivedQuantityReport() {
 // Execute
 //**********************************************************************
 void CDerivedQuantityReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      return;
 
-  this->start();
+  try {
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        return;
 
-  // Write Information
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << "# Not Yet Implemented" << "\n";
-  cout << CONFIG_END_REPORT << "\n" << endl;
+    this->start();
 
-  this->end();
+    // Write Information
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << "# Not Yet Implemented" << "\n";
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CDerivedQuantityReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
 }
 
 //**********************************************************************

@@ -25,21 +25,29 @@ CRandomNumberSeedReport::CRandomNumberSeedReport() {
 // Execute the Report
 //**********************************************************************
 void CRandomNumberSeedReport::execute() {
-  // Check for correct state
-  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-      if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
-        return;
 
-  this->start();
+  try {
+    // Check for correct state
+    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+        if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+          return;
 
-  // Output
-  cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-  cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-  cout << PARAM_RANDOM_NUMBER_SEED << CONFIG_RATIO_SEPARATOR << " " << pConfig->getRandomSeed() << "\n";
-  cout << CONFIG_END_REPORT << "\n" << endl;
+    this->start();
 
-  this->end();
+    // Output
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_RANDOM_NUMBER_SEED << CONFIG_RATIO_SEPARATOR << " " << pConfig->getRandomSeed() << "\n";
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
+
+  } catch (string &Ex) {
+    Ex = "CRandomNumberSeedReport.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
 }
 
 //**********************************************************************
