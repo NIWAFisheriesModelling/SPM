@@ -65,17 +65,17 @@ c 1
 @report 1994_TimeStep_One
 type partition
 time_step One
-year 1994
+years 1994
 
 @report 1995_TimeStep_One
 type partition
 time_step One
-year 1995
+years 1995
 
 @report 1996_TimeStep_One
 type partition
 time_step One
-year 1996
+years 1996
 
 @report Objective_Score
 type objective_function
