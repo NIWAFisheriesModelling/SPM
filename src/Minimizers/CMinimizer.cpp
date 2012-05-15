@@ -8,6 +8,8 @@
 //============================================================================
 
 // Global Headers
+#define BOOST_UBLAS_TYPE_CHECK 0
+
 #include <boost/numeric/ublas/triangular.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/lu.hpp>
@@ -53,6 +55,8 @@ void CMinimizer::buildCovarianceMatrix() {
     for (int i = 0; i < iEstimateCount; ++i)
       for (int j = 0; j < iEstimateCount; ++j)
         mxHessian(i,j) = pHessian[i][j];
+
+//TODO: Replace the following code with a better inversion algorithm
 
     // Convert Hessian to Covariance
     ublas::permutation_matrix<> pm(mxHessian.size1());
