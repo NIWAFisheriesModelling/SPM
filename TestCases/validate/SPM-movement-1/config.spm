@@ -5,22 +5,5 @@ type partition
 time_step step_one
 years 1994-2008
 
-@report state-1998-1
-type partition
-time_step step_one
-years 1998
-
-@report state-2004-1
-type partition
-time_step step_one
-years 2004
-#file_name state-2004-1.txt
-
-@report Final
-type partition
-time_step step_one
-years 2008
-
 @report Objective_Score
 type objective_function
-file_name objective_function.txt
