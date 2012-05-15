@@ -16,18 +16,18 @@ time_steps step_one step_two
 
 @initialisation_phase Phase1
 years 200
-processes Recruitment Spawning Maturation halfM halfM Postspawning Ageing
+processes Recruitment Spawning Maturation halfM halfM PostSpawning Ageing
 
 @initialisation_phase Phase2
 years 1
-processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing Postspawning
+processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing PostSpawning
 
 @initialisation_phase Phase3
 years 20
-processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing Postspawning
+processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing PostSpawning
 
 @time_step step_one
-processes Recruitment Spawning Maturation halfM fishing halfM
+processes Recruitment Spawning Maturation halfM Fishing halfM
 processes MoveImmature MoveMature MoveSpawning
 
 @time_step step_two
@@ -65,22 +65,22 @@ penalty event_mortality_penalty
 type category_transition_rate
 from immature
 to mature
-proportion 0.324392
-selectivity Maturation
+proportions 0.324392
+selectivities Maturation
 
 @process Spawning
 type category_transition_rate
 from mature
 to spawning
-proportion 0.574593
-selectivity One
+proportions 0.574593
+selectivities One
 
 @process PostSpawning
 type category_transition_rate
 from spawning
 to mature
-proportion 0.5
-selectivity One
+proportions 0.5
+selectivities One
 
 # Movement processes
 @process MoveImmature
@@ -144,8 +144,8 @@ type double_normal
 alpha 1
 layer Depth
 mu 875.389
-sigma_L 143.127
-sigma_R 1364.35
+sigma_l 143.127
+sigma_r 1364.35
 
 @preference_function MatureLatitude
 type logistic
@@ -159,8 +159,8 @@ type double_normal
 alpha 1
 layer Latitude
 mu 65.8099
-sigma_L 1.77552
-sigma_R 1.62161
+sigma_l 1.77552
+sigma_r 1.62161
 
 # Definition of layers
 @layer Base
