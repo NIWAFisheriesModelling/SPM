@@ -16,11 +16,6 @@ type partition
 time_step step_two
 years 1994-2007
 
-@report state-3
-type partition
-time_step step_three
-years 1994-2007
-
 @report Maturation-selectivity
 type selectivity
 selectivity Maturation
