@@ -39,7 +39,9 @@ void CBaseObject::registerEstimable(string name, double *variable) {
 // Register variable as estimable with an index (used for Vectors)
 //**********************************************************************
 void CBaseObject::registerEstimable(string name, int index, double *variable) {
-  string newName = name + string("(") + boost::lexical_cast<string>(index) + string(")");
+  // Note index +1 is to allow user input using natural counting from 1 rather
+  // than the C++ standard of counting from 0
+  string newName = name + string("(") + boost::lexical_cast<string>(index+1) + string(")");
   mEstimables[newName] = variable;
 }
 
