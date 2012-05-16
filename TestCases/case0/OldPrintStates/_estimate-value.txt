@@ -1,2 +1,0 @@
-q[cpueq].q,directed_process[immaturelatitude].a50,directed_process[immaturelatitude].ato95,directed_process[maturedistance].lambda,directed_process[maturelatitude].a50,directed_process[maturelatitude].ato95,directed_process[spawninglatitude].mu,directed_process[spawninglatitude].sigmal,directed_process[spawninglatitude].sigmar,population_process[spawning].proportion,population_process[postspawning].proportion,selectivity[fishingsel].a50,selectivity[fishingsel].ato95
-0.000243186,69.7991,0.341695,1.58245,71.0952,0.432386,65.244,3.08479,1.62996,0.54815,0.511832,7.44674,2.16521

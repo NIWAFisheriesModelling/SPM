@@ -31,7 +31,7 @@ type constant_recruitment
 categories all
 proportions 1.0
 R0 100
-ages 1
+age 1
 
 @process M
 type constant_mortality_rate

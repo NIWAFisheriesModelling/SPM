@@ -1,2 +1,0 @@
-q[cpueq].q,population_process[recruitment].r0,selectivity[fishingsel].a50,selectivity[fishingsel].ato95
-1.10676e-005,2.37248e+006,10.1886,4.89094

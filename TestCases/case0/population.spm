@@ -43,7 +43,7 @@ type constant_recruitment
 categories immature
 proportions 1.0
 R0 997386
-ages 1
+age 1
 layer Depth
 
 @process halfM

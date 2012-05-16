@@ -1,25 +1,13 @@
 @include "population.spm"
 @include "estimation.spm"
 
-@report state-1994-1
+@report state-1
 type partition
 time_step step_one
-year 1994
-
-@report state-1998-1
-type partition
-time_step step_one
-year 1998
-
-@report state-2004-1
-type partition
-time_step step_one
-year 2004
-
-@report Final
-type partition
-time_step step_two
-year 2008
+years 1994 1998 2004 2008
 
 @report Objective_Score
 type objective_function
+
+@report Covariance
+type covariance

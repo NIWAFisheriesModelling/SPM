@@ -1,0 +1,91 @@
+# spatial structure
+@model
+nrows 3
+ncols 3
+layer base
+categories immature
+min_age 1
+max_age 5
+age_plus_group true
+initial_year 1990
+current_year 1996
+final_year 100
+cell_length 1
+time_steps one
+
+@time_step one
+processes recruitment ageing move
+
+@process move
+type migration
+categories immature
+proportion 0.5
+source_layer source
+sink_layer sink
+selectivities one
+
+@process recruitment
+type constant_recruitment
+layer recruit
+categories immature
+proportions 1.0
+r0 90
+age 1
+
+@process ageing
+type ageing
+categories immature
+
+@selectivity one
+type all_values
+v 0 1 0 0 0
+
+@layer base
+type numeric
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer all
+type categorical
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer recruit
+type numeric
+data 1 0 0
+data 0 0 0
+data 0 0 0
+
+@layer double_layer
+type numeric
+data 1 2 3
+data 4 5 6
+data 7 8 9
+
+@layer source
+type numeric
+data 1 0 0
+data 0 0 0
+data 0 0 0
+
+@layer sink
+type numeric
+data 0 1 1
+data 0 0 1
+data 0 0 0.5
+
+@report 1994_timestep_one
+type partition
+time_step one
+years 1990-1996
+
+@report objective_score
+type objective_function
+
+@report all
+type layer_derived_view
+time_step one
+years 1990-1996
+layer all

@@ -32,7 +32,7 @@ type constant_recruitment
 categories immature
 proportions 1.0
 R0 100
-ages 1
+age 1
 
 @layer EM1994
 type numeric

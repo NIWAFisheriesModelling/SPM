@@ -2,21 +2,13 @@
 @estimation
 minimiser gammadiff
 
-@minimiser desolver
-type de_solver
-iterations 1000
-evaluations 4000
-step_size 1e-7
-tolerance 0.00002 #The default is 0.002
-covariance False
-
 @minimiser gammadiff
 type numerical_differences
 iterations 1000
 evaluations 4000
 step_size 1e-7
-tolerance 0.0000002 #The default is 0.002
-covariance False
+tolerance 0.002 #The default is 0.002
+covariance True
 
 # MCMC
 @MCMC

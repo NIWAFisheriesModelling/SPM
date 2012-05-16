@@ -1,18 +1,22 @@
 @include "population.spm"
 @include "estimation.spm"
 
-@report state-2008-2
+@report state-1
+type partition
+time_step step_one
+years 1994 1998 2004 2008
+
+@report state-2
 type partition
 time_step step_two
-year 2008
+years 1994 1998 2004 2008
 
 @report Objective_Score
 type objective_function
 
-@report Estimate_Value
+@report estimate
 type estimate_value
-file_name MPD.txt
-overwrite true
+file_name MPD.dat
 
-@report Estimate_summary
+@report estimate-summary
 type estimate_summary

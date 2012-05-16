@@ -1,29 +1,9 @@
 @include "population.spm"
 
-@report state-1994-1
+@report state-1
 type partition
 time_step step_one
-year 1994
-file_name Alpha.txt
-
-@report state-1998-1
-type partition
-time_step step_one
-year 1998
-file_name state_1998_1.txt
-
-@report state-2004-1
-type partition
-time_step step_one
-year 2004
-file_name state-2004-1.txt
-
-@report Final
-type partition
-time_step step_one
-year 2008
-file_name state-2008-1.txt
+years 1994 1998 2004 2008
 
 @report Objective_Score
 type objective_function
-file_name objective_function.txt

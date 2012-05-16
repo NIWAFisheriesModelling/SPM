@@ -1,132 +1,132 @@
 @model
 nrows 1
 ncols 1
-layer Base
+layer base
 categories immature mature
 min_age 1
 max_age 50
-age_plus_group True
+age_plus_group true
 initial_year 1994
 current_year 2008
 final_year 2108
 cell_length 1
-initialisation_phases Phase1 Phase2
+initialisation_phases phase1 phase2
 time_steps step_one step_two
 
-@initialisation_phase Phase1
+@initialisation_phase phase1
 years 200
-processes Recruitment Maturation halfM halfM Ageing
+processes recruitment maturation halfm halfm ageing
 
-@initialisation_phase Phase2
+@initialisation_phase phase2
 years 1
-processes Recruitment Maturation halfM halfM Ageing
+processes recruitment maturation halfm halfm ageing
 
 @time_step step_one
-processes Recruitment Maturation halfM fishing halfM
+processes recruitment maturation halfm fishing halfm
 
 @time_step step_two
-processes Ageing
+processes ageing
 
-# Population processes
-@process Ageing
+# population processes
+@process ageing
 type ageing
 categories immature mature
 
-@process Recruitment
+@process recruitment
 type constant_recruitment
 categories immature
 proportions 1.0
-R0 997386
-ages 1
+r0 997386
+age 1
 
-@process halfM
+@process halfm
 type constant_mortality_rate
 categories immature mature
-M 0.065 0.065
-selectivities One One
+m 0.065 0.065
+selectivities one one
 
-@process Fishing
+@process fishing
 type event_mortality
 categories immature mature
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
-layers Fishing_1998 Fishing_1999 Fishing_2000 Fishing_2001 Fishing_2002 Fishing_2003 Fishing_2004 Fishing_2005 Fishing_2006 Fishing_2007
-U_max 0.99
-selectivities FishingSel FishingSel
+layers fishing_1998 fishing_1999 fishing_2000 fishing_2001 fishing_2002 fishing_2003 fishing_2004 fishing_2005 fishing_2006 fishing_2007
+u_max 0.99
+selectivities fishingsel fishingsel
 penalty event_mortality_penalty
 
-@process Maturation
+@process maturation
 type category_transition_rate
 from immature
 to mature
-proportion 1.0
-selectivity Maturation
+proportions 1.0
+selectivities maturation
 
-# Definition of layers
-@layer Base
+# definition of layers
+@layer base
 type numeric
-@include "Base.map"
+@include "base.map"
 
 @layer constant
 type numeric
 @include "constant.map"
 
-@layer SSRU
+@layer ssru
 type categorical
-@include "SSRU.map"
+@include "ssru.map"
 
-@layer Fishing_1998
+@layer fishing_1998
 type numeric
-@include "Fishing_1998.map"
+@include "fishing_1998.map"
 
-@layer Fishing_1999
+@layer fishing_1999
 type numeric
-@include "Fishing_1999.map"
+@include "fishing_1999.map"
 
-@layer Fishing_2000
+@layer fishing_2000
 type numeric
-@include "Fishing_2000.map"
+@include "fishing_2000.map"
 
-@layer Fishing_2001
+@layer fishing_2001
 type numeric
-@include "Fishing_2001.map"
+@include "fishing_2001.map"
 
-@layer Fishing_2002
+@layer fishing_2002
 type numeric
-@include "Fishing_2002.map"
+@include "fishing_2002.map"
 
-@layer Fishing_2003
+@layer fishing_2003
 type numeric
-@include "Fishing_2003.map"
+@include "fishing_2003.map"
 
-@layer Fishing_2004
+@layer fishing_2004
 type numeric
-@include "Fishing_2004.map"
+@include "fishing_2004.map"
 
-@layer Fishing_2005
+@layer fishing_2005
 type numeric
-@include "Fishing_2005.map"
+@include "fishing_2005.map"
 
-@layer Fishing_2006
+@layer fishing_2006
 type numeric
-@include "Fishing_2006.map"
+@include "fishing_2006.map"
 
-@layer Fishing_2007
+@layer fishing_2007
 type numeric
-@include "Fishing_2007.map"
+@include "fishing_2007.map"
 
-# Definition of selecivities
-@selectivity One
+# definition of selecivities
+@selectivity one
 type constant
 c 1
 
-@selectivity Maturation
+@selectivity maturation
 type logistic_producing
-L 5
-H 30
+l 5
+h 30
 a50 8
 ato95 3
 
-@selectivity FishingSel
+@selectivity fishingsel
 type logistic
 a50 8
 ato95 3

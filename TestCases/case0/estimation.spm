@@ -680,13 +680,13 @@ upper_bound 30
 prior Uniform
 
 @estimate
-parameter process[Spawning].proportions
+parameter process[Spawning].proportions(1)
 lower_bound 1e-5
 upper_bound 1
 prior Uniform
 
 @estimate
-parameter process[PostSpawning].proportions
+parameter process[PostSpawning].proportions(1)
 lower_bound 1e-5
 upper_bound 1
 prior Uniform

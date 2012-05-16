@@ -1,46 +1,46 @@
-# Spatial structure
+# spatial structure
 @model
 nrows 1
 ncols 100
-layer Base
+layer base
 categories all
 min_age 1
 max_age 1
-age_plus_group True
-initialisation_phases Phase1
+age_plus_group true
+initialisation_phases phase1
 time_steps step_one
 initial_year 1994
 current_year 2008
 final_year 2108
 cell_length 1
 
-@initialisation_phase Phase1
+@initialisation_phase phase1
 years 200
-processes Recruitment M Ageing
+processes recruitment m ageing
 
 @time_step step_one
-processes Recruitment M Move2 Ageing
+processes recruitment m move2 ageing
 
-# Population processes
-@process Ageing
+# population processes
+@process ageing
 type ageing
 categories all
 
-@process Recruitment
+@process recruitment
 type constant_recruitment
 categories all
 proportions 1.0
-R0 100
-ages 1
-layer Recruit
+r0 100
+age 1
+layer recruit
 
-@process M
+@process m
 type constant_mortality_rate
 categories all
-M 0.13
-selectivities One
+m 0.13
+selectivities one
 
-@process Move2
+@process move2
 type preference
 categories all
 preference_functions distance-move depth-move
@@ -54,31 +54,31 @@ lambda 0.2
 @preference_function depth-move
 type normal
 alpha 1
-layer Depth
+layer depth
 mu 50
 sigma 15
 
-# Definition of layers
-@layer Base
+# definition of layers
+@layer base
 type numeric
-@include "Base.map"
+@include "base.map"
 
-@layer Depth
+@layer depth
 type numeric
-@include "Depth.map"
+@include "depth.map"
 
-@layer Recruit
+@layer recruit
 type numeric
-@include "Recruit.map"
+@include "recruit.map"
 
 @layer constant
 type numeric
-@include "Constant.map"
+@include "constant.map"
 
-@layer Distance
+@layer distance
 type distance
 
-# Definition of selecivities
-@selectivity One
+# definition of selecivities
+@selectivity one
 type constant
 c 1

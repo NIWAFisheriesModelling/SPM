@@ -1,8 +1,0 @@
-# ESTIMATION
-@MPD
-max_iters 1000
-max_evals 4000
-stepsize 1e-7
-grad_tol 0.00002 #The default is 0.002
-
-
