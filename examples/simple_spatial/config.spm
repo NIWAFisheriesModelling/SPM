@@ -51,7 +51,7 @@ type constant_recruitment
 categories immature
 proportions 1.0
 r0 1e6
-ages 1
+age 1
 
 {
 @process Recruitment
@@ -146,6 +146,7 @@ ato95 0.436736
 
 # Definition of layers
 @include "layers/Base.spm"
+@include "layers/Source_sink.spm"
 @include "layers/Cell.spm"
 @include "layers/Constant.spm"
 @include "layers/CPUE.spm"
