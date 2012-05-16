@@ -194,23 +194,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
-\TOUNDO
-
-\defSub{ages} {Define the age within each category that receive recruitment}
-\defType{Integer vector}
-\defDefault{No default}
-\defValue{The age classes that receive recruitment}
-
-\TOUNDOend
-
-\TODO
-
-\defSub{age} {Define the age that receive recruitment}
+\defSub{age} {Define the age that receives recruitment}
 \defType{Integer}
 \defDefault{No default}
-\defValue{The age classe that receive recruitment}
-
-\TODOend
+\defValue{The age class that receives recruitment}
 
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
 \defType{Estimable}
@@ -295,10 +282,10 @@ Changed name to be clearer.
 \defDefault{No default}
 \defValue{Proportion of the annual recruitment that is applied to each category}
 
-\defSub{age} {Define the age that receive recruitment}
+\defSub{age} {Define the age that receives recruitment}
 \defType{Integer}
 \defDefault{No default}
-\defValue{The age classe that receive recruitment}
+\defValue{The age class that receives recruitment}
 
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
 \defType{Estimable}
@@ -536,12 +523,20 @@ Changed name to be clearer.
 
 \subsubsection[Migration movement]{\commandlabsubarg{process}{type}{migration\_movement}}
 
-\TODO
-
 \defSub{categories} {Define the categories that the migration movement event is applied to}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{proportion} {Define the constant multiplier for the proportion of individuals that migrate}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
 
 \defSub{source\_layer} {Define the label of a layer that defines the source cells of the migration movement event}
 \defType{String}
@@ -552,29 +547,6 @@ Changed name to be clearer.
 \defType{String}
 \defDefault{No default}
 \defValue{A valid layer defined by \command{layer}}
-
-\defSub{proportions} {Define the constant multiplier for the proportions that migrate}
-\defType{Estimable}
-\defDefault{1.0}
-\defValue{A real number between 0 and 1, inclusive}
-
-\defSub{selectivities} {Define the selectivities applied to each category}
-\defType{String vector, of length \subcommand{categories}}
-\defDefault{No default}
-\defValue{Valid selectivity labels defined by \command{selectivity}}
-
-\TODOend
-
-\TOUNDO
-
-This is already included in the source\_layer.
-
-\defSub{layer} {Name of the layer}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer.}
-
-\TOUNDOend
 
 \subsubsection[Adjacent cell movement]{\commandlabsubarg{process}{type}{adjacent\_cell\_movement}}
 
@@ -1028,16 +1000,10 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\TODO 
-
-Changed name from selectivity to selectivities to reflect the rest of the structure. Not sure if it is already the case in the code.
-
 \defSub{selectivities} {Define the selectivities}
 \defType{String vector, of length \subcommand{categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
-
-\TODOend
 
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
 \defType{String}
@@ -1046,7 +1012,7 @@ Changed name from selectivity to selectivities to reflect the rest of the struct
 
 \TODO
 
-Is the proportion below needed? what does it do? Or is it just taxt carry over?
+Is the proportion below needed? what does it do? Or is it just text carry over?
 
 \defSub{time\_step\_proportion} {Define the proportion of the time step through which the derived quantity has been calculated}
 \defType{String vector}

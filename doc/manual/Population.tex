@@ -490,23 +490,19 @@ i.e., each element in cell$(i,j)$ is updated as the sum of itself and some propo
 	\item Movement parametrised as a probability density function. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
-\TODO
-
 \subsubsection{\I{Migration movement}}
 
-The migration process moves individuals from one sets of locations (the emigration layer) to another set of locations (the immigration layer). A migration can involve one or more categories. The emigration at age is defined as some constant proportion multiplied by a selectivity and the removal layer applied as a proportion. The immigration at age is defined as the emigration at age distributed proportionally into the immigration layer. Migrations are similar to the migration process used in some limited space models such as CASAL \citep{1388}.
+The migration process moves individuals from one sets of locations (the source, or emigration layer) to another set of locations (the sink, or immigration layer). A migration can involve one or more categories. The emigration at age is defined as some constant proportion multiplied by a selectivity and the source layer applied as a proportion. The immigration at age is defined as the number emigrating at age distributed proportionally into the sink layer. Migrations are similar to the migration process used in some limited space models such as CASAL \citep{1388}.
 
-For example, let the emigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $E(a,k,l)$, and given a value from an emigration layer $Le_a$  at $a$, a constant migration proportion $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+For example, let the emigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $E(a,k,l)$, and given a value from an source layer $Le_a$  at $a$, a constant migration proportion $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
   E(a,k,l) = \frac{P Le_a S_l }{\sum\limits_a Le_a}
 \end{equation}
 
-And let the immigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $I(a,k,l)$, and given a value from an immigration layer $Li_a$  at $a$, for some user-defined categories $k$ then, 
+And let the immigration applied to the population at cell $a$ in category $k$ and age $l$ be denoted $I(a,k,l)$, and given a value from an sink layer $Li_a$  at $a$, for some user-defined categories $k$ then, 
 \begin{equation}
   I(a,k,l) = \frac{E(a,k,l) Li_a }{\sum\limits_a Li_a} 
 \end{equation}
-
-\TODOend
 
 \subsubsection{\I{Adjacent cell movement}}
 

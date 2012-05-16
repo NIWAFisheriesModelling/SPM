@@ -6,6 +6,7 @@ In SPM, but not in manual
   adjacent_cell
   age_index
   age_size
+  ages
   area
   binomial
   binomial_approx
@@ -75,8 +76,6 @@ In manual, but not in SPM
   quantiles
   random_seed
   sd
-  sink_layer
-  source_layer
   standardise_ycs_years
   start
   time_step_proportion
