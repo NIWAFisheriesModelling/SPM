@@ -106,7 +106,14 @@ void CMigrationMovementProcess::execute() {
   try {
 #endif
 
+//TODO: Scott.. this function works correctly, but does need
+// optimisation. Its multiple loops would proably result in this
+// being relatively slow. Can we improve it?
+
     CMovementProcess::execute();
+
+    dSourceLayerMax = 0.0;
+    dSinkLayerTotal = 0.0;
 
 // iterate over source layer and calc. max_layer_source_value
 // iterate over sink layer and calc. total_layer_sink_value
@@ -114,13 +121,10 @@ void CMigrationMovementProcess::execute() {
       for (int j = 0; j < iWorldWidth; ++j) {
         // Get Current Squares
         pBaseSquare = pWorld->getBaseSquare(i, j);
-        pDiff       = pWorld->getDifferenceSquare(i, j);
-
         if (!pBaseSquare->getEnabled())
           continue;
-
-        //dSourceLayerMax = max(dSourceLayerMax, pSourceLayer->getValue(i, j));
-        //dSinkLayerTotal += pSinkLayer->getValue(i, j);
+        dSourceLayerMax = fmax(dSourceLayerMax, pSourceLayer->getValue(i, j));
+        dSinkLayerTotal += pSinkLayer->getValue(i, j);
       }
     }
 
@@ -129,14 +133,37 @@ void CMigrationMovementProcess::execute() {
 //    multiply by source layer/max_layer_value
 //    multiply by selectivity
 //  and sum the result for age and category (call total)
+    for (int k = 0; k < (int)vCategories.size(); ++k) {
+      for (int l = 0; l < iBaseColCount; ++l) {
 
+        dTotal = 0.0;
 
+        // iterate over the world and sum the source
+        for (int i = 0; i < iWorldHeight; ++i) {
+          for (int j = 0; j < iWorldWidth; ++j) {
 
+          // Get Current Squares
+          pBaseSquare = pWorld->getBaseSquare(i, j);
+          pDiff       = pWorld->getDifferenceSquare(i, j);
+          if (!pBaseSquare->getEnabled())
+            continue;
 
-// iterate over the world, and allocate total to
-//   all cells with proportion sink layer value / total
-//
+          dSquare = pBaseSquare->getValue( vCategories[k], l) * dProportion * vSelectivities[k]->getResult(l);
+          dTotal += dSquare;
+          pDiff->subValue(k, l, dSquare); // remove from world
 
+          }
+        }
+        // iterate over the world and allocate dTotal to sink, proportionally
+        for (int i = 0; i < iWorldHeight; ++i) {
+          for (int j = 0; j < iWorldWidth; ++j) {
+            pBaseSquare = pWorld->getBaseSquare(i, j);
+            pDiff       = pWorld->getDifferenceSquare(i, j);
+            pDiff->addValue(k, l, dTotal * pSinkLayer->getValue(i, j)/dSinkLayerTotal);
+          }
+        }
+      }
+    }
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
