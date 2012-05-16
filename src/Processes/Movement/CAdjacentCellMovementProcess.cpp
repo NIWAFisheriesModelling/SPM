@@ -41,7 +41,7 @@ void CAdjacentCellMovementProcess::validate() {
   try {
 
     // Get our Variables
-    sLayer = pParameterList->getString(PARAM_LAYER);
+    sLayer = pParameterList->getString(PARAM_LAYER,true,"");
     dProportion = pParameterList->getDouble(PARAM_PROPORTION);
 
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
@@ -114,36 +114,40 @@ void CAdjacentCellMovementProcess::execute() {
           continue;
 
         // Loop Through Categories and Ages
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+        for (int k = 0; k < (int)vCategories.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
+            dCurrent = pBaseSquare->getValue( vCategories[k], l);
 
-            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
             if(CComparer::isZero(dCurrent))
               continue;
             // get up/down/left/right layer values and convert to proportions
-            if (pLayer != 0) {
-              if ( (i+1) <= pWorld->getHeight() )
-                dLayerValueUp = pLayer->getValue(i+1, j);
+
+            if (sLayer != "") {
+              if ( (i+1) < pWorld->getHeight() )
+                dLayerValueDown = pLayer->getValue(i+1, j);
               else
-                dLayerValueUp = 0.0;
+                dLayerValueDown = 0.0;
               if ( (i-1) >= 0 )
-                dLayerValueDown = pLayer->getValue(i-1, j);
+                dLayerValueUp = pLayer->getValue(i-1, j);
               else
                 dLayerValueUp = 0.0;
-              if ( (j+1) <= pWorld->getWidth() )
-                dLayerValueLeft = pLayer->getValue(i, j+1);
+              if ( (j+1) < pWorld->getWidth() )
+                dLayerValueRight = pLayer->getValue(i, j+1);
               else
-                dLayerValueUp = 0.0;
+                dLayerValueRight = 0.0;
               if ( (j-1) >= 0 )
-                dLayerValueRight = pLayer->getValue(i, j-1);
+                dLayerValueLeft = pLayer->getValue(i, j-1);
               else
-                dLayerValueUp = 0.0;
+                dLayerValueLeft = 0.0;
+
               dLayerTotal = dLayerValueUp + dLayerValueDown + dLayerValueLeft + dLayerValueRight;
+
               if(dLayerTotal > 0.0) {
-                dLayerValueUp = dCurrent * dLayerValueUp/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueDown = dCurrent * dLayerValueDown/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueLeft = dCurrent * dLayerValueLeft/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
-                dLayerValueRight = dCurrent * dLayerValueRight/dLayerTotal * dProportion * vSelectivityIndex[k]->getResult(l);
+                dValue = dCurrent * dProportion * vSelectivities[k]->getResult(l);
+                dLayerValueUp = dValue * dLayerValueUp/dLayerTotal;
+                dLayerValueDown = dValue * dLayerValueDown/dLayerTotal;
+                dLayerValueLeft = dValue * dLayerValueLeft/dLayerTotal;
+                dLayerValueRight = dValue * dLayerValueRight/dLayerTotal;
               } else {
                 dLayerValueUp = 0.0;
                 dLayerValueDown = 0.0;
@@ -152,17 +156,17 @@ void CAdjacentCellMovementProcess::execute() {
               }
              // or if no layer defined, then just move 1/4 each way
             } else {
-              dLayerValueUp = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
-              dLayerValueDown = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
-              dLayerValueLeft = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
-              dLayerValueRight = 0.25 * dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);;
+              dValue = dCurrent * dProportion * vSelectivities[k]->getResult(l);
+              dLayerValueUp = 0.25 * dValue;
+              dLayerValueDown = 0.25 * dValue;
+              dLayerValueLeft = 0.25 * dValue;
+              dLayerValueRight = 0.25 * dValue;
             }
             // Move
-            moveUp(i, j, vCategoryIndex[k], l, dLayerValueUp);
-            moveDown(i, j, vCategoryIndex[k], l, dLayerValueDown);
-            moveLeft(i, j, vCategoryIndex[k], l, dLayerValueLeft);
-            moveRight(i, j, vCategoryIndex[k], l, dLayerValueRight);
-
+            moveUp(i, j, vCategories[k], l, dLayerValueUp);
+            moveDown(i, j, vCategories[k], l, dLayerValueDown);
+            moveLeft(i, j, vCategories[k], l, dLayerValueLeft);
+            moveRight(i, j, vCategories[k], l, dLayerValueRight);
           }
         }
       }

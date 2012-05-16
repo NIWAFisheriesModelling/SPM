@@ -34,6 +34,7 @@ protected:
   double                        dLayerValueDown;
   double                        dLayerValueLeft;
   double                        dLayerValueRight;
+  double                        dValue;
   CNumericLayer                 *pLayer;
   vector<string>                vCategoryNames;
   vector<int>                   vCategories;
