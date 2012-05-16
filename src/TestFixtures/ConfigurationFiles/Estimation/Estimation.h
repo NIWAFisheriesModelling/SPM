@@ -21,7 +21,7 @@ const string basic_estimation =
   "type de_solver\n"
   "covariance False\n"
   "@estimate\n"
-  "parameter process[category_transition_rate].proportions(0)\n"
+  "parameter process[category_transition_rate].proportions(1)\n"
   "lower_bound 0.1\n"
   "upper_bound 1.0\n"
   "prior uniform_prior\n"

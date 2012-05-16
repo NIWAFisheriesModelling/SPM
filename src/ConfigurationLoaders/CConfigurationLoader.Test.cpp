@@ -102,7 +102,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
   addToConfiguration(logistic_producing);
   addToConfiguration(basic_estimation);
   addToTimeStep("ageing constant_recruitment_all_ages category_transition_rate annual_mortality_rate");
-  string estimateValues = "process[category_transition_rate].proportions(0)\n0.3\n0.4\n0.7";
+  string estimateValues = "process[category_transition_rate].proportions(1)\n0.3\n0.4\n0.7";
   addToEstimateValueConfiguation(estimateValues);
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
@@ -116,7 +116,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
   BOOST_CHECK_EQUAL(pEstimateManager->getEstimateValueCount(), 3);
 
   CEstimate *pEstimate = 0;
-  BOOST_REQUIRE_NO_THROW(pEstimate = pEstimateManager->getEstimate("process[category_transition_rate].proportions(0)"));
+  BOOST_REQUIRE_NO_THROW(pEstimate = pEstimateManager->getEstimate("process[category_transition_rate].proportions(1)"));
 
   BOOST_REQUIRE_NO_THROW(pEstimateManager->loadEstimateValues(0));
   BOOST_CHECK_EQUAL(pEstimate->getValue(), 0.3);
@@ -185,7 +185,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
   addToConfiguration(logistic_producing);
   addToConfiguration(basic_estimation);
   addToTimeStep("ageing constant_recruitment_all_ages category_transition_rate annual_mortality_rate");
-  string estimateValues = "process[category_transition_rate].proportions(0)\n0.3\n0.4\n0.7\n0.2\n0.5";
+  string estimateValues = "process[category_transition_rate].proportions(1)\n0.3\n0.4\n0.7\n0.2\n0.5";
   addToEstimateValueConfiguation(estimateValues);
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
@@ -199,7 +199,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
   BOOST_CHECK_EQUAL(pEstimateManager->getEstimateValueCount(), 5);
 
   CEstimate *pEstimate = 0;
-  BOOST_REQUIRE_NO_THROW(pEstimate = pEstimateManager->getEstimate("process[category_transition_rate].proportions(0)"));
+  BOOST_REQUIRE_NO_THROW(pEstimate = pEstimateManager->getEstimate("process[category_transition_rate].proportions(1)"));
 
   BOOST_REQUIRE_NO_THROW(pEstimateManager->loadEstimateValues(0));
   BOOST_CHECK_EQUAL(pEstimate->getValue(), 0.3);
