@@ -26,7 +26,7 @@ type constant_recruitment
 categories immature
 proportions 1.0
 r0 100
-ages 1
+age 1
 
 @preference_function double_normal_preference
 type double_normal

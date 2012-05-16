@@ -7,33 +7,37 @@ categories immature
 min_age 1
 max_age 5
 age_plus_group true
-initial_year 1994
+initial_year 1990
 current_year 1996
 final_year 100
 cell_length 1
 time_steps one
 
 @time_step one
-processes recruitment prefmoveone
+processes recruitment ageing moveone
 
-@process prefmoveone
-type preference
+@process moveone
+type adjacent_cell
 categories immature
-preference_functions normal_preference
+proportion 0.5
+layer move_gradient
+selectivities one
 
 @process recruitment
 type constant_recruitment
+layer recruit
 categories immature
 proportions 1.0
-r0 100
+r0 90
 age 1
 
-@preference_function normal_preference
-type normal
-alpha 2.6
-mu 4.0
-sigma 12.7
-layer double_layer
+@process ageing
+type ageing
+categories immature
+
+@selectivity one
+type constant
+c 1
 
 @layer base
 type numeric
@@ -41,26 +45,28 @@ data 1 1 1
 data 1 1 1
 data 1 1 1
 
+@layer recruit
+type numeric
+data 1 0 0
+data 0 0 0
+data 0 0 0
+
 @layer double_layer
 type numeric
 data 1 2 3
 data 4 5 6
 data 7 8 9
 
+@layer move_gradient
+type numeric
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
 @report 1994_timestep_one
 type partition
 time_step one
-years 1994
-
-@report 1995_timestep_one
-type partition
-time_step one
-years 1995
-
-@report 1996_timestep_one
-type partition
-time_step one
-years 1996
+years 1990-1996
 
 @report objective_score
 type objective_function
