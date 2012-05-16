@@ -8,7 +8,9 @@
 //============================================================================
 
 // Global Headers
+#define NDEBUG 1
 #define BOOST_UBLAS_TYPE_CHECK 0
+#define BOOST_UBLAS_SINGULAR_CHECK 1
 
 #include <boost/numeric/ublas/triangular.hpp>
 #include <boost/numeric/ublas/io.hpp>
