@@ -69,6 +69,17 @@ void CMinimizer::buildCovarianceMatrix() {
     ublas::lu_substitute(copiedMatrix,pm,identityMatrix);
 
     mxCovariance.swap(identityMatrix);
+
+    mxCorrelation = mxCovariance;
+    double dDiag;
+    for (int i = 0; i < iEstimateCount; ++i) {
+      dDiag = mxCorrelation(i,i);
+      for (int j = 0; j < iEstimateCount; ++j) {
+        mxCorrelation(i,j) = mxCorrelation(i,j) / sqrt(dDiag);
+        mxCorrelation(j,i) = mxCorrelation(j,i) / sqrt(dDiag);
+      }
+    }
+
   } catch (...) {
     // Something went wrong.
     bCovarianceError = true;
@@ -84,6 +95,16 @@ double CMinimizer::getCovarianceValue(int row, int col) {
     CError::errorMissing(PARAM_COVARIANCE);
 
   return mxCovariance(row, col);
+}
+
+//**********************************************************************
+// double CMinimizer::getCorrelationValue(int row, int col)
+// Return our Correlation Matrix Value
+//**********************************************************************
+double CMinimizer::getCorrelationValue(int row, int col) {
+  if ( (mxCorrelation.size1() == 0) || (mxCorrelation.size2() == 0) )
+    CError::errorMissing(PARAM_COVARIANCE);
+  return mxCorrelation(row, col);
 }
 
 //**********************************************************************

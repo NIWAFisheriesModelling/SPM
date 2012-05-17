@@ -171,6 +171,7 @@
 #define PARAM_CONSTANT                            "constant"
 #define PARAM_CONSTANT_MORTALITY_RATE             "constant_mortality_rate"
 #define PARAM_CONSTANT_RECRUITMENT                "constant_recruitment"
+#define PARAM_CORRELATION                         "correlation"
 #define PARAM_COVARIANCE                          "covariance"
 #define PARAM_CROSSOVER_PROBABILITY               "crossover_probability"
 #define PARAM_CURRENT_YEAR                        "current_year"

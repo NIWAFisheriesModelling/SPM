@@ -30,6 +30,7 @@ public:
   bool                       getBuildCovariance() { return bCovariance; }
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   double                     getCovarianceValue(int row, int col);
+  double                     getCorrelationValue(int row, int col);
   int                        getEstimateCount() { return iEstimateCount; }
   bool                       getCovarianceError() { return bCovarianceError; }
   void                       buildCovarianceMatrix();
@@ -41,6 +42,7 @@ protected:
   // Variables
   double                      **pHessian;
   ublas::matrix<double>       mxCovariance;
+  ublas::matrix<double>       mxCorrelation;
   int                         iEstimateCount;
   bool                        bCovariance;
   bool                        bCovarianceError;

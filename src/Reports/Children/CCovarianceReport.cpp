@@ -77,6 +77,13 @@ void CCovarianceReport::execute() {
         }
         cout << "\n";
       }
+      cout << "Correlation:\n";
+      for (int i = 0; i < iCount; ++i) {
+        for (int j = 0; j < iCount; ++j) {
+          cout << pMinimizer->getCorrelationValue(i, j) << " ";
+        }
+        cout << "\n";
+      }
     }
 
     cout << CONFIG_END_REPORT << "\n" << endl;
