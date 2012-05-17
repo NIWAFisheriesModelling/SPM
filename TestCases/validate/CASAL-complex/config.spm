@@ -38,7 +38,7 @@ categories male female
 type constant_recruitment
 categories male female
 proportions 0.5 0.5
-r0 12000
+r0 8000
 age 2
 {
 @process Recruitment

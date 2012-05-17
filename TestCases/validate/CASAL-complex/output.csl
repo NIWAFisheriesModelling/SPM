@@ -11,6 +11,7 @@ pearson_resids false
 normalised_resids false
 estimation_section false
 covariance True
+hessian True
 # population section
 requests true
 initial_state true

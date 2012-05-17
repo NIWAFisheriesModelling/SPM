@@ -512,7 +512,7 @@ prior uniform_log
 #FREE PARAMETERS
 @estimate
 parameter process[Recruitment].r0
-lower_bound 10000
+lower_bound 1000
 upper_bound 150000
 prior uniform_log
 {
