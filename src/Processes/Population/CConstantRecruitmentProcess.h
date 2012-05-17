@@ -31,10 +31,10 @@ public:
 
 protected:
   // Variables
-  vector<double>             vProportionList;
   double                     dR0;
-  int                        dAge;
-  int                        dAgeIndex;
+  vector<double>             vProportions;
+  int                        iAge;
+  int                        iAgeIndex;
   string                     sLayer;
   CNumericLayer              *pLayer;
 };

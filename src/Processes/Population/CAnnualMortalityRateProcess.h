@@ -35,10 +35,6 @@ protected:
   // Variables
   vector<int>                 vYears;
   vector<double>              vMortalityRates;
-  vector<string>              vCategoryNames;
-  vector<int>                 vCategories;
-  vector<string>              vSelectivityNames;
-  vector<CSelectivity*>       vSelectivities;
   string                      sLayer;
   CNumericLayer               *pLayer;
   CTimeStepManager            *pTimeStepManager;

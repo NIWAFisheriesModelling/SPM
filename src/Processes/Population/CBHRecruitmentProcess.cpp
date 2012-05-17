@@ -74,26 +74,29 @@ void CBHRecruitmentProcess::validate() {
     iSSBOffset    = pParameterList->getInt(PARAM_SSB_OFFSET);
     sLayer        = pParameterList->getString(PARAM_LAYER, true, "");
 
-    pParameterList->fillVector(vProportionList, PARAM_PROPORTIONS);
+    pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
     pParameterList->fillVector(vYCSYears, PARAM_YCS_YEARS);
     pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
-    // The 2 Vectors must be same size
-    unsigned iCategorySize    = vCategoryList.size();
-    unsigned iProportionSize  = vProportionList.size();
+    // iAge must be a valid age
+    if (iAge < pWorld->getMinAge())
+      CError::errorLessThan(PARAM_AGE,PARAM_MIN_AGE);
+    if (iAge > pWorld->getMaxAge())
+      CError::errorGreaterThan(PARAM_AGE,PARAM_MAX_AGE);
 
-    if (iCategorySize != iProportionSize)
+    // The 2 Vectors must be same size
+    if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     // Register our Proportions as Estimable
-    for (int i = 0; i < (int)vProportionList.size(); ++i)
-      registerEstimable(PARAM_PROPORTIONS, i, &vProportionList[i]);
+    for (int i = 0; i < (int)vProportions.size(); ++i)
+      registerEstimable(PARAM_PROPORTIONS, i, &vProportions[i]);
 
     // Loop Through Proportions. Make Sure They Equal 1.0
     double dRunningTotal = 0.0;
-    foreach(double Prop, vProportionList) {
+    foreach(double Prop, vProportions) {
       dRunningTotal += Prop;
     }
     // See If It is close enough to 1.0
@@ -163,7 +166,7 @@ void CBHRecruitmentProcess::build() {
     iAgeIndex = pWorld->getColIndexForAge(iAge);
 
     // Validate our Vectors are all same size
-    if (vCategoryIndex.size() != vProportionList.size())
+    if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
   } catch (string &Ex) {
@@ -214,8 +217,8 @@ void CBHRecruitmentProcess::execute() {
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k)
-          pDiff->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportionList[k]) );
+        for (int k = 0; k < getCategoryCount(); ++k)
+          pDiff->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]) );
       }
     }
 #ifndef OPTIMIZE
@@ -231,4 +234,5 @@ void CBHRecruitmentProcess::execute() {
 // Destructor
 //**********************************************************************
 CBHRecruitmentProcess::~CBHRecruitmentProcess() {
-}
+    vProportions.clear();
+  }

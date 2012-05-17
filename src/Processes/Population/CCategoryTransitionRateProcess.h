@@ -30,13 +30,11 @@ public:
 
 protected:
   // Variables
-  vector<string>             vFrom;
-  vector<int>                vFromIndex;
-  vector<string>             vTo;
-  vector<int>                vToIndex;
   vector<double>             vProportions;
-  vector<string>             vSelectivityNames;
-  vector<CSelectivity*>      vSelectivities;
+  vector<string>             vFromList;
+  vector<int>                vFromIndex;
+  vector<string>             vToList;
+  vector<int>                vToIndex;
   string                     sLayer;
   CNumericLayer              *pLayer;
 

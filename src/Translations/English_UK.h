@@ -257,7 +257,7 @@
 #define PARAM_OBSERVATION                         "observation"
 #define PARAM_OFF_BY_ONE                          "off_by_one"
 #define PARAM_ONE                                 "1 (one)"
-#define PARAM_ONE_THOUSAND                        "1,000"
+#define PARAM_ONE_THOUSAND                        "1000"
 #define PARAM_OVERWRITE                           "overwrite"
 #define PARAM_P1                                  "p1"
 #define PARAM_P2                                  "p2"

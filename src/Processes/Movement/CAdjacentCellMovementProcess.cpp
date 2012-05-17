@@ -44,8 +44,8 @@ void CAdjacentCellMovementProcess::validate() {
     sLayer = pParameterList->getString(PARAM_LAYER,true,"");
     dProportion = pParameterList->getDouble(PARAM_PROPORTION);
 
-    pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
     // Base Validation
     CMovementProcess::validate();
@@ -79,8 +79,8 @@ void CAdjacentCellMovementProcess::build() {
     CMovementProcess::build();
 
     // Get selectivities and categories.
-    CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
-    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+    CSelectivityManager::Instance()->fillVector(vSelectivityIndex, vSelectivityList);
+    pWorld->fillCategoryVector(vCategoryIndex, vCategoryList);
 
     // Get our Layer
     if (sLayer != "")
@@ -114,9 +114,9 @@ void CAdjacentCellMovementProcess::execute() {
           continue;
 
         // Loop Through Categories and Ages
-        for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int k = 0; k < getCategoryCount(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
-            dCurrent = pBaseSquare->getValue( vCategories[k], l);
+            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
 
             if(CComparer::isZero(dCurrent))
               continue;
@@ -143,7 +143,7 @@ void CAdjacentCellMovementProcess::execute() {
               dLayerTotal = dLayerValueUp + dLayerValueDown + dLayerValueLeft + dLayerValueRight;
 
               if(dLayerTotal > 0.0) {
-                dValue = dCurrent * dProportion * vSelectivities[k]->getResult(l);
+                dValue = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
                 dLayerValueUp = dValue * dLayerValueUp/dLayerTotal;
                 dLayerValueDown = dValue * dLayerValueDown/dLayerTotal;
                 dLayerValueLeft = dValue * dLayerValueLeft/dLayerTotal;
@@ -156,17 +156,17 @@ void CAdjacentCellMovementProcess::execute() {
               }
              // or if no layer defined, then just move 1/4 each way
             } else {
-              dValue = dCurrent * dProportion * vSelectivities[k]->getResult(l);
+              dValue = dCurrent * dProportion * vSelectivityIndex[k]->getResult(l);
               dLayerValueUp = 0.25 * dValue;
               dLayerValueDown = 0.25 * dValue;
               dLayerValueLeft = 0.25 * dValue;
               dLayerValueRight = 0.25 * dValue;
             }
             // Move
-            moveUp(i, j, vCategories[k], l, dLayerValueUp);
-            moveDown(i, j, vCategories[k], l, dLayerValueDown);
-            moveLeft(i, j, vCategories[k], l, dLayerValueLeft);
-            moveRight(i, j, vCategories[k], l, dLayerValueRight);
+            moveUp(i, j, vCategoryIndex[k], l, dLayerValueUp);
+            moveDown(i, j, vCategoryIndex[k], l, dLayerValueDown);
+            moveLeft(i, j, vCategoryIndex[k], l, dLayerValueLeft);
+            moveRight(i, j, vCategoryIndex[k], l, dLayerValueRight);
           }
         }
       }

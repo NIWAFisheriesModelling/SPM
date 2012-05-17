@@ -47,17 +47,17 @@ void CCategoryTransitionRateProcess::validate() {
     // Populate our variables
     sLayer  = pParameterList->getString(PARAM_LAYER,true,"");
 
-    pParameterList->fillVector(vFrom, PARAM_FROM);
-    pParameterList->fillVector(vTo, PARAM_TO);
+    pParameterList->fillVector(vFromList, PARAM_FROM);
+    pParameterList->fillVector(vToList, PARAM_TO);
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
-    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
     // Validate Sizes
-    if (vFrom.size() != vTo.size())
+    if (vFromList.size() != vToList.size())
       CError::errorListSameSize(PARAM_FROM, PARAM_TO);
-    if (vFrom.size() != vProportions.size())
+    if (vFromList.size() != vProportions.size())
       CError::errorListSameSize(PARAM_FROM, PARAM_PROPORTIONS);
-    if (vFrom.size() != vSelectivityNames.size())
+    if (vFromList.size() != vSelectivityList.size())
       CError::errorListSameSize(PARAM_FROM, PARAM_SELECTIVITIES);
 
     // Local Validation
@@ -87,17 +87,17 @@ void CCategoryTransitionRateProcess::build() {
     CProcess::build();
 
     // Get our Category Indexes.
-    foreach(string Category, vFrom) {
+    foreach(string Category, vFromList) {
       vFromIndex.push_back(pWorld->getCategoryIndexForName(Category));
     }
-    foreach(string Category, vTo) {
+    foreach(string Category, vToList) {
       vToIndex.push_back(pWorld->getCategoryIndexForName(Category));
     }
 
     // Get Selectivities
     CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
-    foreach(string Label, vSelectivityNames) {
-      vSelectivities.push_back(pSelectivityManager->getSelectivity(Label));
+    foreach(string Label, vSelectivityList) {
+      vSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Label));
     }
 
     if (sLayer != "")
@@ -126,7 +126,7 @@ void CCategoryTransitionRateProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        pDiff       = pWorld->getDifferenceSquare(i, j);
+        pDiff = pWorld->getDifferenceSquare(i, j);
 
         for (int l = 0; l < iBaseColCount; ++l) {
           // Loop through vectors and make adjustment
@@ -139,7 +139,7 @@ void CCategoryTransitionRateProcess::execute() {
             if (pLayer != 0)
               dCurrent *= log(pLayer->getValue(i, j));
 
-            dCurrent = dCurrent * vProportions[k] * vSelectivities[k]->getResult(l);
+            dCurrent = dCurrent * vProportions[k] * vSelectivityIndex[k]->getResult(l);
             pBaseSquare->subValue(vFromIndex[k], l, dCurrent);
             pBaseSquare->addValue(vToIndex[k], l, dCurrent);
           }
@@ -157,4 +157,5 @@ void CCategoryTransitionRateProcess::execute() {
 // Destructor
 //**********************************************************************
 CCategoryTransitionRateProcess::~CCategoryTransitionRateProcess() {
+  vProportions.clear();
 }

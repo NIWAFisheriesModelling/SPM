@@ -48,13 +48,19 @@ void CAnnualMortalityRateProcess::validate() {
 
     pParameterList->fillVector(vYears, PARAM_YEARS);
     pParameterList->fillVector(vMortalityRates, PARAM_M);
-    pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+
+    // M must be non-negative
+    for(int i=0; i < (int)vMortalityRates.size(); ++i ) {
+      if ( vMortalityRates[i] < 0.0 )
+        CError::errorLessThan(PARAM_AGE,PARAM_ZERO);
+    }
 
     // Check Sizes
     if (vYears.size() != vMortalityRates.size())
       CError::errorListSameSize(PARAM_YEARS, PARAM_M);
-    if (vCategoryNames.size() != vSelectivityNames.size())
+    if (vCategoryList.size() != vSelectivityList.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
   } catch (string &Ex) {
@@ -77,8 +83,8 @@ void CAnnualMortalityRateProcess::build() {
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
     // Get selectivities and categories.
-    CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
-    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+    CSelectivityManager::Instance()->fillVector(vSelectivityIndex, vSelectivityList);
+    pWorld->fillCategoryVector(vCategoryIndex, vCategoryList);
 
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
@@ -125,12 +131,12 @@ void CAnnualMortalityRateProcess::execute() {
         if (pLayer != 0)
           dLayerValue = pLayer->getValue(i, j);
 
-        for(int k = 0; k < (int)vCategories.size(); ++k) {
+        for(int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int m = 0; m < iBaseColCount; ++m) {
-            double dCurrent = pBaseSquare->getValue(vCategories[k], m);
-            dCurrent *= ( 1.0 - exp(-dM * dLayerValue) ) * vSelectivities[k]->getResult(m);
+            double dCurrent = pBaseSquare->getValue(vCategoryIndex[k], m);
+            dCurrent *= ( 1.0 - exp(-dM * dLayerValue) ) * vSelectivityIndex[k]->getResult(m);
 
-            pDiff->subValue(vCategories[k], m, dCurrent);
+            pDiff->subValue(vCategoryIndex[k], m, dCurrent);
           } // for m
         } // for k
       } // for j

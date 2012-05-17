@@ -21,8 +21,6 @@ public:
   CAdjacentCellMovementProcess();
   virtual                    ~CAdjacentCellMovementProcess();
   CProcess*                  clone() { return (new CAdjacentCellMovementProcess(*this)); }
-  int                        getCategoryCount() { return (int)vCategoryNames.size(); }
-  int                        getSelectivityCount() { return (int)vSelectivityNames.size(); }
   void                       validate();
   void                       build();
   void                       execute();
@@ -36,10 +34,6 @@ protected:
   double                        dLayerValueRight;
   double                        dValue;
   CNumericLayer                 *pLayer;
-  vector<string>                vCategoryNames;
-  vector<int>                   vCategories;
-  vector<string>                vSelectivityNames;
-  vector<CSelectivity*>         vSelectivities;
   string                        sLayer;
 };
 

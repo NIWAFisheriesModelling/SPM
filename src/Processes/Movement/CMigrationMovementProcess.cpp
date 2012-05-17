@@ -47,8 +47,8 @@ void CMigrationMovementProcess::validate() {
 
     dProportion = pParameterList->getDouble(PARAM_PROPORTION);
 
-    pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
-    pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
     // Base Validation
     CMovementProcess::validate();
@@ -82,8 +82,8 @@ void CMigrationMovementProcess::build() {
     CMovementProcess::build();
 
     // Get selectivities and categories.
-    CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
-    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+    CSelectivityManager::Instance()->fillVector(vSelectivityIndex, vSelectivityList);
+    pWorld->fillCategoryVector(vCategoryIndex, vCategoryList);
 
     // Get our Layers
     if (sSinkLayer != "")
@@ -133,7 +133,7 @@ void CMigrationMovementProcess::execute() {
 //    multiply by source layer/max_layer_value
 //    multiply by selectivity
 //  and sum the result for age and category (call total)
-    for (int k = 0; k < (int)vCategories.size(); ++k) {
+    for (int k = 0; k < getCategoryCount(); ++k) {
       for (int l = 0; l < iBaseColCount; ++l) {
 
         dTotal = 0.0;
@@ -148,7 +148,7 @@ void CMigrationMovementProcess::execute() {
           if (!pBaseSquare->getEnabled())
             continue;
 
-          dSquare = pBaseSquare->getValue( vCategories[k], l) * dProportion * vSelectivities[k]->getResult(l);
+          dSquare = pBaseSquare->getValue( vCategoryIndex[k], l) * dProportion * vSelectivityIndex[k]->getResult(l);
           dTotal += dSquare;
           pDiff->subValue(k, l, dSquare); // remove from world
 

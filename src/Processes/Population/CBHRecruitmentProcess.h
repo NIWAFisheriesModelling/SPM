@@ -27,8 +27,8 @@ public:
 
 protected:
   // Variables
-  vector<double>              vProportionList;
   double                      dR0;
+  vector<double>              vProportions;
   int                         iAge;
   int                         iAgeIndex;
   double                      dSteepness;
