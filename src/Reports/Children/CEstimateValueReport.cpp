@@ -22,6 +22,27 @@
 CEstimateValueReport::CEstimateValueReport() {
   eExecutionState = STATE_FINALIZATION;
   bWrittenHeader  = false;
+  bStandardHeader = false;
+
+    // Register allowed
+  pParameterList->registerAllowed(PARAM_HEADER);
+}
+
+//**********************************************************************
+// void CEstimateValueReport::validate()
+// Validate our selectivity
+//**********************************************************************
+void CEstimateValueReport::validate() {
+  try {
+    // Parent
+    CFileReport::validate();
+
+    bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,0);
+
+  } catch (string & ex) {
+    ex = "CEstimateValueReport.validate(" + getLabel() + ")->" + ex;
+    throw ex;
+  }
 }
 
 //**********************************************************************
@@ -47,13 +68,18 @@ void CEstimateValueReport::execute() {
       if (intStat == 0) // File Exists
         bWrittenHeader = true; // Don't write the header
     }
-
     // Start IO
     this->start();
 
     // Variables
     CEstimateManager *pEstimateManager = CEstimateManager::Instance();
     int              iCount            = pEstimateManager->getEstimateCount();
+
+    if (bStandardHeader) {
+      cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+      cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+      cout << PARAM_PARAMETER << CONFIG_RATIO_SEPARATOR << " ";
+    }
 
     if (!bWrittenHeader) {
       bWrittenHeader = true;
@@ -75,6 +101,9 @@ void CEstimateValueReport::execute() {
       if((i+1)<iCount) cout << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     }
     cout << endl;
+
+    if (bStandardHeader)
+      cout << CONFIG_END_REPORT << "\n" << endl;
 
     // End IO
     this->end();

@@ -21,10 +21,12 @@ public:
   CEstimateValueReport();
   virtual                     ~CEstimateValueReport();
   CReport*                    clone() { return new CEstimateValueReport(*this); }
+  void                        validate();
   void                        execute();
 
 protected:
   bool                        bWrittenHeader;
+  bool                        bStandardHeader;
 };
 
 #endif /* CESTIMATEVALUEREPORT_H_ */
