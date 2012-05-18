@@ -98,7 +98,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
       ("input,i", value<string>(), "Load free parameter values from file")
       ("threads,t", value<int>(), "Number of threads to spawn")
       ("quiet,q", "Run in quiet mode")
-      ("genseed,g", value<int>(), "Random number seed");
+      ("seed,g", value<int>(), "Random number seed");
 
   options_description oAllOptions("All");
   oAllOptions.add(oDesc);
@@ -178,8 +178,8 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
     pConfig->setQuietMode(true);
 
   // Random Seed
-  if (vmParams.count("genseed")) {
-    pConfig->setRandomSeed(vmParams["genseed"].as<int>());
+  if (vmParams.count("seed")) {
+    pConfig->setRandomSeed(vmParams["seed"].as<int>());
   } else {
     long iSeed = time (0);
     iSeed = (long)(iSeed-(floor((double)iSeed/100000)*100000));
