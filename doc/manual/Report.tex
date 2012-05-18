@@ -19,7 +19,9 @@ Note that the \texttt{estimate\_values} report does not print either a header (e
 
 Reports, by default, are directed to standard out (see Section \ref{sec:redirecting-stdout}), but this default can be overwritten be specifying an output file (\commandlabsub{report}{file\_name}). Hence reports can be directed to separate files as required. Note that if an output file is defined, any data within it is deleted and replaced with the output from the report. To append data to an output file rather than replacing it, use the subcommand \commandlabsubarg{report}{overwrite}{false}.
 
-Note that reports can be defined that are  not valid, for example printing the partition for a year and/or time-step that does not exist or reporting the covariance matrix when not estimating --- although  all reports must conform to syntax requirements. In these cases, \SPM\ does not generate output.
+Note that reports can be defined that are not valid, for example printing the partition for a year and/or time-step that does not exist or reporting the covariance matrix when not estimating --- although  all reports must conform to syntax requirements. In these cases, \SPM\ does not generate output.
+
+Not all reports will be generated in all run modes. Some reports are only available in some run modes. For example, when simulating, only simulation reports will be output.
 
 \subsection{\I{Printing the model spatial map}}\index{Reports ! Spatial map}
 

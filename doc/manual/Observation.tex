@@ -130,11 +130,15 @@ obs A 0.05 0.15 0.15 0.05 0.02 0.03 0.08 0.04 0.05 0.15 0.15 0.08
 ...
 \end{verbatim}
 
-It may be useful at times to consider grouping categories together even though the data might have been collected separately, as the model cannot dissociate the uncertainty between age classes and that between the proportion of fish at age in each category. For example if observations have been collected for males and females separately, but very few females were caught, the uncertainty surrounding the ratio of males to females might be higher than the model applies, as it applies the same uncertainty to that surrounding the dataset. In this case an alternative is to provide the proportions at age for males and females together with appropriate uncertainty, and then the proportion-at-age (see Section \ref{sec:proportions-by-category}) of males as a different observation with a different (and in this case higher) uncertainty.
+It may be useful at times to consider grouping categories together even though the data might have been collected separately, as the model cannot dissociate the uncertainty between age classes and that between the proportion of fish at age in each category. For example if observations have been collected for males and females separately, but very few females were caught, the uncertainty surrounding the ratio of males to females might be higher than the model applies, as it applies the same uncertainty to that surrounding the data. In this case an alternative is to provide the proportions at age for males and females together with appropriate uncertainty, and then the proportion-at-age (see Section \ref{sec:proportions-by-category}) of males as a different observation with a different (and in this case higher) uncertainty.
 
-To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
+To supply an observation for individual spatial cells, then define a categorical layer with a single, unique value for each spatial cell. 
 
-\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
+\TODO
+
+\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$. Note that it may not be sensible to use a value other than one, depending on the processes that happen during the time step (for example, if the time step contains an ageing process).
+
+\TODOend
 
 \subsubsection{Likelihoods for proportions-at-age observations}
 
@@ -242,7 +246,11 @@ obs B 0.02 0.06 0.10 0.21 0.18
 
 To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
 
-\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
+\TODO
+
+\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$. Note that it may not be sensible to use a value other than one, depending on the processes that happen during the time step (for example, if the time step contains an ageing process).
+
+\TODOend
 
 \subsubsection{Likelihoods for proportions-by-category observations}
 
@@ -339,7 +347,11 @@ obs B 1200
 
 To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
 
-\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$.
+\TODO
+
+\SPM\ always evaluates the observations at the end of a time step (i.e., after \SPM\ has applied all of the processes for that time step). However, the observation can be applied to the abundance at the start of a time step or part-way through a time step by the use of the \subcommand{proportion\_time\_step} subcommand. Here \SPM\ stores the state of the partition at the beginning of a time step, and again at the end of the time step. The partition at some point $p$ during the time step is then evaluated as the weighted sum between the start and end of the time step, i.e, for any element $i$ in the partition, $n_i=(1-p) n_i^{start} + p n_i^{end}$. Note that it may not be sensible to use a value other than one, depending on the processes that happen during the time step (for example, if the time step contains an ageing process).
+
+\TODOend
 
 \subsubsection{Likelihoods for abundance observations}
 

@@ -2,7 +2,7 @@
 In SPM, but not in manual
   0 (zero)
   1 (one)
-  1,000
+  1000
   adjacent_cell
   age_index
   age_size
@@ -15,6 +15,7 @@ In SPM, but not in manual
   column
   column_index
   command
+  correlation
   enabled_estimates
   estimable
   estimates
@@ -74,7 +75,6 @@ In manual, but not in SPM
   proportion_time_step
   proposal_distribution
   quantiles
-  random_seed
   sd
   standardise_ycs_years
   start
