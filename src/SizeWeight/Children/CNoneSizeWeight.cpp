@@ -17,6 +17,8 @@
 //**********************************************************************
 CNoneSizeWeight::CNoneSizeWeight() {
 
+  sType  = PARAM_NONE;
+
   // Register user allowed parameters
 
 }

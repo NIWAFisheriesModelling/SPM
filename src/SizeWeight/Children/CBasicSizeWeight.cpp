@@ -17,6 +17,8 @@
 //**********************************************************************
 CBasicSizeWeight::CBasicSizeWeight() {
 
+  sType = PARAM_BASIC;
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_A);
   pParameterList->registerAllowed(PARAM_B);
