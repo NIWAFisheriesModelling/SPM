@@ -31,6 +31,7 @@ public:
   static void           errorNotEqual(string value1, string value2);
   static void           errorEqualTo(string value1, string value2);
   static void           errorSupported(string value);
+  static void           errorTypeNotSupported(string type, string label);
   static void           errorUnknown(string type, string label);
   static void           errorPairs(string value);
   static void           errorNoMatch(string type, string value, string type2);

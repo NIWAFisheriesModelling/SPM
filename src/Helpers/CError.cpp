@@ -109,6 +109,15 @@ void CError::errorSupported(string value) {
 }
 
 //**********************************************************************
+// void CError::errorTypeNotSupported(string type string label)
+// Throw error not supported
+//**********************************************************************
+void CError::errorTypeNotSupported(string type, string label) {
+  string sException = type + ERROR_TYPE_NOT_SUPPORTED + label;
+  throw sException;
+}
+
+//**********************************************************************
 // void CError::errorUnknown(string type, string label)
 // Throw Unknown Error
 //**********************************************************************
