@@ -31,6 +31,7 @@
 #define ERROR_SUPPORTED                     " not supported"
 #define ERROR_TOO_HIGH                      " is too high"
 #define ERROR_TOO_MUCH                      "Too much "
+#define ERROR_TYPE_NOT_SUPPORTED            " has a type that is not supported for "
 #define ERROR_UNKNOWN                       "Unknown "
 #define ERROR_BETWEEN                       " is not between values: "
 
@@ -136,6 +137,7 @@
 #define PARAM_AGE_INDEX                           "age_index"
 #define PARAM_AGE_PLUS_GROUP                      "age_plus_group"
 #define PARAM_AGE_SIZE                            "age_size"
+#define PARAM_AGE_WEIGHT                          "age_weight"
 #define PARAM_AGEING                              "ageing"
 #define PARAM_AGEING_ERROR                        "ageing_error"
 #define PARAM_AGES                                "ages"
@@ -154,6 +156,7 @@
 #define PARAM_BINOMIAL_APPROX                     "binomial_approx"
 #define PARAM_BIOMASS                             "biomass"
 #define PARAM_BIOMASS_DENSITY                     "biomass_density"
+#define PARAM_BY_LENGTH                           "by_length"
 #define PARAM_C                                   "c"
 #define PARAM_CATCHABILITY                        "catchability"
 #define PARAM_CATEGORICAL                         "categorical"
