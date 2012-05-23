@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CAgeSizeReport.cpp
+// Name        : CAgeWeightReport.cpp
 // Author      : A.Dunn
 // Date        : 24/05/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -8,18 +8,20 @@
 //============================================================================
 
 // Local headers
-#include "CAgeSizeReport.h"
+#include "CAgeWeightReport.h"
 #include "../../AgeSize/CAgeSizeManager.h"
 #include "../../AgeSize/CAgeSize.h"
+#include "../../SizeWeight/CSizeWeightManager.h"
+#include "../../SizeWeight/CSizeWeight.h"
 
 //**********************************************************************
-// CAgeSizeReport::CAgeSizeReport()
+// CAgeWeightReport::CAgeWeightReport()
 // Constructor
 //**********************************************************************
-CAgeSizeReport::CAgeSizeReport() {
+CAgeWeightReport::CAgeWeightReport() {
   // Variables
-  eExecutionState   = STATE_FINALIZATION;
-  pAgeSize      = 0;
+  eExecutionState = STATE_FINALIZATION;
+  pAgeSize        = 0;
 
   // Register allowed
   pParameterList->registerAllowed(PARAM_AGE_SIZE);
@@ -27,10 +29,10 @@ CAgeSizeReport::CAgeSizeReport() {
 }
 
 //**********************************************************************
-// void CAgeSizeReport::validate()
+// void CAgeWeightReport::validate()
 // Validate our selectivity
 //**********************************************************************
-void CAgeSizeReport::validate() {
+void CAgeWeightReport::validate() {
   try {
     // Parent
     CFileReport::validate();
@@ -43,16 +45,16 @@ void CAgeSizeReport::validate() {
     }
 
   } catch (string &Ex) {
-    Ex = "CAgeSizeReport.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CAgeWeightReport.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CAgeSizeReport::build()
+// void CAgeWeightReport::build()
 // Build our Report
 //**********************************************************************
-void CAgeSizeReport::build() {
+void CAgeWeightReport::build() {
   try {
     // Parent
     CFileReport::build();
@@ -62,16 +64,16 @@ void CAgeSizeReport::build() {
     pAgeSize = pManager->getAgeSize(sAgeSize);
 
   } catch (string & ex) {
-    ex = "CAgeSizeReport.build(" + getLabel() + ")->" + ex;
+    ex = "CAgeWeightReport.build(" + getLabel() + ")->" + ex;
     throw ex;
   }
 }
 
 //**********************************************************************
-// void CAgeSizeReport::execute()
+// void CAgeWeightReport::execute()
 // Execute
 //**********************************************************************
-void CAgeSizeReport::execute() {
+void CAgeWeightReport::execute() {
 
   try {
     // Check for correct state
@@ -92,13 +94,6 @@ void CAgeSizeReport::execute() {
     }
     cout << " " << vAgeList[vAgeList.size()-1] << "\n";
 
-    // Output list of sizes corrsponding to list of ages
-    cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR;
-    for (int i = 0; i < ((int)vAgeList.size()-1); ++i) {
-      cout << " " << pAgeSize->getMeanSize(vAgeList[i]) << CONFIG_SEPERATOR_ESTIMATE_VALUES;
-    }
-    cout << " " << pAgeSize->getMeanSize(vAgeList[vAgeList.size()-1]) << "\n";
-
     // Output list of weights corrsponding to list of sizes
     cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR;
     for (int i = 0; i < ((int)vAgeList.size()-1); ++i) {
@@ -112,15 +107,15 @@ void CAgeSizeReport::execute() {
     this->end();
 
   } catch (string &Ex) {
-    Ex = "CAgeSizeReport.build(" + getLabel() + ")->" + Ex;
+    Ex = "CAgeWeightReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 
 }
 
 //**********************************************************************
-// CAgeSizeReport::~CAgeSizeReport()
+// CAgeWeightReport::~CAgeWeightReport()
 // Destuctor
 //**********************************************************************
-CAgeSizeReport::~CAgeSizeReport() {
+CAgeWeightReport::~CAgeWeightReport() {
 }

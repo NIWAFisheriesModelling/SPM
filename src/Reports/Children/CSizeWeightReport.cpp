@@ -11,6 +11,7 @@
 #include "CSizeWeightReport.h"
 #include "../../SizeWeight/CSizeWeightManager.h"
 #include "../../SizeWeight/CSizeWeight.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CSizeWeightReport::CSizeWeightReport()
@@ -40,6 +41,12 @@ void CSizeWeightReport::validate() {
 
     // Get our list of sizes to evaluate
     pParameterList->fillVector(vSizeList, PARAM_SIZES);
+
+    // Validate
+    for (int i = 0; i < (int)vSizeList.size(); ++i ) {
+      if(vSizeList[i] < 0)
+        CError::errorLessThan(PARAM_SIZES, PARAM_ZERO);
+    }
 
   } catch (string &Ex) {
     Ex = "CSizeWeightReport.validate(" + getLabel() + ")->" + Ex;
