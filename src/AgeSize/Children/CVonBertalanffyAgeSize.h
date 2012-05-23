@@ -33,8 +33,10 @@ protected:
   double                      dT0;
   double                      dCV;
   std::string                 sDistribution;
+  bool                        bByLength;
   string                      sSizeWeight;
   CSizeWeight*                pSizeWeight;
+  double                      getMeanWeightFromSize(double &size);
 
 };
 

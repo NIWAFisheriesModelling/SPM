@@ -25,7 +25,12 @@ public:
   void                        build();
   void                        rebuild();
   double                      getMeanSize(double &size) { return 1; };
-  double                      getMeanWeight(double &age);
+  double                      getMeanWeight(double &age) { return 1; };
+
+protected:
+  string                      sSizeWeight;
+  CSizeWeight*                pSizeWeight;
+  double                      getMeanWeightFromSize(double &size) { return 1; };
 
 };
 

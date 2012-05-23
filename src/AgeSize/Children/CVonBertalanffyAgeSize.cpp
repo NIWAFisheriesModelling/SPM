@@ -30,8 +30,8 @@ CVonBertalanffyAgeSize::CVonBertalanffyAgeSize() {
   pParameterList->registerAllowed(PARAM_T0);
   pParameterList->registerAllowed(PARAM_CV);
   pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
-
 
 }
 
@@ -49,13 +49,12 @@ void CVonBertalanffyAgeSize::validate() {
     dK              = pParameterList->getDouble(PARAM_K);
     dT0             = pParameterList->getDouble(PARAM_T0);
     dCV             = pParameterList->getDouble(PARAM_CV,true,0);
-    sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION,true, PARAM_NORMAL);
+    sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
+    bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
     // Validate
     if (dLinf <= 0)
       CError::errorLessThanEqualTo(PARAM_LINF, PARAM_ZERO);
-    if (dK <= 0)
-      CError::errorLessThanEqualTo(PARAM_K, PARAM_ZERO);
     if (dCV <= 0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
 
@@ -129,18 +128,36 @@ double CVonBertalanffyAgeSize::getMeanSize(double &age) {
 }
 
 //**********************************************************************
-// double CVonBertalanffyAgeSize::getMeanWeight(double &size)
+// double CVonBertalanffyAgeSize::getMeanWeight(double &age)
 // Apply size-weight relationship
 //**********************************************************************
 double CVonBertalanffyAgeSize::getMeanWeight(double &age) {
   double dWeight = 0;
 
   try {
-    double dSize = this->getMeanSize(age);
-    dWeight = pSizeWeight->getMeanWeight(dSize);
+    double dSize = this->getMeanSize( age );
+    dWeight = getMeanWeightFromSize( dSize );
 
   } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
+  return dWeight;
+}
+
+//**********************************************************************
+// double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size)
+// Apply size-weight relationship
+//**********************************************************************
+double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size) {
+  double dWeight = 0;
+
+  try {
+    dWeight = pSizeWeight->getMeanWeight( size );
+
+  } catch (string &Ex) {
+    Ex = "CVonBertalanffyAgeSize.getMeanWeightFromSize(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 

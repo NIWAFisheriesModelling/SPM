@@ -36,7 +36,9 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
   pParameterList->registerAllowed(PARAM_B);
   pParameterList->registerAllowed(PARAM_CV);
   pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
+
 }
 
 //**********************************************************************
@@ -56,9 +58,16 @@ void CSchnuteAgeSize::validate() {
     dA              = pParameterList->getDouble(PARAM_A);
     dB              = pParameterList->getDouble(PARAM_B);
     dCV             = pParameterList->getDouble(PARAM_CV,true,0);
-    //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION,true,"normal");
+    sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
+    bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
     // TODO: (Alistair) Complete validation
+    // Validate
+    if (dCV <= 0)
+      CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
+
+    if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
+      CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
 
 
   } catch (string &Ex) {
@@ -113,15 +122,22 @@ double CSchnuteAgeSize::getMeanSize(double &age) {
   double dSize = 0;
   double dTemp = 0;
 
-  if (dA != 0) {
-    dTemp = (1 - exp( - dA * (age - dTau1))) / (1 - exp(- dA * (dTau2 - dTau1)));
-  } else {
-    dTemp = (age - dTau1) / (dTau2 - dTau1);
-  }
-  if (dB != 0) {
-    dSize = pow((pow(dY1,dB) + (pow(dY2,dB) - pow(dY1,dB)) * dTemp), 1 / dB);
-  } else {
-    dSize = dY1 * exp(log( dY2/ dY1) * dTemp);
+  try {
+
+    if (dA != 0) {
+      dTemp = (1 - exp( - dA * (age - dTau1))) / (1 - exp(- dA * (dTau2 - dTau1)));
+    } else {
+      dTemp = (age - dTau1) / (dTau2 - dTau1);
+    }
+    if (dB != 0) {
+      dSize = pow((pow(dY1,dB) + (pow(dY2,dB) - pow(dY1,dB)) * dTemp), 1 / dB);
+    } else {
+      dSize = dY1 * exp(log( dY2/ dY1) * dTemp);
+    }
+
+  } catch (string &Ex) {
+    Ex = "CSchnuteAgeSize.getMeanSize(" + getLabel() + ")->" + Ex;
+    throw Ex;
   }
 
   if (dSize < 0)
@@ -131,23 +147,41 @@ double CSchnuteAgeSize::getMeanSize(double &age) {
 }
 
 //**********************************************************************
-// double CSchnuteAgeSize::getMeanWeight(double &size)
+// double CSchnuteAgeSize::getMeanWeight(double &age)
 // Apply size-weight relationship
 //**********************************************************************
 double CSchnuteAgeSize::getMeanWeight(double &age) {
-  double dSize = 0;
+  double dWeight = 0;
 
   try {
-    dSize = this->getMeanSize(age);
-    double dWeight = pSizeWeight->getMeanWeight(dSize);
-    return dWeight;
+    double dSize = this->getMeanSize( age );
+    dWeight = getMeanWeightFromSize( dSize );
 
   } catch (string &Ex) {
     Ex = "CSchnuteAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 
-  return dSize;
+  return dWeight;
+}
+
+//**********************************************************************
+// double CSchnuteAgeSize::getMeanWeightFromSize(double &size)
+// Apply size-weight relationship
+//**********************************************************************
+double CSchnuteAgeSize::getMeanWeightFromSize(double &size) {
+
+double dWeight = 0;
+
+  try {
+    dWeight = pSizeWeight->getMeanWeight( size );
+
+  } catch (string &Ex) {
+    Ex = "CSchnuteAgeSize.getMeanWeightFromSize(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
+  return dWeight;
 }
 
 //**********************************************************************

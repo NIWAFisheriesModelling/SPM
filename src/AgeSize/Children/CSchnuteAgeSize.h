@@ -36,9 +36,10 @@ protected:
   double                      dB;
   double                      dCV;
   std::string                 sDistribution;
+  bool                        bByLength;
   string                      sSizeWeight;
   CSizeWeight*                pSizeWeight;
-
+  double                      getMeanWeightFromSize(double &size);
 };
 
 #endif /* CSCHNUTEAGESIZE_H_ */

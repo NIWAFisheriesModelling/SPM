@@ -19,6 +19,7 @@
 CNoneAgeSize::CNoneAgeSize() {
 
   // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 
 }
 
@@ -32,6 +33,13 @@ void CNoneAgeSize::validate() {
 
     // Base
     CAgeSize::validate();
+
+    sSizeWeight   = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
+    pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
+
+    if ( pSizeWeight->getType() != PARAM_NONE )
+      CError::errorTypeNotSupported(PARAM_SIZE_WEIGHT,string(PARAM_AGE_SIZE + string(" type=") + PARAM_NONE));
 
   } catch (string &Ex) {
     Ex = "CNoneAgeSize.validate(" + getLabel() + ")->" + Ex;
@@ -48,6 +56,13 @@ void CNoneAgeSize::build() {
 
     // Base
     CAgeSize::build();
+
+    sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
+    pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
+
+    // Rebuild
+    rebuild();
 
   } catch (string &Ex) {
     Ex = "CNoneAgeSize.build(" + getLabel() + ")->" + Ex;
@@ -68,13 +83,6 @@ void CNoneAgeSize::rebuild() {
   }
 }
 
-//**********************************************************************
-// double CNoneAgeSize::getMeanWeight(double &size)
-// Apply size-weight relationship
-//**********************************************************************
-double CNoneAgeSize::getMeanWeight(double &age) {
-  return 1;
-}
 
 //**********************************************************************
 // CNoneAgeSize::~CNoneAgeSize()
