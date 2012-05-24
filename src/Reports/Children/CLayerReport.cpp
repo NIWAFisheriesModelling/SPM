@@ -102,8 +102,8 @@ void CLayerReport::execute() {
     // Print Out
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
-    cout << PARAM_PARTITION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
+    cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
+    cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
     for (int i = 0; i < pLayer->getHeight(); ++i) {
       for (int j = 0; j < pLayer->getWidth(); ++j) {

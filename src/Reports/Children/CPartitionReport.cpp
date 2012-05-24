@@ -40,7 +40,6 @@ void CPartitionReport::validate() {
 
     // Assign Variables
     pParameterList->fillVector(vYear, PARAM_YEARS);
-    //iYear       = pParameterList->getInt(PARAM_YEAR);
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
 
     // Validate Year Range
@@ -105,8 +104,8 @@ void CPartitionReport::execute() {
           // Print Out
           cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
           cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-          cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
-          cout << PARAM_PARTITION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
+          cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
+          cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
           cout << PARAM_ROW << CONFIG_SEPERATOR_ESTIMATE_VALUES;
           cout << PARAM_COLUMN << CONFIG_SEPERATOR_ESTIMATE_VALUES,

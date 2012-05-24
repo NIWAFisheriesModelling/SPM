@@ -128,8 +128,8 @@ void CLayerDerivedWorldViewReport::execute() {
           // Start Output
           cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
           cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-          cout << PARAM_PARTITION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
-          cout << PARAM_PARTITION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
+          cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
+          cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
           cout << PARAM_AREA << CONFIG_SEPERATOR_ESTIMATE_VALUES;
           cout << PARAM_CATEGORY;
