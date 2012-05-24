@@ -13,6 +13,7 @@ initial_year 1994
 current_year 2008
 final_year 2108
 time_steps step_one step_two
+age_size default default default
 
 @initialisation_phase Phase1
 years 200
@@ -254,3 +255,20 @@ ato95 2.70004
 @selectivity Age10
 type knife_edge
 e 10
+
+@age_size default
+type none
+#type von_bertalanffy
+#linf 100
+#k 0.27
+#t0 -0.1
+#distribution normal
+#by_length true
+#cv 0.1
+size_weight SW
+
+@size_weight SW
+type none
+#type basic
+#a 1.387e-008
+#b 2.965

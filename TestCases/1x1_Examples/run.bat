@@ -1,6 +1,9 @@
 cd AgeingProcess
 spm -r -q > Expected.txt
 cd ..
+cd BiomassEventMortalityProcess
+spm -r -q > Expected.txt
+cd ..
 cd CategoryTransitionProcess
 spm -r -q > Expected.txt
 cd ..

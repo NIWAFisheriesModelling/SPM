@@ -1,14 +1,14 @@
 SPM (Spatial Population Model)
 Call: spm -r -q 
-Date: Thu May 17 08:31:43 2012
-v1.1-2012-05-15 (rev. 4572). Copyright (c) 2008-2012, NIWA
+Date: Fri May 25 11:08:14 2012
+v1.1-2012-05-24 (rev. 4613). Copyright (c) 2008-2012, NIWA
 User name: dunn
-Machine name: NIWA-34253 (Windows_NT, PID=5416)
+Machine name: NIWA-34253 (Windows_NT, PID=7532)
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1990
-partition.time_step: one
+year: 1990
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,0,0,0
 1,2,immature,0,22.5,0,0,0
@@ -23,8 +23,8 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1991
-partition.time_step: one
+year: 1991
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,30,0,0
 1,2,immature,0,22.5,22.5,0,0
@@ -39,8 +39,8 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1992
-partition.time_step: one
+year: 1992
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,30,22.5,0
 1,2,immature,0,22.5,22.5,20.625,0
@@ -55,8 +55,8 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1993
-partition.time_step: one
+year: 1993
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,30,22.5,18.125
 1,2,immature,0,22.5,22.5,20.625,18.75
@@ -71,8 +71,8 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1994
-partition.time_step: one
+year: 1994
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,30,22.5,33.4375
 1,2,immature,0,22.5,22.5,20.625,35.9375
@@ -87,8 +87,8 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1995
-partition.time_step: one
+year: 1995
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,30,22.5,46.8229
 1,2,immature,0,22.5,22.5,20.625,51.875
@@ -103,8 +103,8 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 
 [1994_timestep_one]
 report.type: partition
-partition.year: 1996
-partition.time_step: one
+year: 1996
+time_step: one
 row,column,category,age[1],age[2],age[3],age[4],age[5]
 1,1,immature,0,45,30,22.5,58.8281
 1,2,immature,0,22.5,22.5,20.625,66.8229

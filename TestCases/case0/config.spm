@@ -13,3 +13,34 @@ years 1994-2008
 
 @report Objective_Score
 type objective_function
+
+@report age-size
+type age_size
+age_size default
+
+@report size-weight
+type size_weight
+sizes 10 20 30 40 50 60 70 80 90 100 110 120 130
+size_weight SW
+
+@report age-weight
+type age_weight
+age_size default
+
+@report biomass
+type layer
+layer biomass
+
+@report abundance
+type layer
+layer abundance
+
+@layer biomass
+type biomass
+categories immature
+selectivities One
+
+@layer abundance
+type abundance
+categories immature
+selectivities One

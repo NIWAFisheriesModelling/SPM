@@ -15,6 +15,14 @@ current_year 1996
 final_year 100
 cell_length 1
 time_steps One
+age_size none
+
+@age_size none
+type none
+size_weight none
+
+@size_weight none
+type none
 
 @time_step One
 processes NaturalMortality Recruitment Ageing

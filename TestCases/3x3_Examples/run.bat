@@ -19,6 +19,9 @@ cd ..
 cd LogisticPreferenceMovementProcess
 spm -r -q > Expected.txt
 cd ..
+cd MigrationMovementProcess
+spm -r -q > Expected.txt
+cd ..
 cd MonotonicCategoricalPreferenceMovementProcess
 spm -r -q > Expected.txt
 cd ..

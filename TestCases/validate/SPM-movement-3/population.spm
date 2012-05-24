@@ -13,6 +13,14 @@ initial_year 1994
 current_year 2008
 final_year 2108
 time_steps step_one
+age_size none
+
+@age_size none
+type none
+size_weight none
+
+@size_weight none
+type none
 
 @initialisation_phase phase1
 years 200
