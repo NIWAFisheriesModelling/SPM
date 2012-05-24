@@ -115,8 +115,8 @@ double CBiomassDensityLayer::getValue(int RowIndex, int ColIndex, int TargetRow=
 
     for (int i = 0; i < pWorld->getAgeSpread(); ++i) {
       for (int j = 0; j < (int)vCategories.size(); ++j) {
-         //dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getBiomassInCategoryForAge(i, vCategories[j]);
-         dResult += vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
+        double dAbundance = vSelectivities[j]->getResult(i) * pWorld->getBaseSquare(RowIndex, ColIndex)->getAbundanceInCategoryForAge(i, vCategories[j]);
+        dResult += dAbundance * pWorld->getMeanWeight(i,j);
       }
     }
 
