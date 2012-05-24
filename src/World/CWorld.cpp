@@ -20,6 +20,8 @@
 #include "../Layers/Numeric/Base/CNumericLayer.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "../AgeSize/CAgeSizeManager.h"
+#include "../AgeSize/CAgeSize.h"
 
 // Using
 using std::cout;
@@ -57,7 +59,7 @@ CWorld::CWorld() {
   pParameterList->registerAllowed(PARAM_CURRENT_YEAR);
   pParameterList->registerAllowed(PARAM_FINAL_YEAR);
   pParameterList->registerAllowed(PARAM_TIME_STEPS);
-
+  pParameterList->registerAllowed(PARAM_AGE_SIZE);
 }
 
 //**********************************************************************
@@ -122,6 +124,7 @@ void CWorld::validate() {
     pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
     pParameterList->fillVector(vInitializationPhases, PARAM_INITIALIZATION_PHASES, true);
     pParameterList->fillVector(vTimeSteps, PARAM_TIME_STEPS);
+    pParameterList->fillVector(vAgeSizeList, PARAM_AGE_SIZE);
 
     // Validation
     if (iHeight > 1000)
@@ -132,6 +135,8 @@ void CWorld::validate() {
       CError::errorLessThan(PARAM_CURRENT_YEAR, PARAM_INITIAL_YEAR);
     if (dCellLength <= ZERO )
       CError::errorLessThan(PARAM_CELL_LENGTH, PARAM_ZERO);
+    if (vAgeSizeList.size() != vCategories.size())
+      CError::errorNotEqual(PARAM_AGE_SIZE, PARAM_CATEGORIES);
 
   } catch(string &Ex) {
     Ex = "CWorld.validateWorld->" + Ex;
@@ -197,6 +202,11 @@ void CWorld::build() {
 
       if (iEnabledSquareCount <= 0)
         throw string(ERROR_VALID_SQUARES_WITH_LAYER);
+    }
+
+    // Build our AgeSize object
+    foreach(string label, vAgeSizeList) {
+      vAgeSizeIndex.push_back(CAgeSizeManager::Instance()->getAgeSize(label));
     }
 
   } catch(string &Ex) {
@@ -278,7 +288,7 @@ CWorldSquare* CWorld::getDifferenceSquare(int RowIndex, int ColIndex) {
 }
 
 //**********************************************************************
-//
+// int CWorld::getCategoryIndexForName(string Name)
 //
 //**********************************************************************
 int CWorld::getCategoryIndexForName(string Name) {
@@ -300,19 +310,33 @@ int CWorld::getCategoryIndexForName(string Name) {
 }
 
 //**********************************************************************
-//
+// CWorldSquare* CWorld::getMeanWeight(int AgeIndex, int CategoryIndex)
+// Get a square from our Difference Grid
+//**********************************************************************
+double CWorld::getMeanWeight(int AgeIndex, int CategoryIndex) {
+   double dAge = (double)(AgeIndex+iMinAge);
+   double dWeight = vAgeSizeIndex[CategoryIndex]->getMeanWeight(dAge);
+   return dWeight;
+}
+
+//**********************************************************************
+// string CWorld::getCategoryNameForIndex(int Index)
 //
 //**********************************************************************
 string CWorld::getCategoryNameForIndex(int Index) {
   return vCategories[Index];
 }
 
+//**********************************************************************
+// int CWorld::getColIndexForAge(int Age)
+//
+//**********************************************************************
 int CWorld::getColIndexForAge(int Age) {
   return (Age-iMinAge);
 }
 
 //**********************************************************************
-//
+// string CWorld::getInitializationPhase(int index)
 //
 //**********************************************************************
 string CWorld::getInitializationPhase(int index) {

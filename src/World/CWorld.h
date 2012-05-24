@@ -33,6 +33,7 @@
 // Classes
 class CWorldSquare;
 class CNumericLayer;
+class CAgeSize;
 
 //**********************************************************************
 //
@@ -69,6 +70,7 @@ public:
   int                       getCategoryIndexForName(string Name);
   string                    getCategoryNameForIndex(int Index);
   int                       getColIndexForAge(int Age);
+  double                    getMeanWeight(int AgeIndex, int iCategoryIndex);
   void                      mergeDifferenceGrid();
   void                      zeroGrid();
   void                      debugToScreen();
@@ -96,6 +98,8 @@ protected:
   CWorldSquare              **pGrid;
   CWorldSquare              **pDifferenceGrid;
   int                       iEnabledSquareCount;
+  vector<string>            vAgeSizeList;
+  vector<CAgeSize*>         vAgeSizeIndex;
 
 private:
   static boost::thread_specific_ptr<CWorld> clInstance;
