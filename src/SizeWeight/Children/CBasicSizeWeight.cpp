@@ -40,8 +40,8 @@ void CBasicSizeWeight::validate() {
     // Validate
     if (dA <= 0)
       CError::errorLessThanEqualTo(PARAM_A, PARAM_ZERO);
-    if (dB <= 0)
-      CError::errorLessThanEqualTo(PARAM_B, PARAM_ZERO);
+    if (dB < 0)
+      CError::errorLessThan(PARAM_B, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CBasicSizeWeight.validate(" + getLabel() + ")->" + Ex;
