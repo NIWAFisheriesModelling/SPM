@@ -142,6 +142,7 @@ src/Minimizers/GammaDiff/Engine/FMM.cpp
 src/Minimizers/GammaDiff/Engine/GammaDiffEngine.cpp
 src/ObjectiveFunction/CObjectiveFunction.cpp
 src/Observations/Children/CAbundanceObservation.cpp
+src/Observations/Children/CBiomassObservation.cpp
 src/Observations/Children/CProportionsAtAgeObservation.cpp
 src/Observations/Children/CProportionsByCategoryObservation.cpp
 src/Observations/CObservation.cpp
