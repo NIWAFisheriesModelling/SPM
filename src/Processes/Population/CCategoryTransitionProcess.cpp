@@ -198,7 +198,7 @@ void CCategoryTransitionProcess::execute() {
           }
         }
 
-        // Work out exploitation rate To Kill off
+        // Work out exploitation rate to remove
         dExploitation = dN / CMath::zeroFun(dVulnerable,ZERO);
         if (dExploitation > 0.999) {
           dExploitation = 0.999;
@@ -207,7 +207,7 @@ void CCategoryTransitionProcess::execute() {
           }
         }
 
-        // Loop Through Categories & Kill Stock
+        // Loop Through Categories & remove individuals
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to move

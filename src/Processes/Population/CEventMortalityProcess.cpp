@@ -194,7 +194,7 @@ void CEventMortalityProcess::execute() {
           }
         }
 
-        // Work out exploitation rate To Kill off
+        // Work out exploitation rate remove
         dExploitation = dCatch / CMath::zeroFun(dVulnerable,ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
@@ -203,10 +203,10 @@ void CEventMortalityProcess::execute() {
           }
         }
 
-        // Loop Through Categories & Kill Stock
+        // Loop Through Categories & remove individuals
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
-            // Get Amount to Kill/Exploit
+            // Get Amount to remove
             dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
 
             // If is Zero, Cont

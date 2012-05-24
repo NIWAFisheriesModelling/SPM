@@ -1,33 +1,109 @@
 //============================================================================
 // Name        : CBiomassEventMortalityProcess.cpp
 // Author      : S.Rasmussen
-// Date        : 15/01/2009
+// Date        : 9/03/2008
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global Headers
+#include <iostream>
+#include <boost/lexical_cast.hpp>
+
 // Local headers
 #include "CBiomassEventMortalityProcess.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../Penalties/CPenaltyManager.h"
+#include "../../Penalties/CPenalty.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CMath.h"
+#include "../../Helpers/ForEach.h"
+#include "../../Helpers/CComparer.h"
 
-// TODO: (Alistair) Implement Biomass Event Mortality
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CBiomassEventMortalityProcess::CBiomassEventMortalityProcess()
-// Default constructor
+// Default Constructor
 //**********************************************************************
 CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
-  throw string("Not yet implemented");
+  // Variables
+  pTimeStepManager = CTimeStepManager::Instance();
+  pWorldSquare     = 0;
+
+  // Register estimable parameters
+  registerEstimable(PARAM_U_MAX, &dUMax);
+
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_YEARS);
+  pParameterList->registerAllowed(PARAM_LAYERS);
+  pParameterList->registerAllowed(PARAM_U_MAX);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_PENALTY);
 }
 
 //**********************************************************************
-// void CBiomassEventMortalityProcess::validate()
-// Validate the process
+// int CBiomassEventMortalityProcess::getYears(int index)
+// Return the years entry from vector @ index
+//**********************************************************************
+int CBiomassEventMortalityProcess::getYears(int index) {
+  return vYearsList[index];
+}
+
+//**********************************************************************
+// string CBiomassEventMortalityProcess::getLayers(int index)
+// Return the layers entry in vector at index
+//**********************************************************************
+string CBiomassEventMortalityProcess::getLayers(int index) {
+  return vLayersList[index];
+}
+
+//**********************************************************************
+// void CBiomassEventMortalityProcess:validate()
+// Validate This
 //**********************************************************************
 void CBiomassEventMortalityProcess::validate() {
   try {
-    throw string("Not yet implemented");
-  } catch (string &Ex) {
+    // Base Validate
+    CProcess::validate();
+
+    // Get our Parameters
+    dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
+    sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
+
+    pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+    pParameterList->fillVector(vYearsList, PARAM_YEARS);
+    pParameterList->fillVector(vLayersList, PARAM_LAYERS);
+    pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
+
+    if (dUMax >= ONE)
+      CError::errorGreaterThanEqualTo(PARAM_U_MAX, PARAM_ONE);
+    if (dUMax <= TRUE_ZERO)
+      CError::errorLessThanEqualTo(PARAM_U_MAX, PARAM_ZERO);
+
+    if (vCategoryList.size() != vSelectivityList.size())
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+    if (vYearsList.size() != vLayersList.size())
+      CError::errorListSameSize(PARAM_YEARS, PARAM_LAYERS);
+
+    // Duplicate Year check
+    map<int, int> mYears;
+    foreach(int Year, vYearsList) {
+      mYears[Year]++;
+
+      if (mYears[Year] > 1)
+        CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
+    }
+
+  } catch(string &Ex) {
     Ex = "CBiomassEventMortalityProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -35,12 +111,28 @@ void CBiomassEventMortalityProcess::validate() {
 
 //**********************************************************************
 // void CBiomassEventMortalityProcess::build()
-// Build the process
+// Build Our Relationships and Indexes
 //**********************************************************************
 void CBiomassEventMortalityProcess::build() {
   try {
-    throw string("Not yet implemented");
-  } catch (string &Ex) {
+    // Base Build
+    CProcess::build();
+
+    // Build our Grid To Be World+1
+    if (pWorldSquare == 0) {
+      pWorldSquare = new CWorldSquare();
+      pWorldSquare->build();
+    }
+
+    // Build our Layer Index
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayerManager->fillVector(vLayersIndex, vLayersList);
+
+    // Build Penalty
+    if (sPenalty != "")
+      pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
+
+  } catch(string &Ex) {
     Ex = "CBiomassEventMortalityProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
@@ -48,20 +140,99 @@ void CBiomassEventMortalityProcess::build() {
 
 //**********************************************************************
 // void CBiomassEventMortalityProcess::execute()
-// Execute the process
+// execute this Process
 //**********************************************************************
 void CBiomassEventMortalityProcess::execute() {
+#ifndef OPTIMIZE
   try {
-    throw string("Not yet implemented");
-  } catch (string &Ex) {
+#endif
+    // See if we are suppose to be executing first
+    bYearMatch    = false;
+    iCurrentYear  = pTimeStepManager->getCurrentYear();
+    for (int i = 0; i < (int)vYearsList.size(); ++i) {
+      if (vYearsList[i] == iCurrentYear) {
+        bYearMatch = true;
+        pLayer = vLayersIndex[i];
+        break;
+      }
+    }
+
+    // No Match. Don't Execute
+    if (!bYearMatch)
+      return;
+
+    // Base execute
+    CProcess::execute();
+
+    // Loop Through The World Grid (i,j)
+    for (int i = 0; i < iWorldHeight; ++i) {
+      for (int j = 0; j < iWorldWidth; ++j) {
+        // Get Current Square
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
+          continue;
+
+        pDiff       = pWorld->getDifferenceSquare(i, j);
+
+        // Clear our Square Out
+        pWorldSquare->zeroGrid();
+
+        // Get Layer Value
+        dCatch = pLayer->getValue(i, j);
+
+        // Clear our Vulnerable Amount
+        dVulnerable = 0.0;
+
+        // Loop Through Categories & Work out Vulnerable Stock in BIOMASS
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,k);
+            pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
+            // Increase Vulnerable Amount
+            dVulnerable += dCurrent;
+          }
+        }
+
+        // Work out exploitation rate to remove
+        dExploitation = dCatch / CMath::zeroFun(dVulnerable,ZERO);
+        if (dExploitation > dUMax) {
+          dExploitation = dUMax;
+          if (pPenalty != 0) { // Throw Penalty
+            pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
+          }
+        }
+
+        // Loop Through Categories & remove biomass
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
+            // Get Amount to remove
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * pWorld->getMeanWeight(l,k) * dExploitation;
+
+            // If is Zero, Cont
+            if (CComparer::isZero(dCurrent))
+              continue;
+
+            // Subtract These
+            pDiff->subValue(vCategoryIndex[k], l, dCurrent);
+          }
+        }
+      }
+    }
+#ifndef OPTIMIZE
+  } catch(string &Ex) {
     Ex = "CBiomassEventMortalityProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+#endif
 }
 
 //**********************************************************************
 // CBiomassEventMortalityProcess::~CBiomassEventMortalityProcess()
-// Destructor
+// Default De-Constructor
 //**********************************************************************
 CBiomassEventMortalityProcess::~CBiomassEventMortalityProcess() {
+  // Clean Our Grid
+  if (pWorldSquare != 0) {
+    delete pWorldSquare;
+  }
 }
