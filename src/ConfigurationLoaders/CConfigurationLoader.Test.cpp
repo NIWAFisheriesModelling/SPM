@@ -19,11 +19,15 @@
 #include "../Estimates/CEstimateManager.h"
 #include "../TestFixtures/C1x1_Fixture.h"
 #include "../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
 #include "../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
 #include "../TestFixtures/ConfigurationFiles/Selectivities/LogisticProducing.h"
 #include "../TestFixtures/ConfigurationFiles/Estimation/Estimation.h"
+#include "../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 
 //**********************************************************************
 //
@@ -34,6 +38,8 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_NoEstimateValues, C1x1_Fixture ) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment_all_ages);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
@@ -96,6 +102,8 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment_all_ages);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
@@ -179,6 +187,8 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment_all_ages);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);

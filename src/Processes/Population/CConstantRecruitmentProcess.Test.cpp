@@ -14,6 +14,8 @@
 
 // Local Includes
 #include "../../TestFixtures/C1x1_Fixture.h"
+#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 
@@ -27,6 +29,8 @@ BOOST_FIXTURE_TEST_CASE( ConstantRecruitmentProcess, C1x1_Fixture ) {
   // Then run our model
   addToConfiguration(ageing);
   addToConfiguration(constant_recruitment);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToTimeStep("ageing constant_recruitment");
   loadAndRunEnvironment();
 

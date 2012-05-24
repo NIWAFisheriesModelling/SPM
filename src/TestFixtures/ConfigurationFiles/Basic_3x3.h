@@ -16,6 +16,7 @@ const string basic_3x3 =
   "ncols 3\n"
   "layer base\n"
   "categories immature mature spawning\n"
+  "age_size vonB vonB vonB\n"
   "min_age 1\n"
   "max_age 10\n"
   "age_plus_group True\n"

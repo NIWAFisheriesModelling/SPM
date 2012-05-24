@@ -18,6 +18,8 @@
 #include "../Helpers/CComparer.h"
 #include "../TestFixtures/C1x1_Fixture.h"
 #include "../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
@@ -32,6 +34,8 @@ BOOST_FIXTURE_TEST_CASE( Derived_Quantity, C1x1_Fixture ) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment);
   addToConfiguration(derived_quantity);
   addToConfiguration(constant);

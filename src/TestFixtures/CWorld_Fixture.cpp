@@ -44,6 +44,10 @@ CWorld_Fixture::CWorld_Fixture() {
   pWorld->addParameter(PARAM_TIME_STEPS, "time_step_one");
   pWorld->addParameter(PARAM_TIME_STEPS, "time_step_two");
 
+  pWorld->addParameter(PARAM_AGE_SIZE, "vonB");
+  pWorld->addParameter(PARAM_AGE_SIZE, "vonB");
+  pWorld->addParameter(PARAM_AGE_SIZE, "vonB");
+
   pWorld->validate();
 }
 

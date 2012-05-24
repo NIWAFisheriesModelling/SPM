@@ -18,6 +18,8 @@
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C3x3_Fixture.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/AnnualMortalityRate.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/CategoryTransitionRate.h"
@@ -37,6 +39,8 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtAgeObservation, C3x3_Fixture ) {
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment_all_ages);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
@@ -177,6 +181,8 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtAgeObservationWithNormalAgeingError, C3x3_
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment_all_ages);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
@@ -318,6 +324,8 @@ BOOST_FIXTURE_TEST_CASE( ProportionsAtAgeObservationWithOffByOneAgeingError, C3x
   // Add What we need to configuration
   // Then run our model
   addToConfiguration(ageing);
+  addToConfiguration(age_size_vonB);
+  addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment_all_ages);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
