@@ -80,7 +80,7 @@ CAgeSize* CAgeSizeManager::getAgeSize(string label) {
         return AgeSize;
     }
 
-    CError::errorUnknown(PARAM_SIZE_WEIGHT, label);
+    CError::errorUnknown(PARAM_AGE_SIZE, label);
 
   } catch (string &Ex) {
     Ex = "CAgeSizeManager.getAgeSize(" + label + ")->" + Ex;
