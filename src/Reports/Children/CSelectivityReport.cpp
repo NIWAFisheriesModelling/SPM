@@ -89,7 +89,7 @@ void CSelectivityReport::execute() {
       cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
     cout << "\n";
 
-    cout << "values" << CONFIG_RATIO_SEPARATOR << " ";
+    cout << PARAM_VALUES << CONFIG_RATIO_SEPARATOR << " ";
     cout << pSelectivity->getResult(0);
     for (int i = 1; i < iSpread; ++i)
       cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << pSelectivity->getResult(i);

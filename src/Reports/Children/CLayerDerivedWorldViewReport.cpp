@@ -47,16 +47,19 @@ void CLayerDerivedWorldViewReport::validate() {
     CFileReport::validate();
 
     // Assign Variables
-    pParameterList->fillVector(vYear, PARAM_YEARS);
-    //iYear       = pParameterList->getInt(PARAM_YEAR,true,pWorld->getInitialYear());
+    if (pParameterList->hasParameter(PARAM_YEARS) )
+      pParameterList->fillVector(vYear, PARAM_YEARS);
+    else
+      vYear.push_back(pWorld->getInitialYear());
+
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
     sLayer      = pParameterList->getString(PARAM_LAYER);
 
     // Validate Year Range
     for (int i = 0; i < (int)vYear.size(); ++i) {
-      if (boost::lexical_cast<double>(vYear[i]) < pWorld->getInitialYear())
+      if (vYear[i] < pWorld->getInitialYear())
         CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
-      else if (boost::lexical_cast<double>(vYear[i]) > pWorld->getCurrentYear())
+      else if (vYear[i] > pWorld->getCurrentYear())
         CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
     }
 
@@ -119,8 +122,7 @@ void CLayerDerivedWorldViewReport::execute() {
     this->start();
 
     for (int i = 0; i < (int)vYear.size(); ++i) {
-      iYear = boost::lexical_cast<double>(vYear[i]);
-      if (iYear == pTimeStepManager->getCurrentYear()) {
+      if (vYear[i] == pTimeStepManager->getCurrentYear()) {
         if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
 
           pWorldView->execute();
@@ -128,7 +130,7 @@ void CLayerDerivedWorldViewReport::execute() {
           // Start Output
           cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
           cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-          cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << boost::lexical_cast<string>(iYear) << "\n";
+          cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << vYear[i] << "\n";
           cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
           cout << PARAM_AREA << CONFIG_SEPERATOR_ESTIMATE_VALUES;

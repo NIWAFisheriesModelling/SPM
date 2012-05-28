@@ -70,7 +70,7 @@ void CSimulatedObservationReport::execute() {
     vector<string> vDefinedParameters;
     pList->fillDefinedParameterVector(vDefinedParameters);
 
-    cout << "@observation" << " " << pList->getString(PARAM_LABEL) << "\n";
+    cout << CONFIG_SECTION_SYMBOL << PARAM_OBSERVATION << " " << pList->getString(PARAM_LABEL) << "\n";
 
     // Loop through and print values
     vector<string> vValues;

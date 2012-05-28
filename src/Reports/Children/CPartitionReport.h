@@ -31,8 +31,7 @@ public:
 
 protected:
   // Variables
-  int                         iYear;
-  vector<string>              vYear;
+  vector<int>                 vYear;
   int                         iTimeStep;
   string                      sTimeStep;
   CTimeStepManager            *pTimeStepManager;
