@@ -341,6 +341,7 @@
 #define PARAM_V                                   "v"
 #define PARAM_VONBERTALANFFY                      "von_bertalanffy"
 #define PARAM_VALUE                               "value"
+#define PARAM_VALUES                              "values"
 #define PARAM_WIDTH                               "width"
 #define PARAM_WEIGHTS                             "weights"
 #define PARAM_X0                                  "x0"
