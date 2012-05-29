@@ -282,6 +282,7 @@ src/Priors/Children/CNormalPrior.Test.cpp
 src/Priors/Children/CUniformLogPrior.Test.cpp
 src/Priors/Children/CUniformPrior.Test.cpp
 src/Priors/Factory/CPriorFactory.Test.cpp
+src/Processes/Movement/CAdjacentCellMovementProcess.Test.cpp
 src/Processes/Population/CAgeingProcess.Test.cpp
 src/Processes/Population/CAnnualMortalityRateProcess.Test.cpp
 src/Processes/Population/CCategoryTransitionRateProcess.Test.cpp
