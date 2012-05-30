@@ -72,8 +72,6 @@ string CBiomassEventMortalityProcess::getLayers(int index) {
 //**********************************************************************
 void CBiomassEventMortalityProcess::validate() {
   try {
-    // Base Validate
-    CProcess::validate();
 
     // Get our Parameters
     dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
@@ -84,6 +82,10 @@ void CBiomassEventMortalityProcess::validate() {
     pParameterList->fillVector(vLayersList, PARAM_LAYERS);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
+    // Validate parent
+    CProcess::validate();
+
+    // local validation
     if (dUMax >= ONE)
       CError::errorGreaterThanEqualTo(PARAM_U_MAX, PARAM_ONE);
     if (dUMax <= TRUE_ZERO)
@@ -98,7 +100,6 @@ void CBiomassEventMortalityProcess::validate() {
     map<int, int> mYears;
     foreach(int Year, vYearsList) {
       mYears[Year]++;
-
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }

@@ -61,12 +61,10 @@ CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess() {
 //**********************************************************************
 void CLocalBHRecruitmentProcess::validate() {
   try {
-    // Validate parent
-    CProcess::validate();
 
     // Assign our variables
     dR0           = pParameterList->getDouble(PARAM_R0);
-    iAge           = pParameterList->getDouble(PARAM_AGE);
+    iAge          = pParameterList->getInt(PARAM_AGE);
     dSteepness    = pParameterList->getDouble(PARAM_STEEPNESS,true,1.0);
     dSigmaR       = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
     dRho          = pParameterList->getDouble(PARAM_RHO,true,0.0);
@@ -80,6 +78,10 @@ void CLocalBHRecruitmentProcess::validate() {
     pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
+    // Validate parent
+    CProcess::validate();
+
+    // local validation
     // iAge must be a valid age
     if (iAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_AGE,PARAM_MIN_AGE);

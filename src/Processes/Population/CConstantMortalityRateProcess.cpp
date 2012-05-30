@@ -38,8 +38,6 @@ CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
 //**********************************************************************
 void CConstantMortalityRateProcess::validate() {
   try {
-    // Base Validate
-    CProcess::validate();
 
     // Get our parameters
     sLayer  = pParameterList->getString(PARAM_LAYER, true, "");
@@ -47,6 +45,9 @@ void CConstantMortalityRateProcess::validate() {
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vMortalityRates, PARAM_M);
+
+    // Base Validation
+    CProcess::validate();
 
     // Register Estimables
     for (int i = 0; i < (int)vMortalityRates.size(); ++i)

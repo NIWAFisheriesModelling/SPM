@@ -61,6 +61,10 @@ void CConstantRecruitmentProcess::validate() {
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
 
+    // Base Validation
+    // CProcess::validate(); TODO: uncomment this line (and delete from 11 lines abobe). Will need to update unit tests...
+
+    // Local validation
     // iAge must be a valid age
     if (iAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_AGE,PARAM_MIN_AGE);

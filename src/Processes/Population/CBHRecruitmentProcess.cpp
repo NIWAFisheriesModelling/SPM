@@ -61,8 +61,6 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
 //**********************************************************************
 void CBHRecruitmentProcess::validate() {
   try {
-    // Validate parent
-    CProcess::validate();
 
     // Assign our variables
     dR0           = pParameterList->getDouble(PARAM_R0);
@@ -80,6 +78,10 @@ void CBHRecruitmentProcess::validate() {
     pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
+    // Validate parent
+    CProcess::validate();
+
+    // local validation
     // iAge must be a valid age
     if (iAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_AGE,PARAM_MIN_AGE);

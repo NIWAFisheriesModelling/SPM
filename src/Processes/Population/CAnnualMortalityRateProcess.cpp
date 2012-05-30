@@ -40,17 +40,18 @@ CAnnualMortalityRateProcess::CAnnualMortalityRateProcess() {
 //**********************************************************************
 void CAnnualMortalityRateProcess::validate() {
   try {
-    // Base
-    CProcess::validate();
 
     // Get our variables
     sLayer  = pParameterList->getString(PARAM_LAYER, true, "");
-
     pParameterList->fillVector(vYears, PARAM_YEARS);
     pParameterList->fillVector(vMortalityRates, PARAM_M);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
+    // Validate parent
+    CProcess::validate();
+
+    // local validation
     // M must be non-negative
     for(int i=0; i < (int)vMortalityRates.size(); ++i ) {
       if ( vMortalityRates[i] < 0.0 )
@@ -62,6 +63,14 @@ void CAnnualMortalityRateProcess::validate() {
       CError::errorListSameSize(PARAM_YEARS, PARAM_M);
     if (vCategoryList.size() != vSelectivityList.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
+    // Check unique years
+    map<int, int> mYears;
+    foreach(int Year, vYears) {
+      mYears[Year]++;
+      if (mYears[Year] > 1)
+        CError::errorDuplicate(PARAM_YEARS, boost::lexical_cast<string>(Year));
+    }
 
   } catch (string &Ex) {
     Ex = "CAnnualMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;

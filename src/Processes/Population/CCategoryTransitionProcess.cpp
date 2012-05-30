@@ -73,8 +73,6 @@ string CCategoryTransitionProcess::getCategoryTo(int index) {
 //**********************************************************************
 void CCategoryTransitionProcess::validate() {
   try {
-    // Base Validation
-    CProcess::validate();
 
     // Get our Parameters
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
@@ -85,11 +83,14 @@ void CCategoryTransitionProcess::validate() {
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
     pParameterList->fillVector(vLayersList, PARAM_LAYERS);
 
+    // Base Validation
+    CProcess::validate();
+
+    // Local validation
     // Check for Duplicate Year
     map<int, int> mYears;
     foreach(int Year, vYearsList) {
       mYears[Year]++;
-
       if (mYears[Year] > 1)
         CError::errorDuplicate(PARAM_YEAR, boost::lexical_cast<string>(Year));
     }

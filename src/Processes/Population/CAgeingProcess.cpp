@@ -27,11 +27,14 @@ CAgeingProcess::CAgeingProcess() {
 //**********************************************************************
 void CAgeingProcess::validate() {
   try {
-    // Call Base Validate
-    CProcess::validate();
 
     // populate our vector
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+
+    // Validate parent
+    CProcess::validate();
+
+    // local validation
 
   } catch(string &Ex) {
     Ex = "CAgeingProcess.validate(" + getLabel() + ")->" + Ex;

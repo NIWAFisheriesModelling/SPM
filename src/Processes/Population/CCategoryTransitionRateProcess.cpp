@@ -41,8 +41,6 @@ CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
 //**********************************************************************
 void CCategoryTransitionRateProcess::validate() {
   try {
-    // Base Validation
-    CProcess::validate();
 
     // Populate our variables
     sLayer  = pParameterList->getString(PARAM_LAYER,true,"");
@@ -52,6 +50,10 @@ void CCategoryTransitionRateProcess::validate() {
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
+    // Base Validation
+    CProcess::validate();
+
+    // Local validation
     // Validate Sizes
     if (vFromList.size() != vToList.size())
       CError::errorListSameSize(PARAM_FROM, PARAM_TO);
