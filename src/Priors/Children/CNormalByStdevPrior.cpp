@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CNormalByStdevPrior.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CNormalByStdevPrior::CNormalByStdevPrior()
@@ -26,12 +27,17 @@ CNormalByStdevPrior::CNormalByStdevPrior() {
 //**********************************************************************
 void CNormalByStdevPrior::validate() {
   try {
-    // Base
-    CPrior::validate();
 
     // Assign parameters
     dMu     = pParameterList->getDouble(PARAM_MU);
     dSigma  = pParameterList->getDouble(PARAM_SIGMA);
+
+    // Validate parent
+    CPrior::validate();
+
+    // Local validation
+    if (dSigma <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CNormalByStdevPrior.validate(" + getLabel() + ")->" + Ex;

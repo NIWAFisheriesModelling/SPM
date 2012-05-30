@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CLogNormalPrior.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CLogNormalPrior::CLogNormalPrior()
@@ -26,12 +27,19 @@ CLogNormalPrior::CLogNormalPrior() {
 //**********************************************************************
 void CLogNormalPrior::validate() {
   try {
-    // Base
-    CPrior::validate();
 
     // Populate our variables
     dMu   = pParameterList->getDouble(PARAM_MU);
     dCv   = pParameterList->getDouble(PARAM_CV);
+
+    // Validate parent
+    CPrior::validate();
+
+    // Local validation
+    if (dMu <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_MU, PARAM_ZERO);
+    if (dCv <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CLogNormalPrior.validate(" + getLabel() + ")->" + Ex;

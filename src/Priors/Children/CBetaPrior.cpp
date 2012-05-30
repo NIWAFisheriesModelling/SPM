@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CBetaPrior.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CBetaPrior::CBetaPrior(CBetaPrior *Prior)
@@ -28,14 +29,23 @@ CBetaPrior::CBetaPrior() {
 //**********************************************************************
 void CBetaPrior::validate() {
   try {
-    // Base
-    CPrior::validate();
 
     // Assign our parameters
     dMu     = pParameterList->getDouble(PARAM_MU);
     dSigma  = pParameterList->getDouble(PARAM_SIGMA);
     dA      = pParameterList->getDouble(PARAM_A);
     dB      = pParameterList->getDouble(PARAM_B);
+
+    // Validate parent
+    CPrior::validate();
+
+    // Local validation
+    if (dSigma <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
+    if (dA >= dB)
+      CError::errorGreaterThanEqualTo(PARAM_A, PARAM_B);
+    if( ((((dMu - dA) * (dB - dMu)) / (dSigma * dSigma)) - 1) <=0 )
+      CError::error(PARAM_SIGMA + string(" is too large")) ;
 
   } catch (string &Ex) {
     Ex = "CBetaPrior.validate(" + getLabel() + ")->" + Ex;

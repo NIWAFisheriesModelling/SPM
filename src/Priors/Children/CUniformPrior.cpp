@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CUniformPrior.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CUniformPrior::CUniformPrior()
@@ -23,8 +24,11 @@ CUniformPrior::CUniformPrior() {
 //**********************************************************************
 void CUniformPrior::validate() {
   try {
-    // Base
+
+    // Validate parent
     CPrior::validate();
+
+    // Local validation
 
   } catch (string &Ex) {
     Ex = "CUniformPrior.validate(" + getLabel() + ")->" + Ex;
