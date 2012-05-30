@@ -33,15 +33,16 @@ COffByOneAgeingError::COffByOneAgeingError() {
 //**********************************************************************
 void COffByOneAgeingError::validate() {
   try {
-    // Base
-    CAgeingError::validate();
 
     // Get our variables
     dP1      = pParameterList->getDouble(PARAM_P1);
     dP2      = pParameterList->getDouble(PARAM_P2);
     iK       = pParameterList->getInt(PARAM_K,true,0);
 
-    // Validate parameters
+    // Parent validation
+    CAgeingError::validate();
+
+    // Local validations
     if (iK > iMaxAge)
       CError::errorGreaterThan(PARAM_K, PARAM_MAX_AGE);
     if ((dP1+dP2) >= 1.0)

@@ -32,14 +32,15 @@ CNormalAgeingError::CNormalAgeingError() {
 //**********************************************************************
 void CNormalAgeingError::validate() {
   try {
-    // Base
-    CAgeingError::validate();
 
     // Get our variables
     dCV      = pParameterList->getDouble(PARAM_CV);
     iK       = pParameterList->getInt(PARAM_K,true,0);
 
-    // Validate
+    // Parent validation
+    CAgeingError::validate();
+
+    // Local validations
     if (dCV <= 0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
     if (iK > iMaxAge)
