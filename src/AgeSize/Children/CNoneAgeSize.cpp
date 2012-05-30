@@ -31,13 +31,15 @@ void CNoneAgeSize::validate() {
 
   try {
 
-    // Base
-    CAgeSize::validate();
-
+    // Get our variables
     sSizeWeight   = pParameterList->getString(PARAM_SIZE_WEIGHT);
     CSizeWeightManager *pSizeWeightManager = CSizeWeightManager::Instance();
     pSizeWeight = pSizeWeightManager->getSizeWeight(sSizeWeight);
 
+    // Validate parent
+    CAgeSize::validate();
+
+    // Local validation
     if ( pSizeWeight->getType() != PARAM_NONE )
       CError::errorTypeNotSupported(PARAM_SIZE_WEIGHT,string(PARAM_AGE_SIZE + string(" type=") + PARAM_NONE));
 

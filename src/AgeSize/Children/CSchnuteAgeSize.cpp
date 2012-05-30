@@ -47,8 +47,6 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
 //**********************************************************************
 void CSchnuteAgeSize::validate() {
   try {
-    // Base
-    CAgeSize::validate();
 
     // Get our variables
     dY1             = pParameterList->getDouble(PARAM_Y1);
@@ -61,10 +59,16 @@ void CSchnuteAgeSize::validate() {
     sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
     bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
-    // TODO: (Alistair) Complete validation
-    // Validate
+    // Validate parent
+    CAgeSize::validate();
+
+    // Local validation
     if (dCV <= 0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
+    if (dA <= 0)
+      CError::errorLessThanEqualTo(PARAM_A, PARAM_ZERO);
+    if (dB < 1)
+      CError::errorLessThanEqualTo(PARAM_B, PARAM_ONE);
 
     if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
       CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);

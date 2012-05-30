@@ -41,8 +41,6 @@ CVonBertalanffyAgeSize::CVonBertalanffyAgeSize() {
 //**********************************************************************
 void CVonBertalanffyAgeSize::validate() {
   try {
-    // Base
-    CAgeSize::validate();
 
     // Get our variables
     dLinf           = pParameterList->getDouble(PARAM_LINF);
@@ -52,9 +50,14 @@ void CVonBertalanffyAgeSize::validate() {
     sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
     bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
-    // Validate
+    // Validate parent
+    CAgeSize::validate();
+
+    // Local validation
     if (dLinf <= 0)
       CError::errorLessThanEqualTo(PARAM_LINF, PARAM_ZERO);
+    if (dK <= 0)
+      CError::errorLessThanEqualTo(PARAM_K, PARAM_ZERO);
     if (dCV <= 0)
       CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
 
