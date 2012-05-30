@@ -30,14 +30,15 @@ CBasicSizeWeight::CBasicSizeWeight() {
 //**********************************************************************
 void CBasicSizeWeight::validate() {
   try {
-    // Base
-    CSizeWeight::validate();
 
     // Get our variables
     dA      = pParameterList->getDouble(PARAM_A);
     dB      = pParameterList->getDouble(PARAM_B);
 
-    // Validate
+    // Validate parent
+    CSizeWeight::validate();
+
+    // Local validations
     if (dA <= 0)
       CError::errorLessThanEqualTo(PARAM_A, PARAM_ZERO);
     if (dB < 0)

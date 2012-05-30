@@ -29,9 +29,11 @@ CNoneSizeWeight::CNoneSizeWeight() {
 //**********************************************************************
 void CNoneSizeWeight::validate() {
   try {
+
     // Base
     CSizeWeight::validate();
 
+    // Local validations
 
   } catch (string &Ex) {
     Ex = "CNoneSizeWeight.validate(" + getLabel() + ")->" + Ex;
