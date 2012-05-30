@@ -30,8 +30,6 @@ CIncreasingSelectivity::CIncreasingSelectivity() {
 //**********************************************************************
 void CIncreasingSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Get our values
     iL     = pParameterList->getInt(PARAM_L);
@@ -40,7 +38,10 @@ void CIncreasingSelectivity::validate() {
 
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // Validate
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
     if (iL < pWorld->getMinAge())

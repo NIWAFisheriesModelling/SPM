@@ -29,12 +29,14 @@ CConstantSelectivity::CConstantSelectivity() {
 //**********************************************************************
 void CConstantSelectivity::validate() {
   try {
-    // Base validation
-    CSelectivity::validate();
 
     // Populate our variables
     dC = pParameterList->getDouble(PARAM_C);
 
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
   } catch (string &Ex) {
     Ex = "CConstantSelectivity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

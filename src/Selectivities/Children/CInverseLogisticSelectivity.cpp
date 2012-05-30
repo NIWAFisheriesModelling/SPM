@@ -33,16 +33,20 @@ CInverseLogisticSelectivity::CInverseLogisticSelectivity() {
 //**********************************************************************
 void CInverseLogisticSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Populate our variables
     dA50    = pParameterList->getDouble(PARAM_A50);
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
     dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
+    if (dAto95 <= 0)
+      CError::errorLessThanEqualTo(PARAM_ATO95, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CInverseLogisticSelectivity.validate(" + getLabel() + ")->" + Ex;

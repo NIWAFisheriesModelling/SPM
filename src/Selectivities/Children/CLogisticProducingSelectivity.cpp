@@ -35,8 +35,6 @@ CLogisticProducingSelectivity::CLogisticProducingSelectivity() {
 //**********************************************************************
 void CLogisticProducingSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Populate our variables
     iL      = pParameterList->getInt(PARAM_L);
@@ -45,8 +43,14 @@ void CLogisticProducingSelectivity::validate() {
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
     dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
+    if (dAto95 <= 0)
+      CError::errorLessThanEqualTo(PARAM_ATO95, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CLogisticProducingSelectivity.validate(" + getLabel() + ")->" + Ex;

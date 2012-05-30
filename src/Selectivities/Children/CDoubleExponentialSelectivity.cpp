@@ -40,8 +40,6 @@ CDoubleExponentialSelectivity::CDoubleExponentialSelectivity() {
 //**********************************************************************
 void CDoubleExponentialSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Populate our parameters
     dX0    = pParameterList->getDouble(PARAM_X0);
@@ -52,6 +50,10 @@ void CDoubleExponentialSelectivity::validate() {
     dY2    = pParameterList->getDouble(PARAM_Y2);
     dAlpha = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
     if (!CComparer::isBetween(dX0, dX1, dX2))

@@ -26,12 +26,14 @@ CAllValuesSelectivity::CAllValuesSelectivity() {
 //**********************************************************************
 void CAllValuesSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Fill our vector
     pParameterList->fillVector(vVs, PARAM_V);
 
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     // Make sure we have same amount of V's as Age Spread
     if ((int)vVs.size() !=  pWorld->getAgeSpread())
       CError::errorListSameSize(PARAM_V, PARAM_AGES);

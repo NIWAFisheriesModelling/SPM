@@ -31,13 +31,15 @@ CKnifeEdgeSelectivity::CKnifeEdgeSelectivity() {
 //**********************************************************************
 void CKnifeEdgeSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Populate our variable
     dE  = pParameterList->getDouble(PARAM_E);
     dAlpha  = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     if (dAlpha <= 0)
       CError::errorLessThanEqualTo(PARAM_ALPHA, PARAM_ZERO);
 

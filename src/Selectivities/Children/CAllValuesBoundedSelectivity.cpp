@@ -35,8 +35,6 @@ CAllValuesBoundedSelectivity::CAllValuesBoundedSelectivity() {
 //**********************************************************************
 void CAllValuesBoundedSelectivity::validate() {
   try {
-    // Base
-    CSelectivity::validate();
 
     // Get our variables
     iL      = pParameterList->getInt(PARAM_L);
@@ -44,7 +42,10 @@ void CAllValuesBoundedSelectivity::validate() {
 
     pParameterList->fillVector(vVs, PARAM_V);
 
-    // Validate
+    // Validate parent
+    CSelectivity::validate();
+
+    // Local validation
     if (iL < pWorld->getMinAge())
       CError::errorLessThan(PARAM_L, PARAM_MIN_AGE);
     if (iL > pWorld->getMaxAge())
