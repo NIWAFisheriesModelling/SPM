@@ -31,10 +31,13 @@ CAgeingErrorReport::CAgeingErrorReport() {
 //**********************************************************************
 void CAgeingErrorReport::validate() {
   try {
-    // Parent
-    CFileReport::validate();
 
     sAgeingError = pParameterList->getString(PARAM_AGEING_ERROR);
+
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
 
   } catch (string & ex) {
     ex = "CAgeingErrorReport.validate(" + getLabel() + ")->" + ex;
@@ -48,8 +51,6 @@ void CAgeingErrorReport::validate() {
 //**********************************************************************
 void CAgeingErrorReport::build() {
   try {
-    // Parent
-    CFileReport::build();
 
     // Get our selectivity
     CAgeingErrorManager *pManager = CAgeingErrorManager::Instance();

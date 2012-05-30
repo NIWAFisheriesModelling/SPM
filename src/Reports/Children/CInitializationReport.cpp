@@ -31,11 +31,14 @@ CInitializationReport::CInitializationReport() {
 //**********************************************************************
 void CInitializationReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Populate vars
     sInitializationPhase = pParameterList->getString(PARAM_INITIALIZATION_PHASE);
+
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
 
   } catch (string &Ex) {
     Ex = "CInitializationReport.validate(" + getLabel() + ")->" + Ex;

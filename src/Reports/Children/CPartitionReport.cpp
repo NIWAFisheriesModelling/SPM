@@ -35,8 +35,6 @@ CPartitionReport::CPartitionReport() {
 //**********************************************************************
 void CPartitionReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Assign Variables
     if (pParameterList->hasParameter(PARAM_YEARS) )
@@ -46,6 +44,10 @@ void CPartitionReport::validate() {
 
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
 
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
     // Validate Year Range
     for (int i = 0; i < (int)vYear.size(); ++i) {
       if (vYear[i] < pWorld->getInitialYear())

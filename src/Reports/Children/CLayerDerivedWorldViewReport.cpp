@@ -43,8 +43,6 @@ CLayerDerivedWorldViewReport::CLayerDerivedWorldViewReport() {
 //**********************************************************************
 void CLayerDerivedWorldViewReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Assign Variables
     if (pParameterList->hasParameter(PARAM_YEARS) )
@@ -55,6 +53,10 @@ void CLayerDerivedWorldViewReport::validate() {
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
     sLayer      = pParameterList->getString(PARAM_LAYER);
 
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
     // Validate Year Range
     for (int i = 0; i < (int)vYear.size(); ++i) {
       if (vYear[i] < pWorld->getInitialYear())

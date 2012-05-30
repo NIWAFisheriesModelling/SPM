@@ -31,11 +31,14 @@ CObservationReport::CObservationReport() {
 //**********************************************************************
 void CObservationReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Get Params
     sObservation = pParameterList->getString(PARAM_OBSERVATION);
+
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
 
   } catch (string &Ex) {
     Ex = "CObservationReport.validate(" + sLabel + ")->" + Ex;

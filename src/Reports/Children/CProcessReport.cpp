@@ -34,11 +34,14 @@ CProcessReport::CProcessReport() {
 //**********************************************************************
 void CProcessReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Get var
     sParameter = pParameterList->getString(PARAM_PROCESS);
+
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
 
   } catch (string &Ex) {
     Ex = "CProcessReport.validate()->" + Ex;

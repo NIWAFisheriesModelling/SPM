@@ -39,14 +39,16 @@ CLayerReport::CLayerReport() {
 //**********************************************************************
 void CLayerReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Assign Variables
     iYear       = pParameterList->getInt(PARAM_YEAR,true,pWorld->getInitialYear());
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
     sLayer      = pParameterList->getString(PARAM_LAYER);
 
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
     // Validate Year Range
     if (iYear < pWorld->getInitialYear())
       CError::errorLessThan(PARAM_YEAR, PARAM_INITIAL_YEAR);

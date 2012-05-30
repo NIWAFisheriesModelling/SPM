@@ -34,11 +34,14 @@ CSimulatedObservationReport::CSimulatedObservationReport() {
 //**********************************************************************
 void CSimulatedObservationReport::validate() {
   try {
-    // Base
-    CFileReport::validate();
 
     // Get Params
     sObservation = pParameterList->getString(PARAM_OBSERVATION);
+
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
 
   } catch (string &Ex) {
     Ex = "CSimulatedObservationReport.validate(" + sLabel + ")->" + Ex;

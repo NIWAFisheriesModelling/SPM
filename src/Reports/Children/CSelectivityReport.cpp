@@ -31,10 +31,13 @@ CSelectivityReport::CSelectivityReport() {
 //**********************************************************************
 void CSelectivityReport::validate() {
   try {
-    // Parent
-    CFileReport::validate();
 
     sSelectivity = pParameterList->getString(PARAM_SELECTIVITY);
+
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
 
   } catch (string &Ex) {
     Ex = "CSelectivityReport.validate(" + getLabel() + ")->" + Ex;

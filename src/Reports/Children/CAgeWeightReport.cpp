@@ -34,11 +34,13 @@ CAgeWeightReport::CAgeWeightReport() {
 //**********************************************************************
 void CAgeWeightReport::validate() {
   try {
-    // Parent
-    CFileReport::validate();
 
      sAgeSize = pParameterList->getString(PARAM_AGE_SIZE);
 
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
     // Get our list of ages to evaluate
     for (int i = pWorld->getMinAge(); i <= pWorld->getMaxAge(); ++i ) {
       vAgeList.push_back(i);

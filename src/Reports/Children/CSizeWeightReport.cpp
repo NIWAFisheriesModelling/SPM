@@ -34,15 +34,15 @@ CSizeWeightReport::CSizeWeightReport() {
 //**********************************************************************
 void CSizeWeightReport::validate() {
   try {
-    // Parent
-    CFileReport::validate();
 
     sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
-
     // Get our list of sizes to evaluate
     pParameterList->fillVector(vSizeList, PARAM_SIZES);
 
-    // Validate
+    // Validate parent
+    CFileReport::validate();
+
+    // Local validation
     for (int i = 0; i < (int)vSizeList.size(); ++i ) {
       if(vSizeList[i] < 0)
         CError::errorLessThan(PARAM_SIZES, PARAM_ZERO);
