@@ -11,6 +11,7 @@
 #include "CThresholdPreferenceFunction.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CThresholdPreferenceFunction::CThresholdPreferenceFunction()
@@ -34,12 +35,17 @@ CThresholdPreferenceFunction::CThresholdPreferenceFunction() {
 //**********************************************************************
 void CThresholdPreferenceFunction::validate() {
   try {
-    // Base Validation
-    CPreferenceFunction::validate();
 
     // Assign local variables
     dN        = pParameterList->getDouble(PARAM_N);
     dLambda   = pParameterList->getDouble(PARAM_LAMBDA);
+
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    //Local validation
+    if (dLambda <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_LAMBDA, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CThresholdPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

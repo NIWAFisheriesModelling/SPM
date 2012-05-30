@@ -13,6 +13,7 @@
 #include "CExponentialPreferenceFunction.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/CError.h"
 
 // Using
 using std::cout;
@@ -41,11 +42,16 @@ CExponentialPreferenceFunction::CExponentialPreferenceFunction() {
 //**********************************************************************
 void CExponentialPreferenceFunction::validate() {
   try {
-    // Base
-    CPreferenceFunction::validate();
 
     // Assign Variables
     dLambda = pParameterList->getDouble(PARAM_LAMBDA);
+
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    //Local validation
+    if (dLambda <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_LAMBDA, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CExponentialPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

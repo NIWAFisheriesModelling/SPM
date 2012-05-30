@@ -28,6 +28,25 @@ CConstantPreferenceFunction::CConstantPreferenceFunction() {
 }
 
 //**********************************************************************
+// void CConstantPreferenceFunction::validate()
+// Validate
+//**********************************************************************
+void CConstantPreferenceFunction::validate() {
+  try {
+
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    // Local validations
+
+  } catch (string &Ex) {
+    Ex = "CConstantPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+
+//**********************************************************************
 // double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)
 // Get Result
 //**********************************************************************

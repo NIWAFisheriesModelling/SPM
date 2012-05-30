@@ -33,20 +33,22 @@ CCategoricalPreferenceFunction::CCategoricalPreferenceFunction() {
 //**********************************************************************
 void CCategoricalPreferenceFunction::validate() {
   try {
-    // Base Validation
-    CPreferenceFunction::validate();
 
     // Assign local variables
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
 
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    //Local validation
     if (vValues.size() != vLabels.size())
       CError::errorListSameSize(PARAM_CATEGORY_VALUES, PARAM_CATEGORY_LABELS);
     // TODO:
     //       Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
     // Check For Duplicate Labels.
 
-  // Register estimables
+    // Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)
       registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
 

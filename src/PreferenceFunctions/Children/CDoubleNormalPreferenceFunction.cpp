@@ -35,13 +35,20 @@ CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction() {
 //**********************************************************************
 void CDoubleNormalPreferenceFunction::validate() {
   try {
-    // Base
-    CPreferenceFunction::validate();
 
     // Assign our Variables
     dSigmaL = pParameterList->getDouble(PARAM_SIGMA_L);
     dSigmaR = pParameterList->getDouble(PARAM_SIGMA_R);
     dMu     = pParameterList->getDouble(PARAM_MU);
+
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    //Local validation
+    if (dSigmaL <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_SIGMA_L, PARAM_ZERO);
+    if (dSigmaR <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_SIGMA_R, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CDoubleNormalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

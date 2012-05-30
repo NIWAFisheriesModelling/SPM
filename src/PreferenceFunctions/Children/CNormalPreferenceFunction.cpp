@@ -33,12 +33,17 @@ CNormalPreferenceFunction::CNormalPreferenceFunction() {
 //**********************************************************************
 void CNormalPreferenceFunction::validate() {
   try {
-    // Base Validation
-    CPreferenceFunction::validate();
 
     // Assign our variables
     dMu       = pParameterList->getDouble(PARAM_MU);
     dSigma    = pParameterList->getDouble(PARAM_SIGMA);
+
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    //Local validation
+    if (dSigma <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CNormalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

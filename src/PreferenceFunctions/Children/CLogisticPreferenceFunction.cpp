@@ -33,12 +33,17 @@ CLogisticPreferenceFunction::CLogisticPreferenceFunction() {
 //**********************************************************************
 void CLogisticPreferenceFunction::validate() {
   try {
-    // Base
-    CPreferenceFunction::validate();
 
     // Local
     dA50    = pParameterList->getDouble(PARAM_A50);
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
+
+    // Validate parent
+    CPreferenceFunction::validate();
+
+    //Local validation
+    if (dAto95 <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_ATO95, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CLogisticPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
