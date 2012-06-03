@@ -9,7 +9,7 @@
 \defSub{min\_age}{Minimum age of the population}
 \defSub{max\_age}{Maximum age of the population}
 \defSub{age\_plus\_group}{Define the largest age as a plus group}
-\defSub{age\_size\_weight}{Define the label of the associated age-size-weight relationship for each category}
+\defSub{age\_size}{Define the label of the associated age-size relationship for each category}
 \defSub{initialisation\_phases}{Define the labels of the phases of the initialisation}
 \defSub{initial\_year}{Define the first year of the model, immediately following initialisation}
 \defSub{current\_year}{Define the current year of the model}
@@ -82,7 +82,6 @@
 \defSub{penalty} {Define the event mortality penalty label}
 \par\textbf{\commandlabsubarg{process}{type}{biomass\_event\_mortality}}\par
 \defSub{categories}{Define the categories that the event mortality is applied to}
-\defSub{age\_size\_weight}{Define the age-size-weight relationships for each of the categories that the event mortality is applied to}
 \defSub{years}{Define the years where the mortality event is applied}
 \defSub{layers}{Define the layers that specify the event mortality (as a biomass) in each year}
 \defSub{u\_max} {Define the maximum exploitation rate}
@@ -101,13 +100,13 @@
 \defSub{to} {Define the category that is the sink of the transition process}
 \defSub{proportions} {Define the proportion of individuals to move}
 \defSub{layer} {Name of the layer}
-\par\textbf{\commandlabsubarg{process}{type}{migration\_movement}}\par
+\par\textbf{\commandlabsubarg{process}{type}{migration}}\par
 \defSub{categories} {Define the categories that the migration movement event is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defSub{proportion} {Define the constant multiplier for the proportion of individuals that migrate}
 \defSub{source\_layer} {Define the label of a layer that defines the source cells of the migration movement event}
 \defSub{sink\_layer} {Define the label of a layer that defines the sink cells of the migration movement event}
-\par\textbf{\commandlabsubarg{process}{type}{adjacent\_cell\_movement}}\par
+\par\textbf{\commandlabsubarg{process}{type}{adjacent\_cell}}\par
 \defSub{categories} {Define the categories that the adjacent cell movement event is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defSub{layer} {Define the label of a gradient layer that defines the the relative strength of movement to adjacent cells}
@@ -173,14 +172,12 @@
 \par\textbf{\commandlabsubarg{layer}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the biomass}
 \defSub{selectivities} {Define the selectivities applied to each category}
-\defSub{age\_size\_weight}{Define the age-size-weight relationships for each of the categories that the biomass is calculated from}
 \par\textbf{\commandlabsubarg{layer}{type}{abundance\_density}}\par
 \defSub{categories} {Define the categories are used to calculate the abundance}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \par\textbf{\commandlabsubarg{layer}{type}{biomass\_density}}\par
 \defSub{categories} {Define the categories are used to calculate the biomass}
 \defSub{selectivities} {Define the selectivities applied to each category}
-\defSub{age\_size\_weight}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
 \par\textbf{\commandlabsubarg{layer}{type}{meta}}\par
 \defSub{years} {Define the years}
 \defSub{layers} {Define the layer labels for each of the years}
@@ -206,19 +203,24 @@
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
 \defSub{selectivities} {Define the selectivities}
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
-\defSub{time\_step\_proportion} {Define the proportion of the time step through which the derived quantity has been calculated}
 \defSub{layer} {Name of the layer}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
 \defSub{selectivities} {Define the selectivities}
 \defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
 \defSub{layer} {Name of the layer}
-\par\defComLab{age\_size\_weight} {Define an age-size-weight relationship with label}\par
+\par\defComLab{age\_size} {Define an age-size relationship with label}\par
 \defSub{type} {Define the type of size-at-age relationship}
+\par\textbf{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}\par
 \defSub{linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
 \defSub{k} {Define the $k$ parameter of the von Bertalanffy relationship}
 \defSub{t0} {Define the $t_0$ parameter of the von Bertalanffy relationship}
 \defSub{distribution} {Define the distribution of sizes-at-age around the mean}
+\defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
+\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
+\defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
+\defSub{size\_weight} {Define the label of the associated size-weight relationship}
+\par\textbf{\commandlabsubarg{age\_size}{type}{schnute}}\par
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
 \defSub{y2} {Define the $y_2$ parameter of the Schnute relationship}
 \defSub{tau1} {Define the $\tau_1$ parameter of the Schnute relationship}
@@ -228,16 +230,13 @@
 \defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
 \defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
-\defSub{weight\_a} {Define the $a$ parameter of the basic size-weight relationship}
-\defSub{weight\_b} {Define the $b$ parameter of the basic size-weight relationship}
-\par\textbf{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}\par
-\defSub{size\_weight} {Define the label of the associated size-weight relationship}
-\par\textbf{\commandlabsubarg{age\_size}{type}{schnute}}\par
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \par\defComLab{size\_weight} {Define a size-weight relationship with label}\par
 \defSub{type} {Define the type of relationship}
 \par\textbf{\commandlabsubarg{size\_weight}{type}{none}}\par
 \par\textbf{\commandlabsubarg{size\_weight}{type}{basic}}\par
+\defSub{a} {Define the $a$ parameter of the basic size-weight relationship}
+\defSub{b} {Define the $b$ parameter of the basic size-weight relationship}
 \par\defComLab{selectivity} {Define a selectivity function with label}\par
 \defSub{type} {Define the type of selectivity function}
 \par\textbf{\commandlabsubarg{selectivity}{type}{constant}}\par
@@ -335,9 +334,9 @@
 \par\textbf{\commandlabsubarg{prior}{type}{normal}}\par
 \defSub{mu}{Defines the mean $\mu$ of the normal prior}
 \defSub{cv}{Defines the c.v. $c$ of the normal prior}
-\par\textbf{\commandlabsubarg{prior}{type}{normal\_by\_sd}}\par
+\par\textbf{\commandlabsubarg{prior}{type}{normal\_by\_stdev}}\par
 \defSub{mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
-\defSub{sd}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
+\defSub{sigma}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
 \par\textbf{\commandlabsubarg{prior}{type}{lognormal}}\par
 \defSub{mu}{Defines the mean $\mu$ of the lognormal prior}
 \defSub{cv}{Defines the c.v. $c$ of the lognormal prior}
@@ -345,7 +344,7 @@
 \defSub{a}{The lower value of the range parameter $A$ of the Beta prior}
 \defSub{b}{The upper value of the range parameter $B$ of the Beta prior}
 \defSub{mu}{Defines the mean $\mu$ of the Beta prior}
-\defSub{sd}{Defines the standard deviation $\sigma$ of the Beta prior}
+\defSub{sigma}{Defines the standard deviation $\sigma$ of the Beta prior}
 \par\defComLab{catchability}{Define a catchability constant with \argument{label}}\par\par
 \defSub{q} {Value of the q parameter}
 \par\defComLab{penalty}{Define a penalty with \argument{label}}\par\par
@@ -354,21 +353,6 @@
 \subsection{Observation command and subcommand syntax}\par
 \defComLab{observation}{Define an observation}\par\par
 \defSub{type} {Define the type of observation}
-\par\textbf{\commandlabsubarg{observation}{type}{event\_mortality\_at\_age}}\par
-\defSub{year} {Define the year that the observation applies to}
-\defSub{process\_label} {Define the label of the event mortality process}
-\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
-\defSub{min\_age} {Define the minimum age for the observation}
-\defSub{max\_age} {Define the maximum age for the observation}
-\defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
-\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
-\defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
-\defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
-\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defSub{likelihood}{Define the likelihood for the observation}
-\defSub{delta}{Define the delta robustifying constant for the likelihood}
-\defSub{process\_error}{Define the process error term}
-\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
 \par\textbf{\commandlabsubarg{observation}{type}{proportions\_at\_age}}\par
 \defSub{year} {Define the year that the observation applies to}
 \defSub{time\_step} {Define the time-step that the observation applies to}
@@ -512,12 +496,17 @@
 \par\textbf{\commandlabsubarg{report}{type}{random\_number\_seed}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\par\textbf{\commandlabsubarg{report}{type}{age\_size}}\par
+\defSub{age\_size} {Define the label of the age-size relationship}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{size\_weight}}\par
-\defSub{size\_weight} {Define the label of the size-weight relationship print}
-\par\textbf{\commandlabsubarg{report}{type}{age\_size\_weight}}\par
-\defSub{age\_size\_weight} {Define the label of the age-size-weight relationship print}
-\defSub{quantiles} {Define the labels of the size-at-age relationship print}
-\defSub{sizes} {Define the labels of the size-weight relationship print}
+\defSub{size\_weight} {Define the label of the size-weight relationship}
+\defSub{sizes} {Define the sizes for which to report the mean weights}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\par\textbf{\commandlabsubarg{report}{type}{age\_weight}}\par
+\defSub{age\_size} {Define the label of the age-size relationship}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \subsection{Other commands and subcommands}\par

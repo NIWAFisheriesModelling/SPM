@@ -44,14 +44,10 @@
 \defDefault{True}
 \defValue{Defines  the largest age as a plus group}
 
-\TODO
-
-\defSub{age\_size\_weight}{Define the label of the associated age-size-weight relationship for each category}
-\defType{Vector of strings, of length $1\ldots n_{categories}$}
+\defSub{age\_size}{Define the label of the associated age-size relationship for each category}
+\defType{Vector of strings, of length $n_{categories}$}
 \defDefault{No default}
-\defValue{Must be labels of command \command{age\_size\_weight}}
-
-\TODOend
+\defValue{Must be labels of command \command{age\_size}}
 
 \defSub{initialisation\_phases}{Define the labels of the phases of the initialisation}
 \defType{Vector of strings, of length of the number of initialisation phases}
@@ -81,7 +77,6 @@
 \subsection{Initialisation}
 
 The methods for initialisation available are,
-
 \begin{itemize}
 	\item Iterative
 \end{itemize}
@@ -432,11 +427,6 @@ Changed name to be clearer.
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\defSub{age\_size\_weight}{Define the age-size-weight relationships for each of the categories that the event mortality is applied to}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid labels from \command{age\_size\_weight}}
-
 \defSub{years}{Define the years where the mortality event is applied}
 \defType{Integer vector or integer range}
 \defDefault{No default}
@@ -521,7 +511,7 @@ Changed name to be clearer.
 \defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then rate applied to each cell is multiplied by the value of the layer. Note that the layer values must be non-negative}
 
-\subsubsection[Migration movement]{\commandlabsubarg{process}{type}{migration\_movement}}
+\subsubsection[Migration movement]{\commandlabsubarg{process}{type}{migration}}
 
 \defSub{categories} {Define the categories that the migration movement event is applied to}
 \defType{String vector}
@@ -548,7 +538,7 @@ Changed name to be clearer.
 \defDefault{No default}
 \defValue{A valid layer defined by \command{layer}}
 
-\subsubsection[Adjacent cell movement]{\commandlabsubarg{process}{type}{adjacent\_cell\_movement}}
+\subsubsection[Adjacent cell movement]{\commandlabsubarg{process}{type}{adjacent\_cell}}
 
 \defSub{categories} {Define the categories that the adjacent cell movement event is applied to}
 \defType{String vector}
@@ -846,11 +836,6 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{age\_size\_weight}{Define the age-size-weight relationships for each of the categories that the biomass is calculated from}
-\defType{String vector, of length \subcommand{categories}}
-\defDefault{No default}
-\defValue{Valid labels from \command{age\_size\_weight}}
-
 \subsubsection[Abundance-density]{\commandlabsubarg{layer}{type}{abundance\_density}}
 
 \defSub{categories} {Define the categories are used to calculate the abundance}
@@ -874,11 +859,6 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defType{String vector, of length \subcommand{categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
-
-\defSub{age\_size\_weight}{Define the age-weight relationships for each of the categories that the biomass is calculated from}
-\defType{String vector, of length \subcommand{categories}}
-\defDefault{No default}
-\defValue{Valid labels from \command{age\_size\_weight}}
 
 \subsubsection[Meta-layer]{\commandlabsubarg{layer}{type}{meta}}
 
@@ -977,6 +957,8 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 
 \TODOend 
 
+\TODO
+
 \subsection{Derived quantities}
 
 The individual types of derived quantities available are,
@@ -1010,16 +992,6 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{A valid time step label from \command{time\_step}}
 
-\TODO
-
-Is the proportion below needed? what does it do? Or is it just text carry over?
-
-\defSub{time\_step\_proportion} {Define the proportion of the time step through which the derived quantity has been calculated}
-\defType{String vector}
-\defDefault{No default}
-
-\TODOend
-
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{No default}
@@ -1047,11 +1019,9 @@ Is the proportion below needed? what does it do? Or is it just text carry over?
 \defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell biomass multiplied by the value of the layer.}
 
-\subsection{Age-size-weight relationship}
+\TODOend
 
-\TODO
-
-Changed a lot to reflect a single module for age-size-weight relationships. Also changed the a and b parameters of the size-weight relationship to weight\_a and weight\_b to separate from Schnute parameters a and b.
+\subsection{Age-size relationship}
 
 The individual types of size-at-age relationships available are,
 
@@ -1061,19 +1031,14 @@ The individual types of size-at-age relationships available are,
 	\item Schnute
 \end{itemize}
 
-The individual types of size-weight relationships available are,
-
-\begin{itemize}
-  \item none - the default if no size-weight parameters are provided
-	\item basic
-\end{itemize}
-
-\defComLab{age\_size\_weight} {Define an age-size-weight relationship with label}
+\defComLab{age\_size} {Define an age-size relationship with label}
 
 \defSub{type} {Define the type of size-at-age relationship}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid type of size-at-age relationship}
+
+\subsubsection[von Bertalanffy]{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}
 
 \defSub{linf} {Define the $L_\infty$ parameter of the von Bertalanffy relationship}
 \defType{Estimable}
@@ -1098,6 +1063,28 @@ The individual types of size-weight relationships available are,
 \defDefault{Normal}
 \defValue{Either normal or lognormal}
 \defCondition{Only define if using the von Bertalanffy relationship}
+
+\defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
+\defType{Logical}
+\defDefault{True}
+\defValue{If true, the the c.v. is a function of length, else a function of age}
+
+\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
+\defType{Constant vector}
+\defDefault{No default}
+\defValue{A vector of values, $\le1$ of length equal to the number of time steps}
+
+\defSub{size\_weight} {Define the label of the associated size-weight relationship}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid label from \command{size\_weight}}
+
+\subsubsection[Schnute]{\commandlabsubarg{age\_size}{type}{schnute}}
 
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
 \defType{Estimable}
@@ -1150,31 +1137,6 @@ The individual types of size-weight relationships available are,
 \defDefault{No default}
 \defValue{A vector of values, $\le1$ of length equal to the number of time steps}
 
-\defSub{weight\_a} {Define the $a$ parameter of the basic size-weight relationship}
-\defType{Estimable}
-\defDefault{Default to 1 representing relationship type none}
-\defValue{A positive real number}
-
-\defSub{weight\_b} {Define the $b$ parameter of the basic size-weight relationship}
-\defType{Estimable}
-\defDefault{Default to 1 representing relationship type none}
-\defValue{A positive real number}
-
-\TODOend
-
-\TOUNDO
-
-these comes off and are now within the age-size-weight module.
-
-\subsubsection[von Bertalanffy]{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}
-
-\defSub{size\_weight} {Define the label of the associated size-weight relationship}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid label from \command{size\_weight}}
-
-\subsubsection[Schnute]{\commandlabsubarg{age\_size}{type}{schnute}}
-
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \defType{String}
 \defDefault{No default}
@@ -1202,7 +1164,15 @@ There are no other subcommands for \commandlabsubarg{size\_weight}{type}{none}.
 
 \subsubsection[Basic]{\commandlabsubarg{size\_weight}{type}{basic}}
 
-\TOUNDOend
+\defSub{a} {Define the $a$ parameter of the basic size-weight relationship}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{b} {Define the $b$ parameter of the basic size-weight relationship}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
 
 \subsection{Selectivities}
 

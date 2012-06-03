@@ -93,20 +93,14 @@ Prints the values of a selectivity for each age in the partition, for a given ye
 
 Prints the random number seed used by \SPM\ to generate the random number sequence. Future runs made with the same random number seed and the same model will produce identical outputs.
 
-\subsection{\I{Verifying the size-weight relationship}\label{sec:report-weight-at-size}}\index{Reports ! Size-at-age}
-
-\TOUNDO
- 
-This section needs to be removed and replaced with the section below where it includes age, size and weight checks.
+\subsection{\I{Printing the size-weight relationship}\label{sec:report-size-weight}}\index{Reports ! Size-weight}
 
 Prints a summary of the size-weight relationship used by \SPM\ for each category by printing the mean weight for a list of sizes. Useful for verifying that the choice of parameters (and their magnitude) are sensible choices.
 
-\TOUNDOend
+\subsection{\I{Printing the size-at-age relationship}\label{sec:report-age-size}}\index{Reports ! Size-at-age}
 
-\subsection{\I{Verifying the size-at-age and size-weight relationships}\label{sec:report-age-size-weight}}\index{Reports ! Size-at-age}
+Prints a summary of the size-at-age relationship used by \SPM\ for each category. For each age between \argument{min\_age} and \argument{max\_age}, prints the mean size. Useful for verifying that the choice of parameters (and their magnitude) are sensible choices.
 
-\TODO
+\subsection{\I{Printing the weight-at-age relationship}\label{sec:report-age-weight}}\index{Reports ! Weight-at-age}
 
-Prints a summary of the size-at-age and size-weight relationship used by \SPM\ for each category. For each age between \argument{min\_age} and \argument{max\_age}, prints the mean size, as well as the size at user-defined quantiles. For user-defined lengths, returns the corresponding mean weights. Useful for verifying that the choice of parameters (and their magnitude) are sensible choices.
-
-\TODOend
+Prints a summary of the mean weight-at-age relationship used by \SPM\ for each category. For each age between \argument{min\_age} and \argument{max\_age}, prints the mean weight. Useful for verifying that the choice of parameters (and their magnitude) are sensible choices.

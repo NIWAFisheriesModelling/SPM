@@ -45,7 +45,7 @@ See Section \ref{sec:parameter-names} for instructions on how to generate the pa
 
 All parameters are estimated within bounds\index{Bounds}. For each parameter to be estimated, you need to specify the bounds and the prior\index{Priors} (Section \ref{sec:priors}). Note that the bounds and prior for each parameter refer to the values of the parameters, not the actual values resulting from the application of the parameter to an equation. If you want to estimate only some elements of a vector, either define the elements of the vector to be estimated (see \ref{sec:parameter-names}) or fix the others by setting the bounds equal.
 
-Phased estimation of parameters is not yet implemented.
+The estimation of parameters can be phased. \NYI. Here, some of the estimated parameters are initially held fixed, and a minimisation is carried out. Next, some or all of the remaining parameters that were initially held fixed are freed, and another minimisation is carried out. This process continues until all phases have been carried out.
 
 \subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
@@ -174,7 +174,8 @@ You have the option to specify that some of the estimated parameters are fixed d
 
 A multivariate $t$ distribution is available as an alternative to the multivariate normal proposal distribution. If you request multivariate $t$ proposals, you may want to change the degrees of freedom from the default of $4$. As the degrees of freedom decrease, the $t$ distribution becomes more heavy tailed. This may lead to better convergence properties.
 
-The posterior sample can also be used for projections (Section \ref{sec:projections}) or simulations (Section {sec:simulation-observations}) with the values supplied using \texttt{spm -i \emph{file}}.
+The posterior sample can also be used for %projections (Section \ref{sec:projections}) or 
+simulations (Section {sec:simulation-observations}) with the values supplied using \texttt{spm -i \emph{file}}.
 
 \subsection{Priors\label{sec:priors}}
 

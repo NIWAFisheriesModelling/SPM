@@ -5,7 +5,6 @@
 The observation types available are,
 
 \begin{description}
-  \item Observations of a mortality event proportions of individuals by age class
   \item Observations of proportions of individuals by age class
   \item Observations of proportions of individuals between categories within each age class
   \item Relative and absolute abundance observations
@@ -20,78 +19,6 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defType{String}
 \defDefault{No default}
 \defValue{A valid type of observation}
-
-\subsubsection[Event mortality-at-age]{\commandlabsubarg{observation}{type}{event\_mortality\_at\_age}}
-
-\defSub{year} {Define the year that the observation applies to}
-\defType{Integer}
-\defDefault{No default}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
-
-\defSub{process\_label} {Define the label of the event mortality process}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid label of \command{process} where \commandlabsubarg{process}{type}{event\_mortality}}
-
-\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
-\defType{Constant}
-\defDefault{1.0}
-\defValue{A real number between 0 and 1, inclusive}
-
-\defSub{min\_age} {Define the minimum age for the observation}
-\defType{Integer}
-\defDefault{No default}
-\defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
-
-\defSub{max\_age} {Define the maximum age for the observation}
-\defType{Integer}
-\defDefault{No default}
-\defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
-
-\defSub{age\_plus\_group} {Define is the the maximum age for the observation is a plus group}
-\defType{Switch}
-\defDefault{True}
-\defValue{Either true or false}
-
-\defSub{layer} {Name of the categorical layer used to group the spacial cells for the observation}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid layer as defined by \command{layer}. Must be a layer of \texttt{type=categorical}}
-
-\defSub{obs [label]}{Define the following data as observations for the categorical layer with value \texttt{[label]}}
-\defType{Constant vector}
-\defDefault{No default}
-\defValue{The label is valid value from the associated observation layer. It is followed by a vector of values giving the proportions at age. This subcommand is repeated for each unique value of label}
-
-\defSub{tolerance}{Define the tolerance on the sum-to-one error check in \SPM}
-\defType{Constant}
-\defDefault{0.001}
-\defValue{The tolerance on the sum to one error check. If $abs(1-\sum O_i) > \text{\argument{tolerance}}$ then \SPM\ will report an error}
-
-\defSub{error\_value [label]}{Define the following data as error values (e.g., $N$ for multinomial likelihoods, c.v. for lognormal likelihoods, etc.) for the categorical layer with value \texttt{[label]}}
-\defType{Constant}
-\defDefault{No default}
-\defValue{A valid value from the associated observation layer. This subcommand is repeated for each unique value of label}
-
-\defSub{likelihood}{Define the likelihood for the observation}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid likelihood}
-
-\defSub{delta}{Define the delta robustifying constant for the likelihood}
-\defType{Constant}
-\defDefault{1e-11}
-\defValue{A non-negative real number}
-
-\defSub{process\_error}{Define the process error term}
-\defType{Constant}
-\defDefault{No process error}
-\defValue{A non-negative real number}
-
-\defSub{simulation\_likelihood}{Define the likelihood when doing simulations, if the observations is a pseudo-observation}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid likelihood, except not \texttt{none}. Note that this command is ignored if the observation is not a pseudo-observation}
 
 \subsubsection[Proportions at age]{\commandlabsubarg{observation}{type}{proportions\_at\_age}}
 

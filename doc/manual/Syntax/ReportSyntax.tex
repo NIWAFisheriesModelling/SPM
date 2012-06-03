@@ -314,37 +314,12 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True of False}
 
-\subsubsection[Print the weight-at-size]{\commandlabsubarg{report}{type}{size\_weight}}
+\subsubsection[Print mean size at age]{\commandlabsubarg{report}{type}{age\_size}}
 
-\TOUNDO
-
-This is superseded with the size-age-weight report below
-
-\defSub{size\_weight} {Define the label of the size-weight relationship print}
+\defSub{age\_size} {Define the label of the age-size relationship}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid label from \command{size\_weight}}
-
-\TOUNDOend
-
-\subsubsection[Print the age-size-weight]{\commandlabsubarg{report}{type}{age\_size\_weight}}
-
-\TODO
-
-\defSub{age\_size\_weight} {Define the label of the age-size-weight relationship print}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid label from \command{age\_size\_weight}}
-
-\defSub{quantiles} {Define the labels of the size-at-age relationship print}
-\defType{Constant vector}
-\defDefault{No default}
-\defValue{Values of the quantiles on which to report the size-at-age relationship for}
-
-\defSub{sizes} {Define the labels of the size-weight relationship print}
-\defType{Constant vector}
-\defDefault{No default}
-\defValue{Values of sizes to calculate the size-weight relationship for}
+\defValue{A valid label from \command{age\_age}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -356,4 +331,41 @@ This is superseded with the size-age-weight report below
 \defDefault{True}
 \defValue{Either True of False}
 
-\TODOend
+\subsubsection[Print mean weight at size]{\commandlabsubarg{report}{type}{size\_weight}}
+
+\defSub{size\_weight} {Define the label of the size-weight relationship}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid label from \command{size\_weight}}
+
+\defSub{sizes} {Define the sizes for which to report the mean weights}
+\defType{Constant vector}
+\defDefault{No default}
+\defValue{Values of sizes to report the mean weight}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print mean weight at age]{\commandlabsubarg{report}{type}{age\_weight}}
+
+\defSub{age\_size} {Define the label of the age-size relationship}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid label from \command{age\_size}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}

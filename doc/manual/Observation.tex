@@ -188,7 +188,7 @@ and the $c_i$'s are the c.v.s for each age class $i$, and $Z \left(\theta,\delta
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsection{\I{Proportions-by-category}\label{sec:proportions-by-category}}
+\subsection{\I{Proportions-by-category observations}\label{sec:proportions-by-category}}
 Proportions-by-category observations are observations of either the relative number of individuals between categories within age classes, or relative biomass between categories within age classes. 
 
 The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. 
@@ -298,20 +298,20 @@ where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent divi
 
 The default value of $\delta$ is $1 \times 10^{-11}$.
 
-\subsection{\I{Abundance}}
+\subsection{\I{Abundance or biomass observations}}
 
-Abundance observations are observations of either a relative or absolute number of individuals from a set of categories after applying a selectivity. 
+Abundance (or biomass) observations are observations of either a relative or absolute number (or biomass) of individuals from a set of categories after applying a selectivity. The observations classes are the same, except that a biomass observation will use the biomass as the observed (and expected) value (calculated from mean weight of individuals within each age and category) while an abundance observation is just the number of individuals. 
 
-The observation is supplied for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated of fixed. For absolute abundance observations, define a catchability where $q=1$.
+Each observation is for a given year and time step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated of fixed. For absolute abundance or absolute biomass observations, define a catchability where $q=1$.
 
-Abundance observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance (male $+$ female) or just male abundance. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}, e.g., 
+The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance/biomass (male $+$ female) or just male abundance/biomass. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance/biomass. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}, e.g., 
 
 \begin{verbatim}
 categories male
 selectivities male-selectivity
 \end{verbatim}
 
-defines an observation of the abundance of males. \SPM\ then expects that there will be a single abundance value supplied. The expected values will be the expected number of males, after applying the selectivities, at the year and time step specified. 
+defines an observation for males after applying the selectivity male-selectivity. \SPM\ then expects that there will be a single observation supplied. The expected values for the observations will be the expected abundance (or biomass) of males, after applying the selectivities, at the year and time step specified. 
 
 The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
 

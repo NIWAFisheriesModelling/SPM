@@ -3,9 +3,7 @@ In SPM, but not in manual
   0 (zero)
   1 (one)
   1000
-  adjacent_cell
   age_index
-  age_size
   ages
   area
   binomial
@@ -27,9 +25,7 @@ In SPM, but not in manual
   layer_height
   layer_width
   method
-  migration
   multinomial
-  normal_by_stdev
   normal_log
   objective
   profiles
@@ -41,23 +37,20 @@ In SPM, but not in manual
   scores_index
   size_weights
   square_uniform
-  standardise_ycs_year_range
   threshold_biomass
   total_score
   value
+  values
   weights
   width
 
 
 
 In manual, but not in SPM
-  age_size_weight
   include
   joint_selectivity
-  age_size_weight
   b0
   b0_layer
-  by_length
   correlation_adjustment_diff
   correlation_adjustment_method
   df
@@ -70,24 +63,11 @@ In manual, but not in SPM
   mcmc_fixed
   parameter_values
   parameters
-  process_label
   projection_layer
   proportion_time_step
   proposal_distribution
-  quantiles
-  sd
-  standardise_ycs_years
   start
-  time_step_proportion
-  weight_a
-  weight_b
-  adjacent_cell_movement
-  age_size_weight
-  biomass_event_mortality
   derived
   derived_meta
-  event_mortality_at_age
   iterative
   metropolis_hastings
-  migration_movement
-  normal_by_sd

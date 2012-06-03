@@ -51,11 +51,12 @@ Hence, the definition of the spatial structure includes;
 
 The population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
 
-The names and number of categories are user defined, but there must be at least one category defined for a model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, with the last age optionally a plus group.
+The names and number of categories are user defined, but there must be at least one category defined for a model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, with the last age optionally a plus group. In order to calcuate bio mass, the age-size relationship for each category must also be defined.
 
 Hence, the definition of the population structure includes;
 \begin{itemize}
   \item The number and labels of the categories, $k_{categories}$
+	\item The age\_size relationship for each category
   \item The minimum and maximum ages that define the ages of the model, $l_{ages}$
   \item If the last age is a plus group
 \end{itemize}
@@ -128,7 +129,7 @@ The time sequence of the model is defined in three parts;
 \begin{itemize}
   \item \I{Initialisation}
   \item \I{Run years}
-  \item \I{Projection year}s
+  %\item \I{Projection year}s
 \end{itemize}
 
 \subsubsection{\I{Annual cycle}}
@@ -137,7 +138,8 @@ The annual cycle is implemented as a set of processes that occur, in a user-defi
 
 \subsubsection{\I{Initialisation}}
 
-Model initialisation can occur in several phases\index{Initialisation!phases}, each which iterates through a number of years carrying out the population and/or spatial processes defined for that phase. At the end of the initialisation step, \SPM\ runs through the model years carrying out processes in the order defined in the annual cycle, and can evaluate expected values of observations in order to calculate likelihoods, project forward to determine future states \NYI, or simulate observations from the current state.
+Model initialisation can occur in several phases\index{Initialisation!phases}, each which iterates through a number of years carrying out the population and/or spatial processes defined for that phase. At the end of the initialisation step, \SPM\ runs through the model years carrying out processes in the order defined in the annual cycle, and can evaluate expected values of observations in order to calculate likelihoods, %project forward to determine future states \NYI, 
+or simulate observations from the current state.
 
 \SPM\ initialises the initial equilibrium state as an iterative process, because a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can take many iterations, and be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. 
 
@@ -161,12 +163,12 @@ Processes are carried out in the order specified within each time step, and can 
   \item The time steps and the processes applied in each
   \item The initial year (i.e., the model start year)
   \item The current year (i.e., the model end year)
-  \item The final year (i.e., the model projection end year)
+  %\item The final year (i.e., the model projection end year)
 \end{itemize}
 
-\subsubsection{\I{Projections}\label{sec:projections}}
-
-\SPM\ can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the model is run from \argument{current} to \argument{final}. 
+%\subsubsection{\I{Projections}\label{sec:projections}}
+%
+%\SPM\ can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the model is run from \argument{current} to \argument{final}. 
 
 \subsection{\I{Processes}}
 
@@ -337,7 +339,7 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-Four types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, or biomass-event \NYI. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
+Four types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, or biomass-event. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
 Mortality can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. Here, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
 
@@ -642,33 +644,12 @@ The total mortality of prey $B$ can be defined as due to predation by predator $
 
 \subsection{\I{Size-age relationship}\label{sec:size-at-age}}
 
-\TOUNDO
- 
-Size at age are currently two modules. They need to be regrouped into a single module as per below
+The age-size relationship defines the size at age (and the weight at size, see Section \ref{sec:mean-weight}) of individuals at age/category within the model. There are three size-age relationships available in \SPM. The first is the naive no relationship (where each individual has size 1 irrespective of age). The second  and third are the von-Bertalanffy and Schnute relationships respectively. The size-at-age relationship is used to determine the size frequency, given age, and then with the size-weight relationship, a weight-at-age of individuals within an age/category. 
 
-Size-age relationships \NYI\ are used to determine length frequencies, and hence derive a  weight-at-age (in conjunction with the size-weight relationship) of individuals at age/category. There are two alternative growth curves in \SPM, 
-
-\TOUNDOend
-
-\subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
-
-\TOUNDO
-
-Same comment as above.
-
-\TOUNDOend
-
-
-\subsection{\I{Age-size-weight relationship}\label{sec:age-size-weight}}
-
-\TODO
-
-The age-size-weight relationship defines the size at age and weight at size (or age) of individuals within the model. There are three types of relationships defined in \SPM, based on no relationship, or on a size-at-age relationship and a separate size-weight relationship (von-Bertalanffy and Schnute, combined with a length weight relationship). The size-at-age relationship is used to determine the size frequency, given and age, and then with size-weight relationship, a weight-at-age of individuals within an age/category. Using the none relationships for size at age and weight at size provides biomass results in numbers rather than biomass.
-
-The three age-size relationship are,
+The three age-size relationships are,
 
 \begin{description}
-\item {None:} where the size of each individual is exactly 1 for all ages, in which case the none relationship for size-weight should also be used.
+\item {None:} where the size of each individual is exactly 1 for all ages, in which case the \texttt{none} size-weight relationship must also be used.
 \item{von Bertalanffy:}\index{von Bertalanffy growth curve} where size at age is defined as,
 \begin{equation} 
 \bar{s}(age)= L_\infty \left( 1 - \exp \left( -k \left(age-t_0 \right) \right) \right)
@@ -690,20 +671,26 @@ The three age-size relationship are,
 
 The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Schnute curve \citep{836} by $y_1$ and $y_2$, which are the mean sizes at reference ages $\tau_1$ and $\tau_2$, and $a$ and $b$ (when $b=1$, this reduces to the von Bertalanffy with $k=a$). 
 
-The model can incorporate changes in size-at-age during the year (i.e., growth between birthdays) by specifying the growth proportions for each time step of the annual cycle.
+When defining size-at-age in \SPM, you must also define a size-weight relationship (see Section \ref{sec:mean-weight} below).
 
+\subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
 
-The size-weight relationship, with parameters $a$ and $b$, is calculated as either,
+There are two size-weight relationship,s available in \SPM. The first is the naive no relationship, where the weight of an individual, irregardless of size is always 1. The second is the basic relationship. 
+
+The two size-weight relationships are,
 
 \begin{itemize}
-  \item{None:} A relationship where the weight of each individual is exactly 1 
-  \item{Basic:}\index{Basic size-weight relationship} The more usual size-weight relationship, where 
+  \item{None:} The size-weight relationship where  
+  \begin{equation}
+    \text{mean weight}=1
+  \end{equation}
+  \item{Basic:}\index{Basic size-weight relationship} The size-weight relationship where 
   \begin{equation}
     \text{mean weight}=a(\text{mean size-at-age})^b
   \end{equation}
 \end{itemize}
   
-Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there is an option \commandlabsubarg{report}{type}{age\_size\_weight} (see Section \ref{sec:report-age-size-weight}) that can be used to help check that the units specified are plausible.
+Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there are reports available that can be used to help check that the units specified are plausible (see Section \ref{sec:report-section}).
 
 If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
 \begin{equation}
@@ -711,8 +698,6 @@ If you specify a distribution for the size-at-age relationship, then the mean we
 \end{equation}
 
 where $c$ is the c.v. of sizes-at-age.
-
-\TODOend
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 

@@ -233,7 +233,7 @@ The available priors are,
   \item uniform
   \item uniform log
   \item normal
-  \item normal by sd
+  \item normal by standard deviation
   \item lognormal
   \item Beta
 \end{itemize}
@@ -265,14 +265,14 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the c.v. of the normal prior}
 
-\subsubsection[Normal-by-sd prior]{\commandlabsubarg{prior}{type}{normal\_by\_sd}}
+\subsubsection[Normal-by-stdev prior]{\commandlabsubarg{prior}{type}{normal\_by\_stdev}}
 
 \defSub{mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the mean of the normal by standard deviation prior}
 
-\defSub{sd}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
+\defSub{sigma}{Defines the standard deviation $\sigma$ of the normal by standard deviation prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the standard deviation of the normal by standard deviation prior}
@@ -306,7 +306,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the mean of the Beta prior}
 
-\defSub{sd}{Defines the standard deviation $\sigma$ of the Beta prior}
+\defSub{sigma}{Defines the standard deviation $\sigma$ of the Beta prior}
 \defType{Constant}
 \defDefault{No default}
 \defValue{Defines the standard deviation of the Beta prior}
