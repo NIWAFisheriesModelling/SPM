@@ -69,6 +69,16 @@ double CDerivedQuantity::getValue(int offset) {
 }
 
 //**********************************************************************
+// double CDerivedQuantity::getFirstValue()
+// Get the First Value From our Derived Quantity
+//**********************************************************************
+double CDerivedQuantity::getFirstValue() {
+
+  return vValues[0];
+
+}
+
+//**********************************************************************
 // void CDerivedQuantity::validate()
 // Validate our Derived Quantity
 //**********************************************************************
@@ -146,8 +156,9 @@ void CDerivedQuantity::rebuild() {
 //**********************************************************************
 void CDerivedQuantity::execute() {
 
-  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep)
+  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
     return;
+  }
 
   double dValue = 0.0;
 

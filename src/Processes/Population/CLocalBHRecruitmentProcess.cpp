@@ -50,7 +50,7 @@ CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_SSB_OFFSET);
   pParameterList->registerAllowed(PARAM_YCS_VALUES);
   pParameterList->registerAllowed(PARAM_YCS_YEARS);
-  pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEAR_RANGE);
+  pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEARS);
   pParameterList->registerAllowed(PARAM_R0_LAYER);
   pParameterList->registerAllowed(PARAM_SSB_LAYER);
 }
@@ -75,7 +75,7 @@ void CLocalBHRecruitmentProcess::validate() {
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
     pParameterList->fillVector(vYCSYears, PARAM_YCS_YEARS);
-    pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
+    pParameterList->fillVector(vStandardiseYCSYears, PARAM_STANDARDISE_YCS_YEARS, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
     // Validate parent
@@ -107,21 +107,21 @@ void CLocalBHRecruitmentProcess::validate() {
 
     //***************************************************
     // Validate the Standardise YCS Year Range
-    if(vStandardiseYCSYearRange.size() == 0) {
-      vStandardiseYCSYearRange.push_back(pWorld->getInitialYear());
-      vStandardiseYCSYearRange.push_back(pWorld->getCurrentYear());
+    if(vStandardiseYCSYears.size() == 0) {
+      vStandardiseYCSYears.push_back(pWorld->getInitialYear());
+      vStandardiseYCSYears.push_back(pWorld->getCurrentYear());
     }
 
-    if(vStandardiseYCSYearRange.size() != 2)
-      CError::errorListNotSize(PARAM_STANDARDISE_YCS_YEAR_RANGE, 2);
+    if(vStandardiseYCSYears.size() != 2)
+      CError::errorListNotSize(PARAM_STANDARDISE_YCS_YEARS, 2);
 
-    if (vStandardiseYCSYearRange[0] < vStandardiseYCSYearRange[1])
-      CError::errorElementLessThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, 1, 2);
+    if (vStandardiseYCSYears[0] < vStandardiseYCSYears[1])
+      CError::errorElementLessThan(PARAM_STANDARDISE_YCS_YEARS, 1, 2);
 
-    if (vStandardiseYCSYearRange[0] < pWorld->getInitialYear())
-      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, PARAM_INITIAL_YEAR);
-    if (vStandardiseYCSYearRange[1] > pWorld->getCurrentYear())
-      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, PARAM_CURRENT_YEAR);
+    if (vStandardiseYCSYears[0] < pWorld->getInitialYear())
+      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
+    if (vStandardiseYCSYears[1] > pWorld->getCurrentYear())
+      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
 
     //Check that a value of YCSValues supplied for each YCSYear
     if(vYCSYears.size() != vYCSValues.size())

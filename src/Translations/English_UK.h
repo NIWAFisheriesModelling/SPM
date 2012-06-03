@@ -313,7 +313,7 @@
 #define PARAM_SOURCE_LAYER                        "source_layer"
 #define PARAM_SPATIAL_MAP                         "spatial_map"
 #define PARAM_SSB_LAYER                           "SSB_layer"
-#define PARAM_STANDARDISE_YCS_YEAR_RANGE          "standardise_ycs_year_range"
+#define PARAM_STANDARDISE_YCS_YEARS               "standardise_ycs_years"
 #define PARAM_SQUARE_UNIFORM                      "square_uniform"
 #define PARAM_SSB                                 "ssb"
 #define PARAM_SSB_OFFSET                          "ssb_offset"

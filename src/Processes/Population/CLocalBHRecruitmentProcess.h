@@ -36,7 +36,7 @@ protected:
   double                      dRho;
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
-  vector<int>                 vStandardiseYCSYearRange;
+  vector<int>                 vStandardiseYCSYears;
   int                         iSSBOffset;
   string                      sR0Layer;
   string                      sSSBLayer;

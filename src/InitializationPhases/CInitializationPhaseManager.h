@@ -15,6 +15,7 @@
 // Classes
 class CInitializationPhase;
 class CReportManager;
+class CDerivedQuantityManager;
 
 //**********************************************************************
 //
@@ -44,6 +45,7 @@ protected:
   vector<CInitializationPhase*> vInitializationPhaseOrder;
   int                         lastExecutedInitializationPhase;
   CReportManager              *pReportManager;
+  CDerivedQuantityManager     *pDerivedQuantityManager;
 
 private:
   // Variables

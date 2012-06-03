@@ -12,6 +12,10 @@
 // Local Headers
 #include "../CProcess.h"
 
+// Classes
+class CTimeStepManager;
+class CDerivedQuantityManager;
+
 //**********************************************************************
 //
 //
@@ -37,10 +41,12 @@ protected:
   string                      sSSB;
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
-  vector<int>                 vStandardiseYCSYearRange;
+  vector<int>                 vStandardiseYCSYears;
   int                         iSSBOffset;
   string                      sLayer;
   CNumericLayer               *pLayer;
+  CTimeStepManager            *pTimeStepManager;
+  CDerivedQuantityManager     *pDerivedQuantity;
 };
 
 #endif /* CBHRECRUITMENTPROCESS_H_ */

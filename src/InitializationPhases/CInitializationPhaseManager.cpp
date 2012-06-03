@@ -14,6 +14,7 @@
 #include "CInitializationPhaseManager.h"
 #include "CInitializationPhase.h"
 #include "../Reports/CReportManager.h"
+#include "../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
 
@@ -145,6 +146,7 @@ void CInitializationPhaseManager::build() {
 
     // Variables
     pReportManager = CReportManager::Instance();
+    pDerivedQuantityManager = CDerivedQuantityManager::Instance();
 
   } catch(string &Ex) {
     Ex = "CInitialisationManager.build()->" + Ex;
@@ -165,6 +167,7 @@ void CInitializationPhaseManager::execute() {
     Phase->execute();
     // Incremenet Place holder
     lastExecutedInitializationPhase++;
+    pDerivedQuantityManager->execute();
     pReportManager->execute(STATE_INITIALIZATION_MODELLING);
   }
 }

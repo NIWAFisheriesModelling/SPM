@@ -29,6 +29,7 @@ public:
   virtual                     ~CDerivedQuantity();
   CDerivedQuantity*           clone() { return new CDerivedQuantity(*this); }
   double                      getValue(int offset = 0);
+  double                      getFirstValue();
   void                        validate();
   void                        build();
   void                        rebuild();

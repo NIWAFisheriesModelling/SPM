@@ -13,6 +13,8 @@
 
 // Local headers
 #include "CBHRecruitmentProcess.h"
+#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CError.h"
@@ -29,9 +31,9 @@ using std::numeric_limits;
 // Default constructor
 //**********************************************************************
 CBHRecruitmentProcess::CBHRecruitmentProcess() {
+  pTimeStepManager = CTimeStepManager::Instance();
     // Default Vars
   pLayer          = 0;
-
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
   registerEstimable(PARAM_SIGMA_R, &dSigmaR);
@@ -49,8 +51,7 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_SSB);
   pParameterList->registerAllowed(PARAM_SSB_OFFSET);
   pParameterList->registerAllowed(PARAM_YCS_VALUES);
-  pParameterList->registerAllowed(PARAM_YCS_YEARS);
-  pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEAR_RANGE);
+  pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEARS);
   pParameterList->registerAllowed(PARAM_LAYER);
 
 }
@@ -74,8 +75,7 @@ void CBHRecruitmentProcess::validate() {
 
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
-    pParameterList->fillVector(vYCSYears, PARAM_YCS_YEARS);
-    pParameterList->fillVector(vStandardiseYCSYearRange, PARAM_STANDARDISE_YCS_YEAR_RANGE, true);
+    pParameterList->fillVector(vStandardiseYCSYears, PARAM_STANDARDISE_YCS_YEARS, true);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
     // Validate parent
@@ -107,29 +107,27 @@ void CBHRecruitmentProcess::validate() {
 
     //***************************************************
     // Validate the Standardise YCS Year Range
-    if(vStandardiseYCSYearRange.size() == 0) {
-      vStandardiseYCSYearRange.push_back(pWorld->getInitialYear());
-      vStandardiseYCSYearRange.push_back(pWorld->getCurrentYear());
+    if(vStandardiseYCSYears.size() == 0) {
+      for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i ) {
+        vStandardiseYCSYears.push_back(i);
+      }
     }
 
-    if(vStandardiseYCSYearRange.size() != 2)
-      CError::errorListNotSize(PARAM_STANDARDISE_YCS_YEAR_RANGE, 2);
+    if(vStandardiseYCSYears.size() > 1) {
+      for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i ) {
+        if(vStandardiseYCSYears[i-1] >= vStandardiseYCSYears[i] )
+          CError::error(PARAM_YCS_YEARS + string(" is not in numeric order"));
+      }
+    }
 
-    if (vStandardiseYCSYearRange[0] < vStandardiseYCSYearRange[1])
-      CError::errorElementLessThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, 1, 2);
-
-    if (vStandardiseYCSYearRange[0] < pWorld->getInitialYear())
-      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, PARAM_INITIAL_YEAR);
-    if (vStandardiseYCSYearRange[1] > pWorld->getCurrentYear())
-      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEAR_RANGE, PARAM_CURRENT_YEAR);
+    if (vStandardiseYCSYears[0] < pWorld->getInitialYear())
+      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
+    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > pWorld->getCurrentYear())
+      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
 
     //Check that a value of YCSValues supplied for each YCSYear
-    if(vYCSYears.size() != vYCSValues.size())
-      CError::errorListSameSize(PARAM_YCS_YEARS, PARAM_YCS_VALUES);
-
-    // Loop Through YCSYears and "add the offset" //TODO: (Alistair) YCS_YEARS and the SSBOffset ... needs more thought
-    for (int i = 0; i < (int)vYCSYears.size(); ++i)
-      vYCSYears[i] -= iSSBOffset;
+    if(vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
+      CError::errorListSameSize(PARAM_YCS_VALUES, string("model years"));
 
     // Register our YCS as Estimable
     for (int i = 0; i < (int)vYCSValues.size(); ++i)
@@ -138,12 +136,11 @@ void CBHRecruitmentProcess::validate() {
     // Loop Through YCS. Make Sure They Are >= 0.0
     foreach(double dValue, vYCSValues) {
       if (!CComparer::isNonNegative(dValue))
-        CError::errorLessThan(PARAM_PROPORTIONS, PARAM_ZERO);
+        CError::errorLessThan(PARAM_YCS_VALUES, PARAM_ZERO);
     }
     //Check SSBOffset is a non-negative int
     if (iSSBOffset < 0)
       CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
-
 
   } catch (string &Ex) {
     Ex = "CBHRecruitment.validate(" + getLabel() + ")->" + Ex;
@@ -163,6 +160,10 @@ void CBHRecruitmentProcess::build() {
     // Get our Layer
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
+
+    // TODO: Get our derived quantity
+    //pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
 
     // Populate Our Ages Index
     iAgeIndex = pWorld->getColIndexForAge(iAge);
@@ -188,8 +189,24 @@ void CBHRecruitmentProcess::execute() {
     // Base Execute
     CProcess::execute();
 
+    // TODO: sort this mess out!
+
     // Setup Our Variables
-    double dAmountPer = dR0; // TODO: Multiply this by (a) YCS (b) YCS-MEAN (c) SR relationship, and SSB/BO
+    double dYCS = vYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
+    double dMeanYCS=0;
+    // Get men YCS
+    for ( int i = 0; i < (int)vYCSValues.size(); ++i ) {
+      dMeanYCS += vYCSValues[i];
+    }
+    dMeanYCS /= ( vYCSValues.size() + 1 );
+    // standardise YCS
+    dYCS /= dMeanYCS;
+    // Get SSB (and B0)
+    double dSSBRatio = 1;// pDerivedQuantity->getValue(iSSBOffset)/pDerivedQuantity->getFirstValue();
+
+
+    double dTrueYCS =  dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
+    double dAmountPer = dR0 * dTrueYCS;
 
     if (pLayer != 0) {
       double dTotal = 0.0;
@@ -216,7 +233,7 @@ void CBHRecruitmentProcess::execute() {
         if (pLayer != 0)
           value *= pLayer->getValue(i, j);
 
-        pDiff       = pWorld->getDifferenceSquare(i, j);
+        pDiff = pWorld->getDifferenceSquare(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
         for (int k = 0; k < getCategoryCount(); ++k)
