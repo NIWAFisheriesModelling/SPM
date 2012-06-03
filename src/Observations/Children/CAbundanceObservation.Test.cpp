@@ -40,7 +40,7 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
   addToConfiguration(ageing);
   addToConfiguration(age_size_vonB);
   addToConfiguration(size_weight_none);
-  addToConfiguration(constant_recruitment_all_ages);
+  addToConfiguration(constant_recruitment);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
   addToConfiguration(logistic_producing);
@@ -48,7 +48,7 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
   addToConfiguration(string_layer);
   addToConfiguration(abundance_observation);
   addToConfiguration(constant);
-  addToTimeStep("ageing constant_recruitment_all_ages category_transition_rate annual_mortality_rate");
+  addToTimeStep("ageing constant_recruitment category_transition_rate annual_mortality_rate");
   loadAndRunEnvironment();
 
   // Check our Results
@@ -64,53 +64,53 @@ BOOST_FIXTURE_TEST_CASE( AbundanceObservation, C3x3_Fixture ) {
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaA");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.10, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 60.0, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 45.03699183033919, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dScore, 1.9745809174805404, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.45036991830339179, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 1202.7134007388327, 1e-9);
 
   pComparison = vComparisons[1];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaB");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.12, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 40.0, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 30.024661220226122, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dScore, 0.89915090881399307, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.30024661220226112, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 837.26363028909884, 1e-9);
 
   pComparison = vComparisons[2];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaC");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.13, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 15.012330610113061, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dScore, 0.55620541348069308, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.15012330610113056, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 714.41621457987969, 1e-9);
 
   pComparison = vComparisons[3];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaD");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.14, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 15.012330610113061, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dScore, 0.29459475322637707, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.15012330610113056, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 616.95036283520096, 1e-9);
 
   pComparison = vComparisons[4];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaE");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.15, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 15.012330610113061, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dScore, 0.092656077673523241, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.15012330610113056, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 538.32830605461959, 1e-9);
 
   pComparison = vComparisons[5];
   BOOST_CHECK_EQUAL(pComparison->sKey, "AreaF");
   BOOST_CHECK_CLOSE(pComparison->dErrorValue, 0.16, 1e-9);
   BOOST_CHECK_CLOSE(pComparison->dObservedValue, 20.0, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 15.012330610113061, 1e-9);
-  BOOST_CHECK_CLOSE(pComparison->dScore, -0.064634245065369855, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dExpectedValue, 0.15012330610113056, 1e-9);
+  BOOST_CHECK_CLOSE(pComparison->dScore, 473.98919711083579, 1e-9);
 
   for (int i = 0; i < 3; ++i) {
     for (int j = 0; j < 3; ++j) {
       CWorldSquare *pSquare = getSquare(i,j);
 
-      BOOST_CHECK_CLOSE(pSquare->getAbundance(), 15012.33061011306, 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = { 1111.1111111111111, 1111.1111111111111, 1111.1111111111111, 1111.1111111111111, 1083.3333333333333, 1041.6266318250709, 952.85900493878341, 803.91670313042891, 621.10466653061906, 1404.1008649763676 };
-      double mature[] = { 0.0, 0.0, 0.0, 0.0, 27.5260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 68.514671490004474, 153.01395904028104, 288.4780206714787, 442.52416779189696, 3680.8881270055226 };
+      double immature[] = { 11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675 };
+      double mature[] = { 0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224 };
       double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
       // Check Expected against model

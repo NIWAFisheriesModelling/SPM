@@ -50,8 +50,6 @@ CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
 //**********************************************************************
 void CConstantRecruitmentProcess::validate() {
   try {
-    // Base Validation
-    CProcess::validate();
 
     // Populate our Variables
     dR0         = pParameterList->getDouble(PARAM_R0);
@@ -62,7 +60,7 @@ void CConstantRecruitmentProcess::validate() {
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
 
     // Base Validation
-    // CProcess::validate(); TODO: uncomment this line (and delete from 11 lines abobe). Will need to update unit tests...
+    CProcess::validate();
 
     // Local validation
     // iAge must be a valid age

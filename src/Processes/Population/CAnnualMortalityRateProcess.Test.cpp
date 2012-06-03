@@ -34,21 +34,21 @@ BOOST_FIXTURE_TEST_CASE( AnnualMortalityRateProcess, C1x1_Fixture ) {
   addToConfiguration(ageing);
   addToConfiguration(age_size_vonB);
   addToConfiguration(size_weight_none);
-  addToConfiguration(constant_recruitment_all_ages);
+  addToConfiguration(constant_recruitment);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
   addToConfiguration(logistic_producing);
-  addToTimeStep("ageing constant_recruitment_all_ages category_transition_rate annual_mortality_rate");
+  addToTimeStep("ageing constant_recruitment category_transition_rate annual_mortality_rate");
   loadAndRunEnvironment();
 
   // Check our Results
   CWorldSquare *pSquare = getSquare();
 
-  BOOST_CHECK_CLOSE(pSquare->getAbundance(), 135110.97549101757, 1e-9);
+  BOOST_CHECK_CLOSE(pSquare->getAbundance(), 1351.1097549101755, 1e-9);
 
   // Our Expected Results
-  double immature[] = { 10000.0, 10000.0, 10000.0, 10000.0, 9750, 9374.6396864256385, 8575.7310444490504, 7235.2503281738609, 5589.9419987755718, 12636.90778478731 };
-  double mature[] = { 0.0, 0.0, 0.0, 0.0, 247.73413441347478, 616.6320434100403, 1377.125631362529, 2596.3021860433082, 3982.7175101270723, 33127.993143049709 };
+  double immature[] = { 100.0, 100.0, 100.0, 100.0, 97.5, 93.746396864256383, 85.7573104444905, 72.352503281738606, 55.899419987755721, 126.36907784787311 };
+  double mature[] = { 0.0, 0.0, 0.0, 0.0, 2.4773413441347478, 6.1663204341004025, 13.77125631362529, 25.963021860433084, 39.827175101270718, 331.27993143049707 };
   double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
   // Check Expected against model

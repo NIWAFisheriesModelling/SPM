@@ -40,7 +40,7 @@ BOOST_FIXTURE_TEST_CASE( ProportionsByCategoryObservation, C3x3_Fixture ) {
   addToConfiguration(ageing);
   addToConfiguration(age_size_vonB);
   addToConfiguration(size_weight_none);
-  addToConfiguration(constant_recruitment_all_ages);
+  addToConfiguration(constant_recruitment);
   addToConfiguration(annual_mortality_rate);
   addToConfiguration(category_transition_rate);
   addToConfiguration(logistic_producing);
@@ -48,7 +48,7 @@ BOOST_FIXTURE_TEST_CASE( ProportionsByCategoryObservation, C3x3_Fixture ) {
   addToConfiguration(string_layer);
   addToConfiguration(proportions_by_category_observation);
   addToConfiguration(constant);
-  addToTimeStep("ageing constant_recruitment_all_ages category_transition_rate annual_mortality_rate");
+  addToTimeStep("ageing constant_recruitment category_transition_rate annual_mortality_rate");
   BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
 
   // Check our Results
@@ -127,11 +127,11 @@ BOOST_FIXTURE_TEST_CASE( ProportionsByCategoryObservation, C3x3_Fixture ) {
     for (int j = 0; j < 3; ++j) {
       CWorldSquare *pSquare = getSquare(i,j);
 
-      BOOST_CHECK_CLOSE(pSquare->getAbundance(), 15012.33061011306, 1e-9);
+      BOOST_CHECK_CLOSE(pSquare->getAbundance(), 150.12330610113057, 1e-9);
 
       // Our Expected Results
-      double immature[] = { 1111.1111111111111, 1111.1111111111111, 1111.1111111111111, 1111.1111111111111, 1083.3333333333333, 1041.6266318250709, 952.85900493878341, 803.91670313042891, 621.10466653061906, 1404.1008649763676 };
-      double mature[] = { 0.0, 0.0, 0.0, 0.0, 27.5260149348305312601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 68.514671490004474, 153.01395904028104, 288.4780206714787, 442.52416779189696, 3680.8881270055226 };
+      double immature[] = { 11.111111111111111, 11.111111111111111, 11.111111111111111, 11.111111111111111, 10.833333333333332, 10.416266318250708, 9.5285900493878319, 8.039167031304288, 6.2110466653061902, 14.041008649763675 };
+      double mature[] = { 0.0, 0.0, 0.0, 0.0, 0.275260149348305342601493483053126014934830531260149348305312601493483053126014934830531260149348305312601493483053126014934830531, 0.68514671490004475, 1.5301395904028099, 2.8847802067147867, 4.4252416779189687, 36.808881270055224 };
       double spawning[] = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 };
 
       // Check Expected against model
