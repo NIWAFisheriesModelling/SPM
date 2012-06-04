@@ -377,7 +377,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
 
     dPreviousScore2 = Score;
 
-    // Have We taken the Maximum Netwon Step
+    // Have We taken the Maximum Newton Step
     if (bMaxStepTaken) {
       iConsecutiveMaxSteps++;
 
