@@ -86,13 +86,6 @@ void CGammaDiff::runEstimation() {
         status, iMaxIters, iMaxEvals, dGradientTolerance,
         pHessian,1,dStepSize);
 
-    /*cout << "Hessian: " << endl;
-    for (int i = 0; i < iCount; ++i) {
-      for (int j = 0; j < iCount; ++j)
-        cout << pHessian[i][j] << "\t";
-      cout << endl;
-    }*/
-
   } catch (string &Ex) {
     Ex = "CGammaDiff.runEstimation()->" + Ex;
     throw Ex;
