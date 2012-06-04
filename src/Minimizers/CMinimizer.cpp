@@ -21,6 +21,7 @@
 #include "CMinimizer.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/CComparer.h"
 
 // Using
 using std::cout;
@@ -53,10 +54,17 @@ void CMinimizer::buildCovarianceMatrix() {
   try {
 
     // Get handle to our Minimizer and Hessian
+    // Locate zero rows, and set the ciorrsponding diagonal element of the Hessian = 1
     ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
-    for (int i = 0; i < iEstimateCount; ++i)
-      for (int j = 0; j < iEstimateCount; ++j)
+    vector<bool> bZeroRow;
+    for (int i = 0; i < iEstimateCount; ++i) {
+      bZeroRow.push_back(1);
+      for (int j = 0; j < iEstimateCount; ++j) {
         mxHessian(i,j) = pHessian[i][j];
+        if( !CComparer::isZero( mxHessian(i,j) ) ) bZeroRow[i] = 0;
+      }
+      if( bZeroRow[i] ) mxHessian(i,i) = 1.0;
+    }
 
 //TODO: Replace the following code with a better inversion algorithm
 
