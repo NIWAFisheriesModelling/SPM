@@ -34,28 +34,28 @@ BOOST_FIXTURE_TEST_CASE( ExponentialPreferenceFunction_DoubleLayer, CLayer_Fixtu
   BOOST_REQUIRE_NO_THROW(pPreference->build());
 
   BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 6.1442123533282081e-006, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 1), 6.1633793064669094e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 2), 5.0000057988138013e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 3), 5.000000000035629e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 4), 5.0000000000000002e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 1), 3.7751345442790984e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 2), 2.3195228302435696e-016, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 3), 1.4251640827409352e-021, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 4), 8.75651076269652e-027, 1e-9);
 
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 1), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 2), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 3), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 4), 5.0000000000000002e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 1), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 2), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 3), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 4), 5e-051, 1e-9);
 
   BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 6.1442123533282081e-006, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(1, 0, 0, 1), 6.1633793064669094e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 2, 0, 2), 5.0000057988138013e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(3, 0, 0, 3), 5.000000000035629e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 4, 0, 4), 5.0000000000000002e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(1, 0, 0, 1), 3.7751345442790984e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 2, 0, 2), 2.3195228302435696e-016, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(3, 0, 0, 3), 1.4251640827409352e-021, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 4, 0, 4), 8.75651076269652e-027, 1e-9);
 
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 1, 3, 1), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(2, 0, 3, 2), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 3, 3, 3), 5.0000000000000002e-011, 1e-9);
-  BOOST_CHECK_CLOSE(pPreference->getResult(4, 0, 3, 4), 5.0000000000000002e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 3, 0), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 1, 3, 1), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(2, 0, 3, 2), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 3, 3, 3), 5e-051, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(4, 0, 3, 4), 5e-051, 1e-9);
 
   delete pPreference;
 }

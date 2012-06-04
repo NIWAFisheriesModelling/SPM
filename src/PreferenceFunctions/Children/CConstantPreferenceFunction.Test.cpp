@@ -75,7 +75,7 @@ BOOST_FIXTURE_TEST_CASE( ConstantPreferenceFunction_DistanceLayer, CLayer_Fixtur
   BOOST_REQUIRE_NO_THROW(pPreference->validate());
   BOOST_REQUIRE_NO_THROW(pPreference->build());
 
-  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 5.0000000000000002e-011, 1e-9);
+  BOOST_CHECK_CLOSE(pPreference->getResult(0, 0, 0, 0), 5e-051, 1e-9);
   BOOST_CHECK_CLOSE(pPreference->getResult(0, 1, 0, 0), 1.0, 1e-9);
   BOOST_CHECK_CLOSE(pPreference->getResult(0, 2, 0, 0), 8.0, 1e-9);
   BOOST_CHECK_CLOSE(pPreference->getResult(0, 3, 0, 0), 27.0, 1e-9);
