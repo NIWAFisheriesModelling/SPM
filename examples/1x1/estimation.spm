@@ -36,12 +36,12 @@ upper_bound  1000000
 q 0.0001
 
 # ESTIMATION PARAMETERS
-{@estimate
+@estimate
 parameter catchability[CPUEq].q
 lower_bound 1e-10
 upper_bound 1e-1
 prior Uniform
-}
+
 @estimate
 parameter process[Recruitment].r0
 lower_bound 1e4

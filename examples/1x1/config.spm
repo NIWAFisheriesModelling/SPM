@@ -13,6 +13,14 @@ final_year 2108
 cell_length 1
 initialisation_phases Phase1 Phase2
 time_steps step_one step_two
+age_size none none
+
+@age_size none
+type none
+size_weight none
+
+@size_weight none
+type none
 
 # Initalisation
 @initialisation_phase Phase1
