@@ -98,7 +98,7 @@ void CFileReport::end() {
 
   cout.flush();
 
-  if (fFile != 0) {
+  if (sFileName != "") {
     fFile->close();
     cout.rdbuf(sCoutBackup);
   }
