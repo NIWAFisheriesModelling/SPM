@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CFileReport.h"
+#include "../../CReportManager.h"
 
 //**********************************************************************
 // CFileReport::CFileReport()
@@ -17,6 +18,7 @@
 CFileReport::CFileReport() {
   // Default Values
   sFileName           = "";
+  sFullFileName       = "";
   bOverwrite          = true;
   bStartedWrite       = false;
   fFile               = 0;
@@ -52,6 +54,21 @@ void CFileReport::validate() {
 //**********************************************************************
 void CFileReport::start() {
   if (sFileName != "") {
+    /**
+     * Check if our prefix has changed. If it has we need to reset
+     * our overwrite variable otherwise all reports after the
+     * first one will append.
+     */
+    string sPrefix = CReportManager::Instance()->getReportPrefix();
+    if (sPrefix != sLastPrefix) {
+      bOverwrite = pParameterList->getBool(PARAM_OVERWRITE, true, true);
+    }
+    sLastPrefix = sPrefix;
+
+    // This variable allows us to print out to different prefixe'd files
+    // based on different iterations etc
+    sFullFileName =  sPrefix + sFileName;
+
     // Variables
     sCoutBackup     = cout.rdbuf();
 
@@ -61,9 +78,9 @@ void CFileReport::start() {
       mode = ios_base::app;
 
     // Try to Open our File
-    fFile->open(sFileName.c_str(), mode);
+    fFile->open(sFullFileName.c_str(), mode);
     if (!(*fFile))
-      throw string(ERROR_OPEN_FILE + sFileName);
+      throw string(ERROR_OPEN_FILE + sFullFileName);
 
     // Redirect Standard Output
     cout.rdbuf(fFile->rdbuf());
@@ -81,7 +98,7 @@ void CFileReport::end() {
 
   cout.flush();
 
-  if (sFileName != "") {
+  if (fFile != 0) {
     fFile->close();
     cout.rdbuf(sCoutBackup);
   }

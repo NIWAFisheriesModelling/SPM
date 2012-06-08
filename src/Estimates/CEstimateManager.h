@@ -43,6 +43,7 @@ public:
   void                       addEstimateValue(string estimate, double value);
   int                        getEstimateValueCount();
   void                       loadEstimateValues(int index);
+  void                       setCurrentPhase(int phase);
   void                       clone(CEstimateManager *Manager);
   void                       validate();
   void                       build();

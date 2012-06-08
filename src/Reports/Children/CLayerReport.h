@@ -32,7 +32,7 @@ public:
 
 protected:
   // Variables
-  vector<int>                 vYear;
+  vector<int>                 vYears;
   int                         iTimeStep;
   string                      sTimeStep;
   CTimeStepManager            *pTimeStepManager;

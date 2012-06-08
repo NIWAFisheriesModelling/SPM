@@ -31,6 +31,7 @@ public:
   double                     getHessianValue(int row, int col) { return pHessian[row][col]; }
   double                     getCovarianceValue(int row, int col);
   double                     getCorrelationValue(int row, int col);
+  ublas::matrix<double>&     getCovarianceMatrix() { return mxCovariance; }
   int                        getEstimateCount() { return iEstimateCount; }
   bool                       getCovarianceError() { return bCovarianceError; }
   void                       buildCovarianceMatrix();

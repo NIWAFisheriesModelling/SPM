@@ -93,11 +93,11 @@ void CProportionsAtAgeObservation::validate() {
       for (int j = 0; j < iAgeSpread; ++j) {
         mvProportionMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
         // Check for non-positive or negative values in our observations  - depends on likelihood
-        if(sLikelihood==PARAM_LOGNORMAL) {
+        if(sLikelihood == PARAM_LOGNORMAL) {
           if ((*mvProportionMatrix[vOBS[i]].rbegin()) <= 0.0 ) {
             CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
           }
-        } else if(sLikelihood==PARAM_MULTINOMIAL) {
+        } else if(sLikelihood == PARAM_MULTINOMIAL) {
           if(boost::lexical_cast<double>(vOBS[i+j+1]) < 0.0) {
             CError::errorLessThan(PARAM_OBS, PARAM_ZERO);
           }

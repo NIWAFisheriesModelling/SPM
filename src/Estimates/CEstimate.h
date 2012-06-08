@@ -28,6 +28,7 @@ public:
 	double                     getLowerBound() { return dLowerBound; }
 	double                     getUpperBound() { return dUpperBound; }
 	string                     getPrior() { return sPrior; }
+	int                        getEstimationPhase() { return iEstimationPhase; }
   void                       setValue(double value);
 	double                     getValue();
 	void                       setEnabled(bool value) { bEnabled = value; }
@@ -49,6 +50,7 @@ protected:
   CPrior                     *pPrior;
   double                     *pTarget;
   bool                       bEnabled;
+  int                        iEstimationPhase;
   vector<string>             vSameList;
   vector<double*>            vSameIndex;
   vector<double>             vValueList;

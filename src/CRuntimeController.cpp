@@ -96,7 +96,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
       ("forward,f", "Forward projections")
       ("simulate,s", value<int>(), "Simulate observations")
       ("input,i", value<string>(), "Load free parameter values from file")
-      ("threads,t", value<int>(), "Number of threads to spawn")
+//      ("threads,t", value<int>(), "Number of threads to spawn")
       ("quiet,q", "Run in quiet mode")
       ("seed,g", value<int>(), "Random number seed");
 
@@ -170,8 +170,8 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
     pConfig->setEstimateValuesFile(vmParams["input"].as<string>());
 
   // Threads
-  if (vmParams.count("threads"))
-    pConfig->setNumberOfThreads(vmParams["threads"].as<int>());
+//  if (vmParams.count("threads"))
+//    pConfig->setNumberOfThreads(vmParams["threads"].as<int>());
 
   // Quiet
   if (vmParams.count("quiet"))
@@ -268,13 +268,11 @@ void CRuntimeController::run() {
         case RUN_MODE_ESTIMATION:
           pBaseThread->executeEstimationRun();
           break;
-
         case RUN_MODE_PROFILE:
           pBaseThread->executeProfileRun();
           break;
         case RUN_MODE_MARKOV_CHAIN_MONTE_CARLO:
-          startEstimation();
-          startMCMC();
+          pBaseThread->executeMCMC();
           break;
         case RUN_MODE_SIMULATION:
           pBaseThread->executeSimulationRun();
@@ -291,146 +289,6 @@ void CRuntimeController::run() {
   } catch (string &Ex) {
     Ex = "CRuntimeController.run()->" + Ex;
     throw Ex;
-  }
-}
-
-//**********************************************************************
-// void CRuntimeController::startEstimation()
-// Start Estimation Run
-//**********************************************************************
-void CRuntimeController::startEstimation() {
-  try {
-    // Get Minimizer Manager
-    CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
-
-    // Get Configuration
-    // CConfiguration *pConfig = CConfiguration::Instance();
-    // int iNumberOfThreads = pConfig->getNumberOfThreads();
-
-    // Create Threads
-   /* boost::thread_group threads;
-    for (int i = 0; i < iNumberOfThreads; ++i)
-      threads.create_thread(&CRuntimeController::initEstimationThread);*/
-
-    // Start the Minimizer.
-    pMinimizer->execute();
-
-    // Wait for all threads to finish.
-//    threads.join_all();
-
-  } catch (string &Ex) {
-    Ex = "CRuntimeController.startEstimation()->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
-// static void CRuntimeController::initEstimationThread()
-// Initialise an Estimation Thread
-//**********************************************************************
-void CRuntimeController::initEstimationThread() {
-
-  CRuntimeController  *pThis    = CRuntimeController::Instance();
-  CRuntimeThread      *pThread  = 0;
-  pThread             = new CRuntimeThread();
-
-  if (true) {
-    // Clone
-    lock lk(pThis->runtimeLock);
-    pThread->clone(pThis->pBaseThread);
-
-    // Register with Publisher (CMinimizerManager)
-    CMinimizerManager *pMinimizer = CMinimizerManager::Instance();
-    pMinimizer->addThread(pThread);
-  }
-
-  // Validate and Build
-  pThread->validate();
-  pThread->build();
-
-  // Setup Vars
-  pThread->setWaiting(true);
-  pThread->setTerminate(false);
-
-  // Execute
-  // TODO: (Scott) Implement Minimizer Pool
-  //pThread->executeEstimation();
-
-  delete pThread;
-}
-
-//**********************************************************************
-// void CRuntimeController::startMCMC()
-// Start MCMC
-//**********************************************************************
-void CRuntimeController::startMCMC() {
-  try {
-    // Setup the MCMC Controller.
-    CMCMC *pMCMC = CMCMC::Instance();
-    pMCMC->validate();
-    pMCMC->build();
-
-    // Get Configuration
-    CConfiguration *pConfig = CConfiguration::Instance();
-    int iNumberOfThreads = pConfig->getNumberOfThreads();
-
-    // Create Threads
-    boost::thread_group threads;
-    for (int i = 0; i < iNumberOfThreads; ++i)
-        threads.create_thread(&CRuntimeController::initMCMCThread);
-
-    // Start the MCMC
-    pMCMC->execute();
-
-    // Wait for Threads to finish.
-    threads.join_all();
-
-
-  } catch (string &ex) {
-    ex = "CRuntimeController.startMCMC()->" + ex;
-    throw ex;
-  }
-}
-
-//**********************************************************************
-// static void CRuntimeController::initMCMCThread()
-// Init an MCMC Thread
-//**********************************************************************
-void CRuntimeController::initMCMCThread() {
-
-  try {
-
-    CRuntimeController  *pThis    = CRuntimeController::Instance();
-    CRuntimeThread      *pThread  = 0;
-    pThread             = new CRuntimeThread();
-
-    if (true) {
-      // Clone
-      lock lk(pThis->runtimeLock);
-      pThread->clone(pThis->pBaseThread);
-
-      // Register with Publisher (MCMC)
-      CMCMC *pMCMC = CMCMC::Instance();
-      pMCMC->addThread(pThread);
-    }
-
-    // Validate and Build
-    pThread->validate();
-    pThread->build();
-
-    // Setup Vars
-    pThread->setWaiting(true);
-    pThread->setTerminate(false);
-
-    // Execute
-    pThread->executeMCMC();
-
-    delete pThread;
-
-  } catch (string &ex) {
-    ex = "CRuntimeController.initMCMCThread()-> " + ex;
-    cout << "[EXCEPTION] " << ex << endl;
-    return;
   }
 }
 

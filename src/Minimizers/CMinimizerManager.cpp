@@ -7,10 +7,15 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local Headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CMinimizerManager.h"
 #include "CMinimizer.h"
 #include "../RuntimeThread/CRuntimeThread.h"
+#include "../Estimates/CEstimateManager.h"
+#include "../Estimates/CEstimate.h"
+#include "../Reports/CReportManager.h"
 #include "../CRuntimeController.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
@@ -135,9 +140,34 @@ void CMinimizerManager::execute() {
     if (pMinimizer == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
-    pMinimizer->runEstimation();
-    if(pMinimizer->getBuildCovariance())
-      pMinimizer->buildCovarianceMatrix();
+    /*
+     * We need to go through each of the estimates now and check out what phases
+     * that have been given. This will allow us to determine how many minimisation
+     * phases we need to run.
+     */
+    int estimationPhases = 1;
+
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+    int enabledEstimates = pEstimateManager->getEnabledEstimateCount();
+    for (int i = 0; i < enabledEstimates; ++i) {
+      int estimationPhase = pEstimateManager->getEnabledEstimate(i)->getEstimationPhase();
+      estimationPhases = estimationPhases > estimationPhase ? estimationPhases : estimationPhase;
+    }
+
+    /**
+     * Now we do X estimations where X is the highest number
+     * of phases we found in the configuration file.
+     */
+    for (int i = 0; i < estimationPhases; ++i) {
+      string reportPrefix = "estimation_" + boost::lexical_cast<string>(i) + "_";
+      CReportManager::Instance()->setReportPrefix(reportPrefix);
+
+      pEstimateManager->setCurrentPhase(i);
+
+      pMinimizer->runEstimation();
+      if(pMinimizer->getBuildCovariance())
+        pMinimizer->buildCovarianceMatrix();
+    }
 
   } catch (string &Ex) {
     Ex = "CMinimizerManager.execute()->" + Ex;

@@ -7,13 +7,14 @@
 // $Date$
 //============================================================================
 
-// Global Headers
+// Headers
+#include <limits>
+#include <numeric>
 #include <boost/random.hpp>
 #include <boost/numeric/ublas/triangular.hpp>
 #include <boost/numeric/ublas/io.hpp>
 #include <boost/numeric/ublas/lu.hpp>
 
-// Local Headers
 #include "CMCMC.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../Estimates/CEstimateManager.h"
@@ -21,8 +22,10 @@
 #include "../Estimates/CEstimate.h"
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Minimizers/CMinimizer.h"
+#include "../RandomNumberGenerator/CRandomNumberGenerator.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CComparer.h"
+#include "../Helpers/CError.h"
 
 // Namespaces
 using namespace boost::numeric;
@@ -35,6 +38,17 @@ CMCMC* CMCMC::clInstance = 0;
 // Default Constructor
 //**********************************************************************
 CMCMC::CMCMC() {
+
+  pParameterList->registerAllowed(PARAM_TYPE);
+  pParameterList->registerAllowed(PARAM_START);
+  pParameterList->registerAllowed(PARAM_LENGTH);
+  pParameterList->registerAllowed(PARAM_KEEP);
+  pParameterList->registerAllowed(PARAM_MAX_CORRELATION);
+  pParameterList->registerAllowed(PARAM_CORRELATION_ADJUSTMENT_METHOD);
+  pParameterList->registerAllowed(PARAM_CORRELATION_ADJUSTMENT_DIFF);
+  pParameterList->registerAllowed(PARAM_STEP_SIZE);
+  pParameterList->registerAllowed(PARAM_PROPOSAL_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_DF);
 }
 
 //**********************************************************************
@@ -59,28 +73,31 @@ void CMCMC::Destroy() {
 }
 
 //**********************************************************************
-// void CMCMC::addThread(CRuntimeThread *Thread)
-// Add Thread
-//**********************************************************************
-void CMCMC::addThread(CRuntimeThread *Thread) {
-  lock lk(mutThread);
-  vThreadList.push_back(Thread);
-}
-
-//**********************************************************************
-// void CMCMC::addAdaptAt(int value)
-// Add AdaptAt
-//**********************************************************************
-void CMCMC::addAdaptAt(int value) {
-  vAdaptAtList.push_back(value);
-}
-
-//**********************************************************************
 // void CMCMC::validate()
 // Validate our MCMC
 //**********************************************************************
 void CMCMC::validate() {
   try {
+    // Populate the variables from parameter list
+    dStart                  = pParameterList->getDouble(PARAM_START, true, 0.0);
+    iLength                 = pParameterList->getInt(PARAM_LENGTH);
+    iKeep                   = pParameterList->getInt(PARAM_KEEP, true, 1);
+    dMaxCorrelation         = pParameterList->getDouble(PARAM_MAX_CORRELATION, true, 0.8);
+    sCorrelationMethod      = pParameterList->getString(PARAM_CORRELATION_ADJUSTMENT_METHOD, true, "correlation");
+    dCorrelationDiff        = pParameterList->getDouble(PARAM_CORRELATION_ADJUSTMENT_DIFF, true, 0.0001);
+    dStepSize               = pParameterList->getDouble(PARAM_STEP_SIZE, true, 0.0);
+    sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, "t");
+    iDf                     = pParameterList->getInt(PARAM_DF, true, 4);
+
+    // Validate the parameters
+    if (iLength < 0)
+      CError::errorLessThan(PARAM_LENGTH, PARAM_ZERO);
+    if (iKeep < 0)
+      CError::errorLessThan(PARAM_KEEP, PARAM_ZERO);
+    if (sCorrelationMethod != "correlation" && sCorrelationMethod != "covariance")
+      CError::errorUnknown(PARAM_CORRELATION_ADJUSTMENT_METHOD, sCorrelationMethod);
+    if (sProposalDistribution != "t" && sProposalDistribution != "normal")
+      CError::errorUnknown(PARAM_PROPOSAL_DISTRIBUTION, sProposalDistribution);
 
   } catch (string &Ex) {
     Ex = "CMCMC.validate()->" + Ex;
@@ -94,6 +111,13 @@ void CMCMC::validate() {
 //**********************************************************************
 void CMCMC::build() {
   try {
+    // Build a default step size if one doesn't exist. Leave this here
+    // because we want to ensure the estimates have all been validated
+    // before we get the enabled count.
+    if (!pParameterList->hasParameter(PARAM_STEP_SIZE)) {
+      int estimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
+      dStepSize = 2.4 * pow( (double)estimateCount, -0.5);
+    }
 
   } catch (string &Ex) {
     Ex = "CMCMC.build()->" + Ex;
@@ -107,71 +131,41 @@ void CMCMC::build() {
 //**********************************************************************
 void CMCMC::execute() {
   try {
-    // Variables
+    dBestScore = std::numeric_limits<double>::max();
+
+    // Build our choleskyDecomp of the Covariance
+    if (!choleskyDecomposition())
+      CError::error("Cholesky Decomposition failed");
+
+    // Resize our vectors
     int iEstimateCount      = CEstimateManager::Instance()->getEnabledEstimateCount();
-    int iThreadCount        = pConfig->getNumberOfThreads();
-    int iThreadListSize     = 0;
-
-    // Build the Covariance Matrix
-    buildCovarianceMatrix();
-
-    // Wait until all threads have subscribed.
-    while (iThreadListSize != iThreadCount) {
-      if (true) {
-        lock lk(mutThread);
-        iThreadListSize = (int)vThreadList.size();
-      }
-      sleep(1);
-    }
-
-    // Resize Vector for Generating our estimates
     vCandidates.resize(iEstimateCount);
     vMeans.resize(iEstimateCount);
+    vMeans.assign(iEstimateCount, 0);
 
-    for (int i = 0; i < iEstimateCount; ++i)
-      vMeans[i] = 0.0;
-
-    // Start MCMC
     for (int i = 0; i < iLength; ++i) {
+      generateEstimates();
 
-      foreach(CRuntimeThread *Thread, vThreadList) {
-        // Get Handle to target thread's estimate manager
-        CEstimateManager *pEstimateManager = Thread->getEstimateManager();
-
-        // Generate new Vars
-        generateEstimates();
-
-        for (int j = 0; j < iEstimateCount; ++j)
-          pEstimateManager->getEstimate(j)->setValue(vCandidates[i]);
-
-        // Un-"Wait" thread
-        Thread->setWaiting(false);
+      for (int i = 0; i < iEstimateCount; ++i) {
+        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
       }
 
-      // Wait until all threads are "Waiting"
-      foreach(CRuntimeThread *Thread, vThreadList) {
-        while(!Thread->getWaiting())
-          sleep(1);
+      // Re-Run
+      CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+      pThread->rebuild();
+      pThread->startModel();
+
+      // Workout our Objective Score
+      CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
+      pObjectiveFunction->execute();
+
+      double dRandom = CRandomNumberGenerator::Instance()->getRandomUniform_01();
+      double dScore = pObjectiveFunction->getScore();
+      if (dScore < dBestScore || dRandom < 0.3) {
+        dBestScore = fmin(dBestScore, dScore);
+
+        // Keep this entry for our chain
       }
-
-      // Work Through and Look For our Match
-      /*foreach(CRuntimeThread *Thread, vThreadList) {
-        // Print Thread to PrintState
-        PrintState->print(thread);
-        // Check if We want
-        if ( ((Thread->getScore() < dBestScore) || (Thread->getScore() < randomScore)) && (i < iLength) ) {
-          bestScore = Thread->getVariables();
-          break;
-        } else if (i >= iLength)
-          break;
-
-        ++i;
-      }*/
-    }
-
-    // Terminate Threads
-    foreach(CRuntimeThread *Thread, vThreadList) {
-      Thread->setTerminate(true);
     }
 
   } catch (string &Ex) {
@@ -187,35 +181,13 @@ void CMCMC::execute() {
 //**********************************************************************
 bool CMCMC::generateEstimates() {
 
-  int iSize = mxCovariance.size1();
-
-  ublas::matrix<double> mxCovarianceTemp(mxCovariance);
-  vector<int> vZeros(iSize);
-
-  for (int i = 0; i < iSize; ++i)
-    vZeros[i] = 0;
-
-  // Make the 0 Covariances because they cause
-  // The cholesky to fail.
-  for (int i = 0; i < iSize; ++i)
-    if (CComparer::isZero(mxCovariance(i,i))) {
-      mxCovarianceTemp(i,i) = 1.0;
-      vZeros[i] = 1;
-    }
+  int iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
 
   // generate the standard normal random numbers
   //fill_randn(s);
 
-  if (!choleskyDecomposition())
-    return false;
-
-  for (int i = 0; i < iSize; ++i)
+  for (int i = 0; i < iEstimateCount; ++i)
     vCandidates[i] *= mxCovarianceLT(i,i) + vMeans[i];
-
-  // Reset our 0 Co-Variances
-  for (int i = 0; i < iSize; ++i)
-    if (vZeros[i] == 1)
-      vCandidates[i] = 0.0; // mean[i]
 
   return true;
 }
@@ -225,6 +197,10 @@ bool CMCMC::generateEstimates() {
 //
 //**********************************************************************
 bool CMCMC::choleskyDecomposition() {
+
+  CMinimizer *pMinimizer = CMinimizerManager::Instance()->getMinimizer();
+  ublas::matrix<double>& mxCovariance = pMinimizer->getCovarianceMatrix();
+
   int n = mxCovariance.size1();
 
   for (unsigned int i = 0; i < mxCovariance.size1(); ++i)
@@ -269,45 +245,8 @@ bool CMCMC::choleskyDecomposition() {
 }
 
 //**********************************************************************
-// void CMCMC::buildCovarianceMatrix()
-// Build the Co-Variance Matrix
-//**********************************************************************
-void CMCMC::buildCovarianceMatrix() {
-  // Variables
-  int iEstimateCount      = CEstimateManager::Instance()->getEnabledEstimateCount();
-
-  // Get handle to our Minimizer and Hessian
-  CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
-  CMinimizer *pMinimizer  = pMinimizerManager->getMinimizer();
-
-  ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
-  for (int i = 0; i < iEstimateCount; ++i)
-    for (int j = 0; j < iEstimateCount; ++j)
-      mxHessian(i,j) = pMinimizer->getHessianValue(i, j);
-
-  // Convert Hessian to Covariance
-  ublas::permutation_matrix<> pm(mxHessian.size1());
-  ublas::matrix<double> copiedMatrix = ublas::matrix<double>(mxHessian);
-  ublas::lu_factorize(copiedMatrix,pm);
-
-  ublas::matrix<double> identityMatrix(ublas::identity_matrix<double>(copiedMatrix.size1()));
-  ublas::lu_substitute(copiedMatrix,pm,identityMatrix);
-
-  mxCovariance.swap(identityMatrix);
-}
-
-//**********************************************************************
-// void CMCMC::sleep(int time)
-// Platform-Independent Sleep
-//**********************************************************************
-void CMCMC::sleep(int milliseconds) {
- boost::this_thread::sleep(boost::posix_time::milliseconds(milliseconds));
-}
-
-//**********************************************************************
 // CMCMC::~CMCMC()
 // Default De-Constructor
 //**********************************************************************
 CMCMC::~CMCMC() {
-  vThreadList.clear();
 }

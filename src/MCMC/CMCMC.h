@@ -29,22 +29,7 @@ public:
   static CMCMC*              Instance();
   static void                Destroy();
 
-  // Functions
-  void                       addThread(CRuntimeThread *Thread);
-	void                       setStart(int value) { iStart = value; }
-	int                        getStart() { return iStart; }
-	void                       setLength(int value) { iLength = value; }
-	int                        getLength() { return iLength; }
-	void                       setKeep(int value) { iKeep = value; }
-	int                        getKeep() { return iKeep; }
-	void                       setAdaptiveStepsize(bool value) { bAdaptiveStepsize = value; }
-	bool                       getAdaptiveStepsize() { return bAdaptiveStepsize; }
-	void                       addAdaptAt(int value);
-	int                        getAdaptAtCount() { return vAdaptAtList.size(); }
-	void                       setProposalT(bool value) { bProposalT = value; }
-	bool                       getProposalT() { return bProposalT; }
-	void                       setDf(int value) { iDf = value; }
-	int                        getDf() { return iDf; }
+  // Methods
 	void                       validate();
 	void                       build();
 	void                       execute();
@@ -53,24 +38,22 @@ protected:
   // Functions
   CMCMC();
   virtual                    ~CMCMC();
-  void                       sleep(int milliseconds);
   void                       buildCovarianceMatrix();
   bool                       generateEstimates();
   bool                       choleskyDecomposition();
 
   // Variables
-  int                        iStart;
+  double                     dStart;
   int                        iLength;
   int                        iKeep;
-  bool                       bAdaptiveStepsize;
-  vector<int>                vAdaptAtList;
-  int                        iBurnIn;
-  bool                       bProposalT;
+  double                     dMaxCorrelation;
+  string                     sCorrelationMethod;
+  double                     dCorrelationDiff;
+  double                     dStepSize;
+  string                     sProposalDistribution;
   int                        iDf;
+  double                     dBestScore;
   vector<double>             vLastAcceptedList;
-  vector<CRuntimeThread*>    vThreadList;
-  boost::mutex               mutThread;
-  ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
   vector<double>             vMeans;

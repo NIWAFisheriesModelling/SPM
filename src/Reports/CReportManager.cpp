@@ -28,6 +28,7 @@ boost::thread_specific_ptr<CReportManager> CReportManager::clInstance;
 //**********************************************************************
 CReportManager::CReportManager() {
   // Variables
+  sReportPrefix         = "";
   bDisableReports       = false;;
 }
 

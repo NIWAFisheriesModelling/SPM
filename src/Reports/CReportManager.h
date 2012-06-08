@@ -27,6 +27,8 @@ public:
   static void                 Destroy();
   virtual                     ~CReportManager();
   void                        addReporter(CReport *value);
+  void                        setReportPrefix(string newPrefix) { sReportPrefix = newPrefix; }
+  string                      getReportPrefix() {  return sReportPrefix; }
   void                        clone(CReportManager *Manager);
   void                        validate();
   void                        build();
@@ -40,6 +42,8 @@ protected:
   vector<CReport*>          vReporters;
   vector<CReport*>          vModellingReporters;
   bool                      bDisableReports;
+  string                    sReportPrefix;
+
 
 private:
   static boost::thread_specific_ptr<CReportManager> clInstance;

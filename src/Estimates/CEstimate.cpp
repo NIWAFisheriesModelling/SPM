@@ -34,6 +34,7 @@ CEstimate::CEstimate() {
   pParameterList->registerAllowed(PARAM_UPPER_BOUND);
   pParameterList->registerAllowed(PARAM_PRIOR);
   pParameterList->registerAllowed(PARAM_SAME);
+  pParameterList->registerAllowed(PARAM_ESTIMATION_PHASE);
 
   // Add Default
   pParameterList->addParameter(PARAM_LABEL, "Estimate");
@@ -157,10 +158,11 @@ void CEstimate::validate() {
     CBaseBuild::validate();
 
     // Populate our Variables
-    sParameter    = pParameterList->getString(PARAM_PARAMETER);
-    dLowerBound   = pParameterList->getDouble(PARAM_LOWER_BOUND);
-    dUpperBound   = pParameterList->getDouble(PARAM_UPPER_BOUND);
-    sPrior        = pParameterList->getString(PARAM_PRIOR, true, "");
+    sParameter        = pParameterList->getString(PARAM_PARAMETER);
+    dLowerBound       = pParameterList->getDouble(PARAM_LOWER_BOUND);
+    dUpperBound       = pParameterList->getDouble(PARAM_UPPER_BOUND);
+    sPrior            = pParameterList->getString(PARAM_PRIOR, true, "");
+    iEstimationPhase  = pParameterList->getInt(PARAM_ESTIMATION_PHASE, true, 1);
 
     pParameterList->fillVector(vSameList, PARAM_SAME, true);
 

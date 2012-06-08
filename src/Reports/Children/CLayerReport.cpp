@@ -16,6 +16,7 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
 
 //**********************************************************************
 // CLayerReport::CLayerReport()
@@ -28,9 +29,9 @@ CLayerReport::CLayerReport() {
   pLayerManager       = CLayerManager::Instance();
 
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_TIME_STEP);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -41,11 +42,9 @@ void CLayerReport::validate() {
   try {
 
     // Assign Variables
-    // Assign Variables
-    if (pParameterList->hasParameter(PARAM_YEARS) )
-      pParameterList->fillVector(vYear, PARAM_YEARS);
-    else
-      vYear.push_back(pWorld->getInitialYear());
+    pParameterList->fillVector(vYears, PARAM_YEARS, true);
+    if (vYears.size() == 0)
+      vYears.push_back(pWorld->getInitialYear());
 
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
     sLayer      = pParameterList->getString(PARAM_LAYER);
@@ -55,11 +54,11 @@ void CLayerReport::validate() {
 
     // Local validation
     // Validate Year Range
-    for (int i = 0; i < (int)vYear.size(); ++i) {
-      if (vYear[i] < pWorld->getInitialYear())
-        CError::errorLessThan(PARAM_YEARS, PARAM_INITIAL_YEAR);
-      else if (vYear[i] > pWorld->getCurrentYear())
-        CError::errorGreaterThan(PARAM_YEARS, PARAM_CURRENT_YEAR);
+    foreach(int year, vYears) {
+      if (year < pWorld->getInitialYear())
+        CError::errorLessThan(PARAM_YEAR, PARAM_INITIAL_YEAR);
+      else if (year > pWorld->getCurrentYear())
+        CError::errorGreaterThan(PARAM_YEAR, PARAM_CURRENT_YEAR);
     }
 
   } catch (string &Ex) {
@@ -100,34 +99,30 @@ void CLayerReport::execute() {
   try {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
-      if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-        return;
+      return;
+    if (std::find(vYears.begin(), vYears.end(), pTimeStepManager->getCurrentYear()) == vYears.end())
+      return;
+    if (iTimeStep != pTimeStepManager->getCurrentTimeStep())
+      return;
 
     this->start();
 
-    for (int i = 0; i < (int)vYear.size(); ++i) {
-      if (vYear[i] == pTimeStepManager->getCurrentYear()) {
-        if (iTimeStep == pTimeStepManager->getCurrentTimeStep()) {
-          // Print Out
-          cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-          cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-          cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << vYear[i] << "\n";
-          cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
+    // Print Out
+    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << pTimeStepManager->getCurrentYear() << "\n";
+    cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
-          for (int i = 0; i < pLayer->getHeight(); ++i) {
-            for (int j = 0; j < pLayer->getWidth(); ++j) {
-              cout << pLayer->getValue(i, j) << " ";
-            }
-            cout << "\n";
-          }
-
-          cout << CONFIG_END_REPORT << "\n" << endl;
-
-        }
+    for (int i = 0; i < pLayer->getHeight(); ++i) {
+      for (int j = 0; j < pLayer->getWidth(); ++j) {
+        cout << pLayer->getValue(i, j) << " ";
       }
+      cout << "\n";
     }
-    this->end();
 
+    cout << CONFIG_END_REPORT << "\n" << endl;
+
+    this->end();
   } catch (string &Ex) {
     Ex = "CLayerReport.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

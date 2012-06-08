@@ -39,8 +39,10 @@ public:
   void                        end();
 
 protected:
-  // Variables
+  // Variable
   string                     sFileName;
+  string                     sFullFileName;
+  string                     sLastPrefix;
   bool                       bOverwrite;
   streambuf*                 sCoutBackup;
   ofstream                   *fFile;

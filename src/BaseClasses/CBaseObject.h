@@ -40,6 +40,7 @@ protected:
   // Functions
   void                       registerEstimable(string name, double *variable);
   void                       registerEstimable(string name, int index, double *variable);
+  void                       registerEstimable(string name, vector<double> &variables);
 
   // Variables
   CConfiguration                *pConfig;

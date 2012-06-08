@@ -9,6 +9,7 @@
 
 // Global Headers
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local Headers
 #include "CRuntimeThread.h"
@@ -20,6 +21,7 @@
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
 #include "../Minimizers/CMinimizerManager.h"
+#include "../MCMC/CMCMC.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../Observations/CObservationManager.h"
 #include "../Penalties/CPenaltyManager.h"
@@ -195,37 +197,19 @@ void CRuntimeThread::executeProfileRun() {
 
 //**********************************************************************
 // void CRuntimeThread::executeMCMC()
-// Execute the MCMC path for this thread. Basically, become an MCMC subscriber
+// Do a point estimate, then start our MCMC
 //**********************************************************************
 void CRuntimeThread::executeMCMC() {
+  // Find a pointer estimate to start our chain from
+  CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
+  pMinimizerManager->execute();
 
-  // Variables
-  boost::xtime xt;
+  // Rebuild our managers to ensure everything is back to default state
+  rebuild();
 
-  while (!getTerminate()) {
-
-    // Wait Until We Are not Waiting
-    while ( (getWaiting()) && (!getTerminate()) ) {
-      boost::xtime_get(&xt, boost::TIME_UTC);
-      xt.nsec += 10;
-      boost::thread::sleep(xt);
-    }
-
-    if (getTerminate())
-      return;
-
-    // We are not waiting, this means we have our variables and are
-    // ready to execute a run
-    rebuild();
-    startModel();
-
-    // Execute Objective
-    pObjectiveFunction->execute();
-    dScore = pObjectiveFunction->getScore();
-
-    // Now, we wait for the MCMC to publish new variables
-    setWaiting(true);
-  }
+  // Start our MCMC run
+  CMCMC *mcmc = CMCMC::Instance();
+  mcmc->execute();
 }
 
 //**********************************************************************
@@ -234,8 +218,12 @@ void CRuntimeThread::executeMCMC() {
 //**********************************************************************
 void CRuntimeThread::executeSimulationRun() {
   for (int i=0; i < CConfiguration::Instance()->getSimulationCandidates(); ++i) {
+    string sReportPrefix = "simulation_" + boost::lexical_cast<string>(i) + "_";
+    CReportManager::Instance()->setReportPrefix(sReportPrefix);
+
     // Validate, Build, Start
     startModel();
+
     // Change State
     eCurrentState = STATE_FINALIZATION;
     CReportManager::Instance()->execute(eCurrentState);
