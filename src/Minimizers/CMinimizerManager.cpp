@@ -162,7 +162,7 @@ void CMinimizerManager::execute() {
       string reportPrefix = "estimation_" + boost::lexical_cast<string>(i) + "_";
       CReportManager::Instance()->setReportPrefix(reportPrefix);
 
-      pEstimateManager->setCurrentPhase(i);
+      pEstimateManager->setCurrentPhase(i+1);
 
       pMinimizer->runEstimation();
       if(pMinimizer->getBuildCovariance())
