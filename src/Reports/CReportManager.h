@@ -27,8 +27,8 @@ public:
   static void                 Destroy();
   virtual                     ~CReportManager();
   void                        addReporter(CReport *value);
-  void                        setReportPrefix(string newPrefix) { sReportPrefix = newPrefix; }
-  string                      getReportPrefix() {  return sReportPrefix; }
+  void                        setReportSuffix(string newSuffix) { sReportSuffix = newSuffix; }
+  string                      getReportSuffix() {  return sReportSuffix; }
   void                        clone(CReportManager *Manager);
   void                        validate();
   void                        build();
@@ -42,7 +42,7 @@ protected:
   vector<CReport*>          vReporters;
   vector<CReport*>          vModellingReporters;
   bool                      bDisableReports;
-  string                    sReportPrefix;
+  string                    sReportSuffix;
 
 
 private:

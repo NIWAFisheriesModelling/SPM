@@ -159,8 +159,8 @@ void CMinimizerManager::execute() {
      * of phases we found in the configuration file.
      */
     for (int i = 0; i < estimationPhases; ++i) {
-      string reportPrefix = "estimation_" + boost::lexical_cast<string>(i) + "_";
-      CReportManager::Instance()->setReportPrefix(reportPrefix);
+      string reportSuffix = ".phase_" + boost::lexical_cast<string>(i);
+      CReportManager::Instance()->setReportSuffix(reportSuffix);
 
       pEstimateManager->setCurrentPhase(i+1);
 

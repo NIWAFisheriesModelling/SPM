@@ -55,19 +55,19 @@ void CFileReport::validate() {
 void CFileReport::start() {
   if (sFileName != "") {
     /**
-     * Check if our prefix has changed. If it has we need to reset
+     * Check if our suffix has changed. If it has we need to reset
      * our overwrite variable otherwise all reports after the
      * first one will append.
      */
-    string sPrefix = CReportManager::Instance()->getReportPrefix();
-    if (sPrefix != sLastPrefix) {
+    string sSuffix = CReportManager::Instance()->getReportSuffix();
+    if (sSuffix != sLastSuffix) {
       bOverwrite = pParameterList->getBool(PARAM_OVERWRITE, true, true);
     }
-    sLastPrefix = sPrefix;
+    sLastSuffix = sSuffix;
 
-    // This variable allows us to print out to different prefixe'd files
+    // This variable allows us to print out to different suffixed files
     // based on different iterations etc
-    sFullFileName =  sPrefix + sFileName;
+    sFullFileName = sFileName + sSuffix;
 
     // Variables
     sCoutBackup     = cout.rdbuf();

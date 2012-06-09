@@ -42,7 +42,7 @@ protected:
   // Variable
   string                     sFileName;
   string                     sFullFileName;
-  string                     sLastPrefix;
+  string                     sLastSuffix;
   bool                       bOverwrite;
   streambuf*                 sCoutBackup;
   ofstream                   *fFile;

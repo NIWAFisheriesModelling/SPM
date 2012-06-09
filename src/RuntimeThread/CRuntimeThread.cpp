@@ -217,9 +217,20 @@ void CRuntimeThread::executeMCMC() {
 // Execute a Simulation Run
 //**********************************************************************
 void CRuntimeThread::executeSimulationRun() {
+
+  int iSuffixIterationWidth = (int) floor(log10((double) CConfiguration::Instance()->getSimulationCandidates()+1)) +1;
+
   for (int i=0; i < CConfiguration::Instance()->getSimulationCandidates(); ++i) {
-    string sReportPrefix = "simulation_" + boost::lexical_cast<string>(i) + "_";
-    CReportManager::Instance()->setReportPrefix(sReportPrefix);
+    string sReportSuffix = "." ;
+    int iThisIterationWidth = floor(log10(i+1))+1;
+    int iCount = iSuffixIterationWidth - iThisIterationWidth;
+    if (iCount > 0) {
+      for (int j=0; j < iCount; ++j) {
+        sReportSuffix += "0";
+      }
+    }
+    sReportSuffix += boost::lexical_cast<string>( i+1 );
+    CReportManager::Instance()->setReportSuffix(sReportSuffix);
 
     // Validate, Build, Start
     startModel();
