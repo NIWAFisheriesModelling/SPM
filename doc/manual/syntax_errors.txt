@@ -17,6 +17,7 @@ In SPM, but not in manual
   enabled_estimates
   estimable
   estimates
+  final_year
   flagged_penalties
   function
   height
@@ -31,6 +32,7 @@ In SPM, but not in manual
   profiles
   proportion_time-step
   rescale
+  rho
   row
   row_index
   run_mode
@@ -51,22 +53,13 @@ In manual, but not in SPM
   joint_selectivity
   b0
   b0_layer
-  correlation_adjustment_diff
-  correlation_adjustment_method
-  df
-  estimation_phase
   formula
   growth_proportions
   initialisation_layers
-  keep
-  max_correlation
   mcmc_fixed
   parameter_values
   parameters
-  projection_layer
   proportion_time_step
-  proposal_distribution
-  start
   derived
   derived_meta
   iterative

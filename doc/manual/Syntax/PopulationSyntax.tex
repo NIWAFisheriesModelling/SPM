@@ -64,10 +64,10 @@
 \defDefault{No default}
 \defValue{Defines the current year of the model, i.e., the model is run from \commandsub{model}{first\_year}\ to \commandsub{model}{current\_year}}
 
-\defSub{final\_year}{Define the final year of the model in projections}
-\defType{Integer}
-\defDefault{No default}
-\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{model}{first\_year} to \commandsub{model}{current\_year}, then projected to \commandsub{model}{final\_year}}
+%\defSub{final\_year}{Define the final year of the model in projections}
+%\defType{Integer}
+%\defDefault{No default}
+%\defValue{Defines the final year of the model for use in projections, i.e., the model is run from \commandsub{model}{first\_year} to %\commandsub{model}{current\_year}, then projected to \commandsub{model}{final\_year}}
 
 \defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}
@@ -199,13 +199,13 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{1.0}
 \defValue{Steepness value between 0.2 and 1.0}
 
-\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
-\defType{Estimable}
-\defDefault{1.0}
+%\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
+%\defType{Estimable}
+%\defDefault{1.0}
 
-\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
-\defType{Estimable}
-\defDefault{0.0}
+%\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
+%\defType{Estimable}
+%\defDefault{0.0}
 
 \TODO
 
@@ -287,13 +287,13 @@ Changed name to be clearer.
 \defDefault{1.0}
 \defValue{Steepness value between 0.2 and 1.0}
 
-\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
-\defType{Estimable}
-\defDefault{1.0}
+%\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
+%\defType{Estimable}
+%\defDefault{1.0}
 
-\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
-\defType{Estimable}
-\defDefault{0.0}
+%\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
+%\defType{Estimable}
+%\defDefault{0.0}
 
 \defSub{r0\_layer} {Define the label of the layer that defines the distribution of recruitment at equilibrium abundances for each cell}
 \defType{String}
@@ -887,10 +887,10 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 
 \TODOend 
 
-\defSub{projection\_layer} {Define the layer label to use during the projection}
-\defType{String}
-\defDefault{No default}
-\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
+%\defSub{projection\_layer} {Define the layer label to use during the projection}
+%\defType{String}
+%\defDefault{No default}
+%\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
 
 \subsubsection[Derived-layer]{\commandlabsubarg{layer}{type}{derived}}
 

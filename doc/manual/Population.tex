@@ -8,7 +8,7 @@ The population section consists of several components, including;
 \begin{itemize}
   \item The spatial and population structure
   \item Model initialisation (i.e., the state of the model at the start of the first year)\index{Initialisation}\index{Model ! initialisation}
-  \item The years over which the model runs (i.e., the start, end, and projection years of the model)
+  \item The years over which the model runs (i.e., the start and end years of the model)
   \item The annual cycle (time steps and processes that are applied in each time step)\index{Annual cycle}
   \item The specifications and parameters of the processes;
   \begin{itemize}
@@ -157,7 +157,7 @@ Hence, for initialisation you need to define;
 
 Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. 
 
-Processes are carried out in the order specified within each time step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. The projection part \NYI\ then extends the run time up to the end of year \argument{final}. 
+Processes are carried out in the order specified within each time step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. %The projection part then extends the run time up to the end of year \argument{final}. 
 
 \begin{itemize}
   \item The time steps and the processes applied in each

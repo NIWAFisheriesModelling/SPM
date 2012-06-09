@@ -4,7 +4,8 @@
 
 The \config\ is compulsory and defines the model structure, processes, observations, parameters (both the fixed parameters and the parameters to be estimated)\index{Estimable parameters}\index{Estimated parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
-Other input files can, in some circumstances, be supplied to define the starting point for an estimation, define the parameters for a projection, or to simulate observations.
+Other input files can, in some circumstances, be supplied to define the starting point for an estimation %, define the parameters for a projection, 
+or as a point estimate from which to simulate observations.
 
 Simple command line arguments\index{Command line arguments} are used to determine the actions or \emph{tasks}\index{Tasks} of \SPM, i.e., to run a model with a set of parameter values, estimate parameter values (either point estimates or MCMC), project quantities into the future, simulate observations, etc,. Hence, the \emph{command line arguments} define the \emph{task}. For example, \texttt{-r} is the \emph{run}, \texttt{-e} is the \emph{estimation}, and \texttt{-m} is the \emph{MCMC} task. The \emph{command line arguments} are described in Section \ref{sec:command-line-arguments}.
 

@@ -45,7 +45,7 @@ See Section \ref{sec:parameter-names} for instructions on how to generate the pa
 
 All parameters are estimated within bounds\index{Bounds}. For each parameter to be estimated, you need to specify the bounds and the prior\index{Priors} (Section \ref{sec:priors}). Note that the bounds and prior for each parameter refer to the values of the parameters, not the actual values resulting from the application of the parameter to an equation. If you want to estimate only some elements of a vector, either define the elements of the vector to be estimated (see \ref{sec:parameter-names}) or fix the others by setting the bounds equal.
 
-The estimation of parameters can be phased. \NYI. Here, some of the estimated parameters are initially held fixed, and a minimisation is carried out. Next, some or all of the remaining parameters that were initially held fixed are freed, and another minimisation is carried out. This process continues until all phases have been carried out.
+The estimation of parameters can be phased. Here, some of the estimated parameters are initially held fixed, and a minimisation is carried out. Next, some or all of the remaining parameters that were initially held fixed are freed, and another minimisation is carried out. This process continues until all phases have been carried out.
 
 \subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
@@ -80,7 +80,7 @@ The differential evolution minimiser is a simple population based, stochastic fu
 
 The differential evolution minimiser can be good at finding global minimums in surfaces that may have local minima. However, the speed of the minimiser, and the ability to find a good minima depend on the number of initial `populations'. Some authors recommend that the number of populations be set at about $10*p$, where $p$ is the number of free parameters. However, depending on your problem, you may find that you may need more, or that less will suffice.
 
-We note that there is no proof of convergence for the differential evolution solver, but several papers have found it to be an efficient method of solving multidimensional problems. Our (limited) experience suggests that it can often find a better minima and may be faster or longer (depending on the actual mode specification) at finding a solution when compared with the numerical differences minimiser. Comparisons with auto-differentiation minimisers or other more sophisticated algorithms have not been made. 
+We note that there is no proof of convergence for the differential evolution solver, but several papers have found it to be an efficient method of solving multidimensional problems. Our (limited) experience suggests that it can often find a better minima and may be faster or longer (depending on the actual model specification) at finding a solution when compared with the numerical differences minimiser. Comparisons with auto-differentiation minimisers or other more sophisticated algorithms have not been made. 
 
 \subsection{\I{Posterior profiles}\label{sec:estimate-profiles}}
 

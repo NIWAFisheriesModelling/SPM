@@ -13,7 +13,6 @@
 \defSub{initialisation\_phases}{Define the labels of the phases of the initialisation}
 \defSub{initial\_year}{Define the first year of the model, immediately following initialisation}
 \defSub{current\_year}{Define the current year of the model}
-\defSub{final\_year}{Define the final year of the model in projections}
 \defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) to form the annual cycle}
 \par\defComLab{initialisation\_phase}{Define the processes and years of the initialisation phase with label}\par
 \defSub{type} {Define the type of initialisation}
@@ -36,8 +35,6 @@
 \defSub{proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{age} {Define the age that receives recruitment}
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
-\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
-\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
 \defSub{b0} {Define the label of the \command{derived\_quantity} that defines the initial spawning stock biomass ($B_0$)}
 \defSub{ssb} {Define the label of the \command{derived\_quantity} that defines the spawning stock biomass (SSB)}
 \defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
@@ -51,8 +48,6 @@
 \defSub{proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{age} {Define the age that receives recruitment}
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
-\defSub{sigma\_r} {Define the recruitment variability $\sigma_R$ in the stock-recruitment relationship for projections}
-\defSub{rho} {Define the autocorrelation $\rho$ in the recruitment variability in the stock-recruitment relationship for projections}
 \defSub{r0\_layer} {Define the label of the layer that defines the distribution of recruitment at equilibrium abundances for each cell}
 \defSub{b0\_layer} {Name of the layer that defines the initial or equilibrium spawning stock biomass ($B_0$) for each cell}
 \defSub{ssb\_layer} {Define the label of the layer that defines the spawning stock biomass (SSB) for each cell in each year}
@@ -183,7 +178,6 @@
 \defSub{layers} {Define the layer labels for each of the years}
 \defSub{data} {Define the values of the meta-layer directly}
 \defSub{initialisation\_layers} {Define the layers label to use during the initialisation}
-\defSub{projection\_layer} {Define the layer label to use during the projection}
 \par\textbf{\commandlabsubarg{layer}{type}{derived}}\par
 \defSub{years} {Define the years when the calculation is performed}
 \defSub{time\_step} {Define the timestep at which the calculation is performed}
@@ -477,7 +471,7 @@
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{layer}}\par
 \defSub{layer} {Define the label of the layer to print}
-\defSub{year} {Define the year for the printing of the layer}
+\defSub{years} {Define the years for the printing of the layer}
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}

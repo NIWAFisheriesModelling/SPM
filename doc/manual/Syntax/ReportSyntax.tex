@@ -47,7 +47,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{years} {Define the years that the partition report applies to}
 \defType{Integer vector or integer range}
 \defDefault{No default}
-\defValue{The expanded vector must be valid model years}
+\defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the partition report applies to}
 \defType{Integer}
@@ -228,10 +228,10 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{No default}
 \defValue{A valid label from \command{layer}}
 
-\defSub{year} {Define the year for the printing of the layer}
-\defType{Integer}
+\defSub{years} {Define the years for the printing of the layer}
+\defType{Integer vector or integer range}
 \defDefault{The first year of the model, \commandsub{model}{initial\_year}}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+\defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defType{Integer}
@@ -256,9 +256,9 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defValue{A valid label from \command{layer} of type \texttt{categorical}}
 
 \defSub{years} {Define the years for the printing of the layer}
-\defType{Integer}
+\defType{Integer vector or integer range}
 \defDefault{No default}
-\defValue{A vector of positive integers between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+\defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
 \defType{Integer}
