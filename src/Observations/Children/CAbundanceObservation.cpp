@@ -163,12 +163,18 @@ void CAbundanceObservation::execute() {
       // Reset Vars
       dExpectedTotal = 0.0;
 
-      CWorldSquare *pSquare = pWorldView->getSquare((*mPropPtr).first);
+      CWorldSquare *pStartSquare  = pStartWorldView->getSquare((*mPropPtr).first);
+      CWorldSquare *pSquare     = pWorldView->getSquare((*mPropPtr).first);
 
       for (int i = 0; i < (int)vCategories.size(); ++i)
         for (int j = 0; j < pSquare->getWidth(); ++j) {
           double dSelectResult = vSelectivities[i]->getResult(j);
-          dExpectedTotal += dSelectResult * pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
+
+          double dStartValue = pStartSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
+          double dEndValue   = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
+          double dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+
+          dExpectedTotal += dSelectResult * dFinalValue;
         }
 
       // Note: dExpectedTotal is total number of fish the model has for that
