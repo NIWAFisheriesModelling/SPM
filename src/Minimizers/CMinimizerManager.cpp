@@ -140,18 +140,22 @@ void CMinimizerManager::execute() {
     if (pMinimizer == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
     /*
      * We need to go through each of the estimates now and check out what phases
      * that have been given. This will allow us to determine how many minimisation
      * phases we need to run.
      */
+    ERunMode runMode = CRuntimeController::Instance()->getRunMode();
+
     int estimationPhases = 1;
 
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    int enabledEstimates = pEstimateManager->getEnabledEstimateCount();
-    for (int i = 0; i < enabledEstimates; ++i) {
-      int estimationPhase = pEstimateManager->getEnabledEstimate(i)->getEstimationPhase();
-      estimationPhases = estimationPhases > estimationPhase ? estimationPhases : estimationPhase;
+    if (runMode == RUN_MODE_ESTIMATION) {
+      int enabledEstimates = pEstimateManager->getEnabledEstimateCount();
+      for (int i = 0; i < enabledEstimates; ++i) {
+        int estimationPhase = pEstimateManager->getEnabledEstimate(i)->getEstimationPhase();
+        estimationPhases = estimationPhases > estimationPhase ? estimationPhases : estimationPhase;
+      }
     }
 
     /**
@@ -162,7 +166,8 @@ void CMinimizerManager::execute() {
       string reportSuffix = ".phase_" + boost::lexical_cast<string>(i);
       CReportManager::Instance()->setReportSuffix(reportSuffix);
 
-      pEstimateManager->setCurrentPhase(i+1);
+      if (runMode == RUN_MODE_ESTIMATION)
+        pEstimateManager->setCurrentPhase(i+1);
 
       pMinimizer->runEstimation();
       if(pMinimizer->getBuildCovariance())
