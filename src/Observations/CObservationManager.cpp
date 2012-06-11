@@ -155,6 +155,16 @@ void CObservationManager::build() {
 }
 
 //**********************************************************************
+// void CObservationManager::prepare()
+// Prepare our observations
+//**********************************************************************
+void CObservationManager::prepare() {
+  foreach(CObservation *observation, vObservationList) {
+    observation->prepare();
+  }
+}
+
+//**********************************************************************
 // void CObservationManager::execute(int year, int step)
 // Execute
 //**********************************************************************

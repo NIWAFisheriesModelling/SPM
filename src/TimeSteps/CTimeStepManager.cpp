@@ -200,6 +200,9 @@ void CTimeStepManager::execute() {
     for (int j = 0; j < (int)vTimeStepsOrder.size(); ++j) {
       iCurrentTimeStep = j;
 
+      // Prepare our Observations
+      pObservationManager->prepare();
+
       // Execute Time Step
       vTimeStepsOrder[j]->execute();
 

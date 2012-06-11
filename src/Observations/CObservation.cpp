@@ -22,6 +22,7 @@
 //**********************************************************************
 CObservation::CObservation() {
   // Variables
+  pStartWorldView       = 0;
   pWorldView            = 0;
   pLikelihood           = 0;
   bSimulationRunMode    = false;
@@ -147,6 +148,11 @@ void CObservation::build() {
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
+    // Build our start world view. This represents the world before the timestep
+    pStartWorldView = new CLayerDerivedWorldView(pLayer);
+    pStartWorldView->validate();
+    pStartWorldView->build();
+
     // Build our World View
     pWorldView = new CLayerDerivedWorldView(pLayer);
     pWorldView->validate();
@@ -165,6 +171,19 @@ void CObservation::build() {
     Ex = "CObservation.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+}
+
+//**********************************************************************
+// void CObservation::prepare()
+// This method is called before the timestep to load any pre-timestep info
+//**********************************************************************
+void CObservation::prepare() {
+  /**
+   * Execute our start world view. This means when we actually call
+   * execute we'll have a view of the world from before the timestep
+   * and we can interpolate this.
+   */
+  pStartWorldView->execute();
 }
 
 //**********************************************************************

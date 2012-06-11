@@ -46,6 +46,7 @@ public:
   void                       fillComparisons(vector<SComparison*> &comparisons);
   virtual void               validate();
   virtual void               build();
+  void                       prepare();
   virtual void               execute();
 
 protected:
@@ -64,6 +65,7 @@ protected:
   vector<string>             vSelectivityNames;
   vector<CSelectivity*>      vSelectivities;
   vector<SComparison*>       vComparisons;
+  CLayerDerivedWorldView     *pStartWorldView;
   CLayerDerivedWorldView     *pWorldView;
   string                     sLikelihood;
   string                     sSimulationLikelihood;
