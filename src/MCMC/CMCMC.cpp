@@ -98,6 +98,10 @@ void CMCMC::validate() {
       CError::errorUnknown(PARAM_CORRELATION_ADJUSTMENT_METHOD, sCorrelationMethod);
     if (sProposalDistribution != "t" && sProposalDistribution != "normal")
       CError::errorUnknown(PARAM_PROPOSAL_DISTRIBUTION, sProposalDistribution);
+    if (dMaxCorrelation <= 0)
+      CError::errorLessThan(PARAM_MAX_CORRELATION, PARAM_ZERO);
+    if (dMaxCorrelation > 1)
+      CError::errorGreaterThan(PARAM_MAX_CORRELATION, PARAM_ONE);
 
   } catch (string &Ex) {
     Ex = "CMCMC.validate()->" + Ex;
