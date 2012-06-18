@@ -12,22 +12,26 @@
 #include "../CEstimateManager.h"
 #include "../../Helpers/CError.h"
 
+//
+////**********************************************************************
+//// CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager)
+//// Build our estimates
+////**********************************************************************
+//CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager) {
+//
+//  CEstimateInfo *pInfo = new CEstimateInfo();
+//
+//  if (registerWithManager)
+//    CEstimateManager::Instance()->addEstimateInfo(pInfo);
+//
+//  return pInfo;
+//}
 
-//**********************************************************************
-// CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager)
-// Build our estimates
-//**********************************************************************
-CEstimate* CEstimateFactory::buildEstimate(string type, bool registerWithManager) {
-
-  CEstimate *pEstimate = 0;
-
-  if (type == "")
-    pEstimate = new CEstimate();
-  else
-    CError::errorUnknown(PARAM_ESTIMATE, type);
+CEstimate* CEstimateFactory::buildEstimate(bool registerWithManager) {
+  CEstimate *estimate = new CEstimate();
 
   if (registerWithManager)
-    CEstimateManager::Instance()->addEstimate(pEstimate);
+    CEstimateManager::Instance()->addEstimate(estimate);
 
-  return pEstimate;
+  return estimate;
 }

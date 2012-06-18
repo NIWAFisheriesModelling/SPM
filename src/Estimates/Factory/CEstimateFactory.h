@@ -15,6 +15,7 @@
 #include <string>
 
 // Local Headers
+#include "../CEstimateInfo.h"
 #include "../CEstimate.h"
 
 // Using
@@ -27,7 +28,8 @@ using std::string;
 class CEstimateFactory {
 public:
   // Functions
-  static CEstimate*           buildEstimate(string type, bool registerWithManager = true);
+  static CEstimate*           buildEstimate(bool registerWithManager = true);
+//  static CEstimateInfo*       buildEstimateInfo(bool registerWithManager = true);
 
 private:
   // Functions

@@ -27,11 +27,11 @@ public:
   // Functions
   void                        addDerivedQuantity(CDerivedQuantity *DerivedQuantity);
   CDerivedQuantity*           getDerivedQuantity(string label);
-  void                        clone(CDerivedQuantityManager *Manager);
+  void                        setInitialisationPhase(int newValue) { iInitialisationPhase = newValue; }
   void                        validate();
   void                        build();
   void                        rebuild();
-  void                        execute();
+  void                        calculate(bool isInitialisation);
   virtual                     ~CDerivedQuantityManager();
 
 protected:
@@ -40,6 +40,7 @@ protected:
 
   // Variables
   vector<CDerivedQuantity*>   vDerivedQuantities;
+  int                         iInitialisationPhase;
 
 private:
   static boost::thread_specific_ptr<CDerivedQuantityManager> clInstance;

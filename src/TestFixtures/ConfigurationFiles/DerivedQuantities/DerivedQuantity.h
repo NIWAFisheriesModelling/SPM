@@ -12,6 +12,7 @@
 
 const string derived_quantity =
   "@derived_quantity derived_quantity\n"
+  "type abundance\n"
   "time_step step_one\n"
   "categories immature mature spawning\n"
   "layer double\n"

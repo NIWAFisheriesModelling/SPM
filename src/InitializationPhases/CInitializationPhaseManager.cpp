@@ -101,23 +101,6 @@ int CInitializationPhaseManager::getInitializationPhaseOrderIndex(string label) 
 }
 
 //**********************************************************************
-// void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager)
-// Clone the manager passed in as a parameter
-//**********************************************************************
-void CInitializationPhaseManager::clone(CInitializationPhaseManager *Manager) {
-  try {
-    for (int i = 0; i < (int)Manager->vInitializationPhases.size(); ++i) {
-      CInitializationPhase *pInitializationPhase = Manager->vInitializationPhases[i];
-      vInitializationPhases.push_back(pInitializationPhase->clone());
-    }
-
-  } catch (string &Ex) {
-    Ex = "CInitialisationManager.clone()->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // void CInitializationPhaseManager::validate()
 // Validate our TimeSteps
 //**********************************************************************
@@ -167,7 +150,10 @@ void CInitializationPhaseManager::execute() {
     Phase->execute();
     // Incremenet Place holder
     lastExecutedInitializationPhase++;
-    pDerivedQuantityManager->execute();
+
+    pDerivedQuantityManager->setInitialisationPhase(lastExecutedInitializationPhase);
+    pDerivedQuantityManager->calculate(true);
+
     pReportManager->execute(STATE_INITIALIZATION_MODELLING);
   }
 }

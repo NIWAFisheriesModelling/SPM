@@ -12,8 +12,8 @@
 
 // Local headers
 #include "CInitializationPhase.h"
-#include "../Processes/CProcessManager.h"
-#include "../Processes/CProcess.h"
+#include "../TimeSteps/CTimeStep.h"
+#include "../TimeSteps/CTimeStepManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 
@@ -31,7 +31,7 @@ CInitializationPhase::CInitializationPhase() {
 
   // Register parameters
   pParameterList->registerAllowed(PARAM_YEARS);
-  pParameterList->registerAllowed(PARAM_PROCESSES);
+  pParameterList->registerAllowed(PARAM_TIME_STEPS);
 }
 
 //**********************************************************************
@@ -45,7 +45,7 @@ void CInitializationPhase::validate() {
 
     // Fill our Variables
     iYears  = pParameterList->getInt(PARAM_YEARS);
-    pParameterList->fillVector(vProcessNames, PARAM_PROCESSES);
+    pParameterList->fillVector(vTimeStepNames, PARAM_TIME_STEPS);
 
   } catch(string &Ex) {
     Ex = "CInitializationPhase.validate(" + getLabel() + ")->" + Ex;
@@ -60,8 +60,8 @@ void CInitializationPhase::validate() {
 void CInitializationPhase::build() {
   try {
     // Now Lets Build Our Relationships
-    CProcessManager *pProcessManager = CProcessManager::Instance();
-    pProcessManager->fillVector(vProcesses, vProcessNames);
+    CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
+    pTimeStepManager->fillVector(vTimeStepNames, vTimeSteps);
 
   } catch (string &Ex) {
     Ex = "CInitializationPhase.build(" + getLabel() + ")->" + Ex;
@@ -71,14 +71,13 @@ void CInitializationPhase::build() {
 
 //**********************************************************************
 // void CInitializationPhase::execute()
-//
+// Execute the TimeSteps for this initialisation phase
 //**********************************************************************
 void CInitializationPhase::execute() {
   // Loop Through and Execute
   for (int i = 0; i < iYears; i++) {
-    foreach(CProcess* Process, vProcesses) {
-      Process->execute();
-      pWorld->mergeDifferenceGrid();
+    foreach(CTimeStep *timeStep, vTimeSteps) {
+      timeStep->execute();
     }
   }
 }

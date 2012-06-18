@@ -26,7 +26,6 @@ public:
   // Functions
   static CInitializationPhaseManager* Instance();
   static void                 Destroy();
-  void                        clone(CInitializationPhaseManager *Manager);
   void                        addInitializationPhase(CInitializationPhase *value);
   void                        loadInitializationPhaseOrder(vector<string> &order);
   int                         getInitializationPhaseOrderIndex(string label);

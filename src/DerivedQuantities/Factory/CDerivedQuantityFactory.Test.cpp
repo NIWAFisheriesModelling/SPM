@@ -25,7 +25,7 @@ using namespace std;
 BOOST_AUTO_TEST_CASE(Build_DerivedQuantity) {
 
   CDerivedQuantity *pBasic = 0;
-  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityFactory::buildDerivedQuantity("", false));
+  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityFactory::buildDerivedQuantity(PARAM_ABUNDANCE, false));
   delete pBasic;
 }
 

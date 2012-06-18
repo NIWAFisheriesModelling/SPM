@@ -37,9 +37,8 @@ public:
 
   // Functions
   void                        addTimeStep(CTimeStep *value);
-//  int                         getTimeStepCount() { return (int) vTimeSteps.size(); }
-//  CTimeStep*                  getTimeStep(int index);
-  void                        loadTimeStepOrder(vector<string> &order);
+  void                        fillVector(vector<string> &labels, vector<CTimeStep*> &result);
+  void                        setTimeStepOrder(vector<string> &order);
   int                         getTimeStepOrderIndex(string label);
   string                      getFirstTimeStepLabel();
   int                         getCurrentYear() {return iCurrentYear;}
@@ -47,6 +46,7 @@ public:
   void                        clone(CTimeStepManager *Manager);
   void                        validate();
   void                        build();
+  void                        executeInitialisation();
   void                        execute();
   virtual                     ~CTimeStepManager();
 
@@ -61,8 +61,8 @@ protected:
   int                         iCurrentTimeStep;
   CObservationManager         *pObservationManager;
   CReportManager              *pReporterManager;
+  vector<CTimeStep*>          vMasterTimeStepList;
   vector<CTimeStep*>          vTimeSteps;
-  vector<CTimeStep*>          vTimeStepsOrder;
   CDerivedQuantityManager     *pDerivedQuantityManager;
 
 private:

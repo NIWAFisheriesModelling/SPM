@@ -25,17 +25,8 @@ using namespace std;
 BOOST_AUTO_TEST_CASE( Build_Estimate ) {
   // See if we got a Valid Estimate
   CEstimate *pBasic = 0;
-  BOOST_REQUIRE_NO_THROW(pBasic = CEstimateFactory::buildEstimate("", false));
+  BOOST_REQUIRE_NO_THROW(pBasic = CEstimateFactory::buildEstimate(false));
   delete pBasic;
-}
-
-//**********************************************************************
-//
-//
-//**********************************************************************
-BOOST_AUTO_TEST_CASE( Build_Estimate_PARAM_INVALID ) {
-  // Try to Build Invalid Estimate
-  BOOST_REQUIRE_THROW(CEstimateFactory::buildEstimate(PARAM_ZERO, false), string);
 }
 
 #endif

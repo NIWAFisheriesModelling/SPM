@@ -44,7 +44,6 @@ public:
   int                        getEstimateValueCount();
   void                       loadEstimateValues(int index);
   void                       setCurrentPhase(int phase);
-  void                       clone(CEstimateManager *Manager);
   void                       validate();
   void                       build();
   virtual                    ~CEstimateManager();

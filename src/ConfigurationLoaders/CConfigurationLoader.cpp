@@ -141,7 +141,7 @@ void CConfigurationLoader::processSection() {
     else if (sSection == PARAM_DERIVED_QUANTITY)
       pBaseObject = CDerivedQuantityFactory::buildDerivedQuantity(sType);
     else if (sSection == PARAM_ESTIMATE)
-      pBaseObject = CEstimateFactory::buildEstimate(sType);
+      pBaseObject = CEstimateFactory::buildEstimate();
     else if (sSection == PARAM_INITIALIZATION_PHASE)
       pBaseObject = CInitializationPhaseFactory::buildInitializationPhase(sType);
     else if (sSection == PARAM_LAYER)

@@ -13,23 +13,24 @@
 #include <string>
 
 // Local Includes
-#include "CDerivedQuantityManager.h"
-#include "CDerivedQuantity.h"
-#include "../Helpers/CComparer.h"
-#include "../TestFixtures/C1x1_Fixture.h"
-#include "../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
-#include "../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
-#include "../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
-#include "../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
-#include "../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
-#include "../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
-#include "../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
+#include "CAbundanceDerivedQuantity.h"
+#include "../CDerivedQuantityManager.h"
+#include "../CDerivedQuantity.h"
+#include "../../Helpers/CComparer.h"
+#include "../../TestFixtures/C1x1_Fixture.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
+#include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
+#include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
+#include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
+#include "../../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
+#include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Derived_Quantity, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE( Abundance_Derived_Quantity, C1x1_Fixture ) {
 
   // Add What we need to configuration
   // Then run our model
@@ -49,6 +50,7 @@ BOOST_FIXTURE_TEST_CASE( Derived_Quantity, C1x1_Fixture ) {
   CWorldSquare            *pSquare      = getSquare();
 
   // Check Results
+  BOOST_CHECK_EQUAL(15, pQuantity->getValuesSize());
   BOOST_CHECK_EQUAL(pSquare->getAbundance(), pQuantity->getValue(0));
   BOOST_CHECK_EQUAL(pQuantity->getValue(1), 1400.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(2), 1300.0);

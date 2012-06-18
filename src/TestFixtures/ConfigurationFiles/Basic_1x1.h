@@ -24,7 +24,7 @@ const string basic_1x1 =
   "current_year 2008\n"
   "final_year 2108\n"
   "cell_length 1\n"
-  "initialisation_phases Phase1 Phase2\n"
+  //"initialisation_phases Phase1 Phase2\n"
   "time_steps step_one\n"
   "@layer base\n"
   "type numeric\n"

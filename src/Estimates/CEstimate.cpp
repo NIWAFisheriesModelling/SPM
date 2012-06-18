@@ -48,6 +48,15 @@ void CEstimate::addValue(double value) {
   vValueList.push_back(value);
 }
 
+
+//**********************************************************************
+// void CEstimateInfo::fillSameVector(vector<string> &sames)
+// Fill a Vector with our "Same" parameters
+//**********************************************************************
+void CEstimate::fillSameVector(vector<string> &sames) {
+  sames.assign(vSameList.begin(), vSameList.end());
+}
+
 //**********************************************************************
 // void CEstimate::setValue(double value)
 // Set Value of our Target
@@ -136,17 +145,7 @@ void CEstimate::loadValue(int index) {
   }
 }
 
-//**********************************************************************
-// void CEstimate::fillSameVector(vector<string> &sames)
-// Fill a Vector with our "Same" parameters
-//**********************************************************************
-void CEstimate::fillSameVector(vector<string> &sames) {
-  sames.clear();
 
-  foreach(string Same, vSameList) {
-    sames.push_back(Same);
-  }
-}
 
 //**********************************************************************
 // void CEstimate::validate()

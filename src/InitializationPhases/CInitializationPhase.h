@@ -13,7 +13,7 @@
 #include "../BaseClasses/CBaseExecute.h"
 
 // Classes
-class CProcess;
+class CTimeStep;
 
 //**********************************************************************
 //
@@ -23,15 +23,14 @@ class CInitializationPhase : public CBaseExecute {
 public:
   CInitializationPhase();
   virtual                     ~CInitializationPhase();
-  CInitializationPhase*       clone() { return (new CInitializationPhase(*this)); }
   void                        validate();
   void                        build();
   void                        execute();
 
 protected:
   int                         iYears;
-  vector<string>              vProcessNames;
-  vector<CProcess*>           vProcesses;
+  vector<string>              vTimeStepNames;
+  vector<CTimeStep*>          vTimeSteps;
 };
 
 #endif /* CINITIALIZATIONPHASE_H_ */

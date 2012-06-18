@@ -11,6 +11,7 @@
 #include "CDerivedQuantityFactory.h"
 #include "../CDerivedQuantityManager.h"
 #include "../../Helpers/CError.h"
+#include "../Children/CAbundanceDerivedQuantity.h"
 
 //**********************************************************************
 // CDerivedQuantity* CDerivedQuantityFactory::buildDerivedQuantity(string type, bool registerWithManager)
@@ -20,8 +21,8 @@ CDerivedQuantity* CDerivedQuantityFactory::buildDerivedQuantity(string type, boo
 
   CDerivedQuantity *pQuantity = 0;
 
-  if (type == "")
-    pQuantity = new CDerivedQuantity();
+  if (type == PARAM_ABUNDANCE)
+    pQuantity = new CAbundanceDerivedQuantity();
   else
     CError::errorUnknown(PARAM_DERIVED_QUANTITY, type);
 

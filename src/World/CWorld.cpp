@@ -151,7 +151,7 @@ void CWorld::build() {
   try {
     // Load TimeStep Order
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
-    pTimeStepManager->loadTimeStepOrder(vTimeSteps);
+    pTimeStepManager->setTimeStepOrder(vTimeSteps);
 
     // Load Initialization Phase Order
     CInitializationPhaseManager *pInitialManager = CInitializationPhaseManager::Instance();

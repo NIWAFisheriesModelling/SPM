@@ -23,7 +23,7 @@ class CEstimate : public CBaseBuild {
 public:
 	CEstimate();
 	virtual                    ~CEstimate();
-	CEstimate*                 clone() { return new CEstimate(*this); }
+	void                        fillSameVector(vector<string> &sames);
 	string                     getParameter() { return sParameter; }
 	double                     getLowerBound() { return dLowerBound; }
 	double                     getUpperBound() { return dUpperBound; }
@@ -37,7 +37,6 @@ public:
   int                        getValueCount() { return (int)vValueList.size(); }
   void                       loadValue(int index);
   double                     getPriorScore();
-  void                       fillSameVector(vector<string> &sames);
   void                       validate();
 	void                       build();
 

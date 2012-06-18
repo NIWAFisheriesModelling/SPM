@@ -305,6 +305,7 @@
 #define PARAM_ROW_INDEX                           "row_index"
 #define PARAM_RUN_MODE                            "run_mode"
 #define PARAM_SAME                                "same"
+#define PARAM_SAMPLE                              "sample"
 #define PARAM_SCORES_INDEX                        "scores_index"
 #define PARAM_SCHNUTE                             "schnute"
 #define PARAM_SECTION                             "command"

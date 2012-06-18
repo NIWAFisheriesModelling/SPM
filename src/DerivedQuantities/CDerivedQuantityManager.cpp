@@ -7,11 +7,17 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local Headers
+// Headers
+#include <iostream>
+
 #include "CDerivedQuantityManager.h"
 #include "CDerivedQuantity.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 // Singleton Variable
 boost::thread_specific_ptr<CDerivedQuantityManager> CDerivedQuantityManager::clInstance;
@@ -44,22 +50,6 @@ void CDerivedQuantityManager::Destroy() {
 }
 
 //**********************************************************************
-// void CDerivedQuantityManager::clone(CDerivedQuantityManager *Manager)
-// Clone our Derived Quantities
-//**********************************************************************
-void CDerivedQuantityManager::clone(CDerivedQuantityManager *Manager) {
-  try {
-    foreach(CDerivedQuantity *Quantity, vDerivedQuantities) {
-      vDerivedQuantities.push_back(Quantity->clone());
-    }
-
-  } catch (string &Ex) {
-    Ex = "CDerivedQuantityManager.clone()->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // void CDerivedQuantityManager::addDerivedQuantity(CDerivedQuantity *DerivedQuantity)
 // Add Derived Quantity to our list
 //**********************************************************************
@@ -73,7 +63,6 @@ void CDerivedQuantityManager::addDerivedQuantity(CDerivedQuantity *DerivedQuanti
 //**********************************************************************
 CDerivedQuantity* CDerivedQuantityManager::getDerivedQuantity(string label) {
   try {
-
     foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
       if (DerivedQuantity->getLabel() == label)
         return DerivedQuantity;
@@ -145,10 +134,17 @@ void CDerivedQuantityManager::rebuild() {
 // void CDerivedQuantityManager::execute()
 // Execute Derived Quantities
 //**********************************************************************
-void CDerivedQuantityManager::execute() {
+void CDerivedQuantityManager::calculate(bool isInitialisation) {
 
-  foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
-    DerivedQuantity->execute();
+  if (isInitialisation) {
+    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+      DerivedQuantity->calculate(iInitialisationPhase);
+    }
+
+  } else {
+    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+      DerivedQuantity->calculate();
+    }
   }
 }
 

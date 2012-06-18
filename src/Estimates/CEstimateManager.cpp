@@ -245,25 +245,6 @@ void CEstimateManager::loadEstimateValues(int index) {
 }
 
 //**********************************************************************
-// void CEstimateManager::clone(CEstimateManager *Manager)
-// Clone the Estimate Manager for a new Thread
-//**********************************************************************
-void CEstimateManager::clone(CEstimateManager *Manager) {
-  try {
-
-    // Copy from Manager into out vector
-    for (int i = 0; i < Manager->getEstimateCount(); ++i) {
-      CEstimate *pEstimate = Manager->getEstimate(i);
-      vEstimateList.push_back(pEstimate->clone());
-    }
-
-  } catch (string &Ex) {
-    Ex = "CEstimateManager.clone()->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // void CEstimateManager::setCurrentPhase(int phase)
 // This method will enable all estimates that have estimate_phase = phase
 //**********************************************************************

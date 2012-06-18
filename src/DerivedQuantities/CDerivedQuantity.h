@@ -12,41 +12,30 @@
 // Local headers
 #include "../BaseClasses/CBaseExecute.h"
 
-// Forward Declarations
-class CNumericLayer;
-class CSelectivity;
-class CTimeStepManager;
-class CCompleteWorldView;
-
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CDerivedQuantity : public CBaseExecute {
+class CDerivedQuantity : public CBaseBuild {
 public:
   // Functions
   CDerivedQuantity();
   virtual                     ~CDerivedQuantity();
-  CDerivedQuantity*           clone() { return new CDerivedQuantity(*this); }
-  double                      getValue(int offset = 0);
-  double                      getFirstValue();
-  void                        validate();
-  void                        build();
-  void                        rebuild();
-  void                        execute();
+  double                      getValue(int offset);
+  void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
+  int                         getValuesSize() { return vValues.size(); }
+  virtual void                calculate() = 0;
+  virtual void                calculate(int initialisationPhase) = 0;
+  void                        rebuild() {
+    iCurrentInitialisationPhase = 0;
+    vvInitialisationValues.clear();
+    vValues.clear();
+  }
 
 protected:
-  // Variables
-  CTimeStepManager            *pTimeStepManager;
-  string                      sTimeStep;
-  int                         iTimeStep;
-  vector<string>              vCategoryNames;
-  vector<int>                 vCategories;
-  string                      sLayer;
-  CNumericLayer               *pLayer;
-  vector<string>              vSelectivityNames;
-  vector<CSelectivity*>       vSelectivities;
-  CCompleteWorldView          *pWorldView;
+  // Members
+  int                         iCurrentInitialisationPhase;
+  vector<vector<double> >     vvInitialisationValues;
   vector<double>              vValues;
 
 };

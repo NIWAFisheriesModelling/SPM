@@ -46,7 +46,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_NoEstimateValues, C1x1_Fixture ) {
   addToConfiguration(logistic_producing);
   addToConfiguration(basic_estimation);
   addToTimeStep("ageing constant_recruitment category_transition_rate annual_mortality_rate");
-  BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
+  loadAndRunEnvironment();
 
   // Check our Results
   CWorldSquare *pSquare = getSquare();
@@ -112,7 +112,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValues, C1x1_Fixture ) {
   addToTimeStep("ageing constant_recruitment category_transition_rate annual_mortality_rate");
   string estimateValues = "process[category_transition_rate].proportions(1)\n0.3\n0.4\n0.7";
   addToEstimateValueConfiguation(estimateValues);
-  BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
+  loadAndRunEnvironment();
 
   // Check our Results - Configuration
   CConfiguration *pConfig = CConfiguration::Instance();
@@ -197,7 +197,7 @@ BOOST_FIXTURE_TEST_CASE( ConfigurationLoader_EstimateValuesx5, C1x1_Fixture ) {
   addToTimeStep("ageing constant_recruitment category_transition_rate annual_mortality_rate");
   string estimateValues = "process[category_transition_rate].proportions(1)\n0.3\n0.4\n0.7\n0.2\n0.5";
   addToEstimateValueConfiguation(estimateValues);
-  BOOST_REQUIRE_NO_THROW(loadAndRunEnvironment());
+  loadAndRunEnvironment();
 
   // Check our Results - Configuration
   CConfiguration *pConfig = CConfiguration::Instance();
