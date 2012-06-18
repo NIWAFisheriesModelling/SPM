@@ -109,7 +109,7 @@ The arguments for a subcommand are either\index{Subcommand argument type},
 \item \textbf{switch} true/false 
 \item \textbf{integer} an integer number
 \item \textbf{integer vector} a vector of integer numbers
-\item \textbf{integer range} a range of integer numbers separated by - and/or spaces (for example 1994-1996 2000 is expanded to an integer vector of values 1994 1995 1996 2000)
+\item \textbf{integer range} a range of integer numbers separated by a hyphem (-), for example 1994-1996 2000 is expanded to an integer vector of values 1994 1995 1996 2000). 
 \item \textbf{constant} a real number (i.e., double)
 \item \textbf{constant vector} a vector of real numbers (i.e., vector of doubles)
 \item \textbf{estimable} a real number that can be estimated (i.e., estimable double)
@@ -148,6 +148,8 @@ Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between
 There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). Note, however, that the \command{include} is the only exception to this rule. See Section \ref{sec:general-syntax})\index{Command ! Include files} for details of the use of \command{include}. 
 
 Note that in the \config, commands, sub-commands, and arguments are not case sensitive. However, labels and variable values are case sensitive. Also note that if you are on a Linux system then external calls to files are case sensitive (i.e., when using \command{include} \subcommand{\emph{file}}, the argument \subcommand{\emph{file}} will be case sensitive). 
+
+Characters used in labels must be alphanumeric and can include underscores (\_). Other characters will result in an error.
 
 \subsubsection{Commenting out lines}\index{Comments}\index{Commenting \config}
 
