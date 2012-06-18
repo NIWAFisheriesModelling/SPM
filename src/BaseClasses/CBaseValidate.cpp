@@ -39,7 +39,6 @@ void CBaseValidate::validate() {
 
     // Check label is alphanumeric (incl. '_')
     for (size_t i=0; i < sLabel.length(); ++i) {
-      std::cerr << sLabel.at(i) << "\n";
       if ( !(isalnum(sLabel.at(i)) || sLabel.at(i)== boost::lexical_cast<char>("_")) )
         CError::errorInvalidCharacter(boost::lexical_cast<string>(sLabel.at(i)),sLabel);
     }
