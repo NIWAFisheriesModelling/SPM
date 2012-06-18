@@ -246,6 +246,6 @@ void CError::errorSumGreaterThan(string val1, string val2, string less) {
 // A + B is less than more
 //**********************************************************************
 void CError::errorInvalidCharacter(string val1, string val2) {
-  string sException = ERROR_INVALID_CHAR + val1 + string(" in ") + val2 ;
+  string sException = ERROR_INVALID_CHAR + string("'") + val1 + string("' in ") + val2 ;
   throw sException;
 }

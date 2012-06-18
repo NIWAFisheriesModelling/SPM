@@ -11,6 +11,7 @@
 #include "../../Layers/String/CStringLayer.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CError.h"
+#include "../../Helpers/DefinedValues.h"
 #include "../CWorldSquare.h"
 
 //**********************************************************************
@@ -21,7 +22,7 @@ CLayerDerivedWorldView::CLayerDerivedWorldView(CStringLayer *sourceLayer) {
   // Variables
   pSourceLayer = sourceLayer;
 
-  pParameterList->addParameter(PARAM_LABEL, PARAM_ZERO);
+  pParameterList->addParameter(PARAM_LABEL, "0");
 }
 
 //**********************************************************************
