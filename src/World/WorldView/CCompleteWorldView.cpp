@@ -21,7 +21,7 @@ CCompleteWorldView::CCompleteWorldView() {
   pWorldSquare = 0;
 
   // Add Default Label
-  pParameterList->addParameter(PARAM_LABEL, PARAM_ZERO);
+  pParameterList->addParameter(PARAM_LABEL, "0");
 }
 
 //**********************************************************************
