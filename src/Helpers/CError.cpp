@@ -240,3 +240,12 @@ void CError::errorSumGreaterThan(string val1, string val2, string less) {
   sException += less;
   throw sException;
 }
+
+//**********************************************************************
+// void CError::errorInvalidCharacter(string val1, char val2)
+// A + B is less than more
+//**********************************************************************
+void CError::errorInvalidCharacter(string val1, string val2) {
+  string sException = ERROR_INVALID_CHAR + val1 + string(" in ") + val2 ;
+  throw sException;
+}

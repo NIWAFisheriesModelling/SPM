@@ -45,7 +45,8 @@ public:
   static void           errorElementLessThan(string type, int lessIndex, int moreIndex);
   static void           errorSumGreaterThanEqualTo(string val1, string val2, string less);
   static void           errorSumGreaterThan(string val1, string val2, string less);
-  // Functions
+  static void           errorInvalidCharacter(string val1, string val2);
+// Functions
   CError() { }
   virtual ~CError() { }
 };

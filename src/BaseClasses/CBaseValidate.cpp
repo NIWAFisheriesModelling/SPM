@@ -7,8 +7,12 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global headers
+#include <boost/lexical_cast.hpp>
+
 // Local headers
 #include "CBaseValidate.h"
+#include "../Helpers/CError.h"
 
 //**********************************************************************
 // CBaseValidate::CBaseValidate()
@@ -32,6 +36,13 @@ void CBaseValidate::validate() {
   try {
     // Populate our variable
     sLabel  = pParameterList->getString(PARAM_LABEL);
+
+    // Check label is alphanumeric (incl. '_')
+    for (size_t i=0; i < sLabel.length(); ++i) {
+      std::cerr << sLabel.at(i) << "\n";
+      if ( !(isalnum(sLabel.at(i)) || sLabel.at(i)== boost::lexical_cast<char>("_")) )
+        CError::errorInvalidCharacter(boost::lexical_cast<string>(sLabel.at(i)),sLabel);
+    }
 
     // Validate known parameters against bad ones
     pParameterList->checkInvalidParameters();

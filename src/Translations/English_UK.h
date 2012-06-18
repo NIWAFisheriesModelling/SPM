@@ -41,6 +41,7 @@
 #define ERROR_ENABLED_ESTIMATES             "No enabled estimates to use"
 #define ERROR_EQUAL_PROPORTION_ONE          " proportions do not sum to 1.0: "
 #define ERROR_FORMAT_PARAMETER              "Invalid format, please use  type[label].variable"
+#define ERROR_INVALID_CHAR                  "Invalid character value: "
 #define ERROR_INVALID_FILE_NAME             "Invalid file name: "
 #define ERROR_INVALID_FORMAT                "Invalid format: "
 #define ERROR_INVALID_IDX                   "Invalid index: "
