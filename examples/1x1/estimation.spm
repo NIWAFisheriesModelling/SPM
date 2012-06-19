@@ -17,8 +17,8 @@ covariance false
 
 @mcmc
 start 1
-length 1500000
-keep 1000
+length 10
+keep 2
 adaptive_stepsize True
 adapt_at 100000 200000 400000
 proposal_t True

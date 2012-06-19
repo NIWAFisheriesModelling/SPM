@@ -18,22 +18,22 @@ population_size 250
 @mcmc MH
 minimiser GammaDiff
 type metropolis_hastings
-length 1500000
-keep 1000
+length 10
+keep 2
 start 1
-adaptive_stepsize True
-adapt_at 100000 200000 400000
+#adaptive_stepsize True
+#adapt_at 100000 200000 400000
 #burn_in 500
 proposal_t True
 df 4
 #stepsize 0.01
 
 # ESTIMATION PROFILING
-#@profile R0
-#parameter process[Recruitment].r0
-#n  10
-#lower_bound  1e5
-#upper_bound  1e8
+@profile R0
+parameter process[Recruitment].r0
+steps 10
+lower_bound  1e5
+upper_bound  1e8
 
 # ESTIMATION
 @estimate

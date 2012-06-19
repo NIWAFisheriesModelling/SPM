@@ -9,7 +9,7 @@ initialisation_phase Phase2
 @report state-1
 type partition
 time_step step_one
-years 1994-2007
+years 1994 #-2007
 
 @report state-2
 type partition

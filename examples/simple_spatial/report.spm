@@ -64,15 +64,18 @@ file_name MPD.dat
 
 @report Abundance
 type layer
-year 2000
+years 2000
 time_step one
 layer Abundance
 
 @report Abundance-density
 type layer
-year 2000
+years 1995-2000
 time_step one
 layer Abundance-density
 
 @include "simulation_reports.spm"
 
+@report recruitment
+type process
+process Recruitment
