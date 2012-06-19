@@ -24,7 +24,7 @@ y1 1
 y2 100
 tau1 1
 tau2 50
-a 0
+a 1
 b 1
 cv 0.10
 
@@ -98,6 +98,6 @@ selectivities One
 @report Objective_Score
 type objective_function
 
-@report age-size
+@report age_size
 type age_size
 age_size schnute
