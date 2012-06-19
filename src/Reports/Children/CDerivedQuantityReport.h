@@ -12,6 +12,9 @@
 // Local headers
 #include "Base/CFileReport.h"
 
+// Forward-Declaration
+class CDerivedQuantity;
+
 //**********************************************************************
 //
 //
@@ -21,7 +24,13 @@ public:
   CDerivedQuantityReport();
   virtual                     ~CDerivedQuantityReport();
   CReport*                    clone() { return new CDerivedQuantityReport(*this); }
+  void                        validate();
+  void                        build();
   void                        execute();
+
+protected:
+  string                      sDerivedQuantity;
+  CDerivedQuantity            *pDerivedQuantity;
 };
 
 #endif /* CDERIVEDQUANTITYREPORT_H_ */
