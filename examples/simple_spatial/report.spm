@@ -34,9 +34,9 @@ type partition
 time_step two
 years 1995-2007
 
-#@report SSB
-#type derived_quantity
-#derived_quantity SSB
+@report SSB
+type derived_quantity
+derived_quantity SSB
 
 @report estimate-summary
 type estimate_summary
