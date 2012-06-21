@@ -16,6 +16,7 @@
 #include "../TimeSteps/CTimeStepManager.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "../DerivedQuantities/CDerivedQuantityManager.h"
 
 // Using
 using std::cout;
@@ -74,11 +75,15 @@ void CInitializationPhase::build() {
 // Execute the TimeSteps for this initialisation phase
 //**********************************************************************
 void CInitializationPhase::execute() {
+  CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
+
   // Loop Through and Execute
   for (int i = 0; i < iYears; i++) {
     foreach(CTimeStep *timeStep, vTimeSteps) {
       timeStep->execute();
     }
+
+    pDerivedQuantityManager->calculate(true);
   }
 }
 

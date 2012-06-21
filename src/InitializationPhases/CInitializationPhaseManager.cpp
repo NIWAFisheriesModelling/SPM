@@ -147,12 +147,12 @@ void CInitializationPhaseManager::execute() {
   lastExecutedInitializationPhase = -1;
 
   foreach(CInitializationPhase *Phase, vInitializationPhaseOrder) {
-    Phase->execute();
-    // Incremenet Place holder
+     // Incremenet Place holder
     lastExecutedInitializationPhase++;
 
     pDerivedQuantityManager->setInitialisationPhase(lastExecutedInitializationPhase);
-    pDerivedQuantityManager->calculate(true);
+
+    Phase->execute();
 
     pReportManager->execute(STATE_INITIALIZATION_MODELLING);
   }
