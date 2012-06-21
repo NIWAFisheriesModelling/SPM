@@ -41,6 +41,14 @@ processes Recruitment Maturation halfM Fishing halfM
 @time_step step_two
 processes Ageing
 
+# Derived quantities
+@derived_quantity SSB
+type abundance
+time_step step_one
+categories mature
+selectivities One
+layer Base
+
 # Population processes
 @process Ageing
 type ageing

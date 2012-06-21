@@ -58,4 +58,8 @@ time_step step_one
 type layer
 layer Fishing_2005
 
+@report SSB
+type derived_quantity
+derived_quantity SSB
+
 @include "simulation-reports.spm"
