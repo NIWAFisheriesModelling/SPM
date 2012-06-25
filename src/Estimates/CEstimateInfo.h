@@ -18,19 +18,22 @@
 //
 //
 //**********************************************************************
-class CEstimateInfo : public CBaseBuild {
+class CEstimateInfo : public CBaseObject {
 public:
   // Methods
   CEstimateInfo();
   virtual                     ~CEstimateInfo();
   string                      getTargetParameter() { return ""; }
   void                        fillSameVector(vector<string> &sames);
-  void                        validate();
-  void                        build();
+  void                        generateEstimates();
 
 private:
   // Members
   vector<string>              vSameList;
+  string                      sObjectType;
+  string                      sObjectLabel;
+  string                      sObjectParameter;
+  int                         iObjectIndex;
 };
 
 #endif /* CESTIMATEINFO_H_ */

@@ -29,7 +29,7 @@ class CEstimateFactory {
 public:
   // Functions
   static CEstimate*           buildEstimate(bool registerWithManager = true);
-//  static CEstimateInfo*       buildEstimateInfo(bool registerWithManager = true);
+  static CEstimateInfo*       buildEstimateInfo(bool registerWithManager = true);
 
 private:
   // Functions

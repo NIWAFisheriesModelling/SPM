@@ -58,7 +58,6 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CAgeSizeManager::Instance());
   vManagers.push_back(CCatchabilityManager::Instance());
   vManagers.push_back(CDerivedQuantityManager::Instance());
-  vManagers.push_back(CEstimateManager::Instance());
   vManagers.push_back(CInitializationPhaseManager::Instance());
   vManagers.push_back(CLayerManager::Instance());
   vManagers.push_back(CMinimizerManager::Instance());
@@ -71,6 +70,16 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CReportManager::Instance());
   vManagers.push_back(CSelectivityManager::Instance());
   vManagers.push_back(CTimeStepManager::Instance());
+
+  /**
+   * EstimateManager goes last, because we want it to be validated
+   * after everything else. As part of the validation the EstimateManager
+   * will look for estimables, if they don't exist the system out error.
+   *
+   * All estimables must exist by the end of each Manager's validate
+   * phase.
+   */
+  vManagers.push_back(CEstimateManager::Instance());
 
   // Variables
   bWaiting            = false;

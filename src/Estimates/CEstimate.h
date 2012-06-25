@@ -37,6 +37,7 @@ public:
   int                        getValueCount() { return (int)vValueList.size(); }
   void                       loadValue(int index);
   double                     getPriorScore();
+  void                       setTarget(double *newTarget) { pTarget = newTarget; }
   void                       validate();
 	void                       build();
 

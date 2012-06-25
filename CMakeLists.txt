@@ -20,9 +20,8 @@ SET(OPTI_NAME spm)
 #   Boost header files are located in C:/Progra~2/MinGW/include/boost/
 
 IF (WIN32)
-# SET(BOOST_LIBS "D:/Programming/boost/boost_1_48_0/boost_1_48_0/stage/lib")
-  SET(BOOST_LIBS "C:/Progra~1/boost/boost_1_48_0/stage/lib")
-  SET(LINK_OPTIONS "-L ${BOOST_LIBS} -static icon.o")
+  SET(BOOST_LIBS "-L C:/Progra~1/boost/boost_1_48_0/stage/lib -L D:/Programming/boost/boost_1_48_0/boost_1_48_0/stage/lib")
+  SET(LINK_OPTIONS "${BOOST_LIBS} -static icon.o")
   SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0")
   SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0")
@@ -96,9 +95,12 @@ src/ConfigurationLoaders/CConfigurationLoader.cpp
 src/CRuntimeController.cpp
 src/DerivedQuantities/CDerivedQuantity.cpp
 src/DerivedQuantities/CDerivedQuantityManager.cpp
+src/DerivedQuantities/Children/CAbundanceDerivedQuantity.cpp
+src/DerivedQuantities/Children/CTestDerivedQuantity.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.cpp
 src/Distributions/CNormalDistribution.cpp
 src/Estimates/CEstimate.cpp
+src/Estimates/CEstimateInfo.cpp
 src/Estimates/CEstimateManager.cpp
 src/Estimates/Factory/CEstimateFactory.cpp
 src/Helpers/CComparer.cpp
@@ -140,6 +142,7 @@ src/Minimizers/GammaDiff/CGammaDiff.cpp
 src/Minimizers/GammaDiff/CGammaDiffCallback.cpp
 src/Minimizers/GammaDiff/Engine/FMM.cpp
 src/Minimizers/GammaDiff/Engine/GammaDiffEngine.cpp
+src/ObjectFinder/CObjectFinder.cpp
 src/ObjectiveFunction/CObjectiveFunction.cpp
 src/Observations/Children/CAbundanceObservation.cpp
 src/Observations/Children/CBiomassObservation.cpp
@@ -148,7 +151,6 @@ src/Observations/Children/CProportionsByCategoryObservation.cpp
 src/Observations/CObservation.cpp
 src/Observations/CObservationManager.cpp
 src/Observations/Factory/CObservationFactory.cpp
-src/ParameterParser/CParamParser.cpp
 src/Penalties/CPenalty.cpp
 src/Penalties/CPenaltyManager.cpp
 src/Penalties/Factory/CPenaltyFactory.cpp
@@ -252,7 +254,8 @@ ADD_EXECUTABLE(${TEST_NAME}
 src/Catchabilities/CCatchability.Test.cpp
 src/Catchabilities/Factory/CCatchabilityFactory.Test.cpp
 src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
-src/DerivedQuantities/CDerivedQuantity.Test.cpp
+src/DerivedQuantities/Children/CAbundanceDerivedQuantity.Test.cpp
+src/DerivedQuantities/Children/CTestDerivedQuantity.Test.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.Test.cpp
 src/Estimates/Factory/CEstimateFactory.Test.cpp
 src/InitializationPhases/Factory/CInitializationPhaseFactory.Test.cpp

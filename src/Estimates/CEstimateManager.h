@@ -22,6 +22,7 @@
 
 // Classes
 class CEstimate;
+class CEstimateInfo;
 
 //**********************************************************************
 //
@@ -33,6 +34,7 @@ public:
   static void               Destroy();
 
   // Functions
+  void                       addEstimateInfo(CEstimateInfo *info);
   void                       addEstimate(CEstimate *Estimate);
   void                       fillVector(vector<CEstimate*> &list);
   int                        getEstimateCount() { return vEstimateList.size(); }
@@ -53,7 +55,9 @@ protected:
   CEstimateManager();
 
 	// Variables
+  vector<CEstimateInfo*>       vEstimateInfoList;
 	vector<CEstimate*>           vEstimateList;
+	map<string, vector<double> > mvEstimateValues;
 
 private:
   static boost::thread_specific_ptr<CEstimateManager> clInstance;

@@ -11,12 +11,12 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CEstimate.h"
-#include "../ParameterParser/CParamParser.h"
 #include "../Priors/CPriorManager.h"
 #include "../Priors/CPrior.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CConvertor.h"
+#include "../ObjectFinder/CObjectFinder.h"
 
 //**********************************************************************
 // CEstimate::CEstimate()
@@ -27,17 +27,6 @@ CEstimate::CEstimate() {
   pPrior    = 0;
   pTarget   = 0;
   bEnabled  = true;
-
-  // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_PARAMETER);
-  pParameterList->registerAllowed(PARAM_LOWER_BOUND);
-  pParameterList->registerAllowed(PARAM_UPPER_BOUND);
-  pParameterList->registerAllowed(PARAM_PRIOR);
-  pParameterList->registerAllowed(PARAM_SAME);
-  pParameterList->registerAllowed(PARAM_ESTIMATION_PHASE);
-
-  // Add Default
-  pParameterList->addParameter(PARAM_LABEL, "Estimate");
 }
 
 //**********************************************************************
@@ -189,10 +178,6 @@ void CEstimate::validate() {
 //**********************************************************************
 void CEstimate::build() {
   try {
-    // Build Our Estimate Target
-    CParamParser clParser = CParamParser();
-    pTarget = clParser.parseCommand(sParameter);
-
     // Build our Prior Target
     if (sPrior != "") {
       CPriorManager *pPriorManager = CPriorManager::Instance();
@@ -202,7 +187,8 @@ void CEstimate::build() {
     // Populate Same Index
     vSameIndex.clear();
     foreach(string Same, vSameList) {
-      vSameIndex.push_back(clParser.parseCommand(Same));
+      double *target = CObjectFinder::getObjectEstimable(Same);
+      vSameIndex.push_back(target);
     }
 
   } catch (string &Ex) {

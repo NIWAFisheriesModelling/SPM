@@ -7,7 +7,20 @@
 //============================================================================
 
 // Headers
+#include <iostream>
+#include <iomanip>
+#include <boost/lexical_cast.hpp>
+
 #include "CEstimateInfo.h"
+#include "CEstimate.h"
+#include "Factory/CEstimateFactory.h"
+#include "../ObjectFinder/CObjectFinder.h"
+#include "../Helpers/CError.h"
+#include "../Helpers/CConvertor.h"
+
+// Using
+using std::cout;
+using std::endl;
 
 //**********************************************************************
 // CEstimateInfo::CEstimateInfo()
@@ -15,6 +28,20 @@
 //**********************************************************************
 CEstimateInfo::CEstimateInfo() {
 
+  // Add default parameters to be passed to any CEstimate objects
+  // we create from here.
+
+  // Register user allowed parameters
+  pParameterList->registerAllowed(PARAM_LABEL);
+  pParameterList->registerAllowed(PARAM_PARAMETER);
+  pParameterList->registerAllowed(PARAM_LOWER_BOUND);
+  pParameterList->registerAllowed(PARAM_UPPER_BOUND);
+  pParameterList->registerAllowed(PARAM_PRIOR);
+  pParameterList->registerAllowed(PARAM_SAME);
+  pParameterList->registerAllowed(PARAM_ESTIMATION_PHASE);
+
+  // Add Default
+  pParameterList->addParameter(PARAM_LABEL, "Estimate");
 }
 
 //**********************************************************************
@@ -33,45 +60,48 @@ void CEstimateInfo::fillSameVector(vector<string> &sames) {
 }
 
 //**********************************************************************
-// void CEstimateInfo::validate()
-// Validate the parameters loaded by the configuration file
+// void CEstimateInfo::generateEstimates()
+// Generate all of our estimates
 //**********************************************************************
-void CEstimateInfo::validate() {
+void CEstimateInfo::generateEstimates() {
   try {
-//    // Base
-//    CBaseBuild::validate();
-//
-//    // Populate our Variables
-//    sParameter        = pParameterList->getString(PARAM_PARAMETER);
-//    dLowerBound       = pParameterList->getDouble(PARAM_LOWER_BOUND);
-//    dUpperBound       = pParameterList->getDouble(PARAM_UPPER_BOUND);
-//    sPrior            = pParameterList->getString(PARAM_PRIOR, true, "");
-//    iEstimationPhase  = pParameterList->getInt(PARAM_ESTIMATION_PHASE, true, 1);
-//
-//    pParameterList->fillVector(vSameList, PARAM_SAME, true);
-//
-//    // Validate
-//    if (dUpperBound < dLowerBound)
-//      CError::errorLessThan(PARAM_UPPER_BOUND, PARAM_LOWER_BOUND);
-//
-//    // Check For Duplicate Sames
-//    map<string, int>  mSames;
-//    foreach(string Same, vSameList) {
-//      mSames[Same]++;
-//      if (mSames[Same] > 1)
-//        CError::errorDuplicate(PARAM_SAME, Same);
-//    }
+    string parameter = pParameterList->getString(PARAM_PARAMETER);
 
-  } catch (string &Ex) {
-    Ex = "CEstimateInfo.validate(" + sLabel + ")->" + Ex;
-    throw Ex;
+    /**
+     * First thing we want to split our parameter
+     */
+    CObjectFinder::splitParameter(parameter, sObjectType, sObjectLabel, sObjectParameter, iObjectIndex);
+
+    /**
+     * Find the target object with the estimable we're interested in.
+     */
+    CBaseObject *target = CObjectFinder::getObject(parameter);
+
+    // Do we have to create 1 or n Estimates
+    if (iObjectIndex != -1 || !target->isEstimableAVector(sObjectParameter)) {
+      // 1 Estimate
+      CEstimate *newEstimate = CEstimateFactory::buildEstimate();
+      newEstimate->getParameterList()->copyFrom(pParameterList);
+
+      if (iObjectIndex != -1)
+        sObjectParameter += "(" + boost::lexical_cast<string>(iObjectIndex) + ")";
+      newEstimate->setTarget(target->getEstimableVariable(sObjectParameter));
+
+    } else {
+      // N Estimates
+      int size = target->getEstimableVectorSize(sObjectParameter);
+
+      for (int i = 0; i < size; ++i) {
+        CEstimate *newEstimate = CEstimateFactory::buildEstimate();
+        newEstimate->getParameterList()->copyFrom(pParameterList);
+
+        string newParameter = sObjectParameter + "(" + boost::lexical_cast<string>(i+1) + ")";
+        newEstimate->getParameterList()->setParameter(PARAM_PARAMETER, newParameter);
+
+        newEstimate->setTarget(target->getEstimableVariable(newParameter));
+      }
+    }
+  } catch(const string &ex) {
+    RETHROW_EXCEPTION(ex);
   }
-}
-
-//**********************************************************************
-// void CEstimateInfo::build()
-// Build the CEstimate objects from this object
-//**********************************************************************
-void CEstimateInfo::build() {
-
 }

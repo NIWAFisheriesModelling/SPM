@@ -29,5 +29,11 @@ BOOST_AUTO_TEST_CASE( Build_Estimate ) {
   delete pBasic;
 }
 
+BOOST_AUTO_TEST_CASE(CEstimateFactory_buildEstimateInfo) {
+  CEstimateInfo *info = 0;
+  BOOST_REQUIRE_NO_THROW(info = CEstimateFactory::buildEstimateInfo(false));
+  delete info;
+}
+
 #endif
 

@@ -15,7 +15,7 @@
 // Local Headers
 #include "CEstimateManager.h"
 #include "CEstimate.h"
-#include "../ParameterParser/CParamParser.h"
+#include "CEstimateInfo.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/CConvertor.h"
 #include "../Helpers/ForEach.h"
@@ -53,6 +53,14 @@ void CEstimateManager::Destroy() {
   if (clInstance.get() != 0) {
     clInstance.reset();
   }
+}
+
+//**********************************************************************
+// void CEstimateManager::addEstimate(CEstimate *Estimate)
+// Add Estimate to our List
+//**********************************************************************
+void CEstimateManager::addEstimateInfo(CEstimateInfo *info) {
+  vEstimateInfoList.push_back(info);
 }
 
 //**********************************************************************
@@ -194,21 +202,7 @@ CEstimate* CEstimateManager::getEstimate(string Parameter) {
 // Add An Estimate Value to Be Used
 //**********************************************************************
 void CEstimateManager::addEstimateValue(string estimate, double value) {
-  try {
-    foreach(CEstimate *Estimate, vEstimateList) {
-      CParameterList *pList = Estimate->getParameterList();
-      if (pList->getString(PARAM_PARAMETER) == estimate) {
-        Estimate->addValue(value);
-        return;
-      }
-    }
-
-    CError::errorUnknown(PARAM_ESTIMATE, estimate);
-
-  } catch (string &Ex) {
-    Ex = "CEstimateManager.addEstimateValue()->" + Ex;
-    throw Ex;
-  }
+  mvEstimateValues[estimate].push_back(value);
 }
 
 //**********************************************************************
@@ -263,6 +257,28 @@ void CEstimateManager::setCurrentPhase(int phase) {
 //**********************************************************************
 void CEstimateManager::validate() {
   try {
+    /**
+     * Remove any existing Estimates
+     */
+    if (vEstimateInfoList.size() > 0) {
+      foreach(CEstimate *estimate, vEstimateList) {
+        delete estimate;
+      }
+
+      vEstimateList.clear();
+    }
+
+    /**
+     * Convert from EstimateInfo objects into Estimate objects
+     */
+    foreach(CEstimateInfo *info, vEstimateInfoList) {
+      info->generateEstimates();
+    }
+    vEstimateInfoList.clear();
+
+    /**
+     * Now, start the real validation of the CEstimateObjects
+     */
     // Validate Each Estimate
     foreach(CEstimate *Estimate, vEstimateList) {
       Estimate->validate();
@@ -314,6 +330,16 @@ void CEstimateManager::build() {
       vPtr++;
     }
 
+    // Now set the estimate values on Them
+    foreach(CEstimate *estimate, vEstimateList) {
+      string parameter = estimate->getParameter();
+
+      for (unsigned i = 0; i < mvEstimateValues[parameter].size(); ++i) {
+        estimate->addValue(mvEstimateValues[parameter][i]);
+      }
+    }
+
+
   } catch (string &Ex) {
     Ex = "CEstimateManager.build()->" + Ex;
     throw Ex;
@@ -327,6 +353,10 @@ void CEstimateManager::build() {
 CEstimateManager::~CEstimateManager() {
   foreach(CEstimate *Estimate, vEstimateList) {
     delete Estimate;
+  }
+
+  foreach(CEstimateInfo* info, vEstimateInfoList) {
+    delete info;
   }
 }
 

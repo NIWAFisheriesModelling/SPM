@@ -11,9 +11,22 @@
 
 // Global Headers
 #include <string>
+#include <sstream>
+#include <iostream>
+#include <exception>
 
 // Using
 using std::string;
+using std::ostringstream;
+using std::stringstream;
+using std::cout;
+using std::endl;
+using std::exception;
+
+// Macro
+#define THROW_EXCEPTION(X) { ostringstream o; o << __FILE__ << ":" << __LINE__ << endl << "## " << X << endl; throw string(o.str()); }
+#define RETHROW_EXCEPTION(X) { ostringstream o; o << __FILE__ << ":" << __LINE__ << endl << X; throw string(o.str()); }
+#define RETHROW_LABELLED_EXCEPTION(X) { ostringstream o; o << __FILE__ << ":" << __LINE__ << " (" << pParameterList->getString(PARAM_LABEL, "Unknown") << ") " << endl << X; throw string(o.str()); }
 
 //**********************************************************************
 //

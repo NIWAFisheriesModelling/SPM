@@ -37,6 +37,15 @@ CParameterList::CParameterList() {
 }
 
 //**********************************************************************
+// void CParameterList::copyFrom(CParameterList *parameterList)
+// Copy into this parameter list from another one
+//**********************************************************************
+void CParameterList::copyFrom(CParameterList *parameterList) {
+  mParameters         = parameterList->mParameters;
+  vAllowedParameters  = parameterList->vAllowedParameters;
+}
+
+//**********************************************************************
 // void CParameterList::registerAllowed(string name)
 // Register an allowed parameter
 //**********************************************************************
@@ -49,6 +58,15 @@ void CParameterList::registerAllowed(string name) {
 // Add a parameter
 //**********************************************************************
 void CParameterList::addParameter(string name, string value) {
+  mParameters[name].push_back(value);
+}
+
+//**********************************************************************
+// void CParameterList::setParameter(string name, string value)
+// Set a parameter
+//****************S******************************************************
+void CParameterList::setParameter(string name, string value) {
+  mParameters[name].clear();
   mParameters[name].push_back(value);
 }
 

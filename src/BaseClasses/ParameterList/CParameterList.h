@@ -28,7 +28,9 @@ public:
   // Functions
   CParameterList();
   virtual                     ~CParameterList();
+  void                        copyFrom(CParameterList *parameterList);
   void                        addParameter(string name, string value);
+  void                        setParameter(string name, string value);
   void                        registerAllowed(string name);
   string                      getString(string name, bool optional = false, string defaultValue = "");
   double                      getDouble(string name, bool optional = false, double defaultValue = 0.0);

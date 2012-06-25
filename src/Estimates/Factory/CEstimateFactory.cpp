@@ -12,20 +12,20 @@
 #include "../CEstimateManager.h"
 #include "../../Helpers/CError.h"
 
-//
-////**********************************************************************
-//// CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager)
-//// Build our estimates
-////**********************************************************************
-//CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager) {
-//
-//  CEstimateInfo *pInfo = new CEstimateInfo();
-//
-//  if (registerWithManager)
-//    CEstimateManager::Instance()->addEstimateInfo(pInfo);
-//
-//  return pInfo;
-//}
+
+//**********************************************************************
+// CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager)
+// Build our estimates
+//**********************************************************************
+CEstimateInfo* CEstimateFactory::buildEstimateInfo(bool registerWithManager) {
+
+  CEstimateInfo *pInfo = new CEstimateInfo();
+
+  if (registerWithManager)
+    CEstimateManager::Instance()->addEstimateInfo(pInfo);
+
+  return pInfo;
+}
 
 CEstimate* CEstimateFactory::buildEstimate(bool registerWithManager) {
   CEstimate *estimate = new CEstimate();

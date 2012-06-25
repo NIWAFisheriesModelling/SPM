@@ -76,6 +76,47 @@ double* CBaseObject::getEstimableVariable(string name) {
 }
 
 //**********************************************************************
+// bool CBaseObject::isEstimableAVector(string name)
+// This method will return true if the name we've given is for a vector
+//**********************************************************************
+bool CBaseObject::isEstimableAVector(string name) {
+
+  /**
+   * name will be something like 'r0'. What we need to check for
+   * is the presence of an estimation 'r0' or 'r0(1)'. If
+   * 'r0' exists, then it's not a vector. If 'r0(1)' exists
+   * then it's a vector
+   */
+  name = name + "(1)";
+  if (mEstimables.find(name) != mEstimables.end())
+    return true;
+
+  return false;
+}
+
+//**********************************************************************
+// int CBaseObject::getEstimableVectorSize(string name)
+// This method iterates over estimables looking for the highest index
+//**********************************************************************
+int CBaseObject::getEstimableVectorSize(string name) {
+  /**
+   * This method is a very crude method. It'll go through all of the
+   * registered estimables with 'name' and find the highest registered
+   * index.
+   */
+  int size = 1;
+
+  for (size = 1; size < 9999; ++size) {
+    string temp = name + "(" + boost::lexical_cast<string>(size) + ")";
+
+    if (mEstimables.find(temp) == mEstimables.end())
+      break;
+  }
+
+  return (size - 1);
+}
+
+//**********************************************************************
 // void CBaseObject::addParameter(string name, string value)
 // Add A Parameters
 //**********************************************************************

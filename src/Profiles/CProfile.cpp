@@ -10,7 +10,6 @@
 // Local Headers
 #include "CProfile.h"
 #include "../World/CWorld.h"
-#include "../ParameterParser/CParamParser.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../Estimates/CEstimate.h"
 #include "../Helpers/CError.h"
