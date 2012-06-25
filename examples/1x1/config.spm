@@ -13,38 +13,48 @@ final_year 2108
 cell_length 1
 initialisation_phases Phase1 Phase2
 time_steps step_one step_two
-age_size none none
+age_size VB VB
 
-@age_size none
-type none
-size_weight none
+@age_size VB
+type von_bertalanffy
+size_weight basic
+k      0.093
+t0    -0.256
+linf 169.07
+cv     0.102
 
-@size_weight none
-type none
+@size_weight basic
+type basic
+a 1.387e-008
+b 2.965
 
 # Initalisation
 @initialisation_phase Phase1
 years 200
-time_steps Phase1
+time_steps Phase1a Phase1b
 
 @initialisation_phase Phase2
 years 1
-time_steps Phase1
+time_steps Phase1a Phase1b
 
-@time_step Phase1
-processes Recruitment Maturation halfM halfM Ageing
+@time_step Phase1a
+processes Recruitment Maturation halfM
+
+@time_step Phase1b
+processes halfM Ageing
 
 # Annual cycle
 @time_step step_one
-processes Recruitment Maturation halfM Fishing halfM
+processes BHrecruitment Maturation halfM Fishing halfM
 
 @time_step step_two
 processes Ageing
 
 # Derived quantities
 @derived_quantity SSB
-type abundance
+type biomass
 time_step step_one
+#initialisation_time_steps Phase1a Phase1a
 categories mature
 selectivities One
 layer Base
@@ -60,6 +70,17 @@ categories immature
 proportions 1.0
 r0 550000
 age 1
+
+@process BHrecruitment
+type bh_recruitment
+categories immature
+proportions 1.0
+r0 550000
+age 1
+ssb SSB
+b0 Phase1
+ssb_offset 1
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
 @process halfM
 type constant_mortality_rate
