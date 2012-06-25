@@ -96,6 +96,7 @@ src/CRuntimeController.cpp
 src/DerivedQuantities/CDerivedQuantity.cpp
 src/DerivedQuantities/CDerivedQuantityManager.cpp
 src/DerivedQuantities/Children/CAbundanceDerivedQuantity.cpp
+src/DerivedQuantities/Children/CBiomassDerivedQuantity.cpp
 src/DerivedQuantities/Children/CTestDerivedQuantity.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.cpp
 src/Distributions/CNormalDistribution.cpp
