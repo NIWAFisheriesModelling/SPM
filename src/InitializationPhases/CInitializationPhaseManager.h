@@ -30,6 +30,7 @@ public:
   void                        loadInitializationPhaseOrder(vector<string> &order);
   int                         getInitializationPhaseOrderIndex(string label);
   int                         getLastExecutedInitializationPhase() { return lastExecutedInitializationPhase; }
+  int                         getNumberInitializationPhases() { return vInitializationPhases.size(); }
   void                        validate();
   void                        build();
   void                        execute();

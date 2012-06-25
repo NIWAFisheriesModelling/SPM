@@ -12,6 +12,7 @@
 #include "../CDerivedQuantityManager.h"
 #include "../../Helpers/CError.h"
 #include "../Children/CAbundanceDerivedQuantity.h"
+#include "../Children/CBiomassDerivedQuantity.h"
 
 //**********************************************************************
 // CDerivedQuantity* CDerivedQuantityFactory::buildDerivedQuantity(string type, bool registerWithManager)
@@ -23,6 +24,8 @@ CDerivedQuantity* CDerivedQuantityFactory::buildDerivedQuantity(string type, boo
 
   if (type == PARAM_ABUNDANCE)
     pQuantity = new CAbundanceDerivedQuantity();
+  else if (type == PARAM_BIOMASS)
+    pQuantity = new CBiomassDerivedQuantity();
   else
     CError::errorUnknown(PARAM_DERIVED_QUANTITY, type);
 

@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CSampleDerivedQuantity.cpp
+// Name        : CBiomassDerivedQuantity.cpp
 // Author      : S.Rasmussen
 // Date        : 18/06/2012
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -7,7 +7,7 @@
 //============================================================================
 
 // Headers
-#include "CAbundanceDerivedQuantity.h"
+#include "CBiomassDerivedQuantity.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
@@ -25,39 +25,30 @@ using std::endl;
 //
 //
 //**********************************************************************
-CAbundanceDerivedQuantity::CAbundanceDerivedQuantity() {
+CBiomassDerivedQuantity::CBiomassDerivedQuantity() {
 
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
-
+  pParameterList->registerAllowed(PARAM_INITIALIZATION_TIME_STEPS);
   // Build World View
   pWorldView = new CCompleteWorldView();
 }
 
 //**********************************************************************
-//
-//
-//**********************************************************************
-CAbundanceDerivedQuantity::~CAbundanceDerivedQuantity() {
-}
-
-
-
-//**********************************************************************
 // void CDerivedQuantity::validate()
 // Validate our Derived Quantity
 //**********************************************************************
-void CAbundanceDerivedQuantity::validate() {
+void CBiomassDerivedQuantity::validate() {
   try {
     // Base
     CBaseBuild::validate();
 
     // Get our parameters
-    sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer        = pParameterList->getString(PARAM_LAYER);
+    sTimeStep               = pParameterList->getString(PARAM_TIME_STEP);
+    sLayer                  = pParameterList->getString(PARAM_LAYER);
 
     //pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
@@ -79,7 +70,7 @@ void CAbundanceDerivedQuantity::validate() {
 // void CDerivedQuantity::build()
 // Build our Derived Quantity
 //**********************************************************************
-void CAbundanceDerivedQuantity::build() {
+void CBiomassDerivedQuantity::build() {
   try {
     // Get TimeStep and Layer
     pTimeStepManager = CTimeStepManager::Instance();
@@ -103,7 +94,7 @@ void CAbundanceDerivedQuantity::build() {
 // void CSampleDerivedQuantity::calculate()
 // Calculate a value during a standard model run
 //**********************************************************************
-void CAbundanceDerivedQuantity::calculate() {
+void CBiomassDerivedQuantity::calculate() {
 
   if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
     return;
@@ -116,7 +107,8 @@ void CAbundanceDerivedQuantity::calculate() {
 
   for (int i = 0; i < (int)vCategories.size(); ++i) {
     for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      dValue += dAbundance * pWorld->getMeanWeight(j,i);
     }
   }
 
@@ -126,13 +118,41 @@ void CAbundanceDerivedQuantity::calculate() {
 }
 
 //**********************************************************************
+// void CDerivedQuantity::build(bool isInitialisation)
+// Build our Derived Quantity
+//**********************************************************************
+void CBiomassDerivedQuantity::build(int initialisationPhase) {
+  try {
+    // Get TimeStep and Layer
+    pTimeStepManager = CTimeStepManager::Instance();
+    iTimeStep = pTimeStepManager->getTimeStepOrderIndex(vInitializationTimeStepNames[initialisationPhase]);
+
+    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
+    // Get our Selectivitys and Categories
+    CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
+    pWorldView->build();
+
+  } catch (string &Ex) {
+    Ex = "CDerivedQuantity.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
 // void CSampleDerivedQuantity::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
-void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
+void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
 
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
+
+  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
+    return;
+  }
 
   double dValue = 0.0;
 
@@ -141,9 +161,18 @@ void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
 
   for (int i = 0; i < (int)vCategories.size(); ++i) {
     for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      dValue += dAbundance * pWorld->getMeanWeight(j,i);
     }
   }
 
   vvInitialisationValues[initialisationPhase].push_back(dValue);
 }
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+CBiomassDerivedQuantity::~CBiomassDerivedQuantity() {
+}
+

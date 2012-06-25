@@ -128,8 +128,9 @@ void CInitializationPhaseManager::build() {
     }
 
     // Variables
-    pReportManager = CReportManager::Instance();
+    //TODO: Check that I have the order of the following two calls correct
     pDerivedQuantityManager = CDerivedQuantityManager::Instance();
+    pReportManager = CReportManager::Instance();
 
   } catch(string &Ex) {
     Ex = "CInitialisationManager.build()->" + Ex;

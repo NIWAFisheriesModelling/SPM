@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CSampleDerivedQuantity.h
+// Name        : CBiomassDerivedQuantity.h
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CABUNDANCEDERIVEDQUANTITY_H_
-#define CABUNDANCEDERIVEDQUANTITY_H_
+#ifndef CBIOMASSDERIVEDQUANTITY_H_
+#define CBIOMASSDERIVEDQUANTITY_H_
 
 // Headers
 #include "../CDerivedQuantity.h"
@@ -22,13 +22,14 @@ class CCompleteWorldView;
 //
 //
 //**********************************************************************
-class CAbundanceDerivedQuantity : public CDerivedQuantity {
+class CBiomassDerivedQuantity : public CDerivedQuantity {
 public:
   // Methods
-  CAbundanceDerivedQuantity();
-  virtual                     ~CAbundanceDerivedQuantity();
+  CBiomassDerivedQuantity();
+  virtual                     ~CBiomassDerivedQuantity();
   void                        validate();
   void                        build();
+  void                        build(int initialisationPhase);
   void                        calculate();
   void                        calculate(int initialisationPhase);
 
@@ -36,7 +37,9 @@ protected:
   // Members
   CTimeStepManager            *pTimeStepManager;
   string                      sTimeStep;
+  vector<string>              vInitializationTimeStepNames;
   int                         iTimeStep;
+  vector<int>                 vInitializationTimeStepIndex;
   vector<string>              vCategoryNames;
   vector<int>                 vCategories;
   string                      sLayer;
@@ -46,4 +49,4 @@ protected:
   CCompleteWorldView          *pWorldView;
 };
 
-#endif /* CABUNDANCEDERIVEDQUANTITY_H_ */
+#endif /* CBIOMASSDERIVEDQUANTITY_H_ */

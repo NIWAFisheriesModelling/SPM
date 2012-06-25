@@ -53,7 +53,7 @@ void CConstantRecruitmentProcess::validate() {
 
     // Populate our Variables
     dR0         = pParameterList->getDouble(PARAM_R0);
-    iAge        = pParameterList->getInt(PARAM_AGE);
+    iAge        = pParameterList->getInt(PARAM_AGE,pWorld->getMinAge());
     sLayer      = pParameterList->getString(PARAM_LAYER, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);

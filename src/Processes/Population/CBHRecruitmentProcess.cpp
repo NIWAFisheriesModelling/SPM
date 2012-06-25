@@ -14,6 +14,8 @@
 // Local headers
 #include "CBHRecruitmentProcess.h"
 #include "../../TimeSteps/CTimeStepManager.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "../../DerivedQuantities/CDerivedQuantity.h"
 #include "../../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
@@ -49,6 +51,7 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_SIGMA_R);
   pParameterList->registerAllowed(PARAM_RHO);
   pParameterList->registerAllowed(PARAM_SSB);
+  pParameterList->registerAllowed(PARAM_B0);
   pParameterList->registerAllowed(PARAM_SSB_OFFSET);
   pParameterList->registerAllowed(PARAM_YCS_VALUES);
   pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEARS);
@@ -65,11 +68,12 @@ void CBHRecruitmentProcess::validate() {
 
     // Assign our variables
     dR0           = pParameterList->getDouble(PARAM_R0);
-    iAge          = pParameterList->getInt(PARAM_AGE);
+    iAge          = pParameterList->getInt(PARAM_AGE,true,pWorld->getMinAge());
     dSteepness    = pParameterList->getDouble(PARAM_STEEPNESS,true,1.0);
     dSigmaR       = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
     dRho          = pParameterList->getDouble(PARAM_RHO,true,0.0);
     sSSB          = pParameterList->getString(PARAM_SSB);
+    sB0           = pParameterList->getString(PARAM_B0,true,"");
     iSSBOffset    = pParameterList->getInt(PARAM_SSB_OFFSET);
     sLayer        = pParameterList->getString(PARAM_LAYER, true, "");
 
@@ -161,9 +165,16 @@ void CBHRecruitmentProcess::build() {
     if (sLayer != "")
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
+    // Get our derived quantity (SSB)
+    pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
 
-    // TODO: Get our derived quantity
-    //pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
+    // Get B0 phase
+    CInitializationPhaseManager *pInitializationPhaseManager = CInitializationPhaseManager::Instance();
+    if( sB0 == "" ) {
+      iPhaseB0 = pInitializationPhaseManager->getNumberInitializationPhases() - 1;
+    } else {
+      iPhaseB0 = pInitializationPhaseManager->getInitializationPhaseOrderIndex(sB0);
+    }
 
     // Populate Our Ages Index
     iAgeIndex = pWorld->getColIndexForAge(iAge);
@@ -189,7 +200,8 @@ void CBHRecruitmentProcess::execute() {
     // Base Execute
     CProcess::execute();
 
-    // TODO: sort this mess out!
+    // Get our B0 (assumed to be the LAST value in the defined initialisation)
+    dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) -1);
 
     // Setup Our Variables
     double dYCS = vYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
@@ -202,7 +214,7 @@ void CBHRecruitmentProcess::execute() {
     // standardise YCS
     dYCS /= dMeanYCS;
     // Get SSB (and B0)
-    double dSSBRatio = 1;// pDerivedQuantity->getValue(iSSBOffset)/pDerivedQuantity->getFirstValue();
+    double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
 
 
     double dTrueYCS =  dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));

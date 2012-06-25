@@ -11,10 +11,13 @@
 
 // Local Headers
 #include "../CProcess.h"
+#include "../../DerivedQuantities/CDerivedQuantity.h"
+#include "../../DerivedQuantities/CDerivedQuantityManager.h"
+
 
 // Classes
 class CTimeStepManager;
-class CDerivedQuantityManager;
+class CDerivedQuantity;
 
 //**********************************************************************
 //
@@ -32,6 +35,8 @@ public:
 protected:
   // Variables
   double                      dR0;
+  int                         iPhaseB0;
+  double                      dB0;
   vector<double>              vProportions;
   int                         iAge;
   int                         iAgeIndex;
@@ -39,6 +44,7 @@ protected:
   double                      dSigmaR;
   double                      dRho;
   string                      sSSB;
+  string                      sB0;
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
   vector<int>                 vStandardiseYCSYears;
@@ -46,7 +52,7 @@ protected:
   string                      sLayer;
   CNumericLayer               *pLayer;
   CTimeStepManager            *pTimeStepManager;
-  CDerivedQuantityManager     *pDerivedQuantity;
+  CDerivedQuantity            *pDerivedQuantity;
 };
 
 #endif /* CBHRECRUITMENTPROCESS_H_ */
