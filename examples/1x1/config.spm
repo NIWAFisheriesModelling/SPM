@@ -45,16 +45,16 @@ processes halfM Ageing
 
 # Annual cycle
 @time_step step_one
-processes BHrecruitment Maturation halfM Fishing halfM
+processes BHrecruitment Maturation halfM Fishing
 
 @time_step step_two
-processes Ageing
+processes halfM Ageing
 
 # Derived quantities
 @derived_quantity SSB
 type biomass
 time_step step_one
-#initialisation_time_steps Phase1a Phase1a
+initialisation_time_steps Phase1a Phase1a
 categories mature
 selectivities One
 layer Base
