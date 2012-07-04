@@ -33,6 +33,7 @@ CPreferenceMovementProcess::CPreferenceMovementProcess() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_PROPORTION);
   pParameterList->registerAllowed(PARAM_PREFERENCE_FUNCTIONS);
 }
 
@@ -46,8 +47,15 @@ void CPreferenceMovementProcess::validate() {
     CProcess::validate();
 
     // Get our Variables
+    dProportion = pParameterList->getDouble(PARAM_PROPORTION,true,1.0);
+
     pParameterList->fillVector(vDirectedProcessList, PARAM_PREFERENCE_FUNCTIONS);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
+
+    if (getProportion() < 0.0)
+      CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);
+    if (getProportion() > 1.0)
+      CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
   } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.validate(" + getLabel() + ")->" + Ex;
@@ -162,8 +170,8 @@ void CPreferenceMovementProcess::execute() {
                 // Convert To Proportion
                 dCurrent /= dRunningTotal;
 
-                // Get Current Number of Fish
-                dCurrent *= pBaseSquare->getValue(Category, m);
+                // Get Current Number of Fish, multipled by proportion to move
+                dCurrent *= dProportion * pBaseSquare->getValue(Category, m);
 
                 // Move
                 pDiff->subValue(Category, m, dCurrent);

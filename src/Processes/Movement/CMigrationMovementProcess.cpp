@@ -45,7 +45,7 @@ void CMigrationMovementProcess::validate() {
     sSinkLayer = pParameterList->getString(PARAM_SINK_LAYER);
     sSourceLayer = pParameterList->getString(PARAM_SOURCE_LAYER);
 
-    dProportion = pParameterList->getDouble(PARAM_PROPORTION);
+    dProportion = pParameterList->getDouble(PARAM_PROPORTION,true,1.0);
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);

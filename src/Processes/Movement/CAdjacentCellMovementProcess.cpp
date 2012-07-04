@@ -42,7 +42,7 @@ void CAdjacentCellMovementProcess::validate() {
 
     // Get our Variables
     sLayer = pParameterList->getString(PARAM_LAYER,true,"");
-    dProportion = pParameterList->getDouble(PARAM_PROPORTION);
+    dProportion = pParameterList->getDouble(PARAM_PROPORTION,true,1.0);
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
