@@ -48,6 +48,9 @@ protected:
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
   vector<int>                 vStandardiseYCSYears;
+  vector<double>              vStandardiseYCSValues;
+  vector<double>              vTrueYCSValues;
+  vector<double>              vRecruitmentValues;
   int                         iSSBOffset;
   string                      sLayer;
   CNumericLayer               *pLayer;

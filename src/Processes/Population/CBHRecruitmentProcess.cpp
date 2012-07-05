@@ -56,7 +56,6 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_YCS_VALUES);
   pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEARS);
   pParameterList->registerAllowed(PARAM_LAYER);
-
 }
 
 //**********************************************************************
@@ -183,6 +182,31 @@ void CBHRecruitmentProcess::build() {
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
+    // reset values
+    vYCSYears.resize(0);
+    vTrueYCSValues.resize(0);
+    vRecruitmentValues.resize(0);
+
+    // Create vector of YCS years
+    for (int i=pWorld->getInitialYear(); i <= pWorld->getCurrentYear();  ++i) {
+     vYCSYears.push_back(i);
+    }
+
+    // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears
+    double dMeanYCS = 0;
+    for (int i=0; i < (int)vStandardiseYCSYears.size(); ++i) {
+      for (int j=0; j < (int)vYCSYears.size(); ++j) {
+        if( vYCSYears[j] == vStandardiseYCSYears[i] ) {
+          dMeanYCS += vYCSValues[j];
+          break;
+        }
+      }
+    }
+    dMeanYCS /= vStandardiseYCSYears.size();
+    for (int i=0; i < (int)vYCSValues.size(); ++i) {
+      vStandardiseYCSValues.push_back(vYCSValues[i] / dMeanYCS);
+    }
+
   } catch (string &Ex) {
     Ex = "CBHRecruitment.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -204,21 +228,15 @@ void CBHRecruitmentProcess::execute() {
     dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) -1);
 
     // Setup Our Variables
-    double dYCS = vYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
-    double dMeanYCS=0;
-    // Get men YCS
-    for ( int i = 0; i < (int)vYCSValues.size(); ++i ) {
-      dMeanYCS += vYCSValues[i];
-    }
-    dMeanYCS /= ( vYCSValues.size() + 1 );
-    // standardise YCS
-    dYCS /= dMeanYCS;
+    double dYCS = vStandardiseYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
     // Get SSB (and B0)
     double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
 
-
     double dTrueYCS =  dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
     double dAmountPer = dR0 * dTrueYCS;
+
+    vTrueYCSValues.push_back(dTrueYCS);
+    vRecruitmentValues.push_back(dAmountPer);
 
     if (pLayer != 0) {
       double dTotal = 0.0;
