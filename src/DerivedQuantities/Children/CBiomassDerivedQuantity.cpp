@@ -50,7 +50,7 @@ void CBiomassDerivedQuantity::validate() {
     sTimeStep               = pParameterList->getString(PARAM_TIME_STEP);
     sLayer                  = pParameterList->getString(PARAM_LAYER);
 
-    //pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS);
+    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
@@ -118,30 +118,6 @@ void CBiomassDerivedQuantity::calculate() {
 }
 
 //**********************************************************************
-// void CDerivedQuantity::build(bool isInitialisation)
-// Build our Derived Quantity
-//**********************************************************************
-void CBiomassDerivedQuantity::build(int initialisationPhase) {
-  try {
-    // Get TimeStep and Layer
-    pTimeStepManager = CTimeStepManager::Instance();
-    iTimeStep = pTimeStepManager->getTimeStepOrderIndex(vInitializationTimeStepNames[initialisationPhase]);
-
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
-
-    // Get our Selectivitys and Categories
-    CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
-    pWorld->fillCategoryVector(vCategories, vCategoryNames);
-
-    pWorldView->build();
-
-  } catch (string &Ex) {
-    Ex = "CDerivedQuantity.build(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-}
-
-//**********************************************************************
 // void CSampleDerivedQuantity::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
@@ -149,10 +125,6 @@ void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
 
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
-
-  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
-    return;
-  }
 
   double dValue = 0.0;
 

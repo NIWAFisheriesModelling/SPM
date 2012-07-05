@@ -29,7 +29,6 @@ public:
   virtual                     ~CBiomassDerivedQuantity();
   void                        validate();
   void                        build();
-  void                        build(int initialisationPhase);
   void                        calculate();
   void                        calculate(int initialisationPhase);
 

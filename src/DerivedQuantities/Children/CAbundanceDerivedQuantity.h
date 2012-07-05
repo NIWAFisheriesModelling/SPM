@@ -36,7 +36,9 @@ protected:
   // Members
   CTimeStepManager            *pTimeStepManager;
   string                      sTimeStep;
+  vector<string>              vInitializationTimeStepNames;
   int                         iTimeStep;
+  vector<int>                 vInitializationTimeStepIndex;
   vector<string>              vCategoryNames;
   vector<int>                 vCategories;
   string                      sLayer;
