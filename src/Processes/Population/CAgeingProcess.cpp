@@ -17,6 +17,10 @@
 // Default Constructor
 //**********************************************************************
 CAgeingProcess::CAgeingProcess() {
+
+  // Variables
+  sType = PARAM_AGEING;
+
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
 }

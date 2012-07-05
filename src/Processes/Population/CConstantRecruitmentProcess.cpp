@@ -31,6 +31,7 @@ using std::numeric_limits;
 CConstantRecruitmentProcess::CConstantRecruitmentProcess() {
   // Default Vars
   pLayer          = 0;
+  sType = PARAM_CONSTANT_RECRUITMENT;
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);

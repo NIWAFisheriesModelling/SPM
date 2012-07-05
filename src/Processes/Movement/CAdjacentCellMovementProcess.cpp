@@ -24,6 +24,7 @@ CAdjacentCellMovementProcess::CAdjacentCellMovementProcess() {
 
   // Default Values
   pLayer = 0;
+  sType = PARAM_ADJACENT_CELL_MOVEMENT;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);

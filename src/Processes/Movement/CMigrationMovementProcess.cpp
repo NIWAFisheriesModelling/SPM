@@ -25,6 +25,7 @@ CMigrationMovementProcess::CMigrationMovementProcess() {
     //Default values
     pSourceLayer = 0;
     pSinkLayer = 0;
+    sType = PARAM_MIGRATION_MOVEMENT;
 
     // Register user allowed parameters
     pParameterList->registerAllowed(PARAM_CATEGORIES);

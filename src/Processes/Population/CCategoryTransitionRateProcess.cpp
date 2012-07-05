@@ -26,6 +26,7 @@ CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
 
   // Variables
   pLayer = 0;
+  sType = PARAM_CATEGORY_TRANSITION_RATE;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FROM);

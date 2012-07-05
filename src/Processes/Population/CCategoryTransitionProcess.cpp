@@ -32,6 +32,7 @@ CCategoryTransitionProcess::CCategoryTransitionProcess() {
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
   pWorldSquare     = 0;
+  sType = PARAM_CATEGORY_TRANSITION;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FROM);     //categories

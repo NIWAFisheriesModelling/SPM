@@ -31,6 +31,11 @@ public:
   void                        validate();
   void                        build();
   void                        execute();
+  vector<double>              getTrueYCSValues() { return vTrueYCSValues; }
+  vector<double>              getRecruitmentValues() { return vRecruitmentValues; }
+  vector<int>              getYCSYears() { return vYCSYears; }
+  vector<double>              getSSBValues() { return vSSBValues; }
+  double                      getB0Value() { return dB0; }
 
 protected:
   // Variables
@@ -51,6 +56,7 @@ protected:
   vector<double>              vStandardiseYCSValues;
   vector<double>              vTrueYCSValues;
   vector<double>              vRecruitmentValues;
+  vector<double>              vSSBValues;
   int                         iSSBOffset;
   string                      sLayer;
   CNumericLayer               *pLayer;

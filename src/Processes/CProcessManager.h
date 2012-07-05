@@ -38,7 +38,6 @@ public:
   // Functions
   void                        addProcess(CProcess* value);
   void                        fillVector(vector<CProcess*> &list, vector<string> &labels);
-  //int                         getProcessCount() { return vProcessList.size(); }
   CProcess*                   getProcess(string Label);
   void                        clone(CProcessManager *Manager);
   void                        validate();
@@ -50,8 +49,8 @@ protected:
   // Functions
   CProcessManager();
 
-	// Variables
-	vector<CProcess*>            vProcessList;
+  // Variables
+  vector<CProcess*>            vProcessList;
 
 private:
   static boost::thread_specific_ptr<CProcessManager> clInstance;

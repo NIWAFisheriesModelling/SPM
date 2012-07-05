@@ -29,13 +29,10 @@ public:
   string                     getCategory(int index);
   int                        getSelectivityCount() { return vSelectivityList.size(); }
   string                     getSelectivity(int index);
-//  int                        getLayerCategoryCount() { return vLayerCategoryList.size(); }
-//  string                     getLayerCategory(int index);
-//  bool                       checkUsableSquare(CWorldSquare *Square, int iX, int iY);
-//  bool                       checkUsableBaseSquare(int RowIndex, int ColIndex);
   virtual void               validate();
   virtual void               build();
   virtual void               execute();
+  string                     getProcessType() { return sType; };
 
 protected:
   // Variables
@@ -48,6 +45,7 @@ protected:
   int                        iBaseColCount;
   double                     dCurrent;
   double                     dSelectivityResult;
+  string                     sType;
 };
 
 #endif /*CPROCESS_H_*/

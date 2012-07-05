@@ -23,6 +23,7 @@ CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
   // Variables
   pGrid            = 0;
   pLayer           = 0;
+  sType = PARAM_CONSTANT_MORTALITY_RATE;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);

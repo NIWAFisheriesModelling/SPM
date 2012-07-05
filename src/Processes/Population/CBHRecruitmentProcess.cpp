@@ -36,6 +36,8 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pTimeStepManager = CTimeStepManager::Instance();
     // Default Vars
   pLayer          = 0;
+  sType = PARAM_BH_RECRUITMENT;
+
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
   registerEstimable(PARAM_SIGMA_R, &dSigmaR);
@@ -183,6 +185,7 @@ void CBHRecruitmentProcess::build() {
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
     // reset values
+    vSSBValues.resize(0);
     vYCSYears.resize(0);
     vTrueYCSValues.resize(0);
     vRecruitmentValues.resize(0);
@@ -237,6 +240,7 @@ void CBHRecruitmentProcess::execute() {
 
     vTrueYCSValues.push_back(dTrueYCS);
     vRecruitmentValues.push_back(dAmountPer);
+    vSSBValues.push_back(pDerivedQuantity->getValue(iSSBOffset));
 
     if (pLayer != 0) {
       double dTotal = 0.0;

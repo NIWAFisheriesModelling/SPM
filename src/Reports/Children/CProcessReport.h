@@ -11,6 +11,7 @@
 
 // Local headers
 #include "Base/CFileReport.h"
+#include "../../Processes/CProcess.h"
 
 //**********************************************************************
 //
@@ -27,7 +28,7 @@ public:
 
 protected:
   string                      sParameter;
-  CBaseObject                 *pTarget;
+  CProcess                    *pTarget;
 };
 
 #endif /* CPROCESSREPORT_H_ */

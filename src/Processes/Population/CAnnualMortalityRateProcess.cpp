@@ -28,6 +28,7 @@
 CAnnualMortalityRateProcess::CAnnualMortalityRateProcess() {
   // Variables
   pLayer = 0;
+  sType = PARAM_ANNUAL_MORTALITY_RATE;
 
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_YEARS);

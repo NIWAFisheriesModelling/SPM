@@ -32,6 +32,7 @@ CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess() {
     // Default Vars
   pR0Layer          = 0;
   pSSBLayer         = 0;
+  sType = PARAM_LOCAL_BH_RECRUITMENT;
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
