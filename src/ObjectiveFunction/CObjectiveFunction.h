@@ -28,9 +28,13 @@ public:
   static void                Destroy();
 
   // Functions
-	double                     getScore() { return dScore; }
-	int                        getScoreListCount() { return (int)vScoreList.size(); }
-	SScore*                    getScore(int Index);
+  double                     getScore() { return dScore; }
+  double                     getLikelihoods() { return dLikelihoods; }
+  double                     getPriors() { return dPriors; }
+  double                     getPenalties() { return dPenalties; }
+
+  int                        getScoreListCount() { return (int)vScoreList.size(); }
+  SScore*                    getScore(int Index);
   void                       build() { };
   void                       execute();
   virtual                    ~CObjectiveFunction();
@@ -42,6 +46,10 @@ protected:
 
   // Variables
   double                     dScore;
+  double                     dLikelihoods;
+  double                     dPriors;
+  double                     dPenalties;
+
   vector<SScore>             vScoreList;
 
 private:

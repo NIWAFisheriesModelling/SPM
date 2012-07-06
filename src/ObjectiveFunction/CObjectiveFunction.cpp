@@ -99,6 +99,9 @@ void CObjectiveFunction::execute() {
 
   // Variables
                         dScore                = 0;
+                        dLikelihoods          = 0;
+                        dPenalties            = 0;
+                        dPriors               = 0;
                         vScoreList.clear();
   string                sLabel;
   double                dValue;
@@ -113,7 +116,7 @@ void CObjectiveFunction::execute() {
    dValue = Observation->getScore();
 
    // Increment Score, and Add Value to Vector
-   dScore += dValue;
+   dLikelihoods += dValue;
    addScore(sLabel, dValue);
   }
 
@@ -127,7 +130,7 @@ void CObjectiveFunction::execute() {
      dValue = Penalty->Score;
 
      // Inc Score, Add Value to Vector
-     dScore += dValue;
+     dPenalties += dValue;
      addScore(sLabel, dValue);
   }
 
@@ -145,9 +148,13 @@ void CObjectiveFunction::execute() {
     dValue = Estimate->getPriorScore();
 
     // Inc Score, Add Value to vector
-    dScore += dValue;
+    dPriors += dValue;
     addScore(sLabel, dValue);
   }
+
+  // Now sum for out total score
+  dScore = dLikelihoods + dPenalties + dPriors;
+
 }
 
 //**********************************************************************
