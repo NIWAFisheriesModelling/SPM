@@ -337,6 +337,7 @@
 #define PARAM_STEPS                               "steps"
 #define PARAM_STEEPNESS                           "steepness"
 #define PARAM_STRING                              "categorical"
+#define PARAM_T                                   "t"
 #define PARAM_T0                                  "t0"
 #define PARAM_TAU1                                "tau1"
 #define PARAM_TAU2                                "tau2"

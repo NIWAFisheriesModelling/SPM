@@ -14,6 +14,8 @@
 
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
+#include "../Minimizers/CMinimizerManager.h"
+#include "../Minimizers/CMinimizer.h"
 
 // Classes
 class CRuntimeThread;
@@ -30,33 +32,43 @@ public:
   static void                Destroy();
 
   // Methods
-	void                       validate();
-	void                       build();
-	void                       execute();
+  void                       validate();
+  void                       build();
+  void                       execute();
 
 protected:
   // Functions
   CMCMC();
   virtual                    ~CMCMC();
   void                       buildCovarianceMatrix();
-  bool                       generateEstimates();
+  void                       generateEstimates();
+  void                       generateRandomStart();
+  void                       generateNewCandidate();
+  void                       fillMVnorm(double stepsize);
+  void                       fillMVt(double stepsize);
   bool                       choleskyDecomposition();
 
   // Variables
   double                     dStart;
   int                        iLength;
   int                        iKeep;
+  int                        iEstimateCount;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
   double                     dCorrelationDiff;
   double                     dStepSize;
   string                     sProposalDistribution;
-  int                        iDf;
-  double                     dBestScore;
-  vector<double>             vLastAcceptedList;
+  int                        iDF;
+  ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
-  vector<double>             vMeans;
+  vector<vector<double> >    vMCMCValues;
+  vector<double>             vScore;
+  vector<double>             vLikelihoods;
+  vector<double>             vPriors;
+  vector<double>             vPenalties;
+  int                        iSuccessfulJumps;
+  CMinimizer                 *pMinimizer;
 
 private:
   static CMCMC*              clInstance;
