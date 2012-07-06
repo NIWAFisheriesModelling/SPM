@@ -54,7 +54,7 @@ void CMinimizer::buildCovarianceMatrix() {
   try {
 
     // Get handle to our Minimizer and Hessian
-    // Locate zero rows, and set the ciorrsponding diagonal element of the Hessian = 1
+    // Locate zero rows, and set the corresponding diagonal element of the Hessian = 1
     ublas::matrix<double> mxHessian(iEstimateCount, iEstimateCount);
     vector<bool> bZeroRow;
     for (int i = 0; i < iEstimateCount; ++i) {
