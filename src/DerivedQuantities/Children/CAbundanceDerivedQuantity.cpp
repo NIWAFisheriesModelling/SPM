@@ -50,7 +50,7 @@ void CAbundanceDerivedQuantity::validate() {
     sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
     sLayer        = pParameterList->getString(PARAM_LAYER);
 
-    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS);
+    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true); // not currently used: but if not defined, should default to the end of the annual cycle in each initialisation phase
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
