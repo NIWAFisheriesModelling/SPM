@@ -62,6 +62,10 @@ protected:
   CNumericLayer               *pLayer;
   CTimeStepManager            *pTimeStepManager;
   CDerivedQuantity            *pDerivedQuantity;
+
+private:
+  double                      dAmountPer;
+
 };
 
 #endif /* CBHRECRUITMENTPROCESS_H_ */

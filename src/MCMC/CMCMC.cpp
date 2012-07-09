@@ -40,6 +40,7 @@ CMCMC* CMCMC::clInstance = 0;
 CMCMC::CMCMC() {
   // default variables
   iSuccessfulJumps = 0;
+  iJumps = 0;
 
   pParameterList->registerAllowed(PARAM_TYPE);
   pParameterList->registerAllowed(PARAM_START);
@@ -51,6 +52,7 @@ CMCMC::CMCMC() {
   pParameterList->registerAllowed(PARAM_STEP_SIZE);
   pParameterList->registerAllowed(PARAM_PROPOSAL_DISTRIBUTION);
   pParameterList->registerAllowed(PARAM_DF);
+  pParameterList->registerAllowed(PARAM_ADAPT_STEPSIZE_AT);
 }
 
 //**********************************************************************
@@ -91,6 +93,13 @@ void CMCMC::validate() {
     sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, PARAM_T);
     iDF                     = pParameterList->getInt(PARAM_DF, true, 4);
 
+    if (pParameterList->hasParameter(PARAM_STEP_SIZE)) {
+      pParameterList->fillVector(vAdaptStepSize, PARAM_ADAPT_STEPSIZE_AT);
+    } else {
+      vAdaptStepSize.resize(1);
+      vAdaptStepSize[0] = 1;
+    }
+
     // Validate the parameters
     if (iLength < 0)
       CError::errorLessThan(PARAM_LENGTH, PARAM_ZERO);
@@ -106,6 +115,12 @@ void CMCMC::validate() {
       CError::errorGreaterThan(PARAM_MAX_CORRELATION, PARAM_ONE);
     if (iDF <= 0)
       CError::errorLessThan(PARAM_DF, PARAM_ZERO);
+    for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
+      if (vAdaptStepSize[i] < 1)
+        CError::errorLessThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_ONE);
+      if (vAdaptStepSize[i] > iLength )
+        CError::errorGreaterThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_LENGTH);
+    }
 
   } catch (string &Ex) {
     Ex = "CMCMC.validate()->" + Ex;
@@ -132,7 +147,8 @@ void CMCMC::build() {
     }
 
     //Setup our vectors to hold the MCMC output values
-    // We will need to add a reporter or some sort of output facility to print these out
+    // We will need to add a reporter or some sort or output facility to print these out
+    // this is probably better as some sort of structure as well
     vScore.resize(iLength);
     vLikelihoods.resize(iLength);
     vPriors.resize(iLength);
@@ -158,15 +174,15 @@ void CMCMC::execute() {
     vCandidates.resize(iEstimateCount);
 
     for(int i=0; i < iEstimateCount; ++i) {
-      // Get the actual estimates values from our estimator
-      // vCandidates[i] = CEstimateManager::Instance()->getEnabledEstimate(i);
+      // Get the actual estimates values from our estimator: we need an accessor function here to get these values from the minimiser
+      // vCandidates[i] = CEstimateManager::Instance()->getEstimates(i);
     }
 
     // Get MCMC starting values
     if (dStart > 0.0 ) {
       generateRandomStart();
       for (int j = 0; j < iEstimateCount; ++j) {
-        // Set our new candidate values as the values for our estimator
+        // Set our new candidate values as the values for our model
         //CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
       }
     }
@@ -188,24 +204,27 @@ void CMCMC::execute() {
     for (int i =0; i < iLength; ++i) {
     // Generate a candidate value
       vector<double> vOldCandidates = vCandidates;
+
+      updateStepSize(i);
+
       generateNewCandidate();
       for (int j = 0; j < iEstimateCount; ++j) {
-        // Passthis to the model so-as it vcan use these values to evaluate the objective function
-        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
+        // Pass these as the point estimates for a run-time run of the model so-as it can use these values to evaluate the objective function
+        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);//not sure if this is the correct function call?
       }
 
       // Run model with these parameters to get objective function score
       CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
       pThread->rebuild();
       pThread->startModel();
-
       // Workout our Objective Score
       CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
       pObjectiveFunction->execute();
 
+      // Preserve our score for later
       double dOldScore = dScore;
       dScore = pObjectiveFunction->getScore();
-      double dRatio = 1;
+      double dRatio = 1.0;
 
       // Evaluate if the new value is better, and decide whether to jump
       if (dScore >= dOldScore) {
@@ -214,19 +233,25 @@ void CMCMC::execute() {
       if (CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
         // accept the candidate point
         for (int j=0; j< iEstimateCount; ++j) {
+          // preserve it: note vMCMCVaules will need to be initialised somewhere to be the correct size
           vMCMCValues[i][j] = vCandidates[j];
         }
+        // keep the score, and its compontent parts
         vPriors[i] = pObjectiveFunction->getPriors();
         vPenalties[i] = pObjectiveFunction->getPenalties();
         vLikelihoods[i] = pObjectiveFunction->getLikelihoods();
         vScore[i] = pObjectiveFunction->getScore();
+        iJumps++;
         iSuccessfulJumps++;
       } else {
         // reject the candidate point and reset our Candidate back to what they were
         dScore = dOldScore;
         vCandidates = vOldCandidates;
+        iJumps++;
       }
     }
+    // now we've finished, we need to thin the results so as to keep only 1 in  every iKeep value
+    // vMCMCValues, vPriors, vPenalties, vLikelihoodsvScore
 
   } catch (string &Ex) {
     Ex = "CMCMC.execute()->" + Ex;
@@ -298,6 +323,33 @@ void CMCMC::generateNewCandidate() {
   }
 }
 
+
+//**********************************************************************
+// void CMCMC::updateStepSize(int iLength)
+// Ypdate stepsize if required
+//**********************************************************************
+void CMCMC::updateStepSize(int iteration) {
+
+  if(iJumps > 0) {
+    for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
+      if(vAdaptStepSize[i] == iteration ) {
+        double dAcceptanceRate = (double)iSuccessfulJumps / (double)iJumps ;
+        if (dAcceptanceRate > 0.5) {
+          dStepSize *= 2;
+          iSuccessfulJumps = 0;
+          iJumps = 0;
+          break;
+        } else if (dAcceptanceRate < 0.2) {
+          dStepSize /= 2;
+          iSuccessfulJumps = 0;
+          iJumps = 0;
+          break;
+        }
+      }
+    }
+  }
+}
+
 //**********************************************************************
 // void CMCMC::buildCovarianceMatrix()
 // build our Covariance Matrix
@@ -351,24 +403,19 @@ void CMCMC::buildCovarianceMatrix() {
 //**********************************************************************
 void CMCMC::fillMVnorm(double stepsize) {
 
-//+++++++++++++++++++++++++++++++++++++
-// Copied from CASAL: Needs work
-//+++++++++++++++++++++++++++++++++++++
-
-  // Found a problem here for the case where some variances (and hence the corresponding
-  // rows and columns of covar) are 0. The cholesky decomposition does not work in these
-  // cases. I thought of this kludge: Set the 0 variances to 1, leaving the covariances at 0.
-  // When finished, set the corresponding deviations from the mean to 0.
-
   // set zero variances to 1 as above
-//  dvector zero_variances(covar.rowmin(),covar.rowmax());
-//  zero_variances = 0;
-//  for (int i=covar.rowmin(); i<=covar.rowmax(); i++){
-//    if (covar[i][i]==0){
-//      covar[i][i] = 1;
-//      zero_variances[i] = 1;
-//    }
-//  }
+  ublas::matrix<double>  mxTemp = mxCovariance;
+
+  vector<bool> bHasZeroVariances;
+  bHasZeroVariances.resize(mxTemp.size1());
+  for (int i = 0; i <= (int)mxTemp.size1(); ++i) {
+    if ( mxTemp(i,i) == 0 ) {
+      mxTemp(i,i) = 1;
+      bHasZeroVariances[i] = true;
+    } else{
+      bHasZeroVariances[i] = false;
+    }
+  }
   // generate the standard normal random numbers
 //  fill_randn(s);
   // get lower triangular part of choleski decomposition of covar
@@ -376,12 +423,46 @@ void CMCMC::fillMVnorm(double stepsize) {
 //  if (!chol(covar,L)){
 //    error("Failed choleski decomposition in fill_mvnorm");}
 //  (*this) = L*(*this) + mean;
-//  // find the elements with 0 variances and set them to their means
+  // find the elements with 0 variances and set them to their means
 //  for (int i=covar.rowmin(); i<=covar.rowmax(); i++){
 //    if (zero_variances[i]){
 //      (*this)[i] = mean[i];
 //    }
 //  }
+
+//+++++++++++++++++++++++++++++++++++++
+// Copied from CASAL: Needs work
+//+++++++++++++++++++++++++++++++++++++
+
+/*
+  // Found a problem here for the case where some variances (and hence the corresponding
+  // rows and columns of covar) are 0. The cholesky decomposition does not work in these
+  // cases. I thought of this kludge: Set the 0 variances to 1, leaving the covariances at 0.
+  // When finished, set the corresponding deviations from the mean to 0.
+
+  // set zero variances to 1 as above
+  dvector zero_variances(covar.rowmin(),covar.rowmax());
+  zero_variances = 0;
+  for (int i=covar.rowmin(); i<=covar.rowmax(); i++){
+    if (covar[i][i]==0){
+      covar[i][i] = 1;
+      zero_variances[i] = 1;
+    }
+  }
+  // generate the standard normal random numbers
+  fill_randn(s);
+  // get lower triangular part of choleski decomposition of covar
+  dmatrix L(1,n,1,n);
+  if (!chol(covar,L)){
+    error("Failed choleski decomposition in fill_mvnorm");}
+  (*this) = L*(*this) + mean;
+  // find the elements with 0 variances and set them to their means
+  for (int i=covar.rowmin(); i<=covar.rowmax(); i++){
+    if (zero_variances[i]){
+      (*this)[i] = mean[i];
+    }
+  }
+*/
 }
 
 //**********************************************************************

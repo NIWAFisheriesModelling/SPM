@@ -133,6 +133,7 @@
 #define PARAM_A50                                 "a50"
 #define PARAM_ABUNDANCE                           "abundance"
 #define PARAM_ABUNDANCE_DENSITY                   "abundance_density"
+#define PARAM_ADAPT_STEPSIZE_AT                   "adapt_stepsize_at"
 #define PARAM_ADJACENT_CELL_MOVEMENT              "adjacent_cell"
 #define PARAM_AGE                                 "age"
 #define PARAM_AGES                                "ages"

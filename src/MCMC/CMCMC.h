@@ -47,12 +47,15 @@ protected:
   void                       fillMVnorm(double stepsize);
   void                       fillMVt(double stepsize);
   bool                       choleskyDecomposition();
+  void                       updateStepSize(int iteration);
 
   // Variables
   double                     dStart;
   int                        iLength;
   int                        iKeep;
   int                        iEstimateCount;
+  int                        iJumps;
+  int                        iSuccessfulJumps;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
   double                     dCorrelationDiff;
@@ -67,7 +70,7 @@ protected:
   vector<double>             vLikelihoods;
   vector<double>             vPriors;
   vector<double>             vPenalties;
-  int                        iSuccessfulJumps;
+  vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;
 
 private:
