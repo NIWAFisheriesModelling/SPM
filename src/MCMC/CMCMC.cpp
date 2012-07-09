@@ -147,8 +147,8 @@ void CMCMC::build() {
     }
 
     //Setup our vectors to hold the MCMC output values
-    // We will need to add a reporter or some sort or output facility to print these out
-    // this is probably better as some sort of structure as well
+    // Scot TODO: We will need to add a reporter or some sort or output facility to print these out
+    //            this is probably better as some sort of structure as well
     vScore.resize(iLength);
     vLikelihoods.resize(iLength);
     vPriors.resize(iLength);
@@ -174,7 +174,7 @@ void CMCMC::execute() {
     vCandidates.resize(iEstimateCount);
 
     for(int i=0; i < iEstimateCount; ++i) {
-      // Get the actual estimates values from our estimator: we need an accessor function here to get these values from the minimiser
+      // Scott TODO: Get the actual estimates values from our estimator: we need an accessor function here to get these values from the minimiser
       // vCandidates[i] = CEstimateManager::Instance()->getEstimates(i);
     }
 
@@ -182,7 +182,7 @@ void CMCMC::execute() {
     if (dStart > 0.0 ) {
       generateRandomStart();
       for (int j = 0; j < iEstimateCount; ++j) {
-        // Set our new candidate values as the values for our model
+        // Scott TODO: Set our new candidate values as the values for our model
         //CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
       }
     }
@@ -209,7 +209,7 @@ void CMCMC::execute() {
 
       generateNewCandidate();
       for (int j = 0; j < iEstimateCount; ++j) {
-        // Pass these as the point estimates for a run-time run of the model so-as it can use these values to evaluate the objective function
+        // Scott TODO: Pass these as the point estimates for a run-time run of the model so-as it can use these values to evaluate the objective function
         CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);//not sure if this is the correct function call?
       }
 
@@ -250,8 +250,8 @@ void CMCMC::execute() {
         iJumps++;
       }
     }
-    // now we've finished, we need to thin the results so as to keep only 1 in  every iKeep value
-    // vMCMCValues, vPriors, vPenalties, vLikelihoodsvScore
+    // Alistair TODO: now we've finished, we need to thin the results so as to keep only 1 in every iKeep value
+    //                vMCMCValues, vPriors, vPenalties, vLikelihoodsvScore
 
   } catch (string &Ex) {
     Ex = "CMCMC.execute()->" + Ex;
@@ -271,6 +271,7 @@ void CMCMC::generateRandomStart() {
     fillMVnorm(dStart);
 
     int iAttempts = 0;
+    // Scott TODO: check that out randomly generated candiates are still within the upper and lower bounds defined by the @estimate blocks
 //    while (!vCandidates ! within_bounds() ){  // we need a within_bounds function for our minimiser to carry out this test
       iAttempts++;
       if (iAttempts >= 1000)
@@ -298,6 +299,7 @@ void CMCMC::generateNewCandidate() {
     if (sProposalDistribution == PARAM_NORMAL) {
       fillMVnorm(dStepSize);
       int iAttempts = 0;
+    // Scott TODO: check that out randomly generated candiates are still within the upper and lower bounds defined by the @estimate blocks
       //while (!vCandidates ! within_bounds() ){  // we need a within_bounds function for our minimiser to carry out this test
         iAttempts++;
         if (iAttempts >= 1000)
@@ -308,6 +310,7 @@ void CMCMC::generateNewCandidate() {
     } else {
       fillMVt(dStepSize);
       int iAttempts = 0;
+      // Scott TODO: check that out randomly generated candiates are still within the upper and lower bounds defined by the @estimate blocks
       //while (!vCandidates ! within_bounds() ){  // we need a within_bounds function for our minimiser to carry out this test
         iAttempts++;
         if (iAttempts >= 1000)
@@ -374,7 +377,7 @@ void CMCMC::buildCovarianceMatrix() {
       }
     }
     // Adjust any nonzero variances less than min_diff x the difference between the bounds on the parameter.
-    // TODO: Enable getUpperBounds() and getLowerBounds() functions
+    // Scott TODO: Enable getUpperBounds() and getLowerBounds() functions
     // Obtain the estimation bounds to use to modify the covariance matrix
     //vector<double> vDiffBounds = (pMinimizer->getUpperBounds() - pMinimizer->getLowerBounds());
     //for (int i=0; i < (int)mxCovariance.size1(); ++i) {
@@ -417,6 +420,7 @@ void CMCMC::fillMVnorm(double stepsize) {
     }
   }
   // generate the standard normal random numbers
+
 //  fill_randn(s);
   // get lower triangular part of choleski decomposition of covar
 //  dmatrix L(1,n,1,n);
