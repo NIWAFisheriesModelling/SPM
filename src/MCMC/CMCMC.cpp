@@ -139,8 +139,9 @@ void CMCMC::build() {
     pMinimizer = CMinimizerManager::Instance()->getMinimizer();
 
     // Build default step size
+    iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
+
     if (!pParameterList->hasParameter(PARAM_STEP_SIZE)) {
-      iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
       dStepSize = 2.4 * pow( (double)iEstimateCount, -0.5);
     } else if ( dStepSize==0.0 ) {
       dStepSize = 2.4 * pow( (double)iEstimateCount, -0.5);
@@ -178,13 +179,13 @@ void CMCMC::execute() {
     }
 
     // Get the initial objective function value -> we need to set the value of the estimates here calculated in the lines above
-    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
-    pThread->rebuild();
-    pThread->startModel();
+//    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+//    pThread->rebuild();
+//    pThread->startModel();
 
     // Workout our objective function value
     CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
-    pObjectiveFunction->execute();
+//    pObjectiveFunction->execute();
     double dScore = pObjectiveFunction->getScore();
 
     //===============================================================
@@ -200,7 +201,7 @@ void CMCMC::execute() {
 
       generateNewCandidate();
       for (int j = 0; j < iEstimateCount; ++j) {
-        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
+        CEstimateManager::Instance()->getEnabledEstimate(j)->setValue(vCandidates[j]);
       }
 
       // Run model with these parameters to get objective function score
