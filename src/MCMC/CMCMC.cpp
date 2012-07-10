@@ -10,6 +10,7 @@
 // Headers
 #include <limits>
 #include <numeric>
+#include <iostream>
 #include <boost/random.hpp>
 #include <boost/numeric/ublas/triangular.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -29,6 +30,8 @@
 
 // Namespaces
 using namespace boost::numeric;
+using std::cout;
+using std::endl;
 
 // Singleton Variable
 CMCMC* CMCMC::clInstance = 0;
@@ -179,14 +182,15 @@ void CMCMC::execute() {
     }
 
     // Get the initial objective function value -> we need to set the value of the estimates here calculated in the lines above
-//    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
-//    pThread->rebuild();
-//    pThread->startModel();
+    CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
+    pThread->rebuild();
+    pThread->startModel();
 
     // Workout our objective function value
     CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
-//    pObjectiveFunction->execute();
+    pObjectiveFunction->execute();
     double dScore = pObjectiveFunction->getScore();
+    cout << "dScore: " << dScore << endl;
 
     //===============================================================
     // Now, do our MCMC
