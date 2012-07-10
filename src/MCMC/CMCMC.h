@@ -17,6 +17,14 @@
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Minimizers/CMinimizer.h"
 
+// Structs
+struct SChainItem {
+  double  dScore;
+  double  dLikelihood;
+  double  dPrior;
+  double  dPenalty;
+};
+
 // Classes
 class CRuntimeThread;
 
@@ -66,10 +74,7 @@ protected:
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
   vector<vector<double> >    vMCMCValues;
-  vector<double>             vScore;
-  vector<double>             vLikelihoods;
-  vector<double>             vPriors;
-  vector<double>             vPenalties;
+  vector<SChainItem>         vChain;
   vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;
 

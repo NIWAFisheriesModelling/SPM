@@ -270,33 +270,6 @@ void CRuntimeThread::startModel() {
 }
 
 //**********************************************************************
-// void CRuntimeThread::clone(CRuntimeThread *Thread)
-// Clone our Parameter
-//**********************************************************************
-void CRuntimeThread::clone(CRuntimeThread *Thread) {
-  // TODO: (Scott) Implement clone function
-  throw string("Not yet implemented");
-  /*pCatchabilityManager->clone(Thread->pCatchabilityManager);
-  pDerivedQuantityManager->clone(Thread->pDerivedQuantityManager);
-  pEstimateManager->clone(Thread->pEstimateManager);
-  pInitializationManager->clone(Thread->pInitializationManager);
-  pLayerManager->clone(Thread->pLayerManager);
-  pMinimizerManager->clone(Thread->pMinimizerManager);
-  pObservationManager->clone(Thread->pObservationManager);
-  pPenaltyManager->clone(Thread->pPenaltyManager);
-  pPreferenceFunctionManager->clone(Thread->pPreferenceFunctionManager);
-  pPriorManager->clone(Thread->pPriorManager);
-  pProcessManager->clone(Thread->pProcessManager);
-  pProfileManager->clone(Thread->pProfileManager);
-  pReporterManager->clone(Thread->pReporterManager);
-  pSelectivityManager->clone(Thread->pSelectivityManager);
-  pTimeStepManager->clone(Thread->pTimeStepManager);
-  pWorld->clone(Thread->pWorld);
-  pObjectiveFunction->clone();
-  */
-}
-
-//**********************************************************************
 // CRuntimeThread::~CRuntimeThread()
 // Destructor
 //**********************************************************************

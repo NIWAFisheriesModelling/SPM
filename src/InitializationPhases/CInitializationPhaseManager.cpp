@@ -155,7 +155,7 @@ void CInitializationPhaseManager::execute() {
 
     Phase->execute();
 
-    pReportManager->execute(STATE_INITIALIZATION_MODELLING);
+    pReportManager->execute(STATE_INITIALIZATION);
   }
 }
 

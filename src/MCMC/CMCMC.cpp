@@ -146,14 +146,6 @@ void CMCMC::build() {
       dStepSize = 2.4 * pow( (double)iEstimateCount, -0.5);
     }
 
-    //Setup our vectors to hold the MCMC output values
-    // Scot TODO: We will need to add a reporter or some sort or output facility to print these out
-    //            this is probably better as some sort of structure as well
-    vScore.resize(iLength);
-    vLikelihoods.resize(iLength);
-    vPriors.resize(iLength);
-    vPenalties.resize(iLength);
-
   } catch (string &Ex) {
     Ex = "CMCMC.build()->" + Ex;
     throw Ex;
@@ -174,16 +166,14 @@ void CMCMC::execute() {
     vCandidates.resize(iEstimateCount);
 
     for(int i=0; i < iEstimateCount; ++i) {
-      // Scott TODO: Get the actual estimates values from our estimator: we need an accessor function here to get these values from the minimiser
-      // vCandidates[i] = CEstimateManager::Instance()->getEstimates(i);
+      vCandidates[i] = CEstimateManager::Instance()->getEnabledEstimate(i)->getValue();
     }
 
     // Get MCMC starting values
     if (dStart > 0.0 ) {
       generateRandomStart();
-      for (int j = 0; j < iEstimateCount; ++j) {
-        // Scott TODO: Set our new candidate values as the values for our model
-        //CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
+      for (int i = 0; i < iEstimateCount; ++i) {
+        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
       }
     }
 
@@ -191,6 +181,7 @@ void CMCMC::execute() {
     CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
     pThread->rebuild();
     pThread->startModel();
+
     // Workout our objective function value
     CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
     pObjectiveFunction->execute();
@@ -209,8 +200,7 @@ void CMCMC::execute() {
 
       generateNewCandidate();
       for (int j = 0; j < iEstimateCount; ++j) {
-        // Scott TODO: Pass these as the point estimates for a run-time run of the model so-as it can use these values to evaluate the objective function
-        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);//not sure if this is the correct function call?
+        CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
       }
 
       // Run model with these parameters to get objective function score
@@ -236,11 +226,16 @@ void CMCMC::execute() {
           // preserve it: note vMCMCVaules will need to be initialised somewhere to be the correct size
           vMCMCValues[i][j] = vCandidates[j];
         }
+
         // keep the score, and its compontent parts
-        vPriors[i] = pObjectiveFunction->getPriors();
-        vPenalties[i] = pObjectiveFunction->getPenalties();
-        vLikelihoods[i] = pObjectiveFunction->getLikelihoods();
-        vScore[i] = pObjectiveFunction->getScore();
+        SChainItem newItem;
+        newItem.dPenalty    = pObjectiveFunction->getPenalties();
+        newItem.dScore      = pObjectiveFunction->getScore();
+        newItem.dPrior      = pObjectiveFunction->getPriors();
+        newItem.dLikelihood = pObjectiveFunction->getLikelihoods();;
+
+        vChain.push_back(newItem);
+
         iJumps++;
         iSuccessfulJumps++;
       } else {
@@ -271,14 +266,34 @@ void CMCMC::generateRandomStart() {
     fillMVnorm(dStart);
 
     int iAttempts = 0;
-    // Scott TODO: check that out randomly generated candiates are still within the upper and lower bounds defined by the @estimate blocks
-//    while (!vCandidates ! within_bounds() ){  // we need a within_bounds function for our minimiser to carry out this test
+    bool bCandidatesOk;
+    int iEnabledEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
+
+    // Sanity check
+    if ((int)vCandidates.size() != iEnabledEstimateCount)
+      THROW_EXCEPTION("Candidate vector size d")
+
+
+    do {
+      bCandidatesOk = true;
+
       iAttempts++;
       if (iAttempts >= 1000)
         CError::errorEqualTo("MCMC start attempts", "1000");
       vCandidates = vOldCandidates;
       fillMVnorm(dStart);
-//    }
+
+      // Check bounds and regenerate candidates if
+      // they are not within the bounds.
+      for (int i = 0; i < iEnabledEstimateCount; ++i) {
+        CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
+        if (estimate->getLowerBound() > vCandidates[i] || estimate->getUpperBound() < vCandidates[i]) {
+          bCandidatesOk = false;
+          break;
+        }
+      }
+
+    } while (!bCandidatesOk);
 
   } catch (string &Ex) {
     Ex = "CMCMC.generateRandomStart()->" + Ex;
@@ -376,10 +391,15 @@ void CMCMC::buildCovarianceMatrix() {
         }
       }
     }
+
     // Adjust any nonzero variances less than min_diff x the difference between the bounds on the parameter.
-    // Scott TODO: Enable getUpperBounds() and getLowerBounds() functions
     // Obtain the estimation bounds to use to modify the covariance matrix
-    //vector<double> vDiffBounds = (pMinimizer->getUpperBounds() - pMinimizer->getLowerBounds());
+    vector<double> vDiffBounds;
+    for (int i = 0; i < CEstimateManager::Instance()->getEnabledEstimateCount(); ++i) {
+      CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
+      vDiffBounds.push_back( estimate->getUpperBound() - estimate->getLowerBound() );
+    }
+
     //for (int i=0; i < (int)mxCovariance.size1(); ++i) {
     //  if (mxCovariance(i,i) < dCorrelationDiff * vDiffBounds[i] && mxCovariance(i,i) != 0) {
           if (sCorrelationMethod == PARAM_COVARIANCE) {

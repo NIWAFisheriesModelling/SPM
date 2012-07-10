@@ -42,7 +42,6 @@ public:
   void                        executeProfileRun();
   void                        executeMCMC();
   void                        executeSimulationRun();
-  void                        clone(CRuntimeThread *Thread);
   void                        startModel();
 
 protected:

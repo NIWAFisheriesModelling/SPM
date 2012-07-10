@@ -18,7 +18,7 @@
 //**********************************************************************
 CInitializationReport::CInitializationReport() {
   // Variables
-  eExecutionState             = STATE_INITIALIZATION_MODELLING;
+  eExecutionState             = STATE_INITIALIZATION;
   pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
   // Register user allowed parameter
