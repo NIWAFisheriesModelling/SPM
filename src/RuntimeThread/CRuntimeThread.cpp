@@ -218,6 +218,8 @@ void CRuntimeThread::executeMCMC() {
 
   // Start our MCMC run
   CMCMC *mcmc = CMCMC::Instance();
+  mcmc->validate();
+  mcmc->build();
   mcmc->execute();
 }
 
