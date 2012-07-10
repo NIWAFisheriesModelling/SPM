@@ -30,7 +30,7 @@ public:
   void                        validate();
   void                        build();
   void                        calculate();
-  void                        calculate(int initialisationPhase);
+  void                        calculate(int initialisationPhase, int timeStep);
 
 protected:
   // Members

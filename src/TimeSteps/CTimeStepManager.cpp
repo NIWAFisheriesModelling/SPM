@@ -204,7 +204,7 @@ void CTimeStepManager::execute() {
       vTimeSteps[j]->execute();
 
       // Execute Other Tasks
-      pDerivedQuantityManager->calculate(false);
+      pDerivedQuantityManager->calculate(false, j);
       pObservationManager->execute(iCurrentYear, j);
       pReporterManager->execute();
     }

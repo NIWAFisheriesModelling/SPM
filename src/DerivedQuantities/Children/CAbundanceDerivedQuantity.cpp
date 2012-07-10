@@ -51,13 +51,18 @@ void CAbundanceDerivedQuantity::validate() {
     sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
     sLayer        = pParameterList->getString(PARAM_LAYER);
 
-    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true); // not currently used: but if not defined, should default to the end of the annual cycle in each initialisation phase
+    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
     // Validate
     if (vCategoryNames.size() != vSelectivityNames.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
+    //Scott TODO: Validate PARAM_INITIALIZATION_TIME_STEPS are val;id time steps in each inialisation phase
+    //            Should be a vector of length inialisation_phases
+    //            each element should be valid within that phase
+    // if the vector is not supplied, then default to the end of the annual cycle in each phase
 
     pWorldView->validate();
 
@@ -121,14 +126,12 @@ void CAbundanceDerivedQuantity::calculate() {
 // void CSampleDerivedQuantity::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
-void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
+void CAbundanceDerivedQuantity::calculate(int initialisationPhase, int timeStep ) {
 
-    CInitializationPhaseManager *pInitializationPhase;
-    pInitializationPhaseManager = CInitializationPhaseManager::Instance();
-
-std::cerr << " " << pInitializationPhaseManager->getCurrentTimeStep();
-
-//  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
+// SCOTT: TODO: work out the index of the initialisation phase timestep index, and test here to see if we are in the correct timestep
+//              this same code needs adding to CBiomassDerivedQuantity.cpp as well
+//   int what_is_the_index_of vInitializationTimeStepNames[initialisationPhase]
+//   if (timeStep != what_is_the_index_of) {
 //    return;
 //  }
 

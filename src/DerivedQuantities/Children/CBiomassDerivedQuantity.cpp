@@ -121,7 +121,7 @@ void CBiomassDerivedQuantity::calculate() {
 // void CSampleDerivedQuantity::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
-void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
+void CBiomassDerivedQuantity::calculate(int initialisationPhase, int timeStep) {
 
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);

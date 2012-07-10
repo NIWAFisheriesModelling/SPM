@@ -79,11 +79,10 @@ void CInitializationPhase::execute() {
 
   // Loop Through and Execute
   for (int i = 0; i < iYears; i++) {
-    foreach(CTimeStep *timeStep, vTimeSteps) {
-      timeStep->execute();
+    for (int j = 0; j < (int)vTimeSteps.size(); ++j) {
+      vTimeSteps[j]->execute();
+      pDerivedQuantityManager->calculate(true, j);
     }
-
-    pDerivedQuantityManager->calculate(true);
   }
 }
 
