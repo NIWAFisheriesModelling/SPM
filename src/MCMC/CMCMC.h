@@ -19,10 +19,11 @@
 
 // Structs
 struct SChainItem {
-  double  dScore;
-  double  dLikelihood;
-  double  dPrior;
-  double  dPenalty;
+  double          dScore;
+  double          dLikelihood;
+  double          dPrior;
+  double          dPenalty;
+  vector<double>  vValues;
 };
 
 // Classes
@@ -73,7 +74,6 @@ protected:
   ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
-  vector<vector<double> >    vMCMCValues;
   vector<SChainItem>         vChain;
   vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;

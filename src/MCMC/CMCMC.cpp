@@ -222,17 +222,13 @@ void CMCMC::execute() {
       }
       if (CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
         // accept the candidate point
-        for (int j=0; j< iEstimateCount; ++j) {
-          // preserve it: note vMCMCVaules will need to be initialised somewhere to be the correct size
-          vMCMCValues[i][j] = vCandidates[j];
-        }
-
         // keep the score, and its compontent parts
         SChainItem newItem;
         newItem.dPenalty    = pObjectiveFunction->getPenalties();
         newItem.dScore      = pObjectiveFunction->getScore();
         newItem.dPrior      = pObjectiveFunction->getPriors();
         newItem.dLikelihood = pObjectiveFunction->getLikelihoods();;
+        newItem.vValues     = vCandidates;
 
         vChain.push_back(newItem);
 
@@ -246,7 +242,7 @@ void CMCMC::execute() {
       }
     }
     // Alistair TODO: now we've finished, we need to thin the results so as to keep only 1 in every iKeep value
-    //                vMCMCValues, vPriors, vPenalties, vLikelihoodsvScore
+    //                vMCMC vValues, vPriors, vPenalties, vLikelihoodsvScore
 
   } catch (string &Ex) {
     Ex = "CMCMC.execute()->" + Ex;
