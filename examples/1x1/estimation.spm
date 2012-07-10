@@ -18,12 +18,12 @@ covariance false
 @mcmc
 start 1
 length 10
-keep 2
+keep 1
 adaptive_stepsize True
-adapt_at 100000 200000 400000
+adapt_at 2 4 12
 proposal_t True
 df 4
-max_correlation 1.4
+max_correlation 0.8
 
 #Profile
 @profile R0
