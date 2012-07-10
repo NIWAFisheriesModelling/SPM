@@ -229,16 +229,26 @@ void CBHRecruitmentProcess::execute() {
     // Base Execute
     CProcess::execute();
 
-    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION &&
-        pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0 ) {
-      // If in a phase before we have defined B0, then just assume a constant recruitment of dR0
-      dAmountPer = dR0;
+    if ( pRuntimeController->getCurrentState() == STATE_INITIALIZATION ) {
+      // We are in an initialisation phase
+      if ( pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0 ) {
+        // If in a phase before we have defined B0, then just assume a constant recruitment of dR0
+        dAmountPer = dR0;
+      } else {
+        // Get our B0 (assumed to be the LAST value in the defined initialisation)
+        dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
+        double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
+        // Calculate the Stock-recruit relationship
+        double dTrueYCS =  1.0 * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
+        // And apply to calculate this events recruitment
+        dAmountPer = dR0 * dTrueYCS;
+      }
     } else {
-      // Get our B0 (assumed to be the LAST value in the defined initialisation)
-      dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) -1);
+      // We are not in an initialisation phase
       // Setup Our Variables
       double dYCS = vStandardiseYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
       // Get SSB (and SSB:B0 ratio)
+      dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
       double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
       // Calculate the Stock-recruit relationship
       double dTrueYCS =  dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
@@ -258,8 +268,12 @@ void CBHRecruitmentProcess::execute() {
         for (int j = 0; j < iWorldWidth; ++j)
           dTotal += pLayer->getValue(i, j);
 
-      if (!CComparer::isZero(dTotal))
+      if (CComparer::isPositive(dTotal)) {
         dAmountPer /= dTotal;
+      } else {
+        CError::errorLessThanEqualTo(PARAM_LAYER,PARAM_ZERO);
+      }
+
     } else
       dAmountPer /= pWorld->getEnabledSquareCount();
 

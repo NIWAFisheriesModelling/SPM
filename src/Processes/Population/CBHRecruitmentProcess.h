@@ -33,7 +33,7 @@ public:
   void                        execute();
   vector<double>              getTrueYCSValues() { return vTrueYCSValues; }
   vector<double>              getRecruitmentValues() { return vRecruitmentValues; }
-  vector<int>              getYCSYears() { return vYCSYears; }
+  vector<int>                 getYCSYears() { return vYCSYears; }
   vector<double>              getSSBValues() { return vSSBValues; }
   double                      getB0Value() { return dB0; }
 
