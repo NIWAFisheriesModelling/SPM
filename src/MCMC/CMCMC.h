@@ -19,10 +19,13 @@
 
 // Structs
 struct SChainItem {
+  int             iIteration;
   double          dScore;
   double          dLikelihood;
   double          dPrior;
   double          dPenalty;
+  double          dAcceptanceRate;
+  double          dStepSize;
   vector<double>  vValues;
 };
 
@@ -53,8 +56,8 @@ protected:
   void                       generateEstimates();
   void                       generateRandomStart();
   void                       generateNewCandidate();
-  void                       fillMVnorm(double stepsize);
-  void                       fillMVt(double stepsize);
+  void                       fillMultivariateNormal(double stepsize);
+  void                       fillMultivariatet(double stepsize);
   bool                       choleskyDecomposition();
   void                       updateStepSize(int iteration);
 
@@ -64,6 +67,7 @@ protected:
   int                        iKeep;
   int                        iEstimateCount;
   int                        iJumps;
+  int                        iAcceptedJumps;
   int                        iSuccessfulJumps;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
