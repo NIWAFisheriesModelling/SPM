@@ -8,14 +8,14 @@
 
 // Headers
 #include "CBiomassDerivedQuantity.h"
-#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
-#include "../../Helpers/ForEach.h"
-#include "../../World/WorldView/CCompleteWorldView.h"
-#include "../../Helpers/CError.h"
 #include "../../Selectivities/CSelectivityManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../World/WorldView/CCompleteWorldView.h"
 
 // Using
 using std::cout;

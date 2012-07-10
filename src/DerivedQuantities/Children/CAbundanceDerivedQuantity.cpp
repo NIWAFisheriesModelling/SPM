@@ -8,14 +8,15 @@
 
 // Headers
 #include "CAbundanceDerivedQuantity.h"
-#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
-#include "../../Helpers/ForEach.h"
-#include "../../World/WorldView/CCompleteWorldView.h"
-#include "../../Helpers/CError.h"
 #include "../../Selectivities/CSelectivityManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../World/WorldView/CCompleteWorldView.h"
 
 // Using
 using std::cout;
@@ -121,6 +122,15 @@ void CAbundanceDerivedQuantity::calculate() {
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
 void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
+
+    CInitializationPhaseManager *pInitializationPhase;
+    pInitializationPhaseManager = CInitializationPhaseManager::Instance();
+
+std::cerr << " " << pInitializationPhaseManager->getCurrentTimeStep();
+
+//  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
+//    return;
+//  }
 
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
