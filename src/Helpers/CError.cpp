@@ -83,7 +83,7 @@ void CError::errorGreaterThanEqualTo(string more, string less) {
 void CError::errorNotEqual(string value1, string value2) {
   string sException = value1;
   sException += ERROR_EQUAL_NOT;
-  sException += value1;
+  sException += value2;
   throw sException;
 }
 
@@ -94,7 +94,7 @@ void CError::errorNotEqual(string value1, string value2) {
 void CError::errorEqualTo(string value1, string value2) {
   string sException = value1;
   sException += ERROR_EQUAL_TO;
-  sException += value1;
+  sException += value2;
   throw sException;
 }
 
