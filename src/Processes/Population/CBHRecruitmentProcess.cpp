@@ -13,15 +13,15 @@
 
 // Local headers
 #include "CBHRecruitmentProcess.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../DerivedQuantities/CDerivedQuantity.h"
 #include "../../DerivedQuantities/CDerivedQuantityManager.h"
-#include "../../Layers/CLayerManager.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
-#include "../../Helpers/CComparer.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 // Using
 using std::cout;
