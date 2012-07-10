@@ -13,7 +13,7 @@
 #include "../CProcess.h"
 #include "../../DerivedQuantities/CDerivedQuantity.h"
 #include "../../DerivedQuantities/CDerivedQuantityManager.h"
-
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
 
 // Classes
 class CTimeStepManager;
@@ -62,6 +62,7 @@ protected:
   CNumericLayer               *pLayer;
   CTimeStepManager            *pTimeStepManager;
   CDerivedQuantity            *pDerivedQuantity;
+  CInitializationPhaseManager *pInitializationPhaseManager;
 
 private:
   double                      dAmountPer;

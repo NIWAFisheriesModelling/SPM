@@ -169,8 +169,10 @@ void CBHRecruitmentProcess::build() {
     // Get our derived quantity (SSB)
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
 
+    // Get out initialisation
+    pInitializationPhaseManager = CInitializationPhaseManager::Instance();
+
     // Get B0 phase
-    CInitializationPhaseManager *pInitializationPhaseManager = CInitializationPhaseManager::Instance();
     if( sB0 == "" ) {
       iPhaseB0 = pInitializationPhaseManager->getNumberInitializationPhases() - 1;
     } else {
@@ -227,27 +229,25 @@ void CBHRecruitmentProcess::execute() {
     // Base Execute
     CProcess::execute();
 
-    // SCOTT: TODO: Need a function here to determine if we are in initialisation phase, and then, if so, which one
-    //if (in an initailsation phase and if that is <= iPhaseB0 ) {
-      //dAmountPer = dR0;
-    //} else {
-
+    if (pRuntimeController->getCurrentState() == STATE_INITIALIZATION &&
+        pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0 ) {
+      dAmountPer = dR0;
+    } else {
       // Get our B0 (assumed to be the LAST value in the defined initialisation)
       dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) -1);
-
       // Setup Our Variables
       double dYCS = vStandardiseYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
-      // Get SSB (and B0)
+      // Get SSB (and SSN:B0 ratio)
       double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
-
       double dTrueYCS =  dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
       dAmountPer = dR0 * dTrueYCS;
-
+      // Retain these for later reporting
       vTrueYCSValues.push_back(dTrueYCS);
       vRecruitmentValues.push_back(dAmountPer);
       vSSBValues.push_back(pDerivedQuantity->getValue(iSSBOffset));
-  //}
+    }
 
+    //Allocate our recruitment across the cells
     if (pLayer != 0) {
       double dTotal = 0.0;
 
