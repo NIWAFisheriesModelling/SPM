@@ -31,6 +31,7 @@ public:
   int                         getInitializationPhaseOrderIndex(string label);
   int                         getLastExecutedInitializationPhase() { return lastExecutedInitializationPhase; }
   int                         getNumberInitializationPhases() { return vInitializationPhases.size(); }
+  CInitializationPhase*       getInitializationPhase(int index) { return vInitializationPhaseOrder[index]; };
   void                        validate();
   void                        build();
   void                        execute();

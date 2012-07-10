@@ -26,10 +26,11 @@ public:
   void                        validate();
   void                        build();
   void                        execute();
-
+  int                         getCurrentTimeStep() { return iCurrentTimeStep; }
 
 protected:
   int                         iYears;
+  int                         iCurrentTimeStep;
   vector<string>              vTimeStepNames;
   vector<CTimeStep*>          vTimeSteps;
 };

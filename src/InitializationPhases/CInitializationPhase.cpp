@@ -28,7 +28,8 @@ using std::endl;
 //**********************************************************************
 CInitializationPhase::CInitializationPhase() {
   // Vars
-  iYears    = 0;
+  iYears            = 0;
+  iCurrentTimeStep  = 0;
 
   // Register parameters
   pParameterList->registerAllowed(PARAM_YEARS);
@@ -80,6 +81,8 @@ void CInitializationPhase::execute() {
   // Loop Through and Execute
   for (int i = 0; i < iYears; i++) {
     for (int j = 0; j < (int)vTimeSteps.size(); ++j) {
+      iCurrentTimeStep = j;
+
       vTimeSteps[j]->execute();
       pDerivedQuantityManager->calculate(true, j);
     }

@@ -59,6 +59,10 @@ void CAbundanceDerivedQuantity::validate() {
     if (vCategoryNames.size() != vSelectivityNames.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
+    int initialisationPhaseCount = CInitializationPhaseManager::Instance()->getNumberInitializationPhases();
+    if (vInitializationTimeStepNames.size() != 0 && vInitializationTimeStepNames.size() != initialisationPhaseCount)
+      THROW_EXCEPTION(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as number of defined initialisation phases"));
+
     //Scott TODO: Validate PARAM_INITIALIZATION_TIME_STEPS are val;id time steps in each inialisation phase
     //            Should be a vector of length inialisation_phases
     //            each element should be valid within that phase
@@ -83,6 +87,15 @@ void CAbundanceDerivedQuantity::build() {
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
     pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
+    // Get a vector of Initialisation indexes
+    if (vInitializationTimeStepNames.size() > 0) {
+      CInitializationPhaseManager *initialisationManager = CInitializationPhaseManager::Instance();
+
+      foreach(string name, vInitializationTimeStepNames) {
+        vInitializationTimeStepIndex.push_back(initialisationManager->getInitializationPhaseOrderIndex(name));
+      }
+    }
 
     // Get our Selectivitys and Categories
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
@@ -127,6 +140,17 @@ void CAbundanceDerivedQuantity::calculate() {
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
 void CAbundanceDerivedQuantity::calculate(int initialisationPhase, int timeStep ) {
+
+  // Check if we're in the right initialisation phase
+  if (std::find(vInitializationTimeStepIndex.begin(), vInitializationTimeStepIndex.end(), initialisationPhase) == vInitializationTimeStepIndex.end()  ) {
+    return;
+  }
+
+  // Check if we're in the right timestep
+  CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
+  if (phase->getCurrentTimeStep() != timeStep)
+    return;
+
 
 // SCOTT: TODO: work out the index of the initialisation phase timestep index, and test here to see if we are in the correct timestep
 //              this same code needs adding to CBiomassDerivedQuantity.cpp as well
