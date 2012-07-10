@@ -31,8 +31,10 @@ public:
   double                      getRandomUniform(double min, double max);
   double                      getRandomUniform_01();
   double                      getRandomNormal(double mean, double sigma);
+  double                      getRandomStandardNormal();
   double                      getRandomLogNormal(double mean, double cv);
   double                      getRandomBinomial(double p, double N);
+  double                      getRandomChiSquare(int df);
 
 protected:
   // Functions

@@ -84,6 +84,19 @@ double CRandomNumberGenerator::getRandomNormal(double mean, double sigma) {
 }
 
 //**********************************************************************
+// double CRandomNumberGenerator::getRandomStandardNormal()
+// Get a standard normal distributed random number
+//**********************************************************************
+double CRandomNumberGenerator::getRandomStandardNormal() {
+
+  // Build our Normal Distribution Generator
+  boost::normal_distribution<> distNormal(0.0,1.0);
+  boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
+
+  return gen(); // Generated Number
+}
+
+//**********************************************************************
 // double CRandomNumberGenerator::getRandomLogNormal(double mean, double cv)
 // Get a lognormal distributed random number, with mean and c.v.
 //**********************************************************************
@@ -113,6 +126,25 @@ double CRandomNumberGenerator::getRandomBinomial(double p, double N) {
 
   return (dCount / std::ceil(N)); // Generated Number
 }
+
+//**********************************************************************
+// double CRandomNumberGenerator::getRandomChiSquare()
+// Get a ChiSquare distributed random number
+//**********************************************************************
+double CRandomNumberGenerator::getRandomChiSquare(int df) {
+
+  // Build our Normal Distribution Generator
+  boost::normal_distribution<> distNormal(0.0,1.0);
+  double dSum = 0.0;
+  for (int i = 0; i < df; ++i ) {
+    boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
+    //ChiSq ~ sum of normals squared
+    double dNumber = gen();
+    dSum += dNumber * dNumber;
+  }
+  return dSum; // Generated Number
+}
+
 
 //**********************************************************************
 // void CRandomNumberGenerator::validate()
