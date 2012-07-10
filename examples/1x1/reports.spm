@@ -63,3 +63,16 @@ type derived_quantity
 derived_quantity SSB
 
 @include "simulation-reports.spm"
+
+@report Recruitment
+type process
+process BHrecruitment
+
+@report Ageing
+type process
+process Ageing
+
+@report Maturation
+type process
+process Maturation
+

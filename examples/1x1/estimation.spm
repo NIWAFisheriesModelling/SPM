@@ -6,7 +6,7 @@ minimiser GammaDiff
 type numerical_differences
 iterations 1000
 evaluations 4000
-tolerance 0.0002
+tolerance 0.02
 covariance true
 
 @minimiser DE
@@ -23,10 +23,11 @@ adaptive_stepsize True
 adapt_at 100000 200000 400000
 proposal_t True
 df 4
+max_correlation 1.4
 
 #Profile
 @profile R0
-parameter process[Recruitment].r0
+parameter process[BHrecruitment].r0
 steps  20
 lower_bound   100000
 upper_bound  1000000
@@ -43,7 +44,7 @@ upper_bound 1e-1
 prior Uniform
 
 @estimate
-parameter process[Recruitment].r0
+parameter process[BHrecruitment].r0
 lower_bound 1e4
 upper_bound 1e7
 prior Uniform

@@ -38,7 +38,7 @@ years 1
 time_steps Phase1a Phase1b
 
 @time_step Phase1a
-processes Recruitment Maturation halfM
+processes BHrecruitment Maturation halfM
 
 @time_step Phase1b
 processes halfM Ageing
@@ -52,9 +52,9 @@ processes halfM Ageing
 
 # Derived quantities
 @derived_quantity SSB
-type biomass
+type abundance
 time_step step_one
-initialisation_time_steps Phase1a Phase1a
+#initialisation_time_steps Phase1a Phase1a
 categories mature
 selectivities One
 layer Base
@@ -64,13 +64,6 @@ layer Base
 type ageing
 categories immature mature
 
-@process Recruitment
-type constant_recruitment
-categories immature
-proportions 1.0
-r0 550000
-age 1
-
 @process BHrecruitment
 type bh_recruitment
 categories immature
@@ -78,9 +71,11 @@ proportions 1.0
 r0 550000
 age 1
 ssb SSB
-b0 Phase1
+b0 Phase2
 ssb_offset 1
+standardise_YCS_years 1994-2000
 ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
 
 @process halfM
 type constant_mortality_rate
