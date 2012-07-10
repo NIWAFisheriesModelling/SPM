@@ -186,7 +186,7 @@ void CTimeStepManager::build() {
 }
 
 //**********************************************************************
-// void CTimeStepManager::executeTimeSteps(int Step)
+// void CTimeStepManager::execute()
 // Execute Our TimeSteps
 //**********************************************************************
 void CTimeStepManager::execute() {
