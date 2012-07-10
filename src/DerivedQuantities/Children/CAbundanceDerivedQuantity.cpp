@@ -11,6 +11,7 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
+#include "../../InitializationPhases/CInitializationPhase.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -60,7 +61,7 @@ void CAbundanceDerivedQuantity::validate() {
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
     int initialisationPhaseCount = CInitializationPhaseManager::Instance()->getNumberInitializationPhases();
-    if (vInitializationTimeStepNames.size() != 0 && vInitializationTimeStepNames.size() != initialisationPhaseCount)
+    if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
       THROW_EXCEPTION(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as number of defined initialisation phases"));
 
     //Scott TODO: Validate PARAM_INITIALIZATION_TIME_STEPS are val;id time steps in each inialisation phase

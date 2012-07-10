@@ -153,6 +153,7 @@ void CInitializationPhaseManager::execute() {
 
     pDerivedQuantityManager->setInitialisationPhase(lastExecutedInitializationPhase);
 
+    Phase->setExecutionOrderIndex(lastExecutedInitializationPhase);
     Phase->execute();
 
     pReportManager->execute(STATE_INITIALIZATION);

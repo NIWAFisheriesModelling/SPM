@@ -131,20 +131,19 @@ void CDerivedQuantityManager::rebuild() {
 
 
 //**********************************************************************
-// void CDerivedQuantityManager::calculate(bool isInitialisation, int timeStep)
+// void CDerivedQuantityManager::calculate(bool initialisationPhase, int timeStep)
 // Calculate Derived Quantities
 //**********************************************************************
-void CDerivedQuantityManager::calculate(bool isInitialisation, int timeStep) {
+void CDerivedQuantityManager::calculate() {
+  foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+    DerivedQuantity->calculate();
+  }
+}
 
-  if (isInitialisation) {
-    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
-      DerivedQuantity->calculate(iInitialisationPhase, timeStep);
-    }
+void CDerivedQuantityManager::calculate(int initialisationPhase, int timeStep) {
 
-  } else {
-    foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
-      DerivedQuantity->calculate();
-    }
+  foreach(CDerivedQuantity *DerivedQuantity, vDerivedQuantities) {
+    DerivedQuantity->calculate(initialisationPhase, timeStep);
   }
 }
 

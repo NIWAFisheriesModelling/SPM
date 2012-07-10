@@ -31,7 +31,8 @@ public:
   void                        validate();
   void                        build();
   void                        rebuild();
-  void                        calculate(bool isInitialisation, int timeStep);
+  void                        calculate();
+  void                        calculate(int initialisationPhase, int timeStep);
   virtual                     ~CDerivedQuantityManager();
 
 protected:

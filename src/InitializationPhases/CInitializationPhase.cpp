@@ -84,7 +84,7 @@ void CInitializationPhase::execute() {
       iCurrentTimeStep = j;
 
       vTimeSteps[j]->execute();
-      pDerivedQuantityManager->calculate(true, j);
+      pDerivedQuantityManager->calculate(iExecutionOrderIndex, j);
     }
   }
 }

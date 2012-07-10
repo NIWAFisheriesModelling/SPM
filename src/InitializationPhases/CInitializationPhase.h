@@ -27,10 +27,12 @@ public:
   void                        build();
   void                        execute();
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
+  void                        setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
 
 protected:
   int                         iYears;
   int                         iCurrentTimeStep;
+  int                         iExecutionOrderIndex;
   vector<string>              vTimeStepNames;
   vector<CTimeStep*>          vTimeSteps;
 };
