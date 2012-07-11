@@ -10,8 +10,8 @@
 #include "CAbundanceDerivedQuantity.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
-#include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../InitializationPhases/CInitializationPhase.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -67,7 +67,7 @@ void CAbundanceDerivedQuantity::validate() {
     pWorldView->validate();
 
   } catch (string &Ex) {
-    Ex = "CDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CAbundanceDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -117,7 +117,7 @@ void CAbundanceDerivedQuantity::build() {
     pWorldView->build();
 
   } catch (string &Ex) {
-    Ex = "CDerivedQuantity.build(" + getLabel() + ")->" + Ex;
+    Ex = "CAbundanceDerivedQuantity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

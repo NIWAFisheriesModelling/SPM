@@ -10,6 +10,8 @@
 #include "CBiomassDerivedQuantity.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../InitializationPhases/CInitializationPhase.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -47,10 +49,10 @@ void CBiomassDerivedQuantity::validate() {
     CBaseBuild::validate();
 
     // Get our parameters
-    sTimeStep               = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer                  = pParameterList->getString(PARAM_LAYER);
+    sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
+    sLayer        = pParameterList->getString(PARAM_LAYER);
 
-    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true); // not currently used: but if not defined, should default to the end of the annual cycle in each initialisation phase
+    pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
 
@@ -58,10 +60,14 @@ void CBiomassDerivedQuantity::validate() {
     if (vCategoryNames.size() != vSelectivityNames.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
+    int initialisationPhaseCount = CInitializationPhaseManager::Instance()->getNumberInitializationPhases();
+    if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
+      CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
+
     pWorldView->validate();
 
   } catch (string &Ex) {
-    Ex = "CDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CBiomassDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -78,6 +84,32 @@ void CBiomassDerivedQuantity::build() {
 
     pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
+    // Get a vector of Initialisation indexes
+    if (vInitializationTimeStepNames.size() > 0) {
+      CInitializationPhaseManager *initialisationManager = CInitializationPhaseManager::Instance();
+
+      for (int i=0; i < (int)vInitializationTimeStepNames.size(); ++i) {
+        vector<string> vTimeStepNames = initialisationManager->getInitializationPhase(i)->getTimeStepNames();
+        bool bValidTimeStepName = false;
+        for (int j=0; j < (int)vTimeStepNames.size(); ++j) {
+          if ( vInitializationTimeStepNames[i] == vTimeStepNames[j] ) {
+            bValidTimeStepName = true;
+            vInitializationTimeStepIndex.push_back(j);
+          }
+        }
+        if (bValidTimeStepName == false)
+          CError::errorUnknown(PARAM_TIME_STEP,vInitializationTimeStepNames[i]);
+      }
+    } else {
+      CInitializationPhaseManager *initialisationManager = CInitializationPhaseManager::Instance();
+      int iPhases = initialisationManager->getNumberInitializationPhases();
+      for (int i=0; i < iPhases; ++i) {
+        vector<string> vTimeStepNames = initialisationManager->getInitializationPhase(i)->getTimeStepNames();
+        vInitializationTimeStepNames.push_back(vTimeStepNames[vTimeStepNames.size()-1]);
+        vInitializationTimeStepIndex.push_back(vTimeStepNames.size()-1);
+      }
+    }
+
     // Get our Selectivitys and Categories
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
@@ -85,7 +117,7 @@ void CBiomassDerivedQuantity::build() {
     pWorldView->build();
 
   } catch (string &Ex) {
-    Ex = "CDerivedQuantity.build(" + getLabel() + ")->" + Ex;
+    Ex = "CBiomassDerivedQuantity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -123,6 +155,12 @@ void CBiomassDerivedQuantity::calculate() {
 //**********************************************************************
 void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
 
+  //Check if we're in the right timestep for the initialisation phase we are in
+  CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
+  if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
+    return;
+
+  // If a new initialisation phase, then grow the result to hold the new vector of derived quantitys
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
 
@@ -131,13 +169,14 @@ void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
   pWorldView->execute();
   pBaseSquare = pWorldView->getSquare();
 
+  // Calcuate the derived quantity value
   for (int i = 0; i < (int)vCategories.size(); ++i) {
     for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
       double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
       dValue += dAbundance * pWorld->getMeanWeight(j,i);
     }
   }
-
+  // And add the value to our results
   vvInitialisationValues[initialisationPhase].push_back(dValue);
 }
 
@@ -147,4 +186,3 @@ void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
 //**********************************************************************
 CBiomassDerivedQuantity::~CBiomassDerivedQuantity() {
 }
-
