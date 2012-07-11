@@ -19,8 +19,8 @@
 \par\textbf{\commandlabsubarg{initialisation\_phase}{type}{iterative}}\par
 \defSub{years} {Define the number of years to run}
 \defSub{processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
-\par\defComLab{time\_step} {Define a time step with label}\par
-\defSub{processes} {Define the process labels, in the order that they are applied, for the time step}
+\par\defComLab{time\_step} {Define a time-step with label}\par
+\defSub{processes} {Define the process labels, in the order that they are applied, for the time-step}
 \par\defComLab{process} {Define a process with label}\par
 \defSub{type} {Define the type of process}
 \par\textbf{\commandlabsubarg{process}{type}{constant\_recruitment}}\par
@@ -35,7 +35,7 @@
 \defSub{proportions} {Define the proportion of recruitment that occurs into each category}
 \defSub{age} {Define the age that receives recruitment}
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
-\defSub{b0} {Define the label of the \command{derived\_quantity} that defines the initial spawning stock biomass ($B_0$)}
+\defSub{b0} {Define the \command{initialization\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$)}
 \defSub{ssb} {Define the label of the \command{derived\_quantity} that defines the spawning stock biomass (SSB)}
 \defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
 \defSub{ycs\_years} {Years for year class strength values}
@@ -108,6 +108,7 @@
 \defSub{proportion} {Define the constant multiplier for the proportion that moves from each cell to the neighbouring cell}
 \par\textbf{\commandlabsubarg{process}{type}{preference}}\par
 \defSub{categories} {Define the categories that the preference function movement is applied to}
+\defSub{proportion} {Define the constant multiplier for the proportion that the preference function movement is applied to}
 \defSub{preference\_functions} {Define the labels of the individual  preference functions that make up the total preference function}
 \par\defComLab{preference\_function} {Define a preference function with label}\par
 \defSub{type} {Define the type of preference function}
@@ -180,13 +181,13 @@
 \defSub{initialisation\_layers} {Define the layers label to use during the initialisation}
 \par\textbf{\commandlabsubarg{layer}{type}{derived}}\par
 \defSub{years} {Define the years when the calculation is performed}
-\defSub{time\_step} {Define the timestep at which the calculation is performed}
+\defSub{time\_step} {Define the time-step at which the calculation is performed}
 \defSub{layers} {Define the layers to be used in the calculations}
 \defSub{parameters} {Define the user-defined parameters within the function}
 \defSub{parameter\_values} {Define the initial values of the user-defined parameters within the function}
 \defSub{formula} {Define the calculation to be applied}
 \par\textbf{\commandlabsubarg{layer}{type}{derived\_meta}}\par
-\defSub{time\_step} {Define the timestep at which the calculation is performed}
+\defSub{time\_step} {Define the time-step at which the calculation is performed}
 \defSub{layers} {Define the layers to be used in the calculations}
 \defSub{parameters} {Define the user-defined parameters within the function}
 \defSub{parameter\_values} {Define the initial values of the user-defined parameters within the function}
@@ -196,12 +197,14 @@
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{abundance}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
 \defSub{selectivities} {Define the selectivities}
-\defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity is calculated}
 \defSub{layer} {Name of the layer}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
 \defSub{selectivities} {Define the selectivities}
-\defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity is calculated}
 \defSub{layer} {Name of the layer}
 \par\defComLab{age\_size} {Define an age-size relationship with label}\par
 \defSub{type} {Define the type of size-at-age relationship}
@@ -212,7 +215,7 @@
 \defSub{distribution} {Define the distribution of sizes-at-age around the mean}
 \defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
-\defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
+\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \par\textbf{\commandlabsubarg{age\_size}{type}{schnute}}\par
 \defSub{y1} {Define the $y_1$ parameter of the Schnute relationship}
@@ -223,7 +226,7 @@
 \defSub{b} {Define the $b$ parameter of the Schnute relationship}
 \defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
 \defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
-\defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
+\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \par\defComLab{size\_weight} {Define a size-weight relationship with label}\par
 \defSub{type} {Define the type of relationship}
@@ -304,11 +307,12 @@
 \defSub{length} {Length of the Markov chain}
 \defSub{keep} {Spacing between recorded values in the chain}
 \defSub{max\_correlation} {Maximum absolute correlation in the covariance matrix of the proposal distribution}
-\defSub{correlation\_adjustment\_method} {Method for adjusting small variances in the covariance proposal matrix}
+\defSub{covariance\_adjustment\_method} {Method for adjusting small variances in the covariance proposal matrix}
 \defSub{correlation\_adjustment\_diff} {Minimum non-zero variance times the range of the bounds in the covariance matrix of the proposal distribution}
 \defSub{step\_size} {Initial step-size (as a multiplier of the approximate covariance matrix)}
 \defSub{proposal\_distribution} {The shape of the proposal distribution (either \textit{t} or normal)}
 \defSub{df} {Degrees of freedom of the multivariate t proposal distribution}
+\defSub{adapt\_stepsize\_at} {Iterations in the chain to check and resize the MCMC step-size}
 \par\defComLab{profile}{Define the profile parameters and arguments}\par\par
 \defSub{parameter} {Name of the parameter to be profiled}
 \defSub{steps} {Number of steps (values) at which to profile the parameter}
@@ -501,6 +505,9 @@
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{age\_weight}}\par
 \defSub{age\_size} {Define the label of the age-size relationship}
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\par\textbf{\commandlabsubarg{report}{type}{MCMC}}\par
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \subsection{Other commands and subcommands}\par

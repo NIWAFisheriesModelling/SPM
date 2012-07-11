@@ -113,7 +113,7 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defSub{type} {Define the method of MCMC}
 \defType{String}
 \defDefault{metropolis\_hastings}
-\defValue{A valid type of MCMC, currently only Metropolis-Hastings is available}
+\defValue{A valid type of MCMC. Currently only Metropolis-Hastings is available}
 
 \subsubsection[Metropolis-Hastings]{\commandsubarg{mcmc}{type}{metropolis\_hastings}}
 
@@ -137,9 +137,9 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defDefault{0.8}
 \defValue{Defines the maximum correlation in the covariance matrix of the proposal distribution. Correlations greater than max\_correlation are decreased to max\_correlation, and those less than -max\_correlation are increased to -max\_correlation }
 
-\defSub{correlation\_adjustment\_method} {Method for adjusting small variances in the covariance proposal matrix}
+\defSub{covariance\_adjustment\_method} {Method for adjusting small variances in the covariance proposal matrix}
 \defType{String}
-\defDefault{correlation}
+\defDefault{covariance}
 \defValue{Defines the method (either correlation or covariance) for the adjusting small variances in the covariance matrix of the proposal distribution}
 
 \defSub{correlation\_adjustment\_diff} {Minimum non-zero variance times the range of the bounds in the covariance matrix of the proposal distribution}
@@ -161,6 +161,11 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defType{Integer}
 \defDefault{4}
 \defValue{Defines the degrees of freedom of the multivariate t proposal distribution}
+
+\defSub{adapt\_stepsize\_at} {Iterations in the chain to check and resize the MCMC step-size}
+\defType{Vector of integers}
+\defDefault{no default}
+\defValue{Defines the points during the MCMC iterations to re-evaluate the MCMC step-size argument}
 
 \subsection{Profiles}
 

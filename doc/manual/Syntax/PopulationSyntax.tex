@@ -72,7 +72,7 @@
 \defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Defines the labels of the time steps that are run in each year}
+\defValue{Defines the labels of the time-steps that are run in each year}
 
 \subsection{Initialisation}
 
@@ -102,14 +102,14 @@ Each type of initialisation requires a set of subcommands and arguments specific
 \defDefault{No default}
 \defValue{A valid process label, from one of \command{process}}
 
-\subsection{Time steps}
+\subsection{time-steps}
 
-\defComLab{time\_step} {Define a time step with label}
+\defComLab{time\_step} {Define a time-step with label}
 
-\defSub{processes} {Define the process labels, in the order that they are applied, for the time step}
+\defSub{processes} {Define the process labels, in the order that they are applied, for the time-step}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Defines the labels of the processes for that time step}
+\defValue{Defines the labels of the processes for that time-step}
 
 \subsection{Processes}
 
@@ -164,7 +164,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{age} {Define the age that receives recruitment}
 \defType{Integer}
-\defDefault{No default}
+\defDefault{The minimum age of the population}
 \defValue{The age class that receives recruitment}
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
@@ -191,7 +191,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{age} {Define the age that receives recruitment}
 \defType{Integer}
-\defDefault{No default}
+\defDefault{The minimum age of the population}
 \defValue{The age class that receives recruitment}
 
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
@@ -207,14 +207,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 %\defType{Estimable}
 %\defDefault{0.0}
 
-\TODO
-
-\defSub{b0} {Define the label of the \command{derived\_quantity} that defines the initial spawning stock biomass ($B_0$)}
+\defSub{b0} {Define the \command{initialization\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$)}
 \defType{String}
 \defDefault{No default}
 \defValue{Must be a valid \command{derived\_quantity} label}
-
-\TODOend
 
 \defSub{ssb} {Define the label of the \command{derived\_quantity} that defines the spawning stock biomass (SSB)}
 \defType{String}
@@ -557,8 +553,8 @@ Changed name to be clearer.
 
 \defSub{proportion} {Define the constant multiplier for the proportion that moves from each cell to the neighbouring cell}
 \defType{Estimable}
-\defDefault{No default}
-\defValue{A real number between 0 and 1, inclusive.}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
 
 \subsubsection[Preference movement]{\commandlabsubarg{process}{type}{preference}}
 
@@ -566,6 +562,11 @@ Changed name to be clearer.
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{proportion} {Define the constant multiplier for the proportion that the preference function movement is applied to}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
 
 \defSub{preference\_functions} {Define the labels of the individual  preference functions that make up the total preference function}
 \defType{String vector}
@@ -899,9 +900,9 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defSub{years} {Define the years when the calculation is performed}
 \defType{Integer vector or integer range}
 \defDefault{If not specified, calculation is carried out at ever model year}
-\defValue{Must be valid model years once expanded, including insitialisation steps}
+\defValue{Must be valid model years once expanded, including initialisation steps}
 
-\defSub{time\_step} {Define the timestep at which the calculation is performed}
+\defSub{time\_step} {Define the time-step at which the calculation is performed}
 \defType{String}
 \defDefault{No default}
 \defValue{Valid label from \command{time\_step}}
@@ -931,7 +932,7 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 
 \TODO
 
-\defSub{time\_step} {Define the timestep at which the calculation is performed}
+\defSub{time\_step} {Define the time-step at which the calculation is performed}
 \defType{String}
 \defDefault{No default}
 \defValue{Valid label from \command{time\_step}}
@@ -957,8 +958,6 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 
 \TODOend 
 
-\TODO
-
 \subsection{Derived quantities}
 
 The individual types of derived quantities available are,
@@ -973,7 +972,7 @@ The individual types of derived quantities available are,
 \defSub{type} {Define the type of derived quantity}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid type of derived quantity}
+\defValue{A valid type of derived quantity, either \texttt{abundance} or \texttt{biomass}}
 
 \subsubsection[Abundance]{\commandlabsubarg{derived\_quantity}{type}{abundance}}
 
@@ -987,10 +986,15 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity is calculated}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid time step label from \command{time\_step}}
+\defValue{A valid time-step label from \command{time\_step}}
+
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity is calculated}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid time-step label from \command{time\_step}}
 
 \defSub{layer} {Name of the layer}
 \defType{String}
@@ -1009,17 +1013,20 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{time\_step} {Define the time step at the end of which, the derived quantity is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity is calculated}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid time step label from \command{time\_step}}
+\defValue{A valid time-step label from \command{time\_step}}
+
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity is calculated}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid time-step label from \command{time\_step}}
 
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell biomass multiplied by the value of the layer.}
-
-\TODOend
 
 \subsection{Age-size relationship}
 
@@ -1074,10 +1081,10 @@ The individual types of size-at-age relationships available are,
 \defDefault{No default}
 \defValue{A positive real number}
 
-\defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
+\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
 \defType{Constant vector}
 \defDefault{No default}
-\defValue{A vector of values, $\le1$ of length equal to the number of time steps}
+\defValue{A vector of values, $\le1$ of length equal to the number of time-steps}
 
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \defType{String}
@@ -1132,10 +1139,10 @@ The individual types of size-at-age relationships available are,
 \defDefault{No default}
 \defValue{A positive real number}
 
-\defSub{growth\_proportions} {Define the proportion of the year for each time step for evaluating size}
+\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
 \defType{Constant vector}
 \defDefault{No default}
-\defValue{A vector of values, $\le1$ of length equal to the number of time steps}
+\defValue{A vector of values, $\le1$ of length equal to the number of time-steps}
 
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \defType{String}

@@ -9,7 +9,7 @@ The population section consists of several components, including;
   \item The spatial and population structure
   \item Model initialisation (i.e., the state of the model at the start of the first year)\index{Initialisation}\index{Model ! initialisation}
   \item The years over which the model runs (i.e., the start and end years of the model)
-  \item The annual cycle (time steps and processes that are applied in each time step)\index{Annual cycle}
+  \item The annual cycle (time-steps and processes that are applied in each time-step)\index{Annual cycle}
   \item The specifications and parameters of the processes;
   \begin{itemize}
     \item Population processes (i.e., processes that add, remove individuals to or from the partition, or shift numbers between ages and categories in the partition)
@@ -134,7 +134,7 @@ The time sequence of the model is defined in three parts;
 
 \subsubsection{\I{Annual cycle}}
 
-The annual cycle is implemented as a set of processes that occur, in a user-defined order, within each year. Time steps are used to break the annual cycle into separate components, and allow observations to be associated with different sets of processes. Any number of processes can occur within each time step, in any order and can occur multiple times within each time step. Note that time steps are not implemented during the initialisation phases (effectively, there is only one time step), and that the annual cycle in the initialisation phases can be different from that which is applied during the model years.
+The annual cycle is implemented as a set of processes that occur, in a user-defined order, within each year. time-steps are used to break the annual cycle into separate components, and allow observations to be associated with different sets of processes. Any number of processes can occur within each time-step, in any order and can occur multiple times within each time-step. Note that time-steps are not implemented during the initialisation phases (effectively, there is only one time-step), and that the annual cycle in the initialisation phases can be different from that which is applied during the model years.
 
 \subsubsection{\I{Initialisation}}
 
@@ -155,12 +155,12 @@ Hence, for initialisation you need to define;
 
 \subsubsection{\I{Model years}}
 
-Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time steps, and observations can be associated with the state of the model at the end of any time step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time step. 
+Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time-steps, and observations can be associated with the state of the model at the end of any time-step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time-step. 
 
-Processes are carried out in the order specified within each time step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. %The projection part then extends the run time up to the end of year \argument{final}. 
+Processes are carried out in the order specified within each time-step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. %The projection part then extends the run time up to the end of year \argument{final}. 
 
 \begin{itemize}
-  \item The time steps and the processes applied in each
+  \item The time-steps and the processes applied in each
   \item The initial year (i.e., the model start year)
   \item The current year (i.e., the model end year)
   %\item The final year (i.e., the model projection end year)
@@ -198,7 +198,7 @@ Population processes are those processes that change the population state of ind
 
 Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}. 
 
-In the recruitment processes, the number of individuals are added to the partition is defined by the type of recruitment process and the form of the recruitment function. The allocation across each age is specified by a selectivity. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
+In the recruitment processes, the number of individuals are added to the partition in a define age class, and the amount is defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
 For the constant and Beverton-Holt recruitments, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
 \begin{equation}
@@ -207,7 +207,7 @@ For the constant and Beverton-Holt recruitments, the  number of individuals in c
 
 where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, $n$ is the number of spatial locations where recruitment occurs, and the recruitment to each cell is scaled to be proportional to the value of the layer in that cell. See below for how $R_y$ is determined in each of these cases.
 
-In the local Beverton-Holt recruitment process, individuals are recruited to an individual cell, based on the local abundance or biomass (i.e., SSB). For each cell where cell$(i,j)$ is a member of some layer $L_R$, the number of individuals in that cell following recruitment in each year $y$ is 
+In the local Beverton-Holt recruitment process, individuals are recruited to an individual cell, based on the local abundance or biomass (i.e., the local SSB). For each cell where cell$(i,j)$ is a member of some layer $L_R$, the number of individuals in that cell following recruitment in each year $y$ is 
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k R_y L_{ij}
 \end{equation}
@@ -235,23 +235,21 @@ age 1
 layer recruitment
 \end{verbatim}
 
-\TODO
-
 \paragraph{Beverton-Holt recruitment:}
 
 In the Beverton-Holt recruitment process the total number of recruits added each year is $R_y$, and is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
 \begin{equation}
   R_y = R_0 \times YCS_{y-offset} \times SR(SSB_{y-offset})
 \end{equation}
-
+  
 where $offset$ is the number of years offset to link the year class with the year of spawning $y$, and $SR$ is the Beverton-Holt stock-recruit relationship parametrised by the steepness $h$,
 \begin{equation}
 SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B_0} \right) \right)
 \end{equation}
 
-Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, derived quantities (see Section \ref{sec:derived-quantities}) must be defined that provides both $B_0$ and the annual $SSB_y$ for the recruitment process. The recruits are distributed in the cells defined by a user-defined layer. 
+Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is defined as the value of the $SSB$ at the end of one of the initialisation phases. The resulting recruits are then distributed across cells in proportion to the values in a numeric layer. 
 
-For example, to specify a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity of spawning stock biomass in each year, YCS is standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning, then,
+For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity labelled \texttt{SSB\_biomass} that represents the spawning stock biomass in each year, with $B_0$ the value of the derived quantity at the end of the inilatisation pahase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 
 \begin{verbatim}
 @process Recruitment
@@ -260,19 +258,17 @@ categories immature
 proportions 1.0
 R0 500000
 steepness 0.75
-sigma_r 0.6 [not actually used yet]
-rho 0.6 [not actually used yet]
 age 1
 layer MyRecruitment
-B0 1990_biomass
-SSB mature_biomass
+B0 phase1
+SSB SSB_biomasss
 standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 2
 \end{verbatim}
 
-Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time step before spawning, and therefore the offset is $age$ plus one.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age + 1$.
 
 \paragraph{Local Beverton-Holt recruitment:}
 
@@ -311,7 +307,7 @@ YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 1
 \end{verbatim}
 
-Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time step before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
 
 \TODOend
 
@@ -607,17 +603,17 @@ Note that for the monotonic categorical preference function, the preference func
 
 \subsection{\I{Derived quantities}\label{sec:derived-quantities}}
 
-Derived quantities are values, calculated by \SPM\ as required, that have a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Derived quantities are simply the count or sum of cells within some categories, after applying a selectivity, within cells defined by a layer.
+Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. Derived quantities are values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have  a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Abundance derived quantities are simply the count or sum of cells within some categories (after applying a selectivity) within cells defined by a layer. Biomass derived quantities are similar, except they are a measure of biomass. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. Here, the spawning stock biomass would be defined as the abundance or biomass of a part of the population at some point in the annual cycle for selected ages and categories, and would be calculated as a derived quantity.
 
-Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. In this example, the spawning stock biomass could be defined as the abundance or biomass of a part of the population at some point in the annual cycle, for selected ages and categories.
-
-For example, to define a derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time step over areas defined by a layer as the spawning ground but counting all `mature' individuals, we might use the syntax,
+As an example to define a biomass derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time-step (labelled step\_one) in the initialisation phases (and assuming two initialisation phases) and at the end of the first time-step otherwise, over areas defined by a layer as the spawning ground but counting all `mature' individuals, we would use the syntax,
 
 \begin{verbatim}
 @derived_quantity SSB
+type biomass
+time_step step_one
+initialisation_time_steps step_one step_one
 categories mature
 selectivity One
-time_step 1
 layer spawning_ground
 \end{verbatim}
 
@@ -625,7 +621,7 @@ layer spawning_ground
 
 \TODO
 
-Derived layers are layers, calculated by \SPM\ at a specific user-defined time step and year(s), that have a single value for each cell of the model. For example, $B_0$ is a derived layer calculated once only at the last initialisation phase of the model as the spawning stock biomass at that time; or a mortality dependent layer is calculated every year based on a formula including other layers with the latest calculation over-riding previous results. Derived meta-layers are meta-layers, calculated by \SPM\ at a specific user-defined time step every year that the model runs, with all results retained as yearly-indexed layers.
+Derived layers are layers, calculated by \SPM\ at a specific user-defined time-step and year(s), that have a single value for each cell of the model. For example, $B_0$ is a derived layer calculated once only at the last initialisation phase of the model as the spawning stock biomass at that time; or a mortality dependent layer is calculated every year based on a formula including other layers with the latest calculation over-riding previous results. Derived meta-layers are meta-layers, calculated by \SPM\ at a specific user-defined time-step every year that the model runs, with all results retained as yearly-indexed layers.
 
 Both derived layers and derived meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  
 
@@ -638,7 +634,7 @@ For example, density dependent mortality based on diet selectivity can be implem
 Lm_B = L_A \frac{E_B L_B}{E_B L_B + E_C L_C}
 \end{equation}
 
-The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to prey $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomass layers of species $A$, $B$, and $C$ respectively at a specific time step. These biomass layers as well as the mortality layer are updated each year by the model at the required time step. The selectivity parameters can be fixed or estimated by the model with the given initial values.
+The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to prey $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomass layers of species $A$, $B$, and $C$ respectively at a specific time-step. These biomass layers as well as the mortality layer are updated each year by the model at the required time-step. The selectivity parameters can be fixed or estimated by the model with the given initial values.
 
 \TODOend
 
