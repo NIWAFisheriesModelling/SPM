@@ -84,16 +84,14 @@ void CMCMCReport::execute() {
     cout << "Original " << PARAM_COVARIANCE << " matrix:\n";
     for(int i=0; i < (int)mxOriginalCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxOriginalCovariance.size2(); ++j) {
-        cout << mxOriginalCovariance(i,j) << ",";
+        cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? ", " : "\n");
       }
-      cout << "\n";
     }
     cout << "Proposal distribution " PARAM_COVARIANCE << " matrix:\n";
     for(int i=0; i < (int)mxCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxCovariance.size2(); ++j) {
-        cout << mxCovariance(i,j) << ",";
+        cout << mxCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? ", " : "\n");
       }
-      cout << "\n";
     }
 
     cout << "MCMC objective function values:\n";
@@ -103,14 +101,12 @@ void CMCMCReport::execute() {
     }
     cout << "MCMC samples:\n";
     for (int i =0; i < (int)vEstimateNames.size(); ++i ) {
-      cout << vEstimateNames[i] << ", ";
+      cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? ", " : "\n");
     }
-    cout << "\n";
     for(int i=0; i<(int)vChain.size(); ++i) {
       for(int j=0; j < (int)vChain[i].vValues.size(); ++j) {
-        cout << vChain[i].vValues[j] << ", ";
+        cout << vChain[i].vValues[j] << ((j<(int)vChain[i].vValues.size()-1) ? ", " : "\n");
       }
-      cout << "\n";
     }
 
     cout << CONFIG_END_REPORT << "\n" << endl;
