@@ -94,6 +94,7 @@ void CAbundanceDerivedQuantity::build() {
       CInitializationPhaseManager *initialisationManager = CInitializationPhaseManager::Instance();
 
       foreach(string name, vInitializationTimeStepNames) {
+        // ERROR here: this checks for initialisation phases labels, not the timesteps within an initialisation phase. We have to access the correct index for the timestep label wirthin each phase
         vInitializationTimeStepIndex.push_back(initialisationManager->getInitializationPhaseOrderIndex(name));
       }
     }
@@ -140,18 +141,17 @@ void CAbundanceDerivedQuantity::calculate() {
 // void CSampleDerivedQuantity::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
-void CAbundanceDerivedQuantity::calculate(int initialisationPhase, int timeStep ) {
+void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
 
   // Check if we're in the right initialisation phase
   if (std::find(vInitializationTimeStepIndex.begin(), vInitializationTimeStepIndex.end(), initialisationPhase) == vInitializationTimeStepIndex.end()  ) {
     return;
   }
 
-  // Check if we're in the right timestep
+  // Check if we're in the right timestep for our phase
   CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
-  if (phase->getCurrentTimeStep() != timeStep)
+  if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
     return;
-
 
 // SCOTT: TODO: work out the index of the initialisation phase timestep index, and test here to see if we are in the correct timestep
 //              this same code needs adding to CBiomassDerivedQuantity.cpp as well

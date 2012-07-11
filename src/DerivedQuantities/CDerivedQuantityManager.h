@@ -32,7 +32,7 @@ public:
   void                        build();
   void                        rebuild();
   void                        calculate();
-  void                        calculate(int initialisationPhase, int timeStep);
+  void                        calculate(int initialisationPhase);
   virtual                     ~CDerivedQuantityManager();
 
 protected:

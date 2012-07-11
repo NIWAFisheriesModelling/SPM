@@ -26,7 +26,7 @@ public:
   void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
   int                         getValuesSize() { return vValues.size(); }
   virtual void                calculate() = 0;
-  virtual void                calculate(int initialisationPhase, int timeStep) = 0;
+  virtual void                calculate(int initialisationPhase) = 0;
   // TODO: Scott to check
   int                         getInitialisationSize() { return vvInitialisationValues.size(); }
   int                         getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
