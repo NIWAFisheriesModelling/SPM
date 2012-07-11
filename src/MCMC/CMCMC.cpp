@@ -150,13 +150,11 @@ void CMCMC::build() {
     pMinimizer = CMinimizerManager::Instance()->getMinimizer();
 
     // Get the names of our parameters
-    int iCount = pMinimizer->getEstimateCount();
     vector<CEstimate*> vEstimates;
     CEstimateManager::Instance()->fillVector(vEstimates);
     foreach(CEstimate *Estimate, vEstimates) {
       vEstimateNames.push_back(Estimate->getParameter());
     }
-
 
     // Build default step size
     iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
@@ -206,8 +204,6 @@ void CMCMC::execute() {
     CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
     pObjectiveFunction->execute();
     double dScore = pObjectiveFunction->getScore();
-
-
     // Keep the location as the first point in our chain
     {
       SChainItem newItem;
@@ -219,7 +215,6 @@ void CMCMC::execute() {
       newItem.dAcceptanceRate = 0;
       newItem.dStepSize       = dStepSize;
       newItem.vValues         = vCandidates;
-
       vChain.push_back(newItem);
     }
 
@@ -265,6 +260,10 @@ void CMCMC::execute() {
         iTotalJumps++;
         // keep the score, and its compontent parts
         if ( ((iAcceptedJumps) % iKeep) == 0) {
+          if(!(pConfig->getQuietMode())) {
+            std::cerr << "." ;
+          }
+
           SChainItem newItem;
           newItem.iIteration      = iAcceptedJumps;
           newItem.dPenalty        = pObjectiveFunction->getPenalties();
@@ -286,6 +285,10 @@ void CMCMC::execute() {
         iTotalJumps++;
       }
     } while (iAcceptedJumps <= iLength);
+
+    if(!(pConfig->getQuietMode())) {
+      std::cerr << "\n" ;
+    }
 
   } catch (string &Ex) {
     Ex = "CMCMC.execute()->" + Ex;
