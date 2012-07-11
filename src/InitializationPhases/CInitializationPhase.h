@@ -27,6 +27,7 @@ public:
   void                        build();
   void                        execute();
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
+  vector<string>              getTimeStepNames() { return vTimeStepNames; }
   void                        setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
 
 protected:

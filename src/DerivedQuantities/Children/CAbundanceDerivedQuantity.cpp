@@ -62,12 +62,7 @@ void CAbundanceDerivedQuantity::validate() {
 
     int initialisationPhaseCount = CInitializationPhaseManager::Instance()->getNumberInitializationPhases();
     if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
-      THROW_EXCEPTION(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as number of defined initialisation phases"));
-
-    //Scott TODO: Validate PARAM_INITIALIZATION_TIME_STEPS are val;id time steps in each inialisation phase
-    //            Should be a vector of length inialisation_phases
-    //            each element should be valid within that phase
-    // if the vector is not supplied, then default to the end of the annual cycle in each phase
+      CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
 
     pWorldView->validate();
 
@@ -93,9 +88,25 @@ void CAbundanceDerivedQuantity::build() {
     if (vInitializationTimeStepNames.size() > 0) {
       CInitializationPhaseManager *initialisationManager = CInitializationPhaseManager::Instance();
 
-      foreach(string name, vInitializationTimeStepNames) {
-        // ERROR here: this checks for initialisation phases labels, not the timesteps within an initialisation phase. We have to access the correct index for the timestep label wirthin each phase
-        vInitializationTimeStepIndex.push_back(initialisationManager->getInitializationPhaseOrderIndex(name));
+      for (int i=0; i < (int)vInitializationTimeStepNames.size(); ++i) {
+        vector<string> vTimeStepNames = initialisationManager->getInitializationPhase(i)->getTimeStepNames();
+        bool bValidTimeStepName = false;
+        for (int j=0; j < (int)vTimeStepNames.size(); ++j) {
+          if ( vInitializationTimeStepNames[i] == vTimeStepNames[j] ) {
+            bValidTimeStepName = true;
+            vInitializationTimeStepIndex.push_back(j);
+          }
+        }
+        if (bValidTimeStepName == false)
+          CError::errorUnknown(PARAM_TIME_STEP,vInitializationTimeStepNames[i]);
+      }
+    } else {
+      CInitializationPhaseManager *initialisationManager = CInitializationPhaseManager::Instance();
+      int iPhases = initialisationManager->getNumberInitializationPhases();
+      for (int i=0; i < iPhases; ++i) {
+        vector<string> vTimeStepNames = initialisationManager->getInitializationPhase(i)->getTimeStepNames();
+        vInitializationTimeStepNames.push_back(vTimeStepNames[vTimeStepNames.size()-1]);
+        vInitializationTimeStepIndex.push_back(vTimeStepNames.size()-1);
       }
     }
 
@@ -143,23 +154,12 @@ void CAbundanceDerivedQuantity::calculate() {
 //**********************************************************************
 void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
 
-  // Check if we're in the right initialisation phase
-  if (std::find(vInitializationTimeStepIndex.begin(), vInitializationTimeStepIndex.end(), initialisationPhase) == vInitializationTimeStepIndex.end()  ) {
-    return;
-  }
-
-  // Check if we're in the right timestep for our phase
+  //Check if we're in the right timestep for the initialisation phase we are in
   CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
   if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
     return;
 
-// SCOTT: TODO: work out the index of the initialisation phase timestep index, and test here to see if we are in the correct timestep
-//              this same code needs adding to CBiomassDerivedQuantity.cpp as well
-//   int what_is_the_index_of vInitializationTimeStepNames[initialisationPhase]
-//   if (timeStep != what_is_the_index_of) {
-//    return;
-//  }
-
+  // If a new initialisation phase, then grow the result to hold the new vector of derived quantitys
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
 
@@ -168,12 +168,13 @@ void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
   pWorldView->execute();
   pBaseSquare = pWorldView->getSquare();
 
+  // Calcuate the derived quantity value
   for (int i = 0; i < (int)vCategories.size(); ++i) {
     for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
       dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
     }
   }
-
+  // And add the value to our results
   vvInitialisationValues[initialisationPhase].push_back(dValue);
 }
 
