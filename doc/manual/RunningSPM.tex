@@ -51,7 +51,7 @@ The call to \SPM\ is of the following form.:
 
 and where \emph{task} is one of;
 \begin{description}
-\item [\texttt{-h}]  Display help (this page).
+\item [\texttt{-h}] Display help (this page).
 \item [\texttt{-l}] Display the reference for the software license (CPLv1.0).
 \item [\texttt{-v}] Display the \SPM\ version number.
 
@@ -95,7 +95,7 @@ The model definition, parameters, observations, and reports are specified in an 
 \item Commands that do not have either a label or argument, but have subcommands (for example \command{model})
 \end{enumerate}
 
-Commands that have a label must have a unique label, i.e., the label cannot be used on more than one command of that type. The labels must start with a letter or underscore, can contain letters, underscores, or numbers, but must not contain white-space or a full-point ('.').
+Commands that have a label must have a unique label, i.e., the label cannot be used on more than one command of that type. The labels must start with a letter or underscore, can contain letters, underscores, or numbers. Labels must not contain white-space, a full-point ('.'), or other characters that are not letters, numbers, or an underscore.
 
 \subsubsection{Subcommands}\index{Commands ! Subcommands}
 
@@ -143,7 +143,7 @@ and then
 \item etc,.
 \end{description}
 
-Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. Commands and subcommands consist of letters and/or underscores, must not contain a spaces or full-point ('.').
+Blank lines are ignored, as is extra white space (i.e., tabs and spaces) between arguments. But don't put extra white space before a \command{} character (which must also be the first character on the line), and make sure the file ends with a carriage return. 
 
 There is no need to mark the end of a command block. This is automatically recognized by either the end of the file, section, or the start of the next command block (which is marked by the \command{} on the first character of a line). Note, however, that the \command{include} is the only exception to this rule. See Section \ref{sec:general-syntax})\index{Command ! Include files} for details of the use of \command{include}. 
 
