@@ -65,7 +65,7 @@ void CMCMCReport::build() {
 void CMCMCReport::execute() {
   try {
     // Check for correct state
-    if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+    if (pRuntimeController->getRunMode() != RUN_MODE_MARKOV_CHAIN_MONTE_CARLO)
       return;
 
     this->start();
