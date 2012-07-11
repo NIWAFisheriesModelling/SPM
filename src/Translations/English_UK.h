@@ -254,6 +254,7 @@
 #define PARAM_MCMC                                "mcmc"
 #define PARAM_META                                "meta"
 #define PARAM_METHOD                              "method"
+#define PARAM_METROPOLIS_HASTINGS                 "metropolis_hastings"
 #define PARAM_MIGRATION_MOVEMENT                  "migration"
 #define PARAM_MIN_AGE                             "min_age"
 #define PARAM_MINIMIZER                           "minimiser"

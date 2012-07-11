@@ -92,6 +92,7 @@ void CMCMC::validate() {
     pParameterList->checkInvalidParameters();
 
     // Populate the variables from parameter list
+    sType                   = pParameterList->getString(PARAM_TYPE, true, PARAM_METROPOLIS_HASTINGS);
     dStart                  = pParameterList->getDouble(PARAM_START, true, 0.0);
     iLength                 = pParameterList->getInt(PARAM_LENGTH);
     iKeep                   = pParameterList->getInt(PARAM_KEEP, true, 1);
@@ -102,14 +103,10 @@ void CMCMC::validate() {
     sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, PARAM_T);
     iDF                     = pParameterList->getInt(PARAM_DF, true, 4);
 
-    if (pParameterList->hasParameter(PARAM_ADAPT_STEPSIZE_AT)) {
-      pParameterList->fillVector(vAdaptStepSize, PARAM_ADAPT_STEPSIZE_AT);
-    } else {
-      vAdaptStepSize.resize(1);
-      vAdaptStepSize[0] = 1;
-    }
 
     // Validate the parameters
+    if (sType != PARAM_METROPOLIS_HASTINGS)
+      CError::errorNotEqual(PARAM_TYPE, PARAM_METROPOLIS_HASTINGS);
     if (iLength < 1)
       CError::errorLessThan(PARAM_LENGTH, PARAM_ONE);
     if (iKeep < 0)
@@ -131,6 +128,12 @@ void CMCMC::validate() {
         CError::errorLessThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_ONE);
       if (vAdaptStepSize[i] > iLength )
         CError::errorGreaterThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_LENGTH);
+    }
+    if (pParameterList->hasParameter(PARAM_ADAPT_STEPSIZE_AT)) {
+      pParameterList->fillVector(vAdaptStepSize, PARAM_ADAPT_STEPSIZE_AT);
+    } else {
+      vAdaptStepSize.resize(1);
+      vAdaptStepSize[0] = 1;
     }
 
   } catch (string &Ex) {

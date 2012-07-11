@@ -66,6 +66,7 @@ protected:
   void                       updateStepSize(int iteration);
 
   // Variables
+  string                     sType;
   double                     dStart;
   int                        iLength;
   int                        iKeep;
