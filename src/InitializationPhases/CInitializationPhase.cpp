@@ -65,6 +65,19 @@ void CInitializationPhase::build() {
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();
     pTimeStepManager->fillVector(vTimeStepNames, vTimeSteps);
 
+    // TimeStep Validation
+    for(int i=0; i < (int)vTimeStepNames.size(); ++i) {
+      bool bValid = false;
+      foreach( CTimeStep *TimeStep, vTimeSteps) {
+        if( TimeStep->getLabel() == vTimeStepNames[i] ) {
+          bValid = true;
+        }
+      }
+      if(bValid == false) {
+        CError::errorUnknown(PARAM_TIME_STEP, vTimeStepNames[i]);
+      }
+    }
+
   } catch (string &Ex) {
     Ex = "CInitializationPhase.build(" + getLabel() + ")->" + Ex;
     throw Ex;
