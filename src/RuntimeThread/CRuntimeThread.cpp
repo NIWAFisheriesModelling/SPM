@@ -221,6 +221,10 @@ void CRuntimeThread::executeMCMC() {
   mcmc->validate();
   mcmc->build();
   mcmc->execute();
+
+  // Change State
+  eCurrentState = STATE_FINALIZATION;
+  CReportManager::Instance()->execute(eCurrentState);
 }
 
 //**********************************************************************
