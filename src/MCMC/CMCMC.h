@@ -47,6 +47,10 @@ public:
   void                       validate();
   void                       build();
   void                       execute();
+  vector<SChainItem>         getMCMCChain() { return vChain; }
+  ublas::matrix<double>      getOriginalCovariance() { return mxOriginalCovariance; }
+  ublas::matrix<double>      getCovariance() { return mxCovariance; }
+  vector<string>             getEstimateNames() { return vEstimateNames; }
 
 protected:
   // Functions
@@ -76,12 +80,14 @@ protected:
   double                     dStepSize;
   string                     sProposalDistribution;
   int                        iDF;
+  ublas::matrix<double>      mxOriginalCovariance;
   ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
   vector<SChainItem>         vChain;
   vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;
+  vector<string>             vEstimateNames;
 
 private:
   static CMCMC*              clInstance;

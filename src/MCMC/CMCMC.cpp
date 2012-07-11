@@ -149,6 +149,15 @@ void CMCMC::build() {
     // Link to our minimiser
     pMinimizer = CMinimizerManager::Instance()->getMinimizer();
 
+    // Get the names of our parameters
+    int iCount = pMinimizer->getEstimateCount();
+    vector<CEstimate*> vEstimates;
+    CEstimateManager::Instance()->fillVector(vEstimates);
+    foreach(CEstimate *Estimate, vEstimates) {
+      vEstimateNames.push_back(Estimate->getParameter());
+    }
+
+
     // Build default step size
     iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
     if (!pParameterList->hasParameter(PARAM_STEP_SIZE)) {
@@ -278,18 +287,6 @@ void CMCMC::execute() {
       }
     } while (iAcceptedJumps <= iLength);
 
-std::cerr<< "MCMC output:\n";
-for(int i=0; i<(int)vChain.size(); ++i) {
-  std::cerr << vChain[i].iIteration << " " << vChain[i].dScore << " " << vChain[i].dPenalty << " " << vChain[i].dPrior  << " " << vChain[i].dLikelihood << " " << vChain[i].dAcceptanceRate << " " << vChain[i].dStepSize << " : ";
-  for(int j=0; j<iEstimateCount; ++j) {
-    std:: cerr << vChain[i].vValues[j] << " ";
-  }
-  std::cerr << "\n";
-}
-std::cerr << "\n\n";
-
-
-
   } catch (string &Ex) {
     Ex = "CMCMC.execute()->" + Ex;
     throw Ex;
@@ -414,7 +411,8 @@ void CMCMC::buildCovarianceMatrix() {
   try {
 
     // Obtain the covariance matrix to use for the proposal distribution
-    mxCovariance = pMinimizer->getCovarianceMatrix();
+    mxOriginalCovariance = pMinimizer->getCovarianceMatrix();
+    mxCovariance = mxOriginalCovariance;
 
     if ( sCorrelationMethod == PARAM_NONE )
       return;
@@ -580,28 +578,6 @@ bool CMCMC::choleskyDecomposition() {
   if (mxCovariance(iN-1,iN-1) <= dSum)
     return false;
   mxCovarianceLT(iN-1,iN-1) = sqrt(mxCovariance(iN-1,iN-1) - dSum);
-
-
-/*//Print our covariance
-  std::cerr << "Covariance:\n";
-  for(int i=0; i < iN; ++i ) {
-    for(int j=0; j < iN; ++j ) {
-      std::cerr << mxCovariance(i,j) << " ";
-    }
-    std::cerr << "\n";
-  }
-  std::cerr << "\n";
-
-  //Print our cholesky decomposition
-  std::cerr << "Cholesky decomposition:\n";
-  for(int i=0; i < iN; ++i ) {
-    for(int j=0; j < iN; ++j ) {
-      std::cerr << mxCovarianceLT(i,j) << " ";
-    }
-    std::cerr << "\n";
-  }
-  std::cerr << "\n";
-*/
 
   return true;
 }

@@ -11,6 +11,7 @@
 
 // Local headers
 #include "Base/CFileReport.h"
+#include "../../MCMC/CMCMC.h"
 
 // Forward-Declaration
 class CMCMC;
@@ -31,6 +32,7 @@ public:
 protected:
   string                      sMCMC;
   CMCMC                       *pMCMC;
+  vector<SChainItem>          vChain;
 };
 
 #endif /* CMCMCREPORT_H_ */
