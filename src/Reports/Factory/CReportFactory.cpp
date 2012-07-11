@@ -10,25 +10,26 @@
 // Local headers
 #include "CReportFactory.h"
 #include "../CReportManager.h"
-#include "../Children/CPartitionReport.h"
-#include "../Children/CObjectiveFunctionReport.h"
-#include "../Children/CEstimateSummaryReport.h"
-#include "../Children/CEstimateValueReport.h"
-#include "../Children/CObservationReport.h"
-#include "../Children/CInitializationReport.h"
-#include "../Children/CDerivedQuantityReport.h"
-#include "../Children/CRandomNumberSeedReport.h"
-#include "../Children/CSelectivityReport.h"
-#include "../Children/CLayerDerivedWorldViewReport.h"
-#include "../Children/CProcessReport.h"
-#include "../Children/CCovarianceReport.h"
-#include "../Children/CSimulatedObservationReport.h"
-#include "../Children/CSpatialMapReport.h"
-#include "../Children/CAgeingErrorReport.h"
-#include "../Children/CSizeWeightReport.h"
 #include "../Children/CAgeSizeReport.h"
 #include "../Children/CAgeWeightReport.h"
+#include "../Children/CAgeingErrorReport.h"
+#include "../Children/CCovarianceReport.h"
+#include "../Children/CDerivedQuantityReport.h"
+#include "../Children/CEstimateSummaryReport.h"
+#include "../Children/CEstimateValueReport.h"
+#include "../Children/CInitializationReport.h"
+#include "../Children/CLayerDerivedWorldViewReport.h"
 #include "../Children/CLayerReport.h"
+#include "../Children/CMCMCReport.h"
+#include "../Children/CObjectiveFunctionReport.h"
+#include "../Children/CObservationReport.h"
+#include "../Children/CPartitionReport.h"
+#include "../Children/CProcessReport.h"
+#include "../Children/CRandomNumberSeedReport.h"
+#include "../Children/CSelectivityReport.h"
+#include "../Children/CSimulatedObservationReport.h"
+#include "../Children/CSizeWeightReport.h"
+#include "../Children/CSpatialMapReport.h"
 
 //**********************************************************************
 //
@@ -76,6 +77,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CAgeWeightReport();
   else if (type == PARAM_LAYER)
     pReporter = new CLayerReport();
+  else if (type == PARAM_MCMC)
+    pReporter = new CMCMCReport();
   else
     throw string("Unknown type: " + type);
 
