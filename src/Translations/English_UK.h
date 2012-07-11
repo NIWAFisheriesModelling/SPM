@@ -181,7 +181,7 @@
 #define PARAM_CONSTANT_RECRUITMENT                "constant_recruitment"
 #define PARAM_CORRELATION                         "correlation"
 #define PARAM_CORRELATION_ADJUSTMENT_DIFF         "correlation_adjustment_diff"
-#define PARAM_CORRELATION_ADJUSTMENT_METHOD       "correlation_adjustment_method"
+#define PARAM_COVARIANCE_ADJUSTMENT_METHOD       "covariance_adjustment_method"
 #define PARAM_COVARIANCE                          "covariance"
 #define PARAM_CROSSOVER_PROBABILITY               "crossover_probability"
 #define PARAM_CURRENT_YEAR                        "current_year"

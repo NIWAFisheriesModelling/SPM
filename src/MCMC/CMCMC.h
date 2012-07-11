@@ -69,6 +69,7 @@ protected:
   int                        iJumps;
   int                        iAcceptedJumps;
   int                        iSuccessfulJumps;
+  int                        iTotalJumps;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
   double                     dCorrelationDiff;

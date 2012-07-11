@@ -43,6 +43,7 @@ CMCMC* CMCMC::clInstance = 0;
 //**********************************************************************
 CMCMC::CMCMC() {
   // default variables
+  iTotalJumps = 0;
   iAcceptedJumps = 0;
   iSuccessfulJumps = 0;
   iJumps = 0;
@@ -52,7 +53,7 @@ CMCMC::CMCMC() {
   pParameterList->registerAllowed(PARAM_LENGTH);
   pParameterList->registerAllowed(PARAM_KEEP);
   pParameterList->registerAllowed(PARAM_MAX_CORRELATION);
-  pParameterList->registerAllowed(PARAM_CORRELATION_ADJUSTMENT_METHOD);
+  pParameterList->registerAllowed(PARAM_COVARIANCE_ADJUSTMENT_METHOD);
   pParameterList->registerAllowed(PARAM_CORRELATION_ADJUSTMENT_DIFF);
   pParameterList->registerAllowed(PARAM_STEP_SIZE);
   pParameterList->registerAllowed(PARAM_PROPOSAL_DISTRIBUTION);
@@ -87,12 +88,15 @@ void CMCMC::Destroy() {
 //**********************************************************************
 void CMCMC::validate() {
   try {
+
+    pParameterList->checkInvalidParameters();
+
     // Populate the variables from parameter list
     dStart                  = pParameterList->getDouble(PARAM_START, true, 0.0);
     iLength                 = pParameterList->getInt(PARAM_LENGTH);
     iKeep                   = pParameterList->getInt(PARAM_KEEP, true, 1);
     dMaxCorrelation         = pParameterList->getDouble(PARAM_MAX_CORRELATION, true, 0.8);
-    sCorrelationMethod      = pParameterList->getString(PARAM_CORRELATION_ADJUSTMENT_METHOD, true, PARAM_COVARIANCE);
+    sCorrelationMethod      = pParameterList->getString(PARAM_COVARIANCE_ADJUSTMENT_METHOD, true, PARAM_COVARIANCE);
     dCorrelationDiff        = pParameterList->getDouble(PARAM_CORRELATION_ADJUSTMENT_DIFF, true, 0.0001);
     dStepSize               = pParameterList->getDouble(PARAM_STEP_SIZE, true, 0.0);
     sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, PARAM_T);
@@ -110,8 +114,8 @@ void CMCMC::validate() {
       CError::errorLessThan(PARAM_LENGTH, PARAM_ONE);
     if (iKeep < 0)
       CError::errorLessThan(PARAM_KEEP, PARAM_ZERO);
-    if (sCorrelationMethod != PARAM_CORRELATION && sCorrelationMethod != PARAM_COVARIANCE)
-      CError::errorUnknown(PARAM_CORRELATION_ADJUSTMENT_METHOD, sCorrelationMethod);
+    if (sCorrelationMethod != PARAM_CORRELATION && sCorrelationMethod != PARAM_COVARIANCE && sCorrelationMethod != PARAM_NONE)
+      CError::errorUnknown(PARAM_COVARIANCE_ADJUSTMENT_METHOD, sCorrelationMethod);
     if (sProposalDistribution != PARAM_T && sProposalDistribution != PARAM_NORMAL)
       CError::errorUnknown(PARAM_PROPOSAL_DISTRIBUTION, sProposalDistribution);
     if (dMaxCorrelation <= 0)
@@ -194,6 +198,22 @@ void CMCMC::execute() {
     pObjectiveFunction->execute();
     double dScore = pObjectiveFunction->getScore();
 
+
+    // Keep the location as the first point in our chain
+    {
+      SChainItem newItem;
+      newItem.iIteration      = 0;
+      newItem.dPenalty        = pObjectiveFunction->getPenalties();
+      newItem.dScore          = pObjectiveFunction->getScore();
+      newItem.dPrior          = pObjectiveFunction->getPriors();
+      newItem.dLikelihood     = pObjectiveFunction->getLikelihoods();;
+      newItem.dAcceptanceRate = 0;
+      newItem.dStepSize       = dStepSize;
+      newItem.vValues         = vCandidates;
+
+      vChain.push_back(newItem);
+    }
+
     // Create Cholskey decomposition for new candidates
     if ( !choleskyDecomposition() )
       THROW_EXCEPTION("Cholskey decomposition failed")
@@ -202,10 +222,10 @@ void CMCMC::execute() {
     // Now, do our MCMC
     //===============================================================
     // Iterate over length of MCMC
-    for (int i =0; i < iLength; ++i) {
+    do {
     // Generate a candidate value
       vector<double> vOldCandidates = vCandidates;
-      updateStepSize(i);
+      updateStepSize(iAcceptedJumps);
       generateNewCandidate();
       for (int j = 0; j < iEstimateCount; ++j) {
         CEstimateManager::Instance()->getEnabledEstimate(j)->setValue(vCandidates[j]);
@@ -225,36 +245,38 @@ void CMCMC::execute() {
       double dRatio = 1.0;
 
       // Evaluate if the old value was better, and decide whether to jump
-      if (dScore < dOldScore) {
-        dRatio = exp(dOldScore - dScore);
+      if (dScore > dOldScore) {
+        dRatio = exp(-dScore + dOldScore);
       }
       if (CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
         // accept the candidate point
+        iJumps++;
+        iSuccessfulJumps++;
+        iAcceptedJumps++;
+        iTotalJumps++;
         // keep the score, and its compontent parts
-        if ( ((i+1) % iKeep) == 0) {
+        if ( ((iAcceptedJumps) % iKeep) == 0) {
           SChainItem newItem;
-          newItem.iIteration      = i+1;
+          newItem.iIteration      = iAcceptedJumps;
           newItem.dPenalty        = pObjectiveFunction->getPenalties();
           newItem.dScore          = pObjectiveFunction->getScore();
           newItem.dPrior          = pObjectiveFunction->getPriors();
           newItem.dLikelihood     = pObjectiveFunction->getLikelihoods();;
-          newItem.dAcceptanceRate = (double)iAcceptedJumps / (double)(i+1);
+          newItem.dAcceptanceRate = (double)iAcceptedJumps / (double)(iTotalJumps);
           newItem.dStepSize       = dStepSize;
           newItem.vValues         = vCandidates;
 
           vChain.push_back(newItem);
         }
 
-        iJumps++;
-        iSuccessfulJumps++;
-        iAcceptedJumps++;
       } else {
         // reject the candidate point and reset our Candidate back to what they were
         dScore = dOldScore;
         vCandidates = vOldCandidates;
         iJumps++;
+        iTotalJumps++;
       }
-    }
+    } while (iAcceptedJumps <= iLength);
 
 std::cerr<< "MCMC output:\n";
 for(int i=0; i<(int)vChain.size(); ++i) {
@@ -338,16 +360,15 @@ void CMCMC::generateNewCandidate() {
       bCandidatesOk = true;
 
       iAttempts++;
-      if (iAttempts >= 1000)
-        CError::errorEqualTo("MCMC candidate attempts", "1000");
+      if (iAttempts >= 10000)
+        CError::errorGreaterThanEqualTo("MCMC candidate attempts", "10000");
 
       if (sProposalDistribution == PARAM_NORMAL)
         fillMultivariateNormal(dStepSize);
       else if (sProposalDistribution == PARAM_T)
         fillMultivariatet(dStepSize);
 
-      // Check bounds and regenerate candidates if
-      // they are not within the bounds.
+      // Check bounds and regenerate candidates if they are not within the bounds.
       for (int i = 0; i < iEnabledEstimateCount; ++i) {
         CEstimate *pEstimate = CEstimateManager::Instance()->getEnabledEstimate(i);
         if (pEstimate->getLowerBound() > vCandidates[i] || pEstimate->getUpperBound() < vCandidates[i]) {
@@ -376,18 +397,9 @@ void CMCMC::updateStepSize(int iIteration) {
   if(iJumps > 0) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
       if(vAdaptStepSize[i] == iIteration ) {
-        double dAcceptanceRate = (double)iSuccessfulJumps / (double)iJumps ;
-        if (dAcceptanceRate > 0.5) {
-          dStepSize *= 2;
-          iSuccessfulJumps = 0;
-          iJumps = 0;
-          break;
-        } else if (dAcceptanceRate < 0.2) {
-          dStepSize /= 2;
-          iSuccessfulJumps = 0;
-          iJumps = 0;
-          break;
-        }
+        dStepSize *= ((double)iSuccessfulJumps / (double)iJumps) * 4.166667; // modify the step size by that ratio = AcceptanceRate / 0.24
+        dStepSize = CMath::zeroFun(dStepSize, 1e-3);
+        break;
       }
     }
   }
@@ -403,6 +415,9 @@ void CMCMC::buildCovarianceMatrix() {
 
     // Obtain the covariance matrix to use for the proposal distribution
     mxCovariance = pMinimizer->getCovarianceMatrix();
+
+    if ( sCorrelationMethod == PARAM_NONE )
+      return;
 
     // Adjust the covariance matrix for the proposal distribution
     for (int i=0; i < (int)mxCovariance.size1(); ++i) {
@@ -478,6 +493,7 @@ void CMCMC::fillMultivariateNormal(double stepsize) {
       dRowSum += mxCovarianceLT(i,j) * vRandomNormals[j];
     }
     vCandidates[i] += dRowSum * stepsize;
+
   }
 
   // find the elements with 0 variances and set them to their means
@@ -522,16 +538,16 @@ bool CMCMC::choleskyDecomposition() {
   if (mxCovariance.size1() != mxCovariance.size2() )
     THROW_EXCEPTION("Invalid covariance matrix (size1!=size2)");
 
-  int n = mxCovariance.size1();
+  int iN = mxCovariance.size1();
   mxCovarianceLT = mxCovariance;
 
-  for (int i = 0; i < n; ++i) {
-    for (int j = 0; j < n; ++j) {
+  for (int i = 0; i < iN; ++i) {
+    for (int j = 0; j < iN; ++j) {
       mxCovarianceLT(i,j) = 0.0;
     }
   }
 
-  for (int i = 0; i < n; ++i)
+  for (int i = 0; i < iN; ++i)
     mxCovarianceLT(i,i) = 1.0;
 
   if (mxCovariance(0,0) < 0)
@@ -540,7 +556,7 @@ bool CMCMC::choleskyDecomposition() {
   double dSum = 0.0;
 
   mxCovarianceLT(0,0) = sqrt(mxCovariance(0,0));
-  for (int i = 1; i < n; ++i) {
+  for (int i = 1; i < iN; ++i) {
     dSum = 0.0;
 
     for (int j = 0; j < i; ++j)
@@ -550,7 +566,7 @@ bool CMCMC::choleskyDecomposition() {
       return false;
 
     mxCovarianceLT(i,i) = sqrt(mxCovariance(i,i)-dSum);
-    for (int j = i+1; j < n; ++j) {
+    for (int j = i+1; j < iN; ++j) {
       dSum = 0.0;
       for (int k = 0; k < i; ++k)
         dSum += mxCovarianceLT(j,k) * mxCovarianceLT(i,k);
@@ -559,11 +575,33 @@ bool CMCMC::choleskyDecomposition() {
   }
 
   dSum = 0.0;
-  for (int i = 0; i < (n-1); ++i)
-    dSum += mxCovarianceLT(n-1,i) * mxCovarianceLT(n-1,i);
-  if (mxCovariance(n-1,n-1) <= dSum)
+  for (int i = 0; i < (iN-1); ++i)
+    dSum += mxCovarianceLT(iN-1,i) * mxCovarianceLT(iN-1,i);
+  if (mxCovariance(iN-1,iN-1) <= dSum)
     return false;
-  mxCovarianceLT(n-1,n-1) = sqrt(mxCovariance(n-1,n-1) - dSum);
+  mxCovarianceLT(iN-1,iN-1) = sqrt(mxCovariance(iN-1,iN-1) - dSum);
+
+
+/*//Print our covariance
+  std::cerr << "Covariance:\n";
+  for(int i=0; i < iN; ++i ) {
+    for(int j=0; j < iN; ++j ) {
+      std::cerr << mxCovariance(i,j) << " ";
+    }
+    std::cerr << "\n";
+  }
+  std::cerr << "\n";
+
+  //Print our cholesky decomposition
+  std::cerr << "Cholesky decomposition:\n";
+  for(int i=0; i < iN; ++i ) {
+    for(int j=0; j < iN; ++j ) {
+      std::cerr << mxCovarianceLT(i,j) << " ";
+    }
+    std::cerr << "\n";
+  }
+  std::cerr << "\n";
+*/
 
   return true;
 }
@@ -574,3 +612,6 @@ bool CMCMC::choleskyDecomposition() {
 //**********************************************************************
 CMCMC::~CMCMC() {
 }
+
+
+
