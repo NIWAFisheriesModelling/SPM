@@ -6,7 +6,7 @@ minimiser GammaDiff
 type numerical_differences
 iterations 1000
 evaluations 4000
-tolerance 0.02
+tolerance 0.002
 covariance true
 
 @minimiser DE
@@ -16,14 +16,14 @@ tolerance 0.0002
 covariance false
 
 @mcmc
-start 1
-length 10
-keep 1
-adaptive_stepsize True
-adapt_at 2 4 12
-proposal_t True
+start 0
+length 600000
+keep 500
+adapt_stepsize_at 1000 10000 20000 30000 40000 50000 80000
+proposal_distribution t
 df 4
 max_correlation 0.8
+covariance_adjustment_method covariance
 
 #Profile
 @profile R0

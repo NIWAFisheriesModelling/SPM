@@ -35,12 +35,15 @@ time_steps Phase1a Phase1b
 
 @initialisation_phase Phase2
 years 1
-time_steps Phase1a Phase1b
+time_steps Phase1a Phase1c
 
 @time_step Phase1a
 processes BHrecruitment Maturation halfM
 
 @time_step Phase1b
+processes halfM Ageing
+
+@time_step Phase1c
 processes halfM Ageing
 
 # Annual cycle
@@ -54,7 +57,7 @@ processes halfM Ageing
 @derived_quantity SSB
 type abundance
 time_step step_one
-#initialisation_time_steps Phase1a Phase1a
+initialisation_time_steps Phase1a Phase1b
 categories mature
 selectivities One
 layer Base
