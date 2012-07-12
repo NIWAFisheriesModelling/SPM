@@ -76,6 +76,10 @@ layer Abundance-density
 
 @include "simulation_reports.spm"
 
+@report SSB
+type derived_quantity
+derived_quantity SSB
+
 @report recruitment
 type process
 process Recruitment

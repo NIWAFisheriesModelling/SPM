@@ -52,6 +52,7 @@ processes MoveImmature MoveMature Ageing
 @derived_quantity SSB
 type abundance
 time_step one
+initialisation_time_steps Phase1 Phase2 Phase2
 categories mature
 selectivities One
 layer Base

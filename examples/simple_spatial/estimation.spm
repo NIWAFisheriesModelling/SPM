@@ -15,18 +15,15 @@ tolerance 0.02 #The default is 0.002
 population_size 250
 
 # MCMC
-@mcmc MH
-minimiser GammaDiff
-type metropolis_hastings
-length 10
-keep 2
-start 1
-#adaptive_stepsize True
-#adapt_at 100000 200000 400000
-#burn_in 500
-proposal_t True
+@mcmc
+start 0
+length 60# 600000
+keep 1 #500
+adapt_stepsize_at 1 5 10 #1000 10000 20000 30000 40000 50000 80000
+proposal_distribution t
 df 4
-#stepsize 0.01
+max_correlation 0.8
+covariance_adjustment_method covariance
 
 # ESTIMATION PROFILING
 @profile R0
