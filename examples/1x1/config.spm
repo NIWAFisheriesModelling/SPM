@@ -55,9 +55,9 @@ processes halfM Ageing
 
 # Derived quantities
 @derived_quantity SSB
-type abundance
+type biomass
 time_step step_one
-initialisation_time_steps Phase1a Phase1b
+initialisation_time_steps Phase1a Phase1a
 categories mature
 selectivities One
 layer Base
