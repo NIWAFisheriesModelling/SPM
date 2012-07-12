@@ -538,6 +538,10 @@ void CMCMC::fillMultivariatet(double stepsize) {
 //**********************************************************************
 bool CMCMC::choleskyDecomposition() {
 
+//SCOTT todo: We also have similar functionality in FMM::CholeskyDecomposition()
+//            Can we put them _both_ in the same place...with the same function call interface
+//            As they both use a slightly different algortim, it might be useful to compare their output.
+
   //sanity check
   if (mxCovariance.size1() != mxCovariance.size2() )
     THROW_EXCEPTION("Invalid covariance matrix (size1!=size2)");
