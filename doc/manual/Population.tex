@@ -198,9 +198,9 @@ Population processes are those processes that change the population state of ind
 
 Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}. 
 
-In the recruitment processes, the number of individuals are added to the partition in a define age class, and the amount is defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
+In the recruitment processes, the number of individuals are added to a single age class within the partition, with the amount defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
-For the constant and Beverton-Holt recruitments, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
+For the constant and Beverton-Holt recruitment processes, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k(R_y / n) \frac{L_ij}{\sum_ij L_ij}
 \end{equation}
@@ -225,7 +225,7 @@ It is equivalent to a Beverton-Holt recruitment process where steepness is set e
 
 For example, to specify a constant recruitment process, where individuals are added to the category `immature' at $age=1$, and the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{recruitment}, then the syntax is,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process Recruitment
 type constant_recruitment
 categories immature
@@ -233,7 +233,7 @@ proportions 1.0
 R0 500000
 age 1
 layer recruitment
-\end{verbatim}
+\end{verbatim}}}
 
 \paragraph{Beverton-Holt recruitment:}
 
@@ -247,11 +247,11 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B_0} \right) \right)
 \end{equation}
 
-Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is defined as the value of the $SSB$ at the end of one of the initialisation phases. The resulting recruits are then distributed across cells in proportion to the values in a numeric layer. 
+Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
 
-For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity labelled \texttt{SSB\_biomass} that represents the spawning stock biomass in each year, with $B_0$ the value of the derived quantity at the end of the inilatisation pahase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
+For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity labelled \texttt{SSB\_biomass} that represents the spawning stock biomass in each year, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process Recruitment
 type BH_recruitment
 categories immature
@@ -266,7 +266,7 @@ standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 2
-\end{verbatim}
+\end{verbatim}}}
 
 Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age + 1$.
 
@@ -284,11 +284,11 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that should probably be abundance or biomass layers or a user-defined derived layer, see Section \ref{sec:derived-layers}) must be provided that provide both $B_0$ and the annual $SSB_y$ for the recruitment process. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ as distributed relative to the recruitment layer \texttt{R0\_layer}.
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that probably should be abundance or biomass layers --- see Section \ref{sec:derived-layers}) must be provided for $B_0$ and the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ distributed relative to the recruitment layer \texttt{R0\_layer}.
 
-For example, to specify a local Beverton-Holt recruitment process where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{recruitment\_layer}, $B_0$ is a derived layer that specifies the biomass in each cell at the end of the initialisation period, $SSB_y$ is a derived layer or meta-layer of spawning stock biomass for each year, YCS is standardised over the 1994 to 2004 period, and recruits enter into the model the year following spawning, then,
+For example, assume a local Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{recruitment\_layer}, $B_0$ is a derived layer that specifies the biomass in each cell  of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity labelled \texttt{SSB\_biomass} that represents the spawning stock biomass in each year, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process Recruitment
 type local_BH_recruitment
 categories immature
@@ -305,7 +305,7 @@ standardise_ycs_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 1
-\end{verbatim}
+\end{verbatim}}}
 
 Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
 
@@ -325,11 +325,11 @@ except that in the case of the plus group (if defined),
 
 For example, to apply ageing to the categories \texttt{immature} and \texttt{mature}, then the syntax is,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process Ageing
 type ageing
 categories immature mature
-\end{verbatim}
+\end{verbatim}}}
 
 Note that ageing is \emph{not} applied by \SPM\ by default. As with other processes, \SPM\ will not apply a process unless its defined and specified as a process within the annual cycle. Hence, it is possible to specify a model where a category is not aged. \SPM\ will not check or otherwise warn if there is a category defined where ageing is not applied.
 
@@ -341,21 +341,21 @@ Mortality can depend on a layer. Here only one method of dependence is implement
 
 For example, to specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process NaturalMortality
 type constant_mortality_rate
 categories male female
 selectivities One One
 M 0.2 0.2
-\end{verbatim}
+\end{verbatim}}}
 
 Note that the mortality rate process requires a selectivity. To apply the same mortality rate over all age classes, use a selectivity defined as $S_i=1.0$ for all ages $i$, e.g.,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @selectivity One
 type constant
 c 1
-\end{verbatim}
+\end{verbatim}}}
 
 A constant rate could also be defined as a multiplier of a layer. For example, let the mortality rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $M(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant mortality rate $M$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
@@ -369,14 +369,14 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 
 Mortality for the annual rate\index{Annual mortality} is similar to the constant rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process AnnualMortality
 type annual_mortality_rate
 categories male female
 selectivities One One
 years 1996 1997 1998 1999 2000
 M 0.20 0.15 0.22 0.25 0.21
-\end{verbatim}
+\end{verbatim}}}
 
 The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
@@ -409,7 +409,7 @@ And the number removed $R$ from each age $l$ in category $k$ is,
 
 For example, to specify fishing mortality based on spatially explicit catches (and given for each year as a layer, `Catch2000', `Catch2001', etc,.) over categories `immature' and 'mature' with selectivity `FishingSel' and assuming a maximum possible exploitation rate of 0.7, then the syntax is,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process Fishing
 type event_mortality
 categories immature mature
@@ -418,7 +418,7 @@ layers Catch2000 Catch2001 Catch2002 Catch2003
 U_max 0.70
 selectivities FishingSel FishingSel
 penalty event_mortality_penalty
-\end{verbatim}
+\end{verbatim}}}
 
 %Similarly, the biomass-event mortality type is applied as \ldots \textbf{to be added}.
 
@@ -437,7 +437,7 @@ Category transition processes require a penalty function to discourage parameter
 
 If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process tagging
 type category_transition
 from immature mature
@@ -446,7 +446,7 @@ to immature-tag mature-tag
 years 2001 2002 2003
 layers TagRelease2001 TagRelease2002 TagRelease2003
 penalty tag_release_penalty
-\end{verbatim}
+\end{verbatim}}}
 
 Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories.
 
@@ -458,14 +458,14 @@ The transition rate type moves a proportion $p$ between a source and sink catego
 
 If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. \SPM\ treats each pair of categories as an independent transition --- but note that these are applied in order that they are specified. For example, to `mature' males and females in a model with four categories \texttt{male-immature}, \texttt{female-immature}, \texttt{male-mature}, and \texttt{female-mature}, then you might define a category transition process \texttt{maturation} with selectivities \texttt{male-maturity} and \texttt{female-maturity}, as,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @process maturation
 type category_transition_rate
 from male-immature female-immature
 to male-mature female-mature
 proportions 1.0 1.0
 selectivities male-maturity female-maturity
-\end{verbatim}
+\end{verbatim}}}
 
 Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
 
@@ -603,11 +603,13 @@ Note that for the monotonic categorical preference function, the preference func
 
 \subsection{\I{Derived quantities}\label{sec:derived-quantities}}
 
-Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. Derived quantities are values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have  a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Abundance derived quantities are simply the count or sum of cells within some categories (after applying a selectivity) within cells defined by a layer. Biomass derived quantities are similar, except they are a measure of biomass. For example, a recruitment process may require the amount of spawning stock biomass to resolve the stock-recruit relationship. Here, the spawning stock biomass would be defined as the abundance or biomass of a part of the population at some point in the annual cycle for selected ages and categories, and would be calculated as a derived quantity.
+Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. Derived quantities are values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have  a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Abundance derived quantities are simply the count or sum of cells within some categories (after applying a selectivity) within cells defined by a layer. Biomass derived quantities are similar, except they are a measure of biomass. Derived quantities are also calculated during the initialisation phases, and hence the time-step during each phase must also be specified. If the initialisation time-steps are not specified, \SPM\ will calculate the derived quantity during the initialisation phases in every year, at the end of each phases annual cycle.
+
+Derived quantities are required by some processes, for example the Beverton-Holt recruitment process. The Beverton-Holt recruitment process requires an equilibrium biomass ($B_0$) and annual spawning stock biomass values ($SSB_y$) to resolve the stock-recruit relationship. Here, these would be defined as the abundance or biomass of a part of the population at some point in the annual cycle for selected ages and categories, and would be calculated as a derived quantity.
 
 As an example to define a biomass derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time-step (labelled step\_one) in the initialisation phases (and assuming two initialisation phases) and at the end of the first time-step otherwise, over areas defined by a layer as the spawning ground but counting all `mature' individuals, we would use the syntax,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @derived_quantity SSB
 type biomass
 time_step step_one
@@ -615,7 +617,7 @@ initialisation_time_steps step_one step_one
 categories mature
 selectivity One
 layer spawning_ground
-\end{verbatim}
+\end{verbatim}}}
 
 \subsection{\I{Derived layers and meta-layers}\label{sec:derived-layers}}
 
@@ -625,9 +627,9 @@ Derived layers are layers, calculated by \SPM\ at a specific user-defined time-s
 
 Both derived layers and derived meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 + - * / exp log(e) sqrt ^2 pow(a,b) cos sin
-\end{verbatim}
+\end{verbatim}}}
 
 For example, density dependent mortality based on diet selectivity can be implemented by applying a derived layer to a constant relationship mortality rate (see Section \ref{sec:mortality}). If predator $A$ of a previously-defined biomass layer $L_A$ has two potential preys $B$ and $C$ with estimable selectivity parameters $E_B$ and $E_C$ respectively of initial values 0.9 and 0.1, and with previously-defined biomass layers $L_B$ and $L_C$ respectively, the mortality layer $Lm_B$ of prey $B$ due to predation by predator $A$ applied as a constant relationship mortality rate can be defined as,
 \begin{equation}

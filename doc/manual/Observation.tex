@@ -26,9 +26,9 @@ Proportions-at-age observations can be supplied for a single category, aggregate
 
 The way the categories of the observation are defined specifies which of these alternatives to use. For example, to specify that the observations are of the proportions of male within each age class (example (i) above), then the subcommand \subcommand{categories} for the \commandlabsubarg{observation}{type}{proportion\_by\_age} command is,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male
-\end{verbatim}
+\end{verbatim}}}
 
 \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of males within each of these age classes, after applying a selectivity at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
 
@@ -38,18 +38,17 @@ By default, categories are aggregated. For example, to specify that the observat
 
 Note that we are changing the notation to + here, and nothing instead of : to make it less ambiguous
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male female
-\end{verbatim}
+\end{verbatim}}}
 
 \TOUNDOend
 
 \TODO
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male + female
-\end{verbatim}
-
+\end{verbatim}}}
 \TODOend
 
 \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
@@ -58,17 +57,16 @@ Otherwise, to provide proportions for multiple categories simultaneously, you ne
 
 \TOUNDO
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male : female
-\end{verbatim}
-
+\end{verbatim}}}
 \TOUNDOend
 
 \TODO
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male female
-\end{verbatim}
+\end{verbatim}}}
 
 \TODOend
 
@@ -76,9 +74,9 @@ categories male female
 
 The definition of categories can be a combination of the above cases and can become more complex as the number of categories in the model increases. For example, in a model with categories male-immature, male-mature, female-immature, and female-mature, we might supply observations of males (immature and mature combined) and females (immature and mature combined) simultaneously. Here the \subcommand{categories} subcommand would be;
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male-immature + male-mature  female-immature + female-mature
-\end{verbatim}
+\end{verbatim}}}
 
 Assuming that we wanted to supply observations for ages 3 to 10, then \SPM\ would expect a vector of 16 proportions for each spatial location --- the first eight corresponding to the observed proportions of males aged 3--10, and the second set of eight corresponding to the proportions of females aged 3--10. Further, the proportions would sum to one. Note that the addition takes precedence on the multiple categories defined. 
 
@@ -86,16 +84,16 @@ The observations must be supplied using all or some of the the values of defined
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @layer Area
 type categorical
 data A A 
 data B B
-\end{verbatim}
+\end{verbatim}}}
 
 Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyProportions
 ...
 categories male female
@@ -103,11 +101,11 @@ min_age 1
 max_age 5
 obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
 ...
-\end{verbatim}
+\end{verbatim}}}
 
 Or, for both $A$ and $B$ as,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyProportions
 ...
 categories male female
@@ -120,7 +118,7 @@ obs B 0.02 0.06 0.10 0.21 0.18 0.02 0.05 0.15 0.20 0.01
 
 Or for example, 12 observations are required to describe immature males, mature males, and all females together, for ages 1--4,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyProportions
 ...
 categories male_immature male_mature female_immature + female_mature
@@ -128,7 +126,7 @@ min_age 1
 max_age 4
 obs A 0.05 0.15 0.15 0.05 0.02 0.03 0.08 0.04 0.05 0.15 0.15 0.08
 ...
-\end{verbatim}
+\end{verbatim}}}
 
 It may be useful at times to consider grouping categories together even though the data might have been collected separately, as the model cannot dissociate the uncertainty between age classes and that between the proportion of fish at age in each category. For example if observations have been collected for males and females separately, but very few females were caught, the uncertainty surrounding the ratio of males to females might be higher than the model applies, as it applies the same uncertainty to that surrounding the data. In this case an alternative is to provide the proportions at age for males and females together with appropriate uncertainty, and then the proportion-at-age (see Section \ref{sec:proportions-by-category}) of males as a different observation with a different (and in this case higher) uncertainty.
 
@@ -197,12 +195,12 @@ The age range must be ages defined in the partition (i.e., between \commandsub{m
 
 Proportions-by-category observations can be supplied for any set of categories as a proportion of themselves and any set of additional categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply observations of the proportions of males in the population at each age class. The subcommand \subcommand{categories} defines the categories for the numerator in the calculation of the proportion, and the subcommand \subcommand{categories2} supplies the additional categories to be used in the denominator of the calculation. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities} for the numerator categories and \subcommand{selectivities2} for the additional categories used in the denominator, e.g., 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male
 categories2 female
 selectivities male-selectivity
 selectivities2 female-selectivity
-\end{verbatim}
+\end{verbatim}}}
 
 defines that the proportion of males in each age class as a proportion of males $+$ females. \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range, i.e., if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of male to male $+$ female within each of these age classes, after applying the selectivities at the year and time-step specified. 
 
@@ -210,16 +208,16 @@ The observations must be supplied using all or some of the values defined by a c
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @layer Area
 type categorical
 data A A 
 data B B
-\end{verbatim}
+\end{verbatim}}}
 
 Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyProportions
 ...
 categories male 
@@ -228,11 +226,11 @@ min_age 1
 max_age 5
 obs A 0.01 0.05 0.10 0.20 0.20
 ...
-\end{verbatim}
+\end{verbatim}}}
 
 Or, for both $A$ and $B$ as,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyProportions
 ...
 categories male
@@ -242,7 +240,7 @@ max_age 5
 obs A 0.01 0.05 0.10 0.20 0.20
 obs B 0.02 0.06 0.10 0.21 0.18
 ...
-\end{verbatim}
+\end{verbatim}}}
 
 To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
 
@@ -306,10 +304,10 @@ Each observation is for a given year and time-step, for some selected age classe
 
 The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance/biomass (male $+$ female) or just male abundance/biomass. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance/biomass. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}, e.g., 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 categories male
 selectivities male-selectivity
-\end{verbatim}
+\end{verbatim}}}
 
 defines an observation for males after applying the selectivity male-selectivity. \SPM\ then expects that there will be a single observation supplied. The expected values for the observations will be the expected abundance (or biomass) of males, after applying the selectivities, at the year and time-step specified. 
 
@@ -317,33 +315,33 @@ The observations must be supplied using all or some of the the values of defined
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @layer Area
 type categorical
 data A A 
 data B B
-\end{verbatim}
+\end{verbatim}}}
 
 Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyAbundance
 ...
 categories male 
 obs A 1000
 ...
-\end{verbatim}
+\end{verbatim}}}
 
 Or, for both $A$ and $B$ as,
 
-\begin{verbatim}
+{\small{\begin{verbatim}
 @observation MyAbundance
 ...
 categories male
 obs A 1000
 obs B 1200
 ...
-\end{verbatim}
+\end{verbatim}}}
 
 To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
 
