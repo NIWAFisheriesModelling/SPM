@@ -186,6 +186,26 @@ void CBHRecruitmentProcess::build() {
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
+    rebuild();
+
+  } catch (string &Ex) {
+    Ex = "CBHRecruitment.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CBHRecruitmentProcess::rebuild()
+// Build the process
+//**********************************************************************
+void CBHRecruitmentProcess::rebuild() {
+#ifndef OPTIMIZE
+  try {
+#endif
+
+    // Base rebuild
+    CProcess::rebuild();
+
     // reset values
     vSSBValues.resize(0);
     vYCSYears.resize(0);
@@ -212,10 +232,12 @@ void CBHRecruitmentProcess::build() {
       vStandardiseYCSValues.push_back(vYCSValues[i] / dMeanYCS);
     }
 
+#ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CBHRecruitment.build(" + getLabel() + ")->" + Ex;
+    Ex = "CBHRecruitmentProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+#endif
 }
 
 //**********************************************************************

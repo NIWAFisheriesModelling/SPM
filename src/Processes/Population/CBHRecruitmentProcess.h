@@ -30,6 +30,7 @@ public:
   CProcess*                   clone() { return new CBHRecruitmentProcess(*this); }
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        execute();
   vector<double>              getTrueYCSValues() { return vTrueYCSValues; }
   vector<double>              getRecruitmentValues() { return vRecruitmentValues; }
