@@ -101,10 +101,12 @@ void CDESolver::runEstimation() {
     clDESolver.Setup(vStartValues, vLowerBounds, vUpperBounds, stBest1Exp, dDifferenceScale, dCrossoverProbability);
 
     if (clDESolver.Solve(iMaxGenerations)) {
-      cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations to find a solution\n";
+      if(!(pConfig->getQuietMode()))
+        cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations to find a solution\n";
       cerr << "Convergence was successful" << "\n" << endl;
     } else {
-      cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations\n";
+      if(!(pConfig->getQuietMode()))
+        cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations\n";
       cerr << "Failed to converge, ran out of generations\n" << endl;
     }
   } catch (string &Ex) {
