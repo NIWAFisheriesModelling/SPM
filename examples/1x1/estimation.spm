@@ -1,6 +1,6 @@
 # ESTIMATION
 @estimation
-minimiser DE
+minimiser GammaDiff
 
 @minimiser GammaDiff
 type numerical_differences
