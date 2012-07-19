@@ -7,10 +7,14 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
-// Local headers
+// Headers
+#include <boost/lexical_cast.hpp>
+
 #include "CProcessReport.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Estimates/CEstimateManager.h"
+#include "../../Estimates/CEstimate.h"
 #include "../../Processes/CProcessManager.h"
 #include "../../Processes/CProcess.h"
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
@@ -82,6 +86,8 @@ void CProcessReport::execute() {
 
     this->start();
 
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+
     CParameterList *pList = pTarget->getParameterList();
 
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
@@ -95,9 +101,40 @@ void CProcessReport::execute() {
       pList->fillVector(vValues, Parameter);
 
       cout << Parameter << ": ";
-      foreach(string Value, vValues) {
-        cout << Value << " ";
+
+      /**
+       * Check if this parameter is estimated
+       * First check if there is only 1 value
+       */
+      if (vValues.size() == 1) {
+        string estimableName = "process[" + pTarget->getLabel() + "]." + Parameter;
+
+        if (pEstimateManager->hasEstimate(estimableName)) {
+          CEstimate *pEstimate = pEstimateManager->getEstimate(estimableName);
+          cout << pEstimate->getValue();
+        } else {
+          cout << vValues[0];
+        }
+
+      } else if (vValues.size() > 1) {
+
+        for (unsigned i = 0; i < vValues.size(); ++i) {
+          string estimableName = "process[" + pTarget->getLabel() + "]." + Parameter + "(" + boost::lexical_cast<string>(i + 1) + ")";
+
+          if (pEstimateManager->hasEstimate(estimableName)) {
+            CEstimate *pEstimate = pEstimateManager->getEstimate(estimableName);
+            cout << pEstimate->getValue() << " ";
+          } else {
+            cout << vValues[i] << " ";
+          }
+        }
+
+      } else {
+        foreach(string Value, vValues) {
+          cout << Value << " ";
+        }
       }
+
       cout << endl;
     }
 

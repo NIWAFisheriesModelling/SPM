@@ -41,6 +41,7 @@ public:
   int                        getEnabledEstimateCount();
   CEstimate*                 getEnabledEstimate(int Index);
   CEstimate*                 getEstimate(int Index);
+  bool                       hasEstimate(string Parameter);
   CEstimate*                 getEstimate(string Parameter);
   void                       addEstimateValue(string estimate, double value);
   int                        getEstimateValueCount();

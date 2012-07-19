@@ -165,6 +165,31 @@ CEstimate* CEstimateManager::getEstimate(int Index) {
 }
 
 //**********************************************************************
+// bool CEstimateManager::hasEstimate(string Parameter)
+// Check if estimate exists
+//**********************************************************************
+bool CEstimateManager::hasEstimate(string Parameter) {
+  // Variables
+  vector<CEstimate*>::iterator vPtr           = vEstimateList.begin();
+  string                       sParam         = Parameter;
+  string                       sParam2        = "";
+
+  // Loop Through
+  while (vPtr != vEstimateList.end()) {
+    // Make sure both commands are relative
+    sParam2 = (*vPtr)->getParameter();
+
+    // Check For Match (ignore case)
+    if (CConvertor::stringToLowercase(sParam) == CConvertor::stringToLowercase(sParam2))
+      return true;
+
+    vPtr++;
+  }
+
+  return false;
+}
+
+//**********************************************************************
 // CEstimate* CEstimateManager::getEstimate(string Parameter)
 // Get Estimate
 //**********************************************************************
