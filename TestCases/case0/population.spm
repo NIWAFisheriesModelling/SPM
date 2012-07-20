@@ -11,25 +11,34 @@ initialisation_phases Phase1 Phase2 Phase3
 cell_length 1
 initial_year 1994
 current_year 2008
-final_year 2108
 time_steps step_one step_two
 age_size default default default
 
+#initialisation
 @initialisation_phase Phase1
 years 200
-processes Recruitment Spawning Maturation halfM halfM PostSpawning Ageing
+time_steps phase1
 
 @initialisation_phase Phase2
 years 1
-processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing PostSpawning
+time_steps phase2
 
 @initialisation_phase Phase3
 years 20
+time_steps phase3
+
+@time_step phase1
+processes Recruitment Spawning Maturation halfM halfM PostSpawning Ageing
+
+@time_step phase2
+processes Recruitment Spawning Maturation halfM halfM InitialMoveImmature InitialMoveMature InitialMoveSpawning Ageing PostSpawning
+
+@time_step phase3
 processes Recruitment Spawning Maturation halfM halfM MoveImmature MoveMature MoveSpawning Ageing PostSpawning
 
+#Model run years
 @time_step step_one
-processes Recruitment Spawning Maturation halfM Fishing halfM
-processes MoveImmature MoveMature MoveSpawning
+processes Recruitment Spawning Maturation halfM Fishing halfM MoveImmature MoveMature MoveSpawning
 
 @time_step step_two
 processes PostSpawning Ageing

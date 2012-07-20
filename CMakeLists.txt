@@ -187,13 +187,14 @@ src/Processes/Movement/CMigrationMovementProcess.cpp
 src/Processes/Population/CAgeingProcess.cpp
 src/Processes/Population/CAnnualMortalityRateProcess.cpp
 src/Processes/Population/CBHRecruitmentProcess.cpp
-src/Processes/Population/CLocalBHRecruitmentProcess.cpp
 src/Processes/Population/CBiomassEventMortalityProcess.cpp
 src/Processes/Population/CCategoryTransitionProcess.cpp
 src/Processes/Population/CCategoryTransitionRateProcess.cpp
 src/Processes/Population/CConstantMortalityRateProcess.cpp
 src/Processes/Population/CConstantRecruitmentProcess.cpp
 src/Processes/Population/CEventMortalityProcess.cpp
+src/Processes/Population/CHollingMortalityRateProcess.cpp
+src/Processes/Population/CLocalBHRecruitmentProcess.cpp
 src/Profiles/CProfile.cpp
 src/Profiles/CProfileManager.cpp
 src/Profiles/Factory/CProfileFactory.cpp

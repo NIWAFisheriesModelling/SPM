@@ -9,7 +9,6 @@ max_age 35
 age_plus_group True
 initial_year 1994
 current_year 2007
-final_year 2108
 cell_length 1
 initialisation_phases Phase1 Phase2
 time_steps step_one step_two

@@ -18,6 +18,7 @@
 #include "../../Processes/CProcessManager.h"
 #include "../../Processes/CProcess.h"
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
+#include "../../Processes/Population/CHollingMortalityRateProcess.h"
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../Selectivities/CSelectivity.h"
 
@@ -172,7 +173,27 @@ void CProcessReport::execute() {
       }
       cout << "\n";
     }
-
+    CHollingMortalityRateProcess *pHolling = dynamic_cast<CHollingMortalityRateProcess*>(pTarget);
+    if (pHolling != 0) {
+      cout << "layer_type" << ": " << (pHolling->isAbundance()?PARAM_ABUNDANCE:PARAM_BIOMASS) << "\n";
+      vector<double> vMortalityRate = pHolling->getMortalityRate();
+      vector<double> vMortalityN = pHolling->getMortalityN();
+      cout << PARAM_PROPORTION << ": ";
+      for (int i = 0; i < (int)vMortalityRate.size(); ++i)
+        cout << vMortalityRate[i] << " ";
+      cout << "\n";
+      cout << PARAM_ABUNDANCE << ": ";
+      for (int i = 0; i < (int)vMortalityN.size(); ++i)
+        cout << vMortalityN[i] << " ";
+      cout << "\n";
+      if(!(pHolling->isAbundance())) {
+        vector<double> vMortalityBiomass = pHolling->getMortalityBiomass();
+        cout << PARAM_BIOMASS << ": ";
+        for (int i = 0; i < (int)vMortalityBiomass.size(); ++i)
+          cout << vMortalityBiomass[i] << " ";
+        cout << "\n";
+      }
+    }
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();

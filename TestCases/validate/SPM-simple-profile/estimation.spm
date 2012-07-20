@@ -28,7 +28,7 @@ df 4
 #stepsize 0.01
 
 # estimation profiling
-@profile fishingsel.a50
+@profile fishingsel_50
 parameter selectivity[fishingsel].a50
 steps  11
 lower_bound   5

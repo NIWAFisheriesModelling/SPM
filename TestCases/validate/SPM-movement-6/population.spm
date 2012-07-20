@@ -12,7 +12,6 @@ time_steps step_one
 cell_length 1
 initial_year 1994
 current_year 2008
-final_year 2108
 age_size none
 
 @age_size none
@@ -24,6 +23,9 @@ type none
 
 @initialisation_phase phase1
 years 200
+time_steps Phase1
+
+@time_step Phase1
 processes recruitment m ageing
 
 @time_step step_one

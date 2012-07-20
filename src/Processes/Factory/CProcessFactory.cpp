@@ -8,23 +8,24 @@
 //============================================================================
 
 // Local Headers
-#include "CProcessFactory.h"
-#include "../CProcessManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
-#include "../Movement/CPreferenceMovementProcess.h"
+#include "../CProcessManager.h"
 #include "../Movement/CAdjacentCellMovementProcess.h"
 #include "../Movement/CMigrationMovementProcess.h"
+#include "../Movement/CPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
 #include "../Population/CAnnualMortalityRateProcess.h"
+#include "../Population/CBHRecruitmentProcess.h"
 #include "../Population/CBiomassEventMortalityProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CCategoryTransitionRateProcess.h"
-#include "../Population/CEventMortalityProcess.h"
 #include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
-#include "../Population/CBHRecruitmentProcess.h"
+#include "../Population/CEventMortalityProcess.h"
+#include "../Population/CHollingMortalityRateProcess.h"
 #include "../Population/CLocalBHRecruitmentProcess.h"
+#include "CProcessFactory.h"
 
 //**********************************************************************
 // CProcessFactory::CProcessFactory()
@@ -50,6 +51,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_BIOMASS_EVENT_MORTALITY)
     pProcess = new CBiomassEventMortalityProcess();
+  else if (type == PARAM_HOLLING_MORTALITY_RATE)
+    pProcess = new CHollingMortalityRateProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)
     pProcess = new CCategoryTransitionProcess();
   else if (type == PARAM_CATEGORY_TRANSITION_RATE)

@@ -32,7 +32,7 @@ CWorld_Fixture::CWorld_Fixture() {
   pWorld->addParameter(PARAM_AGE_PLUS_GROUP, "true");
   pWorld->addParameter(PARAM_INITIAL_YEAR, "1990");
   pWorld->addParameter(PARAM_CURRENT_YEAR, "2000");
-  pWorld->addParameter(PARAM_FINAL_YEAR, "2010");
+  //pWorld->addParameter(PARAM_FINAL_YEAR, "2010");
 
   pWorld->addParameter(PARAM_CATEGORIES, "immature");
   pWorld->addParameter(PARAM_CATEGORIES, "mature");

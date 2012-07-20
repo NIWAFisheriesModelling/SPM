@@ -12,7 +12,6 @@ max_age 5
 age_plus_group True
 initial_year 1994
 current_year 1996
-final_year 100
 cell_length 1
 time_steps One
 age_size none none

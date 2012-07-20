@@ -53,7 +53,7 @@ selectivity chatTANselFemale
 @report base_layer
 type layer
 layer Base
-year 1994
+years 1994
 time_step one
 
 @report covariance

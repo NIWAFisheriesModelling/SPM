@@ -57,7 +57,7 @@ CWorld::CWorld() {
   pParameterList->registerAllowed(PARAM_INITIALIZATION_PHASES);
   pParameterList->registerAllowed(PARAM_INITIAL_YEAR);
   pParameterList->registerAllowed(PARAM_CURRENT_YEAR);
-  pParameterList->registerAllowed(PARAM_FINAL_YEAR);
+//pParameterList->registerAllowed(PARAM_FINAL_YEAR);
   pParameterList->registerAllowed(PARAM_TIME_STEPS);
   pParameterList->registerAllowed(PARAM_AGE_SIZE);
 }
@@ -119,7 +119,7 @@ void CWorld::validate() {
     bAgePlusGroup     = pParameterList->getBool(PARAM_AGE_PLUS_GROUP,true,true);
     iInitialYear      = pParameterList->getInt(PARAM_INITIAL_YEAR);
     iCurrentYear      = pParameterList->getInt(PARAM_CURRENT_YEAR);
-    iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
+//  iFinalYear        = pParameterList->getInt(PARAM_FINAL_YEAR);
 
     pParameterList->fillVector(vCategories, PARAM_CATEGORIES);
     pParameterList->fillVector(vInitializationPhases, PARAM_INITIALIZATION_PHASES, true);

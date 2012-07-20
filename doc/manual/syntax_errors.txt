@@ -18,7 +18,6 @@ In SPM, but not in manual
   enabled_estimates
   estimable
   estimates
-  final_year
   flagged_penalties
   function
   height

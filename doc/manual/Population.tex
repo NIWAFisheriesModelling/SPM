@@ -335,9 +335,9 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-Four types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, or biomass-event. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
+Five types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, biomass-event, and a Holling \citep{Holling1959} Type II or Type III predator-prey relationship. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
-Mortality can depend on a layer. Here only one method of dependence is implemented, the multiplicative method. Here, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
+The constant rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
 
 For example, to specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
 
@@ -378,7 +378,7 @@ years 1996 1997 1998 1999 2000
 M 0.20 0.15 0.22 0.25 0.21
 \end{verbatim}}}
 
-The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
+The event mortality process\index{Event mortality} and biomass  mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
 The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate. Event mortality processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be removed. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in defined categories (after applying selectivities). See Section \ref{sec:penalties} for more information on specifying penalties.
 
@@ -420,7 +420,26 @@ selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}}}
 
-%Similarly, the biomass-event mortality type is applied as \ldots \textbf{to be added}.
+The Holling mortality process\index{Holling mortality} applies either a Holling Type II or Type III function that removes a number or biomass from a set of categories according to their abundance (or biomass) and some 'predator' abundance (or biomass) .
+
+For example, the Holling mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
+
+First, calculate the vulnerable abundance for each category $k$ in $1 \ldots K$ for ages $l = 1 \ldots L$ that are subject to the mortality,
+\begin{equation}
+  V(k,l) = S(l) N(k,l)
+\end{equation}
+
+and then, assuming that the predator abundance (or biomass) is given by the value of an abundance or biomass layer $L_a$ at $a$, the the number to remove is determined as,
+\begin{equation}
+R(k,l) = \begin{cases}
+  L_a (a  V(k,l))/(b + V(k,l)), & \text{if Type II} \\
+  L_a (a^2  V(k,l)^2)/(b^2 + V(k,l)^2), & \text{if Type III}\\ 
+  \end{cases} 
+\end{equation}
+
+Except that if the exploitation rate ($U=R(l,k)/V(l,k)$) in any partition element $(l,k)$ exceeds $U_{max}$, then the exploration rate is set equal to $U_{max}$.
+
+Note that the Holling function is applied either as an abundance (if $L_a$ is an abundance layer) or biomass (if $L_a$ is a biomass layer).
 
 \subsubsection{\I{Category transition}s}
 

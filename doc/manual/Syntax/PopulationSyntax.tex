@@ -124,6 +124,7 @@ The population processes available are,
 	\item Annually varying relationship mortality rate process
 	\item Mortality event (as a number) process
 	\item Mortality event (as a biomass) process
+	\item Holling mortality rate
 	\item Category transition process
 	\item Category shift process
 \end{itemize}
@@ -217,16 +218,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Must be a valid \command{derived\_quantity} label}
 
-\TODO 
-
-Default changed.
-
 \defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
 \defType{Integer}
-\defDefault{Defaults to the value of \commandlabsub{process}{age}}
+\defDefault{No default}
 \defValue{Must be a value $\ge 0$}
-
-\TODOend\
 
 \defSub{ycs\_years} {Years for year class strength values}
 \defType{Integer vector or integer range}
@@ -238,25 +233,19 @@ Default changed.
 \defDefault{No default}
 \defValue{Must be vector}
 
-\TODO
-
-Changed name to be clearer.
-
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
 \defType{Integer vector or integer range}
 \defDefault{No default}
 \defValue{The expanded vector must have values of years between \commandsub{model}{initial} and \commandsub{model}{current}}
-
-\TODOend
 
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values.}
 
-\subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
-
 \TODO
+
+\subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
 
 \defSub{r0} {Define a multiplier of \subcommand{r0\_layer} for calculating the total amount of recruitment at equilibrium abundance levels}
 \defType{Estimable}
@@ -448,6 +437,47 @@ Changed name to be clearer.
 \defDefault{No default}
 \defValue{Valid penalty label defined by \command{penalty}}
 
+\subsubsection[Holling mortality process]{\commandlabsubarg{process}{type}{holling\_mortality\_rate}}
+
+\defSub{categories}{Define the categories that the Holling mortality rate is applied to}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{selectivities}{Define the selectivities applied to each category}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{holling\_type}{Define if the Holling function is Type II (true) or Type III (false)}
+\defType{Boolean}
+\defDefault{True}
+
+\defSub{a}{Define the $a$ parameter of the Holling function}
+\defType{Numeric}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{b}{Define the $b$ parameter of the Holling function}
+\defType{Numeric}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{layer}{Define the layer that specify the Holling predator abundance (or biomass)}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layers defined by \command{layer} of \texttt{type} abundance or biomass}
+
+\defSub{u\_max} {Define the maximum exploitation rate}
+\defType{Constant}
+\defDefault{0.99}
+\defValue{Must be $> 0$ and $< 1$}
+
+\defSub{penalty} {Define the event mortality penalty label}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid penalty label defined by \command{penalty}}
+
 \subsubsection[Category transition process]{\commandlabsubarg{process}{type}{category\_transition}}
 
 \defSub{from} {Define the categories that are the source of the transition process}
@@ -590,12 +620,6 @@ The individual preference functions available are,
 \end{itemize}
 
 Each type of preference function requires a set of subcommands and arguments specific to that function.
-
-\TODO
-
-I added the requirements for layers to be positive or strictly positive below. Alistair, can you check please.
-
-\TODOend
 
 \defComLab{preference\_function} {Define a preference function with label}
 

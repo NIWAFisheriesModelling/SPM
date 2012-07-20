@@ -10,7 +10,6 @@ age_plus_group True
 initialisation_phases Phase1 Phase2 Phase3
 initial_year 1995
 current_year 2007
-final_year 2107
 cell_length 100
 time_steps one two
 age_size none none

@@ -16,7 +16,7 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
     }
     temp<-substr(res$header$version[1],2,16)
     if (temp != spm.binary.version()) {
-       cat("Warning, spm and R versions differ\n")
+       cat("Warning: spm and the spm R library versions are different\n")
        cat("SPM v",spm.binary.version(),"\n")
        cat("R   v",temp,"\n")
     }
