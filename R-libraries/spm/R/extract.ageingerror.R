@@ -1,4 +1,4 @@
-"extract.ageingerror" <-
+"extract.ageing_error" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
@@ -7,12 +7,13 @@ function(lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
-  res$type<-substring(lines[index.start+2],20)
+  res$type<-substring(lines[index.start+2],21)
   col.labs<-spm.string.to.vector.of.words(lines[3+index.start],sep=",")
+  col.labs[1]<-substring(col.labs[1],regexpr(":",col.labs[1])+2)
   values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)],sep=",")
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
+  values[,1]<-substring(values[,1],regexpr(":",values[,1])+2)
   names(values)<-col.labs
-  values$ages<-as.numeric(as.character(values$ages))
   values<-apply(values,2,as.numeric)
   res$data<-values
   return(res)

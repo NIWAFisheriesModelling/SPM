@@ -1,7 +1,4 @@
-spm.report.types <- function () 
+spm.report.types <- function ()
 {
-    return(c("initialisation", "partition", "process", "derived_quantity", 
-        "estimate_value", "estimate_summary", "objective_function", 
-        "observation", "layer", "selectivity", "random_number_seed", 
-        "weight_at_size", "layer_derived_view", "spatial_map","covariance"))
+  return(c("ageing_error", "age_size", "age_weight", "covariance", "derived_quantity", "estimate_summary", "estimate_value", "initialisation", "layer", "layer_derived_view", "MCMC", "objective_function", "observation", "partition", "process", "random_number_seed", "selectivity", "simulated_observation", "size_weight", "spatial_map"))
 }

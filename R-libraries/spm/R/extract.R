@@ -17,8 +17,8 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
     temp<-substr(res$header$version[1],2,16)
     if (temp != spm.binary.version()) {
        cat("Warning: spm and the spm R library versions are different\n")
-       cat("SPM v",spm.binary.version(),"\n")
-       cat("R   v",temp,"\n")
+       cat("SPM v",spm.binary.version(),"\n",sep="")
+       cat("R   v",temp,"\n",sep="")
     }
 
     index <- (1:length(line))[substring(line, 1, 1) == "["]
@@ -31,41 +31,41 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
     counter <- as.list(rep(0, length(report.types)))
     names(counter) <- report.types
     for (i in 1:length(report.type)) {
-        if (report.type[i] == "initialisation") {
-            if (!("initialisation" %in% names(res))) {
-                res$initialisation <- list()
+        if (report.type[i] == "ageing_error") {
+            if (!("ageing_error" %in% names(res))) {
+                res$"ageing_error" <- list()
             }
-            counter$initialisation <- counter$initialisation + 1
-            temp <- extract.initialisationphase(lines = line[index[i]:(index[i + 1] - 1)])
-            res$initialisation[[counter$initialisation]] <- temp
-            names(res$initialisation)[counter$initialisation] <- report.label[i]
+            counter$"ageing_error" <- counter$"ageing_error" + 1
+            temp <- extract.ageing_error(lines = line[index[i]:(index[i + 1] - 1)])
+            res$"ageing_error"[[counter$"ageing_error"]] <- temp
+            names(res$"ageing_error")[counter$"ageing_error"] <- report.label[i]
         }
-        else if (report.type[i] == "partition") {
-            if (!("partition" %in% names(res))) {
-                res$partition <- list()
+        else if (report.type[i] == "age_size") {
+            if (!("age_size" %in% names(res))) {
+                res$age_size <- list()
             }
-            counter$partition <- counter$partition + 1
-            temp <- extract.partition(lines = line[index[i]:(index[i + 1] - 1)])
-            res$partition[[counter$partition]] <- temp
-            names(res$partition)[counter$partition] <- report.label[i]
+            counter$age_size <- counter$age_size + 1
+            temp <- extract.age_size(lines = line[index[i]:(index[i + 1] - 1)])
+            res$age_size[[counter$age_size]] <- temp
+            names(res$age_size)[counter$age_size] <- report.label[i]
         }
-        else if (report.type[i] == "layer_derived_world_view") {
-            if (!("layer_derived_world_view" %in% names(res))) {
-                res$layer_derived_world_view <- list()
+        else if (report.type[i] == "age_weight") {
+            if (!("age_weight" %in% names(res))) {
+                res$age_weight <- list()
             }
-            counter$layer_derived_world_view <- counter$layer_derived_world_view + 1
-            temp <- extract.layerderivedworldview(lines = line[index[i]:(index[i + 1] - 1)])
-            res$layer_derived_world_view[[counter$layer_derived_world_view]] <- temp
-            names(res$layer_derived_world_view)[counter$layer_derived_world_view] <- report.label[i]
+            counter$age_weight <- counter$age_weight + 1
+            temp <- extract.age_weight(lines = line[index[i]:(index[i + 1] - 1)])
+            res$age_weight[[counter$age_weight]] <- temp
+            names(res$age_weight)[counter$age_weight] <- report.label[i]
         }
-        else if (report.type[i] == "process") {
-            if (!("process" %in% names(res))) {
-                res$process <- list()
+        else if (report.type[i] == "covariance") {
+            if (!("covariance" %in% names(res))) {
+                res$covariance <- list()
             }
-            counter$process <- counter$process + 1
-            temp <- extract.process(lines = line[index[i]:(index[i + 1] - 1)])
-            res$process[[counter$process]] <- temp
-            names(res$process)[counter$process] <- report.label[i]
+            counter$covariance <- counter$covariance + 1
+            temp <- extract.covariance(lines = line[index[i]:(index[i + 1] - 1)])
+            res$covariance[[counter$covariance]] <- temp
+            names(res$covariance)[counter$covariance] <- report.label[i]
         }
         else if (report.type[i] == "derived_quantity") {
             if (!("derived_quantity" %in% names(res))) {
@@ -85,32 +85,14 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
             res$estimate_summary[[counter$estimate_summary]] <- temp
             names(res$estimate_summary)[counter$estimate_summary] <- report.label[i]
         }
-        else if (report.type[i] == "objective_function") {
-            if (!("objective_function" %in% names(res))) {
-                res$objective_function <- list()
+        else if (report.type[i] == "initialisation") {
+            if (!("initialisation" %in% names(res))) {
+                res$initialisation <- list()
             }
-            counter$objective_function <- counter$objective_function + 1
-            temp <- extract.objectivefunction(lines = line[index[i]:(index[i + 1] - 1)])
-            res$objective_function[[counter$objective_function]] <- temp
-            names(res$objective_function)[counter$objective_function] <- report.label[i]
-        }
-        else if (report.type[i] == "observation") {
-            if (!("observation" %in% names(res))) {
-                res$observation <- list()
-            }
-            counter$observation <- counter$observation + 1
-            temp <- extract.observation(lines = line[index[i]:(index[i + 1] - 1)])
-            res$observation[[counter$observation]] <- temp
-            names(res$observation)[counter$observation] <- report.label[i]
-        }
-        else if (report.type[i] == "spatial_map") {
-            if (!("spatial_map" %in% names(res))) {
-                res$spatial_map <- list()
-            }
-            counter$spatial_map <- counter$spatial_map + 1
-            temp <- extract.spatial.map(lines = line[index[i]:(index[i + 1] - 1)])
-            res$spatial_map[[counter$spatial_map]] <- temp
-            names(res$spatial_map)[counter$spatial_map] <- report.label[i]
+            counter$initialisation <- counter$initialisation + 1
+            temp <- extract.initialisationphase(lines = line[index[i]:(index[i + 1] - 1)])
+            res$initialisation[[counter$initialisation]] <- temp
+            names(res$initialisation)[counter$initialisation] <- report.label[i]
         }
         else if (report.type[i] == "layer") {
             if (!("layer" %in% names(res))) {
@@ -130,14 +112,50 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
             res$layer_derived_view[[counter$layer_derived_view]] <- temp
             names(res$layer_derived_view)[counter$layer_derived_view] <- report.label[i]
         }
-        else if (report.type[i] == "selectivity") {
-            if (!("selectivity" %in% names(res))) {
-                res$selectivity <- list()
+        else if (report.type[i] == "MCMC") {
+            if (!("MCMC" %in% names(res))) {
+                res$MCMC <- list()
             }
-            counter$selectivity <- counter$selectivity + 1
-            temp <- extract.selectivity(lines = line[index[i]:(index[i + 1] - 1)])
-            res$selectivity[[counter$selectivity]] <- temp
-            names(res$selectivity)[counter$selectivity] <- report.label[i]
+            counter$MCMC <- counter$MCMC + 1
+            temp <- extract.layerderivedworldview(lines = line[index[i]:(index[i + 1] - 1)])
+            res$MCMC[[counter$MCMC]] <- temp
+            names(res$MCMC)[counter$MCMC] <- report.label[i]
+        }
+        else if (report.type[i] == "objective_function") {
+            if (!("objective_function" %in% names(res))) {
+                res$objective_function <- list()
+            }
+            counter$objective_function <- counter$objective_function + 1
+            temp <- extract.objectivefunction(lines = line[index[i]:(index[i + 1] - 1)])
+            res$objective_function[[counter$objective_function]] <- temp
+            names(res$objective_function)[counter$objective_function] <- report.label[i]
+        }
+        else if (report.type[i] == "observation") {
+            if (!("observation" %in% names(res))) {
+                res$observation <- list()
+            }
+            counter$observation <- counter$observation + 1
+            temp <- extract.observation(lines = line[index[i]:(index[i + 1] - 1)])
+            res$observation[[counter$observation]] <- temp
+            names(res$observation)[counter$observation] <- report.label[i]
+        }
+        else if (report.type[i] == "partition") {
+            if (!("partition" %in% names(res))) {
+                res$partition <- list()
+            }
+            counter$partition <- counter$partition + 1
+            temp <- extract.partition(lines = line[index[i]:(index[i + 1] - 1)])
+            res$partition[[counter$partition]] <- temp
+            names(res$partition)[counter$partition] <- report.label[i]
+        }
+        else if (report.type[i] == "process") {
+            if (!("process" %in% names(res))) {
+                res$process <- list()
+            }
+            counter$process <- counter$process + 1
+            temp <- extract.process(lines = line[index[i]:(index[i + 1] - 1)])
+            res$process[[counter$process]] <- temp
+            names(res$process)[counter$process] <- report.label[i]
         }
         else if (report.type[i] == "random_number_seed") {
             if (!("random_number_seed" %in% names(res))) {
@@ -148,23 +166,41 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
             res$random_number_seed[[counter$random_number_seed]] <- temp
             names(res$random_number_seed)[counter$random_number_seed] <- report.label[i]
         }
-        else if (report.type[i] == "weight_at_size") {
-            if (!("weight_at_size" %in% names(res))) {
-                res$weight_at_size <- list()
+        else if (report.type[i] == "selectivity") {
+            if (!("selectivity" %in% names(res))) {
+                res$selectivity <- list()
             }
-            counter$weight_at_size <- counter$weight_at_size + 1
-            temp <- extract.weightatsize(lines = line[index[i]:(index[i + 1] - 1)])
-            res$weight_at_size[[counter$weight_at_size]] <- temp
-            names(res$weight_at_size)[counter$weight_at_size] <- report.label[i]
+            counter$selectivity <- counter$selectivity + 1
+            temp <- extract.selectivity(lines = line[index[i]:(index[i + 1] - 1)])
+            res$selectivity[[counter$selectivity]] <- temp
+            names(res$selectivity)[counter$selectivity] <- report.label[i]
         }
-        else if (report.type[i] == "covariance") {
-            if (!("covariance" %in% names(res))) {
-                res$covariance <- list()
+        else if (report.type[i] == "simulated_observation") {
+            if (!("simulated_observation" %in% names(res))) {
+                res$simulated_observation <- list()
             }
-            counter$covariance <- counter$covariance + 1
-            temp <- extract.covariance(lines = line[index[i]:(index[i + 1] - 1)])
-            res$covariance[[counter$covariance]] <- temp
-            names(res$covariance)[counter$covariance] <- report.label[i]
+            counter$simulated_observation <- counter$simulated_observation + 1
+            temp <- extract.simulated_observation(lines = line[index[i]:(index[i + 1] - 1)])
+            res$simulated_observation[[counter$simulated_observation]] <- temp
+            names(res$simulated_observation)[counter$simulated_observation] <- report.label[i]
+        }
+        else if (report.type[i] == "size_weight") {
+            if (!("size_weight" %in% names(res))) {
+                res$size_weight <- list()
+            }
+            counter$size_weight <- counter$size_weight + 1
+            temp <- extract.size_weight(lines = line[index[i]:(index[i + 1] - 1)])
+            res$size_weight[[counter$size_weight]] <- temp
+            names(res$size_weight)[counter$size_weight] <- report.label[i]
+        }
+        else if (report.type[i] == "spatial_map") {
+            if (!("spatial_map" %in% names(res))) {
+                res$spatial_map <- list()
+            }
+            counter$spatial_map <- counter$spatial_map + 1
+            temp <- extract.spatial.map(lines = line[index[i]:(index[i + 1] - 1)])
+            res$spatial_map[[counter$spatial_map]] <- temp
+            names(res$spatial_map)[counter$spatial_map] <- report.label[i]
         }
         else if (ignore.unknown==FALSE) {
           stop(paste("ERROR: Unknown report type (report.type=",report.type[i],")"))

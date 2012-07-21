@@ -1,4 +1,4 @@
 "spm.binary.version"<-
 function() {
-return("1.1-2012-07-19")
+return("1.1-2012-07-20")
 }

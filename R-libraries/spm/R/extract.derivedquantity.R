@@ -7,7 +7,18 @@ function(lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
-  res$data<-NA
+  res$data<-list()
+  res$data$initialisation<-list()
+  count<-1
+  for(i in index.start:index.end) {
+    if(substring(lines[i],1,14)=="initialisation") {
+      res$data$initialisation[[count]]<-spm.string.to.vector.of.numbers(substring(lines[i],regexpr(":",lines[i])+1),sep=",")
+      count<-count+1
+    }
+    if(substring(lines[i],1,5)=="years")
+      res$data$years<-spm.string.to.vector.of.numbers(substring(lines[i],7),sep=",")
+    if(substring(lines[i],1,6)=="values")
+      res$data$values<-spm.string.to.vector.of.numbers(substring(lines[i],8),sep=",")
+  }
   return(res)
 }
-
