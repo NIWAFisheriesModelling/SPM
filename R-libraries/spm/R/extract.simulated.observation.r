@@ -7,6 +7,7 @@ function(lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
+  cat("simulated_obsrvation extract functions have not been implemented\n")
   res$data<-NA
   return(res)
 }
