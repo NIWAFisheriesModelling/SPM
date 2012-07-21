@@ -53,10 +53,12 @@ void CBiomassObservation::validate() {
     dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP,true,1.0);
     dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
 
+    if (dDelta < 0)
+      CError::errorLessThan(PARAM_DELTA, PARAM_ZERO);
+
     // Get our OBS
     vector<string> vOBS;
     pParameterList->fillVector(vOBS, PARAM_OBS);
-
     if ((vOBS.size() % 2) != 0)
       CError::errorPairs(PARAM_OBS);
 
@@ -69,6 +71,11 @@ void CBiomassObservation::validate() {
 
     if (dProcessError < 0)
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
+
+    if (dProportionTimeStep < 0)
+      CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
+    if (dProportionTimeStep > 1)
+      CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
 
     // Get our ErrorValues
     vector<string> vErrorValues;

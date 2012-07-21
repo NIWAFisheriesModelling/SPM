@@ -72,6 +72,9 @@ void CProportionsAtAgeObservation::validate() {
     dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
     sAgeingError        = pParameterList->getString(PARAM_AGEING_ERROR, true, "");
 
+    if (dDelta < 0)
+      CError::errorLessThan(PARAM_DELTA, PARAM_ZERO);
+
     if (iMinAge < pWorld->getMinAge())
       CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
     if (iMaxAge > pWorld->getMaxAge())
@@ -104,6 +107,13 @@ void CProportionsAtAgeObservation::validate() {
         }
       }
     }
+
+    if (dProportionTimeStep < 0)
+      CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
+    if (dProportionTimeStep > 1)
+      CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
+    if (dProportionTimeStep < 1)
+      CError::error(PARAM_PROPORTION_TIME_STEP + string(" not yet implemented."));
 
     // Get our Error Value
     vector<string> vErrorValues;

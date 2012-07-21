@@ -73,8 +73,18 @@ void CProportionsByCategoryObservation::validate() {
     pParameterList->fillVector(vTargetCategoryNames, PARAM_TARGET_CATEGORIES);
     pParameterList->fillVector(vTargetSelectivityNames, PARAM_TARGET_SELECTIVITIES);
 
+    if (dDelta < 0)
+      CError::errorLessThan(PARAM_DELTA, PARAM_ZERO);
+
     // Find out the Spread in Ages
     int iAgeSpread = (iMaxAge+1) - iMinAge;
+
+    if (iMinAge < pWorld->getMinAge())
+      CError::errorLessThan(PARAM_MIN_AGE, PARAM_MIN_AGE);
+    if (iMaxAge > pWorld->getMaxAge())
+      CError::errorGreaterThan(PARAM_MAX_AGE, PARAM_MAX_AGE);
+    if (dProcessError < 0)
+      CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
 
     // Get our OBS
     vector<string> vOBS;
@@ -91,6 +101,13 @@ void CProportionsByCategoryObservation::validate() {
 
     if (dProcessError < 0)
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
+
+    if (dProportionTimeStep < 0)
+      CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
+    if (dProportionTimeStep > 1)
+      CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
+    if (dProportionTimeStep < 1)
+      CError::error(PARAM_PROPORTION_TIME_STEP + string(" not yet implemented."));
 
     // Get our Error Value
     vector<string> vErrorValues;
