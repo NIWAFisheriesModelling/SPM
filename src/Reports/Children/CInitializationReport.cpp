@@ -112,7 +112,7 @@ void CInitializationReport::execute() {
 
         // Loop Through
         for (int k = 0; k < iSquareHeight; ++k) {
-          cout << i+1 << CONFIG_SEPERATOR_ESTIMATE_VALUES << j+1 << "," << pWorld->getCategoryNameForIndex(k);
+          cout << i+1 << CONFIG_SEPERATOR_ESTIMATE_VALUES << j+1 << CONFIG_SEPERATOR_ESTIMATE_VALUES << pWorld->getCategoryNameForIndex(k);
           for (int l = 0; l < iSquareWidth; ++l) {
             cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << pBaseSquare->getValue(k, l);
           }
