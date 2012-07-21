@@ -92,7 +92,7 @@ void CDerivedQuantityReport::execute() {
     for (int i=0; i < pDerivedQuantity->getInitialisationSize(); ++i) {
       cout << PARAM_INITIALIZATION << "." << PARAM_INITIALIZATION_PHASE << CONFIG_ARRAY_START << boost::lexical_cast<string>(i+1) << CONFIG_ARRAY_END << CONFIG_RATIO_SEPARATOR << " " ;
       for (int j=0; j < pDerivedQuantity->getInitialisationValuesSize(i); ++j) {
-        cout << pDerivedQuantity->getInitialisationValue(i,j) << " ";
+        cout << pDerivedQuantity->getInitialisationValue(i,j) << (j==(pDerivedQuantity->getInitialisationValuesSize(i)-1)?"":CONFIG_SEPERATOR_ESTIMATE_VALUES);
       }
       cout << "\n";
     }
@@ -100,11 +100,11 @@ void CDerivedQuantityReport::execute() {
     // Output values for each year
     cout << PARAM_YEARS << CONFIG_RATIO_SEPARATOR << " ";
     for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
-      cout << boost::lexical_cast<string>(i) << " ";
+      cout << boost::lexical_cast<string>(i) << (i==(pWorld->getCurrentYear())?"":CONFIG_SEPERATOR_ESTIMATE_VALUES);
     }
     cout << "\n" << PARAM_VALUES << CONFIG_RATIO_SEPARATOR << " ";
     for (int i=0; i < pDerivedQuantity->getValuesSize(); ++i) {
-      cout << pDerivedQuantity->getValueFromIndex(i) << " ";
+      cout << pDerivedQuantity->getValueFromIndex(i) << (i==(pDerivedQuantity->getValuesSize()-1)?"":CONFIG_SEPERATOR_ESTIMATE_VALUES);
     }
 
     cout << "\n";

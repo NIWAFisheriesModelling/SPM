@@ -84,9 +84,9 @@ void CAgeingErrorReport::execute() {
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_AGEING_ERROR << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sAgeingError << "\n";
 
-    cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
+    cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << iMinAge;
     for (int i = 1; i < iSpread; ++i)
-      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << " " << (i + iMinAge);
+      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES  << (i + iMinAge);
     cout << "\n";
 
     vector<vector<double> > mMisMatrix = pAgeingError->getMisMatrix();
@@ -94,7 +94,7 @@ void CAgeingErrorReport::execute() {
     for (int i = 0; i < iSpread; ++i) {
       cout << i+1 << CONFIG_RATIO_SEPARATOR << " ";
       for (int j = 0; j < (iSpread - 1); ++j) {
-        cout << mMisMatrix[i][j] << CONFIG_SEPERATOR_ESTIMATE_VALUES << " ";
+        cout << mMisMatrix[i][j] << CONFIG_SEPERATOR_ESTIMATE_VALUES;
       }
       cout << mMisMatrix[i][iSpread-1] << "\n";
     }

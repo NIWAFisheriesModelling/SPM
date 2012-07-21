@@ -91,17 +91,17 @@ void CSizeWeightReport::execute() {
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_SIZE_WEIGHT << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sSizeWeight << "\n";
 
-    cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR;
+    cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR << " ";
     for (int i = 0; i < ((int)vSizeList.size()-1); ++i) {
-      cout << " " << vSizeList[i] << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      cout << vSizeList[i] << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     }
-    cout << " " << vSizeList[vSizeList.size()-1] << "\n";
+    cout << vSizeList[vSizeList.size()-1] << "\n";
 
-    cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR;
+    cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << " ";
     for (int i = 0; i < ((int)vSizeList.size()-1); ++i) {
-      cout << " " << pSizeWeight->getMeanWeight(vSizeList[i]) << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      cout << pSizeWeight->getMeanWeight(vSizeList[i]) << CONFIG_SEPERATOR_ESTIMATE_VALUES;
     }
-    cout << " " << pSizeWeight->getMeanWeight(vSizeList[vSizeList.size()-1]) << "\n";
+    cout << pSizeWeight->getMeanWeight(vSizeList[vSizeList.size()-1]) << "\n";
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
