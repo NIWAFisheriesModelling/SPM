@@ -74,7 +74,7 @@ void CObservationReport::execute() {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-        if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+//        if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
           return;
 
     this->start();
