@@ -1,4 +1,4 @@
-extract <- function (file, path = "", ignore.unknown=TRUE)
+extract <- function (file, path = "", ignore.unknown=FALSE)
 {
     if (missing(path))
         path <- ""
@@ -14,7 +14,7 @@ extract <- function (file, path = "", ignore.unknown=TRUE)
         header$machine.name <- line[6]
         res$header <- header
     }
-    temp<-substr(res$header$version[1],2,16)
+    temp<-substr(res$header$version[1],2,15)
     if (temp != spm.binary.version()) {
        cat("Warning: spm and the spm R library versions are different\n")
        cat("SPM v",spm.binary.version(),"\n",sep="")
