@@ -24,25 +24,28 @@ type none
 # Initialisation
 @initialisation_phase Phase1
 years 100
-time_steps Phase1
+time_steps stepA stepB
 
 @initialisation_phase Phase2
 years 100
-time_steps Phase2
+time_steps stepB stepC
 
 @initialisation_phase Phase3
 years 1
-time_steps Phase2
+time_steps stepB stepC
 
-@time_step Phase1
-processes ConstantRecruitment Maturation halfM halfM Ageing
+@time_step stepA
+processes BHrecruitment Maturation halfM halfM
 
-@time_step Phase2
-processes ConstantRecruitment Maturation halfM halfM MoveImmature MoveMature Ageing
+@time_step stepB
+processes BHrecruitment Maturation halfM halfM MoveImmature MoveMature
+
+@time_step stepC
+processes Ageing
 
 # Annual Cycle
 @time_step one # Summer
-processes Recruitment Maturation halfM Fishing halfM
+processes BHrecruitment Maturation halfM Fishing halfM
 
 @time_step two # Winter
 processes MoveImmature MoveMature Ageing
@@ -51,7 +54,7 @@ processes MoveImmature MoveMature Ageing
 @derived_quantity SSB
 type abundance
 time_step one
-initialisation_time_steps Phase1 Phase2 Phase2
+initialisation_time_steps stepA stepB stepB
 categories mature
 selectivities One
 layer Base
@@ -61,39 +64,19 @@ layer Base
 type ageing
 categories immature mature
 
-@process ConstantRecruitment
-type constant_recruitment
-categories immature
-proportions 1.0
-r0 1e6
-age 1
-
-@process Recruitment
+@process BHrecruitment
 type bh_recruitment
 categories immature
 proportions 1.0
-r0 1e6
+r0 550000
 age 1
 ssb SSB
-ssb_offset 0
-ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1
-{
-@process Recruitment
-type bh_recruitment
-categories immature
-proportions 1.0
-r0 1e6
-ages 1
-steepness 0.75
-sigma_r 0.6
-rho 0.1
-layer Recruitment
-ssb SSB
-ycs_values 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0
-ycs_years 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
+b0 Phase2
 ssb_offset 1
-standardise_ycs_year_range 1993 2005
-}
+standardise_YCS_years 1995-2007
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+
 @process halfM
 type constant_mortality_rate
 categories immature mature
