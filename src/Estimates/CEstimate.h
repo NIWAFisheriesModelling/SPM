@@ -21,17 +21,18 @@ class CPrior;
 //**********************************************************************
 class CEstimate : public CBaseBuild {
 public:
-	CEstimate();
-	virtual                    ~CEstimate();
-	void                       fillSameVector(vector<string> &sames);
-	string                     getParameter() { return sParameter; }
-	double                     getLowerBound() { return dLowerBound; }
-	double                     getUpperBound() { return dUpperBound; }
-	string                     getPrior() { return sPrior; }
-	int                        getEstimationPhase() { return iEstimationPhase; }
+  CEstimate();
+  virtual                    ~CEstimate();
+  void                       fillSameVector(vector<string> &sames);
+  string                     getParameter() { return sParameter; }
+  double                     getLowerBound() { return dLowerBound; }
+  double                     getUpperBound() { return dUpperBound; }
+  bool                       getMCMCFixed() { return bMCMCFixed; }
+  string                     getPrior() { return sPrior; }
+  int                        getEstimationPhase() { return iEstimationPhase; }
   void                       setValue(double value);
-	double                     getValue();
-	void                       setEnabled(bool value) { bEnabled = value; }
+  double                     getValue();
+  void                       setEnabled(bool value) { bEnabled = value; }
   bool                       getEnabled() { return bEnabled; }
   void                       addValue(double value);
   int                        getValueCount() { return (int)vValueList.size(); }
@@ -39,13 +40,14 @@ public:
   double                     getPriorScore();
   void                       setTarget(double *newTarget) { pTarget = newTarget; }
   void                       validate();
-	void                       build();
+  void                       build();
 
 protected:
   // Variables
   string                     sParameter;
   double                     dLowerBound;
   double                     dUpperBound;
+  bool                       bMCMCFixed;
   string                     sPrior;
   CPrior                     *pPrior;
   double                     *pTarget;

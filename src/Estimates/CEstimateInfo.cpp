@@ -39,6 +39,7 @@ CEstimateInfo::CEstimateInfo() {
   pParameterList->registerAllowed(PARAM_PRIOR);
   pParameterList->registerAllowed(PARAM_SAME);
   pParameterList->registerAllowed(PARAM_ESTIMATION_PHASE);
+  pParameterList->registerAllowed(PARAM_MCMC_FIXED);
 
   // Add Default
   pParameterList->addParameter(PARAM_LABEL, "Estimate");
