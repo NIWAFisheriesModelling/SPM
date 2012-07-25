@@ -183,7 +183,7 @@ void CProcessReport::execute() {
       for (int i = 0; i < (int)vMortalityYears.size(); ++i)
         cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
       cout << "\n";
-      cout << PARAM_PROPORTION << ": ";
+      cout << PARAM_PROPORTIONS << ": ";
       for (int i = 0; i < (int)vMortalityRate.size(); ++i)
         cout << vMortalityRate[i] << (i<((int)vMortalityRate.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
       cout << "\n";
