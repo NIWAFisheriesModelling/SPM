@@ -176,11 +176,16 @@ void CProcessReport::execute() {
     CHollingMortalityRateProcess *pHolling = dynamic_cast<CHollingMortalityRateProcess*>(pTarget);
     if (pHolling != 0) {
       cout << "layer_type" << ": " << (pHolling->isAbundance()?PARAM_ABUNDANCE:PARAM_BIOMASS) << "\n";
+      vector<int> vMortalityYears = pHolling->getMortalityYears();
       vector<double> vMortalityRate = pHolling->getMortalityRate();
       vector<double> vMortalityN = pHolling->getMortalityN();
+      cout << PARAM_YEARS << ": ";
+      for (int i = 0; i < (int)vMortalityYears.size(); ++i)
+        cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+      cout << "\n";
       cout << PARAM_PROPORTION << ": ";
       for (int i = 0; i < (int)vMortalityRate.size(); ++i)
-        cout << vMortalityRate[i] << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+        cout << vMortalityRate[i] << (i<((int)vMortalityRate.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
       cout << "\n";
       cout << PARAM_ABUNDANCE << ": ";
       for (int i = 0; i < (int)vMortalityN.size(); ++i)

@@ -169,7 +169,7 @@ void CBHRecruitmentProcess::build() {
     // Get our derived quantity (SSB)
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
 
-    // Get out initialisation
+    // Get our initialisation
     pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
     // Get B0 phase

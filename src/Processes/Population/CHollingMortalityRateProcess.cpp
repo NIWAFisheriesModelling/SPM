@@ -9,6 +9,7 @@
 
 // Local Headers
 #include "CHollingMortalityRateProcess.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/CBiomassLayer.h"
 #include "../../Layers/Numeric/CAbundanceLayer.h"
@@ -16,6 +17,7 @@
 #include "../../Penalties/CPenaltyManager.h"
 #include "../../Penalties/CPenalty.h"
 #include "../../Selectivities/CSelectivity.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CMath.h"
@@ -112,6 +114,9 @@ void CHollingMortalityRateProcess::build() {
       }
     }
 
+    // Build Refs
+    pTimeStepManager = CTimeStepManager::Instance();
+
     // Build Penalty
     if (sPenalty != "")
       pPenalty = CPenaltyManager::Instance()->getPenalty(sPenalty);
@@ -138,6 +143,7 @@ void CHollingMortalityRateProcess::rebuild() {
     vMortalityRate.resize(0);
     vMortalityN.resize(0);
     vMortalityBiomass.resize(0);
+    vMortalityYears.resize(0);
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
@@ -177,15 +183,15 @@ void CHollingMortalityRateProcess::execute() {
             // Get Current Value
             // If predator layer is a biomass, then use prey as a biomass
             if(!bIsAbundance) {
-              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * pWorld->getMeanWeight(l,k);
+              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,k);
             } else {
-              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l);
+              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             }
             // Holling function type 2 or 3
             if(bHollingType2)
-              dMortality = pLayer->getValue(i, j) * (dA * dCurrent * dCurrent)/(dBSquared + dCurrent * dCurrent);
-            else
               dMortality = pLayer->getValue(i, j) * (dA * dCurrent)/(dB + dCurrent);
+            else
+              dMortality = pLayer->getValue(i, j) * (dA * dCurrent * dCurrent)/(dBSquared + dCurrent * dCurrent);
 
             // Work out exploitation rate to remove
             double dExploitation = dMortality / CMath::zeroFun(dCurrent,ZERO);
@@ -213,9 +219,12 @@ void CHollingMortalityRateProcess::execute() {
         }
       }
     }
-    vMortalityRate.push_back(dSumMortality / dSumAbundance);
-    vMortalityN.push_back(dSumMortality);
-    if(!bIsAbundance) vMortalityBiomass.push_back(dSumMortalityBiomass);
+    if ( pRuntimeController->getCurrentState() != STATE_INITIALIZATION ) {
+      vMortalityYears.push_back(pTimeStepManager->getCurrentYear());
+      vMortalityRate.push_back(dSumMortality / dSumAbundance);
+      vMortalityN.push_back(dSumMortality);
+      if(!bIsAbundance) vMortalityBiomass.push_back(dSumMortalityBiomass);
+    }
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
