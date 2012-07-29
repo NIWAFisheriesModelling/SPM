@@ -153,7 +153,7 @@ The proposal distribution can also change adaptively during the chain, using two
 \begin{enumerate}
 \item You can request that the step size change adaptively at one or more sample numbers. At each adaptation, the step size is doubled if the acceptance rate since the last adaptation is more than $0.5$, or halved if the acceptance rate is less than $0.2$. (See Gelman et al. \citep{823} for justification.)
 
-\item You can request that the entire covariance matrix change adaptively at one or more sample numbers. At each adaptation, it is replaced with a matrix based on the sample covariance of an earlier section of the chain. The theory here is that the covariance of a portion of chain could potentially be a better estimate of the covariance of the posterior distribution than the inverse Hessian. \NYI.
+%\item You can request that the entire covariance matrix change adaptively at one or more sample numbers. At each adaptation, it is replaced with a matrix based on the sample covariance of an earlier section of the chain. The theory here is that the covariance of a portion of chain could potentially be a better estimate of the covariance of the posterior distribution than the inverse Hessian. \NYI.
 \end{enumerate}
 
 %The procedure used to choose the sample of points is as follows. First, all points on the chain so far are taken. All points in an initial user-specified period are discarded. The assumption is that the chain will have started moving during this period - if this is incorrect and the chain has still not moved by the end of this period, it is a fatal error and \SPM\ stops. The remaining set of points must contain at least some user-specified number of transitions - if this is incorrect and the chain has not moved this often, it is again a fatal error. If this test is passed, the set of points is systematically sub-sampled down to 1000 points (it must be at least this long to start with).
@@ -166,7 +166,7 @@ The proposal distribution can also change adaptively during the chain, using two
 
 The probability of acceptance for each jump is $0$ if it would move out of the bounds, or $1$ if it improves the posterior, or (new posterior/old posterior) otherwise. You can specify how often the position of the chain is recorded using the keep parameter. For example, with keep $10$, only every $10$th sample is recorded. 
 
-You have the option to specify that some of the estimated parameters are fixed during the MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. If you specify the start of the chain using \texttt{spm -i}, these fixed parameters are set to the values in the file. \NYI.
+You have the option to specify that some of the estimated parameters are fixed during the MCMC. If the chain starts at the point estimate or at a random location, these fixed parameters are set to their values at the point estimate. %If you specify the start of the chain using \texttt{spm -i}, these fixed parameters are set to the values in the file. \NYI.
 
 The posterior sample can also be used for %projections (Section \ref{sec:projections}) or 
 simulations (Section {sec:simulation-observations}) with the values supplied using \texttt{spm -i \emph{file}}.
