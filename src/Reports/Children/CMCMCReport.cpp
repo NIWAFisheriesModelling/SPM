@@ -73,6 +73,7 @@ void CMCMCReport::execute() {
     vChain = pMCMC->getMCMCChain();
     ublas::matrix<double> mxCovariance = pMCMC->getCovariance();
     ublas::matrix<double> mxOriginalCovariance = pMCMC->getOriginalCovariance();
+    ublas::matrix<double> mxCovarianceLT = pMCMC->getCovarianceLT();
     vector<string> vEstimateNames = pMCMC->getEstimateNames();
 
     this->start();
@@ -81,31 +82,41 @@ void CMCMCReport::execute() {
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
 
-    cout << "Original " << PARAM_COVARIANCE << " matrix:\n";
+    cout << "Original " << PARAM_COVARIANCE << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxOriginalCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxOriginalCovariance.size2(); ++j) {
-        cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? ", " : "\n");
+        cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
       }
     }
-    cout << "Proposal distribution " PARAM_COVARIANCE << " matrix:\n";
+    cout << "Proposal distribution " PARAM_COVARIANCE << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxCovariance.size2(); ++j) {
-        cout << mxCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? ", " : "\n");
+        cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+      }
+    }
+    cout << "Cholesky decomposition " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
+    for(int i=0; i < (int)mxCovarianceLT.size1(); ++i) {
+      for(int j=0; j < (int)mxCovarianceLT.size2(); ++j) {
+        cout << mxCovarianceLT(i,j) << ((j<(int)mxCovarianceLT.size2()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
       }
     }
 
     cout << "MCMC objective function values:\n";
     cout << "iteration, score, penalty, prior, likelihood, acceptance_rate, step_size\n";
     for(int i=0; i<(int)vChain.size(); ++i) {
-      cout << vChain[i].iIteration << ", " << vChain[i].dScore << ", " << vChain[i].dPenalty << ", " << vChain[i].dPrior << ", " << vChain[i].dLikelihood << ", " << vChain[i].dAcceptanceRate << ", " << vChain[i].dStepSize << "\n";
+      cout << vChain[i].iIteration << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dScore;
+      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dPenalty << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      cout << vChain[i].dPrior << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dLikelihood;
+      cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dAcceptanceRate << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      cout << vChain[i].dStepSize << "\n";
     }
     cout << "MCMC samples:\n";
     for (int i =0; i < (int)vEstimateNames.size(); ++i ) {
-      cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? ", " : "\n");
+      cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
     }
     for(int i=0; i<(int)vChain.size(); ++i) {
       for(int j=0; j < (int)vChain[i].vValues.size(); ++j) {
-        cout << vChain[i].vValues[j] << ((j<(int)vChain[i].vValues.size()-1) ? ", " : "\n");
+        cout << vChain[i].vValues[j] << ((j<(int)vChain[i].vValues.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
       }
     }
 
@@ -118,7 +129,6 @@ void CMCMCReport::execute() {
     throw Ex;
   }
 }
-
 
 //**********************************************************************
 // CMCMCReport::~CMCMCReport()

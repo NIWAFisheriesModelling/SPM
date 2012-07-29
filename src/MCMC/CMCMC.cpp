@@ -103,7 +103,6 @@ void CMCMC::validate() {
     sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, PARAM_T);
     iDF                     = pParameterList->getInt(PARAM_DF, true, 4);
 
-
     // Validate the parameters
     if (sType != PARAM_METROPOLIS_HASTINGS)
       CError::errorNotEqual(PARAM_TYPE, PARAM_METROPOLIS_HASTINGS);
@@ -161,10 +160,20 @@ void CMCMC::build() {
 
     // Build default step size
     iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
+
+    int iIgnoreEstimate = 0;
+    for(int i = 0; i < iEstimateCount; ++i) {
+      CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
+      if ( (estimate->getLowerBound() == estimate->getUpperBound()) || estimate->getMCMCFixed() )
+        iIgnoreEstimate++;
+    }
+    if ((iEstimateCount - iIgnoreEstimate) < 1)
+      CError::error("The number of estimated parameters must be at least one");
+
     if (!pParameterList->hasParameter(PARAM_STEP_SIZE)) {
-      dStepSize = 2.4 * pow( (double)iEstimateCount, -0.5);
+      dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnoreEstimate), -0.5);
     } else if ( dStepSize==0.0 ) {
-      dStepSize = 2.4 * pow( (double)iEstimateCount, -0.5);
+      dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnoreEstimate), -0.5);
     }
 
   } catch (string &Ex) {
@@ -185,9 +194,15 @@ void CMCMC::execute() {
 
     // Setup initial candidate vector
     vCandidates.resize(iEstimateCount);
+    vbEnabledEstimate.resize(iEstimateCount);
 
     for(int i=0; i < iEstimateCount; ++i) {
-      vCandidates[i] = CEstimateManager::Instance()->getEnabledEstimate(i)->getValue();
+      CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
+      vCandidates[i] = estimate->getValue();
+      if ( (estimate->getLowerBound() == estimate->getUpperBound()) || estimate->getMCMCFixed() )
+        vbEnabledEstimate[i] = false;
+      else
+        vbEnabledEstimate[i] = true;
     }
 
     // Get MCMC starting values
@@ -198,7 +213,7 @@ void CMCMC::execute() {
       CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
     }
 
-    // Get the initial objective function value -> we need to set the value of the estimates here calculated in the lines above
+    // Get the initial objective function value
     CRuntimeThread *pThread = pRuntimeController->getCurrentThread();
     pThread->rebuild();
     pThread->startModel();
@@ -307,16 +322,17 @@ void CMCMC::generateRandomStart() {
   try {
 
     vector<double> vOldCandidates = vCandidates;
+std::cerr <<"A\n";
 
     fillMultivariateNormal(dStart);
-
+std::cerr <<"B\n";
     int iAttempts = 0;
     bool bCandidatesOk;
     int iEnabledEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
 
     // Sanity check
     if ((int)vCandidates.size() != iEnabledEstimateCount)
-      THROW_EXCEPTION("Candidate vector size d")
+      THROW_EXCEPTION("INTERNAL ERROR: Check candidate vector size d")
 
     do {
       bCandidatesOk = true;
@@ -473,20 +489,6 @@ void CMCMC::fillMultivariateNormal(double stepsize) {
 
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
-/*  // set zero variances to 1 as above
-  ublas::matrix<double>  mxTemp = mxCovariance;
-  vector<bool> bHasZeroVariances;
-  bHasZeroVariances.resize(mxTemp.size1());
-  for ( int i = 0; i <= (int)mxTemp.size1(); ++i ) {
-    if ( mxTemp(i,i) == 0.0 ) {
-      mxTemp(i,i) = 1.0;
-      bHasZeroVariances[i] = true;
-    } else{
-      bHasZeroVariances[i] = false;
-    }
-  }
-*/
-
   vector<double>  vRandomNormals(iEstimateCount,0);
   for ( int i = 0; i < iEstimateCount; ++i) {
     vRandomNormals[i] = pRandom->getRandomStandardNormal();
@@ -496,17 +498,10 @@ void CMCMC::fillMultivariateNormal(double stepsize) {
     for (int j = 0; j < iEstimateCount; ++j ) {
       dRowSum += mxCovarianceLT(i,j) * vRandomNormals[j];
     }
-    vCandidates[i] += dRowSum * stepsize;
+    if (vbEnabledEstimate[i])
+      vCandidates[i] += dRowSum * stepsize;
 
   }
-
-  // find the elements with 0 variances and set them to their means
-//  for (int i=covar.rowmin(); i<=covar.rowmax(); i++){
-//    if (zero_variances[i]){
-//      (*this)[i] = mean[i];
-//    }
-//  }
-
 }
 
 //**********************************************************************
@@ -540,7 +535,7 @@ bool CMCMC::choleskyDecomposition() {
 
 //SCOTT todo: We also have similar functionality in FMM::CholeskyDecomposition()
 //            Can we put them _both_ in the same place...with the same function call interface
-//            As they both use a slightly different algortim, it might be useful to compare their output.
+//            As they both use a slightly different algorithms, it might be useful to compare their output.
 
   //sanity check
   if (mxCovariance.size1() != mxCovariance.size2() )
@@ -555,8 +550,9 @@ bool CMCMC::choleskyDecomposition() {
     }
   }
 
-  for (int i = 0; i < iN; ++i)
+  for (int i = 0; i < iN; ++i) {
     mxCovarianceLT(i,i) = 1.0;
+  }
 
   if (mxCovariance(0,0) < 0)
     return false;
@@ -564,9 +560,12 @@ bool CMCMC::choleskyDecomposition() {
   double dSum = 0.0;
 
   mxCovarianceLT(0,0) = sqrt(mxCovariance(0,0));
+
+  for (int i = 1; i < iN; ++i)
+    mxCovarianceLT(i,0) = mxCovariance(i,0)/mxCovarianceLT(0,0);
+
   for (int i = 1; i < iN; ++i) {
     dSum = 0.0;
-
     for (int j = 0; j < i; ++j)
       dSum += mxCovarianceLT(i,j) * mxCovarianceLT(i,j);
 

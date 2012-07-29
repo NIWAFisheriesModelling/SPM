@@ -248,6 +248,7 @@
 #define PARAM_LOGNORMAL                           "lognormal"
 #define PARAM_LOWER_BOUND                         "lower_bound"
 #define PARAM_M                                   "m"
+#define PARAM_MATRIX                              "matrix"
 #define PARAM_MAX_AGE                             "max_age"
 #define PARAM_MAX_CORRELATION                     "max_correlation"
 #define PARAM_MAX_EVALUATIONS                     "evaluations"

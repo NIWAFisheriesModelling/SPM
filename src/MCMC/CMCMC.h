@@ -50,6 +50,7 @@ public:
   vector<SChainItem>         getMCMCChain() { return vChain; }
   ublas::matrix<double>      getOriginalCovariance() { return mxOriginalCovariance; }
   ublas::matrix<double>      getCovariance() { return mxCovariance; }
+  ublas::matrix<double>      getCovarianceLT() { return mxCovarianceLT; }  // Cholesky decomposition (lower triangle) of mxCovariance
   vector<string>             getEstimateNames() { return vEstimateNames; }
 
 protected:
@@ -85,6 +86,7 @@ protected:
   ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
+  vector<bool>               vbEnabledEstimate;
   vector<SChainItem>         vChain;
   vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;
