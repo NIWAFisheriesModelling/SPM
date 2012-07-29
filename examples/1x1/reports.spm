@@ -34,12 +34,11 @@ type objective_function
 type estimate_summary
 
 @report estimate-values
-type estimate_summary
-file_name estimate-values.dat
+type estimate_value
+file_name MPD.dat
 
 @report Objective_Score
 type objective_function
-file_name objective.dat
 
 @report AgeError
 type ageing_error
@@ -79,4 +78,16 @@ process Maturation
 @report MCMC
 type MCMC
 
+@report agesize
+type age_size
+age_size VB
+
+@report sizeweight
+type size_weight
+size_weight basic
+sizes 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170
+
+@report ageweight
+type age_weight
+age_size VB
 
