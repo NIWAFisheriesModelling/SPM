@@ -43,10 +43,10 @@ CMCMC* CMCMC::clInstance = 0;
 //**********************************************************************
 CMCMC::CMCMC() {
   // default variables
-  iTotalJumps = 0;
-  iAcceptedJumps = 0;
-  iSuccessfulJumps = 0;
   iJumps = 0;
+  iSuccessfulJumps = 0;
+  iJumpsSinceAdapt = 0;
+  iSuccessfulJumpsSinceAdapt = 0;
   dStepSize = 0.0;
 
   pParameterList->registerAllowed(PARAM_TYPE);
@@ -231,14 +231,15 @@ void CMCMC::execute() {
     // Keep the location as the first point in our chain
     {
       SChainItem newItem;
-      newItem.iIteration      = 0;
-      newItem.dPenalty        = pObjectiveFunction->getPenalties();
-      newItem.dScore          = pObjectiveFunction->getScore();
-      newItem.dPrior          = pObjectiveFunction->getPriors();
-      newItem.dLikelihood     = pObjectiveFunction->getLikelihoods();;
-      newItem.dAcceptanceRate = 0;
-      newItem.dStepSize       = dStepSize;
-      newItem.vValues         = vCandidates;
+      newItem.iIteration                = 0;
+      newItem.dPenalty                  = pObjectiveFunction->getPenalties();
+      newItem.dScore                    = pObjectiveFunction->getScore();
+      newItem.dPrior                    = pObjectiveFunction->getPriors();
+      newItem.dLikelihood               = pObjectiveFunction->getLikelihoods();;
+      newItem.dAcceptanceRate           = 0;
+      newItem.dAcceptanceRateSinceAdapt = 0;
+      newItem.dStepSize                 = dStepSize;
+      newItem.vValues                   = vCandidates;
       vChain.push_back(newItem);
     }
 
@@ -249,7 +250,7 @@ void CMCMC::execute() {
     do {
     // Generate a candidate value
       vector<double> vOldCandidates = vCandidates;
-      updateStepSize(iAcceptedJumps);
+      updateStepSize(iSuccessfulJumps);
       generateNewCandidate();
       for (int j = 0; j < iEstimateCount; ++j) {
         CEstimateManager::Instance()->getEnabledEstimate(j)->setValue(vCandidates[j]);
@@ -272,28 +273,28 @@ void CMCMC::execute() {
       if (dScore > dOldScore) {
         dRatio = exp(-dScore + dOldScore);
       }
-      if (CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
+      if (dRatio==1.0 || CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
         // accept the candidate point
         iJumps++;
         iSuccessfulJumps++;
-        iAcceptedJumps++;
-        iTotalJumps++;
+        iJumpsSinceAdapt++;
+        iSuccessfulJumpsSinceAdapt++;
         // keep the score, and its compontent parts
-        if ( ((iAcceptedJumps) % iKeep) == 0) {
+        if ( ((iSuccessfulJumps) % iKeep) == 0) {
           if(!(pConfig->getQuietMode())) {
             std::cerr << "." ;
           }
 
           SChainItem newItem;
-          newItem.iIteration      = iAcceptedJumps;
-          newItem.dPenalty        = pObjectiveFunction->getPenalties();
-          newItem.dScore          = pObjectiveFunction->getScore();
-          newItem.dPrior          = pObjectiveFunction->getPriors();
-          newItem.dLikelihood     = pObjectiveFunction->getLikelihoods();;
-          newItem.dAcceptanceRate = (double)iAcceptedJumps / (double)(iTotalJumps);
-          newItem.dStepSize       = dStepSize;
-          newItem.vValues         = vCandidates;
-
+          newItem.iIteration                = iSuccessfulJumps;
+          newItem.dPenalty                  = pObjectiveFunction->getPenalties();
+          newItem.dScore                    = pObjectiveFunction->getScore();
+          newItem.dPrior                    = pObjectiveFunction->getPriors();
+          newItem.dLikelihood               = pObjectiveFunction->getLikelihoods();;
+          newItem.dAcceptanceRateSinceAdapt = (double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt;
+          newItem.dAcceptanceRate           = (double)iSuccessfulJumps / (double)(iJumps);
+          newItem.dStepSize                 = dStepSize;
+          newItem.vValues                   = vCandidates;
           vChain.push_back(newItem);
         }
 
@@ -302,9 +303,9 @@ void CMCMC::execute() {
         dScore = dOldScore;
         vCandidates = vOldCandidates;
         iJumps++;
-        iTotalJumps++;
+        iJumpsSinceAdapt++;
       }
-    } while (iAcceptedJumps <= iLength);
+    } while (iSuccessfulJumps <= iLength);
 
     if(!(pConfig->getQuietMode())) {
       std::cerr << "\n" ;
@@ -354,7 +355,6 @@ void CMCMC::generateRandomStart() {
           break;
         }
       }
-
     } while (!bCandidatesOk);
 
   } catch (string &Ex) {
@@ -413,11 +413,16 @@ void CMCMC::generateNewCandidate() {
 //**********************************************************************
 void CMCMC::updateStepSize(int iIteration) {
 
-  if(iJumps > 0) {
+  if(iJumpsSinceAdapt > 0) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
       if(vAdaptStepSize[i] == iIteration ) {
-        dStepSize *= ((double)iSuccessfulJumps / (double)iJumps) * 4.166667; // modify the step size by that ratio = AcceptanceRate / 0.24
-        dStepSize = CMath::zeroFun(dStepSize, 1e-3);
+        // modify the step size by the ratio = AcceptanceRate / 0.24
+        dStepSize *= ((double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt) * 4.166667;
+        // Ensure the stepsize remains positive
+        dStepSize = CMath::zeroFun(dStepSize, 1e-5);
+        // reset counters
+        iJumpsSinceAdapt = 0;
+        iSuccessfulJumpsSinceAdapt = 0;
         break;
       }
     }

@@ -102,13 +102,13 @@ void CMCMCReport::execute() {
     }
 
     cout << "MCMC objective function values:\n";
-    cout << "iteration, score, penalty, prior, likelihood, acceptance_rate, step_size\n";
+    cout << "iteration, score, penalty, prior, likelihood, acceptance_rate, acceptance_rate_since_adapt, step_size\n";
     for(int i=0; i<(int)vChain.size(); ++i) {
       cout << vChain[i].iIteration << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dScore;
       cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dPenalty << CONFIG_SEPERATOR_ESTIMATE_VALUES;
       cout << vChain[i].dPrior << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dLikelihood;
       cout << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dAcceptanceRate << CONFIG_SEPERATOR_ESTIMATE_VALUES;
-      cout << vChain[i].dStepSize << "\n";
+      cout << vChain[i].dAcceptanceRateSinceAdapt << CONFIG_SEPERATOR_ESTIMATE_VALUES << vChain[i].dStepSize << "\n";
     }
     cout << "MCMC samples:\n";
     for (int i =0; i < (int)vEstimateNames.size(); ++i ) {

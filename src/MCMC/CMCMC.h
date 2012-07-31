@@ -25,6 +25,7 @@ struct SChainItem {
   double          dPrior;
   double          dPenalty;
   double          dAcceptanceRate;
+  double          dAcceptanceRateSinceAdapt;
   double          dStepSize;
   vector<double>  vValues;
 };
@@ -73,9 +74,9 @@ protected:
   int                        iKeep;
   int                        iEstimateCount;
   int                        iJumps;
-  int                        iAcceptedJumps;
   int                        iSuccessfulJumps;
-  int                        iTotalJumps;
+  int                        iJumpsSinceAdapt;
+  int                        iSuccessfulJumpsSinceAdapt;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
   double                     dCorrelationDiff;
