@@ -82,13 +82,13 @@ void CMCMCReport::execute() {
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
 
-    cout << "Original " << PARAM_COVARIANCE << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
+    cout << "Original " << PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxOriginalCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxOriginalCovariance.size2(); ++j) {
         cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
       }
     }
-    cout << "Proposal distribution " PARAM_COVARIANCE << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
+    cout << "Proposal distribution " PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxCovariance.size2(); ++j) {
         cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");

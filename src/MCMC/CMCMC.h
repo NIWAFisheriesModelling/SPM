@@ -86,7 +86,7 @@ protected:
   ublas::matrix<double>      mxCovariance;
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
-  vector<bool>               vbEnabledEstimate;
+  vector<bool>               vbIsEnabledEstimate;
   vector<SChainItem>         vChain;
   vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;

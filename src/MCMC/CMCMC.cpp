@@ -47,6 +47,7 @@ CMCMC::CMCMC() {
   iAcceptedJumps = 0;
   iSuccessfulJumps = 0;
   iJumps = 0;
+  dStepSize = 0.0;
 
   pParameterList->registerAllowed(PARAM_TYPE);
   pParameterList->registerAllowed(PARAM_START);
@@ -122,6 +123,8 @@ void CMCMC::validate() {
       CError::errorLessThan(PARAM_DF, PARAM_ZERO);
     if (dStart < 0.0)
       CError::errorLessThan(PARAM_START, PARAM_ZERO);
+    if (dStepSize < 0)
+      CError::errorLessThan(PARAM_STEP_SIZE, PARAM_ZERO);
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
       if (vAdaptStepSize[i] < 1)
         CError::errorLessThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_ONE);
@@ -161,19 +164,17 @@ void CMCMC::build() {
     // Build default step size
     iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
 
-    int iIgnoreEstimate = 0;
+    int iIgnorableEstimates = 0;
     for(int i = 0; i < iEstimateCount; ++i) {
       CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
       if ( (estimate->getLowerBound() == estimate->getUpperBound()) || estimate->getMCMCFixed() )
-        iIgnoreEstimate++;
+        iIgnorableEstimates++;
     }
-    if ((iEstimateCount - iIgnoreEstimate) < 1)
+    if ((iEstimateCount - iIgnorableEstimates) < 1)
       CError::error("The number of estimated parameters must be at least one");
 
-    if (!pParameterList->hasParameter(PARAM_STEP_SIZE)) {
-      dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnoreEstimate), -0.5);
-    } else if ( dStepSize==0.0 ) {
-      dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnoreEstimate), -0.5);
+    if (!pParameterList->hasParameter(PARAM_STEP_SIZE) || dStepSize==0.0 ) {
+      dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnorableEstimates), -0.5);
     }
 
   } catch (string &Ex) {
@@ -189,26 +190,31 @@ void CMCMC::build() {
 void CMCMC::execute() {
   try {
 
-    // Build initial covariance matrix
-    buildCovarianceMatrix();
-
     // Setup initial candidate vector
     vCandidates.resize(iEstimateCount);
-    vbEnabledEstimate.resize(iEstimateCount);
+    vbIsEnabledEstimate.resize(iEstimateCount);
 
     for(int i=0; i < iEstimateCount; ++i) {
       CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
       vCandidates[i] = estimate->getValue();
       if ( (estimate->getLowerBound() == estimate->getUpperBound()) || estimate->getMCMCFixed() )
-        vbEnabledEstimate[i] = false;
+        vbIsEnabledEstimate[i] = false;
       else
-        vbEnabledEstimate[i] = true;
+        vbIsEnabledEstimate[i] = true;
     }
+
+    // Build initial covariance matrix
+    buildCovarianceMatrix();
+
+    // Create Cholskey decomposition from covariance matrix
+    if ( !choleskyDecomposition() )
+      THROW_EXCEPTION("Cholskey decomposition failed")
 
     // Get MCMC starting values
     if (dStart > 0.0 ) {
       generateRandomStart();
     }
+    // reset our values
     for (int i = 0; i < iEstimateCount; ++i) {
       CEstimateManager::Instance()->getEnabledEstimate(i)->setValue(vCandidates[i]);
     }
@@ -235,10 +241,6 @@ void CMCMC::execute() {
       newItem.vValues         = vCandidates;
       vChain.push_back(newItem);
     }
-
-    // Create Cholskey decomposition for new candidates
-    if ( !choleskyDecomposition() )
-      THROW_EXCEPTION("Cholskey decomposition failed")
 
     //===============================================================
     // Now, do our MCMC
@@ -322,16 +324,12 @@ void CMCMC::generateRandomStart() {
   try {
 
     vector<double> vOldCandidates = vCandidates;
-std::cerr <<"A\n";
 
-    fillMultivariateNormal(dStart);
-std::cerr <<"B\n";
     int iAttempts = 0;
     bool bCandidatesOk;
-    int iEnabledEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
 
     // Sanity check
-    if ((int)vCandidates.size() != iEnabledEstimateCount)
+    if ((int)vCandidates.size() != iEstimateCount)
       THROW_EXCEPTION("INTERNAL ERROR: Check candidate vector size d")
 
     do {
@@ -340,14 +338,18 @@ std::cerr <<"B\n";
       iAttempts++;
       if (iAttempts >= 1000)
         CError::errorEqualTo("MCMC start candidate attempts", "1000");
+      // reset candidates
       vCandidates = vOldCandidates;
+
+      //Generate candidates
       fillMultivariateNormal(dStart);
 
-      // Check bounds and regenerate candidates if
-      // they are not within the bounds.
-      for (int i = 0; i < iEnabledEstimateCount; ++i) {
+      // Check bounds and regenerate candidates if they are not within the bounds.
+      for (int i = 0; i < iEstimateCount; ++i) {
         CEstimate *estimate = CEstimateManager::Instance()->getEnabledEstimate(i);
+
         if (estimate->getLowerBound() > vCandidates[i] || estimate->getUpperBound() < vCandidates[i]) {
+          // try again
           bCandidatesOk = false;
           break;
         }
@@ -373,7 +375,6 @@ void CMCMC::generateNewCandidate() {
 
     int iAttempts = 0;
     bool bCandidatesOk;
-    int iEnabledEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
 
     do {
       bCandidatesOk = true;
@@ -388,11 +389,11 @@ void CMCMC::generateNewCandidate() {
         fillMultivariatet(dStepSize);
 
       // Check bounds and regenerate candidates if they are not within the bounds.
-      for (int i = 0; i < iEnabledEstimateCount; ++i) {
+      for (int i = 0; i < iEstimateCount; ++i) {
         CEstimate *pEstimate = CEstimateManager::Instance()->getEnabledEstimate(i);
         if (pEstimate->getLowerBound() > vCandidates[i] || pEstimate->getUpperBound() < vCandidates[i]) {
-          bCandidatesOk = false;
           // reset candidates and try again
+          bCandidatesOk = false;
           vCandidates = vOldCandidates;
           break;
         }
@@ -411,7 +412,6 @@ void CMCMC::generateNewCandidate() {
 // Ypdate stepsize if required
 //**********************************************************************
 void CMCMC::updateStepSize(int iIteration) {
-
 
   if(iJumps > 0) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
@@ -442,18 +442,16 @@ void CMCMC::buildCovarianceMatrix() {
     // Adjust the covariance matrix for the proposal distribution
     for (int i=0; i < (int)mxCovariance.size1(); ++i) {
       for (int j=i+1; j < (int)mxCovariance.size2(); ++j) {
-        if (mxCovariance(i,j) / sqrt(mxCovariance(i,j) * mxCovariance(j,j)) > dMaxCorrelation) {
+        if (mxCovariance(i,j) / sqrt(mxCovariance(i,i) * mxCovariance(j,j)) > dMaxCorrelation) {
           mxCovariance(i,j) = dMaxCorrelation * sqrt(mxCovariance(i,i) * mxCovariance(j,j));
-          mxCovariance(j,i) = mxCovariance(i,j);
         }
         if (mxCovariance(i,j) / sqrt(mxCovariance(i,i) * mxCovariance(j,j)) < -dMaxCorrelation){
           mxCovariance(i,j) = -dMaxCorrelation * sqrt(mxCovariance(i,i) * mxCovariance(j,j));
-          mxCovariance(j,i) = mxCovariance(i,j);
         }
       }
     }
 
-    // Adjust any nonzero variances less than min_diff x the difference between the bounds on the parameter.
+    // Adjust any nonzero variances less than min_diff * the difference between the bounds on the parameter.
     // Obtain the estimation bounds to use to modify the covariance matrix
     vector<double> vDiffBounds;
     for (int i = 0; i < CEstimateManager::Instance()->getEnabledEstimateCount(); ++i) {
@@ -462,7 +460,7 @@ void CMCMC::buildCovarianceMatrix() {
     }
 
     for (int i=0; i < (int)mxCovariance.size1(); ++i) {
-      if (mxCovariance(i,i) < dCorrelationDiff * vDiffBounds[i] && mxCovariance(i,i) != 0) {
+      if (mxCovariance(i,i) < (dCorrelationDiff * vDiffBounds[i]) && mxCovariance(i,i) != 0) {
         if (sCorrelationMethod == PARAM_COVARIANCE) {
           double dMultiplyCovariance = (sqrt(dCorrelationDiff) * vDiffBounds[i]) / sqrt(mxCovariance(i,i));
           for (int j=0 ; j < (int)mxCovariance.size1(); ++j) {
@@ -498,9 +496,8 @@ void CMCMC::fillMultivariateNormal(double stepsize) {
     for (int j = 0; j < iEstimateCount; ++j ) {
       dRowSum += mxCovarianceLT(i,j) * vRandomNormals[j];
     }
-    if (vbEnabledEstimate[i])
+    if (vbIsEnabledEstimate[i])
       vCandidates[i] += dRowSum * stepsize;
-
   }
 }
 
@@ -522,9 +519,9 @@ void CMCMC::fillMultivariatet(double stepsize) {
     for (int j = 0; j < iEstimateCount; ++j ) {
       dRowSum += mxCovarianceLT(i,j) * vRandomNormals[j] * vRandomChiSquare[j];
     }
-    vCandidates[i] += dRowSum * stepsize;
+    if (vbIsEnabledEstimate[i])
+      vCandidates[i] += dRowSum * stepsize;
   }
-
 }
 
 //**********************************************************************
