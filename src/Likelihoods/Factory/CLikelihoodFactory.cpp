@@ -37,6 +37,16 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
     else
       CError::errorUnknown(PARAM_LIKELIHOOD, type);
 
+  } else if (observationType == PARAM_BIOMASS) {
+    if (type == PARAM_NORMAL)
+      pLikelihood = new CNormalLikelihood();
+    else if (type == PARAM_LOGNORMAL)
+      pLikelihood = new CLogNormalWithQLikelihood();
+    else if (type == PARAM_PSEUDO)
+      pLikelihood = new CPseudoLikelihood();
+    else
+      CError::errorUnknown(PARAM_LIKELIHOOD, type);
+
   } else if (observationType == PARAM_PROPORTIONS_AT_AGE) {
     if (type == PARAM_LOGNORMAL)
       pLikelihood = new CLogNormalLikelihood();
