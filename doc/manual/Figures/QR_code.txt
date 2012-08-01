@@ -1,0 +1,7 @@
+SPM (Spatial Population Model)
+
+SPM is an advanced software package developed by NIWA to help model fish populations. It was designed to allow complex spatially structures to be easily modelled. The program implements an age-structured population model with unlimited user-defined categories (for example, species, sex, and/or maturity). It can be used for a single stock for a single fishery, or for multiple stocks, areas, and/or fishing methods. 
+
+SPM can be used to generate point estimates of the parameters of interest, calculate profiles, and generate Bayesian posterior distributions using Monte Carlo Markov Chain methods. SPM can also be used to simulate observations from a given model for use in management procedure evaluations or other simulation experiments. Observations include catch-at-age or catch-at-size data from commercial fishing, survey and other biomass indices, survey catch-at-age or catch-at-size data, and tag-release and tag-recapture data.
+
+To find out more, see http://www.niwa.co.nz/fisheries/tools-resources/spm-spatial-population-model

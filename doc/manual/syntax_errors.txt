@@ -25,12 +25,12 @@ In SPM, but not in manual
   label
   layer_height
   layer_width
+  matrix
   method
   multinomial
   normal_log
   objective
   profiles
-  proportion_time-step
   recruitment_values
   rescale
   rho
@@ -60,10 +60,8 @@ In manual, but not in SPM
   formula
   growth_proportions
   initialisation_layers
-  mcmc_fixed
   parameter_values
   parameters
-  proportion_time_step
   derived
   derived_meta
   iterative
