@@ -10,7 +10,7 @@ function(data,categories=NULL,ages=NULL,total=T) {
     Ages<-Ages[Ages %in% ages]
   }
   data<-aggregate(data,by=list("index"=index),sum)
-  index<-unpaste(data$index,sep="-")
+  index<-spm.unpaste(data$index,sep="-")
   Col<-as.numeric(index[[1]])
   Row<-as.numeric(index[[2]])
   if(length(Ages)==1) {

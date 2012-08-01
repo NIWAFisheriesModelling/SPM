@@ -5,6 +5,8 @@ function(lines){
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
   values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)],sep=" ")
+  res$year<-substring(lines[index.start+2],7)
+  res$"time_step"<-substring(lines[index.start+3],12)
   nrows<-length((4+index.start):(index.end-1))
   values<-matrix(values,nrow=nrows,byrow=TRUE)
   res<-list()
