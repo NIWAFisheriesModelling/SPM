@@ -114,7 +114,12 @@ void CDoubleLayer::validate() {
       if (iRow >= iHeight)
         CError::errorTooMuch(PARAM_DATA);
 
-      pGrid[iRow][iCol] = boost::lexical_cast<double>(vData[i]);
+      try {
+        pGrid[iRow][iCol] = boost::lexical_cast<double>(vData[i]);
+      } catch (boost::bad_lexical_cast) {
+        string Ex = string("Non-numeric value in layer ") + getLabel();
+        throw Ex;
+      }
       iCol++;
     }
 
