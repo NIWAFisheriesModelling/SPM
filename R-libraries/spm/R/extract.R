@@ -17,8 +17,8 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
     temp<-substr(res$header$version[1],2,15)
     if (temp != spm.binary.version()) {
        cat("Warning: spm and the spm R library versions are different\n")
-       cat("SPM v",spm.binary.version(),"\n",sep="")
-       cat("R   v",temp,"\n",sep="")
+       cat("SPM v",temp,"\n",sep="")
+       cat("R   v",spm.binary.version(),"\n",sep="")
     }
 
     index <- (1:length(line))[substring(line, 1, 1) == "["]
@@ -117,7 +117,7 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
                 res$MCMC <- list()
             }
             counter$MCMC <- counter$MCMC + 1
-            temp <- extract.layerderivedworldview(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.MCMC(lines = line[index[i]:(index[i + 1] - 1)])
             res$MCMC[[counter$MCMC]] <- temp
             names(res$MCMC)[counter$MCMC] <- report.label[i]
         }
