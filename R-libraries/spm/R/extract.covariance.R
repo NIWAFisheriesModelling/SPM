@@ -12,7 +12,7 @@ extract.covariance <- function (lines)
     res <- list()
     res$label <- substring(lines[index.start], 2, nchar(lines[index.start]) -1)
     res$report.type <- substring(lines[index.start + 1], 14)
-    variables <- spm.string.to.vector.of.words(lines[index.start + 2], sep = " ")[-1]
+    variables <- spm.string.to.vector.of.words(lines[index.start + 2], sep = ",")[-1]
     data <- spm.string.to.vector.of.words(lines[(index.hessian + 1):(index.cov -1)], sep = " ")
     if (length(data)==length(variables)^2) {
       data<-as.numeric(data)
@@ -23,7 +23,7 @@ extract.covariance <- function (lines)
     } else
       data <- NA
     res$hessian <- data
-    data <- spm.string.to.vector.of.words(lines[(index.cov + 1):(index.cor -1)], sep = " ")
+    data <- spm.string.to.vector.of.words(lines[(index.cov + 1):(index.cor -1)], sep = ",")
         if (length(data)==length(variables)^2) {
           data<-as.numeric(data)
           data <- matrix(data, ncol = length(variables), byrow = TRUE)
@@ -33,7 +33,7 @@ extract.covariance <- function (lines)
         } else
         data <- NA
     res$covariance <- data
-    data <- spm.string.to.vector.of.words(lines[(index.cor + 1):(index.end -1)], sep = " ")
+    data <- spm.string.to.vector.of.words(lines[(index.cor + 1):(index.end -1)], sep = ",")
         if (length(data)==length(variables)^2) {
           data<-as.numeric(data)
           data <- matrix(data, ncol = length(variables), byrow = TRUE)
