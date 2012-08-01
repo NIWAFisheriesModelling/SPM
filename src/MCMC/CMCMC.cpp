@@ -413,13 +413,13 @@ void CMCMC::generateNewCandidate() {
 //**********************************************************************
 void CMCMC::updateStepSize(int iIteration) {
 
-  if(iJumpsSinceAdapt > 0) {
+  if( (iJumpsSinceAdapt > 0) & (iSuccessfulJumpsSinceAdapt > 0) ) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
-      if(vAdaptStepSize[i] == iIteration ) {
+      if( iIteration == vAdaptStepSize[i] ) {
         // modify the step size by the ratio = AcceptanceRate / 0.24
         dStepSize *= ((double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt) * 4.166667;
         // Ensure the stepsize remains positive
-        dStepSize = CMath::zeroFun(dStepSize, 1e-5);
+        dStepSize = CMath::zeroFun(dStepSize, 1e-10);
         // reset counters
         iJumpsSinceAdapt = 0;
         iSuccessfulJumpsSinceAdapt = 0;
