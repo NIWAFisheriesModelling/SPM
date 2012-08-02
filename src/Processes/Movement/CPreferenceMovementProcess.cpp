@@ -78,7 +78,7 @@ void CPreferenceMovementProcess::build() {
       CPreferenceFunctionManager *pDirectedProcessManager = CPreferenceFunctionManager::Instance();
       // Loop and Add
       foreach(string Label, vDirectedProcessList) {
-        vDirectedProcessIndex.push_back(pDirectedProcessManager->getProcess(Label));
+        vDirectedProcessIndex.push_back(pDirectedProcessManager->getPreferenceFunction(Label));
       }
     }
 

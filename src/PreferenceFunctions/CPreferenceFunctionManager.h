@@ -26,9 +26,9 @@ public:
 
   // Functions
   void                       addPreferenceFunction(CPreferenceFunction *Function);
-  int                        getProcessCount() { return (int)vPreferenceFunctions.size(); }
-  CPreferenceFunction*       getProcess(int index);
-  CPreferenceFunction*       getProcess(string Label);
+  int                        getPreferenceFunctionCount() { return (int)vPreferenceFunctions.size(); }
+  CPreferenceFunction*       getPreferenceFunction(int index);
+  CPreferenceFunction*       getPreferenceFunction(string Label);
   void                       clone(CPreferenceFunctionManager *Manager);
   void                       validate();
   void                       build();

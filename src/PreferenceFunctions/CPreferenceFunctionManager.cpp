@@ -45,17 +45,17 @@ void CPreferenceFunctionManager::Destroy() {
 
 //**********************************************************************
 // void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function)
-// Add DirectedProcess to our list
+// Add Preference Functions to our list
 //**********************************************************************
 void CPreferenceFunctionManager::addPreferenceFunction(CPreferenceFunction *Function) {
   vPreferenceFunctions.push_back(Function);
 }
 
 //**********************************************************************
-// CPreferenceFunction* CPreferenceFunctionManager::getProcess(int index)
-// Get A Process by Index
+// CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(int index)
+// Get A PreferenceFunction by Index
 //**********************************************************************
-CPreferenceFunction* CPreferenceFunctionManager::getProcess(int index) {
+CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(int index) {
   try {
     if (index < 0)
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
@@ -65,28 +65,28 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(int index) {
     return vPreferenceFunctions[index];
 
   } catch (string &Ex) {
-    Ex = "CPreferenceFunctionManager.getProcess()->" + Ex;
+    Ex = "CPreferenceFunctionManager.getPreferenceFunction()->" + Ex;
   }
 
   return 0;
 }
 
 //**********************************************************************
-// CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label)
-// get The Process Pointer For Label
+// CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(string Label)
+// get The PreferenceFunction Pointer For Label
 //**********************************************************************
-CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label) {
+CPreferenceFunction* CPreferenceFunctionManager::getPreferenceFunction(string Label) {
   try {
     // Loop Through And Find
-    foreach(CPreferenceFunction *Process, vPreferenceFunctions) {
-      if (Process->getLabel() == Label)
-        return Process;
+    foreach(CPreferenceFunction *PreferenceFunction, vPreferenceFunctions) {
+      if (PreferenceFunction->getLabel() == Label)
+        return PreferenceFunction;
     }
 
-    CError::errorUnknown(PARAM_PROCESS, Label);
+    CError::errorUnknown(PARAM_PREFERENCE_FUNCTION, Label);
 
   } catch (string &Ex) {
-    Ex = "CPreferenceFunctionManager.getProcess()->" + Ex;
+    Ex = "CPreferenceFunctionManager.getPreferenceFunction()->" + Ex;
     throw Ex;
   }
   return 0;
@@ -94,7 +94,7 @@ CPreferenceFunction* CPreferenceFunctionManager::getProcess(string Label) {
 
 //**********************************************************************
 // void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager)
-// Load our Process Manager From Another One. Multi-Threaded Thing
+// Load our Preference Function Manager From Another One. Multi-Threaded Thing
 //**********************************************************************
 void CPreferenceFunctionManager::clone(CPreferenceFunctionManager *Manager) {
 

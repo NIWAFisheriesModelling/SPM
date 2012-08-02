@@ -77,7 +77,7 @@ CBaseObject* CObjectFinder::getObject(string objectAbsoluteName) {
     target = (CBaseObject*)CProcessManager::Instance()->getProcess(sObjectLabel);
 
   } else if (sObjectType == PARAM_PREFERENCE_FUNCTION) {
-    target = (CBaseObject*)CPreferenceFunctionManager::Instance()->getProcess(sObjectLabel);
+    target = (CBaseObject*)CPreferenceFunctionManager::Instance()->getPreferenceFunction(sObjectLabel);
 
   } else if (sObjectType == PARAM_SELECTIVITY) {
     target = (CBaseObject*)CSelectivityManager::Instance()->getSelectivity(sObjectLabel);
