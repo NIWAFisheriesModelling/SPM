@@ -24,6 +24,7 @@
 #include "../Children/CObjectiveFunctionReport.h"
 #include "../Children/CObservationReport.h"
 #include "../Children/CPartitionReport.h"
+#include "../Children/CPreferenceFunctionReport.h"
 #include "../Children/CProcessReport.h"
 #include "../Children/CRandomNumberSeedReport.h"
 #include "../Children/CSelectivityReport.h"
@@ -79,6 +80,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CLayerReport();
   else if (type == PARAM_MCMC)
     pReporter = new CMCMCReport();
+  else if (type == PARAM_PREFERENCE_FUNCTION)
+    pReporter = new CPreferenceFunctionReport();
   else
     throw string("Unknown type: " + type);
 

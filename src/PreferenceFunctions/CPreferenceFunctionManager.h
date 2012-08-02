@@ -36,10 +36,10 @@ public:
 
 protected:
   // Functions
-	CPreferenceFunctionManager();
+  CPreferenceFunctionManager();
 
-	// Variables
-	vector<CPreferenceFunction*>  vPreferenceFunctions;
+  // Variables
+  vector<CPreferenceFunction*>  vPreferenceFunctions;
 
 private:
   static boost::thread_specific_ptr<CPreferenceFunctionManager> clInstance;

@@ -157,6 +157,15 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
             res$process[[counter$process]] <- temp
             names(res$process)[counter$process] <- report.label[i]
         }
+        else if (report.type[i] == "preference_function") {
+            if (!("preference_function" %in% names(res))) {
+                res$"preference_function" <- list()
+            }
+            counter$preference_function <- counter$preference_function + 1
+            temp <- extract.preferencefunction(lines = line[index[i]:(index[i + 1] - 1)])
+            res$preference_function[[counter$preference_function]] <- temp
+            names(res$preference_function)[counter$preference_function] <- report.label[i]
+        }
         else if (report.type[i] == "random_number_seed") {
             if (!("random_number_seed" %in% names(res))) {
                 res$random_number_seed <- list()
