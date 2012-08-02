@@ -106,8 +106,6 @@ void CProportionsByCategoryObservation::validate() {
       CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
     if (dProportionTimeStep > 1)
       CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
-    if (dProportionTimeStep < 1)
-      CError::error(PARAM_PROPORTION_TIME_STEP + string(" not yet implemented."));
 
     // Get our Error Value
     vector<string> vErrorValues;
@@ -222,7 +220,8 @@ void CProportionsByCategoryObservation::execute() {
   map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
   while (mvPropPtr != mvProportionMatrix.end()) {
     // Get Square for this Area
-    pBaseSquare = pWorldView->getSquare((*mvPropPtr).first);
+      CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mvPropPtr).first);
+      CWorldSquare *pSquare      = pWorldView->getSquare((*mvPropPtr).first);
 
     // Build our 2 Age Result arrays so we can compare them to get the
     // proportion to match against our observation.
@@ -230,11 +229,19 @@ void CProportionsByCategoryObservation::execute() {
       // Loop Through Categories
       for (int j = 0; j < (int)vCategories.size(); ++j) {
         double dSelectResult = vSelectivities[j]->getResult(i);
-        pAgeResults[i] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+        //pAgeResults[i] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+        double dStartValue      = pStartSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+        double dEndValue        = pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+        double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+        pAgeResults[i] += dSelectResult * dProportionValue;
       }
       for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
         double dSelectResult = vTargetSelectivities[j]->getResult(i);
-        pCombinedAgeResults[i] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
+        //pCombinedAgeResults[i] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
+        double dStartValue      = pStartSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
+        double dEndValue        = pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
+        double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+        pCombinedAgeResults[i] += dSelectResult * dProportionValue;
       }
     }
 
@@ -245,11 +252,19 @@ void CProportionsByCategoryObservation::execute() {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult(i);
-          pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
+          //pAgeResults[iArraySize-1] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
+          double dStartValue      = pStartSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
+          double dEndValue        = pSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
+          double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          pAgeResults[iArraySize-1] += dSelectResult * dProportionValue;
         }
         for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
           double dSelectResult = vTargetSelectivities[j]->getResult(i);
-          pCombinedAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
+          //pCombinedAgeResults[iArraySize-1] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
+          double dStartValue      = pStartSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
+          double dEndValue        = pSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
+          double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          pCombinedAgeResults[iArraySize-1] += dSelectResult * dProportionValue;
         }
       }
     }

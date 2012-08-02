@@ -112,8 +112,6 @@ void CProportionsAtAgeObservation::validate() {
       CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
     if (dProportionTimeStep > 1)
       CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
-    if (dProportionTimeStep < 1)
-      CError::error(PARAM_PROPORTION_TIME_STEP + string(" not yet implemented."));
 
     // Get our Error Value
     vector<string> vErrorValues;
@@ -254,18 +252,23 @@ void CProportionsAtAgeObservation::execute() {
     map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
     while (mvPropPtr != mvProportionMatrix.end()) {
       // Get Square for this Area
-      pBaseSquare = pWorldView->getSquare((*mvPropPtr).first);
+      CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mvPropPtr).first);
+      CWorldSquare *pSquare      = pWorldView->getSquare((*mvPropPtr).first);
 
-      //apply ageing error
+
+      //apply ageing error & calculate proportion time_step
       if (pAgeingError != 0) {
-        vector<double> vTemp(pBaseSquare->getWidth(),0);
-        for (int i = 0; i < (int)pBaseSquare->getHeight(); ++i) {
-          for (int j = 0; j < (int)pBaseSquare->getWidth(); ++j) {
-            vTemp[j] = pBaseSquare->getValue(i, j);
+        vector<double> vTemp(pSquare->getWidth(),0);
+        for (int i = 0; i < (int)pSquare->getHeight(); ++i) {
+          for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
+          // vTemp[j] = pBaseSquare->getValue(i, j); //old code that ignores proportion time_step
+          double dStartValue  = pStartSquare->getValue(i, j);
+          double dEndValue    = pSquare->getValue(i, j);
+          vTemp[j]            = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
           }
           pAgeingError->getExpected(vTemp);
-          for (int j = 0; j < (int)pBaseSquare->getWidth(); ++j) {
-            pBaseSquare->setValue(i,j,vTemp[j]);
+          for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
+            pSquare->setValue(i,j,vTemp[j]);
           }
         }
       }
@@ -275,7 +278,7 @@ void CProportionsAtAgeObservation::execute() {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult((i+iSquareAgeOffset));
-          pAgeResults[i] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
+          pAgeResults[i] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
         }
       }
 
@@ -286,7 +289,7 @@ void CProportionsAtAgeObservation::execute() {
           // Loop Through Categories
           for (int j = 0; j < (int)vCategories.size(); ++j) {
             double dSelectResult = vSelectivities[j]->getResult(i);
-            pAgeResults[iArraySize-1] += dSelectResult * pBaseSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
+            pAgeResults[iArraySize-1] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
           }
         }
       }
