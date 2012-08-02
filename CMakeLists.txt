@@ -214,6 +214,7 @@ src/Reports/Children/CMCMCReport.cpp
 src/Reports/Children/CObjectiveFunctionReport.cpp
 src/Reports/Children/CObservationReport.cpp
 src/Reports/Children/CProcessReport.cpp
+src/Reports/Children/CPreferenceFunctionReport.cpp
 src/Reports/Children/CPartitionReport.cpp
 src/Reports/Children/CRandomNumberSeedReport.cpp
 src/Reports/Children/CSelectivityReport.cpp
