@@ -94,7 +94,13 @@ void CProportionsAtAgeObservation::validate() {
 
     for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
-        mvProportionMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
+        try {
+          mvProportionMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
+        } catch (boost::bad_lexical_cast) {
+          string Ex = string("Non-numeric value in ") + PARAM_OBS + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
+          throw Ex;
+        }
+
         // Check for non-positive or negative values in our observations  - depends on likelihood
         if(sLikelihood == PARAM_LOGNORMAL) {
           if ((*mvProportionMatrix[vOBS[i]].rbegin()) <= 0.0 ) {
@@ -121,7 +127,12 @@ void CProportionsAtAgeObservation::validate() {
       throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
-      mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
+      try {
+        mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
+      } catch (boost::bad_lexical_cast) {
+        string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
+        throw Ex;
+      }
       // Check for non-positive or negative values in the error - depends on likelihood
       if(sLikelihood==PARAM_LOGNORMAL) {
         if(mErrorValue[vErrorValues[i]] <= 0.0) {

@@ -126,8 +126,14 @@ double CParameterList::getDouble(string name, bool optional, double defaultValue
   // Get the string
   string sValue = getString(name, optional);
   // If we have one
-  if (sValue != "")
-    dReturn = boost::lexical_cast<double>(sValue);
+  if (sValue != "") {
+    try {
+      dReturn = boost::lexical_cast<double>(sValue);
+    } catch (boost::bad_lexical_cast) {
+      string Ex = string("Non-numeric value in ") + name;
+      throw Ex;
+    }
+  }
 
   return dReturn;
 }
@@ -143,8 +149,14 @@ int CParameterList::getInt(string name, bool optional, int defaultValue) {
   // Get the string
   string sValue = getString(name, optional);
   // If we have one
-  if (sValue != "")
-    iReturn = boost::lexical_cast<int>(sValue);
+  if (sValue != "") {
+    try {
+      iReturn = boost::lexical_cast<int>(sValue);
+    } catch (boost::bad_lexical_cast) {
+      string Ex = string("Non-numeric value in ") + name;
+      throw Ex;
+    }
+  }
 
   return iReturn;
 }
@@ -216,7 +228,12 @@ void CParameterList::fillVector(vector<double> &list, string name, bool optional
 
   vector<string>::iterator vPtr = mParameters[name].begin();
   while (vPtr != mParameters[name].end()) {
-    list.push_back(boost::lexical_cast<double>((*vPtr)));
+    try {
+      list.push_back(boost::lexical_cast<double>((*vPtr)));
+    } catch (boost::bad_lexical_cast) {
+      string Ex = string("Non-numeric value in ") + name;
+      throw Ex;
+    }
     vPtr++;
   }
 }
@@ -239,7 +256,12 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
 
   vector<string>::iterator vPtr = mParameters[name].begin();
   while (vPtr != mParameters[name].end()) {
-    list.push_back(boost::lexical_cast<int>((*vPtr)));
+    try {
+      list.push_back(boost::lexical_cast<int>((*vPtr)));
+    } catch (boost::bad_lexical_cast) {
+      string Ex = string("Non-numeric value in ") + name;
+      throw Ex;
+    }
     vPtr++;
   }
 
@@ -270,8 +292,14 @@ void CParameterList::fillArray(double *array, int length, string name, int offse
   if (((int)mParameters[name].size()-offset) != length)
     CError::errorListSameSize(PARAM_PARAMETER, PARAM_LENGTH);
 
-  for (int i = offset; i < (int)mParameters[name].size(); ++i)
-    array[i-offset] = boost::lexical_cast<double>(mParameters[name][i]);
+  for (int i = offset; i < (int)mParameters[name].size(); ++i) {
+    try {
+      array[i-offset] = boost::lexical_cast<double>(mParameters[name][i]);
+    } catch (boost::bad_lexical_cast) {
+      string Ex = string("Non-numeric value in ") + name;
+      throw Ex;
+    }
+  }
 }
 
 //**********************************************************************

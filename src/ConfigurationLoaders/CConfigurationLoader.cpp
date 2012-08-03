@@ -253,8 +253,15 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
           }
 
           if (isRange) {
-            int firstNumber  = boost::lexical_cast<int>(sValue.substr(0, iRangeSpacerIndex));
-            int secondNumber = boost::lexical_cast<int>(sValue.substr(iRangeSpacerIndex+1, sValue.length()));
+            int firstNumber=0;
+            int secondNumber=0;
+            try {
+              firstNumber  = boost::lexical_cast<int>(sValue.substr(0, iRangeSpacerIndex));
+              secondNumber = boost::lexical_cast<int>(sValue.substr(iRangeSpacerIndex+1, sValue.length()));
+            } catch (boost::bad_lexical_cast) {
+              string Ex = string("Non-numeric value in ") + sName;
+              throw Ex;
+            }
 
             // Now, add our range
             for (int i = firstNumber; i <= secondNumber; ++i)
@@ -417,8 +424,14 @@ void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
       if (vValues.size() != vEstimates.size())
         CError::errorListSameSize(PARAM_VALUE, PARAM_ESTIMATE);
 
-      for(int i = 0; i < (int)vValues.size(); ++i)
-        pEstimateManager->addEstimateValue(vEstimates[i], boost::lexical_cast<double>(vValues[i]));
+      for(int i = 0; i < (int)vValues.size(); ++i) {
+        try {
+          pEstimateManager->addEstimateValue(vEstimates[i], boost::lexical_cast<double>(vValues[i]));
+        } catch (boost::bad_lexical_cast) {
+          string Ex = string("Non-numeric value in ") + vValues[i] +  " of " + PARAM_ESTIMATE;
+          throw Ex;
+        }
+      }
     }
 
     // Now we've loaded correctly. Flag Configuration

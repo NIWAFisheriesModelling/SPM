@@ -63,7 +63,13 @@ void CBiomassObservation::validate() {
       CError::errorPairs(PARAM_OBS);
 
     for (int i = 0; i < (int)vOBS.size(); i+=2) {
-      mProportionMatrix[vOBS[i]] = boost::lexical_cast<double>(vOBS[i+1]);
+      try {
+        mProportionMatrix[vOBS[i]] = boost::lexical_cast<double>(vOBS[i+1]);
+      } catch (boost::bad_lexical_cast) {
+        string Ex = string("Non-numeric value in ") + PARAM_OBS + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
+        throw Ex;
+      }
+
       // Check for non-positive values in our observation values (for all likihoods)
       if(mProportionMatrix[vOBS[i]] <= 0.0)
         CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
@@ -85,7 +91,12 @@ void CBiomassObservation::validate() {
       CError::errorPairs(PARAM_ERROR_VALUE);
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
-      mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
+      try {
+        mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
+      } catch (boost::bad_lexical_cast) {
+        string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
+        throw Ex;
+      }
       // Check for non-positive values in our error values (for all likihoods)
       if(mErrorValue[vErrorValues[i]] <= 0.0)
         CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
