@@ -126,12 +126,6 @@ void CConstantMortalityRateProcess::rebuild() {
             // Convert To Proportion
             dValue = 1-exp(-dValue);
 
-            // Make sure it's between 0 and 1
-            if (dValue < 0.0)
-              dValue = 0.0;
-            if (dValue > 1.0)
-              dValue = 1.0;
-
             // Assign it to our Grid
             pGrid[i][j].setValue(vCategoryIndex[k], l, dValue);
           }
