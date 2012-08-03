@@ -14,8 +14,6 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
 
-//TODO: Check that this class/functions work correctly
-
 //**********************************************************************
 // CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction()
 // Default Constructor
@@ -41,14 +39,15 @@ void CCategoricalMonotonicPreferenceFunction::validate() {
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
     for (int i = 1; i < (int)vValues.size(); i++) {
       if(vValues[i] < 0) {
-        CError::errorLessThan(PARAM_CATEGORY_VALUES, PARAM_ZERO); // TODO: Not a helpful error message: Should report that these values are not monotonically increasing.
+        // TODO: Not a helpful error message: Should report that these values are not monotonically increasing.
+        CError::errorLessThan(PARAM_CATEGORY_VALUES, PARAM_ZERO);
       }
     }
     if (vValues.size() != vLabels.size())
       CError::errorListSameSize(PARAM_CATEGORY_VALUES, PARAM_CATEGORY_LABELS);
     // TODO:
-    //       Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
-    //       Check For Duplicate Labels.
+    //   Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
+    //   Check For Duplicate Labels.
 
 // Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)

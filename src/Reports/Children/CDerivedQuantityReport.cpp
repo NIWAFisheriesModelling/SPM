@@ -86,8 +86,6 @@ void CDerivedQuantityReport::execute() {
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_DERIVED_QUANTITY << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sDerivedQuantity << "\n";
 
-// TODO: Scott to check
-
     // Output initialisation values
     for (int i=0; i < pDerivedQuantity->getInitialisationSize(); ++i) {
       cout << PARAM_INITIALIZATION << "." << PARAM_INITIALIZATION_PHASE << CONFIG_ARRAY_START << boost::lexical_cast<string>(i+1) << CONFIG_ARRAY_END << CONFIG_RATIO_SEPARATOR << " " ;

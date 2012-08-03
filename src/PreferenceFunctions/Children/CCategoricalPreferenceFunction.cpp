@@ -14,8 +14,6 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
 
-//TODO: Check that this class/functions work correctly
-
 //**********************************************************************
 // CCategoricalPreferenceFunction::CCategoricalPreferenceFunction()
 // Default Constructor
