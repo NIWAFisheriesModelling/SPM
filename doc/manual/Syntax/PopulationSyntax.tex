@@ -238,8 +238,8 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values.}
 
+\begin{comment}
 \TODO
-
 \subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
 
 \defSub{r0} {Define a multiplier of \subcommand{r0\_layer} for calculating the total amount of recruitment at equilibrium abundance levels}
@@ -309,8 +309,8 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{Integer vector or integer range}
 \defDefault{No default}
 \defValue{The expanded vector must be valid model years}
-
 \TODOend
+\end{comment}
 
 \subsubsection[Ageing process]{\commandlabsubarg{process}{type}{ageing}}
 
@@ -880,6 +880,8 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
+\begin{comment}
+\TODO
 \subsubsection[Meta-layer]{\commandlabsubarg{layer}{type}{meta}}
 
 \defSub{years} {Define the years}
@@ -892,8 +894,6 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta\_layer}. Command has to have either \subcommand{layers} or \subcommand{as\_meta\_layer} but not both}
 
-\TODO
-
 \defSub{data} {Define the values of the meta-layer directly}
 \defType{Constant vector, with total length \commandsub{model}{ncols} $\times$ \commandsub{model}{nrows} $\times$ \subcommand{years} once expanded}
 \defDefault{No default}
@@ -905,16 +905,12 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
 
-\TODOend 
-
 %\defSub{projection\_layer} {Define the layer label to use during the projection}
 %\defType{String}
 %\defDefault{No default}
 %\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
 
 \subsubsection[Derived-layer]{\commandlabsubarg{layer}{type}{derived}}
-
-\TODO
 
 \defSub{years} {Define the years when the calculation is performed}
 \defType{Integer vector or integer range}
@@ -945,11 +941,7 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defCondition{All parameters and layers used have to be defined above}
 
-\TODOend 
-
 \subsubsection[Derived-meta-layer]{\commandlabsubarg{layer}{type}{derived\_meta}}
-
-\TODO
 
 \defSub{time\_step} {Define the time-step at which the calculation is performed}
 \defType{String}
@@ -974,8 +966,8 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defType{String}
 \defDefault{No default}
 \defCondition{All parameters and layers used have to be defined above}
-
 \TODOend 
+\end{comment}
 
 \subsection{Derived quantities}
 
@@ -1084,27 +1076,27 @@ The individual types of size-at-age relationships available are,
 \defValue{A real number}
 \defCondition{Only define if using the von Bertalanffy relationship}
 
-\defSub{distribution} {Define the distribution of sizes-at-age around the mean}
-\defType{String}
-\defDefault{Normal}
-\defValue{Either normal or lognormal}
-\defCondition{Only define if using the von Bertalanffy relationship}
-
-\defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
-\defType{Logical}
-\defDefault{True}
-\defValue{If true, the the c.v. is a function of length, else a function of age}
-
-\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
-\defType{Estimable}
-\defDefault{No default}
-\defValue{A positive real number}
-
-\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
-\defType{Constant vector}
-\defDefault{No default}
-\defValue{A vector of values, $\le1$ of length equal to the number of time-steps}
-
+%\defSub{distribution} {Define the distribution of sizes-at-age around the mean}
+%\defType{String}
+%\defDefault{Normal}
+%\defValue{Either normal or lognormal}
+%\defCondition{Only define if using the von Bertalanffy relationship}
+%
+%\defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
+%\defType{Logical}
+%\defDefault{True}
+%\defValue{If true, the the c.v. is a function of length, else a function of age}
+%
+%\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
+%\defType{Estimable}
+%\defDefault{No default}
+%\defValue{A positive real number}
+%
+%\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
+%\defType{Constant vector}
+%\defDefault{No default}
+%\defValue{A vector of values, $\le1$ of length equal to the number of time-steps}
+%
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \defType{String}
 \defDefault{No default}
@@ -1148,21 +1140,21 @@ The individual types of size-at-age relationships available are,
 \defValue{Either normal or lognormal}
 \defCondition{Only define if using the Schnute relationship}
 
-\defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
-\defType{Logical}
-\defDefault{True}
-\defValue{If true, the the c.v. is a function of length, else a function of age}
-
-\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
-\defType{Estimable}
-\defDefault{No default}
-\defValue{A positive real number}
-
-\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
-\defType{Constant vector}
-\defDefault{No default}
-\defValue{A vector of values, $\le1$ of length equal to the number of time-steps}
-
+%\defSub{by\_length} {Specifies if the linear interpolation of c.v.s is a linear function of mean size or of age}
+%\defType{Logical}
+%\defDefault{True}
+%\defValue{If true, the the c.v. is a function of length, else a function of age}
+%
+%\defSub{cv} {Define the c.v. of the distribution of sizes-at-age around the mean}
+%\defType{Estimable}
+%\defDefault{No default}
+%\defValue{A positive real number}
+%
+%\defSub{growth\_proportions} {Define the proportion of the year for each time-step for evaluating size}
+%\defType{Constant vector}
+%\defDefault{No default}
+%\defValue{A vector of values, $\le1$ of length equal to the number of time-steps}
+%
 \defSub{size\_weight} {Define the label of the associated size-weight relationship}
 \defType{String}
 \defDefault{No default}
@@ -1397,15 +1389,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defType{Estimable}
 \defDefault{No default}
 
-\TODO
-
-Not implemented yet. A way to apply joint selectivity would be to arbitrarily fix the first selectivity to one and only estimate the second one (say using a pointer?). If the estimated selectivity is above 1, it gets fixed to 1 and the other one gest estimated. Both get reported.
-
-\defComLab{joint\_selectivity} {Define a joint selectivity}
-
-\defSub{selectivities} {Define the labels of the selectivities to be defined as 'joint'}
-\defType{String vector of length 2}
-\defDefault{No default}
-\defValue{Valid \command{selectivity} labels}
-
-\TODOend
+%Not implemented yet. A way to apply joint selectivity would be to arbitrarily fix the first selectivity to one and only estimate the second one (say using a pointer?). If the estimated selectivity is above 1, it gets fixed to 1 and the other one gest estimated. Both get reported.
+%
+%\defComLab{joint\_selectivity} {Define a joint selectivity}
+%
+%\defSub{selectivities} {Define the labels of the selectivities to be defined as 'joint'}
+%\defType{String vector of length 2}
+%\defDefault{No default}
+%\defValue{Valid \command{selectivity} labels}

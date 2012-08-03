@@ -9,9 +9,9 @@ This simple example is provided to demonstrate syntax of the \config, provide an
   }%  
 \ non-spatial model\label{example1}} 
 
-The first example implements a very simple single spatial cell model (i.e., no movement $1 \times 1$ spatial structure) with recruitment, maturation, natural and exploitation mortality, and an annual age increment. The population structure has ages $1-50^{+}$ with categories labelled immature and mature. 
+The first example implements a very simple single spatial cell model (i.e., a model with no movement, and the entire population enclosed within a $1 \times 1$ spatial structure) with recruitment, maturation, natural and exploitation mortality, and an annual age increment. The population structure had ages $1-50^{+}$ with categories labelled immature and mature. 
 
-The model is initialised over a 200 year period, and applies the following processes,
+The model was initialised over a 200 year period, and applies the following processes,
 
 \begin{enumerate}
 \item A constant recruitment process, recruiting a constant number of individuals to the first age class (i.e., $age=1$) in the category labelled immature.
@@ -34,7 +34,7 @@ The \config\ includes definitions of required layers and the estimation, observa
 
 To carry out a run of the model (to verify that the model runs without any syntax errors), use the command \texttt{spm -r -c config.spm}. Note that as \SPM\ looks for a file named \texttt{config.spm} by default, we can simplify the command to \texttt{spm -r}. 
 
-To run an estimate, and hence estimate the parameters defined in the file \texttt{estimation.spm} (the catchability constant $q$, recruitment $R_0$, and the selectivity parameters $a_{50}$ and $a_{to95}$), use  \texttt{spm -e}. Here, we have piped the output to \texttt{estimate.log} using the command \texttt{spm -e > estimate.log}.  \SPM\ reports a the results of each iteration of the estimation, and ends with successful convergence,
+To run an estimation, and hence estimate the parameters defined in the file \texttt{estimation.spm} (the catchability constant $q$, recruitment $R_0$, and the selectivity parameters $a_{50}$ and $a_{to95}$), use  \texttt{spm -e}. Here, we have piped the output to \texttt{estimate.log} using the command \texttt{spm -e > estimate.log}.  \SPM\ reports a the results of each iteration of the estimation, and ends with successful convergence,
 {\small{\begin{verbatim}
 Convergence was successful
 Total elapsed time: 1 second
@@ -45,4 +45,21 @@ The main part of the output from the estimation run is summarised in the file \t
 with parameter estimates,
 \lstinputlisting{../../examples/1x1/estimate-values.dat} 
 
-A profile on the $R_0$ parameter can also be run, using \texttt{spm -p > profile.log}.
+A profile on the $R_0$ parameter can also be run, using \texttt{spm -p > profile.log}. See the examples folder for an example of the output.
+
+Simulations were run using command \texttt{spm -s 10 > simulations.log}. The first 20 lines of the first simulation are,
+% Include simulations.01 file
+\lstinputlisting[firstline=1,lastline=20]{../../examples/1x1/simulations/observations.01} 
+
+An estimate of the posterior distribution can be found using the command \texttt{spm -m -g 0 > MCMC.log}. The first sets of output describes the covariance matrix and the MCMC proposal matrix.
+% Include MCMC.log file
+\lstinputlisting[firstline=1,lastline=19]{../../examples/1x1/MCMC.log}
+
+Following this, the log file contains the iterations, objective functions values, MCMC acceptance rate, and the step size.
+% Include MCMC.log file
+\lstinputlisting[firstline=25,lastline=50]{../../examples/1x1/MCMC.log}
+
+The actual MCMC samples are listed at the end of the file.
+% Include MCMC.log file
+\lstinputlisting[firstline=1228,lastline=1253]{../../examples/1x1/MCMC.log}
+

@@ -165,7 +165,7 @@ When SPM processes a \config, it translates each command and each subcommand int
 \item \texttt{command[label].subcommand} if the command has a label, or
 \item \texttt{command.subcommand} if the command has no label, or
 \item \texttt{command[label].subcommand(i)} if the command has a label and the subcommand arguments are a vector, and we are accessing the  \emph{i}th element of that vector. 
-\item \texttt{command[label].subcommand(i-j)} if the command has a label, and the subcommand arguments are a vector, and we are accessing the elements from $i$ to $j$ (inclusive) of that vector. \NYI.
+%\item \texttt{command[label].subcommand(i-j)} if the command has a label, and the subcommand arguments are a vector, and we are accessing the elements from $i$ to $j$ (inclusive) of that vector.
 \end{description} 
 
 The unique parameter name is used to reference the parameter when estimating, applying a penalty, or applying a profile. For example, the parameter name of subcommand \subcommand{r0} of the command \command{process} with the label \argument{MyRecruitment} is,

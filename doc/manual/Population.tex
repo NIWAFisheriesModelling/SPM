@@ -69,7 +69,7 @@ Layers are a key underlying concept in \SPM. They comprise of a grid of known va
 
 Every model must define at least one layer, the base layer $L_B$. A layer is defined as a $n_{rows} \times n_{cols}$ matrix of values (albeit with one exception --- the distance layer --- which we describe below), where the value in each cell represents a known quantity. For example layers may represent classifications, physical attributes, or some other known or assumed quantity. Typically they are provided by the user as a matrix of values, although some layer (e.g., abundance and distance layers) can be calculated by \SPM\ during a model run. 
 
-Within \SPM, layers are used in three contexts:
+Within \SPM, layers are used in the following contexts:
 \begin{enumerate}
 \item The base layer\index{Base layer}\index{Layers ! the base layer}: The base layer $L_B$ is a special layer (there must be exactly one base layer defined within the model) that defines the locations where the population can and cannot potentially be present (e.g., locations associated with the sea and not land in a marine model). Here, we define that a cell may potentially have part of the population present if every element $L_B(i,j) \ge 0$. Further, positive values of the base layer $L_B$ represent the \emph{area} represented by that spatial cell. 
 \item \I{Covariate layers}: A model may have many covariate layers, and these are used as covariates of some population or movement process (e.g., the sea floor depth may be a covariate of some movement process). The values in layers used as covariates can be numeric or categorical.
@@ -113,13 +113,11 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
-\TODO
-
-\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have exactly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). Meta layers can be used in the place of layers, and \SPM will extract the layer corresponding to the year being run.
-
-\item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
-
-\TODOend
+%\TODO
+%\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have exactly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). Meta layers can be used in the place of layers, and \SPM will extract the layer corresponding to the year being run.
+%
+%\item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
+%\TODOend
 
 \end{enumerate}
 
@@ -640,24 +638,22 @@ layer spawning_ground
 
 \subsection{\I{Derived layers and meta-layers}\label{sec:derived-layers}}
 
-\TODO
-
-Derived layers are layers, calculated by \SPM\ at a specific user-defined time-step and year(s), that have a single value for each cell of the model. For example, $B_0$ is a derived layer calculated once only at the last initialisation phase of the model as the spawning stock biomass at that time; or a mortality dependent layer is calculated every year based on a formula including other layers with the latest calculation over-riding previous results. Derived meta-layers are meta-layers, calculated by \SPM\ at a specific user-defined time-step every year that the model runs, with all results retained as yearly-indexed layers.
-
-Both derived layers and derived meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  
-
-{\small{\begin{verbatim}
-+ - * / exp log(e) sqrt ^2 pow(a,b) cos sin
-\end{verbatim}}}
-
-For example, density dependent mortality based on diet selectivity can be implemented by applying a derived layer to a constant relationship mortality rate (see Section \ref{sec:mortality}). If predator $A$ of a previously-defined biomass layer $L_A$ has two potential preys $B$ and $C$ with estimable selectivity parameters $E_B$ and $E_C$ respectively of initial values 0.9 and 0.1, and with previously-defined biomass layers $L_B$ and $L_C$ respectively, the mortality layer $Lm_B$ of prey $B$ due to predation by predator $A$ applied as a constant relationship mortality rate can be defined as,
-\begin{equation}
-Lm_B = L_A \frac{E_B L_B}{E_B L_B + E_C L_C}
-\end{equation}
-
-The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to prey $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomass layers of species $A$, $B$, and $C$ respectively at a specific time-step. These biomass layers as well as the mortality layer are updated each year by the model at the required time-step. The selectivity parameters can be fixed or estimated by the model with the given initial values.
-
-\TODOend
+%\TODO
+%Derived layers are layers, calculated by \SPM\ at a specific user-defined time-step and year(s), that have a single value for each cell of the model. For example, $B_0$ is a derived layer calculated once only at the last initialisation phase of the model as the spawning stock biomass at that time; or a mortality dependent layer is calculated every year based on a formula including other layers with the latest calculation over-riding previous results. Derived meta-layers are meta-layers, calculated by \SPM\ at a specific user-defined time-step every year that the model runs, with all results retained as yearly-indexed layers.
+%
+%Both derived layers and derived meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  
+%
+%{\small{\begin{verbatim}
+%+ - * / exp log(e) sqrt ^2 pow(a,b) cos sin
+%\end{verbatim}}}
+%
+%For example, density dependent mortality based on diet selectivity can be implemented by applying a derived layer to a constant relationship mortality rate (see Section \ref{sec:mortality}). If predator $A$ of a previously-defined biomass layer $L_A$ has two potential preys $B$ and $C$ with estimable selectivity parameters $E_B$ and $E_C$ respectively of initial values 0.9 and 0.1, and with previously-defined biomass layers $L_B$ and $L_C$ respectively, the mortality layer $Lm_B$ of prey $B$ due to predation by predator $A$ applied as a constant relationship mortality rate can be defined as,
+%\begin{equation}
+%Lm_B = L_A \frac{E_B L_B}{E_B L_B + E_C L_C}
+%\end{equation}
+%
+%The total mortality of prey $B$ can be defined as due to predation by predator $A$ only using a constant relationship mortality rate only, or as due to a combination of the mortality due to predation by predator $A$ and other mortalities (constant or layer-based) by defining other mortality events applicable to prey $B$ (see Section \ref{sec:mortality} for further details). The three biomass layers $L_A$, $L_B$, and $L_C$ need to be defined in the model as (derived) biomass layers of species $A$, $B$, and $C$ respectively at a specific time-step. These biomass layers as well as the mortality layer are updated each year by the model at the required time-step. The selectivity parameters can be fixed or estimated by the model with the given initial values.
+%\TODOend
 
 \subsection{\I{Size-age relationship}\label{sec:size-at-age}}
 
@@ -707,14 +703,13 @@ The two size-weight relationships are,
   \end{equation}
 \end{itemize}
   
-Be careful about the scale of $a$ --- this is easily specified incorrectly. If you provide your catch in tonnes, and your growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there are reports available that can be used to help check that the units specified are plausible (see Section \ref{sec:report-section}).
+Be careful about the scale of $a$ --- this can easily be specified incorrectly. If the catch is in tonnes and the growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there are reports available that can be used to help check that the units specified are plausible (see Section \ref{sec:report-section}).
 
-If you specify a distribution for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
-\begin{equation}
-	\text{mean weight}=a \times (\text{mean size at age})^b \times \left( 1+\text{c}^2 \right)^{\frac{b(b-1)}{2}}
-\end{equation}
-
-where $c$ is the c.v. of sizes-at-age.
+%If a distribution is specified for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
+%\begin{equation}
+%	\text{mean weight}=a \times (\text{mean size at age})^b \times \left( 1+\text{c}^2 \right)^{\frac{b(b-1)}{2}}
+%\end{equation}
+%where $c$ is the c.v. of sizes-at-age.
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 

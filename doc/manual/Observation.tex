@@ -32,32 +32,31 @@ categories male
 
 \SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied (one proportion for each of the the ages 3, 4, 5, 6, 7, 8, 9, and 10). The expected values will be the expected proportions of males within each of these age classes, after applying a selectivity at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
 
-\TODO
-
-By default, categories are aggregated. For example, to specify that the observations are of the proportions of total individuals (males $+$ females) at each age class (example (ii) above), then the subcommand \subcommand{categories} is,
-
-{\small{\begin{verbatim}
-categories male+female
-\end{verbatim}}}
-
-\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
-\TODOend
-
-Otherwise, to provide proportions for multiple categories simultaneously, you need to specify which categories are aggregated and which are separate. \SPM\ uses a space symbol to denote those categories to separate. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
-
-{\small{\begin{verbatim}
-categories male female
-\end{verbatim}}}
-
-\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range for males and then females. For example, if the age range was 3 to 10, then 16 proportions should be supplied, the first set of 8 corresponding to the proportions of male (out of male and female combined) and the second 8 to female. The expected values will be the expected proportions of selected males and selected females within each of these age classes, at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 16 proportions) must sum to one (with a default tolerance of 0.001).
-
-The definition of categories can be a combination of the above cases and can become more complex as the number of categories in the model increases. For example, in a model with categories male-immature, male-mature, female-immature, and female-mature, we might supply observations of males (immature and mature combined) and females (immature and mature combined) simultaneously. Here the \subcommand{categories} subcommand would be;
-
-{\small{\begin{verbatim}
-categories male-immature + male-mature  female-immature + female-mature
-\end{verbatim}}}
-
-Assuming that we wanted to supply observations for ages 3 to 10, then \SPM\ would expect a vector of 16 proportions for each spatial location --- the first eight corresponding to the observed proportions of males aged 3--10, and the second set of eight corresponding to the proportions of females aged 3--10. Further, the proportions would sum to one. Note that the addition takes precedence on the multiple categories defined. 
+%\TODO
+%By default, categories are aggregated. For example, to specify that the observations are of the proportions of total individuals (males $+$ females) at each age class (example (ii) above), then the subcommand \subcommand{categories} is,
+%
+%{\small{\begin{verbatim}
+%categories male+female
+%\end{verbatim}}}
+%
+%\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range. For example, if the age range was 3 to 10, then 8 proportions should be supplied. The expected values will be the expected proportions of selected males plus selected females within each of these age classes, at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 8 proportions) must sum to one (with a default tolerance of 0.001).
+%
+%Otherwise, to provide proportions for multiple categories simultaneously, you need to specify which categories are aggregated and which are separate. \SPM\ uses a space symbol to denote those categories to separate. For example, to specify that the observations are of the the proportions of individuals for both male and female simultaneously at each age class (example (iii) above), then the subcommand \subcommand{categories} is,
+%
+%{\small{\begin{verbatim}
+%categories male female
+%\end{verbatim}}}
+%
+%\SPM\ then expects that there will be a vector of proportions supplied, with one proportion for each age class within the defined age range for males and then females. For example, if the age range was 3 to 10, then 16 proportions should be supplied, the first set of 8 corresponding to the proportions of male (out of male and female combined) and the second 8 to female. The expected values will be the expected proportions of selected males and selected females within each of these age classes, at the year and time-step specified. Note that the supplied vector of proportions (i.e., in this example, the 16 proportions) must sum to one (with a default tolerance of 0.001).
+%
+%The definition of categories can be a combination of the above cases and can become more complex as the number of categories in the model increases. For example, in a model with categories male-immature, male-mature, female-immature, and female-mature, we might supply observations of males (immature and mature combined) and females (immature and mature combined) simultaneously. Here the \subcommand{categories} subcommand would be;
+%
+%{\small{\begin{verbatim}
+%categories male-immature + male-mature  female-immature + female-mature
+%\end{verbatim}}}
+%
+%Assuming that we wanted to supply observations for ages 3 to 10, then \SPM\ would expect a vector of 16 proportions for each spatial location --- the first eight corresponding to the observed proportions of males aged 3--10, and the second set of eight corresponding to the proportions of females aged 3--10. Further, the proportions would sum to one. Note that the addition takes precedence on the multiple categories defined. 
+%\TODOend
 
 The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
 
