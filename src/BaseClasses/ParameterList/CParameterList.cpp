@@ -153,7 +153,7 @@ int CParameterList::getInt(string name, bool optional, int defaultValue) {
     try {
       iReturn = boost::lexical_cast<int>(sValue);
     } catch (boost::bad_lexical_cast) {
-      string Ex = string("Non-numeric value in ") + name;
+      string Ex = string("Non-integer value in ") + name;
       throw Ex;
     }
   }
@@ -259,7 +259,7 @@ void CParameterList::fillVector(vector<int> &list, string name, bool optional) {
     try {
       list.push_back(boost::lexical_cast<int>((*vPtr)));
     } catch (boost::bad_lexical_cast) {
-      string Ex = string("Non-numeric value in ") + name;
+      string Ex = string("Non-integer value in ") + name;
       throw Ex;
     }
     vPtr++;

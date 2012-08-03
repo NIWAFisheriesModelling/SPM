@@ -259,7 +259,7 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
               firstNumber  = boost::lexical_cast<int>(sValue.substr(0, iRangeSpacerIndex));
               secondNumber = boost::lexical_cast<int>(sValue.substr(iRangeSpacerIndex+1, sValue.length()));
             } catch (boost::bad_lexical_cast) {
-              string Ex = string("Non-numeric value in ") + sName;
+              string Ex = string("Non-integer value in ") + sName;
               throw Ex;
             }
 
