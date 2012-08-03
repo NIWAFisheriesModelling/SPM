@@ -8,6 +8,7 @@
 \usepackage{float} % for floating tables and graphics
 \usepackage{setspace} % for defining spacing between lines
 \usepackage{cmap} % allow searching in pdf documents
+\usepackage{tabulary} % better tables
 
 % hyperref for HTML links within pdf 
 % EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
@@ -217,16 +218,17 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
   \SPMName\ User Manual (modified: \DocVer) \\ for use with \SPM\ \VER
 \end{center}
 
+
 % Citation page
 \cleardoublepage{}
 \fancyfoot[C]{\thepage}
 \pagenumbering{roman}
 ~\vfill
-\begin{center}
-  \includegraphics[height=4cm,width=4cm]{Figures/QR_code}
-	\\
-{ Citation: \ManualRef}
-\end{center}
+
+\begin{tabulary}{\textwidth}{L C}        
+$\vcenter{Citation: \ManualRef}$ & $\vcenter{\hbox{\includegraphics[height=1.8cm,width=1.8cm]{Figures/QR_code}}}$\\
+\end{tabulary}
+
 
 % Table of contents
 \clearemptydoublepage{}
