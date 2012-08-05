@@ -16,8 +16,6 @@ const string age_size_vonB =
   "linf 100\n"
   "k 0.2\n"
   "t0 0.0\n"
-  "distribution normal\n"
-  "cv 0.1\n"
   "size_weight none\n";
 
 #endif /* AGESIZE_H_ */

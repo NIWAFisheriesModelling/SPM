@@ -35,7 +35,7 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
   pParameterList->registerAllowed(PARAM_A);
   pParameterList->registerAllowed(PARAM_B);
   //pParameterList->registerAllowed(PARAM_CV);
-  pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  //pParameterList->registerAllowed(PARAM_DISTRIBUTION);
   pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 
