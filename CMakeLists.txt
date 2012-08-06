@@ -45,15 +45,13 @@ ELSE (WIN32)
   SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DTEST -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
   SET(MAIN_LIBRARIES
-    boost_system-gcc41-mt-1_48
-    boost_filesystem-gcc41-mt-1_48
-    boost_thread-gcc41-mt-1_48
-    boost_program_options-gcc41-mt-1_48
+    boost_system
+    boost_filesystem
+    boost_thread
+    boost_program_options
     pthread
     )
-  SET(TEST_LIBRARIES
-    boost_unit_test_framework-gcc41-mt-1_48
-  )
+  SET(TEST_LIBRARIES boost_unit_test_framework)
 ENDIF (WIN32)
 
 
