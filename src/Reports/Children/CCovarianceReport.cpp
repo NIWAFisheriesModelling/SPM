@@ -57,7 +57,7 @@ void CCovarianceReport::execute() {
     cout << PARAM_PARAMETER << CONFIG_RATIO_SEPARATOR << " ";
     for(int i=0; i < (int)vEstimates.size(); ++i) {
       //foreach(CEstimate *Estimate, vEstimates) {
-      cout << vEstimates[i]->getParameter() << ( i<(vEstimates.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");;
+      cout << vEstimates[i]->getParameter() << ( i<((int)vEstimates.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");;
     }
     cout << "Hessian:\n";
     for (int i = 0; i < iCount; ++i) {

@@ -131,7 +131,7 @@ void CBHRecruitmentProcess::validate() {
       CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
 
     //Check that a value of YCSValues supplied for each YCSYear
-    if(vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
+    if((int)vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
       CError::errorListSameSize(PARAM_YCS_VALUES, string("model years"));
 
     // Register our YCS as Estimable

@@ -237,7 +237,7 @@ void CRuntimeThread::executeSimulationRun() {
 
   for (int i=0; i < CConfiguration::Instance()->getSimulationCandidates(); ++i) {
     string sReportSuffix = "." ;
-    int iThisIterationWidth = floor(log10(i+1))+1;
+    int iThisIterationWidth = (int)floor(log10(i+1))+1;
     int iCount = iSuffixIterationWidth - iThisIterationWidth;
     if (iCount > 0) {
       for (int j=0; j < iCount; ++j) {
