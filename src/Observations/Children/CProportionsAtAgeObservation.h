@@ -42,7 +42,6 @@ protected:
   bool                       bAgePlus;
   bool                       bRescale;
   double                     dTolerance;
-  double                     dProportionTimeStep;
   double                     dProcessError;
   string                     sAgeingError;
   CAgeingError               *pAgeingError;

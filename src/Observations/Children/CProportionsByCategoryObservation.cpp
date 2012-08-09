@@ -49,7 +49,6 @@ CProportionsByCategoryObservation::CProportionsByCategoryObservation() {
   pParameterList->registerAllowed(PARAM_TARGET_CATEGORIES);
   pParameterList->registerAllowed(PARAM_TARGET_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_DELTA);
-  pParameterList->registerAllowed(PARAM_PROPORTION_TIME_STEP);
   pParameterList->registerAllowed(PARAM_PROCESS_ERROR);
 }
 
@@ -67,7 +66,6 @@ void CProportionsByCategoryObservation::validate() {
     iMinAge             = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge             = pParameterList->getInt(PARAM_MAX_AGE);
     bAgePlus            = pParameterList->getBool(PARAM_AGE_PLUS_GROUP);
-    dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP,true,1.0);
     dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
 
     pParameterList->fillVector(vTargetCategoryNames, PARAM_TARGET_CATEGORIES);
@@ -107,11 +105,6 @@ void CProportionsByCategoryObservation::validate() {
     if (dProcessError < 0)
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
 
-    if (dProportionTimeStep < 0)
-      CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
-    if (dProportionTimeStep > 1)
-      CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
-
     // Get our Error Value
     vector<string> vErrorValues;
     pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
@@ -119,7 +112,6 @@ void CProportionsByCategoryObservation::validate() {
     if (vErrorValues.size() != vOBS.size()) {
       CError::errorListSameSize(PARAM_OBS, PARAM_ERROR_VALUE);
     }
-
 
     for (int i = 0; i < (int)vErrorValues.size(); i+=(iAgeSpread+1)) {
       for (int j = 0; j < iAgeSpread; ++j) {

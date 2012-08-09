@@ -58,6 +58,7 @@ protected:
   int                        iYear;
   string                     sTimeStep;
   int                        iTimeStep;
+  double                     dProportionTimeStep;
   string                     sLayer;
   CStringLayer               *pLayer;
   vector<string>             vCategoryNames;

@@ -32,6 +32,7 @@ CObservation::CObservation() {
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_PROPORTION_TIME_STEP);
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_LIKELIHOOD);
   pParameterList->registerAllowed(PARAM_SIMULATION_LIKELIHOOD);
@@ -96,10 +97,11 @@ void CObservation::validate() {
     CBaseExecute::validate();
 
     // Assign our Variables
-    iYear       = pParameterList->getInt(PARAM_YEAR);
-    sTimeStep   = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer      = pParameterList->getString(PARAM_LAYER);
-    sLikelihood = pParameterList->getString(PARAM_LIKELIHOOD);
+    iYear               = pParameterList->getInt(PARAM_YEAR);
+    sTimeStep           = pParameterList->getString(PARAM_TIME_STEP);
+    sLayer              = pParameterList->getString(PARAM_LAYER);
+    sLikelihood         = pParameterList->getString(PARAM_LIKELIHOOD);
+    dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP,true,1.0);
 
     if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
       if(sLikelihood == PARAM_PSEUDO) {
@@ -112,6 +114,11 @@ void CObservation::validate() {
 
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
+
+    if (dProportionTimeStep < 0)
+      CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
+    if (dProportionTimeStep > 1)
+      CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
 
     //Check length of categories and selectivites are equal
     unsigned iCategoryNamesSize = vCategoryNames.size();
