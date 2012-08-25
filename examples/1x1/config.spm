@@ -20,7 +20,6 @@ size_weight basic
 k      0.093
 t0    -0.256
 linf 169.07
-cv     0.102
 
 @size_weight basic
 type basic
