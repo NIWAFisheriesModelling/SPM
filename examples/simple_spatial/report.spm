@@ -120,4 +120,26 @@ sizes 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170
 type age_weight
 age_size none
 
+@report ImmatureDistance
+type preference_function
+preference_function ImmatureDistance
 
+@report ImmatureDepth
+type preference_function
+preference_function ImmatureDepth
+
+@report ImmatureLatitude
+type preference_function
+preference_function ImmatureLatitude
+
+@report MatureDistance
+type preference_function
+preference_function MatureDistance
+
+@report MatureDepth
+type preference_function
+preference_function MatureDepth
+
+@report MatureLatitude
+type preference_function
+preference_function MatureLatitude
