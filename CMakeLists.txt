@@ -201,6 +201,7 @@ src/Reports/Children/Base/CFileReport.cpp
 src/Reports/Children/CAgeingErrorReport.cpp
 src/Reports/Children/CAgeSizeReport.cpp
 src/Reports/Children/CAgeWeightReport.cpp
+src/Reports/Children/CBiomassPartitionReport.cpp
 src/Reports/Children/CCovarianceReport.cpp
 src/Reports/Children/CDerivedQuantityReport.cpp
 src/Reports/Children/CEstimateSummaryReport.cpp

@@ -7,6 +7,7 @@ The report types available are,
 \begin{enumerate}
   \item Print the map (i.e., row and column labels of each spatial cell) of the spatial structure
   \item Print the partition at a specific time-step for any number of years
+  \item Print the biomass of the partition at a specific time-step for any number of years
   \item Print the partition at the end of an initialisation
   \item Print a summary of a process
 	\item Print a summary of a preference function
@@ -54,6 +55,28 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the partition report applies to}
+\defType{Integer}
+\defDefault{No default}
+\defValue{A valid time-step}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print the partition biomass]{\commandlabsubarg{report}{type}{partition\_biomass}}
+
+\defSub{years} {Define the years that the partition\_biomass report applies to}
+\defType{Integer vector or integer range}
+\defDefault{No default}
+\defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
+
+\defSub{time\_step} {Define the time-step that the partition\_biomass report applies to}
 \defType{Integer}
 \defDefault{No default}
 \defValue{A valid time-step}

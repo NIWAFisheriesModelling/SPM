@@ -13,6 +13,7 @@
 #include "../Children/CAgeSizeReport.h"
 #include "../Children/CAgeWeightReport.h"
 #include "../Children/CAgeingErrorReport.h"
+#include "../Children/CBiomassPartitionReport.h"
 #include "../Children/CCovarianceReport.h"
 #include "../Children/CDerivedQuantityReport.h"
 #include "../Children/CEstimateSummaryReport.h"
@@ -42,6 +43,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
 
   if (type == PARAM_PARTITION)
     pReporter = new CPartitionReport();
+  else if (type == PARAM_PARTITION_BIOMASS)
+    pReporter = new CBiomassPartitionReport();
   else if (type == PARAM_OBJECTIVE_FUNCTION)
     pReporter = new CObjectiveFunctionReport();
   else if (type == PARAM_ESTIMATE_SUMMARY)

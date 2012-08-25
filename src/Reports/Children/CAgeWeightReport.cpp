@@ -35,7 +35,7 @@ CAgeWeightReport::CAgeWeightReport() {
 void CAgeWeightReport::validate() {
   try {
 
-     sAgeSize = pParameterList->getString(PARAM_AGE_SIZE);
+    sAgeSize = pParameterList->getString(PARAM_AGE_SIZE);
 
     // Validate parent
     CFileReport::validate();

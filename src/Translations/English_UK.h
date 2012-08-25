@@ -286,6 +286,7 @@
 #define PARAM_P2                                  "p2"
 #define PARAM_PARAMETER                           "parameter"
 #define PARAM_PARTITION                           "partition"
+#define PARAM_PARTITION_BIOMASS                   "partition_biomass"
 #define PARAM_PENALTY                             "penalty"
 #define PARAM_POPULATION_SIZE                     "population_size"
 #define PARAM_PREFERENCE_MOVEMENT                 "preference"
