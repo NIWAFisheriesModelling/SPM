@@ -148,6 +148,15 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
             res$partition[[counter$partition]] <- temp
             names(res$partition)[counter$partition] <- report.label[i]
         }
+        else if (report.type[i] == "partition_biomass") {
+            if (!("partition_biomass" %in% names(res))) {
+                res$partition_biomass <- list()
+            }
+            counter$partition_biomass <- counter$partition_biomass + 1
+            temp <- extract.partition.biomass(lines = line[index[i]:(index[i + 1] - 1)])
+            res$partition_biomass[[counter$partition_biomass]] <- temp
+            names(res$partition_biomass)[counter$partition_biomass] <- report.label[i]
+        }
         else if (report.type[i] == "process") {
             if (!("process" %in% names(res))) {
                 res$process <- list()
