@@ -11,10 +11,15 @@ function(lines){
   variables<-spm.string.to.vector.of.words(lines[index.start+3],sep=",")
   if((index.end-index.start)>4) {
     data<-spm.string.to.vector.of.words(lines[(index.start+4):(index.end-1)],sep=",")
-    data<-matrix(data,ncol=6,byrow=TRUE)
+    data<-matrix(data,ncol=length(variables),byrow=TRUE)
     data<-as.data.frame(data)
     names(data)<-variables
-    data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4], errorvalue=data[,5], score=data[,6])
+    if("age" %in% variables) {
+      data<-data.frame("area"=data[,1], age=data[,2], observed=data[,3], expected=data[,4], residual=data[,5], errorvalue=data[,6], score=data[,7])
+      data$age<-as.numeric(as.character(data$age))
+    } else {
+      data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4], errorvalue=data[,5], score=data[,6])
+    }
     data$area<-as.character(data$area)
     data$observed<-as.numeric(as.character(data$observed))
     data$expected<-as.numeric(as.character(data$expected))
