@@ -13,7 +13,6 @@
 
 // Local Headers
 #include "CProportionsAtAgeObservation.h"
-#include "../../Layers/String/CStringLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CConvertor.h"
@@ -241,6 +240,7 @@ void CProportionsAtAgeObservation::execute() {
     double              dRunningTotal      = 0.0;
     double              dCurrentProp       = 0.0;
     vector<string>      vKeys;
+    vector<int>         vAges;
     vector<double>      vExpected;
     vector<double>      vObserved;
     vector<double>      vProcessError;
@@ -313,6 +313,7 @@ void CProportionsAtAgeObservation::execute() {
 
         // Store the items we want to calculate scores for
         vKeys.push_back((*mvPropPtr).first);
+        vAges.push_back(i+pWorld->getMinAge());
         vExpected.push_back(dCurrentProp);
         vObserved.push_back(((*mvPropPtr).second)[i]);
         vProcessError.push_back(dProcessError);
@@ -331,7 +332,7 @@ void CProportionsAtAgeObservation::execute() {
       // Simulate our values, then save them
       pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vObserved.size(); ++i)
-        saveComparison(vKeys[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
+        saveComparison(vKeys[i], vAges[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
 
     } else { // Generate Score
       dScore = pLikelihood->getInitialScore(vKeys, vProcessError, vErrorValue);
@@ -340,7 +341,7 @@ void CProportionsAtAgeObservation::execute() {
       pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vScores.size(); ++i) {
         dScore += vScores[i];
-        saveComparison(vKeys[i], vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
+        saveComparison(vKeys[i], vAges[i], vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
       }
     }
 

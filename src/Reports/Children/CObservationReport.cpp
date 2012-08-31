@@ -11,6 +11,8 @@
 #include "CObservationReport.h"
 #include "../../Observations/CObservation.h"
 #include "../../Observations/CObservationManager.h"
+#include "../../Observations/Children/CProportionsAtAgeObservation.h"
+#include "../../Observations/Children/CProportionsByCategoryObservation.h"
 #include "../../Helpers/ForEach.h"
 
 //**********************************************************************
@@ -77,6 +79,9 @@ void CObservationReport::execute() {
 //        if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
           return;
 
+    CProportionsAtAgeObservation *pProportionsAtAge = dynamic_cast<CProportionsAtAgeObservation*>(pObservation);
+    CProportionsByCategoryObservation *pProportionsByCategory = dynamic_cast<CProportionsByCategoryObservation*>(pObservation);
+
     this->start();
 
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
@@ -86,12 +91,20 @@ void CObservationReport::execute() {
     vector<SComparison*> vComparisons;
     pObservation->fillComparisons(vComparisons);
 
-    cout << "area,observed,expected,residual,errorvalue,score\n";
+    if (pProportionsAtAge != 0)
+      cout << "area,age,observed,expected,residual,errorvalue,score\n";
+    else if (pProportionsByCategory != 0)
+      cout << "area,age,observed,expected,residual,errorvalue,score\n";
+    else
+      cout << "area,observed,expected,residual,errorvalue,score\n";
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
-      cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES
-           << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
+      cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      if (pProportionsAtAge != 0 || pProportionsByCategory != 0) {
+        cout << Comparison->iAge << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      }
+      cout << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
            << Comparison->dExpectedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
            << dResidual << CONFIG_SEPERATOR_ESTIMATE_VALUES
            << Comparison->dErrorValue << CONFIG_SEPERATOR_ESTIMATE_VALUES
