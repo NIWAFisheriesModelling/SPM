@@ -89,6 +89,7 @@ void CObservation::saveComparison(string key, double expected, double observed, 
 
   SComparison *pComparison = new SComparison();
   pComparison->sKey           = key;
+  pComparison->iAge           = -1;
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
   pComparison->dErrorValue    = errorValue;
