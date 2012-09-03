@@ -193,15 +193,6 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
             res$selectivity[[counter$selectivity]] <- temp
             names(res$selectivity)[counter$selectivity] <- report.label[i]
         }
-        else if (report.type[i] == "simulated_observation") {
-            if (!("simulated_observation" %in% names(res))) {
-                res$simulated_observation <- list()
-            }
-            counter$simulated_observation <- counter$simulated_observation + 1
-            temp <- extract.simulated_observation(lines = line[index[i]:(index[i + 1] - 1)])
-            res$simulated_observation[[counter$simulated_observation]] <- temp
-            names(res$simulated_observation)[counter$simulated_observation] <- report.label[i]
-        }
         else if (report.type[i] == "size_weight") {
             if (!("size_weight" %in% names(res))) {
                 res$size_weight <- list()
