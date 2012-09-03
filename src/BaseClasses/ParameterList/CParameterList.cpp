@@ -54,6 +54,19 @@ void CParameterList::registerAllowed(string name) {
 }
 
 //**********************************************************************
+// void CParameterList::unregisterAllowed(string name)
+// Remove a registered parameter from the list of allowed paraemter names
+//**********************************************************************
+void CParameterList::unregisterAllowed(string name) {
+  for(int i=0; i < (int)vAllowedParameters.size(); ++i) {
+    if (vAllowedParameters[i] == name) {
+      vAllowedParameters.erase(vAllowedParameters.begin() + i);
+      break;
+    }
+  }
+}
+
+//**********************************************************************
 // void CParameterList::addParameter(string name, string value)
 // Add a parameter
 //**********************************************************************
