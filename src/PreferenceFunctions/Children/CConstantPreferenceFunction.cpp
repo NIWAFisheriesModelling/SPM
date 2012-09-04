@@ -15,6 +15,7 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 
 // Using
 using std::cout;
@@ -25,6 +26,11 @@ using std::endl;
 // Default Constructor
 //**********************************************************************
 CConstantPreferenceFunction::CConstantPreferenceFunction() {
+  // Register our Estimables
+  registerEstimable(PARAM_C, &dC);
+
+  // Register User Allowed Parameters
+  pParameterList->registerAllowed(PARAM_C);
 }
 
 //**********************************************************************
@@ -34,10 +40,15 @@ CConstantPreferenceFunction::CConstantPreferenceFunction() {
 void CConstantPreferenceFunction::validate() {
   try {
 
+    dC = pParameterList->getDouble(PARAM_C,true, 1.0);
+
     // Validate parent
     CPreferenceFunction::validate();
 
     // Local validations
+    //Local validation
+    if (dC <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_C, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CConstantPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
@@ -55,7 +66,7 @@ double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
   try {
 #endif
 
-    dRet = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex);
+    dRet = pLayer->getValue(TRIndex, TCIndex, RIndex, CIndex) * dC;
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {

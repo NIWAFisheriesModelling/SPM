@@ -25,6 +25,10 @@ public:
   double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
   void                       validate();
 
+protected:
+  // Variables
+  double                     dC;
+
 };
 
 #endif /*CCONSTANTPREFERENCEFUNCTION_H_*/
