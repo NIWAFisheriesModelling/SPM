@@ -17,6 +17,7 @@ In SPM, but not in manual
   command
   correlation
   derived_layer
+  difference
   distribution
   enabled_estimates
   estimable
@@ -29,6 +30,7 @@ In SPM, but not in manual
   layer_height
   layer_width
   matrix
+  mean
   method
   multinomial
   normal_log

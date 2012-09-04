@@ -32,7 +32,12 @@ Each type of observation requires a set of subcommands and arguments specific to
 \defDefault{No default}
 \defValue{A valid time-step}
 
-\defSub{proportion\_time\_step} {Define the interpolated proportion of the time-step passes that the observation applies to}
+\defSub{proportion\_method} {Define the method for interpolating the time-step for calculating the expected value of the observation}
+\defType{String}
+\defDefault{mean}
+\defValue{Either \texttt{mean} for the weighted mean, or \texttt{difference} for the difference between the start and end state}
+
+\defSub{proportion\_time\_step} {Define the interpolated proportion through the time-step for calculating the expected value of the observation}
 \defType{Constant}
 \defDefault{1.0}
 \defValue{A real number between 0 and 1, inclusive}
