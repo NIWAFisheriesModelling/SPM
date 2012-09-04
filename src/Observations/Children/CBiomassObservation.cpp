@@ -78,11 +78,6 @@ void CBiomassObservation::validate() {
     if (dProcessError < 0)
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
 
-    if (dProportionTimeStep < 0)
-      CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
-    if (dProportionTimeStep > 1)
-      CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
-
     // Get our ErrorValues
     vector<string> vErrorValues;
     pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
@@ -189,7 +184,12 @@ void CBiomassObservation::execute() {
 
           double dStartValue  = pStartSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
           double dEndValue    = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
-          double dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          double dFinalValue = 0.0;
+          if(sProportionMethod == PARAM_MEAN) {
+            dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          } else {
+            dFinalValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+          }
 
           double dSelectResult = vSelectivities[i]->getResult(j) * dFinalValue;
           dExpectedTotal += dSelectResult * pWorld->getMeanWeight(j,i);

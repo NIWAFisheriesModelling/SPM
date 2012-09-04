@@ -233,18 +233,26 @@ void CProportionsByCategoryObservation::execute() {
       // Loop Through Categories
       for (int j = 0; j < (int)vCategories.size(); ++j) {
         double dSelectResult = vSelectivities[j]->getResult(i);
-        //pAgeResults[i] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
         double dStartValue      = pStartSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
         double dEndValue        = pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
-        double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+        double dProportionValue = 0.0;
+        if(sProportionMethod == PARAM_MEAN) {
+          dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+        } else {
+          dProportionValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+        }
         pAgeResults[i] += dSelectResult * dProportionValue;
       }
       for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
         double dSelectResult = vTargetSelectivities[j]->getResult(i);
-        //pCombinedAgeResults[i] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
         double dStartValue      = pStartSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
         double dEndValue        = pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vTargetCategories[j]);
-        double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+        double dProportionValue = 0.0;
+        if(sProportionMethod == PARAM_MEAN) {
+          dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+        } else {
+          dProportionValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+        }
         pCombinedAgeResults[i] += dSelectResult * dProportionValue;
       }
     }
@@ -256,18 +264,26 @@ void CProportionsByCategoryObservation::execute() {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult(i);
-          //pAgeResults[iArraySize-1] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
           double dStartValue      = pStartSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
           double dEndValue        = pSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
-          double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          double dProportionValue = 0.0;
+          if(sProportionMethod == PARAM_MEAN) {
+            dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          } else {
+            dProportionValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+          }
           pAgeResults[iArraySize-1] += dSelectResult * dProportionValue;
         }
         for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
           double dSelectResult = vTargetSelectivities[j]->getResult(i);
-          //pCombinedAgeResults[iArraySize-1] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
           double dStartValue      = pStartSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
           double dEndValue        = pSquare->getAbundanceInCategoryForAge(i, vTargetCategories[j]);
-          double dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          double dProportionValue = 0.0;
+          if(sProportionMethod == PARAM_MEAN) {
+            dProportionValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          } else {
+            dProportionValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+          }
           pCombinedAgeResults[iArraySize-1] += dSelectResult * dProportionValue;
         }
       }
@@ -293,7 +309,6 @@ void CProportionsByCategoryObservation::execute() {
       pAgeResults[i] = 0.0;
       pCombinedAgeResults[i] = 0.0;
     }
-
     mvPropPtr++;
   }
 

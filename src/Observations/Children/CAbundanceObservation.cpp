@@ -184,8 +184,12 @@ void CAbundanceObservation::execute() {
 
           double dStartValue = pStartSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
           double dEndValue   = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
-          double dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
-
+          double dFinalValue = 0.0;
+          if(sProportionMethod == PARAM_MEAN) {
+            dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          } else {
+            dFinalValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+          }
           dExpectedTotal += dSelectResult * dFinalValue;
         }
 

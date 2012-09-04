@@ -61,6 +61,7 @@ protected:
   string                     sTimeStep;
   int                        iTimeStep;
   double                     dProportionTimeStep;
+  string                     sProportionMethod;
   string                     sLayer;
   CStringLayer               *pLayer;
   vector<string>             vCategoryNames;

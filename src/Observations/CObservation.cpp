@@ -33,10 +33,10 @@ CObservation::CObservation() {
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_PROPORTION_TIME_STEP);
+  pParameterList->registerAllowed(PARAM_PROPORTION_METHOD);
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_LIKELIHOOD);
   pParameterList->registerAllowed(PARAM_SIMULATION_LIKELIHOOD);
-
 }
 
 //**********************************************************************
@@ -124,6 +124,7 @@ void CObservation::validate() {
     sLayer              = pParameterList->getString(PARAM_LAYER);
     sLikelihood         = pParameterList->getString(PARAM_LIKELIHOOD);
     dProportionTimeStep = pParameterList->getDouble(PARAM_PROPORTION_TIME_STEP,true,1.0);
+    sProportionMethod   = pParameterList->getString(PARAM_PROPORTION_METHOD,true,PARAM_MEAN);
 
     if (pRuntimeController->getRunMode() == RUN_MODE_SIMULATION) {
       if(sLikelihood == PARAM_PSEUDO) {
@@ -141,6 +142,10 @@ void CObservation::validate() {
       CError::errorLessThan(PARAM_PROPORTION_TIME_STEP, PARAM_ZERO);
     if (dProportionTimeStep > 1)
       CError::errorGreaterThan(PARAM_PROPORTION_TIME_STEP, PARAM_ONE);
+
+    if (!(sProportionMethod == PARAM_MEAN || sProportionMethod == PARAM_DIFFERENCE)) {
+      CError::errorNotEqual(PARAM_PROPORTION_METHOD,PARAM_MEAN + string(" or ") + PARAM_DIFFERENCE);
+    }
 
     //Check length of categories and selectivites are equal
     unsigned iCategoryNamesSize = vCategoryNames.size();

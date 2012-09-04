@@ -265,10 +265,13 @@ void CProportionsAtAgeObservation::execute() {
         vector<double> vTemp(pSquare->getWidth(),0);
         for (int i = 0; i < (int)pSquare->getHeight(); ++i) {
           for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
-          // vTemp[j] = pBaseSquare->getValue(i, j); //old code that ignores proportion time_step
-          double dStartValue  = pStartSquare->getValue(i, j);
-          double dEndValue    = pSquare->getValue(i, j);
-          vTemp[j]            = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+            double dStartValue  = pStartSquare->getValue(i, j);
+            double dEndValue    = pSquare->getValue(i, j);
+            if(sProportionMethod == PARAM_MEAN) {
+              vTemp[j] = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+            } else {
+              vTemp[j] = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
+            }
           }
           pAgeingError->getExpected(vTemp);
           for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
