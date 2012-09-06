@@ -366,6 +366,7 @@
 #define PARAM_U_MAX                               "u_max"
 #define PARAM_UNIFORM                             "uniform"
 #define PARAM_UNIFORM_LOG                         "uniform_log"
+#define PARAM_UNITS                               "units"
 #define PARAM_UPPER_BOUND                         "upper_bound"
 #define PARAM_V                                   "v"
 #define PARAM_VONBERTALANFFY                      "von_bertalanffy"
