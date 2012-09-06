@@ -194,7 +194,7 @@ Population processes are those processes that change the population state of ind
 
 \subsubsection{\I{Recruitment}}
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}. 
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}.
 
 In the recruitment processes, the number of individuals are added to a single age class within the partition, with the amount defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
@@ -306,8 +306,6 @@ SSB_offset 1
 \end{verbatim}}}
 
 Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
-
-\TODOend
 
 \subsubsection{\I{Ageing}\label{sec:ageing}}
 
