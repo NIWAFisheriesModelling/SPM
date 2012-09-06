@@ -47,6 +47,7 @@ CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_LAYERS);
   pParameterList->registerAllowed(PARAM_U_MAX);
+  pParameterList->registerAllowed(PARAM_UNITS);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_PENALTY);
 }
@@ -76,6 +77,7 @@ void CBiomassEventMortalityProcess::validate() {
 
     // Get our Parameters
     dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
+    dUnits    = pParameterList->getDouble(PARAM_U_MAX,true,1000);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
@@ -188,29 +190,32 @@ void CBiomassEventMortalityProcess::execute() {
         // Loop Through Categories & Work out Vulnerable Stock in BIOMASS
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
-            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,k);
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
+            if (dCurrent <0.0)
+              dCurrent = 0.0;
+            // record our Vulnerable number
             pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
-            // Increase Vulnerable Amount
-            dVulnerable += dCurrent;
+            // Increase Vulnerable biomass
+            dVulnerable += dCurrent * pWorld->getMeanWeight(l,k) * dUnits;
           }
         }
 
-        // Work out exploitation rate to remove
+        // Work out exploitation rate to remove (catch/vulnerableBiomass)
         dExploitation = dCatch / CMath::zeroFun(dVulnerable,ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
           if (pPenalty != 0) { // Throw Penalty
             pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
           }
-        } else if (dExploitation < 0.0) {
+        } else if (dExploitation < ZERO) {
           dExploitation = 0.0;
         }
 
-        // Loop Through Categories & remove biomass
+        // Loop Through Categories & remove number based on calcuated exploitation rate
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,k) * dExploitation;
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)

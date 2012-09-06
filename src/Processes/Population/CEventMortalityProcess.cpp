@@ -189,29 +189,31 @@ void CEventMortalityProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
+            if (dCurrent <0.0)
+              dCurrent = 0.0;
+            // record our Vulnerable number
             pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
-
             // Increase Vulnerable Amount
             dVulnerable += dCurrent;
           }
         }
 
-        // Work out exploitation rate remove
+        // Work out exploitation rate to remove (catch/vulnerableNumber)
         dExploitation = dCatch / CMath::zeroFun(dVulnerable,ZERO);
         if (dExploitation > dUMax) {
           dExploitation = dUMax;
           if (pPenalty != 0) { // Throw Penalty
             pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
           }
-        } else if (dExploitation < 0.0) {
+        } else if (dExploitation < ZERO) {
           dExploitation = 0.0;
         }
 
-        // Loop Through Categories & remove individuals
+        // Loop Through Categories & remove number based on calcuated exploitation rate
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)
