@@ -200,27 +200,31 @@ void CCategoryTransitionProcess::execute() {
           }
         }
 
-        // Work out exploitation rate to remove
+        // Work out exploitation rate to move
         dExploitation = dN / CMath::zeroFun(dVulnerable,ZERO);
         if (dExploitation > 0.999) {
           dExploitation = 0.999;
           if (pPenalty != 0) { // Throw Penalty
             pPenalty->trigger(sLabel, dN, (dVulnerable * 0.999));
           }
+        } else if (dExploitation < 0.0) {
+          dExploitation = 0.0;
         }
 
         // Loop Through Categories & remove individuals
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to move
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
 
             // If is Zero, Cont
-            if (CComparer::isZero(dCurrent))
+            if (dCurrent <= 0.0)
               continue;
 
             // Add these to the categories to move to
             pDiff->addValue(vCategoryToIndex[k], l, dCurrent);
+            // Subtract these from the categories to move from
+            pDiff->subValue(vCategoryIndex[k], l, dCurrent);
           }
         }
       }

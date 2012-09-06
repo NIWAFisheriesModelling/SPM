@@ -139,8 +139,15 @@ void CCategoryTransitionRateProcess::execute() {
                continue;
 
             // Multiplayer layer
-            if (pLayer != 0)
-              dCurrent *= log(pLayer->getValue(i, j));
+            if (pLayer != 0) {
+              double temp = pLayer->getValue(i, j);
+              dCurrent *= temp;
+              if(temp < 0.0) {
+                CError::errorLessThan(PARAM_LAYER, PARAM_ZERO);
+              } else if (temp > 1.0) {
+                CError::errorGreaterThan(PARAM_LAYER, PARAM_ONE);
+              }
+            }
 
             dCurrent = dCurrent * vProportions[k] * vSelectivityIndex[k]->getResult(l);
             pBaseSquare->subValue(vFromIndex[k], l, dCurrent);

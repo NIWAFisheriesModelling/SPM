@@ -200,14 +200,14 @@ void CHollingMortalityRateProcess::execute() {
               dExploitation = dUMax;
               if (pPenalty != 0) // Throw Penalty
                 pPenalty->trigger(sLabel, dMortality, (dCurrent * dUMax));
-            } else if (dExploitation < ZERO) {
-              dExploitation = ZERO;
+            } else if (dExploitation < 0.0) {
+              dExploitation = 0.0;
             }
 
             dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * dExploitation;
 
             // Check 0
-            if(CComparer::isZero(dCurrent))
+            if (dCurrent <= 0.0)
                continue;
 
             // Do Add/Subs

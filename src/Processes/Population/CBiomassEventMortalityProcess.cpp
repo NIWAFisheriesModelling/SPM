@@ -202,16 +202,18 @@ void CBiomassEventMortalityProcess::execute() {
           if (pPenalty != 0) { // Throw Penalty
             pPenalty->trigger(sLabel, dCatch, (dVulnerable * dUMax));
           }
+        } else if (dExploitation < 0.0) {
+          dExploitation = 0.0;
         }
 
         // Loop Through Categories & remove biomass
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * pWorld->getMeanWeight(l,k) * dExploitation;
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,k) * dExploitation;
 
             // If is Zero, Cont
-            if (CComparer::isZero(dCurrent))
+            if (dCurrent <= 0.0)
               continue;
 
             // Subtract These
