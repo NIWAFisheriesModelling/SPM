@@ -39,7 +39,6 @@ public:
 protected:
   // Variables
   double                     dUMax;
-  double                     dUnits;
   double                     dCatch;
   double                     dVulnerable;
   double                     dExploitation;

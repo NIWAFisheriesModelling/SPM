@@ -47,7 +47,6 @@ CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_LAYERS);
   pParameterList->registerAllowed(PARAM_U_MAX);
-  pParameterList->registerAllowed(PARAM_UNITS);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_PENALTY);
 }
@@ -77,7 +76,6 @@ void CBiomassEventMortalityProcess::validate() {
 
     // Get our Parameters
     dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
-    dUnits    = pParameterList->getDouble(PARAM_U_MAX,true,1000);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
@@ -196,7 +194,7 @@ void CBiomassEventMortalityProcess::execute() {
             // record our Vulnerable number
             pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
             // Increase Vulnerable biomass
-            dVulnerable += dCurrent * pWorld->getMeanWeight(l,k) * dUnits;
+            dVulnerable += dCurrent * pWorld->getMeanWeight(l,k);
           }
         }
 
