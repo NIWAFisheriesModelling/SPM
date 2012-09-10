@@ -11,12 +11,16 @@
 
 // Global Headers
 #include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
 
 // Local Headers
 #include "DefinedValues.h"
 
 // Using
 using std::string;
+using std::vector;
 
 //**********************************************************************
 //
@@ -26,6 +30,7 @@ class CComparer {
 public:
   // Functions
   static bool     isSame(string one, string two, bool useWildCards = true);
+  static bool     hasDuplicates(const vector<std::string>& vLabels);
 
   // Inline Functions
   static bool     isZero(double A) { return ( (A < ZERO) && (A > -ZERO) ); }

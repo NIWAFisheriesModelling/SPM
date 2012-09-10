@@ -13,6 +13,7 @@
 #include "../../Layers/String/CStringLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
 
 //**********************************************************************
 // CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction()
@@ -45,11 +46,11 @@ void CCategoricalMonotonicPreferenceFunction::validate() {
     }
     if (vValues.size() != vLabels.size())
       CError::errorListSameSize(PARAM_CATEGORY_VALUES, PARAM_CATEGORY_LABELS);
-    // TODO:
-    //   Validate that the layer has a number of discrete character values that exactly match CATEGORY_LABELS
-    //   Check For Duplicate Labels.
+    // Check For Duplicate Labels.
+    if (CComparer::hasDuplicates(vLabels))
+      CError::errorDuplicate(PARAM_CATEGORY_LABELS, getLabel());
 
-// Register estimables
+    // Register estimables
     for (int i = 0; i < (int)vValues.size(); ++i)
       registerEstimable(PARAM_CATEGORY_VALUES, i, &vValues[i]);
 
@@ -69,6 +70,29 @@ void CCategoricalMonotonicPreferenceFunction::build() {
     // Get our Layer Pointer
     CLayerManager *pLayerManager = CLayerManager::Instance();
     pLayer = pLayerManager->getStringLayer(sLayerName);
+
+    // Get list of layer values
+    std::vector<std::string> vLayerLabels;
+    for (int i=0; i<pLayer->getHeight(); ++i) {
+      for (int j=0; j<pLayer->getWidth(); ++j) {
+        vLayerLabels.push_back(pLayer->getValue(i, j));
+      }
+    }
+    // Remove duplicates
+    std::sort(vLayerLabels.begin(), vLayerLabels.end());
+    vLayerLabels.erase(std::unique(vLayerLabels.begin(), vLayerLabels.end()), vLayerLabels.end());
+    // Test to see if we have the correct number of labels defined
+    if (vLayerLabels.size() > vLabels.size())
+      CError::errorNotEnough(PARAM_CATEGORY_VALUES);
+    if (vLayerLabels.size() < vLabels.size())
+      CError::errorTooMuch(PARAM_CATEGORY_VALUES);
+
+    for (int i = 0; i < (int)vLabels.size(); i++) {
+      if(vLabels[i] == sLayerValue) {
+        dRet = vValues[i];
+        break;
+      }
+    }
 
   } catch (string &Ex) {
     Ex = "CCategoricalMonotonicPreferenceFunction.build(" + getLabel() + ")->" + Ex;

@@ -53,3 +53,18 @@ bool CComparer::isSame(string one, string two, bool useWildCards) {
 
   return false;
 }
+
+//**********************************************************************
+// bool CComparer::hasDuplicates(std::vector<string>)
+//
+//**********************************************************************
+
+bool CComparer::hasDuplicates(const std::vector<string>& vLabels) {
+
+  std::vector<std::string> vTemp = vLabels;
+  std::sort(vTemp.begin(), vTemp.end());
+  vTemp.erase(std::unique(vTemp.begin(), vTemp.end()), vTemp.end());
+  if(vTemp.size() != vLabels.size()) return 1;
+  else return 0;
+
+}
