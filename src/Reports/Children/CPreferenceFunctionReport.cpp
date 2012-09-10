@@ -130,8 +130,8 @@ void CPreferenceFunctionReport::execute() {
         }
 
       } else {
-        foreach(string Value, vValues) {
-          cout << Value << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+        for (int i = 0; i < (int)vValues.size(); ++i) {
+          cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
         }
       }
 
