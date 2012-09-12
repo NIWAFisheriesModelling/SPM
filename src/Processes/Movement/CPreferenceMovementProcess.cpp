@@ -129,22 +129,17 @@ void CPreferenceMovementProcess::execute() {
             // Get Target Square
             pTargetBase = pWorld->getBaseSquare(k, l);
 
-            // Make sure we are Ok!
+            // Make sure the target cell is enabled
             if (pTargetBase->getEnabled()) {
               dCurrent = 1.0;
-
               foreach(CPreferenceFunction *Process, vDirectedProcessIndex) {
                 dCurrent *= Process->getResult(i, j, k, l);
               }
-              // Logit This
-              // if (!isZero(dCurrent))
-              // dCurrent = 1 / (1-exp(-dCurrent));
-            } else
+            } else {
               dCurrent = 0.0;
+            }
 
-            // Put This in our Logit-Layer
-            // +1 to k/l Because They are Indexes
-            // The Function Requires Human Co-Ords
+            // Put This in our Layer: +1 to k/l Because They are Indexes and the Function Requires Human Co-Ords
             pLayer->setValue(k+1, l+1, dCurrent);
             dRunningTotal += dCurrent;
           }
@@ -156,16 +151,17 @@ void CPreferenceMovementProcess::execute() {
             // Get Current Squares
             pTargetDiff = pWorld->getDifferenceSquare(k, l);
 
-            // Check if this square is ok
+            // Make sure the target cell is enabled
             if (!pTargetDiff->getEnabled())
               continue;
 
             // Loop Categories and Ages
             foreach(int Category, vCategoryIndex) {
               for (int m = (iBaseColCount-1); m >= 0; --m) {
-                // Get Logit Amount
+                // Get Amount
                 dCurrent = pLayer->getValue(k, l);
-                if (CComparer::isZero(dCurrent))
+                // if the amount is low, then don't bother moving
+                if (dCurrent <= TRUE_ZERO)
                   continue;
 
                 // Convert To Proportion

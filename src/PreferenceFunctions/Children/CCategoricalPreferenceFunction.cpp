@@ -85,12 +85,12 @@ void CCategoricalPreferenceFunction::build() {
     if (vLayerLabels.size() < vLabels.size())
       CError::errorTooMuch(PARAM_CATEGORY_VALUES);
 
-    for (int i = 0; i < (int)vLabels.size(); i++) {
-      if(vLabels[i] == sLayerValue) {
-        dRet = vValues[i];
-        break;
-      }
-    }
+    //for (int i = 0; i < (int)vLabels.size(); i++) {
+    //  if(vLabels[i] == sLayerValue) {
+    //    dRet = vValues[i];
+    //    break;
+    //  }
+    //}
 
   } catch (string &Ex) {
     Ex = "CCategoricalPreferenceFunction.build(" + getLabel() + ")->" + Ex;
