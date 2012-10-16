@@ -35,7 +35,7 @@ CEstimateValueReport::CEstimateValueReport() {
 void CEstimateValueReport::validate() {
   try {
 
-    bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,0);
+    bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,false);
 
     // Validate parent
     CFileReport::validate();

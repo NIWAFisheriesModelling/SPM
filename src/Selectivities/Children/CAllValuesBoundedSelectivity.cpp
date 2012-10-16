@@ -14,7 +14,7 @@
 #include "CAllValuesBoundedSelectivity.h"
 #include "../../Helpers/CError.h"
 
-// Usong
+// Using
 using std::cout;
 using std::endl;
 

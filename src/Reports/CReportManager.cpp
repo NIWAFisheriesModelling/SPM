@@ -29,7 +29,7 @@ boost::thread_specific_ptr<CReportManager> CReportManager::clInstance;
 CReportManager::CReportManager() {
   // Variables
   sReportSuffix         = "";
-  bDisableReports       = false;;
+  bDisableReports       = false;
 }
 
 //**********************************************************************
