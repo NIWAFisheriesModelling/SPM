@@ -1,0 +1,47 @@
+//============================================================================
+// Name        : CDerivedLayer.h
+// Author      : S.Rasmussen
+// Date        : 15/04/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+// Description :
+// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
+//============================================================================
+#ifndef CDERIVEDLAYER_H_
+#define CDERIVEDLAYER_H_
+
+// Local headers
+#include "../BaseClasses/CBaseExecute.h"
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+class CDerivedLayer : public CBaseBuild {
+public:
+  // Functions
+  CDerivedLayer();
+  virtual                     ~CDerivedLayer();
+  double                      getValue(int offset);
+  double                      getValueFromIndex(int index) { return vValues[index]; };
+  void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
+  int                         getValuesSize() { return vValues.size(); }
+  virtual void                calculate() = 0;
+  virtual void                calculate(int initialisationPhase) = 0;
+  int                         getInitialisationSize() { return vvInitialisationValues.size(); }
+  int                         getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
+  double                      getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
+  void                        rebuild() {
+    iCurrentInitialisationPhase = 0;
+    vvInitialisationValues.clear();
+    vValues.clear();
+  }
+
+protected:
+  // Members
+  int                         iCurrentInitialisationPhase;
+  vector<vector<double> >     vvInitialisationValues;
+  vector<double>              vValues;
+
+};
+
+#endif /* CDERIVEDLAYER_H_ */
