@@ -16,6 +16,7 @@
 #include "../BaseClasses/CBaseManager.h"
 #include "../AgeingError/CAgeingErrorManager.h"
 #include "../Catchabilities/CCatchabilityManager.h"
+#include "../DerivedLayers/CDerivedLayerManager.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
@@ -57,6 +58,7 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CSizeWeightManager::Instance());
   vManagers.push_back(CAgeSizeManager::Instance());
   vManagers.push_back(CCatchabilityManager::Instance());
+  vManagers.push_back(CDerivedLayerManager::Instance());
   vManagers.push_back(CDerivedQuantityManager::Instance());
   vManagers.push_back(CInitializationPhaseManager::Instance());
   vManagers.push_back(CLayerManager::Instance());
@@ -297,6 +299,7 @@ CRuntimeThread::~CRuntimeThread() {
   CLayerManager::Destroy();
   CInitializationPhaseManager::Destroy();
   CEstimateManager::Destroy();
+  CDerivedLayerManager::Destroy();
   CDerivedQuantityManager::Destroy();
   CCatchabilityManager::Destroy();
   CAgeSizeManager::Destroy();
