@@ -9,8 +9,18 @@
 #ifndef CDERIVEDLAYER_H_
 #define CDERIVEDLAYER_H_
 
+// Global Headers
+#include <boost/shared_ptr.hpp>
+
 // Local headers
 #include "../BaseClasses/CBaseExecute.h"
+#include "../Layers/Numeric/CDoubleLayer.h"
+
+// Namespace
+using boost::shared_ptr;
+
+
+typedef vector<vector<double> > Data;
 
 //**********************************************************************
 //
@@ -21,26 +31,23 @@ public:
   // Functions
   CDerivedLayer();
   virtual                     ~CDerivedLayer();
-  double                      getValue(int offset);
-  double                      getValueFromIndex(int index) { return vValues[index]; };
+  vector<vector<double> >     getValue(int offset);
   void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
   int                         getValuesSize() { return vValues.size(); }
   virtual void                calculate() = 0;
   virtual void                calculate(int initialisationPhase) = 0;
   int                         getInitialisationSize() { return vvInitialisationValues.size(); }
   int                         getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
-  double                      getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
-  void                        rebuild() {
-    iCurrentInitialisationPhase = 0;
-    vvInitialisationValues.clear();
-    vValues.clear();
-  }
+  vector<vector<double> >     getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
+  void                        build();
+  void                        rebuild();
 
 protected:
   // Members
+  vector<vector<double> >     vBlankData;
   int                         iCurrentInitialisationPhase;
-  vector<vector<double> >     vvInitialisationValues;
-  vector<double>              vValues;
+  vector<vector<Data> >       vvInitialisationValues;
+  vector<Data>                vValues;
 
 };
 

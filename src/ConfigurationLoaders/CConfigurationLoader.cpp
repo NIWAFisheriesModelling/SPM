@@ -25,6 +25,7 @@
 #include "../SizeWeight/Factory/CSizeWeightFactory.h"
 #include "../AgeSize/Factory/CAgeSizeFactory.h"
 #include "../Catchabilities/Factory/CCatchabilityFactory.h"
+#include "../DerivedLayers/Factory/CDerivedLayerFactory.h"
 #include "../DerivedQuantities/Factory/CDerivedQuantityFactory.h"
 #include "../Estimates/Factory/CEstimateFactory.h"
 #include "../InitializationPhases/Factory/CInitializationPhaseFactory.h"
@@ -140,6 +141,8 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CCatchabilityFactory::buildCatchability(sType);
     else if (sSection == PARAM_DERIVED_QUANTITY)
       pBaseObject = CDerivedQuantityFactory::buildDerivedQuantity(sType);
+    else if (sSection == PARAM_DERIVED_QUANTITY)
+      pBaseObject = CDerivedLayerFactory::buildDerivedLayer(sType);
     else if (sSection == PARAM_ESTIMATE)
       pBaseObject = CEstimateFactory::buildEstimateInfo();
     else if (sSection == PARAM_INITIALIZATION_PHASE)

@@ -18,7 +18,7 @@
 // CDerivedLayer::CDerivedLayer()
 // Default Constructor
 //**********************************************************************
-CDerivedLayer::CDerivedLayer() :iCurrentInitialisationPhase(0) {
+CDerivedLayer::CDerivedLayer() : iCurrentInitialisationPhase(0) {
 }
 
 //**********************************************************************
@@ -29,10 +29,10 @@ CDerivedLayer::~CDerivedLayer() {
 }
 
 //**********************************************************************
-// double CDerivedLayer::getValue(int offset)
+// vector<vector<double> > CDerivedLayer::getValue(int offset)
 // Get Value From our Derived Layer
 //**********************************************************************
-double CDerivedLayer::getValue(int offset) {
+vector<vector<double> > CDerivedLayer::getValue(int offset) {
 
   int phasesCrossed = 0;
 
@@ -49,14 +49,14 @@ double CDerivedLayer::getValue(int offset) {
    * If we have no values at all, return 0.0
    */
   if (vvInitialisationValues.size() == 0)
-    return 0.0;
+    return vBlankData;
 
   /**
    * Since we don't have any values that are not in the initialisation stage
    * or we've crossed because the offset was too large we need to start working
    * backwards through the initialisation values
    */
-  vector<vector<double> >::reverse_iterator vvIter;
+  vector<vector<Data> >::reverse_iterator vvIter;
   for (vvIter = vvInitialisationValues.rbegin(); vvIter != vvInitialisationValues.rend(); ++vvIter) {
 
     if (offset >= (int)vvIter->size()) {
@@ -82,3 +82,49 @@ double CDerivedLayer::getValue(int offset) {
 
   return *vvInitialisationValues.begin()->begin();
 }
+
+//**********************************************************************
+// void CDerivedLayer::rebuild()
+// Rebuild our derived layer
+//**********************************************************************
+void CDerivedLayer::build() {
+
+  // We have to build the blank data object to return when we haven't yet
+  // built some data during the initialisation phases
+  int worldHeight = pWorld->getHeight();
+  int worldWidth  = pWorld->getWidth();
+
+  vBlankData.resize(worldHeight);
+  for (int i = 0; i < worldHeight; ++i)
+    vBlankData[i].assign(worldWidth, 0.0);
+}
+
+//**********************************************************************
+// void CDerivedLayer::rebuild()
+// Rebuild our derived layer
+//**********************************************************************
+void CDerivedLayer::rebuild() {
+   iCurrentInitialisationPhase = 0;
+   vvInitialisationValues.clear();
+   vValues.clear();
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

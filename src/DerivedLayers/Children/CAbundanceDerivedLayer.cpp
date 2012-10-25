@@ -35,8 +35,6 @@ CAbundanceDerivedLayer::CAbundanceDerivedLayer() {
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_INITIALIZATION_TIME_STEPS);
-  // Build World View
-  pWorldView = new CCompleteWorldView();
 }
 
 //**********************************************************************
@@ -64,8 +62,6 @@ void CAbundanceDerivedLayer::validate() {
     if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
       CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
 
-    pWorldView->validate();
-
   } catch (string &Ex) {
     Ex = "CAbundanceDerivedLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -78,6 +74,8 @@ void CAbundanceDerivedLayer::validate() {
 //**********************************************************************
 void CAbundanceDerivedLayer::build() {
   try {
+    CDerivedLayer::build();
+
     // Get TimeStep and Layer
     pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
@@ -114,8 +112,6 @@ void CAbundanceDerivedLayer::build() {
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
-    pWorldView->build();
-
   } catch (string &Ex) {
     Ex = "CAbundanceDerivedLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -132,20 +128,31 @@ void CAbundanceDerivedLayer::calculate() {
     return;
   }
 
-  double dValue = 0.0;
+  int worldHeight = pWorld->getHeight();
+  int worldWidth  = pWorld->getWidth();
 
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
+  vector<vector<double> > newData;
+  newData.resize(worldHeight);
 
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+  for (int height = 0; height < worldHeight; ++height) {
+    newData[height].assign(worldWidth, 0.0);
+
+    for (int width = 0; width < worldWidth; ++width) {
+
+      pBaseSquare = pWorld->getBaseSquare(height, width);
+      double dValue = 0.0;
+
+      for (int i = 0; i < (int)vCategories.size(); ++i) {
+        for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
+          dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+        }
+      }
+
+      newData[height][width] = dValue;
     }
   }
 
-  // Store our Value
-  vValues.push_back(dValue);
-
+  vValues.push_back(newData);
 }
 
 //**********************************************************************
@@ -163,19 +170,32 @@ void CAbundanceDerivedLayer::calculate(int initialisationPhase) {
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
 
-  double dValue = 0.0;
+  int worldHeight = pWorld->getHeight();
+  int worldWidth  = pWorld->getWidth();
 
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
+  vector<vector<double> > newData;
+  newData.resize(worldHeight);
 
-  // Calcuate the derived layers value
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+  for (int height = 0; height < worldHeight; ++height) {
+    newData[height].assign(worldWidth, 0.0);
+
+    for (int width = 0; width < worldWidth; ++width) {
+
+      pBaseSquare = pWorld->getBaseSquare(height, width);
+      double dValue = 0.0;
+
+      for (int i = 0; i < (int)vCategories.size(); ++i) {
+        for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
+          dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+        }
+      }
+
+      newData[height][width] = dValue;
     }
   }
+
   // And add the value to our results
-  vvInitialisationValues[initialisationPhase].push_back(dValue);
+  vvInitialisationValues[initialisationPhase].push_back(newData);
 }
 
 //**********************************************************************

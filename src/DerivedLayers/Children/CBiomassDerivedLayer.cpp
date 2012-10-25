@@ -128,24 +128,24 @@ void CBiomassDerivedLayer::build() {
 //**********************************************************************
 void CBiomassDerivedLayer::calculate() {
 
-  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
-    return;
-  }
-
-  double dValue = 0.0;
-
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
-
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
-      dValue += dAbundance * pWorld->getMeanWeight(j,i);
-    }
-  }
-
-  // Store our Value
-  vValues.push_back(dValue);
+//  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
+//    return;
+//  }
+//
+//  double dValue = 0.0;
+//
+//  pWorldView->execute();
+//  pBaseSquare = pWorldView->getSquare();
+//
+//  for (int i = 0; i < (int)vCategories.size(); ++i) {
+//    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
+//      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+//      dValue += dAbundance * pWorld->getMeanWeight(j,i);
+//    }
+//  }
+//
+//  // Store our Value
+//  vValues.push_back(dValue);
 
 }
 
@@ -154,30 +154,30 @@ void CBiomassDerivedLayer::calculate() {
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
 void CBiomassDerivedLayer::calculate(int initialisationPhase) {
-
-  //Check if we're in the right timestep for the initialisation phase we are in
-  CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
-  if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
-    return;
-
-  // If a new initialisation phase, then grow the result to hold the new vector of derived layers
-  if ((int)vvInitialisationValues.size() <= initialisationPhase)
-    vvInitialisationValues.resize(initialisationPhase+1);
-
-  double dValue = 0.0;
-
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
-
-  // Calcuate the derived layers value
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
-      dValue += dAbundance * pWorld->getMeanWeight(j,i);
-    }
-  }
-  // And add the value to our results
-  vvInitialisationValues[initialisationPhase].push_back(dValue);
+//
+//  //Check if we're in the right timestep for the initialisation phase we are in
+//  CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
+//  if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
+//    return;
+//
+//  // If a new initialisation phase, then grow the result to hold the new vector of derived layers
+//  if ((int)vvInitialisationValues.size() <= initialisationPhase)
+//    vvInitialisationValues.resize(initialisationPhase+1);
+//
+//  double dValue = 0.0;
+//
+//  pWorldView->execute();
+//  pBaseSquare = pWorldView->getSquare();
+//
+//  // Calcuate the derived layers value
+//  for (int i = 0; i < (int)vCategories.size(); ++i) {
+//    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
+//      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+//      dValue += dAbundance * pWorld->getMeanWeight(j,i);
+//    }
+//  }
+//  // And add the value to our results
+//  vvInitialisationValues[initialisationPhase].push_back(dValue);
 }
 
 //**********************************************************************
