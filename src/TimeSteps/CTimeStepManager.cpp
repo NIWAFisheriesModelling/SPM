@@ -20,6 +20,7 @@
 #include "../Observations/CObservationManager.h"
 #include "../Reports/CReportManager.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
+#include "../DerivedLayers/CDerivedLayerManager.h"
 
 // Using
 using std::cout;
@@ -36,6 +37,7 @@ CTimeStepManager::CTimeStepManager() {
   pObservationManager         = 0;
   pReporterManager            = 0;
   pDerivedQuantityManager     = 0;
+  pDerivedLayerManager        = 0;
 
   iCurrentYear                = 0;
 }
@@ -173,9 +175,10 @@ void CTimeStepManager::build() {
     iFirstHumanYear   = pWorld->getInitialYear();
     iNumberOfYears    = pWorld->getCurrentYear() - iFirstHumanYear;
 
+    pDerivedLayerManager      = CDerivedLayerManager::Instance();
+    pDerivedQuantityManager   = CDerivedQuantityManager::Instance();
     pObservationManager       = CObservationManager::Instance();
     pReporterManager          = CReportManager::Instance();
-    pDerivedQuantityManager   = CDerivedQuantityManager::Instance();
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
@@ -204,6 +207,7 @@ void CTimeStepManager::execute() {
       vTimeSteps[j]->execute();
 
       // Execute Other Tasks
+      pDerivedLayerManager->calculate();
       pDerivedQuantityManager->calculate();
       pObservationManager->execute(iCurrentYear, j);
       pReporterManager->execute();

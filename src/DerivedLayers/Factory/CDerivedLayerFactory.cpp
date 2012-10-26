@@ -12,7 +12,7 @@
 #include "../CDerivedLayerManager.h"
 #include "../../Helpers/CError.h"
 #include "../Children/CAbundanceDerivedLayer.h"
-#include "../Children/CBiomassDerivedLayer.h"
+//#include "../Children/CBiomassDerivedLayer.h"
 
 //**********************************************************************
 // CDerivedLayer* CDerivedLayerFactory::buildDerivedLayer(string type, bool registerWithManager)
@@ -24,8 +24,8 @@ CDerivedLayer* CDerivedLayerFactory::buildDerivedLayer(string type, bool registe
 
   if (type == PARAM_ABUNDANCE)
     pLayer = new CAbundanceDerivedLayer();
-  else if (type == PARAM_BIOMASS)
-    pLayer = new CBiomassDerivedLayer();
+//  else if (type == PARAM_BIOMASS)
+//    pLayer = new CBiomassDerivedLayer();
   else
     CError::errorUnknown(PARAM_DERIVED_LAYER, type);
 

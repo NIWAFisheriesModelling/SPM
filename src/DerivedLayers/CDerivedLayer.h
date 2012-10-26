@@ -39,12 +39,18 @@ public:
   int                         getInitialisationSize() { return vvInitialisationValues.size(); }
   int                         getInitialisationValuesSize(int initialisationPhase = 0) { return vvInitialisationValues[initialisationPhase].size(); }
   vector<vector<double> >     getInitialisationValue(int initialisationPhase = 0, int index = 0) { return vvInitialisationValues[initialisationPhase][index]; }
+  int                         getWidth() { return iWidth; }
+  int                         getHeight() { return iHeight; }
   void                        build();
   void                        rebuild();
 
 protected:
   // Members
+  string                      sLayer;
+  CNumericLayer               *pLayer;
   vector<vector<double> >     vBlankData;
+  int                         iHeight;
+  int                         iWidth;
   int                         iCurrentInitialisationPhase;
   vector<vector<Data> >       vvInitialisationValues;
   vector<Data>                vValues;

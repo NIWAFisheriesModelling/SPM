@@ -141,7 +141,7 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CCatchabilityFactory::buildCatchability(sType);
     else if (sSection == PARAM_DERIVED_QUANTITY)
       pBaseObject = CDerivedQuantityFactory::buildDerivedQuantity(sType);
-    else if (sSection == PARAM_DERIVED_QUANTITY)
+    else if (sSection == PARAM_DERIVED_LAYER)
       pBaseObject = CDerivedLayerFactory::buildDerivedLayer(sType);
     else if (sSection == PARAM_ESTIMATE)
       pBaseObject = CEstimateFactory::buildEstimateInfo();

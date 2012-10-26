@@ -91,12 +91,12 @@ void CDerivedLayer::build() {
 
   // We have to build the blank data object to return when we haven't yet
   // built some data during the initialisation phases
-  int worldHeight = pWorld->getHeight();
-  int worldWidth  = pWorld->getWidth();
+  iHeight = pWorld->getHeight();
+  iWidth  = pWorld->getWidth();
 
-  vBlankData.resize(worldHeight);
-  for (int i = 0; i < worldHeight; ++i)
-    vBlankData[i].assign(worldWidth, 0.0);
+  vBlankData.resize(iHeight);
+  for (int i = 0; i < iHeight; ++i)
+    vBlankData[i].assign(iWidth, 0.0);
 }
 
 //**********************************************************************

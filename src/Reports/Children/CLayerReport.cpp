@@ -115,9 +115,8 @@ void CLayerReport::execute() {
 
     for (int i = 0; i < pLayer->getHeight(); ++i) {
       for (int j = 0; j < pLayer->getWidth(); ++j) {
-        cout << pLayer->getValue(i, j) << " ";
+        cout << pLayer->getValue(i, j) << (j<((int)pLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
       }
-      cout << "\n";
     }
 
     cout << CONFIG_END_REPORT << "\n" << endl;

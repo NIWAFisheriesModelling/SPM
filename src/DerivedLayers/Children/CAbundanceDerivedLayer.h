@@ -40,8 +40,6 @@ protected:
   vector<int>                 vInitializationTimeStepIndex;
   vector<string>              vCategoryNames;
   vector<int>                 vCategories;
-  string                      sLayer;
-  CNumericLayer               *pLayer;
   vector<string>              vSelectivityNames;
   vector<CSelectivity*>       vSelectivities;
 };

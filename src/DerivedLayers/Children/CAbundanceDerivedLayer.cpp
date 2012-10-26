@@ -128,27 +128,23 @@ void CAbundanceDerivedLayer::calculate() {
     return;
   }
 
-  int worldHeight = pWorld->getHeight();
-  int worldWidth  = pWorld->getWidth();
-
   vector<vector<double> > newData;
-  newData.resize(worldHeight);
+  newData.resize(iHeight);
 
-  for (int height = 0; height < worldHeight; ++height) {
-    newData[height].assign(worldWidth, 0.0);
+  for (int i = 0; i < iHeight; ++i) {
+    newData[i].assign(iWidth, 0.0);
 
-    for (int width = 0; width < worldWidth; ++width) {
-
-      pBaseSquare = pWorld->getBaseSquare(height, width);
+    for (int j = 0; j < iWidth; ++j) {
+      pBaseSquare = pWorld->getBaseSquare(i, j);
       double dValue = 0.0;
 
-      for (int i = 0; i < (int)vCategories.size(); ++i) {
-        for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-          dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          dValue += pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
         }
       }
 
-      newData[height][width] = dValue;
+      newData[i][j] = dValue;
     }
   }
 
@@ -170,29 +166,28 @@ void CAbundanceDerivedLayer::calculate(int initialisationPhase) {
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
 
-  int worldHeight = pWorld->getHeight();
-  int worldWidth  = pWorld->getWidth();
-
   vector<vector<double> > newData;
-  newData.resize(worldHeight);
+  newData.resize(iHeight);
 
-  for (int height = 0; height < worldHeight; ++height) {
-    newData[height].assign(worldWidth, 0.0);
+  for (int i = 0; i < iHeight; ++i) {
+    newData[i].assign(iWidth, 0.0);
 
-    for (int width = 0; width < worldWidth; ++width) {
+    for (int j = 0; j < iWidth; ++j) {
 
-      pBaseSquare = pWorld->getBaseSquare(height, width);
+      pBaseSquare = pWorld->getBaseSquare(i, j);
       double dValue = 0.0;
 
-      for (int i = 0; i < (int)vCategories.size(); ++i) {
-        for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-          dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          dValue += pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
         }
       }
 
-      newData[height][width] = dValue;
+      newData[i][j] = dValue;
+
     }
   }
+
 
   // And add the value to our results
   vvInitialisationValues[initialisationPhase].push_back(newData);

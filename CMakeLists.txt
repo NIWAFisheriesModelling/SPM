@@ -91,11 +91,15 @@ src/Catchabilities/Factory/CCatchabilityFactory.cpp
 src/CConfiguration.cpp
 src/ConfigurationLoaders/CConfigurationLoader.cpp
 src/CRuntimeController.cpp
+src/DerivedLayers/CDerivedLayer.cpp
+src/DerivedLayers/CDerivedLayerManager.cpp
+src/DerivedLayers/Children/CAbundanceDerivedLayer.cpp
+#src/DerivedLayers/Children/CBiomassDerivedLayer.cpp
+src/DerivedLayers/Factory/CDerivedLayerFactory.cpp
 src/DerivedQuantities/CDerivedQuantity.cpp
 src/DerivedQuantities/CDerivedQuantityManager.cpp
 src/DerivedQuantities/Children/CAbundanceDerivedQuantity.cpp
 src/DerivedQuantities/Children/CBiomassDerivedQuantity.cpp
-src/DerivedQuantities/Children/CTestDerivedQuantity.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.cpp
 src/Distributions/CNormalDistribution.cpp
 src/Estimates/CEstimate.cpp
@@ -203,6 +207,7 @@ src/Reports/Children/CAgeSizeReport.cpp
 src/Reports/Children/CAgeWeightReport.cpp
 src/Reports/Children/CBiomassPartitionReport.cpp
 src/Reports/Children/CCovarianceReport.cpp
+src/Reports/Children/CDerivedLayerReport.cpp
 src/Reports/Children/CDerivedQuantityReport.cpp
 src/Reports/Children/CEstimateSummaryReport.cpp
 src/Reports/Children/CEstimateValueReport.cpp
@@ -257,6 +262,9 @@ ADD_EXECUTABLE(${TEST_NAME}
 src/Catchabilities/CCatchability.Test.cpp
 src/Catchabilities/Factory/CCatchabilityFactory.Test.cpp
 src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
+src/DerivedLayers/Children/CAbundanceDerivedLayer.Test.cpp
+src/DerivedLayers/Children/CTestDerivedLayer.Test.cpp
+src/DerivedLayers/Factory/CDerivedLayerFactory.Test.cpp
 src/DerivedQuantities/Children/CAbundanceDerivedQuantity.Test.cpp
 src/DerivedQuantities/Children/CTestDerivedQuantity.Test.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.Test.cpp

@@ -25,6 +25,7 @@ class CTimeStep;
 class CObservationManager;
 class CReportManager;
 class CDerivedQuantityManager;
+class CDerivedLayerManager;
 
 //**********************************************************************
 //
@@ -64,6 +65,7 @@ protected:
   vector<CTimeStep*>          vMasterTimeStepList;
   vector<CTimeStep*>          vTimeSteps;
   CDerivedQuantityManager     *pDerivedQuantityManager;
+  CDerivedLayerManager        *pDerivedLayerManager;
 
 private:
   static boost::thread_specific_ptr<CTimeStepManager> clInstance;

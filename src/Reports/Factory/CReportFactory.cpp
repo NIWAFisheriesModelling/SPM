@@ -15,6 +15,7 @@
 #include "../Children/CAgeingErrorReport.h"
 #include "../Children/CBiomassPartitionReport.h"
 #include "../Children/CCovarianceReport.h"
+#include "../Children/CDerivedLayerReport.h"
 #include "../Children/CDerivedQuantityReport.h"
 #include "../Children/CEstimateSummaryReport.h"
 #include "../Children/CEstimateValueReport.h"
@@ -55,6 +56,8 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CObservationReport();
   else if (type == PARAM_INITIALIZATION)
     pReporter = new CInitializationReport();
+  else if (type == PARAM_DERIVED_LAYER)
+    pReporter = new CDerivedLayerReport();
   else if (type == PARAM_DERIVED_QUANTITY)
     pReporter = new CDerivedQuantityReport();
   else if (type == PARAM_RANDOM_NUMBER_SEED)
