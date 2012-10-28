@@ -94,7 +94,7 @@ src/CRuntimeController.cpp
 src/DerivedLayers/CDerivedLayer.cpp
 src/DerivedLayers/CDerivedLayerManager.cpp
 src/DerivedLayers/Children/CAbundanceDerivedLayer.cpp
-#src/DerivedLayers/Children/CBiomassDerivedLayer.cpp
+src/DerivedLayers/Children/CBiomassDerivedLayer.cpp
 src/DerivedLayers/Factory/CDerivedLayerFactory.cpp
 src/DerivedQuantities/CDerivedQuantity.cpp
 src/DerivedQuantities/CDerivedQuantityManager.cpp
@@ -262,9 +262,9 @@ ADD_EXECUTABLE(${TEST_NAME}
 src/Catchabilities/CCatchability.Test.cpp
 src/Catchabilities/Factory/CCatchabilityFactory.Test.cpp
 src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
-src/DerivedLayers/Children/CAbundanceDerivedLayer.Test.cpp
-src/DerivedLayers/Children/CTestDerivedLayer.Test.cpp
-src/DerivedLayers/Factory/CDerivedLayerFactory.Test.cpp
+#src/DerivedLayers/Children/CAbundanceDerivedLayer.Test.cpp
+#src/DerivedLayers/Children/CTestDerivedLayer.Test.cpp
+#src/DerivedLayers/Factory/CDerivedLayerFactory.Test.cpp
 src/DerivedQuantities/Children/CAbundanceDerivedQuantity.Test.cpp
 src/DerivedQuantities/Children/CTestDerivedQuantity.Test.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.Test.cpp
