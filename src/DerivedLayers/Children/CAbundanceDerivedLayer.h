@@ -1,10 +1,8 @@
 //============================================================================
-// Name        : CSampleDerivedLayer.h
+// Name        : CAbundanceDerivedLayer.h
 // Author      : S.Rasmussen
-// Date        : 15/04/2009
+// Date        : 23/10/2012
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 #ifndef CABUNDANCEDERIVEDLAYER_H_
 #define CABUNDANCEDERIVEDLAYER_H_

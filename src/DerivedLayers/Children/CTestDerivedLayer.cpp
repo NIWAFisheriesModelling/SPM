@@ -1,9 +1,9 @@
-/*
- * CTestDerivedLayer.cpp
- *
- *  Created on: 18/06/2012
- *      Author: Admin
- */
+//============================================================================
+// Name        : CDerivedLayer.Test.cpp
+// Author      : S.Rasmussen
+// Date        : 23/04/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+//============================================================================
 
 #include "CTestDerivedLayer.h"
 

@@ -1,9 +1,8 @@
 //============================================================================
-// Name        : CBiomassDerivedLayer.cpp
+// Name        : CSampleDerivedLayer.cpp
 // Author      : S.Rasmussen
 // Date        : 18/06/2012
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Headers
@@ -35,8 +34,6 @@ CBiomassDerivedLayer::CBiomassDerivedLayer() {
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_INITIALIZATION_TIME_STEPS);
-  // Build World View
-  pWorldView = new CCompleteWorldView();
 }
 
 //**********************************************************************
@@ -64,8 +61,6 @@ void CBiomassDerivedLayer::validate() {
     if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
       CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
 
-    pWorldView->validate();
-
   } catch (string &Ex) {
     Ex = "CBiomassDerivedLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -78,6 +73,8 @@ void CBiomassDerivedLayer::validate() {
 //**********************************************************************
 void CBiomassDerivedLayer::build() {
   try {
+    CDerivedLayer::build();
+
     // Get TimeStep and Layer
     pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
@@ -114,8 +111,6 @@ void CBiomassDerivedLayer::build() {
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
-    pWorldView->build();
-
   } catch (string &Ex) {
     Ex = "CBiomassDerivedLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -128,25 +123,32 @@ void CBiomassDerivedLayer::build() {
 //**********************************************************************
 void CBiomassDerivedLayer::calculate() {
 
-//  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
-//    return;
-//  }
-//
-//  double dValue = 0.0;
-//
-//  pWorldView->execute();
-//  pBaseSquare = pWorldView->getSquare();
-//
-//  for (int i = 0; i < (int)vCategories.size(); ++i) {
-//    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-//      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
-//      dValue += dAbundance * pWorld->getMeanWeight(j,i);
-//    }
-//  }
-//
-//  // Store our Value
-//  vValues.push_back(dValue);
+  if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
+    return;
+  }
 
+  vector<vector<double> > newData;
+  newData.resize(iHeight);
+
+  for (int i = 0; i < iHeight; ++i) {
+    newData[i].assign(iWidth, 0.0);
+
+    for (int j = 0; j < iWidth; ++j) {
+      pBaseSquare = pWorld->getBaseSquare(i, j);
+      double dValue = 0.0;
+
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          double dAbundance = pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
+          dValue += dAbundance * pWorld->getMeanWeight(l,k);
+        }
+      }
+
+      newData[i][j] = dValue;
+    }
+  }
+
+  vValues.push_back(newData);
 }
 
 //**********************************************************************
@@ -154,30 +156,42 @@ void CBiomassDerivedLayer::calculate() {
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
 void CBiomassDerivedLayer::calculate(int initialisationPhase) {
-//
-//  //Check if we're in the right timestep for the initialisation phase we are in
-//  CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
-//  if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
-//    return;
-//
-//  // If a new initialisation phase, then grow the result to hold the new vector of derived layers
-//  if ((int)vvInitialisationValues.size() <= initialisationPhase)
-//    vvInitialisationValues.resize(initialisationPhase+1);
-//
-//  double dValue = 0.0;
-//
-//  pWorldView->execute();
-//  pBaseSquare = pWorldView->getSquare();
-//
-//  // Calcuate the derived layers value
-//  for (int i = 0; i < (int)vCategories.size(); ++i) {
-//    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-//      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
-//      dValue += dAbundance * pWorld->getMeanWeight(j,i);
-//    }
-//  }
-//  // And add the value to our results
-//  vvInitialisationValues[initialisationPhase].push_back(dValue);
+
+  //Check if we're in the right timestep for the initialisation phase we are in
+  CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
+  if (phase->getCurrentTimeStep() != vInitializationTimeStepIndex[initialisationPhase])
+    return;
+
+  // If a new initialisation phase, then grow the result to hold the new vector of derived layers
+  if ((int)vvInitialisationValues.size() <= initialisationPhase)
+    vvInitialisationValues.resize(initialisationPhase+1);
+
+  vector<vector<double> > newData;
+  newData.resize(iHeight);
+
+  for (int i = 0; i < iHeight; ++i) {
+    newData[i].assign(iWidth, 0.0);
+
+    for (int j = 0; j < iWidth; ++j) {
+
+      pBaseSquare = pWorld->getBaseSquare(i, j);
+      double dValue = 0.0;
+
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          double dAbundance = pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
+          dValue += dAbundance* pWorld->getMeanWeight(l,k);
+        }
+      }
+
+      newData[i][j] = dValue;
+
+    }
+  }
+
+
+  // And add the value to our results
+  vvInitialisationValues[initialisationPhase].push_back(newData);
 }
 
 //**********************************************************************

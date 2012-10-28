@@ -3,8 +3,6 @@
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
-// Description :
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 #ifndef CDERIVEDLAYER_H_
 #define CDERIVEDLAYER_H_
@@ -18,7 +16,6 @@
 
 // Namespace
 using boost::shared_ptr;
-
 
 typedef vector<vector<double> > Data;
 
