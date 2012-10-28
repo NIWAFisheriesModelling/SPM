@@ -47,8 +47,8 @@ protected:
   int                         iAge;
   int                         iAgeIndex;
   double                      dSteepness;
-  double                      dSigmaR;
-  double                      dRho;
+  //double                    dSigmaR;
+  //double                    dRho;
   string                      sSSB;
   string                      sB0;
   vector<double>              vYCSValues;

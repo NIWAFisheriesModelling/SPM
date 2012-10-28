@@ -40,9 +40,9 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
-  registerEstimable(PARAM_SIGMA_R, &dSigmaR);
   registerEstimable(PARAM_STEEPNESS, &dSteepness);
-  registerEstimable(PARAM_RHO, &dRho);
+  //registerEstimable(PARAM_SIGMA_R, &dSigmaR);
+  //registerEstimable(PARAM_RHO, &dRho);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_R0);
@@ -50,8 +50,8 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_PROPORTIONS);
   pParameterList->registerAllowed(PARAM_AGE);
   pParameterList->registerAllowed(PARAM_STEEPNESS);
-  pParameterList->registerAllowed(PARAM_SIGMA_R);
-  pParameterList->registerAllowed(PARAM_RHO);
+  //pParameterList->registerAllowed(PARAM_SIGMA_R);
+  //pParameterList->registerAllowed(PARAM_RHO);
   pParameterList->registerAllowed(PARAM_SSB);
   pParameterList->registerAllowed(PARAM_B0);
   pParameterList->registerAllowed(PARAM_SSB_OFFSET);
@@ -71,12 +71,12 @@ void CBHRecruitmentProcess::validate() {
     dR0           = pParameterList->getDouble(PARAM_R0);
     iAge          = pParameterList->getInt(PARAM_AGE,true,pWorld->getMinAge());
     dSteepness    = pParameterList->getDouble(PARAM_STEEPNESS,true,1.0);
-    dSigmaR       = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
-    dRho          = pParameterList->getDouble(PARAM_RHO,true,0.0);
     sSSB          = pParameterList->getString(PARAM_SSB);
     sB0           = pParameterList->getString(PARAM_B0,true,"");
     iSSBOffset    = pParameterList->getInt(PARAM_SSB_OFFSET);
     sLayer        = pParameterList->getString(PARAM_LAYER, true, "");
+    //dSigmaR       = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
+    //dRho          = pParameterList->getDouble(PARAM_RHO,true,0.0);
 
     pParameterList->fillVector(vProportions, PARAM_PROPORTIONS);
     pParameterList->fillVector(vYCSValues, PARAM_YCS_VALUES);
