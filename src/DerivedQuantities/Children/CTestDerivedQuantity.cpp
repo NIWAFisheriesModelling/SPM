@@ -1,9 +1,9 @@
-/*
- * CTestDerivedQuantity.cpp
- *
- *  Created on: 18/06/2012
- *      Author: Admin
- */
+//============================================================================
+// Name        : CBiomassDerivedQuantity.h
+// Author      : S.Rasmussen
+// Date        : 15/04/2009
+// Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
+//============================================================================
 
 #include "CTestDerivedQuantity.h"
 

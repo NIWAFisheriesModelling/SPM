@@ -266,6 +266,7 @@ src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
 #src/DerivedLayers/Children/CTestDerivedLayer.Test.cpp
 #src/DerivedLayers/Factory/CDerivedLayerFactory.Test.cpp
 src/DerivedQuantities/Children/CAbundanceDerivedQuantity.Test.cpp
+src/DerivedQuantities/Children/CTestDerivedQuantity.cpp
 src/DerivedQuantities/Children/CTestDerivedQuantity.Test.cpp
 src/DerivedQuantities/Factory/CDerivedQuantityFactory.Test.cpp
 src/Estimates/Factory/CEstimateFactory.Test.cpp
