@@ -127,7 +127,7 @@ void CAbundanceDerivedLayer::calculate() {
     return;
   }
 
-  vector<vector<double> > newData;
+  Data newData;
   newData.resize(iHeight);
 
   for (int i = 0; i < iHeight; ++i) {
@@ -165,7 +165,7 @@ void CAbundanceDerivedLayer::calculate(int initialisationPhase) {
   if ((int)vvInitialisationValues.size() <= initialisationPhase)
     vvInitialisationValues.resize(initialisationPhase+1);
 
-  vector<vector<double> > newData;
+  Data newData;
   newData.resize(iHeight);
 
   for (int i = 0; i < iHeight; ++i) {

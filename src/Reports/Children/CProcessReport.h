@@ -13,6 +13,8 @@
 #include "Base/CFileReport.h"
 #include "../../Processes/CProcess.h"
 
+typedef vector<vector<double> > Data;
+
 //**********************************************************************
 //
 //

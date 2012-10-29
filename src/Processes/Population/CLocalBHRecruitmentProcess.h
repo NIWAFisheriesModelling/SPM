@@ -11,6 +11,15 @@
 
 // Local Headers
 #include "../CProcess.h"
+#include "../../DerivedLayers/CDerivedLayer.h"
+#include "../../DerivedLayers/CDerivedLayerManager.h"
+#include "../../InitializationPhases/CInitializationPhaseManager.h"
+
+// Classes
+class CTimeStepManager;
+class CDerivedLayer;
+
+typedef vector<vector<double> > Data;
 
 //**********************************************************************
 //
@@ -23,25 +32,45 @@ public:
   CProcess*                   clone() { return new CLocalBHRecruitmentProcess(*this); }
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        execute();
+  vector<Data>                getTrueYCSValues() { return vTrueYCSValues; }
+  vector<Data>                getRecruitmentValues() { return vRecruitmentValues; }
+  vector<int>                 getYCSYears() { return vYCSYears; }
+  vector<Data>                getSSBValues() { return vSSBValues; }
+  Data                        getB0Value() { return dB0; }
 
 protected:
   // Variables
   double                      dR0;
+  int                         iPhaseB0;
+  Data                        dB0;
   vector<double>              vProportions;
   int                         iAge;
   int                         iAgeIndex;
   double                      dSteepness;
-  double                      dSigmaR;
-  double                      dRho;
+  //double                    dSigmaR;
+  //double                    dRho;
+  string                      sSSB;
+  string                      sB0;
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
   vector<int>                 vStandardiseYCSYears;
+  vector<double>              vStandardiseYCSValues;
+  vector<Data>                vTrueYCSValues;
+  vector<Data>                vRecruitmentValues;
+  vector<Data>                vSSBValues;
   int                         iSSBOffset;
   string                      sR0Layer;
-  string                      sSSBLayer;
   CNumericLayer               *pR0Layer;
-  CNumericLayer               *pSSBLayer;
+  vector<vector<double> >     *pSSB;
+  CTimeStepManager            *pTimeStepManager;
+  CDerivedLayer               *pDerivedLayer;
+  CInitializationPhaseManager *pInitializationPhaseManager;
+
+private:
+  Data                      dAmountPer;
+  Data                      dTrueYCS;
 };
 
 #endif /* CLOCALBHRECRUITMENTPROCESS_H_ */

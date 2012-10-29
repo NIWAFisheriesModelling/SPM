@@ -34,7 +34,7 @@ using std::numeric_limits;
 //**********************************************************************
 CBHRecruitmentProcess::CBHRecruitmentProcess() {
   pTimeStepManager = CTimeStepManager::Instance();
-    // Default Vars
+  // Default Vars
   pLayer          = 0;
   sType = PARAM_BH_RECRUITMENT;
 

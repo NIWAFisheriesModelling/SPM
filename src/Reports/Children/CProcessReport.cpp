@@ -18,6 +18,7 @@
 #include "../../Processes/CProcessManager.h"
 #include "../../Processes/CProcess.h"
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
+#include "../../Processes/Population/CLocalBHRecruitmentProcess.h"
 #include "../../Processes/Population/CHollingMortalityRateProcess.h"
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -140,6 +141,8 @@ void CProcessReport::execute() {
     }
 
     // Specific private reporting for individual processes
+
+    // BH Recruitment
     CBHRecruitmentProcess *pRecruit = dynamic_cast<CBHRecruitmentProcess*>(pTarget);
     if (pRecruit != 0) {
       //B0
@@ -173,6 +176,57 @@ void CProcessReport::execute() {
       }
       cout << "\n";
     }
+
+    // Local BH Recruitment
+    CLocalBHRecruitmentProcess *pLocalRecruit = dynamic_cast<CLocalBHRecruitmentProcess*>(pTarget);
+    if (pLocalRecruit != 0) {
+      //YCS years
+      vector<int> vYCSYears = pLocalRecruit->getYCSYears();
+      cout << PARAM_YCS_YEARS << ": " ;
+      for (int i=0; i < (int)vYCSYears.size(); ++i) {
+        cout << vYCSYears[i] << (i<((int)vYCSYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+      }
+      //B0
+      Data dB0 = pLocalRecruit->getB0Value();
+      cout << PARAM_B0_VALUE << ":\n";
+      for (int i = 0; i < (int)dB0.size(); ++i) {
+        for (int j = 0; j < (int)dB0[i].size(); ++j) {
+          cout << dB0[i][j] << (j<((int)dB0[i].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+        }
+      }
+      //SSBs
+      vector<Data> vSSBValues = pLocalRecruit->getSSBValues();
+      for (int i = 0; i < (int)vSSBValues.size(); ++i) {
+        cout << PARAM_SSB_VALUES << " for " << PARAM_YEAR << "=" << vYCSYears[i]<< ":\n";
+        for (int j = 0; j < (int)vSSBValues[i].size(); ++j) {
+          for (int k = 0; k < (int)vSSBValues[i][j].size(); ++k) {
+            cout << vSSBValues[i][j][k] << (k<((int)vSSBValues[i][j].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+          }
+        }
+      }
+      //Recruitments
+      vector<Data> vRecruitmentValues = pLocalRecruit->getRecruitmentValues();
+      for (int i = 0; i < (int)vRecruitmentValues.size(); ++i) {
+        cout << PARAM_RECRUITMENT_VALUES << " for " << PARAM_YEAR << "=" << vYCSYears[i]<< ":\n";
+        for (int j = 0; j < (int)vRecruitmentValues[i].size(); ++j) {
+          for (int k = 0; k < (int)vRecruitmentValues[i][j].size(); ++k) {
+            cout << vRecruitmentValues[i][j][k] << (k<((int)vRecruitmentValues[i][j].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+          }
+        }
+      }
+      //True YCS
+      vector<Data> vTrueYCSValues = pLocalRecruit->getTrueYCSValues();
+      for (int i = 0; i < (int)vTrueYCSValues.size(); ++i) {
+        cout << PARAM_TRUE_YCS_VALUES << " for " << PARAM_YEAR << "=" << vYCSYears[i]<< ":\n";
+        for (int j = 0; j < (int)vTrueYCSValues[i].size(); ++j) {
+          for (int k = 0; k < (int)vTrueYCSValues[i][j].size(); ++k) {
+            cout << vTrueYCSValues[i][j][k] << (k<((int)vTrueYCSValues[i][j].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+          }
+        }
+      }
+    }
+
+    // Holling mortality rates
     CHollingMortalityRateProcess *pHolling = dynamic_cast<CHollingMortalityRateProcess*>(pTarget);
     if (pHolling != 0) {
       cout << "layer_type" << ": " << (pHolling->isAbundance()?PARAM_ABUNDANCE:PARAM_BIOMASS) << "\n";
