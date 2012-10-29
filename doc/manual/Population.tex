@@ -63,7 +63,7 @@ Hence, the definition of the population structure includes;
 
 \subsection{\I{Layers}\label{sec:layers}}
 
-\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes of each spatial location (for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n_{rows} \times n_{cols}$ matrix and can be either \emph{numeric} or \emph{categorical}. See Section \ref{sec:population-section} for further details.
+\emph{Layers} are used by \SPM\ to evaluate locations where the population may be present (via the \emph{base layer}), to provide sets of known attributes or values of each spatial location (for some processes and for preference based movements), and to group or categorise cells for use by processes and observations. Layers consist of an $n_{rows} \times n_{cols}$ matrix and can be either \emph{numeric} or \emph{categorical}. See Section \ref{sec:population-section} for further details.
 
 Layers are a key underlying concept in \SPM. They comprise of a grid of known values, with a value for every spatial cell in the model. Layers are used by processes, observations, and outputs commands to supply spatially explicit covariates and any categorical groupings required. 
 
@@ -113,17 +113,17 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
+\item {\I{Derived layers}\label{derived layer}}: \SPM\ can calculate the value in each cell of a derived layer at some user-defined time-step each year, either as an abundance or as a biomass. Derived layers are actually a vector of layers, one for each year of the model (including the initialisation phases). Derived layers are the sum of abundance or biomass in a set of categories after applying a selectivity at the end of some time step for every model year.
+
 %\TODO
 %\item {\I{Meta-layers}\label{meta-layer}}: In addition to the above types of layer, \SPM\ defines a special type of layer known as a \emph{meta-layer}. The meta-layer allows individual layers (of the same type) to be indexed by year, and applied as a single layer within the model. For example, assume that we had a model where we wished to use Sea Surface Temperature (SST) as a layer, perhaps to control some movement process. The SST values for each year of the model would be defined as individual numeric layers, each with a unique label. We could then define a meta-layer that indexed the individual annual SST layers by year, and use the meta-layer as the control layer in the movement process. Meta-layers must have exactly the same number of years as the model runs as well as layers for the initialisation phase and prediction phase (interpolation or extrapolation are not permitted). Meta layers can be used in the place of layers, and \SPM will extract the layer corresponding to the year being run.
-%
-%\item {\I{Derived layers and derived meta-layers}\label{derived layer}\label{derived meta-layer}}: \SPM\ calculates the value of a derived layer or a derived meta-layer at a user-defined point in time each year, with a user-defined formula. The calculation can include other layers and estimable parameters. Derived layers will only retain the latest values whereas derived meta-layers will retain values for all years calculated. Note that layers of type biomass, quantity, and distance are specific forms of derived layers calculated by \SPM. For example, for the distance layer in a square grid, the distance between cell $a$ and cell $b$ is defined as proportional to $\sqrt{(x_a-x_b)^2 +(y_a-y_b)^2}$, where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively. For the abundance (or biomass) layer, the abundance (or biomass) of a cell is simply a count of the number (or biomass) of individuals in the cell a within categories $K$, with selectivity $S$, e.g., $N(a)=\sum_k \sum_i \ \text{element}(i,j,k,l)$.
 %\TODOend
 
 \end{enumerate}
 
 \subsection{\I{Time sequences}}
 
-The time sequence of the model is defined in three parts;
+The time sequence of the model is defined in two parts;
 \begin{itemize}
   \item \I{Initialisation}
   \item \I{Run years}
@@ -247,7 +247,7 @@ SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B
 
 Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
 
-For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}, $B_0$ is a derived quantity of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity labelled \texttt{SSB\_biomass} that represents the spawning stock biomass in each year, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
+For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived layer that specifies the total spawning stock biomass, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 
 {\small{\begin{verbatim}
 @process Recruitment
@@ -259,14 +259,14 @@ steepness 0.75
 age 1
 layer MyRecruitment
 B0 phase1
-SSB SSB_biomasss
+SSB SSB_Biomasss
 standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 2
 \end{verbatim}}}
 
-Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age + 1$.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, he offset will need to be specified as $age + 1$.
 
 \paragraph{Local Beverton-Holt recruitment:}
 
@@ -282,30 +282,29 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, layers (that probably should be abundance or biomass layers --- see Section \ref{sec:derived-layers}) must be provided for $B_0$ and the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ distributed relative to the recruitment layer \texttt{R0\_layer}.
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, a derived layer (see Section \ref{sec:derived-layers}) must be provided that defines $B_0$ and the annual $SSB_y$ for the recruitment process. As for the Beverton-Holt recruitment process above, $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ distributed relative to the recruitment layer \texttt{layer}.
 
-For example, assume a local Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{recruitment\_layer}, $B_0$ is a derived layer that specifies the biomass in each cell  of total spawning stock biomass at the end of initialisation, $SSB_y$ is a derived quantity labelled \texttt{SSB\_biomass} that represents the spawning stock biomass in each year, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
+For example, assume a local Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to recruit in each cell is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived layer that specifies the spawning stock biomass in each cell, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 
 {\small{\begin{verbatim}
+
 @process Recruitment
 type local_BH_recruitment
 categories immature
 proportions 1.0
 R0 500000
 steepness 0.75
-sigma_r 0.6 [not actually used yet]
-rho 0.6 [not actually used yet]
 age 1
-R0_layer recruitment_layer
-B0_layer B0_biomass_layer
-SSB_layer mature_biomass_layer
-standardise_ycs_years 1994-2004
+layer MyRecruitment
+B0 phase1
+SSB SSB_Biomasss
+standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
-SSB_offset 1
+SSB_offset 2
 \end{verbatim}}}
 
-Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed, such as if recruitment happens in a time-step before spawning, and therefore the offset is $age$ plus one. In the example above, $SSB\_offset$ is equal to $age$ and therefore could be omitted.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, he offset will need to be specified as $age + 1$.
 
 \subsubsection{\I{Ageing}\label{sec:ageing}}
 
@@ -618,11 +617,11 @@ Note that for the monotonic categorical preference function, the preference func
 
 \subsection{\I{Derived quantities}\label{sec:derived-quantities}}
 
-Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. Derived quantities are values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have  a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Abundance derived quantities are simply the count or sum of cells within some categories (after applying a selectivity) within cells defined by a layer. Biomass derived quantities are similar, except they are a measure of biomass. Derived quantities are also calculated during the initialisation phases, and hence the time-step during each phase must also be specified. If the initialisation time-steps are not specified, \SPM\ will calculate the derived quantity during the initialisation phases in every year, at the end of each phases annual cycle.
+Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. Derived quantities are values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Abundance derived quantities are simply the count or sum of cells within some categories (after applying a selectivity) within cells defined by a layer. Biomass derived quantities are similar, except they are a measure of biomass. Derived quantities are also calculated during the initialisation phases, and hence the time-step during each phase must also be specified. If the initialisation time-steps are not specified, \SPM\ will calculate the derived quantity during the initialisation phases in every year, at the end of the annual cycle.
 
 Derived quantities are required by some processes, for example the Beverton-Holt recruitment process. The Beverton-Holt recruitment process requires an equilibrium biomass ($B_0$) and annual spawning stock biomass values ($SSB_y$) to resolve the stock-recruit relationship. Here, these would be defined as the abundance or biomass of a part of the population at some point in the annual cycle for selected ages and categories, and would be calculated as a derived quantity.
 
-As an example to define a biomass derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time-step (labelled step\_one) in the initialisation phases (and assuming two initialisation phases) and at the end of the first time-step otherwise, over areas defined by a layer as the spawning ground but counting all `mature' individuals, we would use the syntax,
+As an example, to define a biomass derived quantity (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time-step (labelled step\_one) in the initialisation phases (and assuming two initialisation phases) and at the end of the first time-step otherwise, over areas defined by a layer as the spawning ground but counting all `mature' individuals, we would use the syntax,
 
 {\small{\begin{verbatim}
 @derived_quantity SSB
@@ -634,10 +633,22 @@ selectivity One
 layer spawning_ground
 \end{verbatim}}}
 
-\subsection{\I{Derived layers and meta-layers}\label{sec:derived-layers}}
+\subsection{\I{Derived layers}\label{sec:derived-layers}}
 
-%\TODO
-%Derived layers are layers, calculated by \SPM\ at a specific user-defined time-step and year(s), that have a single value for each cell of the model. For example, $B_0$ is a derived layer calculated once only at the last initialisation phase of the model as the spawning stock biomass at that time; or a mortality dependent layer is calculated every year based on a formula including other layers with the latest calculation over-riding previous results. Derived meta-layers are meta-layers, calculated by \SPM\ at a specific user-defined time-step every year that the model runs, with all results retained as yearly-indexed layers.
+Some processes require, as arguments, a population value derived from the population state, but available for each cell of the population. These are termed \emph{derived layers}. Derived layers are a layer of values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have a single value for each cell in each year of the model. Derived layers can be calculated as either an abundance or as a biomass. Abundance derived layers are simply the count or sum within each cell for some categories (after applying a selectivity). Biomass derived layers are similar, except they are a measure of biomass. Derived layers are also calculated during the initialisation phases, and hence the time-step during each phase must also be specified. If the initialisation time-steps are not specified, \SPM\ will calculate the derived layer during the initialisation phases in every year, at the end of the annual cycle.
+
+Derived layers are required by some processes, for example the local Beverton-Holt recruitment process. The local Beverton-Holt recruitment process requires an equilibrium biomass ($B_0$) and annual spawning stock biomass values ($SSB_y$) in each cell to resolve the stock-recruit relationship for each cell. Here, these would be defined as the abundance or biomass of a part of the population at some point in the annual cycle for selected ages and categories, and would be calculated as a derived layer.
+
+As an example, to define a biomass derived layer (say spawning stock biomass, SSB) for a model, evaluated at the end of the first time-step (labelled step\_one) in the initialisation phases (and assuming two initialisation phases) and at the end of the first time-step otherwise, but counting all `mature' individuals, we would use the syntax,
+
+{\small{\begin{verbatim}
+@derived_quantity SSB
+type biomass
+time_step step_one
+initialisation_time_steps step_one step_one
+categories mature
+selectivity One
+\end{verbatim}}}
 %
 %Both derived layers and derived meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  
 %

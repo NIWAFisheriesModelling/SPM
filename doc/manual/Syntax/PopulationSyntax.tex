@@ -240,10 +240,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
 
-\defSub{r0} {Define a multiplier of \subcommand{r0\_layer} for calculating the total amount of recruitment at equilibrium abundance levels}
+\defSub{r0} {Define a multiplier of \subcommand{r0\_layer} for calculating the amount of recruitment in each cell at equilibrium abundance levels}
 \defType{Estimable}
 \defDefault{No default}
-\defValue{Multiplier of \subcommand{r0\_layer} to calculate the total amount (in numbers) of recruitment applied across all categories at equilibrium abundances}
+\defValue{Multiplier of \subcommand{r0\_layer} to calculate the amount in each cell (in numbers) of recruitment applied across all categories at equilibrium abundances}
 
 \defSub{categories} {Define the categories into which recruitment occurs}
 \defType{String vector}
@@ -273,24 +273,19 @@ Each type of process requires a set of subcommands and arguments specific to tha
 %\defType{Estimable}
 %\defDefault{0.0}
 
-\defSub{r0\_layer} {Define the label of the layer that defines the distribution of recruitment at equilibrium abundances for each cell}
+\defSub{b0} {Define the \command{initialization\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$) in each cell}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid layer as defined by \command{layer}}
+\defValue{Must be a valid \command{initialization\_phase} label}
 
-\defSub{b0\_layer} {Name of the layer that defines the initial or equilibrium spawning stock biomass ($B_0$) for each cell}
-\defType{String}
-\defDefault{No layer}
-\defValue{A valid layer as defined by \command{layer}}
-
-\defSub{ssb\_layer} {Define the label of the layer that defines the spawning stock biomass (SSB) for each cell in each year}
+\defSub{ssb} {Define the label of the \command{derived\_layer} that defines the spawning stock biomass (SSB) in each cell}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid layer as defined by \command{layer}}
+\defValue{Must be a valid \command{derived\_layer} label}
 
-\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied as the SSB in the stock-recruit relationship}
+\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived layer that is to be applied as the SSB in the stock-recruit relationship}
 \defType{Integer}
-\defDefault{Defaults to the value of \commandlabsub{process}{age}}
+\defDefault{No default}
 \defValue{Must be a value $\ge 0$}
 
 \defSub{ycs\_years} {Years for year class strength values}
@@ -299,14 +294,19 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defValue{The expanded vector must be valid model years}
 
 \defSub{ycs\_values} {YCS values}
-\defType{Estimable vector, of length \subcommand{cys\_years} once expanded}
+\defType{Estimable vector}
 \defDefault{No default}
-\defValue{Must be vector}
+\defValue{Must be vector of length \commandsub{model}{initial} to \commandsub{model}{current}}
 
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
 \defType{Integer vector or integer range}
 \defDefault{No default}
-\defValue{The expanded vector must be valid model years}
+\defValue{The expanded vector must have values of years between \commandsub{model}{initial} and \commandsub{model}{current}}
+
+\defSub{layer} {Define the label of the layer that defines the distribution of recruitment (as a multpiler of $R0$ at equilibrium abundances in each cell}
+\defType{String}
+\defDefault{No layer}
+\defValue{A valid numeric layer as defined by \command{layer}. The amount of recruitment in each cell is the product of $r0$ and the layer value in each cell.}
 
 \subsubsection[Ageing process]{\commandlabsubarg{process}{type}{ageing}}
 

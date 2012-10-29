@@ -31,6 +31,7 @@ In SPM, but not in manual
   layer_width
   matrix
   mean
+  meta
   method
   multinomial
   normal_log
@@ -46,6 +47,7 @@ In SPM, but not in manual
   scores_index
   size_weights
   square_uniform
+  ssb_layer
   ssb_values
   t
   threshold_biomass
@@ -60,11 +62,3 @@ In SPM, but not in manual
 
 In manual, but not in SPM
   include
-  b0_layer
-  formula
-  initialisation_layers
-  parameter_values
-  parameters
-  derived
-  derived_meta
-  iterative
