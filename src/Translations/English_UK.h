@@ -310,7 +310,6 @@
 #define PARAM_PSEUDO                              "none"
 #define PARAM_Q                                   "q"
 #define PARAM_R0                                  "r0"
-#define PARAM_R0_LAYER                            "r0_layer"
 #define PARAM_RECRUITMENT_VALUES                  "recruitment_values"
 #define PARAM_RANDOM_NUMBER_SEED                  "random_number_seed"
 #define PARAM_REPORT                              "report"

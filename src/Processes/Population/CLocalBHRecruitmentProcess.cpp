@@ -56,7 +56,7 @@ CLocalBHRecruitmentProcess::CLocalBHRecruitmentProcess() {
   pParameterList->registerAllowed(PARAM_SSB_OFFSET);
   pParameterList->registerAllowed(PARAM_YCS_VALUES);
   pParameterList->registerAllowed(PARAM_STANDARDISE_YCS_YEARS);
-  pParameterList->registerAllowed(PARAM_R0_LAYER);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -73,7 +73,7 @@ void CLocalBHRecruitmentProcess::validate() {
     sSSB          = pParameterList->getString(PARAM_SSB);
     sB0           = pParameterList->getString(PARAM_B0,true,"");
     iSSBOffset    = pParameterList->getInt(PARAM_SSB_OFFSET);
-    sR0Layer        = pParameterList->getString(PARAM_R0_LAYER, true, "");
+    sR0Layer        = pParameterList->getString(PARAM_LAYER, true, "");
     //dSigmaR     = pParameterList->getDouble(PARAM_SIGMA_R,true,1.0);
     //dRho        = pParameterList->getDouble(PARAM_RHO,true,0.0);
 
