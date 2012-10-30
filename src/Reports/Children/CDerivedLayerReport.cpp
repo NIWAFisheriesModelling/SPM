@@ -38,7 +38,7 @@ void CDerivedLayerReport::validate() {
   try {
 
     sDerivedLayer = pParameterList->getString(PARAM_DERIVED_LAYER);
-    bPrintInitialisation = pParameterList->getBool(PARAM_INITIALIZATION,true,true);
+    bPrintInitialisation = pParameterList->getBool(PARAM_INITIALIZATION,true,false);
 
     // Validate parent
     CFileReport::validate();
@@ -96,9 +96,8 @@ void CDerivedLayerReport::execute() {
           cout << PARAM_YEAR << "=" << j+1 << "\n";
           for (int k = 0; k < pDerivedLayer->getHeight(); ++k) {
             for (int l = 0; l < pDerivedLayer->getWidth(); ++l) {
-              cout << vvDerivedLayer[k][l] << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+              cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
             }
-            cout << "\n";
           }
         }
       }
@@ -113,12 +112,9 @@ void CDerivedLayerReport::execute() {
         }
       }
     }
-
-    cout << "\n";
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();
-
 
   } catch (string &Ex) {
     Ex = "CDerivedLayerReport.build(" + getLabel() + ")->" + Ex;
