@@ -1,17 +1,13 @@
-"extract.layer" <-
+"extract.derivedlayer" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)],sep=",")
-  res <- list()
-  res$year<-substring(lines[index.start+2],7)
-  res$"time_step"<-substring(lines[index.start+3],12)
-  nrows<-length((4+index.start):(index.end-1))
-  values<-matrix(values,nrow=nrows,byrow=TRUE)
+  res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
-  res$data<-values
+  res$derived_layer.label<-substring(lines[index.start+2],25)
+  res$data<-lines[4:length(lines)]
   return(res)
 }

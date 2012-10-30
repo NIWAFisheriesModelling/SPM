@@ -7,6 +7,7 @@ function(lines){
   res<-list()
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
+  res$derived_quantity.label<-substring(lines[index.start+2],25)
   res$data<-list()
   res$data$initialisation<-list()
   count<-1

@@ -76,6 +76,16 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
             res$derived_quantity[[counter$derived_quantity]] <- temp
             names(res$derived_quantity)[counter$derived_quantity] <- report.label[i]
         }
+        else if (report.type[i] == "derived_layer") {
+            if (!("derived_layer" %in% names(res))) {
+                res$derived_layer <- list()
+            }
+            counter$derived_layer <- counter$derived_layer + 1
+            temp <- extract.derivedlayer(lines = line[index[i]:(index[i + 1] - 1)])
+            xxx<<-line[index[i]:(index[i + 1] - 1)]
+            res$derived_layer[[counter$derived_layer]] <- temp
+            names(res$derived_layer)[counter$derived_layer] <- report.label[i]
+        }
         else if (report.type[i] == "estimate_summary") {
             if (!("estimate_summary" %in% names(res))) {
                 res$estimate_summary <- list()
