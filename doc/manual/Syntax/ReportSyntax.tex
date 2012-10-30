@@ -12,6 +12,7 @@ The report types available are,
   \item Print a summary of a process
 	\item Print a summary of a preference function
   \item Print a derived quantity
+	\item Print a derived layer
   \item Print a summary of the estimated parameters
   \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
   \item Print the objective function values
@@ -148,6 +149,28 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defType{String}
 \defDefault{No default}
 \defValue{A valid label from \command{derived\_quantity}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid file name. If not supplied, then output is directed to the standard out}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True of False}
+
+\subsubsection[Print a derived layer]{\commandlabsubarg{report}{type}{derived\_layer}}
+
+\defSub{derived\_layer} {Define the label of the derived layer to print}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid label from \command{derived\_layer}}
+
+\defSub{initialisation} {Specify if the derived layer values for each year of the initialisation phases should be also be output}
+\defType{Switch}
+\defDefault{False}
+\defValue{Either True of False}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
