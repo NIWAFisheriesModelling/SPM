@@ -30,7 +30,7 @@ CVonBertalanffyAgeSize::CVonBertalanffyAgeSize() {
   pParameterList->registerAllowed(PARAM_T0);
   //pParameterList->registerAllowed(PARAM_CV);
   //pParameterList->registerAllowed(PARAM_DISTRIBUTION);
-  pParameterList->registerAllowed(PARAM_BY_LENGTH);
+  //pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 
 }
@@ -48,7 +48,7 @@ void CVonBertalanffyAgeSize::validate() {
     dT0             = pParameterList->getDouble(PARAM_T0);
     //dCV             = pParameterList->getDouble(PARAM_CV,true,0);
     //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
-    bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
+    //bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
     // Validate parent
     CAgeSize::validate();

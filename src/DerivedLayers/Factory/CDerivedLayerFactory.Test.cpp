@@ -20,10 +20,21 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DerivedLayer) {
+BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedLayer) {
 
   CDerivedLayer *pBasic = 0;
   BOOST_REQUIRE_NO_THROW(pBasic = CDerivedLayerFactory::buildDerivedLayer(PARAM_ABUNDANCE, false));
+  delete pBasic;
+}
+
+//**********************************************************************
+//
+//
+//**********************************************************************
+BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedLayer) {
+
+  CDerivedLayer *pBasic = 0;
+  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedLayerFactory::buildDerivedLayer(PARAM_BIOMASS, false));
   delete pBasic;
 }
 

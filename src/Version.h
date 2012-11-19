@@ -9,16 +9,16 @@
 // control revision number, date, and time using svn_version.
 
 // Call: svn_version --quiet --format c++ m--path C:/Projects/General/SPM --recursive --output C:/Projects/General/SPM/src/Version.h 
-// Current working directory: c:\Projects\General\SPM
+// Current working directory: C:\Projects\General\SPM
 
 #ifndef VERSION_H_
 #define VERSION_H_
 
-#define SOURCE_CONTROL_REVISION 4678
-#define SOURCE_CONTROL_DATE "2012-07-05"
+#define SOURCE_CONTROL_REVISION 4826
+#define SOURCE_CONTROL_DATE "2012-10-30"
 #define SOURCE_CONTROL_YEAR "2012"
-#define SOURCE_CONTROL_MONTH "July"
-#define SOURCE_CONTROL_TIME "00:25:08"
-#define SOURCE_CONTROL_SHORT_VERSION "2012-07-05(rev. 4678)"
-#define SOURCE_CONTROL_VERSION "2012-07-05-00:25:08 UTC (rev. 4678)"
+#define SOURCE_CONTROL_MONTH "October"
+#define SOURCE_CONTROL_TIME "01:40:54"
+#define SOURCE_CONTROL_SHORT_VERSION "2012-10-30(rev. 4826)"
+#define SOURCE_CONTROL_VERSION "2012-10-30-01:40:54 UTC (rev. 4826)"
 #endif

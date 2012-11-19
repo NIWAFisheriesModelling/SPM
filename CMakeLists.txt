@@ -262,9 +262,10 @@ ADD_EXECUTABLE(${TEST_NAME}
 src/Catchabilities/CCatchability.Test.cpp
 src/Catchabilities/Factory/CCatchabilityFactory.Test.cpp
 src/ConfigurationLoaders/CConfigurationLoader.Test.cpp
-#src/DerivedLayers/Children/CAbundanceDerivedLayer.Test.cpp
-#src/DerivedLayers/Children/CTestDerivedLayer.Test.cpp
-#src/DerivedLayers/Factory/CDerivedLayerFactory.Test.cpp
+src/DerivedLayers/Children/CAbundanceDerivedLayer.Test.cpp
+src/DerivedLayers/Children/CTestDerivedLayer.cpp
+src/DerivedLayers/Children/CTestDerivedLayer.Test.cpp
+src/DerivedLayers/Factory/CDerivedLayerFactory.Test.cpp
 src/DerivedQuantities/Children/CAbundanceDerivedQuantity.Test.cpp
 src/DerivedQuantities/Children/CTestDerivedQuantity.cpp
 src/DerivedQuantities/Children/CTestDerivedQuantity.Test.cpp

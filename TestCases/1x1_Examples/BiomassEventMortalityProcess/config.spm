@@ -25,7 +25,7 @@ tau1 1
 tau2 50
 a 1
 b 1
-cv 0.10
+#cv 0.10
 
 @size_weight none
 type basic

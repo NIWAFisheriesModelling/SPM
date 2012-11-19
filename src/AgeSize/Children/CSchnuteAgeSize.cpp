@@ -36,7 +36,7 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
   pParameterList->registerAllowed(PARAM_B);
   //pParameterList->registerAllowed(PARAM_CV);
   //pParameterList->registerAllowed(PARAM_DISTRIBUTION);
-  pParameterList->registerAllowed(PARAM_BY_LENGTH);
+  //pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 
 }
@@ -57,7 +57,7 @@ void CSchnuteAgeSize::validate() {
     dB              = pParameterList->getDouble(PARAM_B);
     //dCV             = pParameterList->getDouble(PARAM_CV,true,0);
     //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
-    bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
+    //bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
     // Validate parent
     CAgeSize::validate();

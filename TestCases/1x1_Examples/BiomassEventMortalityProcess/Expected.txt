@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -r -q 
-Date: Fri Jul 13 21:55:44 2012
-v1.1-2012-07-12 (rev. 4729). Copyright (c) 2008-2012, NIWA
+Date: Tue Oct 30 09:52:57 2012
+v1.1-2012-10-29 (rev. 4823). Copyright (c) 2008-2012, NIWA
 User name: dunn
-Machine name: NIWA-34253 (Windows_NT, PID=964)
+Machine name: NIWA-34253 (Windows_NT, PID=4568)
 
 [1994_TimeStep_One]
 report.type: partition
@@ -17,7 +17,7 @@ row,column,category,age[1],age[2],age[3],age[4],age[5]
 report.type: layer
 year: 1994
 time_step: One
-980000 
+980000
 *end
 
 [1995_TimeStep_One]
@@ -44,9 +44,9 @@ total_score: 0
 [age_size]
 report.type: age_size
 age_size.label: schnute
-ages: 1, 2, 3, 4, 5
-sizes: 1, 63.5799, 86.6018, 95.0711, 98.1868
-weights: 1000, 1000, 1000, 1000, 1000
+ages: 1,2,3,4,5
+sizes: 1,63.5799,86.6018,95.0711,98.1868
+weights: 1000,1000,1000,1000,1000
 *end
 
 Completed

@@ -8,11 +8,9 @@
 #include "CTestDerivedLayer.h"
 
 CTestDerivedLayer::CTestDerivedLayer() {
-
 }
 
 CTestDerivedLayer::~CTestDerivedLayer() {
-
 }
 
 void CTestDerivedLayer::calculate() {
@@ -23,7 +21,7 @@ void CTestDerivedLayer::calculate(int initialisationPhase) {
 
 //  if ((int)vvInitialisationValues.size() <= initialisationPhase)
 //    vvInitialisationValues.resize(initialisationPhase+1);
-//
+
 //  double value = (vvInitialisationValues[initialisationPhase].size()+1) * ((initialisationPhase+1) * 100);
 //  vvInitialisationValues[initialisationPhase].push_back(value);
 }
