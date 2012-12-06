@@ -24,10 +24,6 @@ using std::vector;
 class CConvertor {
 public:
   // Functions
-//  static string         doubleToString(double value);
-//  static string         intToString(int value);
-//  static double         stringToDouble(string value);
-//  static int            stringToInt(string value);
   static bool           stringToBool(string value);
   static void           stringToVectorByNewline(string value, vector<string> &lines);
   static string         stringToLowercase(string value);
