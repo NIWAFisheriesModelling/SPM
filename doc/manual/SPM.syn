@@ -1,0 +1,279 @@
+; TextPad syntax definitions for SPM version 1.1-2012-11-19 (rev. 4827)
+; ===================================================================================
+;
+;
+C=1
+[Syntax]
+Namespace1 = 6
+IgnoreCase = No
+KeyWordLength = 0
+BracketChars = ([])
+OperatorChars = -+*/!~%^&|=$:!_<>
+PreprocStart =
+HexPrefix = 0x
+SyntaxStart =
+SyntaxEnd =
+CommentStart = {
+CommentEnd = }
+CommentStartAlt =
+CommentEndAlt =
+SingleComment = #
+SingleCommentCol =
+SingleCommentAlt = @comment
+SingleCommentColAlt =
+SingleCommentEsc =
+StringsSpanLines = No
+StringStart = "
+StringEnd = "
+StringAlt =
+StringEsc = \ 
+CharStart = '
+CharEnd = '
+CharEsc = \ 
+
+[Keywords 1]
+@age_size
+@ageing_error
+@catchability
+@derived_quantity
+@estimate
+@estimation
+@include
+@initialisation_phase
+@layer
+@mcmc
+@minimiser
+@model
+@observation
+@penalty
+@preference_function
+@prior
+@process
+@profile
+@report
+@selectivity
+@size_weight
+@time_step
+
+[Keywords 2]
+a
+a50
+adapt_stepsize_at
+age
+age_plus_group
+age_size
+ageing_error
+alpha
+ato95
+b
+b0
+c
+catchability
+categories
+categories2
+category_labels
+category_values
+cell_length
+correlation_adjustment_diff
+covariance
+covariance_adjustment_method
+crossover_probability
+current_year
+cv
+data
+delta
+derived_layer
+derived_quantity
+df
+difference_scale
+e
+error_value
+estimation_phase
+evaluations
+file_name
+from
+h
+header
+holling_type
+initial_year
+initialisation
+initialisation_phase
+initialisation_phases
+initialisation_time_steps
+iterations
+k
+keep
+l
+lambda
+layer
+layers
+length
+likelihood
+linf
+log_scale
+lower_bound
+m
+max_age
+max_correlation
+max_generations
+mcmc
+mcmc_fixed
+min_age
+minimiser
+mu
+multiplier
+n
+ncols
+nrows
+obs
+observation
+overwrite
+p1
+p2
+parameter
+penalty
+population_size
+preference_function
+preference_functions
+prior
+process
+process_error
+processes
+profile
+proportion
+proportion_method
+proportion_time_step
+proportions
+proposal_distribution
+q
+r0
+same
+selectivities
+selectivities2
+selectivity
+sigma
+sigma_l
+sigma_r
+simulation_likelihood
+sink_layer
+size_weight
+sizes
+source_layer
+ssb
+ssb_offset
+standardise_ycs_years
+start
+steepness
+step_size
+steps
+t0
+tau1
+tau2
+time_step
+time_steps
+to
+tolerance
+type
+u_max
+upper_bound
+v
+x0
+x1
+x2
+y0
+y1
+y2
+ycs_values
+ycs_years
+year
+years
+
+[Keywords 3]
+F
+False
+T
+True
+f
+false
+t
+true
+
+
+[Keywords 4]
+MCMC
+abundance
+abundance_density
+adjacent_cell
+age_size
+age_weight
+ageing
+ageing_error
+all_values
+all_values_bounded
+annual_mortality_rate
+basic
+beta
+bh_recruitment
+biomass
+biomass_density
+biomass_event_mortality
+categorical
+category_transition
+category_transition_rate
+constant
+constant_mortality_rate
+constant_recruitment
+covariance
+de_solver
+derived_layer
+derived_quantity
+distance
+double_exponential
+double_normal
+estimate_summary
+estimate_value
+event_mortality
+exponential
+holling_mortality_rate
+increasing
+initialisation
+inverse_logistic
+knife_edge
+layer
+layer_derived_view
+local_bh_recruitment
+logistic
+logistic_producing
+lognormal
+metropolis_hastings
+migration
+monotonic_categorical
+none
+normal
+normal_by_stdev
+numeric
+numerical_differences
+objective_function
+observation
+off_by_one
+partition
+partition_biomass
+preference
+preference_function
+process
+proportions_at_age
+proportions_by_category
+random_number_seed
+schnute
+selectivity
+simulated_observation
+size_weight
+spatial_map
+threshold
+uniform
+uniform_log
+von_bertalanffy
+
+[Keywords 5]
+
+[Preprocessor keywords]
