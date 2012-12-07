@@ -183,6 +183,11 @@ Section /o "Copy src files" SEC07
   File /r "source_files\\*"
 SectionEnd
 
+Section /o "Copy the TextPad syntax file" SEC08
+  SetOutPath "$INSTDIR"
+  File "..\\Doc\\Manual\\SPM.syn"
+SectionEnd
+
 !system 'rm -rf source_files'
 !system 'rm -rf example_files'
 
@@ -193,6 +198,7 @@ LangString DESC_SEC04 ${LANG_ENGLISH} "Add the installation directory of ${PRODU
 LangString DESC_SEC05 ${LANG_ENGLISH} "Copy the example files"
 LangString DESC_SEC06 ${LANG_ENGLISH} "Copy the R ${PRODUCT_NAME} library"
 LangString DESC_SEC07 ${LANG_ENGLISH} "Copy the source files (not required unless you intend to compile ${PRODUCT_NAME}"
+LangString DESC_SEC08 ${LANG_ENGLISH} "Copy the TextPad syntax file (SPM.syn)"
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} $(DESC_SEC01)
@@ -202,6 +208,7 @@ LangString DESC_SEC07 ${LANG_ENGLISH} "Copy the source files (not required unles
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC05} $(DESC_SEC05)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC06} $(DESC_SEC06)
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC07} $(DESC_SEC07)
+  !insertmacro MUI_DESCRIPTION_TEXT ${SEC08} $(DESC_SEC08)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 Section -AdditionalIcons
@@ -249,6 +256,7 @@ Section Uninstall
   Delete "$INSTDIR\spm.exe"
   Delete "$INSTDIR\Run SPM.lnk"
   Delete "$INSTDIR\Install.log"
+  Delete "$INSTDIR\SPM.syn"
   Delete "$INSTDIR\spm_1.1.zip"
   RmDir /r "$INSTDIR\source"
   RmDir /r "$INSTDIR\examples"
