@@ -17,6 +17,8 @@
 #include "../../Estimates/CEstimate.h"
 #include "../../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../../PreferenceFunctions/CPreferenceFunction.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/CDoubleLayer.h"
 
 //**********************************************************************
 // CPreferenceFunctionReport::CPreferenceFunctionReport()
@@ -63,6 +65,9 @@ void CPreferenceFunctionReport::build() {
     // Get our preference function
     CPreferenceFunctionManager *pManager = CPreferenceFunctionManager::Instance();
     pPreferenceFunction = pManager->getPreferenceFunction(sPreferenceFunction);
+
+    std::string sLayerName = pPreferenceFunction->getLayerName();
+    pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
 
   } catch (string &Ex) {
     Ex = "CPreferenceFunctionReport.build(" + getLabel() + ")->" + Ex;
@@ -136,6 +141,13 @@ void CPreferenceFunctionReport::execute() {
       }
 
       cout << endl;
+    }
+
+    // print out layer value minimum and maximum if a double layer
+    CDoubleLayer *pDoubleLayer = dynamic_cast<CDoubleLayer*>(pLayer);
+    if (pDoubleLayer != 0) {
+      cout << "layer_min" << CONFIG_RATIO_SEPARATOR << " " << pDoubleLayer->getLayerMin() << endl;
+      cout << "layer_max" << CONFIG_RATIO_SEPARATOR << " " << pDoubleLayer->getLayerMax() << endl;
     }
 
     cout << CONFIG_END_REPORT << "\n" << endl;

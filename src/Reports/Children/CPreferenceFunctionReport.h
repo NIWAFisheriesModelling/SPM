@@ -14,6 +14,7 @@
 
 // Forward-Declaration
 class CPreferenceFunction;
+class CNumericLayer;
 
 //**********************************************************************
 //
@@ -31,6 +32,8 @@ public:
 protected:
   string                      sPreferenceFunction;
   CPreferenceFunction         *pPreferenceFunction;
+  CNumericLayer               *pLayer;
+
 };
 
 #endif /* CPREFERENCEFUNCTIONREPORT_H_ */

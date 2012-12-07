@@ -24,6 +24,8 @@ public:
   CLayer*                     clone() { return (new CDoubleLayer(*this)); }
   double                      getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
   void                        setValue(int Row, int Col, double Value);
+  double                      getLayerMin();
+  double                      getLayerMax();
   void                        validate();
   void                        build();
 

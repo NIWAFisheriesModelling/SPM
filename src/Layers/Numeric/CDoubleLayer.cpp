@@ -133,6 +133,54 @@ void CDoubleLayer::validate() {
 }
 
 //**********************************************************************
+// double getLayerMin();
+// Get layer value min
+//**********************************************************************
+double CDoubleLayer::getLayerMin() {
+  try {
+
+    double dMin = pGrid[0][0];
+
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
+        dMin = std::min(dMin,pGrid[i][j]);
+      }
+    }
+
+    return(dMin);
+
+  } catch (string &Ex) {
+    Ex = "CDoubleLayer.getLayerMin(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
+}
+
+//**********************************************************************
+// double getLayerMax();
+// Get layer value max
+//**********************************************************************
+double CDoubleLayer::getLayerMax() {
+  try {
+
+    double dMax = pGrid[0][0];
+
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
+        dMax = std::max(dMax,pGrid[i][j]);
+      }
+    }
+
+    return(dMax);
+
+  } catch (string &Ex) {
+    Ex = "CDoubleLayer.getLayerMax(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+
+}
+
+//**********************************************************************
 // void CDoubleLayer::build()
 // Build our layer
 //**********************************************************************
