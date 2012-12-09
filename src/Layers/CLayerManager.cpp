@@ -67,11 +67,33 @@ CLayer* CLayerManager::getLayer(int index) {
       CError::errorLessThan(PARAM_INDEX, PARAM_ZERO);
 
   } catch (string &Ex) {
-    Ex = "CLayerManager.gerLayer()->" + Ex;
+    Ex = "CLayerManager.getLayer()->" + Ex;
     throw Ex;
   }
 
   return vLayerList[index];
+}
+
+//**********************************************************************
+// CLayer* CLayerManager::getLayerType(string Label)
+// Get layer type
+//**********************************************************************
+std::string CLayerManager::getLayerType(string Label) {
+  try {
+    foreach(CLayer* Layer, vLayerList) {
+      if (Layer->getLabel() == Label) {
+        return Layer->getLayerType();
+      }
+    }
+
+    CError::errorUnknown(PARAM_LAYER, Label);
+
+  } catch (string &Ex) {
+    Ex = "CLayerManager.getLayerType()->" + Ex;
+    throw Ex;
+  }
+
+  return "";
 }
 
 //**********************************************************************

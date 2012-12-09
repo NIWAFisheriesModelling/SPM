@@ -21,6 +21,7 @@
 //**********************************************************************
 CBiomassLayer::CBiomassLayer() {
   // Variables
+  sType = PARAM_BIOMASS;
   pWorld = CWorld::Instance();
 
   // Register User allowed parameters

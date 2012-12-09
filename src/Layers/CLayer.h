@@ -24,10 +24,12 @@ public:
   int                       getWidth() { return iWidth; }
   int                       getHeight() { return iHeight; }
   virtual void              validate();
+  string                    getLayerType() { return sType; };
 
 protected:
   int                       iWidth;
   int                       iHeight;
+  string                    sType;
 };
 
 #endif /*CLAYER_H_*/

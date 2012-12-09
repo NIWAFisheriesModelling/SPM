@@ -67,7 +67,26 @@ void CPreferenceFunctionReport::build() {
     pPreferenceFunction = pManager->getPreferenceFunction(sPreferenceFunction);
 
     std::string sLayerName = pPreferenceFunction->getLayerName();
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    sLayerType = CLayerManager::Instance()->getLayerType(sLayerName);
+    if ( sLayerType==PARAM_DOUBLE ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_DISTANCE ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_ABUNDANCE ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_ABUNDANCE_DENSITY ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_BIOMASS ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_BIOMASS_DENSITY ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_CATEGORICAL ) {
+      pLayer = 0;
+    } else if ( sLayerType==PARAM_META ) {
+      pLayer = 0;
+    } else {
+      CError::errorUnknown(PARAM_LAYER, sLayerName);
+    }
 
   } catch (string &Ex) {
     Ex = "CPreferenceFunctionReport.build(" + getLabel() + ")->" + Ex;
@@ -143,7 +162,9 @@ void CPreferenceFunctionReport::execute() {
       cout << endl;
     }
 
-    // print out layer value minimum and maximum if a double layer
+    // print out layer type, and
+    // value minimum and maximum if a double layer
+    cout << "layer_type" << CONFIG_RATIO_SEPARATOR << " " << sLayerType << endl;
     CDoubleLayer *pDoubleLayer = dynamic_cast<CDoubleLayer*>(pLayer);
     if (pDoubleLayer != 0) {
       cout << "layer_min" << CONFIG_RATIO_SEPARATOR << " " << pDoubleLayer->getLayerMin() << endl;

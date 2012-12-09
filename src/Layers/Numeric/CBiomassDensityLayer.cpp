@@ -24,6 +24,7 @@
 //**********************************************************************
 CBiomassDensityLayer::CBiomassDensityLayer() {
   // Variables
+  sType = PARAM_BIOMASS_DENSITY;
   pWorld = CWorld::Instance();
 
   // Register User allowed parameters

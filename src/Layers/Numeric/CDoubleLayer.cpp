@@ -29,6 +29,8 @@ using std::endl;
 //**********************************************************************
 CDoubleLayer::CDoubleLayer() {
 
+  sType = PARAM_DOUBLE;
+
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_DATA);
   pParameterList->registerAllowed(PARAM_RESCALE);

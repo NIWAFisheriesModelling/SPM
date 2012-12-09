@@ -26,6 +26,7 @@ using std::endl;
 CNumericLayer::CNumericLayer() {
 
   // Default Variables
+  sType = "";
   pGrid             = 0;
 }
 

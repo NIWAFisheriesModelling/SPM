@@ -48,6 +48,7 @@ public:
   void                      clone(CLayerManager *Manager);
   void                      addLayer(CLayer* Layer);
   CLayer*                   getLayer(int index);
+  std::string               getLayerType(string Label);
   CNumericLayer*            getNumericLayer(string Label);
   CStringLayer*             getStringLayer(string Label);
   int                       getLayerCount() { return (int)vLayerList.size(); }

@@ -33,6 +33,7 @@ protected:
   string                      sPreferenceFunction;
   CPreferenceFunction         *pPreferenceFunction;
   CNumericLayer               *pLayer;
+  std::string                 sLayerType;
 
 };
 

@@ -16,6 +16,7 @@
 //**********************************************************************
 CMetaLayer::CMetaLayer() {
 
+  sType = PARAM_META;
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_LAYER);

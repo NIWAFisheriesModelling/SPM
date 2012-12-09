@@ -24,6 +24,7 @@
 //**********************************************************************
 CAbundanceDensityLayer::CAbundanceDensityLayer() {
   // Variables
+  sType = PARAM_ABUNDANCE_DENSITY;
   pWorld = CWorld::Instance();
 
   // Register User allowed parameters
