@@ -316,7 +316,7 @@ void CProportionsAtAgeObservation::execute() {
 
         // Store the items we want to calculate scores for
         vKeys.push_back((*mvPropPtr).first);
-        vAges.push_back(i+pWorld->getMinAge());
+        vAges.push_back(i+iMinAge);
         vExpected.push_back(dCurrentProp);
         vObserved.push_back(((*mvPropPtr).second)[i]);
         vProcessError.push_back(dProcessError);
