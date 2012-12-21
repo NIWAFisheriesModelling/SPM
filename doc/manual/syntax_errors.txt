@@ -6,6 +6,7 @@ In SPM, but not in manual
   age_index
   ages
   area
+  b0_value
   binomial
   binomial_approx
   by_length
