@@ -261,22 +261,21 @@ void CProportionsAtAgeObservation::execute() {
 
 
       //apply ageing error & calculate proportion time_step
-      if (pAgeingError != 0) {
-        vector<double> vTemp(pSquare->getWidth(),0);
-        for (int i = 0; i < (int)pSquare->getHeight(); ++i) {
-          for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
-            double dStartValue  = pStartSquare->getValue(i, j);
-            double dEndValue    = pSquare->getValue(i, j);
-            if(sProportionMethod == PARAM_MEAN) {
-              vTemp[j] = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
-            } else {
-              vTemp[j] = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
-            }
+      vector<double> vTemp(pSquare->getWidth(),0);
+      for (int i = 0; i < (int)pSquare->getHeight(); ++i) {
+        for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
+          double dStartValue  = pStartSquare->getValue(i, j);
+          double dEndValue    = pSquare->getValue(i, j);
+          if(sProportionMethod == PARAM_MEAN) {
+            vTemp[j] = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
+          } else {
+            vTemp[j] = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
           }
+        }
+        if (pAgeingError != 0)
           pAgeingError->getExpected(vTemp);
-          for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
-            pSquare->setValue(i,j,vTemp[j]);
-          }
+        for (int j = 0; j < (int)pSquare->getWidth(); ++j) {
+          pSquare->setValue(i,j,vTemp[j]);
         }
       }
 
