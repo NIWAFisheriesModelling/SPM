@@ -34,7 +34,7 @@ void CIncreasingSelectivity::validate() {
     // Get our values
     iL     = pParameterList->getInt(PARAM_L);
     iH     = pParameterList->getInt(PARAM_H);
-    dAlpha = pParameterList->getDouble(PARAM_H,true,1.0);
+    dAlpha = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
     pParameterList->fillVector(vVs, PARAM_V);
 
