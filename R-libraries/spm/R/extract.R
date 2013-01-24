@@ -13,12 +13,12 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
         header$user.name <- line[5]
         header$machine.name <- line[6]
         res$header <- header
-    }
-    temp<-substr(res$header$version[1],2,15)
-    if (temp != spm.binary.version()) {
-       cat("Warning: spm and the spm R library versions are different\n")
-       cat("SPM v",temp,"\n",sep="")
-       cat("R   v",spm.binary.version(),"\n",sep="")
+        temp<-substr(res$header$version[1],2,15)
+        if (temp != spm.binary.version()) {
+         cat("Warning: spm and the spm R library versions are different\n")
+         cat("SPM v",temp,"\n",sep="")
+         cat("R   v",spm.binary.version(),"\n",sep="")
+      }
     }
 
     index <- (1:length(line))[substring(line, 1, 1) == "["]
@@ -127,7 +127,7 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
                 res$MCMC <- list()
             }
             counter$MCMC <- counter$MCMC + 1
-            temp <- extract.MCMC(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.MCMC(lines = line[index[i]:(index[i + 1])]) #don't remove the *end
             res$MCMC[[counter$MCMC]] <- temp
             names(res$MCMC)[counter$MCMC] <- report.label[i]
         }
