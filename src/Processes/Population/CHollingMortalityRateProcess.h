@@ -47,6 +47,7 @@ protected:
   bool                        bHollingType2;
   double                      dA;
   double                      dB;
+  double                      dASquared;
   double                      dBSquared;
   double                      dUMax;
   double                      dMortality;

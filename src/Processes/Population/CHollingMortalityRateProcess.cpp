@@ -139,6 +139,7 @@ void CHollingMortalityRateProcess::rebuild() {
   try {
 #endif
 
+    dASquared = dA * dA;
     dBSquared = dB * dB;
     vMortalityRate.resize(0);
     vMortalityN.resize(0);
@@ -191,7 +192,7 @@ void CHollingMortalityRateProcess::execute() {
             if(bHollingType2)
               dMortality = pLayer->getValue(i, j) * (dA * dCurrent)/(dB + dCurrent);
             else
-              dMortality = pLayer->getValue(i, j) * (dA * dCurrent * dCurrent)/(dBSquared + dCurrent * dCurrent);
+              dMortality = pLayer->getValue(i, j) * (dASquared * dCurrent * dCurrent)/(dBSquared + dCurrent * dCurrent);
 
             // Work out exploitation rate to remove
             double dExploitation = dMortality / CMath::zeroFun(dCurrent,ZERO);
