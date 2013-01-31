@@ -194,7 +194,7 @@ void CBiomassEventMortalityProcess::execute() {
             // record our Vulnerable number
             pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
             // Increase Vulnerable biomass
-            dVulnerable += dCurrent * pWorld->getMeanWeight(l,k);
+            dVulnerable += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
           }
         }
 

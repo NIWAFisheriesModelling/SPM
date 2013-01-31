@@ -140,7 +140,7 @@ void CBiomassDerivedLayer::calculate() {
       for (int k = 0; k < (int)vCategories.size(); ++k) {
         for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
           double dAbundance = pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
-          dValue += dAbundance * pWorld->getMeanWeight(l,k);
+          dValue += dAbundance * pWorld->getMeanWeight(l,vCategories[k]);
         }
       }
 
@@ -180,7 +180,7 @@ void CBiomassDerivedLayer::calculate(int initialisationPhase) {
       for (int k = 0; k < (int)vCategories.size(); ++k) {
         for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
           double dAbundance = pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
-          dValue += dAbundance* pWorld->getMeanWeight(l,k);
+          dValue += dAbundance* pWorld->getMeanWeight(l,vCategories[k]);
         }
       }
 

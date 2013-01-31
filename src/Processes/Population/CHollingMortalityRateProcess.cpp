@@ -183,7 +183,7 @@ void CHollingMortalityRateProcess::execute() {
             // Get Current Value
             // If predator layer is a biomass, then use prey as a biomass
             if(!bIsAbundance) {
-              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,k);
+              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,vCategoryIndex[k]);
             } else {
               dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             }
@@ -214,7 +214,7 @@ void CHollingMortalityRateProcess::execute() {
             pDiff->subValue( vCategoryIndex[k], l, dCurrent);
             dSumMortality += dCurrent;
             dSumAbundance += pBaseSquare->getValue( vCategoryIndex[k], l);
-            if(!bIsAbundance) dSumMortalityBiomass += dCurrent * pWorld->getMeanWeight(l,k);
+            if(!bIsAbundance) dSumMortalityBiomass += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
           }
         }
       }

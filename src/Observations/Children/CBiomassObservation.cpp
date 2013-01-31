@@ -192,7 +192,7 @@ void CBiomassObservation::execute() {
           }
 
           double dSelectResult = vSelectivities[i]->getResult(j) * dFinalValue;
-          dExpectedTotal += dSelectResult * pWorld->getMeanWeight(j,i);
+          dExpectedTotal += dSelectResult * pWorld->getMeanWeight(j,vCategories[i]);
         }
 
       // Note: dExpectedTotal is total biomass of fish the model has for that
