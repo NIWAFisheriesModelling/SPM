@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2012-12-21 (rev. 4837)
+; TextPad syntax definitions for SPM version 1.1-2013-01-31 (rev. 4842)
 ; ===================================================================================
 ;
 ;
@@ -94,7 +94,6 @@ file_name
 from
 h
 header
-holling_type
 initial_year
 initialisation
 initialisation_phase
@@ -177,6 +176,7 @@ type
 u_max
 upper_bound
 v
+x
 x0
 x1
 x2

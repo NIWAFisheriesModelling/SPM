@@ -415,7 +415,7 @@ selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}}}
 
-The Holling mortality process\index{Holling mortality} applies either a Holling Type II or Type III function that removes a number or biomass from a set of categories according to their abundance (or biomass) and some 'predator' abundance (or biomass) .
+The Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. Holling Type II or Type III can be obtained by setting the $x$ parameter as either $2$ or $3$ respectively. The function removes a number or biomass from a set of categories according to their abundance (or biomass) and some 'predator' abundance (or biomass) .
 
 For example, the Holling mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
 
@@ -426,11 +426,10 @@ First, calculate the vulnerable abundance for each category $k$ in $1 \ldots K$ 
 
 and then, assuming that the predator abundance (or biomass) is given by the value of an abundance or biomass layer $L_a$ at $a$, the the number to remove is determined as,
 \begin{equation}
-R(k,l) = \begin{cases}
-  L_a (a  V(k,l))/(b + V(k,l)), & \text{if Type II} \\
-  L_a (a^2  V(k,l)^2)/(b^2 + V(k,l)^2), & \text{if Type III}\\ 
-  \end{cases} 
+R(k,l) = L_a (a  V(k,l)^{x-1})/(b + V(k,l)^{x-1})
 \end{equation}
+
+Set the $x$ parameter as $2$ for a Holling Type II process, and as $3$ for a Holling Type III process.
 
 Except that if the exploitation rate ($U=R(l,k)/V(l,k)$) in any partition element $(l,k)$ exceeds $U_{max}$, then the exploration rate is set equal to $U_{max}$.
 

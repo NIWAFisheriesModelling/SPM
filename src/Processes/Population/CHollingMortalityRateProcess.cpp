@@ -35,7 +35,7 @@ CHollingMortalityRateProcess::CHollingMortalityRateProcess() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
-  pParameterList->registerAllowed(PARAM_HOLLING_TYPE);
+  pParameterList->registerAllowed(PARAM_X);
   pParameterList->registerAllowed(PARAM_A);
   pParameterList->registerAllowed(PARAM_B);
   pParameterList->registerAllowed(PARAM_LAYER);
@@ -51,9 +51,9 @@ void CHollingMortalityRateProcess::validate() {
   try {
 
     // Get our parameters
-    bHollingType2 = pParameterList->getBool(PARAM_HOLLING_TYPE, true, true);
     dA = pParameterList->getDouble(PARAM_A);
     dB = pParameterList->getDouble(PARAM_B);
+    dX = pParameterList->getDouble(PARAM_X,true,2.0);
     sLayer  = pParameterList->getString(PARAM_LAYER);
     dUMax = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
 
@@ -83,6 +83,9 @@ void CHollingMortalityRateProcess::validate() {
 
     if (dB < ZERO)
       CError::errorLessThanEqualTo(PARAM_B, PARAM_ZERO);
+
+    if (dX < ONE)
+      CError::errorLessThanEqualTo(PARAM_X, PARAM_ONE);
 
   } catch (string &Ex) {
     Ex = "CHollingMortalityRateProcess.validate(" + getLabel() + ")->" + Ex;
@@ -139,8 +142,6 @@ void CHollingMortalityRateProcess::rebuild() {
   try {
 #endif
 
-    dASquared = dA * dA;
-    dBSquared = dB * dB;
     vMortalityRate.resize(0);
     vMortalityN.resize(0);
     vMortalityBiomass.resize(0);
@@ -188,11 +189,8 @@ void CHollingMortalityRateProcess::execute() {
             } else {
               dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             }
-            // Holling function type 2 or 3
-            if(bHollingType2)
-              dMortality = pLayer->getValue(i, j) * (dA * dCurrent)/(dB + dCurrent);
-            else
-              dMortality = pLayer->getValue(i, j) * (dASquared * dCurrent * dCurrent)/(dBSquared + dCurrent * dCurrent);
+            // Holling function type 2 (x=1) or 3 (x=2), or generalised (Michaelis Menten)
+            dMortality = pLayer->getValue(i, j) * (dA * pow(dCurrent, (dX - 1.0)))/(dB + pow(dCurrent, (dX - 1.0)));
 
             // Work out exploitation rate to remove
             double dExploitation = dMortality / CMath::zeroFun(dCurrent,ZERO);

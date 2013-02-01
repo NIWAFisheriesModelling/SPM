@@ -44,11 +44,9 @@ protected:
   CNumericLayer               *pLayer;
   string                      sLayer;
   bool                        bIsAbundance;
-  bool                        bHollingType2;
   double                      dA;
   double                      dB;
-  double                      dASquared;
-  double                      dBSquared;
+  double                      dX;
   double                      dUMax;
   double                      dMortality;
   vector<int>                 vMortalityYears;
