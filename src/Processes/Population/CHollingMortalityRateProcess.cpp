@@ -31,6 +31,7 @@ CHollingMortalityRateProcess::CHollingMortalityRateProcess() {
   pGrid            = 0;
   pLayer           = 0;
   sType = PARAM_HOLLING_MORTALITY_RATE;
+  pWorldSquare     = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -117,6 +118,12 @@ void CHollingMortalityRateProcess::build() {
       }
     }
 
+    // Build our Grid To Be World+1
+    if (pWorldSquare == 0) {
+      pWorldSquare = new CWorldSquare();
+      pWorldSquare->build();
+    }
+
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
 
@@ -173,7 +180,72 @@ void CHollingMortalityRateProcess::execute() {
     // Loop Through The World Grid (i,j)
     for (int i = 0; i < iWorldHeight; ++i) {
       for (int j = 0; j < iWorldWidth; ++j) {
-        // Get Current Square, and Difference Equal
+
+        // Get Current Square
+        pBaseSquare = pWorld->getBaseSquare(i, j);
+        if (!pBaseSquare->getEnabled())
+          continue;
+
+        pDiff = pWorld->getDifferenceSquare(i, j);
+
+        // Clear our Square Out
+        pWorldSquare->zeroGrid();
+        // Clear our Vulnerable Amount
+        dVulnerable = 0.0;
+
+        // Loop Through Categories & Work out Vulnerable Stock in abundance or biomass
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
+            // get current prey abundance in age/category
+            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
+            if (dCurrent <0.0)
+              dCurrent = 0.0;
+
+            // record our Vulnerable number
+            pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
+
+            // Increase Vulnerable biomass
+            if(!bIsAbundance) {
+              dVulnerable += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
+            } else {
+              dVulnerable += dCurrent;
+            }
+          }
+        }
+
+        // Holling function type 2 (x=1) or 3 (x=2), or generalised (Michaelis Menten)
+        dMortality = pLayer->getValue(i, j) * (dA * pow(dVulnerable, (dX - 1.0)))/(dB + pow(dVulnerable, (dX - 1.0)));
+
+        // Work out exploitation rate to remove (catch/vulnerableBiomass)
+        dExploitation = dMortality / CMath::zeroFun(dVulnerable,ZERO);
+        if (dExploitation > dUMax) {
+          dExploitation = dUMax;
+          if (pPenalty != 0) { // Throw Penalty
+            pPenalty->trigger(sLabel, dMortality, (dVulnerable * dUMax));
+          }
+        } else if (dExploitation < ZERO) {
+          dExploitation = 0.0;
+        }
+
+        // Loop Through Categories & remove number based on calcuated exploitation rate
+        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
+            // Get Amount to remove
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
+
+            // If is Zero, Cont
+            if (dCurrent <= 0.0)
+              continue;
+
+            // Subtract These
+            pDiff->subValue(vCategoryIndex[k], l, dCurrent);
+            dSumMortality += dCurrent;
+            dSumAbundance += pBaseSquare->getValue( vCategoryIndex[k], l);
+            if(!bIsAbundance) dSumMortalityBiomass += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
+          }
+        }
+
+/*        // Get Current Square, and Difference Equal
         pBaseSquare = pWorld->getBaseSquare(i, j);
         // Check Square Ok
         if (!pBaseSquare->getEnabled())
@@ -216,6 +288,8 @@ void CHollingMortalityRateProcess::execute() {
             if(!bIsAbundance) dSumMortalityBiomass += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
           }
         }
+*/
+
       }
     }
     if ( pRuntimeController->getCurrentState() != STATE_INITIALIZATION ) {
@@ -238,6 +312,11 @@ void CHollingMortalityRateProcess::execute() {
 // Destructor
 //**********************************************************************
 CHollingMortalityRateProcess::~CHollingMortalityRateProcess() {
+
+  // Clean Our Grid
+  if (pWorldSquare != 0) {
+    delete pWorldSquare;
+  }
 
   // Clean Our Grid
   if (pGrid != 0) {

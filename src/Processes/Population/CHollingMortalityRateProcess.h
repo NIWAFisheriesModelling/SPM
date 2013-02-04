@@ -43,12 +43,15 @@ protected:
   CWorldSquare                **pGrid;
   CNumericLayer               *pLayer;
   string                      sLayer;
+  CWorldSquare                *pWorldSquare;
   bool                        bIsAbundance;
   double                      dA;
   double                      dB;
   double                      dX;
   double                      dUMax;
   double                      dMortality;
+  double                      dExploitation;
+  double                      dVulnerable;
   vector<int>                 vMortalityYears;
   vector<double>              vMortalityRate;
   vector<double>              vMortalityN;

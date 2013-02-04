@@ -330,7 +330,7 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-Five types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, biomass-event, and a Holling \citep{Holling1959} Type II or Type III predator-prey relationship. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
+Five types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, biomass-event, and a density-dependent relationship based on the Holling \citep{Holling1959} Type II or Type III function. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
 The constant rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. Complex mortality relationships such as density dependent predation mortality with prey selectivity can be applied through user-defined derived layers (see Section \ref{sec:derived-layers} for an example). 
 
@@ -384,9 +384,9 @@ First, calculate the vulnerable abundance for each category $k$ in $1 \ldots K$ 
   V(k,l) = S(l) N(k,l)
 \end{equation}
 
-And hence define the total vulnerable abundance $V_{Total}$ as,
+And hence define the total vulnerable abundance $V_{total}$ as,
 \begin{equation}
-  V_{Total}  = \sum\limits_K {\sum\limits_L {V(k,l)}} 
+  V_{total}  = \sum\limits_K {\sum\limits_L {V(k,l)}} 
 \end{equation}
 
 Hence the exploitation rate\index{Maximum exploitation rate} to apply is 
@@ -415,25 +415,41 @@ selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}}}
 
-The Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. Holling Type II or Type III can be obtained by setting the $x$ parameter as either $2$ or $3$ respectively. The function removes a number or biomass from a set of categories according to their abundance (or biomass) and some 'predator' abundance (or biomass) .
+The density-dependent Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. The function removes a number or biomass from a set of categories according to their total (selected) abundance (or biomass), some 'predator' abundance (or biomass), and constrained by a maximum exploitation rate.
 
-For example, the Holling mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
+For example, the mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S_l$ is applied as follows:
 
-First, calculate the vulnerable abundance for each category $k$ in $1 \ldots K$ for ages $l = 1 \ldots L$ that are subject to the mortality,
+First, calculate the total vulnerable abundance (or biomass) over all categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are subject to the mortality,
 \begin{equation}
   V(k,l) = S(l) N(k,l)
 \end{equation}
 
+And hence define the total vulnerable abundance (or biomass) $V_{total}$ as,
+\begin{equation}
+  V_{total}  = \sum\limits_K {\sum\limits_L {V(k,l)}} 
+\end{equation}
+
 and then, assuming that the predator abundance (or biomass) is given by the value of an abundance or biomass layer $L_a$ at $a$, the the number to remove is determined as,
 \begin{equation}
-R(k,l) = L_a (a  V(k,l)^{x-1})/(b + V(k,l)^{x-1})
+R_{total} = L_a (a  V_{total}^{x-1})/(b + V_{total}^{x-1})
+\end{equation}
+
+Hence the exploitation rate\index{Maximum exploitation rate} to apply is 
+\begin{equation}
+U = \begin{cases}
+  R_{total}/V_{total}, & \text{if $C/V_{total} \leq U_{max}$} \\
+  U_{max}, & \text{otherwise}\\ 
+  \end{cases} 
+\end{equation}
+
+And the number removed $R$ from each age $l$ in category $k$ is,
+\begin{equation}
+  R(k,l) = UV(k,l)
 \end{equation}
 
 Set the $x$ parameter as $2$ for a Holling Type II process, and as $3$ for a Holling Type III process.
 
-Except that if the exploitation rate ($U=R(l,k)/V(l,k)$) in any partition element $(l,k)$ exceeds $U_{max}$, then the exploration rate is set equal to $U_{max}$.
-
-Note that the Holling function is applied either as an abundance (if $L_a$ is an abundance layer) or biomass (if $L_a$ is a biomass layer).
+Note that the mortality function will be applied as an abundance if $L_a$ is an abundance layer, or biomass if $L_a$ is a biomass layer.
 
 \subsubsection{\I{Category transition}s}
 
