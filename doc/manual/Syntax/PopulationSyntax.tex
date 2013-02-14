@@ -434,7 +434,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{type}{Define the type of predation mortality that is applied}
 \defType{String}
 \defDefault{No default}
-\defValue{Must be one of Switch, HollingII or HollingIII}
+\defValue{Must be either Switch or Holling}
 
 \defSub{as\_biomass}{Is the mortality applied as a biomass or as abundance}
 \defType{Switch}
@@ -453,13 +453,18 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{a}{Define the $a$ parameter of the Holling function}
 \defType{Constant}
-\defDefault{No default, only needed if \subcommand{type} is HollingII or HollingIII}
+\defDefault{No default, only needed if \subcommand{type} is Holling}
 \defValue{A positive real number}
 
 \defSub{b}{Define the $b$ parameter of the Holling function}
 \defType{Constant}
-\defDefault{No default, only needed if \subcommand{type} is HollingII or HollingIII}
+\defDefault{No default, only needed if \subcommand{type} is Holling}
 \defValue{A positive real number}
+
+\defSub{x}{Define the type of Holling function or Michaelis-Menton function}
+\defType{Constant}
+\defDefault{No default, only needed if \subcommand{type} is Holling}
+\defValue{A positive real number, use 2 for Holling type II or 3 for Holling Type III}
 
 \defSub{categories}{Define the categories that the predation mortality rate is applied to}
 \defType{String vector}
