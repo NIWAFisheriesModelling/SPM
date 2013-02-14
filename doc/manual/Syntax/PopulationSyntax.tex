@@ -428,9 +428,40 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid penalty label defined by \command{penalty}}
 
-\subsubsection[Holling mortality process]{\commandlabsubarg{process}{type}{holling\_mortality\_rate}}
+\TODO
+\subsubsection[Predation mortality process]{\commandlabsubarg{process}{type}{predation\_mortality\_rate}}
 
-\defSub{categories}{Define the categories that the Holling mortality rate is applied to}
+\defSub{type}{Define the type of predation mortality that is applied}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be one of Switch, HollingII or HollingIII}
+
+\defSub{as\_biomass}{Is the mortality applied as a biomass or as abundance}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True or False}
+
+\defSub{preys}{Define the labels of the prey groups}
+\defType{String vector}
+\defDefault{No default, only needed if \subcommand{type} is Switch}
+\defValue{Names of prey must be unique}
+
+\defSub{electivities}{Define the electivities applied to each prey group}
+\defType{Constant vector, of length \subcommand{preys}}
+\defDefault{No default, only needed if \subcommand{type} is Switch}
+\defValue{A vector of positive real numbers, must sum to 1}
+
+\defSub{a}{Define the $a$ parameter of the Holling function}
+\defType{Constant}
+\defDefault{No default, only needed if \subcommand{type} is HollingII or HollingIII}
+\defValue{A positive real number}
+
+\defSub{b}{Define the $b$ parameter of the Holling function}
+\defType{Constant}
+\defDefault{No default, only needed if \subcommand{type} is HollingII or HollingIII}
+\defValue{A positive real number}
+
+\defSub{categories}{Define the categories that the predation mortality rate is applied to}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
@@ -439,6 +470,33 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String vector, of length \subcommand{categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{prey\_groups}{Define which prey group each category belongs to}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default, only needed if \subcommand{type} is Switch}
+\defValue{Valid labels defined by \command{preys}}
+
+\defSub{categories\_predator}{Define the categories of the predator}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{selectivities\_predator}{Define the selectivities applied to each predator category}
+\defType{String vector, of length \subcommand{categories\_predator}}
+\defDefault{No default}
+\defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{u\_max} {Define the maximum exploitation rate}
+\defType{Constant}
+\defDefault{0.99}
+\defValue{Must be $> 0$ and $< 1$}
+
+\defSub{penalty} {Define the event mortality penalty label}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid penalty label defined by \command{penalty}}
+
+\TODOend
 
 \defSub{x}{Define the $x$ parameter of the Holling function. Use $x=2$ for Type II or $x=3$ for Type III}
 \defType{Numeric}
