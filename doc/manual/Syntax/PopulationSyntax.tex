@@ -102,7 +102,7 @@
 \defDefault{No default}
 \defValue{A valid process label, from one of \command{process}}
 
-\subsection{time-steps}
+\subsection{Time-steps}
 
 \defComLab{time\_step} {Define a time-step with label}
 
@@ -124,8 +124,8 @@ The population processes available are,
 	\item Annually varying relationship mortality rate process
 	\item Mortality event (as a number) process
 	\item Mortality event (as a biomass) process
-	\item Holling mortality process
-	\item Prey switch predation mortality process
+	\item Holling mortality rate
+	\item Prey-switch predation process
 	\item Category transition process
 	\item Category shift process
 \end{itemize}
@@ -429,45 +429,29 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid penalty label defined by \command{penalty}}
 
-\TODO
-\subsubsection[Predation mortality process]{\commandlabsubarg{process}{type}{predation\_mortality\_rate}}
+\subsubsection[Holling mortality rate]{\commandlabsubarg{process}{type}{Holling\_mortality\_rate}}
 
-\defSub{type}{Define the type of predation mortality that is applied}
-\defType{String}
-\defDefault{Holling}
-\defValue{Must be either Switch or Holling}
-
-\defSub{as\_biomass}{Is the mortality applied as a biomass or as abundance}
+\defSub{is\_biomass}{Is the mortality applied as a biomass or as abundance}
 \defType{Switch}
 \defDefault{True}
 \defValue{Either True or False}
 
-\defSub{preys}{Define the labels of the prey groups}
-\defType{String vector}
-\defDefault{No default, only needed if \subcommand{type} is Switch}
-\defValue{Names of prey must be unique}
-
-\defSub{electivities}{Define the electivities applied to each prey group}
-\defType{Constant vector, of length \subcommand{preys}}
-\defDefault{No default, only needed if \subcommand{type} is Switch}
-\defValue{A vector of positive real numbers, must sum to 1}
-
 \defSub{a}{Define the $a$ parameter of the Holling function}
 \defType{Constant}
-\defDefault{No default, only needed if \subcommand{type} is Holling}
+\defDefault{No default}
 \defValue{A positive real number}
 
 \defSub{b}{Define the $b$ parameter of the Holling function}
 \defType{Constant}
-\defDefault{No default, only needed if \subcommand{type} is Holling}
+\defDefault{No default}
 \defValue{A positive real number}
 
 \defSub{x}{Define the type of Holling function or Michaelis-Menton function}
 \defType{Constant}
-\defDefault{default $2$, only needed if \subcommand{type} is Holling}
-\defValue{A positive real number, use $2$ for Holling type II or $3$ for Holling Type III}
+\defDefault{default $2$}
+\defValue{A positive real number, use $2$ for Holling type II or $3$ for Holling Type III, or other positive real value for the generalised Michaelis-Menton function}
 
-\defSub{categories}{Define the categories that the predation mortality rate is applied to}
+\defSub{categories}{Define the categories that the Holling mortality rate is applied to}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
@@ -477,18 +461,13 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
-\defSub{prey\_groups}{Define which prey group each category belongs to}
-\defType{String vector, of length \subcommand{categories}}
-\defDefault{No default, only needed if \subcommand{type} is Switch}
-\defValue{Valid labels defined by \command{preys}}
-
-\defSub{categories\_predator}{Define the categories of the predator}
+\defSub{predator\_categories}{Define the categories of the predator}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\defSub{selectivities\_predator}{Define the selectivities applied to each predator category}
-\defType{String vector, of length \subcommand{categories\_predator}}
+\defSub{predator\_selectivities}{Define the selectivities applied to each predator category}
+\defType{String vector, of length \subcommand{predator\_categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
@@ -502,72 +481,30 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid penalty label defined by \command{penalty}}
 
-\TODOend
+\subsubsection[Prey-switching predation process]{\commandlabsubarg{process}{type}{Prey-switch\_predation}}
 
-\defSub{x}{Define the $x$ parameter of the Holling function. Use $x=2$ for Type II or $x=3$ for Type III}
-\defType{Numeric}
-\defDefault{2}
-\defValue{A positive real number $\geq 1.0$}
-
-\defSub{a}{Define the $a$ parameter of the Holling function}
-\defType{Numeric}
-\defDefault{No default}
-\defValue{A positive real number}
-
-\defSub{b}{Define the $b$ parameter of the Holling function}
-\defType{Numeric}
-\defDefault{No default}
-\defValue{A positive real number}
-
-\TODO
-
-\defSub{categories\_predator}{Define the categories of the predator}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid categories from \commandsub{model}{categories}}
-
-\defSub{selectivities\_predator}{Define the selectivities applied to each predator category}
-\defType{String vector, of length \subcommand{categories\_predator}}
-\defDefault{No default}
-\defValue{Valid selectivity labels defined by \command{selectivity}}
-
-\defSub{as\_biomass}{Is the mortality applied as a biomass or as abundance}
+\defSub{is\_biomass}{Is the mortality applied as a biomass or as abundance}
 \defType{Switch}
 \defDefault{True}
 \defValue{Either True or False}
 
-\TODOend
-
-\defSub{u\_max} {Define the maximum exploitation rate}
-\defType{Constant}
-\defDefault{0.99}
-\defValue{Must be $> 0$ and $< 1$}
-
-\defSub{penalty} {Define the event mortality penalty label}
-\defType{String}
+\defSub{consumption\_rate}{Define the total predator consumption rate}
+\defType{Numeric}
 \defDefault{No default}
-\defValue{Valid penalty label defined by \command{penalty}}
+\defValue{A positive real number}
 
-\TODO
-
-\subsubsection[Prey switching predation mortality process]{\commandlabsubarg{process}{type}{switch\_mortality\_rate}}
-
-\defSub{as\_biomass}{Is the mortality applied as a biomass or as abundance}
-\defType{Switch}
-\defDefault{True}
-\defValue{Either True or False}
-
-\defSub{prey}{Define arbitrary labels for all the prey groups used}
+\defSub{prey}{Define the vector of labels for all the prey groups used}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Names must be unique}
+\defNote{These are the labels which links to the relative electivities for groups of categories}
 
-\defSub{electivities}{Define the electivities applied to prey groups 1 to n-1}
+\defSub{electivities}{Define the electivities applied to prey groups $1$ \ldots $n-1$}
 \defType{Constant vector, of length $\subcommand{prey} - 1$}
 \defDefault{No default}
-\defValue{A vector of positive real numbers, must sum to $< 1$}
+\defValue{A vector of positive real numbers, must have values that sum to $< 1$}
 
-\defSub{categories}{Define the categories that the predation mortality rate is applied to for all prey groups}
+\defSub{categories}{Define the categories that the predation mortality is applied to, for all prey groups}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
@@ -582,13 +519,13 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid labels defined by \subcommand{prey}}
 
-\defSub{categories\_predator}{Define the categories of the predator}
+\defSub{predator\_categories}{Define the categories of the predator}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
 
-\defSub{selectivities\_predator}{Define the selectivities applied to each predator category}
-\defType{String vector, of length \subcommand{categories\_predator}}
+\defSub{predator\_selectivities}{Define the selectivities applied to each predator category}
+\defType{String vector, of length \subcommand{predator\_categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
@@ -597,12 +534,10 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{0.99}
 \defValue{Must be $> 0$ and $< 1$}
 
-\defSub{penalty} {Define the event mortality penalty label}
+\defSub{penalty} {Define the process penalty label}
 \defType{String}
 \defDefault{No default}
 \defValue{Valid penalty label defined by \command{penalty}}
-
-\TODOend
 
 \subsubsection[Category transition process]{\commandlabsubarg{process}{type}{category\_transition}}
 
