@@ -330,9 +330,17 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
+<<<<<<< .mine
+Six types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, biomass-event, a density-dependent relationship based on the Holling \citep{Holling1959} Type II or Type III function, and a density-dependent relationship based on prey-switching mechanisms. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
+=======
 Five types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, biomass-event, and density-dependent predation mortality. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
+>>>>>>> .r4848
 
+<<<<<<< .mine
+The constant rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell.  
+=======
 The constant rate, annually varying rate, event, and biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell. 
+>>>>>>> .r4848
 
 \TODO
 
@@ -420,14 +428,42 @@ selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}}}
 
+<<<<<<< .mine
+The density-dependent Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but is generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. The function removes a number or biomass from a set of categories according to their total (selected) abundance (or biomass), some 'predator' abundance (or biomass), and constrained by a maximum exploitation rate.
+=======
 Three types of density-dependent predation mortalities are available: two relationships based on the Holling \citep{Holling1959} Type II or Type III functions which use predator and target prey density; and a prey switching relationship based on predator density, predator electivity and the density of all its preys. All functions remove a number or biomass from a set of categories according to their total (selected) abundance (or biomass), some 'predator' abundance (or biomass), and constrained by a maximum exploitation rate. In the case of the prey switching function, the removal of any prey is also a function of the total (selected) abundance or biomass of all other prey groups and the electivity of the predator to each prey group. Note that the mortality function will be applied as a biomass or an abundance depending on the value of the \subcommand{as\_biomass} switch. 
+>>>>>>> .r4848
 
+<<<<<<< .mine
+For example, the mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S(l)$ is applied as follows:
+=======
 The density-dependent Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. 
+>>>>>>> .r4848
 
+<<<<<<< .mine
+\TODO
+
+First, calculate the total predator abundance (or biomass) over all predator categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are applying the mortality,
+=======
 For example, the mortality applied to user-defined categories $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S(l)$ is applied as follows:
 
 First, calculate the total predator abundance (or biomass) over all predator categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are applying the mortality,
+>>>>>>> .r4848
 \begin{equation}
+<<<<<<< .mine
+  P(k,l) = S(l) N(k,l)
+\end{equation}
+
+And define the total predator abundance (or biomass) $P_{total}$ as,
+\begin{equation}
+  P_{total}  = \sum\limits_K {\sum\limits_L {P(k,l)}} 
+\end{equation}
+
+\TODOend
+
+Then, calculate the total vulnerable abundance (or biomass) over all categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are subject to the mortality,
+\begin{equation}
+=======
   P(k,l) = S(l) N(k,l)
 \end{equation}
 
@@ -438,6 +474,7 @@ And define the total predator abundance (or biomass) $P_{total}$ as,
 
 Then, calculate the total vulnerable abundance (or biomass) over all prey categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are subject to the mortality,
 \begin{equation}
+>>>>>>> .r4848
   V(k,l) = S(l) N(k,l)
 \end{equation}
 
@@ -446,7 +483,11 @@ And hence define the total vulnerable abundance (or biomass) $V_{total}$ as,
   V_{total}  = \sum\limits_K {\sum\limits_L {V(k,l)}} 
 \end{equation}
 
+<<<<<<< .mine
+and then, the the number to remove is determined as,
+=======
 and then the number to remove is determined as,
+>>>>>>> .r4848
 \begin{equation}
 R_{total} = P_{total} (a  V_{total}^{x-1})/(b + V_{total}^{x-1})
 \end{equation}
@@ -466,10 +507,70 @@ And the number removed $R$ from each age $l$ in category $k$ is,
   R(k,l) = UV(k,l)
 \end{equation}
 
+<<<<<<< .mine
+Set the $x$ parameter as $2$ for a Holling Type II process, as $3$ for a Holling Type III process, and as any positive real number for a generalised Michaelis-Menten process.
+=======
 The prey-switching predation mortality takes into account the availability of all prey groups in the model, and the electivity of the predator for each prey group. The predator abundance (or biomass) $P_{total}$ is calculated as above. Then for each prey group (which might contain a number of categories), the vulnerable abundance or biomass $V(g)_{total}$ is calculated as above. 
+>>>>>>> .r4848
 
+<<<<<<< .mine
+Note that the mortality function will be applied as a biomass or an abundance depending on the value of the \subcommand{as\_biomass} switch.
+=======
+\TODO
+>>>>>>> .r4848
+
+<<<<<<< .mine
 \TODO
 
+The density-dependent prey-switching mortality function applies predation mortality from any single predator group to all its prey groups at once. It removes a number (or biomass) from each prey group according to the total (selected) abundance (or biomass) of this prey group, the total (selected) abundance (or biomass) of all other prey groups, some 'predator' abundance (or biomass), the preference (electivity) of the predator to each prey group, and constrained by a maximum exploitation rate. Each prey group can be composed of a number of individual categories, so can the predator group. 
+
+For example, the mortality applied to user-defined prey group $g$ of category $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S(l)$ is applied as follows:
+
+First, calculate the total predator abundance (or biomass) over all predator categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are applying the mortality,
+\begin{equation}
+  P(k,l) = S(l) N(k,l)
+\end{equation}
+
+And define the total predator abundance (or biomass) $P_{total}$ as,
+\begin{equation}
+  P_{total}  = \sum\limits_K {\sum\limits_L {P(k,l)}} 
+\end{equation}
+
+Then, calculate the total vulnerable abundance (or biomass) of prey group $g$ over all categories $k$ in $1 \ldots K$ and ages $l = 1 \ldots L$ that are subject to the mortality,
+\begin{equation}
+  V(g,k,l) = S(l) N(k,l)
+\end{equation}
+
+And hence define the total vulnerable abundance (or biomass) of each prey group $V(g)_{total}$ as,
+\begin{equation}
+  V(g)_{total}  = \sum\limits_K {\sum\limits_L {V(g,k,l)}} 
+\end{equation}
+
+The vulnerable abundance (or biomass) of every prey group $g$ in $1 \ldots G$ is calculated individually. Then the number to remove from each prey group $g$ depends on its electivity $E(g)$, on the abundance (or biomass) of all other prey groups $i$ in $1 \ldots G$, the electivity of the predator for each prey group $E(i)$, as well as the total consumption rate of the predator $CR$ and its abundance (or biomass) $P_{total}$,
+\begin{equation}
+  R(g)_{total}=P_{total} CR (V(g)_{total} E(g))/({\sum\limits_G {V(i)_{total} E(i)}})
+\end{equation}
+
+Hence the exploitation rate\index{Maximum exploitation rate} to apply to each prey group $g$ is 
+\begin{equation}
+U(g) = \begin{cases}
+  R(g)_{total}/V(g)_{total}, & \text{if $R(g)_{total}/V(g)_{total} \leq U_{max}$} \\
+  U_{max}, & \text{otherwise}\\ 
+  \end{cases} 
+\end{equation}
+
+And the number removed $R(g)$ in each prey group $g$ from each age $l$ in category $k$ is,
+\begin{equation}
+  R(g,k,l) = U(g)V(g,k,l)
+\end{equation}
+
+Note that prey switching is assumed to only happen within the prey groups specificed in the model, and the consumption rate by the predator has to be adjusted to represent the consumption rate of the prey groups present in the model. The electivities must sum to one and therefore $G -1$ electivities are specified in the model.
+
+The mortality function will be applied as a biomass or an abundance depending on the value of the \subcommand{as\_biomass} switch.
+
+\TODOend
+
+=======
 Then the number to remove for each prey group over all groups $g$ in $1 \ldots G$ will depend on the abundance (or biomass) $V(g)_{total}$ of all prey groups in $1 \ldots G$, and the electivity of the predator for each prey group $E(g)$, as well as the total consumption rate of the predator $CR$,
 \begin{equation}
   R(g)_{total}=P_{total} CR (V(g)_{total} E(g))/({\sum\limits_G {V(i)_{total} E(i)}})
@@ -481,6 +582,7 @@ Note that prey switching is assumed to only happen within the prey groups specif
 
 \TODOend
 
+>>>>>>> .r4848
 \subsubsection{\I{Category transition}s}
 
 Category transition processes move individuals between categories. \SPM\ implements two types, the total number and a rate. 
