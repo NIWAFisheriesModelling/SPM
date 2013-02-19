@@ -226,7 +226,7 @@ void CHollingMortalityRateProcess::execute() {
             if(bIsAbundance) {
               dPredatorVulnerable += dPredatorCurrent;
             } else {
-              dPredatorVulnerable += dCurrent * pWorld->getMeanWeight(l,vPredatorCategoryIndex[k]);
+              dPredatorVulnerable += dPredatorCurrent * pWorld->getMeanWeight(l,vPredatorCategoryIndex[k]);
             }
           }
         }
