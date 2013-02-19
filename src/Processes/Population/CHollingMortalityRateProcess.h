@@ -14,6 +14,7 @@
 
 // Forward-Dec
 class CPenalty;
+class CSelectivity;
 class CTimeStepManager;
 
 //**********************************************************************

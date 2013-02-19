@@ -11,11 +11,13 @@
 #include "CHollingMortalityRateProcess.h"
 #include "../../Penalties/CPenaltyManager.h"
 #include "../../Penalties/CPenalty.h"
+#include "../../Selectivities/CSelectivityManager.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/ForEach.h"
 
 //**********************************************************************
 // CHollingMortalityRateProcess::CHollingMortalityRateProcess()
@@ -105,6 +107,15 @@ void CHollingMortalityRateProcess::build() {
   try {
     // Base Build
     CProcess::build();
+
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    foreach(string Name, vPredatorSelectivityList) {
+      vPredatorSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
+    }
+
+    foreach(string Name, vPredatorCategoryList) {
+      vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
+    }
 
     // Build our Grid To Be World+1
     if (pWorldSquare == 0) {
@@ -219,7 +230,6 @@ void CHollingMortalityRateProcess::execute() {
             }
           }
         }
-
 
         // Holling function type 2 (x=1) or 3 (x=2), or generalised (Michaelis Menten)
         dMortality = dPredatorVulnerable * (dA * pow(dVulnerable, (dX - 1.0)))/(dB + pow(dVulnerable, (dX - 1.0)));
