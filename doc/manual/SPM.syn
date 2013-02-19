@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-02-04 (rev. 4844)
+; TextPad syntax definitions for SPM version 1.1-2013-02-15 (rev. 4850)
 ; ===================================================================================
 ;
 ;
@@ -74,6 +74,7 @@ categories2
 category_labels
 category_values
 cell_length
+consumption_rate
 correlation_adjustment_diff
 covariance
 covariance_adjustment_method
@@ -87,6 +88,7 @@ derived_quantity
 df
 difference_scale
 e
+electivities
 error_value
 estimation_phase
 evaluations
@@ -99,6 +101,7 @@ initialisation
 initialisation_phase
 initialisation_phases
 initialisation_time_steps
+is_abundance
 iterations
 k
 keep
@@ -132,8 +135,12 @@ p2
 parameter
 penalty
 population_size
+predator_categories
+predator_selectivities
 preference_function
 preference_functions
+prey
+prey_groups
 prior
 process
 process_error
@@ -200,7 +207,9 @@ true
 
 
 [Keywords 4]
+Holling_mortality_rate
 MCMC
+Prey-switch_predation
 abundance
 abundance_density
 adjacent_cell
@@ -234,7 +243,6 @@ estimate_summary
 estimate_value
 event_mortality
 exponential
-holling_mortality_rate
 increasing
 initialisation
 inverse_logistic

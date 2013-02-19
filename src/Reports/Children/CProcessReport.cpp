@@ -229,10 +229,11 @@ void CProcessReport::execute() {
     // Holling mortality rates
     CHollingMortalityRateProcess *pHolling = dynamic_cast<CHollingMortalityRateProcess*>(pTarget);
     if (pHolling != 0) {
-      cout << "layer_type" << ": " << (pHolling->isAbundance()?PARAM_ABUNDANCE:PARAM_BIOMASS) << "\n";
       vector<int> vMortalityYears = pHolling->getMortalityYears();
       vector<double> vMortalityRate = pHolling->getMortalityRate();
       vector<double> vMortalityN = pHolling->getMortalityN();
+      vector<double> vPredatorBiomass = pHolling->getPredatorBiomass();
+
       cout << PARAM_YEARS << ": ";
       for (int i = 0; i < (int)vMortalityYears.size(); ++i)
         cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
@@ -252,6 +253,14 @@ void CProcessReport::execute() {
           cout << vMortalityBiomass[i] << (i<((int)vMortalityBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
         cout << "\n";
       }
+      if(pHolling->isAbundance()) {
+        cout << PARAM_PREDATOR_ABUNDANCE << ": ";
+      } else {
+        cout << PARAM_PREDATOR_BIOMASS << ": ";
+      }
+      for (int i = 0; i < (int)vPredatorBiomass.size(); ++i)
+        cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+      cout << "\n";
     }
     cout << CONFIG_END_REPORT << "\n" << endl;
 

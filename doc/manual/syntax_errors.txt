@@ -35,6 +35,8 @@ In SPM, but not in manual
   multinomial
   normal_log
   objective
+  predator_abundance
+  predator_biomass
   profiles
   recruitment_values
   rescale

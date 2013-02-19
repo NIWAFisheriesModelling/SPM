@@ -459,7 +459,7 @@ And the number removed $R$ from each age $l$ in category $k$ is,
   R(k,l) = UV(k,l)
 \end{equation}
 
-The density-dependent Holling mortality process will be applied as a biomass or an abundance depending on the value of the \subcommand{as\_biomass} switch.
+The density-dependent Holling mortality process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
 
 The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from any single predator group to all of its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of this prey group, the total (selected) abundance (or biomass) of all other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. Note that each prey group can be composed of a number of individual categories, as can the predator group.
 
@@ -505,7 +505,7 @@ And the number removed $R(g)$ in each prey group $g$ from each age $l$ in catego
 
 Note that prey switching occurs only between prey groups specified by the process, and the total predator consumption rate represents the consumption of the predator on those prey groups alone. Also note that the electivities must sum to one. We define $G -1$ electivities in the process, with the last electivity set equal to $1-\sum\limits_{G-1}{E(g)}$.
 
-The density-dependent prey-switching process will be applied as a biomass or an abundance depending on the value of the \subcommand{as\_biomass} switch.
+The density-dependent prey-switching process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
 
 \subsubsection{\I{Category transition}s}
 

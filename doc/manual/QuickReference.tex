@@ -79,15 +79,29 @@
 \defSub{u\_max} {Define the maximum exploitation rate}
 \defSub{selectivities}{Define the selectivities applied to each category}
 \defSub{penalty} {Define the event mortality penalty label}
-\par\textbf{\commandlabsubarg{process}{type}{holling\_mortality\_rate}}\par
-\defSub{categories}{Define the categories that the Holling mortality rate is applied to}
-\defSub{selectivities}{Define the selectivities applied to each category}
-\defSub{x}{Define the $x$ parameter of the Holling function. Use $x=2$ for Type II or $x=3$ for Type III}
+\par\textbf{\commandlabsubarg{process}{type}{Holling\_mortality\_rate}}\par
+\defSub{is\_abundance}{Is the mortality applied as a biomass or as abundance}
 \defSub{a}{Define the $a$ parameter of the Holling function}
 \defSub{b}{Define the $b$ parameter of the Holling function}
-\defSub{layer}{Define the layer that specify the Holling predator abundance (or biomass)}
+\defSub{x}{Define the type of Holling function or Michaelis-Menton function}
+\defSub{categories}{Define the categories that the Holling mortality rate is applied to}
+\defSub{selectivities}{Define the selectivities applied to each category}
+\defSub{predator\_categories}{Define the categories of the predator}
+\defSub{predator\_selectivities}{Define the selectivities applied to each predator category}
 \defSub{u\_max} {Define the maximum exploitation rate}
 \defSub{penalty} {Define the event mortality penalty label}
+\par\textbf{\commandlabsubarg{process}{type}{Prey-switch\_predation}}\par
+\defSub{is\_abundance}{Is the mortality applied as a biomass or as abundance}
+\defSub{consumption\_rate}{Define the total predator consumption rate}
+\defSub{prey}{Define the vector of labels for all the prey groups used}
+\defSub{electivities}{Define the electivities applied to prey groups $1$ \ldots $n-1$}
+\defSub{categories}{Define the categories that the predation mortality is applied to, for all prey groups}
+\defSub{selectivities}{Define the selectivities applied to each prey category}
+\defSub{prey\_groups}{Assign each prey category to a specific prey group}
+\defSub{predator\_categories}{Define the categories of the predator}
+\defSub{predator\_selectivities}{Define the selectivities applied to each predator category}
+\defSub{u\_max} {Define the maximum exploitation rate}
+\defSub{penalty} {Define the process penalty label}
 \par\textbf{\commandlabsubarg{process}{type}{category\_transition}}\par
 \defSub{from} {Define the categories that are the source of the transition process}
 \defSub{selectivities} {Define the selectivities applied to the source categories}

@@ -9,11 +9,6 @@
 
 // Local Headers
 #include "CHollingMortalityRateProcess.h"
-#include "../../InitializationPhases/CInitializationPhaseManager.h"
-#include "../../Layers/CLayerManager.h"
-#include "../../Layers/Numeric/CBiomassLayer.h"
-#include "../../Layers/Numeric/CAbundanceLayer.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Penalties/CPenaltyManager.h"
 #include "../../Penalties/CPenalty.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -29,17 +24,18 @@
 CHollingMortalityRateProcess::CHollingMortalityRateProcess() {
   // Variables
   pGrid            = 0;
-  pLayer           = 0;
   sType = PARAM_HOLLING_MORTALITY_RATE;
   pWorldSquare     = 0;
 
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_CATEGORIES);
-  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
-  pParameterList->registerAllowed(PARAM_X);
+  pParameterList->registerAllowed(PARAM_IS_ABUNDANCE);
   pParameterList->registerAllowed(PARAM_A);
   pParameterList->registerAllowed(PARAM_B);
-  pParameterList->registerAllowed(PARAM_LAYER);
+  pParameterList->registerAllowed(PARAM_X);
+  pParameterList->registerAllowed(PARAM_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_PREDATOR_CATEGORIES);
+  pParameterList->registerAllowed(PARAM_PREDATOR_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_U_MAX);
   pParameterList->registerAllowed(PARAM_PENALTY);
 }
@@ -52,15 +48,18 @@ void CHollingMortalityRateProcess::validate() {
   try {
 
     // Get our parameters
+    bIsAbundance = pParameterList->getBool(PARAM_IS_ABUNDANCE);
     dA = pParameterList->getDouble(PARAM_A);
     dB = pParameterList->getDouble(PARAM_B);
     dX = pParameterList->getDouble(PARAM_X,true,2.0);
-    sLayer  = pParameterList->getString(PARAM_LAYER);
-    dUMax = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
 
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
+    pParameterList->fillVector(vPredatorCategoryList, PARAM_PREDATOR_CATEGORIES);
+    pParameterList->fillVector(vPredatorSelectivityList, PARAM_PREDATOR_SELECTIVITIES);
+
+    dUMax = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
     // Base Validation
@@ -69,10 +68,14 @@ void CHollingMortalityRateProcess::validate() {
     // Register Estimables
     registerEstimable(PARAM_A,&dA);
     registerEstimable(PARAM_B,&dB);
+    registerEstimable(PARAM_X,&dX);
 
     // Local Validation
     if (getCategoryCount() != getSelectivityCount())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
+
+    if (getPredatorCategoryCount() != getPredatorSelectivityCount())
+      CError::errorListSameSize(PARAM_PREDATOR_CATEGORIES, PARAM_PREDATOR_SELECTIVITIES);
 
     if (dUMax >= ONE)
       CError::errorGreaterThanEqualTo(PARAM_U_MAX, PARAM_ONE);
@@ -102,21 +105,6 @@ void CHollingMortalityRateProcess::build() {
   try {
     // Base Build
     CProcess::build();
-
-    bIsAbundance = false;
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
-    CNumericLayer* pTempLayer = pLayer;
-    CBiomassLayer *pBiomassPtr = dynamic_cast<CBiomassLayer*>(pTempLayer);
-    if (pBiomassPtr == 0) {
-      // Not biomass
-      bIsAbundance = true;
-      pTempLayer = pLayer;
-      CAbundanceLayer *pAbundancePtr = dynamic_cast<CAbundanceLayer*>(pTempLayer);
-      if (pAbundancePtr == 0) {
-        // Not abundance and not biomass
-        throw string("Layer '" + sLayer + "' is not of type abundance or biomass.");
-      }
-    }
 
     // Build our Grid To Be World+1
     if (pWorldSquare == 0) {
@@ -153,6 +141,7 @@ void CHollingMortalityRateProcess::rebuild() {
     vMortalityN.resize(0);
     vMortalityBiomass.resize(0);
     vMortalityYears.resize(0);
+    vPredatorBiomass.resize(0);
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
@@ -192,6 +181,7 @@ void CHollingMortalityRateProcess::execute() {
         pWorldSquare->zeroGrid();
         // Clear our Vulnerable Amount
         dVulnerable = 0.0;
+        dPredatorVulnerable = 0.0;
 
         // Loop Through Categories & Work out Vulnerable Stock in abundance or biomass
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
@@ -205,16 +195,34 @@ void CHollingMortalityRateProcess::execute() {
             pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
 
             // Increase Vulnerable biomass
-            if(!bIsAbundance) {
-              dVulnerable += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
-            } else {
+            if(bIsAbundance) {
               dVulnerable += dCurrent;
+            } else {
+              dVulnerable += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
             }
           }
         }
 
+        // Loop Through Categories & Work out Predator Stock in abundance or biomass
+        for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k) {
+          for (int l = 0; l < iBaseColCount; ++l) {
+            // get current prey abundance in age/category
+            dPredatorCurrent = pBaseSquare->getValue( vPredatorCategoryIndex[k], l) * vPredatorSelectivityIndex[k]->getResult(l);
+            if (dPredatorCurrent <0.0)
+              dPredatorCurrent = 0.0;
+
+            // Increase Predator biomass
+            if(bIsAbundance) {
+              dPredatorVulnerable += dPredatorCurrent;
+            } else {
+              dPredatorVulnerable += dCurrent * pWorld->getMeanWeight(l,vPredatorCategoryIndex[k]);
+            }
+          }
+        }
+
+
         // Holling function type 2 (x=1) or 3 (x=2), or generalised (Michaelis Menten)
-        dMortality = pLayer->getValue(i, j) * (dA * pow(dVulnerable, (dX - 1.0)))/(dB + pow(dVulnerable, (dX - 1.0)));
+        dMortality = dPredatorVulnerable * (dA * pow(dVulnerable, (dX - 1.0)))/(dB + pow(dVulnerable, (dX - 1.0)));
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
         dExploitation = dMortality / CMath::zeroFun(dVulnerable,ZERO);
@@ -244,52 +252,6 @@ void CHollingMortalityRateProcess::execute() {
             if(!bIsAbundance) dSumMortalityBiomass += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
           }
         }
-
-/*        // Get Current Square, and Difference Equal
-        pBaseSquare = pWorld->getBaseSquare(i, j);
-        // Check Square Ok
-        if (!pBaseSquare->getEnabled())
-          continue;
-        pDiff = pWorld->getDifferenceSquare(i, j);
-        // Loop Through Categories and Ages
-        for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
-          for (int l = 0; l < iBaseColCount; ++l) {
-            // Get Current Value
-            // If predator layer is a biomass, then use prey as a biomass
-            if(!bIsAbundance) {
-              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * pWorld->getMeanWeight(l,vCategoryIndex[k]);
-            } else {
-              dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
-            }
-            // Holling function type 2 (x=1) or 3 (x=2), or generalised (Michaelis Menten)
-            dMortality = pLayer->getValue(i, j) * (dA * pow(dCurrent, (dX - 1.0)))/(dB + pow(dCurrent, (dX - 1.0)));
-
-            // Work out exploitation rate to remove
-            double dExploitation = dMortality / CMath::zeroFun(dCurrent,ZERO);
-            // Check against Umax
-            if (dExploitation > dUMax){
-              dExploitation = dUMax;
-              if (pPenalty != 0) // Throw Penalty
-                pPenalty->trigger(sLabel, dMortality, (dCurrent * dUMax));
-            } else if (dExploitation < 0.0) {
-              dExploitation = 0.0;
-            }
-
-            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * dExploitation;
-
-            // Check 0
-            if (dCurrent <= 0.0)
-               continue;
-
-            // Do Add/Subs
-            pDiff->subValue( vCategoryIndex[k], l, dCurrent);
-            dSumMortality += dCurrent;
-            dSumAbundance += pBaseSquare->getValue( vCategoryIndex[k], l);
-            if(!bIsAbundance) dSumMortalityBiomass += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
-          }
-        }
-*/
-
       }
     }
     if ( pRuntimeController->getCurrentState() != STATE_INITIALIZATION ) {
@@ -297,6 +259,7 @@ void CHollingMortalityRateProcess::execute() {
       vMortalityRate.push_back(dSumMortality / dSumAbundance);
       vMortalityN.push_back(dSumMortality);
       if(!bIsAbundance) vMortalityBiomass.push_back(dSumMortalityBiomass);
+      vPredatorBiomass.push_back(dPredatorVulnerable);
     }
 
 #ifndef OPTIMIZE

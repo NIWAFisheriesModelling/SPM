@@ -11,10 +11,8 @@
 
 // Local headers
 #include "../CProcess.h"
-#include "../../InitializationPhases/CInitializationPhaseManager.h"
 
 // Forward-Dec
-class CNumericLayer;
 class CPenalty;
 class CTimeStepManager;
 
@@ -36,13 +34,14 @@ public:
   vector<double>              getMortalityRate() { return vMortalityRate; }
   vector<double>              getMortalityN() { return vMortalityN; }
   vector<double>              getMortalityBiomass() { return vMortalityBiomass; }
+  vector<double>              getPredatorBiomass() { return vPredatorBiomass; }
   bool                        isAbundance() { return bIsAbundance; }
+  int                         getPredatorCategoryCount() { return vPredatorCategoryList.size(); }
+  int                         getPredatorSelectivityCount() { return vPredatorSelectivityList.size(); }
 
 protected:
   // Variables
   CWorldSquare                **pGrid;
-  CNumericLayer               *pLayer;
-  string                      sLayer;
   CWorldSquare                *pWorldSquare;
   bool                        bIsAbundance;
   double                      dA;
@@ -52,14 +51,21 @@ protected:
   double                      dMortality;
   double                      dExploitation;
   double                      dVulnerable;
+  double                      dPredatorVulnerable;
+  vector<string>              vPredatorCategoryList;
+  vector<int>                 vPredatorCategoryIndex;
+  vector<string>              vPredatorSelectivityList;
+  vector<CSelectivity*>       vPredatorSelectivityIndex;
+  double                      dPredatorCurrent;
   vector<int>                 vMortalityYears;
   vector<double>              vMortalityRate;
   vector<double>              vMortalityN;
   vector<double>              vMortalityBiomass;
+  vector<double>              vPredatorBiomass;
   string                      sPenalty;
   CPenalty                    *pPenalty;
-  CInitializationPhaseManager *pInitializationPhaseManager;
   CTimeStepManager            *pTimeStepManager;
+
 };
 
 #endif /* CHOLLINGMORTALITYRATEPROCESS_H_ */

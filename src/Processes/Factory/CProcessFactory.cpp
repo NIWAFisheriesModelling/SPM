@@ -24,6 +24,7 @@
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CHollingMortalityRateProcess.h"
+#include "../Population/CPreySwitchPredationProcess.h"
 #include "../Population/CLocalBHRecruitmentProcess.h"
 #include "CProcessFactory.h"
 
@@ -51,6 +52,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_BIOMASS_EVENT_MORTALITY)
     pProcess = new CBiomassEventMortalityProcess();
+  else if (type == PARAM_PREY_SWITCH_PREDATION)
+    pProcess = new CPreySwitchPredationProcess();
   else if (type == PARAM_HOLLING_MORTALITY_RATE)
     pProcess = new CHollingMortalityRateProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)
