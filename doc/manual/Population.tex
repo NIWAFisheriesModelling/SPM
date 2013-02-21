@@ -334,7 +334,9 @@ Six types of mortality processes are permissible in \SPM, constant rate, annuall
 
 The constant rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell.  
 
-For example, to specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
+\paragraph{Constant mortality rate:}
+
+To specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
 
 {\small{\begin{verbatim}
 @process NaturalMortality
@@ -362,6 +364,8 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
   n'(a,k,l) = n(a,k,l) \exp \left({-M(a,k,l)}\right)
 \end{equation}
 
+\paragraph{Annual mortality rate:}
+
 Mortality for the annual rate\index{Annual mortality} is similar to the constant rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
 
 {\small{\begin{verbatim}
@@ -373,7 +377,9 @@ years 1996 1997 1998 1999 2000
 M 0.20 0.15 0.22 0.25 0.21
 \end{verbatim}}}
 
-The event mortality process\index{Event mortality} and biomass  mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
+\paragraph{Event and biomass-event mortality rate:}
+
+The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
 The event mortality types must be defined using a layer. Here, the abundance or biomass to remove from a the population for each cell $a$ is the value of the layer at $a$ (denoted $F_a$) --- except where there are too few individuals for the event mortality to be taken (as defined by the maximum exploitation rate). In this scenario, \SPM\ removes as many individuals or as much biomass as it can while not exceeding the maximum exploitation rate. Event mortality processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be removed. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in defined categories (after applying selectivities). See Section \ref{sec:penalties} for more information on specifying penalties.
 
@@ -414,6 +420,8 @@ U_max 0.70
 selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}}}
+
+\paragraph{Holling mortality process:}
 
 The density-dependent Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but is generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. The function removes a number or biomass from a set of categories according to their total (selected) abundance (or biomass)and some 'predator' abundance (or biomass), but constrained by a maximum exploitation rate.
 
@@ -460,6 +468,8 @@ And the number removed $R$ from each age $l$ in category $k$ is,
 \end{equation}
 
 The density-dependent Holling mortality process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
+
+\paragraph{Prey-switching mortality process:}
 
 The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from any single predator group to all of its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of this prey group, the total (selected) abundance (or biomass) of all other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. Note that each prey group can be composed of a number of individual categories, as can the predator group.
 
