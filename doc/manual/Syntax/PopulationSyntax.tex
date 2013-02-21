@@ -448,7 +448,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 
 \defSub{x}{Define the type of Holling function or Michaelis-Menton function}
 \defType{Constant}
-\defDefault{default $2$}
+\defDefault{Default $2$}
 \defValue{A positive real number, use $2$ for Holling type II or $3$ for Holling Type III, or other positive real value for the generalised Michaelis-Menton function}
 
 \defSub{categories}{Define the categories that the Holling mortality rate is applied to}
@@ -493,16 +493,33 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{A positive real number}
 
-\defSub{prey}{Define the vector of labels for all the prey groups used}
+\defSub{prey}{Define the vector of labels for all the prey groups}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Names must be unique}
 \defNote{These are the labels which links to the relative electivities for groups of categories}
 
-\defSub{electivities}{Define the electivities applied to prey groups $1$ \ldots $n-1$}
-\defType{Constant vector, of length $\subcommand{prey} - 1$}
+\defSub{a}{Define the $a$ vector of the Holling function for electivity for all the prey groups}
+\defType{Constant vector, of length $\subcommand{prey}$}
 \defDefault{No default}
-\defValue{A vector of positive real numbers, must have values that sum to $< 1$}
+\defValue{A vector of positive real numbers}
+
+\defSub{b}{Define the $b$ vector of the Holling function for electivity for all the prey groups}
+\defType{Constant vector, of length $\subcommand{prey}$}
+\defDefault{Default $0$}
+\defValue{A vector of positive real numbers}
+
+\defSub{x}{Define the type of Holling function or Michaelis-Menton function for electivity}
+\defType{Constant}
+\defDefault{default $1$}
+\defValue{A positive real number, use $1$ for constant, $2$ for Holling type II or $3$ for Holling Type III, or other positive real value for the generalised Michaelis-Menton function}
+
+%
+%\defSub{electivities}{Define the electivities applied to prey groups $1$ \ldots $n-1$}
+%\defType{Constant vector, of length $\subcommand{prey} - 1$}
+%\defDefault{No default}
+%\defValue{A vector of positive real numbers, must have values that sum to $< 1$}
+%
 
 \defSub{categories}{Define the categories that the predation mortality is applied to, for all prey groups}
 \defType{String vector}
