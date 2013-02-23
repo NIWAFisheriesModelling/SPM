@@ -105,6 +105,8 @@ void CBHRecruitmentProcess::validate() {
     double dRunningTotal = 0.0;
     foreach(double Prop, vProportions) {
       dRunningTotal += Prop;
+      if (Prop < TRUE_ZERO)
+        CError::errorLessThan(PARAM_PROPORTIONS, PARAM_ZERO);
     }
     // See If It is close enough to 1.0
     if (!CComparer::isEqual(dRunningTotal, 1.0))
