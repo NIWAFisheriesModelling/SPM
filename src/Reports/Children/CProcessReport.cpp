@@ -20,6 +20,7 @@
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
 #include "../../Processes/Population/CLocalBHRecruitmentProcess.h"
 #include "../../Processes/Population/CHollingMortalityRateProcess.h"
+#include "../../Processes/Population/CPreySwitchPredationProcess.h"
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../Selectivities/CSelectivity.h"
 
@@ -262,6 +263,49 @@ void CProcessReport::execute() {
         cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
       cout << "\n";
     }
+
+    // Prey-switch predation
+    CPreySwitchPredationProcess *pPreySwitchPredation = dynamic_cast<CPreySwitchPredationProcess*>(pTarget);
+    if (pPreySwitchPredation != 0) {
+      vector<string> vPreyGroups = pPreySwitchPredation->getPreyGroups();
+      vector<int> vMortalityYears = pPreySwitchPredation->getMortalityYears();
+      vector<double> vPredatorBiomass = pPreySwitchPredation->getPredatorBiomass();
+      vector<vector<double> > vMortalityRate = pPreySwitchPredation->getMortalityRate();
+      vector<vector<double> > vMortalityN = pPreySwitchPredation->getMortalityN();
+
+      cout << PARAM_YEARS << ": ";
+      for (int i = 0; i < (int)vMortalityYears.size(); ++i)
+        cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+      cout << "\n";
+      for (int m = 0; m < (int)vMortalityRate.size(); ++m) {
+        cout << PARAM_PREY << ": " << vPreyGroups[m] << "\n";
+        cout << "  " << PARAM_PROPORTIONS << ": ";
+        for (int i = 0; i < (int)vMortalityRate[m].size(); ++i)
+          cout << vMortalityRate[m][i] << (i<((int)vMortalityRate[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << "\n";
+
+        cout << "  " << PARAM_ABUNDANCE << ": ";
+        for (int i = 0; i < (int)vMortalityN[m].size(); ++i)
+          cout << vMortalityN[m][i] << (i<((int)vMortalityN[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << "\n";
+        if(!(pPreySwitchPredation->isAbundance())) {
+          vector<vector<double> > vMortalityBiomass = pPreySwitchPredation->getMortalityBiomass();
+          cout << PARAM_BIOMASS << ": ";
+          for (int i = 0; i < (int)vMortalityBiomass[m].size(); ++i)
+            cout << vMortalityBiomass[m][i] << (i<((int)vMortalityBiomass[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+          cout << "\n";
+        }
+      }
+      if(pPreySwitchPredation->isAbundance()) {
+        cout << PARAM_PREDATOR_ABUNDANCE << ": ";
+      } else {
+        cout << PARAM_PREDATOR_BIOMASS << ": ";
+      }
+      for (int i = 0; i < (int)vPredatorBiomass.size(); ++i)
+        cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+      cout << "\n";
+    }
+
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();

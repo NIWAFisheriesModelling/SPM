@@ -44,6 +44,17 @@ void CError::errorLessThan(string less, string more) {
 }
 
 //**********************************************************************
+// void CError::errorNotLessThan(string less, string more)
+// Throw an error if not less than
+//**********************************************************************
+void CError::errorNotLessThan(string less, string more) {
+  string sException = less;
+  sException += ERROR_NOT_LESS_THAN;
+  sException += more;
+  throw sException;
+}
+
+//**********************************************************************
 // void CError::errorLessThanEqualTo(string less, string more)
 // Throw error less than or equal to
 //**********************************************************************

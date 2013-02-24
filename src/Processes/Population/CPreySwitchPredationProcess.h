@@ -31,10 +31,11 @@ public:
   void                        rebuild();
   void                        execute();
   vector<int>                 getMortalityYears() { return vMortalityYears; }
-  vector<double>              getMortalityRate() { return vMortalityRate; }
-  vector<double>              getMortalityN() { return vMortalityN; }
-  vector<double>              getMortalityBiomass() { return vMortalityBiomass; }
+  vector<vector<double> >     getMortalityRate() { return vMortalityRate; }
+  vector<vector<double> >     getMortalityN() { return vMortalityN; }
+  vector<vector<double> >     getMortalityBiomass() { return vMortalityBiomass; }
   vector<double>              getPredatorBiomass() { return vPredatorBiomass; }
+  vector<string>              getPreyGroups() { return vPreyGroups; }
   bool                        isAbundance() { return bIsAbundance; }
   int                         getPredatorCategoryCount() { return vPredatorCategoryList.size(); }
   int                         getPredatorSelectivityCount() { return vPredatorSelectivityList.size(); }
@@ -44,23 +45,26 @@ protected:
   CWorldSquare                **pGrid;
   CWorldSquare                *pWorldSquare;
   bool                        bIsAbundance;
-  double                      dA;
-  double                      dB;
-  double                      dX;
+  double                      dCR;
   double                      dUMax;
-  double                      dMortality;
-  double                      dExploitation;
-  double                      dVulnerable;
+  vector<double>              vMortality;
+  vector<double>              vExploitation;
+  vector<double>              vVulnerable;
   double                      dPredatorVulnerable;
+  int                         iNPreyGroups;
+  vector<double>              vElectivityList;
+  vector<string>              vPreyGroups;
+  vector<string>              vPreyAllocationList;
   vector<string>              vPredatorCategoryList;
   vector<int>                 vPredatorCategoryIndex;
   vector<string>              vPredatorSelectivityList;
   vector<CSelectivity*>       vPredatorSelectivityIndex;
+
   double                      dPredatorCurrent;
   vector<int>                 vMortalityYears;
-  vector<double>              vMortalityRate;
-  vector<double>              vMortalityN;
-  vector<double>              vMortalityBiomass;
+  vector<vector<double> >     vMortalityRate;
+  vector<vector<double> >     vMortalityN;
+  vector<vector<double> >     vMortalityBiomass;
   vector<double>              vPredatorBiomass;
   string                      sPenalty;
   CPenalty                    *pPenalty;

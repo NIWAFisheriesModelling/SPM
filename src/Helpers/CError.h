@@ -38,6 +38,7 @@ public:
   static void           error(string value);
   static void           errorMissing(string value);
   static void           errorLessThan(string less, string more);
+  static void           errorNotLessThan(string less, string more);
   static void           errorLessThanEqualTo(string less, string more);
   static void           errorGreaterThan(string more, string less);
   static void           errorGreaterThanEqualTo(string more, string less);
