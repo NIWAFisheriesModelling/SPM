@@ -212,7 +212,7 @@ In the local Beverton-Holt recruitment process, individuals are recruited to an 
 
 where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and the recruitment to each cell is the product of the Beverton-Holt stock recruitment relationship ($R_y$). 
 
-\paragraph{Constant Recruitment:}
+\subsubsection*{Constant Recruitment}
 
 In the constant recruitment process the total number of recruits added each year is $R_y$, and is simply $R_0$, i.e.,
 \begin{equation}
@@ -233,7 +233,7 @@ age 1
 layer recruitment
 \end{verbatim}}}
 
-\paragraph{Beverton-Holt recruitment:}
+\subsubsection*{Beverton-Holt recruitment}
 
 In the Beverton-Holt recruitment process the total number of recruits added each year is $R_y$, and is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
 \begin{equation}
@@ -268,7 +268,7 @@ SSB_offset 2
 
 Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, he offset will need to be specified as $age + 1$.
 
-\paragraph{Local Beverton-Holt recruitment:}
+\subsubsection*{Local Beverton-Holt recruitment}
 
 The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. If desired, locally recruits can subsequently be subjected to movement (see Section \ref{sec:movement-processes}).
 
@@ -334,7 +334,7 @@ Six types of mortality processes are permissible in \SPM, constant rate, annuall
 
 The constant rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived layer and therefore calculated each year, mortality can change every year in every cell.  
 
-\paragraph{Constant mortality rate:}
+\subsubsection*{Constant mortality rate}
 
 To specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
 
@@ -364,7 +364,7 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
   n'(a,k,l) = n(a,k,l) \exp \left({-M(a,k,l)}\right)
 \end{equation}
 
-\paragraph{Annual mortality rate:}
+\subsubsection*{Annual mortality rate}
 
 Mortality for the annual rate\index{Annual mortality} is similar to the constant rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
 
@@ -377,7 +377,7 @@ years 1996 1997 1998 1999 2000
 M 0.20 0.15 0.22 0.25 0.21
 \end{verbatim}}}
 
-\paragraph{Event and biomass-event mortality rate:}
+\subsubsection*{Event and biomass-event mortality}
 
 The event mortality process\index{Event mortality} and biomass mortality processes act in a similar manner, except that they remove a specified abundance (number of individuals) or biomass respectively, rather than applying mortality as a rate. However, the maximum abundance or biomass to remove is constrained by a maximum exploitation rate.
 
@@ -421,7 +421,7 @@ selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 \end{verbatim}}}
 
-\paragraph{Holling mortality process:}
+\subsubsection*{Holling mortality rate}
 
 The density-dependent Holling mortality process\index{Holling mortality} applies the Holling Type II and Type III functions \citep{Holling1959}, but is generalised using the Michaelis-Menten equation \citep{MentenMichaelis1913}. The function removes a number or biomass from a set of categories according to their total (selected) abundance (or biomass)and some 'predator' abundance (or biomass), but constrained by a maximum exploitation rate.
 
@@ -449,10 +449,10 @@ And hence define the total vulnerable abundance (or biomass) $V_{total}$ as,
 
 and then, the the number to remove is determined as,
 \begin{equation}
-R_{total} = P_{total} (a  V_{total}^{x-1})/(b + V_{total}^{x-1})
+R_{total} = P_{total} \frac{a  V_{total}^{x-1}}{b + V_{total}^{x-1}}
 \end{equation}
 
-Note, choose $x=2$ for Holling type II function and $x=3$ for Holling type III function, or any positive value of $x$ for the generalised Michaelis-Menten function.
+where $x=2$ for Holling type II function and $x=3$ for Holling type III function, or any value of $x \geq 1$ for the generalised Michaelis-Menten function.
 
 Hence the exploitation rate\index{Maximum exploitation rate} to apply is 
 \begin{equation}
@@ -469,7 +469,7 @@ And the number removed $R$ from each age $l$ in category $k$ is,
 
 The density-dependent Holling mortality process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
 
-\paragraph{Prey-switching mortality process:}
+\subsubsection*{Prey-switching mortality}
 
 The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from any single predator group to all of its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of this prey group, the total (selected) abundance (or biomass) of all other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. Note that each prey group can be composed of a number of individual categories, as can the predator group.
 
@@ -497,7 +497,7 @@ And define the total vulnerable abundance (or biomass) of each prey group $V(g)_
 
 The vulnerable abundance (or biomass) of every prey group $g$ in $1 \ldots G$ is calculated simultaneously. Then the abundance (or biomass) to remove from each prey group $g$ is a function of its electivity $E(g)$, the abundance (or biomass) of all other prey groups $i$ in $1 \ldots G$, the electivity of the predator for each prey group $E(i)$, and the total consumption rate of the predator $CR$ and its abundance (or biomass) $P_{total}$,
 \begin{equation}
-  R(g)_{total}=P_{total} CR (V(g)_{total} E(g))/({\sum\limits_G {V(i)_{total} E(i)}})
+  R(g)_{total}=P_{total} CR \frac{V(g)_{total} E(g)}{\sum\limits_G {V(i)_{total} E(i)}}
 \end{equation}
 
 Hence the exploitation rate\index{Maximum exploitation rate} to apply to each prey group $g$ is 
@@ -513,7 +513,7 @@ And the number removed $R(g)$ in each prey group $g$ from each age $l$ in catego
   R(g,k,l) = U(g)V(g,k,l)
 \end{equation}
 
-Note that prey switching occurs only between prey groups specified by the process, and the total predator consumption rate represents the consumption of the predator on those prey groups alone. Also note that the electivities must sum to one. We define $G -1$ electivities in the process, with the last electivity set equal to $1-\sum\limits_{G-1}{E(g)}$.
+Note that prey switching occurs only between prey groups specified by the process, and the total predator consumption rate represents the consumption of the predator on those prey groups alone. Also note that the electivities must sum to one.
 
 The density-dependent prey-switching process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
 
