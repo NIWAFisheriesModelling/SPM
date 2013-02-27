@@ -13,16 +13,17 @@
 
 // Local Headers
 #include "CRuntimeThread.h"
-#include "../BaseClasses/CBaseManager.h"
+#include "../AgeSize/CAgeSizeManager.h"
 #include "../AgeingError/CAgeingErrorManager.h"
+#include "../BaseClasses/CBaseManager.h"
 #include "../Catchabilities/CCatchabilityManager.h"
 #include "../DerivedLayers/CDerivedLayerManager.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
-#include "../Minimizers/CMinimizerManager.h"
 #include "../MCMC/CMCMC.h"
+#include "../Minimizers/CMinimizerManager.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../Observations/CObservationManager.h"
 #include "../Penalties/CPenaltyManager.h"
@@ -34,7 +35,6 @@
 #include "../Reports/CReportManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../SizeWeight/CSizeWeightManager.h"
-#include "../AgeSize/CAgeSizeManager.h"
 #include "../TimeSteps/CTimeStepManager.h"
 
 //#include "../TimeSteps/CTimeStep.h"

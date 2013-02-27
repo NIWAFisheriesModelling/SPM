@@ -74,10 +74,10 @@ void CPreySwitchPredationProcess::validate() {
     if (getCategoryCount() != getSelectivityCount())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
-    if (vPreyGroups.size() != vPreyAllocationList.size())
+    if (vPreyGroups.size() != vElectivityList.size())
       CError::errorListSameSize(PARAM_PREY, PARAM_ELECTIVITIES);
 
-    if (getCategoryCount() != (int) vElectivityList.size())
+    if (getCategoryCount() != (int) vPreyAllocationList.size())
       CError::errorListSameSize(PARAM_CATEGORY, PARAM_PREY_GROUPS);
 
     if (getPredatorCategoryCount() != getPredatorSelectivityCount())

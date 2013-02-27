@@ -216,6 +216,8 @@ src/Reports/Children/CInitializationReport.cpp
 src/Reports/Children/CLayerDerivedWorldViewReport.cpp
 src/Reports/Children/CLayerReport.cpp
 src/Reports/Children/CMCMCReport.cpp
+src/Reports/Children/CMCMCSamplesReport.cpp
+src/Reports/Children/CMCMCObjectivesReport.cpp
 src/Reports/Children/CObjectiveFunctionReport.cpp
 src/Reports/Children/CObservationReport.cpp
 src/Reports/Children/CProcessReport.cpp

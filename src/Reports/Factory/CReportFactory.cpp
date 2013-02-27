@@ -23,6 +23,8 @@
 #include "../Children/CLayerDerivedWorldViewReport.h"
 #include "../Children/CLayerReport.h"
 #include "../Children/CMCMCReport.h"
+#include "../Children/CMCMCObjectivesReport.h"
+#include "../Children/CMCMCSamplesReport.h"
 #include "../Children/CObjectiveFunctionReport.h"
 #include "../Children/CObservationReport.h"
 #include "../Children/CPartitionReport.h"
@@ -86,6 +88,10 @@ CReport* CReportFactory::buildReport(string type, bool registerWithManager) {
     pReporter = new CLayerReport();
   else if (type == PARAM_MCMC)
     pReporter = new CMCMCReport();
+  else if (type == PARAM_MCMC_OBJECTIVES)
+    pReporter = new CMCMCObjectivesReport();
+  else if (type == PARAM_MCMC_SAMPLES)
+    pReporter = new CMCMCSamplesReport();
   else if (type == PARAM_PREFERENCE_FUNCTION)
     pReporter = new CPreferenceFunctionReport();
   else

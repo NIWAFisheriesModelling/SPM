@@ -262,6 +262,8 @@
 #define PARAM_MAX_ITERATIONS                      "iterations"
 #define PARAM_MCMC                                "mcmc"
 #define PARAM_MCMC_FIXED                          "mcmc_fixed"
+#define PARAM_MCMC_OBJECTIVES                     "mcmc_objectives"
+#define PARAM_MCMC_SAMPLES                        "mcmc_samples"
 #define PARAM_MEAN                                "mean"
 #define PARAM_META                                "meta"
 #define PARAM_METHOD                              "method"
