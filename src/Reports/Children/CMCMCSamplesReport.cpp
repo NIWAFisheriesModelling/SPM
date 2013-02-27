@@ -22,7 +22,7 @@
 CMCMCSamplesReport::CMCMCSamplesReport() {
   // Variables
   eExecutionState     = STATE_FINALIZATION;
-  //bWrittenHeader  = false;
+  bWrittenHeader  = false;
 
 }
 
@@ -67,42 +67,35 @@ void CMCMCSamplesReport::execute() {
   try {
 
     // Check for correct state
-    if (pRuntimeController->getRunMode() != RUN_MODE_MARKOV_CHAIN_MONTE_CARLO)
+    if (pRuntimeController->getRunMode() != RUN_MODE_MONTE_CARLO_MARKOV_CHAIN)
       return;
 
-//    if ( (sFileName != "") && (!bOverwrite) ) {
-//      struct stat stFileInfo;
-//      int intStat = stat(sFileName.c_str(),&stFileInfo);
-//
-//      if (intStat == 0) // File Exists
-//        bWrittenHeader = true; // Don't write the header
-//    }
-
-
-
     vChain = pMCMC->getMCMCChain();
-    ublas::matrix<double> mxCovariance = pMCMC->getCovariance();
-    ublas::matrix<double> mxOriginalCovariance = pMCMC->getOriginalCovariance();
-    ublas::matrix<double> mxCovarianceLT = pMCMC->getCovarianceLT();
-    vector<string> vEstimateNames = pMCMC->getEstimateNames();
 
     this->start();
 
     // Print Out
-    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    if(!bWrittenHeader) {
+      cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+      cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
 
-    cout << "MCMC samples:\n";
-    for (int i =0; i < (int)vEstimateNames.size(); ++i ) {
-      cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
-    }
-    for(int i=0; i<(int)vChain.size(); ++i) {
-      for(int j=0; j < (int)vChain[i].vValues.size(); ++j) {
-        cout << vChain[i].vValues[j] << ((j<(int)vChain[i].vValues.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+      cout << PARAM_MCMC_SAMPLES << CONFIG_RATIO_SEPARATOR << "\n";
+      vector<string> vEstimateNames = pMCMC->getEstimateNames();
+      for (int i =0; i < (int)vEstimateNames.size(); ++i ) {
+        cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
       }
+      bWrittenHeader = true;
     }
 
-    cout << CONFIG_END_REPORT << "\n" << endl;
+    //Print out the most recent set of numbers
+    int iN = vChain.size()-1;
+    for(int j=0; j < (int)vChain[iN].vValues.size(); ++j) {
+      cout << vChain[iN].vValues[j] << ((j<(int)vChain[iN].vValues.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+    }
+
+    if( iN == pMCMC->getNSamples() ) {
+      cout << CONFIG_END_REPORT << "\n" << endl;
+    }
 
     this->end();
 

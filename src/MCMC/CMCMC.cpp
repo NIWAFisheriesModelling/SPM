@@ -177,6 +177,8 @@ void CMCMC::build() {
       dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnorableEstimates), -0.5);
     }
 
+    iNSamples = (int) floor(iLength/iKeep);
+
   } catch (string &Ex) {
     Ex = "CMCMC.build()->" + Ex;
     throw Ex;

@@ -156,7 +156,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
   else if (vmParams.count("profile"))
     setRunMode(RUN_MODE_PROFILE);
   else if (vmParams.count("mcmc"))
-    setRunMode(RUN_MODE_MARKOV_CHAIN_MONTE_CARLO);
+    setRunMode(RUN_MODE_MONTE_CARLO_MARKOV_CHAIN);
   else if (vmParams.count("forward"))
     setRunMode(RUN_MODE_FORWARD_PROJECTION);
   else if (vmParams.count("simulate"))
@@ -271,7 +271,7 @@ void CRuntimeController::run() {
         case RUN_MODE_PROFILE:
           pBaseThread->executeProfileRun();
           break;
-        case RUN_MODE_MARKOV_CHAIN_MONTE_CARLO:
+        case RUN_MODE_MONTE_CARLO_MARKOV_CHAIN:
           pBaseThread->executeMCMC();
           break;
         case RUN_MODE_SIMULATION:

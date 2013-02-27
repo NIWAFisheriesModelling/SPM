@@ -34,7 +34,7 @@ typedef enum {
   RUN_MODE_BASIC,
   RUN_MODE_ESTIMATION,
   RUN_MODE_PROFILE,
-  RUN_MODE_MARKOV_CHAIN_MONTE_CARLO,
+  RUN_MODE_MONTE_CARLO_MARKOV_CHAIN,
   RUN_MODE_FORWARD_PROJECTION,
   RUN_MODE_SIMULATION
 } ERunMode;
@@ -69,16 +69,16 @@ public:
 
 protected:
   // Functions
-	CRuntimeController();
-	virtual                    ~CRuntimeController();
-	void                       startEstimation();
-	static void                initEstimationThread();
-	void                       startMCMC();
-	static void                initMCMCThread();
+  CRuntimeController();
+  virtual                    ~CRuntimeController();
+  void                       startEstimation();
+  static void                initEstimationThread();
+  void                       startMCMC();
+  static void                initMCMCThread();
 
-	// Variables
-	ERunMode                   eRunMode;
-	int                        iCurrentEstimateValue;
+  // Variables
+  ERunMode                   eRunMode;
+  int                        iCurrentEstimateValue;
   CRuntimeThread*            pBaseThread;
   string                     sCommandLineOptions;
 

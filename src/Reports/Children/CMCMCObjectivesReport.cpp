@@ -67,7 +67,7 @@ void CMCMCObjectivesReport::build() {
 void CMCMCObjectivesReport::execute() {
   try {
     // Check for correct state
-    if (pRuntimeController->getRunMode() != RUN_MODE_MARKOV_CHAIN_MONTE_CARLO)
+    if (pRuntimeController->getRunMode() != RUN_MODE_MONTE_CARLO_MARKOV_CHAIN)
       return;
 
     vChain = pMCMC->getMCMCChain();

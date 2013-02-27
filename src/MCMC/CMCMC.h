@@ -53,6 +53,7 @@ public:
   ublas::matrix<double>      getCovariance() { return mxCovariance; }
   ublas::matrix<double>      getCovarianceLT() { return mxCovarianceLT; }  // Cholesky decomposition (lower triangle) of mxCovariance
   vector<string>             getEstimateNames() { return vEstimateNames; }
+  int                        getNSamples() { return iNSamples; } // number of samples expected to be generated and saved by the chain
 
 protected:
   // Functions
@@ -76,6 +77,7 @@ protected:
   int                        iJumps;
   int                        iSuccessfulJumps;
   int                        iJumpsSinceAdapt;
+  int                        iNSamples;
   int                        iSuccessfulJumpsSinceAdapt;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
