@@ -9,15 +9,15 @@
 
 // Local Headers
 #include "CHollingMortalityRateProcess.h"
-#include "../../Penalties/CPenaltyManager.h"
-#include "../../Penalties/CPenalty.h"
-#include "../../Selectivities/CSelectivityManager.h"
-#include "../../Selectivities/CSelectivity.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Penalties/CPenalty.h"
+#include "../../Penalties/CPenaltyManager.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CHollingMortalityRateProcess::CHollingMortalityRateProcess()

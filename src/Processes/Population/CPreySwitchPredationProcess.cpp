@@ -9,14 +9,15 @@
 
 // Local Headers
 #include "CPreySwitchPredationProcess.h"
-#include "../../Penalties/CPenaltyManager.h"
-#include "../../Penalties/CPenalty.h"
-#include "../../Selectivities/CSelectivity.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Penalties/CPenalty.h"
+#include "../../Penalties/CPenaltyManager.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CPreySwitchPredationProcess::CPreySwitchPredationProcess()
@@ -134,6 +135,15 @@ void CPreySwitchPredationProcess::build() {
     // Base Build
     CProcess::build();
 
+    CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
+    foreach(string Name, vPredatorSelectivityList) {
+      vPredatorSelectivityIndex.push_back(pSelectivityManager->getSelectivity(Name));
+    }
+
+    foreach(string Name, vPredatorCategoryList) {
+      vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
+    }
+
     // Build our Grid To Be World+1
     if (pWorldSquare == 0) {
       pWorldSquare = new CWorldSquare();
@@ -199,7 +209,7 @@ void CPreySwitchPredationProcess::execute() {
 #endif
     // Base execute
     CProcess::execute();
-
+   //
     vector<double> vSumMortality(iNPreyGroups);
     vector<double> vSumAbundance(iNPreyGroups);
     vector<double> vSumMortalityBiomass(iNPreyGroups);
@@ -220,6 +230,8 @@ void CPreySwitchPredationProcess::execute() {
 
         // Clear our Vulnerable Amount
         vVulnerable.resize(iNPreyGroups);
+        vMortality.resize(iNPreyGroups);
+        vExploitation.resize(iNPreyGroups);
         dPredatorVulnerable = 0.0;
         double dTotalVulnerable = 0.0;
 
@@ -254,7 +266,8 @@ void CPreySwitchPredationProcess::execute() {
           for (int l = 0; l < iBaseColCount; ++l) {
             // get current prey abundance in age/category
             dPredatorCurrent = pBaseSquare->getValue( vPredatorCategoryIndex[k], l) * vPredatorSelectivityIndex[k]->getResult(l);
-            if (dPredatorCurrent <0.0)
+
+            if (dPredatorCurrent < 0.0)
               dPredatorCurrent = 0.0;
 
             // Increase Predator biomass
@@ -268,6 +281,7 @@ void CPreySwitchPredationProcess::execute() {
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
         for (int m = 0; m < iNPreyGroups; ++m) {
+
           vMortality[m] = dPredatorVulnerable * dCR * (vVulnerable[m] * vElectivityList[m]) / dTotalVulnerable;
           vExploitation[m] = vMortality[m] / CMath::zeroFun(vVulnerable[m],ZERO);
           if (vExploitation[m] > dUMax) {

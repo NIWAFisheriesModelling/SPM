@@ -290,7 +290,7 @@ void CProcessReport::execute() {
         cout << "\n";
         if(!(pPreySwitchPredation->isAbundance())) {
           vector<vector<double> > vMortalityBiomass = pPreySwitchPredation->getMortalityBiomass();
-          cout << PARAM_BIOMASS << ": ";
+          cout << "  " << PARAM_BIOMASS << ": ";
           for (int i = 0; i < (int)vMortalityBiomass[m].size(); ++i)
             cout << vMortalityBiomass[m][i] << (i<((int)vMortalityBiomass[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
           cout << "\n";
