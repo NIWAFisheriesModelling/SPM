@@ -41,18 +41,21 @@ void CEstimateSummaryReport::execute() {
     vector<CEstimate*> vEstimates;
     CEstimateManager::Instance()->fillVector(vEstimates);
 
-    cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    if(vEstimates.size() > 0) {
 
-    foreach(CEstimate *Estimate, vEstimates) {
-      cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";
-      cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
-      cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
-      cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
-      cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n\n";
+      cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
+      cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+
+      foreach(CEstimate *Estimate, vEstimates) {
+        cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";
+        cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
+        cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
+        cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
+        cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n\n";
+      }
+
+      cout << CONFIG_END_REPORT << "\n" << endl;
     }
-
-    cout << CONFIG_END_REPORT << "\n" << endl;
 
     // End IO
     this->end();

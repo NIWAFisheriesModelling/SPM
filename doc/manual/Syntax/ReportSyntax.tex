@@ -28,6 +28,8 @@ The report types available are,
   \item Print the age-weight relationship
   \item Print the size-weight relationship
   \item Printing the results of an MCMC
+  \item Printing the individual MCMC samples as they are calculated during an MCMC
+  \item Printing the individual MCMC objective function values as they are calculated during an MCMC
 \end{enumerate}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
@@ -47,6 +49,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defType{String}
 \defDefault{No default}
 \defValue{A valid file name. If not supplied, then output is directed to the standard out}
+\defNote{Some reports \emph{require} that a file name is provided.}
 
 \subsubsection[Print the partition]{\commandlabsubarg{report}{type}{partition}}
 
@@ -68,7 +71,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print the partition biomass]{\commandlabsubarg{report}{type}{partition\_biomass}}
 
@@ -90,7 +93,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print the partition at initialisation]{\commandlabsubarg{report}{type}{initialisation}}
 
@@ -107,7 +110,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a summary of a process]{\commandlabsubarg{report}{type}{process}}
 
@@ -124,7 +127,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a summary of a preference function]{\commandlabsubarg{report}{type}{preference\_function}}
 
@@ -141,7 +144,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a derived quantity]{\commandlabsubarg{report}{type}{derived\_quantity}}
 
@@ -158,7 +161,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a derived layer]{\commandlabsubarg{report}{type}{derived\_layer}}
 
@@ -170,7 +173,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{initialisation} {Specify if the derived layer values for each year of the initialisation phases should be also be output}
 \defType{Switch}
 \defDefault{False}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -180,7 +183,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a summary of the estimated parameters]{\commandlabsubarg{report}{type}{estimate\_summary}}
 
@@ -192,7 +195,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_value}\label{sec:InputFileFormat}}
 
@@ -206,12 +209,12 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{header} {Specify if the output contains the standard \SPM\ style header at the start of the output}
 \defType{Switch}
 \defDefault{False}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print the objective function values]{\commandlabsubarg{report}{type}{objective\_function}}
 
@@ -223,7 +226,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print the covariance matrix]{\commandlabsubarg{report}{type}{covariance}}
 
@@ -235,7 +238,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a summary of the an observation, including fits, and residuals]{\commandlabsubarg{report}{type}{observation}}
 
@@ -252,7 +255,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print an observation using simulated values]{\commandlabsubarg{report}{type}{simulated\_observation}}
 
@@ -269,7 +272,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print an ageing error misclassification matrix]{\commandlabsubarg{report}{type}{ageing\_error}}
 
@@ -286,7 +289,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a layer]{\commandlabsubarg{report}{type}{layer}}
 
@@ -313,7 +316,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a derived view via a categorical layer]{\commandlabsubarg{report}{type}{layer\_derived\_view}}
 
@@ -340,7 +343,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print a selectivity]{\commandlabsubarg{report}{type}{selectivity}}
 
@@ -367,7 +370,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print the random number seed used]{\commandlabsubarg{report}{type}{random\_number\_seed}}
 
@@ -379,7 +382,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print mean size at age]{\commandlabsubarg{report}{type}{age\_size}}
 
@@ -396,7 +399,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print mean weight at size]{\commandlabsubarg{report}{type}{size\_weight}}
 
@@ -418,7 +421,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Print mean weight at age]{\commandlabsubarg{report}{type}{age\_weight}}
 
@@ -435,7 +438,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
 
 \subsubsection[Printing the results of an MCMC]{\commandlabsubarg{report}{type}{MCMC}}
 
@@ -447,4 +450,28 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}
 \defDefault{True}
-\defValue{Either True of False}
+\defValue{Either True or False}
+
+\subsubsection[Printing the individual MCMC samples as they are calculated during an MCMC]{\commandlabsubarg{report}{type}{MCMC\_samples}}
+
+\defSub{file\_name} {Define the name of the output file where the report is written}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid file name. Must be supplied.}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True or False}
+
+\subsubsection[Printing the individual MCMC samples as they are calculated during an MCMC]{\commandlabsubarg{report}{type}{MCMC\_objectives}}
+
+\defSub{file\_name} {Printing the individual MCMC objective function values as they are calculated during an MCMC}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid file name. Must be supplied.}
+
+\defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
+\defType{Switch}
+\defDefault{True}
+\defValue{Either True or False}

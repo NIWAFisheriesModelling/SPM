@@ -78,6 +78,10 @@ process Maturation
 @report MCMC
 type MCMC
 
+@report MCMC_samples
+type MCMC_samples
+file_name bob.txt
+
 @report agesize
 type age_size
 age_size VB

@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-02-23 (rev. 4860)
+; TextPad syntax definitions for SPM version 1.1-2013-02-27 (rev. 4865)
 ; ===================================================================================
 ;
 ;
@@ -209,6 +209,8 @@ true
 [Keywords 4]
 Holling_mortality_rate
 MCMC
+MCMC_objectives
+MCMC_samples
 Prey-switch_predation
 abundance
 abundance_density

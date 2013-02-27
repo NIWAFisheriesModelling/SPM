@@ -15,11 +15,13 @@ report.type: ...
 
 This syntax should make it easier for external packages to be configured to read \SPM\ output. The \texttt{extract} functions in the \R\ \texttt{spm} package uses this information to identify and read \SPM\ output.
 
-Note that the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command\texttt{spm -i}. 
+Note that the \texttt{estimate\_values} report does not print either a header (e.g., \texttt{[...]} or \texttt{*end} at the end of the report. This is as the \texttt{estimate\_values} report is designed to provide a single line (or multi-line for more than one set) vector of the estimated parameter values, suitable for reading by \SPM\ (with the command \texttt{spm -i}). 
 
 Reports, by default, are directed to standard out (see Section \ref{sec:redirecting-stdout}), but this default can be overwritten be specifying an output file (\commandlabsub{report}{file\_name}). Hence reports can be directed to separate files as required. Note that if an output file is defined, any data within it is deleted and replaced with the output from the report. To append data to an output file rather than replacing it, use the subcommand \commandlabsubarg{report}{overwrite}{false}.
 
-Note that reports can be defined that are not valid, for example printing the partition for a year and/or time-step that does not exist or reporting the covariance matrix when not estimating --- although  all reports must conform to syntax requirements. In these cases, \SPM\ does not generate output.
+However, some reports \emph{require} that the results are directed to a file (for example, the \commandlabsub{report}{MCMC\_samples} and \commandlabsub{report}{MCMC\_objectives} reports). In these cases, a file name must be provided.
+
+Note that reports can be defined that may not be generated. For example printing the partition for a year and/or time-step that does not exist or reporting the covariance matrix when not estimating. Such reports are ignored by \SPM\ and the program will not generate any output for these reports --- although they must still conform to \SPM s syntax requirements.
 
 Not all reports will be generated in all run modes. Some reports are only available in some run modes. For example, when simulating, only simulation reports will be output.
 
@@ -120,3 +122,11 @@ Prints a summary of the mean weight-at-age relationship used by \SPM\ for each c
 \subsection{\I{Printing the results of an MCMC}}\index{Reports ! MCMC}
 
 Print the MCMC samples, objective function values, and proposal covariance matrix following an MCMC.
+
+\subsection{\I{Printing the individual MCMC samples as they are calculated during an MCMC}}\index{Reports ! MCMC samples}
+
+Print the individual MCMC samples for each new \textit{i}th sample as soon as they are calculated while doing an MCMC.
+
+\subsection{\I{Printing the individual MCMC objective function values as they are calculated during an MCMC}}\index{Reports ! MCMC objective functions}
+
+Print the individual MCMC objective function values (along with the proposal covariance matrix) for each new \textit{i}th sample as soon as they are calculated while doing an MCMC.
