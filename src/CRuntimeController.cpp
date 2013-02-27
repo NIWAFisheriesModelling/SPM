@@ -88,7 +88,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
       ("help,h", "Print help")
       ("license,l", "Display SPM license")
       ("version,v", "Display version information")
-      ("config,c", value<string>(), "Configuration file")
+      ("config,c", value<string>(), "Input configuration file")
       ("run,r", "Basic model run")
       ("estimate,e", "Point estimation")
       ("profile,p", "Likelihood profiles")
@@ -96,7 +96,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
       ("forward,f", "Forward projections")
       ("simulate,s", value<int>(), "Simulate observations")
       ("input,i", value<string>(), "Load free parameter values from file")
-//      ("threads,t", value<int>(), "Number of threads to spawn")
+      // ("threads,t", value<int>(), "Number of threads to spawn")
       ("quiet,q", "Run in quiet mode")
       ("seed,g", value<int>(), "Random number seed");
 
@@ -170,8 +170,8 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
     pConfig->setEstimateValuesFile(vmParams["input"].as<string>());
 
   // Threads
-//  if (vmParams.count("threads"))
-//    pConfig->setNumberOfThreads(vmParams["threads"].as<int>());
+  // if (vmParams.count("threads"))
+  // pConfig->setNumberOfThreads(vmParams["threads"].as<int>());
 
   // Quiet
   if (vmParams.count("quiet"))
