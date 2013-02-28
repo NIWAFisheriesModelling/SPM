@@ -1,0 +1,17 @@
+# Shelf, slope or north
+@layer ZoneNamed
+type categorical
+data None None None None None None None None Slope Shelf Shelf Shelf Shelf Shelf Shelf None None None None None None
+data None None None None None None None Slope Shelf Shelf Shelf Shelf Shelf Shelf Shelf None None None None None None
+data None None None None None None None Shelf Shelf Shelf Shelf Shelf Slope Slope Slope Slope None None None None None
+data None None None None None None None Slope Shelf Shelf Shelf Slope Slope Slope None None None None None None None
+data None None None None None None None Slope Shelf Shelf Shelf Slope Slope None None None None None None None None
+data None None None Slope None Slope Slope Slope Shelf Slope Slope Slope Slope None None None None None None None None
+data None None None Slope Slope Slope Slope Slope North North Slope None None None None None None None None None None
+data None None Slope Slope Slope Slope Slope Slope North North North North North None None None None None None None None
+data None None North Slope Slope Slope Slope Slope North North North North North None None None None None None None None
+data None North North North North Slope Slope Slope North North North North North North North North North North North North None
+data North North North North North North North North North North North North North North North North North North North North None
+data None North North North North North North North North North North North North North North North North North North North None
+data None None None North North North North North North North North North North North None None None None None None None
+data None None None None None None None None None None None None None None None None None None None None None

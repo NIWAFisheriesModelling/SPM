@@ -1,0 +1,52 @@
+# CPUE (2010)
+@observation cpue-2010
+type biomass
+year 2010
+time_step one
+categories immature mature spawning postspawning immature-tag mature-tag spawning-tag postspawning-tag
+selectivities FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r10-c12 672.0386
+obs r10-c13 469.5222
+obs r11-c14 905.5743
+obs r2-c10 178.3309
+obs r2-c11 222.9571
+obs r2-c9 191.0936
+obs r3-c11 323.6385
+obs r3-c12 882.4677
+obs r4-c12 1180.478
+obs r5-c10 247.6102
+obs r5-c11 393.6828
+obs r5-c12 283.1643
+obs r6-c10 310.5504
+obs r6-c11 266.9373
+obs r6-c12 490.9595
+obs r6-c9 303.0239
+obs r7-c11 458.5566
+obs r9-c12 1227.104
+error_value r10-c12 0.6030246
+error_value r10-c13 1.141991
+error_value r11-c14 0.8231058
+error_value r2-c10 0.6669393
+error_value r2-c11 0.5201079
+error_value r2-c9 0.4756467
+error_value r3-c11 0.3936785
+error_value r3-c12 0.919766
+error_value r4-c12 1.020426
+error_value r5-c10 0.7225527
+error_value r5-c11 0.4777749
+error_value r5-c12 0.9719268
+error_value r6-c10 0.7433393
+error_value r6-c11 0.6162685
+error_value r6-c12 0.8709912
+error_value r6-c9 0.7577128
+error_value r7-c11 0.7608862
+error_value r9-c12 1.054354
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2010
+type observation
+observation cpue-2010
