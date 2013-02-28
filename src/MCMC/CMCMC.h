@@ -53,7 +53,9 @@ public:
   ublas::matrix<double>      getCovariance() { return mxCovariance; }
   ublas::matrix<double>      getCovarianceLT() { return mxCovarianceLT; }  // Cholesky decomposition (lower triangle) of mxCovariance
   vector<string>             getEstimateNames() { return vEstimateNames; }
-  int                        getNSamples() { return iNSamples; } // number of samples expected to be generated and saved by the chain
+  bool                       isLastItem() { return bLastItem; }
+  SChainItem                 getLastChainItem() { return newItem; }
+
 
 protected:
   // Functions
@@ -77,7 +79,7 @@ protected:
   int                        iJumps;
   int                        iSuccessfulJumps;
   int                        iJumpsSinceAdapt;
-  int                        iNSamples;
+  bool                       bLastItem;
   int                        iSuccessfulJumpsSinceAdapt;
   double                     dMaxCorrelation;
   string                     sCorrelationMethod;
@@ -90,6 +92,7 @@ protected:
   ublas::matrix<double>      mxCovarianceLT;
   vector<double>             vCandidates;
   vector<bool>               vbIsEnabledEstimate;
+  SChainItem                 newItem;
   vector<SChainItem>         vChain;
   vector<int>                vAdaptStepSize;
   CMinimizer                 *pMinimizer;

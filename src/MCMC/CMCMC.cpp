@@ -17,17 +17,18 @@
 #include <boost/numeric/ublas/lu.hpp>
 
 #include "CMCMC.h"
-#include "../ObjectiveFunction/CObjectiveFunction.h"
-#include "../Estimates/CEstimateManager.h"
-#include "../RuntimeThread/CRuntimeThread.h"
 #include "../Estimates/CEstimate.h"
-#include "../Minimizers/CMinimizerManager.h"
-#include "../Minimizers/CMinimizer.h"
-#include "../RandomNumberGenerator/CRandomNumberGenerator.h"
-#include "../Helpers/ForEach.h"
+#include "../Estimates/CEstimateManager.h"
 #include "../Helpers/CComparer.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/CMath.h"
+#include "../Helpers/ForEach.h"
+#include "../Minimizers/CMinimizer.h"
+#include "../Minimizers/CMinimizerManager.h"
+#include "../ObjectiveFunction/CObjectiveFunction.h"
+#include "../RandomNumberGenerator/CRandomNumberGenerator.h"
+#include "../Reports/CReportManager.h"
+#include "../RuntimeThread/CRuntimeThread.h"
 
 // Namespaces
 using namespace boost::numeric;
@@ -48,6 +49,7 @@ CMCMC::CMCMC() {
   iJumpsSinceAdapt = 0;
   iSuccessfulJumpsSinceAdapt = 0;
   dStepSize = 0.0;
+  bLastItem = false;
 
   pParameterList->registerAllowed(PARAM_TYPE);
   pParameterList->registerAllowed(PARAM_START);
@@ -177,8 +179,6 @@ void CMCMC::build() {
       dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnorableEstimates), -0.5);
     }
 
-    iNSamples = (int) floor(iLength/iKeep);
-
   } catch (string &Ex) {
     Ex = "CMCMC.build()->" + Ex;
     throw Ex;
@@ -286,8 +286,6 @@ void CMCMC::execute() {
           if(!(pConfig->getQuietMode())) {
             std::cerr << "." ;
           }
-
-          SChainItem newItem;
           newItem.iIteration                = iSuccessfulJumps;
           newItem.dPenalty                  = pObjectiveFunction->getPenalties();
           newItem.dScore                    = pObjectiveFunction->getScore();
@@ -298,6 +296,10 @@ void CMCMC::execute() {
           newItem.dStepSize                 = dStepSize;
           newItem.vValues                   = vCandidates;
           vChain.push_back(newItem);
+          if ( iSuccessfulJumps >= iLength ) {
+            bLastItem = true;
+          }
+          CReportManager::Instance()->execute(STATE_ITERATION_COMPLETE);
         }
 
       } else {

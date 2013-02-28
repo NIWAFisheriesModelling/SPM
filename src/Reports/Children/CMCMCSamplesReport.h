@@ -32,7 +32,7 @@ public:
 protected:
   string                      sMCMC;
   CMCMC                       *pMCMC;
-  vector<SChainItem>          vChain;
+  SChainItem                  vChain;
   bool                        bWrittenHeader;
 
 };

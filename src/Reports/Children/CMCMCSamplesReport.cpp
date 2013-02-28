@@ -9,11 +9,11 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CMCMCSamplesReport.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../MCMC/CMCMC.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../MCMC/CMCMC.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CMCMCSamplesReport::CMCMCSamplesReport()
@@ -21,7 +21,7 @@
 //**********************************************************************
 CMCMCSamplesReport::CMCMCSamplesReport() {
   // Variables
-  eExecutionState     = STATE_FINALIZATION;
+  eExecutionState = STATE_ITERATION_COMPLETE;
   bWrittenHeader  = false;
 
 }
@@ -35,6 +35,8 @@ void CMCMCSamplesReport::validate() {
 
     // Validate parent
     CFileReport::validate();
+
+    sFileName   = pParameterList->getString(PARAM_FILE_NAME);
 
   } catch (string &Ex) {
     Ex = "CMCMCSamplesReport.validate(" + getLabel() + ")->" + Ex;
@@ -70,7 +72,7 @@ void CMCMCSamplesReport::execute() {
     if (pRuntimeController->getRunMode() != RUN_MODE_MONTE_CARLO_MARKOV_CHAIN)
       return;
 
-    vChain = pMCMC->getMCMCChain();
+    vChain = pMCMC->getLastChainItem();
 
     this->start();
 
@@ -88,12 +90,11 @@ void CMCMCSamplesReport::execute() {
     }
 
     //Print out the most recent set of numbers
-    int iN = vChain.size()-1;
-    for(int j=0; j < (int)vChain[iN].vValues.size(); ++j) {
-      cout << vChain[iN].vValues[j] << ((j<(int)vChain[iN].vValues.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+    for(int j=0; j < (int)vChain.vValues.size(); ++j) {
+      cout << vChain.vValues[j] << ((j<(int)vChain.vValues.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
     }
 
-    if( iN == pMCMC->getNSamples() ) {
+    if( pMCMC->isLastItem() ) {
       cout << CONFIG_END_REPORT << "\n" << endl;
     }
 
