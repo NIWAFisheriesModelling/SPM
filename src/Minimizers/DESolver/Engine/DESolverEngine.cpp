@@ -249,15 +249,15 @@ bool DESolverEngine::generateGradient() {
 
     if (dConvergenceCheck > dTolerance) {
       if(!(pConfig->getQuietMode())) {
-        cerr << DESOLVERCONVERGENCE_CHECK << dConvergenceCheck << "\n";
-        cerr << DESOLVERCONVERGENCE_THRESHOLD << dTolerance << "\n" << endl;
+        cerr << DESOLVER_CONVERGENCE_CHECK << dConvergenceCheck << "\n";
+        cerr << DESOLVER_CONVERGENCE_THRESHOLD << dTolerance << "\n" << endl;
       }
       return false; // No Convergence
     }
   }
   if(!(pConfig->getQuietMode())) {
-    cerr << DESOLVERCONVERGENCE_CHECK << dConvergenceCheck << "\n";
-    cerr << DESOLVERCONVERGENCE_THRESHOLD << dTolerance << "\n" << endl;
+    cerr << DESOLVER_CONVERGENCE_CHECK << dConvergenceCheck << "\n";
+    cerr << DESOLVER_CONVERGENCE_THRESHOLD << dTolerance << "\n" << endl;
   }
   return true; // Convergence
 }

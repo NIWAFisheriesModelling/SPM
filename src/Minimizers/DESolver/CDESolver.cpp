@@ -92,9 +92,9 @@ void CDESolver::runEstimation() {
     // Check start value between bounds
     for (int i = 0; i < (int)vStartValues.size(); ++i) {
       if (vStartValues[i] < vLowerBounds[i])
-        throw string(GAMMADIFF_LESS_START_LOWER_BOUND);
+        throw string(DESOLVER_LESS_START_LOWER_BOUND);
       if (vStartValues[i] > vUpperBounds[i])
-        throw string(GAMMADIFF_GREATER_START_UPPER_BOUND);
+        throw string(DESOLVER_GREATER_START_UPPER_BOUND);
     }
 
 
@@ -103,11 +103,11 @@ void CDESolver::runEstimation() {
     if (clDESolver.Solve(iMaxGenerations)) {
       if(!(pConfig->getQuietMode()))
         cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations to find a solution\n";
-      cerr << "Convergence was successful" << "\n" << endl;
+      cerr << DESOLVER_CONVERGENCE_SUCCESSFUL << "\n" << endl;
     } else {
       if(!(pConfig->getQuietMode()))
         cerr << "DE_Solver used " << (clDESolver.getGenerations()+1) << " generations\n";
-      cerr << "Failed to converge, ran out of generations\n" << endl;
+      cerr << DESOLVER_CONVERGENCE_FAILED << "\n" << endl;
     }
   } catch (string &Ex) {
     Ex = "CDESolverInterface.runEstimation()->" + Ex;

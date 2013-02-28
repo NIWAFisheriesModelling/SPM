@@ -70,6 +70,7 @@
 #define CONFIG_ARRAY_END                    "]"
 #define CONFIG_ARRAY_START                  "["
 #define CONFIG_END_REPORT                   "*end"
+#define CONFIG_END_FILE                     "**end"
 #define CONFIG_FALSE                        "false"
 #define CONFIG_FALSE_SHORT                  "f"
 #define CONFIG_INCLUDE                      "@include"
@@ -108,23 +109,27 @@
 // GAMMADIFF
 //
 //**********************************************************************
-#define GAMMADIFF_SIZE_LOWER_BOUND_START_VALUE    "Lower bound vector is not same size as start value"
-#define GAMMADIFF_SIZE_UPPER_BOUND_START_VALUE    "Upper bound vector is not same size as start value"
+#define GAMMADIFF_CONVERGENCE_SUCCESSFUL          "Convergence was successful"
 #define GAMMADIFF_CONVERGENCE_UNCLEAR             "Unclear convergence, maybe local minimum"
 #define GAMMADIFF_EVALUATIONS_MAX                 "Maximum evaluations/iterations with no convergence"
-#define GAMMADIFF_CONVERGENCE                     "Convergence was successful"
-#define GAMMADIFF_RETURN_VALUE_UNKNOWN            "Fatal error, unknown return value = "
-#define GAMMADIFF_LESS_START_LOWER_BOUND          "Start value is less than lower bound"
 #define GAMMADIFF_GREATER_START_UPPER_BOUND       "Start value is greater than upper bound"
+#define GAMMADIFF_LESS_START_LOWER_BOUND          "Start value is less than lower bound"
+#define GAMMADIFF_RETURN_VALUE_UNKNOWN            "Fatal error, unknown return value = "
+#define GAMMADIFF_SIZE_LOWER_BOUND_START_VALUE    "Lower bound vector is not same size as start value"
+#define GAMMADIFF_SIZE_UPPER_BOUND_START_VALUE    "Upper bound vector is not same size as start value"
 
 //**********************************************************************
 // DESOLVER
 //
 //**********************************************************************
+#define DESOLVER_CONVERGENCE                      "DE_Solver: Convergence = "
+#define DESOLVER_CONVERGENCE_CHECK                "DE_Solver: Convergence check value = "
+#define DESOLVER_CONVERGENCE_FAILED               "Failed to converge, ran out of generations"
+#define DESOLVER_CONVERGENCE_SUCCESSFUL           "Convergence was successful"
+#define DESOLVER_CONVERGENCE_THRESHOLD            "DE_Solver: Convergence tolerance = "
 #define DESOLVER_CURRENT_GENERATION               "DE_Solver: Current generation = "
-#define DESOLVERCONVERGENCE_CHECK                 "DE_Solver: Convergence check value = "
-#define DESOLVERCONVERGENCE_THRESHOLD             "DE_Solver: Convergence tolerance = "
-#define DESOLVERCONVERGENCE                       "DE_Solver: Convergence = "
+#define DESOLVER_GREATER_START_UPPER_BOUND        "Start value is greater than upper bound"
+#define DESOLVER_LESS_START_LOWER_BOUND           "Start value is less than lower bound"
 
 //**********************************************************************
 // PARAMETERS

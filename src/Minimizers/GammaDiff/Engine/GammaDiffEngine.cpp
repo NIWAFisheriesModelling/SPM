@@ -213,7 +213,7 @@ double GammaDiffEngine::optimise_finite_differences(CGammaDiffCallback& objectiv
   else if (clMinimiser.getResult() == -2)
     cerr << GAMMADIFF_EVALUATIONS_MAX << endl;
   else if (clMinimiser.getResult() == -1)
-    cerr << GAMMADIFF_CONVERGENCE << endl;
+    cerr << GAMMADIFF_CONVERGENCE_SUCCESSFUL << endl;
   else
     cerr << GAMMADIFF_RETURN_VALUE_UNKNOWN << clMinimiser.getResult() << endl;
 
