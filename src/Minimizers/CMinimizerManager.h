@@ -32,7 +32,10 @@ public:
   void                        clone(CMinimizerManager *Manager) { }
   void                        validate();
   void                        build();
+  void                        initialise();
+  void                        execute(int estimationPhase);
   void                        execute();
+  vector<int>                 getEstimationPhases() { return vEstimationPhases; }
 
 protected:
   // Functions
@@ -52,6 +55,7 @@ protected:
 
 private:
   static CMinimizerManager*   clInstance;
+  vector<int>                 vEstimationPhases;
 };
 
 #endif /*CMINIMIZERMANAGER_H_*/

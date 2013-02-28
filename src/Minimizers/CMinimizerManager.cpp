@@ -132,6 +132,69 @@ void CMinimizerManager::build() {
 }
 
 //**********************************************************************
+// void CMinimizer::initialise()
+// Initialise Our Minimisation
+//**********************************************************************
+void CMinimizerManager::initialise() {
+  try {
+    if (pMinimizer == 0)
+      throw string(ERROR_INVALID_TARGET_NULL);
+
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+
+    /* We need to go through each of the estimates now and check out what phases
+     * that have been given. This will allow us to determine how many minimisation
+     * phases we need to run.
+     */
+    ERunMode runMode = CRuntimeController::Instance()->getRunMode();
+
+    vEstimationPhases.resize(0);
+    vEstimationPhases.push_back(1);
+
+    if (runMode == RUN_MODE_ESTIMATION) {
+      int enabledEstimates = pEstimateManager->getEnabledEstimateCount();
+      for (int i = 0; i < enabledEstimates; ++i) {
+        int estimationPhase = pEstimateManager->getEnabledEstimate(i)->getEstimationPhase();
+        vEstimationPhases.push_back(estimationPhase);
+      }
+      sort(vEstimationPhases.begin(),vEstimationPhases.end());
+      vEstimationPhases.erase(unique(vEstimationPhases.begin(),vEstimationPhases.end()),vEstimationPhases.end());
+    }
+
+  } catch (string &Ex) {
+    Ex = "CMinimizerManager.initialise()->" + Ex;
+    throw Ex;
+  }
+}
+
+
+//**********************************************************************
+// void CMinimizer::execute(int estimationPhase)
+// Execute Our Minimisation
+//**********************************************************************
+void CMinimizerManager::execute(int estimationPhase) {
+  try {
+
+    if (pMinimizer == 0)
+      throw string(ERROR_INVALID_TARGET_NULL);
+
+    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
+    ERunMode runMode = CRuntimeController::Instance()->getRunMode();
+
+    if (runMode == RUN_MODE_ESTIMATION)
+      pEstimateManager->setCurrentPhase(estimationPhase);
+
+    pMinimizer->runEstimation();
+    if(pMinimizer->getBuildCovariance())
+      pMinimizer->buildCovarianceMatrix();
+
+  } catch (string &Ex) {
+    Ex = "CMinimizerManager.execute(int)->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
 // void CMinimizer::execute()
 // Execute Our Minimisation
 //**********************************************************************
@@ -140,39 +203,9 @@ void CMinimizerManager::execute() {
     if (pMinimizer == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
-    CEstimateManager *pEstimateManager = CEstimateManager::Instance();
-    /*
-     * We need to go through each of the estimates now and check out what phases
-     * that have been given. This will allow us to determine how many minimisation
-     * phases we need to run.
-     */
-    ERunMode runMode = CRuntimeController::Instance()->getRunMode();
-
-    int estimationPhases = 1;
-
-    if (runMode == RUN_MODE_ESTIMATION) {
-      int enabledEstimates = pEstimateManager->getEnabledEstimateCount();
-      for (int i = 0; i < enabledEstimates; ++i) {
-        int estimationPhase = pEstimateManager->getEnabledEstimate(i)->getEstimationPhase();
-        estimationPhases = estimationPhases > estimationPhase ? estimationPhases : estimationPhase;
-      }
-    }
-
-    /**
-     * Now we do X estimations where X is the highest number
-     * of phases we found in the configuration file.
-     */
-    for (int i = 0; i < estimationPhases; ++i) {
-      string reportSuffix = ".phase_" + boost::lexical_cast<string>(i);
-      CReportManager::Instance()->setReportSuffix(reportSuffix);
-
-      if (runMode == RUN_MODE_ESTIMATION)
-        pEstimateManager->setCurrentPhase(i+1);
-
-      pMinimizer->runEstimation();
-      if(pMinimizer->getBuildCovariance())
-        pMinimizer->buildCovarianceMatrix();
-    }
+    pMinimizer->runEstimation();
+    if(pMinimizer->getBuildCovariance())
+      pMinimizer->buildCovarianceMatrix();
 
   } catch (string &Ex) {
     Ex = "CMinimizerManager.execute()->" + Ex;

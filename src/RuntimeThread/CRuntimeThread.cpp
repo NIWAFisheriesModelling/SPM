@@ -187,14 +187,26 @@ void CRuntimeThread::executeBasicRun() {
 // Execute Estimations
 //**********************************************************************
 void CRuntimeThread::executeEstimationRun() {
+
   CMinimizerManager *pMinimizerManager = CMinimizerManager::Instance();
-  pMinimizerManager->execute();
+  pMinimizerManager->initialise();
+  vector<int> vEstimationPhases =  pMinimizerManager->getEstimationPhases();
 
-  // Now Execute a Basic Run
-  pRuntimeController->setRunMode(RUN_MODE_BASIC);
-  rebuild();
-  executeBasicRun();
+  for (int i = 0; i < (int)vEstimationPhases.size(); ++i) {
+    pMinimizerManager->execute(vEstimationPhases[i]);
 
+    string reportSuffix = "";
+    if( i < (vEstimationPhases.size()-1) )
+      reportSuffix = ".phase_" + boost::lexical_cast<string>(i+1);
+    CReportManager::Instance()->setReportSuffix(reportSuffix);
+
+
+    // Now Execute a Basic Run
+    pRuntimeController->setRunMode(RUN_MODE_BASIC);
+    rebuild();
+    executeBasicRun();
+    pRuntimeController->setRunMode(RUN_MODE_ESTIMATION);
+  }
 }
 
 //**********************************************************************
