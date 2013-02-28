@@ -30,15 +30,16 @@ type covariance
 @report Objective_Score
 type objective_function
 
+@report Objective_Score
+type objective_function
+file_name objective.dat
+
 @report estimate-summary
 type estimate_summary
 
 @report estimate-values
 type estimate_value
 file_name MPD.dat
-
-@report Objective_Score
-type objective_function
 
 @report AgeError
 type ageing_error
@@ -80,7 +81,7 @@ type MCMC
 
 @report MCMC_samples
 type MCMC_samples
-file_name bob.txt
+file_name samples.dat
 
 @report agesize
 type age_size
