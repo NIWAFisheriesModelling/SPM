@@ -265,11 +265,11 @@ void CEstimateManager::loadEstimateValues(int index) {
 
 //**********************************************************************
 // void CEstimateManager::setCurrentPhase(int phase)
-// This method will enable all estimates that have estimate_phase = phase
+// This method will enable all estimates that have estimate_phase <= phase
 //**********************************************************************
 void CEstimateManager::setCurrentPhase(int phase) {
   foreach(CEstimate *estimate, vEstimateList) {
-    if (estimate->getEstimationPhase() == phase)
+    if (estimate->getEstimationPhase() <= phase)
       estimate->setEnabled(true);
     else
       estimate->setEnabled(false);
