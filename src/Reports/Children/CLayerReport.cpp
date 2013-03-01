@@ -14,6 +14,7 @@
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
+#include "../../Layers/String/CStringLayer.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
@@ -32,6 +33,10 @@ CLayerReport::CLayerReport() {
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_LAYER);
+
+  sLayerType = "";
+  sType = "";
+
 }
 
 //**********************************************************************
@@ -83,7 +88,21 @@ void CLayerReport::build() {
       iTimeStep = 0;
       sTimeStep = pTimeStepManager->getFirstTimeStepLabel();
     }
-    pLayer    = pLayerManager->getNumericLayer(sLayer);
+
+    sLayerType = pLayerManager->getLayerType(sLayer);
+    if (sLayerType == PARAM_ABUNDANCE_DENSITY ||
+        sLayerType == PARAM_ABUNDANCE ||
+        sLayerType == PARAM_BIOMASS_DENSITY ||
+        sLayerType == PARAM_BIOMASS ||
+        sLayerType == PARAM_DOUBLE ) {
+      pNumericLayer    = pLayerManager->getNumericLayer(sLayer);
+      sType = PARAM_DOUBLE;
+   } else if (sLayerType == PARAM_STRING) {
+      pStringLayer    = pLayerManager->getStringLayer(sLayer);
+      sType = PARAM_STRING;
+   } else {
+      CError::error(string("Invalid ") + PARAM_LAYER + " " + PARAM_TYPE + " (" + sLayerType + ") for report " + string(sLabel));
+   }
 
   } catch (string &Ex) {
     Ex = "CLayerReport.build(" + getLabel() + ")->" + Ex;
@@ -113,9 +132,17 @@ void CLayerReport::execute() {
     cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << pTimeStepManager->getCurrentYear() << "\n";
     cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
-    for (int i = 0; i < pLayer->getHeight(); ++i) {
-      for (int j = 0; j < pLayer->getWidth(); ++j) {
-        cout << pLayer->getValue(i, j) << (j<((int)pLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+    if( sType==PARAM_DOUBLE ) {
+      for (int i = 0; i < pNumericLayer->getHeight(); ++i) {
+        for (int j = 0; j < pNumericLayer->getWidth(); ++j) {
+          cout << pNumericLayer->getValue(i, j) << (j<((int)pNumericLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+        }
+      }
+    } else if( sType==PARAM_STRING ) {
+      for (int i = 0; i < pStringLayer->getHeight(); ++i) {
+        for (int j = 0; j < pStringLayer->getWidth(); ++j) {
+          cout << pStringLayer->getValue(i, j) << (j<((int)pStringLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+        }
       }
     }
 

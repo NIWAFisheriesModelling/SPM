@@ -15,6 +15,7 @@
 // Forward Dec
 class CTimeStepManager;
 class CNumericLayer;
+class CStringLayer;
 class CLayerManager;
 
 //**********************************************************************
@@ -37,7 +38,10 @@ protected:
   string                      sTimeStep;
   CTimeStepManager            *pTimeStepManager;
   string                      sLayer;
-  CNumericLayer               *pLayer;
+  string                      sLayerType;
+  string                      sType;
+  CNumericLayer               *pNumericLayer;
+  CStringLayer                *pStringLayer;
   CLayerManager               *pLayerManager;
 };
 
