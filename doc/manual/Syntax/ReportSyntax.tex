@@ -27,9 +27,9 @@ The report types available are,
   \item Print the age-size relationship
   \item Print the age-weight relationship
   \item Print the size-weight relationship
-  \item Printing the results of an MCMC
-  \item Printing the individual MCMC samples as they are calculated during an MCMC
-  \item Printing the individual MCMC objective function values as they are calculated during an MCMC
+  \item Print the results of an MCMC
+  \item Print the MCMC samples as they are calculated
+  \item Print the MCMC objective function values as they are calculated
 \end{enumerate}
 
 Each type of report requires a set of subcommands and arguments specific to that report.
@@ -197,7 +197,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{True}
 \defValue{Either True or False}
 
-\subsubsection[Printing the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_value}\label{sec:InputFileFormat}}
+\subsubsection[Print the estimated parameter values out as a vector]{\commandlabsubarg{report}{type}{estimate\_value}\label{sec:InputFileFormat}}
 
 Prints the estimated parameters in a format suitable for use with \texttt{spm -i}.
 
@@ -440,7 +440,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True or False}
 
-\subsubsection[Printing the results of an MCMC]{\commandlabsubarg{report}{type}{MCMC}}
+\subsubsection[Print the results of an MCMC]{\commandlabsubarg{report}{type}{MCMC}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -452,7 +452,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True or False}
 
-\subsubsection[Printing the individual MCMC samples as they are calculated during an MCMC]{\commandlabsubarg{report}{type}{MCMC\_samples}}
+\subsubsection[Print the MCMC samples as they are calculated]{\commandlabsubarg{report}{type}{MCMC\_samples}}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
@@ -464,9 +464,9 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defDefault{True}
 \defValue{Either True or False}
 
-\subsubsection[Printing the individual MCMC samples as they are calculated during an MCMC]{\commandlabsubarg{report}{type}{MCMC\_objectives}}
+\subsubsection[Print the MCMC objective function values as they are calculated]{\commandlabsubarg{report}{type}{MCMC\_objectives}}
 
-\defSub{file\_name} {Printing the individual MCMC objective function values as they are calculated during an MCMC}
+\defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid file name. Must be supplied.}

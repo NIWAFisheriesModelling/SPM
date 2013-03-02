@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-03-02 (rev. 4878)
+; TextPad syntax definitions for SPM version 1.1-2013-03-02 (rev. 4880)
 ; ===================================================================================
 ;
 ;
@@ -231,6 +231,7 @@ biomass
 biomass_density
 biomass_event_mortality
 categorical
+categorical_meta
 category_transition
 category_transition_rate
 constant
