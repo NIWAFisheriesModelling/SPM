@@ -273,6 +273,7 @@
 #define PARAM_MCMC_SAMPLES                        "mcmc_samples"
 #define PARAM_MEAN                                "mean"
 #define PARAM_META_NUMERIC                        "numeric_meta"
+#define PARAM_META_STRING                         "categorical_meta"
 #define PARAM_METHOD                              "method"
 #define PARAM_METROPOLIS_HASTINGS                 "metropolis_hastings"
 #define PARAM_MIGRATION_MOVEMENT                  "migration"

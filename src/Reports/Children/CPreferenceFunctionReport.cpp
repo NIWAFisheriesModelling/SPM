@@ -84,6 +84,8 @@ void CPreferenceFunctionReport::build() {
       pLayer = 0;
     } else if ( sLayerType==PARAM_META_NUMERIC ) {
       pLayer = 0;
+    } else if ( sLayerType==PARAM_META_STRING ) {
+      pLayer = 0;
     } else {
       CError::errorUnknown(PARAM_LAYER, sLayerName);
     }

@@ -146,7 +146,7 @@ CStringLayer* CLayerManager::getStringLayer(string Label) {
     // Loop Through Layers
     foreach(CLayer* Layer, vLayerList) {
       if (Layer->getLabel() == Label) {
-        // Cast and Check if is Numeric
+        // Cast and Check if is String
         CStringLayer *pPtr = dynamic_cast<CStringLayer*>(Layer);
         if (pPtr == 0)
           throw string(ERROR_INVALID_LAYER_TYPE_STRING + Label);

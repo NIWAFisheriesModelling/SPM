@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CNumericMetaLayer.cpp
+// Name        : CStringMetaLayer.cpp
 // Author      : S.Rasmussen
 // Date        : 16/01/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -8,27 +8,25 @@
 //============================================================================
 
 // Local headers
-#include "CNumericMetaLayer.h"
+#include "CStringMetaLayer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../InitializationPhases/CInitializationPhase.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../Layers/CLayerManager.h"
-#include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Layers/String/CStringLayer.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../World/WorldView/CCompleteWorldView.h"
 
 //**********************************************************************
-// CNumericMetaLayer::CNumericMetaLayer()
+// CStringMetaLayer::CStringMetaLayer()
 // Default constructor
 //**********************************************************************
-CNumericMetaLayer::CNumericMetaLayer() {
+CStringMetaLayer::CStringMetaLayer() {
 
   pTimeStepManager = CTimeStepManager::Instance();
   pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
-  sType = PARAM_META_NUMERIC;
+  sType = PARAM_META_STRING;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_DEFAULT_LAYER);
@@ -42,10 +40,10 @@ CNumericMetaLayer::CNumericMetaLayer() {
 }
 
 //**********************************************************************
-// void CNumericMetaLayer::validate()
+// void CStringMetaLayer::validate()
 // Validate the layer
 //**********************************************************************
-void CNumericMetaLayer::validate() {
+void CStringMetaLayer::validate() {
   try {
     // Base
     CLayer::validate();
@@ -88,16 +86,16 @@ void CNumericMetaLayer::validate() {
       CError::errorListSameSize(PARAM_INITIALIZATION_PHASES, PARAM_INITIALIZATION_LAYERS);
 
   } catch (string &Ex) {
-    Ex = "CNumericMetaLayer.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CStringMetaLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CNumericMetaLayer::build()
+// void CStringMetaLayer::build()
 // Build the layer
 //**********************************************************************
-void CNumericMetaLayer::build() {
+void CStringMetaLayer::build() {
   try {
 
     CLayerManager *pLayerManager = CLayerManager::Instance();
@@ -107,12 +105,12 @@ void CNumericMetaLayer::build() {
     int iInitialisationPhaseCount = pInitializationPhaseManager->getNumberInitializationPhases();
     // Fill in as default, then override with the specifics
     for (int i=0; i < iInitialisationPhaseCount; ++i) {
-      vPhaseLayers.push_back( pLayerManager->getNumericLayer(sDefaultLayer) );
+      vPhaseLayers.push_back( pLayerManager->getStringLayer(sDefaultLayer) );
     }
     if (bHasInitialisation) {
       for (int i=0; i < (int)vInitialisationPhases.size(); ++i) {
         int iPhase = pInitializationPhaseManager->getInitializationPhaseOrderIndex(vInitialisationPhases[i]);
-        vPhaseLayers[iPhase] = pLayerManager->getNumericLayer(vInitialisationLayers[i]);
+        vPhaseLayers[iPhase] = pLayerManager->getStringLayer(vInitialisationLayers[i]);
       }
     }
 
@@ -120,37 +118,39 @@ void CNumericMetaLayer::build() {
     // Fill in as default, then override with the specifics
     for (int i=pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
       vYearsIndex.push_back(i);
-      vYearsLayers.push_back( pLayerManager->getNumericLayer(sDefaultLayer) );
+      vYearsLayers.push_back( pLayerManager->getStringLayer(sDefaultLayer) );
     }
     if (bHasYears) {
       for (int i=0; i < (int)vYearsIndex.size(); ++i) {
         for(int j=0; j < (int)vYears.size(); ++j) {
           if(vYearsIndex[i] == vYears[j]) {
-            vYearsLayers[i] = pLayerManager->getNumericLayer(vLayerNames[j]);
+            vYearsLayers[i] = pLayerManager->getStringLayer(vLayerNames[j]);
           }
         }
       }
     }
 
   } catch (string &Ex) {
-    Ex = "CNumericMetaLayer.build(" + getLabel() + ")->" + Ex;
+    Ex = "CStringMetaLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 
 //**********************************************************************
-// double getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol)
+// string getValue(int RowIndex, int ColIndex)
 // get value
 //**********************************************************************
-double CNumericMetaLayer::getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol) {
+string CStringMetaLayer::getValue(int RowIndex, int ColIndex) {
   try {
 
-    double dValue = -1;
+throw string("Not yet implemented");
+
+    string sValue = "";
     //If initialisation phase, return appropriate layer
     if ( pRuntimeController->getCurrentState() == STATE_INITIALIZATION ) {
       int iThisPhase = pInitializationPhaseManager->getLastExecutedInitializationPhase() + 1;
-      dValue = vPhaseLayers[iThisPhase]->getValue(RowIndex, ColIndex, TargetRow, TargetCol);
+      sValue = vPhaseLayers[iThisPhase]->getValue(RowIndex, ColIndex);
     } else {
       int iThisYear = pTimeStepManager->getCurrentYear();
       int iIndex = 0;
@@ -159,19 +159,19 @@ double CNumericMetaLayer::getValue(int RowIndex, int ColIndex, int TargetRow, in
           iIndex = i;
         }
       }
-      dValue = vYearsLayers[iIndex]->getValue(RowIndex, ColIndex, TargetRow, TargetCol);
+      sValue = vYearsLayers[iIndex]->getValue(RowIndex, ColIndex);
     }
-    return(dValue);
+    return(sValue);
 
   } catch (string &Ex) {
-    Ex = "CNumericMetaLayer.getValue(" + getLabel() + ")->" + Ex;
+    Ex = "CStringMetaLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// CNumericMetaLayer::~CNumericMetaLayer()
+// CStringMetaLayer::~CStringMetaLayer()
 // Destructor
 //**********************************************************************
-CNumericMetaLayer::~CNumericMetaLayer() {
+CStringMetaLayer::~CStringMetaLayer() {
 }

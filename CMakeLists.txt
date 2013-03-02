@@ -116,7 +116,6 @@ src/InitializationPhases/Factory/CInitializationPhaseFactory.cpp
 src/Layers/CLayer.cpp
 src/Layers/CLayerManager.cpp
 src/Layers/Factory/CLayerFactory.cpp
-src/Layers/MetaLayer/CMetaLayer.cpp
 src/Layers/Numeric/Base/CNumericLayer.cpp
 src/Layers/Numeric/CAbundanceDensityLayer.cpp
 src/Layers/Numeric/CAbundanceLayer.cpp
@@ -124,6 +123,8 @@ src/Layers/Numeric/CBiomassDensityLayer.cpp
 src/Layers/Numeric/CBiomassLayer.cpp
 src/Layers/Numeric/CDistanceLayer.cpp
 src/Layers/Numeric/CDoubleLayer.cpp
+src/Layers/Numeric/CNumericMetaLayer.cpp
+src/Layers/String/CStringMetaLayer.cpp
 src/Layers/String/CStringLayer.cpp
 src/Likelihoods/Children/CBinomialApproxLikelihood.cpp
 src/Likelihoods/Children/CBinomialLikelihood.cpp

@@ -17,7 +17,7 @@
 //**********************************************************************
 CStringLayer::CStringLayer() {
   // Vars
-  sType = PARAM_CATEGORICAL;
+  sType = PARAM_STRING;
   pGrid   = 0;
 
   // Register user allowed variables

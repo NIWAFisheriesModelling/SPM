@@ -20,6 +20,7 @@
 #include "../Numeric/CDoubleLayer.h"
 #include "../Numeric/CNumericMetaLayer.h"
 #include "../String/CStringLayer.h"
+#include "../String/CStringMetaLayer.h"
 
 //**********************************************************************
 // CLayer* CLayerFactory::buildLayer(string type)
@@ -31,6 +32,8 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
 
   if (type == PARAM_META_NUMERIC)
     pLayer = new CNumericMetaLayer();
+  else if (type == PARAM_META_STRING)
+    pLayer = new CStringMetaLayer();
   else if (type == PARAM_ABUNDANCE_DENSITY)
     pLayer = new CAbundanceDensityLayer();
   else if (type == PARAM_ABUNDANCE)
