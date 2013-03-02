@@ -1,6 +1,6 @@
 \section{Population command and subcommand syntax\label{sec:population-syntax}}
 
-\subsection{Model structure}
+\subsection{\I{Model structure}}
 
 \defCom{model}{Define the spatial structure, population structure, annual cycle, and model years}
 
@@ -74,7 +74,7 @@
 \defDefault{No default}
 \defValue{Defines the labels of the time-steps that are run in each year}
 
-\subsection{Initialisation}
+\subsection{\I{Initialisation}}
 
 %The methods for initialisation available are,
 %\begin{itemize}
@@ -102,7 +102,7 @@
 \defDefault{No default}
 \defValue{A valid process label, from one of \command{process}}
 
-\subsection{Time-steps}
+\subsection{\I{Time-steps}}
 
 \defComLab{time\_step} {Define a time-step with label}
 
@@ -111,7 +111,7 @@
 \defDefault{No default}
 \defValue{Defines the labels of the processes for that time-step}
 
-\subsection{Processes}
+\subsection{\I{Processes}}
 
 The population processes available are,
 
@@ -664,7 +664,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid preference function labels defined by \command{preference\_function}}
 
-\subsection{Preference functions}
+\subsection{\I{Preference functions}}
 
 The individual preference functions available are,
 
@@ -856,7 +856,7 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defDefault{No default}
 \defValue{A complete set of positive values of labels in \argument{layer} in order of \argument{category\_labels}}
 
-\subsection{Layers}
+\subsection{\I{Layers}}
 
 The available layer types  are,
 
@@ -1058,7 +1058,7 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 %\defCondition{All parameters and layers used have to be defined above}
 %\end{comment}
 
-\subsection{Derived quantities}
+\subsection{\I{Derived quantities}}
 
 The individual types of derived quantities available are,
 
@@ -1128,7 +1128,7 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell biomass multiplied by the value of the layer.}
 
-\subsection{Age-size relationship}
+\subsection{\I{Age-size relationship}}
 
 The individual types of size-at-age relationships available are,
 
@@ -1249,7 +1249,7 @@ The individual types of size-at-age relationships available are,
 \defDefault{No default}
 \defValue{A valid label from \command{size\_weight}}
 
-\subsection{Size-weight}
+\subsection{\I{Size-weight}}
 
 The individual types of size-weight relationship available are,
 
@@ -1281,7 +1281,7 @@ There are no other subcommands for \commandlabsubarg{size\_weight}{type}{none}.
 \defDefault{No default}
 \defValue{A positive real number}
 
-\subsection{Selectivities}
+\subsection{\I{Selectivities}}
 
 The individual selectivity functions available are,
 

@@ -1,0 +1,52 @@
+This example implements a $ 10 \times 6 $ spatial cell model, with preference function movement processes. The population has recruitment, maturation, natural and exploitation mortality, and annual age increment processes, with ages $1-50^{+}$ and categories labelled immature and mature. 
+
+The model was initialised over a 100 year period, and applies the following population processes;
+
+\begin{enumerate}
+\item A Beverton-Holt recruitment process, recruiting a constant number of individuals to the first age class (i.e., $age=1$) in the category labelled immature.
+\item A maturation process, where individuals are moved from the immature to the mature categories with a logistic-producing selectivity labelled `maturation'.
+\item A constant mortality process representing natural mortality. 
+\item An ageing process, where all individuals are aged by one year, and with a plus group accumulator age class at $age=50$.
+\end{enumerate}
+
+The second phase of initialisation also covers 100 years, but includes movement processes in addition to the population processes above;
+\begin{enumerate}
+\item For immature fish, a preference function process that applies movement according to distance, depth, and latitude.
+\item For mature fish, a preference function process that applies movement also according to distance, depth, and latitude, but with different functional forms and parameters to the immature movement.
+\end{enumerate}
+
+A third phase of initialisation, of period one year, is applied to allow external validation that the initialisation process has stabilised the population to equilibrium (i.e., by confirming that there is no or at least only a small difference in the partition at the end of second and third phases).
+
+Following initialisation, the model runs from the years 1994 to 2007 iterating through two time-steps. The first time-step applies processes of recruitment, maturation, and  $ M + F $ processes. The exploitation process (fishing) is applied in the years 1998--2007, with catches defined by the layers Fishing\_1998 to Fishing\_2007. Movement is applied along with ageing in the second time-step.
+
+The first 60 lines of the main section of the \config\ are,
+% Include config file
+\lstinputlisting[firstline=1,lastline=60]{../../examples/simple_spatial/config.spm} 
+
+The \config\ includes definitions of required layers and the estimation, observation, and report parameters as external files.
+
+To carry out a run of the model (to verify that the model runs without any syntax errors), use the command \texttt{spm -r -c config.spm}. Note that as \SPM\ looks for a file named \texttt{config.spm} by default, we can simplify the command to \texttt{spm -r}. 
+
+To run an estimation, and hence estimate the parameters defined in the file \texttt{estimation.spm} (the catchability constant $q$, recruitment $R_0$, and the selectivity parameters $a_{50}$ and $a_{to95}$), use \texttt{spm -e}. Here, we have piped the output to \texttt{estimate.log} using the command \texttt{spm -e > estimate.log}.  \SPM\ reports a the results of each iteration of the estimation, and ends with successful convergence,
+{\small{\begin{verbatim}
+Convergence was successful
+Total elapsed time: 30 minutes
+\end{verbatim}}}
+
+The main part of the output from the estimation run is summarised in the file \texttt{estimate.log}, and the final objective function is,
+\lstinputlisting{../../examples/simple_spatial/objective.dat} 
+with parameter estimates,
+\lstinputlisting[firstline=1,lastline=2]{../../examples/simple_spatial/MPD.dat} 
+
+A profile on the $R_0$ parameter can also be run, using \texttt{spm -p > profile.log}. See the examples folder for an example of the output.
+
+Simulations were run using command \texttt{spm -s 10 > simulations.log}. The first 20 lines of the first simulation are,
+% Include simulations.01 file
+\lstinputlisting[firstline=1,lastline=20]{../../examples/simple_spatial/simulations/observations.01} 
+
+An estimate of the posterior distribution can be found using the command \texttt{spm -m -g 0 > MCMC.log}. The first set of output describes the covariance matrix and the MCMC proposal matrix. Following this, the log file contains the iterations, objective functions values, MCMC acceptance rate, and the step size.
+
+The actual MCMC samples are listed at the end of the file.
+% Include MCMC.log file
+\lstinputlisting[firstline=1228,lastline=1253]{../../examples/simple_spatial/MCMC.log}
+

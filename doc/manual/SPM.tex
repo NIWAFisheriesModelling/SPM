@@ -147,12 +147,12 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 
 % New commands to template syntax definitions
 % Define a command without a label
-\newcommand{\defCom}[2]{\texttt{\textbf{@#1}} \hspace{0.5cm} {#2}}
+\newcommand{\defCom}[2]{\texttt{\textbf{@#1}\index{Command ! #1}} \hspace{0.5cm} {#2}}
 % Define a command with a label
-\newcommand{\defComLab}[2]{\texttt{\textbf{@#1}\ \emph{label}} \hspace{0.5cm} {#2}}
+\newcommand{\defComLab}[2]{\texttt{\textbf{@#1}\ \emph{label}\index{Command ! #1}} \hspace{0.5cm} {#2}}
 % Define a subcommand
 \newcommand{\defSub}[2]{\texttt{#1} \hspace{0.5cm} #2 \\*}% Define a command with an argument
-\newcommand{\defComArg}[3]{\texttt{\textbf{@#1}\ \emph{#2}} \hspace{0.5cm} {#3}}
+\newcommand{\defComArg}[3]{\texttt{\textbf{@#1}\ \emph{#2}\index{Command ! #1}} \hspace{0.5cm} {#3}}
 % Define a Command\index{Command} argument
 \newcommand{\defArg}[2]{\emph{\texttt{#1}} \hspace{0.5cm} #2 \\*}
 
@@ -177,7 +177,7 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \newcommand{\VER}{v\input{SPMversion.tex}} % SPM program version
 \newcommand{\SPM}{\texttt{SPM}} % SPM short  name
 \newcommand{\SPMName}{Spatial Population Model} %SPM long name
-\newcommand{\authors}{\href{mailto:"Alistair Dunn"<a.dunn@niwa.co.nz>?subject=SPM:}{authors}} %hyper ref for email
+\newcommand{\authors}{\href{mailto:"Alistair Dunn"<alistair.dunn@niwa.co.nz>?subject=SPM:}{authors}} %hyper ref for email
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.} %NIWA
 \newcommand{\ManualRef}{Dunn, A.; Rasmussen, S.; Mormede, S. (\DocYear) \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
 \title{\SPMName\ User Manual \\\SPM\ \VER} %Document title

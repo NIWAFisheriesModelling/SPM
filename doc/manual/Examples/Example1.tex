@@ -1,0 +1,54 @@
+This example implements a very simple single spatial cell model (i.e., a model with no movement, and the entire population enclosed within a $1 \times 1$ spatial structure) with recruitment, maturation, natural and exploitation mortality, and an annual age increment. The population structure has ages $1-50^{+}$ with categories labelled immature and mature. 
+
+The model was initialised over a 200 year period, and applies the following processes,
+
+\begin{enumerate}
+\item A Beverton-Holt recruitment process, recruiting a constant number of individuals to the first age class (i.e., $age=1$) in the category labelled immature.
+\item A maturation process, where individuals are moved from the immature to the mature categories with a logistic-producing selectivity labelled `maturation'.
+\item A constant mortality process representing natural mortality, applied as two repeats of the 'halfM' process. (Half $M$ used so-as to be able to mimic a $\frac{1}{2} M + F + \frac{1}{2} M$ natural and fishing exploitation set of processes after initialisation.)
+\item An ageing process, where all individuals are aged by one year, and with a plus group accumulator age class at $age=50$.
+\end{enumerate}
+
+A second phase of initialisation, of period one year, is applied to allow external validation that the initialisation process has stabilised the population to equilibrium (i.e., by confirming that there is no or at least only a small difference in the partition at the end of first and second phases).
+
+Following initialisation, the model runs from the years 1994 to 2007 iterating through two time-steps. The first time-step applies processes of recruitment, maturation, and  $\frac{1}{2} M + F + \frac{1}{2} M$ processes. The exploitation process (fishing) is applied in the years 1998--2007, with catches defined by the layers Fishing\_1998 to Fishing\_2007. 
+
+The second time-step applies an age increment.
+
+The first 50 lines of the main section of the \config\ are,
+% Include config file
+\lstinputlisting[firstline=1,lastline=50]{../../examples/1x1/config.spm} 
+
+The \config\ includes definitions of required layers and the estimation, observation, and report parameters as external files.
+
+To carry out a run of the model (to verify that the model runs without any syntax errors), use the command \texttt{spm -r -c config.spm}. Note that as \SPM\ looks for a file named \texttt{config.spm} by default, we can simplify the command to \texttt{spm -r}. 
+
+To run an estimation, and hence estimate the parameters defined in the file \texttt{estimation.spm} (the catchability constant $q$, recruitment $R_0$, and the selectivity parameters $a_{50}$ and $a_{to95}$), use  \texttt{spm -e}. Here, we have piped the output to \texttt{estimate.log} using the command \texttt{spm -e > estimate.log}.  \SPM\ reports a the results of each iteration of the estimation, and ends with successful convergence,
+{\small{\begin{verbatim}
+Convergence was successful
+Total elapsed time: 1 second
+\end{verbatim}}}
+
+The main part of the output from the estimation run is summarised in the file \texttt{estimate.log}, and the final objective function is,
+\lstinputlisting{../../examples/1x1/objective.dat} 
+with parameter estimates,
+\lstinputlisting{../../examples/1x1/MPD.dat} 
+
+A profile on the $R_0$ parameter can also be run, using \texttt{spm -p > profile.log}. See the examples folder for an example of the output.
+
+Simulations were run using command \texttt{spm -s 10 > simulations.log}. The first 20 lines of the first simulation are,
+% Include simulations.01 file
+\lstinputlisting[firstline=1,lastline=20]{../../examples/1x1/simulations/observations.01} 
+
+An estimate of the posterior distribution can be found using the command \texttt{spm -m -g 0 > MCMC.log}. The first set of output describes the covariance matrix and the MCMC proposal matrix.
+% Include MCMC.log file
+\lstinputlisting[firstline=1,lastline=19]{../../examples/1x1/MCMC.log}
+
+Following this, the log file contains the iterations, objective functions values, MCMC acceptance rate, and the step size.
+% Include MCMC.log file
+\lstinputlisting[firstline=25,lastline=50]{../../examples/1x1/MCMC.log}
+
+The actual MCMC samples are listed at the end of the file.
+% Include MCMC.log file
+\lstinputlisting[firstline=1228,lastline=1253]{../../examples/1x1/MCMC.log}
+
