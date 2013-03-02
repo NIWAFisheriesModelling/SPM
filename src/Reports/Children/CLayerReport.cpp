@@ -11,14 +11,14 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CLayerReport.h"
-#include "../../TimeSteps/CTimeStepManager.h"
+#include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Layers/String/CStringLayer.h"
 #include "../../Layers/String/CStringMetaLayer.h"
-#include "../../Helpers/CConvertor.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/ForEach.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CLayerReport::CLayerReport()
@@ -128,6 +128,10 @@ void CLayerReport::execute() {
     // Print Out
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    if( sType==PARAM_DOUBLE )
+      cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pNumericLayer->getLabel() << "\n";
+    else
+      cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pStringLayer->getLabel() << "\n";
     cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << pTimeStepManager->getCurrentYear() << "\n";
     cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
