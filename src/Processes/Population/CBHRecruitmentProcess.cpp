@@ -33,7 +33,10 @@ using std::numeric_limits;
 // Default constructor
 //**********************************************************************
 CBHRecruitmentProcess::CBHRecruitmentProcess() {
+
   pTimeStepManager = CTimeStepManager::Instance();
+  pInitializationPhaseManager = CInitializationPhaseManager::Instance();
+
   // Default Vars
   pLayer          = 0;
   sType = PARAM_BH_RECRUITMENT;
@@ -170,9 +173,6 @@ void CBHRecruitmentProcess::build() {
 
     // Get our derived quantity (SSB)
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sSSB);
-
-    // Get our initialisation
-    pInitializationPhaseManager = CInitializationPhaseManager::Instance();
 
     // Get B0 phase
     if( sB0 == "" ) {
