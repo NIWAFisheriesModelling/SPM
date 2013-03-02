@@ -11,13 +11,12 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CAbundanceObservation.h"
-#include "../../Catchabilities/CCatchabilityManager.h"
 #include "../../Catchabilities/CCatchability.h"
-#include "../../Layers/String/CStringLayer.h"
-#include "../../Selectivities/CSelectivity.h"
+#include "../../Catchabilities/CCatchabilityManager.h"
+#include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
-#include "../../Helpers/CConvertor.h"
+#include "../../Selectivities/CSelectivity.h"
 
 //**********************************************************************
 // CAbundanceObservation::CAbundanceObservation()

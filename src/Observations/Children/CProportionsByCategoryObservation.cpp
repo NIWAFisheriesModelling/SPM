@@ -14,13 +14,12 @@
 
 // Local Headers
 #include "CProportionsByCategoryObservation.h"
-#include "../../Layers/String/CStringLayer.h"
-#include "../../Selectivities/CSelectivity.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
+#include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
 
 // Using

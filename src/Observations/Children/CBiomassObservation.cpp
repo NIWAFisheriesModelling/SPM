@@ -13,7 +13,6 @@
 #include "CBiomassObservation.h"
 #include "../../Catchabilities/CCatchabilityManager.h"
 #include "../../Catchabilities/CCatchability.h"
-#include "../../Layers/String/CStringLayer.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"

@@ -13,13 +13,13 @@
 
 // Local Headers
 #include "CProportionsAtAgeObservation.h"
-#include "../../Selectivities/CSelectivity.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/CConvertor.h"
-#include "../../Helpers/CMath.h"
-#include "../../Helpers/CComparer.h"
-#include "../../AgeingError/CAgeingErrorManager.h"
 #include "../../AgeingError/CAgeingError.h"
+#include "../../AgeingError/CAgeingErrorManager.h"
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CMath.h"
+#include "../../Selectivities/CSelectivity.h"
 
 // Using
 using std::cout;
