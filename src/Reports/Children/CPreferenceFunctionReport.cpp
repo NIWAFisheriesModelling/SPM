@@ -82,7 +82,7 @@ void CPreferenceFunctionReport::build() {
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
     } else if ( sLayerType==PARAM_CATEGORICAL ) {
       pLayer = 0;
-    } else if ( sLayerType==PARAM_META ) {
+    } else if ( sLayerType==PARAM_META_NUMERIC ) {
       pLayer = 0;
     } else {
       CError::errorUnknown(PARAM_LAYER, sLayerName);

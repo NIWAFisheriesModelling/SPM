@@ -9,16 +9,16 @@
 
 // Local headers
 #include "CLayerFactory.h"
-#include "../CLayerManager.h"
 #include "../../Helpers/CError.h"
 #include "../../Translations/Translations.h"
-#include "../MetaLayer/CMetaLayer.h"
+#include "../CLayerManager.h"
 #include "../Numeric/CAbundanceDensityLayer.h"
 #include "../Numeric/CAbundanceLayer.h"
 #include "../Numeric/CBiomassDensityLayer.h"
 #include "../Numeric/CBiomassLayer.h"
 #include "../Numeric/CDistanceLayer.h"
 #include "../Numeric/CDoubleLayer.h"
+#include "../Numeric/CNumericMetaLayer.h"
 #include "../String/CStringLayer.h"
 
 //**********************************************************************
@@ -29,8 +29,8 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
 
   CLayer *pLayer = 0;
 
-  if (type == PARAM_META)
-    pLayer = new CMetaLayer();
+  if (type == PARAM_META_NUMERIC)
+    pLayer = new CNumericMetaLayer();
   else if (type == PARAM_ABUNDANCE_DENSITY)
     pLayer = new CAbundanceDensityLayer();
   else if (type == PARAM_ABUNDANCE)
