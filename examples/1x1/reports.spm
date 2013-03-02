@@ -83,6 +83,10 @@ type MCMC
 type MCMC_samples
 file_name samples.dat
 
+@report MCMC_objectives
+type MCMC_objectives
+file_name objectives.dat
+
 @report agesize
 type age_size
 age_size VB
