@@ -48,6 +48,8 @@ void CStringMetaLayer::validate() {
     // Base
     CLayer::validate();
 
+throw string("Categorical meta-layers are not yet implemented");
+
     // Populate our variables
     sDefaultLayer = pParameterList->getString(PARAM_DEFAULT_LAYER);
 
@@ -143,8 +145,6 @@ void CStringMetaLayer::build() {
 //**********************************************************************
 string CStringMetaLayer::getValue(int RowIndex, int ColIndex) {
   try {
-
-throw string("Not yet implemented");
 
     string sValue = "";
     //If initialisation phase, return appropriate layer
