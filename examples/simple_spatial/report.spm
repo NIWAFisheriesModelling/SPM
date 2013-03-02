@@ -45,8 +45,12 @@ type estimate_summary
 type estimate_value
 file_name MPD.dat
 
-@report objective
+@report Objective_Score
 type objective_function
+
+@report Objective_Score
+type objective_function
+file_name objective.dat
 
 @report Maturation
 type selectivity
@@ -102,10 +106,18 @@ process Maturation
 
 @report M
 type process
-process halfM
+process M
 
 @report MCMC
 type MCMC
+
+@report MCMC_samples
+type MCMC_samples
+file_name samples.dat
+
+@report MCMC_objectives
+type MCMC_objectives
+file_name objectives.dat
 
 @report agesize
 type age_size

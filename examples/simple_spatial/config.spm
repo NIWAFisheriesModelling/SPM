@@ -1,3 +1,7 @@
+###########################################################################
+# Example 2: 9x6 spatial model with preference movement processes
+###########################################################################
+
 # Model Structure
 @model
 nrows 6
@@ -24,28 +28,25 @@ type none
 # Initialisation
 @initialisation_phase Phase1
 years 100
-time_steps stepA stepB
+time_steps initial_step_one
 
 @initialisation_phase Phase2
 years 100
-time_steps stepB stepC
+time_steps initial_step_two
 
 @initialisation_phase Phase3
 years 1
-time_steps stepB stepC
+time_steps initial_step_two
 
-@time_step stepA
-processes BHrecruitment Maturation halfM halfM
+@time_step initial_step_one
+processes BHrecruitment Maturation M Ageing
 
-@time_step stepB
-processes BHrecruitment Maturation halfM halfM MoveImmature MoveMature
-
-@time_step stepC
-processes Ageing
+@time_step initial_step_two
+processes BHrecruitment Maturation M MoveImmature MoveMature Ageing
 
 # Annual Cycle
 @time_step one # Summer
-processes BHrecruitment Maturation halfM Fishing halfM
+processes BHrecruitment Maturation M Fishing
 
 @time_step two # Winter
 processes MoveImmature MoveMature Ageing
@@ -54,7 +55,7 @@ processes MoveImmature MoveMature Ageing
 @derived_quantity SSB
 type abundance
 time_step one
-initialisation_time_steps stepA stepB stepB
+initialisation_time_steps initial_step_one initial_step_two initial_step_two
 categories mature
 selectivities One
 layer Base
@@ -73,14 +74,14 @@ age 1
 ssb SSB
 b0 Phase2
 ssb_offset 1
-standardise_YCS_years 1995-2007
+standardise_ycs_years 1995-2007
 ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1
 steepness 0.75
 
-@process halfM
+@process M
 type constant_mortality_rate
 categories immature mature
-m 0.065 0.065
+m 0.13 0.13
 selectivities One One
 
 @process Fishing
