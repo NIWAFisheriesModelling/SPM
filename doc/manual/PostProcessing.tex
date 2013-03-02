@@ -2,4 +2,19 @@
 
 The \R\ package \texttt{spm} contains a set of \R\ functions for reading \SPM\ output, and is available as a precompiled binary for Microsoft Windows (.zip file) or as a source package (.gz file) for Linux. To check the version number and date of the \texttt{spm} \R\ package (useful for checking that you have the most recent version), use the function \texttt{spm.version()}.
 
-The \texttt{spm} \R\ package includes a range of extract and write functions to aid post-processing of \SPM\ \config s and output. The main extract functions are briefly described below. In addition, the package also has a number of undocumented helper functions, that could be useful for writing you own analysis functions. See the the \R\ help for more detail e.g., \texttt{help(spm)}
+The \texttt{spm} \R\ package includes a range of extract and write functions to aid post-processing of \SPM\ \config s and output. The main extract functions are briefly described below. In addition, the package also some undocumented helper functions, that could be useful for writing you own analysis functions. See the the \R\ help for more detail e.g., \texttt{help(spm)}
+
+\subsection{Read and extract reports from a SPM output file.}
+
+Command: \texttt{extract()} 
+
+Usage: \texttt{extract(file, path = "", ignore.unknown=FALSE)}
+
+Arguments:
+\begin{description}
+\item[\texttt{file}] the name of the SPM output file to read
+\item[\texttt{path}] Optionally, the operating system path to the directory of the output file.
+\item[\texttt{ignore.unknown}] Ignore unknown reports when reading. (This can be useful to read files that contain undocumented reports or other output)
+\end{description}
+
+Output: A list object with elements for each report type.
