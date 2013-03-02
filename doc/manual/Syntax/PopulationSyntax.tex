@@ -868,9 +868,9 @@ The available layer types  are,
 	\item Biomass
 	\item Abundance density
 	\item Biomass density
-	\item Meta-layer
+	\item Numeric meta-layer
+	\item Categorical meta-layer
 	\item Derived layer
-	\item Derived meta-layer
 \end{itemize}
 
 \defComLab{layer} {Define a layer function with label}
@@ -946,51 +946,77 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-%\subsubsection[Meta-layer]{\commandlabsubarg{layer}{type}{meta}}
-%
-%\defSub{years} {Define the years}
-%\defType{Integer vector or integer range}
-%\defDefault{No default}
-%\defValue{Must be valid model years}
-%
-%\defSub{layers} {Define the layer labels for each of the years}
-%\defType{String vector, of length \argument{year} once expanded}
-%\defDefault{No default}
-%\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta\_layer}. Command has to have either \subcommand{layers} or \subcommand{as\_meta\_layer} but not both}
-%
-%\defSub{data} {Define the values of the meta-layer directly}
-%\defType{Constant vector, with total length \commandsub{model}{ncols} $\times$ \commandsub{model}{nrows} $\times$ \subcommand{years} once expanded}
-%\defDefault{No default}
-%\defValue{A vector of values of length equal to the number of elements defined for the spatial and temporal structure}
-%\defCondition{\commandlabsubarg{layer}{type}{meta} has to have either \subcommand{layers} or \subcommand{data} but not both}
-%
-%\defSub{initialisation\_layers} {Define the layers label to use during the initialisation}
-%\defType{String vector, of length the number of initialisation phases}
-%\defDefault{No default}
-%\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
-%
-%\defSub{projection\_layer} {Define the layer label to use during the projection}
-%\defType{String}
-%\defDefault{No default}
-%\defCondition{Listed layers cannot be \commandlabsubarg{layer}{type}{meta}}
-%
-%\subsubsection[Derived-layer]{\commandlabsubarg{layer}{type}{derived}}
-%
-%\defSub{years} {Define the years when the calculation is performed}
-%\defType{Integer vector or integer range}
-%\defDefault{If not specified, calculation is carried out at ever model year}
-%\defValue{Must be valid model years once expanded, including initialisation steps}
-%
-%\defSub{time\_step} {Define the time-step at which the calculation is performed}
-%\defType{String}
-%\defDefault{No default}
-%\defValue{Valid label from \command{time\_step}}
-%
-%\defSub{layers} {Define the layers to be used in the calculations}
-%\defType{String vector}
-%\defDefault{No default}
-%\defValue{Valid layers as defined by \command{layer} or valid meta-layers as defined by command \commandlabsubarg{layer}{type}{meta\_layer}, in which case the appropriate years will be extracted}
-%
+\subsubsection[Numeric meta-layer]{\commandlabsubarg{layer}{type}{numeric\_meta}}
+
+\defSub{default\_layer} {Define the default layer to use in years or initialisation phases where it is not otherwise defined}
+\defType{String}
+\defDefault{No default}
+\defCondition{The argument must be a numeric layer}
+
+\defSub{years} {Define the years that have a non-default layer}
+\defType{Integer vector or integer range}
+\defDefault{No default}
+\defValue{Must be valid model years}
+
+\defSub{layers} {Define the layers for each of the years}
+\defType{String vector, of length \argument{year} once expanded}
+\defDefault{No default}
+\defCondition{The arguments must be numeric layers}
+
+\defSub{initialisation\_phases} {Define the initialisation phases that have a non-default layer}
+\defType{String vector}
+\defDefault{No default}
+\defCondition{The arguments cannot be meta-layers}
+
+\defSub{initialisation\_layers} {Define the layers for each of the initialisation phases}
+\defType{String vector, of length the number of \argument{initialisation\_phases}}
+\defDefault{No default}
+\defCondition{The arguments must be numeric layers}
+
+\subsubsection[Categorical meta-layer]{\commandlabsubarg{layer}{type}{categorical\_meta}}
+
+\defSub{default\_layer} {Define the default layer to use in years or initialisation phases where it is not otherwise defined}
+\defType{String}
+\defDefault{No default}
+\defCondition{The argument must be a categorical layer}
+
+\defSub{years} {Define the years that have a non-default layer}
+\defType{Integer vector or integer range}
+\defDefault{No default}
+\defValue{Must be valid model years}
+
+\defSub{layers} {Define the layers for each of the years}
+\defType{String vector, of length \argument{year} once expanded}
+\defDefault{No default}
+\defCondition{The arguments must be categorical layers}
+
+\defSub{initialisation\_phases} {Define the initialisation phases that have a non-default layer}
+\defType{String vector}
+\defDefault{No default}
+\defCondition{The arguments must be categorical layers}
+
+\defSub{initialisation\_layers} {Define the layers for each of the initialisation phases}
+\defType{String vector, of length the number of \argument{initialisation\_phases}}
+\defDefault{No default}
+\defCondition{The argument must be categorical layers}
+
+\subsubsection[Derived-layer]{\commandlabsubarg{layer}{type}{derived}}
+
+\defSub{years} {Define the years when the calculation is performed}
+\defType{Integer vector or integer range}
+\defDefault{If not specified, calculation is carried out at every model year}
+\defValue{Must be valid model years once expanded, including initialisation steps}
+
+\defSub{time\_step} {Define the time-step at which the calculation is performed}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid label from \command{time\_step}}
+
+\defSub{layers} {Define the layers to be used in the calculations}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid layers or meta-layers}
+
 %\defSub{parameters} {Define the user-defined parameters within the function}
 %\defType{String vector}
 %\defDefault{No default}

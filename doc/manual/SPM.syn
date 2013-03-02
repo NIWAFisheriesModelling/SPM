@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-02-28 (rev. 4871)
+; TextPad syntax definitions for SPM version 1.1-2013-03-02 (rev. 4878)
 ; ===================================================================================
 ;
 ;
@@ -82,6 +82,7 @@ crossover_probability
 current_year
 cv
 data
+default_layer
 delta
 derived_layer
 derived_quantity
@@ -98,6 +99,7 @@ h
 header
 initial_year
 initialisation
+initialisation_layers
 initialisation_phase
 initialisation_phases
 initialisation_time_steps
@@ -236,6 +238,7 @@ constant_mortality_rate
 constant_recruitment
 covariance
 de_solver
+derived
 derived_layer
 derived_quantity
 distance
@@ -262,6 +265,7 @@ none
 normal
 normal_by_stdev
 numeric
+numeric_meta
 numerical_differences
 objective_function
 observation
