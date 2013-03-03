@@ -45,6 +45,13 @@ void CAbundanceObservation::validate() {
     // Base Validate
     CObservation::validate();
 
+    //Check length of categories and selectivites are equal
+    unsigned iCategoryNamesSize = vCategoryNames.size();
+    unsigned iSelectivityNamesSize = vSelectivityNames.size();
+
+    if (iCategoryNamesSize != iSelectivityNamesSize)
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
     // Get our Parameters
     sCatchability       = pParameterList->getString(PARAM_CATCHABILITY);
     dDelta              = pParameterList->getDouble(PARAM_DELTA,true,DELTA);

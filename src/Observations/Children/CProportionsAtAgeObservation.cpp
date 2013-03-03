@@ -60,6 +60,13 @@ void CProportionsAtAgeObservation::validate() {
     // Base
     CObservation::validate();
 
+    //Check length of categories and selectivites are equal
+    unsigned iCategoryNamesSize = vCategoryNames.size();
+    unsigned iSelectivityNamesSize = vSelectivityNames.size();
+
+    if (iCategoryNamesSize != iSelectivityNamesSize)
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
     // Populate our Parameters
     iMinAge             = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge             = pParameterList->getInt(PARAM_MAX_AGE);

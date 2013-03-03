@@ -60,6 +60,13 @@ void CProportionsByCategoryObservation::validate() {
     // Base Validation
     CObservation::validate();
 
+    //Check length of categories and selectivites are equal
+    unsigned iCategoryNamesSize = vCategoryNames.size();
+    unsigned iSelectivityNamesSize = vSelectivityNames.size();
+
+    if (iCategoryNamesSize != iSelectivityNamesSize)
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
+
     // Get our Variables from ParameterList
     dDelta              = pParameterList->getDouble(PARAM_DELTA,true,DELTA);
     iMinAge             = pParameterList->getInt(PARAM_MIN_AGE);

@@ -147,13 +147,6 @@ void CObservation::validate() {
       CError::errorNotEqual(PARAM_PROPORTION_METHOD,PARAM_MEAN + string(" or ") + PARAM_DIFFERENCE);
     }
 
-    //Check length of categories and selectivites are equal
-    unsigned iCategoryNamesSize = vCategoryNames.size();
-    unsigned iSelectivityNamesSize = vSelectivityNames.size();
-
-    if (iCategoryNamesSize != iSelectivityNamesSize)
-      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
-
   } catch (string &Ex) {
     Ex = "CObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
