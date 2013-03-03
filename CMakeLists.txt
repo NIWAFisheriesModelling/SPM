@@ -124,6 +124,7 @@ src/Layers/Numeric/CBiomassLayer.cpp
 src/Layers/Numeric/CDistanceLayer.cpp
 src/Layers/Numeric/CDoubleLayer.cpp
 src/Layers/Numeric/CNumericMetaLayer.cpp
+src/Layers/String/Base/CCategoricalLayer.cpp
 src/Layers/String/CStringMetaLayer.cpp
 src/Layers/String/CStringLayer.cpp
 src/Likelihoods/Children/CBinomialApproxLikelihood.cpp

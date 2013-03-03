@@ -34,4 +34,4 @@ protected:
   double                      dRescale;
 };
 
-#endif /*CNUMERICLAYER_H_*/
+#endif /*CDOUBLELAYER_H_*/

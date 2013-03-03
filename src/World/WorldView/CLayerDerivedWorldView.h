@@ -18,7 +18,7 @@
 #include "../../BaseClasses/CBaseExecute.h"
 
 // Forward-Declaration
-class CStringLayer;
+class CCategoricalLayer;
 class CWorldSquare;
 
 //**********************************************************************
@@ -27,7 +27,7 @@ class CWorldSquare;
 //**********************************************************************
 class CLayerDerivedWorldView : public CBaseExecute {
 public:
-  CLayerDerivedWorldView(CStringLayer *sourceLayer);
+  CLayerDerivedWorldView(CCategoricalLayer *sourceLayer);
   virtual                     ~CLayerDerivedWorldView();
   CWorldSquare*               getSquare(string area);
   void                        cleanUp();
@@ -36,7 +36,7 @@ public:
 
 protected:
   // Variables
-  CStringLayer                          *pSourceLayer;
+  CCategoricalLayer                     *pSourceLayer;
   map<string,vector<CWorldSquare*> >    mvAreas;
   map<string,CWorldSquare*>             mView;
 };

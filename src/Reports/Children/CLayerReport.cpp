@@ -16,8 +16,7 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Layers/String/CStringLayer.h"
-#include "../../Layers/String/CStringMetaLayer.h"
+#include "../../Layers/String/Base/CCategoricalLayer.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
@@ -97,7 +96,7 @@ void CLayerReport::build() {
       pNumericLayer    = pLayerManager->getNumericLayer(sLayer);
       sType = PARAM_DOUBLE;
    } else if (sLayerType == PARAM_STRING || sLayerType == PARAM_META_STRING) {
-      pStringLayer    = pLayerManager->getStringLayer(sLayer);
+      pCategoricalLayer    = pLayerManager->getCategoricalLayer(sLayer);
       sType = PARAM_STRING;
    } else {
       CError::error(string("Invalid ") + PARAM_LAYER + " " + PARAM_TYPE + " (" + sLayerType + ") for report " + string(sLabel));
@@ -131,7 +130,7 @@ void CLayerReport::execute() {
     if( sType==PARAM_DOUBLE )
       cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pNumericLayer->getLabel() << "\n";
     else
-      cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pStringLayer->getLabel() << "\n";
+      cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pCategoricalLayer->getLabel() << "\n";
     cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << pTimeStepManager->getCurrentYear() << "\n";
     cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
@@ -142,9 +141,9 @@ void CLayerReport::execute() {
         }
       }
     } else if( sType==PARAM_STRING ) {
-      for (int i = 0; i < pStringLayer->getHeight(); ++i) {
-        for (int j = 0; j < pStringLayer->getWidth(); ++j) {
-          cout << pStringLayer->getValue(i, j) << (j<((int)pStringLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+      for (int i = 0; i < pCategoricalLayer->getHeight(); ++i) {
+        for (int j = 0; j < pCategoricalLayer->getWidth(); ++j) {
+          cout << pCategoricalLayer->getValue(i, j) << (j<((int)pCategoricalLayer->getWidth()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
         }
       }
     }

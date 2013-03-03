@@ -11,7 +11,6 @@
 #include "CPreferenceFunction.h"
 #include "../Layers/CLayerManager.h"
 #include "../Layers/Numeric/Base/CNumericLayer.h"
-#include "../Layers/String/CStringLayer.h"
 #include "../Helpers/CError.h"
 
 //**********************************************************************

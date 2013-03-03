@@ -34,7 +34,7 @@
 // Classes
 class CLayer;
 class CNumericLayer;
-class CStringLayer;
+class CCategoricalLayer;
 
 //**********************************************************************
 //
@@ -50,7 +50,7 @@ public:
   CLayer*                   getLayer(int index);
   std::string               getLayerType(string Label);
   CNumericLayer*            getNumericLayer(string Label);
-  CStringLayer*             getStringLayer(string Label);
+  CCategoricalLayer*        getCategoricalLayer(string Label);
   int                       getLayerCount() { return (int)vLayerList.size(); }
   void                      fillVector(vector<CNumericLayer*> &list, vector<string> &names);
   void                      validate();

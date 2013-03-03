@@ -13,8 +13,7 @@
 #include <vector>
 
 // Local headers
-#include "CStringLayer.h"
-#include "../CLayer.h"
+#include "Base/CCategoricalLayer.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
 
 // Classes
@@ -27,7 +26,7 @@ using std::vector;
 //
 //
 //**********************************************************************
-class CStringMetaLayer : public CStringLayer {
+class CStringMetaLayer : public CCategoricalLayer {
 public:
   // Functions
   CStringMetaLayer();
@@ -44,9 +43,9 @@ protected:
   vector<string>               vLayerNames;
   vector<string>               vInitialisationPhases;
   vector<string>               vInitialisationLayers;
-  vector<CStringLayer*>        vPhaseLayers;
+  vector<CCategoricalLayer*>   vPhaseLayers;
   vector<int>                  vYearsIndex;
-  vector<CStringLayer*>        vYearsLayers;
+  vector<CCategoricalLayer*>   vYearsLayers;
   bool                         bHasYears;
   bool                         bHasInitialisation;
   CInitializationPhaseManager  *pInitializationPhaseManager;
@@ -54,4 +53,4 @@ protected:
 
 };
 
-#endif /* CMETALAYER_H_ */
+#endif /* CSTRINGMETALAYER_H_ */

@@ -15,7 +15,7 @@
 // Forward Dec
 class CTimeStepManager;
 class CLayerManager;
-class CStringLayer;
+class CCategoricalLayer;
 class CLayerDerivedWorldView;
 
 //**********************************************************************
@@ -39,7 +39,7 @@ protected:
   string                      sTimeStep;
   CTimeStepManager            *pTimeStepManager;
   string                      sLayer;
-  CStringLayer                *pLayer;
+  CCategoricalLayer           *pLayer;
   CLayerManager               *pLayerManager;
   CLayerDerivedWorldView      *pWorldView;
   map<string, int>            mAreas;

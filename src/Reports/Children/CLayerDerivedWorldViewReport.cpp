@@ -14,7 +14,7 @@
 #include "CLayerDerivedWorldViewReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../Layers/CLayerManager.h"
-#include "../../Layers/String/CStringLayer.h"
+#include "../../Layers/String/Base/CCategoricalLayer.h"
 #include "../../World/WorldView/CLayerDerivedWorldView.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
@@ -89,7 +89,7 @@ void CLayerDerivedWorldViewReport::build() {
     }
 
     // Get our Layer
-    pLayer = pLayerManager->getStringLayer(sLayer);
+    pLayer = pLayerManager->getCategoricalLayer(sLayer);
 
     // Build our view
     pWorldView = new CLayerDerivedWorldView(pLayer);

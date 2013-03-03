@@ -25,7 +25,7 @@ struct SComparison {
 };
 
 // Classes
-class CStringLayer;
+class CCategoricalLayer;
 class CSelectivity;
 
 //**********************************************************************
@@ -63,7 +63,7 @@ protected:
   double                     dProportionTimeStep;
   string                     sProportionMethod;
   string                     sLayer;
-  CStringLayer               *pLayer;
+  CCategoricalLayer          *pLayer;
   vector<string>             vCategoryNames;
   vector<int>                vCategories;
   vector<string>             vSelectivityNames;

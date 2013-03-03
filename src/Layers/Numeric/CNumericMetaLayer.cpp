@@ -15,7 +15,6 @@
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Layers/String/CStringLayer.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../World/WorldView/CCompleteWorldView.h"
 

@@ -10,6 +10,8 @@
 // Local Headers
 #include "CStringLayer.h"
 #include "../../Helpers/CError.h"
+#include "../../Helpers/CComparer.h"
+#include "../../Helpers/CConvertor.h"
 
 //**********************************************************************
 // CStringLayer::CStringLayer()

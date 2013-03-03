@@ -9,12 +9,12 @@
 
 // Local Headers
 #include "CObservation.h"
-#include "../Layers/CLayerManager.h"
-#include "../Selectivities/CSelectivityManager.h"
-#include "../TimeSteps/CTimeStepManager.h"
-#include "../Likelihoods/Factory/CLikelihoodFactory.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
+#include "../Layers/CLayerManager.h"
+#include "../Likelihoods/Factory/CLikelihoodFactory.h"
+#include "../Selectivities/CSelectivityManager.h"
+#include "../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CObservation::CObservation()
@@ -169,7 +169,7 @@ void CObservation::build() {
   try {
     // Get our Layer Pointer
     CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getStringLayer(sLayer);
+    pLayer = pLayerManager->getCategoricalLayer(sLayer);
 
     // Get Selectivities
     CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();

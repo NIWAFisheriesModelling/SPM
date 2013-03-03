@@ -48,8 +48,6 @@ void CStringMetaLayer::validate() {
     // Base
     CLayer::validate();
 
-throw string("Categorical meta-layers are not yet implemented");
-
     // Populate our variables
     sDefaultLayer = pParameterList->getString(PARAM_DEFAULT_LAYER);
 
@@ -107,12 +105,12 @@ void CStringMetaLayer::build() {
     int iInitialisationPhaseCount = pInitializationPhaseManager->getNumberInitializationPhases();
     // Fill in as default, then override with the specifics
     for (int i=0; i < iInitialisationPhaseCount; ++i) {
-      vPhaseLayers.push_back( pLayerManager->getStringLayer(sDefaultLayer) );
+      vPhaseLayers.push_back( pLayerManager->getCategoricalLayer(sDefaultLayer) );
     }
     if (bHasInitialisation) {
       for (int i=0; i < (int)vInitialisationPhases.size(); ++i) {
         int iPhase = pInitializationPhaseManager->getInitializationPhaseOrderIndex(vInitialisationPhases[i]);
-        vPhaseLayers[iPhase] = pLayerManager->getStringLayer(vInitialisationLayers[i]);
+        vPhaseLayers[iPhase] = pLayerManager->getCategoricalLayer(vInitialisationLayers[i]);
       }
     }
 
@@ -120,13 +118,13 @@ void CStringMetaLayer::build() {
     // Fill in as default, then override with the specifics
     for (int i=pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
       vYearsIndex.push_back(i);
-      vYearsLayers.push_back( pLayerManager->getStringLayer(sDefaultLayer) );
+      vYearsLayers.push_back( pLayerManager->getCategoricalLayer(sDefaultLayer) );
     }
     if (bHasYears) {
       for (int i=0; i < (int)vYearsIndex.size(); ++i) {
         for(int j=0; j < (int)vYears.size(); ++j) {
           if(vYearsIndex[i] == vYears[j]) {
-            vYearsLayers[i] = pLayerManager->getStringLayer(vLayerNames[j]);
+            vYearsLayers[i] = pLayerManager->getCategoricalLayer(vLayerNames[j]);
           }
         }
       }

@@ -9,11 +9,11 @@
 
 // Local Headers
 #include "CCategoricalMonotonicPreferenceFunction.h"
-#include "../../Layers/CLayerManager.h"
-#include "../../Layers/String/CStringLayer.h"
-#include "../../Helpers/CMath.h"
-#include "../../Helpers/CError.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CMath.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/String/Base/CCategoricalLayer.h"
 
 //**********************************************************************
 // CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction()
@@ -69,7 +69,7 @@ void CCategoricalMonotonicPreferenceFunction::build() {
 
     // Get our Layer Pointer
     CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getStringLayer(sLayerName);
+    pLayer = pLayerManager->getCategoricalLayer(sLayerName);
 
     // Get list of layer values
     std::vector<std::string> vLayerLabels;

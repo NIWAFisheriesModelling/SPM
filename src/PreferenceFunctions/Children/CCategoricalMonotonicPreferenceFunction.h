@@ -13,7 +13,7 @@
 #include "../CPreferenceFunction.h"
 
 // Classes
-class CStringLayer;
+class CCategoricalLayer;
 
 //**********************************************************************
 //
@@ -38,7 +38,7 @@ protected:
   vector<string>             vCategories;
   vector<string>             vSelectivities;
   string                     sLayerValue;
-  CStringLayer               *pLayer;
+  CCategoricalLayer          *pLayer;
 
 };
 

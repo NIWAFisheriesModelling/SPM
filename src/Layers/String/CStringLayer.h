@@ -10,21 +10,21 @@
 #define CSTRINGLAYER_H_
 
 // Local Headers
-#include "../CLayer.h"
+#include "Base/CCategoricalLayer.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CStringLayer : public CLayer {
+class CStringLayer : public CCategoricalLayer {
 public:
   // Functions
-	CStringLayer();
-	virtual                    ~CStringLayer();
-	CLayer*                    clone() { return new CStringLayer(*this); }
-	string                     getValue(int RowIndex, int ColIndex);
-	void                       validate();
-	void                       build() { };
+  CStringLayer();
+  virtual                    ~CStringLayer();
+  CLayer*                    clone() { return new CStringLayer(*this); }
+  string                     getValue(int RowIndex, int ColIndex);
+  void                       validate();
+  void                       build() { };
 
 protected:
   // Variables

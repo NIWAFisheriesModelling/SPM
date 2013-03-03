@@ -11,7 +11,7 @@
 #include "CLayerManager.h"
 #include "CLayer.h"
 #include "Numeric/Base/CNumericLayer.h"
-#include "String/CStringLayer.h"
+#include "String/Base/CCategoricalLayer.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 
@@ -138,16 +138,16 @@ void CLayerManager::fillVector(vector<CNumericLayer*> &list, vector<string> &nam
 }
 
 //**********************************************************************
-// CStringLayer* CLayerManager::getStringLayer(string Label)
+// CStringLayer* CLayerManager::getCategoricalLayer(string Label)
 // Get String Layer
 //**********************************************************************
-CStringLayer* CLayerManager::getStringLayer(string Label) {
+CCategoricalLayer* CLayerManager::getCategoricalLayer(string Label) {
   try {
     // Loop Through Layers
     foreach(CLayer* Layer, vLayerList) {
       if (Layer->getLabel() == Label) {
         // Cast and Check if is String
-        CStringLayer *pPtr = dynamic_cast<CStringLayer*>(Layer);
+        CCategoricalLayer *pPtr = dynamic_cast<CCategoricalLayer*>(Layer);
         if (pPtr == 0)
           throw string(ERROR_INVALID_LAYER_TYPE_STRING + Label);
 
@@ -159,7 +159,7 @@ CStringLayer* CLayerManager::getStringLayer(string Label) {
     CError::errorUnknown(PARAM_LAYER, Label);
 
   } catch(string &Ex) {
-    Ex = "CLayerManager.getStringLayer()->" + Ex;
+    Ex = "CLayerManager.getCategoricalLayer()->" + Ex;
     throw Ex;
   }
 

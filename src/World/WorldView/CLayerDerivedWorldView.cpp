@@ -8,17 +8,17 @@
 
 // Local Headers
 #include "CLayerDerivedWorldView.h"
-#include "../../Layers/String/CStringLayer.h"
+#include "../../Layers/String/Base/CCategoricalLayer.h"
 #include "../../Helpers/ForEach.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/DefinedValues.h"
 #include "../CWorldSquare.h"
 
 //**********************************************************************
-// CLayerDerivedWorldView::CLayerDerivedWorldView(CStringLayer *sourceLayer)
+// CLayerDerivedWorldView::CLayerDerivedWorldView(CCategoricalLayer *sourceLayer)
 // Default Constructor
 //**********************************************************************
-CLayerDerivedWorldView::CLayerDerivedWorldView(CStringLayer *sourceLayer) {
+CLayerDerivedWorldView::CLayerDerivedWorldView(CCategoricalLayer *sourceLayer) {
   // Variables
   pSourceLayer = sourceLayer;
 
