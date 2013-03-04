@@ -58,15 +58,49 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
 void CProportionsAtAgeObservation::validate() {
   try {
     // Base
+
     CObservation::validate();
 
+    // The '+' syntax is not yot yet implemented
+    for (int i = 0; i < (int)vCategoryNames.size(); ++i) {
+      if (vCategoryNames[i] == PARAM_AND) {
+        CError::error("The '" + string(PARAM_AND) + "' syntax is not yet implemented");
+      }
+    }
     //Check length of categories and selectivites are equal
     unsigned iCategoryNamesSize = vCategoryNames.size();
     unsigned iSelectivityNamesSize = vSelectivityNames.size();
-
     if (iCategoryNamesSize != iSelectivityNamesSize)
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
+/*   Implement the '+' syntax here
+    // Read in categories, and construct the vector<vector>> of categories and selectivities
+    // rows = sets of proportions: columns are the categories to aggregate
+    vector<vector<string> > vvCategoryNames;
+
+    if (vCategoryNames[0] == PARAM_AND || vCategoryNames[vCategoryNames.size()-1] == PARAM_AND)
+      CError::error("Invalid category: " + string(PARAM_AND));
+    else {
+      vector<string> tempCategories;
+      int iCount = 0;
+      for (int i = 0; i < (int)vCategoryNames.size(); ++i) {
+        if (vCategoryNames[i] != PARAM_AND) {
+          tempCategories.push_back(vCategoryNames[i]);
+        } else {
+          for (int j = 0; j < (int)tempCategories.size(); ++j) {
+            vvCategoryNames.push_back(tempCategories);
+          }
+          iCount++;
+          tempCategories.resize(0);
+        }
+      }
+      vvCategoryNames.push_back(tempCategories);
+    }
+
+    // confirm n. selectivities equal to n. categories
+    //
+    //revise code below to construct expected/observed
+*/
     // Populate our Parameters
     iMinAge             = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge             = pParameterList->getInt(PARAM_MAX_AGE);
@@ -170,9 +204,6 @@ void CProportionsAtAgeObservation::validate() {
         }
       vPropPtr++;
     }
-    // Must be same size
-    if (vCategoryNames.size() != vSelectivityNames.size())
-      CError::errorListSameSize(PARAM_CATEGORY, PARAM_SELECTIVITY);
 
     // Number of N's must be equal to number of Proportions
     if (mErrorValue.size() != mvProportionMatrix.size())

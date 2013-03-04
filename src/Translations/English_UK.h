@@ -152,6 +152,7 @@
 #define PARAM_ALL_VALUES_BOUNDED                  "all_values_bounded"
 #define PARAM_ALL_VALUES                          "all_values"
 #define PARAM_ALPHA                               "alpha"
+#define PARAM_AND                                 "+"
 #define PARAM_ANNUAL_MORTALITY_RATE               "annual_mortality_rate"
 #define PARAM_AREA                                "area"
 #define PARAM_ATO95                               "ato95"

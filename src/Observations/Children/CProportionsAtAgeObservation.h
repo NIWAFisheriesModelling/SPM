@@ -33,18 +33,18 @@ public:
 protected:
   // Variables
   map<string, vector<double> > mvProportionMatrix;
-  map<string, double>        mErrorValue;
-  double                     dDelta;
-  double                     *pAgeResults;
-  int                        iMinAge;
-  int                        iMaxAge;
-  int                        iArraySize;
-  bool                       bAgePlus;
-  bool                       bRescale;
-  double                     dTolerance;
-  double                     dProcessError;
-  string                     sAgeingError;
-  CAgeingError               *pAgeingError;
+  map<string, double>          mErrorValue;
+  double                       dDelta;
+  double                       *pAgeResults;
+  int                          iMinAge;
+  int                          iMaxAge;
+  int                          iArraySize;
+  bool                         bAgePlus;
+  bool                         bRescale;
+  double                       dTolerance;
+  double                       dProcessError;
+  string                       sAgeingError;
+  CAgeingError                 *pAgeingError;
 };
 
 #endif /*CPROPORTIONSATAGE_H_*/
