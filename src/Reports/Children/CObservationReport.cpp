@@ -76,8 +76,8 @@ void CObservationReport::execute() {
     // Check for correct state
     if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
       if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
-//        if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
-          return;
+      //if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+        return;
 
     CProportionsAtAgeObservation *pProportionsAtAge = dynamic_cast<CProportionsAtAgeObservation*>(pObservation);
     CProportionsByCategoryObservation *pProportionsByCategory = dynamic_cast<CProportionsByCategoryObservation*>(pObservation);
@@ -92,11 +92,11 @@ void CObservationReport::execute() {
     pObservation->fillComparisons(vComparisons);
 
     if (pProportionsAtAge != 0)
-      cout << "area,age,observed,expected,residual,errorvalue,score\n";
+      cout << "area, age, observed, expected, residual, errorvalue, score\n";
     else if (pProportionsByCategory != 0)
-      cout << "area,age,observed,expected,residual,errorvalue,score\n";
+      cout << "area, age, observed, expected, residual, errorvalue, score\n";
     else
-      cout << "area,observed,expected,residual,errorvalue,score\n";
+      cout << "area, observed, expected, residual, errorvalue, score\n";
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;

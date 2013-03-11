@@ -215,7 +215,7 @@ void CError::errorNotEnough(string type) {
 // Value middle is not between low and high
 //**********************************************************************
 void CError::errorNotBetween(string middle, string low, string high) {
-  string Ex = middle + ERROR_BETWEEN + low + CONFIG_SEPERATOR_ESTIMATE_VALUES + string(" ") + high;
+  string Ex = middle + ERROR_BETWEEN + low + CONFIG_COMMA_SEPERATOR + string(" ") + high;
   throw Ex;
 }
 
