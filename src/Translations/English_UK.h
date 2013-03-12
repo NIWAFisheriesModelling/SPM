@@ -69,6 +69,7 @@
 // Configuration File Syntax Strings
 #define CONFIG_ARRAY_END                    "]"
 #define CONFIG_ARRAY_START                  "["
+#define CONFIG_COMMA_SEPERATOR              ","
 #define CONFIG_END_REPORT                   "*end"
 #define CONFIG_END_FILE                     "**end"
 #define CONFIG_FALSE                        "false"
@@ -78,7 +79,7 @@
 #define CONFIG_MULTI_COMMENT_START          "{"
 #define CONFIG_RATIO_SEPARATOR              ":"
 #define CONFIG_SECTION_SYMBOL               "@"
-#define CONFIG_SEPERATOR_ESTIMATE_VALUES    ","
+#define CONFIG_SEPERATOR_ESTIMATE_VALUES    ", "
 #define CONFIG_SINGLE_COMMENT               "#"
 #define CONFIG_TRUE                         "true"
 #define CONFIG_TRUE_SHORT                   "t"
