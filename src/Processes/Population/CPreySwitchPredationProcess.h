@@ -15,6 +15,7 @@
 // Forward-Dec
 class CPenalty;
 class CTimeStepManager;
+class CCompoundCategories;
 
 //**********************************************************************
 //
@@ -35,10 +36,10 @@ public:
   vector<vector<double> >     getMortalityN() { return vMortalityN; }
   vector<vector<double> >     getMortalityBiomass() { return vMortalityBiomass; }
   vector<double>              getPredatorBiomass() { return vPredatorBiomass; }
-  vector<string>              getPreyGroups() { return vPreyGroups; }
   bool                        isAbundance() { return bIsAbundance; }
   int                         getPredatorCategoryCount() { return vPredatorCategoryList.size(); }
   int                         getPredatorSelectivityCount() { return vPredatorSelectivityList.size(); }
+  vector<string>              getPreyGroups();
 
 protected:
   // Variables
@@ -51,10 +52,10 @@ protected:
   vector<double>              vExploitation;
   vector<double>              vVulnerable;
   double                      dPredatorVulnerable;
-  int                         iNPreyGroups;
   vector<double>              vElectivityList;
-  vector<string>              vPreyGroups;
-  vector<string>              vPreyAllocationList;
+  vector<string>              vPreyCategoryList;
+  vector<string>              vPreySelectivityList;
+  vector<vector<CSelectivity*> > vvPreySelectivityIndex;
   vector<string>              vPredatorCategoryList;
   vector<int>                 vPredatorCategoryIndex;
   vector<string>              vPredatorSelectivityList;
@@ -69,6 +70,7 @@ protected:
   string                      sPenalty;
   CPenalty                    *pPenalty;
   CTimeStepManager            *pTimeStepManager;
+  CCompoundCategories         *pPreyCategories;
 
 };
 

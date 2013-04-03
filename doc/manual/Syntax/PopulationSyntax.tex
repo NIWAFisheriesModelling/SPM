@@ -493,31 +493,31 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{A positive real number}
 
-\defSub{prey}{Define the vector of labels for all the prey groups used}
+%\defSub{prey}{Define the vector of labels for all the prey groups used}
+%\defType{String vector}
+%\defDefault{No default}
+%\defValue{Names must be unique}
+%\defNote{These are the labels which links to the relative electivities for groups of categories}
+
+\defSub{prey\_categories}{Define the prey categories that the predation mortality is applied to}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Names must be unique}
-\defNote{These are the labels which links to the relative electivities for groups of categories}
+\defValue{Valid categories from \commandsub{model}{categories}, grouping categories into $n$ prey groups using the $+$ symbol}
 
-\defSub{electivities}{Define the electivities applied to prey groups $1$ \ldots $n$}
-\defType{Constant vector, of length $\subcommand{prey}$}
-\defDefault{No default}
-\defValue{A vector of positive real numbers, must have values that sum to $1$}
-
-\defSub{categories}{Define the categories that the predation mortality is applied to, for all prey groups}
-\defType{String vector}
-\defDefault{No default}
-\defValue{Valid categories from \commandsub{model}{categories}}
-
-\defSub{selectivities}{Define the selectivities applied to each prey category}
-\defType{String vector, of length \subcommand{categories}}
+\defSub{prey\_selectivities}{Define the selectivities applied to each prey category}
+\defType{String vector, of length \subcommand{prey\_categories}}
 \defDefault{No default}
 \defValue{Valid selectivity labels defined by \command{selectivity}}
 
-\defSub{prey\_groups}{Assign each prey category to a specific prey group}
-\defType{String vector, of length \subcommand{categories}}
+\defSub{electivities}{Define the electivities applied to prey groups $1$ \ldots $n$}
+\defType{Constant vector, of length $n$, the number of groups of prey in $\subcommand{prey\_categories}$}
 \defDefault{No default}
-\defValue{Valid labels defined by \subcommand{prey}}
+\defValue{A vector of positive real numbers, must have values that sum to $1$}
+
+%\defSub{prey\_groups}{Assign each prey category to a specific prey group}
+%\defType{String vector, of length \subcommand{categories}}
+%\defDefault{No default}
+%\defValue{Valid labels defined by \subcommand{prey}}
 
 \defSub{predator\_categories}{Define the categories of the predator}
 \defType{String vector}

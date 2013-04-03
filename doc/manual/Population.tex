@@ -217,7 +217,7 @@ In the local Beverton-Holt recruitment process, individuals are recruited to an 
 
 where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and the recruitment to each cell is the product of the Beverton-Holt stock recruitment relationship ($R_y$). 
 
-\subsubsection*{Constant Recruitment}
+\subsubsection*{\I{Constant Recruitment}}
 
 In the constant recruitment process the total number of recruits added each year is $R_y$, and is simply $R_0$, i.e.,
 \begin{equation}
@@ -238,7 +238,7 @@ age 1
 layer recruitment
 \end{verbatim}}}
 
-\subsubsection*{Beverton-Holt recruitment}
+\subsubsection*{\I{Beverton-Holt recruitment}}
 
 In the Beverton-Holt recruitment process the total number of recruits added each year is $R_y$, and is the product of the average recruitment $R_0$, the annual year class strength multiplier, $YCS$, and the stock-recruit relationship i.e.,
 \begin{equation}
@@ -273,7 +273,7 @@ SSB_offset 2
 
 Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, he offset will need to be specified as $age + 1$.
 
-\subsubsection*{Local Beverton-Holt recruitment}
+\subsubsection*{\I{Local Beverton-Holt recruitment}}
 
 The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. If desired, locally recruits can subsequently be subjected to movement (see Section \ref{sec:movement-processes}).
 
@@ -476,7 +476,7 @@ The density-dependent Holling mortality process will be applied as a biomass or 
 
 \subsubsection*{Prey-switching mortality}
 
-The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from any single predator group to all of its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of this prey group, the total (selected) abundance (or biomass) of all other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. Note that each prey group can be composed of a number of individual categories, as can the predator group.
+The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from a predator group to its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of each prey group, the total (selected) abundance (or biomass) of the other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. Note that both the predator and the prey groups can consist of a number of individual categories.
 
 For example, the mortality applied to the user-defined prey group $g$ of category $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S(l)$ is applied as follows:
 

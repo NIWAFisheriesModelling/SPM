@@ -67,6 +67,7 @@
 //
 //**********************************************************************
 // Configuration File Syntax Strings
+#define CONFIG_AND                          "+"
 #define CONFIG_ARRAY_END                    "]"
 #define CONFIG_ARRAY_START                  "["
 #define CONFIG_COMMA_SEPERATOR              ","
@@ -153,7 +154,6 @@
 #define PARAM_ALL_VALUES_BOUNDED                  "all_values_bounded"
 #define PARAM_ALL_VALUES                          "all_values"
 #define PARAM_ALPHA                               "alpha"
-#define PARAM_AND                                 "+"
 #define PARAM_ANNUAL_MORTALITY_RATE               "annual_mortality_rate"
 #define PARAM_AREA                                "area"
 #define PARAM_ATO95                               "ato95"
@@ -314,8 +314,9 @@
 #define PARAM_PREFERENCE_MOVEMENT                 "preference"
 #define PARAM_PREFERENCE_FUNCTION                 "preference_function"
 #define PARAM_PREFERENCE_FUNCTIONS                "preference_functions"
-#define PARAM_PREY                                "prey"
-#define PARAM_PREY_GROUPS                         "prey_groups"
+#define PARAM_PREY_CATEGORIES                     "prey_categories"
+#define PARAM_PREY_GROUP                          "prey_group"
+#define PARAM_PREY_SELECTIVITIES                  "prey_selectivities"
 #define PARAM_PREY_SWITCH_PREDATION               "prey-switch_predation"
 #define PARAM_PRIOR                               "prior"
 #define PARAM_PROCESS                             "process"

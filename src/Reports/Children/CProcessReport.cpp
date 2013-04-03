@@ -141,7 +141,9 @@ void CProcessReport::execute() {
       cout << endl;
     }
 
+    ///////////////////////////////////////////////////////////////////////////////
     // Specific private reporting for individual processes
+    ///////////////////////////////////////////////////////////////////////////////
 
     // BH Recruitment
     CBHRecruitmentProcess *pRecruit = dynamic_cast<CBHRecruitmentProcess*>(pTarget);
@@ -278,18 +280,18 @@ void CProcessReport::execute() {
         cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
       cout << "\n";
       for (int m = 0; m < (int)vMortalityRate.size(); ++m) {
-        cout << PARAM_PREY << "[" << vPreyGroups[m] << "]." << PARAM_PROPORTIONS << ": ";
+        cout << PARAM_PREY_GROUP << "[" << vPreyGroups[m] << "]." << PARAM_PROPORTIONS << ": ";
         for (int i = 0; i < (int)vMortalityRate[m].size(); ++i)
           cout << vMortalityRate[m][i] << (i<((int)vMortalityRate[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
         cout << "\n";
 
-        cout << PARAM_PREY << "[" << vPreyGroups[m] << "]." << PARAM_ABUNDANCE << ": ";
+        cout << PARAM_PREY_GROUP << "[" << vPreyGroups[m] << "]." << PARAM_ABUNDANCE << ": ";
         for (int i = 0; i < (int)vMortalityN[m].size(); ++i)
           cout << vMortalityN[m][i] << (i<((int)vMortalityN[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
         cout << "\n";
         if(!(pPreySwitchPredation->isAbundance())) {
           vector<vector<double> > vMortalityBiomass = pPreySwitchPredation->getMortalityBiomass();
-          cout << PARAM_PREY << "[" << vPreyGroups[m] << "]." << PARAM_BIOMASS << ": ";
+          cout << PARAM_PREY_GROUP << "[" << vPreyGroups[m] << "]." << PARAM_BIOMASS << ": ";
           for (int i = 0; i < (int)vMortalityBiomass[m].size(); ++i)
             cout << vMortalityBiomass[m][i] << (i<((int)vMortalityBiomass[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
           cout << "\n";

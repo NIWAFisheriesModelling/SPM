@@ -110,6 +110,7 @@ src/Helpers/CComparer.cpp
 src/Helpers/CConvertor.cpp
 src/Helpers/CError.cpp
 src/Helpers/CMath.cpp
+src/Helpers/CCompoundCategories.cpp
 src/InitializationPhases/CInitializationPhase.cpp
 src/InitializationPhases/CInitializationPhaseManager.cpp
 src/InitializationPhases/Factory/CInitializationPhaseFactory.cpp

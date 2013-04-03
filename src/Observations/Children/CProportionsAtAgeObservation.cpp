@@ -63,8 +63,8 @@ void CProportionsAtAgeObservation::validate() {
 
     // The '+' syntax is not yot yet implemented
     for (int i = 0; i < (int)vCategoryNames.size(); ++i) {
-      if (vCategoryNames[i] == PARAM_AND) {
-        CError::error("The '" + string(PARAM_AND) + "' syntax is not yet implemented");
+      if (vCategoryNames[i] == CONFIG_AND) {
+        CError::error("The '" + string(CONFIG_AND) + "' syntax is not yet implemented");
       }
     }
     //Check length of categories and selectivites are equal
@@ -78,13 +78,13 @@ void CProportionsAtAgeObservation::validate() {
     // rows = sets of proportions: columns are the categories to aggregate
     vector<vector<string> > vvCategoryNames;
 
-    if (vCategoryNames[0] == PARAM_AND || vCategoryNames[vCategoryNames.size()-1] == PARAM_AND)
-      CError::error("Invalid category: " + string(PARAM_AND));
+    if (vCategoryNames[0] == CONFIG_AND || vCategoryNames[vCategoryNames.size()-1] == CONFIG_AND)
+      CError::error("Invalid category: " + string(CONFIG_AND));
     else {
       vector<string> tempCategories;
       int iCount = 0;
       for (int i = 0; i < (int)vCategoryNames.size(); ++i) {
-        if (vCategoryNames[i] != PARAM_AND) {
+        if (vCategoryNames[i] != CONFIG_AND) {
           tempCategories.push_back(vCategoryNames[i]);
         } else {
           for (int j = 0; j < (int)tempCategories.size(); ++j) {
