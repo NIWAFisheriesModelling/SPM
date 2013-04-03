@@ -9,7 +9,7 @@ function(lines){
   res$report.type<-substring(lines[index.start+1],14)
   res$year<-substring(lines[index.start+2],7)
   res$"time_step"<-substring(lines[index.start+3],12)
-  col.labs<-spm.string.to.vector.of.words(lines[4+index.start],sep=",")
+  col.labs<-spm.string.to.vector.of.words(lines[4+index.start])
   values<-spm.string.to.vector.of.words(lines[(5+index.start):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
   names(values)<-col.labs

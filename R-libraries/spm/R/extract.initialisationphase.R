@@ -4,7 +4,7 @@ function(lines){
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  col.labs<-spm.string.to.vector.of.words(lines[3+index.start],sep=",")
+  col.labs<-spm.string.to.vector.of.words(lines[3+index.start])
   values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
   names(values)<-col.labs

@@ -13,13 +13,13 @@ function(lines){
   count<-1
   for(i in index.start:index.end) {
     if(substring(lines[i],1,14)=="initialisation") {
-      res$data$initialisation[[count]]<-spm.string.to.vector.of.numbers(substring(lines[i],regexpr(":",lines[i])+1),sep=",")
+      res$data$initialisation[[count]]<-spm.string.to.vector.of.numbers(substring(lines[i],regexpr(":",lines[i])+1))
       count<-count+1
     }
     if(substring(lines[i],1,5)=="years")
-      res$data$years<-spm.string.to.vector.of.numbers(substring(lines[i],7),sep=",")
+      res$data$years<-spm.string.to.vector.of.numbers(substring(lines[i],7))
     if(substring(lines[i],1,6)=="values")
-      res$data$values<-spm.string.to.vector.of.numbers(substring(lines[i],8),sep=",")
+      res$data$values<-spm.string.to.vector.of.numbers(substring(lines[i],8))
   }
   return(res)
 }

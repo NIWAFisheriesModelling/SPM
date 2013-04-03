@@ -4,7 +4,7 @@ function(lines){
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  values<-spm.string.to.vector.of.words(lines[(5+index.start):(index.end-1)],sep=",")
+  values<-spm.string.to.vector.of.words(lines[(5+index.start):(index.end-1)])
   res <- list()
   res$layer<-substring(lines[index.start+2],8)
   res$year<-substring(lines[index.start+3],7)

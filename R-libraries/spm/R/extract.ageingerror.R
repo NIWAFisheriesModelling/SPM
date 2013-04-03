@@ -8,9 +8,9 @@ function(lines){
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
   res$type<-substring(lines[index.start+2],21)
-  col.labs<-spm.string.to.vector.of.words(lines[3+index.start],sep=",")
+  col.labs<-spm.string.to.vector.of.words(lines[3+index.start])
   col.labs[1]<-substring(col.labs[1],regexpr(":",col.labs[1])+2)
-  values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)],sep=",")
+  values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
   values[,1]<-substring(values[,1],regexpr(":",values[,1])+2)
   names(values)<-col.labs

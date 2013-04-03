@@ -8,9 +8,9 @@ function(lines){
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
   res$observation.label<-substring(lines[index.start+2],20)
-  variables<-spm.string.to.vector.of.words(lines[index.start+3],sep=",")
+  variables<-spm.string.to.vector.of.words(lines[index.start+3])
   if((index.end-index.start)>4) {
-    data<-spm.string.to.vector.of.words(lines[(index.start+4):(index.end-1)],sep=",")
+    data<-spm.string.to.vector.of.words(lines[(index.start+4):(index.end-1)])
     data<-matrix(data,ncol=length(variables),byrow=TRUE)
     data<-as.data.frame(data)
     names(data)<-variables
