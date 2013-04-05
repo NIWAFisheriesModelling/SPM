@@ -14,7 +14,10 @@ function(lines){
     data<-matrix(data,ncol=length(variables),byrow=TRUE)
     data<-as.data.frame(data)
     names(data)<-variables
-    if("age" %in% variables) {
+    if("category" %in% variables) {
+      data<-data.frame("area"=data[,1], category=data[,2], age=data[,3], observed=data[,4], expected=data[,5], residual=data[,6], errorvalue=data[,7], score=data[,8])
+      data$age<-as.numeric(as.character(data$age))
+    } else if("age" %in% variables) {
       data<-data.frame("area"=data[,1], age=data[,2], observed=data[,3], expected=data[,4], residual=data[,5], errorvalue=data[,6], score=data[,7])
       data$age<-as.numeric(as.character(data$age))
     } else {

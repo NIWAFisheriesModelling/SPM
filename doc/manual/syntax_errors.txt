@@ -1,6 +1,5 @@
 
 In SPM, but not in manual
-  +
   0 (zero)
   1 (one)
   1000
@@ -37,6 +36,7 @@ In SPM, but not in manual
   objective
   predator_abundance
   predator_biomass
+  prey_group
   profiles
   recruitment_values
   rescale

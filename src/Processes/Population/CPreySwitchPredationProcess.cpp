@@ -228,11 +228,7 @@ vector<string> CPreySwitchPredationProcess::getPreyGroups() {
   vector<string> result;
 
   for ( int i = 0; i < pPreyCategories->getNRows(); ++i ) {
-    string temp ="";
-    for ( int j = 0; j < pPreyCategories->getNElements(i); ++j ) {
-      temp = std::string(temp) + std::string(pPreyCategories->getCategoryName(i,j)) + std::string(j<((int)pPreyCategories->getNElements(i)-1)?CONFIG_AND:"");
-    }
-    result.push_back(temp);
+    result.push_back(pPreyCategories->getGroup(i));
   }
 
   return(result);

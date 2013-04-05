@@ -78,11 +78,11 @@ Or, for both $A$ and $B$ as,
 {\small{\begin{verbatim}
 @observation MyProportions
 ...
-categories male female
+categories male
 min_age 1
 max_age 5
-obs A 0.01 0.05 0.10 0.20 0.20 0.01 0.05 0.15 0.20 0.03
-obs B 0.02 0.06 0.10 0.21 0.18 0.02 0.05 0.15 0.20 0.01
+obs A 0.01 0.09 0.20 0.30 0.40
+obs B 0.02 0.06 0.12 0.25 0.55
 ...
 \end{verbatim}
 
@@ -104,6 +104,7 @@ For example, using the earlier spatial model with a categorical layer that has l
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_at_age
 ...
 categories male female
 min_age 1
@@ -129,6 +130,7 @@ For example, using the earlier spatial model with a categorical layer that has l
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_at_age
 ...
 categories male + female
 min_age 1
@@ -138,10 +140,11 @@ obs B 0.02 0.06 0.18 0.35 0.39
 ...
 \end{verbatim}
 
-The later form can then be extended to include multiple categories, or multiple aggregated categories. For example, to describe immature males, mature males, and all females together for ages 1--4, a total of 12 proportions are required 
+The later form can then be extended to include multiple categories, or multiple aggregated categories. For example, to describe proportions for the three groups: immature males, mature males, and all females (immature and mature females added together) for ages 1--4, a total of 12 proportions are required 
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_at_age
 ...
 categories male_immature male_mature female_immature + female_mature
 min_age 1
@@ -231,6 +234,7 @@ Here we supply observations for those spatial cells where the categorical layer 
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_by_category
 ...
 categories male 
 categories2 female
@@ -244,6 +248,7 @@ Or, for both $A$ and $B$ as,
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_by_category
 ...
 categories male
 categories2 female
@@ -308,7 +313,7 @@ Abundance (or biomass) observations are observations of either a relative or abs
 
 Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated of fixed. For absolute abundance or absolute biomass observations, define a catchability where $q=1$.
 
-The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance/biomass (male $+$ female) or just male abundance/biomass. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance/biomass. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}, e.g., 
+The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance/biomass (male $+$ female) or just male abundance/biomass. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance/biomass. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}. For example,  
 
 {\small{\begin{verbatim}
 categories male
@@ -328,10 +333,11 @@ data A A
 data B B
 \end{verbatim}}}
 
-Here we supply observations for those spatial cells where the categorical layer has value $A$ as, 
+Here we supply abundance observations for those spatial cells where the categorical layer has value $A$ as, 
 
 {\small{\begin{verbatim}
 @observation MyAbundance
+type abundance
 ...
 categories male 
 obs A 1000
@@ -342,6 +348,7 @@ Or, for both $A$ and $B$ as,
 
 {\small{\begin{verbatim}
 @observation MyAbundance
+type abundance
 ...
 categories male
 obs A 1000
@@ -350,6 +357,14 @@ obs B 1200
 \end{verbatim}}}
 
 To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
+
+Note that, to define a biomass observation instead of an abundance observation, use 
+
+{\small{\begin{verbatim}
+@observation MyBiomass
+type biomass
+...
+\end{verbatim}}}
 
 \subsubsection{Likelihoods for abundance observations}
 

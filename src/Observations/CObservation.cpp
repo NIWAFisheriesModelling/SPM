@@ -56,6 +56,28 @@ string CObservation::getSelectivity(int index) {
 }
 
 //**********************************************************************
+// void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double score)
+// Save comparison into our Vector
+//**********************************************************************
+void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double score) {
+
+  if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
+    if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
+      if (pRuntimeController->getRunMode() != RUN_MODE_SIMULATION)
+        return;
+
+  SComparison *pComparison = new SComparison();
+  pComparison->sKey           = key;
+  pComparison->iAge           = age;
+  pComparison->sGroup         = group;
+  pComparison->dExpectedValue = expected;
+  pComparison->dObservedValue = observed;
+  pComparison->dErrorValue    = errorValue;
+  pComparison->dScore         = score;
+  vComparisons.push_back(pComparison);
+}
+
+//**********************************************************************
 // void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double score)
 // Save comparison into our Vector
 //**********************************************************************
@@ -69,6 +91,7 @@ void CObservation::saveComparison(string key, int age, double expected, double o
   SComparison *pComparison = new SComparison();
   pComparison->sKey           = key;
   pComparison->iAge           = age;
+  pComparison->sGroup         = "";
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
   pComparison->dErrorValue    = errorValue;
@@ -90,6 +113,7 @@ void CObservation::saveComparison(string key, double expected, double observed, 
   SComparison *pComparison = new SComparison();
   pComparison->sKey           = key;
   pComparison->iAge           = -1;
+  pComparison->sGroup         = "";
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
   pComparison->dErrorValue    = errorValue;
@@ -167,9 +191,6 @@ void CObservation::build() {
     // Get Selectivities
     CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
     pSelectivityManager->fillVector(vSelectivities, vSelectivityNames);
-
-    // Get Categories
-    pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
     // Get the Index for our TimeStep in the Order Vector
     CTimeStepManager *pTimeStepManager = CTimeStepManager::Instance();

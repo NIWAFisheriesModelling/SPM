@@ -38,6 +38,7 @@ CProportionsByCategoryObservation::CProportionsByCategoryObservation() {
   iMinAge                 = -1;
   iMaxAge                 = -1;
   bAgePlus                = false;
+  pCategories         = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MIN_AGE);
@@ -149,6 +150,9 @@ void CProportionsByCategoryObservation::build() {
     // Base Build
     CObservation::build();
 
+    // Get Categories
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
     pWorld->fillCategoryVector(vTargetCategories, vTargetCategoryNames);
     foreach(int Category, vCategories) {
       vTargetCategories.push_back(Category);
@@ -161,16 +165,16 @@ void CProportionsByCategoryObservation::build() {
     }
 
     // Create Array of Age Results
-    iArraySize = (iMaxAge+1) - iMinAge;
+    iAgeSpread = (iMaxAge+1) - iMinAge;
 
     if (pAgeResults == 0)
-      pAgeResults = new double[iArraySize];
-    for (int i = 0; i < iArraySize; ++i)
+      pAgeResults = new double[iAgeSpread];
+    for (int i = 0; i < iAgeSpread; ++i)
       pAgeResults[i] = 0.0;
 
     if (pCombinedAgeResults == 0)
-      pCombinedAgeResults = new double[iArraySize];
-    for (int i = 0; i < iArraySize; ++i)
+      pCombinedAgeResults = new double[iAgeSpread];
+    for (int i = 0; i < iAgeSpread; ++i)
       pCombinedAgeResults[i] = 0.0;
 
     // Validate our N's against the OBS
@@ -235,7 +239,7 @@ void CProportionsByCategoryObservation::execute() {
 
     // Build our 2 Age Result arrays so we can compare them to get the
     // proportion to match against our observation.
-    for (int i = 0; i < iArraySize; ++i) {
+    for (int i = 0; i < iAgeSpread; ++i) {
       // Loop Through Categories
       for (int j = 0; j < (int)vCategories.size(); ++j) {
         double dSelectResult = vSelectivities[j]->getResult(i);
@@ -266,7 +270,7 @@ void CProportionsByCategoryObservation::execute() {
     // If we have an age_plus_group we wanna add all + ages to the highest specified
     if(bAgePlus) {
       // Loop Through Plus Group Ages in that square and add them to count for the Plus group
-      for (int i = iArraySize+iSquareAgeOffset; i < pWorld->getAgeSpread(); ++i) {
+      for (int i = iAgeSpread+iSquareAgeOffset; i < pWorld->getAgeSpread(); ++i) {
         // Loop Through Categories
         for (int j = 0; j < (int)vCategories.size(); ++j) {
           double dSelectResult = vSelectivities[j]->getResult(i);
@@ -278,7 +282,7 @@ void CProportionsByCategoryObservation::execute() {
           } else {
             dProportionValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
           }
-          pAgeResults[iArraySize-1] += dSelectResult * dProportionValue;
+          pAgeResults[iAgeSpread-1] += dSelectResult * dProportionValue;
         }
         for (int j = 0; j < (int)vTargetCategories.size(); ++j) {
           double dSelectResult = vTargetSelectivities[j]->getResult(i);
@@ -290,13 +294,13 @@ void CProportionsByCategoryObservation::execute() {
           } else {
             dProportionValue = std::abs(dStartValue - dEndValue) * dProportionTimeStep;
           }
-          pCombinedAgeResults[iArraySize-1] += dSelectResult * dProportionValue;
+          pCombinedAgeResults[iAgeSpread-1] += dSelectResult * dProportionValue;
         }
       }
     }
 
     // Do our Comparison
-    for (int i = 0; i < iArraySize; ++i) {
+    for (int i = 0; i < iAgeSpread; ++i) {
       double dExpected = 0.0;
       if (!CComparer::isZero(pCombinedAgeResults[i]))
         dExpected = pAgeResults[i]/pCombinedAgeResults[i];
@@ -311,7 +315,7 @@ void CProportionsByCategoryObservation::execute() {
     }
 
     // Clear Our Age Results
-    for (int i = 0; i < iArraySize; ++i) {
+    for (int i = 0; i < iAgeSpread; ++i) {
       pAgeResults[i] = 0.0;
       pCombinedAgeResults[i] = 0.0;
     }
@@ -323,7 +327,7 @@ void CProportionsByCategoryObservation::execute() {
     // Simulate our values, then save them
     pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
     for (int i = 0; i < (int)vObserved.size(); ++i)
-      saveComparison(vKeys[i], vAges[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
+      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], vErrorValue[i], 0.0);
 
   } else { // Generate Score
     dScore = 0.0;
@@ -332,7 +336,7 @@ void CProportionsByCategoryObservation::execute() {
     pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
     for (int i = 0; i < (int)vScores.size(); ++i) {
       dScore += vScores[i];
-      saveComparison(vKeys[i], vAges[i], vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
+      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
     }
   }
 }

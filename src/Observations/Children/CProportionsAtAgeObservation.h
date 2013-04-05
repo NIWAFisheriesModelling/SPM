@@ -15,6 +15,7 @@
 
 // Forward Declaration
 class CAgeingError;
+class CCompoundCategories;
 
 //**********************************************************************
 //
@@ -25,7 +26,7 @@ public:
   // Functions
   CProportionsAtAgeObservation();
   virtual                    ~CProportionsAtAgeObservation();
-  CObservation*               clone() { return new CProportionsAtAgeObservation(*this); }
+  CObservation*              clone() { return new CProportionsAtAgeObservation(*this); }
   void                       validate();
   void                       build();
   void                       execute();
@@ -38,13 +39,14 @@ protected:
   double                       *pAgeResults;
   int                          iMinAge;
   int                          iMaxAge;
-  int                          iArraySize;
+  int                          iAgeSpread;
   bool                         bAgePlus;
   bool                         bRescale;
   double                       dTolerance;
   double                       dProcessError;
   string                       sAgeingError;
   CAgeingError                 *pAgeingError;
+  CCompoundCategories          *pCategories;
 };
 
 #endif /*CPROPORTIONSATAGE_H_*/

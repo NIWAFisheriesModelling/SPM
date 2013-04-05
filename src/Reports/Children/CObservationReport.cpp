@@ -92,7 +92,7 @@ void CObservationReport::execute() {
     pObservation->fillComparisons(vComparisons);
 
     if (pProportionsAtAge != 0)
-      cout << "area, age, observed, expected, residual, errorvalue, score\n";
+      cout << "area, category, age, observed, expected, residual, errorvalue, score\n";
     else if (pProportionsByCategory != 0)
       cout << "area, age, observed, expected, residual, errorvalue, score\n";
     else
@@ -101,7 +101,10 @@ void CObservationReport::execute() {
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
       cout << Comparison->sKey << CONFIG_SEPERATOR_ESTIMATE_VALUES;
-      if (pProportionsAtAge != 0 || pProportionsByCategory != 0) {
+      if (pProportionsAtAge != 0) {
+        cout << Comparison->sGroup << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+        cout << Comparison->iAge << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+      } else if (pProportionsByCategory != 0) {
         cout << Comparison->iAge << CONFIG_SEPERATOR_ESTIMATE_VALUES;
       }
       cout << Comparison->dObservedValue << CONFIG_SEPERATOR_ESTIMATE_VALUES

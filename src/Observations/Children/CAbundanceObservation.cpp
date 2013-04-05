@@ -142,6 +142,9 @@ void CAbundanceObservation::build() {
     // Base build
     CObservation::build();
 
+    // Get Categories
+    pWorld->fillCategoryVector(vCategories, vCategoryNames);
+
     // Build relationships
     CCatchabilityManager *pCatchabilityManager = CCatchabilityManager::Instance();
     pCatchability = pCatchabilityManager->getCatchability(sCatchability);

@@ -30,7 +30,10 @@ public:
   int                         setCategoryIndex(int row, int col);
   vector<string>              getCategoryNames(int row);
   string                      getCategoryName(int row, int col);
+  string                      getGroup(int row) { return vGroup[row]; }
   int                         getCategoryIndex(int row, int col);
+  int                         getIndex(int row, int col) { return vvElementIndex[row][col]; };
+
 
   int                         getNRows() { return iNRows; }
   int                         getNElements(int index) { return vNElements[index]; }
@@ -46,7 +49,8 @@ private:
   vector<int>                 vNElements;
   vector<vector<string> >     vvCategoryNames;
   vector<vector<int> >        vvCategoryIndex;
-
+  vector<vector<int> >        vvElementIndex;
+  vector<string>              vGroup;
 };
 
 #endif /* CCOMPOUNDCATEGORIES_H_ */

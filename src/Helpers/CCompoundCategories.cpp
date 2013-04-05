@@ -61,13 +61,22 @@ void CCompoundCategories::setCategories(vector<string> vCategoryNames) {
       iNCategories += vvCategoryNames[i].size();
     }
 
+    int iCount = 0;
     for (int i = 0; i < (int)vvCategoryNames.size(); ++i) {
-      vector<int> tempSelectivities;
+      vector<int> tempCategories;
+      vector<int> tempIndex;
+      string tempGroup = "";
       for (int j = 0; j < (int)vvCategoryNames[i].size(); ++j) {
-        tempSelectivities.push_back( setCategoryIndex(i,j) );
+        tempCategories.push_back( setCategoryIndex(i,j) );
+        tempIndex.push_back(iCount);
+        ++iCount;
+        tempGroup = std::string(tempGroup) + std::string(vvCategoryNames[i][j]) + std::string(j<((int)vvCategoryNames[i].size()-1)?CONFIG_AND:"");
       }
-      vvCategoryIndex.push_back(tempSelectivities);
+      vvCategoryIndex.push_back(tempCategories);
+      vvElementIndex.push_back(tempIndex);
+      vGroup.push_back(tempGroup);
     }
+
 
   } catch (string &Ex) {
     Ex = "CCompoundCategories.setCompoundCategories()->" + Ex;

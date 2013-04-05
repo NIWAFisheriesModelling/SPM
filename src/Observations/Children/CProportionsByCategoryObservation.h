@@ -12,6 +12,9 @@
 // Local Headers
 #include "../CObservation.h"
 
+// Forward Declaration
+class CCompoundCategories;
+
 //**********************************************************************
 //
 //
@@ -36,12 +39,13 @@ protected:
   double                      *pCombinedAgeResults;
   int                         iMinAge;
   int                         iMaxAge;
-  int                         iArraySize;
+  int                         iAgeSpread;
   bool                        bAgePlus;
   vector<string>              vTargetSelectivityNames;
   vector<CSelectivity*>       vTargetSelectivities;
   double                      dDelta;
   double                      dProcessError;
+  CCompoundCategories         *pCategories;
 };
 
 #endif /*CPROPORTIONSBYCATEGORYOBSERVATION_H_*/

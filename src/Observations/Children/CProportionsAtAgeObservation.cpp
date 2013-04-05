@@ -17,6 +17,7 @@
 #include "../../AgeingError/CAgeingErrorManager.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CConvertor.h"
+#include "../../Helpers/CCompoundCategories.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -38,6 +39,7 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
   bAgePlus            = false;
   bRescale            = false;
   pAgeingError        = 0;
+  pCategories         = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MIN_AGE);
@@ -61,46 +63,6 @@ void CProportionsAtAgeObservation::validate() {
 
     CObservation::validate();
 
-    // The '+' syntax is not yot yet implemented
-    for (int i = 0; i < (int)vCategoryNames.size(); ++i) {
-      if (vCategoryNames[i] == CONFIG_AND) {
-        CError::error("The '" + string(CONFIG_AND) + "' syntax is not yet implemented");
-      }
-    }
-    //Check length of categories and selectivites are equal
-    unsigned iCategoryNamesSize = vCategoryNames.size();
-    unsigned iSelectivityNamesSize = vSelectivityNames.size();
-    if (iCategoryNamesSize != iSelectivityNamesSize)
-      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
-
-/*   Implement the '+' syntax here
-    // Read in categories, and construct the vector<vector>> of categories and selectivities
-    // rows = sets of proportions: columns are the categories to aggregate
-    vector<vector<string> > vvCategoryNames;
-
-    if (vCategoryNames[0] == CONFIG_AND || vCategoryNames[vCategoryNames.size()-1] == CONFIG_AND)
-      CError::error("Invalid category: " + string(CONFIG_AND));
-    else {
-      vector<string> tempCategories;
-      int iCount = 0;
-      for (int i = 0; i < (int)vCategoryNames.size(); ++i) {
-        if (vCategoryNames[i] != CONFIG_AND) {
-          tempCategories.push_back(vCategoryNames[i]);
-        } else {
-          for (int j = 0; j < (int)tempCategories.size(); ++j) {
-            vvCategoryNames.push_back(tempCategories);
-          }
-          iCount++;
-          tempCategories.resize(0);
-        }
-      }
-      vvCategoryNames.push_back(tempCategories);
-    }
-
-    // confirm n. selectivities equal to n. categories
-    //
-    //revise code below to construct expected/observed
-*/
     // Populate our Parameters
     iMinAge             = pParameterList->getInt(PARAM_MIN_AGE);
     iMaxAge             = pParameterList->getInt(PARAM_MAX_AGE);
@@ -109,6 +71,18 @@ void CProportionsAtAgeObservation::validate() {
     dTolerance          = pParameterList->getDouble(PARAM_TOLERANCE,true,0.001);
     dProcessError       = pParameterList->getDouble(PARAM_PROCESS_ERROR,true,0);
     sAgeingError        = pParameterList->getString(PARAM_AGEING_ERROR, true, "");
+
+    // Read in categories, and construct the vector<vector>> of categories and selectivities
+    // rows = sets of proportions: columns are the categories to aggregate
+    pCategories = new CCompoundCategories;
+    pCategories->setCategories(vCategoryNames);
+
+    // Validate
+    //Check length of categories and selectivites are equal
+    unsigned iCategoryNamesSize = pCategories->getNCategories();
+    unsigned iSelectivityNamesSize = vSelectivityNames.size();
+    if (iCategoryNamesSize != iSelectivityNamesSize)
+      CError::errorListSameSize(PARAM_CATEGORIES, PARAM_SELECTIVITIES);
 
     if (dDelta < 0)
       CError::errorLessThan(PARAM_DELTA, PARAM_ZERO);
@@ -121,17 +95,18 @@ void CProportionsAtAgeObservation::validate() {
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
 
     // Find out the Spread in Ages
-    int iAgeSpread = (iMaxAge+1) - iMinAge;
+    iAgeSpread = (iMaxAge+1) - iMinAge;
+    int iNGroups = pCategories->getNRows();
 
     // Get our OBS
     vector<string> vOBS;
     pParameterList->fillVector(vOBS, PARAM_OBS);
 
-    if ((vOBS.size() % (iAgeSpread+1)) != 0)
-      CError::errorListNotSize(PARAM_OBS, iAgeSpread);
+    if ((vOBS.size() % (iNGroups * iAgeSpread + 1)) != 0)
+      CError::errorListNotSize(PARAM_OBS, iAgeSpread * iNGroups);
 
-    for (int i = 0; i < (int)vOBS.size(); i+=(iAgeSpread+1)) {
-      for (int j = 0; j < iAgeSpread; ++j) {
+    for (int i = 0; i < (int)vOBS.size(); i+=(iNGroups * iAgeSpread + 1)) {
+      for (int j = 0; j < (iNGroups * iAgeSpread); ++j) {
         try {
           mvProportionMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
         } catch (boost::bad_lexical_cast) {
@@ -182,9 +157,9 @@ void CProportionsAtAgeObservation::validate() {
     map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
     while (vPropPtr != mvProportionMatrix.end()) {
       // Validate Sizes
-      if (iAgeSpread > (int)((*vPropPtr).second).size())
+      if ((iAgeSpread * iNGroups) > (int)((*vPropPtr).second).size())
         throw string(ERROR_QTY_LESS_PROPORTIONS + (*vPropPtr).first);
-      if (iAgeSpread < (int)((*vPropPtr).second).size())
+      if ((iAgeSpread  * iNGroups)< (int)((*vPropPtr).second).size())
         throw string(ERROR_QTY_MORE_PROPORTIONS + (*vPropPtr).first);
 
         // Rescale if Tolerance is exceeded
@@ -231,6 +206,7 @@ void CProportionsAtAgeObservation::validate() {
 
       vNPtr++;
     }
+
   } catch (string &Ex) {
     Ex = "CProportionsAtAgeObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -251,11 +227,9 @@ void CProportionsAtAgeObservation::build() {
       pAgeingError = CAgeingErrorManager::Instance()->getAgeingError(sAgeingError);
 
     // Create Array of Age Results
-    iArraySize = (iMaxAge+1) - iMinAge;
-
     if (pAgeResults == 0)
-      pAgeResults = new double[iArraySize];
-    for (int i = 0; i < iArraySize; ++i)
+      pAgeResults = new double[iAgeSpread * pCategories->getNRows()];
+    for (int i = 0; i < (iAgeSpread * pCategories->getNRows()); ++i)
       pAgeResults[i] = 0.0;
 
   } catch (string &Ex) {
@@ -279,6 +253,7 @@ void CProportionsAtAgeObservation::execute() {
     double              dCurrentProp       = 0.0;
     vector<string>      vKeys;
     vector<int>         vAges;
+    vector<string>      vGroup;
     vector<double>      vExpected;
     vector<double>      vObserved;
     vector<double>      vProcessError;
@@ -296,7 +271,6 @@ void CProportionsAtAgeObservation::execute() {
       // Get Square for this Area
       CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mvPropPtr).first);
       CWorldSquare *pSquare      = pWorldView->getSquare((*mvPropPtr).first);
-
 
       //apply ageing error & calculate proportion time_step
       vector<double> vTemp(pSquare->getWidth(),0);
@@ -316,52 +290,56 @@ void CProportionsAtAgeObservation::execute() {
           pSquare->setValue(i,j,vTemp[j]);
         }
       }
-
       // Loop Through Ages in that square and add them to count
-      for (int i = 0; i < iArraySize; ++i) {
-        // Loop Through Categories
-        for (int j = 0; j < (int)vCategories.size(); ++j) {
-          double dSelectResult = vSelectivities[j]->getResult((i+iSquareAgeOffset));
-          pAgeResults[i] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), vCategories[j]);
-        }
-      }
-
-      // And if the observation has a plus group
-      if(bAgePlus) {
-        // Loop Through Plus Group Ages in that square and add them to count for the Plus group
-        for (int i = iArraySize+iSquareAgeOffset; i < pWorld->getAgeSpread(); ++i) {
-          // Loop Through Categories
-          for (int j = 0; j < (int)vCategories.size(); ++j) {
-            double dSelectResult = vSelectivities[j]->getResult(i);
-            pAgeResults[iArraySize-1] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, vCategories[j]);
+      for (int i = 0; i < iAgeSpread; ++i) {
+        // Loop Through Category Groups
+        for (int j = 0; j < pCategories->getNRows(); ++j) {
+          for (int k = 0; k < pCategories->getNElements(j); ++k) {
+            double dSelectResult = vSelectivities[pCategories->getIndex(j,k)]->getResult((i+iSquareAgeOffset));
+            pAgeResults[i + (j * iAgeSpread)] += dSelectResult * pSquare->getAbundanceInCategoryForAge((i+iSquareAgeOffset), pCategories->getCategoryIndex(j,k));
           }
         }
       }
-
+      // And if the observation has a plus group
+      if(bAgePlus) {
+        // Loop Through Plus Group Ages in that square and add them to count for the Plus group
+        for (int i = iAgeSpread+iSquareAgeOffset; i < pWorld->getAgeSpread(); ++i) {
+          // Loop Through Categories
+          for (int j = 0; j < pCategories->getNRows(); ++j) {
+            for (int k = 0; k < pCategories->getNElements(j); ++k) {
+              double dSelectResult = vSelectivities[pCategories->getIndex(j,k)]->getResult(i);
+              pAgeResults[(iAgeSpread-1) + (j * iAgeSpread)] += dSelectResult * pSquare->getAbundanceInCategoryForAge(i, pCategories->getCategoryIndex(j,k));
+            }
+          }
+        }
+      }
       // Populate our Running Total
       dRunningTotal = 0.0;
 
-      for (int i = 0; i < iArraySize; ++i)
+      for (int i = 0; i < (iAgeSpread * pCategories->getNRows()); ++i)
         dRunningTotal += pAgeResults[i];
 
-      for (int i = 0; i < iArraySize; ++i) {
-        // Get our Proportion
-        if(!CComparer::isZero(dRunningTotal))
-          dCurrentProp = pAgeResults[i] / dRunningTotal;
-        else
-          dCurrentProp = 0.0;
+      for (int i = 0; i < (pCategories->getNRows()); ++i) {
+        for (int j = 0; j < iAgeSpread; ++j) {
+          // Get our Proportion
+          if(!CComparer::isZero(dRunningTotal))
+            dCurrentProp = pAgeResults[(iAgeSpread * i) + j] / dRunningTotal;
+          else
+            dCurrentProp = 0.0;
 
-        // Store the items we want to calculate scores for
-        vKeys.push_back((*mvPropPtr).first);
-        vAges.push_back(i+iMinAge);
-        vExpected.push_back(dCurrentProp);
-        vObserved.push_back(((*mvPropPtr).second)[i]);
-        vProcessError.push_back(dProcessError);
-        vErrorValue.push_back(mErrorValue[(*mvPropPtr).first]);
+          // Store the items we want to calculate scores for
+          vKeys.push_back((*mvPropPtr).first);
+          vGroup.push_back(pCategories->getGroup(i));
+          vAges.push_back(j+iMinAge);
+          vExpected.push_back(dCurrentProp);
+          vObserved.push_back(((*mvPropPtr).second)[(iAgeSpread * i) + j]);
+          vProcessError.push_back(dProcessError);
+          vErrorValue.push_back(mErrorValue[(*mvPropPtr).first]);
+        }
       }
 
       // Clear Our Age Results
-      for (int i = 0; i < iArraySize; ++i)
+      for (int i = 0; i < (iAgeSpread * pCategories->getNRows()); ++i)
         pAgeResults[i] = 0.0;
 
       mvPropPtr++;
@@ -372,7 +350,7 @@ void CProportionsAtAgeObservation::execute() {
       // Simulate our values, then save them
       pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vObserved.size(); ++i)
-        saveComparison(vKeys[i], vAges[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
+        saveComparison(vKeys[i], vAges[i], vGroup[i], vExpected[i], vObserved[i], vErrorValue[i], 0.0);
 
     } else { // Generate Score
       dScore = pLikelihood->getInitialScore(vKeys, vProcessError, vErrorValue);
@@ -381,7 +359,7 @@ void CProportionsAtAgeObservation::execute() {
       pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
       for (int i = 0; i < (int)vScores.size(); ++i) {
         dScore += vScores[i];
-        saveComparison(vKeys[i], vAges[i], vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
+        saveComparison(vKeys[i], vAges[i], vGroup[i], vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
       }
     }
 
