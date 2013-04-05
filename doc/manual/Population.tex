@@ -51,7 +51,7 @@ Hence, the definition of the spatial structure includes;
 
 The population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
 
-The names and number of categories are user defined, but there must be at least one category defined for a model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, with the last age optionally a plus group. In order to calcuate bio mass, the age-size relationship for each category must also be defined.
+The names and number of categories are user defined, but there must be at least one category defined for a model. The ages are defined as a sequence from $age_{min}$ to $age_{max}$, with the last age optionally a plus group. In order to calculate biomass, the age-size relationship for each category must also be defined.
 
 Hence, the definition of the population structure includes;
 \begin{itemize}
@@ -148,7 +148,7 @@ or simulate observations from the current state.
 
 In each initialisation phase, the processes defined for that phase are carried out and used as the starting point for the following phase or, if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) set at zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail if used in the first phase of an initialisation. 
 
-The multi-phase iteration also allows the user to determine if the initialisation has converged in a particular model run. Here, add an additional initialisation phase for, say, $1$ year as the last initialisation phase (with the same processes applied). Then, using the initialisation reports (\commandlabsubarg{report}{type}{initialisation\_phase}), print a copy of the partition just before and just after that phase. If the initialisation has converged to an equilibrium state, then the partition at both these time intervals will be the same.
+The multi-phase iteration\index{Multi-phase iteration} also allows the user to determine if the initialisation has converged in a particular model run. Here, add an additional initialisation phase for, say, $1$ year as the last initialisation phase (with the same processes applied). Then, using the initialisation reports (\commandlabsubarg{report}{type}{initialisation\_phase}), print a copy of the partition just before and just after that phase. If the initialisation has converged to an equilibrium state, then the partition at both these time intervals will be the same.
 
 Hence, for initialisation you need to define;
 \begin{itemize}
@@ -179,16 +179,15 @@ Processes produce changes in the model partition, by adding, removing or moving 
 
 \SPM\ has two types of processes, \emph{population}\index{Population processes} and \emph{movement}\index{Movement processes} processes. Population processes are those processes which modify, move or otherwise change the numbers of individuals \emph{within} a spatial cell, i.e., they do not affect the spatial location of a cohort. Movement processes, on the other hand, move, shift or otherwise modify cohorts \emph{between} spatial cells, but do not affect the age or category of the numbers in each cohort. 
 
-The population processes include recruitment\index{Recruitment}, ageing\index{Ageing},  mortality\index{Mortality} events (e.g., natural and exploitation) and category transition processes\index{Category transition} (i.e., processes that move individuals between categories, while preserving their a
-ge structure). See Section \ref{sec:population-section} for a complete list of available processes.
+The population processes include recruitment\index{Recruitment}, ageing\index{Ageing},  mortality\index{Mortality} events (e.g., natural and exploitation) and category transition processes\index{Category transition} (i.e., processes that move individuals between categories, while preserving their age structure). See Section \ref{sec:population-section} for a complete list of available processes.
 
 Each of these processes is carried out in the user-defined prescribed order when initialising the model, and then for a user-defined order in each year in the annual cycle\index{Annual cycle}.
 
 \SPM\ implements three different types of movement processes\index{Movement};
 \begin{enumerate}
-	\item  A migration movement rate\index{Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
-	\item An adjacent cell movements\index{Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. 
-	\item Movement parametrised as a probability density function\index{Preference movement}. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
+	\item  A migration movement rate\index{Migration}\index{Movement ! Migration} of cohorts between any two locations, and is roughly analogous to movements between areas as implemented in other population models, such as CASAL \citep{1388}. 
+	\item An adjacent cell movements\index{Adjacent cell movement}\index{Movement ! Adjacent cell movement}, parametrised by some function of an underlying layer --- equivalent to, for example, movement processes implemented in Fish Heaven \citep{1136,1135}. 
+	\item Movement parametrised as a probability density function\index{Preference movement}\index{Movement ! Preference movement}. Here, the key underlying idea is that the spatial distribution of cohorts at any point in time and at any location can be represented as a density function based on attributes of that location, local abundance, and/or distance from their previous location \citep{1366,1367}. 
 \end{enumerate}
 
 An \SPM\ model can be parametrised by both population processes (for example, ageing, recruitment, and mortality), and movement processes. Population processes are those processes which modify, move or otherwise change the numbers of individuals within a spatial cell, i.e., they do not affect the spatial location of a cohort. Movement processes, on the other hand, move, shift or otherwise modify cohorts between spatial cells, but do not affect the age or category of the numbers in each cohort. 
@@ -264,7 +263,7 @@ steepness 0.75
 age 1
 layer MyRecruitment
 B0 phase1
-SSB SSB_Biomasss
+SSB SSB_Biomass
 standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
@@ -287,12 +286,11 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, a derived layer (see Section \ref{sec:derived-layers}) must be provided that defines $B_0$ and the annual $SSB_y$ for the recruitment process. As for the Beverton-Holt recruitment process above, $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ distributed relative to the recruitment layer \texttt{layer}.
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, a derived layer (see Section \ref{sec:derived-layers}) must be provided that defines $B_0$ and the annual $SSB_y$ for the recruitment process. As for the Beverton-Holt recruitment process above, $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e., in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. $R_0^i$ is defined for each cell as the portion of the total recruitment $R_0$ distributed relative to the recruitment layer \texttt{layer}.
 
 For example, assume a local Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to recruit in each cell is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived layer that specifies the spawning stock biomass in each cell, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 
 {\small{\begin{verbatim}
-
 @process Recruitment
 type local_BH_recruitment
 categories immature
@@ -302,7 +300,7 @@ steepness 0.75
 age 1
 layer MyRecruitment
 B0 phase1
-SSB SSB_Biomasss
+SSB SSB_Biomass
 standardise_YCS_years 1994-2004
 YCS_years 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
@@ -413,7 +411,7 @@ And the number removed $R$ from each age $l$ in category $k$ is,
   R(k,l) = UV(k,l)
 \end{equation}
 
-For example, to specify fishing mortality based on spatially explicit catches (and given for each year as a layer, `Catch2000', `Catch2001', etc,.) over categories `immature' and 'mature' with selectivity `FishingSel' and assuming a maximum possible exploitation rate of 0.7, then the syntax is,
+For example, to specify fishing mortality based on spatially explicit catches (and given for each year as a layer, `Catch2000', `Catch2001', etc.) over categories `immature' and 'mature' with selectivity `FishingSel' and assuming a maximum possible exploitation rate of 0.7, then the syntax is,
 
 {\small{\begin{verbatim}
 @process Fishing
@@ -518,9 +516,30 @@ And the number removed $R(g)$ in each prey group $g$ from each age $l$ in catego
   R(g,k,l) = U(g)V(g,k,l)
 \end{equation}
 
-Note that prey switching occurs only between prey groups specified by the process, and the total predator consumption rate represents the consumption of the predator on those prey groups alone. Also note that the electivities must sum to one.
+Note that prey switching occurs only between prey groups specified by the process, and the total predator consumption rate represents the consumption of the predator on those prey groups alone. Also note that the electivities must sum to one. 
 
 The density-dependent prey-switching process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
+
+Individual categories can be aggregated into prey groups using the '+' symbol. To indicate that two (or more) categories are to be aggregated, separate them with a '+' symbol. For example, to specify two prey groups of two species made up of the males and females in each, then the subcommand would be,
+
+{\small{\begin{verbatim}
+prey_categories maleSpeciesA + femaleSpeciesA maleSpeciesB + femaleSpeciesB
+\end{verbatim}}}
+
+This would indicate that there are two prey groups, \texttt{maleSpeciesA + femaleSpeciesA} and \texttt{maleSpeciesB + femaleSpeciesB}, with each group having its own electivity. For example, a biomass prey-switching mortality process with an overall consumption rate of $0.8$ of \texttt{species A} and \texttt{species B} (modelled as males and females) by our predator \texttt{predatorSpecies} with electivities between \texttt{species A} and \texttt{species B} of $0.18$ and $0.82$ would have syntax,
+
+{\small{\begin{verbatim}
+@process PreySwitchMortality
+type prey-switch_predation
+is_abundance F
+consumption_rate 0.8
+categories maleSpeciesA + femaleSpeciesA maleSpeciesB + femaleSpeciesB
+electivities 0.18 0.82
+selectivities One One One One
+predator_categories predatorSpecies
+predator_selectivities One
+u_max 0.8
+\end{verbatim}}}
 
 \subsubsection{\I{Category transition}s}
 
@@ -783,7 +802,7 @@ When defining size-at-age in \SPM, you must also define a size-weight relationsh
 
 \subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
 
-There are two size-weight relationship,s available in \SPM. The first is the naive no relationship, where the weight of an individual, irregardless of size is always 1. The second is the basic relationship. 
+There are two size-weight relationship,s available in \SPM. The first is the naive no relationship. Here, the weight of an individual, regardless of size, is always 1. The second is the basic relationship. 
 
 The two size-weight relationships are,
 
@@ -833,7 +852,7 @@ The available selectivities are;
 
 The available selectivities are described below.
 
-\subsubsection[Constant]{\argument{constant}}
+\subsubsection[Constant]{\argument{constant}}\I{Selectivities!Constant}
 
 \begin{equation}
 f(x)=C
@@ -841,7 +860,7 @@ f(x)=C
 
 The constant selectivity has the estimable parameter C. 
 
-\subsubsection[Knife-edge]{\argument{knife\_edge}}
+\subsubsection[Knife-edge]{\argument{knife\_edge}}\I{Selectivities!Knife-edge}
 
 \begin{equation}
 f(x)= \begin{cases}
@@ -852,7 +871,7 @@ f(x)= \begin{cases}
 
 The knife-edge ogive has the estimable parameter E and a scaling parameter $\alpha$, where the default value of $\alpha = 1$
 
-\subsubsection[All-values]{\argument{all\_values}}
+\subsubsection[All-values]{\argument{all\_values}}\I{Selectivities!All-values}
 
 \begin{equation}
 f(x)=V_x
@@ -860,7 +879,7 @@ f(x)=V_x
 
 The all-values selectivity has estimable parameters $V_{low}$, $V_{low+1}$ \ldots $V_{high}$. Here, you need to provide the selectivity value for each age class.
 
-\subsubsection[All-values-bounded]{\argument{all\_values\_bounded}}
+\subsubsection[All-values-bounded]{\argument{all\_values\_bounded}}\I{Selectivities!All-values-bounded}
 
 \begin{equation}
 f(x)=\begin{cases}
@@ -872,7 +891,7 @@ f(x)=\begin{cases}
 
 The all-values-bounded selectivity has non-estimable parameters L and H. The estimable parameters are $V_L$, $V_{L+1}$ \ldots $V_H$. Here, you need to provide an selectivity value for each age class from $L \ldots H$.
 
-\subsubsection[Increasing]{\argument{increasing}}
+\subsubsection[Increasing]{\argument{increasing}}\I{Selectivities!Increasing}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -884,7 +903,7 @@ f(x)=\begin{cases}
 
 The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
 
-\subsubsection[Logistic]{\argument{logistic}}
+\subsubsection[Logistic]{\argument{logistic}}\I{Selectivities!Logistic}
 
 \begin{equation}
   f(x) = \alpha / [1+19^{(a_{50}-x)/a_{to95}}]
@@ -892,7 +911,7 @@ The increasing ogive has non-estimable parameters $L$ and $H$. The estimable par
  
 The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}+a_{to95}$. 
 
-\subsubsection[Inverse logistic]{\argument{inverse\_logistic}}
+\subsubsection[Inverse logistic]{\argument{inverse\_logistic}}\I{Selectivities!Inverse-logistic}
 
 \begin{equation}
   f(x) = \alpha - \alpha / [1+19^{(a_{50}-x)/a_{to95}}]
@@ -900,7 +919,7 @@ The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alp
  
 The inverse logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}-a_{to95}$. 
 
-\subsubsection[Logistic producing]{\argument{logistic\_producing}}
+\subsubsection[Logistic producing]{\argument{logistic\_producing}}\I{Selectivities!Logistic-producing}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -913,7 +932,7 @@ f(x)=\begin{cases}
 
 The logistic-producing selectivity has the non-estimable parameters $L$ and $H$, and has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. For category transitions, $f(x)$ represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic-producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters $a_{50}$, $a_{to95}$.
 
-\subsubsection[Double-normal]{\argument{double\_normal}}
+\subsubsection[Double-normal]{\argument{double\_normal}}\I{Selectivities!Double-normal}
 
 \begin{equation}
   f(x) = \begin{cases}
@@ -924,7 +943,7 @@ The logistic-producing selectivity has the non-estimable parameters $L$ and $H$,
 
 The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It has values $\alpha$ at $x=a_1$, and $0.5 \alpha$ at $x=a_1-s_L$ and $x=a_1+s_R$. 
 
-\subsubsection[Double-exponential]{\argument{double\_exponential}}
+\subsubsection[Double-exponential]{\argument{double\_exponential}}\I{Selectivities!Double-exponential}
 
 \begin{equation} 
 f(x)=\begin{cases}

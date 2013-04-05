@@ -13,8 +13,7 @@ The role of the estimation section is to define the tasks carried out by \SPM:
   \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (see Section \ref{sec:estimate-MPD}\index{Covariance matrix}).
 \end{enumerate}
 
-The estimation section defines 
-The objective function is based on a goodness-of-fit measure of the model to observations, priors and penalties. The observation section describes the objective function, observations, priors and penalties. 
+The estimation section defines the objective function, parameters of the model, and the method of estimation (point estimates, Bayesian posteriors, profiles, etc.). The objective function is based on a goodness-of-fit measure of the model to observations, priors and penalties. See the observation section for a description of the observations, likelihoods, priors and penalties. 
 
 \subsection{\I{The objective function}\label{sec:objective-function}}
 
@@ -28,11 +27,11 @@ where $\pi$ is the joint prior density of the parameters $p$.
 
 The contribution to the objective function from the likelihoods are defined in Section \ref{sec:likelihoods}. In addition to likelihoods, priors (see Section \ref{sec:priors}) and penalties (see Section \ref{sec:penalties}) are components of the objective function. 
 
-You will usually want to use penalties to ensure that the exploitation rate constraints on your fisheries are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded catches could not have been taken), penalties on category transitions (to ensure there are enough individuals to move), and possibly penalties to encourage estimated values to be similar, smoothed, etc.
+Penalties can be used to ensure that the exploitation rate constraints on mortality events (i.e., fisheries) are not breached (otherwise there is nothing to prevent the model from having abundances so low that the recorded mortalities could not have been taken), penalties on category transitions (to ensure there are enough individuals to move), and possibly penalties to encourage estimated values to be similar or smooth, etc.
 
 \subsection{\I{Specifying the parameters to be estimated}\label{sec:estimate-free-parameters}}
 
-You need to tell SPM which of the estimable parameters are to be estimated by using \command{estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like\index{Estimating parameters},
+The estimable parameters that will be estimated are defined using \command{estimate} commands (see Section \ref{sec:estimation-syntax}). An \command{estimate} command-block looks like\index{Estimating parameters},
 
 {\small{\begin{verbatim}
   @estimate process[MyRecruitment].r0
@@ -41,15 +40,15 @@ You need to tell SPM which of the estimable parameters are to be estimated by us
   prior uniform
 \end{verbatim}}}
 
-See Section \ref{sec:parameter-names} for instructions on how to generate the parameter name. You have to specify at least one parameter to be estimated if doing an estimation, profile, or MCMC run. You still provide values for the parameters to be estimated, and these are used as the starting values for the minimiser. However, these may be overwritten if you provide a set of alternative starting values (i.e., using  \texttt{spm -i}, see Section \ref{sec:command-line-arguments}).
+See Section \ref{sec:parameter-names} for instructions on how to generate the parameter name. At least one parameter to be estimated if doing an estimation, profile, or MCMC run. Initial values for the parameters to be estimated will still need to be provided, and these are used as the starting values for the minimiser. However, these may be overwritten if you provide a set of alternative starting values (i.e., using  \texttt{spm -i}, see Section \ref{sec:command-line-arguments}).
 
-All parameters are estimated within bounds\index{Bounds}. For each parameter to be estimated, you need to specify the bounds and the prior\index{Priors} (Section \ref{sec:priors}). Note that the bounds and prior for each parameter refer to the values of the parameters, not the actual values resulting from the application of the parameter to an equation. If you want to estimate only some elements of a vector, either define the elements of the vector to be estimated (see \ref{sec:parameter-names}) or fix the others by setting the bounds equal.
+All parameters are estimated within bounds\index{Bounds}. For each parameter to be estimated, you need to specify the bounds and the prior\index{Priors} (Section \ref{sec:priors}). Note that the bounds and prior for each parameter refer to the values of the parameters, not the actual values resulting from the application of the parameter to an equation. If estimating only some elements of a vector, either define the elements of the vector to be estimated (see \ref{sec:parameter-names}) or fix the others by setting the bounds equal.
 
 The estimation of parameters can be phased. Here, some of the estimated parameters are initially held fixed, and a minimisation is carried out. Next, some or all of the remaining parameters that were initially held fixed are freed, and another minimisation is carried out. This process continues until all phases have been carried out.
 
 \subsection{\I{Point estimation}\label{sec:estimate-MPD}}
 
-Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) the optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}, the differential evolution minimiser \index{Differential evolution minimiser}.
+Point estimation is invoked with \texttt{spm -e}. Mathematically, it is an attempt to find a minimum of the objective function\index{Objective function}. SPM has two algorithms for solving (minimising) the optimisation problem. The first uses a quasi-Newton minimiser built which is a slightly modified implementation of the main algorithm of Dennis Jr. \& Schnabel \citep{779}\index{Finite differences minimiser}, while the second uses a genetic algorithm developed by Storn \& Price \citep{1442}, the differential evolution minimiser \index{Differential evolution minimiser}. However, the second minimiser does not produce an estimate of the covariance matrix, and hence cannot be used to start an MCMC.
 
 \subsubsection{\I{The numerical differences minimiser}}
 
