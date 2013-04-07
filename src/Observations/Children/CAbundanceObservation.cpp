@@ -187,7 +187,7 @@ void CAbundanceObservation::execute() {
       CWorldSquare *pStartSquare  = pStartWorldView->getSquare((*mPropPtr).first);
       CWorldSquare *pSquare     = pWorldView->getSquare((*mPropPtr).first);
 
-      for (int i = 0; i < (int)vCategories.size(); ++i)
+      for (int i = 0; i < (int)vCategories.size(); ++i) {
         for (int j = 0; j < pSquare->getWidth(); ++j) {
           double dSelectResult = vSelectivities[i]->getResult(j);
 
@@ -201,6 +201,7 @@ void CAbundanceObservation::execute() {
           }
           dExpectedTotal += dSelectResult * dFinalValue;
         }
+      }
 
       // Note: dExpectedTotal is total number of fish the model has for that
       // Proportion Label across all squares in that layer where that
