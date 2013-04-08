@@ -28,7 +28,7 @@ df 4
 type proportions_at_age
 year 1998
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -44,7 +44,7 @@ delta 1e-11
 type proportions_at_age
 year 1999
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -60,7 +60,7 @@ delta 1e-11
 type proportions_at_age
 year 2000
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -76,7 +76,7 @@ delta 1e-11
 type proportions_at_age
 year 2001
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -92,7 +92,7 @@ delta 1e-11
 type proportions_at_age
 year 2002
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 age_plus_group True
@@ -108,7 +108,7 @@ delta 1e-11
 type proportions_at_age
 year 2003
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -124,7 +124,7 @@ delta 1e-11
 type proportions_at_age
 year 2004
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -140,7 +140,7 @@ delta 1e-11
 type proportions_at_age
 year 2005
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -156,7 +156,7 @@ delta 1e-11
 type proportions_at_age
 year 2006
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35
@@ -172,7 +172,7 @@ delta 1e-11
 type proportions_at_age
 year 2007
 time_step step_one
-categories immature-male mature-male immature-female mature-female
+categories immature-male + mature-male + immature-female + mature-female
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 1
 max_age 35

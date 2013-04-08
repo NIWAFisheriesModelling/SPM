@@ -8,6 +8,7 @@
 // Local Headers
 #include "CCompoundCategories.h"
 #include "CError.h"
+#include "CComparer.h"
 #include "../Translations/Translations.h"
 
 //**********************************************************************
@@ -28,45 +29,47 @@ CCompoundCategories::CCompoundCategories() {
 //**********************************************************************
 // void  setCategories(vector<string> value);
 //**********************************************************************
-void CCompoundCategories::setCategories(vector<string> vCategoryNames) {
+void CCompoundCategories::setCategories(vector<string> vCategoryNames, string label) {
 
   try {
     // Neither first or last element may be the '+' symbol
     if (vCategoryNames[0] == CONFIG_AND || vCategoryNames[vCategoryNames.size()-1] == CONFIG_AND)
-      CError::error("Invalid category: " + string(CONFIG_AND));
+      CError::error("Invalid category: " + string(CONFIG_AND) + " in " + label);
 
     // Otherwise get categories
-    else {
-      int iCount = 1;
-      vector<string> tempCategories;
-      tempCategories.push_back(vCategoryNames[0]);
-
-      while ( iCount < (int)vCategoryNames.size()) {
-        if (vCategoryNames[iCount] == CONFIG_AND) {
-          ++iCount;
-          tempCategories.push_back(vCategoryNames[iCount]);
-         } else {
-          vvCategoryNames.push_back(tempCategories);
-          tempCategories.resize(0);
-          tempCategories.push_back(vCategoryNames[iCount]);
-        }
+    int iCount = 1;
+    vector<string> tempCategories;
+    tempCategories.push_back(vCategoryNames[0]);
+    // Create vvCategories object
+    while ( iCount < (int)vCategoryNames.size()) {
+      if (vCategoryNames[iCount] == CONFIG_AND) {
         ++iCount;
+        tempCategories.push_back(vCategoryNames[iCount]);
+       } else {
+        vvCategoryNames.push_back(tempCategories);
+        tempCategories.resize(0);
+        tempCategories.push_back(vCategoryNames[iCount]);
       }
-      vvCategoryNames.push_back(tempCategories);
+      ++iCount;
     }
+    vvCategoryNames.push_back(tempCategories);
 
+    // Create iNRows, iNElements, and iNCategories
     iNRows = vvCategoryNames.size();
     for (int i = 0; i < (int)vvCategoryNames.size(); ++i) {
       vNElements.push_back( vvCategoryNames[i].size() );
       iNCategories += vvCategoryNames[i].size();
     }
 
-    int iCount = 0;
+    // Create vvCategoryIndex, vvElementIndex, and vGroup objects
+    iCount = 0;
+    vector<string> vCheckCategoryList;
     for (int i = 0; i < (int)vvCategoryNames.size(); ++i) {
       vector<int> tempCategories;
       vector<int> tempIndex;
       string tempGroup = "";
       for (int j = 0; j < (int)vvCategoryNames[i].size(); ++j) {
+        vCheckCategoryList.push_back(vvCategoryNames[i][j]);
         tempCategories.push_back( setCategoryIndex(i,j) );
         tempIndex.push_back(iCount);
         ++iCount;
@@ -76,6 +79,8 @@ void CCompoundCategories::setCategories(vector<string> vCategoryNames) {
       vvElementIndex.push_back(tempIndex);
       vGroup.push_back(tempGroup);
     }
+    if (CComparer::hasDuplicates(vCheckCategoryList))
+      CError::errorDuplicate(PARAM_CATEGORIES,label);
 
 
   } catch (string &Ex) {

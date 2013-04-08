@@ -4,7 +4,7 @@
 @observation CAA-year-1998
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -25,7 +25,7 @@ error_value All 343
 @observation CAA-year-1999
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -46,7 +46,7 @@ error_value All 564
 @observation CAA-year-2000
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -67,7 +67,7 @@ error_value All 651
 @observation CAA-year-2001
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -88,7 +88,7 @@ error_value All 840
 @observation CAA-year-2002
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -109,7 +109,7 @@ error_value All 598
 @observation CAA-year-2003
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -130,7 +130,7 @@ error_value All 456
 @observation CAA-year-2004
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -151,7 +151,7 @@ error_value All 538
 @observation CAA-year-2005
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -172,7 +172,7 @@ error_value All 438
 @observation CAA-year-2006
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial
@@ -193,7 +193,7 @@ error_value All 817
 @observation CAA-year-2007
 age_plus_group True 
 ageing_error normal 
-categories immature mature 
+categories immature + mature 
 delta 1e-11 
 layer SSRU 
 likelihood multinomial

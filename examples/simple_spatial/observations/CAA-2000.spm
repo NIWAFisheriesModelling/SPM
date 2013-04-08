@@ -3,7 +3,7 @@
 type proportions_at_age
 year 2000
 time_step one
-categories immature mature
+categories immature + mature
 selectivities FishingSel FishingSel
 min_age 1
 max_age 30

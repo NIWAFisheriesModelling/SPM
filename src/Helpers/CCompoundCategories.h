@@ -26,7 +26,7 @@ class CCompoundCategories {
 public:
   // Functions
   CCompoundCategories();
-  void                        setCategories(vector<string> value);
+  void                        setCategories(vector<string> value, string label);
   int                         setCategoryIndex(int row, int col);
   vector<string>              getCategoryNames(int row);
   string                      getCategoryName(int row, int col);

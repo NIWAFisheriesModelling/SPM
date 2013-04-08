@@ -34,7 +34,7 @@ df 4
 type proportions_at_age
 year 1998
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -60,7 +60,7 @@ likelihood multinomial
 type proportions_at_age
 year 1999
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -86,7 +86,7 @@ likelihood multinomial
 type proportions_at_age
 year 2000
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -108,7 +108,7 @@ likelihood multinomial
 type proportions_at_age
 year 2001
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -138,7 +138,7 @@ likelihood multinomial
 type proportions_at_age
 year 2002
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -166,7 +166,7 @@ likelihood multinomial
 type proportions_at_age
 year 2003
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -194,7 +194,7 @@ likelihood multinomial
 type proportions_at_age
 year 2004
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -230,7 +230,7 @@ likelihood multinomial
 type proportions_at_age
 year 2005
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -264,7 +264,7 @@ likelihood multinomial
 type proportions_at_age
 year 2006
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30
@@ -294,7 +294,7 @@ likelihood multinomial
 type proportions_at_age
 year 2007
 time_step step_one
-categories immature mature spawning
+categories immature + mature + spawning
 selectivities FishingSel FishingSel FishingSel
 min_age 1
 max_age 30

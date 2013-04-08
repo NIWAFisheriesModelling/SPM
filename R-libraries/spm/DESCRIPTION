@@ -1,7 +1,7 @@
 Package: spm
 Title: SPM extract package
 Version: 1.1
-Date: 2013-04-03
+Date: 2013-04-05
 Author: A. Dunn
 Description: A set of R functions for extracting from SPM configuration files.
 Maintainer: A Dunn <a.dunn@niwa.co.nz>

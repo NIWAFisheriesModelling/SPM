@@ -1,176 +1,176 @@
 SPM (Spatial Population Model)
 Call: spm -r -q 
-Date: Thu Sep 13 15:56:39 2012
-v1.1-2012-09-12 (rev. 4809). Copyright (c) 2008-2012, NIWA
+Date: Mon Apr 08 09:52:33 2013
+v1.1-2013-04-03 (rev. 4899). Copyright (c) 2008-2013, NIWA
 User name: dunn
-Machine name: NIWA-34253 (Windows_NT, PID=2500)
+Machine name: NIWA-34253 (Windows_NT, PID=2828)
 
 [1994_timestep_one]
 report.type: partition
 year: 1990
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,0,0,0
-1,2,immature,0,12.8571,0,0,0
-1,3,immature,0,12.8571,0,0,0
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,0,0,0
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,0,0,0
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 0, 0, 0
+1, 2, immature, 0, 12.8571, 0, 0, 0
+1, 3, immature, 0, 12.8571, 0, 0, 0
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 0, 0, 0
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 0, 0, 0
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1990
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,0,0,0
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 0, 0, 0
 *end
 
 [1994_timestep_one]
 report.type: partition
 year: 1991
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,45,0,0
-1,2,immature,0,12.8571,12.8571,0,0
-1,3,immature,0,12.8571,12.8571,0,0
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,12.8571,0,0
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,6.42857,0,0
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 45, 0, 0
+1, 2, immature, 0, 12.8571, 12.8571, 0, 0
+1, 3, immature, 0, 12.8571, 12.8571, 0, 0
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 12.8571, 0, 0
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 6.42857, 0, 0
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1991
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,90,0,0
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 90, 0, 0
 *end
 
 [1994_timestep_one]
 report.type: partition
 year: 1992
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,45,45,0
-1,2,immature,0,12.8571,12.8571,12.8571,0
-1,3,immature,0,12.8571,12.8571,12.8571,0
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,12.8571,12.8571,0
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,6.42857,6.42857,0
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 45, 45, 0
+1, 2, immature, 0, 12.8571, 12.8571, 12.8571, 0
+1, 3, immature, 0, 12.8571, 12.8571, 12.8571, 0
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 12.8571, 12.8571, 0
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 6.42857, 6.42857, 0
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1992
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,90,90,0
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 90, 90, 0
 *end
 
 [1994_timestep_one]
 report.type: partition
 year: 1993
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,45,45,45
-1,2,immature,0,12.8571,12.8571,12.8571,12.8571
-1,3,immature,0,12.8571,12.8571,12.8571,12.8571
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,12.8571,12.8571,12.8571
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,6.42857,6.42857,6.42857
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 45, 45, 45
+1, 2, immature, 0, 12.8571, 12.8571, 12.8571, 12.8571
+1, 3, immature, 0, 12.8571, 12.8571, 12.8571, 12.8571
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 12.8571, 12.8571, 12.8571
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 6.42857, 6.42857, 6.42857
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1993
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,90,90,90
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 90, 90, 90
 *end
 
 [1994_timestep_one]
 report.type: partition
 year: 1994
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,45,45,90
-1,2,immature,0,12.8571,12.8571,12.8571,25.7143
-1,3,immature,0,12.8571,12.8571,12.8571,25.7143
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,12.8571,12.8571,25.7143
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,6.42857,6.42857,12.8571
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 45, 45, 90
+1, 2, immature, 0, 12.8571, 12.8571, 12.8571, 25.7143
+1, 3, immature, 0, 12.8571, 12.8571, 12.8571, 25.7143
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 12.8571, 12.8571, 25.7143
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 6.42857, 6.42857, 12.8571
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1994
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,90,90,180
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 90, 90, 180
 *end
 
 [1994_timestep_one]
 report.type: partition
 year: 1995
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,45,45,135
-1,2,immature,0,12.8571,12.8571,12.8571,38.5714
-1,3,immature,0,12.8571,12.8571,12.8571,38.5714
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,12.8571,12.8571,38.5714
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,6.42857,6.42857,19.2857
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 45, 45, 135
+1, 2, immature, 0, 12.8571, 12.8571, 12.8571, 38.5714
+1, 3, immature, 0, 12.8571, 12.8571, 12.8571, 38.5714
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 12.8571, 12.8571, 38.5714
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 6.42857, 6.42857, 19.2857
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1995
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,90,90,270
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 90, 90, 270
 *end
 
 [1994_timestep_one]
 report.type: partition
 year: 1996
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,0,45,45,45,180
-1,2,immature,0,12.8571,12.8571,12.8571,51.4286
-1,3,immature,0,12.8571,12.8571,12.8571,51.4286
-2,1,immature,0,0,0,0,0
-2,2,immature,0,0,0,0,0
-2,3,immature,0,12.8571,12.8571,12.8571,51.4286
-3,1,immature,0,0,0,0,0
-3,2,immature,0,0,0,0,0
-3,3,immature,0,6.42857,6.42857,6.42857,25.7143
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 0, 45, 45, 45, 180
+1, 2, immature, 0, 12.8571, 12.8571, 12.8571, 51.4286
+1, 3, immature, 0, 12.8571, 12.8571, 12.8571, 51.4286
+2, 1, immature, 0, 0, 0, 0, 0
+2, 2, immature, 0, 0, 0, 0, 0
+2, 3, immature, 0, 12.8571, 12.8571, 12.8571, 51.4286
+3, 1, immature, 0, 0, 0, 0, 0
+3, 2, immature, 0, 0, 0, 0, 0
+3, 3, immature, 0, 6.42857, 6.42857, 6.42857, 25.7143
 *end
 
 [all]
 report.type: layer_derived_view
 year: 1996
 time_step: one
-area,category,age[1],age[2],age[3],age[4],age[5]
-1,immature,0,90,90,90,360
+area, category, age[1], age[2], age[3], age[4], age[5]
+1, immature, 0, 90, 90, 90, 360
 *end
 
 [objective_score]

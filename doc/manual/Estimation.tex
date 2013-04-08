@@ -10,7 +10,7 @@ The role of the estimation section is to define the tasks carried out by \SPM:
   \item Calculate a point estimate, i.e., the maximum posterior density estimate (MPD) (see Section \ref{sec:estimate-MPD})\index{Maximum posterior density estimate (MPD)}\index{MPD (Maximum posterior density estimate)}.
   \item Calculate a posterior profile selected parameters, i.e., find, for each of a series of values of a parameter, allowing the other estimated parameters to vary, the minimum value of the objective function (see Section \ref{sec:estimate-profiles}\index{Profiles}).
   \item Generate an MCMC sample from the posterior distribution (see Section \ref{sec:estimate-MCMC}\index{MCMC}).
-  \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the Hessian, and the corresponding correlation matrix (see Section \ref{sec:estimate-MPD}\index{Covariance matrix}).
+  \item Calculate the approximate covariance matrix of the parameters as the inverse of the minimizer\textquoteright{}s approximation to the \I{Hessian}, and the corresponding correlation matrix (see Section \ref{sec:estimate-MPD}\index{Covariance matrix}).
 \end{enumerate}
 
 The estimation section defines the objective function, parameters of the model, and the method of estimation (point estimates, Bayesian posteriors, profiles, etc.). The objective function is based on a goodness-of-fit measure of the model to observations, priors and penalties. See the observation section for a description of the observations, likelihoods, priors and penalties. 
@@ -119,7 +119,7 @@ There are two options for the starting point of the Markov Chain:
 
 \begin{itemize}
 \item Start from the point estimate.
-\item Start from a random point near the point estimate (the point is generated from a multivariate normal distribution, centred on the point estimate, with covariance equal to the inverse Hessian times a user-specified constant). This may be useful if the chain getts `stuck' at the point estimate, or if you wish to generate multiple chains from  for later MCMC diagnostic tests.
+\item Start from a random point near the point estimate (the point is generated from a multivariate normal distribution, centred on the point estimate, with covariance equal to the inverse Hessian times a user-specified constant). This may be useful if the chain gets `stuck' at the point estimate, or if you wish to generate multiple chains from  for later MCMC diagnostic tests.
 %\item Start from a point specified by the user with \texttt{spm -i} \NYI.
 \end{itemize}
 

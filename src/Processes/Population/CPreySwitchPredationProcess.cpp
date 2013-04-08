@@ -97,7 +97,7 @@ void CPreySwitchPredationProcess::validate() {
 
     // Assign compound categories
     pPreyCategories = new CCompoundCategories;
-    pPreyCategories->setCategories(vPreyCategoryList);
+    pPreyCategories->setCategories(vPreyCategoryList,getLabel());
 
     // Local Validation
     if (pPreyCategories->getNCategories() != (int)vPreySelectivityList.size())

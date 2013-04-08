@@ -75,7 +75,7 @@ void CProportionsAtAgeObservation::validate() {
     // Read in categories, and construct the vector<vector>> of categories and selectivities
     // rows = sets of proportions: columns are the categories to aggregate
     pCategories = new CCompoundCategories;
-    pCategories->setCategories(vCategoryNames);
+    pCategories->setCategories(vCategoryNames,getLabel());
 
     // Validate
     //Check length of categories and selectivites are equal

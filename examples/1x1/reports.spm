@@ -32,7 +32,7 @@ type objective_function
 
 @report Objective_Score
 type objective_function
-file_name objective.dat
+file_name objective_values.dat
 
 @report estimate-summary
 type estimate_summary

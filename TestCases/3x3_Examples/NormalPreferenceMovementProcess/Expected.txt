@@ -1,56 +1,56 @@
 SPM (Spatial Population Model)
 Call: spm -r -q 
-Date: Thu Sep 13 15:56:40 2012
-v1.1-2012-09-12 (rev. 4809). Copyright (c) 2008-2012, NIWA
+Date: Mon Apr 08 09:52:33 2013
+v1.1-2013-04-03 (rev. 4899). Copyright (c) 2008-2013, NIWA
 User name: dunn
-Machine name: NIWA-34253 (Windows_NT, PID=4992)
+Machine name: NIWA-34253 (Windows_NT, PID=3348)
 
 [1994_timestep_one]
 report.type: partition
 year: 1994
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,10.9066,0,0,0,0
-1,2,immature,11.5332,0,0,0,0
-1,3,immature,11.9264,0,0,0,0
-2,1,immature,12.0604,0,0,0,0
-2,2,immature,11.9264,0,0,0,0
-2,3,immature,11.5332,0,0,0,0
-3,1,immature,10.9066,0,0,0,0
-3,2,immature,10.086,0,0,0,0
-3,3,immature,9.12109,0,0,0,0
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 10.9066, 0, 0, 0, 0
+1, 2, immature, 11.5332, 0, 0, 0, 0
+1, 3, immature, 11.9264, 0, 0, 0, 0
+2, 1, immature, 12.0604, 0, 0, 0, 0
+2, 2, immature, 11.9264, 0, 0, 0, 0
+2, 3, immature, 11.5332, 0, 0, 0, 0
+3, 1, immature, 10.9066, 0, 0, 0, 0
+3, 2, immature, 10.086, 0, 0, 0, 0
+3, 3, immature, 9.12109, 0, 0, 0, 0
 *end
 
 [1995_timestep_one]
 report.type: partition
 year: 1995
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,21.8132,0,0,0,0
-1,2,immature,23.0665,0,0,0,0
-1,3,immature,23.8528,0,0,0,0
-2,1,immature,24.1208,0,0,0,0
-2,2,immature,23.8528,0,0,0,0
-2,3,immature,23.0665,0,0,0,0
-3,1,immature,21.8132,0,0,0,0
-3,2,immature,20.1721,0,0,0,0
-3,3,immature,18.2422,0,0,0,0
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 21.8132, 0, 0, 0, 0
+1, 2, immature, 23.0665, 0, 0, 0, 0
+1, 3, immature, 23.8528, 0, 0, 0, 0
+2, 1, immature, 24.1208, 0, 0, 0, 0
+2, 2, immature, 23.8528, 0, 0, 0, 0
+2, 3, immature, 23.0665, 0, 0, 0, 0
+3, 1, immature, 21.8132, 0, 0, 0, 0
+3, 2, immature, 20.1721, 0, 0, 0, 0
+3, 3, immature, 18.2422, 0, 0, 0, 0
 *end
 
 [1996_timestep_one]
 report.type: partition
 year: 1996
 time_step: one
-row,column,category,age[1],age[2],age[3],age[4],age[5]
-1,1,immature,32.7197,0,0,0,0
-1,2,immature,34.5997,0,0,0,0
-1,3,immature,35.7792,0,0,0,0
-2,1,immature,36.1812,0,0,0,0
-2,2,immature,35.7792,0,0,0,0
-2,3,immature,34.5997,0,0,0,0
-3,1,immature,32.7197,0,0,0,0
-3,2,immature,30.2581,0,0,0,0
-3,3,immature,27.3633,0,0,0,0
+row, column, category, age[1], age[2], age[3], age[4], age[5]
+1, 1, immature, 32.7197, 0, 0, 0, 0
+1, 2, immature, 34.5997, 0, 0, 0, 0
+1, 3, immature, 35.7792, 0, 0, 0, 0
+2, 1, immature, 36.1812, 0, 0, 0, 0
+2, 2, immature, 35.7792, 0, 0, 0, 0
+2, 3, immature, 34.5997, 0, 0, 0, 0
+3, 1, immature, 32.7197, 0, 0, 0, 0
+3, 2, immature, 30.2581, 0, 0, 0, 0
+3, 3, immature, 27.3633, 0, 0, 0, 0
 *end
 
 [objective_score]

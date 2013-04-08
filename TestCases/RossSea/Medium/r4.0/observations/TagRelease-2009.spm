@@ -3,7 +3,7 @@
 type proportions_at_age
 year 2009
 time_step two
-categories immature-tag mature-tag spawning-tag postspawning-tag
+categories immature-tag + mature-tag + spawning-tag + postspawning-tag
 selectivities TagSel TagSel TagSel TagSel
 min_age 3
 max_age 30

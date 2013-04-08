@@ -6,7 +6,7 @@ data 881A
 type proportions_at_age
 year 1994
 time_step One
-categories immature mature
+categories immature + mature
 selectivities One One
 min_age 1
 max_age 5
@@ -22,7 +22,7 @@ delta 1e-11
 type proportions_at_age
 year 1995
 time_step One
-categories immature mature
+categories immature + mature
 selectivities One One
 min_age 1
 max_age 5

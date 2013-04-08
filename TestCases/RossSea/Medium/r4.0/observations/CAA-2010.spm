@@ -3,7 +3,7 @@
 type proportions_at_age
 year 2010
 time_step one
-categories immature mature spawning postspawning
+categories immature + mature + spawning + postspawning
 selectivities FishingSel FishingSel FishingSel FishingSel
 min_age 3
 max_age 30
