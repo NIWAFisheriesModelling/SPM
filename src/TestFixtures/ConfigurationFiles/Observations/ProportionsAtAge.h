@@ -37,6 +37,34 @@ const string proportions_at_age_observation =
   "likelihood multinomial\n"
   "delta 1e-11\n";
 
+const string proportions_at_age_observation_with_compound_categories =
+  "@observation proportions_at_age_observation_with_compound_categories\n"
+  "type proportions_at_age\n"
+  "year 2008\n"
+  "time_step step_one\n"
+  "categories immature mature + spawning\n"
+  "selectivities constant constant constant\n"
+  "min_age 5\n"
+  "max_age 7\n"
+  "tolerance 0.01\n"
+  "age_plus_group True\n"
+  "layer string_layer\n"
+  "obs AreaA 0.05 0.10 0.35 0.05 0.10 0.35 \n"
+  "obs AreaB 0.10 0.15 0.25 0.10 0.15 0.25 \n"
+  "obs AreaC 0.15 0.20 0.15 0.15 0.20 0.15 \n"
+  "obs AreaD 0.20 0.25 0.05 0.20 0.25 0.05 \n"
+  "obs AreaE 0.15 0.15 0.20 0.15 0.15 0.20 \n"
+  "obs AreaF 0.20 0.20 0.10 0.20 0.20 0.10 \n"
+  "error_value AreaA 1000\n"
+  "error_value AreaB 1200\n"
+  "error_value AreaC 1300\n"
+  "error_value AreaD 1400\n"
+  "error_value AreaE 1500\n"
+  "error_value AreaF 1600\n"
+  "likelihood multinomial\n"
+  "delta 1e-11\n"
+  "ageing_error normal\n";
+
 const string proportions_at_age_observation_with_normal =
   "@observation proportions_at_age_observation_with_normal\n"
   "type proportions_at_age\n"
