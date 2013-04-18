@@ -126,15 +126,15 @@ void CProcessReport::execute() {
 
           if (pEstimateManager->hasEstimate(estimableName)) {
             CEstimate *pEstimate = pEstimateManager->getEstimate(estimableName);
-            cout << pEstimate->getValue() << (i<(int)vValues.size()?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+            cout << pEstimate->getValue() << (i<(int)vValues.size()?CONFIG_SPACE_SEPERATOR:"");
           } else {
-            cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+            cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SPACE_SEPERATOR:"");
           }
         }
 
       } else {
         foreach(string Value, vValues) {
-          cout << Value << CONFIG_SEPERATOR_ESTIMATE_VALUES;
+          cout << Value << CONFIG_SPACE_SEPERATOR;
         }
       }
 
@@ -154,28 +154,28 @@ void CProcessReport::execute() {
       vector<int> vYCSYears = pRecruit->getYCSYears();
       cout << PARAM_YCS_YEARS << ": " ;
       for (int i=0; i < (int)vYCSYears.size(); ++i) {
-        cout << vYCSYears[i] << (i<((int)vYCSYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vYCSYears[i] << (i<((int)vYCSYears.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       }
       cout << "\n";
       //SSBs
       vector<double> vSSBValues = pRecruit->getSSBValues();
       cout << PARAM_SSB_VALUES << ": " ;
       for (int i=0; i < (int)vSSBValues.size(); ++i) {
-        cout << vSSBValues[i] << (i<((int)vSSBValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vSSBValues[i] << (i<((int)vSSBValues.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       }
       cout << "\n";
       //Recruitments
       vector<double> vRecruitmentValues = pRecruit->getRecruitmentValues();
       cout << PARAM_RECRUITMENT_VALUES << ": " ;
       for (int i=0; i < (int)vRecruitmentValues.size(); ++i) {
-        cout << vRecruitmentValues[i] << (i<((int)vRecruitmentValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vRecruitmentValues[i] << (i<((int)vRecruitmentValues.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       }
       cout << "\n";
       //True YCS
       vector<double> vTrueYCSValues = pRecruit->getTrueYCSValues();
       cout << PARAM_TRUE_YCS_VALUES << ": " ;
       for (int i=0; i < (int)vTrueYCSValues.size(); ++i) {
-        cout << vTrueYCSValues[i] << (i<((int)vTrueYCSValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vTrueYCSValues[i] << (i<((int)vTrueYCSValues.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       }
       cout << "\n";
     }
@@ -187,14 +187,14 @@ void CProcessReport::execute() {
       vector<int> vYCSYears = pLocalRecruit->getYCSYears();
       cout << PARAM_YCS_YEARS << ": " ;
       for (int i=0; i < (int)vYCSYears.size(); ++i) {
-        cout << vYCSYears[i] << (i<((int)vYCSYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+        cout << vYCSYears[i] << (i<((int)vYCSYears.size()-1)?CONFIG_SPACE_SEPERATOR:"\n");
       }
       //B0
       Data dB0 = pLocalRecruit->getB0Value();
       cout << PARAM_B0_VALUE << ":\n";
       for (int i = 0; i < (int)dB0.size(); ++i) {
         for (int j = 0; j < (int)dB0[i].size(); ++j) {
-          cout << dB0[i][j] << (j<((int)dB0[i].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+          cout << dB0[i][j] << (j<((int)dB0[i].size()-1)?CONFIG_SPACE_SEPERATOR:"\n");
         }
       }
       //SSBs
@@ -203,7 +203,7 @@ void CProcessReport::execute() {
         cout << PARAM_SSB_VALUES << " for " << PARAM_YEAR << "=" << vYCSYears[i]<< ":\n";
         for (int j = 0; j < (int)vSSBValues[i].size(); ++j) {
           for (int k = 0; k < (int)vSSBValues[i][j].size(); ++k) {
-            cout << vSSBValues[i][j][k] << (k<((int)vSSBValues[i][j].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+            cout << vSSBValues[i][j][k] << (k<((int)vSSBValues[i][j].size()-1)?CONFIG_SPACE_SEPERATOR:"\n");
           }
         }
       }
@@ -213,7 +213,7 @@ void CProcessReport::execute() {
         cout << PARAM_RECRUITMENT_VALUES << " for " << PARAM_YEAR << "=" << vYCSYears[i]<< ":\n";
         for (int j = 0; j < (int)vRecruitmentValues[i].size(); ++j) {
           for (int k = 0; k < (int)vRecruitmentValues[i][j].size(); ++k) {
-            cout << vRecruitmentValues[i][j][k] << (k<((int)vRecruitmentValues[i][j].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+            cout << vRecruitmentValues[i][j][k] << (k<((int)vRecruitmentValues[i][j].size()-1)?CONFIG_SPACE_SEPERATOR:"\n");
           }
         }
       }
@@ -223,7 +223,7 @@ void CProcessReport::execute() {
         cout << PARAM_TRUE_YCS_VALUES << " for " << PARAM_YEAR << "=" << vYCSYears[i]<< ":\n";
         for (int j = 0; j < (int)vTrueYCSValues[i].size(); ++j) {
           for (int k = 0; k < (int)vTrueYCSValues[i][j].size(); ++k) {
-            cout << vTrueYCSValues[i][j][k] << (k<((int)vTrueYCSValues[i][j].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"\n");
+            cout << vTrueYCSValues[i][j][k] << (k<((int)vTrueYCSValues[i][j].size()-1)?CONFIG_SPACE_SEPERATOR:"\n");
           }
         }
       }
@@ -239,21 +239,21 @@ void CProcessReport::execute() {
 
       cout << PARAM_YEARS << ": ";
       for (int i = 0; i < (int)vMortalityYears.size(); ++i)
-        cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       cout << "\n";
       cout << PARAM_PROPORTIONS << ": ";
       for (int i = 0; i < (int)vMortalityRate.size(); ++i)
-        cout << vMortalityRate[i] << (i<((int)vMortalityRate.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vMortalityRate[i] << (i<((int)vMortalityRate.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       cout << "\n";
       cout << PARAM_ABUNDANCE << ": ";
       for (int i = 0; i < (int)vMortalityN.size(); ++i)
-        cout << vMortalityN[i] << (i<((int)vMortalityN.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vMortalityN[i] << (i<((int)vMortalityN.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       cout << "\n";
       if(!(pHolling->isAbundance())) {
         vector<double> vMortalityBiomass = pHolling->getMortalityBiomass();
         cout << PARAM_BIOMASS << ": ";
         for (int i = 0; i < (int)vMortalityBiomass.size(); ++i)
-          cout << vMortalityBiomass[i] << (i<((int)vMortalityBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+          cout << vMortalityBiomass[i] << (i<((int)vMortalityBiomass.size()-1)?CONFIG_SPACE_SEPERATOR:"");
         cout << "\n";
       }
       if(pHolling->isAbundance()) {
@@ -262,7 +262,7 @@ void CProcessReport::execute() {
         cout << PARAM_PREDATOR_BIOMASS << ": ";
       }
       for (int i = 0; i < (int)vPredatorBiomass.size(); ++i)
-        cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       cout << "\n";
     }
 
@@ -277,23 +277,23 @@ void CProcessReport::execute() {
 
       cout << PARAM_YEARS << ": ";
       for (int i = 0; i < (int)vMortalityYears.size(); ++i)
-        cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vMortalityYears[i] << (i<((int)vMortalityYears.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       cout << "\n";
       for (int m = 0; m < (int)vMortalityRate.size(); ++m) {
         cout << PARAM_PREY_GROUP << "[" << vPreyGroups[m] << "]." << PARAM_PROPORTIONS << ": ";
         for (int i = 0; i < (int)vMortalityRate[m].size(); ++i)
-          cout << vMortalityRate[m][i] << (i<((int)vMortalityRate[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+          cout << vMortalityRate[m][i] << (i<((int)vMortalityRate[m].size()-1)?CONFIG_SPACE_SEPERATOR:"");
         cout << "\n";
 
         cout << PARAM_PREY_GROUP << "[" << vPreyGroups[m] << "]." << PARAM_ABUNDANCE << ": ";
         for (int i = 0; i < (int)vMortalityN[m].size(); ++i)
-          cout << vMortalityN[m][i] << (i<((int)vMortalityN[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+          cout << vMortalityN[m][i] << (i<((int)vMortalityN[m].size()-1)?CONFIG_SPACE_SEPERATOR:"");
         cout << "\n";
         if(!(pPreySwitchPredation->isAbundance())) {
           vector<vector<double> > vMortalityBiomass = pPreySwitchPredation->getMortalityBiomass();
           cout << PARAM_PREY_GROUP << "[" << vPreyGroups[m] << "]." << PARAM_BIOMASS << ": ";
           for (int i = 0; i < (int)vMortalityBiomass[m].size(); ++i)
-            cout << vMortalityBiomass[m][i] << (i<((int)vMortalityBiomass[m].size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+            cout << vMortalityBiomass[m][i] << (i<((int)vMortalityBiomass[m].size()-1)?CONFIG_SPACE_SEPERATOR:"");
           cout << "\n";
         }
       }
@@ -303,7 +303,7 @@ void CProcessReport::execute() {
         cout << PARAM_PREDATOR_BIOMASS << ": ";
       }
       for (int i = 0; i < (int)vPredatorBiomass.size(); ++i)
-        cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+        cout << vPredatorBiomass[i] << (i<((int)vPredatorBiomass.size()-1)?CONFIG_SPACE_SEPERATOR:"");
       cout << "\n";
     }
 

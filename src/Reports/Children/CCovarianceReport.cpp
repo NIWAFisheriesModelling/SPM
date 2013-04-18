@@ -57,12 +57,12 @@ void CCovarianceReport::execute() {
     cout << PARAM_PARAMETER << CONFIG_RATIO_SEPARATOR << " ";
     for(int i=0; i < (int)vEstimates.size(); ++i) {
       //foreach(CEstimate *Estimate, vEstimates) {
-      cout << vEstimates[i]->getParameter() << ( i<((int)vEstimates.size()-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");;
+      cout << vEstimates[i]->getParameter() << ( i<((int)vEstimates.size()-1) ? CONFIG_SPACE_SEPERATOR : "\n");;
     }
     cout << "Hessian:\n";
     for (int i = 0; i < iCount; ++i) {
         for (int j = 0; j < iCount; ++j) {
-          cout << pMinimizer->getHessianValue(i, j) << ( j<(iCount-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+          cout << pMinimizer->getHessianValue(i, j) << ( j<(iCount-1) ? CONFIG_SPACE_SEPERATOR : "\n");
         }
       }
 
@@ -72,13 +72,13 @@ void CCovarianceReport::execute() {
     } else {
       for (int i = 0; i < iCount; ++i) {
         for (int j = 0; j < iCount; ++j) {
-          cout << pMinimizer->getCovarianceValue(i, j) << ( j<(iCount-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+          cout << pMinimizer->getCovarianceValue(i, j) << ( j<(iCount-1) ? CONFIG_SPACE_SEPERATOR : "\n");
         }
       }
       cout << "Correlation:\n";
       for (int i = 0; i < iCount; ++i) {
         for (int j = 0; j < iCount; ++j) {
-          cout << pMinimizer->getCorrelationValue(i, j) << ( j<(iCount-1) ? CONFIG_SEPERATOR_ESTIMATE_VALUES : "\n");
+          cout << pMinimizer->getCorrelationValue(i, j) << ( j<(iCount-1) ? CONFIG_SPACE_SEPERATOR : "\n");
         }
       }
     }

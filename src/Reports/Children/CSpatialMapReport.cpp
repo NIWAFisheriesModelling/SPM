@@ -34,11 +34,11 @@ void CSpatialMapReport::execute() {
 
     // Print
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
-    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
+    cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << pParameterList->getString(PARAM_TYPE) << "\n";
 
     for (int i = 0; i < pWorld->getHeight(); ++i) {
       for (int j = 0; j < pWorld->getWidth(); ++j) {
-        cout << "r" << (i+1) << "-c" << (j+1) << " ";
+        cout << "r" << (i+1) << "-c" << (j+1) << CONFIG_SPACE_SEPARATOR;
       }
       cout << "\n";
     }

@@ -149,15 +149,15 @@ void CPreferenceFunctionReport::execute() {
 
           if (pEstimateManager->hasEstimate(estimableName)) {
             CEstimate *pEstimate = pEstimateManager->getEstimate(estimableName);
-            cout << pEstimate->getValue() << (i<(int)vValues.size()?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+            cout << pEstimate->getValue() << (i<(int)vValues.size()?CONFIG_SPACE_SEPERATOR:"");
           } else {
-            cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+            cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SPACE_SEPERATOR:"");
           }
         }
 
       } else {
         for (int i = 0; i < (int)vValues.size(); ++i) {
-          cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SEPERATOR_ESTIMATE_VALUES:"");
+          cout << vValues[i] << (i<((int)vValues.size()-1)?CONFIG_SPACE_SEPERATOR:"");
         }
       }
 
