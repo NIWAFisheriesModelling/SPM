@@ -12,9 +12,9 @@ function(file,path="",output.file,sample.size=1)
   colnames(rand)<-parbnds$parameter
   if(!missing(output.file)) {
     outfile <- spm.make.filename(file=output.file,path=path)
-    write.table(x=signif(rand,6), file=outfile, append=FALSE,quote=FALSE, sep=",",row.names=FALSE,col.names=TRUE)
+    write.table(x=signif(rand,6), file=outfile, append=FALSE,quote=FALSE, sep=" ",row.names=FALSE,col.names=TRUE)
   }
   invisible(list("header"=names(rand),"parameters"=parbnds$value,"bounds"=parbnds[,c("lower_bound","upper_bound")],"MVU"=rand))
 }
 
- 
+

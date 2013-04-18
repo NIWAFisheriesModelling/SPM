@@ -1,4 +1,4 @@
 "spm.unpaste"<-
-function(string, sep=",")  {
+function(string, sep=" ")  {
   return(unlist(strsplit(string, sep)))
 }

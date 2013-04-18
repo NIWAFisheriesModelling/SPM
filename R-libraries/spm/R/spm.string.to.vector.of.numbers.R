@@ -1,5 +1,5 @@
 "spm.string.to.vector.of.numbers"<-
-function(string,sep=",")
+function(string,sep=" ")
 {
   as.numeric(spm.string.to.vector.of.words(string,sep))
 }
