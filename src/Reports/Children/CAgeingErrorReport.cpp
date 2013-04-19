@@ -86,7 +86,7 @@ void CAgeingErrorReport::execute() {
 
     cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << iMinAge;
     for (int i = 1; i < iSpread; ++i)
-      cout << CONFIG_SPACE_SEPERATOR  << (i + iMinAge);
+      cout << CONFIG_SPACE_SEPARATOR  << (i + iMinAge);
     cout << "\n";
 
     vector<vector<double> > mMisMatrix = pAgeingError->getMisMatrix();
@@ -94,7 +94,7 @@ void CAgeingErrorReport::execute() {
     for (int i = 0; i < iSpread; ++i) {
       cout << i+1 << CONFIG_RATIO_SEPARATOR << " ";
       for (int j = 0; j < (iSpread - 1); ++j) {
-        cout << mMisMatrix[i][j] << CONFIG_SPACE_SEPERATOR;
+        cout << mMisMatrix[i][j] << CONFIG_SPACE_SEPARATOR;
       }
       cout << mMisMatrix[i][iSpread-1] << "\n";
     }

@@ -93,7 +93,7 @@ void CEstimateValueReport::execute() {
         cout << pEstimate->getParameter();
 
         if((i+1)<iCount)
-          cout << CONFIG_SPACE_SEPERATOR;
+          cout << CONFIG_SPACE_SEPARATOR;
       }
       cout << "\n";
  //   }
@@ -101,7 +101,7 @@ void CEstimateValueReport::execute() {
     for (int i = 0; i < iCount; ++i) {
       CEstimate *pEstimate = pEstimateManager->getEstimate(i);
       cout << pEstimate->getValue();
-      if((i+1)<iCount) cout << CONFIG_SPACE_SEPERATOR;
+      if((i+1)<iCount) cout << CONFIG_SPACE_SEPARATOR;
     }
     cout << endl;
 

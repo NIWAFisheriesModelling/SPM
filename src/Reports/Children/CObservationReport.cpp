@@ -100,17 +100,17 @@ void CObservationReport::execute() {
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
-      cout << Comparison->sKey << CONFIG_SPACE_SEPERATOR;
+      cout << Comparison->sKey << CONFIG_SPACE_SEPARATOR;
       if (pProportionsAtAge != 0) {
-        cout << Comparison->sGroup << CONFIG_SPACE_SEPERATOR;
-        cout << Comparison->iAge << CONFIG_SPACE_SEPERATOR;
+        cout << Comparison->sGroup << CONFIG_SPACE_SEPARATOR;
+        cout << Comparison->iAge << CONFIG_SPACE_SEPARATOR;
       } else if (pProportionsByCategory != 0) {
-        cout << Comparison->iAge << CONFIG_SPACE_SEPERATOR;
+        cout << Comparison->iAge << CONFIG_SPACE_SEPARATOR;
       }
-      cout << Comparison->dObservedValue << CONFIG_SPACE_SEPERATOR
-           << Comparison->dExpectedValue << CONFIG_SPACE_SEPERATOR
-           << dResidual << CONFIG_SPACE_SEPERATOR
-           << Comparison->dErrorValue << CONFIG_SPACE_SEPERATOR
+      cout << Comparison->dObservedValue << CONFIG_SPACE_SEPARATOR
+           << Comparison->dExpectedValue << CONFIG_SPACE_SEPARATOR
+           << dResidual << CONFIG_SPACE_SEPARATOR
+           << Comparison->dErrorValue << CONFIG_SPACE_SEPARATOR
            << Comparison->dScore << "\n";
     }
 

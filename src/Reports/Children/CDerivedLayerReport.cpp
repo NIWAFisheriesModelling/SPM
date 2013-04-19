@@ -96,7 +96,7 @@ void CDerivedLayerReport::execute() {
           cout << PARAM_YEAR << "=" << j+1 << "\n";
           for (int k = 0; k < pDerivedLayer->getHeight(); ++k) {
             for (int l = 0; l < pDerivedLayer->getWidth(); ++l) {
-              cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+              cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
             }
           }
         }
@@ -108,7 +108,7 @@ void CDerivedLayerReport::execute() {
       cout << PARAM_YEARS << CONFIG_RATIO_SEPARATOR << " " << PARAM_YEAR << "=" << i << "\n";
       for (int k = 0; k < pDerivedLayer->getHeight(); ++k) {
         for (int l = 0; l < pDerivedLayer->getWidth(); ++l) {
-          cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+          cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
     }

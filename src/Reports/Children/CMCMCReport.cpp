@@ -85,38 +85,38 @@ void CMCMCReport::execute() {
     cout << "Original " << PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxOriginalCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxOriginalCovariance.size2(); ++j) {
-        cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+        cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
       }
     }
     cout << "Proposal distribution " PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxCovariance.size1(); ++i) {
       for(int j=0; j < (int)mxCovariance.size2(); ++j) {
-        cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+        cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
       }
     }
     cout << "Cholesky decomposition " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
     for(int i=0; i < (int)mxCovarianceLT.size1(); ++i) {
       for(int j=0; j < (int)mxCovarianceLT.size2(); ++j) {
-        cout << mxCovarianceLT(i,j) << ((j<(int)mxCovarianceLT.size2()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+        cout << mxCovarianceLT(i,j) << ((j<(int)mxCovarianceLT.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
       }
     }
 
     cout << "MCMC objective function values:\n";
     cout << "iteration, score, penalty, prior, likelihood, acceptance_rate, acceptance_rate_since_adapt, step_size\n";
     for(int i=0; i<(int)vChain.size(); ++i) {
-      cout << vChain[i].iIteration << CONFIG_SPACE_SEPERATOR << vChain[i].dScore;
-      cout << CONFIG_SPACE_SEPERATOR << vChain[i].dPenalty << CONFIG_SPACE_SEPERATOR;
-      cout << vChain[i].dPrior << CONFIG_SPACE_SEPERATOR << vChain[i].dLikelihood;
-      cout << CONFIG_SPACE_SEPERATOR << vChain[i].dAcceptanceRate << CONFIG_SPACE_SEPERATOR;
-      cout << vChain[i].dAcceptanceRateSinceAdapt << CONFIG_SPACE_SEPERATOR << vChain[i].dStepSize << "\n";
+      cout << vChain[i].iIteration << CONFIG_SPACE_SEPARATOR << vChain[i].dScore;
+      cout << CONFIG_SPACE_SEPARATOR << vChain[i].dPenalty << CONFIG_SPACE_SEPARATOR;
+      cout << vChain[i].dPrior << CONFIG_SPACE_SEPARATOR << vChain[i].dLikelihood;
+      cout << CONFIG_SPACE_SEPARATOR << vChain[i].dAcceptanceRate << CONFIG_SPACE_SEPARATOR;
+      cout << vChain[i].dAcceptanceRateSinceAdapt << CONFIG_SPACE_SEPARATOR << vChain[i].dStepSize << "\n";
     }
     cout << "MCMC samples:\n";
     for (int i =0; i < (int)vEstimateNames.size(); ++i ) {
-      cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+      cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
     }
     for(int i=0; i<(int)vChain.size(); ++i) {
       for(int j=0; j < (int)vChain[i].vValues.size(); ++j) {
-        cout << vChain[i].vValues[j] << ((j<(int)vChain[i].vValues.size()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+        cout << vChain[i].vValues[j] << ((j<(int)vChain[i].vValues.size()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
       }
     }
 

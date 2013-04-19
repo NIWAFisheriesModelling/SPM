@@ -87,11 +87,11 @@ void CInitializationReport::execute() {
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_INITIALIZATION << "." << PARAM_INITIALIZATION_PHASE << CONFIG_RATIO_SEPARATOR << " " << sInitializationPhase << "\n";
 
-    cout << PARAM_ROW << CONFIG_SPACE_SEPERATOR;
-    cout << PARAM_COLUMN << CONFIG_SPACE_SEPERATOR,
+    cout << PARAM_ROW << CONFIG_SPACE_SEPARATOR;
+    cout << PARAM_COLUMN << CONFIG_SPACE_SEPARATOR,
     cout << PARAM_CATEGORY;
     for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {
-      cout << CONFIG_SPACE_SEPERATOR << PARAM_AGE;
+      cout << CONFIG_SPACE_SEPARATOR << PARAM_AGE;
       cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
     }
     cout << "\n";
@@ -112,9 +112,9 @@ void CInitializationReport::execute() {
 
         // Loop Through
         for (int k = 0; k < iSquareHeight; ++k) {
-          cout << i+1 << CONFIG_SPACE_SEPERATOR << j+1 << CONFIG_SPACE_SEPERATOR << pWorld->getCategoryNameForIndex(k);
+          cout << i+1 << CONFIG_SPACE_SEPARATOR << j+1 << CONFIG_SPACE_SEPARATOR << pWorld->getCategoryNameForIndex(k);
           for (int l = 0; l < iSquareWidth; ++l) {
-            cout << CONFIG_SPACE_SEPERATOR << pBaseSquare->getValue(k, l);
+            cout << CONFIG_SPACE_SEPARATOR << pBaseSquare->getValue(k, l);
           }
           cout << "\n";
         }

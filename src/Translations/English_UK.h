@@ -81,7 +81,7 @@
 #define CONFIG_RATIO_SEPARATOR              ":"
 #define CONFIG_SECTION_SYMBOL               "@"
 #define CONFIG_SINGLE_COMMENT               "#"
-#define CONFIG_SPACE_SEPERATOR              " "
+#define CONFIG_SPACE_SEPARATOR              " "
 #define CONFIG_TRUE                         "true"
 #define CONFIG_TRUE_SHORT                   "t"
 #define CONFIG_WILDCARD_MULTIPLE            "*"

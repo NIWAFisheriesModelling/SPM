@@ -84,14 +84,14 @@ void CMCMCSamplesReport::execute() {
       cout << PARAM_MCMC_SAMPLES << CONFIG_RATIO_SEPARATOR << "\n";
       vector<string> vEstimateNames = pMCMC->getEstimateNames();
       for (int i =0; i < (int)vEstimateNames.size(); ++i ) {
-        cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+        cout << vEstimateNames[i] << ((i<(int)vEstimateNames.size()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
       }
       bWrittenHeader = true;
     }
 
     //Print out the most recent set of numbers
     for(int j=0; j < (int)vChain.vValues.size(); ++j) {
-      cout << vChain.vValues[j] << ((j<(int)vChain.vValues.size()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+      cout << vChain.vValues[j] << ((j<(int)vChain.vValues.size()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
     }
 
     if( pMCMC->isLastItem() ) {

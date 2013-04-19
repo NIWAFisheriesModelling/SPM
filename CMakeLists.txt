@@ -285,6 +285,7 @@ src/Likelihoods/Children/CLogNormalLikelihood.Test.cpp
 src/Main
 src/Minimizers/Factory/CMinimizerFactory.Test.cpp
 src/Observations/Children/CAbundanceObservation.Test.cpp
+src/Observations/Children/CBiomassObservation.Test.cpp
 src/Observations/Children/CProportionsAtAgeObservation.Test.cpp
 src/Observations/Children/CProportionsByCategoryObservation.Test.cpp
 src/Observations/Factory/CObservationFactory.Test.cpp

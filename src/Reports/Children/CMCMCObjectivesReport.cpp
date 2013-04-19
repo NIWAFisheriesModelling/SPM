@@ -90,19 +90,19 @@ void CMCMCObjectivesReport::execute() {
       cout << "Original " << PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
       for(int i=0; i < (int)mxOriginalCovariance.size1(); ++i) {
         for(int j=0; j < (int)mxOriginalCovariance.size2(); ++j) {
-          cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+          cout << mxOriginalCovariance(i,j) << ((j<(int)mxOriginalCovariance.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
       cout << "Proposal distribution " PARAM_COVARIANCE << " " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
       for(int i=0; i < (int)mxCovariance.size1(); ++i) {
         for(int j=0; j < (int)mxCovariance.size2(); ++j) {
-          cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+          cout << mxCovariance(i,j) << ((j<(int)mxCovariance.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
       cout << "Cholesky decomposition " << PARAM_MATRIX << CONFIG_RATIO_SEPARATOR << endl;
       for(int i=0; i < (int)mxCovarianceLT.size1(); ++i) {
         for(int j=0; j < (int)mxCovarianceLT.size2(); ++j) {
-          cout << mxCovarianceLT(i,j) << ((j<(int)mxCovarianceLT.size2()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+          cout << mxCovarianceLT(i,j) << ((j<(int)mxCovarianceLT.size2()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
 
@@ -113,11 +113,11 @@ void CMCMCObjectivesReport::execute() {
     }
 
     //Print out the most recent set of numbers
-    cout << vChain.iIteration << CONFIG_SPACE_SEPERATOR << vChain.dScore;
-    cout << CONFIG_SPACE_SEPERATOR << vChain.dPenalty << CONFIG_SPACE_SEPERATOR;
-    cout << vChain.dPrior << CONFIG_SPACE_SEPERATOR << vChain.dLikelihood;
-    cout << CONFIG_SPACE_SEPERATOR << vChain.dAcceptanceRate << CONFIG_SPACE_SEPERATOR;
-    cout << vChain.dAcceptanceRateSinceAdapt << CONFIG_SPACE_SEPERATOR << vChain.dStepSize << "\n";
+    cout << vChain.iIteration << CONFIG_SPACE_SEPARATOR << vChain.dScore;
+    cout << CONFIG_SPACE_SEPARATOR << vChain.dPenalty << CONFIG_SPACE_SEPARATOR;
+    cout << vChain.dPrior << CONFIG_SPACE_SEPARATOR << vChain.dLikelihood;
+    cout << CONFIG_SPACE_SEPARATOR << vChain.dAcceptanceRate << CONFIG_SPACE_SEPARATOR;
+    cout << vChain.dAcceptanceRateSinceAdapt << CONFIG_SPACE_SEPARATOR << vChain.dStepSize << "\n";
 
     if( pMCMC->isLastItem() ) {
       cout << CONFIG_END_REPORT << "\n" << endl;

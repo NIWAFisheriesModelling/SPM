@@ -460,7 +460,7 @@ void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &para
     string  sLine         = line;
     int     iFirstSpace   = -1;
 
-    iFirstSpace = sLine.find_first_of(CONFIG_SPACE_SEPERATOR);
+    iFirstSpace = sLine.find_first_of(CONFIG_SPACE_SEPARATOR);
     if (iFirstSpace == -1) {
       parameters.push_back( sLine );
       return;
@@ -472,7 +472,7 @@ void CConfigurationLoader::splitLineIntoVector(string line, vector<string> &para
         parameters.push_back( sLine.substr(0, iFirstSpace));
 
       sLine = sLine.erase(0, iFirstSpace+1);
-      iFirstSpace = sLine.find_first_of(CONFIG_SPACE_SEPERATOR, 0);
+      iFirstSpace = sLine.find_first_of(CONFIG_SPACE_SEPARATOR, 0);
     }
     // If anything is remaining, add it to the list
     if (sLine.length() > 0)

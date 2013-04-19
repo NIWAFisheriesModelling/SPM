@@ -135,10 +135,10 @@ void CLayerDerivedWorldViewReport::execute() {
           cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << vYear[i] << "\n";
           cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 
-          cout << PARAM_AREA << CONFIG_SPACE_SEPERATOR;
+          cout << PARAM_AREA << CONFIG_SPACE_SEPARATOR;
           cout << PARAM_CATEGORY;
           for(int i = pWorld->getMinAge(); i < pWorld->getMaxAge()+1; i++) {
-            cout << CONFIG_SPACE_SEPERATOR << PARAM_AGE;
+            cout << CONFIG_SPACE_SEPARATOR << PARAM_AGE;
             cout << CONFIG_ARRAY_START << i << CONFIG_ARRAY_END;
           }
           cout << "\n";
@@ -152,9 +152,9 @@ void CLayerDerivedWorldViewReport::execute() {
 
             // Loop Through
             for (int i = 0; i < iSquareHeight; ++i) {
-              cout << (*mPtr).first << CONFIG_SPACE_SEPERATOR << pWorld->getCategoryNameForIndex(i);
+              cout << (*mPtr).first << CONFIG_SPACE_SEPARATOR << pWorld->getCategoryNameForIndex(i);
               for (int j = 0; j < iSquareWidth; ++j) {
-                cout << CONFIG_SPACE_SEPERATOR << pBaseSquare->getValue(i, j);
+                cout << CONFIG_SPACE_SEPARATOR << pBaseSquare->getValue(i, j);
               }
               cout << "\n";
             }

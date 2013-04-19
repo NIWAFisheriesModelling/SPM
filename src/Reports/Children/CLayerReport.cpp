@@ -137,13 +137,13 @@ void CLayerReport::execute() {
     if( sType==PARAM_DOUBLE ) {
       for (int i = 0; i < pNumericLayer->getHeight(); ++i) {
         for (int j = 0; j < pNumericLayer->getWidth(); ++j) {
-          cout << pNumericLayer->getValue(i, j) << (j<((int)pNumericLayer->getWidth()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+          cout << pNumericLayer->getValue(i, j) << (j<((int)pNumericLayer->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
     } else if( sType==PARAM_STRING ) {
       for (int i = 0; i < pCategoricalLayer->getHeight(); ++i) {
         for (int j = 0; j < pCategoricalLayer->getWidth(); ++j) {
-          cout << pCategoricalLayer->getValue(i, j) << (j<((int)pCategoricalLayer->getWidth()-1) ? CONFIG_SPACE_SEPERATOR : "\n");
+          cout << pCategoricalLayer->getValue(i, j) << (j<((int)pCategoricalLayer->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
     }

@@ -92,14 +92,14 @@ void CAgeWeightReport::execute() {
     // Output list of ages
     cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " ";
     for (int i = 0; i < ((int)vAgeList.size()-1); ++i) {
-      cout << vAgeList[i] << CONFIG_SPACE_SEPERATOR;
+      cout << vAgeList[i] << CONFIG_SPACE_SEPARATOR;
     }
     cout << vAgeList[vAgeList.size()-1] << "\n";
 
     // Output list of weights corrsponding to list of sizes
     cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << " ";
     for (int i = 0; i < ((int)vAgeList.size()-1); ++i) {
-      cout << pAgeSize->getMeanWeight(vAgeList[i]) << CONFIG_SPACE_SEPERATOR;
+      cout << pAgeSize->getMeanWeight(vAgeList[i]) << CONFIG_SPACE_SEPARATOR;
     }
     cout << pAgeSize->getMeanWeight(vAgeList[vAgeList.size()-1]) << "\n";
 
