@@ -1,0 +1,88 @@
+# CPUE (2007)
+@observation cpue-2007
+type biomass
+year 2007
+time_step one
+categories immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r11-c24 209.8251
+obs r11-c25 324.1109
+obs r12-c23 333.4895
+obs r12-c24 363.1959
+obs r12-c25 333.9678
+obs r13-c21 268.6123
+obs r13-c22 267.7333
+obs r13-c23 322.1435
+obs r13-c24 431.7417
+obs r13-c26 321.5098
+obs r13-c27 378.4834
+obs r14-c21 374.3523
+obs r14-c24 430.402
+obs r14-c26 333.8895
+obs r14-c27 418.6516
+obs r15-c24 462.2739
+obs r15-c25 316.8497
+obs r15-c26 331.6382
+obs r22-c27 1644.81
+obs r22-c28 2309.838
+obs r25-c20 179.8267
+obs r25-c23 598.4081
+obs r25-c24 131.8753
+obs r25-c25 771.9482
+obs r25-c26 849.786
+obs r25-c32 343.2932
+obs r26-c24 159.3871
+obs r26-c32 47.105
+obs r27-c18 165.7876
+obs r27-c20 128.9306
+obs r28-c19 188.7249
+obs r28-c21 117.4176
+obs r4-c22 474.1247
+obs r4-c23 378.5521
+obs r7-c19 421.7932
+obs r8-c19 347.2087
+error_value r11-c24 0.828986
+error_value r11-c25 0.5696072
+error_value r12-c23 0.6262165
+error_value r12-c24 0.5700285
+error_value r12-c25 0.7307966
+error_value r13-c21 0.3825923
+error_value r13-c22 0.8118635
+error_value r13-c23 0.7983881
+error_value r13-c24 0.7760966
+error_value r13-c26 0.6997524
+error_value r13-c27 0.677012
+error_value r14-c21 0.3454099
+error_value r14-c24 0.831566
+error_value r14-c26 0.726156
+error_value r14-c27 0.6898662
+error_value r15-c24 1.13357
+error_value r15-c25 0.7696273
+error_value r15-c26 0.797456
+error_value r22-c27 0.8092053
+error_value r22-c28 1.092316
+error_value r25-c20 0.6291799
+error_value r25-c23 1.285429
+error_value r25-c24 0.5996446
+error_value r25-c25 0.8892617
+error_value r25-c26 1.518195
+error_value r25-c32 1.198359
+error_value r26-c24 0.6183635
+error_value r26-c32 0.4279899
+error_value r27-c18 1.107452
+error_value r27-c20 0.567467
+error_value r28-c19 0.9793327
+error_value r28-c21 0.7819293
+error_value r4-c22 0.4628764
+error_value r4-c23 0.348826
+error_value r7-c19 0.6095774
+error_value r8-c19 0.7173609
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2007
+type observation
+observation cpue-2007

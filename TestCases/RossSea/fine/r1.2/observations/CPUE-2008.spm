@@ -1,0 +1,82 @@
+# CPUE (2008)
+@observation cpue-2008
+type biomass
+year 2008
+time_step one
+categories immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r12-c23 227.2161
+obs r12-c24 387.6727
+obs r12-c25 336.2997
+obs r13-c21 412.2167
+obs r13-c22 338.086
+obs r13-c23 314.9618
+obs r13-c24 498.1675
+obs r13-c26 384.3537
+obs r14-c21 437.9846
+obs r14-c24 276.5416
+obs r14-c27 546.2647
+obs r15-c24 416.4018
+obs r15-c25 283.6111
+obs r15-c26 808.3285
+obs r21-c28 543.7943
+obs r22-c28 668.5443
+obs r24-c27 572.4726
+obs r25-c24 308.8449
+obs r25-c25 144.6619
+obs r25-c26 177.2288
+obs r25-c32 78.37714
+obs r27-c18 110.4666
+obs r27-c22 212.3754
+obs r28-c19 97.77609
+obs r28-c21 46.5223
+obs r4-c22 154.0667
+obs r4-c25 197.7709
+obs r6-c29 313.0366
+obs r7-c19 340.5714
+obs r7-c20 270.914
+obs r7-c28 121.3611
+obs r8-c19 214.7453
+obs r8-c20 301.0102
+error_value r12-c23 0.862894
+error_value r12-c24 0.7311735
+error_value r12-c25 0.5580189
+error_value r13-c21 0.7834628
+error_value r13-c22 0.6373445
+error_value r13-c23 0.7143515
+error_value r13-c24 0.7790996
+error_value r13-c26 0.3912208
+error_value r14-c21 0.4753946
+error_value r14-c24 0.9070779
+error_value r14-c27 0.4753447
+error_value r15-c24 0.8560072
+error_value r15-c25 0.5371449
+error_value r15-c26 0.9992636
+error_value r21-c28 1.379884
+error_value r22-c28 1.55146
+error_value r24-c27 1.192847
+error_value r25-c24 1.003895
+error_value r25-c25 1.062955
+error_value r25-c26 1.449435
+error_value r25-c32 1.201887
+error_value r27-c18 0.7392432
+error_value r27-c22 0.8365003
+error_value r28-c19 0.675478
+error_value r28-c21 0.985774
+error_value r4-c22 0.5850612
+error_value r4-c25 0.3442754
+error_value r6-c29 0.5854369
+error_value r7-c19 0.6736041
+error_value r7-c20 0.5253109
+error_value r7-c28 1.208097
+error_value r8-c19 0.666694
+error_value r8-c20 0.8434226
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2008
+type observation
+observation cpue-2008

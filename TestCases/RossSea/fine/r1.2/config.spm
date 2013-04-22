@@ -1,0 +1,353 @@
+# Model Structure
+@model
+nrows 33
+ncols 50
+layer Base
+categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag
+min_age 2
+max_age 30
+age_plus_group True
+initialisation_phases Phase1 Phase2 Phase3
+initial_year 1995
+current_year 2011
+cell_length 65.63609
+time_steps zero one oneb two three
+age_size VB VB VB VB VB VB VB VB VB VB
+
+@age_size VB
+type von_bertalanffy
+size_weight basic
+k      0.091
+t0    -0.117
+linf   174.545
+
+@size_weight basic
+type basic
+a 1.051e-008
+b 3.036
+
+# Initialisation
+@initialisation_phase Phase1
+years 100
+time_steps phase1 phase2a phase3a
+
+@initialisation_phase Phase2
+years 100
+time_steps phase1 phase2b phase3b
+
+# only one year to test if initialisation has converged (compare with end phase2)
+@initialisation_phase Phase3
+years 1
+time_steps phase1 phase2b phase3b
+
+@time_step phase1
+processes Recruitment Maturation MatureToPreSpawn halfM halfM
+
+@time_step phase2a
+processes PreSpawnToSpawn
+
+@time_step phase2b
+processes MoveImmature MoveMature MovePreSpawning PreSpawnToSpawn
+
+@time_step phase3a
+processes SpawnToPostSpawn PostSpawnToMature Ageing
+
+@time_step phase3b
+processes SpawnToPostSpawn MovePostSpawning PostSpawnToMature Ageing
+
+# Annual Cycle
+@time_step zero # Summer
+processes Recruitment Maturation MatureToPreSpawn halfM
+
+@time_step one # End summer and fishing
+processes Fishing
+
+@time_step oneb #tagging
+processes  Tagging 
+
+@time_step two # Winter
+processes  halfM MoveImmature MoveMature MovePreSpawning PreSpawnToSpawn
+
+@time_step three # End winter and Ageing
+processes  SpawnToPostSpawn MovePostSpawning PostSpawnToMature Ageing
+
+# Derived layers
+@layer SSB_layer
+type biomass
+categories spawning spawning-tag
+selectivities One One
+
+# Derived quantities
+@derived_quantity SSB
+type biomass
+time_step two
+categories spawning spawning-tag
+selectivities One One
+layer Base
+initialisation_time_steps phase2a phase2b phase2b
+
+# Population processes
+@process Ageing
+type ageing
+categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag
+
+@process Recruitment
+type bh_recruitment
+categories immature
+proportions 1.0
+r0 1021124
+age 2
+ssb SSB
+b0 Phase3
+ssb_offset 3
+standardise_YCS_years 1995-2006
+#ycs_years 1995-2011
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+layer Recruitment
+
+@process halfM
+type constant_mortality_rate
+categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag
+M 0.065 0.065 0.065 0.065 0.065 0.065 0.065 0.065 0.065 0.065
+selectivities One One One One One One One One One One
+
+@process Fishing
+type biomass_event_mortality
+categories immature mature prespawning spawning immature-tag mature-tag prespawning-tag spawning-tag
+years  1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011
+layers Catch1998 Catch1999 Catch2000 Catch2001 Catch2002 Catch2003 Catch2004 Catch2005 Catch2006 Catch2007 Catch2008 Catch2009 Catch2010 Catch2011
+U_max 0.9
+selectivities FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel
+penalty event_mortality_penalty
+
+@process Tagging
+type category_transition
+from immature mature prespawning spawning
+selectivities TagSel TagSel TagSel TagSel
+to immature-tag mature-tag prespawning-tag spawning-tag
+years 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+layers TagRelease2001 TagRelease2002 TagRelease2003 TagRelease2004 TagRelease2005 TagRelease2006 TagRelease2007 TagRelease2008 TagRelease2009 TagRelease2010
+penalty tag_release_penalty
+
+@process Maturation
+type category_transition_rate
+from immature immature-tag
+to mature mature-tag
+proportions 1.0 1.0
+selectivities Maturation Maturation
+
+@process MatureToPreSpawn
+type category_transition_rate
+from mature mature-tag
+to prespawning prespawning-tag
+proportions 0.3 0.3
+selectivities One One
+
+@process PreSpawnToSpawn
+type category_transition_rate
+from prespawning prespawning-tag
+to spawning spawning-tag
+proportions 1.0 1.0
+selectivities One One
+
+@process SpawnToPostSpawn
+type category_transition_rate
+from spawning spawning-tag
+to postspawning postspawning-tag
+proportions 0.5 0.5
+selectivities One One
+
+@process PostSpawnToMature
+type category_transition_rate
+from postspawning postspawning-tag
+to mature mature-tag
+proportions 1.0 1.0
+selectivities One One
+
+# Movement processes
+@process MoveImmature
+type preference
+categories immature immature-tag
+preference_functions ImmatureDistance ImmatureDepth ImmatureTemperature
+
+@process MoveMature
+type preference
+categories mature mature-tag
+preference_functions MatureDistance MatureDepth MatureTemperature MatureHabitat MatureHills
+
+@process MovePreSpawning
+type preference
+categories prespawning prespawning-tag
+preference_functions PreSpawningDistance PreSpawningTemperature PreSpawningHills
+
+@process MovePostSpawning
+type preference
+categories postspawning postspawning-tag
+preference_functions PreSpawningDistance MatureDepth MatureTemperature MatureHabitat
+
+@preference_function ImmatureDistance
+type exponential
+alpha 1
+lambda 0.005
+layer Distance
+
+@preference_function ImmatureDepth
+type double_normal
+alpha 1
+layer Depth
+mu 875.389
+sigma_l 143.127
+sigma_r 1364.35
+
+@preference_function ImmatureTemperature
+type double_normal
+alpha 1
+layer Temperature
+mu -2
+sigma_l 0.5
+sigma_r 0.5
+
+@preference_function MatureDistance
+type exponential
+alpha 1
+lambda 0.005
+layer Distance
+
+@preference_function MatureDepth
+type double_normal
+alpha 1
+layer Depth
+mu 875.389
+sigma_l 143.127
+sigma_r 1364.35
+
+@preference_function MatureTemperature
+type double_normal
+alpha 1
+layer Temperature
+mu 0.5
+sigma_l 0.5
+sigma_r 0.5
+
+@preference_function MatureHabitat
+type constant
+alpha 1
+layer Habitat
+c 1
+
+@preference_function MatureHills
+type categorical
+alpha 1
+layer Hills
+category_labels   No Yes  
+category_values    1   0
+
+@preference_function PreSpawningDistance
+type double_normal
+alpha 1
+mu 344
+sigma_l 200
+sigma_r 200
+layer Distance
+
+@preference_function PreSpawningTemperature
+type double_normal
+alpha 1
+layer Temperature
+mu 3
+sigma_l 0.5
+sigma_r 0.5
+
+@preference_function PreSpawningHills
+type categorical
+alpha 1
+layer Hills
+category_labels   No Yes  
+category_values    0   1
+
+{
+@preference_function PostSpawningDistance
+type double_normal
+alpha 1
+mu 344
+sigma_l 200
+sigma_r 200
+layer Distance
+}
+
+# Definition of layers
+@include "../layers/Base.spm"
+@include "../layers/Cell.spm"
+@include "../layers/Constant.spm"
+@include "../layers/CPUE.spm"
+@include "../layers/Depth.spm"
+@include "../layers/TemperatureBottom.spm"
+@include "../layers/Recruitment.spm"
+#@include "../layers/SSRU.spm"
+@include "../layers/Habitat.spm"
+#@include "../layers/Zone.spm"
+@include "../layers/Hills.spm"
+@include "../layers/Fishing_1998.spm"
+@include "../layers/Fishing_1999.spm"
+@include "../layers/Fishing_2000.spm"
+@include "../layers/Fishing_2001.spm"
+@include "../layers/Fishing_2002.spm"
+@include "../layers/Fishing_2003.spm"
+@include "../layers/Fishing_2004.spm"
+@include "../layers/Fishing_2005.spm"
+@include "../layers/Fishing_2006.spm"
+@include "../layers/Fishing_2007.spm"
+@include "../layers/Fishing_2008.spm"
+@include "../layers/Fishing_2009.spm"
+@include "../layers/Fishing_2010.spm"
+@include "../layers/Fishing_2011.spm"
+@include "../layers/TagRelease_2001.spm"
+@include "../layers/TagRelease_2002.spm"
+@include "../layers/TagRelease_2003.spm"
+@include "../layers/TagRelease_2004.spm"
+@include "../layers/TagRelease_2005.spm"
+@include "../layers/TagRelease_2006.spm"
+@include "../layers/TagRelease_2007.spm"
+@include "../layers/TagRelease_2008.spm"
+@include "../layers/TagRelease_2009.spm"
+@include "../layers/TagRelease_2010.spm"
+
+@layer Distance
+type distance
+
+# Definition of selectivities
+@selectivity One
+type constant
+c 1
+
+@selectivity Maturation
+type logistic_producing
+L 5
+H 30
+a50 12.2
+ato95 2.8
+
+@selectivity FishingSel
+type logistic
+a50    5 #6.91642
+ato95  2 #2.70004
+
+@selectivity TagSel
+type double_normal
+mu 8
+sigma_l 3
+sigma_r 10
+
+# CATCHABILITY
+@catchability CPUEq
+q 1e-5
+
+# Estimation Section
+@include "estimation.spm"
+
+# Observation Section
+@include "observations.spm"
+
+# Report Section
+@include "report.spm"

@@ -1,0 +1,24 @@
+# Proportions recaptured (2011)
+@observation tag-recapture-2011
+type proportions_by_category
+year 2011
+time_step one
+categories immature-tag mature-tag spawning-tag postspawning-tag
+categories2 immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+selectivities2 FishingSel FishingSel FishingSel FishingSel
+min_age Inf
+max_age -Inf
+age_plus_group True
+layer Cell
+obs  
+obs  
+error_value  
+error_value  
+likelihood binomial
+delta 1e-11
+process_error 30
+
+@report tag-recapture-2011
+type observation
+observation tag-recapture-2011

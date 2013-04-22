@@ -1,0 +1,140 @@
+# CPUE (2004)
+@observation cpue-2004
+type biomass
+year 2004
+time_step one
+categories immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r11-c21 144.8805
+obs r11-c22 37.28881
+obs r11-c23 0.1111111
+obs r11-c24 299.4979
+obs r11-c25 218.4838
+obs r12-c21 218.032
+obs r12-c22 67.02036
+obs r12-c23 62.40273
+obs r12-c24 286.1894
+obs r12-c25 338.7115
+obs r12-c26 270.1019
+obs r13-c21 100.6137
+obs r13-c22 222.1234
+obs r13-c23 228.7022
+obs r13-c24 311.5116
+obs r13-c25 116.0099
+obs r13-c26 154.9804
+obs r13-c27 267.1816
+obs r13-c28 66.72104
+obs r14-c21 142.3986
+obs r14-c24 218.3478
+obs r14-c25 195.6151
+obs r14-c26 126.821
+obs r14-c27 147.1696
+obs r15-c25 138.1235
+obs r15-c26 99.69773
+obs r15-c27 104.5435
+obs r18-c26 320.3386
+obs r19-c16 65.45739
+obs r19-c17 31.66126
+obs r19-c18 25.95293
+obs r19-c21 68.42569
+obs r19-c22 182.2411
+obs r19-c26 140.3186
+obs r20-c15 105.4162
+obs r20-c17 36.61772
+obs r20-c25 70.71493
+obs r20-c26 46.20365
+obs r21-c16 124.1593
+obs r21-c20 67.95375
+obs r21-c28 184.9024
+obs r22-c27 111.8044
+obs r23-c29 932.2746
+obs r24-c27 95.16828
+obs r24-c28 88.40833
+obs r24-c29 251.7151
+obs r25-c20 134.3331
+obs r25-c24 157.8136
+obs r25-c26 148.901
+obs r25-c32 701.662
+obs r26-c24 130.4727
+obs r27-c18 37.7796
+obs r27-c19 47.57738
+obs r27-c20 80.95077
+obs r27-c22 98.53867
+obs r28-c19 54.63925
+obs r28-c21 49.0368
+obs r3-c32 109.5483
+obs r4-c25 115.8661
+obs r4-c26 92.41318
+obs r7-c26 2.046111
+obs r9-c26 1.25
+error_value r11-c21 0.7218849
+error_value r11-c22 1.013533
+error_value r11-c23 2.236068
+error_value r11-c24 0.9547749
+error_value r11-c25 0.8947945
+error_value r12-c21 0.479684
+error_value r12-c22 1.054512
+error_value r12-c23 1.651641
+error_value r12-c24 0.7593719
+error_value r12-c25 0.8453598
+error_value r12-c26 0.7474314
+error_value r13-c21 1.202477
+error_value r13-c22 1.045541
+error_value r13-c23 1.127139
+error_value r13-c24 0.9137145
+error_value r13-c25 0.571415
+error_value r13-c26 0.6680951
+error_value r13-c27 0.9413723
+error_value r13-c28 1.106885
+error_value r14-c21 0.7677204
+error_value r14-c24 0.8436619
+error_value r14-c25 1.143544
+error_value r14-c26 0.8747036
+error_value r14-c27 0.7642352
+error_value r15-c25 0.6517587
+error_value r15-c26 1.367216
+error_value r15-c27 0.584661
+error_value r18-c26 0.878163
+error_value r19-c16 0.5428671
+error_value r19-c17 0.8472448
+error_value r19-c18 0.7366195
+error_value r19-c21 1.010197
+error_value r19-c22 1.001455
+error_value r19-c26 0.739742
+error_value r20-c15 0.6240054
+error_value r20-c17 0.4452489
+error_value r20-c25 0.7608176
+error_value r20-c26 0.5927561
+error_value r21-c16 0.7194237
+error_value r21-c20 0.421784
+error_value r21-c28 0.6274818
+error_value r22-c27 1.024089
+error_value r23-c29 0.6493599
+error_value r24-c27 0.9386075
+error_value r24-c28 1.230186
+error_value r24-c29 0.9574255
+error_value r25-c20 1.003649
+error_value r25-c24 0.8687856
+error_value r25-c26 1.550817
+error_value r25-c32 1.053274
+error_value r26-c24 0.5825517
+error_value r27-c18 1.573542
+error_value r27-c19 0.9057113
+error_value r27-c20 0.8551245
+error_value r27-c22 0.7920816
+error_value r28-c19 0.5586921
+error_value r28-c21 1.114247
+error_value r3-c32 0.5736736
+error_value r4-c25 0.5230993
+error_value r4-c26 0.7634672
+error_value r7-c26 0.9970313
+error_value r9-c26 2.44949
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2004
+type observation
+observation cpue-2004

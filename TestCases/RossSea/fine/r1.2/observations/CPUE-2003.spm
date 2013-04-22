@@ -1,0 +1,86 @@
+# CPUE (2003)
+@observation cpue-2003
+type biomass
+year 2003
+time_step one
+categories immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r13-c22 31.66125
+obs r13-c23 570.6675
+obs r13-c24 464.103
+obs r13-c26 145.0667
+obs r14-c20 320.3725
+obs r14-c21 495.2505
+obs r14-c24 462.1402
+obs r14-c25 1097.007
+obs r14-c26 178.2395
+obs r14-c27 113.5338
+obs r15-c24 1065.927
+obs r15-c25 242.7743
+obs r15-c26 114.0054
+obs r15-c27 71.00073
+obs r19-c22 232.2934
+obs r19-c26 137.4614
+obs r20-c26 86.33436
+obs r21-c28 587.1478
+obs r21-c29 1171.049
+obs r22-c27 498.6088
+obs r22-c28 973.8931
+obs r22-c30 904.045
+obs r23-c28 478.8343
+obs r24-c26 214.0289
+obs r24-c27 308.4816
+obs r24-c28 514.5201
+obs r25-c20 249.9892
+obs r25-c24 533.4881
+obs r25-c26 326.1958
+obs r25-c32 1110.34
+obs r26-c32 304.2669
+obs r27-c20 58.71086
+obs r27-c22 212.1042
+obs r28-c21 39.47968
+obs r31-c13 0.3333333
+error_value r13-c22 1.923561
+error_value r13-c23 0.7903182
+error_value r13-c24 0.5533074
+error_value r13-c26 0.4030936
+error_value r14-c20 0.761979
+error_value r14-c21 0.3981804
+error_value r14-c24 0.4607575
+error_value r14-c25 0.8396103
+error_value r14-c26 0.7863367
+error_value r14-c27 1.049816
+error_value r15-c24 0.5832057
+error_value r15-c25 0.8064589
+error_value r15-c26 0.9639024
+error_value r15-c27 0.4470372
+error_value r19-c22 0.679047
+error_value r19-c26 1.485007
+error_value r20-c26 0.7036341
+error_value r21-c28 0.6476968
+error_value r21-c29 1.258957
+error_value r22-c27 0.8183774
+error_value r22-c28 1.179944
+error_value r22-c30 0.7001144
+error_value r23-c28 0.87471
+error_value r24-c26 0.9159301
+error_value r24-c27 1.020882
+error_value r24-c28 1.223553
+error_value r25-c20 0.7540232
+error_value r25-c24 0.854368
+error_value r25-c26 1.021888
+error_value r25-c32 0.9542946
+error_value r26-c32 1.446049
+error_value r27-c20 0.6836236
+error_value r27-c22 0.8171474
+error_value r28-c21 1.286266
+error_value r31-c13 2.44949
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2003
+type observation
+observation cpue-2003
