@@ -38,6 +38,7 @@ CNumericMetaLayer::CNumericMetaLayer() {
 
   bHasYears = true;
   bHasInitialisation = true;
+  bIsStatic = false;
 }
 
 //**********************************************************************

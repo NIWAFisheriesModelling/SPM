@@ -25,11 +25,13 @@ public:
   int                       getHeight() { return iHeight; }
   virtual void              validate();
   string                    getLayerType() { return sType; };
+  bool                      getIsStatic() { return bIsStatic; }
 
 protected:
   int                       iWidth;
   int                       iHeight;
   string                    sType;
+  bool                      bIsStatic;
 };
 
 #endif /*CLAYER_H_*/

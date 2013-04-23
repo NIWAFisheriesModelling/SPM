@@ -37,6 +37,7 @@ CStringMetaLayer::CStringMetaLayer() {
 
   bHasYears = true;
   bHasInitialisation = true;
+  bIsStatic = false;
 }
 
 //**********************************************************************
