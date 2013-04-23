@@ -64,6 +64,18 @@ void CPreferenceFunction::build() {
   }
 }
 
+
+//**********************************************************************
+// CPreferenceFunction::~CPreferenceFunction()
+// Destructor
+//**********************************************************************
+bool CPreferenceFunction::getIsStatic() {
+  if (pLayer == 0)
+    return true;
+
+  return pLayer->getIsStatic();
+}
+
 //**********************************************************************
 // CPreferenceFunction::~CPreferenceFunction()
 // Destructor

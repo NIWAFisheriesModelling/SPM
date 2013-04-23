@@ -29,6 +29,7 @@ public:
   virtual double             getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) = 0;
   virtual void               validate();
   void                       build();
+  bool                       getIsStatic();
 
 protected:
   // Variables
@@ -36,7 +37,6 @@ protected:
   string                     sLayerName;
   double                     dLayerValue;
   CNumericLayer              *pLayer;
-  bool                       bIsStaticLookup;
   double                     dRet;
 };
 
