@@ -53,6 +53,7 @@ CRuntimeThread::CRuntimeThread() {
 
   // Add our managers to the Vector
   vManagers.push_back(CWorld::Instance());
+  vManagers.push_back(CPreferenceFunctionManager::Instance());
   vManagers.push_back(CProcessManager::Instance());
   vManagers.push_back(CAgeingErrorManager::Instance());
   vManagers.push_back(CSizeWeightManager::Instance());
@@ -65,7 +66,6 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CMinimizerManager::Instance());
   vManagers.push_back(CObservationManager::Instance());
   vManagers.push_back(CPenaltyManager::Instance());
-  vManagers.push_back(CPreferenceFunctionManager::Instance());
   vManagers.push_back(CPriorManager::Instance());
   vManagers.push_back(CProfileManager::Instance());
   vManagers.push_back(CRandomNumberGenerator::Instance());
