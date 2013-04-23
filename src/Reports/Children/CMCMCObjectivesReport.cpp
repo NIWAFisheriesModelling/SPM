@@ -107,7 +107,10 @@ void CMCMCObjectivesReport::execute() {
       }
 
       cout << "MCMC objective function values:\n";
-      cout << "iteration, score, penalty, prior, likelihood, acceptance_rate, acceptance_rate_since_adapt, step_size\n";
+      cout << "iteration" << CONFIG_SPACE_SEPARATOR << "score" << CONFIG_SPACE_SEPARATOR
+           << "penalty" << CONFIG_SPACE_SEPARATOR << "prior" << CONFIG_SPACE_SEPARATOR
+           << "likelihood" << CONFIG_SPACE_SEPARATOR << "acceptance_rate" << CONFIG_SPACE_SEPARATOR
+           << "acceptance_rate_since_adapt" << CONFIG_SPACE_SEPARATOR << "step_size\n";
 
       bWrittenHeader = true;
     }
