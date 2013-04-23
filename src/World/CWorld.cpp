@@ -184,6 +184,10 @@ void CWorld::build() {
       CLayerManager *pLayerManager = CLayerManager::Instance();
       pBaseLayer = pLayerManager->getNumericLayer(getBaseLayer());
 
+      if(pBaseLayer->getLayerType()==PARAM_META_NUMERIC) {
+        throw string("The base layer (" + sBaseLayer + ") cannot be a meta-layer");
+      }
+
       // Set Enabled Square Count
       iEnabledSquareCount = iHeight * iWidth;
 
