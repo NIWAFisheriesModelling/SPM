@@ -92,11 +92,18 @@ void CObservationReport::execute() {
     pObservation->fillComparisons(vComparisons);
 
     if (pProportionsAtAge != 0)
-      cout << "area, category, age, observed, expected, residual, errorvalue, score\n";
+      cout << "area" << CONFIG_SPACE_SEPARATOR << "category" << CONFIG_SPACE_SEPARATOR
+           << "age"  << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
+           << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR
+           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "score\n";
     else if (pProportionsByCategory != 0)
-      cout << "area, age, observed, expected, residual, errorvalue, score\n";
+      cout << "area" << CONFIG_SPACE_SEPARATOR << "age" << CONFIG_SPACE_SEPARATOR
+           << "observed" << CONFIG_SPACE_SEPARATOR << "expected" << CONFIG_SPACE_SEPARATOR
+           << "residual" << CONFIG_SPACE_SEPARATOR << "errorvalue" << CONFIG_SPACE_SEPARATOR
+           << "score\n";
     else
-      cout << "area, observed, expected, residual, errorvalue, score\n";
+      cout << "area" << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
+           << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR << "errorvalue" << CONFIG_SPACE_SEPARATOR << "score\n";
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
