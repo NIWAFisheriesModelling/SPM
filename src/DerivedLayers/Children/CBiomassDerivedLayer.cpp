@@ -28,6 +28,9 @@ using std::endl;
 //**********************************************************************
 CBiomassDerivedLayer::CBiomassDerivedLayer() {
 
+  //Variables
+  pLayer = 0;
+
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -47,8 +50,7 @@ void CBiomassDerivedLayer::validate() {
 
     // Get our parameters
     sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer        = pParameterList->getString(PARAM_LAYER);
-
+    sLayer        = pParameterList->getString(PARAM_LAYER,true,"");
     pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
@@ -79,7 +81,8 @@ void CBiomassDerivedLayer::build() {
     pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+    if( sLayer != "" )
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
     // Get a vector of Initialisation indexes
     if (vInitializationTimeStepNames.size() > 0) {
@@ -144,7 +147,10 @@ void CBiomassDerivedLayer::calculate() {
         }
       }
 
-      newData[i][j] = dValue;
+      if ( sLayer != "")
+        newData[i][j] = dValue * pLayer->getValue(i,j);
+      else
+        newData[i][j] = dValue;
     }
   }
 
@@ -184,8 +190,10 @@ void CBiomassDerivedLayer::calculate(int initialisationPhase) {
         }
       }
 
-      newData[i][j] = dValue;
-
+      if ( sLayer != "")
+        newData[i][j] = dValue * pLayer->getValue(i,j);
+      else
+        newData[i][j] = dValue;
     }
   }
 

@@ -48,21 +48,21 @@ BOOST_FIXTURE_TEST_CASE( Biomass_Derived_Quantity, C1x1_Fixture ) {
 
   // Check Results
   BOOST_CHECK_EQUAL(15, pQuantity->getValuesSize());
-  BOOST_CHECK_EQUAL(pSquare->getAbundance(), pQuantity->getValue(0));
-  BOOST_CHECK_EQUAL(pQuantity->getValue(1), 1400.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(2), 1300.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(3), 1200.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(4), 1100.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(5), 1000.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(6), 900.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(7), 800.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(8), 700.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(9), 600.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(10), 500.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(11), 400.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(12), 300.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(13), 200.0);
-  BOOST_CHECK_EQUAL(pQuantity->getValue(14), 100.0);
+  BOOST_CHECK_EQUAL(pSquare->getAbundance() * 2, pQuantity->getValue(0));
+  BOOST_CHECK_EQUAL(pQuantity->getValue(1), 2800.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(2), 2600.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(3), 2400.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(4), 2200.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(5), 2000.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(6), 1800.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(7), 1600.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(8), 1400.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(9), 1200.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(10), 1000.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(11), 800.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(12), 600.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(13), 400.0);
+  BOOST_CHECK_EQUAL(pQuantity->getValue(14), 200.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(15), 0.0);
   BOOST_CHECK_EQUAL(pQuantity->getValue(16), 0.0); // Too Large, should return 0.0
   BOOST_CHECK_EQUAL(pQuantity->getValue(17), 0.0); // ""

@@ -29,6 +29,9 @@ using std::endl;
 //**********************************************************************
 CBiomassDerivedQuantity::CBiomassDerivedQuantity() {
 
+  //Variables
+  pLayer = 0;
+
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -50,8 +53,7 @@ void CBiomassDerivedQuantity::validate() {
 
     // Get our parameters
     sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer        = pParameterList->getString(PARAM_LAYER);
-
+    sLayer        = pParameterList->getString(PARAM_LAYER,true,"");
     pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
@@ -82,7 +84,8 @@ void CBiomassDerivedQuantity::build() {
     pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+    if( sLayer != "" )
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
 
     // Get a vector of Initialisation indexes
     if (vInitializationTimeStepNames.size() > 0) {
@@ -134,13 +137,22 @@ void CBiomassDerivedQuantity::calculate() {
 
   double dValue = 0.0;
 
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
+  for (int i = 0; i < iHeight; ++i) {
+    for (int j = 0; j < iWidth; ++j) {
 
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
-      dValue += dAbundance * pWorld->getMeanWeight(j,vCategories[i]);
+      pBaseSquare = pWorld->getBaseSquare(i, j);
+      double dTempValue = 0.0;
+
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          dTempValue += pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l) * pWorld->getMeanWeight(l,vCategories[k]);
+        }
+      }
+
+      if ( sLayer != "")
+        dValue = dTempValue * pLayer->getValue(i,j);
+      else
+        dValue = dTempValue;
     }
   }
 
@@ -166,16 +178,25 @@ void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
 
   double dValue = 0.0;
 
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
+  for (int i = 0; i < iHeight; ++i) {
+    for (int j = 0; j < iWidth; ++j) {
 
-  // Calcuate the derived quantity value
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      double dAbundance = pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
-      dValue += dAbundance * pWorld->getMeanWeight(j,vCategories[i]);
+      pBaseSquare = pWorld->getBaseSquare(i, j);
+      double dTempValue = 0.0;
+
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          dTempValue += pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l) * pWorld->getMeanWeight(l,vCategories[k]);
+        }
+      }
+
+      if ( sLayer != "")
+        dValue = dTempValue * pLayer->getValue(i,j);
+      else
+        dValue = dTempValue;
     }
   }
+
   // And add the value to our results
   vvInitialisationValues[initialisationPhase].push_back(dValue);
 }

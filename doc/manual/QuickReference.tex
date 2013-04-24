@@ -204,10 +204,20 @@
 \defSub{layers} {Define the layers for each of the years}
 \defSub{initialisation\_phases} {Define the initialisation phases that have a non-default layer}
 \defSub{initialisation\_layers} {Define the layers for each of the initialisation phases}
-\par\textbf{\commandlabsubarg{layer}{type}{derived}}\par
-\defSub{years} {Define the years when the calculation is performed}
-\defSub{time\_step} {Define the time-step at which the calculation is performed}
-\defSub{layers} {Define the layers to be used in the calculations}
+\par\defComLab{derived\_layer} {Define a derived layer with label}\par
+\defSub{type} {Define the type of derived layer}
+\par\textbf{\commandlabsubarg{derived\_layer}{type}{abundance}}\par
+\defSub{categories} {Define the categories are used to calculate the derived layer}
+\defSub{selectivities} {Define the selectivities}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defSub{layer} {Define the layer to be used in the calculations}
+\par\textbf{\commandlabsubarg{derived\_layer}{type}{biomass}}\par
+\defSub{categories} {Define the categories are used to calculate the derived layer}
+\defSub{selectivities} {Define the selectivities}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defSub{layer} {Define the layer to be used in the calculations}
 \par\defComLab{derived\_quantity} {Define a derived quantity with label}\par
 \defSub{type} {Define the type of derived quantity}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{abundance}}\par
@@ -215,13 +225,13 @@
 \defSub{selectivities} {Define the selectivities}
 \defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity is calculated}
 \defSub{time\_step} {Define the time-step at the end of which the derived quantity is calculated}
-\defSub{layer} {Name of the layer}
+\defSub{layer} {Define the layer to be used in the calculations}
 \par\textbf{\commandlabsubarg{derived\_quantity}{type}{biomass}}\par
 \defSub{categories} {Define the categories are used to calculate the derived quantity}
 \defSub{selectivities} {Define the selectivities}
 \defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity is calculated}
 \defSub{time\_step} {Define the time-step at the end of which the derived quantity is calculated}
-\defSub{layer} {Name of the layer}
+\defSub{layer} {Define the layer to be used in the calculations}
 \par\defComLab{age\_size} {Define an age-size relationship with label}\par
 \defSub{type} {Define the type of size-at-age relationship}
 \par\textbf{\commandlabsubarg{age\_size}{type}{von\_bertalanffy}}\par

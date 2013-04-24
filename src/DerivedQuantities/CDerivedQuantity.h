@@ -38,6 +38,8 @@ public:
 
 protected:
   // Members
+  int                         iHeight;
+  int                         iWidth;
   int                         iCurrentInitialisationPhase;
   vector<vector<double> >     vvInitialisationValues;
   vector<double>              vValues;

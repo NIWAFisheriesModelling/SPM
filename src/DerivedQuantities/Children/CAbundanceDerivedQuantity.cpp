@@ -1,9 +1,7 @@
 //============================================================================
-// Name        : CSampleDerivedQuantity.cpp
+// Name        : CBiomassDerivedQuantity.cpp
 // Author      : S.Rasmussen
-// Date        : 18/06/2012
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
-// $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
 // Headers
@@ -29,6 +27,9 @@ using std::endl;
 //**********************************************************************
 CAbundanceDerivedQuantity::CAbundanceDerivedQuantity() {
 
+  //Variables
+  pLayer = 0;
+
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -50,8 +51,7 @@ void CAbundanceDerivedQuantity::validate() {
 
     // Get our parameters
     sTimeStep     = pParameterList->getString(PARAM_TIME_STEP);
-    sLayer        = pParameterList->getString(PARAM_LAYER);
-
+    sLayer        = pParameterList->getString(PARAM_LAYER,true,"");
     pParameterList->fillVector(vInitializationTimeStepNames, PARAM_INITIALIZATION_TIME_STEPS,true);
     pParameterList->fillVector(vCategoryNames, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityNames, PARAM_SELECTIVITIES);
@@ -82,7 +82,11 @@ void CAbundanceDerivedQuantity::build() {
     pTimeStepManager = CTimeStepManager::Instance();
     iTimeStep = pTimeStepManager->getTimeStepOrderIndex(sTimeStep);
 
-    pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+    if( sLayer != "" )
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
+    iHeight = pWorld->getHeight();
+    iWidth  = pWorld->getWidth();
 
     // Get a vector of Initialisation indexes
     if (vInitializationTimeStepNames.size() > 0) {
@@ -134,12 +138,22 @@ void CAbundanceDerivedQuantity::calculate() {
 
   double dValue = 0.0;
 
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
+  for (int i = 0; i < iHeight; ++i) {
+    for (int j = 0; j < iWidth; ++j) {
 
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      pBaseSquare = pWorld->getBaseSquare(i, j);
+      double dTempValue = 0.0;
+
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          dTempValue += pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
+        }
+      }
+
+      if ( sLayer != "")
+        dValue = dTempValue * pLayer->getValue(i,j);
+      else
+        dValue = dTempValue;
     }
   }
 
@@ -165,15 +179,25 @@ void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
 
   double dValue = 0.0;
 
-  pWorldView->execute();
-  pBaseSquare = pWorldView->getSquare();
+  for (int i = 0; i < iHeight; ++i) {
+    for (int j = 0; j < iWidth; ++j) {
 
-  // Calcuate the derived quantity value
-  for (int i = 0; i < (int)vCategories.size(); ++i) {
-    for (int j = 0; j < pBaseSquare->getWidth(); ++j) {
-      dValue += pBaseSquare->getValue(vCategories[i], j) * vSelectivities[i]->getResult(j);
+      pBaseSquare = pWorld->getBaseSquare(i, j);
+      double dTempValue = 0.0;
+
+      for (int k = 0; k < (int)vCategories.size(); ++k) {
+        for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+          dTempValue += pBaseSquare->getValue(vCategories[k], l) * vSelectivities[k]->getResult(l);
+        }
+      }
+
+      if ( sLayer != "")
+        dValue = dTempValue * pLayer->getValue(i,j);
+      else
+        dValue = dTempValue;
     }
   }
+
   // And add the value to our results
   vvInitialisationValues[initialisationPhase].push_back(dValue);
 }

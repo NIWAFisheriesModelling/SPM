@@ -870,7 +870,6 @@ The available layer types  are,
 	\item Biomass density
 	\item Numeric meta-layer
 	\item Categorical meta-layer
-	\item Derived layer
 \end{itemize}
 
 \defComLab{layer} {Define a layer function with label}
@@ -1000,63 +999,75 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defCondition{The arguments must be categorical layers}
 
-\subsubsection[Derived-layer]{\commandlabsubarg{layer}{type}{derived}}
+\subsection{\I{Derived layers}}
 
-\defSub{years} {Define the years when the calculation is performed}
-\defType{Integer vector or integer range}
-\defDefault{If not specified, calculation is carried out at every model year}
-\defValue{Must be valid model years once expanded, including initialisation steps}
+The individual types of derived layers available are,
 
-\defSub{time\_step} {Define the time-step at which the calculation is performed}
+\begin{itemize}
+	\item Abundance
+	\item Biomass
+\end{itemize}
+
+\defComLab{derived\_layer} {Define a derived layer with label}
+
+\defSub{type} {Define the type of derived layer}
 \defType{String}
 \defDefault{No default}
-\defValue{Valid label from \command{time\_step}}
+\defValue{A valid type of derived layer, either \texttt{abundance} or \texttt{biomass}}
 
-\defSub{layers} {Define the layers to be used in the calculations}
+\subsubsection[Abundance]{\commandlabsubarg{derived\_layer}{type}{abundance}}
+
+\defSub{categories} {Define the categories are used to calculate the derived layer}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Valid layers or meta-layers}
+\defValue{Valid categories from \commandsub{model}{categories}}
 
-%\defSub{parameters} {Define the user-defined parameters within the function}
-%\defType{String vector}
-%\defDefault{No default}
-%\defValue{Unique names of user-defined parameters}
-%
-%\defSub{parameter\_values} {Define the initial values of the user-defined parameters within the function}
-%\defType{Vector of individually estimable values, of length \subcommand{parameters}}
-%\defDefault{No default}
-%
-%\defSub{formula} {Define the calculation to be applied}
-%\defType{String}
-%\defDefault{No default}
-%\defCondition{All parameters and layers used have to be defined above}
-%
-%\subsubsection[Derived-meta-layer]{\commandlabsubarg{layer}{type}{derived\_meta}}
-%
-%\defSub{time\_step} {Define the time-step at which the calculation is performed}
-%\defType{String}
-%\defDefault{No default}
-%\defValue{Valid label from \command{time\_step}}
-%
-%\defSub{layers} {Define the layers to be used in the calculations}
-%\defType{String vector}
-%\defDefault{No default}
-%\defValue{Valid layers as defined by \command{layer} or valid meta-layers as defined by command \commandlabsubarg{layer}{type}{meta\_layer}, in which case the appropriate years will be extracted}
-%
-%\defSub{parameters} {Define the user-defined parameters within the function}
-%\defType{String vector}
-%\defDefault{No default}
-%\defValue{Unique names of user-defined parameters}
-%
-%\defSub{parameter\_values} {Define the initial values of the user-defined parameters within the function}
-%\defType{Vector of individually estimable values, of length \subcommand{parameters}}
-%\defDefault{No default}
-%
-%\defSub{formula} {Define the calculation to be applied}
-%\defType{String}
-%\defDefault{No default}
-%\defCondition{All parameters and layers used have to be defined above}
-%\end{comment}
+\defSub{selectivities} {Define the selectivities}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{Valid selectivity labels from \command{selectivity}}
+
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid time-step label from \command{time\_step}}
+
+\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid time-step label from \command{time\_step}}
+
+\defSub{layer} {Define the layer to be used in the calculations}
+\defType{String}
+\defDefault{None}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived layer is the sum of the each cell is multiplied by the value of this layer.}
+
+\subsubsection[Biomass]{\commandlabsubarg{derived\_layer}{type}{biomass}}
+
+\defSub{categories} {Define the categories are used to calculate the derived layer}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{selectivities} {Define the selectivities}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{Valid selectivity labels from \command{selectivity}}
+
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid time-step label from \command{time\_step}}
+
+\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid time-step label from \command{time\_step}}
+
+\defSub{layer} {Define the layer to be used in the calculations}
+\defType{String}
+\defDefault{None}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived layer is the sum of the each cell is multiplied by the value of this layer.}
 
 \subsection{\I{Derived quantities}}
 
@@ -1096,10 +1107,10 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{A valid time-step label from \command{time\_step}}
 
-\defSub{layer} {Name of the layer}
+\defSub{layer} {Define the layer to be used in the calculations}
 \defType{String}
-\defDefault{No default}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell is multiplied by the value of the layer.}
+\defDefault{None}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived quantity is the sum of the each cell is multiplied by the value of this layer.}
 
 \subsubsection[Biomass]{\commandlabsubarg{derived\_quantity}{type}{biomass}}
 
@@ -1123,10 +1134,10 @@ The individual types of derived quantities available are,
 \defDefault{No default}
 \defValue{A valid time-step label from \command{time\_step}}
 
-\defSub{layer} {Name of the layer}
+\defSub{layer} {Define the layer to be used in the calculations}
 \defType{String}
-\defDefault{No default}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then value is the sum of the each cell biomass multiplied by the value of the layer.}
+\defDefault{None}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived layer is the sum of the each cell is multiplied by the value of this layer.}
 
 \subsection{\I{Age-size relationship}}
 
