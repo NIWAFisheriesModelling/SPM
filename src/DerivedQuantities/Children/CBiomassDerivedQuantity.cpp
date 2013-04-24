@@ -17,7 +17,6 @@
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../TimeSteps/CTimeStepManager.h"
-#include "../../World/WorldView/CCompleteWorldView.h"
 
 // Using
 using std::cout;
@@ -31,6 +30,8 @@ CBiomassDerivedQuantity::CBiomassDerivedQuantity() {
 
   //Variables
   pLayer = 0;
+  iHeight = 0;
+  iWidth = 0;
 
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
@@ -38,8 +39,6 @@ CBiomassDerivedQuantity::CBiomassDerivedQuantity() {
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_INITIALIZATION_TIME_STEPS);
-  // Build World View
-  pWorldView = new CCompleteWorldView();
 }
 
 //**********************************************************************
@@ -66,8 +65,6 @@ void CBiomassDerivedQuantity::validate() {
     if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
       CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
 
-    pWorldView->validate();
-
   } catch (string &Ex) {
     Ex = "CBiomassDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -86,6 +83,9 @@ void CBiomassDerivedQuantity::build() {
 
     if( sLayer != "" )
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
+    iHeight = pWorld->getHeight();
+    iWidth  = pWorld->getWidth();
 
     // Get a vector of Initialisation indexes
     if (vInitializationTimeStepNames.size() > 0) {
@@ -116,8 +116,6 @@ void CBiomassDerivedQuantity::build() {
     // Get our Selectivitys and Categories
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
-
-    pWorldView->build();
 
   } catch (string &Ex) {
     Ex = "CBiomassDerivedQuantity.build(" + getLabel() + ")->" + Ex;
@@ -150,9 +148,9 @@ void CBiomassDerivedQuantity::calculate() {
       }
 
       if ( sLayer != "")
-        dValue = dTempValue * pLayer->getValue(i,j);
+        dValue += dTempValue * pLayer->getValue(i,j);
       else
-        dValue = dTempValue;
+        dValue += dTempValue;
     }
   }
 
@@ -191,9 +189,9 @@ void CBiomassDerivedQuantity::calculate(int initialisationPhase) {
       }
 
       if ( sLayer != "")
-        dValue = dTempValue * pLayer->getValue(i,j);
+        dValue += dTempValue * pLayer->getValue(i,j);
       else
-        dValue = dTempValue;
+        dValue += dTempValue;
     }
   }
 

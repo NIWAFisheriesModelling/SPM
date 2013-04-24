@@ -16,7 +16,6 @@
 class CNumericLayer;
 class CSelectivity;
 class CTimeStepManager;
-class CCompleteWorldView;
 
 //**********************************************************************
 //
@@ -45,7 +44,6 @@ protected:
   CNumericLayer               *pLayer;
   vector<string>              vSelectivityNames;
   vector<CSelectivity*>       vSelectivities;
-  CCompleteWorldView          *pWorldView;
 };
 
 #endif /* CABUNDANCEDERIVEDQUANTITY_H_ */

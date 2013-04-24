@@ -29,6 +29,8 @@ CAbundanceDerivedLayer::CAbundanceDerivedLayer() {
 
   //Variables
   pLayer = 0;
+  iHeight = 0;
+  iWidth = 0;
 
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
@@ -82,6 +84,9 @@ void CAbundanceDerivedLayer::build() {
 
     if( sLayer != "" )
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayer);
+
+    iHeight = pWorld->getHeight();
+    iWidth  = pWorld->getWidth();
 
     // Get a vector of Initialisation indexes
     if (vInitializationTimeStepNames.size() > 0) {

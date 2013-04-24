@@ -15,7 +15,6 @@
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
 #include "../../TimeSteps/CTimeStepManager.h"
-#include "../../World/WorldView/CCompleteWorldView.h"
 
 // Using
 using std::cout;
@@ -29,6 +28,8 @@ CAbundanceDerivedQuantity::CAbundanceDerivedQuantity() {
 
   //Variables
   pLayer = 0;
+  iHeight = 0;
+  iWidth = 0;
 
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_TIME_STEP);
@@ -36,8 +37,6 @@ CAbundanceDerivedQuantity::CAbundanceDerivedQuantity() {
   pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
   pParameterList->registerAllowed(PARAM_INITIALIZATION_TIME_STEPS);
-  // Build World View
-  pWorldView = new CCompleteWorldView();
 }
 
 //**********************************************************************
@@ -63,8 +62,6 @@ void CAbundanceDerivedQuantity::validate() {
     int initialisationPhaseCount = CInitializationPhaseManager::Instance()->getNumberInitializationPhases();
     if (vInitializationTimeStepNames.size() != 0 && (int)vInitializationTimeStepNames.size() != initialisationPhaseCount)
       CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
-
-    pWorldView->validate();
 
   } catch (string &Ex) {
     Ex = "CAbundanceDerivedQuantity.validate(" + getLabel() + ")->" + Ex;
@@ -118,8 +115,6 @@ void CAbundanceDerivedQuantity::build() {
     CSelectivityManager::Instance()->fillVector(vSelectivities, vSelectivityNames);
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
-    pWorldView->build();
-
   } catch (string &Ex) {
     Ex = "CAbundanceDerivedQuantity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -151,9 +146,9 @@ void CAbundanceDerivedQuantity::calculate() {
       }
 
       if ( sLayer != "")
-        dValue = dTempValue * pLayer->getValue(i,j);
+        dValue += dTempValue * pLayer->getValue(i,j);
       else
-        dValue = dTempValue;
+        dValue += dTempValue;
     }
   }
 
@@ -192,9 +187,9 @@ void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
       }
 
       if ( sLayer != "")
-        dValue = dTempValue * pLayer->getValue(i,j);
+        dValue += dTempValue * pLayer->getValue(i,j);
       else
-        dValue = dTempValue;
+        dValue += dTempValue;
     }
   }
 
