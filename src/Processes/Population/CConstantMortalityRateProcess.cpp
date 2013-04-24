@@ -24,6 +24,7 @@ CConstantMortalityRateProcess::CConstantMortalityRateProcess() {
   pGrid            = 0;
   pLayer           = 0;
   sType = PARAM_CONSTANT_MORTALITY_RATE;
+  bRequiresMerge   = false;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -161,7 +162,8 @@ void CConstantMortalityRateProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        pDiff       = pWorld->getDifferenceSquare(i, j);
+        // pDiff       = pWorld->getDifferenceSquare(i, j);
+        pDiff       = pWorld->getBaseSquare(i, j);
 
         // Loop Through Categories and Ages
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {

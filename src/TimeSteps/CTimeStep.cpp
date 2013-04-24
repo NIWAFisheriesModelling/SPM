@@ -74,7 +74,8 @@ void CTimeStep::execute() {
     // Loop Through and Execute
     foreach(CProcess* Process, vProcesses) {
       Process->execute();
-      pWorld->mergeDifferenceGrid();
+      if (Process->getRequiresMerge())
+        pWorld->mergeDifferenceGrid();
     }
 
 #ifndef OPTIMIZE

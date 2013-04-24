@@ -33,6 +33,7 @@ public:
   virtual void               build();
   virtual void               execute();
   string                     getProcessType() { return sType; };
+  bool                       getRequiresMerge() { return bRequiresMerge; }
 
 protected:
   // Variables
@@ -46,6 +47,7 @@ protected:
   double                     dCurrent;
   double                     dSelectivityResult;
   string                     sType;
+  bool                       bRequiresMerge;
 };
 
 #endif /*CPROCESS_H_*/

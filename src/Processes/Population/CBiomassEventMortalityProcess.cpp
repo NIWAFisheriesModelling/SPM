@@ -38,6 +38,7 @@ CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   pTimeStepManager = CTimeStepManager::Instance();
   pWorldSquare     = 0;
   sType = PARAM_BIOMASS_EVENT_MORTALITY;
+  bRequiresMerge = false;
 
   // Register estimable parameters
   registerEstimable(PARAM_U_MAX, &dUMax);
@@ -174,7 +175,8 @@ void CBiomassEventMortalityProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        pDiff       = pWorld->getDifferenceSquare(i, j);
+        pDiff = pWorld->getBaseSquare(i, j);
+//        pDiff       = pWorld->getDifferenceSquare(i, j);
 
         // Clear our Square Out
         pWorldSquare->zeroGrid();

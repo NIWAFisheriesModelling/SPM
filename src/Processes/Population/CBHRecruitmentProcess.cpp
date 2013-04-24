@@ -40,6 +40,7 @@ CBHRecruitmentProcess::CBHRecruitmentProcess() {
   // Default Vars
   pLayer          = 0;
   sType = PARAM_BH_RECRUITMENT;
+  bRequiresMerge = false;
 
   // Register allowed estimables
   registerEstimable(PARAM_R0, &dR0);
@@ -314,7 +315,8 @@ void CBHRecruitmentProcess::execute() {
         if (pLayer != 0)
           value *= pLayer->getValue(i, j);
 
-        pDiff = pWorld->getDifferenceSquare(i, j);
+//        pDiff = pWorld->getDifferenceSquare(i, j);
+        pDiff = pWorld->getBaseSquare(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
         for (int k = 0; k < getCategoryCount(); ++k)

@@ -27,6 +27,7 @@ CCategoryTransitionRateProcess::CCategoryTransitionRateProcess() {
   // Variables
   pLayer = 0;
   sType = PARAM_CATEGORY_TRANSITION_RATE;
+  bRequiresMerge = false;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_FROM);
@@ -129,7 +130,7 @@ void CCategoryTransitionRateProcess::execute() {
         if (!pBaseSquare->getEnabled())
           continue;
 
-        pDiff = pWorld->getDifferenceSquare(i, j);
+//        pDiff = pWorld->getDifferenceSquare(i, j);
 
         for (int l = 0; l < iBaseColCount; ++l) {
           // Loop through vectors and make adjustment
