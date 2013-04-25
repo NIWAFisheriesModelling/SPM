@@ -50,6 +50,10 @@ void CInitializationPhase::validate() {
     iYears  = pParameterList->getInt(PARAM_YEARS);
     pParameterList->fillVector(vTimeStepNames, PARAM_TIME_STEPS);
 
+    // Validate
+    if(iYears < 1)
+      CError::errorLessThan(PARAM_YEARS, PARAM_ONE);
+
   } catch(string &Ex) {
     Ex = "CInitializationPhase.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -94,13 +98,14 @@ void CInitializationPhase::execute() {
   CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
 
   // Loop Through and Execute
-  for (int i = 0; i < iYears; i++) {
+  for (int i = 0; i < iYears; ++i) {
     for (int j = 0; j < (int)vTimeSteps.size(); ++j) {
       iCurrentTimeStep = j;
 
       vTimeSteps[j]->execute();
       pDerivedLayerManager->calculate(iExecutionOrderIndex);
       pDerivedQuantityManager->calculate(iExecutionOrderIndex);
+
     }
   }
 }
