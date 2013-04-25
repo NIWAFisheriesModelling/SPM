@@ -89,15 +89,15 @@ void CSizeWeightReport::execute() {
     // Output Header
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << PARAM_SIZE_WEIGHT << "." << PARAM_LABEL << CONFIG_SPACE_SEPARATOR << " " << sSizeWeight << "\n";
+    cout << PARAM_SIZE_WEIGHT << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << sSizeWeight << "\n";
 
-    cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR << " ";
+    cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR;
     for (int i = 0; i < ((int)vSizeList.size()-1); ++i) {
       cout << vSizeList[i] << CONFIG_SPACE_SEPARATOR;
     }
     cout << vSizeList[vSizeList.size()-1] << "\n";
 
-    cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << " ";
+    cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR;
     for (int i = 0; i < ((int)vSizeList.size()-1); ++i) {
       cout << pSizeWeight->getMeanWeight(vSizeList[i]) << CONFIG_SPACE_SEPARATOR;
     }
