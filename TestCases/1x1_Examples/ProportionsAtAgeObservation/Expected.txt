@@ -1,35 +1,35 @@
 SPM (Spatial Population Model)
 Call: spm -r -q 
-Date: Mon Apr 08 09:53:57 2013
-v1.1-2013-04-03 (rev. 4899). Copyright (c) 2008-2013, NIWA
+Date: Thu Apr 25 18:15:32 2013
+v1.1-2013-04-25 (rev. 4924). Copyright (c) 2008-2013, NIWA
 User name: dunn
-Machine name: NIWA-34253 (Windows_NT, PID=7512)
+Machine name: NIWA-34253 (Windows_NT, PID=6304)
 
 [1994_TimeStep_One]
 report.type: partition
 year: 1994
 time_step: One
-row, column, category, age[1], age[2], age[3], age[4], age[5]
-1, 1, immature, 100, 0, 0, 0, 0
-1, 1, mature, 0, 0, 0, 0, 0
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 100 0 0 0 0
+1 1 mature 0 0 0 0 0
 *end
 
 [1995_TimeStep_One]
 report.type: partition
 year: 1995
 time_step: One
-row, column, category, age[1], age[2], age[3], age[4], age[5]
-1, 1, immature, 100, 100, 0, 0, 0
-1, 1, mature, 0, 0, 0, 0, 0
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 100 100 0 0 0
+1 1 mature 0 0 0 0 0
 *end
 
 [1996_TimeStep_One]
 report.type: partition
 year: 1996
 time_step: One
-row, column, category, age[1], age[2], age[3], age[4], age[5]
-1, 1, immature, 100, 100, 100, 0, 0
-1, 1, mature, 0, 0, 0, 0, 0
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 100 100 100 0 0
+1 1 mature 0 0 0 0 0
 *end
 
 [Objective_Score]

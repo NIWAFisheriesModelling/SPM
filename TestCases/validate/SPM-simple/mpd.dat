@@ -1,2 +1,2 @@
-catchability[cpueq].q, process[recruitment].r0, selectivity[fishingsel].a50, selectivity[fishingsel].ato95
-1.10693e-005, 2.37219e+006, 10.1887, 4.89097
+catchability[cpueq].q process[recruitment].r0 selectivity[fishingsel].a50 selectivity[fishingsel].ato95
+1.10693e-005 2.37219e+006 10.1887 4.89097
