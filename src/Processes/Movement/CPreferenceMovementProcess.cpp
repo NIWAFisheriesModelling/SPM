@@ -21,6 +21,7 @@
 
 // Using
 using std::cout;
+using std::cerr;
 using std::endl;
 
 //**********************************************************************
@@ -31,6 +32,7 @@ CPreferenceMovementProcess::CPreferenceMovementProcess() {
   // Default Values
   pLayer = 0;
   sType = PARAM_PREFERENCE_MOVEMENT;
+  bIsStatic = false;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
@@ -94,9 +96,71 @@ void CPreferenceMovementProcess::build() {
       pLayer->build();
     }
 
+    bIsStatic = true;
+    if (pLayer != 0)
+      bIsStatic = bIsStatic && pLayer->getIsStatic();
+
+    foreach(CPreferenceFunction* preferenceFunction, vDirectedProcessIndex) {
+      bIsStatic = bIsStatic && preferenceFunction->getIsStatic();
+    }
+
+    if (bIsStatic) {
+      vPreferenceCache.resize(iWorldHeight);
+      vRunningTotalCache.resize(iWorldHeight);
+      for (int i = 0; i < iWorldHeight; ++i) {
+
+        vRunningTotalCache[i].resize(iWorldWidth, 0.0);
+        vPreferenceCache[i].resize(iWorldWidth);
+        for (int j = 0; j < iWorldWidth; ++j) {
+
+          vPreferenceCache[i][j].resize(iWorldHeight);
+          for (int k = 0; k < iWorldHeight; ++k)
+            vPreferenceCache[i][j][k].resize(iWorldWidth, 0.0);
+        }
+      }
+
+      rebuild();
+    }
+
   } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
+  }
+}
+
+
+//**********************************************************************
+// void CPreferenceMovementProcess::execute()
+// Execute the process
+//**********************************************************************
+void CPreferenceMovementProcess::rebuild() {
+  if (bIsStatic) {
+    for (int i = (iWorldHeight-1); i >= 0; --i) {
+      for (int j = (iWorldWidth-1); j >= 0; --j) {
+        if (!pWorld->getBaseSquare(i, j)->getEnabled())
+          continue;
+
+        dRunningTotal = 0.0;
+        for (int k = (iWorldHeight-1); k >= 0; --k) {
+          for (int l = (iWorldWidth-1); l >= 0; --l) {
+            if (!pWorld->getBaseSquare(k, l)->getEnabled()) {
+              dCurrent = 0.0;
+            } else {
+              dCurrent = 1.0;
+
+              foreach(CPreferenceFunction* preferenceFunction, vDirectedProcessIndex) {
+                dCurrent *= preferenceFunction->getResult(i, j, k, l);
+              }
+            }
+
+            vPreferenceCache[i][j][k][l] = dCurrent;
+            dRunningTotal += dCurrent;
+          }
+        }
+
+        vRunningTotalCache[i][j] = dRunningTotal;
+      }
+    }
   }
 }
 
@@ -120,28 +184,30 @@ void CPreferenceMovementProcess::execute() {
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
-        // Reset our Running Total (For Proportions)
-        dRunningTotal = 0.0;
+        // Only rebuild the cache if we have too
+        if (!bIsStatic) {
+          // Reset our Running Total (For Proportions)
+          dRunningTotal = 0.0;
 
-        // Re-Loop Through World Generating Our Logit Layer
-        for (int k = (iWorldHeight-1); k >= 0; --k) {
-          for (int l = (iWorldWidth-1); l >= 0; --l) {
-            // Get Target Square
-            pTargetBase = pWorld->getBaseSquare(k, l);
+          // Re-Loop Through World Generating Our Logit Layer
+          for (int k = (iWorldHeight-1); k >= 0; --k) {
+            for (int l = (iWorldWidth-1); l >= 0; --l) {
+              // Get Target Square
+              pTargetBase = pWorld->getBaseSquare(k, l);
 
-            // Make sure the target cell is enabled
-            if (pTargetBase->getEnabled()) {
-              dCurrent = 1.0;
-              foreach(CPreferenceFunction *Process, vDirectedProcessIndex) {
-                dCurrent *= Process->getResult(i, j, k, l);
+              // Make sure the target cell is enabled
+              if (pTargetBase->getEnabled()) {
+                dCurrent = 1.0;
+                foreach(CPreferenceFunction *Process, vDirectedProcessIndex) {
+                  dCurrent *= Process->getResult(i, j, k, l);
+                }
+              } else {
+                dCurrent = 0.0;
               }
-            } else {
-              dCurrent = 0.0;
-            }
 
-            // Put This in our Layer: +1 to k/l Because They are Indexes and the Function Requires Human Co-Ords
-            pLayer->setValue(k+1, l+1, dCurrent);
-            dRunningTotal += dCurrent;
+              pLayer->setValue(k+1, l+1, dCurrent);
+              dRunningTotal += dCurrent;
+            }
           }
         }
 
@@ -159,13 +225,21 @@ void CPreferenceMovementProcess::execute() {
             foreach(int Category, vCategoryIndex) {
               for (int m = (iBaseColCount-1); m >= 0; --m) {
                 // Get Amount
-                dCurrent = pLayer->getValue(k, l);
+                if (bIsStatic)
+                  dCurrent = vPreferenceCache[i][j][k][l];
+                else
+                  dCurrent = pLayer->getValue(k, l);
+
                 // if the amount is low, then don't bother moving
                 if (dCurrent <= TRUE_ZERO)
                   continue;
 
                 // Convert To Proportion
-                dCurrent /= dRunningTotal;
+                if (bIsStatic) {
+                  dCurrent /= vRunningTotalCache[i][j];
+                } else {
+                  dCurrent /= dRunningTotal;
+                }
 
                 // Get Current Number of Fish, multipled by proportion to move
                 dCurrent *= dProportion * pBaseSquare->getValue(Category, m);
@@ -179,6 +253,7 @@ void CPreferenceMovementProcess::execute() {
         }
       }
     }
+
   } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;

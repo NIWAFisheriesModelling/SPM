@@ -36,6 +36,7 @@ public:
   static bool     isNonNegative(double A) { return ( 0.0 <= A ); }
   static bool     isPositive(double A) { return ( 0.0 < A ); }
   static bool     isEqual(double A, double B) { return ( ((A-B) < ZERO) && ((A-B) > -ZERO) ); }
+  static bool     isClose(double A, double B) { return ( ((A-B) < 1e-12) && ((A-B) > -1e-12) ); }
   static bool     isBetween(double A, double B, double C) {
     return ( ((A-B) > -ZERO) && ((A-C) < ZERO) );
   }
