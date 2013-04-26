@@ -18,40 +18,6 @@ initialisation_phase Phase2
 type initialisation
 initialisation_phase Phase3
 
-@report state-0
-type partition
-time_step zero
-years 1995-2011
-
-@report state-1
-type partition
-time_step one
-years 1995-2011
-
-@report state-2
-type partition
-time_step two
-years 1995-2011
-
-@report state-0-biomass
-type partition_biomass
-time_step zero
-years 1995-2011
-
-@report state-1-biomass
-type partition_biomass
-time_step one
-years 1995-2011
-
-@report state-2-biomass
-type partition_biomass
-time_step two
-years 1995-2011
-
-#@report SSB
-#type derived_quantity
-#derived_quantity SSB
-
 @report SSB_layer
 type layer
 layer SSB_layer
@@ -89,56 +55,6 @@ file_name MPD.dat
 @report TagRelease2001
 type layer
 layer TagRelease2001
-
-@report ImmatureDistance
-type preference_function
-preference_function ImmatureDistance
-
-@report ImmatureDepth
-type preference_function
-preference_function ImmatureDepth
-
-@report ImmatureTemperature
-type preference_function
-preference_function ImmatureTemperature
-
-@report MatureDistance
-type preference_function
-preference_function MatureDistance
-
-@report MatureDepth
-type preference_function
-preference_function MatureDepth
-
-@report MatureTemperature
-type preference_function
-preference_function MatureTemperature
-
-@report MatureHabitat
-type preference_function
-preference_function MatureHabitat
-
-@report MatureHills
-type preference_function
-preference_function MatureHills
-
-@report PreSpawningDistance
-type preference_function
-preference_function PreSpawningDistance
-
-@report PreSpawningTemperature
-type preference_function
-preference_function PreSpawningTemperature
-
-@report PreSpawningHills
-type preference_function
-preference_function PreSpawningHills
-
-{
-@report PostSpawningDistance
-type preference_function
-preference_function PostSpawningDistance
-}
 
 @report Recruitment
 type process
