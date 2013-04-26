@@ -58,7 +58,6 @@ time_step one
 initialisation_time_steps initial_step_one initial_step_two initial_step_two
 categories mature
 selectivities One
-layer Base
 
 # Population processes
 @process Ageing
