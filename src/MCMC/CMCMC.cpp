@@ -127,14 +127,14 @@ void CMCMC::validate() {
       CError::errorLessThan(PARAM_START, PARAM_ZERO);
     if (dStepSize < 0)
       CError::errorLessThan(PARAM_STEP_SIZE, PARAM_ZERO);
-    for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
-      if (vAdaptStepSize[i] < 1)
-        CError::errorLessThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_ONE);
-      if (vAdaptStepSize[i] > iLength )
-        CError::errorGreaterThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_LENGTH);
-    }
     if (pParameterList->hasParameter(PARAM_ADAPT_STEPSIZE_AT)) {
       pParameterList->fillVector(vAdaptStepSize, PARAM_ADAPT_STEPSIZE_AT);
+      for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
+        if (vAdaptStepSize[i] < 1)
+          CError::errorLessThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_ONE);
+        if (vAdaptStepSize[i] > iLength )
+          CError::errorGreaterThan(PARAM_ADAPT_STEPSIZE_AT, PARAM_LENGTH);
+      }
     } else {
       vAdaptStepSize.resize(1);
       vAdaptStepSize[0] = 1;
