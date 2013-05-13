@@ -40,6 +40,7 @@ CCategoryTransitionProcess::CCategoryTransitionProcess() {
   pParameterList->registerAllowed(PARAM_TO);       //categories
   pParameterList->registerAllowed(PARAM_YEARS);    //years for layers
   pParameterList->registerAllowed(PARAM_LAYERS);   //n to move
+  pParameterList->registerAllowed(PARAM_U_MAX);
   pParameterList->registerAllowed(PARAM_PENALTY);
 
 }
@@ -77,6 +78,7 @@ void CCategoryTransitionProcess::validate() {
 
     // Get our Parameters
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
+    dUMax  = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
 
     pParameterList->fillVector(vCategoryList, PARAM_FROM);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
@@ -102,6 +104,11 @@ void CCategoryTransitionProcess::validate() {
       CError::errorListSameSize(PARAM_FROM, PARAM_TO);
     if (getYearsCount() != getLayersCount())
       CError::errorListSameSize(PARAM_YEARS, PARAM_LAYERS);
+
+    if (dUMax > ONE)
+      CError::errorGreaterThan(PARAM_U_MAX, PARAM_ONE);
+    if (dUMax <= TRUE_ZERO)
+      CError::errorLessThanEqualTo(PARAM_U_MAX, PARAM_ZERO);
 
   } catch(string &Ex) {
     Ex = "CCategoryTransitionProcess.validate(" + getLabel() + ")->" + Ex;
@@ -202,10 +209,10 @@ void CCategoryTransitionProcess::execute() {
 
         // Work out exploitation rate to move
         dExploitation = dN / CMath::zeroFun(dVulnerable,ZERO);
-        if (dExploitation > 0.999) {
-          dExploitation = 0.999;
+        if (dExploitation > dUMax) {
+          dExploitation = dUMax;
           if (pPenalty != 0) { // Throw Penalty
-            pPenalty->trigger(sLabel, dN, (dVulnerable * 0.999));
+            pPenalty->trigger(sLabel, dN, (dVulnerable * dUMax));
           }
         } else if (dExploitation < 0.0) {
           dExploitation = 0.0;

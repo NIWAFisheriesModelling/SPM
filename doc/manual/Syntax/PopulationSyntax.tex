@@ -566,6 +566,11 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid layers defined by \command{layer}. Note that the layer values must be non-negative}
 
+\defSub{u\_max} {Define the maximum proportion of individuals that can be moved}
+\defType{Constant}
+\defDefault{0.99}
+\defValue{Must be $> 0$ and $\le 1$}
+
 \defSub{penalty} {Define the penalty to encourage models parameter values away from those which result in not enough individuals to move}
 \defType{String}
 \defDefault{No default}

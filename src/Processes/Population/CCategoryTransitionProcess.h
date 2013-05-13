@@ -42,6 +42,7 @@ protected:
   double                     dN;
   double                     dVulnerable;
   double                     dExploitation;
+  double                     dUMax;
   string                     sFrom;
   string                     sTo;
   int                        iFromIndex;
