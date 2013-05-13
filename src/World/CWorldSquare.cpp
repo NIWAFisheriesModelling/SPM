@@ -8,9 +8,10 @@
 //============================================================================
 
 // Local Headers
-#include "CWorldSquare.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/DefinedValues.h"
 #include "CWorld.h"
+#include "CWorldSquare.h"
 
 //**********************************************************************
 // CWorldSquare::CWorldSquare();
@@ -36,6 +37,8 @@ bool CWorldSquare::makeAdjustments(CWorldSquare *WorldSquare) {
   for (int i = 0; i < iHeight; ++i) {
     for (int j = 0; j < iWidth; ++j) {
       pGrid[i][j] += WorldSquare->getValue(i, j);
+      if (pGrid[i][j] < TRUE_ZERO)
+        pGrid[i][j] = TRUE_ZERO;
     }
   }
   return true;
