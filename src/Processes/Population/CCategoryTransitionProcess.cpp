@@ -222,7 +222,7 @@ void CCategoryTransitionProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to move
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
+            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)
