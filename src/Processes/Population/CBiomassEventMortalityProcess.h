@@ -42,7 +42,6 @@ protected:
   double                     dCatch;
   double                     dVulnerable;
   double                     dExploitation;
-  CWorldSquare               *pWorldSquare;
   vector<int>                vYearsList;
   vector<string>             vLayersList;
   vector<CNumericLayer*>     vLayersIndex;

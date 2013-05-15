@@ -51,7 +51,6 @@ protected:
   vector<string>             vCategoryToList;
   vector<int>                vCategoryToIndex;
   CSelectivity*              pSelectivity;
-  CWorldSquare               *pWorldSquare;
   vector<int>                vYearsList;
   vector<string>             vLayersList;
   vector<CNumericLayer*>     vLayersIndex;

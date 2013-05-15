@@ -25,16 +25,16 @@ class CEventMortalityProcess : public CProcess {
 public:
   // Functions
   CEventMortalityProcess();
-	virtual                    ~CEventMortalityProcess();
-	CProcess*                  clone() { return new CEventMortalityProcess(*this); }
-	double                     getUMax() { return dUMax; }
-	int                        getYearsCount() { return vYearsList.size(); }
-	int                        getYears(int index);
-	int                        getLayersCount() { return vLayersList.size(); }
-	string                     getLayers(int index);
-	void                       validate();
-	void                       build();
-	void                       execute();
+  virtual                    ~CEventMortalityProcess();
+  CProcess*                  clone() { return new CEventMortalityProcess(*this); }
+  double                     getUMax() { return dUMax; }
+  int                        getYearsCount() { return vYearsList.size(); }
+  int                        getYears(int index);
+  int                        getLayersCount() { return vLayersList.size(); }
+  string                     getLayers(int index);
+  void                       validate();
+  void                       build();
+  void                       execute();
 
 protected:
   // Variables
@@ -42,7 +42,6 @@ protected:
   double                     dCatch;
   double                     dVulnerable;
   double                     dExploitation;
-  CWorldSquare               *pWorldSquare;
   vector<int>                vYearsList;
   vector<string>             vLayersList;
   vector<CNumericLayer*>     vLayersIndex;

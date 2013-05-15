@@ -36,7 +36,6 @@ using std::endl;
 CEventMortalityProcess::CEventMortalityProcess() {
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
-  pWorldSquare     = 0;
   sType = PARAM_EVENT_MORTALITY;
 
   // Register estimable parameters
@@ -77,7 +76,6 @@ void CEventMortalityProcess::validate() {
     // Get our Parameters
     dUMax     = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
-
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vYearsList, PARAM_YEARS);
     pParameterList->fillVector(vLayersList, PARAM_LAYERS);
@@ -119,12 +117,6 @@ void CEventMortalityProcess::build() {
   try {
     // Base Build
     CProcess::build();
-
-    // Build our Grid To Be World+1
-    if (pWorldSquare == 0) {
-      pWorldSquare = new CWorldSquare();
-      pWorldSquare->build();
-    }
 
     // Build our Layer Index
     CLayerManager *pLayerManager = CLayerManager::Instance();
@@ -176,12 +168,8 @@ void CEventMortalityProcess::execute() {
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
-        // Clear our Square Out
-        pWorldSquare->zeroGrid();
-
         // Get Layer Value
         dCatch = pLayer->getValue(i, j);
-
         // Clear our Vulnerable Amount
         dVulnerable = 0.0;
 
@@ -191,8 +179,6 @@ void CEventMortalityProcess::execute() {
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
             if (dCurrent <0.0)
               dCurrent = 0.0;
-            // record our Vulnerable number
-            pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
             // Increase Vulnerable Amount
             dVulnerable += dCurrent;
           }
@@ -213,8 +199,7 @@ void CEventMortalityProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
-
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
             // If is Zero, Cont
             if (dCurrent <= 0.0)
               continue;
@@ -238,8 +223,4 @@ void CEventMortalityProcess::execute() {
 // Default De-Constructor
 //**********************************************************************
 CEventMortalityProcess::~CEventMortalityProcess() {
-  // Clean Our Grid
-  if (pWorldSquare != 0) {
-    delete pWorldSquare;
-  }
 }

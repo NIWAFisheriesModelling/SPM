@@ -42,8 +42,6 @@ public:
 
 protected:
   // Variables
-  CWorldSquare                **pGrid;
-  CWorldSquare                *pWorldSquare;
   bool                        bIsAbundance;
   double                      dA;
   double                      dB;

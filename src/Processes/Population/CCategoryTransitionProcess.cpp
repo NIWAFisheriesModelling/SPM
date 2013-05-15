@@ -31,7 +31,6 @@
 CCategoryTransitionProcess::CCategoryTransitionProcess() {
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
-  pWorldSquare     = 0;
   sType = PARAM_CATEGORY_TRANSITION;
 
   // Register user allowed parameters
@@ -79,7 +78,6 @@ void CCategoryTransitionProcess::validate() {
     // Get our Parameters
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
     dUMax  = pParameterList->getDouble(PARAM_U_MAX, true, 0.99);
-
     pParameterList->fillVector(vCategoryList, PARAM_FROM);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
     pParameterList->fillVector(vCategoryToList, PARAM_TO);
@@ -124,12 +122,6 @@ void CCategoryTransitionProcess::build() {
   try {
     // Base Build
     CProcess::build();
-
-    // Build our Grid To Be World+1
-    if (pWorldSquare == 0) {
-      pWorldSquare = new CWorldSquare();
-      pWorldSquare->build();
-    }
 
     // Build our Layer Index
     CLayerManager *pLayerManager = CLayerManager::Instance();
@@ -187,9 +179,6 @@ void CCategoryTransitionProcess::execute() {
 
         pDiff       = pWorld->getDifferenceSquare(i, j);
 
-        // Clear our Square Out
-        pWorldSquare->zeroGrid();
-
         // Get Layer Value
         dN = pLayer->getValue(i, j);
 
@@ -200,8 +189,6 @@ void CCategoryTransitionProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
-            pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
-
             // Increase Vulnerable Amount
             dVulnerable += dCurrent;
           }
@@ -222,7 +209,7 @@ void CCategoryTransitionProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to move
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
+            dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)
@@ -250,8 +237,4 @@ void CCategoryTransitionProcess::execute() {
 // Default De-Constructor
 //**********************************************************************
 CCategoryTransitionProcess::~CCategoryTransitionProcess() {
-  // Clean Our Grid
-  if (pWorldSquare != 0) {
-    delete pWorldSquare;
-  }
 }

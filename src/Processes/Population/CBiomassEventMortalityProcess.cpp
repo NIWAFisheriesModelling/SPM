@@ -36,7 +36,6 @@ using std::endl;
 CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   // Variables
   pTimeStepManager = CTimeStepManager::Instance();
-  pWorldSquare     = 0;
   sType = PARAM_BIOMASS_EVENT_MORTALITY;
   bRequiresMerge = false;
 
@@ -121,12 +120,6 @@ void CBiomassEventMortalityProcess::build() {
     // Base Build
     CProcess::build();
 
-    // Build our Grid To Be World+1
-    if (pWorldSquare == 0) {
-      pWorldSquare = new CWorldSquare();
-      pWorldSquare->build();
-    }
-
     // Build our Layer Index
     CLayerManager *pLayerManager = CLayerManager::Instance();
     pLayerManager->fillVector(vLayersIndex, vLayersList);
@@ -176,10 +169,6 @@ void CBiomassEventMortalityProcess::execute() {
           continue;
 
         pDiff = pWorld->getBaseSquare(i, j);
-//        pDiff       = pWorld->getDifferenceSquare(i, j);
-
-        // Clear our Square Out
-        pWorldSquare->zeroGrid();
 
         // Get Layer Value
         dCatch = pLayer->getValue(i, j);
@@ -193,8 +182,6 @@ void CBiomassEventMortalityProcess::execute() {
             dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l);
             if (dCurrent <0.0)
               dCurrent = 0.0;
-            // record our Vulnerable number
-            pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
             // Increase Vulnerable biomass
             dVulnerable += dCurrent * pWorld->getMeanWeight(l,vCategoryIndex[k]);
           }
@@ -215,7 +202,7 @@ void CBiomassEventMortalityProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
+           dCurrent = pBaseSquare->getValue(vCategoryIndex[k],l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)
@@ -240,8 +227,4 @@ void CBiomassEventMortalityProcess::execute() {
 // Default De-Constructor
 //**********************************************************************
 CBiomassEventMortalityProcess::~CBiomassEventMortalityProcess() {
-  // Clean Our Grid
-  if (pWorldSquare != 0) {
-    delete pWorldSquare;
-  }
 }

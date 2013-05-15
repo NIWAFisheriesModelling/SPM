@@ -25,9 +25,7 @@
 //**********************************************************************
 CHollingMortalityRateProcess::CHollingMortalityRateProcess() {
   // Variables
-  pGrid            = 0;
   sType = PARAM_HOLLING_MORTALITY_RATE;
-  pWorldSquare     = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_IS_ABUNDANCE);
@@ -54,13 +52,10 @@ void CHollingMortalityRateProcess::validate() {
     dA = pParameterList->getDouble(PARAM_A);
     dB = pParameterList->getDouble(PARAM_B);
     dX = pParameterList->getDouble(PARAM_X,true,2.0);
-
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
-
     pParameterList->fillVector(vPredatorCategoryList, PARAM_PREDATOR_CATEGORIES);
     pParameterList->fillVector(vPredatorSelectivityList, PARAM_PREDATOR_SELECTIVITIES);
-
     dUMax = pParameterList->getDouble(PARAM_U_MAX,true,0.99);
     sPenalty  = pParameterList->getString(PARAM_PENALTY, true, "");
 
@@ -115,12 +110,6 @@ void CHollingMortalityRateProcess::build() {
 
     foreach(string Name, vPredatorCategoryList) {
       vPredatorCategoryIndex.push_back(pWorld->getCategoryIndexForName(Name));
-    }
-
-    // Build our Grid To Be World+1
-    if (pWorldSquare == 0) {
-      pWorldSquare = new CWorldSquare();
-      pWorldSquare->build();
     }
 
     // Build Refs
@@ -188,8 +177,6 @@ void CHollingMortalityRateProcess::execute() {
 
         pDiff = pWorld->getDifferenceSquare(i, j);
 
-        // Clear our Square Out
-        pWorldSquare->zeroGrid();
         // Clear our Vulnerable Amount
         dVulnerable = 0.0;
         dPredatorVulnerable = 0.0;
@@ -201,10 +188,6 @@ void CHollingMortalityRateProcess::execute() {
             dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l);
             if (dCurrent <0.0)
               dCurrent = 0.0;
-
-            // record our Vulnerable number
-            pWorldSquare->addValue(vCategoryIndex[k], l, dCurrent);
-
             // Increase Vulnerable biomass
             if(bIsAbundance) {
               dVulnerable += dCurrent;
@@ -221,7 +204,6 @@ void CHollingMortalityRateProcess::execute() {
             dPredatorCurrent = pBaseSquare->getValue( vPredatorCategoryIndex[k], l) * vPredatorSelectivityIndex[k]->getResult(l);
             if (dPredatorCurrent <0.0)
               dPredatorCurrent = 0.0;
-
             // Increase Predator biomass
             if(bIsAbundance) {
               dPredatorVulnerable += dPredatorCurrent;
@@ -249,7 +231,7 @@ void CHollingMortalityRateProcess::execute() {
         for (int k = 0; k < (int)vCategoryIndex.size(); ++k) {
           for (int l = 0; l < iBaseColCount; ++l) {
             // Get Amount to remove
-            dCurrent = pWorldSquare->getValue(vCategoryIndex[k], l) * dExploitation;
+            dCurrent = pBaseSquare->getValue( vCategoryIndex[k], l) * vSelectivityIndex[k]->getResult(l) * dExploitation;
 
             // If is Zero, Cont
             if (dCurrent <= 0.0)
@@ -285,18 +267,4 @@ void CHollingMortalityRateProcess::execute() {
 // Destructor
 //**********************************************************************
 CHollingMortalityRateProcess::~CHollingMortalityRateProcess() {
-
-  // Clean Our Grid
-  if (pWorldSquare != 0) {
-    delete pWorldSquare;
-  }
-
-  // Clean Our Grid
-  if (pGrid != 0) {
-    for (int i = 0; i < iWorldHeight; ++i) {
-      delete [] pGrid[i];
-      pGrid[i] = 0;
-    }
-    delete [] pGrid;
-  }
 }

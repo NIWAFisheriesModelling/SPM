@@ -26,9 +26,7 @@
 //**********************************************************************
 CPreySwitchPredationProcess::CPreySwitchPredationProcess() {
   // Variables
-  pGrid            = 0;
   sType = PARAM_PREY_SWITCH_PREDATION;
-  pWorldSquare     = 0;
   pPreyCategories  = 0;
 
   // Register user allowed parameters
@@ -167,12 +165,6 @@ void CPreySwitchPredationProcess::build() {
     // Setup Vars
     iBaseColCount   = pWorld->getBaseSquare(0, 0)->getWidth();
 
-    // Build our Grid To Be World+1
-    if (pWorldSquare == 0) {
-      pWorldSquare = new CWorldSquare();
-      pWorldSquare->build();
-    }
-
     // Build Refs
     pTimeStepManager = CTimeStepManager::Instance();
 
@@ -260,9 +252,6 @@ void CPreySwitchPredationProcess::execute() {
 
         pDiff = pWorld->getDifferenceSquare(i, j);
 
-        // Clear our Square Out
-        pWorldSquare->zeroGrid();
-
         // Clear our Vulnerable Amount
         vVulnerable.resize(pPreyCategories->getNRows());
         vMortality.resize(pPreyCategories->getNRows());
@@ -279,8 +268,6 @@ void CPreySwitchPredationProcess::execute() {
               dCurrent = pBaseSquare->getValue( pPreyCategories->getCategoryIndex(m,k), l) * vvPreySelectivityIndex[m][k]->getResult(l);
               if (dCurrent < 0.0)
                 dCurrent = 0.0;
-               // record our Vulnerable number
-              pWorldSquare->addValue(pPreyCategories->getCategoryIndex(m,k), l, dCurrent);
                // Increase Vulnerable biomass
               if(bIsAbundance) {
                 vVulnerable[m] += dCurrent;
@@ -329,7 +316,7 @@ void CPreySwitchPredationProcess::execute() {
           for (int k = 0; k < pPreyCategories->getNElements(m); ++k) {
             for (int l = 0; l < iBaseColCount; ++l) {
               // Get Amount to remove
-              dCurrent = pWorldSquare->getValue(pPreyCategories->getCategoryIndex(m,k), l) * vExploitation[m];
+              dCurrent = pBaseSquare->getValue( pPreyCategories->getCategoryIndex(m,k), l) * vvPreySelectivityIndex[m][k]->getResult(l) * vExploitation[m];
                // If is Zero, Cont
               if (dCurrent <= 0.0)
                 continue;
@@ -366,18 +353,4 @@ void CPreySwitchPredationProcess::execute() {
 // Destructor
 //**********************************************************************
 CPreySwitchPredationProcess::~CPreySwitchPredationProcess() {
-
-  // Clean Our Grid
-  if (pWorldSquare != 0) {
-    delete pWorldSquare;
-  }
-
-  // Clean Our Grid
-  if (pGrid != 0) {
-    for (int i = 0; i < iWorldHeight; ++i) {
-      delete [] pGrid[i];
-      pGrid[i] = 0;
-    }
-    delete [] pGrid;
-  }
 }
