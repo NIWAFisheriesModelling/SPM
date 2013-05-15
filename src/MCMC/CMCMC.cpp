@@ -417,7 +417,7 @@ void CMCMC::generateNewCandidate() {
 //**********************************************************************
 void CMCMC::updateStepSize(int iIteration) {
 
-  if( (iJumpsSinceAdapt > 0) & (iSuccessfulJumpsSinceAdapt > 0) ) {
+  if( (iJumpsSinceAdapt > 0) && (iSuccessfulJumpsSinceAdapt > 0) ) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
       if( iIteration == vAdaptStepSize[i] ) {
         // modify the step size by the ratio = AcceptanceRate / 0.24
