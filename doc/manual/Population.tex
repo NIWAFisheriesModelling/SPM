@@ -852,7 +852,7 @@ The available selectivities are;
 
 The available selectivities are described below.
 
-\subsubsection[Constant]{\argument{constant}}\I{Selectivities!Constant}
+\subsubsection[Constant]{\argument{constant}}\index{Selectivities!Constant}
 
 \begin{equation}
 f(x)=C
@@ -860,7 +860,7 @@ f(x)=C
 
 The constant selectivity has the estimable parameter C. 
 
-\subsubsection[Knife-edge]{\argument{knife\_edge}}\I{Selectivities!Knife-edge}
+\subsubsection[Knife-edge]{\argument{knife\_edge}}\index{Selectivities!Knife-edge}
 
 \begin{equation}
 f(x)= \begin{cases}
@@ -871,7 +871,7 @@ f(x)= \begin{cases}
 
 The knife-edge ogive has the estimable parameter E and a scaling parameter $\alpha$, where the default value of $\alpha = 1$
 
-\subsubsection[All-values]{\argument{all\_values}}\I{Selectivities!All-values}
+\subsubsection[All-values]{\argument{all\_values}}\index{Selectivities!All-values}
 
 \begin{equation}
 f(x)=V_x
@@ -879,7 +879,7 @@ f(x)=V_x
 
 The all-values selectivity has estimable parameters $V_{low}$, $V_{low+1}$ \ldots $V_{high}$. Here, you need to provide the selectivity value for each age class.
 
-\subsubsection[All-values-bounded]{\argument{all\_values\_bounded}}\I{Selectivities!All-values-bounded}
+\subsubsection[All-values-bounded]{\argument{all\_values\_bounded}}\index{Selectivities!All-values-bounded}
 
 \begin{equation}
 f(x)=\begin{cases}
@@ -891,7 +891,7 @@ f(x)=\begin{cases}
 
 The all-values-bounded selectivity has non-estimable parameters L and H. The estimable parameters are $V_L$, $V_{L+1}$ \ldots $V_H$. Here, you need to provide an selectivity value for each age class from $L \ldots H$.
 
-\subsubsection[Increasing]{\argument{increasing}}\I{Selectivities!Increasing}
+\subsubsection[Increasing]{\argument{increasing}}\index{Selectivities!Increasing}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -903,7 +903,7 @@ f(x)=\begin{cases}
 
 The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
 
-\subsubsection[Logistic]{\argument{logistic}}\I{Selectivities!Logistic}
+\subsubsection[Logistic]{\argument{logistic}}\index{Selectivities!Logistic}
 
 \begin{equation}
   f(x) = \alpha / [1+19^{(a_{50}-x)/a_{to95}}]
@@ -919,7 +919,7 @@ The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alp
  
 The inverse logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}-a_{to95}$. 
 
-\subsubsection[Logistic producing]{\argument{logistic\_producing}}\I{Selectivities!Logistic-producing}
+\subsubsection[Logistic producing]{\argument{logistic\_producing}}\index{Selectivities!Logistic-producing}
 
 \begin{equation} 
 f(x)=\begin{cases}
@@ -932,7 +932,7 @@ f(x)=\begin{cases}
 
 The logistic-producing selectivity has the non-estimable parameters $L$ and $H$, and has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. For category transitions, $f(x)$ represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic-producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters $a_{50}$, $a_{to95}$.
 
-\subsubsection[Double-normal]{\argument{double\_normal}}\I{Selectivities!Double-normal}
+\subsubsection[Double-normal]{\argument{double\_normal}}\index{Selectivities!Double-normal}
 
 \begin{equation}
   f(x) = \begin{cases}
@@ -943,7 +943,7 @@ The logistic-producing selectivity has the non-estimable parameters $L$ and $H$,
 
 The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It has values $\alpha$ at $x=a_1$, and $0.5 \alpha$ at $x=a_1-s_L$ and $x=a_1+s_R$. 
 
-\subsubsection[Double-exponential]{\argument{double\_exponential}}\I{Selectivities!Double-exponential}
+\subsubsection[Double-exponential]{\argument{double\_exponential}}\index{Selectivities!Double-exponential}
 
 \begin{equation} 
 f(x)=\begin{cases}
