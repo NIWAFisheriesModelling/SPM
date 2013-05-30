@@ -136,9 +136,13 @@ void CConstantRecruitmentProcess::execute() {
     if (pLayer != 0) {
       double dTotal = 0.0;
 
-      for (int i = 0; i < iWorldHeight; ++i)
-        for (int j = 0; j < iWorldWidth; ++j)
-          dTotal += pLayer->getValue(i, j);
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
+          if (pBaseSquare->getEnabled()) {
+            dTotal += pLayer->getValue(i, j);
+          }
+        }
+      }
 
       if (!CComparer::isZero(dTotal))
         dAmountPer /= dTotal;

@@ -289,9 +289,13 @@ void CBHRecruitmentProcess::execute() {
     if (pLayer != 0) {
       double dTotal = 0.0;
 
-      for (int i = 0; i < iWorldHeight; ++i)
-        for (int j = 0; j < iWorldWidth; ++j)
-          dTotal += pLayer->getValue(i, j);
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
+          if (pBaseSquare->getEnabled()) {
+            dTotal += pLayer->getValue(i, j);
+          }
+        }
+      }
 
       if (CComparer::isPositive(dTotal)) {
         dAmountPer /= dTotal;
@@ -315,7 +319,6 @@ void CBHRecruitmentProcess::execute() {
         if (pLayer != 0)
           value *= pLayer->getValue(i, j);
 
-//        pDiff = pWorld->getDifferenceSquare(i, j);
         pDiff = pWorld->getBaseSquare(i, j);
 
         // Loop Through the Categories and Ages we have and Recruit
