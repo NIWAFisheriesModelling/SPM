@@ -37,8 +37,6 @@ void CEstimateValueReport::validate() {
   try {
 
     bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,false);
-    // This report must specify a filename
-    sFileName   = pParameterList->getString(PARAM_FILE_NAME);
 
     // Validate parent
     CFileReport::validate();
