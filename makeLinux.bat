@@ -1,3 +1,4 @@
+svn update
 svn revert src/Version.h
 cmake -G "Unix Makefiles"
 make all
