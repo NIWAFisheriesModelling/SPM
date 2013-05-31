@@ -291,6 +291,7 @@ void CBHRecruitmentProcess::execute() {
 
       for (int i = 0; i < iWorldHeight; ++i) {
         for (int j = 0; j < iWorldWidth; ++j) {
+          pBaseSquare = pWorld->getBaseSquare(i, j);
           if (pBaseSquare->getEnabled()) {
             dTotal += pLayer->getValue(i, j);
           }
