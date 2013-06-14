@@ -141,7 +141,11 @@ void CAbundanceDerivedLayer::calculate() {
     newData[i].assign(iWidth, 0.0);
 
     for (int j = 0; j < iWidth; ++j) {
+
       pBaseSquare = pWorld->getBaseSquare(i, j);
+      if (!pBaseSquare->getEnabled())
+        continue;
+
       double dValue = 0.0;
 
       for (int k = 0; k < (int)vCategories.size(); ++k) {
@@ -184,6 +188,9 @@ void CAbundanceDerivedLayer::calculate(int initialisationPhase) {
     for (int j = 0; j < iWidth; ++j) {
 
       pBaseSquare = pWorld->getBaseSquare(i, j);
+      if (!pBaseSquare->getEnabled())
+        continue;
+
       double dValue = 0.0;
 
       for (int k = 0; k < (int)vCategories.size(); ++k) {

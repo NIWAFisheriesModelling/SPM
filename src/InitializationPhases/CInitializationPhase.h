@@ -29,13 +29,27 @@ public:
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
   vector<string>              getTimeStepNames() { return vTimeStepNames; }
   void                        setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
+  bool                        getConvergenceCheck() { return bConvergenceCheck; }
+  vector<int>                 getConvergedYears() { return vConvergedYears; }
+  vector<double>              getConvergedLambda() { return vConvergedLambda; }
 
 protected:
-  int                         iYears;
-  int                         iCurrentTimeStep;
-  int                         iExecutionOrderIndex;
-  vector<string>              vTimeStepNames;
-  vector<CTimeStep*>          vTimeSteps;
+  int                           iYears;
+  int                           iCurrentTimeStep;
+  int                           iExecutionOrderIndex;
+  vector<string>                vTimeStepNames;
+  vector<CTimeStep*>            vTimeSteps;
+  bool                          bConvergenceCheck;
+  double                        dLambda;
+  double                        dDiffLambda;
+  double                        dTotalLambda;
+  vector<int>                   vLambdaYears;
+  vector<vector<vector<vector<double> > > >  vvWorldCopy;
+  CWorldSquare                  *pPreviousSquare;
+
+  vector<int>                   vConvergedYears;
+  vector<double>                vConvergedLambda;
+
 };
 
 #endif /* CINITIALIZATIONPHASE_H_ */

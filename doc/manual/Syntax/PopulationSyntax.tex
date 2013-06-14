@@ -102,6 +102,17 @@
 \defDefault{No default}
 \defValue{A valid process label, from one of \command{process}}
 
+\defSub{lambda} {Define the absolute proportional difference for assessing convergence between annual iterations during the initialisation}
+\defType{Constant}
+\defDefault{Zero}
+\defValue{A number between $0$ and $1$}
+\defNote{If zero or not defined, then \SPM\ will not test for convergence between annual iterations}
+
+\defSub{lambda\_years} {Define the years to test for convergence during the initialisation}
+\defType{Constant vector}
+\defDefault{No default}
+\defValue{A vector of valid years between 1 and \commandlabsub{initialisation\_phase}{years}}
+
 \subsection{\I{Time-steps}}
 
 \defComLab{time\_step} {Define a time-step with label}

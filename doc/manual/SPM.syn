@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-05-30 (rev. 4939)
+; TextPad syntax definitions for SPM version 1.1-2013-05-31 (rev. 4942)
 ; ===================================================================================
 ;
 ;
@@ -110,6 +110,7 @@ k
 keep
 l
 lambda
+lambda_years
 layer
 layers
 length

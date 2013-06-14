@@ -9,6 +9,7 @@
 
 // Global headers
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local headers
 #include "CInitializationPhase.h"
@@ -31,10 +32,16 @@ CInitializationPhase::CInitializationPhase() {
   // Vars
   iYears            = 0;
   iCurrentTimeStep  = 0;
+  dLambda           = 0;
+  dTotalLambda      = 0.0;
+  dDiffLambda       = 0.0;
+  bConvergenceCheck = false;
 
   // Register parameters
   pParameterList->registerAllowed(PARAM_YEARS);
   pParameterList->registerAllowed(PARAM_TIME_STEPS);
+  pParameterList->registerAllowed(PARAM_LAMBDA);
+  pParameterList->registerAllowed(PARAM_LAMBDA_YEARS);
 }
 
 //**********************************************************************
@@ -49,10 +56,30 @@ void CInitializationPhase::validate() {
     // Fill our Variables
     iYears  = pParameterList->getInt(PARAM_YEARS);
     pParameterList->fillVector(vTimeStepNames, PARAM_TIME_STEPS);
+    if(pParameterList->hasParameter(PARAM_LAMBDA)) {
+      bConvergenceCheck = true;
+      dLambda = pParameterList->getDouble(PARAM_LAMBDA,true,0.0);
+      pParameterList->fillVector(vLambdaYears, PARAM_LAMBDA_YEARS);
+    }
 
     // Validate
     if(iYears < 1)
       CError::errorLessThan(PARAM_YEARS, PARAM_ONE);
+
+    if(bConvergenceCheck) {
+      if(dLambda < 0)
+        CError::errorLessThan(PARAM_LAMBDA, PARAM_ZERO);
+      if(dLambda >= 1)
+        CError::errorGreaterThan(PARAM_LAMBDA, PARAM_ONE);
+      for (int i=0; i < (int)vLambdaYears.size(); ++i) {
+        if (vLambdaYears[i] < 1)
+          CError::errorLessThan(PARAM_LAMBDA_YEARS, PARAM_ONE);
+        if (vLambdaYears[i] > iYears)
+          CError::errorGreaterThan(PARAM_LAMBDA_YEARS, PARAM_YEARS);
+        if ((i > 0) & (vLambdaYears[i]==vLambdaYears[i-1]))
+          CError::errorDuplicate(PARAM_LAMBDA_YEARS, boost::lexical_cast<string>(vLambdaYears[i]));
+      }
+    }
 
   } catch(string &Ex) {
     Ex = "CInitializationPhase.validate(" + getLabel() + ")->" + Ex;
@@ -83,6 +110,19 @@ void CInitializationPhase::build() {
       }
     }
 
+    if( bConvergenceCheck ) {
+      vvWorldCopy.resize(pWorld->getHeight());
+      for( int i =0; i < pWorld->getHeight(); ++i)  {
+        vvWorldCopy[i].resize(pWorld->getWidth());
+        for(int j=0; j < (int)pWorld->getWidth(); ++j) {
+          vvWorldCopy[i][j].resize(pWorld->getCategoryCount());
+          for(int k=0; k < pWorld->getCategoryCount(); ++k) {
+            vvWorldCopy[i][j][k].resize(pWorld->getAgeSpread());
+          }
+        }
+      }
+    }
+
   } catch (string &Ex) {
     Ex = "CInitializationPhase.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -105,7 +145,58 @@ void CInitializationPhase::execute() {
       vTimeSteps[j]->execute();
       pDerivedLayerManager->calculate(iExecutionOrderIndex);
       pDerivedQuantityManager->calculate(iExecutionOrderIndex);
+    }
 
+    if(bConvergenceCheck) {
+    // If convergence checks are enabled, then...
+
+      bool bExit = false;
+      for (int k=0; k < (int)vLambdaYears.size(); ++k) {
+
+        if (i==(vLambdaYears[k]-1)) {
+          // record state from previous year
+
+          for (int i2 = 0; i2 < pWorld->getHeight(); ++i2) {
+            for (int j2 = 0; j2 < pWorld->getWidth(); ++j2) {
+              pPreviousSquare = pWorld->getBaseSquare(i2, j2);
+              for(int i3 = 0; i3 < pWorld->getCategoryCount(); ++i3) {
+                for(int j3 = 0; j3 < pWorld->getAgeSpread(); ++j3) {
+                  vvWorldCopy[i2][j2][i3][j3] = pPreviousSquare->getValue(i3,j3);
+                }
+              }
+            }
+          }
+
+        } else if(i==vLambdaYears[k]) {
+          // record state in this year and compare
+          dDiffLambda  = 0.0;
+          dTotalLambda = 0.0;
+
+          for (int i2 = 0; i2 < pWorld->getHeight(); ++i2) {
+            for (int j2 = 0; j2 < pWorld->getWidth(); ++j2) {
+
+              pBaseSquare = pWorld->getBaseSquare(i2, j2);
+              if (!pBaseSquare->getEnabled())
+                continue;
+              for (int k = 0; k < pBaseSquare->getHeight(); ++k) {
+                for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
+                  dTotalLambda += pBaseSquare->getValue(k, l);
+                  dDiffLambda += abs( pBaseSquare->getValue(k, l) - vvWorldCopy[i2][j2][k][l]);
+                }
+              }
+            }
+          }
+          // Compare with  dPreviousLambdaValue and exit loop if converged
+          if ( (dDiffLambda/dTotalLambda) <= dLambda ) {
+            vConvergedLambda.push_back(dDiffLambda/dTotalLambda);
+            vConvergedYears.push_back(i);
+            bExit = true;
+          }
+          // debug line: delete
+          //std::cerr << i << "  " << dDiffLambda << " " << dTotalLambda << " " << dLambda << "\n";
+        }
+      }
+      if(bExit) break;
     }
   }
 }

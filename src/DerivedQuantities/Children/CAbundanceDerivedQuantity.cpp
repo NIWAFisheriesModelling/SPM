@@ -137,6 +137,9 @@ void CAbundanceDerivedQuantity::calculate() {
     for (int j = 0; j < iWidth; ++j) {
 
       pBaseSquare = pWorld->getBaseSquare(i, j);
+      if (!pBaseSquare->getEnabled())
+        continue;
+
       double dTempValue = 0.0;
 
       for (int k = 0; k < (int)vCategories.size(); ++k) {
@@ -178,6 +181,9 @@ void CAbundanceDerivedQuantity::calculate(int initialisationPhase) {
     for (int j = 0; j < iWidth; ++j) {
 
       pBaseSquare = pWorld->getBaseSquare(i, j);
+      if (!pBaseSquare->getEnabled())
+        continue;
+
       double dTempValue = 0.0;
 
       for (int k = 0; k < (int)vCategories.size(); ++k) {

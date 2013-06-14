@@ -145,10 +145,10 @@ void CMigrationMovementProcess::execute() {
 
           // Get Current Squares
           pBaseSquare = pWorld->getBaseSquare(i, j);
-          pDiff       = pWorld->getDifferenceSquare(i, j);
           if (!pBaseSquare->getEnabled())
             continue;
 
+          pDiff       = pWorld->getDifferenceSquare(i, j);
           dSquare = pBaseSquare->getValue( vCategoryIndex[k], l) * dProportion * vSelectivityIndex[k]->getResult(l);
           dTotal += dSquare;
           pDiff->subValue(k, l, dSquare); // remove from world
@@ -159,6 +159,9 @@ void CMigrationMovementProcess::execute() {
         for (int i = 0; i < iWorldHeight; ++i) {
           for (int j = 0; j < iWorldWidth; ++j) {
             pBaseSquare = pWorld->getBaseSquare(i, j);
+            if (!pBaseSquare->getEnabled())
+              continue;
+
             pDiff       = pWorld->getDifferenceSquare(i, j);
             pDiff->addValue(k, l, dTotal * pSinkLayer->getValue(i, j)/dSinkLayerTotal);
           }
