@@ -20,10 +20,6 @@ initialisation_phase Phase1
 type initialisation
 initialisation_phase Phase2
 
-@report initialisation-phase3
-type initialisation
-initialisation_phase Phase3
-
 @report state-1
 type partition
 time_step one
