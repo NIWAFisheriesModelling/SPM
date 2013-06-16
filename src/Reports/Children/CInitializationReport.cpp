@@ -57,6 +57,7 @@ void CInitializationReport::build() {
 
     pInitializationPhaseManager = CInitializationPhaseManager::Instance();
     iInitializationPhaseIndex   = pInitializationPhaseManager->getInitializationPhaseOrderIndex(sInitializationPhase);
+    pInitializationPhase        = pInitializationPhaseManager->getInitializationPhase(iInitializationPhaseIndex);
 
   } catch (string &Ex) {
     Ex = "CInitializationReport.build(" + getLabel() + ")->" + Ex;
@@ -86,6 +87,23 @@ void CInitializationReport::execute() {
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_INITIALIZATION << "." << PARAM_INITIALIZATION_PHASE << CONFIG_RATIO_SEPARATOR << " " << sInitializationPhase << "\n";
+    cout << PARAM_YEARS << CONFIG_RATIO_SEPARATOR << " " << pInitializationPhase->getNYears() << "\n";
+    if (pInitializationPhase->getConvergenceCheck()) {
+      // Year of convergence
+      //cout << "converged_year" << CONFIG_RATIO_SEPARATOR << " " << pInitializationPhase->getConvergedYear() << "\n";
+      // lamdba vector
+      cout << PARAM_LAMBDA << CONFIG_RATIO_SEPARATOR << " " ;
+      vector<double> dLambda = pInitializationPhase->getLambdas();
+      for(int i = 0; i < (int)dLambda.size(); ++i) {
+        cout << dLambda[i] << ((i<(int)dLambda.size()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+      }
+      // test years vector
+      cout << PARAM_LAMBDA_YEARS << CONFIG_RATIO_SEPARATOR << " " ;
+      vector<int> iLambdaYears = pInitializationPhase->getLambdaYears();
+      for(int i = 0; i < (int)iLambdaYears.size(); ++i) {
+        cout << iLambdaYears[i] << ((i<(int)iLambdaYears.size()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+      }
+    }
 
     cout << PARAM_ROW << CONFIG_SPACE_SEPARATOR;
     cout << PARAM_COLUMN << CONFIG_SPACE_SEPARATOR,

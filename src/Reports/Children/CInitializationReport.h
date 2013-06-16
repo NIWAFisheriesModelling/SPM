@@ -14,6 +14,7 @@
 
 // Forward-Dec
 class CInitializationPhaseManager;
+class CInitializationPhase;
 
 //**********************************************************************
 //
@@ -33,6 +34,7 @@ protected:
   CInitializationPhaseManager *pInitializationPhaseManager;
   string                      sInitializationPhase;
   int                         iInitializationPhaseIndex;
+  CInitializationPhase        *pInitializationPhase;
 };
 
 #endif /* CINITIALIZATIONREPORT_H_ */

@@ -4,8 +4,15 @@ function(lines){
   index.start<-(1:length(lines))[substring(lines,1,1)=="["][1]
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
-  col.labs<-spm.string.to.vector.of.words(lines[3+index.start])
-  values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)])
+  if(substring(lines[index.start+4],1,6)=="lambda") {
+    lambda<-spm.string.to.vector.of.numbers(substring(lines[index.start+4],regexpr(":",lines[index.start+4])+1))
+    lambdayears<-spm.string.to.vector.of.numbers(substring(lines[index.start+5],regexpr(":",lines[index.start+5])+1))
+    start.line <- 6
+  } else {
+    start.line <- 4
+  }
+  col.labs<-spm.string.to.vector.of.words(lines[start.line+index.start])
+  values<-spm.string.to.vector.of.words(lines[(start.line+index.start+1):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
   names(values)<-col.labs
   values$category<-as.character(values$category)
@@ -16,6 +23,9 @@ function(lines){
   res$label<-substring(lines[index.start],2,nchar(lines[index.start])-1)
   res$report.type<-substring(lines[index.start+1],14)
   res$phase<-substring(lines[index.start+2],38)
+  res$years<-substring(lines[index.start+3],8)
+  res$lambda<-lambda
+  res$lambda.years<-lambdayears
   res$data<-values
   return(res)
 }

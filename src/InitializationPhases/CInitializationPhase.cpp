@@ -36,6 +36,7 @@ CInitializationPhase::CInitializationPhase() {
   dTotalLambda      = 0.0;
   dDiffLambda       = 0.0;
   bConvergenceCheck = false;
+  iConvergedYear    = -1;
 
   // Register parameters
   pParameterList->registerAllowed(PARAM_YEARS);
@@ -56,11 +57,16 @@ void CInitializationPhase::validate() {
     // Fill our Variables
     iYears  = pParameterList->getInt(PARAM_YEARS);
     pParameterList->fillVector(vTimeStepNames, PARAM_TIME_STEPS);
-    if(pParameterList->hasParameter(PARAM_LAMBDA)) {
+    if(pParameterList->hasParameter(PARAM_LAMBDA) || pParameterList->hasParameter(PARAM_LAMBDA_YEARS)) {
       bConvergenceCheck = true;
       dLambda = pParameterList->getDouble(PARAM_LAMBDA,true,0.0);
-      pParameterList->fillVector(vLambdaYears, PARAM_LAMBDA_YEARS);
-    }
+      if(pParameterList->hasParameter(PARAM_LAMBDA_YEARS)) {
+        pParameterList->fillVector(vLambdaYears, PARAM_LAMBDA_YEARS);
+     } else {
+       vLambdaYears.resize(0);
+       vLambdaYears.push_back(iYears);
+     }
+   }
 
     // Validate
     if(iYears < 1)
@@ -111,6 +117,9 @@ void CInitializationPhase::build() {
     }
 
     if( bConvergenceCheck ) {
+
+      vLambdas.resize(0);
+
       vvWorldCopy.resize(pWorld->getHeight());
       for( int i =0; i < pWorld->getHeight(); ++i)  {
         vvWorldCopy[i].resize(pWorld->getWidth());
@@ -153,7 +162,7 @@ void CInitializationPhase::execute() {
       bool bExit = false;
       for (int k=0; k < (int)vLambdaYears.size(); ++k) {
 
-        if (i==(vLambdaYears[k]-1)) {
+        if ((i+1)==(vLambdaYears[k]-1)) {
           // record state from previous year
 
           for (int i2 = 0; i2 < pWorld->getHeight(); ++i2) {
@@ -167,7 +176,7 @@ void CInitializationPhase::execute() {
             }
           }
 
-        } else if(i==vLambdaYears[k]) {
+        } else if((i+1)==vLambdaYears[k]) {
           // record state in this year and compare
           dDiffLambda  = 0.0;
           dTotalLambda = 0.0;
@@ -187,13 +196,11 @@ void CInitializationPhase::execute() {
             }
           }
           // Compare with  dPreviousLambdaValue and exit loop if converged
-          if ( (dDiffLambda/dTotalLambda) <= dLambda ) {
-            vConvergedLambda.push_back(dDiffLambda/dTotalLambda);
-            vConvergedYears.push_back(i);
+          if ( (dDiffLambda/dTotalLambda) < dLambda ) {
+            iConvergedYear = i;
             bExit = true;
           }
-          // debug line: delete
-          //std::cerr << i << "  " << dDiffLambda << " " << dTotalLambda << " " << dLambda << "\n";
+          vLambdas.push_back(dDiffLambda/dTotalLambda);
         }
       }
       if(bExit) break;

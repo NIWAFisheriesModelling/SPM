@@ -29,9 +29,11 @@ public:
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
   vector<string>              getTimeStepNames() { return vTimeStepNames; }
   void                        setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
+  int                         getNYears() { return iYears; }
   bool                        getConvergenceCheck() { return bConvergenceCheck; }
-  vector<int>                 getConvergedYears() { return vConvergedYears; }
-  vector<double>              getConvergedLambda() { return vConvergedLambda; }
+  vector<int>                 getLambdaYears() { return vLambdaYears; }
+  vector<double>              getLambdas() { return vLambdas; }
+  int                         getConvergedYear() { return iConvergedYear; }
 
 protected:
   int                           iYears;
@@ -46,9 +48,8 @@ protected:
   vector<int>                   vLambdaYears;
   vector<vector<vector<vector<double> > > >  vvWorldCopy;
   CWorldSquare                  *pPreviousSquare;
-
-  vector<int>                   vConvergedYears;
-  vector<double>                vConvergedLambda;
+  int                           iConvergedYear;
+  vector<double>                vLambdas;
 
 };
 

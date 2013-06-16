@@ -106,12 +106,13 @@
 \defType{Constant}
 \defDefault{Zero}
 \defValue{A number between $0$ and $1$}
-\defNote{If zero or not defined, then \SPM\ will not test for convergence between annual iterations}
+\defNote{If $\lambda$ is defined as zero, then \SPM\ will still calculate the value of the absolute proportional difference between annual iterations}
 
 \defSub{lambda\_years} {Define the years to test for convergence during the initialisation}
 \defType{Constant vector}
 \defDefault{No default}
-\defValue{A vector of valid years between 1 and \commandlabsub{initialisation\_phase}{years}}
+\defValue{A vector of valid years between $1$ and \commandlabsub{initialisation\_phase}{years}}
+\defNote{If $\lambda$ is defined, but \commandlabsub{initialisation\_phase}{lambda\_years} is not, \SPM\ will evaluate $\lambda$ for the last year in \commandlabsub{initialisation\_phase}{years}}
 
 \subsection{\I{Time-steps}}
 
