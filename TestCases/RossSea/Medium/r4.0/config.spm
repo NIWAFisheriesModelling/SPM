@@ -30,10 +30,14 @@ b 3.036
 @initialisation_phase Phase1
 years 100
 time_steps phase1 phase2a phase3a
+lambda 1e-10
+lambda_years 50 60 70 80 90 100
 
 @initialisation_phase Phase2
 years 100
 time_steps phase1 phase2b phase3b
+lambda 1e-10
+lambda_years 10 20 30 40 50 60 70 80 90 100
 
 # only one year to test if initialisation has converged (compare with end phase2)
 @initialisation_phase Phase3
@@ -63,7 +67,7 @@ processes Recruitment Maturation MatureToPreSpawn halfM
 processes Fishing
 
 @time_step oneb #tagging
-processes  Tagging 
+processes  Tagging
 
 @time_step two # Winter
 processes  halfM MoveImmature MoveMature MovePreSpawning PreSpawnToSpawn
@@ -240,7 +244,7 @@ c 1
 type categorical
 alpha 1
 layer Hills
-category_labels   No Yes  
+category_labels   No Yes
 category_values    1   0
 
 @preference_function PreSpawningDistance
@@ -263,7 +267,7 @@ sigma_r 0.5
 type categorical
 alpha 1
 layer Hills
-category_labels   No Yes  
+category_labels   No Yes
 category_values    0   1
 
 @preference_function PostSpawningDistance

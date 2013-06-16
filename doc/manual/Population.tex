@@ -148,11 +148,7 @@ or simulate observations from the current state.
 
 In addition, each initialisation process can optionally be stopped early if a user defined convergence criteria is met. For a set of user defined years in the initialisation phase, convergence is defined as the proportional absolute summed difference between the the state in year $t-1$ and the state in year $t$, i.e., 
 \begin{equation}
-  \begin{aligned}
-    N_{t-1} =& \sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \text{element}(i,j,k,l) \textrm{ at the end of year } t-1 \textrm{, and} \\
-	  N_{t} =& \sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \text{element}(i,j,k,l) \textrm{ at the end of year } t, \\
-	  \lambda =& (N_{t}-N_{t-1})/N_{t}
-  \end{aligned}
+  \lambda = \frac{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \left|\text{element}(i,j,k,l)_t - \text{element}(i,j,k,l)_{t-1} \right|}{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \frac{}{}\text{element}(i,j,k,l)_t}
 \end{equation}
 
 In each initialisation phase, the processes defined for that phase are carried out and used as the starting point for the following phase or, if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) set at zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail if used in the first phase of an initialisation. 
