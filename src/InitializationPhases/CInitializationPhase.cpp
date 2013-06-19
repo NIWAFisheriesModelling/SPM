@@ -117,9 +117,6 @@ void CInitializationPhase::build() {
     }
 
     if( bConvergenceCheck ) {
-
-      vLambdas.resize(0);
-
       vvWorldCopy.resize(pWorld->getHeight());
       for( int i =0; i < pWorld->getHeight(); ++i)  {
         vvWorldCopy[i].resize(pWorld->getWidth());
@@ -145,6 +142,8 @@ void CInitializationPhase::build() {
 void CInitializationPhase::execute() {
   CDerivedLayerManager *pDerivedLayerManager = CDerivedLayerManager::Instance();
   CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
+
+  vLambdas.resize(0);
 
   // Loop Through and Execute
   for (int i = 0; i < iYears; ++i) {
