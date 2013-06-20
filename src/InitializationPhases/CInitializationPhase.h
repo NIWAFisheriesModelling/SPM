@@ -25,15 +25,16 @@ public:
   virtual                     ~CInitializationPhase();
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        execute();
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
   vector<string>              getTimeStepNames() { return vTimeStepNames; }
   void                        setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
   int                         getNYears() { return iYears; }
+  double                      getLambda() { return dLambda; }
   bool                        getConvergenceCheck() { return bConvergenceCheck; }
-  vector<int>                 getLambdaYears() { return vLambdaYears; }
-  vector<double>              getLambdas() { return vLambdas; }
-  int                         getConvergedYear() { return iConvergedYear; }
+  vector<int>                 getLambdaHatYears() { return vLambdaHatYears; }
+  vector<double>              getLambdaHat() { return vLambdaHat; }
 
 protected:
   int                           iYears;
@@ -48,8 +49,8 @@ protected:
   vector<int>                   vLambdaYears;
   vector<vector<vector<vector<double> > > >  vvWorldCopy;
   CWorldSquare                  *pPreviousSquare;
-  int                           iConvergedYear;
-  vector<double>                vLambdas;
+  vector<double>                vLambdaHat;
+  vector<int>                   vLambdaHatYears;
 
 };
 

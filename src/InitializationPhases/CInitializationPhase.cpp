@@ -36,7 +36,6 @@ CInitializationPhase::CInitializationPhase() {
   dTotalLambda      = 0.0;
   dDiffLambda       = 0.0;
   bConvergenceCheck = false;
-  iConvergedYear    = -1;
 
   // Register parameters
   pParameterList->registerAllowed(PARAM_YEARS);
@@ -128,9 +127,25 @@ void CInitializationPhase::build() {
         }
       }
     }
-
   } catch (string &Ex) {
     Ex = "CInitializationPhase.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CInitializationPhase::rebuild()
+// Rebuild this Initilization phase
+//**********************************************************************
+void CInitializationPhase::rebuild() {
+  try {
+
+    // reset holding container for lambda
+    vLambdaHat.resize(0);
+    vLambdaHatYears.resize(0);
+
+  } catch (string &Ex) {
+    Ex = "CInitializationPhase.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -143,7 +158,6 @@ void CInitializationPhase::execute() {
   CDerivedLayerManager *pDerivedLayerManager = CDerivedLayerManager::Instance();
   CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
 
-  vLambdas.resize(0);
 
   // Loop Through and Execute
   for (int i = 0; i < iYears; ++i) {
@@ -194,12 +208,12 @@ void CInitializationPhase::execute() {
               }
             }
           }
+          vLambdaHat.push_back(dDiffLambda/dTotalLambda);
+          vLambdaHatYears.push_back(i+1);
           // Compare with  dPreviousLambdaValue and exit loop if converged
           if ( (dDiffLambda/dTotalLambda) < dLambda ) {
-            iConvergedYear = i;
             bExit = true;
           }
-          vLambdas.push_back(dDiffLambda/dTotalLambda);
         }
       }
       if(bExit) break;

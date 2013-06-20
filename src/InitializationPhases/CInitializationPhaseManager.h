@@ -35,6 +35,7 @@ public:
   CInitializationPhase*       getInitializationPhase(int index) { return vInitializationPhaseOrder[index]; };
   void                        validate();
   void                        build();
+  void                        rebuild();
   void                        execute();
   virtual                     ~CInitializationPhaseManager();
 

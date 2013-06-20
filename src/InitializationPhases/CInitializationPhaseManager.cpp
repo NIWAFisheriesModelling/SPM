@@ -140,16 +140,35 @@ void CInitializationPhaseManager::build() {
 }
 
 //**********************************************************************
+// void CInitializationPhaseManager::rebuild()
+// Rebuild our initialisation phases
+//**********************************************************************
+void CInitializationPhaseManager::rebuild() {
+  try {
+    foreach( CInitializationPhase *InitializationPhase, vInitializationPhases) {
+      InitializationPhase->rebuild();
+    }
+
+  } catch (string &Ex) {
+    Ex = "CInitializationPhaseManager.rebuild()->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
 // void CInitializationPhaseManager::execute()
 // Execute our Initialization Phases
 //**********************************************************************
 void CInitializationPhaseManager::execute() {
 
-  // Reset Lasr Executed
+  // rebuild any relationships that need rebuilding
+  rebuild();
+
+  // Reset Last Executed
   lastExecutedInitializationPhase = -1;
 
   foreach(CInitializationPhase *Phase, vInitializationPhaseOrder) {
-     // Incremenet Place holder
+     // Increment Place holder
     lastExecutedInitializationPhase++;
 
     pDerivedLayerManager->setInitialisationPhase(lastExecutedInitializationPhase);

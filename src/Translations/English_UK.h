@@ -249,6 +249,7 @@
 #define PARAM_L                                   "l"
 #define PARAM_LABEL                               "label"
 #define PARAM_LAMBDA                              "lambda"
+#define PARAM_LAMBDA_HAT                          "lambda_hat"
 #define PARAM_LAMBDA_YEARS                        "lambda_years"
 #define PARAM_LAYER                               "layer"
 #define PARAM_LAYER_DERIVED_WORLD_VIEW            "layer_derived_view"
