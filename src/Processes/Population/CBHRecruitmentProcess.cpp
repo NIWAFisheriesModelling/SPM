@@ -14,7 +14,6 @@
 // Local headers
 #include "CBHRecruitmentProcess.h"
 #include "../../DerivedQuantities/CDerivedQuantity.h"
-#include "../../DerivedQuantities/CDerivedQuantityManager.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
@@ -327,6 +326,7 @@ void CBHRecruitmentProcess::execute() {
           pDiff->addValue(vCategoryIndex[k], iAgeIndex, (value * vProportions[k]) );
       }
     }
+
 #ifndef OPTIMIZE
   } catch(string &Ex) {
     Ex = "CBHRecruitment.execute(" + getLabel() + ")->" + Ex;
