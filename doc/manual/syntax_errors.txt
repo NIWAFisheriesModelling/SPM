@@ -26,6 +26,7 @@ In SPM, but not in manual
   height
   index
   label
+  lambda_hat
   layer_height
   layer_width
   matrix

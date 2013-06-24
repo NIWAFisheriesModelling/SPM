@@ -19,6 +19,7 @@
 #include "../../Processes/CProcess.h"
 #include "../../Processes/Population/CBHRecruitmentProcess.h"
 #include "../../Processes/Population/CLocalBHRecruitmentProcess.h"
+#include "../../Processes/Population/CProportionalRecruitmentProcess.h"
 #include "../../Processes/Population/CHollingMortalityRateProcess.h"
 #include "../../Processes/Population/CPreySwitchPredationProcess.h"
 #include "../../Selectivities/CSelectivityManager.h"
@@ -227,6 +228,25 @@ void CProcessReport::execute() {
           }
         }
       }
+    }
+
+    // Proportional Recruitment
+    CProportionalRecruitmentProcess *pProportionalRecruit = dynamic_cast<CProportionalRecruitmentProcess*>(pTarget);
+    if (pProportionalRecruit != 0) {
+      //SSBs
+      vector<double> vSSBValues = pProportionalRecruit->getSSBValues();
+      cout << PARAM_SSB_VALUES << ": " ;
+      for (int i=0; i < (int)vSSBValues.size(); ++i) {
+        cout << vSSBValues[i] << (i<((int)vSSBValues.size()-1)?CONFIG_SPACE_SEPARATOR:"");
+      }
+      cout << "\n";
+      //Recruitments
+      vector<double> vRecruitmentValues = pProportionalRecruit->getRecruitmentValues();
+      cout << PARAM_RECRUITMENT_VALUES << ": " ;
+      for (int i=0; i < (int)vRecruitmentValues.size(); ++i) {
+        cout << vRecruitmentValues[i] << (i<((int)vRecruitmentValues.size()-1)?CONFIG_SPACE_SEPARATOR:"");
+      }
+      cout << "\n";
     }
 
     // Holling mortality rates

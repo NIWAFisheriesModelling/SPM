@@ -146,9 +146,9 @@ or simulate observations from the current state.
 
 \SPM\ initialises the initial equilibrium state as an iterative process: a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can take many iterations and be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. Note that the length of the initialisation period may affect the model outputs, and that a period should be chosen to allow the population state to converge.
 
-In addition, each initialisation process can optionally be stopped early if a user defined convergence criteria is met. For a set of user defined years in the initialisation phase, convergence is defined as the proportional absolute summed difference between the the state in year $t-1$ and the state in year $t$, i.e., 
+In addition, each initialisation process can optionally be stopped early if a user defined convergence criteria is met. For a set of user defined years in the initialisation phase, convergence is defined as met if the proportional absolute summed difference between the the state in year $t-1$ and the state in year $t$ ($\widehat{\lambda}$) is less than $\lambda$ where, 
 \begin{equation}
-  \lambda = \frac{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \left|\text{element}(i,j,k,l)_t - \text{element}(i,j,k,l)_{t-1} \right|}{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \frac{}{}\text{element}(i,j,k,l)_t}
+  \widehat{\lambda} = \frac{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \left|\text{element}(i,j,k,l)_t - \text{element}(i,j,k,l)_{t-1} \right|}{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \frac{}{}\text{element}(i,j,k,l)_t}
 \end{equation}
 
 In each initialisation phase, the processes defined for that phase are carried out and used as the starting point for the following phase or, if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) set at zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail if used in the first phase of an initialisation. 
@@ -203,16 +203,16 @@ Population processes are those processes that change the population state of ind
 
 \subsubsection{\I{Recruitment}}
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements three types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, and \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}.
+Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements four types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}, and recruitment proportional to an abundance or biomass \index{Proportional recruitment}\index{Recruitment ! proportional}.
 
 In the recruitment processes, the number of individuals are added to a single age class within the partition, with the amount defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
-For the constant and Beverton-Holt recruitment processes, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
+For the constant, Beverton-Holt, and proportional recruitment processes, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k(R_y / n) \frac{L_ij}{\sum_ij L_ij}
 \end{equation}
 
-where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, $n$ is the number of spatial locations where recruitment occurs, and the recruitment to each cell is scaled to be proportional to the value of the layer in that cell. See below for how $R_y$ is determined in each of these cases.
+where age is the age defined as the recruitment age, $p_k$ is the proportion to category $k$ defined to have recruitment, $n$ is the number of spatial locations where recruitment occurs, and the recruitment to each cell is scaled to be proportional to the value of the layer in that cell. See below for how $R_y$ is determined in each of these cases.
 
 In the local Beverton-Holt recruitment process, individuals are recruited to an individual cell, based on the local abundance or biomass (i.e., the local SSB). For each cell where cell$(i,j)$ is a member of some layer $L_R$, the number of individuals in that cell following recruitment in each year $y$ is 
 \begin{equation}
@@ -275,7 +275,7 @@ YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 2
 \end{verbatim}}}
 
-Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, he offset will need to be specified as $age + 1$.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, the offset will need to be specified as $age + 1$.
 
 \subsubsection*{\I{Local Beverton-Holt recruitment}}
 
@@ -312,7 +312,36 @@ YCS_values   1    1    1    1    1    1    1    1    1    1    1    1    1
 SSB_offset 2
 \end{verbatim}}}
 
-Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, he offset will need to be specified as $age + 1$.
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, the offset will need to be specified as $age + 1$.
+
+\subsubsection*{\I{Proportional recruitment}}
+
+In the proportional recruitment process the total number of recruits added each year is $R_y$, and is the product of a multiplier ($\lambda$) and a measure of abundance or biomass, i.e.,
+\begin{equation}
+  R_y = \lambda \times SSB_{y-offset}
+\end{equation}
+  
+where $offset$ is the number of years offset to link the year class with the year of spawning $y$.
+
+Note that the proportional recruitment process requires a value for $SSB_y$ in each year, with a default value that is applied in the initialisation phases where $SSB_y$ is not be available. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to be $R_0$. Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
+
+For example, assume a proportional recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is 0.5 the female breeding abundance, and placed into areas in proportion to the value of the layer \texttt{MyRecruitment}. The \texttt{female\_abundance} is a derived layer that specifies the total number of breeding females, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. Recruits enter into the model two years following spawning. Then the command specification is,
+
+{\small{\begin{verbatim}
+@process Recruitment
+type proportional_recruitment
+categories immature
+proportions 1.0
+lambda 0.5
+R0 500000
+age 1
+layer MyRecruitment
+B0 phase1
+SSB female_abundance
+SSB_offset 2
+\end{verbatim}}}
+
+Note that if not specified, $SSB\_offset$ is set at the value of $age$. This corresponds to cases where recruitment happens after spawning. $SSB\_offset$ can be user-defined to a different value if needed --- for example, if recruitment happens in a time-step before spawning, the offset will need to be specified as $age + 1$.
 
 \subsubsection{\I{Ageing}\label{sec:ageing}}
 
