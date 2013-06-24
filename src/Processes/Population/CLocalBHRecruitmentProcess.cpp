@@ -12,8 +12,8 @@
 #include <limits>
 
 // Local headers
+#include "CLocalBHRecruitmentProcess.h"
 #include "../../DerivedLayers/CDerivedLayer.h"
-#include "../../DerivedLayers/CDerivedLayerManager.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
@@ -22,7 +22,6 @@
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../TimeSteps/CTimeStepManager.h"
-#include "CLocalBHRecruitmentProcess.h"
 
 // Using
 using std::cout;
@@ -109,24 +108,26 @@ void CLocalBHRecruitmentProcess::validate() {
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
+    //Check SSBOffset is a non-negative int
+    if (iSSBOffset < 0)
+      CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
+
     //***************************************************
     // Validate the Standardise YCS Year Range
     if(vStandardiseYCSYears.size() == 0) {
       for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i ) {
-        vStandardiseYCSYears.push_back(i);
+        vStandardiseYCSYears.push_back(i - iSSBOffset);
       }
-    }
-
-    if(vStandardiseYCSYears.size() > 1) {
+    } else if(vStandardiseYCSYears.size() > 1) {
       for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i ) {
         if(vStandardiseYCSYears[i-1] >= vStandardiseYCSYears[i] )
           CError::error(PARAM_YCS_YEARS + string(" is not in numeric order"));
       }
     }
 
-    if (vStandardiseYCSYears[0] < pWorld->getInitialYear())
+    if (vStandardiseYCSYears[0] < (pWorld->getInitialYear() - iSSBOffset))
       CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
-    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > pWorld->getCurrentYear())
+    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > (pWorld->getCurrentYear() - iSSBOffset))
       CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
 
     //Check that a value of YCSValues supplied for each YCSYear
@@ -142,9 +143,6 @@ void CLocalBHRecruitmentProcess::validate() {
       if (!CComparer::isNonNegative(dValue))
         CError::errorLessThan(PARAM_YCS_VALUES, PARAM_ZERO);
     }
-    //Check SSBOffset is a non-negative int
-    if (iSSBOffset < 0)
-      CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CLocalBHRecruitment.validate(" + getLabel() + ")->" + Ex;
@@ -229,7 +227,7 @@ void CLocalBHRecruitmentProcess::rebuild() {
 
     // Create vector of YCS years
     for (int i=pWorld->getInitialYear(); i <= pWorld->getCurrentYear();  ++i) {
-     vYCSYears.push_back(i);
+     vYCSYears.push_back(i - iSSBOffset);
     }
 
     // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears
