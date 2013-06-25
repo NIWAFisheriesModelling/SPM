@@ -201,6 +201,7 @@ src/Processes/Population/CEventMortalityProcess.cpp
 src/Processes/Population/CHollingMortalityRateProcess.cpp
 src/Processes/Population/CLocalBHRecruitmentProcess.cpp
 src/Processes/Population/CPreySwitchPredationProcess.cpp
+src/Processes/Population/CProportionalRecruitmentProcess.cpp
 src/Profiles/CProfile.cpp
 src/Profiles/CProfileManager.cpp
 src/Profiles/Factory/CProfileFactory.cpp
