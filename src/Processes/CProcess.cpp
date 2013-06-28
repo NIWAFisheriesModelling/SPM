@@ -7,7 +7,9 @@
 // $Date$
 //============================================================================
 
-// Local Headers
+// headers
+#include <omp.h>
+
 #include "CProcess.h"
 #include "../Penalties/CPenaltyManager.h"
 #include "../Selectivities/CSelectivityManager.h"
@@ -21,6 +23,7 @@
 CProcess::CProcess() {
   sType = "";
   bRequiresMerge = true;
+  iNumberOfProcesses = omp_get_num_procs();
 }
 
 //**********************************************************************
@@ -102,11 +105,8 @@ void CProcess::build() {
 // Base execution
 //**********************************************************************
 void CProcess::execute() {
-#ifndef OPTIMIZE
-  try {
-#endif
-    // Default Variables
-    dCurrent  = 0.0;
+  // Default Variables
+  dCurrent  = 0.0;
 
     // Set Up Our Layer
 //    if (bDependsOnLayer) {
@@ -115,13 +115,6 @@ void CProcess::execute() {
 //      else
 //        pLayer->defaultMinMax();
 //    }
-
-#ifndef OPTIMIZE
-  } catch (string &Ex) {
-    Ex = "CProcess.execute(" + getLabel() + ")->" + Ex;
-    throw Ex;
-  }
-#endif
 }
 //**********************************************************************
 // bool CProcess::checkUsableSquare(CWorldSquare *Square, int iX, int iY)

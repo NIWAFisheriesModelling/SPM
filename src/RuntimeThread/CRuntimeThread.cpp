@@ -196,7 +196,7 @@ void CRuntimeThread::executeEstimationRun() {
     pMinimizerManager->execute(vEstimationPhases[i]);
 
     string reportSuffix = "";
-    if( i < (vEstimationPhases.size()-1) )
+    if( i < (int)(vEstimationPhases.size()-1) )
       reportSuffix = ".phase_" + boost::lexical_cast<string>(i+1);
     CReportManager::Instance()->setReportSuffix(reportSuffix);
 

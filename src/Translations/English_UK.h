@@ -314,6 +314,7 @@
 #define PARAM_PREDATOR_CATEGORIES                 "predator_categories"
 #define PARAM_PREDATOR_SELECTIVITIES              "predator_selectivities"
 #define PARAM_PREFERENCE_MOVEMENT                 "preference"
+#define PARAM_PREFERENCE_MOVEMENT_THREADED        "preference_threaded"
 #define PARAM_PREFERENCE_FUNCTION                 "preference_function"
 #define PARAM_PREFERENCE_FUNCTIONS                "preference_functions"
 #define PARAM_PREY_CATEGORIES                     "prey_categories"

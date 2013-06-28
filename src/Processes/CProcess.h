@@ -48,6 +48,7 @@ protected:
   double                     dSelectivityResult;
   string                     sType;
   bool                       bRequiresMerge;
+  int                        iNumberOfProcesses;
 };
 
 #endif /*CPROCESS_H_*/

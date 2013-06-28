@@ -45,7 +45,7 @@ BOOST_FIXTURE_TEST_CASE( Abundance_Derived_Layer, C1x1_Fixture ) {
   // Check our Results
   CDerivedLayerManager *pManager  = CDerivedLayerManager::Instance();
   CDerivedLayer        *pLayer    = pManager->getDerivedLayer("derived_layer_abundance");
-  CWorldSquare         *pSquare   = getSquare();
+//  CWorldSquare         *pSquare   = getSquare();
 
   // Check Results
 

@@ -7,7 +7,8 @@
 // $Date$
 //============================================================================
 
-// Local Headers
+#include <omp.h>
+
 #include "../Helpers/CError.h"
 #include "../Helpers/DefinedValues.h"
 #include "CWorld.h"
@@ -127,6 +128,7 @@ void CWorldSquare::addValue(int RowIndex, int ColIndex, double Value) {
       CError::errorLessThan(PARAM_COLUMN_INDEX, PARAM_ZERO);
 #endif
 
+    #pragma omp atomic
     pGrid[RowIndex][ColIndex] += Value;
 
 #ifndef OPTIMIZE
@@ -154,6 +156,7 @@ void CWorldSquare::subValue(int RowIndex, int ColIndex, double Value) {
       CError::errorLessThan(PARAM_COLUMN_INDEX, PARAM_ZERO);
 #endif
 
+    #pragma omp atomic
     pGrid[RowIndex][ColIndex] -= Value;
 
 #ifndef OPTIMIZE
