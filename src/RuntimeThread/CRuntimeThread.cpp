@@ -280,7 +280,7 @@ void CRuntimeThread::startModel() {
   // Set State To Burn-In (Initialisation) & Execute
   eCurrentState = STATE_INITIALIZATION;
   CInitializationPhaseManager::Instance()->execute();
-  CReportManager::Instance()->execute(eCurrentState);
+//  CReportManager::Instance()->execute(eCurrentState);
 
   // Flag and start modelling
   eCurrentState = STATE_MODELLING;

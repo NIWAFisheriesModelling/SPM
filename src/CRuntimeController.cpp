@@ -23,6 +23,7 @@
 #include "Minimizers/CMinimizerManager.h"
 #include "ConfigurationLoaders/CConfigurationLoader.h"
 #include "Helpers/CError.h"
+#include "Reports/Factory/CReportFactory.h"
 
 // Singleton Variable
 CRuntimeController* CRuntimeController::clInstance = 0;
@@ -96,6 +97,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
       ("forward,f", "Forward projections")
       ("simulate,s", value<int>(), "Simulate observations")
       ("input,i", value<string>(), "Load free parameter values from file")
+      ("estimates,o", value<string>(), "Create estimate values report")
       // ("threads,t", value<int>(), "Number of threads to spawn")
       ("quiet,q", "Run in quiet mode")
       ("seed,g", value<int>(), "Random number seed");
@@ -193,6 +195,15 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
   // Set number of simulation candidates to generate
   if (vmParams.count("simulate"))
     pConfig->setSimulationCandidates(vmParams["simulate"].as<int>());
+
+  if (vmParams.count("estimates")) {
+    string sReportName = vmParams["estimates"].as<string>();
+
+    CReport* report = CReportFactory::buildReport(PARAM_ESTIMATE_VALUE, true);
+    report->addParameter(PARAM_LABEL, PARAM_ESTIMATE_VALUE);
+    report->addParameter(PARAM_TYPE, PARAM_ESTIMATE_VALUE);
+    report->addParameter(PARAM_FILE_NAME, sReportName);
+  }
 }
 
 //**********************************************************************

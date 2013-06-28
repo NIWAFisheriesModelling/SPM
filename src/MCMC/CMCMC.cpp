@@ -309,7 +309,7 @@ void CMCMC::execute() {
         iJumps++;
         iJumpsSinceAdapt++;
       }
-    } while (iSuccessfulJumps <= iLength);
+    } while (iSuccessfulJumps < iLength);
 
     if(!(pConfig->getQuietMode())) {
       std::cerr << "\n" ;
