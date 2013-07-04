@@ -24,7 +24,7 @@ IF (WIN32)
   LINK_DIRECTORIES("D:/Programming/Boost/boost_1_53_0/stage/lib")
   
   # Alistair's Build Environment
-  LINK_DIRECTORIES("C:/Progra~1/boost/boost_1_48_0/stage/lib")
+  LINK_DIRECTORIES("C:/Progra~1/boost/boost_1_54_0/stage/lib")
   
   # Generic Build Settings
   SET(LINK_OPTIONS "-static icon.o")
@@ -38,11 +38,11 @@ IF (WIN32)
   SET(MAIN_LIBRARIES
     gomp
     pthread
-    boost_system-mgw47-mt-s-1_53
-    boost_filesystem-mgw47-mt-s-1_53
-    boost_thread-mgw47-mt-s-1_53
-    boost_program_options-mgw47-mt-s-1_53
-    boost_chrono-mgw47-mt-s-1_53
+    boost_system-mgw47-mt-s-1_54
+    boost_filesystem-mgw47-mt-s-1_54
+    boost_thread-mgw47-mt-s-1_54
+    boost_program_options-mgw47-mt-s-1_54
+    boost_chrono-mgw47-mt-s-1_54
   )
   SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_53)
   
