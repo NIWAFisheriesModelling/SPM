@@ -203,7 +203,7 @@ void CInitializationPhase::execute() {
               for (int k = 0; k < pBaseSquare->getHeight(); ++k) {
                 for (int l = 0; l < pBaseSquare->getWidth(); ++l) {
                   dTotalLambda += pBaseSquare->getValue(k, l);
-                  dDiffLambda += abs( pBaseSquare->getValue(k, l) - vvWorldCopy[i2][j2][k][l]);
+                  dDiffLambda += fabs( pBaseSquare->getValue(k, l) - vvWorldCopy[i2][j2][k][l]);
                 }
               }
             }
