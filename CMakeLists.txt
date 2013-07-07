@@ -44,7 +44,7 @@ IF (WIN32)
     boost_program_options-mgw47-mt-s-1_54
     boost_chrono-mgw47-mt-s-1_54
   )
-  SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_53)
+  SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_54)
   
 ELSE (WIN32)
   SET(BOOST_LIBS "/opt/boost148/lib64/")
