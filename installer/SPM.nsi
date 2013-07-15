@@ -132,6 +132,7 @@ SectionIn RO
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "..\\spm.exe"
+  File "pthreadGC2_64.dll"
   File "run SPM.lnk"
   File "..\\src\\SPM-file.ico"
   File "..\\doc\\manual\\SPM.pdf"
@@ -254,6 +255,7 @@ Section Uninstall
   Delete "$INSTDIR\SPM.pdf"
   Delete "$INSTDIR\SPM-file.ico"
   Delete "$INSTDIR\spm.exe"
+  Delete "$INSTDIR\pthreadGC2_64.dll"
   Delete "$INSTDIR\Run SPM.lnk"
   Delete "$INSTDIR\Install.log"
   Delete "$INSTDIR\SPM.syn"

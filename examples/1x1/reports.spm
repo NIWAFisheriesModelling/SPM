@@ -33,10 +33,6 @@ file_name objective_values.dat
 @report estimate-summary
 type estimate_summary
 
-@report estimate-values
-type estimate_value
-file_name MPD.dat
-
 @report AgeError
 type ageing_error
 ageing_error normal

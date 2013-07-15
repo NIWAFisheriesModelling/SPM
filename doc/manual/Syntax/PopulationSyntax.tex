@@ -681,6 +681,23 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid preference function labels defined by \command{preference\_function}}
 
+\subsubsection[Multi-threaded preference movement]{\commandlabsubarg{process}{type}{preference\_threaded}}
+
+\defSub{categories} {Define the categories that the preference function movement is applied to}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{proportion} {Define the constant multiplier for the proportion that the preference function movement is applied to}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{A real number between 0 and 1, inclusive}
+
+\defSub{preference\_functions} {Define the labels of the individual  preference functions that make up the total preference function}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid preference function labels defined by \command{preference\_function}}
+
 \subsection{\I{Preference functions}}
 
 The individual preference functions available are,

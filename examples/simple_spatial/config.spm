@@ -35,7 +35,7 @@ lambda_years 10 20 30 40 50 60 70 80 90 100
 @initialisation_phase Phase2
 years 100
 time_steps initial_step_two
-lambda 1e-10
+lambda 1e-30
 lambda_years 10 20 30 40 50 60 70 80 90 100
 
 @time_step initial_step_one
@@ -88,7 +88,7 @@ type event_mortality
 categories immature mature
 years 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
 layers Catch1998 Catch1999 Catch2000 Catch2001 Catch2002 Catch2003 Catch2004 Catch2005 Catch2006 Catch2007
-u_max 0.99
+u_max 0.5
 selectivities FishingSel FishingSel
 penalty event_mortality_penalty
 

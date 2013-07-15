@@ -39,7 +39,6 @@ type estimate_summary
 
 @report estimate-value
 type estimate_value
-file_name MPD.dat
 
 @report Objective_Score
 type objective_function
@@ -65,10 +64,6 @@ type covariance
 
 @report estimate-mpd
 type estimate_value
-
-@report estimate
-type estimate_value
-file_name MPD.dat
 
 @report Abundance
 type layer
