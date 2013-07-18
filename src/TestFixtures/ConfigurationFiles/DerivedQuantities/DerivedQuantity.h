@@ -18,5 +18,13 @@ const string derived_quantity =
   "layer double\n"
   "selectivities constant constant constant\n";
 
+const string derived_quantity_SSB =
+  "@derived_quantity SSB\n"
+  "type abundance\n"
+  "time_step step_one\n"
+  "categories spawning\n"
+  "layer double\n"
+  "selectivities constant\n";
+
 #endif /* DERIVEDQUANTITY_H_ */
 #endif /* TEST */
