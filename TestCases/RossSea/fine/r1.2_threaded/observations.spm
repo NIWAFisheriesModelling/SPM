@@ -1,0 +1,82 @@
+# The observations
+
+
+# Maturity at age observations
+@include "observations/Maturity-2002.spm"
+@include "observations/Maturity-2003.spm"
+@include "observations/Maturity-2004.spm"
+@include "observations/Maturity-2005.spm"
+@include "observations/Maturity-2006.spm"
+@include "observations/Maturity-2007.spm"
+@include "observations/Maturity-2008.spm"
+@include "observations/Maturity-2009.spm"
+@include "observations/Maturity-2010.spm"
+#@include "observations/Maturity-2011.spm" # 2011 ages not reread yet
+
+
+# Spawning at age observations
+@include "observations/Spawning-2002.spm"
+@include "observations/Spawning-2003.spm"
+@include "observations/Spawning-2004.spm"
+@include "observations/Spawning-2005.spm"
+@include "observations/Spawning-2006.spm"
+@include "observations/Spawning-2007.spm"
+@include "observations/Spawning-2008.spm"
+@include "observations/Spawning-2009.spm"
+@include "observations/Spawning-2010.spm"
+
+# Catch at age observations
+@include "observations/CAA-1998.spm"
+@include "observations/CAA-1999.spm"
+@include "observations/CAA-2000.spm"
+@include "observations/CAA-2001.spm"
+@include "observations/CAA-2002.spm"
+@include "observations/CAA-2003.spm"
+@include "observations/CAA-2004.spm"
+@include "observations/CAA-2005.spm"
+@include "observations/CAA-2006.spm"
+@include "observations/CAA-2007.spm"
+@include "observations/CAA-2008.spm"
+@include "observations/CAA-2009.spm"
+@include "observations/CAA-2010.spm"
+#@include "observations/CAA-2011.spm"
+
+# CPUE observations
+@include "observations/CPUE-1998.spm"
+@include "observations/CPUE-1999.spm"
+@include "observations/CPUE-2000.spm"
+@include "observations/CPUE-2001.spm"
+@include "observations/CPUE-2002.spm"
+@include "observations/CPUE-2003.spm"
+@include "observations/CPUE-2004.spm"
+@include "observations/CPUE-2005.spm"
+@include "observations/CPUE-2006.spm"
+@include "observations/CPUE-2007.spm"
+@include "observations/CPUE-2008.spm"
+@include "observations/CPUE-2009.spm"
+@include "observations/CPUE-2010.spm"
+@include "observations/CPUE-2011.spm"
+
+# Tag-release observations
+@include "observations/TagRelease-2001.spm"
+@include "observations/TagRelease-2002.spm"
+@include "observations/TagRelease-2003.spm"
+@include "observations/TagRelease-2004.spm"
+@include "observations/TagRelease-2005.spm"
+@include "observations/TagRelease-2006.spm"
+@include "observations/TagRelease-2007.spm"
+@include "observations/TagRelease-2008.spm"
+@include "observations/TagRelease-2009.spm"
+@include "observations/TagRelease-2010.spm"
+
+# Tag-recapture observations (for releases)
+@include "observations/TR-2002.spm"
+@include "observations/TR-2003.spm"
+@include "observations/TR-2004.spm"
+@include "observations/TR-2005.spm"
+@include "observations/TR-2006.spm"
+@include "observations/TR-2007.spm"
+@include "observations/TR-2008.spm"
+@include "observations/TR-2009.spm"
+@include "observations/TR-2010.spm"
+#@include "observations/TR-2011.spm" #age wrong

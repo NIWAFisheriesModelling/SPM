@@ -1,0 +1,69 @@
+# The reports/outputs
+
+@report random_seed
+type random_number_seed
+
+@report spatial-map
+type spatial_map
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report initialisation-phase2
+type initialisation
+initialisation_phase Phase2
+
+@report initialisation-phase3
+type initialisation
+initialisation_phase Phase3
+
+@report SSB_layer
+type layer
+layer SSB_layer
+years 1995-2011
+time_step two
+
+@report estimate-summary
+type estimate_summary
+
+@report objective
+type objective_function
+
+@report Maturation
+type selectivity
+selectivity Maturation
+
+@report FishingSel
+type selectivity
+selectivity FishingSel
+
+@report Tagging
+type selectivity
+selectivity TagSel
+
+@report covariance
+type covariance
+
+@report estimate-mpd
+type estimate_value
+
+@report estimate
+type estimate_value
+file_name MPD.dat
+
+@report TagRelease2001
+type layer
+layer TagRelease2001
+
+@report Recruitment
+type process
+process Recruitment
+
+@report ageweight
+type age_weight
+age_size VB
+
+@report MCMC
+type MCMC
+file_name MCMC.log
