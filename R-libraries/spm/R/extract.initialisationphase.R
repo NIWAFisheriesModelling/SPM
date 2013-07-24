@@ -5,12 +5,14 @@ function(lines){
   index.end<-(1:length(lines))[substring(lines,1,4)=="*end"][1]
   if(index.start >= index.end) stop("Error")
   if(substring(lines[index.start+4],1,6)=="lambda") {
+    has.lambda<-TRUE
     lambda<-spm.string.to.vector.of.numbers(substring(lines[index.start+4],regexpr(":",lines[index.start+4])+1))
     lambdahat<-spm.string.to.vector.of.numbers(substring(lines[index.start+5],regexpr(":",lines[index.start+5])+1))
     lambdayears<-spm.string.to.vector.of.numbers(substring(lines[index.start+6],regexpr(":",lines[index.start+6])+1))
     start.line <- 7
   } else {
-    start.line <- 5
+    has.lambda<-FALSE
+    start.line <- 4
   }
   col.labs<-spm.string.to.vector.of.words(lines[start.line+index.start])
   values<-spm.string.to.vector.of.words(lines[(start.line+index.start+1):(index.end-1)])
@@ -25,8 +27,15 @@ function(lines){
   res$report.type<-substring(lines[index.start+1],14)
   res$phase<-substring(lines[index.start+2],38)
   res$years<-substring(lines[index.start+3],8)
-  res$lambda<-lambda
-  res$lambda.years<-lambdayears
+  if(has.lambda) {
+    res$lambda<-lambda
+    res$lambda.hat<-lambdahat
+    res$lambda.years<-lambdayears
+  } else {
+    res$lambda<-NA
+    res$lambda.hat<-NA
+    res$lambda.years<-NA
+  }
   res$data<-values
   return(res)
 }
