@@ -6,14 +6,22 @@ function(lines){
   if(index.start >= index.end) stop("Error")
   if(substring(lines[index.start+4],1,6)=="lambda") {
     has.lambda<-TRUE
+    has.year <-TRUE
     lambda<-spm.string.to.vector.of.numbers(substring(lines[index.start+4],regexpr(":",lines[index.start+4])+1))
     lambdahat<-spm.string.to.vector.of.numbers(substring(lines[index.start+5],regexpr(":",lines[index.start+5])+1))
     lambdayears<-spm.string.to.vector.of.numbers(substring(lines[index.start+6],regexpr(":",lines[index.start+6])+1))
     start.line <- 7
-  } else {
-    has.lambda<-FALSE
+  } else if(substring(lines[index.start+2],1,5)=="years") {
+    # For backwards compatibility ... we can delete has.year at some stage in the future
     start.line <- 4
+    has.lambda<-FALSE
+    has.year <-TRUE
+  } else {
+    start.line <- 3
+    has.lambda<-FALSE
+    has.year <-FALSE
   }
+  print(has.year)
   col.labs<-spm.string.to.vector.of.words(lines[start.line+index.start])
   values<-spm.string.to.vector.of.words(lines[(start.line+index.start+1):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
@@ -34,7 +42,8 @@ function(lines){
   } else {
     res$lambda<-NA
     res$lambda.hat<-NA
-    res$lambda.years<-NA
+    if(has.year) res$lambda.years<-substring(lines[index.start+3],8)
+    else res$lambda.years<-NA
   }
   res$data<-values
   return(res)
