@@ -20,8 +20,8 @@ SET(OPTI_NAME spm)
 
 IF (WIN32)
   # Scott's Build Environment Variables
-  INCLUDE_DIRECTORIES("D:/Programming/Boost/boost_1_53_0/")
-  LINK_DIRECTORIES("D:/Programming/Boost/boost_1_53_0/stage/lib")
+  #INCLUDE_DIRECTORIES("D:/Programming/Boost/boost_1_53_0/")
+  #LINK_DIRECTORIES("D:/Programming/Boost/boost_1_53_0/stage/lib")
   
   # Alistair's Build Environment
   LINK_DIRECTORIES("C:/Progra~1/boost/boost_1_54_0/stage/lib")

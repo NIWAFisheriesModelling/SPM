@@ -25,7 +25,7 @@ class CTimeStep;
 class CObservationManager;
 class CReportManager;
 class CDerivedQuantityManager;
-class CDerivedLayerManager;
+class CDerivedQuantityByCellManager;
 
 //**********************************************************************
 //
@@ -56,16 +56,16 @@ protected:
   CTimeStepManager();
 
   // Variables
-  int                         iFirstHumanYear;
-  int                         iNumberOfYears;
-  int                         iCurrentYear;
-  int                         iCurrentTimeStep;
-  CObservationManager         *pObservationManager;
-  CReportManager              *pReporterManager;
-  vector<CTimeStep*>          vMasterTimeStepList;
-  vector<CTimeStep*>          vTimeSteps;
-  CDerivedQuantityManager     *pDerivedQuantityManager;
-  CDerivedLayerManager        *pDerivedLayerManager;
+  int                              iFirstHumanYear;
+  int                              iNumberOfYears;
+  int                              iCurrentYear;
+  int                              iCurrentTimeStep;
+  CObservationManager              *pObservationManager;
+  CReportManager                   *pReporterManager;
+  vector<CTimeStep*>               vMasterTimeStepList;
+  vector<CTimeStep*>               vTimeSteps;
+  CDerivedQuantityManager          *pDerivedQuantityManager;
+  CDerivedQuantityByCellManager  *pDerivedQuantityByCellManager;
 
 private:
   static boost::thread_specific_ptr<CTimeStepManager> clInstance;

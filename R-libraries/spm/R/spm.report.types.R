@@ -5,7 +5,7 @@ spm.report.types <- function ()
            "age_weight",
            "covariance",
            "derived_quantity",
-           "derived_layer",
+           "derived_quantity_by_cell",
            "estimate_summary",
            "estimate_value",
            "initialisation",

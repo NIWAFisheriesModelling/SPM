@@ -6,32 +6,32 @@
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CDERIVEDLAYERREPORT_H_
-#define CDERIVEDLAYERREPORT_H_
+#ifndef CDERIVEDQUANTITYBYCELLREPORT_H_
+#define CDERIVEDQUANTITYBYCELLREPORT_H_
 
 // Local headers
 #include "Base/CFileReport.h"
 
 // Forward-Declaration
-class CDerivedLayer;
+class CDerivedQuantityByCell;
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CDerivedLayerReport: public CFileReport {
+class CDerivedQuantityByCellReport: public CFileReport {
 public:
-  CDerivedLayerReport();
-  virtual                  ~CDerivedLayerReport();
-  CReport*                 clone() { return new CDerivedLayerReport(*this); }
+  CDerivedQuantityByCellReport();
+  virtual                  ~CDerivedQuantityByCellReport();
+  CReport*                 clone() { return new CDerivedQuantityByCellReport(*this); }
   void                     validate();
   void                     build();
   void                     execute();
 
 protected:
-  string                   sDerivedLayer;
-  CDerivedLayer            *pDerivedLayer;
+  string                   sDerivedQuantityByCell;
+  CDerivedQuantityByCell            *pDerivedQuantityByCell;
   bool                     bPrintInitialisation;
 };
 
-#endif /* CDERIVEDLAYERREPORT_H_ */
+#endif /* CDERIVEDQUANTITYBYCELLREPORT_H_ */

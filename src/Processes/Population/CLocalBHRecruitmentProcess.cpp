@@ -13,7 +13,7 @@
 
 // Local headers
 #include "CLocalBHRecruitmentProcess.h"
-#include "../../DerivedLayers/CDerivedLayer.h"
+#include "../../DerivedQuantitiesByCell/CDerivedQuantityByCell.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
@@ -164,7 +164,7 @@ void CLocalBHRecruitmentProcess::build() {
       pR0Layer = CLayerManager::Instance()->getNumericLayer(sR0Layer);
 
     // Get our derived layer (SSB)
-    pDerivedLayer = CDerivedLayerManager::Instance()->getDerivedLayer(sSSB);
+    pDerivedQuantityByCell = CDerivedQuantityByCellManager::Instance()->getDerivedQuantityByCell(sSSB);
 
     // Get our initialisation
     pInitializationPhaseManager = CInitializationPhaseManager::Instance();
@@ -268,8 +268,8 @@ void CLocalBHRecruitmentProcess::execute() {
       // We are in an initialisation phase
       if ( pInitializationPhaseManager->getLastExecutedInitializationPhase() <= iPhaseB0 ) {
         // If in a phase before we have defined B0, then just assume a constant recruitment of dR0
-        for (int i = 0; i < pDerivedLayer->getHeight(); ++i) {
-          for (int j = 0; j < pDerivedLayer->getWidth(); ++j) {
+        for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+          for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j) {
             // Check if this square is enabled or not.
             if (!pWorld->getBaseSquare(i, j)->getEnabled()) {
               continue;
@@ -283,10 +283,10 @@ void CLocalBHRecruitmentProcess::execute() {
         }
       } else {
         // Get our B0 (assumed to be the LAST value in the defined initialisation)
-        dB0 = pDerivedLayer->getInitialisationValue(iPhaseB0,(pDerivedLayer->getInitialisationValuesSize(iPhaseB0)) - 1);
-        Data dSSBvalue= pDerivedLayer->getValue(iSSBOffset);
-        for (int i = 0; i < pDerivedLayer->getHeight(); ++i) {
-          for (int j=0; j< pDerivedLayer->getWidth(); ++j) {
+        dB0 = pDerivedQuantityByCell->getInitialisationValue(iPhaseB0,(pDerivedQuantityByCell->getInitialisationValuesSize(iPhaseB0)) - 1);
+        Data dSSBvalue= pDerivedQuantityByCell->getValue(iSSBOffset);
+        for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+          for (int j=0; j< pDerivedQuantityByCell->getWidth(); ++j) {
             // Calculate the Stock-recruit relationship
             // And apply to calculate this events recruitment
             // Check if this square is enabled or not.
@@ -309,10 +309,10 @@ void CLocalBHRecruitmentProcess::execute() {
       double dYCS = vStandardiseYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
 
       // Get SSB (and SSB:B0 ratio)
-      dB0 = pDerivedLayer->getInitialisationValue(iPhaseB0,(pDerivedLayer->getInitialisationValuesSize(iPhaseB0)) - 1);
-      Data dSSBvalue= pDerivedLayer->getValue(iSSBOffset);
-      for (int i = 0; i < pDerivedLayer->getHeight(); ++i) {
-        for (int j = 0; j < pDerivedLayer->getWidth(); ++j) {
+      dB0 = pDerivedQuantityByCell->getInitialisationValue(iPhaseB0,(pDerivedQuantityByCell->getInitialisationValuesSize(iPhaseB0)) - 1);
+      Data dSSBvalue= pDerivedQuantityByCell->getValue(iSSBOffset);
+      for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+        for (int j = 0; j < pDerivedQuantityByCell->getWidth(); ++j) {
           // Calculate the Stock-recruit relationship
           // And apply to calculate this events recruitment
           // Check if this square is enabled or not.
@@ -333,12 +333,12 @@ void CLocalBHRecruitmentProcess::execute() {
       // Retain these for later reporting
       vTrueYCSValues.push_back(dTrueYCS);
       vRecruitmentValues.push_back(dAmountPer);
-      vSSBValues.push_back(pDerivedLayer->getValue(iSSBOffset));
+      vSSBValues.push_back(pDerivedQuantityByCell->getValue(iSSBOffset));
     }
 
     // Iterate over the world and apply
-    for (int i = 0; i < pDerivedLayer->getHeight(); ++i) {
-      for (int j=0; j< pDerivedLayer->getWidth(); ++j) {
+    for (int i = 0; i < pDerivedQuantityByCell->getHeight(); ++i) {
+      for (int j=0; j< pDerivedQuantityByCell->getWidth(); ++j) {
         // Check for non-negative values
         if (!CComparer::isNonNegative(dAmountPer[i][j])) {
           CError::errorLessThan(PARAM_R0,PARAM_ZERO);

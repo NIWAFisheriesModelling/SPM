@@ -1,12 +1,12 @@
 //============================================================================
-// Name        : CSampleDerivedLayer.cpp
+// Name        : CSampleDerivedQuantityByCell.cpp
 // Author      : S.Rasmussen
 // Date        : 18/06/2012
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
 
 // Headers
-#include "CBiomassDerivedLayer.h"
+#include "CBiomassDerivedQuantityByCell.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../InitializationPhases/CInitializationPhase.h"
@@ -26,7 +26,7 @@ using std::endl;
 //
 //
 //**********************************************************************
-CBiomassDerivedLayer::CBiomassDerivedLayer() {
+CBiomassDerivedQuantityByCell::CBiomassDerivedQuantityByCell() {
 
   //Variables
   pLayer = 0;
@@ -42,10 +42,10 @@ CBiomassDerivedLayer::CBiomassDerivedLayer() {
 }
 
 //**********************************************************************
-// void CDerivedLayer::validate()
+// void CDerivedQuantityByCell::validate()
 // Validate our Derived Layer
 //**********************************************************************
-void CBiomassDerivedLayer::validate() {
+void CBiomassDerivedQuantityByCell::validate() {
   try {
     // Base
     CBaseBuild::validate();
@@ -66,18 +66,18 @@ void CBiomassDerivedLayer::validate() {
       CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
 
   } catch (string &Ex) {
-    Ex = "CBiomassDerivedLayer.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CBiomassDerivedQuantityByCell.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CDerivedLayer::build()
+// void CDerivedQuantityByCell::build()
 // Build our Derived Layer
 //**********************************************************************
-void CBiomassDerivedLayer::build() {
+void CBiomassDerivedQuantityByCell::build() {
   try {
-    CDerivedLayer::build();
+    CDerivedQuantityByCell::build();
 
     // Get TimeStep and Layer
     pTimeStepManager = CTimeStepManager::Instance();
@@ -120,16 +120,16 @@ void CBiomassDerivedLayer::build() {
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
   } catch (string &Ex) {
-    Ex = "CBiomassDerivedLayer.build(" + getLabel() + ")->" + Ex;
+    Ex = "CBiomassDerivedQuantityByCell.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CSampleDerivedLayer::calculate()
+// void CSampleDerivedQuantityByCell::calculate()
 // Calculate a value during a standard model run
 //**********************************************************************
-void CBiomassDerivedLayer::calculate() {
+void CBiomassDerivedQuantityByCell::calculate() {
 
   if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
     return;
@@ -167,10 +167,10 @@ void CBiomassDerivedLayer::calculate() {
 }
 
 //**********************************************************************
-// void CSampleDerivedLayer::calculate(int initialisationPhase)
+// void CSampleDerivedQuantityByCell::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
-void CBiomassDerivedLayer::calculate(int initialisationPhase) {
+void CBiomassDerivedQuantityByCell::calculate(int initialisationPhase) {
 
   //Check if we're in the right timestep for the initialisation phase we are in
   CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
@@ -218,5 +218,5 @@ void CBiomassDerivedLayer::calculate(int initialisationPhase) {
 //
 //
 //**********************************************************************
-CBiomassDerivedLayer::~CBiomassDerivedLayer() {
+CBiomassDerivedQuantityByCell::~CBiomassDerivedQuantityByCell() {
 }

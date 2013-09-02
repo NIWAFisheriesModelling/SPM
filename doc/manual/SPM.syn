@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-07-18 (rev. 4968)
+; TextPad syntax definitions for SPM version 1.1-2013-07-24 (rev. 4974)
 ; ===================================================================================
 ;
 ;
@@ -35,8 +35,8 @@ CharEsc = \
 @age_size
 @ageing_error
 @catchability
-@derived_layer
 @derived_quantity
+@derived_quantity_by_cell
 @estimate
 @estimation
 @include
@@ -85,8 +85,8 @@ cv
 data
 default_layer
 delta
-derived_layer
 derived_quantity
+derived_quantity_by_cell
 df
 difference_scale
 e
@@ -241,8 +241,8 @@ constant_mortality_rate
 constant_recruitment
 covariance
 de_solver
-derived_layer
 derived_quantity
+derived_quantity_by_cell
 distance
 double_exponential
 double_normal

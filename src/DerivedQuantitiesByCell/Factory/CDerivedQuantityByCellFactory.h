@@ -1,17 +1,17 @@
 //============================================================================
-// Name        : CDerivedLayerFactory.h
+// Name        : CDerivedQuantityByCellFactory.h
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
-#ifndef CDERIVEDLAYERFACTORY_H_
-#define CDERIVEDLAYERFACTORY_H_
+#ifndef CDERIVEDQUANTITYBYCELLFACTORY_H_
+#define CDERIVEDQUANTITYBYCELLFACTORY_H_
 
 // Global Includes
 #include <string>
 
 // Local includes
-#include "../CDerivedLayer.h"
+#include "../CDerivedQuantityByCell.h"
 
 // Using
 using std::string;
@@ -20,14 +20,14 @@ using std::string;
 //
 //
 //**********************************************************************
-class CDerivedLayerFactory {
+class CDerivedQuantityByCellFactory {
 public:
-  static CDerivedLayer*    buildDerivedLayer(string type, bool registerWithManager = true);
+  static CDerivedQuantityByCell*    buildDerivedQuantityByCell(string type, bool registerWithManager = true);
 
 private:
   // Functions
-  CDerivedLayerFactory() { };
-  virtual ~CDerivedLayerFactory() { };
+  CDerivedQuantityByCellFactory() { };
+  virtual ~CDerivedQuantityByCellFactory() { };
 };
 
-#endif /* CDERIVEDLAYERFACTORY_H_ */
+#endif /* CDERIVEDQUANTITYBYCELLFACTORY_H_ */

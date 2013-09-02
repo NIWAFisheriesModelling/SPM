@@ -18,7 +18,7 @@
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
-#include "../DerivedLayers/CDerivedLayerManager.h"
+#include "../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
 
 // Using
 using std::cout;
@@ -155,7 +155,7 @@ void CInitializationPhase::rebuild() {
 // Execute the TimeSteps for this initialisation phase
 //**********************************************************************
 void CInitializationPhase::execute() {
-  CDerivedLayerManager *pDerivedLayerManager = CDerivedLayerManager::Instance();
+  CDerivedQuantityByCellManager *pDerivedQuantityByCellManager = CDerivedQuantityByCellManager::Instance();
   CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
 
 
@@ -165,7 +165,7 @@ void CInitializationPhase::execute() {
       iCurrentTimeStep = j;
 
       vTimeSteps[j]->execute();
-      pDerivedLayerManager->calculate(iExecutionOrderIndex);
+      pDerivedQuantityByCellManager->calculate(iExecutionOrderIndex);
       pDerivedQuantityManager->calculate(iExecutionOrderIndex);
     }
 

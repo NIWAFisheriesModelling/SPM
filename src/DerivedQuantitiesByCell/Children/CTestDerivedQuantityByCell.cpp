@@ -1,23 +1,23 @@
 //============================================================================
-// Name        : CDerivedLayer.Test.cpp
+// Name        : CDerivedQuantityByCell.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
 
-#include "CTestDerivedLayer.h"
+#include "CTestDerivedQuantityByCell.h"
 
-CTestDerivedLayer::CTestDerivedLayer() {
+CTestDerivedQuantityByCell::CTestDerivedQuantityByCell() {
 }
 
-CTestDerivedLayer::~CTestDerivedLayer() {
+CTestDerivedQuantityByCell::~CTestDerivedQuantityByCell() {
 }
 
-void CTestDerivedLayer::calculate() {
+void CTestDerivedQuantityByCell::calculate() {
 //  vValues.push_back(vValues.size());
 }
 
-void CTestDerivedLayer::calculate(int initialisationPhase) {
+void CTestDerivedQuantityByCell::calculate(int initialisationPhase) {
 
 //  if ((int)vvInitialisationValues.size() <= initialisationPhase)
 //    vvInitialisationValues.resize(initialisationPhase+1);

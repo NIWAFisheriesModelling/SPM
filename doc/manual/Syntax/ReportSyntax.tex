@@ -12,7 +12,7 @@ The report types available are,
   \item Print a summary of a process
 	\item Print a summary of a preference function
   \item Print a derived quantity
-	\item Print a derived layer
+	\item Print a derived quantity by cell
   \item Print a summary of the estimated parameters
   \item Print the estimated parameters in a vector format (suitable for use with \texttt{spm -i})
   \item Print the objective function values
@@ -163,14 +163,14 @@ Each type of report requires a set of subcommands and arguments specific to that
 \defDefault{True}
 \defValue{Either True or False}
 
-\subsubsection[Print a derived layer]{\commandlabsubarg{report}{type}{derived\_layer}}
+\subsubsection[Print a derived quantity by cell]{\commandlabsubarg{report}{type}{derived\_quantity\_by\_cell}}
 
-\defSub{derived\_layer} {Define the label of the derived layer to print}
+\defSub{derived\_quantity\_by\_cell} {Define the label of the derived quantity by cell to print}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid label from \command{derived\_layer}}
+\defValue{A valid label from \command{derived\_quantity\_by\_cell}}
 
-\defSub{initialisation} {Specify if the derived layer values for each year of the initialisation phases should be also be output}
+\defSub{initialisation} {Specify if the derived quantity by cell values for each year of the initialisation phases should be also be output}
 \defType{Switch}
 \defDefault{False}
 \defValue{Either True or False}

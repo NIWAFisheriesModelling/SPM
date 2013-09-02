@@ -1,25 +1,25 @@
 //============================================================================
-// Name        : CSampleDerivedLayer.h
+// Name        : CSampleDerivedQuantityByCell.h
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
-#ifndef CTESTDERIVEDLAYER_H_
-#define CTESTDERIVEDLAYER_H_
+#ifndef CTESTDERIVEDQUANTITYBYCELL_H_
+#define CTESTDERIVEDQUANTITYBYCELL_H_
 
-#include "../CDerivedLayer.h"
+#include "../CDerivedQuantityByCell.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-class CTestDerivedLayer : public CDerivedLayer {
+class CTestDerivedQuantityByCell : public CDerivedQuantityByCell {
 public:
-  CTestDerivedLayer();
-  virtual                     ~CTestDerivedLayer();
+  CTestDerivedQuantityByCell();
+  virtual                     ~CTestDerivedQuantityByCell();
   void                        calculate();
   void                        calculate(int initialisationPhase);
   void                        build() { };
 };
 
-#endif /* CTESTDERIVEDLAYER_H_ */
+#endif /* CTESTDERIVEDQUANTITYBYCELL_H_ */

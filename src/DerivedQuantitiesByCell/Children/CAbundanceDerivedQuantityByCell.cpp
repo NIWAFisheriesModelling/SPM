@@ -1,11 +1,11 @@
 //============================================================================
-// Name        : CAbundanceDerivedLayer.cpp
+// Name        : CAbundanceDerivedQuantityByCell.cpp
 // Author      : S.Rasmussen
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
 
 // Headers
-#include "CAbundanceDerivedLayer.h"
+#include "CAbundanceDerivedQuantityByCell.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../InitializationPhases/CInitializationPhase.h"
@@ -25,7 +25,7 @@ using std::endl;
 //
 //
 //**********************************************************************
-CAbundanceDerivedLayer::CAbundanceDerivedLayer() {
+CAbundanceDerivedQuantityByCell::CAbundanceDerivedQuantityByCell() {
 
   //Variables
   pLayer = 0;
@@ -41,10 +41,10 @@ CAbundanceDerivedLayer::CAbundanceDerivedLayer() {
 }
 
 //**********************************************************************
-// void CDerivedLayer::validate()
+// void CDerivedQuantityByCell::validate()
 // Validate our Derived Layer
 //**********************************************************************
-void CAbundanceDerivedLayer::validate() {
+void CAbundanceDerivedQuantityByCell::validate() {
   try {
     // Base
     CBaseBuild::validate();
@@ -65,18 +65,18 @@ void CAbundanceDerivedLayer::validate() {
       CError::error(PARAM_INITIALIZATION_TIME_STEPS + string(" size must be same as the number of initialisation phases"));
 
   } catch (string &Ex) {
-    Ex = "CAbundanceDerivedLayer.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CAbundanceDerivedQuantityByCell.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CDerivedLayer::build()
+// void CDerivedQuantityByCell::build()
 // Build our Derived Layer
 //**********************************************************************
-void CAbundanceDerivedLayer::build() {
+void CAbundanceDerivedQuantityByCell::build() {
   try {
-    CDerivedLayer::build();
+    CDerivedQuantityByCell::build();
 
     // Get TimeStep and Layer
     pTimeStepManager = CTimeStepManager::Instance();
@@ -119,16 +119,16 @@ void CAbundanceDerivedLayer::build() {
     pWorld->fillCategoryVector(vCategories, vCategoryNames);
 
   } catch (string &Ex) {
-    Ex = "CAbundanceDerivedLayer.build(" + getLabel() + ")->" + Ex;
+    Ex = "CAbundanceDerivedQuantityByCell.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CSampleDerivedLayer::calculate()
+// void CSampleDerivedQuantityByCell::calculate()
 // Calculate a value during a standard model run
 //**********************************************************************
-void CAbundanceDerivedLayer::calculate() {
+void CAbundanceDerivedQuantityByCell::calculate() {
 
   if (pTimeStepManager->getCurrentTimeStep() != iTimeStep) {
     return;
@@ -165,10 +165,10 @@ void CAbundanceDerivedLayer::calculate() {
 }
 
 //**********************************************************************
-// void CSampleDerivedLayer::calculate(int initialisationPhase)
+// void CSampleDerivedQuantityByCell::calculate(int initialisationPhase)
 // Calculate a value during one of our initialisation phases
 //**********************************************************************
-void CAbundanceDerivedLayer::calculate(int initialisationPhase) {
+void CAbundanceDerivedQuantityByCell::calculate(int initialisationPhase) {
 
   //Check if we're in the right timestep for the initialisation phase we are in
   CInitializationPhase *phase = CInitializationPhaseManager::Instance()->getInitializationPhase(initialisationPhase);
@@ -215,5 +215,5 @@ void CAbundanceDerivedLayer::calculate(int initialisationPhase) {
 //
 //
 //**********************************************************************
-CAbundanceDerivedLayer::~CAbundanceDerivedLayer() {
+CAbundanceDerivedQuantityByCell::~CAbundanceDerivedQuantityByCell() {
 }

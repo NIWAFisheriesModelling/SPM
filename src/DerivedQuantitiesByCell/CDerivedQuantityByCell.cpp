@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CDerivedLayer.cpp
+// Name        : CDerivedQuantityByCell.cpp
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -9,28 +9,28 @@
 #include <iostream>
 
 // Local headers
-#include "CDerivedLayer.h"
+#include "CDerivedQuantityByCell.h"
 
 
 //**********************************************************************
-// CDerivedLayer::CDerivedLayer()
+// CDerivedQuantityByCell::CDerivedQuantityByCell()
 // Default Constructor
 //**********************************************************************
-CDerivedLayer::CDerivedLayer() : iCurrentInitialisationPhase(0) {
+CDerivedQuantityByCell::CDerivedQuantityByCell() : iCurrentInitialisationPhase(0) {
 }
 
 //**********************************************************************
-// CDerivedLayer::~CDerivedLayer()
+// CDerivedQuantityByCell::~CDerivedQuantityByCell()
 // Destructor
 //**********************************************************************
-CDerivedLayer::~CDerivedLayer() {
+CDerivedQuantityByCell::~CDerivedQuantityByCell() {
 }
 
 //**********************************************************************
-// vector<vector<double> > CDerivedLayer::getValue(int offset)
+// vector<vector<double> > CDerivedQuantityByCell::getValue(int offset)
 // Get Value From our Derived Layer
 //**********************************************************************
-vector<vector<double> > CDerivedLayer::getValue(int offset) {
+vector<vector<double> > CDerivedQuantityByCell::getValue(int offset) {
 
   int phasesCrossed = 0;
 
@@ -82,10 +82,10 @@ vector<vector<double> > CDerivedLayer::getValue(int offset) {
 }
 
 //**********************************************************************
-// void CDerivedLayer::rebuild()
+// void CDerivedQuantityByCell::rebuild()
 // Rebuild our derived layer
 //**********************************************************************
-void CDerivedLayer::build() {
+void CDerivedQuantityByCell::build() {
 
   // We have to build the blank data object to return when we haven't yet
   // built some data during the initialisation phases
@@ -98,10 +98,10 @@ void CDerivedLayer::build() {
 }
 
 //**********************************************************************
-// void CDerivedLayer::rebuild()
+// void CDerivedQuantityByCell::rebuild()
 // Rebuild our derived layer
 //**********************************************************************
-void CDerivedLayer::rebuild() {
+void CDerivedQuantityByCell::rebuild() {
    iCurrentInitialisationPhase = 0;
    vvInitialisationValues.clear();
    vValues.clear();

@@ -14,22 +14,22 @@
 
 // Local Headers
 #include "CConfigurationLoader.h"
+#include "../AgeSize/Factory/CAgeSizeFactory.h"
+#include "../AgeingError/Factory/CAgeingErrorFactory.h"
+#include "../BaseClasses/CBaseObject.h"
 #include "../CConfiguration.h"
-#include "../World/CWorld.h"
+#include "../Catchabilities/Factory/CCatchabilityFactory.h"
+#include "../DerivedQuantities/Factory/CDerivedQuantityFactory.h"
+#include "../DerivedQuantitiesByCell/Factory/CDerivedQuantityByCellFactory.h"
+#include "../Estimates/CEstimateManager.h"
+#include "../Estimates/Factory/CEstimateFactory.h"
+#include "../Helpers/CConvertor.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
-#include "../Helpers/CConvertor.h"
-#include "../Translations/Translations.h"
-#include "../BaseClasses/CBaseObject.h"
-#include "../AgeingError/Factory/CAgeingErrorFactory.h"
-#include "../SizeWeight/Factory/CSizeWeightFactory.h"
-#include "../AgeSize/Factory/CAgeSizeFactory.h"
-#include "../Catchabilities/Factory/CCatchabilityFactory.h"
-#include "../DerivedLayers/Factory/CDerivedLayerFactory.h"
-#include "../DerivedQuantities/Factory/CDerivedQuantityFactory.h"
-#include "../Estimates/Factory/CEstimateFactory.h"
 #include "../InitializationPhases/Factory/CInitializationPhaseFactory.h"
 #include "../Layers/Factory/CLayerFactory.h"
+#include "../MCMC/CMCMC.h"
+#include "../Minimizers/CMinimizerManager.h"
 #include "../Minimizers/Factory/CMinimizerFactory.h"
 #include "../Observations/Factory/CObservationFactory.h"
 #include "../Penalties/Factory/CPenaltyFactory.h"
@@ -37,12 +37,12 @@
 #include "../Priors/Factory/CPriorFactory.h"
 #include "../Processes/Factory/CProcessFactory.h"
 #include "../Profiles/Factory/CProfileFactory.h"
-#include "../Selectivities/Factory/CSelectivityFactory.h"
-#include "../TimeSteps/Factory/CTimeStepFactory.h"
-#include "../Minimizers/CMinimizerManager.h"
 #include "../Reports/Factory/CReportFactory.h"
-#include "../Estimates/CEstimateManager.h"
-#include "../MCMC/CMCMC.h"
+#include "../Selectivities/Factory/CSelectivityFactory.h"
+#include "../SizeWeight/Factory/CSizeWeightFactory.h"
+#include "../TimeSteps/Factory/CTimeStepFactory.h"
+#include "../Translations/Translations.h"
+#include "../World/CWorld.h"
 
 // Using
 using std::ifstream;
@@ -141,8 +141,8 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CCatchabilityFactory::buildCatchability(sType);
     else if (sSection == PARAM_DERIVED_QUANTITY)
       pBaseObject = CDerivedQuantityFactory::buildDerivedQuantity(sType);
-    else if (sSection == PARAM_DERIVED_LAYER)
-      pBaseObject = CDerivedLayerFactory::buildDerivedLayer(sType);
+    else if (sSection == PARAM_DERIVED_QUANTITY_BY_CELL)
+      pBaseObject = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(sType);
     else if (sSection == PARAM_ESTIMATE)
       pBaseObject = CEstimateFactory::buildEstimateInfo();
     else if (sSection == PARAM_INITIALIZATION_PHASE)

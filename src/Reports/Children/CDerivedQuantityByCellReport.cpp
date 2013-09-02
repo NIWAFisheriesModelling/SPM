@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CDerivedLayerReport.cpp
+// Name        : CDerivedQuantityByCellReport.cpp
 // Author      : S.Rasmussen
 // Date        : 26/03/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -11,33 +11,33 @@
 #include <boost/lexical_cast.hpp>
 
 // Local headers
-#include "CDerivedLayerReport.h"
-#include "../../DerivedLayers/CDerivedLayerManager.h"
-#include "../../DerivedLayers/CDerivedLayer.h"
+#include "CDerivedQuantityByCellReport.h"
+#include "../../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
+#include "../../DerivedQuantitiesByCell/CDerivedQuantityByCell.h"
 
 //**********************************************************************
-// CDerivedLayerReport::CDerivedLayerReport()
+// CDerivedQuantityByCellReport::CDerivedQuantityByCellReport()
 // Constructor
 //**********************************************************************
-CDerivedLayerReport::CDerivedLayerReport() {
+CDerivedQuantityByCellReport::CDerivedQuantityByCellReport() {
   // Variables
   eExecutionState   = STATE_FINALIZATION;
-  pDerivedLayer  = 0;
+  pDerivedQuantityByCell  = 0;
 
   // Register allowed
-  pParameterList->registerAllowed(PARAM_DERIVED_LAYER);
+  pParameterList->registerAllowed(PARAM_DERIVED_QUANTITY_BY_CELL);
   pParameterList->registerAllowed(PARAM_INITIALIZATION);
 
 }
 
 //**********************************************************************
-// void CDerivedLayerReport::validate()
+// void CDerivedQuantityByCellReport::validate()
 // Validate our report
 //**********************************************************************
-void CDerivedLayerReport::validate() {
+void CDerivedQuantityByCellReport::validate() {
   try {
 
-    sDerivedLayer = pParameterList->getString(PARAM_DERIVED_LAYER);
+    sDerivedQuantityByCell = pParameterList->getString(PARAM_DERIVED_QUANTITY_BY_CELL);
     bPrintInitialisation = pParameterList->getBool(PARAM_INITIALIZATION,true,false);
 
     // Validate parent
@@ -46,33 +46,33 @@ void CDerivedLayerReport::validate() {
     // Local validation
 
   } catch (string & ex) {
-    ex = "CDerivedLayerReport.validate(" + getLabel() + ")->" + ex;
+    ex = "CDerivedQuantityByCellReport.validate(" + getLabel() + ")->" + ex;
     throw ex;
   }
 }
 
 //**********************************************************************
-// void CDerivedLayerReport::build()
+// void CDerivedQuantityByCellReport::build()
 // Build our Report
 //**********************************************************************
-void CDerivedLayerReport::build() {
+void CDerivedQuantityByCellReport::build() {
   try {
 
     // Get our derived quantity
-    CDerivedLayerManager *pManager = CDerivedLayerManager::Instance();
-    pDerivedLayer = pManager->getDerivedLayer(sDerivedLayer);
+    CDerivedQuantityByCellManager *pManager = CDerivedQuantityByCellManager::Instance();
+    pDerivedQuantityByCell = pManager->getDerivedQuantityByCell(sDerivedQuantityByCell);
 
   } catch (string &Ex) {
-    Ex = "CDerivedLayerReport.build(" + getLabel() + ")->" + Ex;
+    Ex = "CDerivedQuantityByCellReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CDerivedLayerReport::execute()
+// void CDerivedQuantityByCellReport::execute()
 // Execute
 //**********************************************************************
-void CDerivedLayerReport::execute() {
+void CDerivedQuantityByCellReport::execute() {
 
   try {
     // Check for correct state
@@ -86,17 +86,17 @@ void CDerivedLayerReport::execute() {
     // Output Header
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << PARAM_DERIVED_QUANTITY << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sDerivedLayer << "\n";
+    cout << PARAM_DERIVED_QUANTITY_BY_CELL << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sDerivedQuantityByCell << "\n";
     if(bPrintInitialisation) {
       // Output initialisation values
-      for (int i=0; i < pDerivedLayer->getInitialisationSize(); ++i) {
-        for (int j=0; j < pDerivedLayer->getInitialisationValuesSize(i); ++j) {
-          vector<vector<double> > vvDerivedLayer = pDerivedLayer->getInitialisationValue(i, j);
+      for (int i=0; i < pDerivedQuantityByCell->getInitialisationSize(); ++i) {
+        for (int j=0; j < pDerivedQuantityByCell->getInitialisationValuesSize(i); ++j) {
+          vector<vector<double> > vvDerivedQuantityByCell = pDerivedQuantityByCell->getInitialisationValue(i, j);
           cout << PARAM_INITIALIZATION << "." << PARAM_INITIALIZATION_PHASE << CONFIG_ARRAY_START << boost::lexical_cast<string>(i+1) << CONFIG_ARRAY_END << CONFIG_RATIO_SEPARATOR << " " ;
           cout << PARAM_YEAR << "=" << j+1 << "\n";
-          for (int k = 0; k < pDerivedLayer->getHeight(); ++k) {
-            for (int l = 0; l < pDerivedLayer->getWidth(); ++l) {
-              cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+          for (int k = 0; k < pDerivedQuantityByCell->getHeight(); ++k) {
+            for (int l = 0; l < pDerivedQuantityByCell->getWidth(); ++l) {
+              cout << vvDerivedQuantityByCell[k][l] << (l<((int)pDerivedQuantityByCell->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
             }
           }
         }
@@ -104,11 +104,11 @@ void CDerivedLayerReport::execute() {
     }
     // Output values for each year
     for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
-      vector<vector<double> > vvDerivedLayer = pDerivedLayer->getValue(i);
+      vector<vector<double> > vvDerivedQuantityByCell = pDerivedQuantityByCell->getValue(i);
       cout << PARAM_YEARS << CONFIG_RATIO_SEPARATOR << " " << PARAM_YEAR << "=" << i << "\n";
-      for (int k = 0; k < pDerivedLayer->getHeight(); ++k) {
-        for (int l = 0; l < pDerivedLayer->getWidth(); ++l) {
-          cout << vvDerivedLayer[k][l] << (l<((int)pDerivedLayer->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
+      for (int k = 0; k < pDerivedQuantityByCell->getHeight(); ++k) {
+        for (int l = 0; l < pDerivedQuantityByCell->getWidth(); ++l) {
+          cout << vvDerivedQuantityByCell[k][l] << (l<((int)pDerivedQuantityByCell->getWidth()-1) ? CONFIG_SPACE_SEPARATOR : "\n");
         }
       }
     }
@@ -117,14 +117,14 @@ void CDerivedLayerReport::execute() {
     this->end();
 
   } catch (string &Ex) {
-    Ex = "CDerivedLayerReport.build(" + getLabel() + ")->" + Ex;
+    Ex = "CDerivedQuantityByCellReport.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// CDerivedLayerReport::~CDerivedLayerReport()
+// CDerivedQuantityByCellReport::~CDerivedQuantityByCellReport()
 // Destructor
 //**********************************************************************
-CDerivedLayerReport::~CDerivedLayerReport() {
+CDerivedQuantityByCellReport::~CDerivedQuantityByCellReport() {
 }

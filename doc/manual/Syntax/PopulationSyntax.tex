@@ -291,12 +291,12 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Must be a valid \command{initialisation\_phase} label}
 
-\defSub{ssb} {Define the label of the \command{derived\_layer} that defines the spawning stock biomass (SSB) in each cell}
+\defSub{ssb} {Define the label of the \command{derived\_quantity\_by\_cell} that defines the spawning stock biomass (SSB) in each cell}
 \defType{String}
 \defDefault{No default}
-\defValue{Must be a valid \command{derived\_layer} label}
+\defValue{Must be a valid \command{derived\_quantity\_by\_cell} label}
 
-\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived layer that is to be applied as the SSB in the stock-recruit relationship}
+\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity by cell that is to be applied as the SSB in the stock-recruit relationship}
 \defType{Integer}
 \defDefault{No default}
 \defValue{Must be a value $\ge 0$}
@@ -904,6 +904,10 @@ The available layer types  are,
 	\item Biomass density
 	\item Numeric meta-layer
 	\item Categorical meta-layer
+%	\item abundance derived quantity
+%	\item biomass derived quantity
+%	\item abundance derived quantity by cell
+%	\item biomass derived quantity by cell
 \end{itemize}
 
 \defComLab{layer} {Define a layer function with label}
@@ -1033,25 +1037,25 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defDefault{No default}
 \defCondition{The arguments must be categorical layers}
 
-\subsection{\I{Derived layers}}
+\subsection{\I{Derived quantities by cell}}
 
-The individual types of derived layers available are,
+The individual types of derived quantity by cell available are,
 
 \begin{itemize}
 	\item Abundance
 	\item Biomass
 \end{itemize}
 
-\defComLab{derived\_layer} {Define a derived layer with label}
+\defComLab{derived\_quantity\_by\_cell} {Define a derived quantity by cell with label}
 
-\defSub{type} {Define the type of derived layer}
+\defSub{type} {Define the type of derived quantity by cell}
 \defType{String}
 \defDefault{No default}
-\defValue{A valid type of derived layer, either \texttt{abundance} or \texttt{biomass}}
+\defValue{A valid type of derived quantity by cell, either \texttt{abundance} or \texttt{biomass}}
 
-\subsubsection[Abundance]{\commandlabsubarg{derived\_layer}{type}{abundance}}
+\subsubsection[Abundance]{\commandlabsubarg{derived\_quantity\_by\_cell}{type}{abundance}}
 
-\defSub{categories} {Define the categories are used to calculate the derived layer}
+\defSub{categories} {Define the categories are used to calculate the derived quantity by cell}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
@@ -1061,12 +1065,12 @@ The individual types of derived layers available are,
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity by cell is calculated}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid time-step label from \command{time\_step}}
 
-\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity by cell is calculated}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid time-step label from \command{time\_step}}
@@ -1074,11 +1078,11 @@ The individual types of derived layers available are,
 \defSub{layer} {Define the layer to be used in the calculations}
 \defType{String}
 \defDefault{None}
-\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived layer is the sum of the each cell is multiplied by the value of this layer.}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final values of the derived quantity by cell is the sum of the each cell is multiplied by the value of this layer.}
 
-\subsubsection[Biomass]{\commandlabsubarg{derived\_layer}{type}{biomass}}
+\subsubsection[Biomass]{\commandlabsubarg{derived\_quantity\_by\_cell}{type}{biomass}}
 
-\defSub{categories} {Define the categories are used to calculate the derived layer}
+\defSub{categories} {Define the categories are used to calculate the derived quantity by cell}
 \defType{String vector}
 \defDefault{No default}
 \defValue{Valid categories from \commandsub{model}{categories}}
@@ -1088,12 +1092,12 @@ The individual types of derived layers available are,
 \defDefault{No default}
 \defValue{Valid selectivity labels from \command{selectivity}}
 
-\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity by cell is calculated}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid time-step label from \command{time\_step}}
 
-\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity by cell is calculated}
 \defType{String}
 \defDefault{No default}
 \defValue{A valid time-step label from \command{time\_step}}
@@ -1101,7 +1105,7 @@ The individual types of derived layers available are,
 \defSub{layer} {Define the layer to be used in the calculations}
 \defType{String}
 \defDefault{None}
-\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived layer is the sum of the each cell is multiplied by the value of this layer.}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final values of the derived quantity by cell is the sum of the each cell is multiplied by the value of this layer.}
 
 \subsection{\I{Derived quantities}}
 
@@ -1171,7 +1175,7 @@ The individual types of derived quantities available are,
 \defSub{layer} {Define the layer to be used in the calculations}
 \defType{String}
 \defDefault{None}
-\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived layer is the sum of the each cell is multiplied by the value of this layer.}
+\defValue{A valid numeric layer as defined by \command{layer}. Note, the final value of the derived quantity is the sum of the each cell is multiplied by the value of this layer.}
 
 \subsection{\I{Age-size relationship}}
 

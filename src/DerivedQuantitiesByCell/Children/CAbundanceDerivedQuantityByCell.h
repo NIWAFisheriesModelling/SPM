@@ -1,14 +1,14 @@
 //============================================================================
-// Name        : CAbundanceDerivedLayer.h
+// Name        : CAbundanceDerivedQuantityByCell.h
 // Author      : S.Rasmussen
 // Date        : 23/10/2012
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
-#ifndef CABUNDANCEDERIVEDLAYER_H_
-#define CABUNDANCEDERIVEDLAYER_H_
+#ifndef CABUNDANCEDERIVEDQUANTITYBYCELL_H_
+#define CABUNDANCEDERIVEDQUANTITYBYCELL_H_
 
 // Headers
-#include "../CDerivedLayer.h"
+#include "../CDerivedQuantityByCell.h"
 
 // Forward Declarations
 class CNumericLayer;
@@ -19,11 +19,11 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CAbundanceDerivedLayer : public CDerivedLayer {
+class CAbundanceDerivedQuantityByCell : public CDerivedQuantityByCell {
 public:
   // Methods
-  CAbundanceDerivedLayer();
-  virtual                     ~CAbundanceDerivedLayer();
+  CAbundanceDerivedQuantityByCell();
+  virtual                     ~CAbundanceDerivedQuantityByCell();
   void                        validate();
   void                        build();
   void                        calculate();
@@ -42,4 +42,4 @@ protected:
   vector<CSelectivity*>       vSelectivities;
 };
 
-#endif /* CABUNDANCEDERIVEDLAYER_H_ */
+#endif /* CABUNDANCEDERIVEDQUANTITYBYCELL_H_ */

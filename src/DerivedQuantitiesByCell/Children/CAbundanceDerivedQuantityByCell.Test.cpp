@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CDerivedLayer.Test.cpp
+// Name        : CDerivedQuantityByCell.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -11,9 +11,9 @@
 #include <string>
 
 // Local Includes
-#include "CAbundanceDerivedLayer.h"
-#include "../CDerivedLayerManager.h"
-#include "../CDerivedLayer.h"
+#include "CAbundanceDerivedQuantityByCell.h"
+#include "../CDerivedQuantityByCellManager.h"
+#include "../CDerivedQuantityByCell.h"
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
@@ -21,14 +21,14 @@
 #include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
-#include "../../TestFixtures/ConfigurationFiles/DerivedLayers/DerivedLayer.h"
+#include "../../TestFixtures/ConfigurationFiles/DerivedQuantitiesByCell/DerivedQuantityByCell.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Abundance_Derived_Layer, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE( Abundance_Derived_QuantityByCell, C1x1_Fixture ) {
 
   // Add What we need to configuration
   // Then run our model
@@ -36,15 +36,15 @@ BOOST_FIXTURE_TEST_CASE( Abundance_Derived_Layer, C1x1_Fixture ) {
   addToConfiguration(age_size_vonB);
   addToConfiguration(size_weight_none);
   addToConfiguration(constant_recruitment);
-  addToConfiguration(derived_layer_abundance);
+  addToConfiguration(derived_quantity_by_cell_abundance);
   addToConfiguration(constant);
   addToConfiguration(numeric);
   addToTimeStep("ageing constant_recruitment");
   loadAndRunEnvironment();
 
   // Check our Results
-  CDerivedLayerManager *pManager  = CDerivedLayerManager::Instance();
-  CDerivedLayer        *pLayer    = pManager->getDerivedLayer("derived_layer_abundance");
+  CDerivedQuantityByCellManager *pManager  = CDerivedQuantityByCellManager::Instance();
+  CDerivedQuantityByCell        *pLayer    = pManager->getDerivedQuantityByCell("derived_quantity_by_cell_abundance");
 //  CWorldSquare         *pSquare   = getSquare();
 
   // Check Results

@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CDerivedLayerFactory.Test.cpp
+// Name        : CDerivedQuantityByCellFactory.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -11,7 +11,7 @@
 #include <string>
 
 // Local Headers
-#include "CDerivedLayerFactory.h"
+#include "CDerivedQuantityByCellFactory.h"
 
 // Namespaces
 using namespace std;
@@ -20,10 +20,10 @@ using namespace std;
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedLayer) {
+BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedQuantityByCell) {
 
-  CDerivedLayer *pBasic = 0;
-  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedLayerFactory::buildDerivedLayer(PARAM_ABUNDANCE, false));
+  CDerivedQuantityByCell *pBasic = 0;
+  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_ABUNDANCE, false));
   delete pBasic;
 }
 
@@ -31,10 +31,10 @@ BOOST_AUTO_TEST_CASE(Build_Abundance_DerivedLayer) {
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedLayer) {
+BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedQuantityByCell) {
 
-  CDerivedLayer *pBasic = 0;
-  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedLayerFactory::buildDerivedLayer(PARAM_BIOMASS, false));
+  CDerivedQuantityByCell *pBasic = 0;
+  BOOST_REQUIRE_NO_THROW(pBasic = CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_BIOMASS, false));
   delete pBasic;
 }
 
@@ -42,9 +42,9 @@ BOOST_AUTO_TEST_CASE(Build_Biomass_DerivedLayer) {
 //
 //
 //**********************************************************************
-BOOST_AUTO_TEST_CASE(Build_DerivedLayer_PARAM_INVALID) {
+BOOST_AUTO_TEST_CASE(Build_DerivedQuantityByCell_PARAM_INVALID) {
   // Try to Build Invalid Estimate
-  BOOST_REQUIRE_THROW(CDerivedLayerFactory::buildDerivedLayer(PARAM_ZERO, false), string);
+  BOOST_REQUIRE_THROW(CDerivedQuantityByCellFactory::buildDerivedQuantityByCell(PARAM_ZERO, false), string);
 }
 
 #endif

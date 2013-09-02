@@ -1,11 +1,11 @@
 //============================================================================
-// Name        : CDerivedLayer.h
+// Name        : CDerivedQuantityByCell.h
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
-#ifndef CDERIVEDLAYER_H_
-#define CDERIVEDLAYER_H_
+#ifndef CDERIVEDQUANTITYBYCELL_H_
+#define CDERIVEDQUANTITYBYCELL_H_
 
 // Global Headers
 #include <boost/shared_ptr.hpp>
@@ -23,11 +23,11 @@ typedef vector<vector<double> > Data;
 //
 //
 //**********************************************************************
-class CDerivedLayer : public CBaseBuild {
+class CDerivedQuantityByCell : public CBaseBuild {
 public:
   // Functions
-  CDerivedLayer();
-  virtual                     ~CDerivedLayer();
+  CDerivedQuantityByCell();
+  virtual                     ~CDerivedQuantityByCell();
   vector<vector<double> >     getValue(int offset);
   void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
   int                         getValuesSize() { return vValues.size(); }
@@ -54,4 +54,4 @@ protected:
 
 };
 
-#endif /* CDERIVEDLAYER_H_ */
+#endif /* CDERIVEDQUANTITYBYCELL_H_ */

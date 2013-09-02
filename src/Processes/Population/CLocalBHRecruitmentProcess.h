@@ -11,13 +11,13 @@
 
 // Local Headers
 #include "../CProcess.h"
-#include "../../DerivedLayers/CDerivedLayer.h"
-#include "../../DerivedLayers/CDerivedLayerManager.h"
+#include "../../DerivedQuantitiesByCell/CDerivedQuantityByCell.h"
+#include "../../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
 #include "../../InitializationPhases/CInitializationPhaseManager.h"
 
 // Classes
 class CTimeStepManager;
-class CDerivedLayer;
+class CDerivedQuantityByCell;
 
 typedef vector<vector<double> > Data;
 
@@ -65,7 +65,7 @@ protected:
   CNumericLayer               *pR0Layer;
   vector<vector<double> >     *pSSB;
   CTimeStepManager            *pTimeStepManager;
-  CDerivedLayer               *pDerivedLayer;
+  CDerivedQuantityByCell               *pDerivedQuantityByCell;
   CInitializationPhaseManager *pInitializationPhaseManager;
 
 private:

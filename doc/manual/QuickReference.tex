@@ -48,8 +48,8 @@
 \defSub{age} {Define the age that receives recruitment}
 \defSub{steepness} {Define the Beverton-Holt stock recruitment relationship steepness ($h$) parameter}
 \defSub{b0} {Define the \command{initialisation\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$) in each cell}
-\defSub{ssb} {Define the label of the \command{derived\_layer} that defines the spawning stock biomass (SSB) in each cell}
-\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived layer that is to be applied as the SSB in the stock-recruit relationship}
+\defSub{ssb} {Define the label of the \command{derived\_quantity\_by\_cell} that defines the spawning stock biomass (SSB) in each cell}
+\defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity by cell that is to be applied as the SSB in the stock-recruit relationship}
 \defSub{ycs\_years} {Years for year class strength values}
 \defSub{ycs\_values} {YCS values}
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
@@ -211,19 +211,19 @@
 \defSub{layers} {Define the layers for each of the years}
 \defSub{initialisation\_phases} {Define the initialisation phases that have a non-default layer}
 \defSub{initialisation\_layers} {Define the layers for each of the initialisation phases}
-\par\defComLab{derived\_layer} {Define a derived layer with label}\par
-\defSub{type} {Define the type of derived layer}
-\par\textbf{\commandlabsubarg{derived\_layer}{type}{abundance}}\par
-\defSub{categories} {Define the categories are used to calculate the derived layer}
+\par\defComLab{derived\_quantity\_by\_cell} {Define a derived quantity by cell with label}\par
+\defSub{type} {Define the type of derived quantity by cell}
+\par\textbf{\commandlabsubarg{derived\_quantity\_by\_cell}{type}{abundance}}\par
+\defSub{categories} {Define the categories are used to calculate the derived quantity by cell}
 \defSub{selectivities} {Define the selectivities}
-\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
-\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity by cell is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity by cell is calculated}
 \defSub{layer} {Define the layer to be used in the calculations}
-\par\textbf{\commandlabsubarg{derived\_layer}{type}{biomass}}\par
-\defSub{categories} {Define the categories are used to calculate the derived layer}
+\par\textbf{\commandlabsubarg{derived\_quantity\_by\_cell}{type}{biomass}}\par
+\defSub{categories} {Define the categories are used to calculate the derived quantity by cell}
 \defSub{selectivities} {Define the selectivities}
-\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived layer is calculated}
-\defSub{time\_step} {Define the time-step at the end of which the derived layer is calculated}
+\defSub{initialisation\_time\_steps} {Define the time-steps during the initialisation phases at the end of which the derived quantity by cell is calculated}
+\defSub{time\_step} {Define the time-step at the end of which the derived quantity by cell is calculated}
 \defSub{layer} {Define the layer to be used in the calculations}
 \par\defComLab{derived\_quantity} {Define a derived quantity with label}\par
 \defSub{type} {Define the type of derived quantity}
@@ -482,9 +482,9 @@
 \defSub{derived\_quantity} {Define the label of the derived quantity to print}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
-\par\textbf{\commandlabsubarg{report}{type}{derived\_layer}}\par
-\defSub{derived\_layer} {Define the label of the derived layer to print}
-\defSub{initialisation} {Specify if the derived layer values for each year of the initialisation phases should be also be output}
+\par\textbf{\commandlabsubarg{report}{type}{derived\_quantity\_by\_cell}}\par
+\defSub{derived\_quantity\_by\_cell} {Define the label of the derived quantity by cell to print}
+\defSub{initialisation} {Specify if the derived quantity by cell values for each year of the initialisation phases should be also be output}
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \par\textbf{\commandlabsubarg{report}{type}{estimate\_summary}}\par

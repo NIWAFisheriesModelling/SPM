@@ -1,14 +1,14 @@
 //============================================================================
-// Name        : CSampleDerivedLayer.h
+// Name        : CSampleDerivedQuantityByCell.h
 // Author      : S.Rasmussen
 // Date        : 15/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
 //============================================================================
-#ifndef CBIOMASSDERIVEDLAYER_H_
-#define CBIOMASSDERIVEDLAYER_H_
+#ifndef CBIOMASSDERIVEDQUANTITYBYCELL_H_
+#define CBIOMASSDERIVEDQUANTITYBYCELL_H_
 
 // Headers
-#include "../CDerivedLayer.h"
+#include "../CDerivedQuantityByCell.h"
 
 // Forward Declarations
 class CNumericLayer;
@@ -19,11 +19,11 @@ class CTimeStepManager;
 //
 //
 //**********************************************************************
-class CBiomassDerivedLayer : public CDerivedLayer {
+class CBiomassDerivedQuantityByCell : public CDerivedQuantityByCell {
 public:
   // Methods
-  CBiomassDerivedLayer();
-  virtual                     ~CBiomassDerivedLayer();
+  CBiomassDerivedQuantityByCell();
+  virtual                     ~CBiomassDerivedQuantityByCell();
   void                        validate();
   void                        build();
   void                        calculate();
@@ -42,4 +42,4 @@ protected:
   vector<CSelectivity*>       vSelectivities;
 };
 
-#endif /* CBIOMASSDERIVEDLAYER_H_ */
+#endif /* CBIOMASSDERIVEDQUANTITYBYCELL_H_ */

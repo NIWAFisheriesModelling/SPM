@@ -15,7 +15,7 @@
 #include "CInitializationPhase.h"
 #include "../Reports/CReportManager.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
-#include "../DerivedLayers/CDerivedLayerManager.h"
+#include "../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CError.h"
 
@@ -129,7 +129,7 @@ void CInitializationPhaseManager::build() {
     }
 
     // Variables
-    pDerivedLayerManager = CDerivedLayerManager::Instance();
+    pDerivedQuantityByCellManager = CDerivedQuantityByCellManager::Instance();
     pDerivedQuantityManager = CDerivedQuantityManager::Instance();
     pReportManager = CReportManager::Instance();
 
@@ -171,7 +171,7 @@ void CInitializationPhaseManager::execute() {
      // Increment Place holder
     lastExecutedInitializationPhase++;
 
-    pDerivedLayerManager->setInitialisationPhase(lastExecutedInitializationPhase);
+    pDerivedQuantityByCellManager->setInitialisationPhase(lastExecutedInitializationPhase);
     pDerivedQuantityManager->setInitialisationPhase(lastExecutedInitializationPhase);
 
     Phase->setExecutionOrderIndex(lastExecutedInitializationPhase);

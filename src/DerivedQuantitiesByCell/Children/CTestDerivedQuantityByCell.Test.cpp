@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CDerivedLayer.Test.cpp
+// Name        : CDerivedQuantityByCell.Test.cpp
 // Author      : S.Rasmussen
 // Date        : 23/04/2009
 // Copyright   : Copyright NIWA Science ©2009 - www.niwa.co.nz
@@ -11,9 +11,9 @@
 #include <string>
 
 // Local Includes
-#include "CTestDerivedLayer.h"
-#include "../CDerivedLayerManager.h"
-#include "../CDerivedLayer.h"
+#include "CTestDerivedQuantityByCell.h"
+#include "../CDerivedQuantityByCellManager.h"
+#include "../CDerivedQuantityByCell.h"
 #include "../../Helpers/CComparer.h"
 #include "../../TestFixtures/C1x1_Fixture.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/Ageing.h"
@@ -21,16 +21,16 @@
 #include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
-#include "../../TestFixtures/ConfigurationFiles/DerivedLayers/DerivedLayer.h"
+#include "../../TestFixtures/ConfigurationFiles/DerivedQuantitiesByCell/DerivedQuantityByCell.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
-BOOST_FIXTURE_TEST_CASE( Test_Derived_Layer, C1x1_Fixture ) {
+BOOST_FIXTURE_TEST_CASE( Test_Derived_QuantityByCell, C1x1_Fixture ) {
 
-  CTestDerivedLayer tdq;
+  CTestDerivedQuantityByCell tdq;
 
   /**
    * Check for default value of 0.0

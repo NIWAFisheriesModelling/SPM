@@ -16,7 +16,7 @@
 class CInitializationPhase;
 class CReportManager;
 class CDerivedQuantityManager;
-class CDerivedLayerManager;
+class CDerivedQuantityByCellManager;
 
 //**********************************************************************
 //
@@ -48,7 +48,7 @@ protected:
   vector<CInitializationPhase*> vInitializationPhaseOrder;
   int                         lastExecutedInitializationPhase;
   CReportManager              *pReportManager;
-  CDerivedLayerManager        *pDerivedLayerManager;
+  CDerivedQuantityByCellManager        *pDerivedQuantityByCellManager;
   CDerivedQuantityManager     *pDerivedQuantityManager;
 
 private:
