@@ -13,6 +13,7 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 #include "../../World/CWorld.h"
 
 //**********************************************************************
@@ -20,6 +21,7 @@
 // Default Constructor
 //**********************************************************************
 CDerivedQuantityByCellLayer::CDerivedQuantityByCellLayer() {
+
   // Variables
   sType = PARAM_DERIVED_QUANTITY_BY_CELL;
   pWorld = CWorld::Instance();
@@ -63,6 +65,18 @@ void CDerivedQuantityByCellLayer::build() {
     // Get our derived layer (SSB)
     pDerivedQuantityByCell = CDerivedQuantityByCellManager::Instance()->getDerivedQuantityByCell(sDerivedQuantityByCell);
 
+    // Figure out the order of timesteps
+    pTimeStepManager = CTimeStepManager::Instance();
+
+    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantityByCell->getTimeStep()) {
+      iActualOffset = iOffset + 1;
+    } else {
+      iActualOffset = iOffset;
+    }
+
+    if (iActualOffset < 0)
+      CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
+
   } catch (string &Ex) {
     Ex = "CDerivedQuantityByCellLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -78,7 +92,7 @@ double CDerivedQuantityByCellLayer::getValue(int RowIndex, int ColIndex, int Tar
   try {
 #endif
 
-    double dResult = pDerivedQuantityByCell->getValue(iOffset, RowIndex, ColIndex);
+    double dResult = pDerivedQuantityByCell->getValue(iActualOffset, RowIndex, ColIndex);
     return dResult;
 
 #ifndef OPTIMIZE

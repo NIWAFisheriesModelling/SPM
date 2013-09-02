@@ -59,6 +59,7 @@ protected:
   vector<double>              vRecruitmentValues;
   vector<double>              vSSBValues;
   int                         iSSBOffset;
+  int                         iActualOffset;
   string                      sLayer;
   CNumericLayer               *pLayer;
   CTimeStepManager            *pTimeStepManager;

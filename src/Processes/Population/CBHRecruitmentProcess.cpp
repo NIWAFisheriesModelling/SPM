@@ -115,28 +115,7 @@ void CBHRecruitmentProcess::validate() {
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
-    //Check SSBOffset is a non-negative int
-    if (iSSBOffset < 0)
-      CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
-
     //***************************************************
-    // Validate the Standardise YCS Year Range
-    if(vStandardiseYCSYears.size() == 0) {
-      for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i ) {
-        vStandardiseYCSYears.push_back(i- iSSBOffset);
-      }
-    } else if(vStandardiseYCSYears.size() > 1) {
-      for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i ) {
-        if(vStandardiseYCSYears[i-1] >= vStandardiseYCSYears[i] )
-          CError::error(PARAM_YCS_YEARS + string(" is not in numeric order"));
-      }
-    }
-
-    if (vStandardiseYCSYears[0] < (pWorld->getInitialYear() - iSSBOffset))
-      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
-    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > (pWorld->getCurrentYear() - iSSBOffset))
-      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
-
     //Check that a value of YCSValues supplied for each YCSYear
     if((int)vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
       CError::errorListSameSize(PARAM_YCS_VALUES, string("model years"));
@@ -187,6 +166,36 @@ void CBHRecruitmentProcess::build() {
     if (getCategoryCount() != (int)vProportions.size())
       CError::errorListSameSize(PARAM_CATEGORIES, PARAM_PROPORTIONS);
 
+    // Figure out the when SSB is calcuated w.r.t. recruitment, and then the default iActualOffset
+    pTimeStepManager = CTimeStepManager::Instance();
+
+    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep()) {
+      iActualOffset = iSSBOffset + 1;
+    } else {
+      iActualOffset = iSSBOffset;
+    }
+
+    if (iActualOffset < 0)
+      CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
+
+    // Build the Standardise YCS Year Range
+    if(vStandardiseYCSYears.size() == 0) {
+      for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i ) {
+        vStandardiseYCSYears.push_back(i- iActualOffset);
+      }
+    } else if(vStandardiseYCSYears.size() > 1) {
+      for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i ) {
+        if(vStandardiseYCSYears[i-1] >= vStandardiseYCSYears[i] )
+          CError::error(PARAM_YCS_YEARS + string(" is not in numeric order"));
+      }
+    }
+
+    if (vStandardiseYCSYears[0] < (pWorld->getInitialYear() - iActualOffset))
+      CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
+    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > (pWorld->getCurrentYear() - iActualOffset))
+      CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
+
+    // rebuild
     rebuild();
 
   } catch (string &Ex) {
@@ -215,7 +224,7 @@ void CBHRecruitmentProcess::rebuild() {
 
     // Create vector of YCS years
     for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear();  ++i) {
-     vYCSYears.push_back(i - iSSBOffset);
+     vYCSYears.push_back(i - iActualOffset);
     }
 
     // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears
@@ -260,7 +269,7 @@ void CBHRecruitmentProcess::execute() {
       } else {
         // Get our B0 (assumed to be the LAST value in the defined initialisation)
         dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
-        double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
+        double dSSBRatio = pDerivedQuantity->getValue(iActualOffset)/dB0;
         // Calculate the Stock-recruit relationship
         double dTrueYCS =  1.0 * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
         // And apply to calculate this events recruitment
@@ -272,7 +281,7 @@ void CBHRecruitmentProcess::execute() {
       double dYCS = vStandardiseYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
       // Get SSB (and SSB:B0 ratio)
       dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
-      double dSSBRatio = pDerivedQuantity->getValue(iSSBOffset)/dB0;
+      double dSSBRatio = pDerivedQuantity->getValue(iActualOffset)/dB0;
       // Calculate the Stock-recruit relationship
       double dTrueYCS =  dYCS * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
       // And apply to calculate this events recruitment
@@ -280,7 +289,7 @@ void CBHRecruitmentProcess::execute() {
       // Retain these for later reporting
       vTrueYCSValues.push_back(dTrueYCS);
       vRecruitmentValues.push_back(dAmountPer);
-      vSSBValues.push_back(pDerivedQuantity->getValue(iSSBOffset));
+      vSSBValues.push_back(pDerivedQuantity->getValue(iActualOffset));
     }
 
     //Allocate our recruitment across the cells

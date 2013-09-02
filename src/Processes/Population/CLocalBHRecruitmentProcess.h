@@ -61,6 +61,7 @@ protected:
   vector<Data>                vRecruitmentValues;
   vector<Data>                vSSBValues;
   int                         iSSBOffset;
+  int                         iActualOffset;
   string                      sR0Layer;
   CNumericLayer               *pR0Layer;
   vector<vector<double> >     *pSSB;

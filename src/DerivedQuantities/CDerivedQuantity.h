@@ -22,6 +22,7 @@ public:
   CDerivedQuantity();
   virtual                     ~CDerivedQuantity();
   double                      getValue(int offset);
+  int                         getTimeStep() { return iTimeStep; };
   double                      getValueFromIndex(int index) { return vValues[index]; };
   void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
   int                         getValuesSize() { return vValues.size(); }
@@ -43,6 +44,7 @@ protected:
   int                         iCurrentInitialisationPhase;
   vector<vector<double> >     vvInitialisationValues;
   vector<double>              vValues;
+  int                         iTimeStep;
 
 };
 

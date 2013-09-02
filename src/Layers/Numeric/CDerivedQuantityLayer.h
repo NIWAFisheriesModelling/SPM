@@ -17,6 +17,9 @@ class CWorld;
 class CSelectivity;
 class CDerivedQuantity;
 
+// Forward Declarations
+class CTimeStepManager;
+
 //**********************************************************************
 //
 //
@@ -36,15 +39,19 @@ public:
   void                       build();
 
 protected:
-  // Variables
+  // Members
+  CTimeStepManager           *pTimeStepManager;
   CWorld                     *pWorld;
+  // Variables
   vector<string>             vCategoryNames;
   vector<int>                vCategories;
   vector<string>             vSelectivityNames;
   vector<CSelectivity*>      vSelectivities;
   string                     sDerivedQuantity;
   int                        iOffset;
+  int                        iActualOffset;
   CDerivedQuantity           *pDerivedQuantity;
+
 };
 
 #endif /*CDERIVEDQUANTITYLAYER_H_*/

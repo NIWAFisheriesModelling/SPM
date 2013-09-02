@@ -13,6 +13,7 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Selectivities/CSelectivity.h"
 #include "../../Selectivities/CSelectivityManager.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 #include "../../World/CWorld.h"
 
 //**********************************************************************
@@ -20,6 +21,7 @@
 // Default Constructor
 //**********************************************************************
 CDerivedQuantityLayer::CDerivedQuantityLayer() {
+
   // Variables
   sType = PARAM_DERIVED_QUANTITY;
   pWorld = CWorld::Instance();
@@ -63,6 +65,18 @@ void CDerivedQuantityLayer::build() {
     // Get our derived layer (SSB)
     pDerivedQuantity = CDerivedQuantityManager::Instance()->getDerivedQuantity(sDerivedQuantity);
 
+    // Figure out the order of timesteps
+    pTimeStepManager = CTimeStepManager::Instance();
+
+    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep()) {
+      iActualOffset = iOffset + 1;
+    } else {
+      iActualOffset = iOffset;
+    }
+
+    if (iActualOffset < 0)
+      CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
+
   } catch (string &Ex) {
     Ex = "CDerivedQuantityLayer.build(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -78,7 +92,7 @@ double CDerivedQuantityLayer::getValue(int RowIndex, int ColIndex, int TargetRow
   try {
 #endif
 
-    double dResult = pDerivedQuantity->getValue(iOffset);;
+    double dResult = pDerivedQuantity->getValue(iActualOffset);;
     return dResult;
 
 #ifndef OPTIMIZE
