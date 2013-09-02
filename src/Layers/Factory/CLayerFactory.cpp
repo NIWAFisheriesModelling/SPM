@@ -16,6 +16,8 @@
 #include "../Numeric/CAbundanceLayer.h"
 #include "../Numeric/CBiomassDensityLayer.h"
 #include "../Numeric/CBiomassLayer.h"
+#include "../Numeric/CDerivedQuantityLayer.h"
+#include "../Numeric/CDerivedQuantityByCellLayer.h"
 #include "../Numeric/CDistanceLayer.h"
 #include "../Numeric/CDoubleLayer.h"
 #include "../Numeric/CNumericMetaLayer.h"
@@ -46,6 +48,10 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
     pLayer = new CDistanceLayer();
   else if (type == PARAM_DOUBLE)
     pLayer = new CDoubleLayer();
+  else if (type == PARAM_DERIVED_QUANTITY)
+    pLayer = new CDerivedQuantityLayer;
+  else if (type == PARAM_DERIVED_QUANTITY_BY_CELL)
+    pLayer = new CDerivedQuantityByCellLayer;
   else if (type == PARAM_STRING)
     pLayer = new CStringLayer();
   else

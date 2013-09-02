@@ -92,7 +92,8 @@ void CLayerReport::build() {
     sLayerType = pLayerManager->getLayerType(sLayer);
     if (sLayerType == PARAM_ABUNDANCE_DENSITY || sLayerType == PARAM_ABUNDANCE ||
         sLayerType == PARAM_BIOMASS_DENSITY   || sLayerType == PARAM_BIOMASS   ||
-        sLayerType == PARAM_DOUBLE            || sLayerType == PARAM_META_NUMERIC) {
+        sLayerType == PARAM_DOUBLE            || sLayerType == PARAM_META_NUMERIC ||
+        sLayerType == PARAM_DERIVED_QUANTITY  || sLayerType == PARAM_DERIVED_QUANTITY_BY_CELL) {
       pNumericLayer    = pLayerManager->getNumericLayer(sLayer);
       sType = PARAM_DOUBLE;
    } else if (sLayerType == PARAM_STRING || sLayerType == PARAM_META_STRING) {

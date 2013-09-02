@@ -904,10 +904,8 @@ The available layer types  are,
 	\item Biomass density
 	\item Numeric meta-layer
 	\item Categorical meta-layer
-%	\item abundance derived quantity
-%	\item biomass derived quantity
-%	\item abundance derived quantity by cell
-%	\item biomass derived quantity by cell
+	\item Derived quantity layer
+	\item Derived quantity by cell layer
 \end{itemize}
 
 \defComLab{layer} {Define a layer function with label}
@@ -1036,6 +1034,30 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 \defType{String vector, of length the number of \argument{initialisation\_phases}}
 \defDefault{No default}
 \defCondition{The arguments must be categorical layers}
+
+\subsubsection[Derived quantity layer]{\commandlabsubarg{layer}{type}{derived\_quantity}}
+
+\defSub{derived\_quantity} {Define the label of the \command{derived\_quantity} that is used as the source for the layer}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be a valid \command{derived\_quantity} label}
+
+\defSub{year\_offset} {Define the offset (in years) for the year of the derived quantity that is to be applied}
+\defType{Integer}
+\defDefault{No default}
+\defValue{Must be a value $\ge 0$}
+
+\subsubsection[Derived quantity by cell layer]{\commandlabsubarg{layer}{type}{derived\_quantity\_by\_cell}}
+
+\defSub{derived\_quantity\_by\_cell} {Define the label of the \command{derived\_quantity\_by\_cell} that is used as the source for the layer}
+\defType{String}
+\defDefault{No default}
+\defValue{Must be a valid \command{derived\_quantity\_by\_cell} label}
+
+\defSub{year\_offset} {Define the offset (in years) for the year of the derived quantity by cell that is to be applied}
+\defType{Integer}
+\defDefault{No default}
+\defValue{Must be a value $\ge 0$}
 
 \subsection{\I{Derived quantities by cell}}
 

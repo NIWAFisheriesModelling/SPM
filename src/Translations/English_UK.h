@@ -410,6 +410,7 @@
 #define PARAM_YCS_VALUES                          "ycs_values"
 #define PARAM_YCS_YEARS                           "ycs_years"
 #define PARAM_YEAR                                "year"
+#define PARAM_YEAR_OFFSET                         "year_offset"
 #define PARAM_YEARS                               "years"
 #define PARAM_ZERO                                "0 (zero)"
 

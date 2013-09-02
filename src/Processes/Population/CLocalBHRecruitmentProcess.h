@@ -65,7 +65,7 @@ protected:
   CNumericLayer               *pR0Layer;
   vector<vector<double> >     *pSSB;
   CTimeStepManager            *pTimeStepManager;
-  CDerivedQuantityByCell               *pDerivedQuantityByCell;
+  CDerivedQuantityByCell      *pDerivedQuantityByCell;
   CInitializationPhaseManager *pInitializationPhaseManager;
 
 private:

@@ -23,6 +23,7 @@
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
 #include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
+#include "../../TestFixtures/ConfigurationFiles/DerivedQuantitiesByCell/DerivedQuantityByCell.h"
 #include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 
 //**********************************************************************

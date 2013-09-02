@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2013-07-24 (rev. 4974)
+; TextPad syntax definitions for SPM version 1.1-2013-09-02 (rev. 4975)
 ; ===================================================================================
 ;
 ;
@@ -197,6 +197,7 @@ y2
 ycs_values
 ycs_years
 year
+year_offset
 years
 
 [Keywords 3]

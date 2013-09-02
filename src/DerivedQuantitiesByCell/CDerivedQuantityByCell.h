@@ -29,6 +29,7 @@ public:
   CDerivedQuantityByCell();
   virtual                     ~CDerivedQuantityByCell();
   vector<vector<double> >     getValue(int offset);
+  double                      getValue(int offset, int RowIndex, int ColIndex);
   void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
   int                         getValuesSize() { return vValues.size(); }
   virtual void                calculate() = 0;
