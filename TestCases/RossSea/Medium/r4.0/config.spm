@@ -103,8 +103,8 @@ r0 1021124
 age 2
 ssb SSB
 b0 Phase3
-ssb_offset 3
-standardise_YCS_years 1995-2006
+ssb_offset 2
+standardise_YCS_years 1993-2006
 #ycs_years 1995-2011
 ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 steepness 0.75
