@@ -69,13 +69,13 @@ void CDerivedQuantityByCellLayer::build() {
     pTimeStepManager = CTimeStepManager::Instance();
 
     if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantityByCell->getTimeStep()) {
-      iActualOffset = iOffset + 1;
+      iActualOffset = iOffset - 1;
+      if (iActualOffset < 0) {
+        CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
+      }
     } else {
       iActualOffset = iOffset;
     }
-
-    if (iActualOffset < 0)
-      CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
 
   } catch (string &Ex) {
     Ex = "CDerivedQuantityByCellLayer.build(" + getLabel() + ")->" + Ex;

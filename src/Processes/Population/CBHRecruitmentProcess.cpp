@@ -115,6 +115,10 @@ void CBHRecruitmentProcess::validate() {
     if (!CComparer::isEqual(dRunningTotal, 1.0))
       CError::errorNotEqual(PARAM_PROPORTIONS, PARAM_ONE);
 
+    //Check iSSBOffset is a non-negative int
+    if (iSSBOffset < 0)
+      CError::errorLessThan(PARAM_SSB_OFFSET, PARAM_ZERO);
+
     //***************************************************
     //Check that a value of YCSValues supplied for each YCSYear
     if((int)vYCSValues.size() != (pWorld->getCurrentYear() - pWorld->getInitialYear() + 1))
@@ -170,13 +174,13 @@ void CBHRecruitmentProcess::build() {
     pTimeStepManager = CTimeStepManager::Instance();
 
     if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep()) {
-      iActualOffset = iSSBOffset + 1;
+      iActualOffset = iSSBOffset - 1;
+      if (iActualOffset < 0) {
+        CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
+      }
     } else {
       iActualOffset = iSSBOffset;
     }
-
-    if (iActualOffset < 0)
-      CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ZERO);
 
     // Build the Standardise YCS Year Range
     if(vStandardiseYCSYears.size() == 0) {
