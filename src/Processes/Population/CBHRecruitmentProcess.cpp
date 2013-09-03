@@ -185,7 +185,7 @@ void CBHRecruitmentProcess::build() {
     // Build the Standardise YCS Year Range
     if(vStandardiseYCSYears.size() == 0) {
       for (int i = pWorld->getInitialYear(); i < (pWorld->getCurrentYear() + 1); ++i ) {
-        vStandardiseYCSYears.push_back(i- iActualOffset);
+        vStandardiseYCSYears.push_back(i- iSSBOffset);
       }
     } else if(vStandardiseYCSYears.size() > 1) {
       for (int i = 1; i < (int)vStandardiseYCSYears.size(); ++i ) {
@@ -194,9 +194,9 @@ void CBHRecruitmentProcess::build() {
       }
     }
 
-    if (vStandardiseYCSYears[0] < (pWorld->getInitialYear() - iActualOffset))
+    if (vStandardiseYCSYears[0] < (pWorld->getInitialYear() - iSSBOffset))
       CError::errorLessThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_INITIAL_YEAR);
-    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > (pWorld->getCurrentYear() - iActualOffset))
+    if (vStandardiseYCSYears[vStandardiseYCSYears.size()-1] > (pWorld->getCurrentYear() - iSSBOffset))
       CError::errorGreaterThan(PARAM_STANDARDISE_YCS_YEARS, PARAM_CURRENT_YEAR);
 
     // rebuild
@@ -228,7 +228,7 @@ void CBHRecruitmentProcess::rebuild() {
 
     // Create vector of YCS years
     for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear();  ++i) {
-     vYCSYears.push_back(i - iActualOffset);
+     vYCSYears.push_back(i - iSSBOffset);
     }
 
     // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears

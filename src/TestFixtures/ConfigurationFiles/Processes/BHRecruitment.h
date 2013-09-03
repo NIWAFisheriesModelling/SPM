@@ -17,7 +17,7 @@ const string bh_recruitment =
   "age 1\n"
   "ssb ssb\n"
   "b0 phase1\n"
-  "ssb_offset 0\n"
+  "ssb_offset 1\n"
   "standardise_ycs_years 1994-2006\n"
   "ycs_values 1.0 0.5 0.6 0.4 1.1 1.2 1.2 1.2 1.2 1.2 1.2 1.2 1.0 1.0 1.0\n"
   "steepness 0.75\n"
