@@ -220,7 +220,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 1998 
-obs All 175.16648257142995 
+obs All 175.16648257145502 
 error_value All 0.20000000000000001 
 #end
 
@@ -236,7 +236,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 1999 
-obs All 144.67476133312556 
+obs All 144.67475692227384 
 error_value All 0.20000000000000001 
 #end
 
@@ -252,7 +252,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2000 
-obs All 147.31105648762633 
+obs All 147.31100962479104 
 error_value All 0.20000000000000001 
 #end
 
@@ -268,7 +268,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2001 
-obs All 179.52905971487468 
+obs All 179.52883596473606 
 error_value All 0.20000000000000001 
 #end
 
@@ -284,7 +284,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2002 
-obs All 151.70997363180106 
+obs All 151.7094496984769 
 error_value All 0.20000000000000001 
 #end
 
@@ -300,7 +300,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2003 
-obs All 184.76757909849121 
+obs All 184.76587135324837 
 error_value All 0.20000000000000001 
 #end
 
@@ -316,7 +316,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2004 
-obs All 160.58939591994172 
+obs All 160.58560259743101 
 error_value All 0.20000000000000001 
 #end
 
@@ -332,7 +332,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2005 
-obs All 109.63302189203721 
+obs All 109.62658009697637 
 error_value All 0.20000000000000001 
 #end
 
@@ -348,7 +348,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2006 
-obs All 144.7449326314802 
+obs All 144.72561487100458 
 error_value All 0.20000000000000001 
 #end
 
@@ -364,7 +364,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2007 
-obs All 123.0543004369747 
+obs All 123.02072026544914 
 error_value All 0.20000000000000001 
 #end
 

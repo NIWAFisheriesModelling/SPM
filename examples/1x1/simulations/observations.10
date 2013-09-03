@@ -204,7 +204,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type proportions_at_age 
 year 2007 
-obs All 0 0 0 0 0 0.040000000000000001 0.080000000000000002 0.080000000000000002 0.080000000000000002 0.040000000000000001 0.040000000000000001 0 0.12 0 0.080000000000000002 0.12 0 0.12 0.040000000000000001 0.040000000000000001 0 0 0.080000000000000002 0 0 0 0 0 0 0 0 0.040000000000000001 0 0 0 
+obs All 0 0 0 0 0 0.040000000000000001 0.040000000000000001 0.12 0.080000000000000002 0.040000000000000001 0.040000000000000001 0 0.12 0 0.080000000000000002 0.12 0 0.12 0.040000000000000001 0.040000000000000001 0 0 0.080000000000000002 0 0 0 0 0 0 0 0 0.040000000000000001 0 0 0 
 error_value All 915 
 #end
 
@@ -220,7 +220,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 1998 
-obs All 142.76315548116384 
+obs All 142.76315548118424 
 error_value All 0.20000000000000001 
 #end
 
@@ -236,7 +236,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 1999 
-obs All 174.25474349520996 
+obs All 174.2547381825222 
 error_value All 0.20000000000000001 
 #end
 
@@ -252,7 +252,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2000 
-obs All 114.88227435553006 
+obs All 114.8822378089922 
 error_value All 0.20000000000000001 
 #end
 
@@ -268,7 +268,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2001 
-obs All 149.68320385198126 
+obs All 149.6830172992434 
 error_value All 0.20000000000000001 
 #end
 
@@ -284,7 +284,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2002 
-obs All 208.73368411458105 
+obs All 208.73296324877131 
 error_value All 0.20000000000000001 
 #end
 
@@ -300,7 +300,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2003 
-obs All 177.68028371591569 
+obs All 177.67864147618542 
 error_value All 0.20000000000000001 
 #end
 
@@ -316,7 +316,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2004 
-obs All 124.03105987934907 
+obs All 124.02813011048873 
 error_value All 0.20000000000000001 
 #end
 
@@ -332,7 +332,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2005 
-obs All 149.0797064184963 
+obs All 149.07094682307601 
 error_value All 0.20000000000000001 
 #end
 
@@ -348,7 +348,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2006 
-obs All 96.367834813132248 
+obs All 96.354973494144232 
 error_value All 0.20000000000000001 
 #end
 
@@ -364,7 +364,7 @@ selectivities FishingSel FishingSel
 time_step step_one 
 type abundance 
 year 2007 
-obs All 153.27645010946441 
+obs All 153.2346226441322 
 error_value All 0.20000000000000001 
 #end
 

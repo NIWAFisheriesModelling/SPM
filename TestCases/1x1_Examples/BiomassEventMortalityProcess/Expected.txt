@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -r -q 
-Date: Sun Jun 16 16:07:44 2013
-v1.1-2013-06-16 (rev. 4947). Copyright (c) 2008-2013, NIWA
+Date: Tue Sep 03 14:17:51 2013
+v1.1-2013-09-03 (rev. 4980). Copyright (c) 2008-2013, NIWA
 User name: dunn
-Machine name: NIWA-34253 (Windows_NT, PID=9012)
+Machine name: NIWA-34286 (Windows_NT, PID=5396)
 
 [1994_TimeStep_One]
 report.type: partition
