@@ -193,7 +193,8 @@ prior uniform
 label chatCatchMustBeTaken
 fishery chatFishery
 log_scale true
-multiplier 1000
+multiplier 10
+
 @ageing_error
-type normal
-c 0.08
+type none
+

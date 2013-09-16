@@ -4,7 +4,7 @@ minimiser gammadiff
 
 @minimiser gammadiff
 type numerical_differences
-tolerance 0.0002
+tolerance 0.000002
 iterations 1000
 step_size 1e-7
 covariance True
@@ -32,6 +32,7 @@ type abundance
 catchability chatCPUEq
 layer Cell
 time_step one
+proportion_time_step 1.0
 categories male female
 selectivities chatFselMale chatFselFemale
 likelihood lognormal
@@ -273,6 +274,7 @@ type abundance
 catchability chatTANq
 layer Cell
 time_step one
+proportion_time_step 1.0
 categories male female
 selectivities chatTANselMale chatTANselFemale
 likelihood lognormal
