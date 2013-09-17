@@ -1,6 +1,6 @@
 # ESTIMATION
 @estimation
-minimiser gammadiff
+minimiser DE
 
 @minimiser gammadiff
 type numerical_differences
@@ -28,7 +28,7 @@ burn_in 100
 
 # OBSERVATIONS Chatham Rise
 @observation chatCPUE-1992
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -41,7 +41,7 @@ obs All 1.50
 error_value All 0.35
 
 @observation chatCPUE-1993
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -53,7 +53,7 @@ obs All 1.10
 error_value All 0.35
 
 @observation chatCPUE-1994
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -65,7 +65,7 @@ obs All 0.93
 error_value All 0.35
 
 @observation chatCPUE-1995
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -77,7 +77,7 @@ obs All 1.33
 error_value All 0.35
 
 @observation chatCPUE-1996
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -89,7 +89,7 @@ obs All 1.53
 error_value All 0.35
 
 @observation chatCPUE-1997
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -101,7 +101,7 @@ obs All 0.90
 error_value All 0.35
 
 @observation chatCPUE-1998
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -113,7 +113,7 @@ obs All 0.68
 error_value All 0.35
 
 @observation chatCPUE-1999
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -125,7 +125,7 @@ obs All 0.75
 error_value All 0.35
 
 @observation chatCPUE-2000
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -137,7 +137,7 @@ obs All 0.57
 error_value All 0.35
 
 @observation chatCPUE-2001
-type abundance
+type biomass
 catchability chatCPUEq
 layer Cell
 time_step one
@@ -150,7 +150,7 @@ error_value All 0.35
 
 
 @observation chatTANbiomass1992
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -162,7 +162,7 @@ obs All 4180
 error_value All 0.15
 
 @observation chatTANbiomass1993
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -174,7 +174,7 @@ obs All 2950
 error_value All 0.17
 
 @observation chatTANbiomass1994
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -186,7 +186,7 @@ obs All 3353
 error_value All 0.10
 
 @observation chatTANbiomass1995
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -198,7 +198,7 @@ obs All 3303
 error_value All 0.23
 
 @observation chatTANbiomass1996
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -210,7 +210,7 @@ obs All 2457
 error_value All 0.13
 
 @observation chatTANbiomass1997
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -222,7 +222,7 @@ obs All 2811
 error_value All 0.17
 
 @observation chatTANbiomass1998
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -234,7 +234,7 @@ obs All 2873
 error_value All 0.18
 
 @observation chatTANbiomass1999
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -246,7 +246,7 @@ obs All 2302
 error_value All 0.12
 
 @observation chatTANbiomass2000
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -258,7 +258,7 @@ obs All 2090
 error_value All 0.09
 
 @observation chatTANbiomass2001
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -270,7 +270,7 @@ obs All 1589
 error_value All 0.13
 
 @observation chatTANbiomass2002
-type abundance
+type biomass
 catchability chatTANq
 layer Cell
 time_step one
@@ -514,8 +514,8 @@ prior uniform_log
 #FREE PARAMETERS
 @estimate
 parameter process[Recruitment].r0
-lower_bound 1000
-upper_bound 150000
+lower_bound 1e3
+upper_bound 1e7
 prior uniform_log
 {
 @estimate

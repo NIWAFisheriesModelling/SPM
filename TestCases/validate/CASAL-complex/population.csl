@@ -1,6 +1,6 @@
 #INITALISATION (the starting value for B0 is set as 45000 t)
 @initialization
-R0 20000
+R0 5e6
 
 # PARTITION
 @size_based false
@@ -23,7 +23,7 @@ R0 20000
 time_steps 3
 recruitment_time 2
 spawning_time 1
-spawning_part_mort 0.5
+spawning_part_mort 1.0
 midmortality_partition weighted_product
 spawning_ps 1
 aging_time 3
@@ -72,13 +72,17 @@ future_years   2003 2004 2005 2006 2007
 future_catches 3700 3700 3700 3700 3700
 
 # SELECTIVITIES
-@selectivity_names chatTANsel chatFsel
+@selectivity_names chatTANsel chatFsel one
 @selectivity chatFsel
 male logistic 9 4
-female logistic_capped 9 4 0.7
+female logistic 9 4
+#female logistic_capped 9 4 0.7
 @selectivity chatTANsel
 male logistic 9 4
-female logistic_capped 9 4 0.7
+female logistic 9 4
+#female logistic_capped 9 4 0.7
+@selectivity one
+all constant 1
 
 # SIZE AT AGE
 @size_at_age_type von_Bert
@@ -92,3 +96,11 @@ k_female 0.202
 t0_female -0.20
 Linf_female 113.4
 cv_female 0.1
+{
+@size_weight 
+type basic
+a_male 2.49e-9
+b_male 3.234
+a_female 1.70e-9
+b_female 3.328
+}

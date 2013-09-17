@@ -15,7 +15,7 @@ burn_in 100
 
 # OBSERVATIONS Chatham Rise
 @relative_abundance chatCPUE
-biomass False
+biomass True
 q chatCPUEq
 years 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001
 step 1
@@ -45,7 +45,7 @@ dist lognormal
 cv_process_error 0.0
 
 @relative_abundance chatTANbiomass
-biomass False
+biomass True
 q chatTANq
 years 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002
 step 1
@@ -160,8 +160,8 @@ prior uniform-log
 #FREE PARAMETERS
 @estimate
 parameter initialization.R0
-lower_bound 2500
-upper_bound 150000
+lower_bound 1e3
+upper_bound 1e7
 prior uniform-log
 {
 @estimate
