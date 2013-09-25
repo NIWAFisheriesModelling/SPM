@@ -33,8 +33,8 @@ public:
 
 protected:
   // Variables
-  map<string, vector<double> > mvProportionMatrix;
-  map<string, double>          mErrorValue;
+  map<string, vector<double> > mvObservationMatrix;
+  map<string, vector<double> > mvErrorMatrix;
   double                       dDelta;
   double                       *pAgeResults;
   int                          iMinAge;

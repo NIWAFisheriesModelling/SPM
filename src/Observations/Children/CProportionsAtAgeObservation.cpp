@@ -102,13 +102,13 @@ void CProportionsAtAgeObservation::validate() {
     vector<string> vOBS;
     pParameterList->fillVector(vOBS, PARAM_OBS);
 
-    if ((vOBS.size() % (iNGroups * iAgeSpread + 1)) != 0)
+    if ((vOBS.size() % (iNGroups * iAgeSpread + 1)) !=0)
       CError::errorListNotSize(PARAM_OBS, iAgeSpread * iNGroups);
 
     for (int i = 0; i < (int)vOBS.size(); i+=(iNGroups * iAgeSpread + 1)) {
       for (int j = 0; j < (iNGroups * iAgeSpread); ++j) {
         try {
-          mvProportionMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
+          mvObservationMatrix[vOBS[i]].push_back(boost::lexical_cast<double>(vOBS[i+j+1]));
         } catch (boost::bad_lexical_cast) {
           string Ex = string("Non-numeric value in ") + PARAM_OBS + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
           throw Ex;
@@ -116,7 +116,7 @@ void CProportionsAtAgeObservation::validate() {
 
         // Check for non-positive or negative values in our observations  - depends on likelihood
         if(sLikelihood == PARAM_LOGNORMAL) {
-          if ((*mvProportionMatrix[vOBS[i]].rbegin()) <= 0.0 ) {
+          if ((*mvObservationMatrix[vOBS[i]].rbegin()) <= 0.0 ) {
             CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
           }
         } else if(sLikelihood == PARAM_MULTINOMIAL) {
@@ -131,82 +131,121 @@ void CProportionsAtAgeObservation::validate() {
     vector<string> vErrorValues;
     pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
 
-    if ((vErrorValues.size() % 2) != 0)
-      throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
-
-    for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
-      try {
-        mErrorValue[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
-      } catch (boost::bad_lexical_cast) {
-        string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
-        throw Ex;
-      }
-      // Check for non-positive or negative values in the error - depends on likelihood
-      if(sLikelihood==PARAM_LOGNORMAL) {
-        if(mErrorValue[vErrorValues[i]] <= 0.0) {
-          CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
+    if(sLikelihood == PARAM_LOGNORMAL) {
+      if ((vErrorValues.size() % (iNGroups * iAgeSpread + 1)) !=0)
+        CError::errorListNotSize(PARAM_ERROR_VALUE, iAgeSpread * iNGroups);
+      for (int i = 0; i < (int)vErrorValues.size(); i+=(iNGroups * iAgeSpread + 1)) {
+        for (int j = 0; j < (iNGroups * iAgeSpread); ++j) {
+          try {
+            mvErrorMatrix[vErrorValues[i]].push_back(boost::lexical_cast<double>(vErrorValues[i+j+1]));
+          } catch (boost::bad_lexical_cast) {
+            string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
+            throw Ex;
+          }
+          // Check for non-positive or negative values in the error - depends on likelihood
+          if (boost::lexical_cast<double>(vErrorValues[i+j+1]) <= 0.0 ) {
+            CError::errorLessThanEqualTo(PARAM_ERROR_VALUE, PARAM_ZERO);
+          }
         }
-      } else if(sLikelihood==PARAM_MULTINOMIAL) {
-        if(mErrorValue[vErrorValues[i]] < 0.0) {
-          CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+      }
+    } else if(sLikelihood == PARAM_MULTINOMIAL) {
+      if ((vErrorValues.size() % 2) != 0)
+        throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
+      for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
+        for (int j = 0; j < (iNGroups * iAgeSpread); ++j) {
+          try {
+            mvErrorMatrix[vErrorValues[i]].push_back(boost::lexical_cast<double>(vErrorValues[i+1]));
+          } catch (boost::bad_lexical_cast) {
+            string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
+            throw Ex;
+          }
+          // Check for non-positive or negative values in the error - depends on likelihood
+          if (boost::lexical_cast<double>(vErrorValues[i+1]) < 0.0 ) {
+            CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+          }
         }
       }
     }
 
+    // Declare maps for later use
+    map<string, vector<double> >::iterator vObsPtr = mvObservationMatrix.begin();
+    map<string, vector<double> >::iterator vErrPtr = mvErrorMatrix.begin();
+/*
+std::cerr << "OBS:\n";
+while (vObsPtr != mvObservationMatrix.end()) {
+  std:: cerr << (*vObsPtr).first << ": ";
+  vector<double>::iterator vPtr3 = ((*vObsPtr).second).begin();
+  while (vPtr3 != ((*vObsPtr).second).end()) {
+    std::cerr << (*vPtr3) << " ";
+    vPtr3++;
+  }
+  std:: cerr << "\n";
+  vObsPtr++;
+}
+
+std::cerr << "ERR:\n";
+while (vErrPtr != mvErrorMatrix.end()) {
+  std:: cerr << (*vErrPtr).first << ": ";
+  vector<double>::iterator vPtr3 = ((*vErrPtr).second).begin();
+  while (vPtr3 != ((*vErrPtr).second).end()) {
+    std::cerr << (*vPtr3) << " ";
+    vPtr3++;
+  }
+  std:: cerr << "\n";
+  vErrPtr++;
+}
+*/
     // Loop Through our Partitions
-    map<string, vector<double> >::iterator vPropPtr = mvProportionMatrix.begin();
-    while (vPropPtr != mvProportionMatrix.end()) {
+    while (vObsPtr != mvObservationMatrix.end()) {
       // Validate Sizes
-      if ((iAgeSpread * iNGroups) > (int)((*vPropPtr).second).size())
-        throw string(ERROR_QTY_LESS_PROPORTIONS + (*vPropPtr).first);
-      if ((iAgeSpread  * iNGroups)< (int)((*vPropPtr).second).size())
-        throw string(ERROR_QTY_MORE_PROPORTIONS + (*vPropPtr).first);
+      if ((iAgeSpread * iNGroups) > (int)((*vObsPtr).second).size())
+        throw string(ERROR_QTY_LESS_PROPORTIONS + (*vObsPtr).first);
+      if ((iAgeSpread * iNGroups) < (int)((*vObsPtr).second).size())
+        throw string(ERROR_QTY_MORE_PROPORTIONS + (*vObsPtr).first);
 
         // Rescale if Tolerance is exceeded
         double dRunningTotal = 0.0;
-        vector<double>::iterator vPtr3 = ((*vPropPtr).second).begin();
-        while (vPtr3 != ((*vPropPtr).second).end()) {
+        vector<double>::iterator vPtr3 = ((*vObsPtr).second).begin();
+        while (vPtr3 != ((*vObsPtr).second).end()) {
           dRunningTotal += (*vPtr3);
           vPtr3++;
         }
 
         if (fabs(1.0-dRunningTotal) > dTolerance) {
-          vector<double>::iterator vPtr4 = ((*vPropPtr).second).begin();
-          while (vPtr4 != ((*vPropPtr).second).end()) {
+          vector<double>::iterator vPtr4 = ((*vObsPtr).second).begin();
+          while (vPtr4 != ((*vObsPtr).second).end()) {
             (*vPtr4) /= dRunningTotal;
             vPtr4++;
           }
         }
-      vPropPtr++;
+      vObsPtr++;
     }
 
     // Number of N's must be equal to number of Proportions
-    if (mErrorValue.size() != mvProportionMatrix.size())
+    if (mvErrorMatrix.size() != mvObservationMatrix.size())
       CError::errorListSameSize(PARAM_N, PARAM_OBS);
 
     // Validate our N's against the OBS
     // They have to have a 1-to-1 relationship
     bool bMatch = false;
-    map<string, double>::iterator vNPtr = mErrorValue.begin();
 
-    while (vNPtr != mErrorValue.end()) {
+    while (vErrPtr != mvErrorMatrix.end()) {
       bMatch = false;
       // Loop Props Looking For Match;
-      vPropPtr = mvProportionMatrix.begin();
-      while (vPropPtr != mvProportionMatrix.end()) {
-        if ((*vPropPtr).first == (*vNPtr).first) {
+      vObsPtr = mvObservationMatrix.begin();
+      while (vObsPtr != mvObservationMatrix.end()) {
+        if ((*vObsPtr).first == (*vErrPtr).first) {
           bMatch = true;
           break;
-          }
-      vPropPtr++;
+        }
+        vObsPtr++;
       }
 
       if (!bMatch)
-        throw string(ERROR_MISSING_N_OBS + (*vNPtr).first);
+        throw string(ERROR_MISSING_N_OBS + (*vErrPtr).first);
 
-      vNPtr++;
+      vErrPtr++;
     }
-
   } catch (string &Ex) {
     Ex = "CProportionsAtAgeObservation.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
@@ -266,11 +305,13 @@ void CProportionsAtAgeObservation::execute() {
     pWorldView->execute();
 
     // Loop Through Observations
-    map<string, vector<double> >::iterator mvPropPtr = mvProportionMatrix.begin();
-    while (mvPropPtr != mvProportionMatrix.end()) {
+    map<string, vector<double> >::iterator mvObsPtr = mvObservationMatrix.begin();
+    map<string, vector<double> >::iterator mvErrPtr = mvErrorMatrix.begin();
+
+    while (mvObsPtr != mvObservationMatrix.end()) {
       // Get Square for this Area
-      CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mvPropPtr).first);
-      CWorldSquare *pSquare      = pWorldView->getSquare((*mvPropPtr).first);
+      CWorldSquare *pStartSquare = pStartWorldView->getSquare((*mvObsPtr).first);
+      CWorldSquare *pSquare      = pWorldView->getSquare((*mvObsPtr).first);
 
       //apply ageing error & calculate proportion time_step
       vector<double> vTemp(pSquare->getWidth(),0);
@@ -328,13 +369,13 @@ void CProportionsAtAgeObservation::execute() {
             dCurrentProp = 0.0;
 
           // Store the items we want to calculate scores for
-          vKeys.push_back((*mvPropPtr).first);
+          vKeys.push_back((*mvObsPtr).first);
           vGroup.push_back(pCategories->getGroup(i));
           vAges.push_back(j+iMinAge);
           vExpected.push_back(dCurrentProp);
-          vObserved.push_back(((*mvPropPtr).second)[(iAgeSpread * i) + j]);
+          vObserved.push_back(((*mvObsPtr).second)[(iAgeSpread * i) + j]);
           vProcessError.push_back(dProcessError);
-          vErrorValue.push_back(mErrorValue[(*mvPropPtr).first]);
+          vErrorValue.push_back(((*mvErrPtr).second)[(iAgeSpread * i) + j]);
         }
       }
 
@@ -342,7 +383,7 @@ void CProportionsAtAgeObservation::execute() {
       for (int i = 0; i < (iAgeSpread * pCategories->getNRows()); ++i)
         pAgeResults[i] = 0.0;
 
-      mvPropPtr++;
+      mvObsPtr++;
     }
 
     // Simulate or Generate Result?
