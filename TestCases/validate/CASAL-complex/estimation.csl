@@ -75,7 +75,7 @@ cv_2001 0.13
 cv_2002 0.15
 dist lognormal
 cv_process_error 0.0
-{
+
 @proportions_at chatTANage
 years 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002
 step 1
@@ -113,9 +113,9 @@ cvs_2002 1.091 0.770 0.539 0.421 0.412 0.297 0.367 0.322 0.391 0.510 0.523 0.734
 dist lognormal
 cv_process_error 0.0
 ageing_error False
-
+{
 @catch_at chatOBS
-years 1998 1999 2000 2001
+years 1998 #1999 2000 2001
 fishery chatFishery
 sexed true
 plus_group true
@@ -163,7 +163,7 @@ parameter initialization.R0
 lower_bound 1e3
 upper_bound 1e7
 prior uniform-log
-{
+
 @estimate
 parameter selectivity[chatTANsel].male
 lower_bound 0 0
@@ -175,7 +175,7 @@ parameter selectivity[chatTANsel].female
 lower_bound 0 0 0.2
 upper_bound 30 30 5
 prior uniform
-
+{
 @estimate
 parameter selectivity[chatFsel].male
 lower_bound 0 0

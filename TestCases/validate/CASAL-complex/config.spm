@@ -33,7 +33,6 @@ type none
 
 @size_weight female
 type none
-
 {
 @size_weight male
 type basic
@@ -115,7 +114,7 @@ data 1
 
 @layer Cell
 type categorical
-data All
+data all
 
 @layer catch1975
 type numeric
@@ -249,7 +248,7 @@ ato95 4
 type logistic
 a50 9
 ato95 4
-#alpha 0.7
+alpha 0.7
 
 @selectivity chatFselMale
 type logistic

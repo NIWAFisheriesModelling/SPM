@@ -12,7 +12,7 @@ R0 5e6
 @n_areas 1
 @n_stocks 1
 
-@weightless_model True
+@weightless_model True 
 
 # TIME SEQUENCE
 @initial 1975
@@ -75,12 +75,10 @@ future_catches 3700 3700 3700 3700 3700
 @selectivity_names chatTANsel chatFsel one
 @selectivity chatFsel
 male logistic 9 4
-female logistic 9 4
-#female logistic_capped 9 4 0.7
+female logistic_capped 9 4 0.7
 @selectivity chatTANsel
 male logistic 9 4
-female logistic 9 4
-#female logistic_capped 9 4 0.7
+female logistic_capped 9 4 0.7
 @selectivity one
 all constant 1
 
