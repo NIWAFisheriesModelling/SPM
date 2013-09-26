@@ -170,31 +170,7 @@ void CProportionsAtAgeObservation::validate() {
     // Declare maps for later use
     map<string, vector<double> >::iterator vObsPtr = mvObservationMatrix.begin();
     map<string, vector<double> >::iterator vErrPtr = mvErrorMatrix.begin();
-/*
-std::cerr << "OBS:\n";
-while (vObsPtr != mvObservationMatrix.end()) {
-  std:: cerr << (*vObsPtr).first << ": ";
-  vector<double>::iterator vPtr3 = ((*vObsPtr).second).begin();
-  while (vPtr3 != ((*vObsPtr).second).end()) {
-    std::cerr << (*vPtr3) << " ";
-    vPtr3++;
-  }
-  std:: cerr << "\n";
-  vObsPtr++;
-}
 
-std::cerr << "ERR:\n";
-while (vErrPtr != mvErrorMatrix.end()) {
-  std:: cerr << (*vErrPtr).first << ": ";
-  vector<double>::iterator vPtr3 = ((*vErrPtr).second).begin();
-  while (vPtr3 != ((*vErrPtr).second).end()) {
-    std::cerr << (*vPtr3) << " ";
-    vPtr3++;
-  }
-  std:: cerr << "\n";
-  vErrPtr++;
-}
-*/
     // Loop Through our Partitions
     while (vObsPtr != mvObservationMatrix.end()) {
       // Validate Sizes
