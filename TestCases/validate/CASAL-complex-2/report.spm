@@ -86,3 +86,26 @@ observation chatTANbiomass2001
 @report TAN2002
 type observation
 observation chatTANbiomass2002
+
+@report male
+type age_weight
+age_size male
+
+@report female
+type age_weight
+age_size female
+
+@report male
+type size_weight
+size_weight male
+sizes 50
+
+@report female
+type size_weight
+size_weight female
+sizes 50
+
+@report checkweight
+type partition_biomass
+time_step two
+

@@ -2,7 +2,7 @@
 @estimator Bayes
 @max_iters 300
 @max_evals 1000
-@grad_tol 0.0002
+@grad_tol 0.002
 
 @MCMC
 start 0

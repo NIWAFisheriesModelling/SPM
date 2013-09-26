@@ -58,3 +58,23 @@ ogive chatFsel
 step 2
 proportion_mortality 0.5
 
+@abundance checkweight2
+biomass True
+years 1975
+ogive age2
+step 2
+proportion_mortality 1.0
+
+@abundance checkn2
+biomass False
+years 1975
+ogive age2
+step 2
+proportion_mortality 1.0
+
+@abundance checkweight3
+biomass True
+years 1975
+ogive age3
+step 2
+proportion_mortality 1.0
