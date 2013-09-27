@@ -155,6 +155,7 @@ void CProportionsAtAgeObservation::validate() {
         for (int j = 0; j < (iNGroups * iAgeSpread); ++j) {
           try {
             mvErrorMatrix[vErrorValues[i]].push_back(boost::lexical_cast<double>(vErrorValues[i+1]));
+            //mvErrorMatrix[vErrorValues[i]] = boost::lexical_cast<double>(vErrorValues[i+1]);
           } catch (boost::bad_lexical_cast) {
             string Ex = string("Non-numeric value in ") + PARAM_ERROR_VALUE + string(" for ") + PARAM_OBSERVATION + string(" ") + getLabel();
             throw Ex;
@@ -351,7 +352,14 @@ void CProportionsAtAgeObservation::execute() {
           vExpected.push_back(dCurrentProp);
           vObserved.push_back(((*mvObsPtr).second)[(iAgeSpread * i) + j]);
           vProcessError.push_back(dProcessError);
-          vErrorValue.push_back(((*mvErrPtr).second)[(iAgeSpread * i) + j]);
+          //indentify the correct row of error values and extract the correct error value
+          while (mvErrPtr != mvErrorMatrix.end()) {
+            if ((*mvErrPtr).first == (*mvObsPtr).first) {
+              vErrorValue.push_back(((*mvErrPtr).second)[(iAgeSpread * i) + j]);
+              break;
+            }
+            mvErrPtr++;
+          }
         }
       }
 
