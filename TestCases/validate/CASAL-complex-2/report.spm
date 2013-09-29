@@ -97,12 +97,12 @@ age_size female
 
 @report male
 type size_weight
-size_weight male
+age_size male
 sizes 50
 
 @report female
 type size_weight
-size_weight female
+age_size female
 sizes 50
 
 @report checkweight
