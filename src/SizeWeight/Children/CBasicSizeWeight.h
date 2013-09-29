@@ -24,7 +24,7 @@ public:
   void                        validate();
   void                        build();
   void                        rebuild();
-  double                      getMeanWeight(double &size);
+  double                      getMeanWeight(double &size, string &distribution, double &cv);
 
 protected:
   double                      dA;

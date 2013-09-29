@@ -26,7 +26,7 @@ public:
   void                        build();
   virtual void                rebuild();
   string                      getType() { return sType; };
-  virtual double              getMeanWeight(double &size) = 0;
+  virtual double              getMeanWeight(double &size, string &distribution, double &cv) = 0;
   int                         getMinAge() { return iMinAge; }
   int                         getMaxAge() { return iMaxAge; }
   bool                        getAgePlusGroup() { return bAgePlusGroup; }

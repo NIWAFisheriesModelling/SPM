@@ -28,6 +28,7 @@ public:
   virtual void                rebuild();
   virtual double              getMeanSize(double &age) = 0;
   virtual double              getMeanWeight(double &age) = 0;
+  virtual double              getMeanWeightFromSize(double &size) = 0;
 
 };
 

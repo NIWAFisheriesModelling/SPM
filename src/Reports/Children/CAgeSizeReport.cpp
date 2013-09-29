@@ -11,6 +11,7 @@
 #include "CAgeSizeReport.h"
 #include "../../AgeSize/CAgeSizeManager.h"
 #include "../../AgeSize/CAgeSize.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CAgeSizeReport::CAgeSizeReport()
@@ -59,7 +60,7 @@ void CAgeSizeReport::build() {
     // Parent
     CFileReport::build();
 
-    // Get our selectivity
+    // Get our relationship
     CAgeSizeManager *pManager = CAgeSizeManager::Instance();
     pAgeSize = pManager->getAgeSize(sAgeSize);
 

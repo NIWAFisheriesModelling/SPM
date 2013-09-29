@@ -25,7 +25,7 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
   registerEstimable(PARAM_TAU2, &dTau2);
   registerEstimable(PARAM_A, &dA);
   registerEstimable(PARAM_B, &dB);
-  //registerEstimable(PARAM_CV, &dCV);
+  registerEstimable(PARAM_CV, &dCV);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_Y1);
@@ -34,9 +34,9 @@ CSchnuteAgeSize::CSchnuteAgeSize() {
   pParameterList->registerAllowed(PARAM_TAU2);
   pParameterList->registerAllowed(PARAM_A);
   pParameterList->registerAllowed(PARAM_B);
-  //pParameterList->registerAllowed(PARAM_CV);
-  //pParameterList->registerAllowed(PARAM_DISTRIBUTION);
-  //pParameterList->registerAllowed(PARAM_BY_LENGTH);
+  pParameterList->registerAllowed(PARAM_CV);
+  pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 
 }
@@ -55,23 +55,23 @@ void CSchnuteAgeSize::validate() {
     dTau2           = pParameterList->getDouble(PARAM_TAU2);
     dA              = pParameterList->getDouble(PARAM_A);
     dB              = pParameterList->getDouble(PARAM_B);
-    //dCV             = pParameterList->getDouble(PARAM_CV,true,0);
-    //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
-    //bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
+    dCV             = pParameterList->getDouble(PARAM_CV,true,0);
+    sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
+    bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
     // Validate parent
     CAgeSize::validate();
 
     // Local validation
-    //if (dCV <= 0)
-    //  CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
     if (dA <= 0)
       CError::errorLessThanEqualTo(PARAM_A, PARAM_ZERO);
     if (dB < 1)
       CError::errorLessThanEqualTo(PARAM_B, PARAM_ONE);
+    if (dCV < 0)
+      CError::errorLessThan(PARAM_CV, PARAM_ZERO);
 
-    //if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
-    //  CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
+    if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
+      CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
 
   } catch (string &Ex) {
     Ex = "CSchnuteAgeSize.validate(" + getLabel() + ")->" + Ex;
@@ -177,7 +177,7 @@ double CSchnuteAgeSize::getMeanWeightFromSize(double &size) {
 double dWeight = 0;
 
   try {
-    dWeight = pSizeWeight->getMeanWeight( size );
+    dWeight = pSizeWeight->getMeanWeight( size, sDistribution, dCV );
 
   } catch (string &Ex) {
     Ex = "CSchnuteAgeSize.getMeanWeightFromSize(" + getLabel() + ")->" + Ex;

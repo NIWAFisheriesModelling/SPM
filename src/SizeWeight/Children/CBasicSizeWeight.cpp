@@ -88,9 +88,17 @@ void CBasicSizeWeight::rebuild() {
 // double CBasicSizeWeight::getMeanWeight(double &size)
 // Apply size-weight relationship
 //**********************************************************************
-double CBasicSizeWeight::getMeanWeight(double &size) {
-    double weight = dA*pow(size,dB)*1000;
-    return(weight);
+double CBasicSizeWeight::getMeanWeight(double &size, string &distribution, double &cv) {
+
+  // weight = a * mean size ^ b * bias correction, where
+  // bias correction = (1 + cv of sizes-at-age^2) ^ (b*(b-1)/2)
+
+    double dWeight = dA*pow(size,dB)*1000;
+    if (distribution == PARAM_NORMAL || distribution == PARAM_LOGNORMAL) {
+      dWeight = dWeight * pow(1+cv*cv, dB*(dB-1)/2);
+    }
+    return(dWeight);
+
 }
 
 //**********************************************************************

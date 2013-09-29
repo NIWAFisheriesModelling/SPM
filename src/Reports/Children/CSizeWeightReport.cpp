@@ -9,8 +9,8 @@
 
 // Local headers
 #include "CSizeWeightReport.h"
-#include "../../SizeWeight/CSizeWeightManager.h"
-#include "../../SizeWeight/CSizeWeight.h"
+#include "../../AgeSize/CAgeSizeManager.h"
+#include "../../AgeSize/CAgeSize.h"
 #include "../../Helpers/CError.h"
 
 //**********************************************************************
@@ -20,10 +20,10 @@
 CSizeWeightReport::CSizeWeightReport() {
   // Variables
   eExecutionState   = STATE_FINALIZATION;
-  pSizeWeight      = 0;
+  pAgeSize          = 0;
 
   // Register allowed
-  pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
+  pParameterList->registerAllowed(PARAM_AGE_SIZE);
   pParameterList->registerAllowed(PARAM_SIZES);
 
 }
@@ -35,7 +35,7 @@ CSizeWeightReport::CSizeWeightReport() {
 void CSizeWeightReport::validate() {
   try {
 
-    sSizeWeight = pParameterList->getString(PARAM_SIZE_WEIGHT);
+    sAgeSize = pParameterList->getString(PARAM_AGE_SIZE);
     // Get our list of sizes to evaluate
     pParameterList->fillVector(vSizeList, PARAM_SIZES);
 
@@ -63,9 +63,9 @@ void CSizeWeightReport::build() {
     // Parent
     CFileReport::build();
 
-    // Get our selectivity
-    CSizeWeightManager *pManager = CSizeWeightManager::Instance();
-    pSizeWeight = pManager->getSizeWeight(sSizeWeight);
+    // Get our relationship
+    CAgeSizeManager *pManager = CAgeSizeManager::Instance();
+    pAgeSize = pManager->getAgeSize(sAgeSize);
 
   } catch (string &Ex) {
     Ex = "CSizeWeightReport.build(" + getLabel() + ")->" + Ex;
@@ -89,7 +89,7 @@ void CSizeWeightReport::execute() {
     // Output Header
     cout << CONFIG_ARRAY_START << sLabel << CONFIG_ARRAY_END << "\n";
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << pParameterList->getString(PARAM_TYPE) << "\n";
-    cout << PARAM_SIZE_WEIGHT << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << sSizeWeight << "\n";
+    cout << PARAM_AGE_SIZE << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR << sAgeSize << "\n";
 
     cout << PARAM_SIZES << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR;
     for (int i = 0; i < ((int)vSizeList.size()-1); ++i) {
@@ -99,9 +99,9 @@ void CSizeWeightReport::execute() {
 
     cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << CONFIG_SPACE_SEPARATOR;
     for (int i = 0; i < ((int)vSizeList.size()-1); ++i) {
-      cout << pSizeWeight->getMeanWeight(vSizeList[i]) << CONFIG_SPACE_SEPARATOR;
+      cout << pAgeSize->getMeanWeight(vSizeList[i]) << CONFIG_SPACE_SEPARATOR;
     }
-    cout << pSizeWeight->getMeanWeight(vSizeList[vSizeList.size()-1]) << "\n";
+    cout << pAgeSize->getMeanWeight(vSizeList[vSizeList.size()-1]) << "\n";
     cout << CONFIG_END_REPORT << "\n" << endl;
 
     this->end();

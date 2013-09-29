@@ -13,7 +13,7 @@
 #include "Base/CFileReport.h"
 
 // Forward-Declaration
-class CSizeWeight;
+class CAgeSize;
 
 //**********************************************************************
 //
@@ -29,8 +29,8 @@ public:
   void                        execute();
 
 protected:
-  string                      sSizeWeight;
-  CSizeWeight                *pSizeWeight;
+  string                      sAgeSize;
+  CAgeSize                   *pAgeSize;
   vector<double>              vSizeList;
 
 };

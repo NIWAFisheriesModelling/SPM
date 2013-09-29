@@ -24,7 +24,7 @@ public:
   void                        validate();
   void                        build();
   void                        rebuild();
-  double                      getMeanWeight(double &size) { return 1; }
+  double                      getMeanWeight(double &size, string &distribution, double &cv) { return 1; }
 
 };
 

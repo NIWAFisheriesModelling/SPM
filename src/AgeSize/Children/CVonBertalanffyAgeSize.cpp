@@ -22,15 +22,15 @@ CVonBertalanffyAgeSize::CVonBertalanffyAgeSize() {
   registerEstimable(PARAM_LINF, &dLinf);
   registerEstimable(PARAM_K, &dK);
   registerEstimable(PARAM_T0, &dT0);
-  //registerEstimable(PARAM_CV, &dCV);
+  registerEstimable(PARAM_CV, &dCV);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_LINF);
   pParameterList->registerAllowed(PARAM_K);
   pParameterList->registerAllowed(PARAM_T0);
-  //pParameterList->registerAllowed(PARAM_CV);
-  //pParameterList->registerAllowed(PARAM_DISTRIBUTION);
-  //pParameterList->registerAllowed(PARAM_BY_LENGTH);
+  pParameterList->registerAllowed(PARAM_CV);
+  pParameterList->registerAllowed(PARAM_DISTRIBUTION);
+  pParameterList->registerAllowed(PARAM_BY_LENGTH);
   pParameterList->registerAllowed(PARAM_SIZE_WEIGHT);
 
 }
@@ -46,9 +46,9 @@ void CVonBertalanffyAgeSize::validate() {
     dLinf           = pParameterList->getDouble(PARAM_LINF);
     dK              = pParameterList->getDouble(PARAM_K);
     dT0             = pParameterList->getDouble(PARAM_T0);
-    //dCV             = pParameterList->getDouble(PARAM_CV,true,0);
-    //sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
-    //bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
+    dCV             = pParameterList->getDouble(PARAM_CV,true,0);
+    sDistribution   = pParameterList->getString(PARAM_DISTRIBUTION, true, PARAM_NORMAL);
+    bByLength       = pParameterList->getBool(PARAM_BY_LENGTH,true,1);
 
     // Validate parent
     CAgeSize::validate();
@@ -58,11 +58,11 @@ void CVonBertalanffyAgeSize::validate() {
       CError::errorLessThanEqualTo(PARAM_LINF, PARAM_ZERO);
     if (dK <= 0)
       CError::errorLessThanEqualTo(PARAM_K, PARAM_ZERO);
-    //if (dCV <= 0)
-    //  CError::errorLessThanEqualTo(PARAM_CV, PARAM_ZERO);
+    if (dCV < 0)
+      CError::errorLessThan(PARAM_CV, PARAM_ZERO);
 
-    //if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
-    //  CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
+    if ( (sDistribution != PARAM_NORMAL) && (sDistribution != PARAM_LOGNORMAL) )
+      CError::errorUnknown(PARAM_DISTRIBUTION, sDistribution);
 
   } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.validate(" + getLabel() + ")->" + Ex;
@@ -158,7 +158,7 @@ double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size) {
   double dWeight = 0;
 
   try {
-    dWeight = pSizeWeight->getMeanWeight( size );
+    dWeight = pSizeWeight->getMeanWeight( size, sDistribution, dCV );
 
   } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanWeightFromSize(" + getLabel() + ")->" + Ex;
