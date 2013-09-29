@@ -847,12 +847,16 @@ The two size-weight relationships are,
   \begin{equation}
     \text{mean weight}=1
   \end{equation}
-  \item{Basic:}\index{Basic size-weight relationship} The size-weight relationship where 
+  \item{Basic:}\index{Basic size-weight relationship} The size-weight relationship where the mean weight $w$ of an individual of size $l$ is
   \begin{equation}
-    \text{mean weight}=a(\text{mean size-at-age})^b
+    w=a l^b
+  \end{equation}
+	Note that a bias correction is applied if there is a size-at-age distribution. The mean weight $w$ is corrected using the distribution $cv$, so that
+  \begin{equation}
+	  w=(al^b)(1+cv^2)^{(b(b-1)/2)}
   \end{equation}
 \end{itemize}
-  
+
 Be careful about the scale of $a$ --- this can easily be specified incorrectly. If the catch is in tonnes and the growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there are reports available that can be used to help check that the units specified are plausible (see Section \ref{sec:report-section}).
 
 %If a distribution is specified for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
