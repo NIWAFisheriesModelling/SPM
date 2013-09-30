@@ -116,7 +116,7 @@ age_size none
 
 @report sizeweight
 type size_weight
-size_weight none
+age_size none
 sizes 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170
 
 @report ageweight

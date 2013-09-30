@@ -26,8 +26,6 @@ obs->cpue-2004: 29.0831
 obs->cpue-2005: 24.3502
 obs->cpue-2006: 85.1111
 obs->cpue-2007: 96.5824
-obs->CAA-1998-pseudo: 0
-obs->cpue-1998-pseudo: 0
 prior->catchability[CPUEq].q: 0
 prior->preference_function[ImmatureDistance].lambda: 0
 prior->preference_function[ImmatureDepth].a50: 0
