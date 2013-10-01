@@ -26,6 +26,7 @@ public:
   void                        rebuild();
   double                      getMeanSize(double &age);
   double                      getMeanWeight(double &age);
+  double                      getCV(double &age);
 
 protected:
   double                      dLinf;
@@ -36,7 +37,7 @@ protected:
   bool                        bByLength;
   string                      sSizeWeight;
   CSizeWeight*                pSizeWeight;
-  double                      getMeanWeightFromSize(double &size);
+  double                      getMeanWeightFromSize(double &size, double &cv);
 
 };
 

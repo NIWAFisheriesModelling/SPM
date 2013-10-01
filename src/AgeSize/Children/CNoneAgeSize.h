@@ -26,11 +26,12 @@ public:
   void                        rebuild();
   double                      getMeanSize(double &size) { return 1; };
   double                      getMeanWeight(double &age) { return 1; };
+  double                      getCV(double &age) { return 0; };
 
 protected:
   string                      sSizeWeight;
   CSizeWeight*                pSizeWeight;
-  double                      getMeanWeightFromSize(double &size) { return 1; };
+  double                      getMeanWeightFromSize(double &size, double &cv) { return 1; };
 
 };
 

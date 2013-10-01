@@ -140,7 +140,13 @@ double CVonBertalanffyAgeSize::getMeanWeight(double &age) {
 
   try {
     double dSize = this->getMeanSize( age );
-    dWeight = getMeanWeightFromSize( dSize );
+
+    if (bByLength) {
+      double cv = (dSize * dCV) / age;
+      dWeight = getMeanWeightFromSize( dSize, cv );
+    } else {
+      dWeight = getMeanWeightFromSize( dSize, dCV );
+    }
 
   } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanWeight(" + getLabel() + ")->" + Ex;
@@ -154,11 +160,11 @@ double CVonBertalanffyAgeSize::getMeanWeight(double &age) {
 // double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size)
 // Apply size-weight relationship
 //**********************************************************************
-double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size) {
+double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size, double &cv) {
   double dWeight = 0;
 
   try {
-    dWeight = pSizeWeight->getMeanWeight( size, sDistribution, dCV );
+    dWeight = pSizeWeight->getMeanWeight( size, sDistribution, cv );
 
   } catch (string &Ex) {
     Ex = "CVonBertalanffyAgeSize.getMeanWeightFromSize(" + getLabel() + ")->" + Ex;
@@ -166,6 +172,21 @@ double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size) {
   }
 
   return dWeight;
+}
+
+//**********************************************************************
+// double CVonBertalanffyAgeSize::getCV(double &age)
+// get the cv at age
+//**********************************************************************
+double CVonBertalanffyAgeSize::getCV(double &age) {
+
+  if (bByLength) {
+    double dSize = this->getMeanSize( age );
+    return ( (dSize * dCV) / age );
+  } else {
+    return ( dCV );
+  }
+
 }
 
 //**********************************************************************

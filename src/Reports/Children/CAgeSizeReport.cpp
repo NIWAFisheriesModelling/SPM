@@ -102,6 +102,14 @@ void CAgeSizeReport::execute() {
     }
     cout << pAgeSize->getMeanSize(vAgeList[vAgeList.size()-1]) << "\n";
 
+
+    // Output list of cvs corrsponding to list of ages
+    cout << PARAM_CV << CONFIG_RATIO_SEPARATOR << " ";
+    for (int i = 0; i < ((int)vAgeList.size()-1); ++i) {
+      cout << pAgeSize->getCV(vAgeList[i]) << CONFIG_SPACE_SEPARATOR;
+    }
+    cout << pAgeSize->getCV(vAgeList[vAgeList.size()-1]) << "\n";
+
     // Output list of weights corrsponding to list of sizes
     cout << PARAM_WEIGHTS << CONFIG_RATIO_SEPARATOR << " ";
     for (int i = 0; i < ((int)vAgeList.size()-1); ++i) {
