@@ -860,12 +860,6 @@ The two size-weight relationships are,
 
 Be careful about the scale of $a$ --- this can easily be specified incorrectly. If the catch is in tonnes and the growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there are reports available that can be used to help check that the units specified are plausible (see Section \ref{sec:report-section}).
 
-%If a distribution is specified for the size-at-age relationship, then the mean weight at age is calculated over that distribution, using the following formula, which is exact for lognormal distributions, and a good approximation for a normal distribution (if the c.v. is not large),
-%\begin{equation}
-%	\text{mean weight}=a \times (\text{mean size at age})^b \times \left( 1+\text{c}^2 \right)^{\frac{b(b-1)}{2}}
-%\end{equation}
-%where $c$ is the c.v. of sizes-at-age.
-
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
 A selectivity is a function with a different value for each age class (i.e., for each column of the partition). Selectivities are used throughout \SPM\ to interpret observations (Section \ref{sec:estimation-section}) or to modify the effects of processes on each age class (Section \ref{sec:population-section}). \SPM\ implements a number of different parametric forms, including logistic, knife edge, and double normal selectivities.
