@@ -12,7 +12,8 @@ normalised_resids false
 estimation_section false
 covariance True
 hessian True
-# population section
+every_mean_size true
+population_section true
 requests true
 initial_state true
 state_annually true
