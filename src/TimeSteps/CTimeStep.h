@@ -29,6 +29,7 @@ public:
   void                        validate();
   void                        build();
   void                        execute();
+  vector<string>              getProcessNames() { return vProcessNames; }
 
 protected:
   // Variables

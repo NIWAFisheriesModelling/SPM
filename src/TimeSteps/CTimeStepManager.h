@@ -44,6 +44,7 @@ public:
   string                      getFirstTimeStepLabel();
   int                         getCurrentYear() {return iCurrentYear;}
   int                         getCurrentTimeStep() { return iCurrentTimeStep; }
+  int                         getTimeStepIndexForProcess(string &label);
   void                        clone(CTimeStepManager *Manager);
   void                        validate();
   void                        build();

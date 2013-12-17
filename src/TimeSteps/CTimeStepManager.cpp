@@ -138,6 +138,24 @@ string CTimeStepManager::getFirstTimeStepLabel() {
   return 0;
 }
 
+
+//**********************************************************************
+// void CTimeStepManager::validate()
+// Validate The Time Steps
+//**********************************************************************
+int CTimeStepManager::getTimeStepIndexForProcess(string &label) {
+  for (int i = 0; i < (int)vTimeSteps.size(); ++i) {
+    vector<string> processes = vTimeSteps[i]->getProcessNames();
+    for (int j = 0; j < (int)processes.size(); ++j) {
+      if (processes[j] == label)
+        return i;
+    }
+  }
+
+  CError::errorUnknown(PARAM_PROCESS, label);
+  return -1;
+}
+
 //**********************************************************************
 // void CTimeStepManager::validate()
 // Validate The Time Steps

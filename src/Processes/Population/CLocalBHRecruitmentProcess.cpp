@@ -177,7 +177,7 @@ void CLocalBHRecruitmentProcess::build() {
     // Figure out the when SSB is calcuated w.r.t. recruitment, and then the default iActualOffset
     pTimeStepManager = CTimeStepManager::Instance();
 
-    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantityByCell->getTimeStep()) {
+    if (pTimeStepManager->getTimeStepIndexForProcess(sLabel) <= pDerivedQuantityByCell->getTimeStep()) {
       iActualOffset = iSSBOffset - 1;
       if (iActualOffset < 0) {
         CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);

@@ -173,7 +173,7 @@ void CBHRecruitmentProcess::build() {
     // Figure out the when SSB is calcuated w.r.t. recruitment, and then the default iActualOffset
     pTimeStepManager = CTimeStepManager::Instance();
 
-    if (pTimeStepManager->getCurrentTimeStep() <= pDerivedQuantity->getTimeStep()) {
+    if (pTimeStepManager->getTimeStepIndexForProcess(sLabel) <= pDerivedQuantity->getTimeStep()) {
       iActualOffset = iSSBOffset - 1;
       if (iActualOffset < 0) {
         CError::errorLessThan(PARAM_YEAR_OFFSET, PARAM_ONE);
