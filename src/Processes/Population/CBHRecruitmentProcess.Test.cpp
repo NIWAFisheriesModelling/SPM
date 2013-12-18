@@ -2,7 +2,7 @@
 // Name        : CBHRecruitmentProcess.Test.cpp
 // Author      : S.Rasmussen A.Dunn
 // Date        : 19/07/2013
-// Copyright   : Copyright NIWA Science ©2013 - www.niwa.co.nz
+// Copyright   : Copyright NIWA Science ï¿½2013 - www.niwa.co.nz
 //============================================================================
 #ifdef TEST
 
@@ -15,7 +15,7 @@
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
 #include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Selectivities/Constant.h"
-#include "../../TestFixtures/ConfigurationFiles/Layers/Doublelayer.h"
+#include "../../TestFixtures/ConfigurationFiles/Layers/DoubleLayer.h"
 #include "../../TestFixtures/ConfigurationFiles/DerivedQuantities/DerivedQuantity.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/BHRecruitment.h"
 

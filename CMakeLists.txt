@@ -47,18 +47,19 @@ IF (WIN32)
   SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_54)
   
 ELSE (WIN32)
-  SET(BOOST_LIBS "/opt/boost148/lib64/")
-  SET(BOOST_HEADERS "/opt/boost148/include/")
+  SET(BOOST_LIBS "/opt/boost_1_55_0/stage/lib/")
+  SET(BOOST_HEADERS "/opt/boost_1_55_0/")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
-  SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
-  SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
-  SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
-  SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DTEST -O0 -g3 -Wall -fmessage-length=0 -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
+  SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DTEST -O0 -g3 -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
   SET(MAIN_LIBRARIES
     boost_system
     boost_filesystem
     boost_thread
-    boost_program_options
+    boost_program_options    
+    gomp
     pthread
     )
   SET(TEST_LIBRARIES boost_unit_test_framework)
