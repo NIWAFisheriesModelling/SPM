@@ -47,9 +47,11 @@ IF (WIN32)
   SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_54)
   
 ELSE (WIN32)
-  SET(BOOST_LIBS "/opt/boost_1_55_0/stage/lib/")
-  SET(BOOST_HEADERS "/opt/boost_1_55_0/")
+  # wellopensuse131 link directories
+  SET(BOOST_LIBS "/opt/boost155/lib/")
+  SET(BOOST_HEADERS "/opt/boost155/include/boost/")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
+  #SET(LINK_OPTIONS "-L ${BOOST_LIBS}")
   SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
   SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
   SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DOPTIMIZE -O3 -g0 -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS}")
