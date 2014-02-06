@@ -63,6 +63,8 @@ void CLogNormalLikelihood::simulateObserved(const vector<string> &keys, vector<d
   // instance the random number generator
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
+  map<string, double> mTotals;
+
   // Loop through our expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
 
@@ -74,26 +76,12 @@ void CLogNormalLikelihood::simulateObserved(const vector<string> &keys, vector<d
       // Generate random observation
       observed[i] = pRandom->getRandomLogNormal(expected[i], dCV);
     }
+
+    mTotals[keys[i]] += observed[i];
   }
 
-  // Now rescale observed to sum to one by key
-  string sKey = keys[0];
-  int iLastKey = 0;
-  double dCount = 0.0;
-
-  for (int i = 0; i < (int)observed.size(); ++i) {
-    if (sKey == keys[i]) {
-      dCount += observed[i];
-    } else {
-      for (int j = iLastKey; j < (i-1); ++j) {
-        observed[j] = observed[j] / dCount;
-      }
-      sKey = keys[i];
-      iLastKey = i;
-      dCount = 0.0;
-    }
-  }
-
+  for (unsigned i = 0; i < expected.size(); ++i)
+    observed[i] /= mTotals[keys[i]];
 }
 
 //**********************************************************************
