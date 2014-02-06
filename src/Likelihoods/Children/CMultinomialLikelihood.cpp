@@ -63,6 +63,8 @@ void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector
   // instance the random number generator
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
+  map<string, double> mTotals;
+
   // Loop through our expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
 
@@ -79,27 +81,12 @@ void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector
     } else {
     // Calculate observed number
       observed[i] = pRandom->getRandomBinomial(expected[i], dN);
+      mTotals[keys[i]] += observed[i];
     }
   }
 
-  // Now rescale observed to sum to one by key
-  string sKey = keys[0];
-  int iLastKey = 0;
-  double dCount = 0.0;
-
-  for (int i = 0; i < (int)observed.size(); ++i) {
-    if (sKey == keys[i]) {
-      dCount += observed[i];
-    } else {
-      for (int j = iLastKey; j < (i-1); ++j) {
-        observed[j] = observed[j] / dCount;
-      }
-      sKey = keys[i];
-      iLastKey = i;
-      dCount = 0.0;
-    }
-  }
-
+  for (unsigned i = 0; i < expected.size(); ++i)
+    observed[i] /= mTotals[keys[i]];
 }
 
 //**********************************************************************
