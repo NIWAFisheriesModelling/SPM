@@ -60,46 +60,46 @@ void CMultinomialLikelihood::getResult(vector<double> &scores, const vector<doub
 void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
     const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
-  // declare local variables
-  int iKeyStart = 0;
-  string sLastKey = "";
-
   // instance the random number generator
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
-  // set all observed values to zero
-  for (int i = 0; i < (int)observed.size(); ++i)
-    observed[i] = 0.0;
+  // Loop through our expected values
+  for (int i = 0; i < (int)expected.size(); ++i) {
 
-  // calculate the multinomial samples
-  for (int i = iKeyStart; i < (int)expected.size(); ++i) {
-    for (int j = iKeyStart; j < (int)expected.size(); ++j) {
-      if (keys[j] != sLastKey) {
-        // new group start
-        sLastKey = keys[j];
-        iKeyStart = j;
-        double dN = ceil(adjustErrorValue(processError[j], errorValue[j]));
-        // sample N times
-        for (int k = 0; k < dN; ++k) {
-          double dRandomNumber = pRandom -> getRandomUniform_01();
-          double dCumulativeSumExpected = 0.0;
-          for (int l = 0; l < (int)expected.size(); ++l) {
-            if (keys[l] == sLastKey) {
-              dCumulativeSumExpected += expected[l];
-              if (dRandomNumber <= dCumulativeSumExpected) {
-                observed[l]++;
-                break;
-              }
-            }
-          }
-        }
-      }
+    // Check for invalid values
+    if (errorValue[i] < 0.0)
+      CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
+
+    // Add in process error
+    double dN = ceil(adjustErrorValue(processError[i], errorValue[i]));
+
+    // Deal with zeros
+    if (expected[i] <= 0.0 || dN <=0.0) {
+      observed[i] = 0.0;
+    } else {
+    // Calculate observed number
+      observed[i] = pRandom->getRandomBinomial(expected[i], dN);
     }
   }
 
-  // rescale to sum to one by key
-  for (int i = 0; i < (int)observed.size(); ++i)
-    observed[i] = observed[i] / ceil(adjustErrorValue(processError[i], errorValue[i]));
+  // Now rescale observed to sum to one by key
+  string sKey = keys[0];
+  int iLastKey = 0;
+  double dCount = 0.0;
+
+  for (int i = 0; i < (int)observed.size(); ++i) {
+    if (sKey == keys[i]) {
+      dCount += observed[i];
+    } else {
+      for (int j = iLastKey; j < (i-1); ++j) {
+        observed[j] = observed[j] / dCount;
+      }
+      sKey = keys[i];
+      iLastKey = i;
+      dCount = 0.0;
+    }
+  }
+
 }
 
 //**********************************************************************

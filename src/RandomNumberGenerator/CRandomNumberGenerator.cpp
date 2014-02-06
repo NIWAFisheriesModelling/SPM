@@ -124,7 +124,7 @@ double CRandomNumberGenerator::getRandomBinomial(double p, double N) {
       dCount++;
   }
 
-  return (dCount / std::ceil(N)); // Generated Number
+  return (dCount); // Generated Number (NOT a proportion)
 }
 
 //**********************************************************************

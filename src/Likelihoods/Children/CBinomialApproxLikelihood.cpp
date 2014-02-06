@@ -58,29 +58,27 @@ void CBinomialApproxLikelihood::getResult(vector<double> &scores, const vector<d
 void CBinomialApproxLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
     const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
-  // Variables
+  // instance the random number generator
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
-
-  observed.clear();
 
   // Loop through our expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
-
-    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
 
     // Check for invalid values
     if (errorValue[i] < 0.0)
       CError::errorLessThan(PARAM_ERROR_VALUE, PARAM_ZERO);
 
-    if (expected[i] <= 0.0 || dErrorValue <=0.0) {
-      observed.push_back(0.0);
-      continue;
+    // Add in process error
+    double dN = ceil(adjustErrorValue(processError[i], errorValue[i]));
+
+    // Deal with zeros
+    if (expected[i] <= 0.0 || dN <=0.0) {
+      observed[i] = 0.0;
+    } else {
+    // Calculate observed proportion
+      observed[i] = pRandom->getRandomBinomial(expected[i], dN) / dN;
     }
 
-    // Calculate Observed
-    double dObserved = pRandom->getRandomBinomial(expected[i], dErrorValue);
-
-    observed.push_back(dObserved);
   }
 }
 
