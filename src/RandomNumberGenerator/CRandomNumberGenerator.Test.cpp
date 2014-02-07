@@ -133,18 +133,17 @@ BOOST_FIXTURE_TEST_CASE( RandomNumber_GenerateBinomial, CWorld_Fixture ) {
   // Test
   BOOST_CHECK_EQUAL(pConfig->getRandomSeed(), 123);
 
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(3.5, 7.9), 1.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.0, 1000), 0.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.1, 1000), 86.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.2, 1000), 217.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.3, 1000), 304.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.4, 1000), 399.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.5, 1000), 491.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.6, 1000), 592.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.7, 1000), 704.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.8, 1000), 802.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(0.9, 1000), 898.0);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomBinomial(1.0, 1000), 1000.0);
 }
 
 #endif
