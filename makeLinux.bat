@@ -1,4 +1,4 @@
-#!bash
+#!/bin/bash
 # Remember to compile on virtual machine 'wellopensuse131'
 # ssh wellopensuse131
 svn update
