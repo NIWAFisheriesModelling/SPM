@@ -17,7 +17,7 @@
 //**********************************************************************
 BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
   // Get Likelihood
-  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_MULTINOMIAL);
+  CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_MULTINOMIAL);
 
 
   // Check results
