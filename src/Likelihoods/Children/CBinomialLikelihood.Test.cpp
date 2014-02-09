@@ -23,12 +23,43 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   // Get Likelihood
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_BINOMIAL);
 
+  vector<double> scores;
+  vector<double> expected;
+  vector<double> observed;
+  vector<double> errorValue;
+  vector<double> processError;
+  vector<double> delta;
 
-  // Check results
-  //BOOST_CHECK_EQUAL(pLikelihood->getResult(0.97524381095273815, 0.1, 0.01,0.0, 1e-11), 0.033298488461815871);
+  /**
+   * Test Case 1
+   */
+  expected.push_back(0.1);
+  observed.push_back(0.2);
+  errorValue.push_back(0.005);
+  processError.push_back(0.1);
+  delta.push_back(0.1);
 
-  // clear memory
+  /**
+   * Test Case 2
+   */
+  expected.push_back(0.1);
+  observed.push_back(0.2);
+  errorValue.push_back(0.005);
+  processError.push_back(0.1);
+  delta.push_back(0.1);
+
+  /**
+   * run the likelihood
+   */
+  pLikelihood->getResult(scores, expected, observed, errorValue, processError, delta);
   delete pLikelihood;
+
+  /**
+   * check results
+   *
+   */
+  BOOST_CHECK_EQUAL(0.1, scores[0]); // Test Case 1
+  BOOST_CHECK_EQUAL(0.1, scores[1]); // Test Case 2
 }
 
 #endif /* TEST */
