@@ -45,10 +45,10 @@ void CLogNormalWithQLikelihood::getResult(vector<double> &scores, const vector<d
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
     // Calculate score
-    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
-    double dSigma       = sqrt(log(1+ dErrorValue*dErrorValue));
-    double dScore       = log(observed[i] / CMath::zeroFun(expected[i],delta)) / dSigma + 0.5*dSigma;
-    dScore              = log(dSigma) + 0.5 * (dScore * dScore);
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+    double dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
+    double dScore = log(observed[i] / CMath::zeroFun(expected[i],delta)) / dSigma + 0.5*dSigma;
+    dScore = log(dSigma) + 0.5 * (dScore * dScore);
 
     scores.push_back(dScore);
   }
@@ -62,27 +62,40 @@ void CLogNormalWithQLikelihood::getResult(vector<double> &scores, const vector<d
 void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vector<double> &observed,
     const vector<double> &expected, const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
-  // Variables
+  // instance the random number generator
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
-  observed.clear();
-
-  // Loop through expected
+  // Loop through our expected values
   for (int i = 0; i < (int)expected.size(); ++i) {
 
-    double dErrorValue  = adjustErrorValue(processError[i], errorValue[i]);
-
+    double dCV  = adjustErrorValue(processError[i], errorValue[i]);
     // Check for invalid values
-    if (expected[i] <= 0.0 || dErrorValue <=0.0) {
-      observed.push_back(DELTA);
-      continue;
+    if (expected[i] <= 0.0 || dCV <= 0.0) {
+      observed[i] = delta;
+    } else {
+      // Generate random observation
+      observed[i] = pRandom->getRandomLogNormal(expected[i], dCV);
     }
-
-    // Calculate observed
-    double dObserved    = pRandom->getRandomLogNormal(expected[i], dErrorValue);
-
-    observed.push_back(dObserved);
   }
+
+  // Now rescale observed to sum to one by key
+  string sKey = keys[0];
+  int iLastKey = 0;
+  double dCount = 0.0;
+
+  for (int i = 0; i < (int)observed.size(); ++i) {
+    if (sKey == keys[i]) {
+      dCount += observed[i];
+    } else {
+      for (int j = iLastKey; j < (i-1); ++j) {
+        observed[j] = observed[j] / dCount;
+      }
+      sKey = keys[i];
+      iLastKey = i;
+      dCount = 0.0;
+    }
+  }
+
 }
 
 //**********************************************************************

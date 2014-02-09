@@ -7,6 +7,9 @@
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
 
+// Global headers
+#include <cmath>
+
 // Local headers
 #include "CLogNormalLikelihood.h"
 #include "../../Helpers/CMath.h"
@@ -17,7 +20,6 @@
 // Default Constructor
 //**********************************************************************
 CLogNormalLikelihood::CLogNormalLikelihood() {
-
 }
 
 //**********************************************************************
@@ -46,7 +48,7 @@ void CLogNormalLikelihood::getResult(vector<double> &scores, const vector<double
     double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
     double dSigma = sqrt(log(1+ dErrorValue*dErrorValue));
     double dScore = log(observed[i] / CMath::zeroFun(expected[i],delta)) / dSigma + 0.5*dSigma;
-    dScore        = log(dSigma) + 0.5 * dScore * dScore;
+    dScore = log(dSigma) + 0.5 * (dScore * dScore);
 
     scores.push_back(dScore);
   }
