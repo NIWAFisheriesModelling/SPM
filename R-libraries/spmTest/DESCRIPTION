@@ -4,6 +4,7 @@ Version: 1.1
 Date: 2014-02-10
 Author: A. Dunn
 Description: A set of R functions for assisting with the testing of SPM.
+Depends: spm
 Maintainer: A Dunn <a.dunn@niwa.co.nz>
 License: CPL v1.0. See the SPM User Manual for license details.
 URL: http://www.niwa.co.nz
