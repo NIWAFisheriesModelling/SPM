@@ -19,6 +19,7 @@ BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
   // Get Likelihood
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_MULTINOMIAL);
 
+  vector<string> keys;
   vector<double> scores;
   vector<double> expected;
   vector<double> observed;
@@ -27,36 +28,43 @@ BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
   double delta = 1e-05;
 
   // Test case 1
+  keys.push_back("A");
   expected.push_back(0.1);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 2
+  keys.push_back("A");
   expected.push_back(0.2);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 3
+  keys.push_back("A");
   expected.push_back(0.3);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 4
+  keys.push_back("A");
   expected.push_back(0.4);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 5
+  keys.push_back("B");
   expected.push_back(0.5);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 6
+  keys.push_back("B");
   expected.push_back(0.5);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(10);
   // Test case 7
+  keys.push_back("C");
   expected.push_back(0.5);
   observed.push_back(0.1);
   errorValue.push_back(50);
@@ -64,7 +72,6 @@ BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
 
   // run the likelihood
   pLikelihood->getResult(scores, expected, observed, errorValue, processError, delta);
-  delete pLikelihood;
 
   // Check results
   BOOST_CHECK_CLOSE(16.300417207752272, scores[0], 1e-9);
@@ -74,6 +81,23 @@ BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
   BOOST_CHECK_CLOSE( 8.253227645581770, scores[4], 1e-9);
   BOOST_CHECK_CLOSE( 0.516444725003769, scores[5], 1e-9);
   BOOST_CHECK_CLOSE( 0.872226985105489, scores[6], 1e-9);
+
+  // Get results
+  pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
+
+  // Check results
+  BOOST_CHECK_CLOSE(observed[0], 0.0400000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.1400000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.2999999999999999, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.5200000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.8888888888888888, 1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.1111111111111111, 1e-9);
+  BOOST_CHECK_CLOSE(observed[6], 1.0000000000000000, 1e-9);
+
+
+  // clean up memory
+  delete pLikelihood;
+
 }
 
 #endif /* TEST */

@@ -23,6 +23,7 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   // Get Likelihood
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_BINOMIAL);
 
+  vector<string> keys;
   vector<double> scores;
   vector<double> expected;
   vector<double> observed;
@@ -31,36 +32,43 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   double delta = 1e-05;
 
   // Test case 1
+  keys.push_back("A");
   expected.push_back(0.1);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 2
+  keys.push_back("A");
   expected.push_back(0.2);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 3
+  keys.push_back("A");
   expected.push_back(0.3);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 4
+  keys.push_back("A");
   expected.push_back(0.4);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 5
+  keys.push_back("B");
   expected.push_back(0.5);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(0.0);
   // Test case 6
+  keys.push_back("B");
   expected.push_back(0.5);
   observed.push_back(0.1);
   errorValue.push_back(50);
   processError.push_back(10);
   // Test case 7
+  keys.push_back("B");
   expected.push_back(0.5);
   observed.push_back(0.1);
   errorValue.push_back(50);
@@ -68,7 +76,6 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
 
   // run the likelihood
   pLikelihood->getResult(scores, expected, observed, errorValue, processError, delta);
-  delete pLikelihood;
 
   // Check results
   BOOST_CHECK_CLOSE( 1.687807099701715, scores[0], 1e-9);
@@ -78,6 +85,21 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   BOOST_CHECK_CLOSE(20.091017458126572, scores[4], 1e-9);
   BOOST_CHECK_CLOSE( 3.939720847325895, scores[5], 1e-9);
   BOOST_CHECK_CLOSE( 5.256187812442846, scores[6], 1e-9);
+
+  // Get results
+  pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
+
+  // Check results
+  BOOST_CHECK_CLOSE(observed[0], 0.0400000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.1400000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.2999999999999999, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.5200000000000000, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.4799999999999999, 1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.3333333333333333, 1e-9);
+  BOOST_CHECK_CLOSE(observed[6], 0.3333333333333333, 1e-9);
+
+  // clean up memory
+  delete pLikelihood;
 }
 
 #endif /* TEST */

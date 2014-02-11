@@ -28,12 +28,41 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
   // Get Likelihood
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
 
+  // Generate data
+  vector<string> keys;
+  vector<double> observed;
+  vector<double> expected;
+  vector<double> errorValue;
+  vector<double> processError;
+  double delta = 1e-05;
+
+  for (int i=0; i < 4; ++i) {
+    keys.push_back("A");
+    observed.push_back(0.25);
+    expected.push_back(0.25);
+    errorValue.push_back(0.0001);
+    processError.push_back(0);
+  }
+  for (int i=4; i < 8; ++i) {
+    keys.push_back("B");
+    observed.push_back(0.25);
+    expected.push_back(0.25);
+    errorValue.push_back(0.50);
+    processError.push_back(0);
+  }
+
+  // Get results
+  pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
+
   // Check results
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99947558889177623);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99976020659670273);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 1.0002227168955811);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99848153407070017);
-//  BOOST_CHECK_EQUAL(pLikelihood->simulateObserved(1.0, 0.0001, 0.001, 1e-11), 0.99977680165763549);
+  BOOST_CHECK_CLOSE(observed[0], 0.250002080724, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.249994750039, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.249998591594, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.250004577641, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.207820117722, 1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.287681434146, 1e-9);
+  BOOST_CHECK_CLOSE(observed[6], 0.303605229737, 1e-9);
+  BOOST_CHECK_CLOSE(observed[7], 0.200893218394, 1e-9);
 
   // clear memory
   delete pLikelihood;
