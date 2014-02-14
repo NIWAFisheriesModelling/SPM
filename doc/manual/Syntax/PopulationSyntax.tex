@@ -72,7 +72,7 @@
 \defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) to form the annual cycle}
 \defType{String vector}
 \defDefault{No default}
-\defValue{Defines the labels of the time-steps that are run in each year}
+\defValue{A valid time\_step label, from one of \command{time\_step}}
 
 \subsection{\I{Initialisation}}
 
@@ -97,10 +97,10 @@
 \defDefault{No default}
 \defValue{A non-negative integer}
 
-\defSub{processes} {Define the processes (in order of occurrence) to run in each year of the initialisation}
+\defSub{time\_steps} {Define the \command{time\_step} labels (in order that they are applied) in this initialisation phase}
 \defType{String vector}
 \defDefault{No default}
-\defValue{A valid process label, from one of \command{process}}
+\defValue{A valid time\_step label, from one of \command{time\_step}}
 
 \defSub{lambda} {Define the absolute proportional difference for assessing convergence between annual iterations during the initialisation}
 \defType{Constant}
@@ -249,7 +249,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer used to determine where recruitment occurs}
 \defType{String}
 \defDefault{No layer}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then recruitment is in proportion to the layer values.}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then the total recruitment $R_0$ in each cell is scaled to be proportional to the value of the layer in that cell.}
 
 \subsubsection[Local Beverton-Holt recruitment process]{\commandlabsubarg{process}{type}{local\_bh\_recruitment}}
 
