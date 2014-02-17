@@ -70,6 +70,15 @@ string CConfiguration::getCommandLineParameter(int index) {
 }
 
 //**********************************************************************
+//
+//
+//**********************************************************************
+void CConfiguration::setNumberOfThreads(int value) {
+  if ( value < 1 ) iNumberOfThreads = 1;
+  else iNumberOfThreads = value;
+}
+
+//**********************************************************************
 // CConfiguration::~CConfiguration()
 // Default De-Constructor
 //**********************************************************************

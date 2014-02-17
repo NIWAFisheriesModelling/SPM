@@ -43,7 +43,7 @@ public:
   string                     getConfigFile() { return sConfigFile; }
   void                       setEstimateValuesFile(string value) { sEstimateValuesFile = value; }
   string                     getEstimateValuesFile() { return sEstimateValuesFile; }
-  void                       setNumberOfThreads(int value) { iNumberOfThreads = value; }
+  void                       setNumberOfThreads(int value);
   int                        getNumberOfThreads() { return iNumberOfThreads; }
   void                       setUseEstimateValues(bool value) { bUseEstimateValues = value; }
   bool                       getUseEstimateValues() { return bUseEstimateValues; }
@@ -59,10 +59,10 @@ public:
 
 protected:
   // Functions
-	CConfiguration();
-	virtual                    ~CConfiguration();
+  CConfiguration();
+  virtual                    ~CConfiguration();
 
-	// Variables
+  // Variables
   bool                       bQuietMode;
   bool                       bPopulateWithDummyData;
   string                     sConfigFile;
