@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-02-17 (rev. 5023)
+; TextPad syntax definitions for SPM version 1.1-2014-02-18 (rev. 5024)
 ; ===================================================================================
 ;
 ;
@@ -76,6 +76,7 @@ category_labels
 category_values
 cell_length
 consumption_rate
+consumption_rate_layer
 correlation_adjustment_diff
 covariance
 covariance_adjustment_method
