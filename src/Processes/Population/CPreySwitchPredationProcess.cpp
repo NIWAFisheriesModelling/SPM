@@ -10,10 +10,12 @@
 // Local Headers
 #include "CPreySwitchPredationProcess.h"
 #include "../../Helpers/CComparer.h"
+#include "../../Helpers/CCompoundCategories.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/ForEach.h"
-#include "../../Helpers/CCompoundCategories.h"
+#include "../../Layers/CLayerManager.h"
+#include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Penalties/CPenalty.h"
 #include "../../Penalties/CPenaltyManager.h"
 #include "../../Selectivities/CSelectivity.h"
@@ -28,10 +30,12 @@ CPreySwitchPredationProcess::CPreySwitchPredationProcess() {
   // Variables
   sType = PARAM_PREY_SWITCH_PREDATION;
   pPreyCategories  = 0;
+  pCRLayer         = 0;
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_IS_ABUNDANCE);
   pParameterList->registerAllowed(PARAM_CONSUMPTION_RATE);
+  pParameterList->registerAllowed(PARAM_CONSUMPTION_RATE_LAYER);
   pParameterList->registerAllowed(PARAM_ELECTIVITIES);
   pParameterList->registerAllowed(PARAM_PREY_CATEGORIES);
   pParameterList->registerAllowed(PARAM_PREY_SELECTIVITIES);
@@ -51,6 +55,7 @@ void CPreySwitchPredationProcess::validate() {
     // Get our parameters
     bIsAbundance = pParameterList->getBool(PARAM_IS_ABUNDANCE);
     dCR = pParameterList->getDouble(PARAM_CONSUMPTION_RATE);
+    sCRLayer = pParameterList->getString(PARAM_CONSUMPTION_RATE_LAYER, true, "");
     pParameterList->fillVector(vElectivityList, PARAM_ELECTIVITIES);
     pParameterList->fillVector(vPreyCategoryList, PARAM_PREY_CATEGORIES);
     pParameterList->fillVector(vPreySelectivityList, PARAM_PREY_SELECTIVITIES);
@@ -141,6 +146,19 @@ void CPreySwitchPredationProcess::build() {
   try {
     // Base Build
     //CProcess::build();
+
+    // Get our CR Layer
+    if (sCRLayer != "") {
+      pCRLayer = CLayerManager::Instance()->getNumericLayer(sCRLayer);
+      // Loop Through The World Grid (i,j)
+      for (int i = 0; i < iWorldHeight; ++i) {
+        for (int j = 0; j < iWorldWidth; ++j) {
+          if( pCRLayer->getValue(i, j) < 0) {
+            CError::errorLessThan(PARAM_CONSUMPTION_RATE_LAYER, PARAM_ZERO);
+          }
+        }
+      }
+    }
 
     CSelectivityManager *pSelectivityManager = CSelectivityManager::Instance();
     // Prey
@@ -300,6 +318,8 @@ void CPreySwitchPredationProcess::execute() {
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
         for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
           vMortality[m] = dPredatorVulnerable * dCR * (vVulnerable[m] * vElectivityList[m]) / dTotalVulnerable;
+          if(pCRLayer != 0)
+            vMortality[m] *= pCRLayer->getValue(i, j);
           vExploitation[m] = vMortality[m] / CMath::zeroFun(vVulnerable[m],ZERO);
           if (vExploitation[m] > dUMax) {
             vExploitation[m] = dUMax;

@@ -45,6 +45,8 @@ protected:
   // Variables
   bool                        bIsAbundance;
   double                      dCR;
+  string                      sCRLayer;
+  CNumericLayer               *pCRLayer;
   double                      dUMax;
   vector<double>              vMortality;
   vector<double>              vExploitation;

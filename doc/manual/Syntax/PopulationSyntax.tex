@@ -316,7 +316,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{The expanded vector must have values of years between \commandsub{model}{initial} and \commandsub{model}{current}}
 
-\defSub{layer} {Define the label of the layer that defines the distribution of recruitment (as a multpiler of $R0$ at equilibrium abundances in each cell}
+\defSub{layer} {Define the label of the layer that defines the distribution of recruitment (as a multiplier of $R0$ at equilibrium abundances in each cell}
 \defType{String}
 \defDefault{No layer}
 \defValue{A valid numeric layer as defined by \command{layer}. The amount of recruitment in each cell is the product of $r0$ and the layer value in each cell.}
@@ -348,7 +348,7 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defSub{layer} {Name of the layer}
 \defType{String}
 \defDefault{No layer}
-\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate times the value of the layer. Note that the layer values must be non-negative}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate multiplied by the value of the layer. Note that the layer values must be non-negative}
 
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
 
@@ -504,6 +504,11 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{Numeric}
 \defDefault{No default}
 \defValue{A positive real number}
+
+\defSub{consumption\_rate\_layer}{Define the label of the layer that defines the predator consumption rate in each cell}
+\defType{String}
+\defDefault{None}
+\defValue{A valid numeric layer as defined by \command{layer}. The consumption rate in each cell is the product of the total consumption rate and the layer value in each cell. Note that the layer values must be non-negative.}
 
 %\defSub{prey}{Define the vector of labels for all the prey groups used}
 %\defType{String vector}

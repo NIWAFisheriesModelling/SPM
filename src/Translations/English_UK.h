@@ -188,6 +188,7 @@
 #define PARAM_CONSTANT_MORTALITY_RATE             "constant_mortality_rate"
 #define PARAM_CONSTANT_RECRUITMENT                "constant_recruitment"
 #define PARAM_CONSUMPTION_RATE                    "consumption_rate"
+#define PARAM_CONSUMPTION_RATE_LAYER              "consumption_rate_layer"
 #define PARAM_CORRELATION                         "correlation"
 #define PARAM_CORRELATION_ADJUSTMENT_DIFF         "correlation_adjustment_diff"
 #define PARAM_COVARIANCE_ADJUSTMENT_METHOD        "covariance_adjustment_method"
