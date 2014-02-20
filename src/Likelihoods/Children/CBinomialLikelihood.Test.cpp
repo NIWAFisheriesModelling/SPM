@@ -14,12 +14,15 @@
 
 // Local Includes
 #include "../Factory/CLikelihoodFactory.h"
+#include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
 BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
+  CRandomNumberGenerator::Instance()->Reset(31373u);
+
   // Get Likelihood
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_BY_CATEGORY, PARAM_BINOMIAL);
 
@@ -90,13 +93,13 @@ BOOST_AUTO_TEST_CASE( BinomialLikelihood ) {
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE(observed[0], 0.0400000000000000, 1e-9);
-  BOOST_CHECK_CLOSE(observed[1], 0.1400000000000000, 1e-9);
-  BOOST_CHECK_CLOSE(observed[2], 0.2999999999999999, 1e-9);
-  BOOST_CHECK_CLOSE(observed[3], 0.5200000000000000, 1e-9);
-  BOOST_CHECK_CLOSE(observed[4], 0.4799999999999999, 1e-9);
-  BOOST_CHECK_CLOSE(observed[5], 0.3333333333333333, 1e-9);
-  BOOST_CHECK_CLOSE(observed[6], 0.3333333333333333, 1e-9);
+  BOOST_CHECK_CLOSE(observed[0], 0.14000000000000001, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.28000000000000003, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.26000000000000001, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.5, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.47999999999999998, 1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.1111111111111111,  1e-9);
+  BOOST_CHECK_CLOSE(observed[6], 0.41666666666666669, 1e-9);
 
   // clean up memory
   delete pLikelihood;

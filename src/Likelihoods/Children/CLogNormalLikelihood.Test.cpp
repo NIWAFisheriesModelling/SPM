@@ -19,12 +19,15 @@
 #include "../../TestFixtures/ConfigurationFiles/AgeSize/AgeSize.h"
 #include "../../TestFixtures/ConfigurationFiles/SizeWeight/SizeWeight.h"
 #include "../../TestFixtures/ConfigurationFiles/Processes/ConstantRecruitment.h"
+#include "../../RandomNumberGenerator/CRandomNumberGenerator.h"
 
 //**********************************************************************
 //
 //
 //**********************************************************************
 BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
+  CRandomNumberGenerator::Instance()->Reset(31373u);
+
   // Get Likelihood
   CLikelihood *pLikelihood = CLikelihoodFactory::buildLikelihood(PARAM_PROPORTIONS_AT_AGE, PARAM_LOGNORMAL);
 
@@ -36,14 +39,14 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
   vector<double> processError;
   double delta = 1e-05;
 
-  for (int i=0; i < 4; ++i) {
+  for (int i = 0; i < 4; ++i) {
     keys.push_back("A");
     observed.push_back(0.25);
     expected.push_back(0.25);
     errorValue.push_back(0.0001);
     processError.push_back(0);
   }
-  for (int i=4; i < 8; ++i) {
+  for (int i = 0; i < 4; ++i) {
     keys.push_back("B");
     observed.push_back(0.25);
     expected.push_back(0.25);
@@ -55,14 +58,14 @@ BOOST_AUTO_TEST_CASE(LogNormalLikelihood ) {
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE(observed[0], 0.250002080724, 1e-9);
-  BOOST_CHECK_CLOSE(observed[1], 0.249994750039, 1e-9);
-  BOOST_CHECK_CLOSE(observed[2], 0.249998591594, 1e-9);
-  BOOST_CHECK_CLOSE(observed[3], 0.250004577641, 1e-9);
-  BOOST_CHECK_CLOSE(observed[4], 0.207820117722, 1e-9);
-  BOOST_CHECK_CLOSE(observed[5], 0.287681434146, 1e-9);
-  BOOST_CHECK_CLOSE(observed[6], 0.303605229737, 1e-9);
-  BOOST_CHECK_CLOSE(observed[7], 0.200893218394, 1e-9);
+  BOOST_CHECK_CLOSE(observed[0], 0.25001425607411909, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 0.2500028540353656,  1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 0.24998304181077338, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 0.24999984807974196, 1e-9);
+  BOOST_CHECK_CLOSE(observed[4], 0.32993903406685038, 1e-9);
+  BOOST_CHECK_CLOSE(observed[5], 0.14708804198606557, 1e-9);
+  BOOST_CHECK_CLOSE(observed[6], 0.33929924175930265, 1e-9);
+  BOOST_CHECK_CLOSE(observed[7], 0.18367368218778146, 1e-9);
 
   // clear memory
   delete pLikelihood;

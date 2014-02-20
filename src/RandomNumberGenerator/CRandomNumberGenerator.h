@@ -10,7 +10,7 @@
 #define CRANDOMNUMBERGENERATOR_H_
 
 // Global Headers
-#include <boost/random/mersenne_twister.hpp>
+#include <boost/random.hpp>
 
 // Local headers
 #include "../BaseClasses/CBaseManager.h"
@@ -25,6 +25,7 @@ using boost::mt19937; // Mersenne Twister
 class CRandomNumberGenerator: public CBaseManager {
 public:
   static CRandomNumberGenerator* Instance();
+  void                        Reset(unsigned new_seed = 12345u);
   static void                 Destroy();
   void                        validate();
   void                        build();

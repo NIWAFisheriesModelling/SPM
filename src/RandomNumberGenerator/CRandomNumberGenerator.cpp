@@ -50,6 +50,14 @@ void CRandomNumberGenerator::Destroy() {
 }
 
 //**********************************************************************
+// void CRandomNumberGenerator::Reset(unsigned new_seed)
+// Reset the random number seed
+//**********************************************************************
+void CRandomNumberGenerator::Reset(unsigned new_seed) {
+  clGenerator.seed(new_seed);
+}
+
+//**********************************************************************
 // double CRandomNumberGenerator::getRandomUniform(double min, double max)
 // Get a uniform distributed random number
 //**********************************************************************
