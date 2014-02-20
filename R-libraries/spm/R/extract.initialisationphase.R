@@ -11,7 +11,7 @@ function(lines){
     lambdahat<-spm.string.to.vector.of.numbers(substring(lines[index.start+5],regexpr(":",lines[index.start+5])+1))
     lambdayears<-spm.string.to.vector.of.numbers(substring(lines[index.start+6],regexpr(":",lines[index.start+6])+1))
     start.line <- 7
-  } else if(substring(lines[index.start+2],1,5)=="years") {
+  } else if(substring(lines[index.start+3],1,5)=="years") {
     # For backwards compatibility ... we can delete has.year at some stage in the future
     start.line <- 4
     has.lambda<-FALSE
