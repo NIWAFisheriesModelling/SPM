@@ -21,7 +21,6 @@ function(lines){
     has.lambda<-FALSE
     has.year <-FALSE
   }
-  print(has.year)
   col.labs<-spm.string.to.vector.of.words(lines[start.line+index.start])
   values<-spm.string.to.vector.of.words(lines[(start.line+index.start+1):(index.end-1)])
   values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
