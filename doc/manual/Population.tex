@@ -532,9 +532,14 @@ And define the total vulnerable abundance (or biomass) of each prey group $V(g)_
   V(g)_{total}  = \sum\limits_K {\sum\limits_L {V(g,k,l)}} 
 \end{equation}
 
-The vulnerable abundance (or biomass) of every prey group $g$ in $1 \ldots G$ is calculated simultaneously. Then the abundance (or biomass) to remove from each prey group $g$ is a function of its electivity $E(g)$, the abundance (or biomass) of all other prey groups $i$ in $1 \ldots G$, the electivity of the predator for each prey group $E(i)$, and the total consumption rate of the predator $CR$ and its abundance (or biomass) $P_{total}$,
+And the total availability $A(g)_{total}$ for each prey group as,
 \begin{equation}
-  R(g)_{total}=P_{total} CR \frac{V(g)_{total} E(g)}{\sum\limits_G {V(i)_{total} E(i)}}
+  A(g)_{total} = \frac{V(g)_{total}}{\sum\limits_G {V(i)_{total}}}
+\end{equation}
+
+The vulnerable abundance (or biomass) and availability every prey group $g$ in $1 \ldots G$ is calculated simultaneously. Then the abundance (or biomass) to remove from each prey group $g$ is a function of its electivity $E(g)$, the availability of all other prey groups $i$ in $1 \ldots G$, the electivity of the predator for each prey group $E(i)$, and the total consumption rate of the predator $CR$ and its abundance (or biomass) $P_{total}$,
+\begin{equation}
+  R(g)_{total}=P_{total} CR \frac{A(g)_{total} E(g)}{\sum\limits_G {A(i)_{total} E(i)}}
 \end{equation}
 
 Hence the exploitation rate\index{Maximum exploitation rate} to apply to each prey group $g$ is 

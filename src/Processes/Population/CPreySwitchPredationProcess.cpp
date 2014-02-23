@@ -276,6 +276,7 @@ void CPreySwitchPredationProcess::execute() {
         vExploitation.resize(pPreyCategories->getNRows());
         dPredatorVulnerable = 0.0;
         double dTotalVulnerable = 0.0;
+        double dTotalAvailability = 0.0;
 
         // Loop Through Groups then Categories & Work out Vulnerable Stock in abundance or biomass
         for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
@@ -295,7 +296,9 @@ void CPreySwitchPredationProcess::execute() {
             }
           }
           dTotalVulnerable += vVulnerable[m] * vElectivityList[m];
+          dTotalAvailability += vVulnerable[m];
         }
+        dTotalVulnerable /= dTotalAvailability;
 
         // Loop Through Categories & Work out Predators in abundance or biomass
         for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k) {
@@ -317,7 +320,7 @@ void CPreySwitchPredationProcess::execute() {
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
         for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
-          vMortality[m] = dPredatorVulnerable * dCR * (vVulnerable[m] * vElectivityList[m]) / dTotalVulnerable;
+          vMortality[m] = dPredatorVulnerable * dCR * ((vVulnerable[m]/dTotalAvailability) * vElectivityList[m]) / dTotalVulnerable;
           if(pCRLayer != 0)
             vMortality[m] *= pCRLayer->getValue(i, j);
           vExploitation[m] = vMortality[m] / CMath::zeroFun(vVulnerable[m],ZERO);
