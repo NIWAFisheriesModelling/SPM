@@ -298,7 +298,9 @@ void CPreySwitchPredationProcess::execute() {
           dTotalVulnerable += vVulnerable[m] * vElectivityList[m];
           dTotalAvailability += vVulnerable[m];
         }
-        dTotalVulnerable /= dTotalAvailability;
+
+        dTotalAvailability = CMath::zeroFun( dTotalAvailability, ZERO );
+        dTotalVulnerable = CMath::zeroFun( dTotalVulnerable / dTotalAvailability, ZERO );
 
         // Loop Through Categories & Work out Predators in abundance or biomass
         for (int k = 0; k < (int)vPredatorCategoryIndex.size(); ++k) {
