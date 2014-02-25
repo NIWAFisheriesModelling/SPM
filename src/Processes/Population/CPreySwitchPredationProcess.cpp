@@ -258,6 +258,7 @@ void CPreySwitchPredationProcess::execute() {
     vector<double> vSumMortality(pPreyCategories->getNRows());
     vector<double> vSumAbundance(pPreyCategories->getNRows());
     vector<double> vSumMortalityBiomass(pPreyCategories->getNRows());
+    double dTotalPredatorVulnerable = 0.0;
 
     // Loop Through The World Grid (i,j)
     for (int i = 0; i < iWorldHeight; ++i) {
@@ -319,6 +320,7 @@ void CPreySwitchPredationProcess::execute() {
             }
           }
         }
+       dTotalPredatorVulnerable += dPredatorVulnerable;
 
         // Work out exploitation rate to remove (catch/vulnerableBiomass)
         for (int m = 0; m < pPreyCategories->getNRows(); ++m) {
@@ -357,7 +359,7 @@ void CPreySwitchPredationProcess::execute() {
     }
     if ( pRuntimeController->getCurrentState() != STATE_INITIALIZATION ) {
       vMortalityYears.push_back(pTimeStepManager->getCurrentYear());
-      vPredatorBiomass.push_back(dPredatorVulnerable);
+      vPredatorBiomass.push_back(dTotalPredatorVulnerable);
       for(int m=0; m < pPreyCategories->getNRows(); ++m) {
         vMortalityRate[m].push_back(vSumMortality[m] / vSumAbundance[m]);
         vMortalityN[m].push_back(vSumMortality[m]);
