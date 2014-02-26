@@ -66,6 +66,7 @@ void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vec
   CRandomNumberGenerator *pRandom = CRandomNumberGenerator::Instance();
 
   // Loop through our expected values
+  map<string, double> mTotals;
   for (int i = 0; i < (int)expected.size(); ++i) {
 
     double dCV  = adjustErrorValue(processError[i], errorValue[i]);
@@ -76,26 +77,12 @@ void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vec
       // Generate random observation
       observed[i] = pRandom->getRandomLogNormal(expected[i], dCV);
     }
+
+    mTotals[keys[i]] += observed[i];
   }
 
-  // Now rescale observed to sum to one by key
-  string sKey = keys[0];
-  int iLastKey = 0;
-  double dCount = 0.0;
-
-  for (int i = 0; i < (int)observed.size(); ++i) {
-    if (sKey == keys[i]) {
-      dCount += observed[i];
-    } else {
-      for (int j = iLastKey; j < (i-1); ++j) {
-        observed[j] = observed[j] / dCount;
-      }
-      sKey = keys[i];
-      iLastKey = i;
-      dCount = 0.0;
-    }
-  }
-
+  for (int i = 0; i < (int)expected.size(); ++i)
+    observed[i] /= mTotals[keys[i]];
 }
 
 //**********************************************************************
