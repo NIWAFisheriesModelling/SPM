@@ -159,6 +159,7 @@ void CInitializationPhase::execute() {
   CDerivedQuantityManager *pDerivedQuantityManager = CDerivedQuantityManager::Instance();
 
 
+  iActualYears = iYears;
   // Loop Through and Execute
   for (int i = 0; i < iYears; ++i) {
     for (int j = 0; j < (int)vTimeSteps.size(); ++j) {
@@ -212,6 +213,7 @@ void CInitializationPhase::execute() {
           vLambdaHatYears.push_back(i+1);
           // Compare with  dPreviousLambdaValue and exit loop if converged
           if ( (dDiffLambda/dTotalLambda) < dLambda ) {
+            iActualYears = i+1;
             bExit = true;
           }
         }

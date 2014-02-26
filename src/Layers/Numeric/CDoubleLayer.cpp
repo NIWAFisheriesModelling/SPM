@@ -34,6 +34,7 @@ CDoubleLayer::CDoubleLayer() {
   // Register Allowed Parameters
   pParameterList->registerAllowed(PARAM_DATA);
   pParameterList->registerAllowed(PARAM_RESCALE);
+
 }
 
 //**********************************************************************
@@ -92,8 +93,13 @@ void CDoubleLayer::validate() {
     // Base Validate
     CNumericLayer::validate();
 
-    // Get our variables
-    dRescale = pParameterList->getDouble(PARAM_RESCALE, true, 1.0);
+
+    if (pParameterList->hasParameter(PARAM_RESCALE)) {
+      // Get the value
+      dRescale = pParameterList->getDouble(PARAM_RESCALE);
+      // register estimable parameters
+      registerEstimable(PARAM_RESCALE, &dRescale);
+    }
 
     // Fill a new vector with our row information
     vector<string> vData;
@@ -117,7 +123,10 @@ void CDoubleLayer::validate() {
         CError::errorTooMuch(PARAM_DATA);
 
       try {
+        // Set grid data
         pGrid[iRow][iCol] = boost::lexical_cast<double>(vData[i]);
+        // register as estimable
+        registerEstimable(PARAM_DATA, i, &pGrid[iRow][iCol]);
       } catch (boost::bad_lexical_cast) {
         string Ex = string("Non-numeric value in layer ") + getLabel();
         throw Ex;
@@ -127,6 +136,9 @@ void CDoubleLayer::validate() {
 
     if (((iRow+1) != iHeight) || (iCol != iWidth))
       CError::errorNotEnough(PARAM_DATA);
+
+    // Register the layer valiues as estimable
+
 
   } catch(string &Ex) {
     Ex = "CDoubleLayer.validate(" + getLabel() + ")->" + Ex;

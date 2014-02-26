@@ -20,6 +20,7 @@
 #include "../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../Catchabilities/CCatchabilityManager.h"
+#include "../Layers/CLayerManager.h"
 
 /**
  * This method will split the absolute name of a system object into it's associated block and return them
@@ -84,6 +85,9 @@ CBaseObject* CObjectFinder::getObject(string objectAbsoluteName) {
 
   } else if (sObjectType == PARAM_CATCHABILITY) {
     target = (CBaseObject*)CCatchabilityManager::Instance()->getCatchability(sObjectLabel);
+
+  } else if (sObjectType == PARAM_LAYER) {
+    target = (CBaseObject*)CLayerManager::Instance()->getNumericLayer(sObjectLabel);
 
   } else {
     THROW_EXCEPTION("Failed to find object for: " + objectAbsoluteName);

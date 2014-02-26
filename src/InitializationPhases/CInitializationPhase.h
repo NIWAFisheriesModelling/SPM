@@ -31,6 +31,7 @@ public:
   vector<string>              getTimeStepNames() { return vTimeStepNames; }
   void                        setExecutionOrderIndex(int index) { iExecutionOrderIndex = index; }
   int                         getNYears() { return iYears; }
+  int                         getActualYears() { return iActualYears; }
   double                      getLambda() { return dLambda; }
   bool                        getConvergenceCheck() { return bConvergenceCheck; }
   vector<int>                 getLambdaHatYears() { return vLambdaHatYears; }
@@ -38,6 +39,7 @@ public:
 
 protected:
   int                           iYears;
+  int                           iActualYears;
   int                           iCurrentTimeStep;
   int                           iExecutionOrderIndex;
   vector<string>                vTimeStepNames;
