@@ -134,7 +134,12 @@ void CProportionsAtAgeObservation::validate() {
     vector<string> vErrorValues;
     pParameterList->fillVector(vErrorValues, PARAM_ERROR_VALUE);
 
-    if(sLikelihood == PARAM_LOGNORMAL) {
+    string sThisLikelihood = sLikelihood;
+    if(sLikelihood == PARAM_PSEUDO) {
+      sThisLikelihood = pParameterList->getString(PARAM_SIMULATION_LIKELIHOOD);
+    }
+
+    if(sThisLikelihood == PARAM_LOGNORMAL) {
       if ((vErrorValues.size() % (iNGroups * iAgeSpread + 1)) !=0)
         CError::errorListNotSize(PARAM_ERROR_VALUE, iAgeSpread * iNGroups);
       for (int i = 0; i < (int)vErrorValues.size(); i+=(iNGroups * iAgeSpread + 1)) {
@@ -151,7 +156,7 @@ void CProportionsAtAgeObservation::validate() {
           }
         }
       }
-    } else if(sLikelihood == PARAM_MULTINOMIAL) {
+    } else if(sThisLikelihood == PARAM_MULTINOMIAL) {
       if ((vErrorValues.size() % 2) != 0)
         throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
       for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
@@ -202,8 +207,9 @@ void CProportionsAtAgeObservation::validate() {
     }
 
     // Number of N's must be equal to number of Proportions
-    if (mvErrorMatrix.size() != mvObservationMatrix.size())
+    if (mvErrorMatrix.size() != mvObservationMatrix.size()) {
       CError::errorListSameSize(PARAM_N, PARAM_OBS);
+    }
 
     // Validate our N's against the OBS
     // They have to have a 1-to-1 relationship
