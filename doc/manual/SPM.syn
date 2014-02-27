@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-02-24 (rev. 5034)
+; TextPad syntax definitions for SPM version 1.1-2014-02-26 (rev. 5037)
 ; ===================================================================================
 ;
 ;
@@ -158,6 +158,7 @@ proportions
 proposal_distribution
 q
 r0
+rescale
 same
 selectivities
 selectivities2

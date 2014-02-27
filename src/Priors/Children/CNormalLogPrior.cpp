@@ -16,6 +16,11 @@
 // Default Constructor
 //**********************************************************************
 CNormalLogPrior::CNormalLogPrior() {
+
+  // Register estimables
+  registerEstimable(PARAM_MU, &dMu);
+  registerEstimable(PARAM_SIGMA, &dSigma);
+
   // Register parameters
   pParameterList->registerAllowed(PARAM_MU);
   pParameterList->registerAllowed(PARAM_SIGMA);

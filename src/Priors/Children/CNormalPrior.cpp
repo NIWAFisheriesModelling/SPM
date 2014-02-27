@@ -16,6 +16,11 @@
 // Default Constructor
 //**********************************************************************
 CNormalPrior::CNormalPrior() {
+
+  // Register estimables
+  registerEstimable(PARAM_MU, &dMu);
+  registerEstimable(PARAM_CV, &dCv);
+
   // Register allowed parameters
   pParameterList->registerAllowed(PARAM_MU);
   pParameterList->registerAllowed(PARAM_CV);

@@ -16,6 +16,11 @@
 // Default Constructor
 //**********************************************************************
 CBetaPrior::CBetaPrior() {
+
+  // Register estimables
+  registerEstimable(PARAM_MU, &dMu);
+  registerEstimable(PARAM_SIGMA, &dSigma);
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MU);
   pParameterList->registerAllowed(PARAM_SIGMA);

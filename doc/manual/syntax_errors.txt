@@ -41,7 +41,6 @@ In SPM, but not in manual
   profiles
   proportional_recruitment
   recruitment_values
-  rescale
   rho
   row
   row_index

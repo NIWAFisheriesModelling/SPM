@@ -41,6 +41,9 @@ CProportionsAtAgeObservation::CProportionsAtAgeObservation() {
   pAgeingError        = 0;
   pCategories         = 0;
 
+  // Register estimables
+  registerEstimable(PARAM_PROCESS_ERROR, &dProcessError);
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MIN_AGE);
   pParameterList->registerAllowed(PARAM_MAX_AGE);

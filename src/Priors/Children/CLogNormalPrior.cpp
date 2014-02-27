@@ -16,6 +16,11 @@
 // Default Constructor
 //**********************************************************************
 CLogNormalPrior::CLogNormalPrior() {
+
+  // Register estimables
+  registerEstimable(PARAM_MU, &dMu);
+  registerEstimable(PARAM_CV, &dCv);
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_MU);
   pParameterList->registerAllowed(PARAM_CV);

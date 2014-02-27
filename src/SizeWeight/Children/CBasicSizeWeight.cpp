@@ -19,6 +19,10 @@ CBasicSizeWeight::CBasicSizeWeight() {
 
   sType = PARAM_BASIC;
 
+  // Register estimables
+  registerEstimable(PARAM_A, &dA);
+  registerEstimable(PARAM_B, &dB);
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_A);
   pParameterList->registerAllowed(PARAM_B);

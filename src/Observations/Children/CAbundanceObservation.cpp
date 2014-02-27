@@ -28,6 +28,9 @@ CAbundanceObservation::CAbundanceObservation() {
   sCatchability   = "";
   pCatchability   = 0;
 
+  // Register estimables
+  registerEstimable(PARAM_PROCESS_ERROR, &dProcessError);
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATCHABILITY);
   pParameterList->registerAllowed(PARAM_OBS);
