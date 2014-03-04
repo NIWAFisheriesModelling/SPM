@@ -1,0 +1,157 @@
+# The reports/outputs
+
+@report random_seed
+type random_number_seed
+
+@report spatial-map
+type spatial_map
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report initialisation-phase2
+type initialisation
+initialisation_phase Phase2
+
+@report initialisation-phase3
+type initialisation
+initialisation_phase Phase3
+
+@report state-0
+type partition
+time_step zero
+years 1995-2011
+
+@report state-1
+type partition
+time_step one
+years 1995-2011
+
+@report state-1b
+type partition
+time_step oneb
+years 1995-2011
+
+@report state-2
+type partition
+time_step two
+years 1995-2011
+
+@report state-0-biomass
+type partition_biomass
+time_step zero
+years 1995-2011
+
+@report state-1-biomass
+type partition_biomass
+time_step one
+years 1995-2011
+
+{
+@report state-1b-biomass
+type partition_biomass
+time_step oneb
+years 1995-2011
+}
+
+@report state-2-biomass
+type partition_biomass
+time_step two
+years 1995-2011
+
+#@report SSB
+#type derived_quantity
+#derived_quantity SSB
+
+@report SSB_layer
+type layer
+layer SSB_layer
+years 1995-2011
+time_step two
+
+@report estimate-summary
+type estimate_summary
+
+@report objective
+type objective_function
+
+@report Maturation
+type selectivity
+selectivity Maturation
+
+@report FishingSel
+type selectivity
+selectivity FishingSel
+
+@report Tagging
+type selectivity
+selectivity TagSel
+
+@report covariance
+type covariance
+
+@report estimate-mpd
+type estimate_value
+
+@report estimate
+type estimate_value
+file_name MPD.prof.dat
+
+@report TagRelease2001
+type layer
+layer TagRelease2001
+
+@report ImmatureDistance
+type preference_function
+preference_function ImmatureDistance
+
+@report ImmatureDepth
+type preference_function
+preference_function ImmatureDepth
+
+@report MatureDistance
+type preference_function
+preference_function MatureDistance
+
+@report MatureDepth
+type preference_function
+preference_function MatureDepth
+
+@report MatureHabitat
+type preference_function
+preference_function MatureHabitat
+
+@report MatureHills
+type preference_function
+preference_function MatureHills
+
+@report PreSpawningDistance
+type preference_function
+preference_function PreSpawningDistance
+
+@report PreSpawningTemperature
+type preference_function
+preference_function PreSpawningTemperature
+
+@report PreSpawningHills
+type preference_function
+preference_function PreSpawningHills
+
+{
+@report PostSpawningDistance
+type preference_function
+preference_function PostSpawningDistance
+}
+
+@report Recruitment
+type process
+process Recruitment
+
+@report ageweight
+type age_weight
+age_size VB
+
+@report MCMC
+type MCMC
+file_name MCMC.log

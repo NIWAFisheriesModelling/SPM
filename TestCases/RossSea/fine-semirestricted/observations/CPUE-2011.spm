@@ -1,0 +1,102 @@
+# CPUE (2011)
+@observation cpue-2011
+type biomass
+year 2011
+time_step one
+categories immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r10-c27 255.6671
+obs r11-c24 318.6027
+obs r11-c25 484.25
+obs r11-c27 647.1094
+obs r12-c24 363.7931
+obs r12-c25 566.8653
+obs r12-c27 591.2699
+obs r13-c22 962.3469
+obs r13-c23 573.4877
+obs r13-c24 485.6857
+obs r13-c27 465.6539
+obs r14-c24 413.8867
+obs r14-c25 364.4268
+obs r14-c26 429.0976
+obs r14-c27 299.121
+obs r15-c25 157.7079
+obs r15-c26 367.4089
+obs r24-c26 219.9557
+obs r24-c27 428.8811
+obs r24-c28 464.5987
+obs r25-c20 148.881
+obs r25-c21 204.1662
+obs r25-c24 200.4114
+obs r25-c26 344.7755
+obs r25-c32 858.0839
+obs r26-c24 371.3176
+obs r27-c18 150.3679
+obs r28-c21 53.1661
+obs r4-c22 228.7145
+obs r4-c23 216.6811
+obs r4-c24 453.1669
+obs r4-c25 328.5701
+obs r4-c26 188.084
+obs r5-c23 160.2133
+obs r6-c29 250.2754
+obs r6-c30 238.6626
+obs r7-c23 154.4597
+obs r7-c27 338.0825
+obs r7-c28 264.8833
+obs r7-c29 277.515
+obs r8-c27 542.658
+obs r8-c28 452.0507
+obs r9-c27 406.5305
+error_value r10-c27 0.1390616
+error_value r11-c24 0.5940035
+error_value r11-c25 0.4061846
+error_value r11-c27 0.4669302
+error_value r12-c24 0.6476167
+error_value r12-c25 0.3116192
+error_value r12-c27 0.3711712
+error_value r13-c22 0.4538254
+error_value r13-c23 0.6548174
+error_value r13-c24 0.6643908
+error_value r13-c27 0.3821057
+error_value r14-c24 0.7045333
+error_value r14-c25 0.9467572
+error_value r14-c26 1.051316
+error_value r14-c27 0.5658201
+error_value r15-c25 0.4280143
+error_value r15-c26 0.305294
+error_value r24-c26 0.6418941
+error_value r24-c27 0.8740449
+error_value r24-c28 1.442137
+error_value r25-c20 0.7312182
+error_value r25-c21 0.4030221
+error_value r25-c24 0.6819834
+error_value r25-c26 1.494042
+error_value r25-c32 0.9791725
+error_value r26-c24 1.158086
+error_value r27-c18 1.257871
+error_value r28-c21 1.285139
+error_value r4-c22 0.3710838
+error_value r4-c23 0.515746
+error_value r4-c24 0.2095381
+error_value r4-c25 0.2393146
+error_value r4-c26 0.2205861
+error_value r5-c23 0.7997838
+error_value r6-c29 0.3867735
+error_value r6-c30 0.3232489
+error_value r7-c23 0.7576618
+error_value r7-c27 0.8847976
+error_value r7-c28 0.4268811
+error_value r7-c29 0.2228632
+error_value r8-c27 0.6316466
+error_value r8-c28 0.7461575
+error_value r9-c27 0.3405083
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2011
+type observation
+observation cpue-2011

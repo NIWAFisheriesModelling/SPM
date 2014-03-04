@@ -1,0 +1,96 @@
+# CPUE (2001)
+@observation cpue-2001
+type biomass
+year 2001
+time_step one
+categories immature mature spawning postspawning
+selectivities FishingSel FishingSel FishingSel FishingSel
+layer Cell
+catchability CPUEq
+obs r11-c21 74.60833
+obs r11-c23 0.6888889
+obs r12-c21 205.2604
+obs r14-c24 638.4923
+obs r14-c26 267.8478
+obs r14-c27 184.9112
+obs r15-c21 20.66481
+obs r15-c25 465.0611
+obs r15-c26 276.2418
+obs r15-c27 77.369
+obs r16-c21 6.793981
+obs r17-c21 40.39683
+obs r18-c26 141.934
+obs r19-c16 50.95417
+obs r19-c18 13.03315
+obs r19-c19 12.67762
+obs r19-c21 98.12555
+obs r19-c22 57.61905
+obs r19-c25 520.5101
+obs r19-c26 180.9033
+obs r20-c17 44.23954
+obs r20-c25 95.51915
+obs r20-c26 118.0043
+obs r21-c16 41.6342
+obs r21-c19 105.8306
+obs r21-c20 114.776
+obs r21-c28 494.5243
+obs r22-c27 404.3924
+obs r27-c18 23.38562
+obs r27-c19 6.323535
+obs r27-c20 60.19583
+obs r28-c19 276.4386
+obs r28-c21 13.45205
+obs r3-c26 130.6817
+obs r4-c25 123.0219
+obs r4-c26 132.7639
+obs r4-c27 118.7489
+obs r5-c22 105.3421
+obs r5-c26 108.2967
+obs r9-c23 1.881092
+error_value r11-c21 0.294959
+error_value r11-c23 2.236068
+error_value r12-c21 0.5245511
+error_value r14-c24 0.5684165
+error_value r14-c26 0.9345568
+error_value r14-c27 0.7222425
+error_value r15-c21 1.330843
+error_value r15-c25 0.6558761
+error_value r15-c26 0.7417208
+error_value r15-c27 0.7352201
+error_value r16-c21 1.436607
+error_value r17-c21 0.7684191
+error_value r18-c26 0.5858741
+error_value r19-c16 0.6349535
+error_value r19-c18 1.392205
+error_value r19-c19 1.6091
+error_value r19-c21 1.538204
+error_value r19-c22 1.778882
+error_value r19-c25 0.9078507
+error_value r19-c26 0.8896099
+error_value r20-c17 0.5685198
+error_value r20-c25 1.075041
+error_value r20-c26 0.7316916
+error_value r21-c16 0.5731806
+error_value r21-c19 0.5592173
+error_value r21-c20 0.8796978
+error_value r21-c28 0.5506829
+error_value r22-c27 0.5131237
+error_value r27-c18 1.736878
+error_value r27-c19 1.645485
+error_value r27-c20 2.289307
+error_value r28-c19 1.217968
+error_value r28-c21 1.391824
+error_value r3-c26 0.7553621
+error_value r4-c25 0.3646758
+error_value r4-c26 0.4064236
+error_value r4-c27 0.3868568
+error_value r5-c22 1.081929
+error_value r5-c26 0.4648761
+error_value r9-c23 2.008316
+likelihood lognormal
+delta 1e-11
+process_error 0.3
+
+@report cpue-2001
+type observation
+observation cpue-2001

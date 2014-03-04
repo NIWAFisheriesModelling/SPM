@@ -1,0 +1,291 @@
+# Estimation.spm
+
+@estimation
+minimiser     GamaDiff
+
+@minimiser GammaDiff
+type numerical_differences
+#step_size 1e-4
+tolerance 0.02 #The default is 0.002 - last used 0.02
+covariance True
+
+@minimiser DE
+type DE_Solver
+covariance False
+tolerance 0.02 #The default is 0.002
+population_size 250
+
+# MCMC
+@mcmc MH
+minimiser GammaDiff
+type metropolis_hastings
+length 200000 # 1500000
+keep 100 # 1000
+start 1
+#adaptive_stepsize True
+adapt_stepsize_at 10000 20000 40000 #100000 200000 400000
+burn_in 50
+proposal_t True
+df 4
+#stepsize 0.01
+
+# ESTIMATION PROFILING
+
+@profile proportion-spawning
+parameter Process[MatureToPreSpawn].proportions(1)
+steps  10
+lower_bound  0.01
+upper_bound  1.00
+
+# ESTIMATION
+@estimate
+parameter  catchability[CPUEq].q
+lower_bound 1e-7
+upper_bound 1e-1
+prior Uniform
+
+@estimate
+parameter  preference_function[ImmatureDistance].lambda
+lower_bound 1e-10
+upper_bound 0.05
+prior Uniform
+
+@estimate
+parameter  preference_function[ImmatureDepth].alpha
+lower_bound 1e-10
+upper_bound 10
+prior Uniform
+
+@estimate
+parameter  preference_function[ImmatureDepth].mu
+lower_bound  100
+upper_bound 5000
+prior Uniform
+
+@estimate
+parameter  preference_function[ImmatureDepth].sigma_L
+lower_bound    1
+upper_bound 5000
+prior Uniform
+
+@estimate
+parameter  preference_function[ImmatureDepth].sigma_R
+lower_bound     1
+upper_bound 10000
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureDistance].lambda
+lower_bound 1e-10
+upper_bound  0.05
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureDepth].alpha
+lower_bound 1e-10
+upper_bound 100
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureDepth].mu
+lower_bound  100
+upper_bound 5000
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureDepth].sigma_L
+lower_bound    1
+upper_bound 5000
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureDepth].sigma_R
+lower_bound     1
+upper_bound 10000
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureHabitat].alpha
+lower_bound 1e-10
+upper_bound 100
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureHabitat].c
+lower_bound 1e-10
+upper_bound 10
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureHills].category_values(1)
+lower_bound    0
+upper_bound    5
+prior Uniform
+
+@estimate
+parameter  preference_function[MatureHills].category_values(2)
+lower_bound    0
+upper_bound    5
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningDistance].alpha
+lower_bound 1e-10
+upper_bound 10
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningDistance].mu
+lower_bound      0
+upper_bound   2000
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningDistance].sigma_L
+lower_bound     50
+upper_bound   2000
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningDistance].sigma_R
+lower_bound     50
+upper_bound   2000
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningTemperature].alpha
+lower_bound 1e-10
+upper_bound 10
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningTemperature].mu
+lower_bound  -5
+upper_bound   5
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningTemperature].sigma_L
+lower_bound    0
+upper_bound  100
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningTemperature].sigma_R
+lower_bound    0
+upper_bound  100
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningHills].category_values(1)
+lower_bound    0
+upper_bound    5
+prior Uniform
+
+@estimate
+parameter  preference_function[PreSpawningHills].category_values(2)
+lower_bound    0
+upper_bound    5
+prior Uniform
+
+{
+@estimate
+parameter  preference_function[PostSpawningDistance].alpha
+lower_bound 1e-10
+upper_bound 10
+prior Uniform
+
+@estimate
+parameter  preference_function[PostSpawningDistance].mu
+lower_bound      0
+upper_bound   2000
+prior Uniform
+
+@estimate
+parameter  preference_function[PostSpawningDistance].sigma_L
+lower_bound     50
+upper_bound   2000
+prior Uniform
+
+@estimate
+parameter  preference_function[PostSpawningDistance].sigma_R
+lower_bound     50
+upper_bound   2000
+prior Uniform
+}
+
+@estimate
+parameter  process[MatureToPreSpawn].proportions(1)
+same process[MatureToPreSpawn].proportions(2)
+lower_bound 1e-5
+upper_bound 1
+prior Uniform
+
+@estimate
+parameter  process[SpawnToPostSpawn].proportions(1)
+same process[SpawnToPostSpawn].proportions(2)
+lower_bound 1e-5
+upper_bound 1
+prior Uniform
+
+@estimate
+parameter  selectivity[FishingSel].a50
+lower_bound 0.1
+upper_bound 20
+prior Uniform
+#estimation_phase 2
+
+@estimate
+parameter  selectivity[FishingSel].ato95
+lower_bound 0.01
+upper_bound 50
+prior Uniform
+#estimation_phase 2
+
+@estimate
+parameter selectivity[Maturation].a50
+lower_bound 5
+upper_bound 25
+prior Uniform
+
+@estimate
+parameter selectivity[Maturation].ato95
+lower_bound 0.01
+upper_bound 15
+prior Uniform
+
+@estimate
+parameter selectivity[TagSel].mu
+lower_bound 2
+upper_bound 18
+prior Uniform
+
+@estimate
+parameter selectivity[TagSel].sigma_L
+lower_bound 0.01
+upper_bound 50
+prior Uniform
+
+@estimate
+parameter selectivity[TagSel].sigma_R
+lower_bound 0.01
+upper_bound 50
+prior Uniform
+
+@prior Uniform
+type uniform
+
+@prior Normal
+type normal
+mu 1.0
+cv 0.3
+
+# PENALTIES
+@penalty event_mortality_penalty
+log_scale True
+multiplier 1
+
+# PENALTIES
+@penalty tag_release_penalty
+log_scale True
+multiplier 1
