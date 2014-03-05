@@ -177,7 +177,7 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
     // Loop World
     int procs = (omp_get_num_procs() * 2) - 1; // Default to number of cores less one
     int iMaxProcs = pConfig->getNumberOfThreads();
-    if ( iMaxProcs < procs ) procs = iMaxProcs;
+    if ( iMaxProcs > 0 && iMaxProcs < procs ) procs = iMaxProcs;
     if ( procs < 1) procs = 1;
 
     omp_set_dynamic(0);

@@ -24,7 +24,7 @@ CConfiguration::CConfiguration() {
   bPopulateWithDummyData      = false;
   sConfigFile                 = "config.spm";
   sEstimateValuesFile         = "";
-  iNumberOfThreads            = 1;
+  iNumberOfThreads            = 0;
   bUseEstimateValues          = false;
   iSimulationCandidates       = 0;
   bDisableReports             = false;
