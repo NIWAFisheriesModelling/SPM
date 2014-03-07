@@ -185,7 +185,7 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
     #pragma omp parallel for
     for (int i = (iWorldHeight-1); i >= 0; --i) {
       for (int j = (iWorldWidth-1); j >= 0; --j) {
-        CNumericLayer* pLayer = new CDoubleLayer();
+        CDoubleLayer pLayer = CDoubleLayer();
 
         // Get Current Squares
         CWorldSquare* pBaseSquare = pWorld->getBaseSquare(i, j);
@@ -216,7 +216,7 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
                 dCurrent = 0.0;
               }
 
-              pLayer->setValue(k+1, l+1, dCurrent);
+              pLayer.setValue(k+1, l+1, dCurrent);
               dRunningTotal += dCurrent;
             }
           }
@@ -240,7 +240,7 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
                 if (bIsStatic)
                   dCurrent = vPreferenceCache[i][j][k][l];
                 else
-                  dCurrent = pLayer->getValue(k, l);
+                  dCurrent = pLayer.getValue(k, l, 0, 0);
 
                 // if the amount is low, then don't bother moving
                 if (dCurrent <= TRUE_ZERO)
@@ -263,7 +263,7 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
             }
           }
         }
-        delete pLayer;
+//        delete pLayer;
       }
     }
 

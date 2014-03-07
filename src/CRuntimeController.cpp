@@ -204,6 +204,11 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
     report->addParameter(PARAM_TYPE, PARAM_ESTIMATE_VALUE);
     report->addParameter(PARAM_FILE_NAME, sReportName);
   }
+
+  if (vmParams.count("disable_reports")) {
+    pConfig->setDisableReports(true);
+  }
+
 }
 
 //**********************************************************************
