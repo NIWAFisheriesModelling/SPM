@@ -14,7 +14,7 @@
 #include "../Movement/CAdjacentCellMovementProcess.h"
 #include "../Movement/CMigrationMovementProcess.h"
 #include "../Movement/CPreferenceMovementProcess.h"
-#include "../Movement/COpenMPOrigPreferenceMovementProcess.h"
+#include "../Movement/COpenMPPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
 #include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CBHRecruitmentProcess.h"
@@ -67,7 +67,7 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
   else if (type == PARAM_PREFERENCE_MOVEMENT)
     pProcess = new CPreferenceMovementProcess();
   else if (type == PARAM_PREFERENCE_MOVEMENT_THREADED)
-    pProcess = new COpenMPOrigPreferenceMovementProcess();
+    pProcess = new COpenMPPreferenceMovementProcess();
   else if (type == PARAM_ADJACENT_CELL_MOVEMENT)
     pProcess = new CAdjacentCellMovementProcess();
   else if (type == PARAM_MIGRATION_MOVEMENT)

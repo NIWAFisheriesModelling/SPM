@@ -6,8 +6,8 @@
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef COPENMPORIGPREFERENCEMOVEMENTPROCESS_H_
-#define COPENMPORIGPREFERENCEMOVEMENTPROCESS_H_
+#ifndef COPENMPPREFERENCEMOVEMENTPROCESS_H_
+#define COPENMPPREFERENCEMOVEMENTPROCESS_H_
 
 // Local headers
 #include "Base/CMovementProcess.h"
@@ -20,15 +20,15 @@ class CNumericLayer;
 //
 //
 //**********************************************************************
-class COpenMPOrigPreferenceMovementProcess : public CMovementProcess {
+class COpenMPPreferenceMovementProcess : public CMovementProcess {
 public:
   // Typedefs
   typedef vector<vector<vector<vector<double> > > > Vector4D;
 
   // Functions
-  COpenMPOrigPreferenceMovementProcess();
-  virtual                     ~COpenMPOrigPreferenceMovementProcess();
-  CProcess*                   clone() { return (new COpenMPOrigPreferenceMovementProcess(*this)); }
+  COpenMPPreferenceMovementProcess();
+  virtual                     ~COpenMPPreferenceMovementProcess();
+  CProcess*                   clone() { return (new COpenMPPreferenceMovementProcess(*this)); }
   void                        validate();
   void                        build();
   void                        rebuild();
@@ -45,4 +45,4 @@ protected:
   bool                          bIsStatic;
 };
 
-#endif /* CPREFERENCEMOVEMENTPROCESS_H_ */
+#endif /* COPENMPPREFERENCEMOVEMENTPROCESS_H_ */

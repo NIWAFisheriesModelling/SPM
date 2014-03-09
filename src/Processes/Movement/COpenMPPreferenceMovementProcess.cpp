@@ -12,7 +12,7 @@
 #include <omp.h>
 
 // Local headers
-#include "COpenMPOrigPreferenceMovementProcess.h"
+#include "COpenMPPreferenceMovementProcess.h"
 #include "../../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../../Layers/Numeric/CDoubleLayer.h"
 #include "../../PreferenceFunctions/CPreferenceFunction.h"
@@ -29,7 +29,7 @@ using std::endl;
 // CPreferenceMovementProcess::CPreferenceMovementProcess()
 // Default constructor
 //**********************************************************************
-COpenMPOrigPreferenceMovementProcess::COpenMPOrigPreferenceMovementProcess() {
+COpenMPPreferenceMovementProcess::COpenMPPreferenceMovementProcess() {
   // Default Values
   pLayer = 0;
   sType = PARAM_PREFERENCE_MOVEMENT;
@@ -45,7 +45,7 @@ COpenMPOrigPreferenceMovementProcess::COpenMPOrigPreferenceMovementProcess() {
 // void CPreferenceMovementProcess::validate()
 // Validate the process
 //**********************************************************************
-void COpenMPOrigPreferenceMovementProcess::validate() {
+void COpenMPPreferenceMovementProcess::validate() {
   try {
     // Base
     CProcess::validate();
@@ -71,7 +71,7 @@ void COpenMPOrigPreferenceMovementProcess::validate() {
 // void CPreferenceMovementProcess::build()
 // Build the process
 //**********************************************************************
-void COpenMPOrigPreferenceMovementProcess::build() {
+void COpenMPPreferenceMovementProcess::build() {
   try {
     // Base Build
     CMovementProcess::build();
@@ -134,7 +134,7 @@ void COpenMPOrigPreferenceMovementProcess::build() {
 // void CPreferenceMovementProcess::execute()
 // Execute the process
 //**********************************************************************
-void COpenMPOrigPreferenceMovementProcess::rebuild() {
+void COpenMPPreferenceMovementProcess::rebuild() {
   if (bIsStatic) {
     for (int i = (iWorldHeight-1); i >= 0; --i) {
       for (int j = (iWorldWidth-1); j >= 0; --j) {
@@ -169,7 +169,7 @@ void COpenMPOrigPreferenceMovementProcess::rebuild() {
 // void CPreferenceMovementProcess::execute()
 // Execute the process
 //**********************************************************************
-void COpenMPOrigPreferenceMovementProcess::execute() {
+void COpenMPPreferenceMovementProcess::execute() {
   try {
     // Base Execution
     CMovementProcess::execute();
@@ -182,6 +182,7 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
 
     omp_set_dynamic(0);
     omp_set_num_threads(procs);
+
     #pragma omp parallel for
     for (int i = (iWorldHeight-1); i >= 0; --i) {
       for (int j = (iWorldWidth-1); j >= 0; --j) {
@@ -277,5 +278,5 @@ void COpenMPOrigPreferenceMovementProcess::execute() {
 // CPreferenceMovementProcess::~CPreferenceMovementProcess()
 // Destructor
 //**********************************************************************
-COpenMPOrigPreferenceMovementProcess::~COpenMPOrigPreferenceMovementProcess() {
+COpenMPPreferenceMovementProcess::~COpenMPPreferenceMovementProcess() {
 }
