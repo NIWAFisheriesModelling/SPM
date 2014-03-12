@@ -43,8 +43,8 @@ private:
   int                         iMaxQuasiSteps;   // Max Quasi-Newton steps
   int                         iMaxSteps;        // maximum no. of steps in a single linear search
   long double                 dGradTol;         // scaled gradient (see Dennis & Schnabel p 279) required for termination
-  long double                 dStepTol;         // scaled step size (D&S p 279) required for termination
-  long double                 dMaxStep;         // maximum scaled step size (D&S p 279) permitted
+  long double                 dStepTol;         // scaled stepsize (D&S p 279) required for termination
+  long double                 dMaxStep;         // maximum scaled stepsize (D&S p 279) permitted
   int                         iIters;
   int                         iEvals;           // quasi-Newton iterations, function evaluations
   int                         iRet;

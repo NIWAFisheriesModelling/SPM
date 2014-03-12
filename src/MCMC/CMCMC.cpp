@@ -58,7 +58,7 @@ CMCMC::CMCMC() {
   pParameterList->registerAllowed(PARAM_MAX_CORRELATION);
   pParameterList->registerAllowed(PARAM_COVARIANCE_ADJUSTMENT_METHOD);
   pParameterList->registerAllowed(PARAM_CORRELATION_ADJUSTMENT_DIFF);
-  pParameterList->registerAllowed(PARAM_STEP_SIZE);
+  pParameterList->registerAllowed(PARAM_STEPSIZE);
   pParameterList->registerAllowed(PARAM_PROPOSAL_DISTRIBUTION);
   pParameterList->registerAllowed(PARAM_DF);
   pParameterList->registerAllowed(PARAM_ADAPT_STEPSIZE_AT);
@@ -102,7 +102,7 @@ void CMCMC::validate() {
     dMaxCorrelation         = pParameterList->getDouble(PARAM_MAX_CORRELATION, true, 0.8);
     sCorrelationMethod      = pParameterList->getString(PARAM_COVARIANCE_ADJUSTMENT_METHOD, true, PARAM_COVARIANCE);
     dCorrelationDiff        = pParameterList->getDouble(PARAM_CORRELATION_ADJUSTMENT_DIFF, true, 0.0001);
-    dStepSize               = pParameterList->getDouble(PARAM_STEP_SIZE, true, 0.0);
+    dStepSize               = pParameterList->getDouble(PARAM_STEPSIZE, true, 0.0);
     sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, PARAM_T);
     iDF                     = pParameterList->getInt(PARAM_DF, true, 4);
 
@@ -126,7 +126,7 @@ void CMCMC::validate() {
     if (dStart < 0.0)
       CError::errorLessThan(PARAM_START, PARAM_ZERO);
     if (dStepSize < 0)
-      CError::errorLessThan(PARAM_STEP_SIZE, PARAM_ZERO);
+      CError::errorLessThan(PARAM_STEPSIZE, PARAM_ZERO);
     if (pParameterList->hasParameter(PARAM_ADAPT_STEPSIZE_AT)) {
       pParameterList->fillVector(vAdaptStepSize, PARAM_ADAPT_STEPSIZE_AT);
       for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
@@ -163,7 +163,7 @@ void CMCMC::build() {
       vEstimateNames.push_back(Estimate->getParameter());
     }
 
-    // Build default step size
+    // Build default stepsize
     iEstimateCount = CEstimateManager::Instance()->getEnabledEstimateCount();
 
     int iIgnorableEstimates = 0;
@@ -175,7 +175,7 @@ void CMCMC::build() {
     if ((iEstimateCount - iIgnorableEstimates) < 1)
       CError::error("The number of estimated parameters must be at least one");
 
-    if (!pParameterList->hasParameter(PARAM_STEP_SIZE) || dStepSize==0.0 ) {
+    if (!pParameterList->hasParameter(PARAM_STEPSIZE) || dStepSize==0.0 ) {
       dStepSize = 2.4 * pow( (double)(iEstimateCount-iIgnorableEstimates), -0.5);
     }
 
@@ -420,7 +420,7 @@ void CMCMC::updateStepSize(int iIteration) {
   if( (iJumpsSinceAdapt > 0) && (iSuccessfulJumpsSinceAdapt > 0) ) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
       if( iIteration == vAdaptStepSize[i] ) {
-        // modify the step size by the ratio = AcceptanceRate / 0.24
+        // modify the stepsize by the ratio = AcceptanceRate / 0.24
         dStepSize *= ((double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt) * 4.166667;
         // Ensure the stepsize remains positive
         dStepSize = CMath::zeroFun(dStepSize, 1e-10);

@@ -308,7 +308,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
     // Is StepSize too Small?
     if (dLambda < dLambdaMin) {
       iRet = -3;
-      cerr << FMM_SMALL_LINEAR_STEP_SIZE << " (" << (double)dLambda << ")" << endl;
+      cerr << FMM_SMALL_LINEAR_STEPSIZE << " (" << (double)dLambda << ")" << endl;
       return;
     }
 
@@ -427,7 +427,7 @@ void FMM::fMin(vector<double>& Candidates, double& Score, vector<double>& Gradie
       }
 
       if (dCurrentTolerance <= dStepTol) {
-        cerr << FMM_SMALL_STEP_SIZE_CONVERGENCE << endl;
+        cerr << FMM_SMALL_STEPSIZE_CONVERGENCE << endl;
         iRet = -1;
         return;
       }

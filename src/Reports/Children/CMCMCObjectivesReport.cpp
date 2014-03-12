@@ -110,7 +110,7 @@ void CMCMCObjectivesReport::execute() {
       cout << "iteration" << CONFIG_SPACE_SEPARATOR << "score" << CONFIG_SPACE_SEPARATOR
            << "penalty" << CONFIG_SPACE_SEPARATOR << "prior" << CONFIG_SPACE_SEPARATOR
            << "likelihood" << CONFIG_SPACE_SEPARATOR << "acceptance_rate" << CONFIG_SPACE_SEPARATOR
-           << "acceptance_rate_since_adapt" << CONFIG_SPACE_SEPARATOR << "step_size\n";
+           << "acceptance_rate_since_adapt" << CONFIG_SPACE_SEPARATOR << "stepsize\n";
 
       bWrittenHeader = true;
     }
