@@ -57,7 +57,7 @@ Each type of minimiser requires a set of subcommands and arguments specific to t
 \defDefault{4000}
 \defValue{A positive integer}
 
-\defSub{step\_size} {Define the step-size for the minimiser}
+\defSub{stepsize} {Define the stepsize for the minimiser}
 \defType{Constant}
 \defDefault{1e-6}
 \defValue{A positive real number}
@@ -147,10 +147,10 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defDefault{0.0001}
 \defValue{Defines the minimum non-zero variance times the difference in the bounds of each parameter in the covariance matrix of the proposal distribution}
 
-\defSub{step\_size} {Initial step-size (as a multiplier of the approximate covariance matrix)}
+\defSub{stepsize} {Initial stepsize (as a multiplier of the approximate covariance matrix)}
 \defType{Constant}
 \defDefault{$2.4d^{-0.5}$ where $d$ is the number of estimated parameters}
-\defValue{The covariance of the proposal distribution is the approximate covariance (inverse Hessian) times this step-size parameter}
+\defValue{The covariance of the proposal distribution is the approximate covariance (inverse Hessian) times this stepsize parameter}
 
 \defSub{proposal\_distribution} {The shape of the proposal distribution (either \textit{t} or normal)}
 \defType{String}
@@ -162,10 +162,10 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defDefault{4}
 \defValue{Defines the degrees of freedom of the multivariate t proposal distribution}
 
-\defSub{adapt\_stepsize\_at} {Iterations in the chain to check and resize the MCMC step-size}
+\defSub{adapt\_stepsize\_at} {Iterations in the chain to check and resize the MCMC stepsize}
 \defType{Vector of integers}
 \defDefault{no default}
-\defValue{Defines the points during the MCMC iterations to re-evaluate the MCMC step-size argument}
+\defValue{Defines the points during the MCMC iterations to re-evaluate the MCMC stepsize argument}
 
 \subsection{\I{Profiles}}
 
