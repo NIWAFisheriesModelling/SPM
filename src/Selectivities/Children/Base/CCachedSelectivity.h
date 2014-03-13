@@ -27,7 +27,7 @@ public:
   CCachedSelectivity();
   virtual                     ~CCachedSelectivity();
   void                        build();
-  void                        rebuild();
+  virtual void                rebuild();
   double                      getResult(int index);
 
 protected:

@@ -21,6 +21,7 @@ In SPM, but not in manual
   enabled_estimates
   estimable
   estimates
+  fixed
   flagged_penalties
   function
   height
@@ -31,10 +32,11 @@ In SPM, but not in manual
   layer_width
   matrix
   mean
-  method
   multinomial
+  natural
   normal_log
   objective
+  parabola
   predator_abundance
   predator_biomass
   prey_group
@@ -56,7 +58,6 @@ In SPM, but not in manual
   total_score
   true_ycs_values
   value
-  values
   weights
   width
 

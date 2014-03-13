@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-03-10 (rev. 5044)
+; TextPad syntax definitions for SPM version 1.1-2014-03-12 (rev. 5046)
 ; ===================================================================================
 ;
 ;
@@ -109,6 +109,7 @@ is_abundance
 iterations
 k
 keep
+knots
 l
 lambda
 lambda_years
@@ -125,6 +126,7 @@ max_correlation
 max_generations
 mcmc
 mcmc_fixed
+method
 min_age
 minimiser
 mu
@@ -176,8 +178,8 @@ ssb_offset
 standardise_ycs_years
 start
 steepness
-step_size
 steps
+stepsize
 t0
 tau1
 tau2
@@ -189,6 +191,7 @@ type
 u_max
 upper_bound
 v
+values
 x
 x0
 x1
@@ -289,6 +292,7 @@ selectivity
 simulated_observation
 size_weight
 spatial_map
+spline
 threshold
 uniform
 uniform_log

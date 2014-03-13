@@ -10,17 +10,18 @@
 // Local headers
 #include "CSelectivityFactory.h"
 #include "../CSelectivityManager.h"
-#include "../../Helpers/CError.h"
 #include "../Children/CAllValuesBoundedSelectivity.h"
 #include "../Children/CAllValuesSelectivity.h"
 #include "../Children/CConstantSelectivity.h"
 #include "../Children/CDoubleExponentialSelectivity.h"
 #include "../Children/CDoubleNormalSelectivity.h"
 #include "../Children/CIncreasingSelectivity.h"
+#include "../Children/CInverseLogisticSelectivity.h"
 #include "../Children/CKnifeEdgeSelectivity.h"
 #include "../Children/CLogisticProducingSelectivity.h"
 #include "../Children/CLogisticSelectivity.h"
-#include "../Children/CInverseLogisticSelectivity.h"
+#include "../Children/CSplineSelectivity.h"
+#include "../../Helpers/CError.h"
 
 //**********************************************************************
 // CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWithManager)
@@ -50,6 +51,8 @@ CSelectivity* CSelectivityFactory::buildSelectivity(string type, bool registerWi
     pSelectivity = new CLogisticSelectivity();
   else if (type == PARAM_INVERSE_LOGISTIC)
     pSelectivity = new CInverseLogisticSelectivity();
+  else if (type == PARAM_SPLINE)
+    pSelectivity = new CSplineSelectivity();
   else
     CError::errorUnknown(PARAM_TYPE, type);
 

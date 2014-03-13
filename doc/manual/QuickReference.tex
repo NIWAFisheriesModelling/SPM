@@ -312,6 +312,10 @@
 \defSub{y0} {Defines the $y_0$ parameter of the selectivity function}
 \defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
+\par\textbf{\commandlabsubarg{selectivity}{type}{spline}}\par
+\defSub{knots} {Defines the locations of the knots for the cubic spline function}
+\defSub{values} {Defines the values at the knots for the cubic spline function}
+\defSub{method} {The method for constraining the end values of the spline}
 \subsection{Estimation command and subcommand syntax}\par
 \defCom{estimation}\par\par
 \defSub{minimiser} {The label of the minimiser to use, if doing a point estimate}
@@ -322,7 +326,7 @@
 \par\textbf{\commandlabsubarg{minimiser}{type}{numerical\_differences}}\par
 \defSub{iterations} {Define the maximum number of iterations for the minimiser}
 \defSub{evaluations} {Define the maximum number of evaluations for the minimiser}
-\defSub{step\_size} {Define the step-size for the minimiser}
+\defSub{stepsize} {Define the stepsize for the minimiser}
 \defSub{tolerance} {Define the convergence criteria (tolerance) for the minimiser}
 \defSub{covariance} {Specify if \SPM\ should attempt to calculate the covariance matrix, if estimating}
 \par\textbf{\commandlabsubarg{minimiser}{type}{de\_solver}}\par
@@ -341,10 +345,10 @@
 \defSub{max\_correlation} {Maximum absolute correlation in the covariance matrix of the proposal distribution}
 \defSub{covariance\_adjustment\_method} {Method for adjusting small variances in the covariance proposal matrix}
 \defSub{correlation\_adjustment\_diff} {Minimum non-zero variance times the range of the bounds in the covariance matrix of the proposal distribution}
-\defSub{step\_size} {Initial step-size (as a multiplier of the approximate covariance matrix)}
+\defSub{stepsize} {Initial stepsize (as a multiplier of the approximate covariance matrix)}
 \defSub{proposal\_distribution} {The shape of the proposal distribution (either \textit{t} or normal)}
 \defSub{df} {Degrees of freedom of the multivariate t proposal distribution}
-\defSub{adapt\_stepsize\_at} {Iterations in the chain to check and resize the MCMC step-size}
+\defSub{adapt\_stepsize\_at} {Iterations in the chain to check and resize the MCMC stepsize}
 \par\defComLab{profile}{Define the profile parameters and arguments}\par\par
 \defSub{parameter} {Name of the parameter to be profiled}
 \defSub{steps} {Number of steps (values) at which to profile the parameter}

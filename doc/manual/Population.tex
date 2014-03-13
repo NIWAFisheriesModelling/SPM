@@ -888,6 +888,7 @@ The available selectivities are;
   \item Logistic producing
   \item Double normal
   \item Double exponential
+	\item Cubic spline
 \end{itemize}
 
 The available selectivities are described below.
@@ -993,4 +994,13 @@ f(x)=\begin{cases}
 \end{equation}
 
 The double-exponential selectivity has non-estimable parameters $x_1$ and $x_2$, and estimable parameters $x_0$, $y_0$, $y_1$, and $y_2$.  $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It can be `U-shaped'. Bounds for $x_0$ must be such that $x_1 < x_0 < x_2$. With $\alpha=1$, the selectivity passes through the points $(x_1, y)$, $(x_0, y_0)$, and $(x_2, y_2)$. If both $y_1$ and $y_2$ are greater than $y_0$ the selectivity is `U-shaped' with minimum at $(x_0, y_0)$.
+
+\subsubsection[Spline]{\argument{spline}}\index{Selectivities!Spline}
+
+The spline selectivity has non-estimable knots, and an estimable value for each knot. The cubic spline implements
+(i) natural splines where the where the second derivatives are set to 0 at the boundaries, i.e., the values at the boundaries are horizontal, (ii) a spline with a fixed first derivative at the boundaries (linear, but not necessarily horizontal) and (iii) spline which turns into a parabola at the boundaries.
+
+
+
+
 
