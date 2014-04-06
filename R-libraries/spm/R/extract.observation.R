@@ -15,19 +15,24 @@ function(lines){
     data<-as.data.frame(data)
     names(data)<-variables
     if("category" %in% variables) {
-      data<-data.frame("area"=data[,1], category=data[,2], age=data[,3], observed=data[,4], expected=data[,5], residual=data[,6], errorvalue=data[,7], score=data[,8])
+      data<-data.frame("area"=data[,1], category=data[,2], age=data[,3], observed=data[,4], expected=data[,5],
+            residual=data[,6], errorvalue=data[,7], processerror=data[,8], totalerror=data[,9], score=data[,10])
       data$age<-as.numeric(as.character(data$age))
     } else if("age" %in% variables) {
-      data<-data.frame("area"=data[,1], age=data[,2], observed=data[,3], expected=data[,4], residual=data[,5], errorvalue=data[,6], score=data[,7])
+      data<-data.frame("area"=data[,1], age=data[,2], observed=data[,3], expected=data[,4], residual=data[,5],
+            errorvalue=data[,6], processerror=data[,7], totalerror=data[,8], score=data[,9])
       data$age<-as.numeric(as.character(data$age))
     } else {
-      data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4], errorvalue=data[,5], score=data[,6])
+      data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4], errorvalue=data[,5],
+      errorvalue=data[,6], processerror=data[,7], totalerror=data[,8], score=data[,9])
     }
     data$area<-as.character(data$area)
     data$observed<-as.numeric(as.character(data$observed))
     data$expected<-as.numeric(as.character(data$expected))
     data$residual<-as.numeric(as.character(data$residual))
     data$errorvalue<-as.numeric(as.character( data$errorvalue))
+    data$processerror<-as.numeric(as.character( data$processerror))
+    data$totalerror<-as.numeric(as.character( data$totalerror))
     data$score<-as.numeric(as.character(data$score))
     res$data<-data
   } else {
