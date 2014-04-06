@@ -95,16 +95,20 @@ void CObservationReport::execute() {
       cout << "area" << CONFIG_SPACE_SEPARATOR << "category" << CONFIG_SPACE_SEPARATOR
            << "age"  << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
            << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR
-           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "score\n";
+           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "processerror" << CONFIG_SPACE_SEPARATOR
+           << "totalerror" << CONFIG_SPACE_SEPARATOR << "score\n";
     else if (pProportionsByCategory != 0)
       cout << "area" << CONFIG_SPACE_SEPARATOR << "age" << CONFIG_SPACE_SEPARATOR
            << "observed" << CONFIG_SPACE_SEPARATOR << "expected" << CONFIG_SPACE_SEPARATOR
            << "residual" << CONFIG_SPACE_SEPARATOR << "errorvalue" << CONFIG_SPACE_SEPARATOR
+           << "processerror" << CONFIG_SPACE_SEPARATOR << "totalerror" << CONFIG_SPACE_SEPARATOR
            << "score\n";
     else
       cout << "area" << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
            << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR
-           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "score\n";
+           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "errorvalue" << CONFIG_SPACE_SEPARATOR
+           << "processerror" << CONFIG_SPACE_SEPARATOR << "totalerror" << CONFIG_SPACE_SEPARATOR
+           << "score\n";
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;
@@ -119,6 +123,8 @@ void CObservationReport::execute() {
            << Comparison->dExpectedValue << CONFIG_SPACE_SEPARATOR
            << dResidual << CONFIG_SPACE_SEPARATOR
            << Comparison->dErrorValue << CONFIG_SPACE_SEPARATOR
+           << Comparison->dProcessError << CONFIG_SPACE_SEPARATOR
+           << Comparison->dTotalError << CONFIG_SPACE_SEPARATOR
            << Comparison->dScore << "\n";
     }
 

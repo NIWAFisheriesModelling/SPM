@@ -310,7 +310,7 @@ void CProportionsByCategoryObservation::execute() {
 
       // Store the items we want to calculate scores for
       vKeys.push_back((*mvPropPtr).first);
-      vAges.push_back(i+pWorld->getMinAge());
+      vAges.push_back(i+iMinAge);
       vExpected.push_back(dExpected);
       vObserved.push_back((*mvPropPtr).second[i]);
       vProcessError.push_back(dProcessError);
@@ -330,7 +330,7 @@ void CProportionsByCategoryObservation::execute() {
     // Simulate our values, then save them
     pLikelihood->simulateObserved(vKeys, vObserved, vExpected, vErrorValue, vProcessError, dDelta);
     for (int i = 0; i < (int)vObserved.size(); ++i)
-      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], vErrorValue[i], 0.0);
+      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), 0.0);
 
   } else { // Generate Score
     dScore = 0.0;
@@ -339,7 +339,7 @@ void CProportionsByCategoryObservation::execute() {
     pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);
     for (int i = 0; i < (int)vScores.size(); ++i) {
       dScore += vScores[i];
-      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
+      saveComparison(vKeys[i], vAges[i], std::string(""), vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), vScores[i]);
     }
   }
 }

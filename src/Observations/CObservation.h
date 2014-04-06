@@ -22,6 +22,8 @@ struct SComparison {
   double dExpectedValue;
   double dObservedValue;
   double dErrorValue;
+  double dProcessError;
+  double dTotalError;
   double dScore;
 };
 
@@ -53,9 +55,9 @@ public:
 
 protected:
   // Functions
-  void                       saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double score);
-  void                       saveComparison(string key, int age, double expected, double observed, double errorValue, double score);
-  void                       saveComparison(string key, double expected, double observed, double errorValue, double score);
+  void                       saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double score);
+  void                       saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double score);
+  void                       saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double score);
 
   // Variables
   double                     dScore;

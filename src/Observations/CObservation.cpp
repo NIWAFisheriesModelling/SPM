@@ -56,10 +56,10 @@ string CObservation::getSelectivity(int index) {
 }
 
 //**********************************************************************
-// void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double score)
+// void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double score)
 // Save comparison into our Vector
 //**********************************************************************
-void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double score) {
+void CObservation::saveComparison(string key, int age, string group, double expected, double observed, double errorValue, double processError, double totalError, double score) {
 
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -73,15 +73,17 @@ void CObservation::saveComparison(string key, int age, string group, double expe
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
   pComparison->dErrorValue    = errorValue;
+  pComparison->dProcessError  = processError;
+  pComparison->dTotalError    = totalError;
   pComparison->dScore         = score;
   vComparisons.push_back(pComparison);
 }
 
 //**********************************************************************
-// void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double score)
+// void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double score)
 // Save comparison into our Vector
 //**********************************************************************
-void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double score) {
+void CObservation::saveComparison(string key, int age, double expected, double observed, double errorValue, double processError, double totalError, double score) {
 
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -95,15 +97,17 @@ void CObservation::saveComparison(string key, int age, double expected, double o
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
   pComparison->dErrorValue    = errorValue;
+  pComparison->dProcessError  = processError;
+  pComparison->dTotalError    = totalError;
   pComparison->dScore         = score;
   vComparisons.push_back(pComparison);
 }
 
 //**********************************************************************
-// void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score)
+// void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double score)
 // Save comparison into our Vector
 //**********************************************************************
-void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double score) {
+void CObservation::saveComparison(string key, double expected, double observed, double errorValue, double processError, double totalError, double score) {
 
   if (pRuntimeController->getRunMode() != RUN_MODE_BASIC)
     if (pRuntimeController->getRunMode() != RUN_MODE_PROFILE)
@@ -117,6 +121,8 @@ void CObservation::saveComparison(string key, double expected, double observed, 
   pComparison->dExpectedValue = expected;
   pComparison->dObservedValue = observed;
   pComparison->dErrorValue    = errorValue;
+  pComparison->dProcessError  = processError;
+  pComparison->dTotalError    = totalError;
   pComparison->dScore         = score;
   vComparisons.push_back(pComparison);
 }
