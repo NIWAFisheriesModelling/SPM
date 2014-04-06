@@ -77,7 +77,7 @@ Print the Hessian and covariance matrices if estimating and if the covariance ha
 
 \subsection{\I{Print observations, fits, and residuals}}\index{Reports ! Observations}
 
-Prints out the area (from the observation categorical layer), observed values (as supplied in the \config), expected values as calculated by the model, residuals (observed $-$ expected), the error value (as modified by any additional process error), and the contribution to the total objective function of that individual point in the observation. 
+Prints out the area (from the observation categorical layer), observed values (as supplied in the \config), expected values as calculated by the model, residuals (observed $-$ expected), the error value, process error, and the total error (i.e., the error value as modified by any additional process error), and the contribution to the total objective function of that individual point in the observation. 
 
 Note that constants in likelihoods are often ignored in the objective function score of individual points. Hence, the total score from an observation equals the contribution of the objective function scores from each individual point plus a constant term (if applicable). In likelihoods without a constant term, then the total score from an observation will equal the contribution of the objective function scores from each individual point.
 
