@@ -20,15 +20,17 @@ CConfiguration* CConfiguration::clInstance = 0;
 //**********************************************************************
 CConfiguration::CConfiguration() {
   // Variables
-  bQuietMode                  = false;
-  bPopulateWithDummyData      = false;
-  sConfigFile                 = "config.spm";
-  sEstimateValuesFile         = "";
-  iNumberOfThreads            = 0;
-  bUseEstimateValues          = false;
-  iSimulationCandidates       = 0;
-  bDisableReports             = false;
-  iRandomSeed                 = 123;
+  bQuietMode                    = false;
+  bPopulateWithDummyData        = false;
+  sConfigFile                   = "config.spm";
+  sEstimateValuesFile           = "";
+  iNumberOfThreads              = 0;
+  bUseEstimateValues            = false;
+  iSimulationCandidates         = 0;
+  bDisableReports               = false;
+  iRandomSeed                   = 123;
+  iNumberSuppliedEstimateValues = 0;
+  bWasInputFileSupplied         = false;
 }
 
 //**********************************************************************

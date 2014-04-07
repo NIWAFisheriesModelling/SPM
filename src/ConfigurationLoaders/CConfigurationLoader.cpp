@@ -408,7 +408,7 @@ void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
 
     // Verify file had contents
     if ((int)vLines.size() == 0)
-      throw string("Empty configuration file");
+      throw string("Empty input configuration file");
 
     // Get the First Line and load Estimate names
     // Then delete from Vector
@@ -439,6 +439,8 @@ void CConfigurationLoader::loadEstimateValuesFile(bool skipLoadingFile) {
 
     // Now we've loaded correctly. Flag Configuration
     pConfig->setUseEstimateValues(true);
+    pConfig->setNumberSuppliedEstimateValues(vValues.size());
+    pConfig->setWasInputFileSupplied(true);
 
   } catch (string &Ex) {
     Ex = "CConfigurationLoader.loadEstimateValuesFile()->" + Ex;

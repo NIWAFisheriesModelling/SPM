@@ -47,6 +47,10 @@ public:
   int                        getNumberOfThreads() { return iNumberOfThreads; }
   void                       setUseEstimateValues(bool value) { bUseEstimateValues = value; }
   bool                       getUseEstimateValues() { return bUseEstimateValues; }
+  void                       setWasInputFileSupplied(bool value) { bWasInputFileSupplied = value; }
+  bool                       getWasInputFileSupplied() { return bWasInputFileSupplied; }
+  void                       setNumberSuppliedEstimateValues(int value) { iNumberSuppliedEstimateValues = value;}
+  int                        getNumberSuppliedEstimateValues() { return iNumberSuppliedEstimateValues;}
   void                       setRandomSeed(int value) { iRandomSeed = value; }
   int                        getRandomSeed() { return iRandomSeed; }
   void                       addCommandLineParameter(string value);
@@ -73,6 +77,8 @@ protected:
   vector<string>             vCommandLineParameters;
   int                        iSimulationCandidates;
   bool                       bDisableReports;
+  int                        iNumberSuppliedEstimateValues;
+  bool                       bWasInputFileSupplied;
 
 private:
   static CConfiguration*     clInstance;

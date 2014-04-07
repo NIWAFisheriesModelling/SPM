@@ -13,17 +13,17 @@
 #include <time.h>
 
 // Local Headers
-#include "Translations/Translations.h"
-#include "CRuntimeController.h"
 #include "CConfiguration.h"
+#include "CRuntimeController.h"
+#include "ConfigurationLoaders/CConfigurationLoader.h"
 #include "Estimates/CEstimateManager.h"
-#include "Profiles/CProfileManager.h"
-#include "RuntimeThread/CRuntimeThread.h"
+#include "Helpers/CError.h"
 #include "MCMC/CMCMC.h"
 #include "Minimizers/CMinimizerManager.h"
-#include "ConfigurationLoaders/CConfigurationLoader.h"
-#include "Helpers/CError.h"
+#include "Profiles/CProfileManager.h"
 #include "Reports/Factory/CReportFactory.h"
+#include "RuntimeThread/CRuntimeThread.h"
+#include "Translations/Translations.h"
 
 // Singleton Variable
 CRuntimeController* CRuntimeController::clInstance = 0;
@@ -258,6 +258,13 @@ void CRuntimeController::run() {
     pBaseThread = new CRuntimeThread();
     pBaseThread->validate();
     pBaseThread->build();
+
+    // Verify (if an input file was given) that the correct number of values was supplied
+    if (pConfig->getWasInputFileSupplied()) {
+      if (pConfig->getNumberSuppliedEstimateValues() != pEstimateManager->getEnabledEstimateCount()) {
+        CError::error("Incorrect number of values in the input file supplied with -i");
+      }
+    }
 
     // Set a default number of estimate values we want to run
     // the model for. This defaults to 1, because we always
