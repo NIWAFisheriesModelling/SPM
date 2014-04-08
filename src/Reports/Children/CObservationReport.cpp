@@ -106,9 +106,8 @@ void CObservationReport::execute() {
     else
       cout << "area" << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
            << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR
-           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "errorvalue" << CONFIG_SPACE_SEPARATOR
-           << "processerror" << CONFIG_SPACE_SEPARATOR << "totalerror" << CONFIG_SPACE_SEPARATOR
-           << "score\n";
+           << "errorvalue" << CONFIG_SPACE_SEPARATOR << "processerror" << CONFIG_SPACE_SEPARATOR
+           << "totalerror" << CONFIG_SPACE_SEPARATOR << "score\n";
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;

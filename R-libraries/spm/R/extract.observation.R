@@ -23,8 +23,8 @@ function(lines){
             errorvalue=data[,6], processerror=data[,7], totalerror=data[,8], score=data[,9])
       data$age<-as.numeric(as.character(data$age))
     } else {
-      data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4], errorvalue=data[,5],
-      errorvalue=data[,6], processerror=data[,7], totalerror=data[,8], score=data[,9])
+      data<-data.frame("area"=data[,1], observed=data[,2], expected=data[,3], residual=data[,4],
+            errorvalue=data[,5], processerror=data[,6], totalerror=data[,7], score=data[,8])
     }
     data$area<-as.character(data$area)
     data$observed<-as.numeric(as.character(data$observed))
