@@ -1,0 +1,9 @@
+# Biomass mortality of rattails by cell as a topup to predation
+@layer FishingRatMtopup
+type numeric
+data 0 0 0 0 0.737271 425.5074 0 0 0 0
+data 0 0 0 0.3397843 7077.154 19626.44 0 0 0 0
+data 0 0 0 12342.62 6699.457 18044.38 0 0 0 0
+data 0 0 7833849 10196.85 7163.595 3587.224 0 0 0 0
+data 0 0 0 2281.717 1087.001 923.3268 140207.1 0 0 0
+data 0 0 1167713 935792.9 1417.735 0 0 0 0 0

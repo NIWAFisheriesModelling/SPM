@@ -6,7 +6,7 @@ minimiser gammadiff
 type numerical_differences
 tolerance 0.002
 iterations 1000
-step_size 1e-7
+stepsize 1e-7
 covariance True
 
 @minimiser DE

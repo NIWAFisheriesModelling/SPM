@@ -1,0 +1,587 @@
+# Model Structure
+@model
+nrows 6
+ncols 10
+layer Base
+categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag immatureRat matureRat immatureIce matureIce
+min_age 1
+max_age 50
+age_plus_group True
+initialisation_phases Phase1 Phase2 Phase3
+initial_year 1985
+current_year 2013
+cell_length 344.0693
+time_steps zero zerob one oneb two three
+age_size VB VB VB VB VB VB VB VB VB VB VBRat VBRat VBIce VBIce
+
+@age_size VB
+type von_bertalanffy
+size_weight basic
+k      0.091
+t0    -0.117
+linf   174.545
+
+@size_weight basic
+type basic
+a 1.051e-008
+b 3.036
+
+@age_size VBRat # Marriott 2005 (Pinkerton 2012 gives Linf 53 when observers have fish to 100)
+type von_bertalanffy
+size_weight basicRat
+k       0.06
+t0      0.00
+linf   84.10
+
+@size_weight basicRat # Pinkerton 2012
+type basic
+a  1.75e-009
+b  3.232
+
+@age_size VBIce # Sutton 2008
+type von_bertalanffy
+size_weight basicIce
+k       0.1
+t0     -5.59
+linf   57.67
+
+@size_weight basicIce # Sutton 2008
+type basic
+a 1.01e-009
+b 3.72
+
+# Initialisation
+@initialisation_phase Phase1
+years 100
+time_steps phase1a phase2a phase3a
+
+@initialisation_phase Phase2
+years 100
+time_steps phase1a phase2b phase3b
+
+# only one year to test if initialisation has converged (compare with end phase2)
+@initialisation_phase Phase3
+years 1
+time_steps phase1a phase2b phase3b
+
+@time_step phase1a
+processes Recruitment BHRecruitmentRat BHRecruitmentIce Maturation MaturationRat MaturationIce MatureToPreSpawn halfM halfM MRat MIce
+
+@time_step phase1b
+processes Recruitment BHRecruitmentRat BHRecruitmentIce Maturation MaturationRat MaturationIce MatureToPreSpawn halfM PredationTOA halfM MRat MIce #FishingRatTopup 
+
+@time_step phase2a
+processes PreSpawnToSpawn
+
+@time_step phase2b
+processes MoveImmature MoveMature MovePreSpawning PreSpawnToSpawn
+
+@time_step phase3a
+processes SpawnToPostSpawn PostSpawnToMature Ageing
+
+@time_step phase3b
+processes SpawnToPostSpawn MovePostSpawning PostSpawnToMature Ageing
+
+# Annual Cycle
+@time_step zero # Summer
+processes Recruitment BHRecruitmentRat BHRecruitmentIce Maturation MaturationRat MaturationIce MatureToPreSpawn halfM 
+
+@time_step zerob # mortality of bycatch
+processes PredationTOA FishingRatMtopup 
+
+@time_step one # End summer and fishing
+processes Fishing FishingRat FishingIce
+
+@time_step oneb #tagging
+processes  Tagging 
+
+@time_step two # Winter
+processes  halfM MoveImmature MoveMature MovePreSpawning PreSpawnToSpawn
+
+@time_step three # End winter and Ageing
+processes  SpawnToPostSpawn MovePostSpawning PostSpawnToMature Ageing
+
+# Derived layers
+@layer SSB_layer
+type biomass
+categories spawning spawning-tag
+selectivities One One
+
+@layer TOAImmatureBiomass
+type biomass
+categories immature immature-tag
+selectivities One One
+
+@layer TOAMatureBiomass
+type biomass
+categories mature prespawning spawning postspawning mature-tag prespawning-tag spawning-tag postspawning-tag 
+selectivities One One One One One One One One
+
+@layer RatMatureBiomass
+type biomass
+categories matureRat
+selectivities One
+
+@derived_quantity_by_cell RatSSB_layer
+type biomass
+categories matureRat
+selectivities One
+initialisation_time_steps phase2a phase2b phase2b
+time_step two
+
+@layer IceMatureBiomass
+type biomass
+categories matureIce
+selectivities One 
+
+@derived_quantity_by_cell IceSSB_layer
+type biomass
+categories matureIce
+selectivities One
+initialisation_time_steps phase2a phase2b phase2b
+time_step two
+
+# Derived quantities
+@derived_quantity SSB
+type biomass
+time_step two
+categories spawning spawning-tag
+selectivities One One
+layer Base
+initialisation_time_steps phase2a phase2b phase2b
+
+@derived_quantity SSBRat
+type biomass
+time_step two
+categories matureRat
+selectivities One
+layer Base
+initialisation_time_steps phase2a phase2b phase2b
+
+@derived_quantity SSBIce
+type biomass
+time_step two
+categories matureIce
+selectivities One
+layer Base
+initialisation_time_steps phase2a phase2b phase2b
+
+
+# Population processes
+@process Ageing
+type ageing
+categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag immatureRat matureRat immatureIce matureIce
+
+@process Recruitment
+type bh_recruitment
+categories immature
+proportions 1.0
+r0 1021124
+age 1
+ssb SSB
+b0 Phase3
+ssb_offset 1
+standardise_YCS_years 1985-2006
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+layer Recruitment
+
+@process BHRecruitmentRat
+type local_bh_recruitment
+categories immatureRat
+proportions 1.0
+r0   6551817 #6367680 # 5360000*1.188 to match B toa #92419782 #5360000 * 17.2424966587014 # directly multiplied by recruitment layer, not relative recruitment layer
+age 1
+ssb RatSSB_layer
+b0 Phase3
+ssb_offset 1
+standardise_YCS_years 1985-2006
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+layer BHRecruitmentRat
+
+@process BHRecruitmentIce
+type local_bh_recruitment
+categories immatureIce
+proportions 1.0
+r0  7706508 #7329960 # 6170000*1.188 to match B toa #26978037 #6170000 * 4.37245324699027
+age 1
+ssb IceSSB_layer
+b0 Phase3
+ssb_offset 1
+standardise_YCS_years 1985-2006 # 10 years nothing to make sure our population is stable (relatively)
+ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+steepness 0.75
+layer BHRecruitmentIce
+
+@process halfM
+type constant_mortality_rate
+categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag
+M 0.065 0.065 0.065 0.065 0.065 0.065 0.065 0.065 0.065 0.065
+selectivities One One One One One One One One One One
+
+@process MRat # mortality for initialisation phase to get the right age structure
+type constant_mortality_rate
+categories immatureRat matureRat
+m 0.084 0.084 
+selectivities One One
+
+@process MIce # mortality for initialisation phase to get the right age structure
+type constant_mortality_rate
+categories immatureIce matureIce
+m 0.485 0.485 
+selectivities One One
+
+@process PredationTOA
+type prey-switch_predation
+is_abundance F
+consumption_rate 1 # times the layer, not quite 1 to avoid dropping the icefish biomass
+consumption_rate_layer CR-TOA
+electivities 0.173 0.827#0.093 0.907#0.107 0.893
+prey_categories immatureRat + matureRat immatureIce + matureIce
+prey_selectivities One One One One
+predator_categories immature mature prespawning spawning postspawning immature-tag mature-tag prespawning-tag spawning-tag postspawning-tag
+predator_selectivities One One One One One One One One One One
+u_max 0.8
+#penalty immature_predation_penalty
+
+@process Fishing
+type biomass_event_mortality
+categories immature mature spawning immature-tag mature-tag spawning-tag
+years  1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013
+layers Catch1998 Catch1999 Catch2000 Catch2001 Catch2002 Catch2003 Catch2004 Catch2005 Catch2006 Catch2007 Catch2008 Catch2009 Catch2010 Catch2011 Catch2012 Catch2013
+U_max 0.9
+selectivities FishingSel FishingSel FishingSel FishingSel FishingSel FishingSel
+penalty event_mortality_penalty
+
+@process FishingRat
+type biomass_event_mortality
+categories immatureRat matureRat
+years  1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013
+layers CatchRat1998 CatchRat1999 CatchRat2000 CatchRat2001 CatchRat2002 CatchRat2003 CatchRat2004 CatchRat2005 CatchRat2006 CatchRat2007 CatchRat2008 CatchRat2009 CatchRat2010 CatchRat2011  CatchRat2012  CatchRat2013
+U_max 0.9
+selectivities FishingSelRat FishingSelRat
+penalty event_mortality_penalty
+
+@process FishingIce
+type biomass_event_mortality
+categories immatureIce matureIce
+years  1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013
+layers CatchIce1998 CatchIce1999 CatchIce2000 CatchIce2001 CatchIce2002 CatchIce2003 CatchIce2004 CatchIce2005 CatchIce2006 CatchIce2007 CatchIce2008 CatchIce2009 CatchIce2010 CatchIce2011 CatchIce2012 CatchIce2013
+U_max 0.9
+selectivities FishingSelIce FishingSelIce
+penalty event_mortality_penalty
+
+@process FishingRatMtopup
+type biomass_event_mortality
+categories immatureRat matureRat
+years  1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013
+layers FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup FishingRatMtopup 
+U_max 0.9
+selectivities One One
+penalty event_mortality_penalty
+
+@process Tagging
+type category_transition
+from immature mature prespawning spawning
+selectivities TagSel TagSel TagSel TagSel
+to immature-tag mature-tag prespawning-tag spawning-tag
+years 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010
+layers TagRelease2001 TagRelease2002 TagRelease2003 TagRelease2004 TagRelease2005 TagRelease2006 TagRelease2007 TagRelease2008 TagRelease2009 TagRelease2010
+penalty tag_release_penalty
+
+@process Maturation
+type category_transition_rate
+from immature immature-tag
+to mature mature-tag
+proportions 1.0 1.0
+selectivities Maturation Maturation
+
+@process MaturationRat
+type category_transition_rate
+from immatureRat
+to matureRat
+proportions 1.0
+selectivities MaturationRat
+
+@process MaturationIce
+type category_transition_rate
+from immatureIce
+to matureIce
+proportions 1.0
+selectivities MaturationIce
+
+@process MatureToPreSpawn
+type category_transition_rate
+from mature mature-tag
+to prespawning prespawning-tag
+proportions 0.3 0.3
+selectivities One One
+
+@process PreSpawnToSpawn
+type category_transition_rate
+from prespawning prespawning-tag
+to spawning spawning-tag
+proportions 1.0 1.0
+selectivities One One
+
+@process SpawnToPostSpawn
+type category_transition_rate
+from spawning spawning-tag
+to postspawning postspawning-tag
+proportions 0.5 0.5
+selectivities One One
+
+@process PostSpawnToMature
+type category_transition_rate
+from postspawning postspawning-tag
+to mature mature-tag
+proportions 1.0 1.0
+selectivities One One
+
+# Movement processes
+@process MoveImmature
+type preference
+categories immature immature-tag
+preference_functions ImmatureDistance ImmatureDepth ImmatureTemperature
+
+@process MoveMature
+type preference
+categories mature mature-tag
+preference_functions MatureDistance MatureDepth MatureTemperature MatureHabitat MatureHills
+
+@process MovePreSpawning
+type preference
+categories prespawning prespawning-tag
+preference_functions PreSpawningDistance PreSpawningTemperature PreSpawningHills
+
+@process MovePostSpawning
+type preference
+categories postspawning postspawning-tag
+preference_functions PostSpawningDistance MatureDepth MatureTemperature MatureHabitat
+
+@preference_function ImmatureDistance
+type exponential
+alpha 1
+lambda 0.005
+layer Distance
+
+@preference_function ImmatureDepth
+type double_normal
+alpha 1
+layer Depth
+mu 875.389
+sigma_l 143.127
+sigma_r 1364.35
+
+@preference_function ImmatureTemperature
+type double_normal
+alpha 1
+layer Temperature
+mu -2
+sigma_l 0.5
+sigma_r 0.5
+
+@preference_function MatureDistance
+type exponential
+alpha 1
+lambda 0.005
+layer Distance
+
+@preference_function MatureDepth
+type double_normal
+alpha 1
+layer Depth
+mu 875.389
+sigma_l 143.127
+sigma_r 1364.35
+
+@preference_function MatureTemperature
+type double_normal
+alpha 1
+layer Temperature
+mu 0.5
+sigma_l 0.5
+sigma_r 0.5
+
+@preference_function MatureHabitat
+type constant
+alpha 1
+layer Habitat
+c 1
+
+@preference_function MatureHills
+type categorical
+alpha 1
+layer Hills
+category_labels   No Yes  
+category_values    1   0
+
+@preference_function PreSpawningDistance
+type double_normal
+alpha 1
+mu 344
+sigma_l 200
+sigma_r 200
+layer Distance
+
+@preference_function PreSpawningTemperature
+type double_normal
+alpha 1
+layer Temperature
+mu 3
+sigma_l 0.5
+sigma_r 0.5
+
+@preference_function PreSpawningHills
+type categorical
+alpha 1
+layer Hills
+category_labels   No Yes  
+category_values    0   1
+
+@preference_function PostSpawningDistance
+type double_normal
+alpha 1
+mu 344
+sigma_l 200
+sigma_r 200
+layer Distance
+
+# Definition of layers
+@include "../layers/Base.spm"
+@include "../layers/Cell.spm"
+@include "../layers/Constant.spm"
+@include "../layers/CR.TOA.spm"
+@include "../layers/FishingRatMtopup.spm"
+@include "../layers/CPUE.spm"
+@include "../layers/Depth.spm"
+@include "../layers/Temperature.spm"
+@include "../layers/Hills.spm"
+@include "../layers/Recruitment.spm"
+@include "../layers/Recruitment_Rat.spm"
+@include "../layers/Recruitment_Ice.spm"
+@include "../layers/SSRU.spm"
+@include "../layers/Zone.spm"
+@include "../layers/ZoneNamed.spm"
+@include "../layers/Habitat.spm"
+@include "../layers/ZoneSingle.spm"
+@include "../layers/Fishing_1998.spm"
+@include "../layers/Fishing_1999.spm"
+@include "../layers/Fishing_2000.spm"
+@include "../layers/Fishing_2001.spm"
+@include "../layers/Fishing_2002.spm"
+@include "../layers/Fishing_2003.spm"
+@include "../layers/Fishing_2004.spm"
+@include "../layers/Fishing_2005.spm"
+@include "../layers/Fishing_2006.spm"
+@include "../layers/Fishing_2007.spm"
+@include "../layers/Fishing_2008.spm"
+@include "../layers/Fishing_2009.spm"
+@include "../layers/Fishing_2010.spm"
+@include "../layers/Fishing_2011.spm"
+@include "../layers/Fishing_2012.spm"
+@include "../layers/Fishing_2013.spm"
+@include "../layers/TagRelease_2001.spm"
+@include "../layers/TagRelease_2002.spm"
+@include "../layers/TagRelease_2003.spm"
+@include "../layers/TagRelease_2004.spm"
+@include "../layers/TagRelease_2005.spm"
+@include "../layers/TagRelease_2006.spm"
+@include "../layers/TagRelease_2007.spm"
+@include "../layers/TagRelease_2008.spm"
+@include "../layers/TagRelease_2009.spm"
+@include "../layers/TagRelease_2010.spm"
+
+@include "../layers/FishingRat_1998.spm"
+@include "../layers/FishingRat_1999.spm"
+@include "../layers/FishingRat_2000.spm"
+@include "../layers/FishingRat_2001.spm"
+@include "../layers/FishingRat_2002.spm"
+@include "../layers/FishingRat_2003.spm"
+@include "../layers/FishingRat_2004.spm"
+@include "../layers/FishingRat_2005.spm"
+@include "../layers/FishingRat_2006.spm"
+@include "../layers/FishingRat_2007.spm"
+@include "../layers/FishingRat_2008.spm"
+@include "../layers/FishingRat_2009.spm"
+@include "../layers/FishingRat_2010.spm"
+@include "../layers/FishingRat_2011.spm"
+@include "../layers/FishingRat_2012.spm"
+@include "../layers/FishingRat_2013.spm"
+@include "../layers/FishingIce_1998.spm"
+@include "../layers/FishingIce_1999.spm"
+@include "../layers/FishingIce_2000.spm"
+@include "../layers/FishingIce_2001.spm"
+@include "../layers/FishingIce_2002.spm"
+@include "../layers/FishingIce_2003.spm"
+@include "../layers/FishingIce_2004.spm"
+@include "../layers/FishingIce_2005.spm"
+@include "../layers/FishingIce_2006.spm"
+@include "../layers/FishingIce_2007.spm"
+@include "../layers/FishingIce_2008.spm"
+@include "../layers/FishingIce_2009.spm"
+@include "../layers/FishingIce_2010.spm"
+@include "../layers/FishingIce_2011.spm"
+@include "../layers/FishingIce_2012.spm"
+@include "../layers/FishingIce_2013.spm"
+
+@layer Distance
+type distance
+
+# Definition of selectivities
+@selectivity One
+type constant
+c 1
+
+@selectivity Maturation
+type logistic_producing
+L 5
+H 30
+a50 12.2
+ato95 2.8
+
+@selectivity MaturationRat # FSA05-20 (Pinkerton 2012 only females but a50 higher, similar ato95)
+type logistic
+a50   12
+ato95 10
+
+@selectivity MaturationIce #Sutton 2008
+type logistic
+a50   3.5
+ato95 2.6
+
+@selectivity FishingSel
+type logistic
+a50 6.91642
+ato95 2.70004
+
+@selectivity FishingSelRat # roughly based on 881H unscaled LFs
+type logistic
+a50   26
+ato95  8
+
+@selectivity FishingSelIce # roughly based on 881H unscaled LFs
+type logistic
+a50   2.6
+ato95 1.3
+
+@selectivity TagSel
+type double_normal
+mu 8
+sigma_l 3
+sigma_r 10
+
+# CATCHABILITY
+@catchability CPUEq
+q 1e-5
+
+# Estimation Section
+@include "estimation.spm"
+
+# Observation Section
+#@include "observations.spm"
+
+# Report Section
+@include "report.spm"
+ 

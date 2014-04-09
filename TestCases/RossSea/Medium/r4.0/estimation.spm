@@ -7,6 +7,8 @@ minimiser     GammaDiff
 type numerical_differences
 tolerance 0.02 #The default is 0.002
 covariance True
+adaptive_stepsize True
+step_size 1e-5
 
 @minimiser DE
 type DE_Solver

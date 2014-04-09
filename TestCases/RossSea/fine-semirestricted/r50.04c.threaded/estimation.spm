@@ -1,7 +1,7 @@
 # Estimation.spm
 
 @estimation
-minimiser     GamaDiff
+minimiser GammaDiff
 
 @minimiser GammaDiff
 type numerical_differences

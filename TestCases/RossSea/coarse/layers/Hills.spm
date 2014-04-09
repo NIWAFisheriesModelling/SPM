@@ -1,0 +1,9 @@
+# Hills or not
+@layer Hills
+type categorical
+data No No No No No No No No No No
+data No No No No No No No No No No
+data No No No No No No No No No No
+data No No Yes Yes Yes Yes No No No No
+data Yes Yes Yes Yes Yes Yes Yes Yes Yes Yes
+data Yes Yes Yes Yes No No No No No Yes

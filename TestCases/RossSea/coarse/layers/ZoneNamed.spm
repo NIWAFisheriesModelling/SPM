@@ -1,0 +1,9 @@
+# Shelf, slope or north
+@layer ZoneNamed
+type categorical
+data None None None Slope Shelf Shelf Shelf None None None
+data None None None Slope Shelf Slope Slope Shelf None None
+data None Slope Slope Slope Slope Slope Shelf Shelf Shelf None
+data None Slope Slope Slope North North Shelf Shelf Shelf None
+data North North North North North North North Shelf Shelf Shelf
+data None None North North North North North Shelf None None
