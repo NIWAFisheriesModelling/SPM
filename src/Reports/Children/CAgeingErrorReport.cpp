@@ -84,7 +84,7 @@ void CAgeingErrorReport::execute() {
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_AGEING_ERROR << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << sAgeingError << "\n";
 
-    cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << iMinAge;
+    cout << PARAM_AGES << CONFIG_RATIO_SEPARATOR << " " << iMinAge;
     for (int i = 1; i < iSpread; ++i)
       cout << CONFIG_SPACE_SEPARATOR  << (i + iMinAge);
     cout << "\n";
