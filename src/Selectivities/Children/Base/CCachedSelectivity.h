@@ -26,9 +26,9 @@ class CCachedSelectivity : public CSelectivity {
 public:
   CCachedSelectivity();
   virtual                     ~CCachedSelectivity();
-  void                        build();
+  virtual void                build();
   virtual void                rebuild();
-  double                      getResult(int index);
+  virtual double              getResult(int index);
 
 protected:
   // Functions

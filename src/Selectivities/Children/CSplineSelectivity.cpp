@@ -7,6 +7,9 @@
 // Local Headers
 #include "CSplineSelectivity.h"
 #include "../../Helpers/CError.h"
+#include "../../Helpers/DefinedValues.h"
+#include "../../Helpers/CMath.h"
+#include <math.h>
 
 //**********************************************************************
 // CLogisticproducingSelectivity::CSplineSelectivity()
@@ -45,6 +48,12 @@ void CSplineSelectivity::validate() {
     if (iN < 2)
       CError::errorNotEnough(PARAM_KNOTS);
 
+     for(int i = 0; i < (int)vValues.size(); ++i) {
+       if (vValues[i] < 0)
+         CError::errorLessThanEqualTo(PARAM_VALUES, PARAM_ZERO);
+       if (vValues[i] > 1)
+         CError::errorGreaterThanEqualTo(PARAM_VALUES, PARAM_ONE);
+     }
 
     if(sMethod==PARAM_NATURAL) {
       //A "natural spline" where the second derivatives are set to 0 at the boundaries
@@ -62,8 +71,28 @@ void CSplineSelectivity::validate() {
       CError::errorUnknown(PARAM_METHOD, sMethod);
     }
 
+    // Register our values vector as estimable
+    for (int i = 0; i < (int)vValues.size(); ++i)
+      registerEstimable(PARAM_VALUES, i, &vValues[i]);
+
+
   } catch (string &Ex) {
     Ex = "CSplineSelectivity.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CCachedSelectivity::build()
+// Rebuild the selectivity
+//**********************************************************************
+void CSplineSelectivity::build() {
+  try {
+
+    rebuild();
+
+  } catch (string &Ex) {
+    Ex = "CCachedSelectivity.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
@@ -76,7 +105,7 @@ void CSplineSelectivity::rebuild() {
   try {
 
     for (int i=0; i < iN; ++i) {
-      spline.addPoint(vKnots[i],vValues[i]);
+      spline.addPoint(vKnots[i],transform(vValues[i]) );
     }
 
     CCachedSelectivity::rebuild();
@@ -88,24 +117,45 @@ void CSplineSelectivity::rebuild() {
 }
 
 //**********************************************************************
+// void CSplineSelectivity::transform()
+// transformation using logit
+//**********************************************************************
+double CSplineSelectivity::transform(double x) {
+  //double result = log( x / CMath::zeroFun(1.0 - x, ZERO) );
+  // double result = tan( 3.141592653589793238463 * ( x - 0.5 ) );
+  double result = x;
+  return (result);
+}
+
+//**********************************************************************
+// void CSplineSelectivity::inverse()
+// inverse transformation using logit
+//**********************************************************************
+double CSplineSelectivity::inverseTransform(double x) {
+  //double result = 1.0 / ( 1.0 + exp(-x) );
+  //double result = 1/3.141592653589793238463 * atan( x ) + 0.5;
+  double result = x;
+  return (result);
+}
+
+//**********************************************************************
 // double CSplineSelectivity::calculateResult(int Age)
 // Calculate Our Result
 //**********************************************************************
 double CSplineSelectivity::calculateResult(int Age) {
-#ifndef OPTIMIZE
+
   try {
-    // Do our function
-#endif
 
-  return ( spline((double)Age) );
+std::cerr << "age: " << Age << " ";
+std::cerr << "spline: " << spline((double)Age) << " ";
+std::cerr << "it: " << inverseTransform( spline( (double)Age ) ) << "\n";
 
-#ifndef OPTIMIZE
+    return ( inverseTransform( spline( (double)Age ) ));
   } catch (string &Ex) {
     Ex = "CSplineSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
   return 0.0;
-#endif
 }
 
 //**********************************************************************

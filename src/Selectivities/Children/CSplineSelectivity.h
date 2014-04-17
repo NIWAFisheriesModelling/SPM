@@ -8,7 +8,7 @@
 
 // Local Headers
 #include "Base/CCachedSelectivity.h"
-#include "Spline/CSpline.h"
+#include "../../helpers/CSpline.h"
 
 using namespace magnet::math;
 
@@ -22,14 +22,16 @@ public:
   // Functions
   CSplineSelectivity();
   virtual                    ~CSplineSelectivity();
-  CSelectivity*               clone() { return new CSplineSelectivity(*this); }
+  CSelectivity*              clone() { return new CSplineSelectivity(*this); }
   void                       validate();
   void                       rebuild();
+  void                       build();
 
 protected:
   // Functions
-  double                     calculateResult(int Age);
-
+  double                     calculateResult( int Age );
+  double                     transform( double x );
+  double                     inverseTransform( double x );
   // Variables
   Spline                     spline;
   vector<double>             vKnots;

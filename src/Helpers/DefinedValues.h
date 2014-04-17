@@ -13,5 +13,6 @@
 #define TRUE_ZERO 0
 #define ZERO 1e-15
 #define DELTA 1e-11
+#define PI 3.141592653589793238463;
 
 #endif /* DEFINEDVALUES_H_ */

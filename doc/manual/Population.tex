@@ -508,7 +508,7 @@ The density-dependent Holling mortality process will be applied as a biomass or 
 
 \subsubsection*{Prey-switching mortality}
 
-The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from a predator group to its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of each prey group, the total (selected) abundance (or biomass) of the other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. Note that both the predator and the prey groups can consist of a number of individual categories.
+The density-dependent prey-switching process\index{Density-dependent prey-switching} applies predation mortality from a predator group to its prey groups simultaneously. It removes an abundance (or biomass) from each prey group according to the total (selected) abundance (or biomass) of each prey group, the total (selected) abundance (or biomass) of the other prey groups, some 'predator' abundance (or biomass), and the preference (electivity) of the predator to each prey group, but constrained by a maximum exploitation rate. The predator-prey switch functions were based on the multispecies Virtual Population Analysis (MSVPA) functions described by \citep{JuradoMolina2005}.
 
 For example, the mortality applied to the user-defined prey group $g$ of category $k$, with the numbers removed at age $l$ determined by a selectivity-at-age $S(l)$ is applied as follows:
 
@@ -997,8 +997,9 @@ The double-exponential selectivity has non-estimable parameters $x_1$ and $x_2$,
 
 \subsubsection[Spline]{\argument{spline}}\index{Selectivities!Spline}
 
-The spline selectivity has non-estimable knots, and an estimable value for each knot. The cubic spline implements
-(i) natural splines where the where the second derivatives are set to 0 at the boundaries, i.e., the values at the boundaries are horizontal, (ii) a spline with a fixed first derivative at the boundaries (linear, but not necessarily horizontal) and (iii) spline which turns into a parabola at the boundaries.
+The spline selectivity implements a cubic spline that has non-estimable knots, and an estimable value for each knot. The cubic spline is either (i) a natural splines where the where the second derivatives are set to 0 at the boundaries, i.e., the values at the boundaries are horizontal, (ii) a spline with a fixed first derivative at the boundaries (linear, but not necessarily horizontal) and (iii) spline which turns into a parabola at the boundaries.
+
+
 
 
 

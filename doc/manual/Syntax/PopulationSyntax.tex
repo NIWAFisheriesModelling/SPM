@@ -1431,7 +1431,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}
-\defDefault{No default}
+\defDefault{1.0}
 \defValue{A positive real number}
 
 \defSub{l} {Defines the $L$ parameter of the selectivity function}
@@ -1453,7 +1453,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}
-\defDefault{No default}
+\defDefault{1.0}
 \defValue{A positive real number}
 
 \defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
@@ -1470,7 +1470,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}
-\defDefault{No default}
+\defDefault{1.0}
 \defValue{A positive real number}
 
 \defSub{a50} {Defines the $a_{50}$ parameter of the selectivity function}
@@ -1487,7 +1487,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}
-\defDefault{No default}
+\defDefault{1.0}
 \defValue{A positive real number}
 
 \defSub{l} {Defines the $L$ parameter of the selectivity function}
@@ -1514,7 +1514,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}
-\defDefault{No default}
+\defDefault{1.0}
 \defValue{A positive real number}
 
 \defSub{mu} {Defines the $\mu$ parameter of the selectivity function}
@@ -1533,7 +1533,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 
 \defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defType{Estimable}
-\defDefault{No default}
+\defDefault{1.0}
 \defValue{A positive real number}
 
 \defSub{x1} {Defines the $x_1$ parameter of the selectivity function}
@@ -1561,6 +1561,11 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defDefault{No default}
 
 \subsubsection[Spline]{\commandlabsubarg{selectivity}{type}{spline}}
+
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
+\defType{Estimable}
+\defDefault{1.0}
+\defValue{A positive real number}
 
 \defSub{knots} {Defines the locations of the knots for the cubic spline function}
 \defType{Constant vector}
