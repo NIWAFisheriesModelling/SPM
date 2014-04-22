@@ -30,6 +30,7 @@ public:
   CLayerDerivedWorldView(CCategoricalLayer *sourceLayer);
   virtual                     ~CLayerDerivedWorldView();
   CWorldSquare*               getSquare(string area);
+  vector<CWorldSquare*>       getWorldSquares(string area);
   void                        cleanUp();
   void                        build();
   void                        execute();

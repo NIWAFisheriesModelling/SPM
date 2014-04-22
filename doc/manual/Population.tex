@@ -582,16 +582,18 @@ u_max 0.8
 
 \subsubsection{\I{Category transition}s}
 
-Category transition processes move individuals between categories. \SPM\ implements two types, the total number and a rate. 
+Category transition processes move individuals between categories. \SPM\ implements three types, the total number in each cell (category transition), a rate in each cell (category transition rate), and the number in each age class in each cell (category transition by age).
 
-The category transition process moves a number $n$ between some source and sink category (or categories). This process may be used, for example, to implement a 'tagging' process for mark-recapture data. We define the transition process with selectivity $S$ for source category $a$ and sink category $b$ as,
+\subsubsection*{\I{Category transition process}}
+
+The category transition process\index{Category transition} moves a number $n$ from some source to a sink category (or categories). This process may be used, for example, to implement a 'tagging' process for mark-recapture data. The transition process with selectivity $S$ for source category $a$ and sink category $b$ (in cell$(i,j)$ and age $l$) is,
 
 \begin{equation}\begin{split}
   & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l) \\
   & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l)
 \end{split}\end{equation}
 
-Category transition processes require a penalty function to discourage parameter values that do not allow a the defined number of individuals to be moved. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in the source category (after applying the selectivity) available to be moved. See Section \ref{sec:penalties} for more information on specifying penalties.
+The category transition process requires a penalty function to discourage parameter values that do not allow the specified number of individuals to be moved. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in the source category (after applying the selectivity) available to be moved. See Section \ref{sec:penalties} for more information on specifying penalties.
 
 If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
 
@@ -606,9 +608,12 @@ layers TagRelease2001 TagRelease2002 TagRelease2003
 penalty tag_release_penalty
 \end{verbatim}}}
 
-Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories.
+Note that this syntax can be used to combine individuals into categories, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
 
-The transition rate type moves a proportion $p$ between a source and sink category. The transition rate process with selectivity $S$ for source category $a$ and sink category $b$ is,
+\subsubsection*{\I{Category transition rate process}}
+
+The category transition rate process\index{Category transition} moves a proportion $p$ from a source category to a and sink category (or categories). The category transition rate process with selectivity $S$ for source category $a$ and sink category $b$ (in cell$(i,j)$ and age $l$) is,
+
 \begin{equation}\begin{split}
   & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - pS_l \times \text{element}(i,j,a,l) \\
   & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + pS_l \times \text{element}(i,j,a,l)
@@ -625,7 +630,47 @@ proportions 1.0 1.0
 selectivities male-maturity female-maturity
 \end{verbatim}}}
 
-Note that this syntax can be used to combine individuals, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
+Note that this syntax can be used to combine individuals into categories, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
+
+\subsubsection*{\I{Category transition by age process}}
+
+The category transition by age process\index{Category transition} moves a number $n$ for each age class from some source to a sink category (or categories) in a given year in subsets of cells defined by a categorical layer. This process may be used, for example, to implement a 'tagging' process for mark-recapture data, were the number of individuals tagged at each age are known. If the process is to be applied over more than one year, multiple category transition processes by age will need to be defined --- one for each year. The transition process with selectivity $S$ for source category $a$ and sink category $b$ (in cell$(i,j)$ at age $l$) is,
+
+\begin{equation}\begin{split}
+  & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l) \\
+  & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l)
+\end{split}\end{equation}
+
+Category transition by age processes require a penalty function to discourage parameter values that do not allow the specified number of individuals to be moved. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in the source category (after applying the selectivity) available to be moved. See Section \ref{sec:penalties} for more information on specifying penalties.
+
+If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
+
+For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
+
+{\small{\begin{verbatim}
+@layer Area
+type categorical
+data A A 
+data B B
+\end{verbatim}}}
+
+Then the category transition by age process that moves $40$ individuals in the subset of cells with label $A$ and $55$ individuals in the subset of cells with label $B$ may be defined as, 
+
+{\small{\begin{verbatim}
+@process tagging
+type category_transition_by_age
+from immature mature
+to immature-tag mature-tag
+layer Area
+year 2001
+min_age 1
+max_age 5
+N A 1 5 15 8 11
+N B 2 5 20 20 8
+penalty tag_release_penalty
+\end{verbatim}}}
+
+Note that this syntax can be used to combine individuals into categories, simply by repeating a category label when specifying the sink categories. Similarly, individuals within a category can be split into more than one category by repeating a category label when specifying the source categories.
 
 \subsection{\I{Movement processes}\label{sec:movement-processes}}
 

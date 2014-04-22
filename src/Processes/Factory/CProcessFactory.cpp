@@ -13,20 +13,21 @@
 #include "../CProcessManager.h"
 #include "../Movement/CAdjacentCellMovementProcess.h"
 #include "../Movement/CMigrationMovementProcess.h"
-#include "../Movement/CPreferenceMovementProcess.h"
 #include "../Movement/COpenMPPreferenceMovementProcess.h"
+#include "../Movement/CPreferenceMovementProcess.h"
 #include "../Population/CAgeingProcess.h"
 #include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CBHRecruitmentProcess.h"
 #include "../Population/CBiomassEventMortalityProcess.h"
+#include "../Population/CCategoryTransitionByAgeProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CCategoryTransitionRateProcess.h"
 #include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CHollingMortalityRateProcess.h"
-#include "../Population/CPreySwitchPredationProcess.h"
 #include "../Population/CLocalBHRecruitmentProcess.h"
+#include "../Population/CPreySwitchPredationProcess.h"
 #include "../Population/CProportionalRecruitmentProcess.h"
 #include "CProcessFactory.h"
 
@@ -62,6 +63,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CHollingMortalityRateProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)
     pProcess = new CCategoryTransitionProcess();
+  else if (type == PARAM_CATEGORY_TRANSITION_BY_AGE)
+    pProcess = new CCategoryTransitionByAgeProcess();
   else if (type == PARAM_CATEGORY_TRANSITION_RATE)
     pProcess = new CCategoryTransitionRateProcess();
   else if (type == PARAM_PREFERENCE_MOVEMENT)

@@ -2,7 +2,7 @@
 
 \SPM\ is run from the console window (i.e., the DOS command line) on \I{Microsoft Windows} or from a terminal window on \I{Linux}. \SPM\ gets its information from input data files, the key one of which is the \config\index{Input configuration file}. 
 
-The \config\ is compulsory and defines the model structure, processes, observations, parameters (both the fixed parameters and the parameters to be estimated)\index{Estimable parameters}\index{Estimated parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
+The \config\ is compulsory and defines the model structure, processes, observations, parameters (both the fixed parameters and the parameters to be estimated)\index{Estimable parameters}, and the reports (outputs) requested. The following sections  describe how to construct the \SPM\ configuration file. By convention, the name of the \config\ ends with the suffix \texttt{.spm}, however, any file name is acceptable.
 
 Other input files can, in some circumstances, be supplied to define the starting point for an estimation %, define the parameters for a projection, 
 or as a point estimate from which to simulate observations.
@@ -126,7 +126,7 @@ Integers must be entered as integers (i.e., if \subcommand{year}\ is an integer 
 
 Arguments of type integer vector, integer range, constant vector, estimable vector, or categorical vector contain one or more entries on a row, separated by white space (tabs or spaces). 
 
-\emph{Estimable} parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. And, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{estimated parameters}.
+\emph{Estimable} parameters are those parameters that \SPM\ can estimate, if requested. If a particular parameter is not being estimated in a particular model run, then it acts as a constant.  Within \SPM\, only estimable parameters can be estimated. And, you have to tell \SPM\ those that are to be estimated in any particular model. Estimable parameters that are being estimated within a particular model run are called the \emph{estimated parameters}\index{Estimated parameters}.
 
 \subsubsection{The command-block format}\index{Command block format}
 

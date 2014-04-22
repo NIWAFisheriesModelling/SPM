@@ -43,6 +43,24 @@ CWorldSquare* CLayerDerivedWorldView::getSquare(string area) {
 }
 
 //**********************************************************************
+// vector<CWorldSquare*> CLayerDerivedWorldView::getWorldSquares(string area)
+// Get the vector of world squares from an area in our map
+//**********************************************************************
+vector<CWorldSquare*> CLayerDerivedWorldView::getWorldSquares(string area) {
+  try {
+    if (mView[area] == 0)
+      CError::errorUnknown(PARAM_AREA, area);
+
+    return mvAreas[area];
+
+  } catch (string &Ex) {
+    Ex = "CLayerDerivedWorldView.getWorldSquares(" + area + ")->" + Ex;
+    throw Ex;
+  }
+
+}
+
+//**********************************************************************
 // void CLayerDerivedWorldView::cleanUp()
 // Clean up Our Area-Cache
 //**********************************************************************

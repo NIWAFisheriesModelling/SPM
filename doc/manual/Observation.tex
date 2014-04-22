@@ -65,6 +65,8 @@ The observations for those spatial cells where the categorical layer has value $
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_at_age
+layer Area
 ...
 categories male
 min_age 1
@@ -77,6 +79,8 @@ Or, for both $A$ and $B$ as,
 
 {\small{\begin{verbatim}
 @observation MyProportions
+type proportions_at_age
+layer Area
 ...
 categories male
 min_age 1
@@ -105,6 +109,7 @@ For example, using the earlier spatial model with a categorical layer that has l
 {\small{\begin{verbatim}
 @observation MyProportions
 type proportions_at_age
+layer Area
 ...
 categories male female
 min_age 1
@@ -131,6 +136,7 @@ For example, using the earlier spatial model with a categorical layer that has l
 {\small{\begin{verbatim}
 @observation MyProportions
 type proportions_at_age
+layer Area
 ...
 categories male + female
 min_age 1
@@ -145,6 +151,7 @@ The later form can then be extended to include multiple categories, or multiple 
 {\small{\begin{verbatim}
 @observation MyProportions
 type proportions_at_age
+layer Area
 ...
 categories male_immature male_mature female_immature + female_mature
 min_age 1
@@ -235,6 +242,7 @@ Here we supply observations for those spatial cells where the categorical layer 
 {\small{\begin{verbatim}
 @observation MyProportions
 type proportions_by_category
+layer Area
 ...
 categories male 
 categories2 female
@@ -249,6 +257,7 @@ Or, for both $A$ and $B$ as,
 {\small{\begin{verbatim}
 @observation MyProportions
 type proportions_by_category
+layer Area
 ...
 categories male
 categories2 female
@@ -338,6 +347,7 @@ Here we supply abundance observations for those spatial cells where the categori
 {\small{\begin{verbatim}
 @observation MyAbundance
 type abundance
+layer Area
 ...
 categories male 
 obs A 1000
@@ -349,6 +359,7 @@ Or, for both $A$ and $B$ as,
 {\small{\begin{verbatim}
 @observation MyAbundance
 type abundance
+layer Area
 ...
 categories male
 obs A 1000
