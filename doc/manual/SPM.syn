@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-04-09 (rev. 5053)
+; TextPad syntax definitions for SPM version 1.1-2014-04-22 (rev. 5059)
 ; ===================================================================================
 ;
 ;
@@ -57,6 +57,7 @@ CharEsc = \
 @time_step
 
 [Keywords 2]
+N
 a
 a50
 adapt_stepsize_at
@@ -241,6 +242,7 @@ biomass_event_mortality
 categorical
 categorical_meta
 category_transition
+category_transition_by_age
 category_transition_rate
 constant
 constant_mortality_rate

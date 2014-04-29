@@ -1,5 +1,5 @@
 //============================================================================
-// Name        : CPreySwitchPredationProcess.cpp
+// Name        : CPreySuitabilityPredationProcess.cpp
 // Author      : S.Rasmussen
 // Date        : 15/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
@@ -8,7 +8,7 @@
 //============================================================================
 
 // Local Headers
-#include "CPreySwitchPredationProcess.h"
+#include "CPreySuitabilityPredationProcess.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CCompoundCategories.h"
 #include "../../Helpers/CError.h"
@@ -23,12 +23,12 @@
 #include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
-// CPreySwitchPredationProcess::CPreySwitchPredationProcess()
+// CPreySuitabilityPredationProcess::CPreySuitabilityPredationProcess()
 // Default Constructor
 //**********************************************************************
-CPreySwitchPredationProcess::CPreySwitchPredationProcess() {
+CPreySuitabilityPredationProcess::CPreySuitabilityPredationProcess() {
   // Variables
-  sType = PARAM_PREY_SWITCH_PREDATION;
+  sType = PARAM_PREY_SUITABILITY_PREDATION;
   pPreyCategories  = 0;
   pCRLayer         = 0;
 
@@ -46,10 +46,10 @@ CPreySwitchPredationProcess::CPreySwitchPredationProcess() {
 }
 
 //**********************************************************************
-// void CPreySwitchPredationProcess::validate()
+// void CPreySuitabilityPredationProcess::validate()
 // Validate our process
 //**********************************************************************
-void CPreySwitchPredationProcess::validate() {
+void CPreySuitabilityPredationProcess::validate() {
   try {
 
     // Get our parameters
@@ -133,16 +133,16 @@ void CPreySwitchPredationProcess::validate() {
 
 
   } catch (string &Ex) {
-    Ex = "CPreySwitchPredationProcess.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CPreySuitabilityPredationProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CPreySwitchPredationProcess::build()
+// void CPreySuitabilityPredationProcess::build()
 // Build our process
 //**********************************************************************
-void CPreySwitchPredationProcess::build() {
+void CPreySuitabilityPredationProcess::build() {
   try {
     // Base Build
     //CProcess::build();
@@ -194,16 +194,16 @@ void CPreySwitchPredationProcess::build() {
     rebuild();
 
   } catch (string &Ex) {
-    Ex = "CPreySwitchPredationProcess.build(" + getLabel() + ")->" + Ex;
+    Ex = "CPreySuitabilityPredationProcess.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// void CPreySwitchPredationProcess::rebuild()
+// void CPreySuitabilityPredationProcess::rebuild()
 // Rebuild
 //**********************************************************************
-void CPreySwitchPredationProcess::rebuild() {
+void CPreySuitabilityPredationProcess::rebuild() {
 #ifndef OPTIMIZE
   try {
 #endif
@@ -223,17 +223,17 @@ void CPreySwitchPredationProcess::rebuild() {
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CPreySwitchPredationProcess.rebuild(" + getLabel() + ")->" + Ex;
+    Ex = "CPreySuitabilityPredationProcess.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 }
 
 //**********************************************************************
-// vector<string> CPreySwitchPredationProcess::getPreyGroups()
+// vector<string> CPreySuitabilityPredationProcess::getPreyGroups()
 //
 //**********************************************************************
-vector<string> CPreySwitchPredationProcess::getPreyGroups() {
+vector<string> CPreySuitabilityPredationProcess::getPreyGroups() {
 
   vector<string> result;
 
@@ -245,10 +245,10 @@ vector<string> CPreySwitchPredationProcess::getPreyGroups() {
 }
 
 //**********************************************************************
-// void CPreySwitchPredationProcess::execute()
+// void CPreySuitabilityPredationProcess::execute()
 // Execute our process
 //**********************************************************************
-void CPreySwitchPredationProcess::execute() {
+void CPreySuitabilityPredationProcess::execute() {
 #ifndef OPTIMIZE
   try {
 #endif
@@ -369,15 +369,15 @@ void CPreySwitchPredationProcess::execute() {
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CPreySwitchPredationProcess.execute(" + getLabel() + ")->" + Ex;
+    Ex = "CPreySuitabilityPredationProcess.execute(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
 }
 
 //**********************************************************************
-// CPreySwitchPredationProcess::~CPreySwitchPredationProcess()
+// CPreySuitabilityPredationProcess::~CPreySuitabilityPredationProcess()
 // Destructor
 //**********************************************************************
-CPreySwitchPredationProcess::~CPreySwitchPredationProcess() {
+CPreySuitabilityPredationProcess::~CPreySuitabilityPredationProcess() {
 }

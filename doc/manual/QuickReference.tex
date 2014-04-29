@@ -108,7 +108,7 @@
 \defSub{selectivities} {Define the selectivities applied to the source categories}
 \defSub{to} {Define the categories that are the sink of the transition process}
 \defSub{years} {Define the years where the category transition is applied}
-\defSub{layers} {Define the layers that specify the event mortality (as N for each cell) in each year}
+\defSub{layers} {Define the layers that specify the transitions (as N for each cell) in each year}
 \defSub{u\_max} {Define the maximum proportion of individuals that can be moved}
 \defSub{penalty} {Define the penalty to encourage models parameter values away from those which result in not enough individuals to move}
 \par\textbf{\commandlabsubarg{process}{type}{category\_transition\_rate}}\par
@@ -117,6 +117,16 @@
 \defSub{to} {Define the category that is the sink of the transition process}
 \defSub{proportions} {Define the proportion of individuals to move}
 \defSub{layer} {Name of the layer}
+\par\textbf{\commandlabsubarg{process}{type}{category\_transition\_by\_age}}\par
+\defSub{from} {Define the categories that are the source of the transition process}
+\defSub{to} {Define the categories that are the sink of the transition process}
+\defSub{year} {Define the year when the category transition is applied}
+\defSub{layer} {Name of the categorical layer used to group the spatial cells for the process}
+\defSub{min\_age} {Define the minimum age for the process }
+\defSub{max\_age} {Define the maximum age for the process}
+\defSub{N [label]}{Define the following data as the number of individuals to move in each age class}
+\defSub{u\_max} {Define the maximum proportion of individuals that can be moved}
+\defSub{penalty} {Define the penalty to encourage models parameter values away from those which result in not enough individuals to move}
 \par\textbf{\commandlabsubarg{process}{type}{migration}}\par
 \defSub{categories} {Define the categories that the migration movement event is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
@@ -313,6 +323,7 @@
 \defSub{y1} {Defines the $y_1$ parameter of the selectivity function}
 \defSub{y2} {Defines the $y_2$ parameter of the selectivity function}
 \par\textbf{\commandlabsubarg{selectivity}{type}{spline}}\par
+\defSub{alpha} {Defines the $\alpha$ parameter of the selectivity function}
 \defSub{knots} {Defines the locations of the knots for the cubic spline function}
 \defSub{values} {Defines the values at the knots for the cubic spline function}
 \defSub{method} {The method for constraining the end values of the spline}

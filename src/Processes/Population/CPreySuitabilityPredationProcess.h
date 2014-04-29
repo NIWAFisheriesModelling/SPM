@@ -1,13 +1,13 @@
 //============================================================================
-// Name        : CPreySwitchPredationProcess.h
+// Name        : CPreySuitabilityPredationProcess.h
 // Author      : S.Rasmussen
 // Date        : 15/01/2009
 // Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
 // Description :
 // $Date: 2008-03-04 16:33:32 +1300 (Tue, 04 Mar 2008) $
 //============================================================================
-#ifndef CPRESWITCHPREDATIONPROCESS_H_
-#define CPRESWITCHPREDATIONPROCESS_H_
+#ifndef CPRESUITABILITYPREDATIONPROCESS_H_
+#define CPRESUITABILITYPREDATIONPROCESS_H_
 
 // Local headers
 #include "../CProcess.h"
@@ -21,12 +21,12 @@ class CCompoundCategories;
 //
 //
 //**********************************************************************
-class CPreySwitchPredationProcess : public CProcess {
+class CPreySuitabilityPredationProcess : public CProcess {
 public:
   // Functions
-  CPreySwitchPredationProcess();
-  virtual                     ~CPreySwitchPredationProcess();
-  CProcess*                   clone() { return new CPreySwitchPredationProcess(*this); }
+  CPreySuitabilityPredationProcess();
+  virtual                     ~CPreySuitabilityPredationProcess();
+  CProcess*                   clone() { return new CPreySuitabilityPredationProcess(*this); }
   void                        validate();
   void                        build();
   void                        rebuild();
@@ -74,4 +74,4 @@ protected:
 
 };
 
-#endif /* CPRESWITCHPREDATIONPROCESS_H_ */
+#endif /* CPRESUITABILITYPREDATIONPROCESS_H_ */

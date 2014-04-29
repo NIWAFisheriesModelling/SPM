@@ -326,7 +326,7 @@
 #define PARAM_PREY_CATEGORIES                     "prey_categories"
 #define PARAM_PREY_GROUP                          "prey_group"
 #define PARAM_PREY_SELECTIVITIES                  "prey_selectivities"
-#define PARAM_PREY_SWITCH_PREDATION               "prey-switch_predation"
+#define PARAM_PREY_SUITABILITY_PREDATION               "prey-suitability_predation"
 #define PARAM_PRIOR                               "prior"
 #define PARAM_PROCESS                             "process"
 #define PARAM_PROCESS_ERROR                       "process_error"
