@@ -150,7 +150,7 @@ void CEstimate::validate() {
     dLowerBound       = pParameterList->getDouble(PARAM_LOWER_BOUND);
     dUpperBound       = pParameterList->getDouble(PARAM_UPPER_BOUND);
     bMCMCFixed        = pParameterList->getBool(PARAM_MCMC_FIXED,true,false);
-    sPrior            = pParameterList->getString(PARAM_PRIOR, true, "");
+    sPrior            = pParameterList->getString(PARAM_PRIOR);
     iEstimationPhase  = pParameterList->getInt(PARAM_ESTIMATION_PHASE, true, 1);
 
     pParameterList->fillVector(vSameList, PARAM_SAME, true);
