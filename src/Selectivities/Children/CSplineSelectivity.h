@@ -8,7 +8,7 @@
 
 // Local Headers
 #include "Base/CCachedSelectivity.h"
-#include "../../helpers/CSpline.h"
+#include "../../Helpers/CSpline.h"
 
 using namespace magnet::math;
 
