@@ -123,7 +123,7 @@ void CSplineSelectivity::rebuild() {
 double CSplineSelectivity::transform(double x) {
   //double result = log( x / CMath::zeroFun(1.0 - x, ZERO) );
   //double result = tan( 3.141592653589793238463 * ( x - 0.5 ) );
-  double result = exp(x);
+  double result = log(CMath::zeroFun(x, ZERO));
   return (result);
 }
 
@@ -134,7 +134,7 @@ double CSplineSelectivity::transform(double x) {
 double CSplineSelectivity::inverseTransform(double x) {
   //double result = 1.0 / ( 1.0 + exp(-x) );
   //double result = 1/3.141592653589793238463 * atan( x ) + 0.5;
-  double result = log(x);
+  double result = exp(x);
   return (result);
 }
 
