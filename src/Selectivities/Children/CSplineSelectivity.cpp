@@ -122,8 +122,8 @@ void CSplineSelectivity::rebuild() {
 //**********************************************************************
 double CSplineSelectivity::transform(double x) {
   //double result = log( x / CMath::zeroFun(1.0 - x, ZERO) );
-  // double result = tan( 3.141592653589793238463 * ( x - 0.5 ) );
-  double result = x;
+  //double result = tan( 3.141592653589793238463 * ( x - 0.5 ) );
+  double result = exp(x);
   return (result);
 }
 
@@ -134,7 +134,7 @@ double CSplineSelectivity::transform(double x) {
 double CSplineSelectivity::inverseTransform(double x) {
   //double result = 1.0 / ( 1.0 + exp(-x) );
   //double result = 1/3.141592653589793238463 * atan( x ) + 0.5;
-  double result = x;
+  double result = log(x);
   return (result);
 }
 
@@ -145,11 +145,6 @@ double CSplineSelectivity::inverseTransform(double x) {
 double CSplineSelectivity::calculateResult(int Age) {
 
   try {
-
-std::cerr << "age: " << Age << " ";
-std::cerr << "spline: " << spline((double)Age) << " ";
-std::cerr << "it: " << inverseTransform( spline( (double)Age ) ) << "\n";
-
     return ( inverseTransform( spline( (double)Age ) ));
   } catch (string &Ex) {
     Ex = "CSplineSelectivity.calculateResult(" + getLabel() + ")->" + Ex;
