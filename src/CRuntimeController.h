@@ -63,6 +63,7 @@ public:
   string                     getCommandLineOptions() { return sCommandLineOptions; }
   void                       setRunMode(ERunMode value) { eRunMode = value; }
   ERunMode                   getRunMode() { return eRunMode; }
+  bool                       getDisableHeader() { return bDisableHeader; }
   EState                     getCurrentState();
   CRuntimeThread*            getCurrentThread();
   void                       loadConfiguration();
@@ -79,6 +80,7 @@ protected:
 
   // Variables
   ERunMode                   eRunMode;
+  bool                       bDisableHeader;
   int                        iCurrentEstimateValue;
   CRuntimeThread*            pBaseThread;
   string                     sCommandLineOptions;

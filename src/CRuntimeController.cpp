@@ -43,6 +43,7 @@ using std::ostringstream;
 //**********************************************************************
 CRuntimeController::CRuntimeController() {
   // Setup Variables
+  bDisableHeader          = false;
   eRunMode                = RUN_MODE_INVALID;
   iCurrentEstimateValue   = 0;
   runtimeBarrier          = new boost::barrier(2);
@@ -81,7 +82,8 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
   // Build some hidden options
   options_description oHidden("Hidden");
   oHidden.add_options()
-      ("disable_reports,d", "Disable all reports");
+      ("disable_reports,D", "Disable all reports")
+      ("disable_header,d", "Disable standard header");
 
   // Build Options menu
   options_description oDesc("Usage");
@@ -207,6 +209,10 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
 
   if (vmParams.count("disable_reports")) {
     pConfig->setDisableReports(true);
+  }
+
+  if (vmParams.count("disable_header")) {
+    bDisableHeader = true;
   }
 
 }

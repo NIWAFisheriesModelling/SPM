@@ -72,7 +72,8 @@ int main(int argc, char * argv[]) {
   }
 
   try {
-    clReporter.start();
+    if (!pRuntime->getDisableHeader())
+      clReporter.start();
 
     // Check Run-Mode
     if (pRuntime->getRunMode() == RUN_MODE_LICENSE) {
@@ -102,9 +103,11 @@ int main(int argc, char * argv[]) {
   }
 
   // Clean Up our Model
+  bool bPrintHeader = !pRuntime->getDisableHeader();
   CRuntimeController::Destroy();
 
-  clReporter.end();
+  if (bPrintHeader)
+    clReporter.end();
 
   return 0;
 }
