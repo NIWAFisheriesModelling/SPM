@@ -89,11 +89,27 @@ Within \SPM, layers are used in the following contexts:
 \end{equation}
 where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the square. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{cols}) \times (n_{rows} \times n_{cols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
 
+For example, to specify a distance layer, use,
+
+{\small{\begin{verbatim}
+@layer Distance
+type distance
+\end{verbatim}}}
+
 \item{\I{Abundance layers}}: The abundance layer is the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$. 
 \begin{equation}
   N(a) = \sum\limits_{k} \sum\limits_l S_l \ \text{element}(i,j,k,l)
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
+
+For example, to specify an abundance layer of all individuals who are categorised as \texttt{mature}, use,
+
+{\small{\begin{verbatim}
+@layer Abundance
+type abundance
+categories mature
+selectivities One
+\end{verbatim}}}
 
 \item {\I{Biomass layers}}: The biomass layer is the sum of the biomass of individuals within cell $a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$
 \begin{equation}
@@ -101,11 +117,29 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
+For example, to specify a biomass layer of all individuals who are categorised as \texttt{mature}, use,
+
+{\small{\begin{verbatim}
+@layer Biomass
+type biomass
+categories mature
+selectivities One
+\end{verbatim}}}
+
 \item {\I{Abundance-density layers}}: The abundance density layer is the density of the number of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$,
 \begin{equation}
   N(a) = \frac{1}{A_a} \sum\limits_{k} \sum\limits_l S_l \ \text{element}(i,j,k,l)
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
+
+For example, to specify an abundance density layer of all individuals who are categorised as \texttt{mature}, use,
+
+{\small{\begin{verbatim}
+@layer AbundanceDensity
+type abundance_density
+categories mature
+selectivities One
+\end{verbatim}}}
 
 \item {\I{Biomass-density layers}}: The biomass-density layer is the density of the biomass of individuals within cell $a$ with area $A_a$ in categories $k$, with selectivity $S_l$ at age $l$, and mean weight $w_{kl}$,
 \begin{equation}
@@ -113,15 +147,52 @@ where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively
 \end{equation}
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
+For example, to specify a biomass density layer of all individuals who are categorised as \texttt{mature}, use,
+
+{\small{\begin{verbatim}
+@layer BiomassDensity
+type bioomass_density
+categories mature
+selectivities One
+\end{verbatim}}}
+
 \item {Derived quantity and derived quantity by cell layers}\label{derived quantity layer}\index{Derived quantity layers}\index{Derived quantity by cell layers}: \SPM\ can use values from a derived quantity or a derived quantity by cell as a layer. These are the values of a derived quantity, and require an offset (in years) to extract the desired value for each year. They will extract the derived quantity either for each cell (for derived quantities by cell) or as a total value applied to each cell (for ordinary derived quantities) as values for a layer.
+
+For example, to specify a layer of the biomass of all individuals who are categorised as \texttt{mature} in time step \texttt{StepOne} from two years ago, first define a derived quantity,
+
+{\small{\begin{verbatim}
+@derived_quantity_by_cell Mature
+type biomass
+categories mature
+selectivities One
+time_step StepOne
+\end{verbatim}}}
+
+Then define the derived layer,
+
+{\small{\begin{verbatim}
+@layer MatureBiomass
+type derived_quantity
+derived_quantity Mature
+year_offset 2
+\end{verbatim}}}
 
 \item {\I{Meta-layers}\label{meta-layers}}: \SPM\ defines a special type of layer known as a \emph{meta-layer}. Meta-layers allows individual layers to be indexed by year and applied as an annually varying layer within the model. For example, assume a model that uses Sea Surface Temperature (SST) as a layer, perhaps to drive some movement process. The SST values for each year of the model would be defined as individual layers, each with a unique label. A meta-layer could be defined that indexed the individual annual SST layers by year, and used as a covariate layer in the movement process. Meta-layers have a \emph{default} layer that is used for time periods that are not specifically defined. Meta layers can be used wherever ordinary layers are used (except as  the base layer), with \SPM\ extracting the appropriate layer value corresponding to the year or initialisation phase.
 
 \begin{enumerate}
 
-\item {\I{Numeric meta-layers}\label{numeric meta-layer}}: Numeric meta-layers are a meta layer of numeric layers --- the individual ordinary layers that make up the meta-layer must all be of numeric type. 
+\item {\I{Numeric meta-layers}\label{numeric meta-layer}}: Numeric meta-layers are a meta layer of numeric layers --- the individual ordinary layers that make up the meta-layer must all be of numeric type. For example, to specify a numeric meta-layer with specific values for the years 1990-1995, and a default for all other years (including the initialisation phases), use, 
 
-\item {\I{Categorical meta-layers}\label{categorical meta-layer}}: Categorical meta-layers are a meta layer of categorical layers --- the individual ordinary layers that make up the meta-layer must all be of categorical type.
+{\small{\begin{verbatim}
+@layer AnnualLayer
+type meta-layer
+default_layer SST
+years    1990    1991    1992    1993    1994    1995
+layer SST1990 SST1991 SST1992 SST1993 SST1994 SST1995
+\end{verbatim}}}
+
+
+\item {\I{Categorical meta-layers}\label{categorical meta-layer}}: Categorical meta-layers are a meta layer of categorical layers --- the individual ordinary layers that make up the meta-layer must all be of categorical type. Categorical meta-layers are specified in the same way as numeric meta-layers.
 
 \end{enumerate}
 \end{enumerate}
@@ -206,6 +277,8 @@ Population processes are those processes that change the population state of ind
 Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements four types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}, and recruitment proportional to an abundance or biomass \index{Proportional recruitment}\index{Recruitment ! proportional}.
 
 In the recruitment processes, the number of individuals are added to a single age class within the partition, with the amount defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
+
+Recruitment occurs in those cells defined by a layer, or all cells if a layer has not been specified.
 
 For the constant, Beverton-Holt, and proportional recruitment processes, the  number of individuals in cell cell$(i,j)$ following recruitment in year $y$ is,  
 \begin{equation}
@@ -733,7 +806,7 @@ Movement in \SPM\ can be defined as a probability distribution based on an under
   P_x=f_1(\theta_1,P_1(x))^{\alpha_1} \times f_2(\theta_2,P_2(x))^{\alpha_2} \times f_3(\theta_3,P_3(x))^{\alpha_3} \times \cdots \times f_n(\theta_n,P_n(x))^{\alpha_n}
 \end{equation}
 
-where $\alpha_i$ is an arbitrary weighting factor for attribute $i$. In order to avoid over-parametrisation, it is recommended that at least one $\alpha_i$ be fixed to the value of one.
+where $\alpha_i$ is an arbitrary weighting factor for attribute $i$. In order to avoid over-parameterisation, it is recommended that at least one $\alpha_i$ be fixed to the value of one.
 
 Then we define the probability of moving from cell $a$ to any cell $b$ (where $b$ is defined as the set of all possible cells, including $a$),
 \begin{equation}
