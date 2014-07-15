@@ -96,7 +96,7 @@ void CRuntimeController::parseCommandLine(int argc, const char* argv[]) {
       ("estimate,e", "Point estimation")
       ("profile,p", "Likelihood profiles")
       ("mcmc,m", "MCMC")
-      ("forward,f", "Forward projections")
+      //("forward,f", "Forward projections")
       ("simulate,s", value<int>(), "Simulate observations")
       ("input,i", value<string>(), "Load free parameter values from file")
       ("estimates,o", value<string>(), "Create estimate values report")
