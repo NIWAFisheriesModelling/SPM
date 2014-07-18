@@ -1,0 +1,9 @@
+open ftp.niwa.co.nz
+anonymous
+adunn@niwa.co.nz
+cd software
+cd casal
+type binary
+put cala.zip
+put Setup_CALA.exe
+bye

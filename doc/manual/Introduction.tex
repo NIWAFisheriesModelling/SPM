@@ -48,5 +48,10 @@ The random number generator\index{Random number generator} used by \SPM\ uses an
 
 Note that the output from \SPM\ may differ slightly on the different platforms due to different precision arithmetic or other platform dependent implementation issues. The source code\index{\SPM\ source code} for \SPM\ is available either as a part of the installation, or on request from the \authors.
 
-Unit tests of the underlying \SPM\ code are carried out at build time, using the \href{http://www.boost.org/}{BOOST} unit testing framework. The unit test framework aims to cover a significant proportion of the key functions and processes within the \SPM\ code base. The unit test code for \SPM\ is available as a part of the underlying source code.
+Unit tests of the underlying \SPM\ code are carried out at build time, using the \href{http://www.boost.org/}{BOOST} unit testing framework. The unit test framework aims to cover the key functions and processes within the \SPM\ code base. The unit test code for \SPM\ is available as a part of the underlying source code. You can view a summary of the unit tests and validate the version of \SPM\ you are using has passed these by running
+
+\texttt{spm\_unittests --report\_level=detailed} 
+
+from the command line.
+
 

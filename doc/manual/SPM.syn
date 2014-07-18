@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-04-22 (rev. 5059)
+; TextPad syntax definitions for SPM version 1.1-2014-07-16 (rev. 1147)
 ; ===================================================================================
 ;
 ;
@@ -222,7 +222,7 @@ Holling_mortality_rate
 MCMC
 MCMC_objectives
 MCMC_samples
-Prey-switch_predation
+Prey-suitability_predation
 abundance
 abundance_density
 adjacent_cell

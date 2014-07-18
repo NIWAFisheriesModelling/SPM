@@ -31,6 +31,12 @@ cd installer
 call makeInstall.bat > makeInstall.log
 cd ..
 
+rem Make a zip file
+rm -f spm.zip
+cd build
+call makeZIP.bat > makeZIP.log
+cd ..
+
 rem Unit tests
 spm_unittests.exe --report_level=short
 
