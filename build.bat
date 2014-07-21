@@ -31,7 +31,7 @@ cd installer
 call makeInstall.bat > makeInstall.log
 cd ..
 
-rem Make a zip file
+rem Make a zip file and copy to server
 rm -f spm.zip
 cd build
 call makeZIP.bat > makeZIP.log
@@ -44,7 +44,3 @@ rem Copy to the server
 copy spm.exe \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
 copy Setup_SPM.exe \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
 copy doc\manual\SPM.pdf \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
-
-rem Copy to NIWAs ftp site
-ftp -s:ftp.dat
-

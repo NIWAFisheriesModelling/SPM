@@ -1,0 +1,1 @@
+"../../spm" -v > SPMversion.tex

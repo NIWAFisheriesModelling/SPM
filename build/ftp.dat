@@ -4,6 +4,6 @@ adunn@niwa.co.nz
 cd software
 cd casal
 type binary
-put cala.zip
-put Setup_CALA.exe
+put spm.zip
+put Setup_SPM.exe
 bye
