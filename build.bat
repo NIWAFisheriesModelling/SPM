@@ -12,6 +12,8 @@ svn revert src/Version.h
 
 rem Strip and place in local directories
 strip spm.exe
+strip spm_unittests.exe
+strip spm_unoptimised.exe
 
 rem make manual
 cd doc

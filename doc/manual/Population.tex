@@ -47,6 +47,17 @@ Hence, the definition of the spatial structure includes;
 \item The length (distance) of a side of the grid cell to be used as the scaler for distance calculations
 \end{itemize}
 
+For example, to specify a model with 3 rows and 4 columns (i.e., 12 spatial cells) with a base layer called \texttt{base} and 2 km sides of each cell, then the syntax for \texttt{@model} would include,
+{\small{\begin{verbatim}
+@model
+nrows 3
+ncols 4
+layer base
+cell_length 2
+\end{verbatim}}}
+
+See below for how to define a layer using \texttt{@layer}. 
+
 \subsection{\I{Population structure}}
 
 The population structure in \SPM\ is represented by a matrix containing an arbitrary number of user defined categories (rows), and an arbitrary age range (columns). Hence, each spatial cell has a population state described as $n_{categories} \times n_{ages}$ rectangular matrix with categories $k=1 \ldots n_{categories}$ and ages $l=age_{min} \ldots age_{max}$. 
@@ -60,6 +71,22 @@ Hence, the definition of the population structure includes;
   \item The minimum and maximum ages that define the ages of the model, $l_{ages}$
   \item If the last age is a plus group
 \end{itemize}
+
+For example, to specify a model with 2 categories (male and female) with ages 1-20 (with the last age a plus group) and an age-size relationship defined with the label \texttt{male-growth} and \texttt{female-growth}, then the \texttt{@model} example from above becomes,
+{\small{\begin{verbatim}
+@model
+nrows 3
+ncols 4
+layer base
+cell_length 2
+categories male female
+min_age 1
+max_age 20
+age_plus_group True
+age_size male-growth female-growth
+\end{verbatim}}}
+
+See below for how to define age-size relationships using \texttt{@age\_size}. 
 
 \subsection{\I{Layers}\label{sec:layers}}
 
@@ -81,7 +108,25 @@ Within \SPM, layers are used in the following contexts:
 \begin{enumerate}
 \item{\I{Numeric layers}\label{numeric-layer}}: A model may have many numeric layers, and these can be used as covariates of a population or movement process (e.g., depth may be a covariate of some movement process), and/or locations of event mortality. Numeric layers can contain only continuous (numeric) variables. Values for a numeric layer must be supplied for each cell by the user. Numeric layers can be rescaled to sum to some user-defined value, and unlike other layers, the values for each cell can be estimated. 
 
+For example, to specify a numeric layer for a spatial model with $3 \times 4$ cells called, say \texttt{base}, with the top left and bottom right cells set to zero and all other cells set to one and not rescaled, use,
+{\small{\begin{verbatim}
+@layer base
+type numeric
+data 0 1 1 1
+data 1 1 1 1
+data 1 1 1 0
+\end{verbatim}}}
+
 \item {\I{Categorical layers}\label{categorical-layer}}: A model may have many categorical layers, and these can be used as a classification or grouping variable for aggregating data over individual cells, e.g., management areas; or as covariates of a population or movement process. Such layers are typically used to aggregate the population within cells into groups for comparing with observations, or to apply specific movement characteristics. The values in layers used as categorical layers can contain any characters (except white space), and are interpreted as categorical values. Values for a categorical layer must be supplied for each cell by the user.
+
+For example, to specify a categorical layer for a spatial model with $3 \times 4$ cells called, say \texttt{zone}, with the top left cells allocated as zone \texttt{A}, the bottom right allocated as zone \texttt{C}, and the rest as zone \texttt{B}, then use,
+{\small{\begin{verbatim}
+@layer zone
+type categorical
+data A A B B
+data A A C C
+data B B C C
+\end{verbatim}}}
 
 \item {\I{Distance layers}}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance. Here, the distance between cell $a$ and cell $b$ can be defined as,
 \begin{equation}
@@ -90,7 +135,6 @@ Within \SPM, layers are used in the following contexts:
 where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the square. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{cols}) \times (n_{rows} \times n_{cols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
 
 For example, to specify a distance layer, use,
-
 {\small{\begin{verbatim}
 @layer Distance
 type distance
@@ -103,7 +147,6 @@ type distance
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
 For example, to specify an abundance layer of all individuals who are categorised as \texttt{mature}, use,
-
 {\small{\begin{verbatim}
 @layer Abundance
 type abundance
@@ -118,7 +161,6 @@ selectivities One
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
 For example, to specify a biomass layer of all individuals who are categorised as \texttt{mature}, use,
-
 {\small{\begin{verbatim}
 @layer Biomass
 type biomass
@@ -133,7 +175,6 @@ selectivities One
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
 For example, to specify an abundance density layer of all individuals who are categorised as \texttt{mature}, use,
-
 {\small{\begin{verbatim}
 @layer AbundanceDensity
 type abundance_density
@@ -148,7 +189,6 @@ selectivities One
 \SPM\ calculates the values of the layer when running the model at the point in time where the value is required.
 
 For example, to specify a biomass density layer of all individuals who are categorised as \texttt{mature}, use,
-
 {\small{\begin{verbatim}
 @layer BiomassDensity
 type bioomass_density
@@ -159,7 +199,6 @@ selectivities One
 \item {Derived quantity and derived quantity by cell layers}\label{derived quantity layer}\index{Derived quantity layers}\index{Derived quantity by cell layers}: \SPM\ can use values from a derived quantity or a derived quantity by cell as a layer. These are the values of a derived quantity, and require an offset (in years) to extract the desired value for each year. They will extract the derived quantity either for each cell (for derived quantities by cell) or as a total value applied to each cell (for ordinary derived quantities) as values for a layer.
 
 For example, to specify a layer of the biomass of all individuals who are categorised as \texttt{mature} in time step \texttt{StepOne} from two years ago, first define a derived quantity,
-
 {\small{\begin{verbatim}
 @derived_quantity_by_cell Mature
 type biomass
@@ -169,7 +208,6 @@ time_step StepOne
 \end{verbatim}}}
 
 Then define the derived layer,
-
 {\small{\begin{verbatim}
 @layer MatureBiomass
 type derived_quantity
@@ -177,23 +215,29 @@ derived_quantity Mature
 year_offset 2
 \end{verbatim}}}
 
-\item {\I{Meta-layers}\label{meta-layers}}: \SPM\ defines a special type of layer known as a \emph{meta-layer}. Meta-layers allows individual layers to be indexed by year and applied as an annually varying layer within the model. For example, assume a model that uses Sea Surface Temperature (SST) as a layer, perhaps to drive some movement process. The SST values for each year of the model would be defined as individual layers, each with a unique label. A meta-layer could be defined that indexed the individual annual SST layers by year, and used as a covariate layer in the movement process. Meta-layers have a \emph{default} layer that is used for time periods that are not specifically defined. Meta layers can be used wherever ordinary layers are used (except as  the base layer), with \SPM\ extracting the appropriate layer value corresponding to the year or initialisation phase.
+\item {\I{Meta-layers}\label{meta-layers}}: \SPM\ defines a special type of layer known as a \emph{meta-layer}. Meta-layers allows individual layers to be indexed by year and applied as an annually varying layer within the model. For example, assume a model that uses Sea Surface Temperature (SST) as a layer, perhaps to drive some movement process. The SST values for each year of the model would be defined as individual layers, each with a unique label. A meta-layer could be defined that indexed the individual annual SST layers by year, and used as a covariate layer in the movement process. Meta-layers have a \emph{default} layer that is used for time periods that are not specifically defined. Meta layers can be used wherever ordinary layers are used (except that they cannot be used as the base layer), with \SPM\ extracting the appropriate layer value corresponding to the year or the initialisation phase.
 
 \begin{enumerate}
 
-\item {\I{Numeric meta-layers}\label{numeric meta-layer}}: Numeric meta-layers are a meta layer of numeric layers --- the individual ordinary layers that make up the meta-layer must all be of numeric type. For example, to specify a numeric meta-layer with specific values for the years 1990-1995, and a default for all other years (including the initialisation phases), use, 
+\item {\I{Numeric meta-layers}\label{numeric meta-layer}}: Numeric meta-layers are a meta layer of numeric layers --- the individual ordinary layers that make up the meta-layer must all be of numeric type. For example, assuming that the layers \texttt{SST} and \texttt{SST1990}, \texttt{SST1995}, etc., are defined elsewhere, then to specify a numeric meta-layer with specific values for the years 1990-1995, and a default for all other years (including the initialisation phases), use, 
 
 {\small{\begin{verbatim}
-@layer AnnualLayer
+@layer AnnualNumericLayer
 type meta-layer
 default_layer SST
 years    1990    1991    1992    1993    1994    1995
 layer SST1990 SST1991 SST1992 SST1993 SST1994 SST1995
 \end{verbatim}}}
 
+\item {\I{Categorical meta-layers}\label{categorical meta-layer}}: Categorical meta-layers are a meta layer of categorical layers --- the individual ordinary layers that make up the meta-layer must all be of categorical type. Categorical meta-layers are specified in the same way as numeric meta-layers. For example, assuming that the layers \texttt{zones} and \texttt{zone1990}, \texttt{zone1995}, etc., are defined elsewhere, then to specify a categorical meta-layer with specific values for the years 1990-1995, and a default for all other years (including the initialisation phases), use, 
 
-\item {\I{Categorical meta-layers}\label{categorical meta-layer}}: Categorical meta-layers are a meta layer of categorical layers --- the individual ordinary layers that make up the meta-layer must all be of categorical type. Categorical meta-layers are specified in the same way as numeric meta-layers.
-
+{\small{\begin{verbatim}
+@layer AnnualCategoricalLayer
+type meta-layer
+default_layer zones
+years     1990     1991     1992     1993     1994     1995
+layer zone1990 zone1991 zone1992 zone1993 zone1994 zone1995
+\end{verbatim}}}
 \end{enumerate}
 \end{enumerate}
 
@@ -208,19 +252,21 @@ The time sequence of the model is defined in two parts;
 
 \subsubsection{\I{Annual cycle}}
 
-The annual cycle is implemented as a set of processes that occur, in a user-defined order, within each year. time-steps are used to break the annual cycle into separate components, and allow observations to be associated with different sets of processes. Any number of processes can occur within each time-step, in any order and can occur multiple times within each time-step. Note that time-steps are not implemented during the initialisation phases (effectively, there is only one time-step), and that the annual cycle in the initialisation phases can be different from that which is applied during the model years.
+The annual cycle is implemented as a set of processes that occur, in a user-defined order, within each year. time-steps are used to break the annual cycle into separate components, and allow observations to be associated with different sets of processes. Any number of processes can occur within each time-step, in any order and can occur multiple times within each time-step. Note that time-steps during the initialisation phases can be different from that which is applied during the model years.
 
 \subsubsection{\I{Initialisation}}
 
 Model initialisation can occur in several phases\index{Initialisation!phases}, each which iterates through a number of years carrying out the population and/or spatial processes defined for that phase. At the end of the initialisation step, \SPM\ runs through the model years carrying out processes in the order defined in the annual cycle, and can evaluate expected values of observations in order to calculate likelihoods, %project forward to determine future states \NYI, 
 or simulate observations from the current state.
 
-\SPM\ initialises the initial equilibrium state as an iterative process: a general solution that initialises complex structured movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can take many iterations and be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. Note that the length of the initialisation period may affect the model outputs, and that a period should be chosen to allow the population state to converge.
+\SPM\ initialises the initial equilibrium state as an iterative process: a general solution that initialises complex structured population and movement models can be difficult to implement using analytic techniques. However, initialising via iteration for a long-lived species with complex movements can take many iterations and hence be slow to run. In \SPM, we allow for user-defined multi-phased initialisation using iteration to allow the user to optimize models for speed. Each phase of the initialisation can involve any number of population and/or movement processes. Note that the length of the initialisation period may affect the model outputs, and that a period should be chosen to allow the population state to converge.
 
 In addition, each initialisation process can optionally be stopped early if a user defined convergence criteria is met. For a set of user defined years in the initialisation phase, convergence is defined as met if the proportional absolute summed difference between the the state in year $t-1$ and the state in year $t$ ($\widehat{\lambda}$) is less than $\lambda$ where, 
 \begin{equation}
   \widehat{\lambda} = \frac{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \left|\text{element}(i,j,k,l)_t - \text{element}(i,j,k,l)_{t-1} \right|}{\sum\limits_{i} \sum\limits_{j} \sum\limits_{k} \sum\limits_l \frac{}{}\text{element}(i,j,k,l)_t}
 \end{equation}
+
+Note that the check itself can be expensive time wise, hence options exist for the user to request if and when this convergence check is carried out.
 
 In each initialisation phase, the processes defined for that phase are carried out and used as the starting point for the following phase or, if it is the last phase, then the years that the model is run over. The first phase is always initialised with each element (i.e., each age and category within each spatial cell) set at zero. Note that this means that recruitment processes where the numbers of recruits is based on a stock recruitment or density dependant relationship will likely fail if used in the first phase of an initialisation. 
 
@@ -232,22 +278,87 @@ Hence, for initialisation you need to define;
   \item The number of years in each phase and the processes to apply in each
 \end{itemize}
 
+For example, to specify a model with a single phase of initialisation for 100 years (with a conve4rgence check at 80, 90, and 100 years) using time-steps \texttt{one} and \texttt{two}, then the \texttt{@model} example from above becomes,
+{\small{\begin{verbatim}
+@model
+nrows 3
+ncols 4
+layer base
+cell_length 2
+categories male female
+min_age 1
+max_age 20
+age_plus_group True
+age_size male-growth female-growth
+initialisation_phases phase1
+\end{verbatim}}}
+
+with the initialisation phases specified as,
+{\small{\begin{verbatim}
+@initialisation_phase phase1
+years 100
+time_steps one two
+lambda 1e-10
+lambda_years 80 90 100
+\end{verbatim}}}
+
 \subsubsection{\I{Model years}}
 
-Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time-steps, and observations can be associated with the state of the model at the end of any time-step, i.e., likelihoods for particular observations are evaluated, if required, at the end of each time-step. 
+Following initialisation, the model then runs over a number of user-defined years. For this part of the model, the annual cycle can be broken into separate time-steps (see below). The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. %The projection part then extends the run time up to the end of year \argument{final}. 
 
-Processes are carried out in the order specified within each time-step, and can be the same or different to processes in other initialisation phases of the model. The run years define the years over which the model is to run and the annual cycle within each year. The model runs from the start of year \argument{initial} and runs to the end of year \argument{current}. %The projection part then extends the run time up to the end of year \argument{final}. 
-
-\begin{itemize}
-  \item The time-steps and the processes applied in each
-  \item The initial year (i.e., the model start year)
-  \item The current year (i.e., the model end year)
-  %\item The final year (i.e., the model projection end year)
-\end{itemize}
+For example, to specify a model for the years 1990--2010 , then the \texttt{@model} example from above becomes,
+{\small{\begin{verbatim}
+@model
+nrows 3
+ncols 4
+layer base
+cell_length 2
+categories male female
+min_age 1
+max_age 20
+age_plus_group True
+age_size male-growth female-growth
+initialisation_phases phase1
+initial_year 1990
+current_year 2010
+\end{verbatim}}}
 
 %\subsubsection{\I{Projections}\label{sec:projections}}
 %
 %\SPM\ can project, from a set of parameter estimates, the state of the model into the future \NYI. In a projection run, the model is initialised and run through the model years from \argument{initial} to the \argument{current}. Then, the model is run from \argument{current} to \argument{final}. 
+
+\subsubsection{\I{Time-steps}}
+
+The annual cycle is run during initialisation and over the model years. It is broken into time-steps. Within each time-step, processes are carried out in the order specified, and can be the same or different to processes in other time-steps or in the initialisation phases of the model. Further, observations (see later) can be associated with the state of the model at the end of a time-step --- i.e., time-steps are used to break the annual cycle into discrete 'chunks', and to allow the model to appropriately generate expected values for observations. 
+
+For example, to specify a model with the time-steps \texttt{one} and \texttt{two}, and the processes \texttt{myRecruitment} and \texttt{myMaturation} in \texttt{one} and processes \texttt{myAgeing} and \texttt{myMortality} on \texttt{two}, then the \texttt{@model} example from above becomes,
+{\small{\begin{verbatim}
+@model
+nrows 3
+ncols 4
+layer base
+cell_length 2
+categories male female
+min_age 1
+max_age 20
+age_plus_group True
+age_size male-growth female-growth
+initialisation_phases phase1
+initial_year 1990
+current_year 2010
+time\_steps one two
+\end{verbatim}}}
+
+with the time-step definitions 
+{\small{\begin{verbatim}
+@time_step one
+processes myRecruitment myMaturation
+
+@time_step two
+processes myAgeing myMortality
+\end{verbatim}}}
+
+See later for how to define processes using \texttt{@process}. 
 
 \subsection{\I{Processes}}
 
@@ -284,14 +395,12 @@ For the constant, Beverton-Holt, and proportional recruitment processes, the  nu
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k(R_y / n) \frac{L_ij}{\sum_ij L_ij}
 \end{equation}
-
 where age is the age defined as the recruitment age, $p_k$ is the proportion to category $k$ defined to have recruitment, $n$ is the number of spatial locations where recruitment occurs, and the recruitment to each cell is scaled to be proportional to the value of the layer in that cell. See below for how $R_y$ is determined in each of these cases.
 
 In the local Beverton-Holt recruitment process, individuals are recruited to an individual cell, based on the local abundance or biomass (i.e., the local SSB). For each cell where cell$(i,j)$ is a member of some layer $L_R$, the number of individuals in that cell following recruitment in each year $y$ is 
 \begin{equation}
   \text{element}(i,j,k,l) \leftarrow \text{element}(i,j,k,l) + p_k R_y L_{ij}
 \end{equation}
-
 where age is the age defined as the recruitment age, $p_k$ is the proportion recruitment to category $k$ defined to have recruitment, and the recruitment to each cell is the product of the Beverton-Holt stock recruitment relationship ($R_y$). 
 
 \subsubsection*{\I{Constant Recruitment}}
@@ -304,7 +413,6 @@ In the constant recruitment process the total number of recruits added each year
 It is equivalent to a Beverton-Holt recruitment process where steepness is set equal to one ($h=1$).
 
 For example, to specify a constant recruitment process, where individuals are added to the category `immature' at $age=1$, and the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{recruitment}, then the syntax is,
-
 {\small{\begin{verbatim}
 @process Recruitment
 type constant_recruitment
@@ -330,7 +438,6 @@ SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B
 Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
 
 For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived quantity that specifies the total spawning stock biomass, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
-
 {\small{\begin{verbatim}
 @process Recruitment
 type BH_recruitment
@@ -358,7 +465,6 @@ If the recruitment to cell $i$ is $R_y^i$, then $R_y^i$ is the product of the av
 \begin{equation}
   R_y^i = R_0^i \times YCS_{y-offset} \times SR(SSB_{y-offset}^i)
 \end{equation}
-
 where $offset$ is the number of years offset to link the year class with the year of spawning, and $SR$ is the Beverton-Holt stock-recruit relationship parametrised by the steepness $h$ and initial biomass $B_0^i$
 \begin{equation}
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
@@ -367,7 +473,6 @@ SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}
 Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, a derived quantity by cell (see Section \ref{sec:derived-quantity-by-cell}) must be provided that defines $B_0$ and the annual $SSB_y$ for the recruitment process. As for the Beverton-Holt recruitment process above, $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e., in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. If a layer is defined for recruitment, $R_0^i$ is defined for each cell as product of $r0$ and the layer value in each cell. 
 
 For example, assume a local Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to recruit in each cell is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived quantity by cell that specifies the spawning stock biomass in each cell, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
-
 {\small{\begin{verbatim}
 @process Recruitment
 type local_BH_recruitment
@@ -393,13 +498,11 @@ In the proportional recruitment process the total number of recruits added each 
 \begin{equation}
   R_y = \lambda \times SSB_{y-offset}
 \end{equation}
-  
-where $offset$ is the number of years offset to link the year class with the year of spawning $y$.
+ where $offset$ is the number of years offset to link the year class with the year of spawning $y$.
 
 Note that the proportional recruitment process requires a value for $SSB_y$ in each year, with a default value that is applied in the initialisation phases where $SSB_y$ is not be available. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to be $R_0$. Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
 
 For example, assume a proportional recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is 0.5 the female breeding abundance, and placed into areas in proportion to the value of the layer \texttt{MyRecruitment}. The \texttt{female\_abundance} is a derived quantity by cell that specifies the total number of breeding females, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. Recruits enter into the model two years following spawning. Then the command specification is,
-
 {\small{\begin{verbatim}
 @process Recruitment
 type proportional_recruitment
@@ -429,7 +532,6 @@ except that in the case of the plus group (if defined),
 \end{equation}
 
 For example, to apply ageing to the categories \texttt{immature} and \texttt{mature}, then the syntax is,
-
 {\small{\begin{verbatim}
 @process Ageing
 type ageing
@@ -447,7 +549,6 @@ The constant rate, annually varying rate, event, biomass-event mortalities can d
 \subsubsection*{Constant mortality rate}
 
 To specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
-
 {\small{\begin{verbatim}
 @process NaturalMortality
 type constant_mortality_rate
@@ -457,7 +558,6 @@ M 0.2 0.2
 \end{verbatim}}}
 
 Note that the mortality rate process requires a selectivity. To apply the same mortality rate over all age classes, use a selectivity defined as $S_i=1.0$ for all ages $i$, e.g.,
-
 {\small{\begin{verbatim}
 @selectivity One
 type constant
@@ -477,7 +577,6 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 \subsubsection*{Annual mortality rate}
 
 Mortality for the annual rate\index{Annual mortality} is similar to the constant rate, except that rate applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual rates were applied to males and females between 1996 and 2000, five values of $M$ and the years that these apply to would need to be provided, e.g., 
-
 {\small{\begin{verbatim}
 @process AnnualMortality
 type annual_mortality_rate
@@ -519,7 +618,6 @@ And the number removed $R$ from each age $l$ in category $k$ is,
 \end{equation}
 
 For example, to specify fishing mortality based on spatially explicit catches (and given for each year as a layer, `Catch2000', `Catch2001', etc.) over categories `immature' and 'mature' with selectivity `FishingSel' and assuming a maximum possible exploitation rate of 0.7, then the syntax is,
-
 {\small{\begin{verbatim}
 @process Fishing
 type event_mortality
@@ -561,7 +659,6 @@ and then, the the number to remove is determined as,
 \begin{equation}
 R_{total} = P_{total} \frac{a  V_{total}^{x-1}}{b + V_{total}^{x-1}}
 \end{equation}
-
 where $x=2$ for Holling type II function and $x=3$ for Holling type III function, or any value of $x \geq 1$ for the generalised Michaelis-Menten function.
 
 Hence the exploitation rate\index{Maximum exploitation rate} to apply is 
@@ -660,7 +757,6 @@ Category transition processes move individuals between categories. \SPM\ impleme
 \subsubsection*{\I{Category transition process}}
 
 The category transition process\index{Category transition} moves a number $n$ from some source to a sink category (or categories). This process may be used, for example, to implement a 'tagging' process for mark-recapture data. The transition process with selectivity $S$ for source category $a$ and sink category $b$ (in cell$(i,j)$ and age $l$) is,
-
 \begin{equation}\begin{split}
   & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l) \\
   & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + \frac{nS_l}{\sum\limits_l S_l} \times \text{element}(i,j,a,l)
@@ -669,7 +765,6 @@ The category transition process\index{Category transition} moves a number $n$ fr
 The category transition process requires a penalty function to discourage parameter values that do not allow the specified number of individuals to be moved. Here, the model penalises those parameter estimates that result in an insufficient number of individuals in the source category (after applying the selectivity) available to be moved. See Section \ref{sec:penalties} for more information on specifying penalties.
 
 If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
-
 {\small{\begin{verbatim}
 @process tagging
 type category_transition
@@ -686,14 +781,12 @@ Note that this syntax can be used to combine individuals into categories, simply
 \subsubsection*{\I{Category transition rate process}}
 
 The category transition rate process\index{Category transition} moves a proportion $p$ from a source category to a and sink category (or categories). The category transition rate process with selectivity $S$ for source category $a$ and sink category $b$ (in cell$(i,j)$ and age $l$) is,
-
 \begin{equation}\begin{split}
   & \text{element}(i,j,a,l) \leftarrow \text{element}(i,j,a,l) - pS_l \times \text{element}(i,j,a,l) \\
   & \text{element}(i,j,b,l) \leftarrow \text{element}(i,j,b,l) + pS_l \times \text{element}(i,j,a,l)
 \end{split}\end{equation}
 
 If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. \SPM\ treats each pair of categories as an independent transition --- but note that these are applied in order that they are specified. For example, to `mature' males and females in a model with four categories \texttt{male-immature}, \texttt{female-immature}, \texttt{male-mature}, and \texttt{female-mature}, then you might define a category transition process \texttt{maturation} with selectivities \texttt{male-maturity} and \texttt{female-maturity}, as,
-
 {\small{\begin{verbatim}
 @process maturation
 type category_transition_rate
@@ -719,7 +812,6 @@ Category transition by age processes require a penalty function to discourage pa
 If multiple categories of sources or sinks are defined, then they must be defined in `pairs'. The proportions of selected individuals in the source categories is used to define the proportions of individuals `moved' to the sink categories, as defined by the order that they are specified. For example, to `tag' a population of immature and mature individuals, then you might define a category transition process \texttt{tagging} with selectivities \texttt{tagging-Sel}, as,
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
-
 {\small{\begin{verbatim}
 @layer Area
 type categorical
@@ -728,7 +820,6 @@ data B B
 \end{verbatim}}}
 
 Then the category transition by age process that moves $40$ individuals in the subset of cells with label $A$ and $55$ individuals in the subset of cells with label $B$ may be defined as, 
-
 {\small{\begin{verbatim}
 @process tagging
 type category_transition_by_age
