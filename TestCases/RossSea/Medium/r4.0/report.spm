@@ -17,7 +17,7 @@ initialisation_phase Phase2
 @report initialisation-phase3
 type initialisation
 initialisation_phase Phase3
-
+{
 @report state-0
 type partition
 time_step zero
@@ -47,10 +47,10 @@ years 1995-2011
 type partition_biomass
 time_step two
 years 1995-2011
-
-#@report SSB
-#type derived_quantity
-#derived_quantity SSB
+}
+@report SSB
+type derived_quantity
+derived_quantity SSB
 
 @report SSB_layer
 type layer

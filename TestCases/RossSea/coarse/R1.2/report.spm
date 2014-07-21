@@ -17,7 +17,7 @@ initialisation_phase Phase2
 @report initialisation-phase3
 type initialisation
 initialisation_phase Phase3
-
+{
 @report state-0
 type partition
 time_step zero
@@ -57,7 +57,7 @@ years 1985-2013
 type partition_biomass
 time_step three
 years 1985-2013
-
+}
 @report SSB
 type derived_quantity
 derived_quantity SSB
@@ -98,7 +98,6 @@ type estimate_value
 type estimate_value
 file_name MPD.dat
 
-{
 @report ImmatureDistance
 type preference_function
 preference_function ImmatureDistance
@@ -106,14 +105,6 @@ preference_function ImmatureDistance
 @report ImmatureDepth
 type preference_function
 preference_function ImmatureDepth
-
-@report ImmatureZone
-type preference_function
-preference_function ImmatureZone
-
-@report AllHabitat
-type preference_function
-preference_function AllHabitat
 
 @report MatureDistance
 type preference_function
@@ -123,25 +114,9 @@ preference_function MatureDistance
 type preference_function
 preference_function MatureDepth
 
-@report MatureDistACC
-type preference_function
-preference_function MatureDistACC
-
-@report MatureZone
-type preference_function
-preference_function MatureZone
-
 @report PreSpawningDistance
 type preference_function
 preference_function PreSpawningDistance
-
-@report PreSpawningDepth
-type preference_function
-preference_function PreSpawningDepth
-
-@report PreSpawningZone
-type preference_function
-preference_function PreSpawningZone
 
 @report Recruitment
 type process
@@ -158,7 +133,6 @@ process BHRecruitmentIce
 @report ageweight
 type age_weight
 age_size VB
-}
 
 @report PredationTOA
 type process

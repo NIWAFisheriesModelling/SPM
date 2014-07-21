@@ -17,7 +17,7 @@ initialisation_phase Phase2
 @report initialisation-phase3
 type initialisation
 initialisation_phase Phase3
-
+{
 @report state-0
 type partition
 time_step zero
@@ -48,21 +48,19 @@ type partition_biomass
 time_step one
 years 1995-2011
 
-{
 @report state-1b-biomass
 type partition_biomass
 time_step oneb
 years 1995-2011
-}
 
 @report state-2-biomass
 type partition_biomass
 time_step two
 years 1995-2011
-
-#@report SSB
-#type derived_quantity
-#derived_quantity SSB
+}
+@report SSB
+type derived_quantity
+derived_quantity SSB
 
 @report SSB_layer
 type layer
@@ -126,10 +124,6 @@ preference_function MatureHabitat
 type preference_function
 preference_function MatureHills
 
-@report PreSpawningDistance
-type preference_function
-preference_function PreSpawningDistance
-
 @report PreSpawningTemperature
 type preference_function
 preference_function PreSpawningTemperature
@@ -137,12 +131,6 @@ preference_function PreSpawningTemperature
 @report PreSpawningHills
 type preference_function
 preference_function PreSpawningHills
-
-{
-@report PostSpawningDistance
-type preference_function
-preference_function PostSpawningDistance
-}
 
 @report Recruitment
 type process

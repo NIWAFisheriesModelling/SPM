@@ -233,7 +233,7 @@ m 0.485 0.485
 selectivities One One
 
 @process PredationTOA
-type prey-switch_predation
+type prey-suitability_predation
 is_abundance F
 consumption_rate 1 # times the layer, not quite 1 to avoid dropping the icefish biomass
 consumption_rate_layer CR-TOA
