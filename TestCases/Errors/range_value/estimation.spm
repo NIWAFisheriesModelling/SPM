@@ -1,0 +1,68 @@
+### Estimation command
+
+@estimation
+minimiser simp
+
+@minimiser simp
+type numerical_differences
+tolerance 0.002 #The default is 0.002
+covariance True
+
+## If its relative abundance we need to estimate q.
+@estimate
+parameter catchability[CPUEq].q
+lower_bound 1e-7
+upper_bound 1e-1
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_sum].mu
+lower_bound 5
+upper_bound 60
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_sum].sigma
+lower_bound 0.1
+upper_bound 200
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_aut].mu
+lower_bound 5
+upper_bound 60
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_aut].sigma
+lower_bound 0.1
+upper_bound 200
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_win].mu
+lower_bound 5
+upper_bound 60
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_win].sigma
+lower_bound 0.1
+upper_bound 200
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_spr].mu
+lower_bound 5
+upper_bound 60
+prior Uniform
+
+@estimate
+parameter preference_function[stock_SST_spr].sigma
+lower_bound 0.1
+upper_bound 200
+prior Uniform
+
+
+@prior Uniform
+type uniform

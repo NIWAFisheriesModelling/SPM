@@ -1,0 +1,247 @@
+## Config file for SPM estimation
+@model
+nrows 26
+ncols 31
+layer Base
+categories stock
+min_age 1
+max_age 2 ## There must be two age groups otherwise spm R package will spit the dummy
+age_plus_group True
+
+initialisation_phases Phase1
+initial_year 2002
+current_year 2010
+
+
+cell_length 111.2   ## Approx how many kilometers are in a Degree. This is a rectangle cell tho. Something to work on.
+time_steps one two three four five
+
+age_size none     ### This is the age classes
+
+@age_size none    ### Not specifiing Von Bert as not interested in this at this point
+type none 
+size_weight none
+
+@size_weight none ### Not growing the fish in this as well not interested just yet.
+type none
+
+# initialisation
+@initialisation_phase Phase1
+years 100
+time_steps initial_step_one
+lambda 1e-10  ## What does this do?
+lambda_years 10 20 30 40 50 60 70 80 90 100
+
+@time_step initial_step_one
+processes Move_north recruitment M
+
+### Initialisation movement functions This is to ssed them in the North
+@process Move_north
+type preference
+categories stock
+preference_functions Move_North ## North_distance 
+
+##@preference_function North_distance ## Removing this to stop clumping in the centre of initialisation.
+##type exponential
+##alpha 1     ## 
+##lambda 0.0005   ## This has an extra zero than other distances. This is to make sure that all my particles can reach the north
+##layer Distance
+
+@preference_function Move_North
+type normal
+alpha 1
+layer Int_move
+mu 100
+sigma 10
+
+#############  Annual Cycle
+@time_step one # Summer
+processes recruitment Movestock_sum
+
+@time_step two # Autum
+processes  Movestock_aut
+
+@time_step three # Winter
+processes Movestock_win
+
+@time_step four # Spring
+processes Movestock_spr M
+
+@time_step five # reset Back up North (fudging The migration to the ocean)
+processes Move_north
+
+
+################## Population processes
+@process recruitment
+type constant_recruitment
+categories stock
+proportions 1.0
+r0 550000 ## the initial number of recruits
+age 1
+layer seed_recruits
+
+##ssb SSB         ## Remove all this as we not interested in Beverton holt relationshp
+##b0 Phase1
+##ssb_offset 1
+##standardise_ycs_years 2005-2006   ### Error greater than current year needs to change this to not equal to.
+##ycs_values 1 1  ##  What are these.
+##steepness 0.8   ## Source this from assesment page 19
+
+@process M
+type constant_mortality_rate
+categories stock
+m 0.4     ## Still need to kill them as we are still recruiting them
+selectivities One
+
+
+######################## Define the moving processs
+# Movement processes
+@process Movestock_sum
+type preference
+categories stock
+preference_functions stock_SST_sum stockDistance
+
+
+#Movement processes
+@process Movestock_aut
+type preference
+categories stock
+preference_functions stock_SST_aut stockDistance
+
+
+# Movement processes
+@process Movestock_win
+type preference
+categories stock
+preference_functions stock_SST_win stockDistance
+
+# Movement processes
+@process Movestock_spr
+type preference_threaded
+categories stock
+preference_functions stock_SST_spr stockDistance
+
+
+#################  Preference functions. these are what we want estimated.
+@preference_function stockDistance
+type inverse_logistic
+alpha 1
+a50     600
+ato95   200
+layer Distance
+
+@preference_function stock_SST_sum
+type normal
+alpha 1
+layer sst_sum 
+mu  19
+sigma  3
+
+
+@preference_function stock_SST_aut
+type normal
+alpha 1
+layer sst_aut
+mu  19
+sigma  3
+
+
+@preference_function stock_SST_win
+type normal
+alpha 1
+layer sst_win
+mu  19
+sigma  3
+
+@preference_function stock_SST_spr
+type normal
+alpha 1
+layer sst_spr
+mu  19
+sigma  3
+
+# Definition of layers
+@include "layers/Base.spm"
+@include "layers/Int_move.spm"
+@include "layers/seed_recruits.spm"
+### SST 
+
+@include "layers/sst_sum.spm"
+@include "layers/sst_win.spm"
+@include "layers/sst_spr.spm"
+@include "layers/sst_aut.spm"
+
+@include "layers/obs_cat.spm"
+
+
+@include "layers/sst_02_sum.spm"
+@include "layers/sst_03_sum.spm"
+@include "layers/sst_04_sum.spm"
+@include "layers/sst_05_sum.spm"
+@include "layers/sst_06_sum.spm"
+@include "layers/sst_07_sum.spm"
+@include "layers/sst_08_sum.spm"
+@include "layers/sst_09_sum.spm"
+@include "layers/sst_10_sum.spm"
+@include "layers/sst_11_sum.spm"
+@include "layers/sst_12_sum.spm"
+
+@include "layers/sst_02_win.spm"
+@include "layers/sst_03_win.spm"
+@include "layers/sst_04_win.spm"
+@include "layers/sst_05_win.spm"
+@include "layers/sst_06_win.spm"
+@include "layers/sst_07_win.spm"
+@include "layers/sst_08_win.spm"
+@include "layers/sst_09_win.spm"
+@include "layers/sst_10_win.spm"
+@include "layers/sst_11_win.spm"
+@include "layers/sst_12_win.spm"
+
+@include "layers/sst_02_spr.spm"
+@include "layers/sst_03_spr.spm"
+@include "layers/sst_04_spr.spm"
+@include "layers/sst_05_spr.spm"
+@include "layers/sst_06_spr.spm"
+@include "layers/sst_07_spr.spm"
+@include "layers/sst_08_spr.spm"
+@include "layers/sst_09_spr.spm"
+@include "layers/sst_10_spr.spm"
+@include "layers/sst_11_spr.spm"
+@include "layers/sst_12_spr.spm"
+
+@include "layers/sst_02_aut.spm"
+@include "layers/sst_03_aut.spm"
+@include "layers/sst_04_aut.spm"
+@include "layers/sst_05_aut.spm"
+@include "layers/sst_06_aut.spm"
+@include "layers/sst_07_aut.spm"
+@include "layers/sst_08_aut.spm"
+@include "layers/sst_09_aut.spm"
+@include "layers/sst_10_aut.spm"
+@include "layers/sst_11_aut.spm"
+@include "layers/sst_12_aut.spm"
+
+
+@layer Distance
+type distance
+
+# CATCHABILITY
+@catchability CPUEq
+q 1e-5
+
+
+# Estimation Section
+@include "estimation.spm"
+
+
+# Observation Section
+@include "observations.spm"
+
+
+# Report Section
+@include "report.spm"
+
+@selectivity One
+type constant
+c 1

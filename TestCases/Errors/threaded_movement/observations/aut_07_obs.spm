@@ -1,0 +1,66 @@
+ obs   17-5    0.000649182386227179 
+ obs   18-5    0.000390807866246086 
+ obs   19-5    0                    
+ obs   20-5    0                    
+ obs   15-6    0.00208889361792603  
+ obs   16-6    0.00123793265559932  
+ obs   17-6    0.00135542602951736  
+ obs   18-6    0.000621061427959989 
+ obs   19-6    0                    
+ obs   20-6    0                    
+ obs   14-7    0.000700942644357335 
+ obs   15-7    0.00153027886425406  
+ obs   16-7    0.00189694115178259  
+ obs   20-7    0                    
+ obs   14-8    0.000878632534482588 
+ obs   15-8    0.0014949560589266   
+ obs   5-12    0.0128247816269421   
+ obs   6-15    0.0082971924218215   
+ obs   12-18   0.002                
+ obs   8-19    0.000976430976430976 
+ obs   9-19    0.00230976430976431  
+ obs   10-19   0.0102324929971989   
+ obs   11-19   0.0111070261437908   
+ obs   12-19   0.002                
+ obs   4-20    0.00177777777777778  
+ obs   5-20    0.00116830065359477  
+ obs   6-20    0.00278305089742143  
+ obs   9-20    0.00133333333333333  
+ obs   10-20   0.0129411764705882   
+ obs   4-21    0.00222222222222222  
+ obs   5-21    0                    
+ obs   4-22    0.00201072386058981  
+
+
+error_value  17-5  0
+error_value  18-5  0
+error_value  19-5  0
+error_value  20-5  0
+error_value  15-6  0
+error_value  16-6  0
+error_value  17-6  0
+error_value  18-6  0
+error_value  19-6  0
+error_value  20-6  0
+error_value  14-7  0
+error_value  15-7  0
+error_value  16-7  0
+error_value  20-7  0
+error_value  14-8  0
+error_value  15-8  0
+error_value  5-12  0
+error_value  6-15  0
+error_value  12-18  0
+error_value  8-19  0
+error_value  9-19  0
+error_value  10-19  0
+error_value  11-19  0
+error_value  12-19  0
+error_value  4-20  0
+error_value  5-20  0
+error_value  6-20  0
+error_value  9-20  0
+error_value  10-20  0
+error_value  4-21  0
+error_value  5-21  0
+error_value  4-22  0

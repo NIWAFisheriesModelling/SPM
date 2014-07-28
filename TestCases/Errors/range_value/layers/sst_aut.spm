@@ -1,0 +1,5 @@
+@layer sst_aut
+type numeric_meta
+default_layer sst_08_aut
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	#2011	2012
+layers	sst_02_aut	sst_03_aut	sst_04_aut	sst_05_aut	sst_06_aut	sst_07_aut	sst_08_aut	sst_09_aut	sst_10_aut	#sst_11_aut 	sst_12_aut

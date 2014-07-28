@@ -1,0 +1,38 @@
+
+ obs   15-5    5.52740991043615e-05 
+ obs   16-5    0.000169344817588364 
+ obs   17-5    0.000116331751812703 
+ obs   15-6    9.12627379235014e-05 
+ obs   16-6    9.64525877705626e-05 
+ obs   17-6    5.04711681987118e-05 
+ obs   18-6    6.17691568139412e-05 
+ obs   19-6    7.33647926196128e-05 
+ obs   13-11   0                    
+ obs   12-12   0                    
+ obs   13-12   0                    
+ obs   11-18   0.0572727272727273   
+ obs   12-18   0.0323049863790828   
+ obs   10-19   0.0166293682795699   
+ obs   11-19   0.0292340067340067   
+ obs   12-19   0.0447402757884686   
+ obs   10-20   0.0153125            
+ obs   11-20   0.018125         
+
+error_value  15-5  
+error_value  16-5  
+error_value  17-5  
+error_value  15-6  
+error_value  16-6  
+error_value  17-6  
+error_value  18-6  
+error_value  19-6  
+error_value  13-11 
+error_value  12-12 
+error_value  13-12 
+error_value  11-18 
+error_value  12-18 
+error_value  10-19 
+error_value  11-19 
+error_value  12-19 
+error_value  10-20 
+error_value  11-20 

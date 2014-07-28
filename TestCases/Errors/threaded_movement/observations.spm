@@ -1,0 +1,17 @@
+#### Observations
+
+@observation sum_02_obs
+type abundance
+year 2002
+time_step one ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sum_02_obs.spm"
+
+@report sum_02_obs
+type observation
+observation sum_02_obs

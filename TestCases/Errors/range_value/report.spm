@@ -1,0 +1,70 @@
+# The reports/outputs
+
+##@report random_seed
+##type random_number_seed
+
+##@report spatial-map
+##type spatial_map
+
+@report initialisation-phase1
+type initialisation
+initialisation_phase Phase1
+
+@report state-1
+type partition
+time_step one
+years 2002 2003 2004 2005 2006 2007 2008 2009 2010 ##2011 2012
+
+@report state-2
+type partition
+time_step two
+years 2002 2003 2004 2005 2006 2007 2008 2009 2010 ##2011 2012
+
+@report state-3
+type partition
+time_step three
+years 2002 2003 2004 2005 2006 2007 2008 2009 2010 ##2011 2012
+
+@report state-4
+type partition
+time_step four
+years  2002 2003 2004 2005 2006 2007 2008 2009 2010 ##2011 2012
+
+@report state-5
+type partition
+time_step five
+years  2002 2003 2004 2005 2006 2007 2008 2009 2010 ##2011 2012
+
+##@report SSB
+##type derived_quantity
+##derived_quantity SSB
+
+@report estimate-summary
+type estimate_summary
+
+@report estimate-value
+type estimate_value
+
+@report Objective
+type objective_function
+
+@report Objective_Score
+type objective_function
+##file_name objective.dat
+
+@report sum_sst
+type preference_function
+preference_function stock_SST_sum
+
+@report aut_sst
+type preference_function
+preference_function stock_SST_aut
+
+@report win_sst
+type preference_function
+preference_function stock_SST_win
+
+@report spr_sst
+type preference_function
+preference_function stock_SST_spr
+

@@ -1,0 +1,12 @@
+SPM (Spatial Population Model)
+Call: ..\..\..\spm -r -q 
+Date: Mon Jul 28 15:51:53 2014
+v1.1-2014-07-28 (rev. 1152). Copyright (c) 2008-2014, NIWA
+User name: dunn
+Machine name: NIWA-34286 (Windows_NT, PID=7392)
+
+RuntimeController.run()->
+CLayerManager.validate->
+CStringLayer.validate(obs_cat)->
+Too much data
+Completed

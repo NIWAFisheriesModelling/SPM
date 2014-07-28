@@ -1,0 +1,72 @@
+ obs   14-5    0.000589101620029455 
+ obs   15-5    9.08339229861747e-05 
+ obs   13-6    0.000694635392767501 
+ obs   14-6    0.000212963228881208 
+ obs   15-6    8.83726334129119e-05 
+ obs   16-6    0                    
+ obs   13-7    0.000209536633336579 
+ obs   14-7    0.000197982650309039 
+ obs   15-7    0                    
+ obs   11-8    0.00108695652173913  
+ obs   12-8    0.00108695652173913  
+ obs   13-8    0.000321901328094858 
+ obs   14-8    0.000150285542530809 
+ obs   12-9    0.00106382978723404  
+ obs   13-9    0.000309597523219814 
+ obs   14-9    0.000606612071580224 
+ obs   15-9    0.00134770889487871  
+ obs   13-10   0                    
+ obs   14-10   0                    
+ obs   15-10   0.000673854447439353 
+ obs   5-14    0.00841467519353753  
+ obs   5-15    0.00414593698175788  
+ obs   7-17    0.0416359447004608   
+ obs   8-17    0.0361290322580645   
+ obs   8-18    0.006                
+ obs   9-18    0.0252216748768473   
+ obs   8-19    0.0195043667924923   
+ obs   9-19    0.0158257222648361   
+ obs   10-19   0.01425              
+ obs   11-19   0.00716666666666667  
+ obs   8-20    0.0143868348366053   
+ obs   9-20    0.0203188560505171   
+ obs   10-20   0.0127707834822263   
+ obs   11-20   0.011                
+ obs   10-21   0.00615384615384615  
+
+
+error_value   14-5  0 
+error_value   15-5  0
+error_value   13-6  0
+error_value   14-6  0
+error_value   15-6  0
+error_value   16-6  0
+error_value   13-7  0
+error_value   14-7  0
+error_value   15-7  0
+error_value   11-8  0
+error_value   12-8  0
+error_value   13-8  0
+error_value   14-8  0
+error_value   12-9  0
+error_value   13-9  0
+error_value   14-9  0
+error_value   15-9  0
+error_value   13-10  0
+error_value   14-10  0
+error_value   15-10  0
+error_value   5-14  0
+error_value   5-15  0
+error_value   7-17  0
+error_value   8-17  0
+error_value   8-18  0
+error_value   9-18  0
+error_value   8-19  0
+error_value   9-19  0
+error_value   10-19  0
+error_value   11-19  0
+error_value   8-20  0
+error_value   9-20  0
+error_value   10-20  0
+error_value   11-20  0
+error_value   10-21  0

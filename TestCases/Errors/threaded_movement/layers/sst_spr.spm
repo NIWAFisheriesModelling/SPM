@@ -1,0 +1,5 @@
+@layer sst_spr
+type numeric_meta
+default_layer sst_07_spr
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	sst_02_spr	sst_03_spr	sst_04_spr	sst_05_spr	sst_06_spr	sst_07_spr	sst_08_spr	sst_09_spr	sst_10_spr	sst_11_spr 	sst_12_spr
