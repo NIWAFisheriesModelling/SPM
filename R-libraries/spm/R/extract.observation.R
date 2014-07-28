@@ -47,4 +47,3 @@ function(lines){
   return(res)
 }
 
-a<-extract("c:\\Projects\\General\\SPM\\TestCases\\case0\\run.log")
