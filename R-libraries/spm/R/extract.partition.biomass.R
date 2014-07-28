@@ -16,7 +16,11 @@ function(lines){
   values$category<-as.character(values$category)
   values$row<-as.numeric(as.character(values$row))
   values$column<-as.numeric(as.character(values$column))
-  values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,as.numeric)
+  # To solve errors when age classes are of length 1
+  if(length(col.labs) > 4)
+    values[,4:ncol(values)]<-apply(values[,4:ncol(values)],2,as.numeric)
+  else
+    values[,4]<-as.numeric(values[,4:ncol(values)])
   res$data<-values
   return(res)
 }
