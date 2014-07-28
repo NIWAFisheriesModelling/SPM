@@ -37,10 +37,12 @@ void CPartitionReport::validate() {
   try {
 
     // Assign Variables
-    if (pParameterList->hasParameter(PARAM_YEARS) )
+    if (pParameterList->hasParameter(PARAM_YEARS) ) {
       pParameterList->fillVector(vYear, PARAM_YEARS);
-    else
-      vYear.push_back(pWorld->getInitialYear());
+    } else {
+      for (int i=pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i)
+        vYear.push_back(i);
+    }
 
     sTimeStep   = pParameterList->getString(PARAM_TIME_STEP,true,"");
 

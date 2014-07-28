@@ -43,6 +43,7 @@ public:
   virtual CObservation*      clone() = 0;
   int                        getYear() { return iYear; }
   int                        getTimeStep() { return iTimeStep; }
+  string                     getTimeStepString() { return sTimeStep; }
   string                     getLayer() { return sLayer; }
   string                     getCategory(int index);
   string                     getSelectivity(int index);

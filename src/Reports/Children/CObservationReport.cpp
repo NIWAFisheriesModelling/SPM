@@ -88,26 +88,36 @@ void CObservationReport::execute() {
     cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     cout << PARAM_OBSERVATION << "." << PARAM_LABEL << CONFIG_RATIO_SEPARATOR << " " << pObservation->getLabel()  << "\n";
 
+    cout << PARAM_OBSERVATION << "." << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << pObservation->getYear()  << "\n";
+    cout << PARAM_OBSERVATION << "." << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << pObservation->getTimeStepString()  << "\n";
+
     vector<SComparison*> vComparisons;
     pObservation->fillComparisons(vComparisons);
 
-    if (pProportionsAtAge != 0)
+    if (pProportionsAtAge != 0) {
+      cout << PARAM_OBSERVATION << "." << PARAM_MIN_AGE << CONFIG_RATIO_SEPARATOR << " " << pProportionsAtAge->getMinAge()  << "\n";
+      cout << PARAM_OBSERVATION << "." << PARAM_MAX_AGE << CONFIG_RATIO_SEPARATOR << " " << pProportionsAtAge->getMaxAge()  << "\n";
+      cout << PARAM_OBSERVATION << "." << PARAM_AGE_PLUS_GROUP << CONFIG_RATIO_SEPARATOR << " " << string(pProportionsAtAge->getAgePlusGroup()?CONFIG_TRUE:CONFIG_FALSE) << "\n";
       cout << "area" << CONFIG_SPACE_SEPARATOR << "category" << CONFIG_SPACE_SEPARATOR
            << "age"  << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
            << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR
            << "errorvalue" << CONFIG_SPACE_SEPARATOR << "processerror" << CONFIG_SPACE_SEPARATOR
            << "totalerror" << CONFIG_SPACE_SEPARATOR << "score\n";
-    else if (pProportionsByCategory != 0)
+    } else if (pProportionsByCategory != 0) {
+      cout << PARAM_OBSERVATION << "." << PARAM_MIN_AGE << CONFIG_RATIO_SEPARATOR << " " << pProportionsByCategory->getMinAge()  << "\n";
+      cout << PARAM_OBSERVATION << "." << PARAM_MAX_AGE << CONFIG_RATIO_SEPARATOR << " " << pProportionsByCategory->getMaxAge()  << "\n";
+      cout << PARAM_OBSERVATION << "." << PARAM_AGE_PLUS_GROUP << CONFIG_RATIO_SEPARATOR << " " << string(pProportionsByCategory->getAgePlusGroup()?CONFIG_TRUE:CONFIG_FALSE) << "\n";
       cout << "area" << CONFIG_SPACE_SEPARATOR << "age" << CONFIG_SPACE_SEPARATOR
            << "observed" << CONFIG_SPACE_SEPARATOR << "expected" << CONFIG_SPACE_SEPARATOR
            << "residual" << CONFIG_SPACE_SEPARATOR << "errorvalue" << CONFIG_SPACE_SEPARATOR
            << "processerror" << CONFIG_SPACE_SEPARATOR << "totalerror" << CONFIG_SPACE_SEPARATOR
            << "score\n";
-    else
+    } else {
       cout << "area" << CONFIG_SPACE_SEPARATOR << "observed" << CONFIG_SPACE_SEPARATOR
            << "expected" << CONFIG_SPACE_SEPARATOR << "residual" << CONFIG_SPACE_SEPARATOR
            << "errorvalue" << CONFIG_SPACE_SEPARATOR << "processerror" << CONFIG_SPACE_SEPARATOR
            << "totalerror" << CONFIG_SPACE_SEPARATOR << "score\n";
+    }
 
     foreach(SComparison *Comparison, vComparisons) {
       double dResidual = Comparison->dObservedValue - Comparison->dExpectedValue;

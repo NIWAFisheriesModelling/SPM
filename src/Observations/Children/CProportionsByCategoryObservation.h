@@ -27,6 +27,9 @@ public:
   void                        validate();
   void                        build();
   void                        execute();
+  int                         getMinAge() { return iMinAge; }
+  int                         getMaxAge() { return iMaxAge; }
+  bool                        getAgePlusGroup() { return bAgePlus; }
 
 protected:
   // Variables

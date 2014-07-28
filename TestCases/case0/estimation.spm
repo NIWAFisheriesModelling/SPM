@@ -56,6 +56,10 @@ error_value  881J  61
 likelihood multinomial
 #process_error 500
 
+@report CAA-year-1998
+type observation
+observation CAA-year-1998
+
 @observation CAA-year-1999
 type proportions_at_age
 year 1999
@@ -344,6 +348,10 @@ error_value 881J 0.2
 likelihood lognormal
 #process_error 0.00
 
+@report CPUE-1998
+type observation
+observation CPUE-1998
+
 @observation CPUE-1999
 type abundance
 catchability CPUEq
@@ -366,6 +374,10 @@ error_value  881J  0.2
 error_value  881K  0.2
 likelihood lognormal
 #process_error 0.00
+
+@report CPUE-1999
+type observation
+observation CPUE-1999
 
 @observation CPUE-2000
 type abundance

@@ -55,7 +55,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{years} {Define the years that the partition report applies to}
 \defType{Integer vector or integer range}
-\defDefault{No default}
+\defDefault{All model years}
 \defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the partition report applies to}
@@ -77,7 +77,7 @@ Each type of report requires a set of subcommands and arguments specific to that
 
 \defSub{years} {Define the years that the partition\_biomass report applies to}
 \defType{Integer vector or integer range}
-\defDefault{No default}
+\defDefault{All model years}
 \defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step that the partition\_biomass report applies to}
@@ -327,7 +327,7 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{years} {Define the years for the printing of the layer}
 \defType{Integer vector or integer range}
-\defDefault{No default}
+\defDefault{The first year of the model, \commandsub{model}{initial\_year}}
 \defValue{Valid model years between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
 
 \defSub{time\_step} {Define the time-step for the printing of the layer}
@@ -351,16 +351,6 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 \defType{String}
 \defDefault{No default}
 \defValue{A valid label from \command{selectivity}}
-
-\defSub{year} {Define the year for the printing of the selectivity}
-\defType{Integer}
-\defDefault{No default}
-\defValue{A positive integer between \commandsub{model}{initial\_year} and \commandsub{model}{current\_year}}
-
-\defSub{time\_step} {Define the time-step for the printing of the selectivity}
-\defType{Integer}
-\defDefault{No default}
-\defValue{A valid time-step}
 
 \defSub{file\_name} {Define the name of the output file where the report is written}
 \defType{String}
