@@ -14,7 +14,7 @@ age_plus_group True
 initial_year 1994
 current_year 2007
 cell_length 1
-initialisation_phases Phase1 Phase2
+initialisation_phases Phase1
 time_steps step_one step_two
 age_size VB VB
 
@@ -32,17 +32,10 @@ b 2.965
 
 # Initalisation
 @initialisation_phase Phase1
-years 1
-time_steps initial_state
-
-@initialisation_phase Phase2
 years 200
 time_steps Phase1a Phase1b
 lambda 1e-10
 lambda_years 100 125 150 175 200
-
-@time_step initial_state
-processes InitialState BHrecruitment Maturation halfM
 
 @time_step Phase1a
 processes BHrecruitment Maturation halfM
@@ -64,7 +57,7 @@ processes halfM Ageing
 @derived_quantity SSB
 type biomass
 time_step step_one
-initialisation_time_steps initial_state Phase1a
+initialisation_time_steps Phase1a
 categories mature
 selectivities One
 layer Base
@@ -91,7 +84,7 @@ age 1
 ssb SSB
 b0 Phase1
 ssb_offset 1
-standardise_YCS_years 1993-1999
+standardise_YCS_years 1993-2003
 ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 steepness 0.75
 
