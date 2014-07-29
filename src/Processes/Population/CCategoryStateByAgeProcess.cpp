@@ -81,6 +81,7 @@ void CCategoryStateByAgeProcess::validate() {
           double dNumber = boost::lexical_cast<double>(vNs[i+j+1]);
           if(dNumber < 0) CError::errorLessThanEqualTo(PARAM_DATA, PARAM_ZERO);
           mvNMatrix[vNs[i]].push_back(dNumber);
+          registerEstimable(PARAM_N, i, &mvNMatrix[vNs[i]][j]);
         } catch (boost::bad_lexical_cast) {
           string Ex = string("Non-numeric value in ") + PARAM_N + string(" for ") + PARAM_PROCESS + string(" ") + getLabel();
           throw Ex;
