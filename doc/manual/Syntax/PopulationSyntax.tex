@@ -557,6 +557,33 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Valid penalty label defined by \command{penalty}}
 
+\subsubsection[Category state by age process]{\commandlabsubarg{process}{type}{category\_state\_by\_age}}
+
+\defSub{category} {Define the category that is the object of the process}
+\defType{String vector}
+\defDefault{No default}
+\defValue{A valid list of categories from \commandsub{model}{categories}}
+
+\defSub{layer} {Name of the categorical layer used to group the spatial cells for the process}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer as defined by \command{layer}. Must be a layer of \texttt{type=categorical}}
+
+\defSub{min\_age} {Define the minimum age for the process }
+\defType{Integer}
+\defDefault{No default}
+\defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
+
+\defSub{max\_age} {Define the maximum age for the process}
+\defType{Integer}
+\defDefault{No default}
+\defValue{A valid age in the range \commandsub{model}{min\_age} and \commandsub{model}{max\_age}}
+
+\defSub{N [label]}{Define the following data as the number of individuals to move in each age class}
+\defType{Constant vector}
+\defDefault{No default}
+\defValue{The label is valid value from the associated category transition by age layer. It is followed by a vector of values giving the numbers in each age class. This subcommand is repeated for each unique value of label}
+
 \subsubsection[Category transition process]{\commandlabsubarg{process}{type}{category\_transition}}
 
 \defSub{from} {Define the categories that are the source of the transition process}

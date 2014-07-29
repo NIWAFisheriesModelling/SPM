@@ -750,6 +750,50 @@ predator_selectivities One
 u_max 0.8
 \end{verbatim}}}
 
+\subsubsection{\I{Category state}s}
+
+Category state processes set the number of individuals at each age and category at a specified point in time during the model. \SPM\ implements only one type, the number in each age class and category in each cell (category state by age).
+
+\subsubsection*{\I{Category state by age process}}
+
+The category state by age process\index{Category state by age} sets the number $n$ in each age for a single category in each cell. This process may be used, for example, to initialise the partition at the start of a model for simulations or other scenario testing. The process for category $a$ and age $l$ in cell$(i,j)$ is,
+\begin{equation}\begin{split}
+  & \text{element}(i,j,a,l) \leftarrow N(i,j,a,l)
+\end{split}\end{equation}
+
+Note that this process will overwrite the information that may already exist within a spatial cell --- cells that are not defined will be left with their original values. Similarly, this process will overwrite the information that may already exist within the defined age classes in the specified category --- age classes that are not defined will be left with their original values. 
+
+Only a single category can be defined --- use multiple processes to specify multiple categories. For example, to initialise the immature category in the partition, then you might define the category state processes \texttt{immature} as a process to run during an initialisation phase, with the process defined as,
+{\small{\begin{verbatim}
+@process initialise-immature
+type category_state_by_age
+category immature
+layer Area
+min_age 1
+max_age 5
+N A 2 5 15 8 12
+N B 2 5 20 20 8
+\end{verbatim}}}
+
+where the layer specifies how the number of individuals are assigned to individual cells. In this example, assuming a $2 \times 2$ spatial model with the categorical layer (e.g., with label \texttt{Area}) defined as,
+{\small{\begin{verbatim}
+@layer Area
+type categorical
+data A A 
+data B B
+\end{verbatim}}}
+
+then the state in the initialisation with label \texttt{phase1} would be set to,
+{\small{\begin{verbatim}
+cell  age=1 age=2 age=3 age=4 age=5 age=6
+r1-c1     1   2.5   7.5     4     6     0
+r1-c2     1   2.5   7.5     4     6     0
+r2-c1     1   2.5    10    10     4     0
+r2-c2     1   2.5    10    10     4     0 
+\end{verbatim}}}
+
+assuming that there were no age $6$ individuals previously in the partition. 
+
 \subsubsection{\I{Category transition}s}
 
 Category transition processes move individuals between categories. \SPM\ implements three types, the total number in each cell (category transition), a rate in each cell (category transition rate), and the number in each age class in each cell (category transition by age).

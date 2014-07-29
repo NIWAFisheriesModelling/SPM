@@ -1,0 +1,133 @@
+[initialisation]
+report.type: initialisation
+initialisation.initialisation_phase: phase1
+years: 1
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 3.33333 6.66667 10 0
+1 2 immature 0 3.33333 6.66667 10 0
+1 3 immature 0 3.33333 6.66667 10 0
+2 1 immature 0 7.5 12.5 17.5 0
+2 2 immature 0 7.5 12.5 17.5 0
+2 3 immature 0 5 7.5 10 0
+3 1 immature 0 5 7.5 10 0
+3 2 immature 0 5 7.5 10 0
+3 3 immature 0 5 7.5 10 0
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1990
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 3.47222 6.52778 9.58333
+1 2 immature 0 22.5 4.27083 8.22917 12.1875
+1 3 immature 0 0 3.05556 5.69444 8.33333
+2 1 immature 0 22.5 6.77083 11.3542 15.9375
+2 2 immature 0 0 7.22222 11.9444 16.6667
+2 3 immature 0 0 5.52083 8.85417 12.1875
+3 1 immature 0 0 4.58333 7.08333 9.58333
+3 2 immature 0 0 5.9375 9.0625 12.1875
+3 3 immature 0 0 4.16667 6.25 8.33333
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1991
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 30 3.57639 16.0069
+1 2 immature 0 22.5 22.5 4.67014 21.3194
+1 3 immature 0 0 3.75 3.15972 13.9236
+2 1 immature 0 22.5 22.5 6.30208 25.4167
+2 2 immature 0 0 7.5 7.36111 29.3056
+2 3 immature 0 0 0 5.46875 21.25
+3 1 immature 0 0 3.75 4.40972 16.4236
+3 2 immature 0 0 0 6.05903 22.0139
+3 3 immature 0 0 0 3.99306 14.3403
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1992
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 30 22.5 19.4097
+1 2 immature 0 22.5 22.5 20.625 26.7448
+1 3 immature 0 0 3.75 5.625 17.3264
+2 1 immature 0 22.5 22.5 20.625 30.5469
+2 2 immature 0 0 7.5 11.25 37.0833
+2 3 immature 0 0 0 1.875 26.7969
+3 1 immature 0 0 3.75 5.625 20.3819
+3 2 immature 0 0 0 1.875 28.4115
+3 3 immature 0 0 0 0 18.2986
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1993
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 30 22.5 37.3785
+1 2 immature 0 22.5 22.5 20.625 45.9418
+1 3 immature 0 0 3.75 5.625 24.1493
+2 1 immature 0 22.5 22.5 20.625 48.6068
+2 2 immature 0 0 7.5 11.25 50.4167
+2 3 immature 0 0 0 1.875 30.6901
+3 1 immature 0 0 3.75 5.625 26.5799
+3 2 immature 0 0 0 1.875 32.2613
+3 3 immature 0 0 0 0 18.9757
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1994
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 30 22.5 52.5723
+1 2 immature 0 22.5 22.5 20.625 63.4049
+1 3 immature 0 0 3.75 5.625 31.4091
+2 1 immature 0 22.5 22.5 20.625 65.3451
+2 2 immature 0 0 7.5 11.25 64.5833
+2 3 immature 0 0 0 1.875 36.1784
+3 1 immature 0 0 3.75 5.625 33.3304
+3 2 immature 0 0 0 1.875 37.5716
+3 3 immature 0 0 0 0 20.6047
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1995
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 30 22.5 65.8695
+1 2 immature 0 22.5 22.5 20.625 79.5208
+1 3 immature 0 0 3.75 5.625 38.8643
+2 1 immature 0 22.5 22.5 20.625 80.9711
+2 2 immature 0 0 7.5 11.25 79.1667
+2 3 immature 0 0 0 1.875 42.9156
+3 1 immature 0 0 3.75 5.625 40.3805
+3 2 immature 0 0 0 1.875 44.0925
+3 3 immature 0 0 0 0 23.219
+*end
+
+[1994_timestep_one]
+report.type: partition
+year: 1996
+time_step: one
+row column category age[1] age[2] age[3] age[4] age[5]
+1 1 immature 0 45 30 22.5 77.8084
+1 2 immature 0 22.5 22.5 20.625 94.5897
+1 3 immature 0 0 3.75 5.625 46.4007
+2 1 immature 0 22.5 22.5 20.625 95.6939
+2 2 immature 0 0 7.5 11.25 93.9583
+2 3 immature 0 0 0 1.875 50.6245
+3 1 immature 0 0 3.75 5.625 47.5967
+3 2 immature 0 0 0 1.875 51.592
+3 3 immature 0 0 0 0 26.7359
+*end
+
+[objective_score]
+report.type: objective_function
+total_score: 0
+*end
+

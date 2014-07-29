@@ -19,6 +19,7 @@
 #include "../Population/CAnnualMortalityRateProcess.h"
 #include "../Population/CBHRecruitmentProcess.h"
 #include "../Population/CBiomassEventMortalityProcess.h"
+#include "../Population/CCategoryStateByAgeProcess.h"
 #include "../Population/CCategoryTransitionByAgeProcess.h"
 #include "../Population/CCategoryTransitionProcess.h"
 #include "../Population/CCategoryTransitionRateProcess.h"
@@ -61,6 +62,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CPreySuitabilityPredationProcess();
   else if (type == PARAM_HOLLING_MORTALITY_RATE)
     pProcess = new CHollingMortalityRateProcess();
+  else if (type == PARAM_CATEGORY_STATE_BY_AGE)
+    pProcess = new CCategoryStateByAgeProcess();
   else if (type == PARAM_CATEGORY_TRANSITION)
     pProcess = new CCategoryTransitionProcess();
   else if (type == PARAM_CATEGORY_TRANSITION_BY_AGE)

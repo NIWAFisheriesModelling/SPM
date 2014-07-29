@@ -1,0 +1,107 @@
+# spatial structure
+@model
+nrows 3
+ncols 3
+layer base
+categories immature
+min_age 1
+max_age 5
+age_plus_group true
+initial_year 1990
+current_year 1996
+cell_length 1
+time_steps one
+age_size none
+initialisation_phases phase1
+
+@age_size none
+type none
+size_weight none
+
+@size_weight none
+type none
+
+@initialisation_phase phase1
+years 1
+time_steps phase1
+
+@time_step phase1
+processes initial_state
+
+@time_step one
+processes recruitment ageing moveone
+
+@process initial_state
+type category_state_by_age
+category immature
+min_age 1
+max_age 4
+layer cell
+N A 0 10 20 30
+N B 0 15 25 35
+N C 0 20 30 40
+
+@process moveone
+type adjacent_cell
+categories immature
+proportion 0.5
+layer move_gradient
+selectivities one
+
+@process recruitment
+type constant_recruitment
+layer recruit
+categories immature
+proportions 1.0
+r0 90
+age 1
+
+@process ageing
+type ageing
+categories immature
+
+@selectivity one
+type constant
+c 1
+
+@layer base
+type numeric
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer recruit
+type numeric
+data 1 0 0
+data 0 0 0
+data 0 0 0
+
+@layer double_layer
+type numeric
+data 1 2 3
+data 4 5 6
+data 7 8 9
+
+@layer move_gradient
+type numeric
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer cell
+type categorical
+data A A A
+data B B C
+data C C C
+
+@report 1994_timestep_one
+type partition
+time_step one
+years 1990-1996
+
+@report objective_score
+type objective_function
+
+@report initialisation
+type initialisation
+initialisation_phase phase1
