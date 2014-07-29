@@ -208,8 +208,8 @@ Prints the estimated parameters in a format suitable for use with \texttt{spm -i
 
 \defSub{header} {Specify if the output contains the standard \SPM\ style header at the start of the output}
 \defType{Switch}
-\defDefault{False}
-\defValue{Either True or False}
+\defDefault{True if \texttt{file\_name} is not defined, otherwise False.}
+\defValue{Either True or False. Use False if you want to output this to a file in a format that it can be read by SPM as a parameter input file}
 
 \defSub{overwrite} {Specify if any previous file with the same name as the output file should be overwritten or appended to}
 \defType{Switch}

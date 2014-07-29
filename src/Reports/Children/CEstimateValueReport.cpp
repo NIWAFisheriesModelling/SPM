@@ -36,12 +36,11 @@ CEstimateValueReport::CEstimateValueReport() {
 void CEstimateValueReport::validate() {
   try {
 
-    bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,false);
-
     // Validate parent
     CFileReport::validate();
 
     // Local validation
+    bStandardHeader = pParameterList->getBool(PARAM_HEADER,true,sFileName==""?true:false);
 
   } catch (string & ex) {
     ex = "CEstimateValueReport.validate(" + getLabel() + ")->" + ex;

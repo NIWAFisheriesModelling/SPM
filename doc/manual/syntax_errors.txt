@@ -10,7 +10,6 @@ In SPM, but not in manual
   binomial
   binomial_approx
   by_length
-  category
   category_index
   column
   column_index

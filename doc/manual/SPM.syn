@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-07-28 (rev. 1154)
+; TextPad syntax definitions for SPM version 1.1-2014-07-29 (rev. 1157)
 ; ===================================================================================
 ;
 ;
@@ -73,6 +73,7 @@ c
 catchability
 categories
 categories2
+category
 category_labels
 category_values
 cell_length
@@ -241,6 +242,7 @@ biomass_density
 biomass_event_mortality
 categorical
 categorical_meta
+category_state_by_age
 category_transition
 category_transition_by_age
 category_transition_rate
