@@ -56,7 +56,6 @@ protected:
   vector<double>              vYCSValues;
   vector<int>                 vYCSYears;
   vector<int>                 vStandardiseYCSYears;
-  vector<double>              vStandardiseYCSValues;
   vector<Data>                vTrueYCSValues;
   vector<Data>                vRecruitmentValues;
   vector<Data>                vSSBValues;

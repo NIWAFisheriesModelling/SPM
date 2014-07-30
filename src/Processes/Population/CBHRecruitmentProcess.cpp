@@ -233,17 +233,24 @@ void CBHRecruitmentProcess::rebuild() {
 
     // Rescale vYCSValues to get the standardised YCS values over years defined by vStandardiseYCSYears
     double dMeanYCS = 0;
-    for (int i=0; i < (int)vStandardiseYCSYears.size(); ++i) {
-      for (int j=0; j < (int)vYCSYears.size(); ++j) {
-        if( vYCSYears[j] == vStandardiseYCSYears[i] ) {
-          dMeanYCS += vYCSValues[j];
+    for (int i=0; i < (int)vYCSYears.size(); ++i) {
+      for (int j=0; j < (int)vStandardiseYCSYears.size(); ++j) {
+        if( vYCSYears[i] == vStandardiseYCSYears[j] ) {
+          dMeanYCS += vYCSValues[i];
           break;
         }
       }
     }
     dMeanYCS /= vStandardiseYCSYears.size();
-    for (int i=0; i < (int)vYCSValues.size(); ++i) {
-      vStandardiseYCSValues.push_back(vYCSValues[i] / dMeanYCS);
+
+    for (int i=0; i < (int)vYCSYears.size(); ++i) {
+      for (int j=0; j < (int)vStandardiseYCSYears.size(); ++j) {
+        if( vYCSYears[i] == vStandardiseYCSYears[j] ) {
+          // rescale
+          vYCSValues[i] = vYCSValues[i] / dMeanYCS;
+          break;
+        }
+      }
     }
 
 #ifndef OPTIMIZE
@@ -282,7 +289,7 @@ void CBHRecruitmentProcess::execute() {
     } else {
       // We are not in an initialisation phase
       // Setup Our Variables
-      double dYCS = vStandardiseYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
+      double dYCS = vYCSValues[pTimeStepManager->getCurrentYear() - pWorld->getInitialYear()];
       // Get SSB (and SSB:B0 ratio)
       dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
       double dSSBRatio = pDerivedQuantity->getValue(iActualOffset)/dB0;
