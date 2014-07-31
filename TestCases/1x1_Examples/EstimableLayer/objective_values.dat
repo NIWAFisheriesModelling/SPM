@@ -1,0 +1,30 @@
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 60.2425
+obs->CAA-year-1999: 57.0658
+obs->CAA-year-2000: 64.4111
+obs->CAA-year-2001: 64.5304
+obs->CAA-year-2002: 62.0376
+obs->CAA-year-2003: 49.0855
+obs->CAA-year-2004: 62.9255
+obs->CAA-year-2005: 63.0725
+obs->CAA-year-2006: 58.4827
+obs->CAA-year-2007: 65.6781
+obs->CPUE-1998: -1.37479
+obs->CPUE-1999: -1.34974
+obs->CPUE-2000: 2.20217
+obs->CPUE-2001: 6.41343
+obs->CPUE-2002: -1.53247
+obs->CPUE-2003: -1.11013
+obs->CPUE-2004: -1.58313
+obs->CPUE-2005: -1.04799
+obs->CPUE-2006: -1.61286
+obs->CPUE-2007: -1.0447
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+prior->layer[M].data(1): -1.35003
+prior->selectivity[FishingSel].a50: 0
+prior->selectivity[FishingSel].ato95: 0
+total_score: 604.141
+*end
+

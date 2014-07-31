@@ -13,6 +13,15 @@ cd ..
 cd ConstantRecruitmentProcess
 spm -r -q -d > Expected.txt
 cd ..
+cd EstimableLayer
+start run.bat
+cd ..
+cd EstimableState
+start run.bat
+cd ..
+cd EstimableYCS
+start run.bat
+cd ..
 cd EventMortalityProcess
 spm -r -q -d > Expected.txt
 cd ..

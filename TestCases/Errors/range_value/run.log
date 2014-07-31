@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: ..\..\..\spm -r -q 
-Date: Mon Jul 28 15:51:53 2014
-v1.1-2014-07-28 (rev. 1152). Copyright (c) 2008-2014, NIWA
+Date: Fri Aug 01 08:52:20 2014
+v1.1-2014-07-31 (rev. 1163). Copyright (c) 2008-2014, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=7392)
+Machine name: NIWA-34286 (Windows_NT, PID=5008)
 
 RuntimeController.run()->
 CLayerManager.validate->
