@@ -96,10 +96,11 @@ void CEstimateInfo::generateEstimates() {
         CEstimate *newEstimate = CEstimateFactory::buildEstimate();
         newEstimate->getParameterList()->copyFrom(pParameterList);
 
-        string newParameter = sObjectParameter + "(" + boost::lexical_cast<string>(i+1) + ")";
-        newEstimate->getParameterList()->setParameter(PARAM_PARAMETER, newParameter);
+        string newShortParameter = sObjectParameter + "(" + boost::lexical_cast<string>(i+1) + ")";
+        string newParameter = parameter + "(" + boost::lexical_cast<string>(i+1) + ")";
 
-        newEstimate->setTarget(target->getEstimableVariable(newParameter));
+        newEstimate->getParameterList()->setParameter(PARAM_PARAMETER, newParameter);
+        newEstimate->setTarget(target->getEstimableVariable(newShortParameter));
       }
     }
   } catch(const string &ex) {
