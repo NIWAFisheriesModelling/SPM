@@ -46,17 +46,6 @@ void CBaseObject::registerEstimable(string name, int index, double *variable) {
 }
 
 //**********************************************************************
-// void CBaseObject::registerEstimable(string name, vector<double> &variables)
-// Register an entire vector as estimable
-//**********************************************************************
-void CBaseObject::registerEstimable(string name, vector<double> &variables) {
-
-  for (unsigned i = 0; i < variables.size(); ++i) {
-    registerEstimable(name, (int)i+1, &variables[i]);
-  }
-}
-
-//**********************************************************************
 // double* CBaseObject::getEstimableVariable(string name)
 // Get Our Estimable Variable
 //**********************************************************************

@@ -30,19 +30,18 @@ using std::vector;
 //**********************************************************************
 class CBaseObject {
 public:
-	CBaseObject();
-	virtual                    ~CBaseObject();
-	double*                    getEstimableVariable(string name);
-	bool                       isEstimableAVector(string name);
-	int                        getEstimableVectorSize(string name);
-	void                       addParameter(string name, string value);
-	CParameterList*            getParameterList() { return pParameterList; }
+  CBaseObject();
+  virtual                    ~CBaseObject();
+  double*                    getEstimableVariable(string name);
+  bool                       isEstimableAVector(string name);
+  int                        getEstimableVectorSize(string name);
+  void                       addParameter(string name, string value);
+  CParameterList*            getParameterList() { return pParameterList; }
 
 protected:
   // Functions
   void                       registerEstimable(string name, double *variable);
   void                       registerEstimable(string name, int index, double *variable);
-  void                       registerEstimable(string name, vector<double> &variables);
 
   // Variables
   CConfiguration                *pConfig;
