@@ -133,7 +133,7 @@ double* CObjectFinder::getObjectEstimable(string estimableAbsoluteName) {
   if (iIndex != -1)
     sObjectParameter += "(" + boost::lexical_cast<string>(iIndex) + ")";
 
-  return target->getEstimableVariable(sObjectParameter);
+  return target->getEstimableVariable(sObjectParameter, estimableAbsoluteName);
 }
 
 

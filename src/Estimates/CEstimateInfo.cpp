@@ -86,7 +86,7 @@ void CEstimateInfo::generateEstimates() {
 
       if (iObjectIndex != -1)
         sObjectParameter += "(" + boost::lexical_cast<string>(iObjectIndex) + ")";
-      newEstimate->setTarget(target->getEstimableVariable(sObjectParameter));
+      newEstimate->setTarget(target->getEstimableVariable(sObjectParameter, parameter));
 
     } else {
       // N Estimates
@@ -100,7 +100,7 @@ void CEstimateInfo::generateEstimates() {
         string newParameter = parameter + "(" + boost::lexical_cast<string>(i+1) + ")";
 
         newEstimate->getParameterList()->setParameter(PARAM_PARAMETER, newParameter);
-        newEstimate->setTarget(target->getEstimableVariable(newShortParameter));
+        newEstimate->setTarget(target->getEstimableVariable(newShortParameter, newParameter));
       }
     }
   } catch(const string &ex) {
