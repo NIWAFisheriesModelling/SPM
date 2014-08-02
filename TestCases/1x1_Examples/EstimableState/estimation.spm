@@ -54,24 +54,35 @@ parameter selectivity[FishingSel].ato95
 lower_bound 0.01
 upper_bound 50
 prior Uniform
-
+{
+@estimate
+parameter process[BHrecruitment].ycs_values
+lower_bound 0.01 #0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01
+upper_bound  100 # 100  100  100  100  100  100  100  100  100  100  100  100  100
+prior Lognormal
+}
 @estimate
 parameter process[InitialStateI].N
 lower_bound 0
-upper_bound 1e100
-prior Uniform
-{
+upper_bound 1e9
+prior Lognormal
+
 @estimate
 parameter process[InitialStateM].N
 lower_bound 0
 upper_bound 1e9
-prior Uniform
-}
+prior Lognormal
+
 @prior Uniform
 type uniform
 
 @prior Uniform-log
 type uniform_log
+
+@prior Lognormal
+type lognormal
+mu 1.0
+cv 0.6
 
 # PENALTIES
 @penalty event_mortality_penalty
