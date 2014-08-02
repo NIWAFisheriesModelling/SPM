@@ -75,13 +75,16 @@ void CCategoryStateByAgeProcess::validate() {
     if ((vNs.size() % (iAgeSpread + 1)) !=0)
       CError::errorListNotSize(PARAM_DATA, iAgeSpread);
 
+    int iCounter = 0;
     for (int i = 0; i < (int)vNs.size(); i+=(iAgeSpread + 1)) {
       for (int j = 0; j < iAgeSpread; ++j) {
         try {
           double dNumber = boost::lexical_cast<double>(vNs[i+j+1]);
           if(dNumber < 0) CError::errorLessThanEqualTo(PARAM_DATA, PARAM_ZERO);
           mvNMatrix[vNs[i]].push_back(dNumber);
-          registerEstimable(PARAM_N, i, &mvNMatrix[vNs[i]][j]);
+          //
+          registerEstimable(PARAM_N, iCounter, &mvNMatrix[vNs[i]][j]);
+          iCounter++;
         } catch (boost::bad_lexical_cast) {
           string Ex = string("Non-numeric value in ") + PARAM_N + string(" for ") + PARAM_PROCESS + string(" ") + getLabel();
           throw Ex;
@@ -143,7 +146,6 @@ void CCategoryStateByAgeProcess::execute() {
     while (mvNPtr != mvNMatrix.end()) {
       // Get the list of WorldSquares
       vector<CWorldSquare*> vWorldSquares = pWorldView->getWorldSquares((*mvNPtr).first);
-
       // Loop through each age
       for (int j = 0; j < iAgeSpread; ++j) {
         // count the number of worldSquares
