@@ -10,6 +10,7 @@
 // Global Headers
 #include <math.h>
 #include <iomanip>
+#include <boost/lexical_cast.hpp>
 
 // Local Headers
 #include "GammaDiffEngine.h"
@@ -88,10 +89,18 @@ void GammaDiffEngine::buildScaledValues() {
 
   for (int i = 0; i < (int)vStartValues.size(); ++i) {
     // Check
-    if (vStartValues[i] < vLowerBounds[i])
-      throw string(GAMMADIFF_LESS_START_LOWER_BOUND);
-    if (vStartValues[i] > vUpperBounds[i])
-      throw string(GAMMADIFF_GREATER_START_UPPER_BOUND);
+    if (vStartValues[i] < vLowerBounds[i]) {
+      string sError = string(GAMMADIFF_LESS_START_LOWER_BOUND) + " ("
+                      + boost::lexical_cast<std::string>(vStartValues[i])
+                      + " < " + boost::lexical_cast<std::string>(vLowerBounds[i]) + ")" ;
+      throw sError;
+    }
+    if (vStartValues[i] > vUpperBounds[i]) {
+      string sError = string(GAMMADIFF_GREATER_START_UPPER_BOUND) + " ("
+                      + boost::lexical_cast<std::string>(vStartValues[i])
+                      + " > " + boost::lexical_cast<std::string>(vUpperBounds[i]) + ")" ;
+      throw sError;
+    }
 
     // Boundary-Pinning
     if (CComparer::isEqual(vLowerBounds[i], vUpperBounds[i]))

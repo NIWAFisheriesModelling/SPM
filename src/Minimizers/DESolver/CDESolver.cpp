@@ -9,6 +9,7 @@
 
 // Global Headers
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 
 // Local Headers
 #include "CDESolver.h"
@@ -91,10 +92,18 @@ void CDESolver::runEstimation() {
 
     // Check start value between bounds
     for (int i = 0; i < (int)vStartValues.size(); ++i) {
-      if (vStartValues[i] < vLowerBounds[i])
-        throw string(DESOLVER_LESS_START_LOWER_BOUND);
-      if (vStartValues[i] > vUpperBounds[i])
-        throw string(DESOLVER_GREATER_START_UPPER_BOUND);
+      if (vStartValues[i] < vLowerBounds[i]) {
+        string sError = string(DESOLVER_LESS_START_LOWER_BOUND) + " ("
+                        + boost::lexical_cast<std::string>(vStartValues[i])
+                        + " < " + boost::lexical_cast<std::string>(vLowerBounds[i]) + ")" ;
+        throw sError;
+      }
+      if (vStartValues[i] > vUpperBounds[i]) {
+        string sError = string(DESOLVER_GREATER_START_UPPER_BOUND) + " ("
+                        + boost::lexical_cast<std::string>(vStartValues[i])
+                        + " > " + boost::lexical_cast<std::string>(vUpperBounds[i]) + ")" ;
+        throw sError;
+      }
     }
 
 
