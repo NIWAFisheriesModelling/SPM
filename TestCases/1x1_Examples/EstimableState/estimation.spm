@@ -65,13 +65,13 @@ prior Lognormal
 parameter process[InitialStateI].N
 lower_bound 0
 upper_bound 1e9
-prior Lognormal
+prior Uniform
 
 @estimate
 parameter process[InitialStateM].N
 lower_bound 0
 upper_bound 1e9
-prior Lognormal
+prior Uniform
 
 @prior Uniform
 type uniform
