@@ -14,7 +14,7 @@ age_plus_group True
 initial_year 1994
 current_year 2007
 cell_length 1
-initialisation_phases Phase1 Phase2
+initialisation_phases InitialState Phase1
 time_steps step_one step_two
 age_size VB VB
 
@@ -31,17 +31,17 @@ a 1.387e-008
 b 2.965
 
 # Initalisation
-@initialisation_phase Phase1
+@initialisation_phase InitialState
 years 1
-time_steps initial_state
+time_steps InitialState
 
-@initialisation_phase Phase2
+@initialisation_phase Phase1
 years 200
 time_steps Phase1a Phase1b
-lambda 1e-7
-lambda_years 100 125 150 175 200
+lambda 1e-6
+lambda_years 25 50 75 100 125 150 175 200
 
-@time_step initial_state
+@time_step InitialState
 processes InitialStateI InitialStateM
 
 @time_step Phase1a
@@ -64,7 +64,7 @@ processes halfM Ageing
 @derived_quantity SSB
 type biomass
 time_step step_one
-initialisation_time_steps initial_state Phase1a
+initialisation_time_steps InitialState Phase1a
 categories mature
 selectivities One
 layer Base
@@ -80,7 +80,7 @@ category immature
 layer SSRU
 min_age 1
 max_age 35
-N All 0 0 301569 264806 232525 204179 177973 154387 131329 106440 77534.4 46798.5 22404 8887.29 3168.52 1076.32 358.522 118.523 39.0701 12.8652 4.23461 1.39362 0.458615 0.150919 0.0496635 0.0163429 0.00537799 0.00176974 0.000582373 0.000191642 6.30641e-005 0 0 0 0
+N All 0 266500 234012 205485 180435 157277 136434 116057 94062.3 68518 41356.3 19798.7 7853.8 2800.06 951.156 316.83 104.74 34.5267 11.3691 3.74217 1.23155 0.405284 0.133369 0.0438882 0.0144424 0.00475258 0.00156394 0.000514649 0.000169356 5.57304e-005 0 0 0 0 0
 
 @process InitialStateM
 type category_state_by_age
@@ -88,7 +88,7 @@ category mature
 layer SSRU
 min_age 1
 max_age 35
-N All 0 0 0 0 0 1315.52 3045.14 6912.04 14948.7 29056.5 46798.5 59783 63280.8 60201.9 54569 48503.4 42786.9 37636 33069.4 29045.2 25506.8 22398.1 19668 17270.4 15165.1 13316.4 11693.1 10267.7 9015.98 7916.9 6951.79 6104.34 5360.19 4706.76 33903.7
+N All 0 0 0 0 0 1162.54 2691.03 6108.25 13210.3 25677.6 41356.3 52830.9 55922 53201.1 48223.2 42863 37811.3 33259.3 29223.8 25667.5 22540.6 19793.5 17380.8 15262.1 13401.6 11767.9 10333.3 9073.64 7967.52 6996.24 6143.37 5394.46 4736.85 4159.41 29960.8
 
 @process BHrecruitment
 type bh_recruitment
@@ -99,7 +99,7 @@ age 1
 ssb SSB
 b0 Phase1
 ssb_offset 1
-standardise_YCS_years 1993-1999
+standardise_YCS_years 1993-2003
 ycs_values 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 steepness 0.75
 

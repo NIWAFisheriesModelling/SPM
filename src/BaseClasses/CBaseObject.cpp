@@ -49,12 +49,12 @@ void CBaseObject::registerEstimable(string name, int index, double *variable) {
 // double* CBaseObject::getEstimableVariable(string name)
 // Get Our Estimable Variable
 //**********************************************************************
-double* CBaseObject::getEstimableVariable(string name) {
+double* CBaseObject::getEstimableVariable(string name, string longName) {
   try {
     name = CConvertor::stringToLowercase(name);
 
     if (mEstimables[name] == 0)
-      CError::errorUnknown(PARAM_ESTIMABLE, name);
+      CError::errorUnknown(PARAM_ESTIMABLE, longName);
 
   } catch (string &Ex) {
     Ex = "CBaseObject.getEstimableVariable()->" + Ex;

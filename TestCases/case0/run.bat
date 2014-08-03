@@ -1,1 +1,1 @@
-spm -e -q -d > estimate.log
+..\..\spm -e -q -d > estimate.log

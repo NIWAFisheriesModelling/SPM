@@ -1,1 +1,1 @@
-..\..\..\spm -r -q > run.log
+..\..\..\spm -r -q -g 0 -d > run.log

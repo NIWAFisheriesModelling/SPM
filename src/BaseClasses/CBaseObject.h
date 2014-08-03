@@ -32,7 +32,7 @@ class CBaseObject {
 public:
   CBaseObject();
   virtual                    ~CBaseObject();
-  double*                    getEstimableVariable(string name);
+  double*                    getEstimableVariable(string name, string longName);
   bool                       isEstimableAVector(string name);
   int                        getEstimableVectorSize(string name);
   void                       addParameter(string name, string value);

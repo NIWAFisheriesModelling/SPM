@@ -1,13 +1,18 @@
 SPM (Spatial Population Model)
 Call: spm -p -q -g 0 -o profile.dat 
-Date: Mon Jul 07 13:00:04 2014
-v1.1-2014-04-30 (rev. 5064). Copyright (c) 2008-2014, NIWA
+Date: Sat Aug 02 17:14:16 2014
+v1.1-2014-08-02 (rev. 1170). Copyright (c) 2008-2014, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=6464)
+Machine name: NIWA-34286 (Windows_NT, PID=4740)
 
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -374,6 +379,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -710,6 +720,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -1136,6 +1151,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -1592,6 +1612,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -1868,6 +1893,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -2264,6 +2294,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.0011343 -0.0011343 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00601896 -0.00601896 148 50 37.3737 0
@@ -2450,6 +2485,11 @@ r4-c6 immature+mature 30 0.03261 0.138012 -0.105402 58 50 26.8519 1.68667
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00118839 -0.00118839 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00644438 -0.00644438 152 50 37.6238 0
@@ -2606,6 +2646,11 @@ r3-c6 immature+mature 30 0.00367 0.0607539 -0.0570839 356 50 43.8424 0.377584
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00135435 -0.00135435 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.007196 -0.007196 374 50 44.1038 0
@@ -2732,6 +2777,11 @@ r3-c6 immature+mature 30 0.00094 0.0602109 -0.0592709 547 50 45.8124 0.0976418
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00153154 -0.00153154 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00831376 -0.00831376 189 50 39.5397 0
@@ -3038,6 +3088,11 @@ r5-c4 immature+mature 30 0.04559 0.155442 -0.109852 368 50 44.0191 4.43514
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00134092 -0.00134092 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00730474 -0.00730474 267 50 42.1136 0
@@ -3374,6 +3429,11 @@ r5-c6 immature+mature 30 0.05811 0.146891 -0.0887807 327 50 43.3687 6.0571
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00177078 -0.00177078 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.0062202 -0.0062202 89 50 32.0144 0
@@ -3680,6 +3740,11 @@ r5-c7 immature+mature 30 0.0492 0.146664 -0.0974641 230 50 41.0714 4.59133
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00134716 -0.00134716 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00735237 -0.00735237 208 50 40.3101 0
@@ -4136,6 +4201,11 @@ r5-c7 immature+mature 30 0.06439 0.14126 -0.0768704 214 50 40.5303 6.43167
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00178686 -0.00178686 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00975621 -0.00975621 436 50 44.856 0
@@ -4592,6 +4662,11 @@ r5-c7 immature+mature 30 0.08022 0.135007 -0.0547873 169 50 38.5845 8.11068
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00188348 -0.00188348 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.0102778 -0.0102778 277 50 42.3547 0
@@ -4928,6 +5003,11 @@ r6-c5 immature+mature 30 0 0.153611 -0.153611 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00196448 -0.00196448 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.0106872 -0.0106872 531 50 45.6971 0
@@ -5294,6 +5374,8 @@ r6-c5 immature+mature 30 0.00405964 0.146519 -0.14246 58 50 26.8519 0.15573
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 122.119 -84.8418 0.145884 0 0.145884 30.9109
 r3-c5 30.5287 109.384 -78.8552 0.250923 0 0.250923 11.3084
@@ -5306,6 +5388,8 @@ r4-c6 6.50762 72.4456 -65.938 0.396224 0 0.396224 17.763
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 116.465 -84.4077 0.31592 0 0.31592 6.9378
 r2-c5 31.6759 112.909 -81.2334 0.26805 0 0.26805 9.68051
@@ -5318,6 +5402,8 @@ r4-c6 2.04767 73.2281 -71.1805 0.927462 0 0.927462 8.3572
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 101.946 -79.9627 0.42792 0 0.42792 5.36103
 r2-c6 78.8904 89.4899 -10.5996 0.150578 0 0.150578 -1.60469
@@ -5328,6 +5414,8 @@ r3-c6 37.546 62.493 -24.947 0.227084 0 0.227084 0.837724
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 89.8969 -46.662 0.181266 0 0.181266 6.20955
 r1-c6 49.5202 82.4272 -32.907 0.157919 0 0.157919 3.16644
@@ -5344,6 +5432,8 @@ r5-c5 2.6618 55.8178 -53.156 1.09364 0 1.09364 4.34269
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 102.279 0.801359 0.0507771 0 0.0507771 -2.9649
 r2-c5 119.953 97.6105 22.3424 0.0824759 0 0.0824759 0.740282
@@ -5361,6 +5451,8 @@ r6-c5 3.82586 61.4859 -57.66 0.467711 0 0.467711 17.3173
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 77.0003 -39.4399 0.317318 0 0.317318 1.16673
 r3-c5 81.7114 65.1667 16.5447 0.23425 0 0.23425 -0.865885
@@ -5378,6 +5470,8 @@ r6-c5 1.86121 56.3457 -54.4844 1.36183 0 1.36183 3.99364
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 100.508 -64.2213 0.236308 0 0.236308 7.59172
 r1-c6 46.8171 99.2005 -52.3835 0.217512 0 0.217512 4.19198
@@ -5400,6 +5494,8 @@ r5-c7 56.6335 21.5328 35.1007 0.372196 0 0.372196 3.08257
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 75.0059 -24.0675 0.265313 0 0.265313 -0.428355
 r1-c7 129.407 81.3465 48.0605 0.129954 0 0.129954 4.62408
@@ -5422,6 +5518,8 @@ r5-c7 25.8822 19.6981 6.18408 0.49269 0 0.49269 -0.427995
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 70.5911 -22.1883 0.395844 0 0.395844 -0.644949
 r1-c7 86.6808 89.4864 -2.80563 0.159743 0 0.159743 -1.83314
@@ -5441,6 +5539,8 @@ r6-c5 16.2518 40.4116 -24.1598 0.190543 0 0.190543 9.51555
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 67.3372 75.4651 0.140974 0 0.140974 12.7731
 r2-c4 127.203 65.0053 62.1974 0.268246 0 0.268246 2.25388
@@ -5577,8 +5677,12 @@ value: 100000
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 0.0164092 0.000100003 3682.36 1065.42 69.9935 3.81696 0.0041349 5000 2782.49 9240.89 73.8379 29.6704 11.9868 5.84776 14.8058 11.7792 100000
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 91.5589
@@ -5762,8 +5866,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 0.0164092 0.000100003 3682.36 1065.42 69.9935 3.81696 0.0041349 5000 2782.49 9240.89 73.8379 29.6704 11.9868 5.84776 14.8058 11.7792 100000
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -5902,6 +6010,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -6268,6 +6381,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -6604,6 +6722,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -7030,6 +7153,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -7486,6 +7614,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -7762,6 +7895,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -8158,6 +8296,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00113055 -0.00113055 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00435324 -0.00435324 148 50 37.3737 0
@@ -8344,6 +8487,11 @@ r4-c6 immature+mature 30 0.03261 0.146911 -0.114301 58 50 26.8519 1.63196
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00133329 -0.00133329 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.0035603 -0.0035603 152 50 37.6238 0
@@ -8500,6 +8648,11 @@ r3-c6 immature+mature 30 0.00367 0.132213 -0.128543 356 50 43.8424 0.252469
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.0011323 -0.0011323 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00436008 -0.00436008 374 50 44.1038 0
@@ -8626,6 +8779,11 @@ r3-c6 immature+mature 30 0.00094 0.13177 -0.13083 547 50 45.8124 0.0639142
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00133636 -0.00133636 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00356869 -0.00356869 189 50 39.5397 0
@@ -8932,6 +9090,11 @@ r5-c4 immature+mature 30 0.04559 0.1275 -0.0819097 368 50 44.0191 4.83282
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00144695 -0.00144695 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00428103 -0.00428103 267 50 42.1136 0
@@ -9268,6 +9431,11 @@ r5-c6 immature+mature 30 0.05811 0.139928 -0.0818181 327 50 43.3687 6.17948
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00213234 -0.00213234 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00454759 -0.00454759 89 50 32.0144 0
@@ -9574,6 +9742,11 @@ r5-c7 immature+mature 30 0.0492 0.13388 -0.0846802 230 50 41.0714 4.77562
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00133637 -0.00133637 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00356919 -0.00356919 208 50 40.3101 0
@@ -10030,6 +10203,11 @@ r5-c7 immature+mature 30 0.06439 0.133743 -0.0693531 214 50 40.5303 6.57438
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00145409 -0.00145409 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00430267 -0.00430267 436 50 44.856 0
@@ -10486,6 +10664,11 @@ r5-c7 immature+mature 30 0.08022 0.133803 -0.0535834 169 50 38.5845 8.13841
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00145994 -0.00145994 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00432001 -0.00432001 277 50 42.3547 0
@@ -10822,6 +11005,11 @@ r6-c5 immature+mature 30 0 0.167433 -0.167433 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.0013573 -0.0013573 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00362476 -0.00362476 531 50 45.6971 0
@@ -11188,6 +11376,8 @@ r6-c5 immature+mature 30 0.00405964 0.16732 -0.16326 58 50 26.8519 0.141259
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 103.115 -65.8386 0.145884 0 0.145884 22.1439
 r3-c5 30.5287 51.0524 -20.5236 0.250923 0 0.250923 0.517559
@@ -11200,6 +11390,8 @@ r4-c6 6.50762 55.3749 -48.8672 0.396224 0 0.396224 13.7043
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 87.4352 -55.3783 0.31592 0 0.31592 3.6254
 r2-c5 31.6759 103.053 -71.3771 0.26805 0 0.26805 8.1131
@@ -11212,6 +11404,8 @@ r4-c6 2.04767 55.3796 -53.332 0.927462 0 0.927462 6.9498
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 102.952 -80.968 0.42792 0 0.42792 5.44594
 r2-c6 78.8904 55.0086 23.8817 0.150578 0 0.150578 1.18354
@@ -11222,6 +11416,8 @@ r3-c6 37.546 49.6948 -12.1488 0.227084 0 0.227084 -0.84747
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 87.2241 -43.9892 0.181266 0 0.181266 5.5553
 r1-c6 49.5202 80.2999 -30.7797 0.157919 0 0.157919 2.65253
@@ -11238,6 +11434,8 @@ r5-c5 2.6618 49.7439 -47.0821 1.09364 0 1.09364 3.96308
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 80.5547 22.5255 0.0507771 0 0.0507771 8.94793
 r2-c5 119.953 102.847 17.1059 0.0824759 0 0.0824759 -0.673264
@@ -11255,6 +11453,8 @@ r6-c5 3.82586 56.9938 -53.1679 0.467711 0 0.467711 16.3048
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 54.6547 -17.0943 0.317318 0 0.317318 -0.614349
 r3-c5 81.7114 49.5375 32.1739 0.23425 0 0.23425 1.13641
@@ -11272,6 +11472,8 @@ r6-c5 1.86121 56.8853 -55.0241 1.36183 0 1.36183 4.01991
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 87.1909 -50.9042 0.236308 0 0.236308 5.18377
 r1-c6 46.8171 80.5225 -33.7055 0.217512 0 0.217512 1.37839
@@ -11294,6 +11496,8 @@ r5-c7 56.6335 41.9562 14.6773 0.372196 0 0.372196 -0.508121
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 80.1142 -29.1758 0.265313 0 0.265313 -0.0546009
 r1-c7 129.407 62.0404 67.3666 0.129954 0 0.129954 14.4616
@@ -11316,6 +11520,8 @@ r5-c7 25.8822 42.086 -16.2038 0.49269 0 0.49269 -0.43532
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 79.7758 -31.373 0.395844 0 0.395844 -0.337636
 r1-c7 86.6808 61.8698 24.8109 0.159743 0 0.159743 0.587463
@@ -11335,6 +11541,8 @@ r6-c5 16.2518 56.4004 -40.1485 0.190543 0 0.190543 19.4216
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 85.7908 57.0114 0.140974 0 0.140974 4.89011
 r2-c4 127.203 92.0217 35.181 0.268246 0 0.268246 -0.408501
@@ -11471,8 +11679,12 @@ value: 1.12e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 0.000110835 0.00763267 21.9032 4006.88 61.5147 0.0100134 0.00308921 4999.99 2221.13 7928.63 79.8211 29.7385 12.4142 6.19487 15.2185 10.8362 1.12e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 105.141
@@ -11601,8 +11813,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 0.000110835 0.00763267 21.9032 4006.88 61.5147 0.0100134 0.00308921 4999.99 2221.13 7928.63 79.8211 29.7385 12.4142 6.19487 15.2185 10.8362 1.12e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -11741,6 +11957,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -12107,6 +12328,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -12443,6 +12669,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -12869,6 +13100,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -13325,6 +13561,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -13601,6 +13842,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -13997,6 +14243,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00115284 -0.00115284 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00296811 -0.00296811 148 50 37.3737 0
@@ -14183,6 +14434,11 @@ r4-c6 immature+mature 30 0.03261 0.133221 -0.100611 58 50 26.8519 1.71761
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00108014 -0.00108014 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.0021391 -0.0021391 152 50 37.6238 0
@@ -14339,6 +14595,11 @@ r3-c6 immature+mature 30 0.00367 0.0648518 -0.0611818 356 50 43.8424 0.367081
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00115386 -0.00115386 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00297075 -0.00297075 374 50 44.1038 0
@@ -14465,6 +14726,11 @@ r3-c6 immature+mature 30 0.00094 0.0647324 -0.0637924 547 50 45.8124 0.0945236
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00108118 -0.00108118 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.0021412 -0.0021412 189 50 39.5397 0
@@ -14771,6 +15037,11 @@ r5-c4 immature+mature 30 0.04559 0.171379 -0.125789 368 50 44.0191 4.23927
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00108461 -0.00108461 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00222468 -0.00222468 267 50 42.1136 0
@@ -15107,6 +15378,11 @@ r5-c6 immature+mature 30 0.05811 0.171412 -0.113302 327 50 43.3687 5.66804
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00236541 -0.00236541 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00589356 -0.00589356 89 50 32.0144 0
@@ -15413,6 +15689,11 @@ r5-c7 immature+mature 30 0.0492 0.173656 -0.124456 230 50 41.0714 4.24997
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00108126 -0.00108126 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00214152 -0.00214152 208 50 40.3101 0
@@ -15869,6 +16150,11 @@ r5-c7 immature+mature 30 0.06439 0.173597 -0.109207 214 50 40.5303 5.89372
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00108628 -0.00108628 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00222823 -0.00222823 436 50 44.856 0
@@ -16325,6 +16611,11 @@ r5-c7 immature+mature 30 0.08022 0.17365 -0.0934297 169 50 38.5845 7.33157
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00108822 -0.00108822 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00223222 -0.00223222 277 50 42.3547 0
@@ -16661,6 +16952,11 @@ r6-c5 immature+mature 30 0 0.18862 -0.18862 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00108829 -0.00108829 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00215534 -0.00215534 531 50 45.6971 0
@@ -17027,6 +17323,8 @@ r6-c5 immature+mature 30 0.00405964 0.18861 -0.184551 58 50 26.8519 0.128202
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 82.0464 -44.7697 0.145884 0 0.145884 12.4553
 r3-c5 30.5287 49.2584 -18.7296 0.250923 0 0.250923 0.244681
@@ -17039,6 +17337,8 @@ r4-c6 6.50762 44.0118 -37.5042 0.396224 0 0.396224 10.6278
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 87.569 -55.5121 0.31592 0 0.31592 3.64077
 r2-c5 31.6759 82.019 -50.3432 0.26805 0 0.26805 4.72147
@@ -17051,6 +17351,8 @@ r4-c6 2.04767 44.0133 -41.9656 0.927462 0 0.927462 5.88672
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 81.9726 -59.9891 0.42792 0 0.42792 3.62195
 r2-c6 78.8904 80.5448 -1.6544 0.150578 0 0.150578 -1.89686
@@ -17061,6 +17363,8 @@ r3-c6 37.546 54.6354 -17.0894 0.227084 0 0.227084 -0.277098
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 87.4807 -44.2458 0.181266 0 0.181266 5.61773
 r1-c6 49.5202 87.1301 -37.6099 0.157919 0 0.157919 4.34895
@@ -17077,6 +17381,8 @@ r5-c5 2.6618 38.7024 -36.0406 1.09364 0 1.09364 3.19446
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 87.2027 15.8774 0.0507771 0 0.0507771 2.53598
 r2-c5 119.953 81.9256 38.0273 0.0824759 0 0.0824759 8.41701
@@ -17094,6 +17400,8 @@ r6-c5 3.82586 52.1429 -48.317 0.467711 0 0.467711 15.1547
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 39.9822 -2.42181 0.317318 0 0.317318 -1.17093
 r3-c5 81.7114 48.5742 33.1373 0.23425 0 0.23425 1.33381
@@ -17111,6 +17419,8 @@ r6-c5 1.86121 52.0946 -50.2334 1.36183 0 1.36183 3.78076
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 87.4583 -51.1716 0.236308 0 0.236308 5.23172
 r1-c6 46.8171 87.2083 -40.3913 0.217512 0 0.217512 2.34303
@@ -17133,6 +17443,8 @@ r5-c7 56.6335 32.2811 24.3524 0.372196 0 0.372196 0.493919
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 87.0457 -36.1072 0.265313 0 0.265313 0.506912
 r1-c7 129.407 72.3249 57.0821 0.129954 0 0.129954 8.35393
@@ -17155,6 +17467,8 @@ r5-c7 25.8822 32.3528 -6.47067 0.49269 0 0.49269 -0.733033
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 86.8823 -38.4795 0.395844 0 0.395844 -0.0623762
 r1-c7 86.6808 72.264 14.4168 0.159743 0 0.159743 -1.0898
@@ -17174,6 +17488,8 @@ r6-c5 16.2518 51.8874 -35.6356 0.190543 0 0.190543 16.6511
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 86.8687 55.9335 0.140974 0 0.140974 4.56452
 r2-c4 127.203 65.5522 61.6505 0.268246 0 0.268246 2.16926
@@ -17310,8 +17626,12 @@ value: 2.23e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 4.53021e-005 0.0136478 4973.45 3548.89 70.916 7.56678 0.00730686 4999.71 2478.26 9999.35 63.711 24.245 12.1821 6.06552 15.1827 10.9023 2.23e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 103.461
@@ -17440,8 +17760,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 4.53021e-005 0.0136478 4973.45 3548.89 70.916 7.56678 0.00730686 4999.71 2478.26 9999.35 63.711 24.245 12.1821 6.06552 15.1827 10.9023 2.23e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -17580,6 +17904,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -17946,6 +18275,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -18282,6 +18616,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -18708,6 +19047,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -19164,6 +19508,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -19440,6 +19789,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -19836,6 +20190,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00111869 -0.00111869 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00310662 -0.00310662 148 50 37.3737 0
@@ -20022,6 +20381,11 @@ r4-c6 immature+mature 30 0.03261 0.144319 -0.111709 58 50 26.8519 1.64754
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00107838 -0.00107838 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00225224 -0.00225224 152 50 37.6238 0
@@ -20178,6 +20542,11 @@ r3-c6 immature+mature 30 0.00367 0.0985912 -0.0949212 356 50 43.8424 0.299683
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00111933 -0.00111933 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00310841 -0.00310841 374 50 44.1038 0
@@ -20304,6 +20673,11 @@ r3-c6 immature+mature 30 0.00094 0.0985101 -0.0975701 547 50 45.8124 0.0764413
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00107908 -0.00107908 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00225373 -0.00225373 189 50 39.5397 0
@@ -20610,6 +20984,11 @@ r5-c4 immature+mature 30 0.04559 0.160912 -0.115322 368 50 44.0191 4.36574
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00109374 -0.00109374 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00242783 -0.00242783 267 50 42.1136 0
@@ -20946,6 +21325,11 @@ r5-c6 immature+mature 30 0.05811 0.163935 -0.105825 327 50 43.3687 5.78044
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00219577 -0.00219577 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00585611 -0.00585611 89 50 32.0144 0
@@ -21252,6 +21636,11 @@ r5-c7 immature+mature 30 0.0492 0.164632 -0.115432 230 50 41.0714 4.3578
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00107911 -0.00107911 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00225392 -0.00225392 208 50 40.3101 0
@@ -21708,6 +22097,11 @@ r5-c7 immature+mature 30 0.06439 0.164589 -0.100199 214 50 40.5303 6.03278
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.0010949 -0.0010949 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.0024305 -0.0024305 436 50 44.856 0
@@ -22164,6 +22558,11 @@ r5-c7 immature+mature 30 0.08022 0.16463 -0.0844103 169 50 38.5845 7.49666
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00109623 -0.00109623 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00243344 -0.00243344 277 50 42.3547 0
@@ -22500,6 +22899,11 @@ r6-c5 immature+mature 30 0 0.175265 -0.175265 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00108389 -0.00108389 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00226381 -0.00226381 531 50 45.6971 0
@@ -22866,6 +23270,8 @@ r6-c5 immature+mature 30 0.00405964 0.175244 -0.171185 58 50 26.8519 0.136215
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 83.7735 -46.4967 0.145884 0 0.145884 13.2356
 r3-c5 30.5287 53.1741 -22.6453 0.250923 0 0.250923 0.853671
@@ -22878,6 +23284,8 @@ r4-c6 6.50762 51.8076 -45.3 0.396224 0 0.396224 12.7751
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 86.9052 -54.8483 0.31592 0 0.31592 3.56451
 r2-c5 31.6759 83.7552 -52.0793 0.26805 0 0.26805 5.00137
@@ -22890,6 +23298,8 @@ r4-c6 2.04767 51.8088 -49.7611 0.927462 0 0.927462 6.63259
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 83.7248 -61.7412 0.42792 0 0.42792 3.77824
 r2-c6 78.8904 83.1268 -4.23638 0.150578 0 0.150578 -1.86122
@@ -22900,6 +23310,8 @@ r3-c6 37.546 67.5022 -29.9562 0.227084 0 0.227084 1.63957
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 86.8465 -43.6116 0.181266 0 0.181266 5.46358
 r1-c6 49.5202 85.6294 -36.1092 0.157919 0 0.157919 3.96526
@@ -22916,6 +23328,8 @@ r5-c5 2.6618 33.8801 -31.2183 1.09364 0 1.09364 2.81942
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 85.6809 17.3992 0.0507771 0 0.0507771 3.74857
 r2-c5 119.953 83.6948 36.2582 0.0824759 0 0.0824759 7.23838
@@ -22933,6 +23347,8 @@ r6-c5 3.82586 44.3871 -40.5613 0.467711 0 0.467711 13.1744
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 42.6769 -5.11654 0.317318 0 0.317318 -1.13889
 r3-c5 81.7114 52.7156 28.9958 0.23425 0 0.23425 0.558954
@@ -22950,6 +23366,8 @@ r6-c5 1.86121 44.3587 -42.4975 1.36183 0 1.36183 3.36283
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 86.8331 -50.5463 0.236308 0 0.236308 5.11963
 r1-c6 46.8171 85.6846 -38.8676 0.217512 0 0.217512 2.11801
@@ -22972,6 +23390,8 @@ r5-c7 56.6335 25.9574 30.6761 0.372196 0 0.372196 1.73076
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 85.5753 -34.6369 0.265313 0 0.265313 0.383376
 r1-c7 129.407 69.3062 60.1008 0.129954 0 0.129954 9.91064
@@ -22994,6 +23414,8 @@ r5-c7 25.8822 26.0081 -0.125929 0.49269 0 0.49269 -0.738397
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 85.4668 -37.064 0.395844 0 0.395844 -0.11925
 r1-c7 86.6808 69.2644 17.4164 0.159743 0 0.159743 -0.726874
@@ -23013,6 +23435,8 @@ r6-c5 16.2518 44.2373 -27.9855 0.190543 0 0.190543 11.8954
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 86.4345 56.3677 0.140974 0 0.140974 4.69423
 r2-c4 127.203 67.8615 59.3412 0.268246 0 0.268246 1.83025
@@ -23149,8 +23573,12 @@ value: 3.34e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 3.11474e-005 0.0127398 4104.81 2215.34 70.5698 7.51182 0.00398507 5000 1962.42 8791.51 75.1866 0.0215621 12.3082 6.09045 14.8691 11.3554 3.34e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 107.142
@@ -23279,8 +23707,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 3.11474e-005 0.0127398 4104.81 2215.34 70.5698 7.51182 0.00398507 5000 1962.42 8791.51 75.1866 0.0215621 12.3082 6.09045 14.8691 11.3554 3.34e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -23419,6 +23851,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -23785,6 +24222,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -24121,6 +24563,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -24547,6 +24994,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -25003,6 +25455,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -25279,6 +25736,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -25675,6 +26137,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.0014415 -0.0014415 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00693844 -0.00693844 148 50 37.3737 0
@@ -25861,6 +26328,11 @@ r4-c6 immature+mature 30 0.03261 0.126504 -0.0938944 58 50 26.8519 1.76291
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00126615 -0.00126615 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00696394 -0.00696394 152 50 37.6238 0
@@ -26017,6 +26489,11 @@ r3-c6 immature+mature 30 0.00367 0.0521093 -0.0484393 356 50 43.8424 0.40228
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00144208 -0.00144208 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00694125 -0.00694125 374 50 44.1038 0
@@ -26143,6 +26620,11 @@ r3-c6 immature+mature 30 0.00094 0.0520418 -0.0511018 547 50 45.8124 0.103921
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00126694 -0.00126694 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00696833 -0.00696833 189 50 39.5397 0
@@ -26449,6 +26931,11 @@ r5-c4 immature+mature 30 0.04559 0.181102 -0.135512 368 50 44.0191 4.12853
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00126803 -0.00126803 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00697624 -0.00697624 267 50 42.1136 0
@@ -26785,6 +27272,11 @@ r5-c6 immature+mature 30 0.05811 0.17877 -0.12066 327 50 43.3687 5.56212
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00269934 -0.00269934 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00571566 -0.00571566 89 50 32.0144 0
@@ -27091,6 +27583,11 @@ r5-c7 immature+mature 30 0.0492 0.181864 -0.132664 230 50 41.0714 4.15664
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.0012671 -0.0012671 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.0069695 -0.0069695 208 50 40.3101 0
@@ -27547,6 +28044,11 @@ r5-c7 immature+mature 30 0.06439 0.181829 -0.117439 214 50 40.5303 5.77281
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00126992 -0.00126992 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00698683 -0.00698683 436 50 44.856 0
@@ -28003,6 +28505,11 @@ r5-c7 immature+mature 30 0.08022 0.181859 -0.101639 169 50 38.5845 7.1886
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00127076 -0.00127076 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.0069915 -0.0069915 277 50 42.3547 0
@@ -28339,6 +28846,11 @@ r6-c5 immature+mature 30 0 0.206068 -0.206068 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00127178 -0.00127178 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00699506 -0.00699506 531 50 45.6971 0
@@ -28705,6 +29217,8 @@ r6-c5 immature+mature 30 0.00405964 0.206068 -0.202008 58 50 26.8519 0.118553
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 76.7048 -39.428 0.145884 0 0.145884 10.0745
 r3-c5 30.5287 48.4783 -17.9495 0.250923 0 0.250923 0.129674
@@ -28717,6 +29231,8 @@ r4-c6 6.50762 42.803 -36.2954 0.396224 0 0.396224 10.2793
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 87.3276 -55.2708 0.31592 0 0.31592 3.61304
 r2-c5 31.6759 76.6918 -45.0159 0.26805 0 0.26805 3.86673
@@ -28729,6 +29245,8 @@ r4-c6 2.04767 42.8038 -40.7561 0.927462 0 0.927462 5.76355
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 76.6733 -54.6898 0.42792 0 0.42792 3.14556
 r2-c6 78.8904 76.2495 2.64089 0.150578 0 0.150578 -1.85321
@@ -28739,6 +29257,8 @@ r3-c6 37.546 54.5633 -17.0173 0.227084 0 0.227084 -0.286267
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 87.2715 -44.0366 0.181266 0 0.181266 5.56683
 r1-c6 49.5202 87.1295 -37.6093 0.157919 0 0.157919 4.3488
@@ -28755,6 +29275,8 @@ r5-c5 2.6618 40.2659 -37.6041 1.09364 0 1.09364 3.31042
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 87.1957 15.8844 0.0507771 0 0.0507771 2.54123
 r2-c5 119.953 76.6516 43.3014 0.0824759 0 0.0824759 12.5194
@@ -28772,6 +29294,8 @@ r6-c5 3.82586 57.1682 -53.3424 0.467711 0 0.467711 16.3451
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 40.9592 -3.39883 0.317318 0 0.317318 -1.16424
 r3-c5 81.7114 48.1532 33.5582 0.23425 0 0.23425 1.42361
@@ -28789,6 +29313,8 @@ r6-c5 1.86121 57.142 -55.2808 1.36183 0 1.36183 4.03235
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 87.252 -50.9652 0.236308 0 0.236308 5.19471
 r1-c6 46.8171 87.1621 -40.345 0.217512 0 0.217512 2.33616
@@ -28811,6 +29337,8 @@ r5-c7 56.6335 34.4826 22.1509 0.372196 0 0.372196 0.19186
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 87.0539 -36.1154 0.265313 0 0.265313 0.507609
 r1-c7 129.407 84.9892 44.4178 0.129954 0 0.129954 3.44511
@@ -28833,6 +29361,8 @@ r5-c7 25.8822 34.5208 -8.63863 0.49269 0 0.49269 -0.689185
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 86.992 -38.5892 0.395844 0 0.395844 -0.0579297
 r1-c7 86.6808 84.9409 1.73992 0.159743 0 0.159743 -1.81905
@@ -28852,6 +29382,8 @@ r6-c5 16.2518 57.0257 -40.7739 0.190543 0 0.190543 19.8025
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 86.9185 55.8837 0.140974 0 0.140974 4.54976
 r2-c4 127.203 71.226 55.9767 0.268246 0 0.268246 1.38536
@@ -28988,8 +29520,12 @@ value: 4.45e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 2.45069e-005 0.000183839 4989.06 4674.26 71.5439 5.41431 0.0102445 5000 2632.98 9966.92 60 21.9907 12.373 6.26135 15.3684 10.9822 4.45e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 103.896
@@ -29118,8 +29654,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 2.45069e-005 0.000183839 4989.06 4674.26 71.5439 5.41431 0.0102445 5000 2632.98 9966.92 60 21.9907 12.373 6.26135 15.3684 10.9822 4.45e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -29258,6 +29798,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -29624,6 +30169,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -29960,6 +30510,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -30386,6 +30941,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -30842,6 +31402,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -31118,6 +31683,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -31514,6 +32084,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00134131 -0.00134131 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00678038 -0.00678038 148 50 37.3737 0
@@ -31700,6 +32275,11 @@ r4-c6 immature+mature 30 0.03261 0.137582 -0.104972 58 50 26.8519 1.68941
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00121722 -0.00121722 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00680861 -0.00680861 152 50 37.6238 0
@@ -31856,6 +32436,11 @@ r3-c6 immature+mature 30 0.00367 0.0687152 -0.0650452 356 50 43.8424 0.35777
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00134172 -0.00134172 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00678248 -0.00678248 374 50 44.1038 0
@@ -31982,6 +32567,11 @@ r3-c6 immature+mature 30 0.00094 0.0686569 -0.0677169 547 50 45.8124 0.0919889
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00121782 -0.00121782 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00681199 -0.00681199 189 50 39.5397 0
@@ -32288,6 +32878,11 @@ r5-c4 immature+mature 30 0.04559 0.173089 -0.127499 368 50 44.0191 4.21934
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00121775 -0.00121775 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00681179 -0.00681179 267 50 42.1136 0
@@ -32624,6 +33219,11 @@ r5-c6 immature+mature 30 0.05811 0.174017 -0.115907 327 50 43.3687 5.63002
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00245031 -0.00245031 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00566145 -0.00566145 89 50 32.0144 0
@@ -32930,6 +33530,11 @@ r5-c7 immature+mature 30 0.0492 0.175911 -0.126711 230 50 41.0714 4.22389
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00121794 -0.00121794 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00681287 -0.00681287 208 50 40.3101 0
@@ -33386,6 +33991,11 @@ r5-c7 immature+mature 30 0.06439 0.175884 -0.111494 214 50 40.5303 5.85957
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00121919 -0.00121919 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00681997 -0.00681997 436 50 44.856 0
@@ -33842,6 +34452,11 @@ r5-c7 immature+mature 30 0.08022 0.175904 -0.0956841 169 50 38.5845 7.29165
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00121982 -0.00121982 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00682353 -0.00682353 277 50 42.3547 0
@@ -34178,6 +34793,11 @@ r6-c5 immature+mature 30 0 0.190104 -0.190104 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00122148 -0.00122148 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00683255 -0.00683255 531 50 45.6971 0
@@ -34544,6 +35164,8 @@ r6-c5 immature+mature 30 0.00405964 0.190099 -0.186039 58 50 26.8519 0.127346
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 78.8629 -41.5861 0.145884 0 0.145884 11.0297
 r3-c5 30.5287 50.1359 -19.6071 0.250923 0 0.250923 0.376758
@@ -34556,6 +35178,8 @@ r4-c6 6.50762 44.9458 -38.4382 0.396224 0 0.396224 10.894
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 86.902 -54.8451 0.31592 0 0.31592 3.56414
 r2-c5 31.6759 78.8527 -47.1768 0.26805 0 0.26805 4.21251
@@ -34568,6 +35192,8 @@ r4-c6 2.04767 44.9466 -42.8989 0.927462 0 0.927462 5.98029
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 78.8381 -56.8545 0.42792 0 0.42792 3.3408
 r2-c6 78.8904 75.5256 3.36476 0.150578 0 0.150578 -1.83192
@@ -34578,6 +35204,8 @@ r3-c6 37.546 54.5413 -16.9954 0.227084 0 0.227084 -0.289059
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 86.858 -43.6232 0.181266 0 0.181266 5.46638
 r1-c6 49.5202 86.8097 -37.2895 0.157919 0 0.157919 4.26657
@@ -34594,6 +35222,8 @@ r5-c5 2.6618 39.7267 -37.065 1.09364 0 1.09364 3.27073
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 86.8621 16.2181 0.0507771 0 0.0507771 2.79515
 r2-c5 119.953 78.8206 41.1324 0.0824759 0 0.0824759 10.7195
@@ -34611,6 +35241,8 @@ r6-c5 3.82586 53.9574 -50.1316 0.467711 0 0.467711 15.5923
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 43.1675 -5.60709 0.317318 0 0.317318 -1.12871
 r3-c5 81.7114 49.8859 31.8255 0.23425 0 0.23425 1.0677
@@ -34628,6 +35260,8 @@ r6-c5 1.86121 53.9372 -52.076 1.36183 0 1.36183 3.87436
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 86.8429 -50.5562 0.236308 0 0.236308 5.12139
 r1-c6 46.8171 86.8353 -40.0182 0.217512 0 0.217512 2.28769
@@ -34650,6 +35284,8 @@ r5-c7 56.6335 33.0826 23.5509 0.372196 0 0.372196 0.377705
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 86.7501 -35.8117 0.265313 0 0.265313 0.481908
 r1-c7 129.407 85.2587 44.1483 0.129954 0 0.129954 3.36436
@@ -34672,6 +35308,8 @@ r5-c7 25.8822 33.1128 -7.2306 0.49269 0 0.49269 -0.719562
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 86.702 -38.2992 0.395844 0 0.395844 -0.0696697
 r1-c7 86.6808 85.2205 1.46026 0.159743 0 0.159743 -1.82313
@@ -34691,6 +35329,8 @@ r6-c5 16.2518 53.8505 -37.5987 0.190543 0 0.190543 17.8606
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 86.5812 56.2211 0.140974 0 0.140974 4.65021
 r2-c4 127.203 74.1765 53.0262 0.268246 0 0.268246 1.03816
@@ -34827,8 +35467,12 @@ value: 5.56e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.89117e-005 0.000111205 4067.53 4388.49 71.1257 5.20133 0.00702851 4999.69 2425.21 9962.04 65.4649 22.4098 12.1524 6.13088 15.3598 10.8692 5.56e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 105.046
@@ -34957,8 +35601,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.89117e-005 0.000111205 4067.53 4388.49 71.1257 5.20133 0.00702851 4999.69 2425.21 9962.04 65.4649 22.4098 12.1524 6.13088 15.3598 10.8692 5.56e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -35097,6 +35745,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -35463,6 +36116,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -35799,6 +36457,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -36225,6 +36888,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -36681,6 +37349,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -36957,6 +37630,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -37353,6 +38031,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00172834 -0.00172834 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00782468 -0.00782468 148 50 37.3737 0
@@ -37539,6 +38222,11 @@ r4-c6 immature+mature 30 0.03261 0.0397168 -0.00710675 58 50 26.8519 2.77734
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00145531 -0.00145531 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00788374 -0.00788374 152 50 37.6238 0
@@ -37695,6 +38383,11 @@ r3-c6 immature+mature 30 0.00367 0.012621 -0.00895098 356 50 43.8424 0.630435
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00172879 -0.00172879 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00782675 -0.00782675 374 50 44.1038 0
@@ -37821,6 +38514,11 @@ r3-c6 immature+mature 30 0.00094 0.012601 -0.011661 547 50 45.8124 0.164997
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00145587 -0.00145587 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00788683 -0.00788683 189 50 39.5397 0
@@ -38127,6 +38825,11 @@ r5-c4 immature+mature 30 0.04559 0.10542 -0.0598295 368 50 44.0191 5.21445
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00149074 -0.00149074 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00807734 -0.00807734 267 50 42.1136 0
@@ -38463,6 +39166,11 @@ r5-c6 immature+mature 30 0.05811 0.107044 -0.0489339 327 50 43.3687 6.8546
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00295503 -0.00295503 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.0056289 -0.0056289 89 50 32.0144 0
@@ -38769,6 +39477,11 @@ r5-c7 immature+mature 30 0.0492 0.126555 -0.077355 230 50 41.0714 4.88932
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00145601 -0.00145601 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00788781 -0.00788781 208 50 40.3101 0
@@ -39225,6 +39938,11 @@ r5-c7 immature+mature 30 0.06439 0.126499 -0.0621085 214 50 40.5303 6.71972
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00149212 -0.00149212 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00808493 -0.00808493 436 50 44.856 0
@@ -39681,6 +40399,11 @@ r5-c7 immature+mature 30 0.08022 0.126448 -0.046228 169 50 38.5845 8.31341
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00149276 -0.00149276 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00808846 -0.00808846 277 50 42.3547 0
@@ -40017,6 +40740,11 @@ r6-c5 immature+mature 30 0 0.328027 -0.328027 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00145936 -0.00145936 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.0079058 -0.0079058 531 50 45.6971 0
@@ -40383,6 +41111,8 @@ r6-c5 immature+mature 30 0.00405964 0.328082 -0.324022 58 50 26.8519 0.0678574
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 77.7377 -40.4609 0.145884 0 0.145884 10.5304
 r3-c5 30.5287 49.9795 -19.4508 0.250923 0 0.250923 0.353024
@@ -40395,6 +41125,8 @@ r4-c6 6.50762 35.0439 -28.5363 0.396224 0 0.396224 7.93293
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 92.3218 -60.2649 0.31592 0 0.31592 4.18734
 r2-c5 31.6759 77.7289 -46.0531 0.26805 0 0.26805 4.0325
@@ -40407,6 +41139,8 @@ r4-c6 2.04767 35.0438 -32.9961 0.927462 0 0.927462 4.91611
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 77.7168 -55.7333 0.42792 0 0.42792 3.23978
 r2-c6 78.8904 80.178 -1.2876 0.150578 0 0.150578 -1.89834
@@ -40417,6 +41151,8 @@ r3-c6 37.546 53.892 -16.346 0.227084 0 0.227084 -0.370583
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 92.2847 -49.0499 0.181266 0 0.181266 6.80064
 r1-c6 49.5202 90.0847 -40.5646 0.157919 0 0.157919 5.11981
@@ -40433,6 +41169,8 @@ r5-c5 2.6618 33.11 -30.4482 1.09364 0 1.09364 2.75691
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 90.1254 12.9548 0.0507771 0 0.0507771 0.589025
 r2-c5 119.953 77.7029 42.25 0.0824759 0 0.0824759 11.6263
@@ -40450,6 +41188,8 @@ r6-c5 3.82586 62.2587 -58.4329 0.467711 0 0.467711 17.4868
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 45.4651 -7.9047 0.317318 0 0.317318 -1.06541
 r3-c5 81.7114 49.7312 31.9802 0.23425 0 0.23425 1.09804
@@ -40467,6 +41207,8 @@ r6-c5 1.86121 62.2489 -60.3877 1.36183 0 1.36183 4.2725
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 92.2696 -55.9829 0.236308 0 0.236308 6.09833
 r1-c6 46.8171 90.1043 -43.2873 0.217512 0 0.217512 2.77785
@@ -40489,6 +41231,8 @@ r5-c7 56.6335 26.65 29.9835 0.372196 0 0.372196 1.56192
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 90.0337 -39.0953 0.265313 0 0.265313 0.764264
 r1-c7 129.407 87.2458 42.1612 0.129954 0 0.129954 2.79463
@@ -40511,6 +41255,8 @@ r5-c7 25.8822 26.648 -0.765874 0.49269 0 0.49269 -0.748649
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 89.9917 -41.5889 0.395844 0 0.395844 0.0656022
 r1-c7 86.6808 87.2142 -0.533424 0.159743 0 0.159743 -1.83967
@@ -40530,6 +41276,8 @@ r6-c5 16.2518 62.1782 -45.9264 0.190543 0 0.190543 22.909
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 92.0485 50.7537 0.140974 0 0.140974 3.15785
 r2-c4 127.203 75.0854 52.1173 0.268246 0 0.268246 0.938599
@@ -40666,8 +41414,12 @@ value: 6.67e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.67879e-005 0.0001 4997.45 2586.71 71.9822 5.51368 0.0354625 4985.89 2969.03 9965.47 61.5509 4.32563 13.0559 6.85428 16.0348 11.764 6.67e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 100.415
@@ -40796,8 +41548,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.67879e-005 0.0001 4997.45 2586.71 71.9822 5.51368 0.0354625 4985.89 2969.03 9965.47 61.5509 4.32563 13.0559 6.85428 16.0348 11.764 6.67e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -40936,6 +41692,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -41302,6 +42063,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -41638,6 +42404,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -42064,6 +42835,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -42520,6 +43296,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -42796,6 +43577,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -43192,6 +43978,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.0013448 -0.0013448 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00298528 -0.00298528 148 50 37.3737 0
@@ -43378,6 +44169,11 @@ r4-c6 immature+mature 30 0.03261 0.141706 -0.109096 58 50 26.8519 1.66354
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00116678 -0.00116678 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00212228 -0.00212228 152 50 37.6238 0
@@ -43534,6 +44330,11 @@ r3-c6 immature+mature 30 0.00367 0.0483973 -0.0447273 356 50 43.8424 0.41417
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00134522 -0.00134522 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00298623 -0.00298623 374 50 44.1038 0
@@ -43660,6 +44461,11 @@ r3-c6 immature+mature 30 0.00094 0.0483655 -0.0474255 547 50 45.8124 0.107076
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00116715 -0.00116715 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00212295 -0.00212295 189 50 39.5397 0
@@ -43966,6 +44772,11 @@ r5-c4 immature+mature 30 0.04559 0.173716 -0.128126 368 50 44.0191 4.21209
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00115969 -0.00115969 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00211295 -0.00211295 267 50 42.1136 0
@@ -44302,6 +45113,11 @@ r5-c6 immature+mature 30 0.05811 0.176473 -0.118363 327 50 43.3687 5.59471
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00297789 -0.00297789 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00664534 -0.00664534 89 50 32.0144 0
@@ -44608,6 +45424,11 @@ r5-c7 immature+mature 30 0.0492 0.178478 -0.129278 230 50 41.0714 4.19462
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00116718 -0.00116718 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00212307 -0.00212307 208 50 40.3101 0
@@ -45064,6 +45885,11 @@ r5-c7 immature+mature 30 0.06439 0.178459 -0.114069 214 50 40.5303 5.82164
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00116023 -0.00116023 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00211396 -0.00211396 436 50 44.856 0
@@ -45520,6 +46346,11 @@ r5-c7 immature+mature 30 0.08022 0.178489 -0.0982687 169 50 38.5845 7.2465
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00116092 -0.00116092 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00211522 -0.00211522 277 50 42.3547 0
@@ -45856,6 +46687,11 @@ r6-c5 immature+mature 30 0 0.199422 -0.199422 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00116962 -0.00116962 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00212747 -0.00212747 531 50 45.6971 0
@@ -46222,6 +47058,8 @@ r6-c5 immature+mature 30 0.00405964 0.199424 -0.195364 58 50 26.8519 0.122125
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 77.4104 -40.1337 0.145884 0 0.145884 10.3857
 r3-c5 30.5287 40.1719 -9.64318 0.250923 0 0.250923 -0.910549
@@ -46234,6 +47072,8 @@ r4-c6 6.50762 69.8938 -63.3862 0.396224 0 0.396224 17.1927
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 89.2208 -57.1639 0.31592 0 0.31592 3.83067
 r2-c5 31.6759 77.4013 -45.7254 0.26805 0 0.26805 3.9801
@@ -46246,6 +47086,8 @@ r4-c6 2.04767 69.8941 -67.8464 0.927462 0 0.927462 8.11371
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 77.3856 -55.4021 0.42792 0 0.42792 3.2099
 r2-c6 78.8904 77.8014 1.08892 0.150578 0 0.150578 -1.88483
@@ -46256,6 +47098,8 @@ r3-c6 37.546 57.0077 -19.4618 0.227084 0 0.227084 0.0367166
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 89.192 -45.9571 0.181266 0 0.181266 6.03618
 r1-c6 49.5202 89.744 -40.2238 0.157919 0 0.157919 5.02994
@@ -46272,6 +47116,8 @@ r5-c5 2.6618 40.4902 -37.8284 1.09364 0 1.09364 3.32685
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 89.7651 13.315 0.0507771 0 0.0507771 0.803054
 r2-c5 119.953 77.3703 42.5827 0.0824759 0 0.0824759 11.9046
@@ -46289,6 +47135,8 @@ r6-c5 3.82586 60.0638 -56.238 0.467711 0 0.467711 17.0019
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 34.9569 2.60351 0.317318 0 0.317318 -1.09722
 r3-c5 81.7114 39.9572 41.7542 0.23425 0 0.23425 3.68966
@@ -46306,6 +47154,8 @@ r6-c5 1.86121 60.0484 -58.1872 1.36183 0 1.36183 4.17068
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 89.1846 -52.8978 0.236308 0 0.236308 5.5419
 r1-c6 46.8171 89.7692 -42.9522 0.217512 0 0.217512 2.72709
@@ -46328,6 +47178,8 @@ r5-c7 56.6335 27.9425 28.691 0.372196 0 0.372196 1.27172
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 89.717 -38.7785 0.265313 0 0.265313 0.736608
 r1-c7 129.407 76.1066 53.3004 0.129954 0 0.129954 6.63547
@@ -46350,6 +47202,8 @@ r5-c7 25.8822 27.9702 -2.08806 0.49269 0 0.49269 -0.760968
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 89.6617 -41.2589 0.395844 0 0.395844 0.0518366
 r1-c7 86.6808 76.0885 10.5923 0.159743 0 0.159743 -1.4351
@@ -46369,6 +47223,8 @@ r6-c5 16.2518 59.9816 -43.7298 0.190543 0 0.190543 21.5919
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 88.9923 53.81 0.140974 0 0.140974 3.95723
 r2-c4 127.203 61.5209 65.6817 0.268246 0 0.268246 2.83551
@@ -46505,8 +47361,12 @@ value: 7.78e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.54602e-005 0.0153996 4997.02 1 71.7213 7.68709 0.00980307 5000 1742.24 8364.93 71.2067 0.168767 12.6719 6.24042 15.1619 10.8707 7.78e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 117.041
@@ -46635,8 +47495,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.54602e-005 0.0153996 4997.02 1 71.7213 7.68709 0.00980307 5000 1742.24 8364.93 71.2067 0.168767 12.6719 6.24042 15.1619 10.8707 7.78e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -46775,6 +47639,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -47141,6 +48010,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -47477,6 +48351,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -47903,6 +48782,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -48359,6 +49243,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -48635,6 +49524,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -49031,6 +49925,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00120855 -0.00120855 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.00424798 -0.00424798 148 50 37.3737 0
@@ -49217,6 +50116,11 @@ r4-c6 immature+mature 30 0.03261 0.125754 -0.0931442 58 50 26.8519 1.76812
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.001364 -0.001364 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.00338526 -0.00338526 152 50 37.6238 0
@@ -49373,6 +50277,11 @@ r3-c6 immature+mature 30 0.00367 0.109633 -0.105963 356 50 43.8424 0.282602
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00120879 -0.00120879 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00424886 -0.00424886 374 50 44.1038 0
@@ -49499,6 +50408,11 @@ r3-c6 immature+mature 30 0.00094 0.109556 -0.108616 547 50 45.8124 0.0718648
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00136442 -0.00136442 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00338633 -0.00338633 189 50 39.5397 0
@@ -49805,6 +50719,11 @@ r5-c4 immature+mature 30 0.04559 0.126279 -0.0806889 368 50 44.0191 4.85212
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.0014539 -0.0014539 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00396239 -0.00396239 267 50 42.1136 0
@@ -50141,6 +51060,11 @@ r5-c6 immature+mature 30 0.05811 0.129683 -0.0715728 327 50 43.3687 6.37111
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00168539 -0.00168539 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00355759 -0.00355759 89 50 32.0144 0
@@ -50447,6 +51371,11 @@ r5-c7 immature+mature 30 0.0492 0.129228 -0.0800283 230 50 41.0714 4.84708
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00136446 -0.00136446 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00338647 -0.00338647 208 50 40.3101 0
@@ -50903,6 +51832,11 @@ r5-c7 immature+mature 30 0.06439 0.129214 -0.0648244 214 50 40.5303 6.66428
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00145498 -0.00145498 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00396539 -0.00396539 436 50 44.856 0
@@ -51359,6 +52293,11 @@ r5-c7 immature+mature 30 0.08022 0.129213 -0.0489927 169 50 38.5845 8.24646
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00145562 -0.00145562 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00396716 -0.00396716 277 50 42.3547 0
@@ -51695,6 +52634,11 @@ r6-c5 immature+mature 30 0 0.154715 -0.154715 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00136722 -0.00136722 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00339329 -0.00339329 531 50 45.6971 0
@@ -52061,6 +53005,8 @@ r6-c5 immature+mature 30 0.00405964 0.154694 -0.150634 58 50 26.8519 0.149812
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 100.415 -63.1379 0.145884 0 0.145884 20.8915
 r3-c5 30.5287 64.1481 -33.6194 0.250923 0 0.250923 2.75322
@@ -52073,6 +53019,8 @@ r4-c6 6.50762 43.0693 -36.5617 0.396224 0 0.396224 10.3564
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 88.9701 -56.9132 0.31592 0 0.31592 3.80184
 r2-c5 31.6759 100.406 -68.7303 0.26805 0 0.26805 7.68862
@@ -52085,6 +53033,8 @@ r4-c6 2.04767 43.0702 -41.0225 0.927462 0 0.927462 5.79086
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 100.393 -78.4099 0.42792 0 0.42792 5.22937
 r2-c6 78.8904 68.1715 10.7189 0.150578 0 0.150578 -1.34749
@@ -52095,6 +53045,8 @@ r3-c6 37.546 39.0853 -1.53936 0.227084 0 0.227084 -1.49281
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 88.9414 -45.7065 0.181266 0 0.181266 5.97469
 r1-c6 49.5202 83.4292 -33.909 0.157919 0 0.157919 3.41331
@@ -52111,6 +53063,8 @@ r5-c5 2.6618 51.8574 -49.1956 1.09364 0 1.09364 4.09824
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 83.4674 19.6127 0.0507771 0 0.0507771 5.77387
 r2-c5 119.953 100.381 19.5721 0.0824759 0 0.0824759 -0.0668409
@@ -52128,6 +53082,8 @@ r6-c5 3.82586 50.0911 -46.2653 0.467711 0 0.467711 14.6488
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 72.0018 -34.4414 0.317318 0 0.317318 0.721558
 r3-c5 81.7114 63.9317 17.7797 0.23425 0 0.23425 -0.771859
@@ -52145,6 +53101,8 @@ r6-c5 1.86121 50.0794 -48.2182 1.36183 0 1.36183 3.67591
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 88.9351 -52.6483 0.236308 0 0.236308 5.49701
 r1-c6 46.8171 83.4584 -36.6413 0.217512 0 0.217512 1.79446
@@ -52167,6 +53125,8 @@ r5-c7 56.6335 53.7805 2.85298 0.372196 0 0.372196 -0.968762
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 83.3998 -32.4614 0.265313 0 0.265313 0.20474
 r1-c7 129.407 69.8784 59.5286 0.129954 0 0.129954 9.60201
@@ -52189,6 +53149,8 @@ r5-c7 25.8822 53.7938 -27.9116 0.49269 0 0.49269 0.129634
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 83.3605 -34.9577 0.395844 0 0.395844 -0.202102
 r1-c7 86.6808 69.8584 16.8224 0.159743 0 0.159743 -0.805718
@@ -52208,6 +53170,8 @@ r6-c5 16.2518 50.0235 -33.7717 0.190543 0 0.190543 15.4973
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 88.7482 54.054 0.140974 0 0.140974 4.02479
 r2-c4 127.203 97.5906 29.6121 0.268246 0 0.268246 -0.686807
@@ -52344,8 +53308,12 @@ value: 8.89e+007
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.5065e-005 0.00763631 29.1602 4458.99 61.5148 0.0100481 0.000112535 732.822 243.196 9999.48 60.0721 30 12.5468 6.22565 14.6921 11.0218 8.89e+007
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 88.5147
@@ -52474,8 +53442,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.5065e-005 0.00763631 29.1602 4458.99 61.5148 0.0100481 0.000112535 732.822 243.196 9999.48 60.0721 30 12.5468 6.22565 14.6921 11.0218 8.89e+007
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB
@@ -52614,6 +53586,11 @@ layer_max: 77.83
 [mature-2002]
 report.type: observation
 observation.label: mature-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -52980,6 +53957,11 @@ r6-c5 30 0 1 -1 0 0 0 -0
 [mature-2003]
 report.type: observation
 observation.label: mature-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r3-c4 1 0 0 0 0 0 0 -0
 r3-c4 2 0 0 0 0 0 0 -0
@@ -53316,6 +54298,11 @@ r6-c5 30 0 1 -1 0.0244829 0 0.0244829 0.637083
 [mature-2004]
 report.type: observation
 observation.label: mature-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c5 1 0 0 0 0 0 0 -0
 r1-c5 2 0 0 0 0 0 0 -0
@@ -53742,6 +54729,11 @@ r5-c7 30 0.908292 1 -0.0917079 0.343174 0 0.343174 0.805943
 [mature-2005]
 report.type: observation
 observation.label: mature-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -54198,6 +55190,11 @@ r5-c7 30 1 1 0 3.0671 0 3.0671 -0
 [mature-2006]
 report.type: observation
 observation.label: mature-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r1-c6 1 0 0 0 0 0 0 -0
 r1-c6 2 0 0 0 0 0 0 -0
@@ -54474,6 +55471,11 @@ r5-c7 30 0.964089 1 -0.0359106 0.207738 0 0.207738 0.191979
 [mature-2007]
 report.type: observation
 observation.label: mature-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area age observed expected residual errorvalue processerror totalerror score
 r2-c4 1 0 0 0 0 0 0 -0
 r2-c4 2 0 0 0 0 0 0 -0
@@ -54870,6 +55872,11 @@ r6-c5 30 1 1 0 0.00598462 0 0.00598462 -0
 [CAA-1998]
 report.type: observation
 observation.label: CAA-1998
+observation.year: 1998
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00142901 -0.00142901 148 50 37.3737 0
 r2-c5 immature+mature 2 0 0.0058447 -0.0058447 148 50 37.3737 0
@@ -55056,6 +56063,11 @@ r4-c6 immature+mature 30 0.03261 0.00138471 0.0312253 58 50 26.8519 5.71623
 [CAA-1999]
 report.type: observation
 observation.label: CAA-1999
+observation.year: 1999
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00140267 -0.00140267 152 50 37.6238 0
 r1-c5 immature+mature 2 0 0.0055242 -0.0055242 152 50 37.6238 0
@@ -55212,6 +56224,11 @@ r3-c6 immature+mature 30 0.00367 0.00138941 0.00228059 356 50 43.8424 0.985462
 [CAA-2000]
 report.type: observation
 observation.label: CAA-2000
+observation.year: 2000
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r2-c5 immature+mature 1 0 0.00142937 -0.00142937 374 50 44.1038 0
 r2-c5 immature+mature 2 0 0.00584617 -0.00584617 374 50 44.1038 0
@@ -55338,6 +56355,11 @@ r3-c6 immature+mature 30 0.00094 0.00138776 -0.00044776 547 50 45.8124 0.259999
 [CAA-2001]
 report.type: observation
 observation.label: CAA-2001
+observation.year: 2001
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00140326 -0.00140326 189 50 39.5397 0
 r1-c5 immature+mature 2 0 0.00552652 -0.00552652 189 50 39.5397 0
@@ -55644,6 +56666,11 @@ r5-c4 immature+mature 30 0.04559 0.204661 -0.159071 368 50 44.0191 3.8831
 [CAA-2002]
 report.type: observation
 observation.label: CAA-2002
+observation.year: 2002
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00142038 -0.00142038 267 50 42.1136 0
 r1-c6 immature+mature 2 0 0.00563643 -0.00563643 267 50 42.1136 0
@@ -55980,6 +57007,11 @@ r5-c6 immature+mature 30 0.05811 0.202168 -0.144058 327 50 43.3687 5.25213
 [CAA-2003]
 report.type: observation
 observation.label: CAA-2003
+observation.year: 2003
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r3-c4 immature+mature 1 0 0.00223896 -0.00223896 89 50 32.0144 0
 r3-c4 immature+mature 2 0 0.00647476 -0.00647476 89 50 32.0144 0
@@ -56286,6 +57318,11 @@ r5-c7 immature+mature 30 0.0492 0.205288 -0.156088 230 50 41.0714 3.91183
 [CAA-2004]
 report.type: observation
 observation.label: CAA-2004
+observation.year: 2004
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00140364 -0.00140364 208 50 40.3101 0
 r1-c5 immature+mature 2 0 0.00552808 -0.00552808 208 50 40.3101 0
@@ -56742,6 +57779,11 @@ r5-c7 immature+mature 30 0.06439 0.205292 -0.140902 214 50 40.5303 5.45607
 [CAA-2005]
 report.type: observation
 observation.label: CAA-2005
+observation.year: 2005
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00142204 -0.00142204 436 50 44.856 0
 r1-c6 immature+mature 2 0 0.00564307 -0.00564307 436 50 44.856 0
@@ -57198,6 +58240,11 @@ r5-c7 immature+mature 30 0.08022 0.205324 -0.125104 169 50 38.5845 6.81297
 [CAA-2006]
 report.type: observation
 observation.label: CAA-2006
+observation.year: 2006
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c6 immature+mature 1 0 0.00142274 -0.00142274 277 50 42.3547 0
 r1-c6 immature+mature 2 0 0.00564586 -0.00564586 277 50 42.3547 0
@@ -57534,6 +58581,11 @@ r6-c5 immature+mature 30 0 0.215511 -0.215511 1 50 0.980392 0
 [CAA-2007]
 report.type: observation
 observation.label: CAA-2007
+observation.year: 2007
+observation.time_step: one
+observation.min_age: 1
+observation.max_age: 30
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 r1-c5 immature+mature 1 0 0.00140706 -0.00140706 531 50 45.6971 0
 r1-c5 immature+mature 2 0 0.00554153 -0.00554153 531 50 45.6971 0
@@ -57900,6 +58952,8 @@ r6-c5 immature+mature 30 0.00405964 0.215536 -0.211477 58 50 26.8519 0.113656
 [cpue-1998]
 report.type: observation
 observation.label: cpue-1998
+observation.year: 1998
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 37.2768 74.8263 -37.5495 0.145884 0 0.145884 9.25189
 r3-c5 30.5287 54.1644 -23.6356 0.250923 0 0.250923 1.01493
@@ -57912,6 +58966,8 @@ r4-c6 6.50762 21.205 -14.6974 0.396224 0 0.396224 3.24939
 [cpue-1999]
 report.type: observation
 observation.label: cpue-1999
+observation.year: 1999
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 32.0569 76.2314 -44.1745 0.31592 0 0.31592 2.34651
 r2-c5 31.6759 74.8188 -43.1429 0.26805 0 0.26805 3.56841
@@ -57924,6 +58980,8 @@ r4-c6 2.04767 21.2055 -19.1578 0.927462 0 0.927462 3.07212
 [cpue-2000]
 report.type: observation
 observation.label: cpue-2000
+observation.year: 2000
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r2-c5 21.9835 74.8073 -52.8238 0.42792 0 0.42792 2.97664
 r2-c6 78.8904 73.5609 5.32952 0.150578 0 0.150578 -1.75201
@@ -57934,6 +58992,8 @@ r3-c6 37.546 53.0166 -15.4706 0.227084 0 0.227084 -0.477449
 [cpue-2001]
 report.type: observation
 observation.label: cpue-2001
+observation.year: 2001
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 43.2349 76.1991 -32.9642 0.181266 0 0.181266 2.97171
 r1-c6 49.5202 75.2458 -25.7256 0.157919 0 0.157919 1.4951
@@ -57950,6 +59010,8 @@ r5-c5 2.6618 63.7265 -61.0647 1.09364 0 1.09364 4.80019
 [cpue-2002]
 report.type: observation
 observation.label: cpue-2002
+observation.year: 2002
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 103.08 75.2806 27.7995 0.0507771 0 0.0507771 16.356
 r2-c5 119.953 74.7911 45.1619 0.0824759 0 0.0824759 14.1994
@@ -57967,6 +59029,8 @@ r6-c5 3.82586 58.8511 -55.0252 0.467711 0 0.467711 16.7293
 [cpue-2003]
 report.type: observation
 observation.label: cpue-2003
+observation.year: 2003
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r3-c4 37.5604 47.7569 -10.1965 0.317318 0 0.317318 -0.979491
 r3-c5 81.7114 53.9971 27.7143 0.23425 0 0.23425 0.355286
@@ -57984,6 +59048,8 @@ r6-c5 1.86121 58.8428 -56.9816 1.36183 0 1.36183 4.11385
 [cpue-2004]
 report.type: observation
 observation.label: cpue-2004
+observation.year: 2004
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 36.2868 76.1765 -39.8897 0.236308 0 0.236308 3.24036
 r1-c6 46.8171 75.2525 -28.4354 0.217512 0 0.217512 0.667722
@@ -58006,6 +59072,8 @@ r5-c7 56.6335 62.672 -6.03847 0.372196 0 0.372196 -1.016
 [cpue-2005]
 report.type: observation
 observation.label: cpue-2005
+observation.year: 2005
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 50.9385 75.1895 -24.2511 0.265313 0 0.265313 -0.415627
 r1-c7 129.407 69.1625 60.2444 0.129954 0 0.129954 9.98917
@@ -58028,6 +59096,8 @@ r5-c7 25.8822 62.6912 -36.809 0.49269 0 0.49269 0.622287
 [cpue-2006]
 report.type: observation
 observation.label: cpue-2006
+observation.year: 2006
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c6 48.4028 75.1514 -26.7486 0.395844 0 0.395844 -0.500509
 r1-c7 86.6808 69.1343 17.5465 0.159743 0 0.159743 -0.709131
@@ -58047,6 +59117,8 @@ r6-c5 16.2518 58.8044 -42.5526 0.190543 0 0.190543 20.8815
 [cpue-2007]
 report.type: observation
 observation.label: cpue-2007
+observation.year: 2007
+observation.time_step: one
 area observed expected residual errorvalue processerror totalerror score
 r1-c5 142.802 75.9875 66.8147 0.140974 0 0.140974 8.46688
 r2-c4 127.203 68.921 58.2816 0.268246 0 0.268246 1.68414
@@ -58183,8 +59255,12 @@ value: 1e+008
 
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.4699e-005 0.00182114 4131.86 1.43439 69.6746 5.89977 0.000100001 2586.58 1.20954 9957.98 66.9688 0.0681752 14.3303 6.90832 16.7105 11.7265 1e+008
+*end
+
 [Objective_Score]
 report.type: objective_function
 obs->mature-2002: 247.734
@@ -58313,8 +59389,12 @@ Correlation:
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1
 *end
 
-catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
+[estimate-mpd]
+report.type: estimate_value
+parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
 1.4699e-005 0.00182114 4131.86 1.43439 69.6746 5.89977 0.000100001 2586.58 1.20954 9957.98 66.9688 0.0681752 14.3303 6.90832 16.7105 11.7265 1e+008
+*end
+
 [SSB]
 report.type: derived_quantity
 derived_quantity.label: SSB

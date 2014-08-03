@@ -1,0 +1,5 @@
+RuntimeController.run()->
+CMinimizerManager.execute(int)->
+CGammaDiff.runEstimation()->
+Start value is greater than upper bound (7.3999527447508725e+093 >
+ 1000000000)
