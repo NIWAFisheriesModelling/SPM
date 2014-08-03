@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -e -q -g 0 -o MPD.dat 
-Date: Mon Jul 07 18:54:34 2014
-v1.1-2014-04-30 (rev. 5064). Copyright (c) 2008-2014, NIWA
+Date: Sun Aug 03 00:09:10 2014
+v1.1-2014-08-02 (rev. 1170). Copyright (c) 2008-2014, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=1624)
+Machine name: NIWA-34286 (Windows_NT, PID=3080)
 
 [initialisation-phase1]
 report.type: initialisation
@@ -289,6 +289,11 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [CAA-1998]
 report.type: observation
 observation.label: CAA-year-1998
+observation.year: 1998
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.00037434 -0.00037434 343 25 23.3016 0
 All immature+mature 2 0 0.000822058 -0.000822058 343 25 23.3016 0
@@ -330,6 +335,11 @@ All immature+mature 35 0 0.0255555 -0.0255555 343 25 23.3016 0
 [CAA-1999]
 report.type: observation
 observation.label: CAA-year-1999
+observation.year: 1999
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000379115 -0.000379115 564 25 23.9389 0
 All immature+mature 2 0 0.000832654 -0.000832654 564 25 23.9389 0
@@ -371,6 +381,11 @@ All immature+mature 35 0.0416667 0.0254933 0.0161734 564 25 23.9389 3.65892
 [CAA-2000]
 report.type: observation
 observation.label: CAA-year-2000
+observation.year: 2000
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000388149 -0.000388149 651 25 24.0754 0
 All immature+mature 2 0 0.000853385 -0.000853385 651 25 24.0754 0
@@ -412,6 +427,11 @@ All immature+mature 35 0 0.0253467 -0.0253467 651 25 24.0754 0
 [CAA-2001]
 report.type: observation
 observation.label: CAA-year-2001
+observation.year: 2001
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000394792 -0.000394792 840 25 24.2775 0
 All immature+mature 2 0 0.00086911 -0.00086911 840 25 24.2775 0
@@ -453,6 +473,11 @@ All immature+mature 35 0.04 0.0251643 0.0148357 840 25 24.2775 3.56395
 [CAA-2002]
 report.type: observation
 observation.label: CAA-year-2002
+observation.year: 2002
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000410078 -0.000410078 598 25 23.9968 0
 All immature+mature 2 0 0.000902459 -0.000902459 598 25 23.9968 0
@@ -494,6 +519,11 @@ All immature+mature 35 0.0416667 0.0248249 0.0168418 598 25 23.9968 3.69536
 [CAA-2003]
 report.type: observation
 observation.label: CAA-year-2003
+observation.year: 2003
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000428842 -0.000428842 456 25 23.7006 0
 All immature+mature 2 0 0.000945897 -0.000945897 456 25 23.7006 0
@@ -535,6 +565,11 @@ All immature+mature 35 0.166667 0.0243306 0.142336 456 25 23.7006 17.7819
 [CAA-2004]
 report.type: observation
 observation.label: CAA-year-2004
+observation.year: 2004
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000458615 -0.000458615 538 25 23.8899 0
 All immature+mature 2 0 0.00101308 -0.00101308 538 25 23.8899 0
@@ -576,6 +611,11 @@ All immature+mature 35 0 0.0235717 -0.0235717 538 25 23.8899 0
 [CAA-2005]
 report.type: observation
 observation.label: CAA-year-2005
+observation.year: 2005
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.00050708 -0.00050708 438 25 23.6501 0
 All immature+mature 2 0 0.00112412 -0.00112412 438 25 23.6501 0
@@ -617,6 +657,11 @@ All immature+mature 35 0 0.0223998 -0.0223998 438 25 23.6501 0
 [CAA-2006]
 report.type: observation
 observation.label: CAA-year-2006
+observation.year: 2006
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000555645 -0.000555645 817 25 24.2577 0
 All immature+mature 2 0 0.00124009 -0.00124009 817 25 24.2577 0
@@ -658,6 +703,11 @@ All immature+mature 35 0.04 0.0209241 0.0190759 817 25 24.2577 3.73977
 [CAA-2007]
 report.type: observation
 observation.label: CAA-year-2007
+observation.year: 2007
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
 area category age observed expected residual errorvalue processerror totalerror score
 All immature+mature 1 0 0.000611492 -0.000611492 915 25 24.3351 0
 All immature+mature 2 0 0.00136916 -0.00136916 915 25 24.3351 0
@@ -699,6 +749,8 @@ All immature+mature 35 0 0.0190971 -0.0190971 915 25 24.3351 0
 [CPUE-1998]
 report.type: observation
 observation.label: CPUE-1998
+observation.year: 1998
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 103.012 126.124 -23.1123 0.2 0 0.2 -1.19322
 *end
@@ -706,6 +758,8 @@ All 103.012 126.124 -23.1123 0.2 0 0.2 -1.19322
 [CPUE-1999]
 report.type: observation
 observation.label: CPUE-1999
+observation.year: 1999
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 103.413 124.504 -21.0907 0.2 0 0.2 -1.26801
 *end
@@ -713,6 +767,8 @@ All 103.413 124.504 -21.0907 0.2 0 0.2 -1.26801
 [CPUE-2000]
 report.type: observation
 observation.label: CPUE-2000
+observation.year: 2000
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 153.399 121.433 31.9655 0.2 0 0.2 -0.801419
 *end
@@ -720,6 +776,8 @@ All 153.399 121.433 31.9655 0.2 0 0.2 -0.801419
 [CPUE-2001]
 report.type: observation
 observation.label: CPUE-2001
+observation.year: 2001
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 194.992 119.079 75.9133 0.2 0 0.2 1.73287
 *end
@@ -727,6 +785,8 @@ All 194.992 119.079 75.9133 0.2 0 0.2 1.73287
 [CPUE-2002]
 report.type: observation
 observation.label: CPUE-2002
+observation.year: 2002
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 94.3754 114.361 -19.986 0.2 0 0.2 -1.24005
 *end
@@ -734,6 +794,8 @@ All 94.3754 114.361 -19.986 0.2 0 0.2 -1.24005
 [CPUE-2003]
 report.type: observation
 observation.label: CPUE-2003
+observation.year: 2003
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 104.182 108.833 -4.65079 0.2 0 0.2 -1.61189
 *end
@@ -741,6 +803,8 @@ All 104.182 108.833 -4.65079 0.2 0 0.2 -1.61189
 [CPUE-2004]
 report.type: observation
 observation.label: CPUE-2004
+observation.year: 2004
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 87.5232 101.109 -13.5857 0.2 0 0.2 -1.42109
 *end
@@ -748,6 +812,8 @@ All 87.5232 101.109 -13.5857 0.2 0 0.2 -1.42109
 [CPUE-2005]
 report.type: observation
 observation.label: CPUE-2005
+observation.year: 2005
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 98.4496 90.4929 7.95673 0.2 0 0.2 -1.4817
 *end
@@ -755,6 +821,8 @@ All 98.4496 90.4929 7.95673 0.2 0 0.2 -1.4817
 [CPUE-2006]
 report.type: observation
 observation.label: CPUE-2006
+observation.year: 2006
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 78.1727 81.1813 -3.00862 0.2 0 0.2 -1.61507
 *end
@@ -762,6 +830,8 @@ All 78.1727 81.1813 -3.00862 0.2 0 0.2 -1.61507
 [CPUE-2007]
 report.type: observation
 observation.label: CPUE-2007
+observation.year: 2007
+observation.time_step: step_one
 area observed expected residual errorvalue processerror totalerror score
 All 59.0832 72.2837 -13.2005 0.2 0 0.2 -1.1968
 *end

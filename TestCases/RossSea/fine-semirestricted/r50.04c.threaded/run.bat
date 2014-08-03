@@ -1,2 +1,1 @@
-spm -r -q -d > run.log
-rem zip -m run.zip run.log 
+..\..\..\..\spm -r -q -d -g 0 > run.log
