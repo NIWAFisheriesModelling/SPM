@@ -83,12 +83,17 @@ void CCategoryStateByAgeProcess::validate() {
           if(dNumber < 0) CError::errorLessThanEqualTo(PARAM_DATA, PARAM_ZERO);
           mvNMatrix[vNs[i]].push_back(dNumber);
           //
-          registerEstimable(PARAM_N, iCounter, &mvNMatrix[vNs[i]][j]);
           iCounter++;
         } catch (boost::bad_lexical_cast) {
           string Ex = string("Non-numeric value in ") + PARAM_N + string(" for ") + PARAM_PROCESS + string(" ") + getLabel();
           throw Ex;
         }
+      }
+    }
+
+    for (int i = 0; i < (int)vNs.size(); i+=(iAgeSpread + 1)) {
+      for (int j = 0; j < iAgeSpread; ++j) {
+        registerEstimable(PARAM_N, iCounter, &mvNMatrix[vNs[i]][j]);
       }
     }
 
