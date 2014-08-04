@@ -109,6 +109,15 @@ void CCategoryTransitionByAgeProcess::validate() {
       }
     }
 
+    int iCounter = 0;
+    for (int i = 0; i < (int)vNs.size(); i+=(iAgeSpread + 1)) {
+      for (int j = 0; j < iAgeSpread; ++j) {
+        registerEstimable(PARAM_N, iCounter, &mvNMatrix[vNs[i]][j]);
+        iCounter++;
+      }
+    }
+
+
   } catch(string &Ex) {
     Ex = "CCategoryTransitionByAgeProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
