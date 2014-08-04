@@ -280,11 +280,16 @@ void CBHRecruitmentProcess::execute() {
       } else {
         // Get our B0 (assumed to be the LAST value in the defined initialisation)
         dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
-        double dSSBRatio = pDerivedQuantity->getValue(iActualOffset)/dB0;
-        // Calculate the Stock-recruit relationship
-        double dTrueYCS =  1.0 * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
-        // And apply to calculate this events recruitment
-        dAmountPer = dR0 * dTrueYCS;
+        // if dB0 is zero, then error out
+        if ( dB0 <=0 ) {
+          CError::error("The calculated value of " + PARAM_B0 + " is not positive (i.e., <=0). Hence the SSB/B0 ratio cannot be calculated. Check the initialisation phase when " + PARAM_B0 + " is defined.");
+        } else {
+          double dSSBRatio = pDerivedQuantity->getValue(iActualOffset)/dB0;
+          // Calculate the Stock-recruit relationship
+          double dTrueYCS =  1.0 * dSSBRatio / (1 - ((5 * dSteepness - 1) / (4 * dSteepness) ) * (1 - dSSBRatio));
+          // And apply to calculate this events recruitment
+          dAmountPer = dR0 * dTrueYCS;
+        }
       }
     } else {
       // We are not in an initialisation phase
