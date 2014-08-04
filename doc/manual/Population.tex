@@ -385,7 +385,7 @@ Population processes are those processes that change the population state of ind
 
 \subsubsection{\I{Recruitment}}
 
-Recruitment processes are defined as  process that introduces new individuals into the model. \SPM\ implements four types of recruitment process, constant recruitment\index{Recruitment ! Constant},  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}, \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}, and recruitment proportional to an abundance or biomass \index{Proportional recruitment}\index{Recruitment ! proportional}.
+Recruitment processes are defined as a process that introduces new individuals into the model. \SPM\ implements four types of recruitment process: constant recruitment\index{Recruitment ! Constant};  \I{Beverton-Holt recruitment}\index{Recruitment ! Beverton-Holt} \citep{1203}; \I{local Beverton-Holt recruitment}\index{Recruitment ! Local Beverton-Holt}; and recruitment proportional to an abundance or biomass \index{Proportional recruitment}\index{Recruitment ! proportional}.
 
 In the recruitment processes, the number of individuals are added to a single age class within the partition, with the amount defined by the type of recruitment process and its function. If more than one category is defined, then the proportion of recruiting individuals to be added to each category is specified by the \argument{proportions} parameter. For example, if recruiting to categories labelled male and female, then you might set the proportions as $0.5$ and $0.5$ respectively to denote that half of the recruits recruit to the male category and the remaining half to the female category.
 
@@ -435,7 +435,21 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB_y) = \frac{SSB_y}{B_0} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB_y}{B_0} \right) \right)
 \end{equation}
 
-Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
+Note that the Beverton-Holt recruitment process requires a value for $B_0$ and $SSB_y$ to resolve the stock-recruitment relationship. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B_0$ is determined is assumed to have steepness $h=1$ (i.e. in those initialisation phases, recruitment is simply equal to $R_0$). Note it is an error if $B_0 <= 0$. 
+
+Recruitment in the initialisation phases after the phase where $B_0$ follows the Beverton-Holt stock-recruit relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
+
+Year classes are standardised to be equal to one over the period $S$ defined by \texttt{standardise\_YCS\_years}, i.e., the year classes (YCS) for each year of the model are calculated as 
+\begin{equation}
+  YCS_i = \left\{
+	   \begin{array}{ll}
+     Y_i / mean_{y \in S}(Y_y) & : y \in S \\
+	   Y_i & : y \notin S
+  \end{array}
+  \right.
+\end{equation}
+
+Note that the an effect of this parameterisation is that $R_0$ is then defined as the mean estimated recruitment over the years $S$, because the mean year class multiplier over these years will always be one.
 
 For example, assume a Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is $R_0=5 \times 10^5$ in areas proportional to the value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived quantity that specifies the total spawning stock biomass, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 {\small{\begin{verbatim}
@@ -459,7 +473,7 @@ Note that if not specified, $SSB\_offset$ is set at the value of $age$. This cor
 
 \subsubsection*{\I{Local Beverton-Holt recruitment}}
 
-The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. If desired, locally recruits can subsequently be subjected to movement (see Section \ref{sec:movement-processes}).
+The local Beverton-Holt recruitment process assumes that, for recruitment, each cell acts like a local population and is independent of its neighbours. The value of the $SSB_y^i$ in each cell $i$ for each year $y$ is used to determine the amount of recruitment that enters that cell. If desired, these local recruits can subsequently be subjected to movement (see Section \ref{sec:movement-processes}).
 
 If the recruitment to cell $i$ is $R_y^i$, then $R_y^i$ is the product of the average recruitment $R_0^i$ for that cell, the annual year class strength multiplier (assumed to be the same for all cells in each year), and the stock-recruit relationship, i.e., 
 \begin{equation}
@@ -470,7 +484,19 @@ where $offset$ is the number of years offset to link the year class with the yea
 SR(SSB^i) = \frac{SSB^i}{B_0^i} / \left( 1-\frac{5h-1}{4h} \left( 1-\frac{SSB^i}{B_0^i} \right) \right)
 \end{equation}
 
-Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, a derived quantity by cell (see Section \ref{sec:derived-quantity-by-cell}) must be provided that defines $B_0$ and the annual $SSB_y$ for the recruitment process. As for the Beverton-Holt recruitment process above, $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to have steepness $h=1$ (i.e., in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. If a layer is defined for recruitment, $R_0^i$ is defined for each cell as product of $r0$ and the layer value in each cell. 
+Note that the local Beverton-Holt recruitment process requires a value for $B_0^i$ and $SSB_y^i$ to resolve the stock-recruitment relationship. Here, a derived quantity by cell (see Section \ref{sec:derived-quantity-by-cell}) must be provided that defines $B_0$ and the annual $SSB_y$ for the recruitment process. As for the Beverton-Holt recruitment process above, $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the YSC multipliers are assumed to be equal to one, and recruitment that happens in the initialisation phases that occur before and during the phase when $B_0$ is determined is assumed to have steepness $h=1$ (i.e., in those initialisation phases, recruitment is simply equal to $R_0$). Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the Beverton-Holt stock-recruit relationship defined above. If a layer is defined for recruitment, $R_0^i$ is defined for each cell as product of $R_0$ and the layer value in each cell. 
+
+Year classes are standardised to be equal to one over the period $S$ defined by \texttt{standardise\_YCS\_years}, i.e., the year classes (YCS) for each year of the model are calculated as 
+\begin{equation}
+  YCS_i = \left\{
+	   \begin{array}{ll}
+     Y_i / mean_{y \in S}(Y_y) & : y \in S \\
+	   Y_i & : y \notin S
+  \end{array}
+  \right.
+\end{equation}
+
+Note that the an effect of this parameterisation is that $R_0^i$ is then defined as the mean estimated recruitment over the years $S$, because the mean year class multiplier over these years will always be one.
 
 For example, assume a local Beverton-Holt recruitment process, where individuals are added to the category `immature' at $age=1$, the number to recruit in each cell is $R_0=5 \times 10^5$ multiplied by the proportional value of the layer \texttt{MyRecruitment}. Then \texttt{SSB\_Biomass} is a derived quantity by cell that specifies the spawning stock biomass in each cell, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. The YCS are standardised to have mean one in the period 1994 to 2004, and recruits enter into the model two years following spawning. Then the command specification is,
 {\small{\begin{verbatim}
@@ -500,7 +526,7 @@ In the proportional recruitment process the total number of recruits added each 
 \end{equation}
  where $offset$ is the number of years offset to link the year class with the year of spawning $y$.
 
-Note that the proportional recruitment process requires a value for $SSB_y$ in each year, with a default value that is applied in the initialisation phases where $SSB_y$ is not be available. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the recruitment that happens in the initialisation phases that occur before and during the phase when $B0$ is determined is assumed to be $R_0$. Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
+Note that the proportional recruitment process requires a value for $SSB_y$ in each year, with a default value that is applied in the initialisation phases where $SSB_y$ is not be available. Here, a derived quantity (see Section \ref{sec:derived-quantities}) must be defined that provides the annual $SSB_y$ for the recruitment process. $B_0$ is then defined as the value of the $SSB$ at the end of one of the initialisation phases. During initialisation the recruitment that happens in the initialisation phases that occur before and during the phase when $B_0$ is determined is assumed to be $R_0$. Recruitment in the initialisation phases after the phase where $B_0$ was determined follow the relationship defined above. Recruits are then distributed across cells in proportion to the values in a numeric layer. 
 
 For example, assume a proportional recruitment process, where individuals are added to the category `immature' at $age=1$, the number to add is 0.5 the female breeding abundance, and placed into areas in proportion to the value of the layer \texttt{MyRecruitment}. The \texttt{female\_abundance} is a derived quantity by cell that specifies the total number of breeding females, with $B_0$ the value of the derived quantity at the end of the initialisation phase labelled \texttt{phase1}. Recruits enter into the model two years following spawning. Then the command specification is,
 {\small{\begin{verbatim}
