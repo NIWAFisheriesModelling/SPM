@@ -1,25 +1,25 @@
 [Objective_Score]
 report.type: objective_function
-obs->CAA-year-1998: 27.8958
-obs->CAA-year-1999: 33.1782
-obs->CAA-year-2000: 27.5075
-obs->CAA-year-2001: 27.0142
-obs->CAA-year-2002: 25.7686
-obs->CAA-year-2003: 31.705
-obs->CAA-year-2004: 31.5323
-obs->CAA-year-2005: 28.1065
-obs->CAA-year-2006: 26.9761
-obs->CAA-year-2007: 29.4407
-obs->CPUE-1998: 0.915485
-obs->CPUE-1999: 0.786643
-obs->CPUE-2000: -1.61095
-obs->CPUE-2001: -0.970143
-obs->CPUE-2002: 1.28104
-obs->CPUE-2003: -0.0543329
-obs->CPUE-2004: 1.37173
-obs->CPUE-2005: -0.407038
-obs->CPUE-2006: 1.37323
-obs->CPUE-2007: 4.78951
+obs->CAA-year-1998: 26.9695
+obs->CAA-year-1999: 33.0968
+obs->CAA-year-2000: 27.982
+obs->CAA-year-2001: 27.2663
+obs->CAA-year-2002: 26.105
+obs->CAA-year-2003: 32.2493
+obs->CAA-year-2004: 31.8422
+obs->CAA-year-2005: 28.062
+obs->CAA-year-2006: 26.789
+obs->CAA-year-2007: 28.9822
+obs->CPUE-1998: -1.19292
+obs->CPUE-1999: -1.26775
+obs->CPUE-2000: -0.80176
+obs->CPUE-2001: 1.73227
+obs->CPUE-2002: -1.2399
+obs->CPUE-2003: -1.61188
+obs->CPUE-2004: -1.42112
+obs->CPUE-2005: -1.48156
+obs->CPUE-2006: -1.61512
+obs->CPUE-2007: -1.19749
 prior->catchability[CPUEq].q: 0
 prior->process[BHrecruitment].r0: 0
 prior->selectivity[FishingSel].a50: 0
@@ -94,6 +94,6 @@ prior->process[InitialStateM].N(32): 0
 prior->process[InitialStateM].N(33): 0
 prior->process[InitialStateM].N(34): 0
 prior->process[InitialStateM].N(35): 0
-total_score: 296.6
+total_score: 279.247
 *end
 
