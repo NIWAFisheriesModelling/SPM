@@ -36,7 +36,7 @@ CCategoryStateByAgeProcess::CCategoryStateByAgeProcess() {
   sType = PARAM_CATEGORY_STATE_BY_AGE;
 
   // Register user allowed parameters
-  pParameterList->registerAllowed(PARAM_CATEGORY);       //category
+  pParameterList->registerAllowed(PARAM_CATEGORY); //category
   pParameterList->registerAllowed(PARAM_LAYER);    //layer
   pParameterList->registerAllowed(PARAM_MIN_AGE);  // min age
   pParameterList->registerAllowed(PARAM_MAX_AGE);  // max age

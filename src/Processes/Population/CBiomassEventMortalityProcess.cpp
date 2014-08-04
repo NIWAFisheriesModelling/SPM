@@ -39,9 +39,6 @@ CBiomassEventMortalityProcess::CBiomassEventMortalityProcess() {
   sType = PARAM_BIOMASS_EVENT_MORTALITY;
   bRequiresMerge = false;
 
-  // Register estimable parameters
-  registerEstimable(PARAM_U_MAX, &dUMax);
-
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_YEARS);

@@ -58,6 +58,7 @@ void CIncreasingSelectivity::validate() {
     }
 
     // Register Estimables
+    registerEstimable(PARAM_ALPHA, &dAlpha);
     for (int i = 0; i < (int)vVs.size(); ++i)
       registerEstimable(PARAM_V, i, &vVs[i]);
 

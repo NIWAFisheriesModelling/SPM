@@ -18,7 +18,7 @@
 CKnifeEdgeSelectivity::CKnifeEdgeSelectivity() {
   // Register estimable
   registerEstimable(PARAM_E, &dE);
-  registerEstimable(PARAM_E, &dAlpha);
+  registerEstimable(PARAM_ALPHA, &dAlpha);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_E);

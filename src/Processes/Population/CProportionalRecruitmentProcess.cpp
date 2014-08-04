@@ -41,6 +41,7 @@ CProportionalRecruitmentProcess::CProportionalRecruitmentProcess() {
 
   // Register allowed estimables
   registerEstimable(PARAM_LAMBDA, &dLambda);
+  registerEstimable(PARAM_R0, &dR0);
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_LAMBDA);
