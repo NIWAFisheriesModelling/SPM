@@ -64,6 +64,8 @@ void CAdjacentCellMovementProcess::validate() {
     if (getProportion() > 1.0)
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
+    registerEstimable(PARAM_PROPORTION, &dProportion);
+
   } catch (string &Ex) {
     Ex = "CAdjacentCellMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;

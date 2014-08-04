@@ -56,6 +56,9 @@ void COpenMPPreferenceMovementProcess::validate() {
     pParameterList->fillVector(vDirectedProcessList, PARAM_PREFERENCE_FUNCTIONS);
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
 
+    //register estimables
+    registerEstimable(PARAM_PROPORTION, &dProportion);
+
     if (getProportion() < 0.0)
       CError::errorLessThan(PARAM_PROPORTION, PARAM_ZERO);
     if (getProportion() > 1.0)

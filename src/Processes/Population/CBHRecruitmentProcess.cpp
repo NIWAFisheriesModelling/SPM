@@ -282,7 +282,7 @@ void CBHRecruitmentProcess::execute() {
         dB0 = pDerivedQuantity->getInitialisationValue(iPhaseB0,(pDerivedQuantity->getInitialisationValuesSize(iPhaseB0)) - 1);
         // if dB0 is zero, then error out
         if ( dB0 <=0 ) {
-          CError::error("The calculated value of " + PARAM_B0 + " is not positive (i.e., <=0). Hence the SSB/B0 ratio cannot be calculated. Check the initialisation phase when " + PARAM_B0 + " is defined.");
+          CError::error("The calculated value of " + string(PARAM_B0) + " is not positive (i.e., <=0). Hence the SSB/B0 ratio cannot be calculated. Check the initialisation phase when " + string(PARAM_B0) + " is defined.");
         } else {
           double dSSBRatio = pDerivedQuantity->getValue(iActualOffset)/dB0;
           // Calculate the Stock-recruit relationship

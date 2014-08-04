@@ -38,9 +38,6 @@ CEventMortalityProcess::CEventMortalityProcess() {
   pTimeStepManager = CTimeStepManager::Instance();
   sType = PARAM_EVENT_MORTALITY;
 
-  // Register estimable parameters
-  registerEstimable(PARAM_U_MAX, &dUMax);
-
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_YEARS);

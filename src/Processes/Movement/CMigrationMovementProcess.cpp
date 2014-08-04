@@ -51,6 +51,9 @@ void CMigrationMovementProcess::validate() {
     pParameterList->fillVector(vCategoryList, PARAM_CATEGORIES);
     pParameterList->fillVector(vSelectivityList, PARAM_SELECTIVITIES);
 
+    //register estimables
+    registerEstimable(PARAM_PROPORTION, &dProportion);
+
     // Base Validation
     CMovementProcess::validate();
 

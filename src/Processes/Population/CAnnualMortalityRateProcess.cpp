@@ -62,6 +62,10 @@ void CAnnualMortalityRateProcess::validate() {
         CError::errorLessThan(PARAM_AGE,PARAM_ZERO);
     }
 
+    for(int i=0; i < (int)vMortalityRates.size(); ++i ) {
+      registerEstimable(PARAM_M, i, &vMortalityRates[i]);
+    }
+
     // Check Sizes
     if (vYears.size() != vMortalityRates.size())
       CError::errorListSameSize(PARAM_YEARS, PARAM_M);

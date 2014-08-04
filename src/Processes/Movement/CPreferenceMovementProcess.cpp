@@ -60,6 +60,9 @@ void CPreferenceMovementProcess::validate() {
     if (getProportion() > 1.0)
       CError::errorGreaterThan(PARAM_PROPORTION, PARAM_ONE);
 
+    //register estimables
+    registerEstimable(PARAM_PROPORTION, &dProportion);
+
   } catch (string &Ex) {
     Ex = "CPreferenceMovementProcess.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
