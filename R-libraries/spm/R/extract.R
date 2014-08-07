@@ -95,6 +95,15 @@ extract <- function (file, path = "", ignore.unknown=FALSE)
             res$estimate_summary[[counter$estimate_summary]] <- temp
             names(res$estimate_summary)[counter$estimate_summary] <- report.label[i]
         }
+        else if (report.type[i] == "estimate_value") {
+            if (!("estimate_value" %in% names(res))) {
+                res$estimate_value <- list()
+            }
+            counter$estimate_value <- counter$estimate_value + 1
+            temp <- extract.estimatevalue(lines = line[index[i]:(index[i + 1] - 1)])
+            res$estimate_value[[counter$estimate_value]] <- temp
+            names(res$estimate_value)[counter$estimate_value] <- report.label[i]
+        }
         else if (report.type[i] == "initialisation") {
             if (!("initialisation" %in% names(res))) {
                 res$initialisation <- list()
