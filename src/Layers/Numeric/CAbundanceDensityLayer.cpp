@@ -9,14 +9,14 @@
 
 // Local headers
 #include "CAbundanceDensityLayer.h"
-#include "../../Selectivities/CSelectivityManager.h"
-#include "../../World/CWorld.h"
-#include "../../Selectivities/CSelectivity.h"
+#include "../../Helpers/CError.h"
+#include "../../Helpers/CMath.h"
+#include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
-#include "../../Helpers/CError.h"
-#include "../../Helpers/ForEach.h"
-#include "../../Helpers/CMath.h"
+#include "../../Selectivities/CSelectivity.h"
+#include "../../Selectivities/CSelectivityManager.h"
+#include "../../World/CWorld.h"
 
 //**********************************************************************
 // CAbundanceDensityLayer::CAbundanceDensityLayer()

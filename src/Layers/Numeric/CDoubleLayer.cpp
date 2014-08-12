@@ -137,9 +137,6 @@ void CDoubleLayer::validate() {
     if (((iRow+1) != iHeight) || (iCol != iWidth))
       CError::errorNotEnough(PARAM_DATA);
 
-    // Register the layer valiues as estimable
-
-
   } catch(string &Ex) {
     Ex = "CDoubleLayer.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
