@@ -256,7 +256,7 @@
 #define PARAM_LAMBDA                              "lambda"
 #define PARAM_LAMBDA_HAT                          "lambda_hat"
 #define PARAM_LAMBDA_YEARS                        "lambda_years"
-#define PARAM_LAT_LONG_DISTANCE                   "lat_long_distance"
+#define PARAM_LAT_LONG_DISTANCE                   "haversine"
 #define PARAM_LAT_LAYER                           "lat_layer"
 #define PARAM_LONG_LAYER                          "long_layer"
 #define PARAM_LAYER                               "layer"
