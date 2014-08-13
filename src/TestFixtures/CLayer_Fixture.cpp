@@ -43,6 +43,68 @@ CLayer_Fixture::CLayer_Fixture() {
   pLayer->validate();
   pLayer->build();
 
+  // Create a latitude Layer
+  pLayer = CLayerFactory::buildLayer(PARAM_DOUBLE);
+  pLayer->addParameter(PARAM_LABEL, "longitude");
+  pLayer->addParameter(PARAM_DATA, "170");
+  pLayer->addParameter(PARAM_DATA, "180");
+  pLayer->addParameter(PARAM_DATA, "190");
+  pLayer->addParameter(PARAM_DATA, "200");
+  pLayer->addParameter(PARAM_DATA, "210");
+  pLayer->addParameter(PARAM_DATA, "170");
+  pLayer->addParameter(PARAM_DATA, "180");
+  pLayer->addParameter(PARAM_DATA, "190");
+  pLayer->addParameter(PARAM_DATA, "200");
+  pLayer->addParameter(PARAM_DATA, "210");
+  pLayer->addParameter(PARAM_DATA, "170");
+  pLayer->addParameter(PARAM_DATA, "180");
+  pLayer->addParameter(PARAM_DATA, "190");
+  pLayer->addParameter(PARAM_DATA, "200");
+  pLayer->addParameter(PARAM_DATA, "210");
+  pLayer->addParameter(PARAM_DATA, "170");
+  pLayer->addParameter(PARAM_DATA, "180");
+  pLayer->addParameter(PARAM_DATA, "190");
+  pLayer->addParameter(PARAM_DATA, "200");
+  pLayer->addParameter(PARAM_DATA, "210");
+  pLayer->addParameter(PARAM_DATA, "170");
+  pLayer->addParameter(PARAM_DATA, "180");
+  pLayer->addParameter(PARAM_DATA, "190");
+  pLayer->addParameter(PARAM_DATA, "200");
+  pLayer->addParameter(PARAM_DATA, "210");
+  pLayer->validate();
+  pLayer->build();
+
+  // Create a longitude Layer
+  pLayer = CLayerFactory::buildLayer(PARAM_DOUBLE);
+  pLayer->addParameter(PARAM_LABEL, "latitude");
+  pLayer->addParameter(PARAM_DATA, "-40");
+  pLayer->addParameter(PARAM_DATA, "-40");
+  pLayer->addParameter(PARAM_DATA, "-40");
+  pLayer->addParameter(PARAM_DATA, "-40");
+  pLayer->addParameter(PARAM_DATA, "-40");
+  pLayer->addParameter(PARAM_DATA, "-45");
+  pLayer->addParameter(PARAM_DATA, "-45");
+  pLayer->addParameter(PARAM_DATA, "-45");
+  pLayer->addParameter(PARAM_DATA, "-45");
+  pLayer->addParameter(PARAM_DATA, "-45");
+  pLayer->addParameter(PARAM_DATA, "-50");
+  pLayer->addParameter(PARAM_DATA, "-50");
+  pLayer->addParameter(PARAM_DATA, "-50");
+  pLayer->addParameter(PARAM_DATA, "-50");
+  pLayer->addParameter(PARAM_DATA, "-50");
+  pLayer->addParameter(PARAM_DATA, "-55");
+  pLayer->addParameter(PARAM_DATA, "-55");
+  pLayer->addParameter(PARAM_DATA, "-55");
+  pLayer->addParameter(PARAM_DATA, "-55");
+  pLayer->addParameter(PARAM_DATA, "-55");
+  pLayer->addParameter(PARAM_DATA, "-60");
+  pLayer->addParameter(PARAM_DATA, "-60");
+  pLayer->addParameter(PARAM_DATA, "-60");
+  pLayer->addParameter(PARAM_DATA, "-60");
+  pLayer->addParameter(PARAM_DATA, "-60");
+  pLayer->validate();
+  pLayer->build();
+
 }
 
 //**********************************************************************

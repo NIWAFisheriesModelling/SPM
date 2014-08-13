@@ -16,10 +16,11 @@
 #include "../Numeric/CAbundanceLayer.h"
 #include "../Numeric/CBiomassDensityLayer.h"
 #include "../Numeric/CBiomassLayer.h"
-#include "../Numeric/CDerivedQuantityLayer.h"
 #include "../Numeric/CDerivedQuantityByCellLayer.h"
+#include "../Numeric/CDerivedQuantityLayer.h"
 #include "../Numeric/CDistanceLayer.h"
 #include "../Numeric/CDoubleLayer.h"
+#include "../Numeric/CLatLongDistanceLayer.h"
 #include "../Numeric/CNumericMetaLayer.h"
 #include "../String/CStringLayer.h"
 #include "../String/CStringMetaLayer.h"
@@ -32,26 +33,28 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
 
   CLayer *pLayer = 0;
 
-  if (type == PARAM_META_NUMERIC)
-    pLayer = new CNumericMetaLayer();
-  else if (type == PARAM_META_STRING)
-    pLayer = new CStringMetaLayer();
+  if (type == PARAM_ABUNDANCE)
+    pLayer = new CAbundanceLayer();
   else if (type == PARAM_ABUNDANCE_DENSITY)
     pLayer = new CAbundanceDensityLayer();
-  else if (type == PARAM_ABUNDANCE)
-    pLayer = new CAbundanceLayer();
-  else if (type == PARAM_BIOMASS_DENSITY)
-    pLayer = new CBiomassDensityLayer();
   else if (type == PARAM_BIOMASS)
     pLayer = new CBiomassLayer();
-  else if (type == PARAM_DISTANCE)
-    pLayer = new CDistanceLayer();
-  else if (type == PARAM_DOUBLE)
-    pLayer = new CDoubleLayer();
+  else if (type == PARAM_BIOMASS_DENSITY)
+    pLayer = new CBiomassDensityLayer();
   else if (type == PARAM_DERIVED_QUANTITY)
     pLayer = new CDerivedQuantityLayer;
   else if (type == PARAM_DERIVED_QUANTITY_BY_CELL)
     pLayer = new CDerivedQuantityByCellLayer;
+  else if (type == PARAM_DISTANCE)
+    pLayer = new CDistanceLayer();
+  else if (type == PARAM_DOUBLE)
+    pLayer = new CDoubleLayer();
+  else if (type == PARAM_LAT_LONG_DISTANCE)
+    pLayer = new CLatLongDistanceLayer();
+  else if (type == PARAM_META_NUMERIC)
+    pLayer = new CNumericMetaLayer();
+  else if (type == PARAM_META_STRING)
+    pLayer = new CStringMetaLayer();
   else if (type == PARAM_STRING)
     pLayer = new CStringLayer();
   else
