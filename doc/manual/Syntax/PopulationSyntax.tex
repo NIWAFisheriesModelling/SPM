@@ -978,6 +978,7 @@ The available layer types  are,
 	\item Numeric
 	\item Categorical
 	\item Distance
+	\item Haversine
 	\item Abundance
 	\item Biomass
 	\item Abundance density
@@ -1017,6 +1018,18 @@ The available layer types  are,
 \subsubsection[Distance]{\commandlabsubarg{layer}{type}{distance}}
 
 There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
+
+\subsubsection[Haversine]{\commandlabsubarg{layer}{type}{haversine}}
+
+\defSub{latitude} {Define the layer that specifies the latitudes for each cell}
+\defType{String}
+\defDefault{No default}
+\defCondition{The argument must be a numeric layer, with values between -90 and 90.}
+
+\defSub{longitude} {Define the layer that specifies the longitudes for each cell}
+\defType{String}
+\defDefault{No default}
+\defCondition{The argument must be a numeric layer, with values between 0 and 360.}
 
 \subsubsection[Abundance]{\commandlabsubarg{layer}{type}{abundance}}
 

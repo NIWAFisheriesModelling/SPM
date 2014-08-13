@@ -128,16 +128,28 @@ data A A C C
 data B B C C
 \end{verbatim}}}
 
-\item {\I{Distance layers}}: A distance layer is one that defines the distance between any two cells. By default, \SPM\ calculates the values of the distance layer as the Euclidean distance. Here, the distance between cell $a$ and cell $b$ can be defined as,
+\item {\I{Distance layers}}: A distance layer is one that defines the distance between any two cells. \SPM\ has two types of distance layer: (i) the Euclidean distance between cell centres (\texttt{distance}), and (ii) the distance between two locations (defined by longitude and latitude) using the haversine formula (\texttt{haversine}). 
+
+The distance method simply calculates the values of the distance layer as the Euclidean distance between the centres of every pair of cells, taking into account the length of the side of a cell. Here, the distance between cell $a$ and cell $b$ can be defined as,
 \begin{equation}
   d(a,b) = \lambda \sqrt{(x_a - x_b)^2 + (y_a - y_b)^2}
 \end{equation}
 where $x$ and $y$ represent the x- and y-coordinates of $a$ and $b$ respectively, and $\lambda$ is an arbitrary scaler representing the length of one side of the square. Unlike other types of layers, distance layers are not a $n_{rows} \times n_{cols}$ grid of values, but rather a matrix of dimension $(n_{rows} \times n_{cols}) \times (n_{rows} \times n_{cols})$  where the distance between each cell and every other cell is evaluated. Note that under this definition, the distance between any cell and itself is 0. 
 
-For example, to specify a distance layer, use,
+For example, to specify a Euclidean distance layer, use,
 {\small{\begin{verbatim}
 @layer Distance
 type distance
+\end{verbatim}}}
+
+The haversine method calculates the great-circle distance between two points on a sphere from the longitudes and latitudes of the cells, with the assumption that the Earth’s radius is 6371 km. Two numeric layers are required, giving the longitude and latitude of each cell respectively. Latitude values must be between $-90^{\circ}$ (southern latitudes) and $90^{\circ}$ (northern latitudes). Longitude values must be between $0^{\circ}$ and $360^{\circ}$. 
+
+For example, to specify a haversine distance layer, assuming that latitudes and longitudes are given in numeric layers elsewhere (labelled, say, \texttt{cell\_latitudes} and \texttt{cell\_longitudes}), then use,
+{\small{\begin{verbatim}
+@layer Haversine_distance
+type haversine
+latitude cell_latitudes
+longitude cell_longitudes
 \end{verbatim}}}
 
 \item{\I{Abundance layers}}: The abundance layer is the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$. 
