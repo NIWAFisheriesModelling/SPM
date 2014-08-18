@@ -25,9 +25,5 @@ function(lines){
   return(res)
 }
 
-rm(a)
-a<-extract("c:\\Projects\\General\\SPM\\TestCases\\2x3_Examples\\lat_long_layer\\run.log")
-a$layer$distance
-a$layer$lat_long_distance
 
 
