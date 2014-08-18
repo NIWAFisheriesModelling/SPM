@@ -1668,7 +1668,7 @@ Each type of selectivity function requires a set of subcommands and arguments sp
 \defSub{method} {The method for constraining the end values of the spline}
 \defType{String}
 \defDefault{Natural}
-\defValue{Either, \texttt{natural} (sets the 2nd derivatives to $0$ at the boundaries),  \texttt{fixed} (sets the 1st derivatives to zero at the boundaries), or \texttt{parabolic} sets the spline to be a parabola at the boundaries)}.
+\defValue{Either, \texttt{natural} (sets the 2nd derivatives to $0$ at the boundaries),  \texttt{fixed} (sets the 1st derivatives to zero at the boundaries), or \texttt{parabolic} sets the spline to be a parabola at the boundaries)}
 
 %Not implemented yet. A way to apply joint selectivity would be to arbitrarily fix the first selectivity to one and only estimate the second one (say using a pointer?). If the estimated selectivity is above 1, it gets fixed to 1 and the other one gest estimated. Both get reported.
 %

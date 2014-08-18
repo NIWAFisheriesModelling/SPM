@@ -697,7 +697,7 @@ and then, the the number to remove is determined as,
 \begin{equation}
 R_{total} = P_{total} \frac{a  V_{total}^{x-1}}{b + V_{total}^{x-1}}
 \end{equation}
-where $x=2$ for Holling type II function and $x=3$ for Holling type III function, or any value of $x \geq 1$ for the generalised Michaelis-Menten function.
+where $x=2$ for Holling type II function,  $x=3$ for Holling type III function, or any value of $x \geq 1$ for the generalised Michaelis-Menten function, and $a > 0$ and $b > 0$ are the Holling function parameters.
 
 Hence the exploitation rate\index{Maximum exploitation rate} to apply is 
 \begin{equation}
@@ -712,7 +712,23 @@ And the number removed $R$ from each age $l$ in category $k$ is,
   R(k,l) = UV(k,l)
 \end{equation}
 
-The density-dependent Holling mortality process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
+The density-dependent Holling mortality process is applied either as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
+
+For example, a biomass Holling type II mortality process on \texttt{prey} by our predator \texttt{predator} would have syntax,
+
+{\small{\begin{verbatim}
+@process HollingMortality
+type Holling_mortality_rate
+is_abundance F
+a 0.08
+b 10000
+x 2
+categories prey
+selectivities One
+predator_categories predator
+predator_selectivities One
+u_max 0.8
+\end{verbatim}}}
 
 \subsubsection*{Prey-suitability mortality}
 
@@ -765,7 +781,7 @@ And the number removed $R(g)$ in each prey group $g$ from each age $l$ in catego
 
 Note that prey suitability choice occurs only between prey groups specified by the process, and the total predator consumption rate represents the consumption of the predator on those prey groups alone. Also note that the electivities must sum to one. Further, the consumption rate can be modified by a layer, to be cell specific. 
 
-The density-dependent prey-suitability process will be applied as a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
+The density-dependent prey-suitability process is applied as either a biomass or an abundance depending on the value of the \subcommand{is\_abundance} switch.
 
 Individual categories can be aggregated into prey groups using the '+' symbol. To indicate that two (or more) categories are to be aggregated, separate them with a '+' symbol. For example, to specify two prey groups of two species made up of the males and females in each, then the subcommand would be,
 
@@ -953,6 +969,36 @@ And let the immigration applied to the population at cell $a$ in category $k$ an
   I(a,k,l) = \frac{E(a,k,l) Li_a }{\sum\limits_a Li_a} 
 \end{equation}
 
+For example, to migrate 50\% of males from the top left cell to the three cells in the bottom right of a $3\times3$ model, then first define the layers to define the movement source and sinks, 
+
+{\small{\begin{verbatim}
+@layer source
+type numeric
+data 1 0 0
+data 0 0 0
+data 0 0 0
+\end{verbatim}}}
+
+{\small{\begin{verbatim}
+@layer sink
+type numeric
+data 0 0 0
+data 0 0 1
+data 0 1 1
+\end{verbatim}}}
+
+And then the migration is defined as,
+
+{\small{\begin{verbatim}
+@process MaleMigration
+type migration
+categories males
+proportion 0.5
+source_layer source
+sink_layer sink
+selectivities one
+\end{verbatim}}}
+
 \subsubsection{\I{Adjacent cell movement}}
 
 The adjacent cell movement moves a proportion of individuals in each cell to its four neighbouring cells, and hence mimics a simple diffusion process. It can be applied to a limited range of spatial locations and/or as a gradient by using a layer. An adjacent cell movement can involve one or more categories and movement at age is defined as some constant proportion multiplied by a selectivity and the diffusion layer as a proportion over the four adjoining cells. If no layer is supplied, the process moves the population equally to the adjacent cells (i.e., a constant 0.25 proportion is assumed for each of the adjacent cells).
@@ -963,6 +1009,27 @@ For example, let the movement from cell $a$ to neighbouring cell $b$ in category
 \end{equation}
 
 The movement value of all cells into all their neighbouring cells are calculated simultaneously from the population layer at the time of movement, and the balance of all movements is returned.
+
+For example, to move 50\% of females to adjacent cells but favouring movement towards the bottom right cells, then first define a gradient layer, 
+
+{\small{\begin{verbatim}
+@layer diffusion_layer
+type numeric
+data 1 1 1
+data 1 2 2
+data 1 2 4
+\end{verbatim}}}
+
+And then the movement is defined as,
+
+{\small{\begin{verbatim}
+@process diffusion
+type adjacent_cell
+categories female
+proportion 0.5
+layer diffusion_layer
+selectivities one
+\end{verbatim}}}
 
 \subsubsection{\I{Preference movement}}
 
@@ -1052,6 +1119,35 @@ Note that for the monotonic categorical preference function, the preference func
 
 \end{enumerate}
 
+For example, to define a preference based movement that is the combination of a preferred depth (assumed to be given in the layer \texttt{Depth}) and distance (given in, say, the layer \texttt{Distance}, first define the individual preference functions,
+
+{\small{\begin{verbatim}
+@preference_function Depth
+type double_normal
+alpha 1
+layer Depth
+mu 600
+sigma_l 120
+sigma_r 150
+\end{verbatim}}}
+
+{\small{\begin{verbatim}
+@preference_function Distance
+type exponential
+alpha 1
+lambda 0.005
+layer Distance
+\end{verbatim}}}
+
+And then the preference based movement process is simply,
+
+{\small{\begin{verbatim}
+@process Move
+type preference
+categories males+females
+preference_functions Distance Depth
+\end{verbatim}}}
+
 \subsection{\I{Derived quantities}\label{sec:derived-quantities}}
 
 Some processes require, as arguments, a population value derived from the population state. These are termed \emph{derived quantities}. Derived quantities are values, calculated by \SPM\ as the end of a specified time-step in every year, and hence they have a single value for each year of the model. Derived quantities can be calculated as either an abundance or as a biomass. Abundance derived quantities are simply the count or sum of cells within some categories (after applying a selectivity) within cells defined by a layer. Biomass derived quantities are similar, except they are a measure of biomass. Derived quantities are also calculated during the initialisation phases, and hence the time-step during each phase must also be specified. If the initialisation time-steps are not specified, \SPM\ will calculate the derived quantity during the initialisation phases in every year, at the end of the annual cycle.
@@ -1132,6 +1228,17 @@ The von Bertalanffy curve is parameterised by $L_\infty$, $k$, and $t_0$; the Sc
 
 When defining size-at-age in \SPM, you must also define a size-weight relationship (see Section \ref{sec:mean-weight} below).
 
+For example to define the age-at-size with label \texttt{VB} as a von-Bertalanffy relationship with $L_\infty=100$, $k=0.3$, and $t_0=-0.1$, and a size-weight relationship (see below) given by \texttt{SizeWeight},
+
+{\small{\begin{verbatim}
+@age_size VB
+type von_bertalanffy
+linf 100
+k 0.3
+t0 -0.1
+size_weight SizeWeight
+\end{verbatim}}}
+
 \subsection{\I{Size-weight relationship}\label{sec:mean-weight}}
 
 There are two size-weight relationship,s available in \SPM. The first is the naive no relationship. Here, the weight of an individual, regardless of size, is always 1. The second is the basic relationship. 
@@ -1155,6 +1262,15 @@ The two size-weight relationships are,
 \end{itemize}
 
 Be careful about the scale of $a$ --- this can easily be specified incorrectly. If the catch is in tonnes and the growth curve in centimetres, then $a$ should be on the right scale to convert a length in centimetres to a weight in tonnes. Note that there are reports available that can be used to help check that the units specified are plausible (see Section \ref{sec:report-section}).
+
+For example to define the size-weight with label \texttt{SizeWeight} as the basic relationship with $a=1.4e-8$ and $b=3$,
+
+{\small{\begin{verbatim}
+@size_weight SizeWeight
+type basic
+a 1.4e-008
+b 3
+\end{verbatim}}}
 
 \subsection{\I{Selectivities}\label{sec:selectivities}}
 
@@ -1192,6 +1308,14 @@ f(x)=C
 
 The constant selectivity has the estimable parameter C. 
 
+For example, to define a constant selectivity with $c=1$, use,
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type constant
+c 1
+\end{verbatim}}}
+
 \subsubsection[Knife-edge]{\argument{knife\_edge}}\index{Selectivities!Knife-edge}
 
 \begin{equation}
@@ -1201,7 +1325,15 @@ f(x)= \begin{cases}
   \end{cases} 
 \end{equation}
 
-The knife-edge ogive has the estimable parameter E and a scaling parameter $\alpha$, where the default value of $\alpha = 1$
+The knife-edge selectivity has the estimable parameter $E$and a scaling parameter $\alpha$, where the default value of $\alpha = 1$
+
+For example, to define a knife-edge selectivity with $=12$, use,
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type knife_edge
+e 12
+\end{verbatim}}}
 
 \subsubsection[All-values]{\argument{all\_values}}\index{Selectivities!All-values}
 
@@ -1210,6 +1342,14 @@ f(x)=V_x
 \end{equation}
 
 The all-values selectivity has estimable parameters $V_{low}$, $V_{low+1}$ \ldots $V_{high}$. Here, you need to provide the selectivity value for each age class.
+
+For example, to define an all-values selectivity for a model with ages $1 \ldots 6$, and the selectivity at age linearly increasing from $0$ to $1$ over those ages, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type all_values
+v  0.0 0.2 0.4 0.6 0.8 1.0
+\end{verbatim}}}
 
 \subsubsection[All-values-bounded]{\argument{all\_values\_bounded}}\index{Selectivities!All-values-bounded}
 
@@ -1223,6 +1363,16 @@ f(x)=\begin{cases}
 
 The all-values-bounded selectivity has non-estimable parameters L and H. The estimable parameters are $V_L$, $V_{L+1}$ \ldots $V_H$. Here, you need to provide an selectivity value for each age class from $L \ldots H$.
 
+For example, to define an all-values-bounded selectivity for a model with ages $1$ to $6$, and the selectivity at age linearly increasing from $0$ to $1$ over ages $1 \ldots 4$ and constant thereafter, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type all_values_bounded
+l 1 
+h 4 
+v 0.0 0.33 0.66 1.0
+\end{verbatim}}}
+
 \subsubsection[Increasing]{\argument{increasing}}\index{Selectivities!Increasing}
 
 \begin{equation} 
@@ -1235,6 +1385,16 @@ f(x)=\begin{cases}
 
 The increasing ogive has non-estimable parameters $L$ and $H$. The estimable parameters are $\pi_L$, $\pi_{L+1}$ \ldots $\pi_H$ (but if these are estimated, they should always be constrained to be between 0 and 1). $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. Note that the increasing ogive is similar to the all-values-bounded ogive, but is constrained to be non-decreasing.
 
+For example, to define an increasing selectivity for a model with ages $1$ to $6$, and the selectivity at age increasing by 0.1 from $0.5$ over ages $1 \ldots 4$ and constant thereafter, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type increasing
+l 1 
+h 4 
+v 0.5 0.1 0.1 1.0
+\end{verbatim}}}
+
 \subsubsection[Logistic]{\argument{logistic}}\index{Selectivities!Logistic}
 
 \begin{equation}
@@ -1243,13 +1403,33 @@ The increasing ogive has non-estimable parameters $L$ and $H$. The estimable par
  
 The logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}+a_{to95}$. 
 
+For example, to define a logistic selectivity for a model with ages $1$ to $6$ with $a_{50}=3$ and $a_{to95}=1$, with a maximum selectivity of $1.0$, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type logistic
+alpha 1
+a50 4
+ato95 1
+\end{verbatim}}}
+
 \subsubsection[Inverse logistic]{\argument{inverse\_logistic}}\I{Selectivities!Inverse-logistic}
 
 \begin{equation}
   f(x) = \alpha - \alpha / [1+19^{(a_{50}-x)/a_{to95}}]
 \end{equation}
  
-The inverse logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}-a_{to95}$. 
+The inverse-logistic selectivity has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. The logistic selectivity takes values $0.5 \alpha$ at $x=a_{50}$ and $0.95 \alpha$ at $x=a_{50}-a_{to95}$. 
+
+For example, to define an inverse-logistic selectivity for a model with ages $1$ to $6$ with $a_{50}=3$ and $a_{to95}=1$, with a maximum selectivity of $1.0$, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type inverse_logistic
+alpha 1
+a50 4
+ato95 1
+\end{verbatim}}}
 
 \subsubsection[Logistic producing]{\argument{logistic\_producing}}\index{Selectivities!Logistic-producing}
 
@@ -1264,6 +1444,18 @@ f(x)=\begin{cases}
 
 The logistic-producing selectivity has the non-estimable parameters $L$ and $H$, and has estimable parameters $a_{50}$ and $a_{to95}$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. For category transitions, $f(x)$ represents the proportion moving, not the proportion that have moved. This selectivity was designed for use in an age-based model to model maturity. In such a model, a logistic-producing maturation selectivity will (in the absence of other influences) make the proportions mature follow a logistic curve with parameters $a_{50}$, $a_{to95}$.
 
+For example, to define an logistic-producing selectivity for a model with ages $1$ to $6$ with $a_{50}=3$ and $a_{to95}=1$, with a maximum selectivity of $1.0$, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type logistic_producing
+alpha 1
+l 1 
+h 6
+a50 4
+ato95 1
+\end{verbatim}}}
+
 \subsubsection[Double-normal]{\argument{double\_normal}}\index{Selectivities!Double-normal}
 
 \begin{equation}
@@ -1275,6 +1467,17 @@ The logistic-producing selectivity has the non-estimable parameters $L$ and $H$,
 
 The double-normal selectivity has estimable parameters $a_1$, $s_L$, and $s_R$. $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It has values $\alpha$ at $x=a_1$, and $0.5 \alpha$ at $x=a_1-s_L$ and $x=a_1+s_R$. 
 
+For example, to define an double-normal selectivity for a model with ages $1$ to $6$ with $\mu=3$, $\sigma_L=1$, and $\sigma_R=1$, with a maximum selectivity of $1.0$, use
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type double_normal
+alpha 1
+mu 3
+sigma_l 1
+sigma_r 1
+\end{verbatim}}}
+
 \subsubsection[Double-exponential]{\argument{double\_exponential}}\index{Selectivities!Double-exponential}
 
 \begin{equation} 
@@ -1284,15 +1487,33 @@ f(x)=\begin{cases}
   \end{cases}
 \end{equation}
 
-The double-exponential selectivity has non-estimable parameters $x_1$ and $x_2$, and estimable parameters $x_0$, $y_0$, $y_1$, and $y_2$.  $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It can be `U-shaped'. Bounds for $x_0$ must be such that $x_1 < x_0 < x_2$. With $\alpha=1$, the selectivity passes through the points $(x_1, y)$, $(x_0, y_0)$, and $(x_2, y_2)$. If both $y_1$ and $y_2$ are greater than $y_0$ the selectivity is `U-shaped' with minimum at $(x_0, y_0)$.
+The double-exponential selectivity has non-estimable parameters $x_1$ and $x_2$, and estimable parameters $x_0$, $y_0$, $y_1$, and $y_2$.  $\alpha$ is a scaling parameter, with default value of $\alpha = 1$. It can be `U-shaped'. Bounds for $x_0$ must be such that $x_1 < x_0 < x_2$. With $\alpha=1$, the selectivity passes through the points $(x_1, y_1)$, $(x_0, y_0)$, and $(x_2, y_2)$. If both $y_1$ and $y_2$ are greater than $y_0$ the selectivity is `U-shaped' with minimum at $(x_0, y_0)$.
+
+For example, to define an double-exponential selectivity for a model with ages $1$ to $6$ that passes through the points $(1,1)$, $(3,0.1)$, and $(6,1)$, use 
+
+{\small{\begin{verbatim}
+@selectivity Sel
+type double_exponential
+alpha 1
+x0 3
+y0 0.1
+x1 1
+y1 1
+x2 6
+y2 1
+\end{verbatim}}}
 
 \subsubsection[Spline]{\argument{spline}}\index{Selectivities!Spline}
 
 The spline selectivity implements a cubic spline that has non-estimable knots, and an estimable value for each knot. The cubic spline is either (i) a natural splines where the where the second derivatives are set to 0 at the boundaries, i.e., the values at the boundaries are horizontal, (ii) a spline with a fixed first derivative at the boundaries (linear, but not necessarily horizontal) and (iii) spline which turns into a parabola at the boundaries.
 
+For example, to define a spline selectivity for a model with ages $1$ to $6$ with $3$ knots defined for the ages $1$, $3$, and $6$, and where the shape of the selectivity is horizontal at the ends, use
 
-
-
-
-
-
+{\small{\begin{verbatim}
+@selectivity Sel
+type spline
+alpha 1
+knots 1 3 6
+values 0.1 0.5 1.0
+method natural
+\end{verbatim}}}
