@@ -1,0 +1,19 @@
+cd 1x1_Examples
+start run.bat
+cd ..
+cd 2x3_Examples
+start run.bat
+cd ..
+cd 3x3_Examples
+start run.bat
+cd ..
+cd case0
+start run.bat
+cd ..
+cd RossSea
+start run.bat
+cd ..
+cd Validate
+start run.bat
+cd ..
+exit
