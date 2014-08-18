@@ -27,13 +27,14 @@ public:
   double                     getLat(int RowIndex, int ColIndex);
   void                       validate();
   void                       build();
+  void                       rebuild();
 
 protected:
   string                     sLatLayer;
   string                     sLongLayer;
   CNumericLayer              *pLatLayer;
   CNumericLayer              *pLongLayer;
-
+  map<unsigned, map<unsigned, map<unsigned, map<unsigned, double> > > >  mGrid;
   double                     deg2rad(double deg);
   double                     haversine(const double long1, const double lat1, const double long2, const double lat2);
 

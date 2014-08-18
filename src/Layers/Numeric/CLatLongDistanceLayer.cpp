@@ -33,7 +33,7 @@ CLatLongDistanceLayer::CLatLongDistanceLayer() {
 //**********************************************************************
 double CLatLongDistanceLayer::getLong(int RowIndex, int ColIndex) {
   double dLong = pLongLayer->getValue(RowIndex, ColIndex);
-  return(dLong);
+  return dLong;
 }
 
 //**********************************************************************
@@ -42,7 +42,7 @@ double CLatLongDistanceLayer::getLong(int RowIndex, int ColIndex) {
 //**********************************************************************
 double CLatLongDistanceLayer::getLat(int RowIndex, int ColIndex) {
   double dLat = pLatLayer->getValue(RowIndex, ColIndex);
-  return(dLat);
+  return dLat;
 }
 
 //**********************************************************************
@@ -58,19 +58,12 @@ double CLatLongDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow
     if (ColIndex >= iWidth)
       CError::errorGreaterThanEqualTo(PARAM_COLUMN_INDEX, PARAM_LAYER_WIDTH);
 
+    return mGrid[RowIndex][ColIndex][TargetRow][TargetCol];
+
   } catch (string &Ex) {
     Ex = "CLatLongDistanceLayer.getValue(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
-
-  double dLong1 = getLong(RowIndex, ColIndex);
-  double dLat1  = getLat(RowIndex, ColIndex);
-  double dLong2 = getLong(TargetRow, TargetCol);
-  double dLat2  = getLat(TargetRow, TargetCol);
-  double dDistance = haversine(dLong1, dLat1, dLong2, dLat2);
-
-  return dDistance;
-
 }
 
 //**********************************************************************
@@ -79,7 +72,7 @@ double CLatLongDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow
 //**********************************************************************
 double CLatLongDistanceLayer::deg2rad(double deg) {
     double dResult = deg / 180.0 * PI;
-    return(dResult);
+    return dResult;
 }
 
 //**********************************************************************
@@ -100,7 +93,7 @@ double CLatLongDistanceLayer::haversine(const double long1, const double lat1, c
     double dDeltaLat = (dLat2 - dLat1);
     double dA = pow(sin(dDeltaLat * 0.5), 2.0) + cos(dLat1) * cos(dLat2) * pow(sin(dDeltaLong * 0.5), 2.0);
 
-    return(dR * 2.0 * asin(std::min(1.0, sqrt(dA))));  // return distance in kilometres
+    return dR * 2.0 * asin(std::min(1.0, sqrt(dA)));  // return distance in kilometres
 
   }
 
@@ -136,8 +129,8 @@ void CLatLongDistanceLayer::build() {
 
     for (int i = 0; i < iHeight; ++i) {
       for (int j = 0; j < iWidth; ++j) {
-        double dLat = pLatLayer->getValue(i, j);
-        double dLong = pLongLayer->getValue(i, j);
+        double dLong = getLong(i, j);
+        double dLat = getLat(i, j);
         if (dLat < -90)
           CError::errorLessThan(PARAM_LAT_LAYER,"-90");
         if (dLat > 90)
@@ -149,8 +142,37 @@ void CLatLongDistanceLayer::build() {
       }
     }
 
+    rebuild();
+
   } catch (string &Ex) {
     Ex = "CLatLongDistanceLayer.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CLatLongDistanceLayer::rebuild()
+// build
+//**********************************************************************
+void CLatLongDistanceLayer::rebuild() {
+  try {
+
+    for (int i = 0; i < iHeight; ++i) {
+      for (int j = 0; j < iWidth; ++j) {
+        for (int k = 0; k < iHeight; ++k) {
+          for (int l = 0; l < iWidth; ++l) {
+            double dLong1 = getLong(i, j);
+            double dLat1  = getLat(i, j);
+            double dLong2 = getLong(k, l);
+            double dLat2  = getLat(k, l);
+            mGrid[i][j][k][l] = haversine(dLong1, dLat1, dLong2, dLat2);
+          }
+        }
+      }
+    }
+
+  } catch (string &Ex) {
+    Ex = "CLatLongDistanceLayer.rebuild(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
