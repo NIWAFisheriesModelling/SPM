@@ -23,6 +23,8 @@ public:
   virtual                    ~CLatLongDistanceLayer();
   CLayer*                    clone() { return (new CLatLongDistanceLayer(*this)); }
   double                     getValue(int RowIndex, int ColIndex, int TargetRow, int TargetCol);
+  double                     getLong(int RowIndex, int ColIndex);
+  double                     getLat(int RowIndex, int ColIndex);
   void                       validate();
   void                       build();
 

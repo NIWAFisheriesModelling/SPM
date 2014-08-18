@@ -15,13 +15,13 @@ BUILD    = BASE + 'build\\'
 RELEASE  = BASE + 'build\\Release\\'
 BIN      = BASE + ''
 RLIB     = BASE + 'R-libraries\\'
-DOC      = BASE + 'Doc\\Manual\\'
-EXAMPLES = BASE + 'Examples\\'
+DOC      = BASE + 'doc\\manual\\'
+EXAMPLES = BASE + 'examples\\'
 
 ##################################################################
 print('\n1. Cleanup and create directories')
 os.chdir(BASE)
-os.system('rd /S /Q \"' +  RELEASE + '\"')
+#os.system('rd /S /Q \"' +  RELEASE + '\"')
 os.system('md \"' +  RELEASE + '\"')
 os.system('md \"' +  RELEASE + 'R-library\"')
 os.system('md \"' +  RELEASE + 'Examples\"')

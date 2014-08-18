@@ -28,6 +28,24 @@ CLatLongDistanceLayer::CLatLongDistanceLayer() {
 }
 
 //**********************************************************************
+// double CLatLongDistanceLayer::getLong(int RowIndex, int ColIndex)
+// Get The Long Value From our LatLongDistance Layer
+//**********************************************************************
+double CLatLongDistanceLayer::getLong(int RowIndex, int ColIndex) {
+  double dLong = pLongLayer->getValue(RowIndex, ColIndex);
+  return(dLong);
+}
+
+//**********************************************************************
+// double CLatLongDistanceLayer::getLat(int RowIndex, int ColIndex)
+// Get The Lat Value From our LatLongDistance Layer
+//**********************************************************************
+double CLatLongDistanceLayer::getLat(int RowIndex, int ColIndex) {
+  double dLat = pLatLayer->getValue(RowIndex, ColIndex);
+  return(dLat);
+}
+
+//**********************************************************************
 // double CLatLongDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow=0, int TargetCol=0)
 // Get The Value Fromo ur LatLongDistance Layer
 //**********************************************************************
@@ -45,10 +63,10 @@ double CLatLongDistanceLayer::getValue(int RowIndex, int ColIndex, int TargetRow
     throw Ex;
   }
 
-  double dLong1 = pLongLayer->getValue(RowIndex, ColIndex);
-  double dLat1  = pLatLayer->getValue(RowIndex, ColIndex);
-  double dLong2 = pLongLayer->getValue(TargetRow, TargetCol);
-  double dLat2  = pLatLayer->getValue(TargetRow, TargetCol);
+  double dLong1 = getLong(RowIndex, ColIndex);
+  double dLat1  = getLat(RowIndex, ColIndex);
+  double dLong2 = getLong(TargetRow, TargetCol);
+  double dLat2  = getLat(TargetRow, TargetCol);
   double dDistance = haversine(dLong1, dLat1, dLong2, dLat2);
 
   return dDistance;

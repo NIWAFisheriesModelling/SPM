@@ -142,7 +142,7 @@ For example, to specify a Euclidean distance layer, use,
 type distance
 \end{verbatim}}}
 
-The haversine method calculates the great-circle distance between two points on a sphere from the longitudes and latitudes of the cells, with the assumption that the Earth’s radius is 6371 km. Two numeric layers are required, giving the longitude and latitude of each cell respectively. Latitude values must be between $-90^{\circ}$ (southern latitudes) and $90^{\circ}$ (northern latitudes). Longitude values must be between $0^{\circ}$ and $360^{\circ}$. 
+The haversine method calculates the great-circle distance between two points on a sphere from the longitudes and latitudes of the cells, with the assumption that the Earth is a perfect sphere with radius exactly 6371 km. Two numeric layers are required, giving the longitude and latitude of each cell respectively. Latitude values must be between $-90^{\circ}$ (southern latitudes) and $90^{\circ}$ (northern latitudes). Longitude values must be between $0^{\circ}$ and $360^{\circ}$. 
 
 For example, to specify a haversine distance layer, assuming that latitudes and longitudes are given in numeric layers elsewhere (labelled, say, \texttt{cell\_latitudes} and \texttt{cell\_longitudes}), then use,
 {\small{\begin{verbatim}
