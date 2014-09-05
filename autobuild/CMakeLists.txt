@@ -20,13 +20,14 @@ MESSAGE("Home: ${SPM_HOME_DIRECTORY}")
 
 IF (WIN32)
   INCLUDE_DIRECTORIES("C:/Work/Boost/boost_1_55_0/")
+  INCLUDE_DIRECTORIES("D:/Programming/Boost/boost_1_55_0")
   LINK_DIRECTORIES("${SPM_HOME_DIRECTORY}/libs/windows_gcc_4_8/")
   
   # Generic Build Settings
-  SET(LINK_OPTIONS "-static icon.o")
-  SET(COMPILE_OPTIONS_MAIN "-DBOOST_THREAD_USE_LIB=1 -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -O0 -g3 -Wall -fmessage-length=0 -fopenmp -static")
-  SET(COMPILE_OPTIONS_OPTI "-DBOOST_THREAD_USE_LIB=1 -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -DOPTIMIZE -O2 -g0 -Wall -fmessage-length=0 -fopenmp -static")
-  SET(COMPILE_OPTIONS_TEST "-DBOOST_THREAD_USE_LIB=1 -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -DTEST -O0 -g3 -Wall -fmessage-length=0 -fopenmp -static")
+  SET(LINK_OPTIONS "-static")
+  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static")
+  SET(COMPILE_OPTIONS_OPTI "-O2 -g0 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -DOPTIMIZE")
+  SET(COMPILE_OPTIONS_TEST "-O0 -g3 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -DTEST")
   SET(MAIN_LIBRARIES
     gomp
     pthread
@@ -36,7 +37,7 @@ IF (WIN32)
     boost_program_options-mgw48-mt-s-1_55
     boost_chrono-mgw48-mt-s-1_55
   )
-  SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_54)
+  SET(TEST_LIBRARIES boost_unit_test_framework-mgw48-mt-s-1_55)
   
 ELSE (WIN32)
   # wellopensuse131 link directories
