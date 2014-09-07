@@ -19,8 +19,8 @@ public:
   // methods
   CUniformLogEstimate();
   virtual                     ~CUniformLogEstimate() = default;
-  void                        validate() override final { CEstimate::validate(); }
-  double                      getScore() override final;
+  void                        validate() { CEstimate::validate(); }
+  double                      getScore();
 };
 
 #endif /* CUNIFORMLOGESTIMATE_H_ */

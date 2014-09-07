@@ -18,8 +18,8 @@ public:
   // methods
   CNormalLogEstimate();
   virtual                     ~CNormalLogEstimate() = default;
-  void                        validate() override final;
-  double                      getScore() override final;
+  void                        validate();
+  double                      getScore();
 
 protected:
   // Variables

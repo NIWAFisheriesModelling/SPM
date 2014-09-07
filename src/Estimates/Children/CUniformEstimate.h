@@ -19,8 +19,8 @@ public:
   // methods
   CUniformEstimate();
   virtual                     ~CUniformEstimate() = default;
-  void                        validate() override final { CEstimate::validate(); }
-  double                      getScore() override final { return 0; }
+  void                        validate() { CEstimate::validate(); }
+  double                      getScore() { return 0; }
 };
 
 #endif /* CUNIFORMESTIMATE_H_ */
