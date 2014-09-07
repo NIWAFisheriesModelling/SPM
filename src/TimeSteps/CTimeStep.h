@@ -13,6 +13,8 @@
 
 // Local Headers
 #include "../BaseClasses/CBaseExecute.h"
+#include "../DerivedQuantities/CDerivedQuantity.h"
+#include "../DerivedQuantitiesByCell/CDerivedQuantityByCell.h"
 
 // Classes
 class CProcess;
@@ -30,11 +32,19 @@ public:
   void                        build();
   void                        execute();
   vector<string>              getProcessNames() { return vProcessNames; }
+  void                        addInitialisationDerivedQuantity(CDerivedQuantity* dq) { vInitialisationDerivedQuantities.push_back(dq); }
+  void                        addDerivedQuantity(CDerivedQuantity *dq);
 
 protected:
   // Variables
   vector<string>              vProcessNames;
   vector<CProcess*>           vProcesses;
+
+  vector<CDerivedQuantity*>                       vInitialisationDerivedQuantities;
+  map<unsigned, vector<CDerivedQuantity*> >       mvDerivedQuantities;
+  vector<CDerivedQuantityByCell*>                 vInitialisationDerivedQuantitiesByCell;
+  map<unsigned, vector<CDerivedQuantityByCell*> > mvDerivedQuantitiesByCell;
+
 };
 
 #endif /*CTIMESTEP_H_*/

@@ -28,7 +28,6 @@
 #include "../Observations/CObservationManager.h"
 #include "../Penalties/CPenaltyManager.h"
 #include "../PreferenceFunctions/CPreferenceFunctionManager.h"
-#include "../Priors/CPriorManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Profiles/CProfileManager.h"
 #include "../RandomNumberGenerator/CRandomNumberGenerator.h"
@@ -64,7 +63,6 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CMinimizerManager::Instance());
   vManagers.push_back(CObservationManager::Instance());
   vManagers.push_back(CPenaltyManager::Instance());
-  vManagers.push_back(CPriorManager::Instance());
   vManagers.push_back(CProfileManager::Instance());
   vManagers.push_back(CRandomNumberGenerator::Instance());
   vManagers.push_back(CSelectivityManager::Instance());
@@ -302,7 +300,6 @@ CRuntimeThread::~CRuntimeThread() {
   CRandomNumberGenerator::Destroy();
   CProfileManager::Destroy();
   CProcessManager::Destroy();
-  CPriorManager::Destroy();
   CPreferenceFunctionManager::Destroy();
   CPenaltyManager::Destroy();
   CObservationManager::Destroy();

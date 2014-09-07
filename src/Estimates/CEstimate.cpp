@@ -11,8 +11,6 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CEstimate.h"
-#include "../Priors/CPriorManager.h"
-#include "../Priors/CPrior.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
 #include "../Helpers/CConvertor.h"
@@ -24,7 +22,6 @@
 //**********************************************************************
 CEstimate::CEstimate() {
   // Default Values
-  pPrior    = 0;
   pTarget   = 0;
   bEnabled  = true;
 }
@@ -79,6 +76,7 @@ void CEstimate::setValue(double value) {
 double CEstimate::getValue() {
 #ifndef OPTIMIZE
   try {
+    sType = pParameterList->getString(PARAM_TYPE);
     if (pTarget == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
 
@@ -88,31 +86,6 @@ double CEstimate::getValue() {
   }
 #endif
   return (*pTarget);
-}
-
-//**********************************************************************
-// double CEstimate::getPriorScore()
-// Get The Score for Our Prior
-//**********************************************************************
-double CEstimate::getPriorScore() {
-#ifndef OPTIMIZE
-  try {
-    if (pPrior == 0)
-          CError::errorMissing(PARAM_PRIOR);
-#endif
-
-    if (sPrior == "")
-      return 0.0; // No Prior
-
-    return pPrior->getResult((*pTarget));
-
-#ifndef OPTIMIZE
-  } catch (string &Ex) {
-    Ex = "CEstimate.getPriorScore(" + getParameter() + ")->" + Ex;
-    throw Ex;
-  }
-  return 0.0;
-#endif
 }
 
 //**********************************************************************
@@ -150,7 +123,6 @@ void CEstimate::validate() {
     dLowerBound       = pParameterList->getDouble(PARAM_LOWER_BOUND);
     dUpperBound       = pParameterList->getDouble(PARAM_UPPER_BOUND);
     bMCMCFixed        = pParameterList->getBool(PARAM_MCMC_FIXED,true,false);
-    sPrior            = pParameterList->getString(PARAM_PRIOR);
     iEstimationPhase  = pParameterList->getInt(PARAM_ESTIMATION_PHASE, true, 1);
 
     pParameterList->fillVector(vSameList, PARAM_SAME, true);
@@ -179,12 +151,6 @@ void CEstimate::validate() {
 //**********************************************************************
 void CEstimate::build() {
   try {
-    // Build our Prior Target
-    if (sPrior != "") {
-      CPriorManager *pPriorManager = CPriorManager::Instance();
-      pPrior = pPriorManager->getPrior(sPrior);
-    }
-
     // Populate Same Index
     vSameIndex.clear();
     foreach(string Same, vSameList) {

@@ -50,7 +50,7 @@ void CEstimateSummaryReport::execute() {
         cout << PARAM_PARAMETER << ": " << Estimate->getParameter() << "\n";
         cout << PARAM_LOWER_BOUND << ": " << Estimate->getLowerBound() << "\n";
         cout << PARAM_UPPER_BOUND << ": " << Estimate->getUpperBound() << "\n";
-        cout << PARAM_PRIOR << ": " << Estimate->getPrior() << "\n";
+        cout << PARAM_PRIOR << ": " << Estimate->getType() << "\n";
         cout << PARAM_VALUE<< ": " << Estimate->getValue() << "\n\n";
       }
 

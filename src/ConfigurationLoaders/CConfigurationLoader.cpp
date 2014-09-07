@@ -34,7 +34,6 @@
 #include "../Observations/Factory/CObservationFactory.h"
 #include "../Penalties/Factory/CPenaltyFactory.h"
 #include "../PreferenceFunctions/Factory/CPreferenceFunctionFactory.h"
-#include "../Priors/Factory/CPriorFactory.h"
 #include "../Processes/Factory/CProcessFactory.h"
 #include "../Profiles/Factory/CProfileFactory.h"
 #include "../Reports/Factory/CReportFactory.h"
@@ -157,8 +156,6 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CPenaltyFactory::buildPenalty(sType);
     else if (sSection == PARAM_PREFERENCE_FUNCTION)
       pBaseObject = CPreferenceFunctionFactory::buildPreferenceFunction(sType);
-    else if (sSection == PARAM_PRIOR)
-      pBaseObject = CPriorFactory::buildPrior(sType);
     else if (sSection == PARAM_PROCESS)
       pBaseObject = CProcessFactory::buildProcess(sType);
     else if (sSection == PARAM_PROFILE)

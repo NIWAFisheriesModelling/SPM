@@ -33,6 +33,7 @@ CEstimateInfo::CEstimateInfo() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_LABEL);
+  pParameterList->registerAllowed(PARAM_TYPE);
   pParameterList->registerAllowed(PARAM_PARAMETER);
   pParameterList->registerAllowed(PARAM_LOWER_BOUND);
   pParameterList->registerAllowed(PARAM_UPPER_BOUND);
@@ -67,6 +68,7 @@ void CEstimateInfo::fillSameVector(vector<string> &sames) {
 void CEstimateInfo::generateEstimates() {
   try {
     string parameter = pParameterList->getString(PARAM_PARAMETER);
+    string type      = pParameterList->getString(PARAM_TYPE);
 
     /**
      * First thing we want to split our parameter
@@ -81,7 +83,7 @@ void CEstimateInfo::generateEstimates() {
     // Do we have to create 1 or n Estimates
     if (iObjectIndex != -1 || !target->isEstimableAVector(sObjectParameter)) {
       // 1 Estimate
-      CEstimate *newEstimate = CEstimateFactory::buildEstimate();
+      CEstimate *newEstimate = CEstimateFactory::buildEstimate(type);
       newEstimate->getParameterList()->copyFrom(pParameterList);
 
       if (iObjectIndex != -1)
@@ -93,7 +95,7 @@ void CEstimateInfo::generateEstimates() {
       int size = target->getEstimableVectorSize(sObjectParameter);
 
       for (int i = 0; i < size; ++i) {
-        CEstimate *newEstimate = CEstimateFactory::buildEstimate();
+        CEstimate *newEstimate = CEstimateFactory::buildEstimate(type);
         newEstimate->getParameterList()->copyFrom(pParameterList);
 
         string newShortParameter = sObjectParameter + "(" + boost::lexical_cast<string>(i+1) + ")";

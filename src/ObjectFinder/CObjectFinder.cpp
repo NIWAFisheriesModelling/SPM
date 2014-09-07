@@ -22,7 +22,6 @@
 #include "../Layers/CLayerManager.h"
 #include "../Observations/CObservationManager.h"
 #include "../PreferenceFunctions/CPreferenceFunctionManager.h"
-#include "../Priors/CPriorManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../SizeWeight/CSizeWeightManager.h"
@@ -102,9 +101,6 @@ CBaseObject* CObjectFinder::getObject(string objectAbsoluteName) {
 
   } else if (sObjectType == PARAM_SIZE_WEIGHT) {
     target = (CBaseObject*)CSizeWeightManager::Instance()->getSizeWeight(sObjectLabel);
-
-  } else if (sObjectType == PARAM_PRIOR) {
-    target = (CBaseObject*)CPriorManager::Instance()->getPrior(sObjectLabel);
 
   } else if (sObjectType == PARAM_OBSERVATION) {
     target = (CBaseObject*)CObservationManager::Instance()->getObservation(sObjectLabel);

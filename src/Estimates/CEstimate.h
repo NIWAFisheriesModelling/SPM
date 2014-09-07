@@ -12,8 +12,6 @@
 // Local Headers
 #include "../BaseClasses/CBaseBuild.h"
 
-// Classes
-class CPrior;
 
 //**********************************************************************
 //
@@ -28,7 +26,6 @@ public:
   double                     getLowerBound() { return dLowerBound; }
   double                     getUpperBound() { return dUpperBound; }
   bool                       getMCMCFixed() { return bMCMCFixed; }
-  string                     getPrior() { return sPrior; }
   int                        getEstimationPhase() { return iEstimationPhase; }
   void                       setValue(double value);
   double                     getValue();
@@ -37,19 +34,19 @@ public:
   void                       addValue(double value);
   int                        getValueCount() { return (int)vValueList.size(); }
   void                       loadValue(int index);
-  double                     getPriorScore();
   void                       setTarget(double *newTarget) { pTarget = newTarget; }
-  void                       validate();
+  virtual void               validate();
   void                       build();
+  virtual double             getScore() = 0;
+  string                     getType() { return sType; }
 
 protected:
   // Variables
+  string                     sType;
   string                     sParameter;
   double                     dLowerBound;
   double                     dUpperBound;
   bool                       bMCMCFixed;
-  string                     sPrior;
-  CPrior                     *pPrior;
   double                     *pTarget;
   bool                       bEnabled;
   int                        iEstimationPhase;

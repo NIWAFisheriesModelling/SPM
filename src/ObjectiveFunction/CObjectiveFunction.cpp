@@ -139,13 +139,9 @@ void CObjectiveFunction::execute() {
   CEstimateManager::Instance()->fillVector(vEstimates);
 
   foreach(CEstimate *Estimate, vEstimates) {
-    // Check if we are using a prior on this estimate
-    if (Estimate->getPrior() == "")
-      continue;
-
     // Get Vars
     sLabel = PARAM_PRIOR + string("->") + Estimate->getParameter();
-    dValue = Estimate->getPriorScore();
+    dValue = Estimate->getScore();
 
     // Inc Score, Add Value to vector
     dPriors += dValue;
