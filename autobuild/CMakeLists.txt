@@ -25,9 +25,9 @@ IF (WIN32)
   
   # Generic Build Settings
   SET(LINK_OPTIONS "-static")
-  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -std=c++")
-  SET(COMPILE_OPTIONS_OPTI "-O2 -g0 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -std=c++ -DOPTIMIZE")
-  SET(COMPILE_OPTIONS_TEST "-O0 -g3 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -std=c++ -DTEST")
+  SET(COMPILE_OPTIONS_MAIN "-O0 -g3 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -std=c++11")
+  SET(COMPILE_OPTIONS_OPTI "-O2 -g0 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -std=c++11 -DOPTIMIZE")
+  SET(COMPILE_OPTIONS_TEST "-O0 -g3 -Wall -Werror -fmessage-length=0 -DBOOST_THREAD_USE_LIB=1 -Wno-unused-local-typedefs -DBOOST_THREAD_PROVIDES_GENERIC_SHARED_MUTEX_ON_WIN -fopenmp -static -std=c++11 -DTEST")
   SET(MAIN_LIBRARIES
     gomp
     pthread
