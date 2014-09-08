@@ -41,8 +41,8 @@ CParameterList::CParameterList() {
 // Copy into this parameter list from another one
 //**********************************************************************
 void CParameterList::copyFrom(CParameterList *parameterList) {
-  mParameters         = parameterList->mParameters;
-  vAllowedParameters  = parameterList->vAllowedParameters;
+  mParameters.insert(parameterList->mParameters.begin(), parameterList->mParameters.end());
+  vAllowedParameters.insert(vAllowedParameters.end(), parameterList->vAllowedParameters.begin(), parameterList->vAllowedParameters.end());
 }
 
 //**********************************************************************
