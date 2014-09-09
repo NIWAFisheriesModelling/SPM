@@ -65,7 +65,7 @@ double CRandomNumberGenerator::getRandomUniform(double min, double max) {
 
   // Build our Uniform Distribution Generator
   boost::uniform_real<> distUniform(min,max);
-  boost::variate_generator<mt19937&, boost::uniform_real<> > gen(clGenerator, distUniform);
+  boost::variate_generator<boost::mt19937&, boost::uniform_real<> > gen(clGenerator, distUniform);
 
   return gen(); // Generated Number
 }
@@ -86,7 +86,7 @@ double CRandomNumberGenerator::getRandomNormal(double mean, double sigma) {
 
   // Build our Normal Distribution Generator
   boost::normal_distribution<> distNormal(mean,sigma);
-  boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
+  boost::variate_generator<boost::mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
 
   return gen(); // Generated Number
 }
@@ -99,7 +99,7 @@ double CRandomNumberGenerator::getRandomStandardNormal() {
 
   // Build our Normal Distribution Generator
   boost::normal_distribution<> distNormal(0.0,1.0);
-  boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
+  boost::variate_generator<boost::mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
 
   return gen(); // Generated Number
 }
@@ -145,7 +145,7 @@ double CRandomNumberGenerator::getRandomChiSquare(int df) {
   boost::normal_distribution<> distNormal(0.0,1.0);
   double dSum = 0.0;
   for (int i = 0; i < df; ++i ) {
-    boost::variate_generator<mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
+    boost::variate_generator<boost::mt19937&, boost::normal_distribution<> > gen(clGenerator, distNormal);
     //ChiSq ~ sum of normals squared
     double dNumber = gen();
     dSum += dNumber * dNumber;
@@ -159,12 +159,6 @@ double CRandomNumberGenerator::getRandomChiSquare(int df) {
 // Validate RNG
 //**********************************************************************
 void CRandomNumberGenerator::validate() {
-  try {
-
-  } catch (string &Ex) {
-    Ex = "CRandomNumberGenerator.validate()->" + Ex;
-    throw Ex;
-  }
 }
 
 //**********************************************************************
@@ -172,12 +166,6 @@ void CRandomNumberGenerator::validate() {
 // Build our RNG
 //**********************************************************************
 void CRandomNumberGenerator::build() {
-  try {
-
-  } catch (string &Ex) {
-    Ex = "CRandomNumberGenerator.build()->" + Ex;
-    throw Ex;
-  }
 }
 
 //**********************************************************************

@@ -15,9 +15,6 @@
 // Local headers
 #include "../BaseClasses/CBaseManager.h"
 
-// Using
-using boost::mt19937; // Mersenne Twister
-
 //**********************************************************************
 //
 //
@@ -42,7 +39,7 @@ protected:
   CRandomNumberGenerator();
   virtual                     ~CRandomNumberGenerator();
   // Variables
-  mt19937                     clGenerator;
+  boost::mt19937              clGenerator;
 
 private:
   static CRandomNumberGenerator* clInstance;
