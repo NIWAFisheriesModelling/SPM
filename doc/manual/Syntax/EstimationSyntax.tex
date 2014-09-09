@@ -224,41 +224,20 @@ Only one method of carrying out MCMCs is available, Monte Carlo Markov Chain usi
 \defDefault{False}
 \defValue{Define this parameter as fixed during MCMC (i.e., considered a constant for the MCMC)}
 
-\defSub{prior}{Defines the label for the prior for this parameter}
+\defSub{type}{Defines the type of prior for this parameter}
 \defType{String}
 \defDefault{No default}
-\defValue{Defines the label of the prior on this parameter}
+\defValue{Defines the type of prior for this parameter}
 
+\subsubsection[Uniform prior]{\commandlabsubarg{estimate}{type}{uniform}}
 
-\subsection{\I{Priors}}
+The uniform prior has no other subcommands.
 
-The available priors are,
+\subsubsection[Uniform-log prior]{\commandlabsubarg{estimate}{type}{uniform-log}}
 
-\begin{itemize}
-  \item uniform
-  \item uniform log
-  \item normal
-  \item normal by standard deviation
-  \item lognormal
-  \item Beta
-\end{itemize}
+The uniform-log prior has no other subcommands.
 
-\defComLab{prior}{Define the prior label}
-
-\defSub{type} {Define the type of prior}
-\defType{String}
-\defDefault{No default}
-\defValue{A valid type of prior}
-
-\subsubsection[Uniform prior]{\commandlabsubarg{prior}{type}{uniform}}
-
-The command \commandlabsubarg{prior}{type}{uniform} has no other subcommands.
-
-\subsubsection[Uniform-log prior]{\commandlabsubarg{prior}{type}{uniform\_log}}
-
-The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommands.
-
-\subsubsection[Normal prior]{\commandlabsubarg{prior}{type}{normal}}
+\subsubsection[Normal prior]{\commandlabsubarg{estimate}{type}{normal}}
 
 \defSub{mu}{Defines the mean $\mu$ of the normal prior}
 \defType{Estimable}
@@ -270,7 +249,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the c.v. of the normal prior}
 
-\subsubsection[Normal-by-stdev prior]{\commandlabsubarg{prior}{type}{normal\_by\_stdev}}
+\subsubsection[Normal-by-stdev prior]{\commandlabsubarg{estimate}{type}{normal\_by\_stdev}}
 
 \defSub{mu}{Defines the mean $\mu$ of the normal by standard deviation prior}
 \defType{Estimable}
@@ -282,7 +261,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the standard deviation of the normal by standard deviation prior}
 
-\subsubsection[Lognormal prior]{\commandlabsubarg{prior}{type}{lognormal}}
+\subsubsection[Lognormal prior]{\commandlabsubarg{estimate}{type}{lognormal}}
 
 \defSub{mu}{Defines the mean $\mu$ of the lognormal prior}
 \defType{Estimable}
@@ -294,7 +273,7 @@ The command \commandlabsubarg{prior}{type}{uniform\_log} has no other subcommand
 \defDefault{No default}
 \defValue{Defines the c.v. of the lognormal prior}
 
-\subsubsection[Beta prior]{\commandlabsubarg{prior}{type}{beta}}
+\subsubsection[Beta prior]{\commandlabsubarg{estimate}{type}{beta}}
 
 \defSub{a}{The lower value of the range parameter $A$ of the Beta prior}
 \defType{Constant}

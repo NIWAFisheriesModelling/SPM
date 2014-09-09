@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-08-18 (rev. 1189)
+; TextPad syntax definitions for SPM version 1.1-2014-09-08 (rev. 1204)
 ; ===================================================================================
 ;
 ;
@@ -48,7 +48,6 @@ CharEsc = \
 @observation
 @penalty
 @preference_function
-@prior
 @process
 @profile
 @report
@@ -152,7 +151,6 @@ preference_function
 preference_functions
 prey_categories
 prey_selectivities
-prior
 process
 process_error
 processes
@@ -302,7 +300,7 @@ spatial_map
 spline
 threshold
 uniform
-uniform_log
+uniform-log
 von_bertalanffy
 
 [Keywords 5]

@@ -37,8 +37,10 @@ The estimable parameters that will be estimated are defined using \command{estim
   @estimate process[MyRecruitment].r0
   lower_bound 1000
   upper_bound 100000
-  prior uniform
+  type uniform
 \end{verbatim}}}
+
+where \texttt{type} specifies the type of prior.
 
 See Section \ref{sec:parameter-names} for instructions on how to generate the parameter name. At least one parameter to be estimated if doing an estimation, profile, or MCMC run. Initial values for the parameters to be estimated will still need to be provided, and these are used as the starting values for the minimiser. However, these may be overwritten if you provide a set of alternative starting values (i.e., using  \texttt{spm -i}, see Section \ref{sec:command-line-arguments}).
 

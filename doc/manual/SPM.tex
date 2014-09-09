@@ -10,6 +10,7 @@
 \usepackage{cmap} % allow searching in pdf documents
 \usepackage{tabulary} % better tables
 \usepackage{comment} % block comments
+\usepackage{titling} % better control over titles
 
 % hyperref for HTML links within pdf 
 % EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
@@ -182,7 +183,8 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \newcommand{\ManualRef}{Dunn, A.; Rasmussen, S.; Mormede, S. (\DocYear) \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
 \title{\SPMName\ User Manual \\\SPM\ \VER} %Document title
 \author{Alistair Dunn, Scott Rasmussen, and Sophie Mormede}  %Document authors
-\date{\DocDate} %Date of publication
+\predate{test}
+\date{ NIWA Technical Report 135\\ISSN 1174-2631\\\DocYear}
 
 % Define \clearemptydoublepage so-as to have truly blank pages between sections
 \let\origdoublepage\cleardoublepage
@@ -207,10 +209,10 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \maketitle
 \thispagestyle{empty} % no header/footer/page number on this page
 
-\vspace{3cm}
+\vspace{8cm}
 \begin{figure}[htp]
   \begin{center}
-   \includegraphics[height=8cm,width=8cm]{Figures/SPM}
+   \includegraphics[height=5cm,width=5cm]{Figures/SPM}
   \end{center}
 \end{figure}
 
