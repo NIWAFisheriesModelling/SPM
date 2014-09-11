@@ -122,8 +122,13 @@ string CParameterList::getString(string name, bool optional, string defaultValue
 
   if ((int)mParameters[name].size() == 0)
     CError::errorMissing(name);
-  if ((int)mParameters[name].size() > 1)
-    CError::errorTooMuch(name);
+  if ((int)mParameters[name].size() > 1) {
+    string out = "Error: Expected only one value for parameter " + name + ": '" + mParameters[name][0];
+    for (unsigned i = 1; i < mParameters[name].size(); ++i)
+      out += " " + mParameters[name][i] + "'";
+
+    THROW_EXCEPTION(out);
+  }
 
   return mParameters[name][0];
 }
@@ -400,4 +405,20 @@ string CParameterList::getMatchFullName(string name, int matchNumber = 1) {
 // Destructor
 //**********************************************************************
 CParameterList::~CParameterList() {
+}
+
+//**********************************************************************
+// void CParameterList::print()
+// Print the parameter list
+//**********************************************************************
+void CParameterList::print() {
+  cout << "---------------------------------------------------------" << endl;
+  cout << "ParameterList: " << endl;
+  for (auto mPtr : mParameters) {
+    cout << mPtr.first << ": ";
+    for (string value : mPtr.second)
+      cout << value << " ";
+    cout << endl;
+  }
+  cout << "---------------------------------------------------------" << endl;
 }

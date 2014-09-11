@@ -10,6 +10,10 @@
 // Global Headers
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/algorithm/string/trim_all.hpp>
+#include <boost/algorithm/string/split.hpp>
 #include <boost/lexical_cast.hpp>
 
 // Local Headers
@@ -62,7 +66,12 @@ CConfigurationLoader::CConfigurationLoader() {
 void CConfigurationLoader::loadIntoCache(vector<string> &lines) {
   vLines.clear();
   foreach(string Line, lines) {
-    vLines.push_back(Line);
+    if (Line != "") {
+      boost::replace_all(Line, "\t", " ");
+      boost::replace_all(Line, "  ", " ");
+      boost::trim_all(Line);
+      vLines.push_back(Line);
+    }
   }
 }
 
@@ -206,39 +215,25 @@ string CConfigurationLoader::getTypeFromCurrentSection() {
 //**********************************************************************
 void CConfigurationLoader::assignParameters(CBaseObject *Object) {
   try {
-    // Extra Label
-    int iSpaceLocation = vCurrentSection[0].find(" ");
-    if (iSpaceLocation > 0) {
-      string sLabel = vCurrentSection[0].substr(iSpaceLocation+1, vCurrentSection[0].length()-iSpaceLocation);
-      Object->addParameter(PARAM_LABEL, sLabel);
+    /**
+     * If we have a label add it as a parameter
+     */
+    vector<string> pieces;
+    boost::split(pieces, vCurrentSection[0], boost::is_any_of(" "));
+    for (unsigned i = 1; i < pieces.size(); ++i) {
+      Object->addParameter(PARAM_LABEL, pieces[i]);
     }
 
     // Loop through rest of parameters
     for (int i = 1; i < (int)vCurrentSection.size(); ++i) {
       string sCurrentLine = vCurrentSection[i];
-
-      iSpaceLocation = sCurrentLine.find_first_of(' ');
-
-      if (iSpaceLocation == -1) {
-        Object->addParameter(sCurrentLine, "");
-        continue;
-      }
+      boost::split(pieces, sCurrentLine, boost::is_any_of(" "));
 
       // Get variable name
-      string sName = CConvertor::stringToLowercase(sCurrentLine.substr(0, iSpaceLocation));
+      string sName = CConvertor::stringToLowercase(pieces[0]);
 
-      // Setup variables
-      int iNxtSpace = 0;
-      iSpaceLocation++;
-
-      do {
-        // Extract value, setup for next run
-        iNxtSpace = sCurrentLine.find(' ', iSpaceLocation);
-        string sValue = sCurrentLine.substr(iSpaceLocation, iNxtSpace-iSpaceLocation);
-        iSpaceLocation = iNxtSpace + 1;
-
-        if (sValue == "")
-          continue;
+      for (unsigned j = 1; j < pieces.size(); ++j) {
+        string sValue = pieces[j];
 
         // Check if the value is a range (e.g 1999-2010)
         int iRangeSpacerIndex = sValue.find('-');
@@ -273,7 +268,7 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
 
         Object->addParameter(sName, sValue);
 
-      } while (iNxtSpace > 0);
+      }
     }
   } catch (string &Ex) {
     Ex = "CConfigurationLoader.assignParameters()->" + Ex;

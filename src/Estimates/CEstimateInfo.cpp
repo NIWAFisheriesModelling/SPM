@@ -41,9 +41,6 @@ CEstimateInfo::CEstimateInfo() {
   pParameterList->registerAllowed(PARAM_SAME);
   pParameterList->registerAllowed(PARAM_ESTIMATION_PHASE);
   pParameterList->registerAllowed(PARAM_MCMC_FIXED);
-
-  // Add Default
-  pParameterList->addParameter(PARAM_LABEL, "Estimate");
 }
 
 //**********************************************************************
@@ -67,6 +64,14 @@ void CEstimateInfo::fillSameVector(vector<string> &sames) {
 //**********************************************************************
 void CEstimateInfo::generateEstimates() {
   try {
+    if (!pParameterList->hasParameter(PARAM_PARAMETER)) {
+      string label = pParameterList->getString(PARAM_LABEL);
+      pParameterList->addParameter(PARAM_PARAMETER, label);
+    } else if (!pParameterList->hasParameter(PARAM_LABEL)) {
+      string param = pParameterList->getString(PARAM_PARAMETER);
+      pParameterList->addParameter(PARAM_LABEL, param);
+    }
+
     string parameter = pParameterList->getString(PARAM_PARAMETER);
     string type      = pParameterList->getString(PARAM_TYPE);
 

@@ -22,8 +22,6 @@ const string basic_estimate_info =
   "parameter process[category_transition_rate_both].proportions(1)\n"
   "lower_bound 0.1\n"
   "upper_bound 1.0\n"
-  "prior uniform_prior\n"
-  "@prior uniform_prior\n"
   "type uniform\n";
 
 const string basic_estimate_info_2_estimates =
@@ -40,13 +38,11 @@ const string basic_estimate_info_2_estimates =
   "parameter process[category_transition_rate_both].proportions(1)\n"
   "lower_bound 0.1\n"
   "upper_bound 1.0\n"
-  "prior uniform_prior\n"
+  "type uniform\n"
   "@estimate\n"
   "parameter process[category_transition_rate_both].proportions(2)\n"
   "lower_bound 0.1\n"
   "upper_bound 1.0\n"
-  "prior uniform_prior\n"
-  "@prior uniform_prior\n"
   "type uniform\n";
 
 const string basic_estimate_info_vector =
@@ -63,8 +59,6 @@ const string basic_estimate_info_vector =
   "parameter process[category_transition_rate_both].proportions\n"
   "lower_bound 0.1\n"
   "upper_bound 1.0\n"
-  "prior uniform_prior\n"
-  "@prior uniform_prior\n"
   "type uniform\n";
 
 #endif /* ESTIMATEINFO_H_ */

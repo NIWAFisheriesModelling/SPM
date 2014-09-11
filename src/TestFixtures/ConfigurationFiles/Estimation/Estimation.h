@@ -24,8 +24,6 @@ const string basic_estimation =
   "parameter process[category_transition_rate].proportions(1)\n"
   "lower_bound 0.1\n"
   "upper_bound 1.0\n"
-  "prior uniform_prior\n"
-  "@prior uniform_prior\n"
   "type uniform\n";
 
 #endif /* ESTIMATION_H_ */

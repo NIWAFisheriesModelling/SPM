@@ -25,6 +25,7 @@ CObservation::CObservation() {
   pStartWorldView       = 0;
   pWorldView            = 0;
   pLikelihood           = 0;
+  dScore                = 0;
   bSimulationRunMode    = false;
 
   // Register some user allowed variables

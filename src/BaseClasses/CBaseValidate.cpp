@@ -13,6 +13,7 @@
 // Local headers
 #include "CBaseValidate.h"
 #include "../Helpers/CError.h"
+#include "../Helpers/CConvertor.h"
 
 //**********************************************************************
 // CBaseValidate::CBaseValidate()
@@ -37,10 +38,10 @@ void CBaseValidate::validate() {
     // Populate our variable
     sLabel  = pParameterList->getString(PARAM_LABEL);
 
-    // Check label is alphanumeric (incl. '_')
-    for (size_t i=0; i < sLabel.length(); ++i) {
-      if ( !(isalnum(sLabel.at(i)) || sLabel.at(i)== boost::lexical_cast<char>("_") || sLabel.at(i)== boost::lexical_cast<char>("-") ) )
-        CError::errorInvalidCharacter(boost::lexical_cast<string>(sLabel.at(i)),sLabel);
+    string temp = CConvertor::stringToLowercase(sLabel);
+    bool invalid_label = temp.find_first_not_of("abcdefghijklmnopqrstuvwxyz0123456789[]-_.()") != std::string::npos;
+    if (invalid_label) {
+      THROW_EXCEPTION("The label " + sLabel + " contains invalid characters. Please ensure it is alphanumeric with the following special characters: []-_.()");
     }
 
     // Validate known parameters against bad ones

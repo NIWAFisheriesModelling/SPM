@@ -8,7 +8,14 @@
 
 // headers
 #include "CBetaEstimate.h"
+
+#include <iostream>
+
 #include "../../Helpers/CError.h"
+
+// namespaces
+using std::cout;
+using std::endl;
 
 /**
  * Default constructor
