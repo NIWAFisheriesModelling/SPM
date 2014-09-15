@@ -10,7 +10,6 @@
 \usepackage{cmap} % allow searching in pdf documents
 \usepackage{tabulary} % better tables
 \usepackage{comment} % block comments
-\usepackage{titling} % better control over titles
 
 % hyperref for HTML links within pdf 
 % EXAMPLE: \href{http://www.niwa.co.nz}{NIWA}
@@ -18,7 +17,7 @@
             pdfpagelayout=TwoPageRight,
             pdftitle={Spatial Population Model (SPM) Users Manual}, 
             pdfauthor={Alistair Dunn; Scott Rasmussen; Sophie Mormede}, 
-            pdfsubject={Spatial Population Model},
+            pdfsubject={Spatial Population Model, NIWA Technical Report 138},
             pdftex]{hyperref}
 \hypersetup{
   breaklinks=true,      % allow line breaks in URLs
@@ -180,11 +179,8 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 \newcommand{\SPMName}{Spatial Population Model} %SPM long name
 \newcommand{\authors}{\href{mailto:"Alistair Dunn"<alistair.dunn@niwa.co.nz>?subject=SPM:}{authors}} %hyper ref for email
 \newcommand{\Organisation}{National Institute of Water \& Atmospheric Research Ltd.} %NIWA
-\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S.; Mormede, S. (\DocYear) \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{Unpublished report}. \ref{TotPages} p.} % full document reference
-\title{\SPMName\ User Manual \\\SPM\ \VER} %Document title
-\author{Alistair Dunn, Scott Rasmussen, and Sophie Mormede}  %Document authors
-\predate{test}
-\date{ NIWA Technical Report 135\\ISSN 1174-2631\\\DocYear}
+\newcommand{\ReportNumber}{NIWA Technical Report 138}
+\newcommand{\ManualRef}{Dunn, A.; Rasmussen, S.; Mormede, S. (\DocYear). \SPMName\ User Manual, \SPM\ \VER. \Organisation\ \emph{\ReportNumber}. \ref{TotPages} p.} % full document reference
 
 % Define \clearemptydoublepage so-as to have truly blank pages between sections
 \let\origdoublepage\cleardoublepage
@@ -206,26 +202,60 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 % Title page
 \pdfbookmark[1]{SPM Users Manual}{title}
 \pagenumbering{alph} % alpha not used, but used to remove warnings when page 1 is re-defined below
-\maketitle
-\thispagestyle{empty} % no header/footer/page number on this page
 
-\vspace{8cm}
-\begin{figure}[htp]
-  \begin{center}
-   \includegraphics[height=5cm,width=5cm]{Figures/SPM}
-  \end{center}
-\end{figure}
+\begin{titlepage}
+  \thispagestyle{empty} % no header/footer/page number on this page
+	\begin{center}
 
-~\vfill
-\begin{center}
-  \SPMName\ User Manual (modified: \DocVer) \\ for use with \SPM\ \VER
-\end{center}
+		\vspace*{2cm}
+		\Huge \SPMName\ User Manual \\
 
+		\vspace{1cm}
+		\LARGE Alistair Dunn, Scott Rasmussen, and Sophie Mormede \\ %Document authors
+
+		\vspace{2cm}
+		\begin{figure}[htp]
+			\begin{center}
+			 \includegraphics[height=7cm,width=7cm]{Figures/SPM}
+			\end{center}
+		\end{figure}
+		\vspace{2cm}
+
+		\Large NIWA Technical Report 138 \\%Document Date
+		\Large ISSN 1174-2631 \\%Document Date
+		\Large 2014 \\%Document Date
+
+		~\vfill
+		\SPMName\ User Manual (modified: \DocVer) \\ for use with \SPM\ \VER
+
+	\end{center}
+\end{titlepage}
 
 % Citation page
 \cleardoublepage{}
-\fancyfoot[C]{\thepage}
-\pagenumbering{roman}
+  \fancyfoot[C]{\thepage}
+  \pagenumbering{roman}
+	  \begin{center}
+
+    \vspace*{2cm}
+		Published by NIWA \\
+		Wellington \\
+		\DocYear \\
+
+    \vspace{3cm}
+    Enquiries to: \\
+    Science Communication, NIWA \\
+    Private Bag 14901, Wellington, New Zealand \\
+
+    \vspace{4cm}
+    ISSN 1174-2631
+
+    \vspace{4cm}
+    \copyright NIWA \DocYear
+		
+	\end{center}
+
+
 ~\vfill
 
 \begin{tabulary}{\textwidth}{L C}        
