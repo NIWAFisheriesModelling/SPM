@@ -227,6 +227,9 @@ void CConfigurationLoader::assignParameters(CBaseObject *Object) {
     // Loop through rest of parameters
     for (int i = 1; i < (int)vCurrentSection.size(); ++i) {
       string sCurrentLine = vCurrentSection[i];
+      boost::replace_all(sCurrentLine, "\t", " ");
+      boost::replace_all(sCurrentLine, "  ", " ");
+      boost::trim_all(sCurrentLine);
       boost::split(pieces, sCurrentLine, boost::is_any_of(" "));
 
       // Get variable name

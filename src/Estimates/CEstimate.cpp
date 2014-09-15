@@ -76,10 +76,8 @@ void CEstimate::setValue(double value) {
 double CEstimate::getValue() {
 #ifndef OPTIMIZE
   try {
-    sType = pParameterList->getString(PARAM_TYPE);
     if (pTarget == 0)
       throw string(ERROR_INVALID_TARGET_NULL);
-
   } catch (string &Ex) {
     Ex = "CEstimate.getValue()->" + Ex;
     throw Ex;
@@ -115,6 +113,9 @@ void CEstimate::loadValue(int index) {
 //**********************************************************************
 void CEstimate::validate() {
   try {
+
+    sType = pParameterList->getString(PARAM_TYPE);
+
     // Base
     CBaseBuild::validate();
 

@@ -37,7 +37,6 @@ CEstimateInfo::CEstimateInfo() {
   pParameterList->registerAllowed(PARAM_PARAMETER);
   pParameterList->registerAllowed(PARAM_LOWER_BOUND);
   pParameterList->registerAllowed(PARAM_UPPER_BOUND);
-  pParameterList->registerAllowed(PARAM_PRIOR);
   pParameterList->registerAllowed(PARAM_SAME);
   pParameterList->registerAllowed(PARAM_ESTIMATION_PHASE);
   pParameterList->registerAllowed(PARAM_MCMC_FIXED);
