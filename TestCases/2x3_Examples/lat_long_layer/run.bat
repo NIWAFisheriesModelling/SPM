@@ -1,1 +1,1 @@
-..\..\..\spm -r -q -d > run.log
+..\..\..\spm -r -q -d > Expected.txt

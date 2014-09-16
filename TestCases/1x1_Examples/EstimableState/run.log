@@ -956,445 +956,445 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.0001
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 550000
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3
 
 parameter: process[InitialStateI].N(1)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateI].N(2)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 266500
 
 parameter: process[InitialStateI].N(3)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 234012
 
 parameter: process[InitialStateI].N(4)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 205485
 
 parameter: process[InitialStateI].N(5)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 180435
 
 parameter: process[InitialStateI].N(6)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 157277
 
 parameter: process[InitialStateI].N(7)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 136434
 
 parameter: process[InitialStateI].N(8)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 116057
 
 parameter: process[InitialStateI].N(9)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 94062.3
 
 parameter: process[InitialStateI].N(10)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 68518
 
 parameter: process[InitialStateI].N(11)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 41356.3
 
 parameter: process[InitialStateI].N(12)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 19798.7
 
 parameter: process[InitialStateI].N(13)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 7853.8
 
 parameter: process[InitialStateI].N(14)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 2800.06
 
 parameter: process[InitialStateI].N(15)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 951.156
 
 parameter: process[InitialStateI].N(16)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 316.83
 
 parameter: process[InitialStateI].N(17)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 104.74
 
 parameter: process[InitialStateI].N(18)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 34.5267
 
 parameter: process[InitialStateI].N(19)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 11.3691
 
 parameter: process[InitialStateI].N(20)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 3.74217
 
 parameter: process[InitialStateI].N(21)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 1.23155
 
 parameter: process[InitialStateI].N(22)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.405284
 
 parameter: process[InitialStateI].N(23)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.133369
 
 parameter: process[InitialStateI].N(24)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.0438882
 
 parameter: process[InitialStateI].N(25)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.0144424
 
 parameter: process[InitialStateI].N(26)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.00475258
 
 parameter: process[InitialStateI].N(27)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.00156394
 
 parameter: process[InitialStateI].N(28)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.000514649
 
 parameter: process[InitialStateI].N(29)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0.000169356
 
 parameter: process[InitialStateI].N(30)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 5.57304e-005
 
 parameter: process[InitialStateI].N(31)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateI].N(32)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateI].N(33)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateI].N(34)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateI].N(35)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateM].N(1)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateM].N(2)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateM].N(3)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateM].N(4)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateM].N(5)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 0
 
 parameter: process[InitialStateM].N(6)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 1162.54
 
 parameter: process[InitialStateM].N(7)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 2691.03
 
 parameter: process[InitialStateM].N(8)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 6108.25
 
 parameter: process[InitialStateM].N(9)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 13210.3
 
 parameter: process[InitialStateM].N(10)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 25677.6
 
 parameter: process[InitialStateM].N(11)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 41356.3
 
 parameter: process[InitialStateM].N(12)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 52830.9
 
 parameter: process[InitialStateM].N(13)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 55922
 
 parameter: process[InitialStateM].N(14)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 53201.1
 
 parameter: process[InitialStateM].N(15)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 48223.2
 
 parameter: process[InitialStateM].N(16)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 42863
 
 parameter: process[InitialStateM].N(17)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 37811.3
 
 parameter: process[InitialStateM].N(18)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 33259.3
 
 parameter: process[InitialStateM].N(19)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 29223.8
 
 parameter: process[InitialStateM].N(20)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 25667.5
 
 parameter: process[InitialStateM].N(21)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 22540.6
 
 parameter: process[InitialStateM].N(22)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 19793.5
 
 parameter: process[InitialStateM].N(23)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 17380.8
 
 parameter: process[InitialStateM].N(24)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 15262.1
 
 parameter: process[InitialStateM].N(25)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 13401.6
 
 parameter: process[InitialStateM].N(26)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 11767.9
 
 parameter: process[InitialStateM].N(27)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 10333.3
 
 parameter: process[InitialStateM].N(28)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 9073.64
 
 parameter: process[InitialStateM].N(29)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 7967.52
 
 parameter: process[InitialStateM].N(30)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 6996.24
 
 parameter: process[InitialStateM].N(31)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 6143.37
 
 parameter: process[InitialStateM].N(32)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 5394.46
 
 parameter: process[InitialStateM].N(33)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 4736.85
 
 parameter: process[InitialStateM].N(34)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 4159.41
 
 parameter: process[InitialStateM].N(35)
 lower_bound: 0
 upper_bound: 1e+009
-prior: Uniform
+prior: uniform
 value: 29960.8
 
 *end

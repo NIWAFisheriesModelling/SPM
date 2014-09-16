@@ -953,109 +953,109 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000149526
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 303499
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.77039
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.53459
 
 parameter: process[BHrecruitment].ycs_values(1)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 1.35222
 
 parameter: process[BHrecruitment].ycs_values(2)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 1.42878
 
 parameter: process[BHrecruitment].ycs_values(3)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 1.07568
 
 parameter: process[BHrecruitment].ycs_values(4)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.982744
 
 parameter: process[BHrecruitment].ycs_values(5)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 1.44135
 
 parameter: process[BHrecruitment].ycs_values(6)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.705376
 
 parameter: process[BHrecruitment].ycs_values(7)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.578837
 
 parameter: process[BHrecruitment].ycs_values(8)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.659738
 
 parameter: process[BHrecruitment].ycs_values(9)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.894811
 
 parameter: process[BHrecruitment].ycs_values(10)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.997788
 
 parameter: process[BHrecruitment].ycs_values(11)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.882678
 
 parameter: process[BHrecruitment].ycs_values(12)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.611525
 
 parameter: process[BHrecruitment].ycs_values(13)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.622108
 
 parameter: process[BHrecruitment].ycs_values(14)
 lower_bound: 0.01
 upper_bound: 100
-prior: Lognormal
+prior: lognormal
 value: 0.62746
 
 *end

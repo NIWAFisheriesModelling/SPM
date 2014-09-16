@@ -488,83 +488,78 @@ q 0.205139
 parameter catchability[chatCPUEq].q
 lower_bound 1e-8
 upper_bound 10
-prior uniform_log
+type uniform_log
 
 @estimate
 parameter catchability[chatTANq].q
 lower_bound 1e-2
 upper_bound 1
-prior uniform_log
+type uniform_log
 
 #FREE PARAMETERS
 @estimate
 parameter process[Recruitment].r0
 lower_bound 1e3
 upper_bound 1e7
-prior uniform_log
+type uniform_log
 
 @estimate
 parameter selectivity[chatTANselMale].a50
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatTANselMale].ato95
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatTANselFemale].a50
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatTANselFemale].ato95
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatTANselFemale].alpha
 lower_bound 0.2
 upper_bound 5
-prior uniform
+type uniform
 {
 @estimate
 parameter selectivity[chatFselMale].a50
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatFselMale].ato95
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatFselFemale].a50
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatFselFemale].ato95
 lower_bound 0
 upper_bound 30
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[chatFselFemale].alpha
 lower_bound 0.2
 upper_bound 5
-prior uniform
-}
-@prior uniform_log
-type uniform_log
-
-@prior uniform
 type uniform
+}

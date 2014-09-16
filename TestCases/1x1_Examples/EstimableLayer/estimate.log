@@ -901,31 +901,31 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 3.11756e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+008
-prior: Uniform
+prior: uniform
 value: 31317.7
 
 parameter: layer[M].data(1)
 lower_bound: 0.01
 upper_bound: 0.1
-prior: Lognormal
+prior: lognormal
 value: 0.0660803
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 4.03561
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 0.296952
 
 *end

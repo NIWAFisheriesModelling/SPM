@@ -35,42 +35,34 @@ q 0.0001
 parameter catchability[CPUEq].q
 lower_bound 1e-10
 upper_bound 1e-1
-prior Uniform
+type uniform
 
 @estimate
 parameter process[BHrecruitment].r0
 lower_bound 1e4
 upper_bound 1e7
-prior Uniform
+type uniform
 
 @estimate
 parameter selectivity[FishingSel].a50
 lower_bound 1
 upper_bound 20
-prior Uniform
+type uniform
 
 @estimate
 parameter selectivity[FishingSel].ato95
 lower_bound 0.01
 upper_bound 50
-prior Uniform
+type uniform
 
 @estimate
 parameter process[BHrecruitment].ycs_values
+#ycs_values 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
 lower_bound 0.01 #0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01
 upper_bound  100 # 100  100  100  100  100  100  100  100  100  100  100  100  100
-prior Lognormal
-
-@prior Uniform
-type uniform
-
-@prior Uniform-log
-type uniform_log
-
-@prior Lognormal
 type lognormal
-mu 1.0
-cv 0.6
+mu           1.0 # 1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0  1.0
+cv           0.6 # 0.6  0.6  0.6  0.6  0.6  0.6  0.6  0.6  0.6  0.6  0.6  0.6  0.6
 
 # PENALTIES
 @penalty event_mortality_penalty

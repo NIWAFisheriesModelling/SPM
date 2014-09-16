@@ -336,36 +336,25 @@ lower_bound 1e-10
 upper_bound 1e-1
 #lower_bound 0.000153139
 #upper_bound 0.000153139
-prior uniform
+type uniform
 
 @estimate
 parameter process[recruitment].r0
 lower_bound 1e5
 upper_bound 1e10
-prior uniform-log
+type uniform-log
 
 @estimate
 parameter selectivity[fishingsel].a50
 lower_bound 1
 upper_bound 20
-prior uniform
+type uniform
 
 @estimate
 parameter selectivity[fishingsel].ato95
 lower_bound 0.01
 upper_bound 50
-prior uniform
-
-@prior uniform
 type uniform
-
-@prior uniform-log
-type uniform_log
-
-@prior normal
-type normal
-mu 1.0
-cv 0.3
 
 # penalties
 @penalty event_mortality_penalty
