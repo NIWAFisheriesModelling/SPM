@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -e -q -g 0 -o MPD.dat 
-Date: Mon Aug 18 20:55:40 2014
-v1.1-2014-08-18 (rev. 1189). Copyright (c) 2008-2014, NIWA
+Date: Tue Sep 16 19:10:37 2014
+v1.1-2014-09-15 (rev. 1214). Copyright (c) 2008-2014, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=4416)
+Machine name: NIWA-34286 (Windows_NT, PID=2156)
 
 [initialisation-phase1]
 report.type: initialisation
@@ -904,25 +904,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000132488
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 344098
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.62018
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.29177
 
 *end

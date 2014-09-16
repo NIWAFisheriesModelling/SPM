@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -p -q -g 0 -o profile.dat 
-Date: Mon Aug 18 14:40:25 2014
-v1.1-2014-08-18 (rev. 1189). Copyright (c) 2008-2014, NIWA
+Date: Tue Sep 16 12:05:21 2014
+v1.1-2014-09-15 (rev. 1214). Copyright (c) 2008-2014, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=8452)
+Machine name: NIWA-34286 (Windows_NT, PID=6924)
 
 [CAA-1998]
 report.type: observation
@@ -624,25 +624,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000601499
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 100000
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 15.3951
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 34.6228
 
 *end
@@ -1316,25 +1316,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000324864
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 147368
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 6.84973
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 2.84829
 
 *end
@@ -2008,25 +2008,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000271283
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 194737
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.27037
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.1917
 
 *end
@@ -2700,25 +2700,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000210303
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 242105
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.65426
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.32608
 
 *end
@@ -3392,25 +3392,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000166067
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 289474
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.67641
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.32405
 
 *end
@@ -4084,25 +4084,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000136176
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 336842
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.62884
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.29668
 
 *end
@@ -4776,25 +4776,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 0.000115194
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 384211
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.57471
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.2684
 
 *end
@@ -5468,25 +5468,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 9.97685e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 431579
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.52656
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.24363
 
 *end
@@ -6160,25 +6160,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 8.79761e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 478947
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.48585
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.2229
 
 *end
@@ -6852,25 +6852,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 7.86779e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 526316
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.45178
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.20602
 
 *end
@@ -7544,25 +7544,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 7.11601e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 573684
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.42306
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.19148
 
 *end
@@ -8236,25 +8236,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 6.49544e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 621053
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.39863
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.17932
 
 *end
@@ -8928,25 +8928,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 5.97451e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 668421
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.37744
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.16873
 
 *end
@@ -9620,25 +9620,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 5.53122e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 715789
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.35949
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.1599
 
 *end
@@ -10312,25 +10312,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 5.14941e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 763158
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.34369
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.15189
 
 *end
@@ -11004,25 +11004,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 4.81643e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 810526
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.32927
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.14593
 
 *end
@@ -11696,25 +11696,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 4.52541e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 857895
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.31879
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.14027
 
 *end
@@ -12388,25 +12388,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 4.26602e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 905263
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.30639
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.1338
 
 *end
@@ -13080,25 +13080,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 4.03532e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 952632
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.29646
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.12896
 
 *end
@@ -13772,25 +13772,25 @@ report.type: estimate_summary
 parameter: catchability[CPUEq].q
 lower_bound: 1e-010
 upper_bound: 0.1
-prior: Uniform
+prior: uniform
 value: 3.8283e-005
 
 parameter: process[BHrecruitment].r0
 lower_bound: 10000
 upper_bound: 1e+007
-prior: Uniform
+prior: uniform
 value: 1e+006
 
 parameter: selectivity[FishingSel].a50
 lower_bound: 1
 upper_bound: 20
-prior: Uniform
+prior: uniform
 value: 8.28758
 
 parameter: selectivity[FishingSel].ato95
 lower_bound: 0.01
 upper_bound: 50
-prior: Uniform
+prior: uniform
 value: 3.12463
 
 *end
