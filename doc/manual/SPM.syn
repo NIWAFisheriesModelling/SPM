@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-09-16 (rev. 1217)
+; TextPad syntax definitions for SPM version 1.1-2014-09-18 (rev. 1218)
 ; ===================================================================================
 ;
 ;
@@ -253,6 +253,7 @@ covariance
 de_solver
 derived_quantity
 derived_quantity_by_cell
+dijkstra
 distance
 double_exponential
 double_normal
