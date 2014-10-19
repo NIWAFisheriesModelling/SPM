@@ -16,6 +16,7 @@
 #include "../../Helpers/ForEach.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/CDijkstraDistanceLayer.h"
+#include "../../Layers/Numeric/CLatLongDijkstraDistanceLayer.h"
 #include "../../Layers/Numeric/CLatLongDistanceLayer.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Layers/String/Base/CCategoricalLayer.h"
@@ -107,6 +108,9 @@ void CLayerReport::build() {
    } else if (sLayerType == PARAM_DIJKSTRA_DISTANCE) {
       pNumericLayer = pLayerManager->getNumericLayer(sLayer);
       sType = PARAM_DIJKSTRA_DISTANCE;
+   } else if (sLayerType == PARAM_LAT_LONG_DIJKSTRA_DISTANCE) {
+      pNumericLayer = pLayerManager->getNumericLayer(sLayer);
+      sType = PARAM_LAT_LONG_DIJKSTRA_DISTANCE;
    } else if (sLayerType == PARAM_STRING || sLayerType == PARAM_META_STRING) {
       pCategoricalLayer = pLayerManager->getCategoricalLayer(sLayer);
       sType = PARAM_STRING;
@@ -198,6 +202,22 @@ void CLayerReport::execute() {
               std::cout << i+1 << " " << j+1 << " "
                         << k+1 << " " << l+1 << " "
                         << pDijkstraDistanceLayer->getValue(i, j, k, l) << "\n";
+            }
+          }
+        }
+      }
+    } else if( sType==PARAM_LAT_LONG_DIJKSTRA_DISTANCE ) {
+      CLatLongDijkstraDistanceLayer *pLatLongDijkstraDistanceLayer = dynamic_cast<CLatLongDijkstraDistanceLayer*>(pNumericLayer);
+      std::cout << "from_" << PARAM_ROW << CONFIG_SPACE_SEPARATOR << "from_" << PARAM_COLUMN << CONFIG_SPACE_SEPARATOR
+                << "to_" << PARAM_ROW << CONFIG_SPACE_SEPARATOR << "to_" << PARAM_COLUMN << CONFIG_SPACE_SEPARATOR
+                << PARAM_DISTANCE << "\n";
+      for (int i = 0; i < pLatLongDijkstraDistanceLayer->getHeight(); ++i) {
+        for (int j = 0; j < pLatLongDijkstraDistanceLayer->getWidth(); ++j) {
+          for (int k = 0; k < pLatLongDijkstraDistanceLayer->getHeight(); ++k) {
+            for (int l = 0; l < pLatLongDijkstraDistanceLayer->getWidth(); ++l) {
+              std::cout << pLatLongDijkstraDistanceLayer->getLong(i,j) << " " << pLatLongDijkstraDistanceLayer->getLat(i,j) << " " <<
+                           pLatLongDijkstraDistanceLayer->getLong(k,l) << " " << pLatLongDijkstraDistanceLayer->getLat(k,l) << " " <<
+                           pLatLongDijkstraDistanceLayer->getValue(i, j, k, l) << "\n";
             }
           }
         }

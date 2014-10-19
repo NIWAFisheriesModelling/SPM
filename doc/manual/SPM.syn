@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2014-09-18 (rev. 1218)
+; TextPad syntax definitions for SPM version 1.1-2014-10-19 (rev. 1220)
 ; ===================================================================================
 ;
 ;
@@ -262,6 +262,7 @@ estimate_value
 event_mortality
 exponential
 haversine
+haversine_dijkstra
 increasing
 initialisation
 inverse_logistic

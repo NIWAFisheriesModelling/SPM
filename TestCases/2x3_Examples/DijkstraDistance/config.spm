@@ -245,7 +245,12 @@ type numeric
 type distance
 
 @layer DijkstraDistance
-type dijkstra_distance
+type dijkstra
+
+@layer HaversineDijkstraDistance
+type haversine_dijkstra
+latitude Latitude
+longitude Longitude
 
 # Definition of selecivities
 @selectivity One
@@ -286,6 +291,12 @@ b 2.965
 @report dijkstra_distance
 type layer
 layer DijkstraDistance
+time_step step_one
+years 1994
+
+@report haversine_dijkstra_distance
+type layer
+layer HaversineDijkstraDistance
 time_step step_one
 years 1994
 

@@ -20,6 +20,7 @@
 #include "../Numeric/CDerivedQuantityLayer.h"
 #include "../Numeric/CDistanceLayer.h"
 #include "../Numeric/CDijkstraDistanceLayer.h"
+#include "../Numeric/CLatLongDijkstraDistanceLayer.h"
 #include "../Numeric/CDoubleLayer.h"
 #include "../Numeric/CLatLongDistanceLayer.h"
 #include "../Numeric/CNumericMetaLayer.h"
@@ -48,6 +49,8 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
     pLayer = new CDerivedQuantityByCellLayer;
   else if (type == PARAM_DIJKSTRA_DISTANCE)
     pLayer = new CDijkstraDistanceLayer();
+  else if (type == PARAM_LAT_LONG_DIJKSTRA_DISTANCE)
+    pLayer = new CLatLongDijkstraDistanceLayer();
   else if (type == PARAM_DISTANCE)
     pLayer = new CDistanceLayer();
   else if (type == PARAM_DOUBLE)

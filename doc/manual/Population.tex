@@ -128,7 +128,7 @@ data A A C C
 data B B C C
 \end{verbatim}}}
 
-\item {\I{Distance layers}}: A distance layer is one that defines the distance between cells. \SPM\ has three types of distance layer: (i) the Euclidean distance between cell centres (\texttt{distance})\index{Distance! Euclidean}\index{Euclidean distance}, (ii) the distance between two locations (defined by longitude and latitude) using the haversine formula (\texttt{haversine})\index{Distance! Haversine}\index{Haversine distance}, and (iii) the shortest path between cells by traversing cell centres using \I{Dijkstra's algorithm} \citep{Dijkstra1959} and assumes that cells excluded by the base layer are not traversable.\index{Distance! Dijkstra}\index{Dijkstra distance}
+\item {\I{Distance layers}}: A distance layer is one that defines the distance between cells. \SPM\ has four types of distance layer: (i) the Euclidean distance between cell centres (\texttt{distance})\index{Distance! Euclidean}\index{Euclidean distance}; (ii) the distance between two locations (defined by longitude and latitude) using the haversine formula (\texttt{haversine})\index{Distance! Haversine}\index{Haversine distance}; (iii) the shortest path between cells by traversing cell centres using \I{Dijkstra's algorithm} \citep{Dijkstra1959} and assumes that cells excluded by the base layer are not traversable (\texttt{dijkstra})\index{Distance! Dijkstra}\index{Dijkstra distance}; and (iv) the shortest path between cells using the Dijkstra's algorithm but with the  distances calculated using the haversine formula from latitudes and longitudes (\texttt{haversine\_dijkstra}).\index{Distance! Haversine Dijkstra}\index{Haversine Dijkstra distance}
 
 The Euclidean distance method simply calculates the values of the distance layer as the Euclidean distance between the centres of every pair of cells, taking into account the length of the side of a cell. Here, the distance between cell $a$ and cell $b$ can be defined as,
 \begin{equation}
@@ -169,6 +169,26 @@ For example, to specify a Dijkstra distance layer then use,
 {\small{\begin{verbatim}
 @layer Dijkstra_distance
 type dijkstra
+\end{verbatim}}}
+
+The haversine-Dijkstra method calculates the distance between two points as the sum of the shortest path between cell centres that does not traverse through cells excluded by the base layer, where distances are calculated using the haversine formulae. Distances between adjacent cells are calculated using haversine distance as the great-circle distance between two points on a sphere from the longitudes and latitudes of the cell, with the assumption that the Earth is a perfect sphere with radius exactly 6371 km. Two numeric layers are required, giving the longitude and latitude of each cell respectively. Latitude values must be between $-90^{\circ}$ (southern latitudes) and $90^{\circ}$ (northern latitudes). Longitude values must be between $0^{\circ}$ and $360^{\circ}$. Note that the distance between any cell and itself is 0.
+
+For example, to specify a haversine Dijkstra distance layer for a $2\times3$ spatial model, assuming that latitudes and longitudes of each cell are given in the numeric layers labelled \texttt{cell\_latitudes} and \texttt{cell\_longitudes}, then use,
+{\small{\begin{verbatim}
+@layer cell_latitudes
+type numeric
+data -45 -45 -45
+data -46 -46 -46
+
+@layer cell_longitudes
+type numeric
+data 176 177 178
+data 176 177 178
+
+@layer Haversine_Dijkstra
+type haversine_dijkstra
+latitude cell_latitudes
+longitude cell_longitudes
 \end{verbatim}}}
 
 \item{\I{Abundance layers}}: The abundance layer is the sum of the number of individuals within cell $a$ in categories $k$ and with selectivity $S_l$ at age $l$. 

@@ -1035,6 +1035,18 @@ There are no other subcommands for \commandlabsubarg{layer}{type}{distance}.
 
 There are no other subcommands for \commandlabsubarg{layer}{type}{dijkstra}.
 
+\subsubsection[Haversine\_Dijkstra]{\commandlabsubarg{layer}{type}{haversine\_dijkstra}}
+
+\defSub{latitude} {Define the layer that specifies the latitudes for each cell}
+\defType{String}
+\defDefault{No default}
+\defCondition{The argument must be a numeric layer, with values between -90 and 90.}
+
+\defSub{longitude} {Define the layer that specifies the longitudes for each cell}
+\defType{String}
+\defDefault{No default}
+\defCondition{The argument must be a numeric layer, with values between 0 and 360.}
+
 \subsubsection[Abundance]{\commandlabsubarg{layer}{type}{abundance}}
 
 \defSub{categories} {Define the categories are used to calculate the abundance}
