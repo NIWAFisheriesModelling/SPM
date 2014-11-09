@@ -23,6 +23,7 @@
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
 #include "../MCMC/CMCMC.h"
+#include "../MCMC/CMCMCManager.h"
 #include "../Minimizers/CMinimizerManager.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../Observations/CObservationManager.h"
@@ -229,7 +230,11 @@ void CRuntimeThread::executeMCMC() {
   rebuild();
 
   // Start our MCMC run
-  CMCMC *mcmc = CMCMC::Instance();
+  string sMCMC_label = CMinimizerManager::Instance()->getActiveMCMCLabel();
+  if (sMCMC_label == "")
+    throw string("No MCMC has been defined in the @estimation block");
+
+  CMCMC *mcmc = CMCMCManager::Instance()->getMCMC(sMCMC_label);
   mcmc->validate();
   mcmc->build();
   mcmc->execute();

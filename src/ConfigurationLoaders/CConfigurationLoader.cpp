@@ -32,7 +32,7 @@
 #include "../Helpers/ForEach.h"
 #include "../InitializationPhases/Factory/CInitializationPhaseFactory.h"
 #include "../Layers/Factory/CLayerFactory.h"
-#include "../MCMC/CMCMC.h"
+#include "../MCMC/Factory/CMCMCFactory.h"
 #include "../Minimizers/CMinimizerManager.h"
 #include "../Minimizers/Factory/CMinimizerFactory.h"
 #include "../Observations/Factory/CObservationFactory.h"
@@ -178,7 +178,7 @@ void CConfigurationLoader::processSection() {
     else if (sSection == PARAM_ESTIMATION)
       pBaseObject = CMinimizerManager::Instance();
     else if (sSection == PARAM_MCMC)
-      pBaseObject = CMCMC::Instance();
+      pBaseObject = CMCMCFactory::buildMCMC(sType);
     else
       CError::errorUnknown(PARAM_SECTION, "");
 

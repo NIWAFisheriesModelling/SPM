@@ -41,9 +41,6 @@ using namespace boost::numeric;
 //**********************************************************************
 class CMCMC : public CBaseExecute {
 public:
-  static CMCMC*              Instance();
-  static void                Destroy();
-
   // Methods
   void                       validate();
   void                       build();
@@ -55,12 +52,12 @@ public:
   vector<string>             getEstimateNames() { return vEstimateNames; }
   bool                       isLastItem() { return bLastItem; }
   SChainItem                 getLastChainItem() { return newItem; }
-
+  virtual                    ~CMCMC();
+  CMCMC();
+  CMCMC*                     clone() { return new CMCMC(*this); }
 
 protected:
   // Functions
-  CMCMC();
-  virtual                    ~CMCMC();
   void                       buildCovarianceMatrix();
   void                       generateEstimates();
   void                       generateRandomStart();

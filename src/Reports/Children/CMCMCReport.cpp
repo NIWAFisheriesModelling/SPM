@@ -13,6 +13,7 @@
 #include "CMCMCReport.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 #include "../../MCMC/CMCMC.h"
+#include "../../MCMC/CMCMCManager.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
@@ -25,6 +26,7 @@ CMCMCReport::CMCMCReport() {
   // Variables
   eExecutionState     = STATE_FINALIZATION;
 
+  pParameterList->registerAllowed(PARAM_MCMC);
 }
 
 //**********************************************************************
@@ -33,9 +35,10 @@ CMCMCReport::CMCMCReport() {
 //**********************************************************************
 void CMCMCReport::validate() {
   try {
-
     // Validate parent
     CFileReport::validate();
+
+    sMCMC = pParameterList->getString(PARAM_MCMC);
 
   } catch (string &Ex) {
     Ex = "CMCMCReport.validate(" + getLabel() + ")->" + Ex;
@@ -52,7 +55,7 @@ void CMCMCReport::build() {
     // Base
     CFileReport::build();
 
-    pMCMC = CMCMC::Instance();
+    pMCMC = CMCMCManager::Instance()->getMCMC(sMCMC);
 
   } catch (string &Ex) {
     Ex = "CMCMCReport.build(" + getLabel() + ")->" + Ex;

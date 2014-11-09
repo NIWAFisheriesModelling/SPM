@@ -37,6 +37,9 @@ public:
   void                        execute();
   vector<int>                 getEstimationPhases() { return vEstimationPhases; }
 
+  // accessor
+  string                      getActiveMCMCLabel() { return sMCMC; }
+
 protected:
   // Functions
   CMinimizerManager();
@@ -45,6 +48,7 @@ protected:
   // Variables
   string                      sMinimizer;
   CMinimizer                  *pMinimizer;
+  string                      sMCMC;
   int                         iMaxIterations;
   int                         iMaxEvaluations;
   double                      dGradientTolerance;

@@ -13,6 +13,7 @@
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
 #include "../../MCMC/CMCMC.h"
+#include "../../MCMC/CMCMCManager.h"
 #include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
@@ -24,6 +25,7 @@ CMCMCObjectivesReport::CMCMCObjectivesReport() {
   eExecutionState = STATE_ITERATION_COMPLETE;
   bWrittenHeader  = false;
 
+  pParameterList->registerAllowed(PARAM_MCMC);
 }
 
 //**********************************************************************
@@ -37,6 +39,7 @@ void CMCMCObjectivesReport::validate() {
     CFileReport::validate();
 
     sFileName   = pParameterList->getString(PARAM_FILE_NAME);
+    sMCMC       = pParameterList->getString(PARAM_MCMC);
 
   } catch (string &Ex) {
     Ex = "CMCMCObjectivesReport.validate(" + getLabel() + ")->" + Ex;
@@ -53,7 +56,7 @@ void CMCMCObjectivesReport::build() {
     // Base
     CFileReport::build();
 
-    pMCMC = CMCMC::Instance();
+    pMCMC = CMCMCManager::Instance()->getMCMC(sMCMC);
 
   } catch (string &Ex) {
     Ex = "CMCMCObjectivesReport.build(" + getLabel() + ")->" + Ex;

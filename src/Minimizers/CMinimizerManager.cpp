@@ -35,6 +35,7 @@ CMinimizerManager::CMinimizerManager() {
 
   // Register
   pParameterList->registerAllowed(PARAM_MINIMIZER);
+  pParameterList->registerAllowed(PARAM_MCMC);
 }
 
 //**********************************************************************
@@ -88,6 +89,7 @@ void CMinimizerManager::validate() {
     pParameterList->checkInvalidParameters();
 
     sMinimizer = pParameterList->getString(PARAM_MINIMIZER);
+    sMCMC = pParameterList->getString(PARAM_MCMC, true, "");
 
     // Validate our Minimizers
     foreach(CMinimizer *Minimizer, vMinimizerList) {
