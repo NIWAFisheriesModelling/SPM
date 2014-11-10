@@ -20,10 +20,10 @@ CMCMC* CMCMCFactory::buildMCMC(string type, bool registerWithManager) {
 
   CMCMC *pMCMC = 0;
 
-  if (type == PARAM_METROPOLIS_HASTINGS)
+  if (type == PARAM_METROPOLIS_HASTINGS || type == "")
     pMCMC = new CMetropolisHastingsMCMC();
   else
-    CError::errorUnknown(PARAM_PROCESS, type);
+    CError::errorUnknown(PARAM_MCMC, type);
 
   if (registerWithManager)
     CMCMCManager::Instance()->addMCMC(pMCMC);

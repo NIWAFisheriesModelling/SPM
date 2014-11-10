@@ -23,6 +23,7 @@
 							<tool id="cdt.managedbuild.tool.gnu.archiver.mingw.base.322776782" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.mingw.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.765537836" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base">
 								<option id="gnu.cpp.compiler.option.preprocessor.def.693869182" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="TEST"/>
 									<listOptionValue builtIn="false" value="BOOST_THREAD_USE_LIB=1 "/>
 									<listOptionValue builtIn="false" value="__GNUDOS__"/>
 								</option>
