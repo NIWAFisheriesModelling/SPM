@@ -1,0 +1,5 @@
+@layer sst_sum
+type numeric_meta
+default_layer sst_04_sum
+years	2002	2003	2004	
+layers	sst_02_sum	sst_03_sum	sst_04_sum	

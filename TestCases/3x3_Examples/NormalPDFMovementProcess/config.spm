@@ -1,0 +1,105 @@
+# spatial structure
+@model
+nrows 3
+ncols 3
+layer base
+categories immature
+min_age 1
+max_age 1
+age_plus_group true
+initial_year 1994
+current_year 1996
+cell_length 1
+time_steps one
+age_size none
+
+@age_size none
+type none
+size_weight none
+
+@size_weight none
+type none
+
+@time_step one
+processes recruitment normalPDF #prefmoveone
+
+@process normalPDF
+type preference
+categories immature
+preference_functions normalPDF
+
+@process prefmoveone
+type preference
+categories immature
+preference_functions double_normal_preference
+
+@process recruitment
+type constant_recruitment
+categories immature
+proportions 1.0
+r0 100
+age 1
+
+@pdf Normal1
+type normal
+mu 10
+sigma 5
+
+@pdf Normal2
+type normal
+mu 3
+sigma 3
+
+@preference_function normalPDF
+type copula
+pdfs Normal1 Normal2
+rho 0.1
+layer double_layer
+
+@report 
+type preference_function
+preference_function normalPDF
+label normalPDF
+
+@preference_function double_normal_preference
+type double_normal
+alpha 1
+mu 3.0
+sigma_l 1.0
+sigma_r 5.0
+layer double_layer
+
+@layer base
+type numeric
+data 1 1 1
+data 1 1 1
+data 1 1 1
+
+@layer double_layer
+type numeric
+data 1 2 3
+data 4 5 6
+data 7 8 9
+
+@report 
+type layer
+layer double_layer
+label double_layer
+
+@report 1994_timestep_one
+type partition
+time_step one
+years 1994
+
+@report 1995_timestep_one
+type partition
+time_step one
+years 1995
+
+@report 1996_timestep_one
+type partition
+time_step one
+years 1996
+
+@report objective_score
+type objective_function

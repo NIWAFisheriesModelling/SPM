@@ -1,0 +1,4 @@
+obs r8-c18 0.00555555555555556
+obs r9-c18 0.00389278752436647
+error_value r8-c18 0.2
+error_value r9-c18 0.2

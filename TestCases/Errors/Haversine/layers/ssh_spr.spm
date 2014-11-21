@@ -1,0 +1,5 @@
+@layer ssh_spr
+type numeric_meta
+default_layer ssh_07_spr
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	ssh_02_spr	ssh_03_spr	ssh_04_spr	ssh_05_spr	ssh_06_spr	ssh_07_spr	ssh_08_spr	ssh_09_spr	ssh_10_spr	ssh_11_spr 	ssh_12_spr

@@ -1,0 +1,5 @@
+@layer mag_sum
+type numeric_meta
+default_layer mag_08_sum
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	mag_02_sum	mag_03_sum	mag_04_sum	mag_05_sum	mag_06_sum	mag_07_sum	mag_08_sum	mag_09_sum	mag_10_sum	mag_11_sum 	mag_12_sum

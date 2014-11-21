@@ -1,0 +1,5 @@
+@layer mag_spr
+type numeric_meta
+default_layer mag_07_spr
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	mag_02_spr	mag_03_spr	mag_04_spr	mag_05_spr	mag_06_spr	mag_07_spr	mag_08_spr	mag_09_spr	mag_10_spr	mag_11_spr 	mag_12_spr

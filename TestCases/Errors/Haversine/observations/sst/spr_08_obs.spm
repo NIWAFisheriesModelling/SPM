@@ -1,0 +1,10 @@
+obs r5-c14 0.005
+obs r6-c14 0.00375
+obs r6-c15 0.0115857454092748
+obs r6-c16 0.0121226268285092
+obs r6-c17 0.0177777777777778
+error_value r5-c14 0.2
+error_value r6-c14 0.2
+error_value r6-c15 0.2
+error_value r6-c16 0.2
+error_value r6-c17 0.2

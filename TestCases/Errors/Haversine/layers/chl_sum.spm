@@ -1,0 +1,5 @@
+@layer chl_sum
+type numeric_meta
+default_layer chl_08_sum
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	chl_02_sum	chl_03_sum	chl_04_sum	chl_05_sum	chl_06_sum	chl_07_sum	chl_08_sum	chl_09_sum	chl_10_sum	chl_11_sum 	chl_12_sum

@@ -1,0 +1,4 @@
+obs r10-c19 0.004
+obs r11-c19 0.00645161290322581
+error_value r10-c19 0.2
+error_value r11-c19 0.2

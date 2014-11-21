@@ -1,0 +1,12 @@
+obs r7-c16 0.0263636363636364
+obs r6-c17 0.0530434782608696
+obs r7-c17 0.032895256916996
+obs r8-c17 0.0159683794466403
+obs r7-c18 0.0236363636363636
+obs r8-c18 0.023830855135203
+error_value r7-c16 0.2
+error_value r6-c17 0.2
+error_value r7-c17 0.2
+error_value r8-c17 0.2
+error_value r7-c18 0.2
+error_value r8-c18 0.2

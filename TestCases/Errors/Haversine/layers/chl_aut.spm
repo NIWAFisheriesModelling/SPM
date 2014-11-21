@@ -1,0 +1,5 @@
+@layer chl_aut
+type numeric_meta
+default_layer chl_08_aut
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	chl_02_aut	chl_03_aut	chl_04_aut	chl_05_aut	chl_06_aut	chl_07_aut	chl_08_aut	chl_09_aut	chl_10_aut	chl_11_aut 	chl_12_aut

@@ -1,0 +1,5 @@
+@layer chl_spr
+type numeric_meta
+default_layer chl_07_spr
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	chl_02_spr	chl_03_spr	chl_04_spr	chl_05_spr	chl_06_spr	chl_07_spr	chl_08_spr	chl_09_spr	chl_10_spr	chl_11_spr 	chl_12_spr

@@ -1,0 +1,4 @@
+obs r6-c16 0.00552424862494309
+obs r7-c16 0.00424778761061947
+error_value r6-c16 0.2
+error_value r7-c16 0.2

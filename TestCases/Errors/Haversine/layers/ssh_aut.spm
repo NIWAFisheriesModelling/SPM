@@ -1,0 +1,5 @@
+@layer ssh_aut
+type numeric_meta
+default_layer ssh_08_aut
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	ssh_02_aut	ssh_03_aut	ssh_04_aut	ssh_05_aut	ssh_06_aut	ssh_07_aut	ssh_08_aut	ssh_09_aut	ssh_10_aut	ssh_11_aut 	ssh_12_aut

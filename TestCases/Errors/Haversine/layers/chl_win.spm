@@ -1,0 +1,5 @@
+@layer chl_win
+type numeric_meta
+default_layer chl_08_win
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	chl_02_win	chl_03_win	chl_04_win	chl_05_win	chl_06_win	chl_07_win	chl_08_win	chl_09_win	chl_10_win	chl_11_win	chl_12_win

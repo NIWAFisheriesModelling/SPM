@@ -17,8 +17,8 @@
 #include "../AgeingError/CAgeingErrorManager.h"
 #include "../BaseClasses/CBaseManager.h"
 #include "../Catchabilities/CCatchabilityManager.h"
-#include "../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
 #include "../DerivedQuantities/CDerivedQuantityManager.h"
+#include "../DerivedQuantitiesByCell/CDerivedQuantityByCellManager.h"
 #include "../Estimates/CEstimateManager.h"
 #include "../InitializationPhases/CInitializationPhaseManager.h"
 #include "../Layers/CLayerManager.h"
@@ -27,6 +27,7 @@
 #include "../Minimizers/CMinimizerManager.h"
 #include "../ObjectiveFunction/CObjectiveFunction.h"
 #include "../Observations/CObservationManager.h"
+#include "../PDFs/CPDFManager.h"
 #include "../Penalties/CPenaltyManager.h"
 #include "../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../Processes/CProcessManager.h"
@@ -67,6 +68,7 @@ CRuntimeThread::CRuntimeThread() {
   vManagers.push_back(CProfileManager::Instance());
   vManagers.push_back(CRandomNumberGenerator::Instance());
   vManagers.push_back(CSelectivityManager::Instance());
+  vManagers.push_back(CPDFManager::Instance());
   vManagers.push_back(CPreferenceFunctionManager::Instance());
   vManagers.push_back(CProcessManager::Instance());
   vManagers.push_back(CReportManager::Instance());
@@ -306,6 +308,7 @@ CRuntimeThread::~CRuntimeThread() {
   CProfileManager::Destroy();
   CProcessManager::Destroy();
   CPreferenceFunctionManager::Destroy();
+  CPDFManager::Destroy();
   CPenaltyManager::Destroy();
   CObservationManager::Destroy();
   CObjectiveFunction::Destroy();

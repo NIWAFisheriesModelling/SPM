@@ -1,0 +1,5 @@
+@layer mag_win
+type numeric_meta
+default_layer mag_08_win
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	mag_02_win	mag_03_win	mag_04_win	mag_05_win	mag_06_win	mag_07_win	mag_08_win	mag_09_win	mag_10_win	mag_11_win	mag_12_win

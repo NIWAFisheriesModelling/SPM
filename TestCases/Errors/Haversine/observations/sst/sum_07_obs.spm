@@ -1,0 +1,14 @@
+obs r9-c17 0.00153846153846154
+obs r9-c18 0.00174915824915825
+obs r4-c19 0.0015625
+obs r5-c19 0.00208333333333333
+obs r8-c19 0.00324675324675325
+obs r9-c19 0.005
+obs r4-c20 0.00208333333333333
+error_value r9-c17 0.2
+error_value r9-c18 0.2
+error_value r4-c19 0.2
+error_value r5-c19 0.2
+error_value r8-c19 0.2
+error_value r9-c19 0.2
+error_value r4-c20 0.2

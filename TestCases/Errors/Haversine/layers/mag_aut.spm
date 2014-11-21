@@ -1,0 +1,5 @@
+@layer mag_aut
+type numeric_meta
+default_layer mag_08_aut
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	mag_02_aut	mag_03_aut	mag_04_aut	mag_05_aut	mag_06_aut	mag_07_aut	mag_08_aut	mag_09_aut	mag_10_aut	mag_11_aut 	mag_12_aut

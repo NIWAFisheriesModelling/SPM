@@ -37,6 +37,7 @@
 #include "../Minimizers/Factory/CMinimizerFactory.h"
 #include "../Observations/Factory/CObservationFactory.h"
 #include "../Penalties/Factory/CPenaltyFactory.h"
+#include "../PDFs/Factory/CPDFFactory.h"
 #include "../PreferenceFunctions/Factory/CPreferenceFunctionFactory.h"
 #include "../Processes/Factory/CProcessFactory.h"
 #include "../Profiles/Factory/CProfileFactory.h"
@@ -163,6 +164,8 @@ void CConfigurationLoader::processSection() {
       pBaseObject = CObservationFactory::buildObservation(sType);
     else if (sSection == PARAM_PENALTY)
       pBaseObject = CPenaltyFactory::buildPenalty(sType);
+    else if (sSection == PARAM_PDF)
+      pBaseObject = CPDFFactory::buildPDF(sType);
     else if (sSection == PARAM_PREFERENCE_FUNCTION)
       pBaseObject = CPreferenceFunctionFactory::buildPreferenceFunction(sType);
     else if (sSection == PARAM_PROCESS)

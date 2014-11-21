@@ -1,0 +1,181 @@
+#### Observations
+
+@observation sum_02_obs
+type abundance
+year 2002
+time_step one ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\sum_02_obs.spm"
+
+@report sum_02_obs
+type observation
+observation sum_02_obs
+
+@observation aut_02_obs
+type abundance
+year 2002
+time_step two ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\aut_02_obs.spm"
+
+@report aut_02_obs
+type observation
+observation aut_02_obs
+
+@observation win_02_obs
+type abundance
+year 2002
+time_step three ## Winter
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\win_02_obs.spm"
+
+@report win_02_obs
+type observation
+observation win_02_obs
+
+@observation spr_02_obs
+type abundance
+year 2002
+time_step four ## Spring
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\spr_02_obs.spm"
+
+@report spr_02_obs
+type observation
+observation spr_02_obs
+
+{
+@observation sum_03_obs
+type abundance
+year 2003
+time_step one ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\sum_03_obs.spm"
+
+@report sum_03_obs
+type observation
+observation sum_03_obs
+}
+
+@observation aut_03_obs
+type abundance
+year 2003
+time_step two ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\aut_03_obs.spm"
+
+@report aut_03_obs
+type observation
+observation aut_03_obs
+
+@observation win_03_obs
+type abundance
+year 2003
+time_step three ## Winter
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\win_03_obs.spm"
+
+@report win_03_obs
+type observation
+observation win_03_obs
+
+@observation spr_03_obs
+type abundance
+year 2003
+time_step four ## Spring
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\spr_03_obs.spm"
+
+@report spr_03_obs
+type observation
+observation spr_03_obs
+{
+@observation sum_04_obs
+type abundance
+year 2004
+time_step one ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\sum_04_obs.spm"
+
+
+@report sum_04_obs
+type observation
+observation sum_04_obs
+}
+
+@observation aut_04_obs
+type abundance
+year 2004
+time_step two ## Summer
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\aut_04_obs.spm"
+
+@report aut_04_obs
+type observation
+observation aut_04_obs
+
+@observation win_04_obs
+type abundance
+year 2004
+time_step three ## Winter
+## proportion time step 0.5 ## THink about that later.
+catchability CPUEq
+categories stock
+selectivities One
+layer obs_cat
+likelihood lognormal
+@include "observations\sst\win_04_obs.spm"
+
+@report win_04_obs
+type observation
+observation win_04_obs

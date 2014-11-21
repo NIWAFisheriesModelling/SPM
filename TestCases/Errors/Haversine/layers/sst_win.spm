@@ -1,0 +1,5 @@
+@layer sst_win
+type numeric_meta
+default_layer sst_08_win
+years	2002	2003	2004	2005	2006	2007	2008	2009	2010	2011	2012
+layers	sst_02_win	sst_03_win	sst_04_win	sst_05_win	sst_06_win	sst_07_win	sst_08_win	sst_09_win	sst_10_win	sst_11_win	sst_12_win

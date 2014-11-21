@@ -40,7 +40,7 @@ void CPreferenceFunction::validate() {
 
     // Populate our Parameters.
     sLayerName  = pParameterList->getString(PARAM_LAYER);
-    dAlpha      = pParameterList->getDouble(PARAM_ALPHA);
+    dAlpha      = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
   } catch (string &Ex) {
     Ex = "CPreferenceFunction.validate(" + getLabel() + ")->" + Ex;

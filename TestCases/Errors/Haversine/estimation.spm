@@ -1,0 +1,30 @@
+### Estimation command
+
+@estimation 
+minimiser simp 
+
+@minimiser simp
+type numerical_differences
+iterations 500
+tolerance 0.02 #The default is 0.002
+covariance True
+
+@estimate
+parameter catchability[CPUEq].q
+type uniform
+lower_bound 1e-7
+upper_bound 1e-1
+
+@estimate
+parameter preference_function[stock_SST_sum].mu
+type uniform
+lower_bound 5
+upper_bound 60
+
+
+@estimate
+parameter preference_function[stock_SST_sum].sigma
+type uniform
+lower_bound 0.1
+upper_bound 200
+
