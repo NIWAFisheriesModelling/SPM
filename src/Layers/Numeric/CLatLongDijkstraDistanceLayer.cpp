@@ -82,7 +82,7 @@ double CLatLongDijkstraDistanceLayer::deg2rad(double deg) {
 
 //**********************************************************************
 // double CLatLongDijkstraDistanceLayer::haversine(const double long1, const double lat1, const double long2, const double lat2)
-// calcuate distanced using the haversine formula
+// calculate distance using the haversine formula
 //**********************************************************************
 double CLatLongDijkstraDistanceLayer::haversine(const double long1, const double lat1, const double long2, const double lat2) {
 

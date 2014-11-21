@@ -72,6 +72,12 @@ void CPreferenceFunctionReport::build() {
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
     } else if ( sLayerType==PARAM_DISTANCE ) {
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_LAT_LONG_DISTANCE ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_LAT_LONG_DIJKSTRA_DISTANCE ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+    } else if ( sLayerType==PARAM_DIJKSTRA_DISTANCE ) {
+      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
     } else if ( sLayerType==PARAM_ABUNDANCE ) {
       pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
     } else if ( sLayerType==PARAM_ABUNDANCE_DENSITY ) {
