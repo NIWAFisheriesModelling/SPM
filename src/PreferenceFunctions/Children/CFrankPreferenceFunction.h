@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CFrankPreferenceFunction.h
-// Author      : 
-// Copyright   : 
+// Author      : C. Marsh
+// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 #ifndef CFRANKPREFERENCEFUNCTION_H_
 #define CFRANKPREFERENCEFUNCTION_H_
@@ -10,7 +10,7 @@
 #include "../CPreferenceFunction.h"
 
 class CPDF;
-class CLayers;
+class CNumericLayer;
 
 //**********************************************************************
 //
@@ -34,7 +34,7 @@ protected:
   vector<string>             vLayerNames;
   vector<string>             vPDFTypes;
   vector<CPDF*>              vPDFs;
-  vector<CLayers*>           vLayers;
+  vector<CNumericLayer*>     vLayers;
 };
 
 #endif /*CFRANKPREFERENCEFUNCTION_H_*/

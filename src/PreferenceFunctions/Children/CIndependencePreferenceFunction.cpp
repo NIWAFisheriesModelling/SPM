@@ -1,13 +1,14 @@
 //============================================================================
 // Name        : CIndependencePreferenceFunction.cpp
-// Author      : 
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Author      : C. Marsh
+// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
 #include "CIndependencePreferenceFunction.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/DefinedValues.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../PDFs/CPDF.h"
@@ -19,11 +20,7 @@
 //**********************************************************************
 CIndependencePreferenceFunction::CIndependencePreferenceFunction() {
 
-  // Register Estimables
-  // registerEstimable(PARAM_RHO, &dRho);		// There is no rho in the independence copula
-
   // Register user allowed variables
-  //pParameterList->registerAllowed(PARAM_RHO);
   pParameterList->registerAllowed(PARAM_PDFS);
   pParameterList->registerAllowed(PARAM_LAYERS);
 
@@ -37,27 +34,25 @@ void CIndependencePreferenceFunction::validate() {
   try {
 
     // Assign our variables
-    //dRho  = pParameterList->getDouble(PARAM_RHO);
     pParameterList->fillVector(vPDFNames, PARAM_PDFS);
     pParameterList->fillVector(vLayerNames, PARAM_LAYERS);
 
     // Validate parent
     CPreferenceFunction::validate();
 
-    //Local validation
-    //if (dRho <= 0.0)
-    //  CError::errorLessThanEqualTo(PARAM_RHO, PARAM_ZERO);
-
-	//********************************************
-	//	This is the only copula that I will allow to have 1 or two PDF's
-	//*********************************************
-    //Ensure exactly 2 PDFs
-    if (vPDFNames.size() != 1 || vPDFNames.size() != 2)
-      CError::errorNotEqual(PARAM_PDFS, "One or Two only");
+    //********************************************
+    //  We can allow either one or two PDF's
+    //*********************************************
+    //Ensure either 1 or 2 PDFs
+    if (!(vPDFNames.size() == 1 || vPDFNames.size() == 2))
+      CError::errorNotEqual(PARAM_PDFS, "either 1 or 2");
 
     //Ensure exactly 2 layers
-    if (vPDFNames.size() != 1 || vPDFNames.size() != 2)
-      CError::errorNotEqual(PARAM_LAYERS, "One or Two only");
+    if (vLayerNames.size() != vPDFNames.size())
+      CError::errorListSameSize(PARAM_LAYERS, PARAM_PDFS);
+
+std::cerr << "in validate\n";
+
 
   } catch (string &Ex) {
     Ex = "CIndependencePreferenceFunction.validate(" + getLabel() + ")->" + Ex;
@@ -72,7 +67,7 @@ void CIndependencePreferenceFunction::validate() {
 void CIndependencePreferenceFunction::build() {
 
   // Build parent
-  CIndependencePreferenceFunction::build();
+  CPreferenceFunction::build();
 
   // Get PDFs
   CPDFManager *pPDFManager = CPDFManager::Instance();
@@ -86,14 +81,8 @@ void CIndependencePreferenceFunction::build() {
   CLayerManager *pLayerManager = CLayerManager::Instance();
 
   for (int i=0; i< (int)vLayerNames.size(); ++i) {
-    vLayers.push_back( pLayerManager->getLayer(vLayerNames[i]) );
+    vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
   }
-
-  // Validate values for this combination of PDFs
-  //if ( vPDFNames[0] =="PARAM_NORMAL" && vPDFNames[1] =="PARAM_NORMAL")) {
-  //  if (dRho <= 0.0)
-  //    CError::errorLessThanEqualTo(PARAM_RHO, PARAM_ZERO);
-  //}
 
 }
 
@@ -109,59 +98,23 @@ double CIndependencePreferenceFunction::getResult(int RIndex, int CIndex, int TR
   try {
 #endif
 
-    vector<double> dValue;
-    vector<double> dLayerValue;
+std::cerr << "vPDFs.size(): " << vPDFs.size() << "\n";
 
-    for (int i=0; (int)i < vLayers.size(); ++i) {
-      dLayerValue[i] = vLayers[i]->getValue(TRIndex, TCIndex, RIndex, CIndex);
-    }
-	 double x1 = dLayervalue[0];
-	 double x2 = dLayervalue[1];
-    // Evaluate using copula
-    if((vPDFTypes[0] == "PARAM_NORMAL") && (vPDFTypes[1] == "PARAM_NORMAL")){		// Margins Normal, Normal
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[1]->getPDFResult(x2);
+     if(vPDFs.size()==1) {
 
-      dRet = dPDF1 * dPDF2;
+       double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
+       dRet = vPDFs[0]->getPDFResult(x1);
 
-    } else if {
-		((vPDFTypes[0] == "PARAM_NORMAL") && (vPDFTypes[1] == "PARAM_EXPONENTIAL")) || ((vPDFTypes[1] == "PARAM_NORMAL") && (vPDFTypes[0] == "PARAM_EXPONENTIAL")) {	// Margins Normal, Exponential
-	 
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[1]->getPDFResult(x2);
+     } else {
 
-      dRet = dPDF1 * dPDF2;
+       double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
+       double x2 = vLayers[1]->getValue(TRIndex, TCIndex, RIndex, CIndex);
 
-    } else if {
-		((vPDFTypes[0] == "PARAM_EXPONENTIAL") && (vPDFTypes[1] == "PARAM_EXPONENTIAL"))) {	// Margins Exponential, Exponential
-	 
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[1]->getPDFResult(x2);
+       double dPDF1 = vPDFs[0]->getPDFResult(x1);
+       double dPDF2 = vPDFs[1]->getPDFResult(x2);
 
-      dRet = dPDF1 * dPDF2;
-
-
-/*} else if {
-	// Comment out lognormal we will just start with exponential and normal
-
-		((vPDFTypes[0] == "PARAM_LOGNORMAL") && (vPDFTypes[1] == "PARAM_EXPONENTIAL")) || ((vPDFTypes[1] == "PARAM_LOGNORMAL") && (vPDFTypes[0] == "PARAM_EXPONENTIAL")) {	// Margins Log Normal, Exponential
-
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[0]->getPDFResult(x2);
-
-      dRet = dPDF1 * dPDF2;
-
-	} else if {
-		((vPDFTypes[0] == "PARAM_NORMAL") && (vPDFTypes[1] == "PARAM_LOGNORMAL")) || ((vPDFTypes[1] == "PARAM_NORMAL") && (vPDFTypes[0] == "PARAM_LOGNORMAL")) {	// Margins Log Normal, Normal
-
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[0]->getPDFResult(x2);
-
-      dRet = dPDF1 * dPDF2;
- */
-	} else {
-      CError::errorUnknown(PARAM_COPULA,vPDFNames[0]);
-    }
+       dRet = dPDF1 * dPDF2;
+     }
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {

@@ -1,61 +1,59 @@
 //============================================================================
-// Name        : CNormalPDF.cpp
+// Name        : CExponentialPDF.cpp
 // Author      : C. Marsh
 // Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
-#include "CNormalPDF.h"
+#include "CExponentialPDF.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/DefinedValues.h"
 
 //**********************************************************************
-// CNormalPDF::CNormalPDF()
+// CExponentialPDF::CExponentialPDF()
 // Default Constructor
 //**********************************************************************
-CNormalPDF::CNormalPDF() {
+CExponentialPDF::CExponentialPDF() {
 
-  sType = PARAM_NORMAL;
+  sType = PARAM_EXPONENTIAL;    // This syntax comes into the Copula setting
 
   // Register Estimables
-  registerEstimable(PARAM_MU, &dMu);
-  registerEstimable(PARAM_SIGMA, &dSigma);
+  registerEstimable(PARAM_LAMBDA, &dLambda);
 
   // Register user allowed variables
-  pParameterList->registerAllowed(PARAM_MU);
-  pParameterList->registerAllowed(PARAM_SIGMA);
+  pParameterList->registerAllowed(PARAM_LAMBDA);
+
 }
 
 //**********************************************************************
-// void CNormalPDF::validate()
+// void CExponentialPDF::validate()
 // Validate
 //**********************************************************************
-void CNormalPDF::validate() {
+void CExponentialPDF::validate() {
   try {
 
     // Assign our variables
-    dMu       = pParameterList->getDouble(PARAM_MU);
-    dSigma    = pParameterList->getDouble(PARAM_SIGMA);
+    dLambda       = pParameterList->getDouble(PARAM_LAMBDA);
 
     // Validate parent
     CPDF::validate();
 
     //Local validation
-    if (dSigma <= 0.0)
-      CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
+    if (dLambda <= 0.0)
+      CError::errorLessThanEqualTo(PARAM_LAMBDA, PARAM_ZERO);
 
   } catch (string &Ex) {
-    Ex = "CNormalPDF.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CExponentialPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// double CNormalPDF::getPDFResult(double Value)
+// double CExponentialPDF::getPDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getPDFResult(double value) {
+double CExponentialPDF::getPDFResult(double value) {
 // not required ?
 
   dRet = 0.0;
@@ -64,7 +62,7 @@ double CNormalPDF::getPDFResult(double value) {
   try {
 #endif
 
-  dRet = exp( (-(value - dMu)*(value - dMu)) / (2.0 * dSigma * dSigma)) / (dSigma * sqrt(TWO_PI));
+    dRet = dLambda*exp(-dLambda*value);   // PDF definition
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
@@ -77,40 +75,23 @@ double CNormalPDF::getPDFResult(double value) {
 }
 
 //**********************************************************************
-// double CNormalPDF::getCDFResult(double Value)
+// double CExponentialPDF::getCDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getCDFResult(double value) {
+double CExponentialPDF::getCDFResult(double value) {
 // not required ?
-  dRet = 0;
+
+  dRet = 0.0;
 
 #ifndef OPTIMIZE
   try {
 #endif
 
-  double x = (value-dMu)/dSigma;
-// constants for the error function
-  double a1 =  0.254829592;
-  double a2 = -0.284496736;
-  double a3 =  1.421413741;
-  double a4 = -1.453152027;
-  double a5 =  1.061405429;
-  double p  =  0.3275911;
-
-  double sign = 1.0;
-  if(x < 0) {
-    sign = -1.0;
-  }
-
-  x = fabs(x)/sqrt(2.0);
-  double t = 1.0/(1.0 + p*x);
-  double y = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-x*x);
-
-  dRet = (0.5*(1.0 + sign*y));
+    dRet = 1-exp(-dLambda*value);     // CDF definition
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CNormalCDF.getResult(" + getLabel() + ")->" + Ex;
+    Ex = "CExponentialPDF.getCDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -118,8 +99,8 @@ double CNormalPDF::getCDFResult(double value) {
   return dRet;
 }
 //**********************************************************************
-// CNormalPDF::~CNormalPDF()
+// CExponentialPDF::~CExponentialPDF()
 // Default De-Constructor
 //**********************************************************************
-CNormalPDF::~CNormalPDF() {
+CExponentialPDF::~CExponentialPDF() {
 }

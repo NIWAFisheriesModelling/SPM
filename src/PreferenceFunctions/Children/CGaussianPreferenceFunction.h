@@ -1,7 +1,7 @@
 //============================================================================
 // Name        : CGaussianPreferenceFunction.h
-// Author      :
-// Copyright   : Copyright NIWA Science ©2008 - www.niwa.co.nz
+// Author      : C. Marsh
+// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 #ifndef CGAUSSIANPREFERENCEFUNCTION_H_
 #define CGAUSSIANPREFERENCEFUNCTION_H_
@@ -10,7 +10,7 @@
 #include "../CPreferenceFunction.h"
 
 class CPDF;
-class CLayers;
+class CNumericLayer;
 
 //**********************************************************************
 //
@@ -28,13 +28,15 @@ public:
   void                       build();
 
 protected:
+  // Functions
+  double                     NormalInverse(double p);
   // Variables
   double                     dRho;
   vector<string>             vPDFNames;
   vector<string>             vLayerNames;
   vector<string>             vPDFTypes;
   vector<CPDF*>              vPDFs;
-  vector<CLayers*>           vLayers;
+  vector<CNumericLayer*>     vLayers;
 };
 
 #endif /*CGAUSSIANPREFERENCEFUNCTION_H_*/

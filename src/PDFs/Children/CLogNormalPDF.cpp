@@ -1,22 +1,22 @@
 //============================================================================
-// Name        : CNormalPDF.cpp
+// Name        : CLogNormalPDF.cpp
 // Author      : C. Marsh
 // Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
-#include "CNormalPDF.h"
+#include "CLogNormalPDF.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/DefinedValues.h"
 
 //**********************************************************************
-// CNormalPDF::CNormalPDF()
+// CLogNormalPDF::CLogNormalPDF()
 // Default Constructor
 //**********************************************************************
-CNormalPDF::CNormalPDF() {
+CLogNormalPDF::CLogNormalPDF() {
 
-  sType = PARAM_NORMAL;
+  sType = PARAM_LOGNORMAL;
 
   // Register Estimables
   registerEstimable(PARAM_MU, &dMu);
@@ -28,10 +28,10 @@ CNormalPDF::CNormalPDF() {
 }
 
 //**********************************************************************
-// void CNormalPDF::validate()
+// void CLogNormalPDF::validate()
 // Validate
 //**********************************************************************
-void CNormalPDF::validate() {
+void CLogNormalPDF::validate() {
   try {
 
     // Assign our variables
@@ -52,10 +52,10 @@ void CNormalPDF::validate() {
 }
 
 //**********************************************************************
-// double CNormalPDF::getPDFResult(double Value)
+// double CLogNormalPDF::getPDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getPDFResult(double value) {
+double CLogNormalPDF::getPDFResult(double value) {
 // not required ?
 
   dRet = 0.0;
@@ -64,11 +64,11 @@ double CNormalPDF::getPDFResult(double value) {
   try {
 #endif
 
-  dRet = exp( (-(value - dMu)*(value - dMu)) / (2.0 * dSigma * dSigma)) / (dSigma * sqrt(TWO_PI));
+  dRet = exp((-((log(value)-dMu) * (log(value)-dMu)))/(2.0*dSigma*dSigma)) / (value*dSigma*sqrt(TWO_PI));
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CNormalPDF.getPDFResult(" + getLabel() + ")->" + Ex;
+    Ex = "CLogNormalPDF.getPDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -77,40 +77,24 @@ double CNormalPDF::getPDFResult(double value) {
 }
 
 //**********************************************************************
-// double CNormalPDF::getCDFResult(double Value)
+// double CLogNormalPDF::getCDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getCDFResult(double value) {
+double CLogNormalPDF::getCDFResult(double value) {
 // not required ?
-  dRet = 0;
+
+  dRet = 0.0;
 
 #ifndef OPTIMIZE
   try {
 #endif
 
-  double x = (value-dMu)/dSigma;
-// constants for the error function
-  double a1 =  0.254829592;
-  double a2 = -0.284496736;
-  double a3 =  1.421413741;
-  double a4 = -1.453152027;
-  double a5 =  1.061405429;
-  double p  =  0.3275911;
-
-  double sign = 1.0;
-  if(x < 0) {
-    sign = -1.0;
-  }
-
-  x = fabs(x)/sqrt(2.0);
-  double t = 1.0/(1.0 + p*x);
-  double y = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-x*x);
-
-  dRet = (0.5*(1.0 + sign*y));
+    double Z = (log(value) - dMu)/dSigma;
+    dRet = exp(-(Z * Z))/sqrt(PI);
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CNormalCDF.getResult(" + getLabel() + ")->" + Ex;
+    Ex = "CLogNormalPDF.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -118,8 +102,8 @@ double CNormalPDF::getCDFResult(double value) {
   return dRet;
 }
 //**********************************************************************
-// CNormalPDF::~CNormalPDF()
+// CLogNormalPDF::~CLogNormalPDF()
 // Default De-Constructor
 //**********************************************************************
-CNormalPDF::~CNormalPDF() {
+CLogNormalPDF::~CLogNormalPDF() {
 }

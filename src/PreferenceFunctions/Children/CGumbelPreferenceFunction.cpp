@@ -1,13 +1,14 @@
 //============================================================================
 // Name        : CGumbelPreferenceFunction.cpp
-// Author      : 
-// Copyright   :
+// Author      : C. Marsh
+// Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
 #include "CGumbelPreferenceFunction.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
+#include "../../Helpers/DefinedValues.h"
 #include "../../Layers/CLayerManager.h"
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../PDFs/CPDF.h"
@@ -20,7 +21,7 @@
 CGumbelPreferenceFunction::CGumbelPreferenceFunction() {
 
   // Register Estimables
-  registerEstimable(PARAM_RHO, &dRho);		
+  registerEstimable(PARAM_RHO, &dRho);
 
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_RHO);
@@ -44,13 +45,9 @@ void CGumbelPreferenceFunction::validate() {
     // Validate parent
     CPreferenceFunction::validate();
 
-    //Local validation
-    //if (dRho <= 0.0)
-    //  CError::errorLessThanEqualTo(PARAM_RHO, PARAM_ZERO);
-
-	//********************************************
-	//	This is the only copula that I will allow to have 1 or two PDF's
-	//*********************************************
+    //********************************************
+    //  We allow only two PDF's
+    //*********************************************
     //Ensure exactly 2 PDFs
     if (vPDFNames.size() != 2)
       CError::errorNotEqual(PARAM_PDFS, "two");
@@ -72,7 +69,7 @@ void CGumbelPreferenceFunction::validate() {
 void CGumbelPreferenceFunction::build() {
 
   // Build parent
-  CGumbelPreferenceFunction::build();
+  CPreferenceFunction::build();
 
   // Get PDFs
   CPDFManager *pPDFManager = CPDFManager::Instance();
@@ -86,15 +83,8 @@ void CGumbelPreferenceFunction::build() {
   CLayerManager *pLayerManager = CLayerManager::Instance();
 
   for (int i=0; i< (int)vLayerNames.size(); ++i) {
-    vLayers.push_back( pLayerManager->getLayer(vLayerNames[i]) );
+    vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
   }
-
-  // Validate values for this combination of PDFs
-  //if ( vPDFNames[0] =="PARAM_NORMAL" && vPDFNames[1] =="PARAM_NORMAL")) {
-  //  if (dRho <= 0.0)
-  //    CError::errorLessThanEqualTo(PARAM_RHO, PARAM_ZERO);
-  //}
-
 }
 
 //**********************************************************************
@@ -110,58 +100,21 @@ double CGumbelPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex,
 #endif
 
     vector<double> dValue;
-    vector<double> dLayerValue;
 
-    for (int i=0; (int)i < vLayers.size(); ++i) {
-      dLayerValue[i] = vLayers[i]->getValue(TRIndex, TCIndex, RIndex, CIndex);
-    }
+    double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
+    double x2 = vLayers[1]->getValue(TRIndex, TCIndex, RIndex, CIndex);
 
-		double u1 = vPDFs[0]->getCDFResult(dLayerValue[0]);
-		double u2 = vPDFs[1]->getCDFResult(dLayerValue[1])
-   
-//		dRet = exp(- ((-log(u1))^dRho + (-log(u2))^dRho)^(1/dRho) * (((-log(u1))^(dRho-1))/u1) * (((-log(u2))^(dRho-1))/u2) *
-//		(((-log(u1))^dRho + (-log(u2))^dRho)^((2/dRho)-2) + ((dRho-1) * ((-log(u1))^dRho + (-log(u2))^Theta)^((1/(dRho)-2)))))* vPDFs[0]->getPDFResult(dLayerValue[0]) * vPDFs[1]->getPDFResult(dLayerValue[1]);
+    // Evaluate using Frank copula
+    double dPDF1 = vPDFs[0]->getPDFResult(x1);
+    double dPDF2 = vPDFs[1]->getPDFResult(x2);
 
-	// Evaluate using Gumbel copula
-    if((vPDFTypes[0] == "PARAM_NORMAL") && (vPDFTypes[1] == "PARAM_NORMAL")){		// Margins Normal, Normal
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[1]->getPDFResult(x2);
+    double dCDF1 = vPDFs[0]->getCDFResult(x1);
+    double dCDF2 = vPDFs[1]->getCDFResult(x2);
 
-	  double dCDF1 = vPDFs[0]->getCDFResult(x1);
-	  double dCDF2 = vPDFs[1]->getCDFResult(x2);
+    dRet = exp(- pow(-log(dCDF1),dRho));// blah blah .. * dPDF1 * dPDF2;
 
-		dRet = exp(- ((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^(1/dRho) * (((-log(dCDF1))^(dRho-1))/dCDF1) * (((-log(dCDF2))^(dRho-1))/dCDF2) *
-	(((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^((2/dRho)-2) + ((dRho-1) * ((-log(dCDF1))^dRho + (-log(dCDF2))^Theta)^((1/(dRho)-2)))))* dPDF1 * dPDF2;
-
-
-    } else if {
-		((vPDFTypes[0] == "PARAM_NORMAL") && (vPDFTypes[1] == "PARAM_EXPONENTIAL")) || ((vPDFTypes[1] == "PARAM_NORMAL") && (vPDFTypes[0] == "PARAM_EXPONENTIAL")) {	// Margins Normal, Exponential
-
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[1]->getPDFResult(x2);
-
-	  double dCDF1 = vPDFs[0]->getCDFResult(x1);
-	  double dCDF2 = vPDFs[1]->getCDFResult(x2);
-
-		dRet = exp(- ((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^(1/dRho) * (((-log(dCDF1))^(dRho-1))/dCDF1) * (((-log(dCDF2))^(dRho-1))/dCDF2) *
-	(((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^((2/dRho)-2) + ((dRho-1) * ((-log(dCDF1))^dRho + (-log(dCDF2))^Theta)^((1/(dRho)-2)))))* dPDF1 * dPDF2;
-
-    } else if {
-		((vPDFTypes[0] == "PARAM_EXPONENTIAL") && (vPDFTypes[1] == "PARAM_EXPONENTIAL"))) {	// Margins Exponential, Exponential
-	 
-	  double dPDF1 = vPDFs[0]->getPDFResult(x1);
-	  double dPDF2 = vPDFs[1]->getPDFResult(x2);
-
-	  double dCDF1 = vPDFs[0]->getCDFResult(x1);
-	  double dCDF2 = vPDFs[1]->getCDFResult(x2);
-
-		dRet = exp(- ((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^(1/dRho) * (((-log(dCDF1))^(dRho-1))/dCDF1) * (((-log(dCDF2))^(dRho-1))/dCDF2) *
-	(((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^((2/dRho)-2) + ((dRho-1) * ((-log(dCDF1))^dRho + (-log(dCDF2))^Theta)^((1/(dRho)-2)))))* dPDF1 * dPDF2;
-
-   
-	} else {
-      CError::errorUnknown(PARAM_COPULA,vPDFNames[0]);
-    }
+    //dRet = exp(- ((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^(1/dRho) * (((-log(dCDF1))^(dRho-1))/dCDF1) * (((-log(dCDF2))^(dRho-1))/dCDF2) *
+    //       (((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^((2/dRho)-2) + ((dRho-1) * ((-log(dCDF1))^dRho + (-log(dCDF2))^Theta)^((1/(dRho)-2)))))* dPDF1 * dPDF2;
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {

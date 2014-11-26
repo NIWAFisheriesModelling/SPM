@@ -1,62 +1,60 @@
 //============================================================================
-// Name        : CNormalPDF.cpp
+// Name        : CUniformPDF.cpp
 // Author      : C. Marsh
 // Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 
 // Local Headers
-#include "CNormalPDF.h"
+#include "CUniformPDF.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
-#include "../../Helpers/DefinedValues.h"
 
 //**********************************************************************
-// CNormalPDF::CNormalPDF()
+// CUniformPDF::CUniformPDF()
 // Default Constructor
 //**********************************************************************
-CNormalPDF::CNormalPDF() {
+CUniformPDF::CUniformPDF() {
 
-  sType = PARAM_NORMAL;
+  sType = PARAM_UNIFORM;
 
   // Register Estimables
-  registerEstimable(PARAM_MU, &dMu);
-  registerEstimable(PARAM_SIGMA, &dSigma);
+  registerEstimable(PARAM_A, &dA);
+  registerEstimable(PARAM_B, &dB);
 
   // Register user allowed variables
-  pParameterList->registerAllowed(PARAM_MU);
-  pParameterList->registerAllowed(PARAM_SIGMA);
+  pParameterList->registerAllowed(PARAM_A);
+  pParameterList->registerAllowed(PARAM_B);
 }
 
 //**********************************************************************
-// void CNormalPDF::validate()
+// void CUniformPDF::validate()
 // Validate
 //**********************************************************************
-void CNormalPDF::validate() {
+void CUniformPDF::validate() {
   try {
 
     // Assign our variables
-    dMu       = pParameterList->getDouble(PARAM_MU);
-    dSigma    = pParameterList->getDouble(PARAM_SIGMA);
+    dA    = pParameterList->getDouble(PARAM_A);
+    dB    = pParameterList->getDouble(PARAM_B);
 
     // Validate parent
     CPDF::validate();
 
     //Local validation
-    if (dSigma <= 0.0)
-      CError::errorLessThanEqualTo(PARAM_SIGMA, PARAM_ZERO);
+    if (dB <= dA)
+      CError::errorLessThanEqualTo(PARAM_B, PARAM_A);
 
   } catch (string &Ex) {
-    Ex = "CNormalPDF.validate(" + getLabel() + ")->" + Ex;
+    Ex = "CUniformPDF.validate(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
 
 //**********************************************************************
-// double CNormalPDF::getPDFResult(double Value)
+// double CUniformPDF::getPDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getPDFResult(double value) {
-// not required ?
+double CUniformPDF::getPDFResult(double value) {
 
   dRet = 0.0;
 
@@ -64,11 +62,13 @@ double CNormalPDF::getPDFResult(double value) {
   try {
 #endif
 
-  dRet = exp( (-(value - dMu)*(value - dMu)) / (2.0 * dSigma * dSigma)) / (dSigma * sqrt(TWO_PI));
+  if(value >=dA  && value <=dB) {
+    dRet = 1.0/(dB- dA);
+  }
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CNormalPDF.getPDFResult(" + getLabel() + ")->" + Ex;
+    Ex = "CUniformPDF.getPDFResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -77,40 +77,28 @@ double CNormalPDF::getPDFResult(double value) {
 }
 
 //**********************************************************************
-// double CNormalPDF::getCDFResult(double Value)
+// double CUniformPDF::getCDFResult(double Value)
 // get Result
 //**********************************************************************
-double CNormalPDF::getCDFResult(double value) {
-// not required ?
-  dRet = 0;
+double CUniformPDF::getCDFResult(double value) {
+
+  dRet = 0.0;
 
 #ifndef OPTIMIZE
   try {
 #endif
 
-  double x = (value-dMu)/dSigma;
-// constants for the error function
-  double a1 =  0.254829592;
-  double a2 = -0.284496736;
-  double a3 =  1.421413741;
-  double a4 = -1.453152027;
-  double a5 =  1.061405429;
-  double p  =  0.3275911;
-
-  double sign = 1.0;
-  if(x < 0) {
-    sign = -1.0;
+  if(value <dA) {
+    dRet = 0.0;
+  } else if (value >=dA  && value <=dB) {
+    dRet = (value-dA)/(dB-dA);
+  } else {
+    dRet = 1.0;
   }
-
-  x = fabs(x)/sqrt(2.0);
-  double t = 1.0/(1.0 + p*x);
-  double y = 1.0 - (((((a5*t + a4)*t) + a3)*t + a2)*t + a1)*t*exp(-x*x);
-
-  dRet = (0.5*(1.0 + sign*y));
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
-    Ex = "CNormalCDF.getResult(" + getLabel() + ")->" + Ex;
+    Ex = "CUniformPDF.getResult(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 #endif
@@ -118,8 +106,8 @@ double CNormalPDF::getCDFResult(double value) {
   return dRet;
 }
 //**********************************************************************
-// CNormalPDF::~CNormalPDF()
+// CUniformPDF::~CUniformPDF()
 // Default De-Constructor
 //**********************************************************************
-CNormalPDF::~CNormalPDF() {
+CUniformPDF::~CUniformPDF() {
 }

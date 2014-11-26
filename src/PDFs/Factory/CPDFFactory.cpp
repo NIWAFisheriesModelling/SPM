@@ -9,10 +9,13 @@
 
 // Local headers
 #include "CPDFFactory.h"
-#include "../CPDFManager.h"
-#include "../../Translations/Translations.h"
 #include "../../Helpers/CError.h"
+#include "../../Translations/Translations.h"
+#include "../CPDFManager.h"
+#include "../Children/CExponentialPDF.h"
+#include "../Children/CLogNormalPDF.h"
 #include "../Children/CNormalPDF.h"
+#include "../Children/CUniformPDF.h"
 
 //**********************************************************************
 // CPDF* CPDFFactory::buildPDF(string type, bool registerWithManager)
@@ -24,9 +27,14 @@ CPDF* CPDFFactory::buildPDF(string type, bool registerWithManager) {
 
   if (type == PARAM_NORMAL)
     pFunction = new CNormalPDF();
+  else if (type == PARAM_LOGNORMAL)
+    pFunction = new CLogNormalPDF();
+  else if (type == PARAM_EXPONENTIAL)
+    pFunction = new CExponentialPDF();
+  else if (type == PARAM_UNIFORM)
+    pFunction = new CUniformPDF();
   else
     CError::errorUnknown(PARAM_TYPE, type);
-
   if (registerWithManager)
     CPDFManager::Instance()->addPDF(pFunction);
 
