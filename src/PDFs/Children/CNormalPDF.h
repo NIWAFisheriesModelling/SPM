@@ -1,6 +1,6 @@
 //============================================================================
 // Name        : CNormalPDF.h
-// Author      : A.Dunn
+// Author      : C. Marsh
 // Copyright   : Copyright NIWA Science ©2014 - www.niwa.co.nz
 //============================================================================
 #ifndef CNORMALPDF_H_
