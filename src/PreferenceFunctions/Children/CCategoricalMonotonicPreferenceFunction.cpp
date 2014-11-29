@@ -21,9 +21,12 @@
 //**********************************************************************
 CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction() {
 
+  sType = PARAM_CATEGORICAL_MONOTONIC;
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORY_VALUES);
   pParameterList->registerAllowed(PARAM_CATEGORY_LABELS);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -32,12 +35,15 @@ CCategoricalMonotonicPreferenceFunction::CCategoricalMonotonicPreferenceFunction
 //**********************************************************************
 void CCategoricalMonotonicPreferenceFunction::validate() {
   try {
-    // Base Validation
-    CPreferenceFunction::validate();
 
     // Assign local variables
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
+
+    // Base Validation
+    CPreferenceFunction::validate();
+
     for (int i = 1; i < (int)vValues.size(); i++) {
       if(vValues[i] < 0) {
         // TODO: Not a helpful error message: Should report that these values are not monotonically increasing.
@@ -98,6 +104,14 @@ void CCategoricalMonotonicPreferenceFunction::build() {
     Ex = "CCategoricalMonotonicPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+}
+
+//**********************************************************************
+// CCategoricalMonotonicPreferenceFunction::getIsStatic()
+// getIsStatic
+//**********************************************************************
+bool CCategoricalMonotonicPreferenceFunction::getIsStatic() {
+  return true;
 }
 
 //**********************************************************************

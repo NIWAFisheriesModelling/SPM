@@ -18,14 +18,15 @@
 // Default Constructor
 //**********************************************************************
 CPreferenceFunction::CPreferenceFunction() {
-  // Layer
+
+  // Initialise
+  sType = "";
   pLayer = 0;
 
   // Register our Estimables
   registerEstimable(PARAM_ALPHA, &dAlpha);
 
   // Register User Allowed Parameters
-  pParameterList->registerAllowed(PARAM_LAYER);
   pParameterList->registerAllowed(PARAM_ALPHA);
 }
 
@@ -39,7 +40,6 @@ void CPreferenceFunction::validate() {
     CBaseBuild::validate();
 
     // Populate our Parameters.
-    sLayerName  = pParameterList->getString(PARAM_LAYER);
     dAlpha      = pParameterList->getDouble(PARAM_ALPHA,true,1.0);
 
   } catch (string &Ex) {
@@ -54,9 +54,6 @@ void CPreferenceFunction::validate() {
 //**********************************************************************
 void CPreferenceFunction::build() {
   try {
-    // Get our Layer
-    CLayerManager *pLayerManager = CLayerManager::Instance();
-    pLayer = pLayerManager->getNumericLayer(sLayerName);
 
   } catch (string &Ex) {
     Ex = "CPreferenceFunction.build(" + getLabel() + ")->" + Ex;
@@ -64,14 +61,16 @@ void CPreferenceFunction::build() {
   }
 }
 
-
 //**********************************************************************
-// CPreferenceFunction::~CPreferenceFunction()
-// Destructor
+// CPreferenceFunction::getIsStatic()
+// getIsStatic
 //**********************************************************************
 bool CPreferenceFunction::getIsStatic() {
+
+std::cerr << "here\n";
+
   if (pLayer == 0)
-    return true;
+    return false;
 
   return pLayer->getIsStatic();
 }

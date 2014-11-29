@@ -24,6 +24,7 @@ public:
   CPreferenceFunction*       clone() { return new CConstantPreferenceFunction(*this); }
   double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
   void                       validate();
+  void                       build();
 
 protected:
   // Variables

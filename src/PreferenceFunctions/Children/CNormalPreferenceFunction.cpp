@@ -12,12 +12,16 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
+#include "../../Layers/CLayerManager.h"
 
 //**********************************************************************
 // CNormalPreferenceFunction::CNormalPreferenceFunction()
 // Default Constructor
 //**********************************************************************
 CNormalPreferenceFunction::CNormalPreferenceFunction() {
+
+  sType = PARAM_NORMAL;
+
   // Register Estimables
   registerEstimable(PARAM_MU, &dMu);
   registerEstimable(PARAM_SIGMA, &dSigma);
@@ -25,6 +29,7 @@ CNormalPreferenceFunction::CNormalPreferenceFunction() {
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_MU);
   pParameterList->registerAllowed(PARAM_SIGMA);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -35,8 +40,9 @@ void CNormalPreferenceFunction::validate() {
   try {
 
     // Assign our variables
-    dMu       = pParameterList->getDouble(PARAM_MU);
-    dSigma    = pParameterList->getDouble(PARAM_SIGMA);
+    dMu        = pParameterList->getDouble(PARAM_MU);
+    dSigma     = pParameterList->getDouble(PARAM_SIGMA);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -47,6 +53,26 @@ void CNormalPreferenceFunction::validate() {
 
   } catch (string &Ex) {
     Ex = "CNormalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CNormalPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CNormalPreferenceFunction::build() {
+  try {
+
+    // Build parent
+    CPreferenceFunction::build();
+
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CNormalPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

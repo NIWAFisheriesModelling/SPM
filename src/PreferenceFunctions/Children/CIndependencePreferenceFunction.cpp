@@ -20,10 +20,11 @@
 //**********************************************************************
 CIndependencePreferenceFunction::CIndependencePreferenceFunction() {
 
+  sType = PARAM_INDEPENDENCE_COPULA;
+
   // Register user allowed variables
   pParameterList->registerAllowed(PARAM_PDFS);
   pParameterList->registerAllowed(PARAM_LAYERS);
-
 }
 
 //**********************************************************************
@@ -50,9 +51,6 @@ void CIndependencePreferenceFunction::validate() {
     //Ensure exactly 2 layers
     if (vLayerNames.size() != vPDFNames.size())
       CError::errorListSameSize(PARAM_LAYERS, PARAM_PDFS);
-
-std::cerr << "in validate\n";
-
 
   } catch (string &Ex) {
     Ex = "CIndependencePreferenceFunction.validate(" + getLabel() + ")->" + Ex;
@@ -83,7 +81,19 @@ void CIndependencePreferenceFunction::build() {
   for (int i=0; i< (int)vLayerNames.size(); ++i) {
     vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
   }
+}
 
+//**********************************************************************
+// CIndependencePreferenceFunction::getIsStatic()
+// getIsStatic
+//**********************************************************************
+bool CIndependencePreferenceFunction::getIsStatic() {
+
+  for (int i=0; i< (int)vLayers.size(); ++i) {
+    if (!( vLayers[i]->getIsStatic() ))
+      return false;
+  }
+  return true;
 }
 
 //**********************************************************************

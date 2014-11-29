@@ -12,12 +12,16 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/CMath.h"
+#include "../../Layers/CLayerManager.h"
 
 //**********************************************************************
 // CLogisticPreferenceFunction::CLogisticPreferenceFunction()
 // Default Constructor
 //**********************************************************************
 CLogisticPreferenceFunction::CLogisticPreferenceFunction() {
+
+   sType = PARAM_LOGISTIC;
+
   // Register estimable parameters
   registerEstimable(PARAM_A50, &dA50);
   registerEstimable(PARAM_ATO95, &dAto95);
@@ -25,6 +29,7 @@ CLogisticPreferenceFunction::CLogisticPreferenceFunction() {
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_A50);
   pParameterList->registerAllowed(PARAM_ATO95);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -35,8 +40,9 @@ void CLogisticPreferenceFunction::validate() {
   try {
 
     // Local
-    dA50    = pParameterList->getDouble(PARAM_A50);
-    dAto95  = pParameterList->getDouble(PARAM_ATO95);
+    dA50       = pParameterList->getDouble(PARAM_A50);
+    dAto95     = pParameterList->getDouble(PARAM_ATO95);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -47,6 +53,26 @@ void CLogisticPreferenceFunction::validate() {
 
   } catch (string &Ex) {
     Ex = "CLogisticPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CLogisticPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CLogisticPreferenceFunction::build() {
+  try {
+
+    // Build parent
+    CPreferenceFunction::build();
+
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CLogisticPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

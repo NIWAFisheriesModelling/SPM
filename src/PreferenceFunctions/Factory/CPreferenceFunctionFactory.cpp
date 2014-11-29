@@ -17,12 +17,12 @@
 #include "../Children/CConstantPreferenceFunction.h"
 #include "../Children/CDoubleNormalPreferenceFunction.h"
 #include "../Children/CExponentialPreferenceFunction.h"
-#include "../Children/CFrankPreferenceFunction.h"
 #include "../Children/CInverseLogisticPreferenceFunction.h"
 #include "../Children/CLogisticPreferenceFunction.h"
 #include "../Children/CNormalPreferenceFunction.h"
 #include "../Children/CThresholdPreferenceFunction.h"
 //#include "../Children/CClaytonPreferenceFunction.h"
+#include "../Children/CFrankPreferenceFunction.h"
 #include "../Children/CGaussianPreferenceFunction.h"
 #include "../Children/CGumbelPreferenceFunction.h"
 #include "../Children/CIndependencePreferenceFunction.h"
@@ -53,14 +53,16 @@ CPreferenceFunction* CPreferenceFunctionFactory::buildPreferenceFunction(string 
     pFunction = new CCategoricalPreferenceFunction();
   else if (type == PARAM_CATEGORICAL_MONOTONIC)
     pFunction = new CCategoricalMonotonicPreferenceFunction();
-  else if (type == PARAM_INDEPENDENCE_COPULA)
-    pFunction = new CIndependencePreferenceFunction();
-  else if (type == PARAM_GUMBEL_COPULA)
-    pFunction = new CGumbelPreferenceFunction();
-  else if (type == PARAM_FRANK_COPULA)
-    pFunction = new CFrankPreferenceFunction();
 //  else if (type == PARAM_CLAYTON_COPULA)
 //    pFunction = new CClaytonPreferenceFunction();
+  else if (type == PARAM_FRANK_COPULA)
+    pFunction = new CFrankPreferenceFunction();
+  else if (type == PARAM_GAUSSIAN_COPULA)
+    pFunction = new CGaussianPreferenceFunction();
+  else if (type == PARAM_GUMBEL_COPULA)
+    pFunction = new CGumbelPreferenceFunction();
+  else if (type == PARAM_INDEPENDENCE_COPULA)
+    pFunction = new CIndependencePreferenceFunction();
   else
     CError::errorUnknown(PARAM_TYPE, type);
 

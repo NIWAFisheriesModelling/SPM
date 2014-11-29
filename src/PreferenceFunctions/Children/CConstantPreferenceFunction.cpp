@@ -16,6 +16,7 @@
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CComparer.h"
 #include "../../Helpers/CError.h"
+#include "../../Layers/CLayerManager.h"
 
 // Using
 using std::cout;
@@ -26,11 +27,15 @@ using std::endl;
 // Default Constructor
 //**********************************************************************
 CConstantPreferenceFunction::CConstantPreferenceFunction() {
+
+  sType = PARAM_CONSTANT;
+
   // Register our Estimables
   registerEstimable(PARAM_C, &dC);
 
   // Register User Allowed Parameters
   pParameterList->registerAllowed(PARAM_C);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -40,7 +45,8 @@ CConstantPreferenceFunction::CConstantPreferenceFunction() {
 void CConstantPreferenceFunction::validate() {
   try {
 
-    dC = pParameterList->getDouble(PARAM_C,true, 1.0);
+    dC         = pParameterList->getDouble(PARAM_C,true, 1.0);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -56,6 +62,21 @@ void CConstantPreferenceFunction::validate() {
   }
 }
 
+//**********************************************************************
+// void CConstantPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CConstantPreferenceFunction::build() {
+  try {
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CConstantPreferenceFunction.build(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
 
 //**********************************************************************
 // double CConstantPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, int TCIndex)

@@ -20,6 +20,8 @@
 //**********************************************************************
 CFrankPreferenceFunction::CFrankPreferenceFunction() {
 
+  sType = PARAM_FRANK_COPULA;
+
   // Register Estimables
   registerEstimable(PARAM_RHO, &dRho);
 
@@ -85,7 +87,19 @@ void CFrankPreferenceFunction::build() {
   for (int i=0; i< (int)vLayerNames.size(); ++i) {
     vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
   }
+}
 
+//**********************************************************************
+// CFrankPreferenceFunction::getIsStatic()
+// getIsStatic
+//**********************************************************************
+bool CFrankPreferenceFunction::getIsStatic() {
+
+  for (int i=0; i< (int)vLayers.size(); ++i) {
+    if (!( vLayers[i]->getIsStatic() ))
+      return false;
+  }
+  return true;
 }
 
 //**********************************************************************

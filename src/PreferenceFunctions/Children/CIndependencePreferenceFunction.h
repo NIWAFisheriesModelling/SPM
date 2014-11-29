@@ -25,6 +25,7 @@ public:
   double                     getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
   void                       validate();
   void                       build();
+  bool                       getIsStatic();
 
 protected:
   // Variables

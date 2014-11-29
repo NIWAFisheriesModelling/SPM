@@ -16,7 +16,6 @@
 #include "../Factory/CPreferenceFunctionFactory.h"
 #include "../../TestFixtures/CLayer_Fixture.h"
 
-
 //**********************************************************************
 //
 //

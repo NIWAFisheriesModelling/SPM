@@ -12,12 +12,16 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
+#include "../../Layers/CLayerManager.h"
 
 //**********************************************************************
 // CThresholdPreferenceFunction::CThresholdPreferenceFunction()
 // Default Constructor
 //**********************************************************************
 CThresholdPreferenceFunction::CThresholdPreferenceFunction() {
+
+  sType = PARAM_THRESHOLD;
+
   // Register estimables
   registerEstimable(PARAM_N, &dN);
   registerEstimable(PARAM_LAMBDA, &dLambda);
@@ -27,6 +31,7 @@ CThresholdPreferenceFunction::CThresholdPreferenceFunction() {
   pParameterList->registerAllowed(PARAM_LAMBDA);
   pParameterList->registerAllowed(PARAM_CATEGORIES);
   pParameterList->registerAllowed(PARAM_SELECTIVITIES);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -37,8 +42,9 @@ void CThresholdPreferenceFunction::validate() {
   try {
 
     // Assign local variables
-    dN        = pParameterList->getDouble(PARAM_N);
-    dLambda   = pParameterList->getDouble(PARAM_LAMBDA);
+    dN         = pParameterList->getDouble(PARAM_N);
+    dLambda    = pParameterList->getDouble(PARAM_LAMBDA);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -49,6 +55,26 @@ void CThresholdPreferenceFunction::validate() {
 
   } catch (string &Ex) {
     Ex = "CThresholdPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CThresholdPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CThresholdPreferenceFunction::build() {
+  try {
+
+    // Build parent
+    CPreferenceFunction::build();
+
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CThreshholdPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

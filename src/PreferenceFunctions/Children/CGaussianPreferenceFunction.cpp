@@ -20,6 +20,8 @@
 //**********************************************************************
 CGaussianPreferenceFunction::CGaussianPreferenceFunction() {
 
+  sType = PARAM_GAUSSIAN_COPULA;
+
   // Register Estimables
   registerEstimable(PARAM_RHO, &dRho);
 
@@ -93,7 +95,20 @@ void CGaussianPreferenceFunction::build() {
   for (int i=0; i< (int)vLayerNames.size(); ++i) {
     vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
   }
+}
 
+//**********************************************************************
+// CGaussianPreferenceFunction::getIsStatic()
+// getIsStatic
+//**********************************************************************
+bool CGaussianPreferenceFunction::getIsStatic() {
+
+  for (int i=0; i< (int)vLayers.size(); ++i) {
+    if (!( vLayers[i]->getIsStatic() ))
+      return false;
+  }
+
+  return true;
 }
 
 //************************************************************************************************

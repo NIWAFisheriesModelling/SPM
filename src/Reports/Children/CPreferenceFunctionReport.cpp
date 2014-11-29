@@ -66,34 +66,39 @@ void CPreferenceFunctionReport::build() {
     CPreferenceFunctionManager *pManager = CPreferenceFunctionManager::Instance();
     pPreferenceFunction = pManager->getPreferenceFunction(sPreferenceFunction);
 
-    std::string sLayerName = pPreferenceFunction->getLayerName();
-    sLayerType = CLayerManager::Instance()->getLayerType(sLayerName);
-    if ( sLayerType==PARAM_DOUBLE ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_DISTANCE ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_LAT_LONG_DISTANCE ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_LAT_LONG_DIJKSTRA_DISTANCE ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_DIJKSTRA_DISTANCE ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_ABUNDANCE ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_ABUNDANCE_DENSITY ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_BIOMASS ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_BIOMASS_DENSITY ) {
-      pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
-    } else if ( sLayerType==PARAM_CATEGORICAL ) {
-      pLayer = 0;
-    } else if ( sLayerType==PARAM_META_NUMERIC ) {
-      pLayer = 0;
-    } else if ( sLayerType==PARAM_META_STRING ) {
+    std::string sType = pPreferenceFunction->getType();
+    if ( sType == PARAM_FRANK_COPULA || sType == PARAM_GAUSSIAN_COPULA || sType == PARAM_GUMBEL_COPULA || sType == PARAM_INDEPENDENCE_COPULA)  {
       pLayer = 0;
     } else {
-      CError::errorUnknown(PARAM_LAYER, sLayerName);
+      std::string sLayerName = pPreferenceFunction->getLayerName();
+      sLayerType = CLayerManager::Instance()->getLayerType(sLayerName);
+      if ( sLayerType==PARAM_DOUBLE ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_DISTANCE ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_LAT_LONG_DISTANCE ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_LAT_LONG_DIJKSTRA_DISTANCE ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_DIJKSTRA_DISTANCE ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_ABUNDANCE ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_ABUNDANCE_DENSITY ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_BIOMASS ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_BIOMASS_DENSITY ) {
+        pLayer = CLayerManager::Instance()->getNumericLayer(sLayerName);
+      } else if ( sLayerType==PARAM_CATEGORICAL ) {
+        pLayer = 0;
+      } else if ( sLayerType==PARAM_META_NUMERIC ) {
+        pLayer = 0;
+      } else if ( sLayerType==PARAM_META_STRING ) {
+        pLayer = 0;
+      } else {
+        CError::errorUnknown(PARAM_LAYER, sLayerName);
+      }
     }
 
   } catch (string &Ex) {

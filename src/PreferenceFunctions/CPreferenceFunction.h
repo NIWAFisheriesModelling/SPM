@@ -24,6 +24,7 @@ public:
   CPreferenceFunction();
   virtual                     ~CPreferenceFunction();
   virtual CPreferenceFunction* clone() = 0;
+  string                     getType() { return sType; }
   string                     getLayerName() { return sLayerName; }
   double                     getAlpha() { return dAlpha; }
   virtual double             getResult(int RIndex, int CIndex, int TRIndex, int TCIndex) = 0;
@@ -33,6 +34,7 @@ public:
 
 protected:
   // Variables
+  string                     sType;
   double                     dAlpha;
   string                     sLayerName;
   double                     dLayerValue;

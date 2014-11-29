@@ -12,12 +12,16 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
+#include "../../Layers/CLayerManager.h"
 
 //**********************************************************************
 // CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction()
 // Default Constructor
 //**********************************************************************
 CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction() {
+
+  sType = PARAM_DOUBLE_NORMAL;
+
   // Register our Estimables
   registerEstimable(PARAM_SIGMA_L, &dSigmaL);
   registerEstimable(PARAM_SIGMA_R, &dSigmaR);
@@ -27,6 +31,7 @@ CDoubleNormalPreferenceFunction::CDoubleNormalPreferenceFunction() {
   pParameterList->registerAllowed(PARAM_SIGMA_L);
   pParameterList->registerAllowed(PARAM_SIGMA_R);
   pParameterList->registerAllowed(PARAM_MU);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -37,9 +42,10 @@ void CDoubleNormalPreferenceFunction::validate() {
   try {
 
     // Assign our Variables
-    dSigmaL = pParameterList->getDouble(PARAM_SIGMA_L);
-    dSigmaR = pParameterList->getDouble(PARAM_SIGMA_R);
-    dMu     = pParameterList->getDouble(PARAM_MU);
+    dSigmaL    = pParameterList->getDouble(PARAM_SIGMA_L);
+    dSigmaR    = pParameterList->getDouble(PARAM_SIGMA_R);
+    dMu        = pParameterList->getDouble(PARAM_MU);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -52,6 +58,22 @@ void CDoubleNormalPreferenceFunction::validate() {
 
   } catch (string &Ex) {
     Ex = "CDoubleNormalPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CDoubleNormalPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CDoubleNormalPreferenceFunction::build() {
+  try {
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CDoubleNormalPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

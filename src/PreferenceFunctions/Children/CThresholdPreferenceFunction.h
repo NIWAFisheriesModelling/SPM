@@ -19,13 +19,14 @@
 class CThresholdPreferenceFunction : public CPreferenceFunction {
 public:
   // Functions
-	CThresholdPreferenceFunction();
-	virtual                     ~CThresholdPreferenceFunction();
-	CPreferenceFunction*        clone() { return new CThresholdPreferenceFunction(*this); }
+  CThresholdPreferenceFunction();
+  virtual                     ~CThresholdPreferenceFunction();
+  CPreferenceFunction*        clone() { return new CThresholdPreferenceFunction(*this); }
   double                      getN() { return dN; }
   double                      getLambda() { return dLambda; }
   double                      getResult(int RIndex, int CIndex, int TRIndex, int TCIndex);
   void                        validate();
+  void                        build();
 
 protected:
   // Variables

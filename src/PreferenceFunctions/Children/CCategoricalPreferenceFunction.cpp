@@ -21,9 +21,12 @@
 //**********************************************************************
 CCategoricalPreferenceFunction::CCategoricalPreferenceFunction() {
 
+  sType = PARAM_CATEGORICAL;
+
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_CATEGORY_VALUES);
   pParameterList->registerAllowed(PARAM_CATEGORY_LABELS);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -36,6 +39,7 @@ void CCategoricalPreferenceFunction::validate() {
     // Assign local variables
     pParameterList->fillVector(vLabels, PARAM_CATEGORY_LABELS);
     pParameterList->fillVector(vValues, PARAM_CATEGORY_VALUES);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -96,6 +100,14 @@ void CCategoricalPreferenceFunction::build() {
     Ex = "CCategoricalPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
+}
+
+//**********************************************************************
+// CCategoricalPreferenceFunction::getIsStatic()
+// getIsStatic
+//**********************************************************************
+bool CCategoricalPreferenceFunction::getIsStatic() {
+  return true;
 }
 
 //**********************************************************************

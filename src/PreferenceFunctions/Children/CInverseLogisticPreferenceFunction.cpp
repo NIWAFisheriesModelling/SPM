@@ -12,6 +12,7 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
+#include "../../Layers/CLayerManager.h"
 
 //**********************************************************************
 // CInverseLogisticPreferenceFunction::CInverseLogisticPreferenceFunction()
@@ -25,6 +26,7 @@ CInverseLogisticPreferenceFunction::CInverseLogisticPreferenceFunction() {
   // Register our user allowed parameters
   pParameterList->registerAllowed(PARAM_A50);
   pParameterList->registerAllowed(PARAM_ATO95);
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -37,6 +39,7 @@ void CInverseLogisticPreferenceFunction::validate() {
     // Local
     dA50    = pParameterList->getDouble(PARAM_A50);
     dAto95  = pParameterList->getDouble(PARAM_ATO95);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -47,6 +50,26 @@ void CInverseLogisticPreferenceFunction::validate() {
 
   } catch (string &Ex) {
     Ex = "CInverseLogisticPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CInverseLogisticPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CInverseLogisticPreferenceFunction::build() {
+  try {
+
+    // Build parent
+    CPreferenceFunction::build();
+
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CInverseLogisticPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }

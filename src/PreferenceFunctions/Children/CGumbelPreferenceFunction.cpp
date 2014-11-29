@@ -20,6 +20,8 @@
 //**********************************************************************
 CGumbelPreferenceFunction::CGumbelPreferenceFunction() {
 
+  sType = PARAM_GUMBEL_COPULA;
+
   // Register Estimables
   registerEstimable(PARAM_RHO, &dRho);
 
@@ -85,6 +87,19 @@ void CGumbelPreferenceFunction::build() {
   for (int i=0; i< (int)vLayerNames.size(); ++i) {
     vLayers.push_back( pLayerManager->getNumericLayer(vLayerNames[i]) );
   }
+}
+
+//**********************************************************************
+// CGumbelPreferenceFunction::getIsStatic()
+// getIsStatic
+//**********************************************************************
+bool CGumbelPreferenceFunction::getIsStatic() {
+
+  for (int i=0; i< (int)vLayers.size(); ++i) {
+    if (!( vLayers[i]->getIsStatic() ))
+      return false;
+  }
+  return true;
 }
 
 //**********************************************************************

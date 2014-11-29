@@ -14,6 +14,7 @@
 #include "../../Layers/Numeric/Base/CNumericLayer.h"
 #include "../../Helpers/CMath.h"
 #include "../../Helpers/CError.h"
+#include "../../Layers/CLayerManager.h"
 
 // Using
 using std::cout;
@@ -25,7 +26,7 @@ using std::endl;
 //**********************************************************************
 CExponentialPreferenceFunction::CExponentialPreferenceFunction() {
 
-  // Vars
+  sType = PARAM_EXPONENTIAL;
   dLambda     = -1.0;
 
   // Register Estimable
@@ -33,7 +34,7 @@ CExponentialPreferenceFunction::CExponentialPreferenceFunction() {
 
   // Register user allowed parameters
   pParameterList->registerAllowed(PARAM_LAMBDA);
-
+  pParameterList->registerAllowed(PARAM_LAYER);
 }
 
 //**********************************************************************
@@ -44,7 +45,8 @@ void CExponentialPreferenceFunction::validate() {
   try {
 
     // Assign Variables
-    dLambda = pParameterList->getDouble(PARAM_LAMBDA);
+    dLambda    = pParameterList->getDouble(PARAM_LAMBDA);
+    sLayerName = pParameterList->getString(PARAM_LAYER);
 
     // Validate parent
     CPreferenceFunction::validate();
@@ -55,6 +57,22 @@ void CExponentialPreferenceFunction::validate() {
 
   } catch (string &Ex) {
     Ex = "CExponentialPreferenceFunction.validate(" + getLabel() + ")->" + Ex;
+    throw Ex;
+  }
+}
+
+//**********************************************************************
+// void CExponentialPreferenceFunction::build()
+// Build our Object
+//**********************************************************************
+void CExponentialPreferenceFunction::build() {
+  try {
+    // Get our Layer
+    CLayerManager *pLayerManager = CLayerManager::Instance();
+    pLayer = pLayerManager->getNumericLayer(sLayerName);
+
+  } catch (string &Ex) {
+    Ex = "CExponentialPreferenceFunction.build(" + getLabel() + ")->" + Ex;
     throw Ex;
   }
 }
