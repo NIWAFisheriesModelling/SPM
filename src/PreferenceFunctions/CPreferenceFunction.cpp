@@ -67,8 +67,6 @@ void CPreferenceFunction::build() {
 //**********************************************************************
 bool CPreferenceFunction::getIsStatic() {
 
-std::cerr << "here\n";
-
   if (pLayer == 0)
     return false;
 
