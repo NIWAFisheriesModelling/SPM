@@ -181,10 +181,10 @@ double CVonBertalanffyAgeSize::getMeanWeightFromSize(double &size, double &cv) {
 double CVonBertalanffyAgeSize::getCV(double &age) {
 
   if (bByLength) {
-    double dSize = this->getMeanSize( age );
-    return ( (dSize * dCV) / age );
-  } else {
     return ( dCV );
+  } else {
+    double dSize = this->getMeanSize( age );
+    return ( (age * dCV) / dSize );
   }
 
 }
