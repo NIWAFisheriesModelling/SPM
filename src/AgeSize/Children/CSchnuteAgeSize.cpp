@@ -159,10 +159,10 @@ double CSchnuteAgeSize::getMeanWeight(double &age) {
     double dSize = this->getMeanSize( age );
 
     if (bByLength) {
-      double cv = (dSize * dCV) / age;
-      dWeight = getMeanWeightFromSize( dSize, cv );
-    } else {
       dWeight = getMeanWeightFromSize( dSize, dCV );
+    } else {
+      double cv = (age * dCV) / dSize;
+      dWeight = getMeanWeightFromSize( dSize, cv );
     }
 
   } catch (string &Ex) {
