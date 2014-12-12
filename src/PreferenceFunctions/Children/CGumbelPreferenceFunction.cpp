@@ -126,10 +126,11 @@ double CGumbelPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex,
     double dCDF1 = vPDFs[0]->getCDFResult(x1);
     double dCDF2 = vPDFs[1]->getCDFResult(x2);
 
-    dRet = exp(- pow(-log(dCDF1),dRho));// blah blah .. * dPDF1 * dPDF2;
-
-    //dRet = exp(- ((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^(1/dRho) * (((-log(dCDF1))^(dRho-1))/dCDF1) * (((-log(dCDF2))^(dRho-1))/dCDF2) *
-    //       (((-log(dCDF1))^dRho + (-log(dCDF2))^dRho)^((2/dRho)-2) + ((dRho-1) * ((-log(dCDF1))^dRho + (-log(dCDF2))^Theta)^((1/(dRho)-2)))))* dPDF1 * dPDF2;
+    dRet = exp(- pow(pow(-log(dCDF1),dRho) + pow(-log(dCDF2),dRho),(1.0/dRho))) *
+           (pow(-log(dCDF1),(dRho-1.0))/dCDF1) * (pow(-log(dCDF2),(dRho-1.0))/dCDF2) *
+           (pow(pow(-log(dCDF1),dRho) + pow(-log(dCDF2),dRho),((2.0/dRho)-2.0)) + ((dRho-1.0) *
+           pow(pow(-log(dCDF1),dRho) + pow(-log(dCDF2),dRho),((1.0/(dRho)-2.0))))) *
+           dPDF1 * dPDF2;
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
