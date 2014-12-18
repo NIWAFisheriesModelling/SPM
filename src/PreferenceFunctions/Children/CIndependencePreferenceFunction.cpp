@@ -108,8 +108,6 @@ double CIndependencePreferenceFunction::getResult(int RIndex, int CIndex, int TR
   try {
 #endif
 
-std::cerr << "vPDFs.size(): " << vPDFs.size() << "\n";
-
      if(vPDFs.size()==1) {
 
        double x1 = vLayers[0]->getValue(TRIndex, TCIndex, RIndex, CIndex);
