@@ -210,7 +210,7 @@ double CGaussianPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
     double I1 = NormalInverse(dCDF1);
     double I2 = NormalInverse(dCDF2);
 
-    dRet = 1.0/(TWO_PI * sqrt(1.0 - dRho)) * exp(-(I1*I1 - 2.0 * dRho * I1*I2 + I2*I2)/(2.0 - 2.0 * dRho * dRho))* dPDF1 * dPDF2;
+    dRet = 1.0/(1.0 - dRho*dRho) * exp(-(I1*I1 - 2.0 * dRho* I1*I2 + I2*I2)/(2.0 - 2.0 * dRho* dRho))* exp((I1*I1 + I2*I2)/2.0) * dPDF1 * dPDF2;
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {

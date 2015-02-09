@@ -127,11 +127,10 @@ double CFrankPreferenceFunction::getResult(int RIndex, int CIndex, int TRIndex, 
     double dCDF1 = vPDFs[0]->getCDFResult(x1);
     double dCDF2 = vPDFs[1]->getCDFResult(x2);
 
-    dRet = ((dRho * exp(-dRho*dCDF1) * exp(-dRho*dCDF2))/(exp(-dRho) - 1.0)) *
-           pow(1+(((exp(-dRho*dCDF1) - 1.0) * (exp(-dRho*dCDF2) - 1.0))/(exp(-dRho) - 1.0)),-1) *
-           ((((exp(-dRho*dCDF1) - 1.0) * (exp(-dRho*dCDF2) - 1.0))/(exp(-dRho) - 1.0)) *
-           pow(1 + (((exp(-dRho*dCDF1) - 1.0) * (exp(-dRho*dCDF2) - 1.0))/(exp(-dRho) - 1.0)),-1) -1 )
-           *dPDF1 * dPDF2;
+    dRet = (dRho * exp(-dRho * dCDF1) * exp(-dRho*dCDF2)) / (exp(-dRho) -1) *
+           (1/( 1 + ((exp(-dRho*dCDF1) -1)*(exp(-dRho*dCDF2) - 1)/(exp(-dRho) -1)))) *
+           (((exp(-dRho*dCDF1) -1)*(exp(-dRho*dCDF2) - 1))/(exp(-dRho) -1) * (1/( 1 + ((exp(-dRho*dCDF1) -1)*(exp(-dRho*dCDF2) - 1)/(exp(-dRho) -1)))) -1 ) *
+           dPDF1 * dPDF2;
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
