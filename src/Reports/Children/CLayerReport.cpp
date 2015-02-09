@@ -145,11 +145,12 @@ void CLayerReport::execute() {
     std::cout << PARAM_REPORT << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pParameterList->getString(PARAM_TYPE) << "\n";
     if( sType==PARAM_DOUBLE ) {
       std::cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pNumericLayer->getLabel() << "\n";
-    } else if( sType==PARAM_DISTANCE || sType == PARAM_LAT_LONG_DISTANCE) {
+    } else if( sType==PARAM_DISTANCE || sType == PARAM_LAT_LONG_DISTANCE || sType == PARAM_DIJKSTRA_DISTANCE || sType == PARAM_LAT_LONG_DIJKSTRA_DISTANCE) {
       std::cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pNumericLayer->getLabel() << "\n";
     } else if( sType==PARAM_STRING ){
       std::cout << PARAM_LAYER << CONFIG_RATIO_SEPARATOR << " " << pCategoricalLayer->getLabel() << "\n";
     }
+    std::cout << PARAM_LAYER << "." << PARAM_TYPE << CONFIG_RATIO_SEPARATOR << " " << pLayerManager->getLayerType(sLayer) << "\n";
     std::cout << PARAM_YEAR << CONFIG_RATIO_SEPARATOR << " " << pTimeStepManager->getCurrentYear() << "\n";
     std::cout << PARAM_TIME_STEP << CONFIG_RATIO_SEPARATOR << " " << sTimeStep << "\n";
 

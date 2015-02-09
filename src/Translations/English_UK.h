@@ -257,6 +257,7 @@
 #define PARAM_KEEP                                "keep"
 #define PARAM_KNIFE_EDGE                          "knife_edge"
 #define PARAM_KNOTS                               "knots"
+#define PARAM_KRUGER_SPLINE                       "kruger_spline"
 #define PARAM_L                                   "l"
 #define PARAM_LABEL                               "label"
 #define PARAM_LAMBDA                              "lambda"

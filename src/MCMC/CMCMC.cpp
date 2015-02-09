@@ -65,6 +65,27 @@ CMCMC::CMCMC() {
 }
 
 //**********************************************************************
+// CMCMC* CMCMC::Instance()
+// Instance Method - Singleton
+//**********************************************************************
+CMCMC* CMCMC::Instance() {
+  if (clInstance == 0)
+    clInstance = new CMCMC();
+  return clInstance;
+}
+
+//**********************************************************************
+// void CMCMC::Destroy()
+// Destroy Method - Singleton
+//**********************************************************************
+void CMCMC::Destroy() {
+  if (clInstance != 0) {
+    delete clInstance;
+    clInstance = 0;
+  }
+}
+
+//**********************************************************************
 // void CMCMC::validate()
 // Validate our MCMC
 //**********************************************************************
