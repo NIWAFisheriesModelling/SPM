@@ -11,12 +11,11 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CMCMCReport.h"
-#include "../../TimeSteps/CTimeStepManager.h"
-#include "../../MCMC/CMCMC.h"
-#include "../../MCMC/CMCMCManager.h"
 #include "../../Helpers/CConvertor.h"
 #include "../../Helpers/CError.h"
 #include "../../Helpers/ForEach.h"
+#include "../../MCMC/CMCMC.h"
+#include "../../TimeSteps/CTimeStepManager.h"
 
 //**********************************************************************
 // CMCMCReport::CMCMCReport()
@@ -55,7 +54,7 @@ void CMCMCReport::build() {
     // Base
     CFileReport::build();
 
-    pMCMC = CMCMCManager::Instance()->getMCMC(sMCMC);
+    pMCMC = CMCMC::Instance();
 
   } catch (string &Ex) {
     Ex = "CMCMCReport.build(" + getLabel() + ")->" + Ex;
