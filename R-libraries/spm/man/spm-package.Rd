@@ -3,7 +3,7 @@
 \alias{spm}
 \docType{package}
 \title{
-Data Weighting package
+SPM extract package
 }
 \description{
 A set of R functions for extracting and processing SPM output.

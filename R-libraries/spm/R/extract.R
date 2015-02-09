@@ -1,4 +1,4 @@
-#' Generate a multivariate uniform distribution based on the bounds for the extimated parameters
+#' Extract SPM output into R
 #'
 #' @author Alistair Dunn
 #' @param file the name of the input file containing model output to extract
