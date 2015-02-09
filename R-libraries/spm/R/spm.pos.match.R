@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 "spm.pos.match"<-
 function(vector, regexp)
 {

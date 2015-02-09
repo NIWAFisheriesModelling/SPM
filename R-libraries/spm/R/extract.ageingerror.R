@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 "extract.ageing_error" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
@@ -11,7 +15,7 @@ function(lines){
   col.labs<-spm.string.to.vector.of.words(lines[3+index.start])[-1]
   col.labs[1]<-substring(col.labs[1],regexpr(":",col.labs[1])+2)
   values<-spm.string.to.vector.of.words(lines[(4+index.start):(index.end-1)])
-  values<-as.data.frame(matrix(values,ncol=length(col.labs)+1,byrow=TRUE))[,-1]
+  values<-as.data.frame(matrix(values,ncol=length(col.labs)+1,byrow=TRUE),stringsAsFactors=FALSE)[,-1]
   names(values)<-col.labs
   values<-apply(values,2,as.numeric)
   res$data<-values

@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 "spm.make.table"<-
 function(lines)
 {

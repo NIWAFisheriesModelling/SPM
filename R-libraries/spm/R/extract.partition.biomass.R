@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 "extract.partition.biomass" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
@@ -11,7 +15,7 @@ function(lines){
   res$"time_step"<-substring(lines[index.start+3],12)
   col.labs<-spm.string.to.vector.of.words(lines[4+index.start])
   values<-spm.string.to.vector.of.words(lines[(5+index.start):(index.end-1)])
-  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
+  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE),stringsAsFactors=FALSE)
   names(values)<-col.labs
   values$category<-as.character(values$category)
   values$row<-as.numeric(as.character(values$row))

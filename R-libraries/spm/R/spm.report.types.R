@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 spm.report.types <- function ()
 {
   return(c("ageing_error",

@@ -1,4 +1,13 @@
-extract <- function (file, path = "", ignore.unknown=FALSE)
+#' Generate a multivariate uniform distribution based on the bounds for the extimated parameters
+#'
+#' @author Alistair Dunn
+#' @param file the name of the input file containing model output to extract
+#' @param path Optionally, the path to the file
+#' @param ignore.unknown Ignore unknown objects in the output file
+#' @export
+#'
+"extract" <-
+function (file, path = "", ignore.unknown=FALSE)
 {
     if (missing(path))
         path <- ""

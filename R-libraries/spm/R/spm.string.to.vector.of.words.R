@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 "spm.string.to.vector.of.words"<-
 function(string,sep=" ")
 {

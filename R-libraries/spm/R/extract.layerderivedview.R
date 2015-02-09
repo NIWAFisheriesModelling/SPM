@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 "extract.layerderivedview" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
@@ -6,7 +10,7 @@ function(lines){
   if(index.start >= index.end) stop("Error")
   col.labs<-spm.string.to.vector.of.words(lines[4+index.start])
   values<-spm.string.to.vector.of.words(lines[(5+index.start):(index.end-1)])
-  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
+  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE),stringsAsFactors=FALSE)
   names(values)<-col.labs
   values$category<-as.character(values$category)
   values$area<-as.character(values$area)

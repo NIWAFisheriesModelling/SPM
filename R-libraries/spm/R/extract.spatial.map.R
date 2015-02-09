@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 "extract.spatial.map" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")

@@ -1,3 +1,8 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#' @param lines a file of scanned lines
+#'
 "extract.initialisationphase" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
@@ -23,7 +28,7 @@ function(lines){
   }
   col.labs<-spm.string.to.vector.of.words(lines[start.line+index.start])
   values<-spm.string.to.vector.of.words(lines[(start.line+index.start+1):(index.end-1)])
-  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE))
+  values<-as.data.frame(matrix(values,ncol=length(col.labs),byrow=TRUE),stringsAsFactors=FALSE)
   names(values)<-col.labs
   values$category<-as.character(values$category)
   values$row<-as.numeric(as.character(values$row))

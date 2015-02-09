@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 extract.covariance <- function (lines)
 {
   make.matrix<-function(lines,columns) {

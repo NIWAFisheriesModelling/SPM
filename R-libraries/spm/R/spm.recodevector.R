@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 "spm.recodevector"<-
 function(in.data, from.vals, to.vals)
 {

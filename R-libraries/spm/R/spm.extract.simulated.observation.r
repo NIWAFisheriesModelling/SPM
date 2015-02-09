@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 "spm.extract.simulated.observation" <-
 function(lines) {
   if (missing(lines)) stop("ERROR: Missing argument lines")

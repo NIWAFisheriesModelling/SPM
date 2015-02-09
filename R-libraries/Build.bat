@@ -1,4 +1,6 @@
+R --vanilla < run-roxygen.R
 R --vanilla < SPM_make_version.R
+
 Rcmd build --force spm
 Rcmd INSTALL --build spm
 

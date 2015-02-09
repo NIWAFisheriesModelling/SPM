@@ -1,7 +1,12 @@
-# based on CASAL generate.MVU.R 2013-02-19 smormede
-# original $Id: generate.MVU.R 1836 2007-12-04 23:29:28Z adunn $
-# much simplified as outfile structure different
-
+#' Generate a multivariate uniform distribution based on the bounds for the extimated parameters
+#'
+#' @author Sophie Mormede
+#' @param file the name of the input file containing the estimated fits
+#' @param path Optionally, the path to the file
+#' @param output.file The name of the output file to write randomly generated values
+#' @param sample.size The number f samples to generate
+#' @export
+#'
 "generate.MVU"<-
 function(file,path="",output.file,sample.size=1)
 {

@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 "extract.derivedquantitybycell" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")

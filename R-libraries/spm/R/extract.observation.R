@@ -1,3 +1,7 @@
+#' Utility extract function
+#'
+#' @author Alistair Dunn
+#'
 "extract.observation" <-
 function(lines){
   if(missing(lines)) stop("ERROR: Missing argument lines")
@@ -21,7 +25,7 @@ function(lines){
   variables<-spm.string.to.vector.of.words(lines[this.line+1])
   data<-spm.string.to.vector.of.words(lines[(this.line+2):(index.end-1)])
   data<-matrix(data,ncol=length(variables),byrow=TRUE)
-  data<-as.data.frame(data)
+  data<-as.data.frame(data,stringsAsFactors=FALSE)
   names(data)<-variables
   if("category" %in% variables) {
     data<-data.frame("area"=data[,1], category=data[,2], age=data[,3], observed=data[,4], expected=data[,5],

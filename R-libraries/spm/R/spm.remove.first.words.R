@@ -1,3 +1,7 @@
+#' utility function
+#'
+#' @author Alistair Dunn
+#'
 "spm.remove.first.words"<-
 function(string, words = 1)
 {
