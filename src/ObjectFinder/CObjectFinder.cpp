@@ -21,10 +21,12 @@
 #include "../Helpers/CError.h"
 #include "../Layers/CLayerManager.h"
 #include "../Observations/CObservationManager.h"
+#include "../PDFs/CPDFManager.h"
 #include "../PreferenceFunctions/CPreferenceFunctionManager.h"
 #include "../Processes/CProcessManager.h"
 #include "../Selectivities/CSelectivityManager.h"
 #include "../SizeWeight/CSizeWeightManager.h"
+
 
 /**
  * This method will split the absolute name of a system object into it's associated block and return them
@@ -104,6 +106,9 @@ CBaseObject* CObjectFinder::getObject(string objectAbsoluteName) {
 
   } else if (sObjectType == PARAM_OBSERVATION) {
     target = (CBaseObject*)CObservationManager::Instance()->getObservation(sObjectLabel);
+
+  } else if (sObjectType == PARAM_PDF) {
+    target = (CBaseObject*)CPDFManager::Instance()->getPDF(sObjectLabel);
 
   } else {
     THROW_EXCEPTION("Failed to find object for: " + objectAbsoluteName);
