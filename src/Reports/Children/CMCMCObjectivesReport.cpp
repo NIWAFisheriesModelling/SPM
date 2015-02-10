@@ -38,7 +38,7 @@ void CMCMCObjectivesReport::validate() {
     CFileReport::validate();
 
     sFileName   = pParameterList->getString(PARAM_FILE_NAME);
-    sMCMC       = pParameterList->getString(PARAM_MCMC);
+    //sMCMC       = pParameterList->getString(PARAM_MCMC);
 
   } catch (string &Ex) {
     Ex = "CMCMCObjectivesReport.validate(" + getLabel() + ")->" + Ex;

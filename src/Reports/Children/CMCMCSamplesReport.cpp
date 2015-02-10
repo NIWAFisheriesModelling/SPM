@@ -38,8 +38,8 @@ void CMCMCSamplesReport::validate() {
     // Validate parent
     CFileReport::validate();
 
-    sMCMC       = pParameterList->getString(PARAM_MCMC);
     sFileName   = pParameterList->getString(PARAM_FILE_NAME);
+    //sMCMC       = pParameterList->getString(PARAM_MCMC);
 
   } catch (string &Ex) {
     Ex = "CMCMCSamplesReport.validate(" + getLabel() + ")->" + Ex;
