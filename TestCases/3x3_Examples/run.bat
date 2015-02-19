@@ -31,3 +31,6 @@ cd ..
 cd NormalPreferenceMovementProcess
 ..\..\..\spm -r -q -d > Expected.txt
 cd ..
+cd NormalPDFMovementProcess
+..\..\..\spm -r -q -d > Expected.txt
+cd ..

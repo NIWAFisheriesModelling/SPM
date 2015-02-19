@@ -20,7 +20,6 @@ start 0
 length 600000
 keep 500
 adapt_stepsize_at 1000 10000 20000 30000 40000 50000 80000 90000 100000
-
 proposal_distribution t
 df 4
 max_correlation 0.8

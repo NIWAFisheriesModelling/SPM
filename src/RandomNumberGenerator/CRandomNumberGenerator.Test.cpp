@@ -105,18 +105,18 @@ BOOST_FIXTURE_TEST_CASE( RandomNumber_GenerateNormal, CWorld_Fixture ) {
   // Test
   pGenerator->Reset(123);
 
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -0.61940019542828928);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), 1.618776687971744);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), 5.2545068045315713);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -8.441452535514653);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), 1.7492572787620508);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -8.6744887776345472);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), 11.568123356065565);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -0.64113237484573116);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -0.80694027757984887);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -2.7300957578196856);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -2.6333897675514244);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), 2.5821298737350658);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),   1.9862292247828885);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  -9.413507710792425);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  -2.1586985535512939);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  19.656685878330016);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  -1.6272000871102419);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  17.554224308231177);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),   6.5962825005600987);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  14.50422845503309);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),   5.8920077785520117);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9), -10.606354435004466);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),  -1.8847354561720575);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomNormal(3.5, 7.9),   9.01073656180900780);
 }
 
 //**********************************************************************
@@ -131,18 +131,18 @@ BOOST_FIXTURE_TEST_CASE( RandomNumber_GenerateLogNormal, CWorld_Fixture ) {
   // Test
   BOOST_CHECK_EQUAL(pConfig->getRandomSeed(), 123);
 
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.10687266483654928);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 8.1506486836276402);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.049065322500023142);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.35379471852562877);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 1.0845094610470529);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.64567353340450262);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.018784713414446545);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.053298607650668767);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.14091413875742836);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 1.7591108850796946);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.25752772312688654);
-  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 0.10115061626022878);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.069160276163240733);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.27071152266878312);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.074228917239052991);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  3.4146964486750382);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  1.0656354075464058);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.16955236354421266);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.15527063257668025);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.6167422491955421);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  2.7069705726622066);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  4.9376708278915435);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9), 10.328347136205977);
+  BOOST_CHECK_EQUAL(pGenerator->getRandomLogNormal(3.5, 7.9),  0.025613983054121554);
 }
 
 //**********************************************************************

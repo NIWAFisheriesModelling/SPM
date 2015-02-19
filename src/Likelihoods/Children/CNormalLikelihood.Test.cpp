@@ -73,10 +73,10 @@ BOOST_AUTO_TEST_CASE(NormalLikelihood ) {
   pLikelihood->simulateObserved(keys, observed, expected, errorValue, processError, delta);
 
   // Check results
-  BOOST_CHECK_CLOSE(observed[0], 648.72263793541288, 1e-9);
-  BOOST_CHECK_CLOSE(observed[1], 617.45173269550855, 1e-9);
-  BOOST_CHECK_CLOSE(observed[2], 492.65047668996476, 1e-9);
-  BOOST_CHECK_CLOSE(observed[3], 598.20432929575531, 1e-9);
+  BOOST_CHECK_CLOSE(observed[0], 557.59511915082294, 1e-9);
+  BOOST_CHECK_CLOSE(observed[1], 976.98119489450221, 1e-9);
+  BOOST_CHECK_CLOSE(observed[2], 431.078887652900960, 1e-9);
+  BOOST_CHECK_CLOSE(observed[3], 392.17240873606607, 1e-9);
 
   // clear memory
   delete pLikelihood;

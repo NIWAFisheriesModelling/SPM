@@ -15,8 +15,8 @@ SET(OPTI_NAME spm)
 # Assumptions
 # Compiled with MinGW under Windows, where,
 #   MinGW is in c:\Program Files
-#   Boost libraries are located in C:/Progra~2/MingW/boost_libs
-#   Boost header files are located in C:/Progra~2/MinGW/include/boost/
+#   Boost libraries are located in C:/Progra~1/TDM-GCC-64/boost_libs
+#   Boost header files are located in C:/Progra~1/TDM-GCC-64/include/boost/
 
 IF (WIN32)
   # Scott's Build Environment Variables
@@ -24,7 +24,7 @@ IF (WIN32)
   #LINK_DIRECTORIES("D:/Programming/Boost/boost_1_53_0/stage/lib")
   
   # Alistair's Build Environment
-  LINK_DIRECTORIES("C:/Progra~1/boost/boost_1_54_0/stage/lib")
+  LINK_DIRECTORIES("C:/Progra~1/boost/boost_1_57_0/stage/lib")
   
   # Generic Build Settings
   SET(LINK_OPTIONS "-static icon.o")
@@ -38,18 +38,18 @@ IF (WIN32)
   SET(MAIN_LIBRARIES
     gomp
     pthread
-    boost_system-mgw47-mt-s-1_54
-    boost_filesystem-mgw47-mt-s-1_54
-    boost_thread-mgw47-mt-s-1_54
-    boost_program_options-mgw47-mt-s-1_54
-    boost_chrono-mgw47-mt-s-1_54
+    boost_system-mgw49-mt-s-1_57
+    boost_filesystem-mgw49-mt-s-1_57
+    boost_thread-mgw49-mt-s-1_57
+    boost_program_options-mgw49-mt-s-1_57
+    boost_chrono-mgw49-mt-s-1_57
   )
-  SET(TEST_LIBRARIES boost_unit_test_framework-mgw47-mt-sd-1_54)
+  SET(TEST_LIBRARIES boost_unit_test_framework-mgw49-mt-sd-1_57)
   
 ELSE (WIN32)
   # wellopensuse131 link directories
-  SET(BOOST_LIBS "/opt/boost155/lib/")
-  SET(BOOST_HEADERS "/opt/boost155/include/boost/")
+  SET(BOOST_LIBS "/opt/boost/boost_1_57_0/stage/lib/")
+  SET(BOOST_HEADERS "/opt/boost/boost_1_57_0/")
   SET(LINK_OPTIONS "-static -L ${BOOST_LIBS}")
   #SET(LINK_OPTIONS "-L ${BOOST_LIBS}")
   SET(COMPILE_OPTIONS_LIBR "-DBOOST_THREAD_USE_LIB=1 -O0 -g3 -ggdb -Wall -fmessage-length=0 -fopenmp -Wno-unused-local-typedefs -I ${BOOST_HEADERS} -std=c++11")

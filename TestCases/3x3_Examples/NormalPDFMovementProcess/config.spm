@@ -23,11 +23,6 @@ type none
 @time_step one
 processes recruitment normalPDF #prefmoveone
 
-@process normalPDF
-type preference
-categories immature
-preference_functions normalPDF
-
 @process prefmoveone
 type preference
 categories immature
@@ -50,11 +45,16 @@ type normal
 mu 3
 sigma 3
 
+@process normalPDF
+type preference
+categories immature
+preference_functions normalPDF
+
 @preference_function normalPDF
-type copula
+type independence_copula
 pdfs Normal1 Normal2
-rho 0.1
-layer double_layer
+#rho 0.1
+layers double_layer base
 
 @report 
 type preference_function

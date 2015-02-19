@@ -11,6 +11,7 @@ In SPM, but not in manual
   binomial_approx
   by_length
   category_index
+  clayton_copula
   column
   column_index
   command
@@ -22,9 +23,14 @@ In SPM, but not in manual
   estimates
   fixed
   flagged_penalties
+  frank_copula
   function
+  gaussian_copula
+  gumbel_copula
   height
+  independence_copula
   index
+  kruger_spline
   label
   lambda_hat
   layer_height
@@ -36,6 +42,8 @@ In SPM, but not in manual
   normal_log
   objective
   parabola
+  pdf
+  pdfs
   predator_abundance
   predator_biomass
   prey_group

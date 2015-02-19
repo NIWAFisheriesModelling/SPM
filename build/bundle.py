@@ -40,8 +40,8 @@ os.system('cp -r -f ' + DOC  + 'spm.pdf '           + RELEASE + 'spm.pdf')
 print('\n\n3. Get the linux 64-bit version from thotter')
 os.chdir(RELEASE)
 # Do this manually the first time to store the RSA fingerprint
-os.system('scp -batch -pw fox20001 adunn@wellopensuse131.niwa.co.nz:SPM/spm Linux/')
-os.system('scp -batch -pw fox20001 adunn@wellopensuse131.niwa.co.nz:SPM/spm_unittests Linux/')
+os.system('scp -batch -pw statistic alistair@MateVM:projects/general/SPM/spm Linux/')
+os.system('scp -batch -pw statistic alistair@MateVM:projects/general/SPM/spm_unittests Linux/')
 
 ##################################################################
 os.chdir(BASE)
@@ -60,5 +60,5 @@ print('\n\n6. And copy the resulting file onto the FTP site')
 os.chdir(BASE)
 os.system('ftp -s:build\\ftp.dat')
 os.chdir(BASE)
-os.system('rd /S /Q \"' +  RELEASE + '\"')
+#os.system('rd /S /Q \"' +  RELEASE + '\"')
 

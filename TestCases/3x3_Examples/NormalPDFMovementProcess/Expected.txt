@@ -1,13 +1,7 @@
-SPM (Spatial Population Model)
-Call: ..\..\..\spm -r 
-Date: Wed Nov 19 16:46:50 2014
-v1.1-2014-11-10 (rev. 1223). Copyright (c) 2008-2014, NIWA
-User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=6708)
-
 [double_layer]
 report.type: layer
 layer: double_layer
+layer.type: numeric
 year: 1994
 time_step: one
 1 2 3
@@ -20,15 +14,15 @@ report.type: partition
 year: 1994
 time_step: one
 row column category age[1]
-1 1 immature 4.00956
-1 2 immature 8.09357
-1 3 immature 13.2497
-2 1 immature 17.5911
-2 2 immature 18.941
-2 3 immature 16.54
-3 1 immature 11.7136
-3 2 immature 6.72768
-3 3 immature 3.13374
+1 1 immature 3.65851
+1 2 immature 5.14002
+1 3 immature 6.9383
+2 1 immature 8.99849
+2 2 immature 11.2128
+2 3 immature 13.4242
+3 1 immature 15.4415
+3 2 immature 17.0655
+3 3 immature 18.1207
 *end
 
 [1995_timestep_one]
@@ -36,15 +30,15 @@ report.type: partition
 year: 1995
 time_step: one
 row column category age[1]
-1 1 immature 8.01912
-1 2 immature 16.1871
-1 3 immature 26.4994
-2 1 immature 35.1823
-2 2 immature 37.8821
-2 3 immature 33.08
-3 1 immature 23.4272
-3 2 immature 13.4554
-3 3 immature 6.26749
+1 1 immature 7.31703
+1 2 immature 10.28
+1 3 immature 13.8766
+2 1 immature 17.997
+2 2 immature 22.4256
+2 3 immature 26.8483
+3 1 immature 30.883
+3 2 immature 34.1309
+3 3 immature 36.2415
 *end
 
 [1996_timestep_one]
@@ -52,28 +46,25 @@ report.type: partition
 year: 1996
 time_step: one
 row column category age[1]
-1 1 immature 12.0287
-1 2 immature 24.2807
-1 3 immature 39.7491
-2 1 immature 52.7734
-2 2 immature 56.8231
-2 3 immature 49.62
-3 1 immature 35.1407
-3 2 immature 20.183
-3 3 immature 9.40123
+1 1 immature 10.9755
+1 2 immature 15.4201
+1 3 immature 20.8149
+2 1 immature 26.9955
+2 2 immature 33.6384
+2 3 immature 40.2725
+3 1 immature 46.3244
+3 2 immature 51.1964
+3 3 immature 54.3622
 *end
 
 [normalPDF]
 report.type: preference_function
 preference_function.label: normalPDF
 label: normalPDF
-layer: double_layer
+layers: double_layer base
 pdfs: Normal1 Normal2
-rho: 0.1
-type: copula
-layer_type: numeric
-layer_min: 1
-layer_max: 9
+type: independence_copula
+layer_type: 
 *end
 
 [objective_score]
@@ -81,4 +72,3 @@ report.type: objective_function
 total_score: 0
 *end
 
-Completed

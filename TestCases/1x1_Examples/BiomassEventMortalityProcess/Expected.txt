@@ -9,6 +9,7 @@ row column category age[1] age[2] age[3] age[4] age[5]
 [biomass]
 report.type: layer
 layer: biomass
+layer.type: biomass
 year: 1994
 time_step: One
 980000

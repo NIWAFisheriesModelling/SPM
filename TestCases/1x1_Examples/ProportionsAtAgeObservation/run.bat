@@ -1,2 +1,1 @@
-..\..\..\Debug\SPM.exe -r
-pause
+..\..\..\SPM.exe -r -d > Expected.txt

@@ -40,6 +40,7 @@ All mature 0 0 0 0 1406.19 3255.01 7388.41 15978.9 31059 50023.7 63903.1 67642 6
 [Fishing_2005]
 report.type: layer
 layer: Fishing_2005
+layer.type: numeric
 year: 1994
 time_step: step_one
 115974
