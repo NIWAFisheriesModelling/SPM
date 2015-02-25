@@ -84,8 +84,8 @@ void CEstimateValueReport::execute() {
       cout << PARAM_PARAMETER << CONFIG_RATIO_SEPARATOR << " ";
     }
 
- //   if (!bWrittenHeader) {
- //     bWrittenHeader = true;
+    if (!bWrittenHeader) {
+      bWrittenHeader = true;
 
       // Output Header
       for (int i = 0; i < iCount; ++i) {
@@ -96,7 +96,7 @@ void CEstimateValueReport::execute() {
           cout << CONFIG_SPACE_SEPARATOR;
       }
       cout << "\n";
- //   }
+    }
 
     for (int i = 0; i < iCount; ++i) {
       CEstimate *pEstimate = pEstimateManager->getEstimate(i);
