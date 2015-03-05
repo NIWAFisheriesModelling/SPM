@@ -127,8 +127,12 @@ double CGaussianPreferenceFunction::NormalInverse(double p)
             Produces the normal deviate Z corresponding to a given lower
             tail area of P; Z is accurate to about 1 part in 10**16.
     */
-    if (fabs(q) <= 0.425)
-    {/* 0.075 <= p <= 0.925 */
+    if (p <= 0.00001) {
+       val = -5;   // return a large negative number (in std normal space)
+    } else  if(p >= 0.99999) {
+        // return a large number (in std normal space)
+        val = 5;
+    } else if (fabs(q) <= 0.425) {/* 0.075 <= p <= 0.925 */
         r = 0.180625 - q * q;
         val = q * (((((((r * 2509.0809287301226727 +
               33430.575583588128105) * r + 67265.770927008700853) * r +
@@ -139,7 +143,7 @@ double CGaussianPreferenceFunction::NormalInverse(double p)
               28729.085735721942674) * r + 39307.89580009271061) * r +
               21213.794301586595867) * r + 5394.1960214247511077) * r +
               687.1870074920579083) * r + 42.313330701600911252) * r + 1.0);
-    } else  { /* closer than 0.075 from {0,1} boundary */
+    } else { /* closer than 0.075 from {0,1} boundary */
       /* r = min(p, 1-p) < 0.075 */
       if (q > 0.0)
         r = 1.0 - p;
@@ -207,10 +211,12 @@ double CGaussianPreferenceFunction::getResult(int RIndex, int CIndex, int TRInde
     double dCDF1 = vPDFs[0]->getCDFResult(x1);
     double dCDF2 = vPDFs[1]->getCDFResult(x2);
 
-    double I1 = NormalInverse(dCDF1);
-    double I2 = NormalInverse(dCDF2);
+    double dI1 = NormalInverse(dCDF1);
+    double dI2 = NormalInverse(dCDF2);
 
-    dRet = 1.0/(1.0 - dRho*dRho) * exp(-(I1*I1 - 2.0 * dRho* I1*I2 + I2*I2)/(2.0 - 2.0 * dRho* dRho))* exp((I1*I1 + I2*I2)/2.0) * dPDF1 * dPDF2;
+    dRet = 1.0/(1.0 - dRho*dRho) * exp(-(dI1*dI1 - 2.0 * dRho* dI1*dI2 + dI2*dI2)/(2.0 - 2.0 * dRho* dRho))* exp((dI1*dI1 + dI2*dI2)/2.0) * dPDF1 * dPDF2;
+
+    // std::cerr << "x1 = " << x1 << "; x2 = " << x2 << "; PDF1 = " << dPDF1 << "; PDF2 = " << dPDF2 << "; CDF1 = " << dCDF1 << "; CDF2 = " << dCDF2 << "; I1 = " << dI1 << "; I2 = " << dI2 << "; dret = " << dRet << "\n";
 
 #ifndef OPTIMIZE
   } catch (string &Ex) {
