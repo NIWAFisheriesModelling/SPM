@@ -1,0 +1,540 @@
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3606
+obs->CAA-year-1999: 61.6639
+obs->CAA-year-2000: 68.995
+obs->CAA-year-2001: 68.7351
+obs->CAA-year-2002: 65.1737
+obs->CAA-year-2003: 59.1114
+obs->CAA-year-2004: 70.1032
+obs->CAA-year-2005: 71.4641
+obs->CAA-year-2006: 59.3336
+obs->CAA-year-2007: 68.7602
+obs->CPUE-1998: -1.57033
+obs->CPUE-1999: -1.56477
+obs->CPUE-2000: 1.08693
+obs->CPUE-2001: 4.64978
+obs->CPUE-2002: -1.61347
+obs->CPUE-2003: -1.53397
+obs->CPUE-2004: -1.52613
+obs->CPUE-2005: -1.59595
+obs->CPUE-2006: -1.21798
+obs->CPUE-2007: 0.919614
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 650.734
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3606
+obs->CAA-year-1999: 61.6654
+obs->CAA-year-2000: 69.001
+obs->CAA-year-2001: 68.7455
+obs->CAA-year-2002: 65.1936
+obs->CAA-year-2003: 59.1502
+obs->CAA-year-2004: 70.1601
+obs->CAA-year-2005: 71.5556
+obs->CAA-year-2006: 59.401
+obs->CAA-year-2007: 68.8826
+obs->CPUE-1998: -1.61926
+obs->CPUE-1999: -1.61908
+obs->CPUE-2000: 0.402909
+obs->CPUE-2001: 3.56921
+obs->CPUE-2002: -1.52441
+obs->CPUE-2003: -1.61646
+obs->CPUE-2004: -1.31173
+obs->CPUE-2005: -1.60688
+obs->CPUE-2006: -0.787321
+obs->CPUE-2007: 1.94352
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 650.946
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3606
+obs->CAA-year-1999: 61.6662
+obs->CAA-year-2000: 69.0041
+obs->CAA-year-2001: 68.7508
+obs->CAA-year-2002: 65.2038
+obs->CAA-year-2003: 59.1701
+obs->CAA-year-2004: 70.1892
+obs->CAA-year-2005: 71.6022
+obs->CAA-year-2006: 59.4353
+obs->CAA-year-2007: 68.9448
+obs->CPUE-1998: -1.61899
+obs->CPUE-1999: -1.61857
+obs->CPUE-2000: 0.433813
+obs->CPUE-2001: 3.61169
+obs->CPUE-2002: -1.52827
+obs->CPUE-2003: -1.61617
+obs->CPUE-2004: -1.30884
+obs->CPUE-2005: -1.60455
+obs->CPUE-2006: -0.755393
+obs->CPUE-2007: 2.03882
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 651.361
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6667
+obs->CAA-year-2000: 69.0059
+obs->CAA-year-2001: 68.754
+obs->CAA-year-2002: 65.21
+obs->CAA-year-2003: 59.1821
+obs->CAA-year-2004: 70.2068
+obs->CAA-year-2005: 71.6304
+obs->CAA-year-2006: 59.4561
+obs->CAA-year-2007: 68.9824
+obs->CPUE-1998: -1.61864
+obs->CPUE-1999: -1.61811
+obs->CPUE-2000: 0.452617
+obs->CPUE-2001: 3.63745
+obs->CPUE-2002: -1.53056
+obs->CPUE-2003: -1.61599
+obs->CPUE-2004: -1.30707
+obs->CPUE-2005: -1.60304
+obs->CPUE-2006: -0.735828
+obs->CPUE-2007: 2.09682
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 651.613
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.667
+obs->CAA-year-2000: 69.0072
+obs->CAA-year-2001: 68.7562
+obs->CAA-year-2002: 65.2142
+obs->CAA-year-2003: 59.1902
+obs->CAA-year-2004: 70.2187
+obs->CAA-year-2005: 71.6494
+obs->CAA-year-2006: 59.47
+obs->CAA-year-2007: 69.0077
+obs->CPUE-1998: -1.61834
+obs->CPUE-1999: -1.61775
+obs->CPUE-2000: 0.464673
+obs->CPUE-2001: 3.65379
+obs->CPUE-2002: -1.53195
+obs->CPUE-2003: -1.61589
+obs->CPUE-2004: -1.30564
+obs->CPUE-2005: -1.60193
+obs->CPUE-2006: -0.722224
+obs->CPUE-2007: 2.13664
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 651.783
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6673
+obs->CAA-year-2000: 69.0081
+obs->CAA-year-2001: 68.7578
+obs->CAA-year-2002: 65.2172
+obs->CAA-year-2003: 59.196
+obs->CAA-year-2004: 70.2272
+obs->CAA-year-2005: 71.663
+obs->CAA-year-2006: 59.48
+obs->CAA-year-2007: 69.0258
+obs->CPUE-1998: -1.60717
+obs->CPUE-1999: -1.60527
+obs->CPUE-2000: 0.698182
+obs->CPUE-2001: 4.01946
+obs->CPUE-2002: -1.57171
+obs->CPUE-2003: -1.60119
+obs->CPUE-2004: -1.38384
+obs->CPUE-2005: -1.61579
+obs->CPUE-2006: -0.850923
+obs->CPUE-2007: 1.87632
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 651.961
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6675
+obs->CAA-year-2000: 69.0088
+obs->CAA-year-2001: 68.759
+obs->CAA-year-2002: 65.2194
+obs->CAA-year-2003: 59.2004
+obs->CAA-year-2004: 70.2336
+obs->CAA-year-2005: 71.6732
+obs->CAA-year-2006: 59.4875
+obs->CAA-year-2007: 69.0394
+obs->CPUE-1998: -1.60847
+obs->CPUE-1999: -1.60672
+obs->CPUE-2000: 0.677838
+obs->CPUE-2001: 3.98611
+obs->CPUE-2002: -1.5683
+obs->CPUE-2003: -1.6034
+obs->CPUE-2004: -1.37439
+obs->CPUE-2005: -1.61434
+obs->CPUE-2006: -0.828265
+obs->CPUE-2007: 1.93069
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.04
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6676
+obs->CAA-year-2000: 69.0093
+obs->CAA-year-2001: 68.7599
+obs->CAA-year-2002: 65.2212
+obs->CAA-year-2003: 59.2038
+obs->CAA-year-2004: 70.2386
+obs->CAA-year-2005: 71.6812
+obs->CAA-year-2006: 59.4934
+obs->CAA-year-2007: 69.05
+obs->CPUE-1998: -1.60945
+obs->CPUE-1999: -1.60781
+obs->CPUE-2000: 0.661862
+obs->CPUE-2001: 3.95991
+obs->CPUE-2002: -1.56553
+obs->CPUE-2003: -1.60504
+obs->CPUE-2004: -1.36683
+obs->CPUE-2005: -1.61302
+obs->CPUE-2006: -0.810273
+obs->CPUE-2007: 1.97357
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.103
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6677
+obs->CAA-year-2000: 69.0097
+obs->CAA-year-2001: 68.7606
+obs->CAA-year-2002: 65.2226
+obs->CAA-year-2003: 59.2066
+obs->CAA-year-2004: 70.2426
+obs->CAA-year-2005: 71.6876
+obs->CAA-year-2006: 59.4981
+obs->CAA-year-2007: 69.0585
+obs->CPUE-1998: -1.61019
+obs->CPUE-1999: -1.60864
+obs->CPUE-2000: 0.64927
+obs->CPUE-2001: 3.93921
+obs->CPUE-2002: -1.56328
+obs->CPUE-2003: -1.60628
+obs->CPUE-2004: -1.36075
+obs->CPUE-2005: -1.61186
+obs->CPUE-2006: -0.795814
+obs->CPUE-2007: 2.00789
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.154
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6678
+obs->CAA-year-2000: 69.0101
+obs->CAA-year-2001: 68.7612
+obs->CAA-year-2002: 65.2237
+obs->CAA-year-2003: 59.2088
+obs->CAA-year-2004: 70.2459
+obs->CAA-year-2005: 71.6928
+obs->CAA-year-2006: 59.502
+obs->CAA-year-2007: 69.0654
+obs->CPUE-1998: -1.6174
+obs->CPUE-1999: -1.61667
+obs->CPUE-2000: 0.494534
+obs->CPUE-2001: 3.69466
+obs->CPUE-2002: -1.53552
+obs->CPUE-2003: -1.61558
+obs->CPUE-2004: -1.30316
+obs->CPUE-2005: -1.59947
+obs->CPUE-2006: -0.692182
+obs->CPUE-2007: 2.22531
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.173
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6679
+obs->CAA-year-2000: 69.0104
+obs->CAA-year-2001: 68.7617
+obs->CAA-year-2002: 65.2247
+obs->CAA-year-2003: 59.2107
+obs->CAA-year-2004: 70.2486
+obs->CAA-year-2005: 71.6972
+obs->CAA-year-2006: 59.5052
+obs->CAA-year-2007: 69.0713
+obs->CPUE-1998: -1.61733
+obs->CPUE-1999: -1.61659
+obs->CPUE-2000: 0.496096
+obs->CPUE-2001: 3.69648
+obs->CPUE-2002: -1.53558
+obs->CPUE-2003: -1.61561
+obs->CPUE-2004: -1.30235
+obs->CPUE-2005: -1.59907
+obs->CPUE-2006: -0.688176
+obs->CPUE-2007: 2.23622
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.212
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6679
+obs->CAA-year-2000: 69.0106
+obs->CAA-year-2001: 68.7621
+obs->CAA-year-2002: 65.2255
+obs->CAA-year-2003: 59.2123
+obs->CAA-year-2004: 70.2509
+obs->CAA-year-2005: 71.7009
+obs->CAA-year-2006: 59.5079
+obs->CAA-year-2007: 69.0762
+obs->CPUE-1998: -1.61166
+obs->CPUE-1999: -1.61028
+obs->CPUE-2000: 0.622732
+obs->CPUE-2001: 3.89558
+obs->CPUE-2002: -1.55839
+obs->CPUE-2003: -1.6087
+obs->CPUE-2004: -1.3477
+obs->CPUE-2005: -1.6091
+obs->CPUE-2006: -0.765043
+obs->CPUE-2007: 2.08037
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.263
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.668
+obs->CAA-year-2000: 69.0109
+obs->CAA-year-2001: 68.7625
+obs->CAA-year-2002: 65.2262
+obs->CAA-year-2003: 59.2137
+obs->CAA-year-2004: 70.2529
+obs->CAA-year-2005: 71.7041
+obs->CAA-year-2006: 59.5102
+obs->CAA-year-2007: 69.0804
+obs->CPUE-1998: -1.61211
+obs->CPUE-1999: -1.61078
+obs->CPUE-2000: 0.614373
+obs->CPUE-2001: 3.88197
+obs->CPUE-2002: -1.55684
+obs->CPUE-2003: -1.60938
+obs->CPUE-2004: -1.34383
+obs->CPUE-2005: -1.60823
+obs->CPUE-2006: -0.756346
+obs->CPUE-2007: 2.1004
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.289
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.668
+obs->CAA-year-2000: 69.011
+obs->CAA-year-2001: 68.7628
+obs->CAA-year-2002: 65.2268
+obs->CAA-year-2003: 59.2148
+obs->CAA-year-2004: 70.2546
+obs->CAA-year-2005: 71.7068
+obs->CAA-year-2006: 59.5123
+obs->CAA-year-2007: 69.0841
+obs->CPUE-1998: -1.61229
+obs->CPUE-1999: -1.61099
+obs->CPUE-2000: 0.610712
+obs->CPUE-2001: 3.8758
+obs->CPUE-2002: -1.5561
+obs->CPUE-2003: -1.60972
+obs->CPUE-2004: -1.3417
+obs->CPUE-2005: -1.60771
+obs->CPUE-2006: -0.751002
+obs->CPUE-2007: 2.11319
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.312
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6681
+obs->CAA-year-2000: 69.0112
+obs->CAA-year-2001: 68.7631
+obs->CAA-year-2002: 65.2274
+obs->CAA-year-2003: 59.2159
+obs->CAA-year-2004: 70.2561
+obs->CAA-year-2005: 71.7093
+obs->CAA-year-2006: 59.5141
+obs->CAA-year-2007: 69.0873
+obs->CPUE-1998: -1.61252
+obs->CPUE-1999: -1.61125
+obs->CPUE-2000: 0.606042
+obs->CPUE-2001: 3.8681
+obs->CPUE-2002: -1.55519
+obs->CPUE-2003: -1.6101
+obs->CPUE-2004: -1.33932
+obs->CPUE-2005: -1.60714
+obs->CPUE-2006: -0.745391
+obs->CPUE-2007: 2.12631
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.333
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6681
+obs->CAA-year-2000: 69.0113
+obs->CAA-year-2001: 68.7634
+obs->CAA-year-2002: 65.2278
+obs->CAA-year-2003: 59.2168
+obs->CAA-year-2004: 70.2575
+obs->CAA-year-2005: 71.7114
+obs->CAA-year-2006: 59.5156
+obs->CAA-year-2007: 69.0901
+obs->CPUE-1998: -1.61285
+obs->CPUE-1999: -1.61161
+obs->CPUE-2000: 0.599761
+obs->CPUE-2001: 3.8579
+obs->CPUE-2002: -1.55401
+obs->CPUE-2003: -1.61057
+obs->CPUE-2004: -1.33643
+obs->CPUE-2005: -1.60645
+obs->CPUE-2006: -0.739062
+obs->CPUE-2007: 2.14072
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.35
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6682
+obs->CAA-year-2000: 69.0115
+obs->CAA-year-2001: 68.7636
+obs->CAA-year-2002: 65.2283
+obs->CAA-year-2003: 59.2176
+obs->CAA-year-2004: 70.2587
+obs->CAA-year-2005: 71.7133
+obs->CAA-year-2006: 59.517
+obs->CAA-year-2007: 69.0926
+obs->CPUE-1998: -1.61292
+obs->CPUE-1999: -1.61169
+obs->CPUE-2000: 0.598115
+obs->CPUE-2001: 3.85503
+obs->CPUE-2002: -1.55364
+obs->CPUE-2003: -1.61074
+obs->CPUE-2004: -1.33526
+obs->CPUE-2005: -1.60613
+obs->CPUE-2006: -0.735899
+obs->CPUE-2007: 2.14843
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.367
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6682
+obs->CAA-year-2000: 69.0116
+obs->CAA-year-2001: 68.7638
+obs->CAA-year-2002: 65.2286
+obs->CAA-year-2003: 59.2183
+obs->CAA-year-2004: 70.2597
+obs->CAA-year-2005: 71.715
+obs->CAA-year-2006: 59.5183
+obs->CAA-year-2007: 69.0949
+obs->CPUE-1998: -1.61314
+obs->CPUE-1999: -1.61195
+obs->CPUE-2000: 0.593574
+obs->CPUE-2001: 3.84763
+obs->CPUE-2002: -1.55277
+obs->CPUE-2003: -1.61107
+obs->CPUE-2004: -1.33311
+obs->CPUE-2005: -1.60561
+obs->CPUE-2006: -0.731121
+obs->CPUE-2007: 2.15934
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.381
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6682
+obs->CAA-year-2000: 69.0117
+obs->CAA-year-2001: 68.764
+obs->CAA-year-2002: 65.229
+obs->CAA-year-2003: 59.219
+obs->CAA-year-2004: 70.2607
+obs->CAA-year-2005: 71.7165
+obs->CAA-year-2006: 59.5194
+obs->CAA-year-2007: 69.0969
+obs->CPUE-1998: -1.61322
+obs->CPUE-1999: -1.61204
+obs->CPUE-2000: 0.591789
+obs->CPUE-2001: 3.84459
+obs->CPUE-2002: -1.55238
+obs->CPUE-2003: -1.61123
+obs->CPUE-2004: -1.332
+obs->CPUE-2005: -1.60531
+obs->CPUE-2006: -0.728269
+obs->CPUE-2007: 2.16616
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.394
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: 61.3607
+obs->CAA-year-1999: 61.6682
+obs->CAA-year-2000: 69.0118
+obs->CAA-year-2001: 68.7641
+obs->CAA-year-2002: 65.2293
+obs->CAA-year-2003: 59.2196
+obs->CAA-year-2004: 70.2616
+obs->CAA-year-2005: 71.7179
+obs->CAA-year-2006: 59.5204
+obs->CAA-year-2007: 69.0987
+obs->CPUE-1998: -1.61345
+obs->CPUE-1999: -1.6123
+obs->CPUE-2000: 0.587065
+obs->CPUE-2001: 3.83695
+obs->CPUE-2002: -1.55149
+obs->CPUE-2003: -1.61155
+obs->CPUE-2004: -1.32986
+obs->CPUE-2005: -1.60478
+obs->CPUE-2006: -0.723706
+obs->CPUE-2007: 2.17642
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: 652.406
+*end
+
