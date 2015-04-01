@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -e -q -g 0 -o MPD.dat 
-Date: Tue Sep 16 20:04:39 2014
-v1.1-2014-09-15 (rev. 1214). Copyright (c) 2008-2014, NIWA
+Date: Sat Feb 21 21:40:06 2015
+v1.1-2015-02-19 (rev. 1246). Copyright (c) 2008-2015, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=4648)
+Machine name: NIWA-34286 (Windows_NT, PID=7776)
 
 [initialisation-phase1]
 report.type: initialisation
@@ -281,6 +281,7 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [Abundance-density]
 report.type: layer
 layer: Abundance-density
+layer.type: abundance_density
 year: 1995
 time_step: one
 0 0 0 154586 185660 185306 157270 0 0 0
@@ -472,6 +473,7 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [Abundance-density]
 report.type: layer
 layer: Abundance-density
+layer.type: abundance_density
 year: 1996
 time_step: one
 0 0 0 154586 185660 185306 157270 0 0 0
@@ -663,6 +665,7 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [Abundance-density]
 report.type: layer
 layer: Abundance-density
+layer.type: abundance_density
 year: 1997
 time_step: one
 0 0 0 154586 185660 185306 157270 0 0 0
@@ -854,6 +857,7 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [Abundance-density]
 report.type: layer
 layer: Abundance-density
+layer.type: abundance_density
 year: 1998
 time_step: one
 0 0 0 154586 185660 185306 157270 0 0 0
@@ -1045,6 +1049,7 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [Abundance-density]
 report.type: layer
 layer: Abundance-density
+layer.type: abundance_density
 year: 1999
 time_step: one
 0 0 0 154582 185542 185301 157267 0 0 0
@@ -1236,6 +1241,7 @@ row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[
 [Abundance]
 report.type: layer
 layer: Abundance
+layer.type: abundance
 year: 2000
 time_step: one
 0 0 0 154538 185562 185236 157231 0 0 0
@@ -1249,6 +1255,7 @@ time_step: one
 [Abundance-density]
 report.type: layer
 layer: Abundance-density
+layer.type: abundance_density
 year: 2000
 time_step: one
 0 0 0 154538 185562 185236 157231 0 0 0
