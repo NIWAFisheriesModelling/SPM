@@ -302,11 +302,6 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defDefault{No default}
 \defValue{Must be a value $\ge 0$}
 
-\defSub{ycs\_years} {Years for year class strength values}
-\defType{Integer vector or integer range}
-\defDefault{No default}
-\defValue{The expanded vector must be valid model years}
-
 \defSub{ycs\_values} {YCS values}
 \defType{Estimable vector}
 \defDefault{No default}
@@ -350,6 +345,28 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String}
 \defDefault{No layer}
 \defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the mortality rate multiplied by the value of the layer. Note that the layer values must be non-negative}
+
+\subsubsection[Constant exploitation rate process]{\commandlabsubarg{process}{type}{constant\_exploitation\_rate}}
+
+\defSub{p} {Define the constant exploitation rate to be applied}
+\defType{Estimable}
+\defDefault{No default}
+\defValue{A positive real number}
+
+\defSub{categories} {Define the categories that mortality is applied to}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{layer} {Name of the layer}
+\defType{String}
+\defDefault{No layer}
+\defValue{A valid layer as defined by \command{layer}. If a numeric layer, then mortality applied is the exploitation rate multiplied by the value of the layer. Note that the layer values must be non-negative. Note that the result of the calculation must be between 0 and 1}
 
 \subsubsection[Annual mortality rate process]{\commandlabsubarg{process}{type}{annual\_mortality\_rate}}
 

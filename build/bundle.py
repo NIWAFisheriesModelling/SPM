@@ -17,6 +17,7 @@ BIN      = BASE + ''
 RLIB     = BASE + 'R-libraries\\'
 DOC      = BASE + 'doc\\manual\\'
 EXAMPLES = BASE + 'examples\\'
+SRC      = BASE + 'src\\'
 
 ##################################################################
 print('\n1. Cleanup and create directories')
@@ -25,6 +26,7 @@ os.chdir(BASE)
 os.system('md \"' +  RELEASE + '\"')
 os.system('md \"' +  RELEASE + 'R-library\"')
 os.system('md \"' +  RELEASE + 'Examples\"')
+os.system('md \"' +  RELEASE + 'source\"')
 os.system('md \"' +  RELEASE + 'Linux\"')
 
 ##################################################################
@@ -37,7 +39,7 @@ os.system('cp -r -f ' + RLIB + 'spm_1.1.tar.gz '    + RELEASE + 'R-library\\spm_
 os.system('cp -r -f ' + DOC  + 'spm.pdf '           + RELEASE + 'spm.pdf')
 
 ##################################################################
-print('\n\n3. Get the linux 64-bit version from thotter')
+print('\n\n3. Get the linux 64-bit version from MateVM')
 os.chdir(RELEASE)
 # Do this manually the first time to store the RSA fingerprint
 os.system('scp -batch -pw statistic alistair@MateVM:projects/general/SPM/spm Linux/')
@@ -45,8 +47,14 @@ os.system('scp -batch -pw statistic alistair@MateVM:projects/general/SPM/spm_uni
 
 ##################################################################
 os.chdir(BASE)
-print('\n\n4. Copy the examples directory to the release directory')
+print('\n\n4a. Copy the examples directory to the release directory')
 cmd = 'svn export ' + EXAMPLES + ' ' + RELEASE + 'Examples --force'
+os.system(cmd)
+
+##################################################################
+os.chdir(BASE)
+print('\n\n4b. Copy the src directory to the release directory')
+cmd = 'svn export ' + SRC + ' ' + RELEASE + 'source --force'
 os.system(cmd)
 
 ##################################################################

@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -p -q -g 0 -o profile.dat 
-Date: Sat Feb 21 16:32:48 2015
-v1.1-2015-02-19 (rev. 1246). Copyright (c) 2008-2015, NIWA
+Date: Fri Apr 10 09:46:09 2015
+v1.1-2015-04-01 (rev. 1250). Copyright (c) 2008-2015, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=4896)
+Machine name: NIWA-34286 (Windows_NT, PID=7280)
 
 [mature-2002]
 report.type: observation
@@ -11681,8 +11681,7 @@ value: 1.12e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-9.68968e-005 0.000100027 4992.28 4965.3 71.3573 5.31963 0.00596757 4999.85 2506.05 7866.99 60.0001 29.9338 12.2334 6.16407 15.3116 10.8908 1.12e+007
+parameter: 9.68968e-005 0.000100027 4992.28 4965.3 71.3573 5.31963 0.00596757 4999.85 2506.05 7866.99 60.0001 29.9338 12.2334 6.16407 15.3116 10.8908 1.12e+007
 *end
 
 [Objective_Score]
@@ -11815,8 +11814,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-9.68968e-005 0.000100027 4992.28 4965.3 71.3573 5.31963 0.00596757 4999.85 2506.05 7866.99 60.0001 29.9338 12.2334 6.16407 15.3116 10.8908 1.12e+007
+parameter: 9.68968e-005 0.000100027 4992.28 4965.3 71.3573 5.31963 0.00596757 4999.85 2506.05 7866.99 60.0001 29.9338 12.2334 6.16407 15.3116 10.8908 1.12e+007
 *end
 
 [SSB]
@@ -17628,8 +17626,7 @@ value: 2.23e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-4.53021e-005 0.0136478 4973.45 3548.89 70.916 7.56678 0.00730685 4999.71 2478.26 9999.35 63.711 24.245 12.1821 6.06552 15.1827 10.9023 2.23e+007
+parameter: 4.53021e-005 0.0136478 4973.45 3548.89 70.916 7.56678 0.00730685 4999.71 2478.26 9999.35 63.711 24.245 12.1821 6.06552 15.1827 10.9023 2.23e+007
 *end
 
 [Objective_Score]
@@ -17762,8 +17759,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-4.53021e-005 0.0136478 4973.45 3548.89 70.916 7.56678 0.00730685 4999.71 2478.26 9999.35 63.711 24.245 12.1821 6.06552 15.1827 10.9023 2.23e+007
+parameter: 4.53021e-005 0.0136478 4973.45 3548.89 70.916 7.56678 0.00730685 4999.71 2478.26 9999.35 63.711 24.245 12.1821 6.06552 15.1827 10.9023 2.23e+007
 *end
 
 [SSB]
@@ -23575,8 +23571,7 @@ value: 3.34e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-3.11669e-005 0.0127819 4093.49 2119.8 70.6023 7.54941 0.003966 4999.99 1963.78 8819.21 75.1338 0.0360561 12.3199 6.09684 14.8767 11.3138 3.34e+007
+parameter: 3.11669e-005 0.0127819 4093.49 2119.8 70.6023 7.54941 0.003966 4999.99 1963.78 8819.21 75.1338 0.0360561 12.3199 6.09684 14.8767 11.3138 3.34e+007
 *end
 
 [Objective_Score]
@@ -23709,8 +23704,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-3.11669e-005 0.0127819 4093.49 2119.8 70.6023 7.54941 0.003966 4999.99 1963.78 8819.21 75.1338 0.0360561 12.3199 6.09684 14.8767 11.3138 3.34e+007
+parameter: 3.11669e-005 0.0127819 4093.49 2119.8 70.6023 7.54941 0.003966 4999.99 1963.78 8819.21 75.1338 0.0360561 12.3199 6.09684 14.8767 11.3138 3.34e+007
 *end
 
 [SSB]
@@ -29522,8 +29516,7 @@ value: 4.45e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-2.51368e-005 0.000107697 4968.84 3450.62 71.8344 5.47545 0.0349947 4999.99 2903.38 9938.5 61.621 4.42247 13.0317 6.84467 16.0571 11.7588 4.45e+007
+parameter: 2.51368e-005 0.000107697 4968.84 3450.62 71.8344 5.47545 0.0349947 4999.99 2903.38 9938.5 61.621 4.42247 13.0317 6.84467 16.0571 11.7588 4.45e+007
 *end
 
 [Objective_Score]
@@ -29656,8 +29649,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-2.51368e-005 0.000107697 4968.84 3450.62 71.8344 5.47545 0.0349947 4999.99 2903.38 9938.5 61.621 4.42247 13.0317 6.84467 16.0571 11.7588 4.45e+007
+parameter: 2.51368e-005 0.000107697 4968.84 3450.62 71.8344 5.47545 0.0349947 4999.99 2903.38 9938.5 61.621 4.42247 13.0317 6.84467 16.0571 11.7588 4.45e+007
 *end
 
 [SSB]
@@ -35469,8 +35461,7 @@ value: 5.56e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.89117e-005 0.000111203 4067.51 4388.49 71.1257 5.20132 0.00702858 4999.69 2425.21 9962.05 65.4649 22.4098 12.1524 6.13088 15.3598 10.8692 5.56e+007
+parameter: 1.89117e-005 0.000111203 4067.51 4388.49 71.1257 5.20132 0.00702858 4999.69 2425.21 9962.05 65.4649 22.4098 12.1524 6.13088 15.3598 10.8692 5.56e+007
 *end
 
 [Objective_Score]
@@ -35603,8 +35594,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.89117e-005 0.000111203 4067.51 4388.49 71.1257 5.20132 0.00702858 4999.69 2425.21 9962.05 65.4649 22.4098 12.1524 6.13088 15.3598 10.8692 5.56e+007
+parameter: 1.89117e-005 0.000111203 4067.51 4388.49 71.1257 5.20132 0.00702858 4999.69 2425.21 9962.05 65.4649 22.4098 12.1524 6.13088 15.3598 10.8692 5.56e+007
 *end
 
 [SSB]
@@ -41416,8 +41406,7 @@ value: 6.67e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.71092e-005 0.0001 4996.12 4086.22 71.3116 5.2208 0.00197499 1488.83 2496.92 9999.96 61.3627 17.2604 12.3221 6.16689 14.8327 10.9926 6.67e+007
+parameter: 1.71092e-005 0.0001 4996.12 4086.22 71.3116 5.2208 0.00197499 1488.83 2496.92 9999.96 61.3627 17.2604 12.3221 6.16689 14.8327 10.9926 6.67e+007
 *end
 
 [Objective_Score]
@@ -41550,8 +41539,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.71092e-005 0.0001 4996.12 4086.22 71.3116 5.2208 0.00197499 1488.83 2496.92 9999.96 61.3627 17.2604 12.3221 6.16689 14.8327 10.9926 6.67e+007
+parameter: 1.71092e-005 0.0001 4996.12 4086.22 71.3116 5.2208 0.00197499 1488.83 2496.92 9999.96 61.3627 17.2604 12.3221 6.16689 14.8327 10.9926 6.67e+007
 *end
 
 [SSB]
@@ -47363,8 +47351,7 @@ value: 7.78e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.54617e-005 0.0153988 4999.41 1.00469 71.7215 7.68689 0.00980387 5000 1742.03 8513.68 71.2271 0.0205422 12.6721 6.24049 15.1617 10.8708 7.78e+007
+parameter: 1.54617e-005 0.0153988 4999.41 1.00469 71.7215 7.68689 0.00980387 5000 1742.03 8513.68 71.2271 0.0205422 12.6721 6.24049 15.1617 10.8708 7.78e+007
 *end
 
 [Objective_Score]
@@ -47497,8 +47484,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.54617e-005 0.0153988 4999.41 1.00469 71.7215 7.68689 0.00980387 5000 1742.03 8513.68 71.2271 0.0205422 12.6721 6.24049 15.1617 10.8708 7.78e+007
+parameter: 1.54617e-005 0.0153988 4999.41 1.00469 71.7215 7.68689 0.00980387 5000 1742.03 8513.68 71.2271 0.0205422 12.6721 6.24049 15.1617 10.8708 7.78e+007
 *end
 
 [SSB]
@@ -53310,8 +53296,7 @@ value: 8.89e+007
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.4914e-005 0.00766533 16.2426 4437.01 61.5122 0.0100001 0.000100012 966.034 475.332 9999.82 62.0379 30 12.501 6.21067 14.7239 11.1161 8.89e+007
+parameter: 1.4914e-005 0.00766533 16.2426 4437.01 61.5122 0.0100001 0.000100012 966.034 475.332 9999.82 62.0379 30 12.501 6.21067 14.7239 11.1161 8.89e+007
 *end
 
 [Objective_Score]
@@ -53444,8 +53429,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.4914e-005 0.00766533 16.2426 4437.01 61.5122 0.0100001 0.000100012 966.034 475.332 9999.82 62.0379 30 12.501 6.21067 14.7239 11.1161 8.89e+007
+parameter: 1.4914e-005 0.00766533 16.2426 4437.01 61.5122 0.0100001 0.000100012 966.034 475.332 9999.82 62.0379 30 12.501 6.21067 14.7239 11.1161 8.89e+007
 *end
 
 [SSB]
@@ -59257,8 +59241,7 @@ value: 1e+008
 
 [estimate-value]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.41499e-005 0.00189087 4122.24 2.88271 69.6735 5.91591 0.0001 2619.16 80.0064 9966.87 66.7699 0.0103283 14.2164 6.88165 16.862 11.7052 1e+008
+parameter: 1.41499e-005 0.00189087 4122.24 2.88271 69.6735 5.91591 0.0001 2619.16 80.0064 9966.87 66.7699 0.0103283 14.2164 6.88165 16.862 11.7052 1e+008
 *end
 
 [Objective_Score]
@@ -59391,8 +59374,7 @@ Correlation:
 
 [estimate-mpd]
 report.type: estimate_value
-parameter: catchability[CPUEq].q preference_function[ImmatureDistance].lambda preference_function[ImmatureDepth].a50 preference_function[ImmatureDepth].ato95 preference_function[ImmatureLatitude].a50 preference_function[ImmatureLatitude].ato95 preference_function[MatureDistance].lambda preference_function[MatureDepth].mu preference_function[MatureDepth].sigma_l preference_function[MatureDepth].sigma_r preference_function[MatureLatitude].a50 preference_function[MatureLatitude].ato95 selectivity[FishingSel].a50 selectivity[FishingSel].ato95 selectivity[Maturation].a50 selectivity[Maturation].ato95 process[BHrecruitment].r0
-1.41499e-005 0.00189087 4122.24 2.88271 69.6735 5.91591 0.0001 2619.16 80.0064 9966.87 66.7699 0.0103283 14.2164 6.88165 16.862 11.7052 1e+008
+parameter: 1.41499e-005 0.00189087 4122.24 2.88271 69.6735 5.91591 0.0001 2619.16 80.0064 9966.87 66.7699 0.0103283 14.2164 6.88165 16.862 11.7052 1e+008
 *end
 
 [SSB]

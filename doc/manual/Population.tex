@@ -274,20 +274,20 @@ year_offset 2
 
 {\small{\begin{verbatim}
 @layer AnnualNumericLayer
-type meta-layer
+type numeric_meta
 default_layer SST
 years    1990    1991    1992    1993    1994    1995
-layer SST1990 SST1991 SST1992 SST1993 SST1994 SST1995
+layers SST1990 SST1991 SST1992 SST1993 SST1994 SST1995
 \end{verbatim}}}
 
 \item {\I{Categorical meta-layers}\label{categorical meta-layer}}: Categorical meta-layers are a meta layer of categorical layers --- the individual ordinary layers that make up the meta-layer must all be of categorical type. Categorical meta-layers are specified in the same way as numeric meta-layers. For example, assuming that the layers \texttt{zones} and \texttt{zone1990}, \texttt{zone1995}, etc., are defined elsewhere, then to specify a categorical meta-layer with specific values for the years 1990-1995, and a default for all other years (including the initialisation phases), use, 
 
 {\small{\begin{verbatim}
 @layer AnnualCategoricalLayer
-type meta-layer
+type categorical_meta
 default_layer zones
 years     1990     1991     1992     1993     1994     1995
-layer zone1990 zone1991 zone1992 zone1993 zone1994 zone1995
+layers zone1990 zone1991 zone1992 zone1993 zone1994 zone1995
 \end{verbatim}}}
 \end{enumerate}
 \end{enumerate}
@@ -649,6 +649,36 @@ A constant rate could also be defined as a multiplier of a layer. For example, l
 And the resulting number of individuals remaining in cell $a$ in category $k$ at age $l$ from applying the constant mortality process is,
 \begin{equation}
   n'(a,k,l) = n(a,k,l) \exp \left({-M(a,k,l)}\right)
+\end{equation}
+
+\subsubsection*{Constant exploitation rate}
+
+To specify an constant annual exploitation rate \index{Constant exploitation}($P=0.2$) for categories `male' and `female', then, 
+{\small{\begin{verbatim}
+@process ExploitationMortality
+type constant_exploitation_rate
+categories male female
+selectivities One One
+P 0.2 0.2
+\end{verbatim}}}
+
+Note that the exploitation rate process requires a selectivity. To apply the same exploitation rate over all age classes, use a selectivity defined as $S_i=1.0$ for all ages $i$, e.g.,
+{\small{\begin{verbatim}
+@selectivity One
+type constant
+c 1
+\end{verbatim}}}
+
+A constant exploitation rate could also be defined as a multiplier of a layer. For example, let the exploitation rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $P(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant exploitation rate $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+\begin{equation}
+  P(a,k,l) = PL_a S_l 
+\end{equation}
+
+with $0<=P(a,l,k)<=1$.
+
+And the resulting number of individuals remaining in cell $a$ in category $k$ at age $l$ from applying the constant mortality process is,
+\begin{equation}
+  n'(a,k,l) = n(a,k,l) P(a,k,l)
 \end{equation}
 
 \subsubsection*{Annual mortality rate}
@@ -1201,7 +1231,7 @@ type biomass
 time_step step_one
 initialisation_time_steps step_one step_one
 categories mature
-selectivity One
+selectivities One
 layer spawning_ground
 \end{verbatim}}}
 
@@ -1219,7 +1249,7 @@ type biomass
 time_step step_one
 initialisation_time_steps step_one step_one
 categories mature
-selectivity One
+selectivities One
 \end{verbatim}}}
 %
 %Both derived quantity by cell and meta-layers are calculated based on user-defined formula, which can use a combination of existing layers and parameters, and user-defined parameters. Parameters defined in the formula need to be provided with initial values. These parameters can be estimated using the estimation section (see Section \ref{sec:estimation-section}) as any other parameter. The formula are given as strings and \SPM\ resolves the string, hence applies the calculation in each cell of the layers separately. The following math functions, including parentheses, are implemented,  

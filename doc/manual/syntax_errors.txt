@@ -17,6 +17,7 @@ In SPM, but not in manual
   command
   correlation
   difference
+  dirichlet
   distribution
   enabled_estimates
   estimable
@@ -25,6 +26,7 @@ In SPM, but not in manual
   flagged_penalties
   frank_copula
   function
+  gamma
   gaussian_copula
   gumbel_copula
   height
@@ -68,6 +70,7 @@ In SPM, but not in manual
   value
   weights
   width
+  ycs_years
 
 
 

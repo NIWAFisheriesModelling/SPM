@@ -50,7 +50,6 @@
 \defSub{b0} {Define the \command{initialisation\_phase} label for the value of the derived quantity  to use as the value of the spawning stock biomass ($B_0$) in each cell}
 \defSub{ssb} {Define the label of the \command{derived\_quantity\_by\_cell} that defines the spawning stock biomass (SSB) in each cell}
 \defSub{ssb\_offset} {Define the offset (in years) for the year of the derived quantity by cell that is to be applied as the SSB in the stock-recruit relationship}
-\defSub{ycs\_years} {Years for year class strength values}
 \defSub{ycs\_values} {YCS values}
 \defSub{standardise\_ycs\_years} {Years for which the year class strength values are defined to have mean 1.0}
 \defSub{layer} {Define the label of the layer that defines the distribution of recruitment (as a multiplier of $R_0$ at equilibrium abundances in each cell}
@@ -58,6 +57,11 @@
 \defSub{categories} {Define the categories that ageing is applied to}
 \par\textbf{\commandlabsubarg{process}{type}{constant\_mortality\_rate}}\par
 \defSub{m} {Define the constant mortality rate to be applied}
+\defSub{categories} {Define the categories that mortality is applied to}
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{layer} {Name of the layer}
+\par\textbf{\commandlabsubarg{process}{type}{constant\_exploitation\_rate}}\par
+\defSub{p} {Define the constant exploitation rate to be applied}
 \defSub{categories} {Define the categories that mortality is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defSub{layer} {Name of the layer}

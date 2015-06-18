@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2015-02-10 (rev. 1245)
+; TextPad syntax definitions for SPM version 1.1-2015-04-01 (rev. 1250)
 ; ===================================================================================
 ;
 ;
@@ -140,6 +140,7 @@ nrows
 obs
 observation
 overwrite
+p
 p1
 p2
 parameter
@@ -202,7 +203,6 @@ y0
 y1
 y2
 ycs_values
-ycs_years
 year
 year_offset
 years
@@ -247,6 +247,7 @@ category_transition
 category_transition_by_age
 category_transition_rate
 constant
+constant_exploitation_rate
 constant_mortality_rate
 constant_recruitment
 covariance
