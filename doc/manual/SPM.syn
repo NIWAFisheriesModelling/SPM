@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2015-04-01 (rev. 1250)
+; TextPad syntax definitions for SPM version 1.1-2015-06-18 (rev. 1251)
 ; ===================================================================================
 ;
 ;
@@ -140,7 +140,6 @@ nrows
 obs
 observation
 overwrite
-p
 p1
 p2
 parameter
@@ -191,6 +190,7 @@ time_steps
 to
 tolerance
 type
+u
 u_max
 upper_bound
 v

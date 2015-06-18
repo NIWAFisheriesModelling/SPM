@@ -625,7 +625,7 @@ The constant rate, annually varying rate, event, biomass-event mortalities can d
 
 \subsubsection*{Constant mortality rate}
 
-To specify an constant annual mortality rate \index{Constant mortality}($M=0.2$) for categories `male' and `female', then, 
+To specify an constant annual mortality rate \index{Constant mortality}(i.e., $M=0.2$) for categories `male' and `female', then, 
 {\small{\begin{verbatim}
 @process NaturalMortality
 type constant_mortality_rate
@@ -653,13 +653,13 @@ And the resulting number of individuals remaining in cell $a$ in category $k$ at
 
 \subsubsection*{Constant exploitation rate}
 
-To specify an constant annual exploitation rate \index{Constant exploitation}($P=0.2$) for categories `male' and `female', then, 
+To specify an constant annual exploitation rate \index{Constant exploitation rate}(i.e., $U=0.2$) for categories `male' and `female', then, 
 {\small{\begin{verbatim}
 @process ExploitationMortality
 type constant_exploitation_rate
 categories male female
 selectivities One One
-P 0.2 0.2
+U 0.2 0.2
 \end{verbatim}}}
 
 Note that the exploitation rate process requires a selectivity. To apply the same exploitation rate over all age classes, use a selectivity defined as $S_i=1.0$ for all ages $i$, e.g.,
@@ -669,16 +669,16 @@ type constant
 c 1
 \end{verbatim}}}
 
-A constant exploitation rate could also be defined as a multiplier of a layer. For example, let the exploitation rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $P(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant exploitation rate $P$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
+A constant exploitation rate could also be defined as a multiplier of a layer. For example, let the exploitation rate applied to the population at cell $a$ in category $k$ and age $l$ be denoted $U(a,k,l)$, and given a value from a layer $L_a$  at $a$, a constant exploitation rate $U$, and a selectivity-at-age $S_l$ at age $l$ for some user-defined categories $k$ then, 
 \begin{equation}
-  P(a,k,l) = PL_a S_l 
+  U(a,k,l) = U L_a S_l 
 \end{equation}
 
-with $0<=P(a,l,k)<=1$.
+with $0<=U(a,l,k)<=U_{max}$.
 
 And the resulting number of individuals remaining in cell $a$ in category $k$ at age $l$ from applying the constant mortality process is,
 \begin{equation}
-  n'(a,k,l) = n(a,k,l) P(a,k,l)
+  n'(a,k,l) = n(a,k,l) U(a,k,l)
 \end{equation}
 
 \subsubsection*{Annual mortality rate}
