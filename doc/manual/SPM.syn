@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2015-06-18 (rev. 1251)
+; TextPad syntax definitions for SPM version 1.1-2015-06-18 (rev. 1253)
 ; ===================================================================================
 ;
 ;
@@ -46,6 +46,7 @@ CharEsc = \
 @minimiser
 @model
 @observation
+@pdf
 @penalty
 @preference_function
 @process
@@ -143,6 +144,7 @@ overwrite
 p1
 p2
 parameter
+pdf
 penalty
 population_size
 predator_categories
@@ -163,6 +165,7 @@ proposal_distribution
 q
 r0
 rescale
+rho
 same
 selectivities
 selectivities2
@@ -262,9 +265,13 @@ estimate_summary
 estimate_value
 event_mortality
 exponential
+frank_copula
+gaussian_copula
+gumbel_copula
 haversine
 haversine_dijkstra
 increasing
+independence_copula
 initialisation
 inverse_logistic
 knife_edge

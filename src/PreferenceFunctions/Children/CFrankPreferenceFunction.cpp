@@ -48,6 +48,12 @@ void CFrankPreferenceFunction::validate() {
     CPreferenceFunction::validate();
 
     //********************************************
+    //  dRho must be in !0
+    //*********************************************
+    if (dRho == 0.0)
+      CError::errorNotEqual(PARAM_RHO, "0.0");
+
+    //********************************************
     //  We allow only two PDF's
     //*********************************************
     //Ensure exactly 2 PDFs

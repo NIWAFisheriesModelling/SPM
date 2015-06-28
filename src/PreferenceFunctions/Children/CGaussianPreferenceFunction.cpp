@@ -48,7 +48,7 @@ void CGaussianPreferenceFunction::validate() {
     CPreferenceFunction::validate();
 
     //********************************************
-    //  dRho must be between -1 and 1
+    //  dRho must be in [-1,1]
     //*********************************************
     if (dRho <= -1.0)
       CError::errorLessThanEqualTo(PARAM_RHO, "-1.0");

@@ -202,6 +202,34 @@
 \defSub{alpha} {Defines the multiplicative constant $\alpha$}
 \defSub{category\_labels} {Defines the unique labels of \argument{layer} in order of their coefficients}
 \defSub{category\_values} {Defines the coefficients for each unique label of \argument{layer} in order of their labels}
+\par\textbf{\commandlabsubarg{preference\_function}{type}{gaussian\_copula}}\par
+\defSub{rho} {Defines the dependence parameter ($\rho$) for the copula}
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defSub{pdf} {Defines the two PDFs for the copula}
+\par\textbf{\commandlabsubarg{preference\_function}{type}{gumbel\_copula}}\par
+\defSub{rho} {Defines the dependence parameter ($\rho$) for the copula}
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defSub{pdf} {Defines the two PDFs for the copula}
+\par\textbf{\commandlabsubarg{preference\_function}{type}{frank\_copula}}\par
+\defSub{rho} {Defines the dependence parameter ($\rho$) for the copula}
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defSub{pdf} {Defines the two PDF for the copula}
+\par\textbf{\commandlabsubarg{preference\_function}{type}{independence\_copula}}\par
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defSub{pdf} {Defines the two PDFs for the copula}
+\par\defComLab{pdf} {Define a PDF for use as a copula preference function with label}\par
+\defSub{type} {Define the type of PDF}
+\par\textbf{\commandlabsubarg{pdf}{type}{normal}}\par
+\defSub{mu} {Define the mean of the PDF}
+\defSub{sigma} {Define the variance of the PDF}
+\par\textbf{\commandlabsubarg{pdf}{type}{lognormal}}\par
+\defSub{mu} {Define the mean of the PDF}
+\defSub{sigma} {Define the variance of the PDF}
+\par\textbf{\commandlabsubarg{pdf}{type}{exponential}}\par
+\defSub{lambda} {Define the mean of the PDF}
+\par\textbf{\commandlabsubarg{pdf}{type}{uniform}}\par
+\defSub{a} {Define the minimum of the PDF}
+\defSub{b} {Define the maximum of the PDF}
 \par\defComLab{layer} {Define a layer function with label}\par
 \defSub{type} {Define the type of layer}
 \par\textbf{\commandlabsubarg{layer}{type}{numeric}}\par

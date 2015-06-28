@@ -1131,6 +1131,8 @@ Note that there are three forms of preference function,
 
 Preference functions of the first type are determined only by the parameters of the preference function and some underlying, fixed, attribute. Preference functions of the others are dynamic, i.e. they depend on the relative locations of the cells or on the density of a cell at a particular point in time.
 
+\SPM can also incorporate dependence between two variables as a preference function using the copula method (see later).
+
 \subsubsection*{Preference functions\index{Preference function}}
 
 Preference functions in \SPM\ include constant, Normal, double-Normal, logistic, inverse-logistic, Exponential, threshold, categorical, and monotonic categorical. These are defined as,
@@ -1215,6 +1217,118 @@ And then the preference based movement process is simply,
 type preference
 categories males+females
 preference_functions Distance Depth
+\end{verbatim}}}
+
+\subsubsection*{Copula Movement}
+
+The dependence between two variables can be included as a preference function using the copula \index{Copulas}method. This uses marginal \I{Probability Distribution Functions (PDF)} along with an assumed dependence structure to calculate the joint preference distribution between two preference variables \citep{Marsh2015}. Here, the joint distribution for the two variables $x_1$ and $x_2$ with known marginal PDF is given by,
+\begin{equation}
+  f_{x_1,x_2}(x_1,x_2;u_1,u_2,\phi_1,\phi_2,\rho) = c(u_1,u_2;\rho)f_1(x_1;\phi_1)f_1(x_1;\phi_1)
+\end{equation}
+
+where, $c(u_1,u_2;\rho)$ is a copula density representing the structure of dependence between $X_1$ and $X_2$ with $0\leq (u_1,u_2) \leq 1$, and $f_{x_1,x_2}(x_1,x_2;u_1,u_2,\phi_1,\phi_2,\rho)$ is the bivariate joint distribution of $X_1$ and $X_2$, and $u_i = F_i(x_i;\phi_i)$ is the cumulative distribution function from the corresponding PDF.
+
+The marginal probability distributions available are,
+
+\begin{enumerate}
+	\item The normal distribution \index{Normal density function} has variable $x$ and parameters $\phi = (\mu,\sigma)$, and is defined as,
+	\begin{equation}
+	  f(x;\mu,\sigma)=\frac{1}{\sigma\sqrt{2\pi}}\exp-(\frac{(x-\mu)^2}{2\sigma^2}) 
+	\end{equation}
+	
+	\item The lognormal distribution \index{Lognormal density function} has variable $x$ and parameters $\phi = (\mu,\sigma)$, and is defined as,
+	\begin{equation}
+	  f(x;\mu,\sigma)=\frac{1}{x_i\sigma\sqrt{2\pi}}\exp-(\frac{(\log x-\mu)^2}{2\sigma^2})
+	\end{equation}
+	
+	\item The exponential distribution \index{Exponential density function} has variable $x$ and parameters $\phi = (\lambda)$, and is defined as,
+	\begin{equation}
+	  f(x;\lambda)= \lambda \exp(-\lambda x)
+	\end{equation}  
+	
+	\item The uniform distribution \index{Uniform density function} has variable $x$ and parameters $\phi = (a,b)$, and is defined as,
+	\begin{equation}
+	  f(x;a,b)= \frac{1}{b-a}
+	\end{equation}
+	
+\end{enumerate}
+
+A marginal distribution must be chosen for each of the two preference variables when using the copula method. The dependence structures available are,
+
+\begin{enumerate}
+	\item The \I{Gaussian copula}, which has variables $x_1$ and $x_2$ and parameter $\rho$, and is defined as,
+
+	\begin{equation}
+	  c(.) = \frac{1}{2\pi \sqrt{1- \rho}} \exp(-\frac{\zeta_1^2 - 2\rho \zeta_1\zeta_2 + \zeta_2^2}{2(1-\rho^2)})
+	\end{equation}
+
+	where  $\rho \in{[-1,1]}$
+
+	\item The \I{Gumbel copula}, which has variables $x_1$ and $x_2$ and parameter $\rho$, and is defined as,
+
+  \begin{eqnarray}
+  c(.)&=&\exp\{-[(-ln(u_1))^\rho+(-ln(u_2))^\rho]^{1/\rho}\}\frac{(-ln(u_1))^\theta-1}{u_1}\frac{(-ln(u_2))^\rho-1}{u_2} \nonumber \\
+	& &\{[(-ln(u_1))^\rho+(-ln(u_2))^\rho]^{\frac{2}{\rho}-2}+(\rho-1) \nonumber \\
+	& & [(-ln(u_1))^\rho+(-ln(u_2))^\rho]^{\frac{1}{\theta}-2}\} 
+  \end{eqnarray}
+
+	where  $\rho \in{[1,\infty)}$
+	
+	\item The \I{Frank copula}, which has variables $x_1$ and $x_2$ and parameter $\rho$, and is defined as,
+  \begin{eqnarray}
+	c(.)&=&\rho \exp\{-\rho u_1\}\exp\{-\rho u_2\}[(\exp\{-\rho\}-1)+(\exp\{-\rho u_1\}-1)(\exp\{-\rho u_2\}-1)]^{-1} \nonumber \\
+	& &\{(\exp\{-\rho u_1\}-1)(\exp\{-\rho u_2\}-1)((\exp\{-\rho\}-1) \nonumber \\
+	& & +(\exp\{-\rho u_1\}-1)(\exp\{-\rho u_2\}-1))^{-1} -1 \}
+  \end{eqnarray}
+
+	where $\rho != 0$.
+	
+	\item \I{Independence copula}, which has variables $x_1$ and $x_2$, and is defined as,
+
+	\begin{equation}
+	  c(.) = f_1(x_1)f_2(x_2)
+	\end{equation}		
+
+\end{enumerate}
+
+Dependence is described by quadrant dependence. Here, let $X_1$ and $X_2$ be random variables. Then $X_1$ and $X_2$ are positively quadrant dependent (PDQ) if for all ($x_1,x_2$) in $\boldsymbol{R^2}$
+\begin{equation}
+  P[X_1\leq x_1, X_2\leq x_2] \geq P[X_1\leq x_1],P[X_2\leq X_2]
+\end{equation}
+
+or,
+\begin{equation}
+  P[X_1 > x_1, X_2 > x_2] \geq P[X_1 > x_1],P[X_2 > x_2] 
+\end{equation}
+
+where $\boldsymbol{R^2}$ is the two dimensional space of real numbers. Negative quadrant dependence (NQD) is defined analogously by reversing the inequalities. PQD says the probability that random variables are jointly large is greater than when they are looked at independently.
+
+independence copula represents lack of dependence. 
+
+The Gaussian copula is an elliptical copula that captures the full range of positive and negative dependence.
+ 
+The Frank copula can describe both PQD and NQD. When $\rho > 0$ it displays PQD, and when $\rho < 0$ it displays NQD. 
+
+The Gumbel copula cannot account for negative dependence but is well suited for the case when there is strong right tail dependence (strong association at high values) but weak left tail dependence (weak association at low values). 
+
+For example, an implementation of the Gumbel copula with normal and exponential marginal distributions would be defined as,
+
+{\small{\begin{verbatim}
+		@preference_function SST_NPP
+		type gumbel_copula
+		rho 2
+		pdfs sst npp
+		layers sst npp
+		
+		@pdf sst
+		type normal 
+		mu 18
+		sigma 2
+		
+		@pdf npp
+		type exponential
+		mu 1
+		sigma 500
 \end{verbatim}}}
 
 \subsection{\I{Derived quantities}\label{sec:derived-quantities}}

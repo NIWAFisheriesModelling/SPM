@@ -814,6 +814,10 @@ The individual preference functions available are,
 	\item Threshold
 	\item Categorical
 	\item Monotonic categorical
+	\item Gaussian copula
+	\item Gumbel copula
+	\item Frank copula
+	\item Independence copula
 \end{itemize}
 
 Each type of preference function requires a set of subcommands and arguments specific to that function.
@@ -991,6 +995,128 @@ Each type of preference function requires a set of subcommands and arguments spe
 \defType{Numeric vector}
 \defDefault{No default}
 \defValue{A complete set of positive values of labels in \argument{layer} in order of \argument{category\_labels}}
+
+\subsubsection[Gaussian copula]{\commandlabsubarg{preference\_function}{type}{gaussian\_copula}}
+
+\defSub{rho} {Defines the dependence parameter ($\rho$) for the copula}
+\defType{Constant}
+\defDefault{No default}
+\defValue{Any real number $>=-1$ and $<=1$}
+
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{pdf} {Defines the two PDFs for the copula}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid PDFs defined by \command{pdf}}
+
+\subsubsection[Gumbel copula]{\commandlabsubarg{preference\_function}{type}{gumbel\_copula}}
+
+\defSub{rho} {Defines the dependence parameter ($\rho$) for the copula}
+\defType{Constant}
+\defDefault{No default}
+\defValue{Any real number $>=1$}
+
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{pdf} {Defines the two PDFs for the copula}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid PDFs defined by \command{pdf}}
+
+\subsubsection[Frank copula]{\commandlabsubarg{preference\_function}{type}{frank\_copula}}
+
+\defSub{rho} {Defines the dependence parameter ($\rho$) for the copula}
+\defType{Constant}
+\defDefault{No default}
+\defValue{Any real number $!=0$}
+
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{pdf} {Defines the two PDF for the copula}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid PDFs defined by \command{pdf}}
+
+\subsubsection[Independence copula]{\commandlabsubarg{preference\_function}{type}{independence\_copula}}
+
+\defSub{layers} {Defines the two layers which supplies the preference function independent variables}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid layer defined by \command{layer}}
+
+\defSub{pdf} {Defines the two PDFs for the copula}
+\defType{String}
+\defDefault{No default}
+\defValue{Valid PDFs defined by \command{pdf}}
+
+\subsection{\I{Probability Density Functions}}
+
+The available Probability Density Functions (PDF) types are,
+
+\begin{itemize}
+	\item Normal
+	\item Lognormal
+	\item Exponential
+	\item Uniform
+\end{itemize}
+
+\defComLab{pdf} {Define a PDF for use as a copula preference function with label}
+
+\defSub{type} {Define the type of PDF}
+\defType{String}
+\defDefault{No default}
+\defValue{A valid type of PDF}
+
+\subsubsection[Normal]{\commandlabsubarg{pdf}{type}{normal}}
+
+\defSub{mu} {Define the mean of the PDF}
+\defType{Constant}
+\defDefault{No default}
+
+\defSub{sigma} {Define the variance of the PDF}
+\defType{Constant}
+\defDefault{No default}
+\defValue{A real number $>0$}
+
+\subsubsection[Lognormal]{\commandlabsubarg{pdf}{type}{lognormal}}
+
+\defSub{mu} {Define the mean of the PDF}
+\defType{Constant}
+\defDefault{No default}
+
+\defSub{sigma} {Define the variance of the PDF}
+\defType{Constant}
+\defDefault{No default}
+\defValue{A real number $>0$}
+
+\subsubsection[Exponential]{\commandlabsubarg{pdf}{type}{exponential}}
+
+\defSub{lambda} {Define the mean of the PDF}
+\defType{Constant}
+\defDefault{No default}
+\defValue{A real number $>0$}
+
+\subsubsection[Uniform]{\commandlabsubarg{pdf}{type}{uniform}}
+
+\defSub{a} {Define the minimum of the PDF}
+\defType{Constant}
+\defDefault{No default}
+\defValue{A real number}
+
+\defSub{b} {Define the maximum of the PDF}
+\defType{Constant}
+\defDefault{No default}
+\defValue{A real number $>a$}
 
 \subsection{\I{Layers}}
 

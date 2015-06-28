@@ -48,6 +48,12 @@ void CGumbelPreferenceFunction::validate() {
     CPreferenceFunction::validate();
 
     //********************************************
+    //  dRho must be in [1,inf)
+    //*********************************************
+    if (dRho <= 1.0)
+      CError::errorLessThanEqualTo(PARAM_RHO, "1.0");
+
+    //********************************************
     //  We allow only two PDF's
     //*********************************************
     //Ensure exactly 2 PDFs
