@@ -1,6 +1,6 @@
 #!/bin/bash
-# Remember to compile on virtual machine 'wellopensuse131'
-# ssh wellopensuse131
+# Remember to compile on virtual machine 'VMMate'
+# ssh VMMate
 svn update
 svn revert src/Version.h
 cmake -G "Unix Makefiles"

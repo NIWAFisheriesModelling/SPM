@@ -71,7 +71,7 @@ ENDIF (WIN32)
 # Autogeneration of Version.h file in src directory (backing up current ('NULL') version
 ADD_CUSTOM_TARGET(version ALL
   COMMAND cp ${PROJECT_SOURCE_DIR}/src/Version.h ${PROJECT_SOURCE_DIR}/src/Version.h.old
-  COMMAND svn_version --quiet --format c++ m--path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
+  COMMAND svn_version --quiet --format c++ --path ${PROJECT_SOURCE_DIR} --recursive --output ${PROJECT_SOURCE_DIR}/src/Version.h
 )
 
 # To build the list below I used MSYS

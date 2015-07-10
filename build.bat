@@ -45,4 +45,5 @@ spm_unittests.exe --report_level=short
 rem Copy to the server
 copy spm.exe \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
 copy Setup_SPM.exe \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
+copy spm.zip \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
 copy doc\manual\SPM.pdf \\niwa.local\groups\Wellington\NIWAFisheries\bin\ /Y
