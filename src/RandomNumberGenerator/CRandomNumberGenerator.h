@@ -33,6 +33,7 @@ public:
   double                      getRandomLogNormal(double mean, double cv);
   double                      getRandomBinomial(double p, double N);
   double                      getRandomChiSquare(int df);
+  double                      getRandomGamma(double shape);
 
 protected:
   // Functions

@@ -1,0 +1,684 @@
+[initialisation-phase1]
+report.type: initialisation
+initialisation.initialisation_phase: Phase1
+years: 200
+lambda: 1e-010
+lambda_hat: 0.00648141 0.00460798 0.00340124 0.00257387 0.00198205
+lambda_years: 100 125 150 175 200
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.16605e+007 6.11571e+007 6.06578e+007 6.01625e+007 5.92335e+007 5.80394e+007 5.57659e+007 5.10518e+007 4.20048e+007 2.86374e+007 1.54856e+007 6.93853e+006 2.79417e+006 1.0721e+006 403374 150624 56083.2 20859.4 7755.27 2882.87 1071.59 398.311 148.051 55.0303 20.4546 7.6029 2.82597 1.0504 0.390431 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437836 1.14477e+006 2.93505e+006 7.16983e+006 1.57415e+007 2.86374e+007 4.13217e+007 4.94049e+007 5.30892e+007 5.43551e+007 5.45712e+007 5.43752e+007 5.40245e+007 5.36182e+007 5.31934e+007 5.27639e+007 5.23349e+007 5.19083e+007 5.14847e+007 5.10644e+007 5.06476e+007 5.02341e+007 4.98239e+007 4.94171e+007 4.90137e+007 4.86135e+007 4.82166e+007 4.78229e+007 4.74325e+007 4.2966e+009
+*end
+
+[state-1]
+report.type: partition
+year: 1994
+time_step: step_one
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 6.19138e+007 6.14083e+007 6.09069e+007 6.04096e+007 5.94768e+007 5.82778e+007 5.59949e+007 5.12615e+007 4.21773e+007 2.87551e+007 1.55492e+007 6.96703e+006 2.80565e+006 1.0765e+006 405031 151242 56313.5 20945.1 7787.12 2894.71 1075.99 399.947 148.66 55.2563 20.5386 7.63413 2.83758 1.05472 0.392035 0 0 0 0 0 0
+1 1 mature 0 0 0 0 439634 1.14947e+006 2.9471e+006 7.19928e+006 1.58062e+007 2.87551e+007 4.14914e+007 4.96078e+007 5.33073e+007 5.45783e+007 5.47954e+007 5.45985e+007 5.42464e+007 5.38384e+007 5.34119e+007 5.29806e+007 5.25498e+007 5.21215e+007 5.16962e+007 5.12742e+007 5.08556e+007 5.04404e+007 5.00286e+007 4.96201e+007 4.9215e+007 4.88132e+007 4.84147e+007 4.80194e+007 4.76273e+007 4.72385e+007 4.27902e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 1994
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19138e+007 6.14083e+007 6.09069e+007 6.04096e+007 5.94768e+007 5.82778e+007 5.59949e+007 5.12615e+007 4.21773e+007 2.87551e+007 1.55492e+007 6.96703e+006 2.80565e+006 1.0765e+006 405031 151242 56313.5 20945.1 7787.12 2894.71 1075.99 399.947 148.66 55.2563 20.5386 7.63413 2.83758 1.05472 0.392035 0 0 0 0 0 0
+All mature 0 0 0 0 439634 1.14947e+006 2.9471e+006 7.19928e+006 1.58062e+007 2.87551e+007 4.14914e+007 4.96078e+007 5.33073e+007 5.45783e+007 5.47954e+007 5.45985e+007 5.42464e+007 5.38384e+007 5.34119e+007 5.29806e+007 5.25498e+007 5.21215e+007 5.16962e+007 5.12742e+007 5.08556e+007 5.04404e+007 5.00286e+007 4.96201e+007 4.9215e+007 4.88132e+007 4.84147e+007 4.80194e+007 4.76273e+007 4.72385e+007 4.27902e+009
+*end
+
+[Fishing_2005]
+report.type: layer
+layer: Fishing_2005
+layer.type: numeric
+year: 1994
+time_step: step_one
+115974
+*end
+
+[state-2]
+report.type: partition
+year: 1994
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.16605e+007 6.11571e+007 6.06578e+007 6.01625e+007 5.92335e+007 5.80394e+007 5.57659e+007 5.10518e+007 4.20048e+007 2.86374e+007 1.54856e+007 6.93853e+006 2.79417e+006 1.0721e+006 403374 150624 56083.2 20859.4 7755.27 2882.87 1071.59 398.311 148.051 55.0303 20.4546 7.6029 2.82597 1.0504 0.390431 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437836 1.14477e+006 2.93505e+006 7.16983e+006 1.57415e+007 2.86374e+007 4.13217e+007 4.94049e+007 5.30892e+007 5.43551e+007 5.45712e+007 5.43752e+007 5.40245e+007 5.36182e+007 5.31934e+007 5.27639e+007 5.23349e+007 5.19083e+007 5.14847e+007 5.10644e+007 5.06476e+007 5.02341e+007 4.98239e+007 4.94171e+007 4.90137e+007 4.86135e+007 4.82166e+007 4.78229e+007 4.74325e+007 4.30856e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 1995
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19258e+007 6.14083e+007 6.09069e+007 6.04096e+007 5.94768e+007 5.82778e+007 5.59949e+007 5.12615e+007 4.21773e+007 2.87551e+007 1.55492e+007 6.96703e+006 2.80565e+006 1.0765e+006 405031 151242 56313.5 20945.1 7787.12 2894.71 1075.99 399.947 148.66 55.2563 20.5386 7.63413 2.83758 1.05472 0.392035 0 0 0 0 0 0
+All mature 0 0 0 0 439634 1.14947e+006 2.9471e+006 7.19928e+006 1.58062e+007 2.87551e+007 4.14914e+007 4.96078e+007 5.33073e+007 5.45783e+007 5.47954e+007 5.45985e+007 5.42464e+007 5.38384e+007 5.34119e+007 5.29806e+007 5.25498e+007 5.21215e+007 5.16962e+007 5.12742e+007 5.08556e+007 5.04404e+007 5.00286e+007 4.96201e+007 4.9215e+007 4.88132e+007 4.84147e+007 4.80194e+007 4.76273e+007 4.72385e+007 4.29094e+009
+*end
+
+[state-2]
+report.type: partition
+year: 1995
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.16725e+007 6.11571e+007 6.06578e+007 6.01625e+007 5.92335e+007 5.80394e+007 5.57659e+007 5.10518e+007 4.20048e+007 2.86374e+007 1.54856e+007 6.93853e+006 2.79417e+006 1.0721e+006 403374 150624 56083.2 20859.4 7755.27 2882.87 1071.59 398.311 148.051 55.0303 20.4546 7.6029 2.82597 1.0504 0.390431 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437836 1.14477e+006 2.93505e+006 7.16983e+006 1.57415e+007 2.86374e+007 4.13217e+007 4.94049e+007 5.30892e+007 5.43551e+007 5.45712e+007 5.43752e+007 5.40245e+007 5.36182e+007 5.31934e+007 5.27639e+007 5.23349e+007 5.19083e+007 5.14847e+007 5.10644e+007 5.06476e+007 5.02341e+007 4.98239e+007 4.94171e+007 4.90137e+007 4.86135e+007 4.82166e+007 4.78229e+007 4.74325e+007 4.32043e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 1996
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19376e+007 6.14202e+007 6.09069e+007 6.04096e+007 5.94768e+007 5.82778e+007 5.59949e+007 5.12615e+007 4.21773e+007 2.87551e+007 1.55492e+007 6.96703e+006 2.80565e+006 1.0765e+006 405031 151242 56313.5 20945.1 7787.12 2894.71 1075.99 399.947 148.66 55.2563 20.5386 7.63413 2.83758 1.05472 0.392035 0 0 0 0 0 0
+All mature 0 0 0 0 439634 1.14947e+006 2.9471e+006 7.19928e+006 1.58062e+007 2.87551e+007 4.14914e+007 4.96078e+007 5.33073e+007 5.45783e+007 5.47954e+007 5.45985e+007 5.42464e+007 5.38384e+007 5.34119e+007 5.29806e+007 5.25498e+007 5.21215e+007 5.16962e+007 5.12742e+007 5.08556e+007 5.04404e+007 5.00286e+007 4.96201e+007 4.9215e+007 4.88132e+007 4.84147e+007 4.80194e+007 4.76273e+007 4.72385e+007 4.30276e+009
+*end
+
+[state-2]
+report.type: partition
+year: 1996
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.16843e+007 6.11689e+007 6.06578e+007 6.01625e+007 5.92335e+007 5.80394e+007 5.57659e+007 5.10518e+007 4.20048e+007 2.86374e+007 1.54856e+007 6.93853e+006 2.79417e+006 1.0721e+006 403374 150624 56083.2 20859.4 7755.27 2882.87 1071.59 398.311 148.051 55.0303 20.4546 7.6029 2.82597 1.0504 0.390431 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437836 1.14477e+006 2.93505e+006 7.16983e+006 1.57415e+007 2.86374e+007 4.13217e+007 4.94049e+007 5.30892e+007 5.43551e+007 5.45712e+007 5.43752e+007 5.40245e+007 5.36182e+007 5.31934e+007 5.27639e+007 5.23349e+007 5.19083e+007 5.14847e+007 5.10644e+007 5.06476e+007 5.02341e+007 4.98239e+007 4.94171e+007 4.90137e+007 4.86135e+007 4.82166e+007 4.78229e+007 4.74325e+007 4.3322e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 1997
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19493e+007 6.14319e+007 6.09187e+007 6.04096e+007 5.94768e+007 5.82778e+007 5.59949e+007 5.12615e+007 4.21773e+007 2.87551e+007 1.55492e+007 6.96703e+006 2.80565e+006 1.0765e+006 405031 151242 56313.5 20945.1 7787.12 2894.71 1075.99 399.947 148.66 55.2563 20.5386 7.63413 2.83758 1.05472 0.392035 0 0 0 0 0 0
+All mature 0 0 0 0 439634 1.14947e+006 2.9471e+006 7.19928e+006 1.58062e+007 2.87551e+007 4.14914e+007 4.96078e+007 5.33073e+007 5.45783e+007 5.47954e+007 5.45985e+007 5.42464e+007 5.38384e+007 5.34119e+007 5.29806e+007 5.25498e+007 5.21215e+007 5.16962e+007 5.12742e+007 5.08556e+007 5.04404e+007 5.00286e+007 4.96201e+007 4.9215e+007 4.88132e+007 4.84147e+007 4.80194e+007 4.76273e+007 4.72385e+007 4.31448e+009
+*end
+
+[state-2]
+report.type: partition
+year: 1997
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.16959e+007 6.11806e+007 6.06695e+007 6.01625e+007 5.92335e+007 5.80394e+007 5.57659e+007 5.10518e+007 4.20048e+007 2.86374e+007 1.54856e+007 6.93853e+006 2.79417e+006 1.0721e+006 403374 150624 56083.2 20859.4 7755.27 2882.87 1071.59 398.311 148.051 55.0303 20.4546 7.6029 2.82597 1.0504 0.390431 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437836 1.14477e+006 2.93505e+006 7.16983e+006 1.57415e+007 2.86374e+007 4.13217e+007 4.94049e+007 5.30892e+007 5.43551e+007 5.45712e+007 5.43752e+007 5.40245e+007 5.36182e+007 5.31934e+007 5.27639e+007 5.23349e+007 5.19083e+007 5.14847e+007 5.10644e+007 5.06476e+007 5.02341e+007 4.98239e+007 4.94171e+007 4.90137e+007 4.86135e+007 4.82166e+007 4.78229e+007 4.74325e+007 4.34388e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 1998
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19609e+007 6.14435e+007 6.09304e+007 6.04213e+007 5.94768e+007 5.82778e+007 5.59949e+007 5.12615e+007 4.21773e+007 2.8755e+007 1.55492e+007 6.96703e+006 2.80565e+006 1.0765e+006 405031 151242 56313.5 20945.1 7787.12 2894.71 1075.99 399.947 148.659 55.2563 20.5386 7.63412 2.83758 1.05472 0.392035 0 0 0 0 0 0
+All mature 0 0 0 0 439634 1.14947e+006 2.9471e+006 7.19928e+006 1.58062e+007 2.8755e+007 4.14914e+007 4.96078e+007 5.33073e+007 5.45783e+007 5.47954e+007 5.45985e+007 5.42464e+007 5.38384e+007 5.34118e+007 5.29806e+007 5.25498e+007 5.21214e+007 5.16962e+007 5.12742e+007 5.08556e+007 5.04404e+007 5.00286e+007 4.96201e+007 4.9215e+007 4.88132e+007 4.84146e+007 4.80194e+007 4.76273e+007 4.72384e+007 4.32611e+009
+*end
+
+[state-2]
+report.type: partition
+year: 1998
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17074e+007 6.11922e+007 6.06811e+007 6.01742e+007 5.92335e+007 5.80394e+007 5.57659e+007 5.10518e+007 4.20048e+007 2.86374e+007 1.54855e+007 6.93853e+006 2.79417e+006 1.0721e+006 403374 150624 56083.1 20859.4 7755.26 2882.87 1071.59 398.311 148.051 55.0303 20.4546 7.60289 2.82597 1.0504 0.390431 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437836 1.14477e+006 2.93505e+006 7.16983e+006 1.57415e+007 2.86374e+007 4.13217e+007 4.94049e+007 5.30892e+007 5.4355e+007 5.45712e+007 5.43751e+007 5.40245e+007 5.36182e+007 5.31934e+007 5.27639e+007 5.23349e+007 5.19082e+007 5.14847e+007 5.10644e+007 5.06475e+007 5.0234e+007 4.98239e+007 4.94171e+007 4.90137e+007 4.86135e+007 4.82166e+007 4.78229e+007 4.74325e+007 4.35546e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 1999
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19723e+007 6.1455e+007 6.09419e+007 6.04329e+007 5.94883e+007 5.82777e+007 5.59949e+007 5.12615e+007 4.21772e+007 2.8755e+007 1.55491e+007 6.96701e+006 2.80564e+006 1.0765e+006 405030 151242 56313.4 20945.1 7787.1 2894.7 1075.99 399.946 148.659 55.2562 20.5385 7.6341 2.83757 1.05471 0.392034 0 0 0 0 0 0
+All mature 0 0 0 0 439719 1.14947e+006 2.9471e+006 7.19927e+006 1.58062e+007 2.8755e+007 4.14913e+007 4.96077e+007 5.33072e+007 5.45782e+007 5.47952e+007 5.45983e+007 5.42463e+007 5.38383e+007 5.34117e+007 5.29805e+007 5.25497e+007 5.21213e+007 5.1696e+007 5.1274e+007 5.08554e+007 5.04403e+007 5.00284e+007 4.962e+007 4.92149e+007 4.8813e+007 4.84145e+007 4.80192e+007 4.76272e+007 4.72383e+007 4.33763e+009
+*end
+
+[state-2]
+report.type: partition
+year: 1999
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17188e+007 6.12036e+007 6.06926e+007 6.01857e+007 5.9245e+007 5.80394e+007 5.57658e+007 5.10518e+007 4.20047e+007 2.86374e+007 1.54855e+007 6.93851e+006 2.79416e+006 1.0721e+006 403373 150623 56083 20859.4 7755.24 2882.86 1071.59 398.31 148.051 55.0301 20.4545 7.60288 2.82596 1.0504 0.39043 0 0 0 0 0
+1 1 mature 0 0 0 0 0 437921 1.14477e+006 2.93504e+006 7.16982e+006 1.57415e+007 2.86374e+007 4.13216e+007 4.94048e+007 5.30891e+007 5.43549e+007 5.45711e+007 5.4375e+007 5.40244e+007 5.36181e+007 5.31932e+007 5.27637e+007 5.23347e+007 5.19081e+007 5.14846e+007 5.10643e+007 5.06474e+007 5.02339e+007 4.98238e+007 4.9417e+007 4.90135e+007 4.86134e+007 4.82165e+007 4.78228e+007 4.74324e+007 4.36693e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2000
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19836e+007 6.14663e+007 6.09532e+007 6.04443e+007 5.94997e+007 5.8289e+007 5.59949e+007 5.12614e+007 4.21771e+007 2.87549e+007 1.5549e+007 6.96698e+006 2.80563e+006 1.07649e+006 405028 151241 56313.1 20945 7787.06 2894.69 1075.98 399.944 148.658 55.2559 20.5384 7.63407 2.83756 1.05471 0.392032 0 0 0 0 0 0
+All mature 0 0 0 0 439803 1.14969e+006 2.9471e+006 7.19926e+006 1.58061e+007 2.87549e+007 4.14911e+007 4.96075e+007 5.33069e+007 5.45779e+007 5.4795e+007 5.45981e+007 5.4246e+007 5.3838e+007 5.34114e+007 5.29802e+007 5.25494e+007 5.21211e+007 5.16958e+007 5.12738e+007 5.08552e+007 5.044e+007 5.00282e+007 4.96197e+007 4.92146e+007 4.88128e+007 4.84143e+007 4.8019e+007 4.76269e+007 4.72381e+007 4.34904e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2000
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.173e+007 6.12149e+007 6.07039e+007 6.01971e+007 5.92563e+007 5.80506e+007 5.57658e+007 5.10517e+007 4.20046e+007 2.86372e+007 1.54854e+007 6.93848e+006 2.79415e+006 1.07209e+006 403371 150623 56082.7 20859.3 7755.21 2882.85 1071.58 398.308 148.05 55.0299 20.4544 7.60284 2.82595 1.0504 0.390428 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438004 1.14499e+006 2.93504e+006 7.16981e+006 1.57415e+007 2.86372e+007 4.13214e+007 4.94045e+007 5.30888e+007 5.43546e+007 5.45708e+007 5.43747e+007 5.40241e+007 5.36178e+007 5.3193e+007 5.27635e+007 5.23345e+007 5.19079e+007 5.14843e+007 5.1064e+007 5.06472e+007 5.02337e+007 4.98235e+007 4.94168e+007 4.90133e+007 4.86131e+007 4.82162e+007 4.78226e+007 4.74321e+007 4.3783e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2001
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.19947e+007 6.14775e+007 6.09645e+007 6.04556e+007 5.95109e+007 5.83002e+007 5.60057e+007 5.12613e+007 4.2177e+007 2.87548e+007 1.5549e+007 6.96695e+006 2.80561e+006 1.07649e+006 405026 151241 56312.8 20944.9 7787.03 2894.67 1075.98 399.942 148.658 55.2557 20.5383 7.63403 2.83754 1.05471 0.39203 0 0 0 0 0 0
+All mature 0 0 0 0 439887 1.14991e+006 2.94767e+006 7.19925e+006 1.58061e+007 2.87548e+007 4.1491e+007 4.96073e+007 5.33067e+007 5.45777e+007 5.47947e+007 5.45978e+007 5.42458e+007 5.38378e+007 5.34112e+007 5.298e+007 5.25492e+007 5.21208e+007 5.16955e+007 5.12736e+007 5.0855e+007 5.04398e+007 5.0028e+007 4.96195e+007 4.92144e+007 4.88126e+007 4.84141e+007 4.80188e+007 4.76267e+007 4.72379e+007 4.36037e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2001
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17411e+007 6.1226e+007 6.07151e+007 6.02083e+007 5.92675e+007 5.80617e+007 5.57766e+007 5.10516e+007 4.20045e+007 2.86372e+007 1.54854e+007 6.93845e+006 2.79414e+006 1.07209e+006 403369 150622 56082.5 20859.2 7755.17 2882.83 1071.58 398.306 148.05 55.0296 20.4543 7.60281 2.82594 1.05039 0.390427 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438087 1.14521e+006 2.93561e+006 7.16981e+006 1.57415e+007 2.86372e+007 4.13213e+007 4.94043e+007 5.30886e+007 5.43544e+007 5.45706e+007 5.43745e+007 5.40239e+007 5.36176e+007 5.31927e+007 5.27633e+007 5.23343e+007 5.19076e+007 5.14841e+007 5.10638e+007 5.0647e+007 5.02335e+007 4.98233e+007 4.94166e+007 4.90131e+007 4.86129e+007 4.8216e+007 4.78224e+007 4.74319e+007 4.38958e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2002
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.20057e+007 6.14885e+007 6.09756e+007 6.04667e+007 5.9522e+007 5.83111e+007 5.60163e+007 5.12712e+007 4.21769e+007 2.87547e+007 1.55489e+007 6.9669e+006 2.80559e+006 1.07648e+006 405023 151239 56312.4 20944.7 7786.96 2894.65 1075.97 399.939 148.657 55.2552 20.5382 7.63397 2.83752 1.0547 0.392027 0 0 0 0 0 0
+All mature 0 0 0 0 439968 1.15013e+006 2.94823e+006 7.20063e+006 1.58061e+007 2.87547e+007 4.14907e+007 4.96069e+007 5.33063e+007 5.45772e+007 5.47943e+007 5.45974e+007 5.42453e+007 5.38373e+007 5.34108e+007 5.29795e+007 5.25488e+007 5.21204e+007 5.16951e+007 5.12732e+007 5.08546e+007 5.04394e+007 5.00276e+007 4.96191e+007 4.9214e+007 4.88122e+007 4.84137e+007 4.80184e+007 4.76264e+007 4.72375e+007 4.37159e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2002
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.1752e+007 6.1237e+007 6.07261e+007 6.02194e+007 5.92785e+007 5.80726e+007 5.57872e+007 5.10614e+007 4.20044e+007 2.8637e+007 1.54853e+007 6.9384e+006 2.79412e+006 1.07208e+006 403366 150621 56082 20859 7755.11 2882.81 1071.57 398.303 148.048 55.0292 20.4542 7.60274 2.82591 1.05038 0.390423 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438169 1.14542e+006 2.93617e+006 7.17118e+006 1.57414e+007 2.8637e+007 4.1321e+007 4.9404e+007 5.30882e+007 5.4354e+007 5.45702e+007 5.43741e+007 5.40234e+007 5.36171e+007 5.31923e+007 5.27628e+007 5.23338e+007 5.19072e+007 5.14837e+007 5.10634e+007 5.06465e+007 5.02331e+007 4.98229e+007 4.94162e+007 4.90127e+007 4.86125e+007 4.82156e+007 4.7822e+007 4.74315e+007 4.40075e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2003
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.20165e+007 6.14994e+007 6.09865e+007 6.04777e+007 5.9533e+007 5.8322e+007 5.60269e+007 5.12809e+007 4.21849e+007 2.87545e+007 1.55488e+007 6.96685e+006 2.80557e+006 1.07647e+006 405019 151238 56311.8 20944.5 7786.88 2894.62 1075.96 399.935 148.655 55.2547 20.538 7.63389 2.83749 1.05469 0.392023 0 0 0 0 0 0
+All mature 0 0 0 0 440049 1.15034e+006 2.94878e+006 7.202e+006 1.58091e+007 2.87545e+007 4.14904e+007 4.96065e+007 5.33058e+007 5.45767e+007 5.47938e+007 5.45969e+007 5.42448e+007 5.38368e+007 5.34102e+007 5.2979e+007 5.25483e+007 5.21199e+007 5.16946e+007 5.12726e+007 5.08541e+007 5.04389e+007 5.00271e+007 4.96186e+007 4.92135e+007 4.88117e+007 4.84132e+007 4.80179e+007 4.76259e+007 4.7237e+007 4.3827e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2003
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17628e+007 6.12478e+007 6.0737e+007 6.02303e+007 5.92894e+007 5.80834e+007 5.57977e+007 5.10711e+007 4.20124e+007 2.86369e+007 1.54852e+007 6.93835e+006 2.79409e+006 1.07207e+006 403362 150619 56081.5 20858.8 7755.03 2882.78 1071.56 398.299 148.047 55.0286 20.454 7.60267 2.82588 1.05037 0.390419 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438249 1.14564e+006 2.93672e+006 7.17254e+006 1.57444e+007 2.86369e+007 4.13207e+007 4.94036e+007 5.30877e+007 5.43535e+007 5.45696e+007 5.43735e+007 5.40229e+007 5.36166e+007 5.31918e+007 5.27623e+007 5.23333e+007 5.19067e+007 5.14831e+007 5.10629e+007 5.0646e+007 5.02325e+007 4.98224e+007 4.94157e+007 4.90122e+007 4.8612e+007 4.82151e+007 4.78215e+007 4.74311e+007 4.41182e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2004
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.20272e+007 6.15101e+007 6.09973e+007 6.04885e+007 5.95438e+007 5.83327e+007 5.60372e+007 5.12904e+007 4.21928e+007 2.87599e+007 1.55487e+007 6.96677e+006 2.80553e+006 1.07646e+006 405013 151236 56311 20944.2 7786.77 2894.58 1075.94 399.929 148.653 55.2539 20.5377 7.63378 2.83745 1.05467 0.392017 0 0 0 0 0 0
+All mature 0 0 0 0 440129 1.15055e+006 2.94933e+006 7.20333e+006 1.5812e+007 2.87599e+007 4.14901e+007 4.9606e+007 5.33051e+007 5.4576e+007 5.4793e+007 5.45961e+007 5.4244e+007 5.3836e+007 5.34095e+007 5.29782e+007 5.25475e+007 5.21191e+007 5.16939e+007 5.12719e+007 5.08533e+007 5.04381e+007 5.00263e+007 4.96179e+007 4.92128e+007 4.8811e+007 4.84125e+007 4.80172e+007 4.76252e+007 4.72364e+007 4.39371e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2004
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17734e+007 6.12585e+007 6.07478e+007 6.02411e+007 5.93002e+007 5.80941e+007 5.5808e+007 5.10806e+007 4.20202e+007 2.86422e+007 1.54851e+007 6.93827e+006 2.79406e+006 1.07205e+006 403356 150617 56080.7 20858.5 7754.92 2882.74 1071.54 398.293 148.045 55.0278 20.4537 7.60256 2.82584 1.05036 0.390414 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438329 1.14585e+006 2.93726e+006 7.17387e+006 1.57473e+007 2.86422e+007 4.13203e+007 4.94031e+007 5.30871e+007 5.43527e+007 5.45689e+007 5.43727e+007 5.40221e+007 5.36158e+007 5.3191e+007 5.27615e+007 5.23325e+007 5.19059e+007 5.14824e+007 5.10622e+007 5.06453e+007 5.02318e+007 4.98217e+007 4.94149e+007 4.90115e+007 4.86113e+007 4.82145e+007 4.78208e+007 4.74304e+007 4.42278e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2005
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.20377e+007 6.15207e+007 6.10079e+007 6.04993e+007 5.95544e+007 5.83432e+007 5.60474e+007 5.12997e+007 4.22004e+007 2.87651e+007 1.55515e+007 6.96667e+006 2.80549e+006 1.07644e+006 405005 151233 56309.9 20943.8 7786.62 2894.52 1075.92 399.921 148.65 55.2528 20.5373 7.63363 2.83739 1.05465 0.39201 0 0 0 0 0 0
+All mature 0 0 0 0 440208 1.15076e+006 2.94986e+006 7.20465e+006 1.58149e+007 2.87651e+007 4.14976e+007 4.96053e+007 5.33043e+007 5.4575e+007 5.4792e+007 5.4595e+007 5.42429e+007 5.3835e+007 5.34084e+007 5.29772e+007 5.25464e+007 5.21181e+007 5.16928e+007 5.12709e+007 5.08523e+007 5.04371e+007 5.00253e+007 4.96169e+007 4.92118e+007 4.881e+007 4.84115e+007 4.80163e+007 4.76242e+007 4.72354e+007 4.4046e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2005
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17839e+007 6.12691e+007 6.07584e+007 6.02518e+007 5.93108e+007 5.81046e+007 5.58182e+007 5.10899e+007 4.20278e+007 2.86474e+007 1.54879e+007 6.93817e+006 2.79401e+006 1.07203e+006 403349 150614 56079.6 20858.1 7754.77 2882.68 1071.52 398.285 148.042 55.0267 20.4533 7.60241 2.82579 1.05034 0.390406 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438407 1.14606e+006 2.9378e+006 7.17517e+006 1.57502e+007 2.86474e+007 4.13278e+007 4.94023e+007 5.30862e+007 5.43518e+007 5.45678e+007 5.43717e+007 5.4021e+007 5.36147e+007 5.31899e+007 5.27605e+007 5.23315e+007 5.19049e+007 5.14814e+007 5.10611e+007 5.06443e+007 5.02308e+007 4.98207e+007 4.9414e+007 4.90105e+007 4.86104e+007 4.82135e+007 4.78199e+007 4.74294e+007 4.43362e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2006
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.20481e+007 6.15312e+007 6.10185e+007 6.05098e+007 5.9565e+007 5.83537e+007 5.60576e+007 5.13091e+007 4.22081e+007 2.87703e+007 1.55543e+007 6.96793e+006 2.80545e+006 1.07642e+006 404998 151230 56308.8 20943.4 7786.47 2894.47 1075.9 399.913 148.647 55.2517 20.5369 7.63348 2.83734 1.05463 0.392002 0 0 0 0 0 0
+All mature 0 0 0 0 440286 1.15097e+006 2.9504e+006 7.20596e+006 1.58178e+007 2.87703e+007 4.15051e+007 4.96143e+007 5.33035e+007 5.45741e+007 5.4791e+007 5.4594e+007 5.42419e+007 5.38339e+007 5.34074e+007 5.29761e+007 5.25454e+007 5.21171e+007 5.16918e+007 5.12699e+007 5.08513e+007 5.04361e+007 5.00244e+007 4.96159e+007 4.92109e+007 4.88091e+007 4.84106e+007 4.80153e+007 4.76233e+007 4.72345e+007 4.4154e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2006
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.17943e+007 6.12795e+007 6.07689e+007 6.02623e+007 5.93213e+007 5.8115e+007 5.58282e+007 5.10992e+007 4.20355e+007 2.86526e+007 1.54907e+007 6.93943e+006 2.79397e+006 1.07202e+006 403342 150611 56078.5 20857.7 7754.61 2882.63 1071.5 398.277 148.039 55.0257 20.4529 7.60226 2.82573 1.05031 0.390398 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438485 1.14626e+006 2.93833e+006 7.17648e+006 1.57531e+007 2.86526e+007 4.13353e+007 4.94113e+007 5.30855e+007 5.43509e+007 5.45669e+007 5.43707e+007 5.402e+007 5.36137e+007 5.31889e+007 5.27594e+007 5.23305e+007 5.19039e+007 5.14804e+007 5.10601e+007 5.06433e+007 5.02298e+007 4.98197e+007 4.9413e+007 4.90096e+007 4.86094e+007 4.82125e+007 4.78189e+007 4.74285e+007 4.44438e+009
+*end
+
+[SSRUs]
+report.type: layer_derived_view
+year: 2007
+time_step: step_one
+area category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+All immature 6.20584e+007 6.15415e+007 6.10288e+007 6.05202e+007 5.95754e+007 5.8364e+007 5.60676e+007 5.13183e+007 4.22158e+007 2.87755e+007 1.55571e+007 6.96919e+006 2.80595e+006 1.0764e+006 404991 151227 56307.7 20942.9 7786.31 2894.41 1075.88 399.905 148.644 55.2505 20.5364 7.63333 2.83728 1.05461 0.391994 0 0 0 0 0 0
+All mature 0 0 0 0 440363 1.15117e+006 2.95093e+006 7.20726e+006 1.58206e+007 2.87755e+007 4.15126e+007 4.96232e+007 5.33131e+007 5.45733e+007 5.47901e+007 5.4593e+007 5.42408e+007 5.38328e+007 5.34063e+007 5.29751e+007 5.25443e+007 5.2116e+007 5.16908e+007 5.12688e+007 5.08503e+007 5.04351e+007 5.00233e+007 4.96149e+007 4.92098e+007 4.88081e+007 4.84096e+007 4.80143e+007 4.76223e+007 4.72335e+007 4.42611e+009
+*end
+
+[state-2]
+report.type: partition
+year: 2007
+time_step: step_two
+row column category age[1] age[2] age[3] age[4] age[5] age[6] age[7] age[8] age[9] age[10] age[11] age[12] age[13] age[14] age[15] age[16] age[17] age[18] age[19] age[20] age[21] age[22] age[23] age[24] age[25] age[26] age[27] age[28] age[29] age[30] age[31] age[32] age[33] age[34] age[35]
+1 1 immature 0 6.18045e+007 6.12898e+007 6.07792e+007 6.02727e+007 5.93317e+007 5.81253e+007 5.58382e+007 5.11084e+007 4.20431e+007 2.86578e+007 1.54935e+007 6.94068e+006 2.79448e+006 1.072e+006 403335 150609 56077.4 20857.3 7754.46 2882.57 1071.48 398.269 148.036 55.0245 20.4524 7.6021 2.82567 1.05029 0.39039 0 0 0 0 0
+1 1 mature 0 0 0 0 0 438561 1.14646e+006 2.93885e+006 7.17778e+006 1.57559e+007 2.86578e+007 4.13428e+007 4.94202e+007 5.3095e+007 5.43501e+007 5.4566e+007 5.43697e+007 5.4019e+007 5.36126e+007 5.31878e+007 5.27584e+007 5.23294e+007 5.19028e+007 5.14793e+007 5.10591e+007 5.06423e+007 5.02288e+007 4.98187e+007 4.9412e+007 4.90085e+007 4.86084e+007 4.82116e+007 4.78179e+007 4.74275e+007 4.45504e+009
+*end
+
+[CAA-1998]
+report.type: observation
+observation.label: CAA-year-1998
+observation.year: 1998
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.13131e-005 -1.13131e-005 343 0.25 85.75 -1115.04
+*end
+
+[CAA-1999]
+report.type: observation
+observation.label: CAA-year-1999
+observation.year: 1999
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.12924e-005 -1.12924e-005 564 0.25 141 -846.935
+*end
+
+[CAA-2000]
+report.type: observation
+observation.label: CAA-year-2000
+observation.year: 2000
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.1272e-005 -1.1272e-005 651 0.25 162.75 -2773.87
+*end
+
+[CAA-2001]
+report.type: observation
+observation.label: CAA-year-2001
+observation.year: 2001
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.12518e-005 -1.12518e-005 840 0.25 210 -1844.42
+*end
+
+[CAA-2002]
+report.type: observation
+observation.label: CAA-year-2002
+observation.year: 2002
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.12319e-005 -1.12319e-005 598 0.25 149.5 -988.013
+*end
+
+[CAA-2003]
+report.type: observation
+observation.label: CAA-year-2003
+observation.year: 2003
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.12122e-005 -1.12122e-005 456 0.25 114 -716.643
+*end
+
+[CAA-2004]
+report.type: observation
+observation.label: CAA-year-2004
+observation.year: 2004
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.11927e-005 -1.11927e-005 538 0.25 134.5 -2242.9
+*end
+
+[CAA-2005]
+report.type: observation
+observation.label: CAA-year-2005
+observation.year: 2005
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.11736e-005 -1.11736e-005 438 0.25 109.5 -1642.27
+*end
+
+[CAA-2006]
+report.type: observation
+observation.label: CAA-year-2006
+observation.year: 2006
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.11546e-005 -1.11546e-005 817 0.25 204.25 -1541.34
+*end
+
+[CAA-2007]
+report.type: observation
+observation.label: CAA-year-2007
+observation.year: 2007
+observation.time_step: step_one
+observation.min_age: 1
+observation.max_age: 35
+observation.age_plus_group: true
+area category age observed expected residual errorvalue processerror totalerror score
+All immature+mature 1 0 1.11358e-005 -1.11358e-005 915 0.25 228.75 -3826.51
+*end
+
+[CPUE-1998]
+report.type: observation
+observation.label: CPUE-1998
+observation.year: 1998
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 103.012 102.842 0.169842 0.2 0 0.2 -1.61351
+*end
+
+[CPUE-1999]
+report.type: observation
+observation.label: CPUE-1999
+observation.year: 1999
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 103.413 103.049 0.363716 0.2 0 0.2 -1.61245
+*end
+
+[CPUE-2000]
+report.type: observation
+observation.label: CPUE-2000
+observation.year: 2000
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 153.399 103.254 50.1445 0.2 0 0.2 0.581139
+*end
+
+[CPUE-2001]
+report.type: observation
+observation.label: CPUE-2001
+observation.year: 2001
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 194.992 103.458 91.5338 0.2 0 0.2 3.82343
+*end
+
+[CPUE-2002]
+report.type: observation
+observation.label: CPUE-2002
+observation.year: 2002
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 94.3754 103.66 -9.28445 0.2 0 0.2 -1.54904
+*end
+
+[CPUE-2003]
+report.type: observation
+observation.label: CPUE-2003
+observation.year: 2003
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 104.182 103.86 0.322158 0.2 0 0.2 -1.6127
+*end
+
+[CPUE-2004]
+report.type: observation
+observation.label: CPUE-2004
+observation.year: 2004
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 87.5232 104.058 -16.5347 0.2 0 0.2 -1.31915
+*end
+
+[CPUE-2005]
+report.type: observation
+observation.label: CPUE-2005
+observation.year: 2005
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 98.4496 104.254 -5.80441 0.2 0 0.2 -1.60118
+*end
+
+[CPUE-2006]
+report.type: observation
+observation.label: CPUE-2006
+observation.year: 2006
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 78.1727 104.449 -26.276 0.2 0 0.2 -0.688782
+*end
+
+[CPUE-2007]
+report.type: observation
+observation.label: CPUE-2007
+observation.year: 2007
+observation.time_step: step_one
+area observed expected residual errorvalue processerror totalerror score
+All 59.0832 104.642 -45.5587 0.2 0 0.2 2.26502
+*end
+
+[Maturation-selectivity]
+report.type: selectivity
+selectivity.label: Maturation
+ages: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+values: 0 0 0 0 0.00733746 0.0120938 0.0312622 0.076997 0.17044 0.312622 0.454803 0.548247 0.593982 0.61315 0.620656 0.623517 0.624595 0.625001 0.625153 0.62521 0.625231 0.625239 0.625242 0.625243 0.625244 0.625244 0.625244 0.625244 0.625244 1 1 1 1 1 1
+*end
+
+[FishingSel-selectivity]
+report.type: selectivity
+selectivity.label: FishingSel
+ages: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+values: 0.00103703 0.00276243 0.00733746 0.0193425 0.05 0.123147 0.272598 0.5 0.727402 0.876853 0.95 0.980658 0.992663 0.997238 0.998963 0.999611 0.999854 0.999945 0.99998 0.999992 0.999997 0.999999 1 1 1 1 1 1 1 1 1 1 1 1 1
+*end
+
+[Covariance]
+report.type: covariance
+parameter: catchability[CPUEq].q process[BHrecruitment].r0
+Hessian:
+5.3947e+017 -171.823
+-171.823 5.53255e-014
+Covariance:
+1.71184e-016 0.531644
+0.531644 1.66919e+015
+Correlation:
+1 0.994571
+0.994571 1
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->CAA-year-1998: -1115.04
+obs->CAA-year-1999: -846.935
+obs->CAA-year-2000: -2773.87
+obs->CAA-year-2001: -1844.42
+obs->CAA-year-2002: -988.013
+obs->CAA-year-2003: -716.643
+obs->CAA-year-2004: -2242.9
+obs->CAA-year-2005: -1642.27
+obs->CAA-year-2006: -1541.34
+obs->CAA-year-2007: -3826.51
+obs->CPUE-1998: -1.61351
+obs->CPUE-1999: -1.61245
+obs->CPUE-2000: 0.581139
+obs->CPUE-2001: 3.82343
+obs->CPUE-2002: -1.54904
+obs->CPUE-2003: -1.6127
+obs->CPUE-2004: -1.31915
+obs->CPUE-2005: -1.60118
+obs->CPUE-2006: -0.688782
+obs->CPUE-2007: 2.26502
+prior->catchability[CPUEq].q: 0
+prior->process[BHrecruitment].r0: 0
+total_score: -17541.3
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[CPUEq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 1.79813e-008
+
+parameter: process[BHrecruitment].r0
+lower_bound: 10000
+upper_bound: 1e+008
+prior: uniform
+value: 6.21681e+007
+
+*end
+
+[estimate_value]
+report.type: estimate_value
+parameter: catchability[CPUEq].q process[BHrecruitment].r0
+1.79813e-008 6.21681e+007
+*end
+
+[AgeError]
+report.type: ageing_error
+ageing_error.label: normal
+ages: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+1: 1 2.86652e-007 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+2: 0.00620967 0.987581 0.00620967 3.18634e-014 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+3: 2.86652e-007 0.0477901 0.904419 0.0477901 2.86652e-007 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+4: 2.05226e-010 8.84171e-005 0.105561 0.7887 0.105561 8.84171e-005 2.05226e-010 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+5: 1.27981e-012 2.8665e-007 0.00134961 0.157305 0.682689 0.157305 0.00134961 2.8665e-007 1.27987e-012 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+6: 3.19089e-014 2.71651e-009 1.54516e-005 0.00619421 0.196119 0.595343 0.196119 0.00619421 1.54516e-005 2.71651e-009 3.18634e-014 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+7: 1.96497e-015 6.44024e-011 2.86587e-007 0.000177233 0.0158848 0.221463 0.524949 0.221463 0.0158848 0.000177233 2.86587e-007 6.44024e-011 1.9984e-015 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+8: 2.23681e-016 3.09927e-012 9.2723e-009 6.06235e-006 0.000882954 0.0295073 0.235589 0.468029 0.235589 0.0295073 0.000882954 6.06235e-006 9.2723e-009 3.0993e-012 2.22045e-016 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+9: 3.92987e-017 2.55685e-013 4.94444e-010 2.86157e-007 5.00655e-005 0.00268625 0.0450538 0.241467 0.421485 0.241467 0.0450538 0.00268625 5.00655e-005 2.86157e-007 4.94444e-010 2.55684e-013 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+10: 9.47953e-018 3.18994e-014 4.01281e-011 1.89494e-008 3.37868e-006 0.000229231 0.00597704 0.0605975 0.24173 0.382925 0.24173 0.0605975 0.00597704 0.000229231 3.37868e-006 1.89494e-008 4.01281e-011 3.18634e-014 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+11: 2.90153e-018 5.49085e-015 4.6045e-012 1.71539e-009 2.84932e-007 2.11976e-005 0.000710284 0.0107895 0.0748197 0.238377 0.350564 0.238377 0.0748197 0.0107895 0.000710284 2.11976e-005 2.84932e-007 1.71539e-009 4.60454e-012 5.44009e-015 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+12: 1.06676e-018 1.21875e-015 7.02418e-013 2.04523e-010 3.0155e-008 2.25775e-006 8.61292e-005 0.00168055 0.0168415 0.0870393 0.232811 0.323078 0.232811 0.0870393 0.0168415 0.00168055 8.61292e-005 2.25775e-006 3.0155e-008 2.04523e-010 7.02438e-013 1.22125e-015 0 0 0 0 0 0 0 0 0 0 0 0 0
+13: 4.52937e-019 3.31654e-016 1.35553e-013 3.09415e-011 3.95063e-009 2.8267e-007 1.1358e-005 0.000256904 0.00327942 0.0236872 0.0970464 0.22598 0.299478 0.22598 0.0970464 0.0236872 0.00327942 0.000256904 1.1358e-005 2.8267e-007 3.95063e-009 3.09416e-011 1.35558e-013 3.33067e-016 0 0 0 0 0 0 0 0 0 0 0
+14: 2.15773e-019 1.065e-016 3.18022e-014 5.74377e-012 6.28111e-010 4.16402e-008 1.67585e-006 4.10079e-005 0.000611121 0.00555582 0.0308631 0.104916 0.218504 0.279015 0.218504 0.104916 0.0308631 0.00555582 0.000611121 4.10079e-005 1.67585e-006 4.16402e-008 6.28111e-010 5.74385e-012 3.17524e-014 1.11022e-016 0 0 0 0 0 0 0 0 0
+15: 1.12859e-019 3.91859e-017 8.78689e-015 1.27099e-012 1.1868e-010 7.16015e-009 2.79371e-007 7.05677e-006 0.000115523 0.00122703 0.00846543 0.037975 0.110865 0.210786 0.261117 0.210786 0.110865 0.037975 0.00846543 0.00122703 0.000115523 7.05677e-006 2.79371e-007 7.16015e-009 1.1868e-010 1.27109e-012 8.77076e-015 0 0 0 0 0 0 0 0
+16: 6.37471e-020 1.61461e-017 2.78702e-015 3.27139e-013 2.61266e-011 1.42055e-009 5.26187e-008 1.32875e-006 2.28922e-005 0.00026928 0.00216435 0.0118951 0.0447321 0.115166 0.20308 0.245339 0.20308 0.115166 0.0447321 0.0118951 0.00216435 0.00026928 2.28922e-005 1.32875e-006 5.26187e-008 1.42055e-009 2.61265e-011 3.27183e-013 2.77556e-015 0 0 0 0 0 0
+17: 3.83865e-020 7.3163e-018 9.94008e-016 9.59448e-014 6.58207e-012 3.21073e-010 1.11417e-008 2.75182e-007 4.83992e-006 6.06509e-005 0.00054181 0.00345217 0.0156958 0.0509457 0.118092 0.195541 0.231332 0.195541 0.118092 0.0509457 0.0156958 0.00345217 0.00054181 6.06509e-005 4.83992e-006 2.75182e-007 1.11417e-008 3.21073e-010 6.58207e-012 9.59233e-014 9.99201e-016 0 0 0 0
+18: 2.43936e-020 3.5934e-018 3.91975e-016 3.15133e-014 1.86785e-012 8.16479e-011 2.633e-009 6.26634e-008 1.10103e-006 1.42879e-005 0.00013699 0.000970776 0.00508645 0.0197113 0.0565123 0.119895 0.188263 0.218817 0.188263 0.119895 0.0565123 0.0197113 0.00508645 0.000970776 0.00013699 1.42879e-005 1.10103e-006 6.26634e-008 2.633e-009 8.16479e-011 1.86795e-012 3.14193e-014 4.44089e-016 0 0
+19: 1.62265e-020 1.89068e-018 1.6855e-016 1.14243e-014 5.88873e-013 2.30891e-011 6.88803e-010 1.56388e-008 2.703e-007 3.55751e-006 3.56633e-005 0.000272389 0.00158549 0.00703471 0.0237978 0.0613925 0.120795 0.181297 0.207571 0.181297 0.120795 0.0613925 0.0237978 0.00703471 0.00158549 0.000272389 3.56633e-005 3.55751e-006 2.703e-007 1.56388e-008 6.88803e-010 2.3089e-011 5.88973e-013 1.13243e-014 2.22045e-016
+20: 1.12246e-020 1.05554e-018 7.81305e-017 4.51543e-015 2.03791e-013 7.18387e-012 1.97834e-010 4.25695e-009 7.15874e-008 9.41034e-007 9.67144e-006 7.77288e-005 0.000488608 0.00240274 0.00924471 0.0278347 0.0655906 0.120978 0.174666 0.197413 0.174666 0.120978 0.0655906 0.0278347 0.00924471 0.00240274 0.000488608 7.77288e-005 9.67144e-006 9.41034e-007 7.15874e-008 4.25695e-009 1.97834e-010 7.18392e-012 2.08389e-013
+21: 8.03131e-021 6.20362e-019 3.86703e-017 1.92567e-015 7.66156e-014 2.4358e-012 6.189e-011 1.25694e-009 2.04076e-008 2.64923e-007 2.75017e-006 2.28338e-005 0.000151649 0.000805755 0.00342551 0.0116535 0.0317281 0.0691393 0.120596 0.168378 0.188193 0.168378 0.120596 0.0691393 0.0317281 0.0116535 0.00342551 0.000805755 0.000151649 2.28338e-005 2.75017e-006 2.64923e-007 2.04076e-008 1.25694e-009 6.44044e-011
+22: 5.91755e-021 3.81313e-019 2.02728e-017 8.78292e-016 3.101e-014 8.92376e-013 2.09328e-011 4.00302e-010 6.24136e-009 7.93508e-008 8.22725e-007 6.95725e-006 4.79898e-005 0.000270043 0.00123975 0.00464402 0.0141954 0.03541 0.0720872 0.119775 0.162429 0.179788 0.162429 0.119775 0.0720872 0.03541 0.0141954 0.00464402 0.00123975 0.000270043 4.79898e-005 6.95725e-006 8.22725e-007 7.93508e-008 6.66351e-009
+23: 4.47338e-021 2.43779e-019 1.1181e-017 4.25189e-016 1.34072e-014 3.50576e-013 7.60245e-012 1.36738e-010 2.03999e-009 2.52469e-008 2.5922e-007 2.20823e-006 1.5609e-005 9.15576e-005 0.000445694 0.00180067 0.00603829 0.0168075 0.0388354 0.0744908 0.118616 0.156807 0.172097 0.156807 0.118616 0.0744908 0.0388354 0.0168075 0.00603829 0.00180067 0.000445694 9.15576e-005 1.5609e-005 2.20823e-006 2.86652e-007
+24: 3.45879e-021 1.61353e-019 6.45017e-018 2.17066e-016 6.14989e-015 1.46698e-013 2.94642e-012 4.98317e-011 7.0972e-010 8.51275e-009 8.59968e-008 7.31735e-007 5.24462e-006 3.16657e-005 0.000161067 0.000690222 0.00249208 0.00758134 0.0194339 0.041978 0.0764088 0.117202 0.151499 0.165031 0.151499 0.117202 0.0764088 0.041978 0.0194339 0.00758134 0.00249208 0.000690222 0.000161067 3.16657e-005 6.07162e-006
+25: 2.72815e-021 1.10131e-019 3.87295e-018 1.16208e-016 2.97517e-015 6.49969e-014 1.21172e-012 1.92781e-011 2.61758e-010 3.03343e-009 3.00047e-008 2.53331e-007 1.8258e-006 1.12333e-005 5.90023e-005 0.000264581 0.00101297 0.00331129 0.00924226 0.0220269 0.0448263 0.0778986 0.115598 0.146487 0.158519 0.146487 0.115598 0.0778986 0.0448263 0.0220269 0.00924226 0.00331129 0.00101297 0.000264581 7.2348e-005
+26: 2.19029e-021 7.72558e-020 2.41017e-018 6.49234e-017 1.51012e-015 3.03314e-014 5.26097e-013 7.88042e-012 1.01944e-010 1.13899e-009 1.09911e-008 9.16112e-008 6.59561e-007 4.10184e-006 2.20362e-005 0.000102269 0.000410031 0.00142026 0.0042502 0.0109889 0.0245479 0.04738 0.0790143 0.113855 0.141755 0.152499 0.141755 0.113855 0.0790143 0.04738 0.0245479 0.0109889 0.0042502 0.00142026 0.000539202
+27: 1.78647e-021 5.55376e-020 1.5488e-018 3.76926e-017 8.0054e-016 1.48385e-014 2.40046e-013 3.38928e-012 4.17682e-011 4.49286e-010 4.21847e-009 3.45744e-008 2.47364e-007 1.54495e-006 8.42367e-006 4.00968e-005 0.00016663 0.00060456 0.00191506 0.00529652 0.01279 0.0269672 0.0496464 0.0798055 0.112015 0.137285 0.146916 0.137285 0.112015 0.0798055 0.0496464 0.0269672 0.01279 0.00529652 0.0027366
+28: 1.47787e-021 4.08121e-020 1.02447e-018 2.26566e-017 4.41453e-016 7.57845e-015 1.14629e-013 1.5277e-012 1.794e-011 1.85636e-010 1.69265e-009 1.36003e-008 9.62976e-008 6.00873e-007 3.30415e-006 1.60124e-005 6.83881e-005 0.000257421 0.000853995 0.00249701 0.00643501 0.0146166 0.029263 0.0516383 0.0803171 0.110111 0.133059 0.141726 0.133059 0.110111 0.0803171 0.0516383 0.029263 0.0146166 0.0101319
+29: 1.23824e-021 3.0591e-020 6.95593e-019 1.40544e-017 2.52333e-016 4.02579e-015 5.70758e-014 7.19096e-013 8.05129e-012 8.01119e-011 7.0842e-010 5.56745e-009 3.88868e-008 2.414e-007 1.3319e-006 6.53146e-006 2.84685e-005 0.000110291 0.000379791 0.00116248 0.00316276 0.00764882 0.0164428 0.0314206 0.0533719 0.0805888 0.108169 0.129062 0.136888 0.129062 0.108169 0.0805888 0.0533719 0.0314206 0.0289436
+30: 1.04945e-021 2.33441e-020 4.83615e-019 8.97153e-018 1.49034e-016 2.217e-015 2.95334e-014 3.5232e-013 3.76396e-012 3.60118e-011 3.08563e-010 2.36782e-009 1.6273e-008 1.00163e-007 5.52176e-007 2.72634e-006 1.20566e-005 4.77549e-005 0.00016942 0.000538356 0.00153228 0.0039064 0.00892047 0.0182464 0.0334307 0.0548653 0.0806559 0.106209 0.125279 0.132368 0.125279 0.106209 0.0806559 0.0548653 0.0668072
+31: 8.98751e-022 1.81058e-020 3.4356e-019 5.87846e-018 9.06999e-017 1.26194e-015 1.58332e-014 1.79142e-013 1.82783e-012 1.68186e-011 1.39561e-010 1.04439e-009 7.04853e-009 4.29014e-008 2.35499e-007 1.16589e-006 5.20571e-006 2.09635e-005 7.614e-005 0.000249421 0.00073693 0.0019638 0.00472012 0.0102328 0.0200088 0.0352891 0.0561375 0.0805491 0.104247 0.121694 0.128135 0.121694 0.104247 0.0805491 0.129442
+32: 7.77003e-022 1.42522e-020 2.4891e-019 3.94486e-018 5.67357e-017 7.40492e-016 8.77061e-015 9.42734e-014 9.19611e-013 8.14105e-012 6.54067e-011 4.76908e-010 3.1559e-009 1.89536e-008 1.03311e-007 5.11084e-007 2.29473e-006 9.35124e-006 3.45867e-005 0.000116107 0.000353764 0.000978328 0.00245568 0.00559473 0.0115693 0.0217151 0.036995 0.0572074 0.0802954 0.102296 0.118294 0.124164 0.118294 0.102296 0.217328
+33: 6.7756e-022 1.13712e-020 1.83607e-019 2.70587e-018 3.63972e-017 4.46862e-016 5.00759e-015 5.12199e-014 4.78196e-013 4.07509e-012 3.16982e-011 2.25062e-010 1.45863e-009 8.62917e-009 4.65988e-008 2.29704e-007 1.0336e-006 4.2455e-006 1.59185e-005 5.44852e-005 0.000170238 0.00048556 0.00126427 0.003005 0.00652027 0.0129152 0.0233538 0.0385507 0.0580935 0.079918 0.100366 0.115067 0.120431 0.115067 0.324718
+34: 5.95514e-022 9.18527e-021 1.37687e-019 1.89373e-018 2.38988e-017 2.76737e-016 2.94033e-015 2.86659e-014 2.56437e-013 2.10496e-012 1.58547e-011 1.0958e-010 6.9496e-010 4.04438e-009 2.15978e-008 1.05836e-007 4.75918e-007 1.96383e-006 7.43624e-006 2.58394e-005 8.23939e-005 0.000241097 0.000647406 0.00159533 0.00360759 0.00748645 0.0142571 0.0249162 0.0399604 0.0588134 0.0794371 0.0984624 0.112 0.116914 0.441543
+35: 5.27193e-022 7.50411e-021 1.04828e-019 1.35013e-018 1.60325e-017 1.75533e-016 1.77194e-015 1.64921e-014 1.41528e-013 1.11983e-012 8.16967e-012 5.49549e-011 3.40847e-010 1.94924e-009 1.02785e-008 4.99747e-008 2.24044e-007 9.26149e-007 3.53016e-006 1.24073e-005 4.02098e-005 0.00012016 0.000331101 0.000841277 0.00197104 0.00425828 0.00848307 0.0155831 0.0263962 0.0412298 0.0593839 0.07887 0.0965923 0.109084 0.556798
+*end
+
+[RNDseed]
+report.type: random_number_seed
+random_number_seed: 0
+*end
+
+[SSB]
+report.type: derived_quantity
+derived_quantity.label: SSB
+initialisation.initialisation_phase[1]: 0 0 0 0 1.4715e+006 7.15849e+006 2.71607e+007 9.06188e+007 2.64162e+008 6.4475e+008 1.28958e+009 2.17563e+009 3.25058e+009 4.4747e+009 5.82445e+009 7.28559e+009 8.84813e+009 1.05039e+010 1.22453e+010 1.40654e+010 1.59572e+010 1.79142e+010 1.99299e+010 2.19984e+010 2.41139e+010 2.6271e+010 2.84646e+010 3.06899e+010 3.29427e+010 3.52188e+010 3.75144e+010 3.98261e+010 4.21508e+010 4.44854e+010 4.68274e+010 4.91502e+010 5.14541e+010 5.37392e+010 5.60056e+010 5.82535e+010 6.0483e+010 6.26944e+010 6.48877e+010 6.70631e+010 6.92207e+010 7.13607e+010 7.34833e+010 7.55885e+010 7.76765e+010 7.97475e+010 8.18016e+010 8.38389e+010 8.58595e+010 8.78637e+010 8.98515e+010 9.18231e+010 9.37786e+010 9.57181e+010 9.76418e+010 9.95497e+010 1.01442e+011 1.03319e+011 1.05181e+011 1.07027e+011 1.08858e+011 1.10675e+011 1.12476e+011 1.14263e+011 1.16036e+011 1.17793e+011 1.19537e+011 1.21266e+011 1.22981e+011 1.24682e+011 1.26369e+011 1.28043e+011 1.29703e+011 1.31349e+011 1.32982e+011 1.34601e+011 1.36207e+011 1.378e+011 1.3938e+011 1.40948e+011 1.42502e+011 1.44044e+011 1.45573e+011 1.47089e+011 1.48594e+011 1.50086e+011 1.51565e+011 1.53033e+011 1.54489e+011 1.55933e+011 1.57365e+011 1.58785e+011 1.60194e+011 1.61591e+011 1.62977e+011 1.64352e+011 1.65715e+011 1.67067e+011 1.68408e+011 1.69738e+011 1.71058e+011 1.72366e+011 1.73664e+011 1.74952e+011 1.76228e+011 1.77495e+011 1.78751e+011 1.79996e+011 1.81232e+011 1.82458e+011 1.83673e+011 1.84879e+011 1.86074e+011 1.8726e+011 1.88437e+011 1.89603e+011 1.9076e+011 1.91908e+011 1.93046e+011 1.94175e+011 1.95295e+011 1.96406e+011 1.97508e+011 1.986e+011 1.99684e+011 2.00759e+011 2.01825e+011 2.02882e+011 2.03931e+011 2.04971e+011 2.06003e+011 2.07026e+011 2.08041e+011 2.09048e+011 2.10046e+011 2.11036e+011 2.12018e+011 2.12993e+011 2.13959e+011 2.14917e+011 2.15868e+011 2.1681e+011 2.17745e+011 2.18673e+011 2.19592e+011 2.20505e+011 2.2141e+011 2.22307e+011 2.23197e+011 2.2408e+011 2.24956e+011 2.25824e+011 2.26686e+011 2.2754e+011 2.28388e+011 2.29228e+011 2.30062e+011 2.30888e+011 2.31709e+011 2.32522e+011 2.33329e+011 2.34129e+011 2.34922e+011 2.3571e+011 2.3649e+011 2.37265e+011 2.38033e+011 2.38794e+011 2.3955e+011 2.40299e+011 2.41043e+011 2.4178e+011 2.42511e+011 2.43236e+011 2.43955e+011 2.44669e+011 2.45376e+011 2.46078e+011 2.46774e+011 2.47465e+011 2.48149e+011 2.48828e+011 2.49502e+011 2.5017e+011 2.50833e+011 2.5149e+011 2.52142e+011 2.52789e+011 2.5343e+011 2.54066e+011 2.54697e+011 2.55322e+011 2.55943e+011 2.56558e+011 2.57169e+011 2.57775e+011
+years: 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007
+values: 2.58375e+011 2.58971e+011 2.59562e+011 2.60148e+011 2.60729e+011 2.61304e+011 2.61875e+011 2.62441e+011 2.63001e+011 2.63556e+011 2.64106e+011 2.6465e+011 2.65189e+011 2.65724e+011
+*end
+
+[Recruitment]
+report.type: process
+age: 1
+b0: Phase1
+categories: immature
+label: BHrecruitment
+proportions: 1.0
+r0: 6.21681e+007
+ssb: SSB
+ssb_offset: 1
+standardise_ycs_years: 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003
+steepness: 0.75
+type: bh_recruitment
+ycs_values: 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+b0_value: 2.57775e+011
+ycs_years: 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006
+ssb_values: 2.57775e+011 2.58375e+011 2.58971e+011 2.59562e+011 2.60148e+011 2.60729e+011 2.61304e+011 2.61875e+011 2.62441e+011 2.63001e+011 2.63556e+011 2.64106e+011 2.6465e+011 2.65189e+011
+recruitment_values: 6.21681e+007 6.21801e+007 6.2192e+007 6.22038e+007 6.22154e+007 6.22268e+007 6.22381e+007 6.22493e+007 6.22603e+007 6.22712e+007 6.22819e+007 6.22925e+007 6.2303e+007 6.23133e+007
+true_ycs_values: 1 1.00019 1.00039 1.00057 1.00076 1.00095 1.00113 1.00131 1.00148 1.00166 1.00183 1.002 1.00217 1.00234
+*end
+
+[Ageing]
+report.type: process
+categories: immature mature
+label: Ageing
+type: ageing
+*end
+
+[Maturation]
+report.type: process
+from: immature
+label: Maturation
+proportions: 1.0
+selectivities: Maturation
+to: mature
+type: category_transition_rate
+*end
+
+[agesize]
+report.type: age_size
+age_size.label: VB
+ages: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+sizes: 18.639 31.9982 44.1711 55.2629 65.3697 74.579 82.9704 90.6166 97.5838 103.932 109.717 114.988 119.791 124.167 128.155 131.788 135.099 138.116 140.865 143.37 145.652 147.732 149.627 151.353 152.927 154.36 155.667 156.857 157.942 158.93 159.83 160.651 161.399 162.08 162.701
+cv: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+weights: 0.081073 0.402507 1.04691 2.03419 3.3471 4.94748 6.78709 8.8145 10.9795 13.2355 15.5413 17.8611 20.1651 22.4287 24.6325 26.7615 28.8045 30.7538 32.6044 34.3536 36.0006 37.5462 38.9922 40.3416 41.5977 42.7646 43.8466 44.8482 45.7739 46.6284 47.4161 48.1415 48.8089 49.4223 49.9856
+*end
+
+[sizeweight]
+report.type: size_weight
+age_size.label: VB
+sizes: 10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170
+weights: 13.2355 34.3536 46.6284 52.1742 54.4772 55.404 55.7726 55.9185 55.9761 55.9988 56.0078 56.0113 56.0127 56.0133 56.0135 56.0136 56.0136
+*end
+
+[ageweight]
+report.type: age_weight
+age_size.label: VB
+ages: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+weights: 0.081073 0.402507 1.04691 2.03419 3.3471 4.94748 6.78709 8.8145 10.9795 13.2355 15.5413 17.8611 20.1651 22.4287 24.6325 26.7615 28.8045 30.7538 32.6044 34.3536 36.0006 37.5462 38.9922 40.3416 41.5977 42.7646 43.8466 44.8482 45.7739 46.6284 47.4161 48.1415 48.8089 49.4223 49.9856
+*end
+

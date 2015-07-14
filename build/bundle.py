@@ -41,9 +41,12 @@ os.system('cp -r -f ' + DOC  + 'spm.pdf '           + RELEASE + 'spm.pdf')
 ##################################################################
 print('\n\n3. Get the linux 64-bit version from MateVM')
 os.chdir(RELEASE)
+# Pull from VMMate
 # Do this manually the first time to store the RSA fingerprint
 os.system('scp -batch -pw statistic alistair@MateVM:projects/general/SPM/spm Linux/')
 os.system('scp -batch -pw statistic alistair@MateVM:projects/general/SPM/spm_unittests Linux/')
+# Put to odin
+os.system('scp -batch -pw Fox20003 Linux/spm dunn@odin.niwa.co.nz:bin/')
 
 ##################################################################
 os.chdir(BASE)

@@ -10,6 +10,7 @@
 // Global headers
 #include <boost/random/uniform_real.hpp>
 #include <boost/random/normal_distribution.hpp>
+#include <boost/random/gamma_distribution.hpp>
 #include <boost/random/variate_generator.hpp>
 
 // Local Headers
@@ -151,6 +152,19 @@ double CRandomNumberGenerator::getRandomChiSquare(int df) {
     dSum += dNumber * dNumber;
   }
   return dSum; // Generated Number
+}
+
+//**********************************************************************
+// double CRandomNumberGenerator::getRandomGamma()
+// Get a Gamma distributed random number
+//**********************************************************************
+double CRandomNumberGenerator::getRandomGamma(double shape) {
+
+  // Build our Gamma Distribution Generator
+  boost::gamma_distribution<> distGamma( shape );
+  boost::variate_generator<boost::mt19937&,boost::gamma_distribution<> > gen(clGenerator, distGamma);
+  double dNumber = gen();
+  return dNumber; // Generated Number
 }
 
 

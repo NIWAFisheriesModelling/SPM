@@ -16,6 +16,7 @@
 #include "../Children/CLogNormalLikelihood.h"
 #include "../Children/CLogNormalWithQLikelihood.h"
 #include "../Children/CMultinomialLikelihood.h"
+#include "../Children/CDirichletLikelihood.h"
 #include "../Children/CNormalLikelihood.h"
 #include "../Children/CPseudoLikelihood.h"
 
@@ -52,6 +53,8 @@ CLikelihood* CLikelihoodFactory::buildLikelihood(string observationType, string 
       pLikelihood = new CLogNormalLikelihood();
     else if (type == PARAM_MULTINOMIAL)
       pLikelihood = new CMultinomialLikelihood();
+    else if (type == PARAM_DIRICHLET)
+      pLikelihood = new CDirichletLikelihood();
     else if (type == PARAM_PSEUDO)
       pLikelihood = new CPseudoLikelihood();
     else

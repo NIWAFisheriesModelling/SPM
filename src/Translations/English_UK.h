@@ -210,6 +210,7 @@
 #define PARAM_DF                                  "df"
 #define PARAM_DIFFERENCE                          "difference"
 #define PARAM_DIFFERENCE_SCALE                    "difference_scale"
+#define PARAM_DIRICHLET                           "dirichlet"
 #define PARAM_DISTANCE                            "distance"
 #define PARAM_DIJKSTRA_DISTANCE                   "dijkstra"
 #define PARAM_DIRICHLET                           "dirichlet"

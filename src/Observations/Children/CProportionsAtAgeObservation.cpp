@@ -122,7 +122,7 @@ void CProportionsAtAgeObservation::validate() {
           if ((*mvObservationMatrix[vOBS[i]].rbegin()) <= 0.0 ) {
             CError::errorLessThanEqualTo(PARAM_OBS, PARAM_ZERO);
           }
-        } else if(sLikelihood == PARAM_MULTINOMIAL) {
+        } else if(sLikelihood == PARAM_MULTINOMIAL || sLikelihood == PARAM_DIRICHLET ) {
           if(boost::lexical_cast<double>(vOBS[i+j+1]) < 0.0) {
             CError::errorLessThan(PARAM_OBS, PARAM_ZERO);
           }
@@ -156,7 +156,7 @@ void CProportionsAtAgeObservation::validate() {
           }
         }
       }
-    } else if(sThisLikelihood == PARAM_MULTINOMIAL) {
+    } else if(sThisLikelihood == PARAM_MULTINOMIAL || sThisLikelihood == PARAM_DIRICHLET) {
       if ((vErrorValues.size() % 2) != 0)
         throw string(PARAM_ERROR_VALUE + string(ERROR_NOT_CONTAIN_EVEN_ELEMENTS));
       for (int i = 0; i < (int)vErrorValues.size(); i+=2) {
