@@ -27,7 +27,8 @@ public:
                                 const vector<double> &errorValue, const vector<double> &processError, const double delta);
   void                        simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
                                 const vector<double> &errorValue, const vector<double> &processError, const double delta);
-  double                      getInitialScore(const vector<string> &keys, const vector<double> &processError, const vector<double> &errorValue);
+  double                      getInitialScore(const vector<string> &keys, const vector<double> &expected, const vector<double> &observed,
+                                const vector<double> &processError, const vector<double> &errorValue, const double delta);
 };
 
 #endif /* CMULTINOMIALLIKELIHOOD_H_ */

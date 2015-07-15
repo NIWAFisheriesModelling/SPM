@@ -25,8 +25,8 @@ public:
                                 const vector<double> &errorValue, const vector<double> &processError, const double delta) = 0;
   virtual void                simulateObserved(const vector<string> &keys, vector<double> &observed, const vector<double> &expected,
                                 const vector<double> &errorValue, const vector<double> &processError, const double delta) = 0;
-  virtual double              getInitialScore(const vector<string> &keys, const vector<double> &processError,
-                                const vector<double> &errorValue) { return 0; }
+  virtual double              getInitialScore(const vector<string> &keys, const vector<double> &expected, const vector<double> &observed,
+                                const vector<double> &processError, const vector<double> &errorValue, const double delta) { return 0; }
 };
 
 #endif /* CLIKELIHOOD_H_ */

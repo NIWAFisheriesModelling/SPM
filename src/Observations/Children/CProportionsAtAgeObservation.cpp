@@ -387,7 +387,7 @@ void CProportionsAtAgeObservation::execute() {
         saveComparison(vKeys[i], vAges[i], vGroup[i], vExpected[i], vObserved[i], vErrorValue[i], vProcessError[i], pLikelihood->adjustErrorValue(vProcessError[i], vErrorValue[i]), 0.0);
 
     } else { // Generate Score
-      dScore = pLikelihood->getInitialScore(vKeys, vProcessError, vErrorValue);
+      dScore = pLikelihood->getInitialScore(vKeys, vExpected, vObserved, vProcessError, vErrorValue, dDelta);
 
       // Generate Results and save them
       pLikelihood->getResult(vScores, vExpected, vObserved, vErrorValue, vProcessError, dDelta);

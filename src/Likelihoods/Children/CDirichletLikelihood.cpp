@@ -40,20 +40,14 @@ double CDirichletLikelihood::adjustErrorValue(const double processError, const d
 void CDirichletLikelihood::getResult(vector<double> &scores, const vector<double> &expected, const vector<double> &observed,
     const vector<double> &errorValue, const vector<double> &processError, const double delta) {
 
-  double dA1 = 0.0;
-  double dA2 = 0.0;
-  double dA3 = 0.0;
   // Loop through expected
   for (int i = 0; i < (int)expected.size(); ++i) {
     // Calculate score
     double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
     double dAlpha = CMath::zeroFun(expected[i],delta) * dErrorValue;
-    dA1 += dAlpha;
-    dA2 += CMath::lnGamma(dAlpha);
-    dA3 += (dAlpha - 1.0) * log(CMath::zeroFun(observed[i],delta));
+    double dA2_A3 = CMath::lnGamma(dAlpha) - ((dAlpha - 1.0) * log(CMath::zeroFun(observed[i],delta)));
+    scores.push_back(dA2_A3);
   }
-  double dScore = -CMath::lnGamma(dA1) + dA2 - dA3;
-  scores.push_back(dScore);
 }
 
 //**********************************************************************
@@ -98,10 +92,20 @@ void CDirichletLikelihood::simulateObserved(const vector<string> &keys, vector<d
 //    const vector<double> &errorValue) {
 // Get Initial Score
 //**********************************************************************
-double CDirichletLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &processError,
-    const vector<double> &errorValue) {
+double CDirichletLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &expected, const vector<double> &observed,
+                                             const vector<double> &processError, const vector<double> &errorValue, const double delta) {
 
   double dScore   = 0.0;
+
+  // Only one loop through expected
+  double dA1 = 0.0;
+  for (int i = 0; i < (int)expected.size(); ++i) {
+    // Calculate score
+    double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
+    dA1 += CMath::zeroFun(expected[i],delta) * dErrorValue;
+  }
+
+  dScore  = -CMath::lnGamma(dA1);
   return dScore;
 }
 

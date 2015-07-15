@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE( MultinomialLikelihood ) {
   errorValue.push_back(50);
   processError.push_back(15);
 
-  BOOST_CHECK_CLOSE(-315.78552739959304, pLikelihood->getInitialScore(keys, processError, errorValue), 1e-9);
+  BOOST_CHECK_CLOSE(-315.78552739959304, pLikelihood->getInitialScore(keys, expected, observed, processError, errorValue, delta), 1e-9);
 
   // run the likelihood
   pLikelihood->getResult(scores, expected, observed, errorValue, processError, delta);

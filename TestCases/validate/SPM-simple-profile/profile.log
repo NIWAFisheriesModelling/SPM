@@ -1,0 +1,627 @@
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 98.5982
+obs->caa-year-1999: 183.838
+obs->caa-year-2000: 323.36
+obs->caa-year-2001: 233.267
+obs->caa-year-2002: 405.921
+obs->caa-year-2003: 482.051
+obs->caa-year-2004: 359.62
+obs->caa-year-2005: 322.453
+obs->caa-year-2006: 510.646
+obs->caa-year-2007: 472.498
+obs->cpue-1998: 10.79
+obs->cpue-1999: -1.5843
+obs->cpue-2000: -1.60001
+obs->cpue-2001: 2.71929
+obs->cpue-2002: 2.89149
+obs->cpue-2003: -1.09791
+obs->cpue-2004: 0.775355
+obs->cpue-2005: -0.755789
+obs->cpue-2006: 3.54144
+obs->cpue-2007: 0.430775
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.5242
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 3422.89
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 7.51666e-006
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.03128e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 5
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 1.38616
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 114.999
+obs->caa-year-1999: 142.958
+obs->caa-year-2000: 251.478
+obs->caa-year-2001: 162.75
+obs->caa-year-2002: 337.256
+obs->caa-year-2003: 430.411
+obs->caa-year-2004: 302.058
+obs->caa-year-2005: 286.667
+obs->caa-year-2006: 418.735
+obs->caa-year-2007: 382.541
+obs->cpue-1998: 10.8361
+obs->cpue-1999: -1.582
+obs->cpue-2000: -1.59856
+obs->cpue-2001: 2.73747
+obs->cpue-2002: 2.87936
+obs->cpue-2003: -1.09945
+obs->cpue-2004: 0.770759
+obs->cpue-2005: -0.746341
+obs->cpue-2006: 3.57974
+obs->cpue-2007: 0.464609
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.5473
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2860.64
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 8.34424e-006
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.07882e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 6
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 1.80373
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 130.965
+obs->caa-year-1999: 144.626
+obs->caa-year-2000: 199.224
+obs->caa-year-2001: 140.12
+obs->caa-year-2002: 271.675
+obs->caa-year-2003: 379.568
+obs->caa-year-2004: 252.558
+obs->caa-year-2005: 249.171
+obs->caa-year-2006: 341.531
+obs->caa-year-2007: 313.023
+obs->cpue-1998: 10.8899
+obs->cpue-1999: -1.57922
+obs->cpue-2000: -1.5968
+obs->cpue-2001: 2.7589
+obs->cpue-2002: 2.86503
+obs->cpue-2003: -1.10129
+obs->cpue-2004: 0.765501
+obs->cpue-2005: -0.735281
+obs->cpue-2006: 3.62476
+obs->cpue-2007: 0.50482
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.5552
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2453.41
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 9.37795e-006
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.09533e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 7
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 2.36288
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 141.636
+obs->caa-year-1999: 179.415
+obs->caa-year-2000: 177.49
+obs->caa-year-2001: 154.292
+obs->caa-year-2002: 217.335
+obs->caa-year-2003: 331.57
+obs->caa-year-2004: 210.116
+obs->caa-year-2005: 211.35
+obs->caa-year-2006: 281.994
+obs->caa-year-2007: 261.956
+obs->cpue-1998: 10.952
+obs->cpue-1999: -1.57588
+obs->cpue-2000: -1.59464
+obs->cpue-2001: 2.7844
+obs->cpue-2002: 2.84734
+obs->cpue-2003: -1.10398
+obs->cpue-2004: 0.761124
+obs->cpue-2005: -0.723858
+obs->cpue-2006: 3.67278
+obs->cpue-2007: 0.54872
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.548
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2198.27
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 1.06441e-005
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.08027e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 8
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 3.11298
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 151.806
+obs->caa-year-1999: 227.26
+obs->caa-year-2000: 179.827
+obs->caa-year-2001: 179.555
+obs->caa-year-2002: 178.346
+obs->caa-year-2003: 288.261
+obs->caa-year-2004: 175.011
+obs->caa-year-2005: 177.962
+obs->caa-year-2006: 236.758
+obs->caa-year-2007: 223.314
+obs->cpue-1998: 9.43231
+obs->cpue-1999: -1.61913
+obs->cpue-2000: -1.61542
+obs->cpue-2001: 1.91709
+obs->cpue-2002: 3.8062
+obs->cpue-2003: -0.752215
+obs->cpue-2004: 0.157884
+obs->cpue-2005: -0.294568
+obs->cpue-2006: 4.63435
+obs->cpue-2007: 1.16457
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.7306
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2049.66
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 9.32233e-006
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.49688e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 9
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 3.92992
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 163.763
+obs->caa-year-1999: 279.127
+obs->caa-year-2000: 197.347
+obs->caa-year-2001: 205.196
+obs->caa-year-2002: 153.919
+obs->caa-year-2003: 251.767
+obs->caa-year-2004: 149.608
+obs->caa-year-2005: 152.944
+obs->caa-year-2006: 210.074
+obs->caa-year-2007: 199.594
+obs->cpue-1998: 9.28385
+obs->cpue-1999: -1.61803
+obs->cpue-2000: -1.61179
+obs->cpue-2001: 1.82167
+obs->cpue-2002: 3.93617
+obs->cpue-2003: -0.694714
+obs->cpue-2004: 0.0679662
+obs->cpue-2005: -0.202068
+obs->cpue-2006: 4.85895
+obs->cpue-2007: 1.33259
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.6908
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 1995.21
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 1.07415e-005
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.39969e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 10
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 4.73789
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 175.954
+obs->caa-year-1999: 329.809
+obs->caa-year-2000: 225.124
+obs->caa-year-2001: 228.67
+obs->caa-year-2002: 142.136
+obs->caa-year-2003: 222.692
+obs->caa-year-2004: 133.993
+obs->caa-year-2005: 136.265
+obs->caa-year-2006: 200.999
+obs->caa-year-2007: 188.403
+obs->cpue-1998: 9.0754
+obs->cpue-1999: -1.61465
+obs->cpue-2000: -1.60458
+obs->cpue-2001: 1.68846
+obs->cpue-2002: 4.12353
+obs->cpue-2003: -0.609733
+obs->cpue-2004: -0.0560757
+obs->cpue-2005: -0.0646937
+obs->cpue-2006: 5.18646
+obs->cpue-2007: 1.581
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.6144
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2016.36
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 1.27525e-005
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 2.22299e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 11
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 5.56065
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 189.175
+obs->caa-year-1999: 377.222
+obs->caa-year-2000: 258.331
+obs->caa-year-2001: 250.124
+obs->caa-year-2002: 140.203
+obs->caa-year-2003: 203.259
+obs->caa-year-2004: 128.457
+obs->caa-year-2005: 129.132
+obs->caa-year-2006: 205.434
+obs->caa-year-2007: 188.06
+obs->cpue-1998: 11.8878
+obs->cpue-1999: -1.51134
+obs->cpue-2000: -1.5521
+obs->cpue-2001: 3.16142
+obs->cpue-2002: 2.60136
+obs->cpue-2003: -1.13786
+obs->cpue-2004: 0.680117
+obs->cpue-2005: -0.527085
+obs->cpue-2006: 4.46716
+obs->cpue-2007: 1.29858
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 13.9586
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2102.72
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 3.04567e-005
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 1.15384e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 12
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 6.35552
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 199.295
+obs->caa-year-1999: 416.397
+obs->caa-year-2000: 294.535
+obs->caa-year-2001: 268.874
+obs->caa-year-2002: 145.827
+obs->caa-year-2003: 189.664
+obs->caa-year-2004: 129.135
+obs->caa-year-2005: 126.643
+obs->caa-year-2006: 219.041
+obs->caa-year-2007: 193.318
+obs->cpue-1998: 12.2438
+obs->cpue-1999: -1.47993
+obs->cpue-2000: -1.53079
+obs->cpue-2001: 3.30753
+obs->cpue-2002: 2.50875
+obs->cpue-2003: -1.15146
+obs->cpue-2004: 0.653655
+obs->cpue-2005: -0.450936
+obs->cpue-2006: 4.77455
+obs->cpue-2007: 1.60731
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 13.8182
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2217.03
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 3.90483e-005
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 1.00273e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 13
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 7.22616
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 203.228
+obs->caa-year-1999: 442.234
+obs->caa-year-2000: 330.289
+obs->caa-year-2001: 283.671
+obs->caa-year-2002: 158.607
+obs->caa-year-2003: 182.571
+obs->caa-year-2004: 136.951
+obs->caa-year-2005: 130.067
+obs->caa-year-2006: 248.532
+obs->caa-year-2007: 212.925
+obs->cpue-1998: 7.72173
+obs->cpue-1999: -1.53566
+obs->cpue-2000: -1.49236
+obs->cpue-2001: 0.85437
+obs->cpue-2002: 5.4806
+obs->cpue-2003: 0.0700062
+obs->cpue-2004: -0.778892
+obs->cpue-2005: 1.0557
+obs->cpue-2006: 7.67711
+obs->cpue-2007: 3.58608
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 14.0999
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2365.81
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 2.65515e-005
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 1.32892e+006
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 14
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 8.27384
+
+*end
+
+[Objective_Score]
+report.type: objective_function
+obs->caa-year-1998: 223.91
+obs->caa-year-1999: 486.117
+obs->caa-year-2000: 364.412
+obs->caa-year-2001: 306.312
+obs->caa-year-2002: 164.146
+obs->caa-year-2003: 179.902
+obs->caa-year-2004: 139.303
+obs->caa-year-2005: 130.994
+obs->caa-year-2006: 235.55
+obs->caa-year-2007: 201.464
+obs->cpue-1998: 15.0992
+obs->cpue-1999: -1.1085
+obs->cpue-2000: -1.26879
+obs->cpue-2001: 4.51569
+obs->cpue-2002: 1.81025
+obs->cpue-2003: -1.25941
+obs->cpue-2004: 0.479896
+obs->cpue-2005: 0.215981
+obs->cpue-2006: 7.45241
+obs->cpue-2007: 4.6326
+prior->catchability[cpueq].q: 0
+prior->process[recruitment].r0: 13.1252
+prior->selectivity[fishingsel].a50: 0
+prior->selectivity[fishingsel].ato95: 0
+total_score: 2475.8
+*end
+
+[estimate-summary]
+report.type: estimate_summary
+parameter: catchability[cpueq].q
+lower_bound: 1e-010
+upper_bound: 0.1
+prior: uniform
+value: 0.00010456
+
+parameter: process[recruitment].r0
+lower_bound: 100000
+upper_bound: 1e+010
+prior: uniform_log
+value: 501400
+
+parameter: selectivity[fishingsel].a50
+lower_bound: 1
+upper_bound: 20
+prior: uniform
+value: 15
+
+parameter: selectivity[fishingsel].ato95
+lower_bound: 0.01
+upper_bound: 50
+prior: uniform
+value: 8.71045
+
+*end
+

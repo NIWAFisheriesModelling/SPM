@@ -331,7 +331,7 @@ type uniform
 parameter process[Recruitment].R0
 lower_bound 1e5
 upper_bound 1e10
-type uniform-log
+type uniform_log
 
 @estimate
 parameter selectivity[FishingSel].a50

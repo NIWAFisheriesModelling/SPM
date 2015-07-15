@@ -2,6 +2,7 @@
 
 export(binomialLikelihood)
 export(binomialapproxLikelihood)
+export(dirichletLikelihood)
 export(lognormalLikelihood)
 export(multinomialLikelihood)
 export(normalLikelihood)

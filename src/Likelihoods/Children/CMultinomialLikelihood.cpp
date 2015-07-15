@@ -94,8 +94,8 @@ void CMultinomialLikelihood::simulateObserved(const vector<string> &keys, vector
 //    const vector<double> &errorValue) {
 // Get Initial Score
 //**********************************************************************
-double CMultinomialLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &processError,
-    const vector<double> &errorValue) {
+double CMultinomialLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &expected, const vector<double> &observed,
+                                               const vector<double> &processError, const vector<double> &errorValue, const double delta) {
 
   double dScore   = 0.0;
   string sLastKey = "";
