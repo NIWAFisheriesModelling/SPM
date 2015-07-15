@@ -48,11 +48,11 @@ void CDirichletLikelihood::getResult(vector<double> &scores, const vector<double
     // Calculate score
     double dErrorValue = adjustErrorValue(processError[i], errorValue[i]);
     double dAlpha = CMath::zeroFun(expected[i],delta) * dErrorValue;
-    dA1 += CMath::lnGamma(dAlpha);
-    dA2 += dAlpha;
+    dA1 += dAlpha;
+    dA2 += CMath::lnGamma(dAlpha);
     dA3 += (dAlpha - 1.0) * log(CMath::zeroFun(observed[i],delta));
   }
-  double dScore = dA3 - dA1 + CMath::lnGamma(dA2);
+  double dScore = -CMath::lnGamma(dA1) + dA2 - dA3;
   scores.push_back(dScore);
 }
 
@@ -101,7 +101,8 @@ void CDirichletLikelihood::simulateObserved(const vector<string> &keys, vector<d
 double CDirichletLikelihood::getInitialScore(const vector<string> &keys, const vector<double> &processError,
     const vector<double> &errorValue) {
 
-  return 0.0;
+  double dScore   = 0.0;
+  return dScore;
 }
 
 //**********************************************************************
