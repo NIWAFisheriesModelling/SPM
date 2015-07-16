@@ -96,6 +96,8 @@ void CProportionsAtAgeObservation::validate() {
       CError::errorGreaterThan(PARAM_MAX_AGE, PARAM_MAX_AGE);
     if (dProcessError < 0)
       CError::errorLessThan(PARAM_PROCESS_ERROR, PARAM_ZERO);
+    if(sLikelihood == PARAM_DIRICHLET && dProcessError > 1)
+      CError::errorGreaterThan(PARAM_PROCESS_ERROR, PARAM_ONE);
 
     // Find out the Spread in Ages
     iAgeSpread = (iMaxAge+1) - iMinAge;

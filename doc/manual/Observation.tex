@@ -454,7 +454,7 @@ For observations where where the likelihood is parameterised by the c.v., you ca
 
 Note that $c_{process\_ error} \ge 0$, and that $c_{process\_ error} = 0$ is equivalent to no process error.
 
-Similarly, if the likelihood is parameterised by the effective sample size $N$,
+For the multinomial and binomial likelihoods that are parameterised by the effective sample size $N$, then,
 
 \begin{equation}
  N'_i  = \frac{1}{1 / {N_i}+ 1 / N_{process\_error}}
@@ -462,7 +462,15 @@ Similarly, if the likelihood is parameterised by the effective sample size $N$,
 
 Note that this requires that $N_{process\_ error} > 0$, but we allow the special case of $N_{process\_ error}=0$, and define $N_{process\_ error}=0$ as no process error (i.e., defined to be equivalent to $N_{process\_ error}=\infty$). 
 
-For both the c.v. and $N$ process errors, the process error has more effect on small errors than on large ones. Be clear that a large value for the $N$ process error means a small process error.
+For the Dirichlet likelihood (parameterised by the effective sample size $N$) then,
+
+\begin{equation}
+ N'_i  = N_i N_{process\_error}
+\end{equation}
+
+Note that this requires that $0 < N_{process\_ error} \ge 1$. As above, we allow the special case of $N_{process\_ error}=0$ and define this as no process error (i.e., defined to be equivalent to $N_{process\_ error}=1.0$) for consistency with other likelihoods.
+
+For both the c.v. and $N$ process errors, the process error has more effect on small errors than on large ones. Note that a large \emph{value} for the $N$ process error in the case of the multinomial and binomial means a \emph{small} process error.
 
 \subsection{\I{Ageing error}}
 
