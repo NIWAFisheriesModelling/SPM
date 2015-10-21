@@ -24,9 +24,9 @@ CBinomialwithQLikelihood::CBinomialwithQLikelihood() {
 // Adjust our ErrorValue based on process error
 //**********************************************************************
 double CBinomialwithQLikelihood::adjustErrorValue(const double processError, const double errorValue) {
-  // adjust for over-dispersion process error
+  // adjust for N process error
   if( (errorValue > 0.0) && (processError > 0.0) )
-    return (errorValue * 1.0/processError));
+    return (1.0/(1.0/errorValue + 1.0/processError));
 
   return errorValue;
 }
