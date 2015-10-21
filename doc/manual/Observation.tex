@@ -9,6 +9,8 @@ Observations are typically supplied as observations at an instance in time, over
   \item Observations of proportions by age class within categories
   \item Observations of proportions between categories within age classes
   \item Relative and absolute abundance/biomass observations
+  \item Relative proportions present observations
+	
 \end{itemize}
 
 The definitions for each type of observation are described below, including how the observed values should be supplied, how \SPM\ calculates the expected values, and the likelihoods that are available for each type of observation.
@@ -339,7 +341,7 @@ The default value of $\delta$ is $1 \times 10^{-11}$.
 
 Abundance (or biomass) observations are observations of either a relative or absolute number (or biomass) of individuals from a set of categories after applying a selectivity. The observations classes are the same, except that a biomass observation will use the biomass as the observed (and expected) value (calculated from mean weight of individuals within each age and category) while an abundance observation is just the number of individuals. 
 
-Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated of fixed. For absolute abundance or absolute biomass observations, define a catchability where $q=1$.
+Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated or fixed. For absolute abundance or absolute biomass observations, define a catchability where $q=1$.
 
 The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total abundance/biomass (male $+$ female) or just male abundance/biomass. The subcommand \subcommand{categories} defines the categories used to aggregate the abundance/biomass. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}. For example,  
 
@@ -432,6 +434,86 @@ For observations $O_i$, c.v. $c_i$, and expected values $qE_i$, the negative log
 \end{equation}
 
 and $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
+
+\begin{equation}
+   Z \left(\theta,\delta \right) = \begin{cases}
+	  \theta, & \text{where $\theta \ge r$} \\
+	  \delta/\left( 2-\theta/\delta \right), & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+The default value of $\delta$ is $1 \times 10^{-11}$.
+
+\subsection{\I{Relative proportions present observations}}
+
+Relative proportions present observations are observations of either a relative proportion of sampling efforts that detected the presence of some individuals from a set of categories after applying a selectivity. This assumes that the relative probability of detecting an individual in a cell is proportional to the abundance (in number of individuals) for that cell. 
+
+Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated or fixed. The catchability coefficient must be between 0 and 1.
+
+The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total presence proportions (male $+$ female) or just male proportions. The subcommand \subcommand{categories} defines the categories used to aggregate. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}. For example,  
+
+{\small{\begin{verbatim}
+categories male
+selectivities male-selectivity
+\end{verbatim}}}
+
+defines an observation for males after applying the selectivity male-selectivity. \SPM\ then expects that there will be a single observation supplied. The expected values for the observations will be the expected relative probability of presence for males, after applying the selectivities, at the year and time-step specified. 
+
+The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
+
+For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
+
+{\small{\begin{verbatim}
+@layer Area
+type categorical
+data A A 
+data B B
+\end{verbatim}}}
+
+Here we supply presence observations for those spatial cells where the categorical layer has value $A$ as, 
+
+{\small{\begin{verbatim}
+@observation MyPresence
+type presence
+layer Area
+...
+categories male 
+obs A 0.10
+...
+\end{verbatim}}}
+
+Or, for both $A$ and $B$ as,
+
+{\small{\begin{verbatim}
+@observation MyPresence
+type presence
+layer Area
+...
+categories male
+obs A 0.10
+obs B 0.12
+...
+\end{verbatim}}}
+
+To supply an observation for individual spatial cells, then you will need to define a categorical layer with a single, unique value for each spatial cell. 
+
+\subsubsection{Likelihoods for presence observations}
+
+\subsubsection*{The binomial likelihood\index{Binomial likelihood ! presence}\index{Binomial likelihood ! presence}}
+
+For observations $O_i$, N. $N_i$, and expected values $qE_i$, the negative log-likelihood is defined as;
+
+For observed proportions $O_i$ for cell $i$, where $qE_i$ are the expected proportions in cell $i$, scaled by a catchability coefficient $q$ (where $0 < q le 1$), and $N_i$ is the effective sample size in cell $i$, then the negative log-likelihood is defined as;  
+
+\begin{equation}
+  \begin{split}
+    -\log \left(L \right)= -\sum\limits_i & \left[ \right. \log \left(N_i! \right) - \log \left(\left(N_i \left(1 - O_i \right) \right)! \right) - \log \left(\left(N_i O_i \right)! \right) + N_i O_i \log \left(Z\left(qE_i,\delta \right) \right) \\
+    &+ N_i \left(1 - O_i \right)\log \left(Z\left(1 - qE_i,\delta\right) \right) \left. \right]
+  \end{split}
+\end{equation}
+
+
+where $Z \left(\theta,\delta \right)$ is a robustifying function to prevent division by zero errors, with parameter $\delta>0$. $Z \left(\theta,\delta \right)$ is defined as,
 
 \begin{equation}
    Z \left(\theta,\delta \right) = \begin{cases}

@@ -182,7 +182,7 @@ void CPresenceObservation::execute() {
     pWorldView->execute();
 
 
-    double dMaxValue;
+    double dMaxValue = 0.0;
     // Loop through WorldView to obtain scaling maximum abundnance anywhere in the model
     // *********************************************
     // Craig to insert code here

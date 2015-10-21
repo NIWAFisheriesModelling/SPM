@@ -13,6 +13,7 @@
 #include "../../Translations/Translations.h"
 #include "../Children/CBinomialApproxLikelihood.h"
 #include "../Children/CBinomialLikelihood.h"
+#include "../Children/CBinomialwithQLikelihood.h"
 #include "../Children/CLogNormalLikelihood.h"
 #include "../Children/CLogNormalWithQLikelihood.h"
 #include "../Children/CMultinomialLikelihood.h"
