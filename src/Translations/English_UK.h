@@ -341,6 +341,7 @@
 #define PARAM_PREFERENCE_MOVEMENT_THREADED        "preference_threaded"
 #define PARAM_PREFERENCE_FUNCTION                 "preference_function"
 #define PARAM_PREFERENCE_FUNCTIONS                "preference_functions"
+#define PARAM_PRESENCE                            "presence"
 #define PARAM_PREY_CATEGORIES                     "prey_categories"
 #define PARAM_PREY_GROUP                          "prey_group"
 #define PARAM_PREY_SELECTIVITIES                  "prey_selectivities"

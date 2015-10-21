@@ -14,6 +14,7 @@
 #include "../Children/CAbundanceObservation.h"
 #include "../Children/CBiomassObservation.h"
 #include "../Children/CProportionsAtAgeObservation.h"
+#include "../Children/CPresenceObservation.h"
 #include "../Children/CProportionsByCategoryObservation.h"
 #include "../../Helpers/CError.h"
 
@@ -29,6 +30,8 @@ CObservation* CObservationFactory::buildObservation(string type, bool registerWi
     pObservation = new CAbundanceObservation();
   else if (type == PARAM_BIOMASS)
     pObservation = new CBiomassObservation();
+  else if (type == PARAM_PRESENCE)
+    pObservation = new CPresenceObservation();
   else if (type == PARAM_PROPORTIONS_AT_AGE)
     pObservation = new CProportionsAtAgeObservation();
   else if (type == PARAM_PROPORTIONS_BY_CATEGORY)
