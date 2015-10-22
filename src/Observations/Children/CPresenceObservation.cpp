@@ -181,14 +181,6 @@ void CPresenceObservation::execute() {
 
     pWorldView->execute();
 
-
-    double dMaxValue = 0.0;
-    // Loop through WorldView to obtain scaling maximum abundnance anywhere in the model
-    // *********************************************
-    // Craig to insert code here
-    // return dMaxValue;
-    // *********************************************
-
     // Loop Through Obs
     map<string, double>::iterator mPropPtr = mProportionMatrix.begin();
     while (mPropPtr != mProportionMatrix.end()) {
@@ -205,6 +197,7 @@ void CPresenceObservation::execute() {
           double dStartValue = pStartSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
           double dEndValue   = pSquare->getAbundanceInCategoryForAge(j, vCategories[i]);
           double dFinalValue = 0.0;
+
           if(sProportionMethod == PARAM_MEAN) {
             dFinalValue = dStartValue + ((dEndValue - dStartValue) * dProportionTimeStep);
           } else {
@@ -214,17 +207,14 @@ void CPresenceObservation::execute() {
         }
       }
 
-      // Note: dExpectedTotal is total number of fish the model has for that
-      // Proportion Label across all squares in that layer where that
-      // label is used.
-      // rescale by the maximum cell expected value to ensure values between 0 and 1
-      dExpectedTotal /= dMaxValue;
+      // Divide by area for a density
+      dExpectedTotal /= pSquare->getArea();
+      // multiply by q
       dExpectedTotal *= pCatchability->getQ();
       // Error check to ensure dExpectedTotal never goes above 1.0
       if(dExpectedTotal > 1.0)
         dExpectedTotal = 1.0;
       double dErrorValue = mErrorValue[(*mPropPtr).first];
-
       // Store our Values
       vKeys.push_back((*mPropPtr).first);
       vExpected.push_back(dExpectedTotal);

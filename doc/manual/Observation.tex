@@ -446,9 +446,9 @@ The default value of $\delta$ is $1 \times 10^{-11}$.
 
 \subsection{\I{Relative proportions present observations}}
 
-Relative proportions present observations are observations of either a relative proportion of sampling efforts that detected the presence of some individuals from a set of categories after applying a selectivity. This assumes that the relative probability of detecting an individual in a cell is proportional to the abundance (in number of individuals) for that cell. 
+Relative proportions present observations are observations of a relative proportion of sampling efforts that detected the presence of one of more individuals from a set of categories after applying a selectivity. This assumes that the relative probability of detecting an individual in a cell is proportional to the density (in number of individuals per unit area) for that cell. 
 
-Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated or fixed. The catchability coefficient must be between 0 and 1.
+Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated or fixed.
 
 The observations can be supplied for any set of categories. For example, for a model with the two categories \emph{male} and \emph{female}, we might supply an observation of the total presence proportions (male $+$ female) or just male proportions. The subcommand \subcommand{categories} defines the categories used to aggregate. In addition, each category must have an associated selectivity, defined by \subcommand{selectivities}. For example,  
 
@@ -459,7 +459,7 @@ selectivities male-selectivity
 
 defines an observation for males after applying the selectivity male-selectivity. \SPM\ then expects that there will be a single observation supplied. The expected values for the observations will be the expected relative probability of presence for males, after applying the selectivities, at the year and time-step specified. 
 
-The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations.
+The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations, anmd diving into the area of that set of spatial cells
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
 
@@ -501,9 +501,7 @@ To supply an observation for individual spatial cells, then you will need to def
 
 \subsubsection*{The binomial likelihood\index{Binomial likelihood ! presence}\index{Binomial likelihood ! presence}}
 
-For observations $O_i$, N. $N_i$, and expected values $qE_i$, the negative log-likelihood is defined as;
-
-For observed proportions $O_i$ for cell $i$, where $qE_i$ are the expected proportions in cell $i$, scaled by a catchability coefficient $q$ (where $0 < q le 1$), and $N_i$ is the effective sample size in cell $i$, then the negative log-likelihood is defined as;  
+For observed proportions $O_i$ for cell $i$, we define $E_i$ as the expected proportion in cell $i$, where $E_i = \min(qD_i, 1)$ and $d_i$ is the density in cell $i$ and $q$ is a catchability coefficient such that $q > 0$. Then if $N_i$ is the effective sample size in cell $i$, the negative log-likelihood is defined as;  
 
 \begin{equation}
   \begin{split}

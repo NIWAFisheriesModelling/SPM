@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2015-07-15 (rev. 1259)
+; TextPad syntax definitions for SPM version 1.1-2015-10-21 (rev. 1263)
 ; ===================================================================================
 ;
 ;
@@ -298,6 +298,7 @@ partition_biomass
 preference
 preference_function
 preference_threaded
+presence
 process
 proportions_at_age
 proportions_by_category
