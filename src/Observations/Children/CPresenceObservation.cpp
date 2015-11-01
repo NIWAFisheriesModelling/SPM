@@ -207,11 +207,19 @@ void CPresenceObservation::execute() {
         }
       }
 
+      // Calculate area
+      double dArea = 0.0;
+      vector<CWorldSquare*> vWorldSquares = pWorldView->getWorldSquares((*mPropPtr).first);
+      for (int k=0; k < (int)vWorldSquares.size(); ++k) {
+         dArea += vWorldSquares[k]->getArea();
+      }
+
       // Divide by area for a density
-      dExpectedTotal /= pSquare->getArea();
+      dExpectedTotal /= dArea;
       // multiply by q
       dExpectedTotal *= pCatchability->getQ();
       // Error check to ensure dExpectedTotal never goes above 1.0
+
       if(dExpectedTotal > 1.0)
         dExpectedTotal = 1.0;
       double dErrorValue = mErrorValue[(*mPropPtr).first];
