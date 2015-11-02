@@ -446,7 +446,16 @@ The default value of $\delta$ is $1 \times 10^{-11}$.
 
 \subsection{\I{Relative proportions present observations}}
 
-Relative proportions present observations are observations of a relative proportion of sampling efforts that detected the presence of one of more individuals from a set of categories after applying a selectivity. This assumes that the relative probability of detecting an individual in a cell is proportional to the density (in number of individuals per unit area) for that cell. 
+Relative proportions present observations are observations of a relative proportion of sampling efforts that detected the presence of one of more individuals from a set of categories after applying a selectivity. This assumes that the probability of detecting an individual in a cell is proportional to the density (in number of individuals per unit area) for that cell, i.e., the expected proportion present $E_i$ is;
+
+\begin{equation}
+   E_i = \begin{cases}
+	  1, & \text{where $qN_i/A_i \ge 1$} \\
+	  qN_i/A_i, & \text{otherwise} \\  
+  \end{cases}
+\end{equation}
+
+where $q$ is the catchability coefficient, $N_i$ is the number of individuals in cell $i$, and $A_i$ is the area of cell $i$ as given in the base layer.
 
 Each observation is for a given year and time-step, for some selected age classes of the population (i.e., for a range of ages multiplied by a selectivity), for categories aggregated over a set of spatial cells. Further, you need to provide the label of the catchability coefficient $q$, which can either be estimated or fixed.
 
