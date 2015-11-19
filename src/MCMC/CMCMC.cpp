@@ -232,6 +232,10 @@ void CMCMC::execute() {
     // Workout our objective function value
     CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
     pObjectiveFunction->execute();
+
+    // record it as the old one as well
+    CObjectiveFunction *pOldObjectiveFunction = CObjectiveFunction::Instance();
+
     double dScore = pObjectiveFunction->getScore();
     // Keep the location as the first point in our chain
     {
@@ -252,6 +256,7 @@ void CMCMC::execute() {
     // Now, do our MCMC
     //===============================================================
     // Iterate over length of MCMC
+
     do {
 
       if(!(pConfig->getQuietMode())) {
@@ -273,7 +278,7 @@ void CMCMC::execute() {
       pThread->rebuild();
       pThread->startModel();
       // Workout our Objective Score
-      CObjectiveFunction *pObjectiveFunction = CObjectiveFunction::Instance();
+      pOldObjectiveFunction = pObjectiveFunction;
       pObjectiveFunction->execute();
 
       // Preserve our score for later
@@ -313,16 +318,17 @@ void CMCMC::execute() {
         // reject the new proposed candidate point and use the point from the previous iteration
         dScore = dOldScore;
         vCandidates = vOldCandidates;
+        pObjectiveFunction = pOldObjectiveFunction;
         if ( ((iJumps) % iKeep) == 0) {
           newItem.iIteration                = iJumps;
-          newItem.dPenalty                  = vChain[vChain.size()-1].dPenalty;
-          newItem.dScore                    = vChain[vChain.size()-1].dScore;
-          newItem.dPrior                    = vChain[vChain.size()-1].dPrior;
-          newItem.dLikelihood               = vChain[vChain.size()-1].dLikelihood;
+          newItem.dPenalty                  = pOldObjectiveFunction->getPenalties();
+          newItem.dScore                    = dScore;
+          newItem.dPrior                    = pOldObjectiveFunction->getPriors();
+          newItem.dLikelihood               = pOldObjectiveFunction->getLikelihoods();
           newItem.dAcceptanceRateSinceAdapt = (double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt;
           newItem.dAcceptanceRate           = (double)iSuccessfulJumps / (double)(iJumps);
           newItem.dStepSize                 = dStepSize;
-          newItem.vValues                   = vChain[vChain.size()-1].vValues;
+          newItem.vValues                   = vCandidates;
           vChain.push_back(newItem);
           if ( iSuccessfulJumps >= iLength ) {
             bLastItem = true;
