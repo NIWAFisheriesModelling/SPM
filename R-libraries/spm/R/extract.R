@@ -45,7 +45,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$"ageing_error" <- list()
             }
             counter$"ageing_error" <- counter$"ageing_error" + 1
-            temp <- extract.ageing_error(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.ageingerror(lines = line[index[i]:(index[i + 1] - 1)])
             res$"ageing_error"[[counter$"ageing_error"]] <- temp
             names(res$"ageing_error")[counter$"ageing_error"] <- report.label[i]
         }
@@ -54,7 +54,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$age_size <- list()
             }
             counter$age_size <- counter$age_size + 1
-            temp <- extract.age_size(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.agesize(lines = line[index[i]:(index[i + 1] - 1)])
             res$age_size[[counter$age_size]] <- temp
             names(res$age_size)[counter$age_size] <- report.label[i]
         }
@@ -63,7 +63,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$age_weight <- list()
             }
             counter$age_weight <- counter$age_weight + 1
-            temp <- extract.age_weight(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.ageweight(lines = line[index[i]:(index[i + 1] - 1)])
             res$age_weight[[counter$age_weight]] <- temp
             names(res$age_weight)[counter$age_weight] <- report.label[i]
         }
@@ -90,7 +90,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$derived_quantity_by_cell <- list()
             }
             counter$derived_quantity_by_cell <- counter$derived_quantity_by_cell + 1
-            temp <- extract.derivedquantity_by_cell(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.derivedquantitybycell(lines = line[index[i]:(index[i + 1] - 1)])
             xxx<<-line[index[i]:(index[i + 1] - 1)]
             res$derived_quantity_by_cell[[counter$derived_quantity_by_cell]] <- temp
             names(res$derived_quantity_by_cell)[counter$derived_quantity_by_cell] <- report.label[i]
@@ -181,7 +181,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$partition_biomass <- list()
             }
             counter$partition_biomass <- counter$partition_biomass + 1
-            temp <- extract.partition.biomass(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.partitionbiomass(lines = line[index[i]:(index[i + 1] - 1)])
             res$partition_biomass[[counter$partition_biomass]] <- temp
             names(res$partition_biomass)[counter$partition_biomass] <- report.label[i]
         }
@@ -226,7 +226,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$size_weight <- list()
             }
             counter$size_weight <- counter$size_weight + 1
-            temp <- extract.size_weight(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.sizeweight(lines = line[index[i]:(index[i + 1] - 1)])
             res$size_weight[[counter$size_weight]] <- temp
             names(res$size_weight)[counter$size_weight] <- report.label[i]
         }
@@ -235,7 +235,7 @@ function (file, path = "", ignore.unknown=FALSE)
                 res$spatial_map <- list()
             }
             counter$spatial_map <- counter$spatial_map + 1
-            temp <- extract.spatial.map(lines = line[index[i]:(index[i + 1] - 1)])
+            temp <- extract.spatialmap(lines = line[index[i]:(index[i + 1] - 1)])
             res$spatial_map[[counter$spatial_map]] <- temp
             names(res$spatial_map)[counter$spatial_map] <- report.label[i]
         }
