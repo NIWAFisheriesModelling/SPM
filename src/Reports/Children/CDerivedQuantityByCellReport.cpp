@@ -104,8 +104,8 @@ void CDerivedQuantityByCellReport::execute() {
     }
     // Output values for each year
     for (int i = pWorld->getInitialYear(); i <= pWorld->getCurrentYear(); ++i) {
-      int iIndex = i - pWorld->getInitialYear() +1;
-      vector<vector<double> > vvDerivedQuantityByCell = pDerivedQuantityByCell->getValue(iIndex);
+      int iIndex = i - pWorld->getInitialYear();
+      vector<vector<double> > vvDerivedQuantityByCell = pDerivedQuantityByCell->getValueFromIndex(iIndex);
       cout << PARAM_YEARS << CONFIG_RATIO_SEPARATOR << " " << PARAM_YEAR << "=" << i << "\n";
       for (int k = 0; k < pDerivedQuantityByCell->getHeight(); ++k) {
         for (int l = 0; l < pDerivedQuantityByCell->getWidth(); ++l) {

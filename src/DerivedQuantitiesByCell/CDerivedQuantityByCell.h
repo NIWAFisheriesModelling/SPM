@@ -30,6 +30,7 @@ public:
   virtual                     ~CDerivedQuantityByCell();
   vector<vector<double> >     getValue(int offset);
   double                      getValue(int offset, int RowIndex, int ColIndex);
+  vector<vector<double> >     getValueFromIndex(int index) { return vValues[index]; };
   int                         getTimeStep() { return iTimeStep; };
   void                        incrementInitialisationPhase() { iCurrentInitialisationPhase++; }
   int                         getValuesSize() { return vValues.size(); }
