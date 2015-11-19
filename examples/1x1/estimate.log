@@ -1,9 +1,9 @@
 SPM (Spatial Population Model)
 Call: spm -e -q -g 0 -o MPD.dat 
-Date: Fri Apr 10 13:44:46 2015
-v1.1-2015-04-01 (rev. 1250). Copyright (c) 2008-2015, NIWA
+Date: Thu Nov 19 23:27:01 2015
+v1.1-2015-11-19 (rev. 1272). Copyright (c) 2008-2015, NIWA
 User name: dunn
-Machine name: NIWA-34286 (Windows_NT, PID=9072)
+Machine name: NIWA-34286 (Windows_NT, PID=6108)
 
 [initialisation-phase1]
 report.type: initialisation

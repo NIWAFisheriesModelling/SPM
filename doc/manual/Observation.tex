@@ -468,7 +468,7 @@ selectivities male-selectivity
 
 defines an observation for males after applying the selectivity male-selectivity. \SPM\ then expects that there will be a single observation supplied. The expected values for the observations will be the expected relative probability of presence for males, after applying the selectivities, at the year and time-step specified. 
 
-The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those spatial cells where the categorical layer has the same value as defined for each vector of observations, anmd diving into the area of that set of spatial cells
+The observations must be supplied using all or some of the the values of defined by a categorical layer. \SPM\ calculates the expected values by summing over the defined ages (via the age range and selectivity) and categories for those cells where the categorical layer has the same value as defined for each vector of observations.
 
 For example, in a $2 \times 2$ spatial model a categorical layer (e.g., with label Area) may define that cells $(1,1)$ and $(1,2)$ have value $A$ and cells $(2,1)$ and $(2,2)$ have value $B$, i.e.,
 
