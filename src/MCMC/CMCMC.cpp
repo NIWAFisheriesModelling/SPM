@@ -107,8 +107,7 @@ void CMCMC::validate() {
     dStepSize               = pParameterList->getDouble(PARAM_STEPSIZE, true, 0.0);
     sProposalDistribution   = pParameterList->getString(PARAM_PROPOSAL_DISTRIBUTION, true, PARAM_T);
     iDF                     = pParameterList->getInt(PARAM_DF, true, 4);
-    dAcceptanceRatio        = pParameterList->getDouble(PARAM_STEPSIZE, true, 0.24);
-    dInverseAcceptanceRatio = 1.0/dAcceptanceRatio;
+    dAcceptanceRatio        = pParameterList->getDouble(PARAM_ACCEPTANCE_RATIO, true, 0.24);
 
     // Validate the parameters
     if (sType != PARAM_METROPOLIS_HASTINGS)
@@ -256,7 +255,9 @@ void CMCMC::execute() {
     do {
 
       if(!(pConfig->getQuietMode())) {
-        std::cerr << "." ;
+        if(((iJumps) % iKeep) == 0) {
+          std::cerr << "." ;
+        }
       }
 
       // Generate a candidate value
@@ -284,10 +285,11 @@ void CMCMC::execute() {
       if (dScore > dOldScore) {
         dRatio = exp(-dScore + dOldScore);
       }
+      //Update number of jumps and jumps since last adapt
+      iJumps++;
+      iJumpsSinceAdapt++;
       if (dRatio==1.0 || CRandomNumberGenerator::Instance()->getRandomUniform_01() < dRatio) {
         // accept the proposed candidate point
-        iJumps++;
-        iJumpsSinceAdapt++;
         iSuccessfulJumps++;
         iSuccessfulJumpsSinceAdapt++;
         // keep the score, and its component parts
@@ -307,23 +309,26 @@ void CMCMC::execute() {
           }
           CReportManager::Instance()->execute(STATE_ITERATION_COMPLETE);
         }
-
       } else {
         // reject the new proposed candidate point and use the point from the previous iteration
-        iJumps++;
-        iJumpsSinceAdapt++;
         dScore = dOldScore;
         vCandidates = vOldCandidates;
-        newItem.iIteration                = iJumps;
-        newItem.dPenalty                  = vChain[vChain.size()-1].dPenalty;
-        newItem.dScore                    = vChain[vChain.size()-1].dScore;
-        newItem.dPrior                    = vChain[vChain.size()-1].dPrior;
-        newItem.dLikelihood               = vChain[vChain.size()-1].dLikelihood;
-        newItem.dAcceptanceRateSinceAdapt = (double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt;
-        newItem.dAcceptanceRate           = (double)iSuccessfulJumps / (double)(iJumps);
-        newItem.dStepSize                 = dStepSize;
-        newItem.vValues                   = vCandidates;
-        vChain.push_back(newItem);
+        if ( ((iJumps) % iKeep) == 0) {
+          newItem.iIteration                = iJumps;
+          newItem.dPenalty                  = vChain[vChain.size()-1].dPenalty;
+          newItem.dScore                    = vChain[vChain.size()-1].dScore;
+          newItem.dPrior                    = vChain[vChain.size()-1].dPrior;
+          newItem.dLikelihood               = vChain[vChain.size()-1].dLikelihood;
+          newItem.dAcceptanceRateSinceAdapt = (double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt;
+          newItem.dAcceptanceRate           = (double)iSuccessfulJumps / (double)(iJumps);
+          newItem.dStepSize                 = dStepSize;
+          newItem.vValues                   = vChain[vChain.size()-1].vValues;
+          vChain.push_back(newItem);
+          if ( iSuccessfulJumps >= iLength ) {
+            bLastItem = true;
+          }
+          CReportManager::Instance()->execute(STATE_ITERATION_COMPLETE);
+        }
       }
 
     } while (iJumps < iLength);
@@ -437,8 +442,8 @@ void CMCMC::updateStepSize(int iIteration) {
   if( (iJumpsSinceAdapt > 0) && (iSuccessfulJumpsSinceAdapt > 0) ) {
     for(int i = 0; i < (int)vAdaptStepSize.size(); ++i) {
       if( iIteration == vAdaptStepSize[i] ) {
-        // modify the stepsize by the ratio = AcceptanceRate / 0.24
-        dStepSize *= ((double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt) * dInverseAcceptanceRatio;
+        // modify the stepsize by the ratio = AcceptanceRate / AceptanceRatio
+        dStepSize *= ((double)iSuccessfulJumpsSinceAdapt / (double)iJumpsSinceAdapt) / dAcceptanceRatio;
         // Ensure the stepsize remains positive
         dStepSize = CMath::zeroFun(dStepSize, 1e-10);
         // reset counters

@@ -86,7 +86,6 @@ protected:
   double                     dCorrelationDiff;
   double                     dStepSize;
   double                     dAcceptanceRatio;
-  double                     dInverseAcceptanceRatio;
   string                     sProposalDistribution;
   int                        iDF;
   ublas::matrix<double>      mxOriginalCovariance;
