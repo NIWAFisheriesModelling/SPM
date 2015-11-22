@@ -1,0 +1,227 @@
+# SPM input file
+# Created 2015-11-19T10:49:10.435000
+# Simple config file to test comparison of biomass vs biomass by cell
+
+################################################
+
+# define model spatial dimensions and scale
+
+@model
+# Specify spatial extent
+nrows 1
+ncols 2
+layer base
+cell_length 1
+
+# GDU population config section
+categories GDU
+min_age 1
+max_age 5
+age_plus_group False
+age_size GDUage_size
+
+# Set up initialisation phase
+initialisation_phases init_phase_0 
+
+# Set up model run years
+initial_year 2001
+current_year 2006
+time_steps model_time_step_1 model_time_step_2 model_time_step_3
+
+
+
+################################################
+# define reports (==outputs)
+
+@report GDUmap
+type spatial_map
+
+@report GDUbiomass
+type derived_quantity
+derived_quantity GDUbiomass
+
+@report GDUbiomassInBPA
+type derived_quantity
+derived_quantity GDUbiomassInBPA
+
+@report GDUbiomassByCell
+type derived_quantity_by_cell
+derived_quantity_by_cell GDUbiomassByCell
+initialisation true
+
+################################################
+# define layers
+
+# define base layer
+@layer base
+type numeric
+data 1 1 
+
+# define fishing effort layers
+# define as a meta-layer, where each layer
+# from 2001-2006 is a numeric layer
+@layer annualFishingEffortLayer
+type numeric_meta
+default_layer base
+years             2001            2002            2003            2004            2005            2006            
+layers area_layer_2001 area_layer_2002 area_layer_2003 area_layer_2004 area_layer_2005 area_layer_2006 
+
+@layer area_layer_2001
+type numeric
+data 0.1 0 
+
+@layer area_layer_2002
+type numeric
+data 0.1 0 
+
+@layer area_layer_2003
+type numeric
+data 0.1 0 
+
+@layer area_layer_2004
+type numeric
+data 0.1 0 
+
+@layer area_layer_2005
+type numeric
+data 0.1 0 
+
+@layer area_layer_2006
+type numeric
+data 0.1 0 
+
+################################################
+# define processes
+@initialisation_phase init_phase_0
+years 20
+time_steps init_time_step_1 init_time_step_2 init_time_step_3
+lambda 1e-10
+lambda_years 5 10 15 20
+
+@time_step init_time_step_1
+processes GDUageing
+
+@time_step init_time_step_2
+processes GDUrecruitment
+
+@time_step init_time_step_3
+processes GDUmortality
+
+# define model time steps
+@time_step model_time_step_1
+processes GDUageing
+
+@time_step model_time_step_2
+processes GDUrecruitment
+
+@time_step model_time_step_3
+processes GDUmortality GDUfishingImpact
+
+# define constant recruitment
+@process GDUrecruitment
+type local_bh_recruitment
+categories GDU
+r0 1000 #number of individuals to add to cell per year - scaled by layer
+proportions 1.0
+age 1
+layer GDU
+steepness 0.9
+b0 init_phase_0
+ssb GDUbiomassByCell
+ssb_offset 1
+YCS_values 1 1 1 1 1 1 # Need as many as there years of model run, but offset to index SSB years
+standardise_YCS_years 2000-2005 # Range of years to standardise YCS over (if they are non-1)#
+
+
+#layer GDU
+@layer GDU
+type numeric
+data 0.5 0.5
+
+# define ageing
+@process GDUageing
+type ageing
+categories GDU
+
+# define natural mortality
+# as 1% remaining after max_age years
+@process GDUmortality
+type constant_exploitation_rate
+categories GDU
+selectivities useAllAgesEqually
+u 0.1
+u_max 0.99
+
+# define mortality from fishing impact (== additional mortality)
+# as some proportion of the area impacted
+# i.e mortality (for all ages) = area * u
+# where 'area impacted' can be cumulative or combined footprint
+# So if u = 0.25 and the 'area impacted' is footprint 
+# the all ages will experience a mortality equal to
+# 1/4 of the proportion of the cell area which was impacted
+# So if the whole cell is impacted then 25% would be removed from the number in every age class
+# and if x% is impacted then x/4% would be removed.
+@process GDUfishingImpact
+type constant_exploitation_rate
+categories GDU
+selectivities useAllAgesEqually
+u 10.0
+layer annualFishingEffortLayer
+
+
+# define age-size relationship
+@age_size GDUage_size
+type none
+#type von_bertalanffy
+#linf 1e2
+#k 1e-5
+#t0 0
+size_weight GDUsize_weight
+
+# define size-weight relationship
+@size_weight GDUsize_weight
+type none
+#type basic
+#a 3.14159
+#b 2
+
+@derived_quantity GDUbiomass
+type biomass
+time_step model_time_step_3 # Time step after which quantity is calculated
+initialisation_time_steps init_time_step_3 # Time step after which SSB is calculated - one required for each init phase
+categories GDU
+selectivities useAllAgesEqually
+
+@derived_quantity_by_cell GDUbiomassByCell
+type biomass
+time_step model_time_step_3 # Time step after which quantity is calculated
+initialisation_time_steps init_time_step_3 # Time step after which SSB is calculated - one required for each init phase
+categories GDU
+selectivities useAllAgesEqually
+
+@derived_quantity GDUbiomassInBPA
+type biomass
+time_step model_time_step_3 # Time step after which quantity is calculated
+initialisation_time_steps init_time_step_3 # Time step after which SSB is calculated - one required for each init phase
+categories GDU
+selectivities useAllAgesEqually
+layer bpa #using the bpa mask gives only biomass where mask = 1
+
+#layer bpa
+@layer bpa
+type numeric
+data 1 0 
+
+
+################################################
+# define selectivities
+
+# Set up constant selectivity
+@selectivity useAllAgesEqually
+type constant
+c 1
+
+
+
+################################################
+# End of SPM input file

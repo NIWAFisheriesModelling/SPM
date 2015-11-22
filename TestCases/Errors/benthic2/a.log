@@ -1,0 +1,66 @@
+SPM (Spatial Population Model)
+Call: ..\..\..\spm -r 
+Date: Fri Nov 20 10:19:28 2015
+v1.1-2015-11-19 (rev. 1272). Copyright (c) 2008-2015, NIWA
+User name: dunn
+Machine name: NIWA-34286 (Windows_NT, PID=8620)
+
+[GDUmap]
+report.type: spatial_map
+r1-c1 r1-c2 
+*end
+
+[GDUbiomass]
+report.type: derived_quantity
+derived_quantity.label: GDUbiomass
+initialisation.initialisation_phase[1]: 900 1710 2439 3095.1 3685.59 3685.59 3685.59 3685.59 3685.59 3685.59
+years: 2001 2002 2003 2004 2005 2006
+values: 3503.15 3377.68 3296.28 3248.77 3227.1 3224.92
+*end
+
+[GDUbiomassInBPA]
+report.type: derived_quantity
+derived_quantity.label: GDUbiomassInBPA
+initialisation.initialisation_phase[1]: 450 855 1219.5 1547.55 1842.8 1842.8 1842.8 1842.8 1842.8 1842.8
+years: 2001 2002 2003 2004 2005 2006
+values: 1660.36 1534.89 1453.49 1405.97 1384.31 1382.13
+*end
+
+[GDUbiomassByCell]
+report.type: derived_quantity_by_cell
+derived_quantity_by_cell.label: GDUbiomassByCell
+initialisation.initialisation_phase[1]: year=1
+450 450
+initialisation.initialisation_phase[1]: year=2
+855 855
+initialisation.initialisation_phase[1]: year=3
+1219.5 1219.5
+initialisation.initialisation_phase[1]: year=4
+1547.55 1547.55
+initialisation.initialisation_phase[1]: year=5
+1842.8 1842.8
+initialisation.initialisation_phase[1]: year=6
+1842.8 1842.8
+initialisation.initialisation_phase[1]: year=7
+1842.8 1842.8
+initialisation.initialisation_phase[1]: year=8
+1842.8 1842.8
+initialisation.initialisation_phase[1]: year=9
+1842.8 1842.8
+initialisation.initialisation_phase[1]: year=10
+1842.8 1842.8
+years: year=2001
+1660.36 1842.8
+years: year=2002
+1534.89 1842.8
+years: year=2003
+1453.49 1842.8
+years: year=2004
+1405.97 1842.8
+years: year=2005
+1384.31 1842.8
+years: year=2006
+1382.13 1842.8
+*end
+
+Completed
