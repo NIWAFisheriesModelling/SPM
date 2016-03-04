@@ -77,12 +77,7 @@ void CLogNormalWithQLikelihood::simulateObserved(const vector<string> &keys, vec
       // Generate random observation
       observed[i] = pRandom->getRandomLogNormal(expected[i], dCV);
     }
-
-    mTotals[keys[i]] += observed[i];
   }
-
-  for (int i = 0; i < (int)expected.size(); ++i)
-    observed[i] /= mTotals[keys[i]];
 }
 
 //**********************************************************************
