@@ -78,10 +78,12 @@ double CLogisticProducingSelectivity::calculateResult(int Age) {
       dRet = 1.0/(1.0+pow(19.0,(dA50-Age)/dAto95)) * dAlpha;
     } else {
       double lambda2 = 1.0/(1.0+pow(19.0,(dA50-(Age-1))/dAto95));
-      if (lambda2 > 0.9999)
-        dRet = dAlpha;
-      double lambda1 = 1.0/(1.0+pow(19.0,(dA50-Age)/dAto95));
-      dRet = (lambda1-lambda2)/(1-lambda2) * dAlpha;
+      if (lambda2 > 0.9999) {
+      	dRet = dAlpha;
+	  } else {
+	  	double lambda1 = 1.0/(1.0+pow(19.0,(dA50-Age)/dAto95));
+      	dRet = (lambda1-lambda2)/(1-lambda2) * dAlpha;
+	  }       
     }
     return dRet;
 
