@@ -25,6 +25,7 @@
 #include "../Population/CCategoryTransitionRateProcess.h"
 #include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantExploitationRateProcess.h"
+#include "../Population/CLayerVaryingExploitationRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CHollingMortalityRateProcess.h"
@@ -55,6 +56,8 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CConstantMortalityRateProcess();
   else if (type == PARAM_CONSTANT_EXPLOITATION_RATE)
     pProcess = new CConstantExploitationRateProcess();
+  else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE)
+    pProcess = new CLayerVaryingExploitationRateProcess();
   else if (type == PARAM_ANNUAL_MORTALITY_RATE)
     pProcess = new CAnnualMortalityRateProcess();
   else if (type == PARAM_EVENT_MORTALITY)

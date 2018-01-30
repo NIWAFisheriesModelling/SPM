@@ -190,6 +190,7 @@
 #define PARAM_COLUMN_INDEX                        "column_index"
 #define PARAM_CONSTANT                            "constant"
 #define PARAM_CONSTANT_EXPLOITATION_RATE          "constant_exploitation_rate"
+#define PARAM_LAYER_VARYING_EXPLOITATION_RATE     "layer_varying_exploitation_rate"
 #define PARAM_CONSTANT_MORTALITY_RATE             "constant_mortality_rate"
 #define PARAM_CONSTANT_RECRUITMENT                "constant_recruitment"
 #define PARAM_CONSUMPTION_RATE                    "consumption_rate"
