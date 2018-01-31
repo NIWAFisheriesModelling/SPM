@@ -327,9 +327,9 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \subsubsection[Constant mortality rate process]{\commandlabsubarg{process}{type}{constant\_mortality\_rate}}
 
 \defSub{m} {Define the constant mortality rate to be applied}
-\defType{Estimable}
+\defType{Estimable vector, of length \subcommand{categories}}
 \defDefault{No default}
-\defValue{A positive real number}
+\defValue{A vector of positive real numbers}
 
 \defSub{categories} {Define the categories that mortality is applied to}
 \defType{String vector}
@@ -349,9 +349,9 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \subsubsection[Constant exploitation rate process]{\commandlabsubarg{process}{type}{constant\_exploitation\_rate}}
 
 \defSub{u} {Define the constant exploitation rate to be applied}
-\defType{Estimable}
+\defType{Estimable vector, of length \subcommand{categories}}
 \defDefault{No default}
-\defValue{A positive real number}
+\defValue{A vector of positive real numbers}
 
 \defSub{u\_max} {Define the maximum constant exploitation rate that could be applied}
 \defType{Constant}
@@ -399,6 +399,38 @@ Each type of process requires a set of subcommands and arguments specific to tha
 \defType{String}
 \defDefault{No layer}
 \defValue{A valid numeric layer as defined by \command{layer}. Note that the layer values must be non-negative}
+
+\subsubsection[Layer varying exploitation rate process]{\commandlabsubarg{process}{type}{layer\_varying\_exploitation\_rate}}
+
+\defSub{u} {Define the constant exploitation rate to be applied}
+\defType{Estimable vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{A vector of positive real numbers}
+
+\defSub{u\_max} {Define the maximum constant exploitation rate that could be applied}
+\defType{Constant}
+\defDefault{$0.99$}
+\defValue{A positive real number between $0.0$ And $1.0$}
+
+\defSub{categories} {Define the categories that mortality is applied to}
+\defType{String vector}
+\defDefault{No default}
+\defValue{Valid categories from \commandsub{model}{categories}}
+
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defType{String vector, of length \subcommand{categories}}
+\defDefault{No default}
+\defValue{Valid selectivity labels defined by \command{selectivity}}
+
+\defSub{years} {Define the years when the exploitation rates are applied}
+\defType{Integer vector or integer range}
+\defDefault{No default}
+\defValue{Valid model years}
+
+\defSub{layers} {Names of the layers}
+\defType{String vector, of length \subcommand{years} once expanded}
+\defDefault{No layer}
+\defValue{A vector of valid layers as defined by \command{layer}. Note that the layer values must be non-negative. Note that the result of the calculation will be set to 0 if less than zero, and set to $u_{max}$ if greater than $u_{max}$}
 
 \subsubsection[Event mortality process]{\commandlabsubarg{process}{type}{event\_mortality}}
 

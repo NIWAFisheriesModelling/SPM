@@ -619,9 +619,9 @@ Note that ageing is \emph{not} applied by \SPM\ by default. As with other proces
 
 \subsubsection{\I{Mortality}\label{sec:mortality}}
 
-Six types of mortality processes are permissible in \SPM, constant rate, annually varying rate, event, biomass-event, a density-dependent relationship based on the Holling \citep{Holling1959} Type II or Type III function, and a density-dependent relationship based on prey-suitability process. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
+The following types of mortality processes are permissible in \SPM, constant rate, constant exploitation rate, annually varying rate, layer varying exploitation rate, event, biomass-event, a density-dependent relationship based on the Holling \citep{Holling1959} Type II or Type III function, and a density-dependent relationship based on prey-suitability process. These processes remove individuals from the partition, either as a rate (for constant or annually varying mortality processes), as an exploitation rate, as a total number (abundance), or as a biomass of individuals. \SPM\ does not implement the Baranov catch equation or any other process where both natural and event mortality are applied simultaneously. To approximate concurrent natural and event mortality, the population processes must be defined to remove some natural mortality (e.g., as a constant or annually varying), then some event mortality (e.g., fishing) in sequence. It is up to the user to specify how this happens.
 
-The constant rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived quantity and therefore calculated each year, mortality can change every year in every cell.
+The constant rate, constant exploitation rate, annually varying rate, event, biomass-event mortalities can depend on a layer. In these cases, the value of instantaneous mortality applied to the population state within each cell is the product of the layer value, a selectivity, and the mortality rate. If the layer is static, mortality is effectively constant each year but can be different in each cell; if the layer is a derived quantity and therefore calculated each year, mortality can change every year in every cell. The exploitation rate with an annually varying layer applies user-defined layers for each year specified, then calculated mortality as in the event mortalities.
 
 \subsubsection*{Constant mortality rate}
 
@@ -692,6 +692,22 @@ selectivities One One
 years 1996 1997 1998 1999 2000
 M 0.20 0.15 0.22 0.25 0.21
 \end{verbatim}}}
+
+\subsubsection*{Layer varying exploitation rate}
+
+Mortality for the layer varying exploitation rate\index{Layer varying exploitation rate} is similar to the constant exploitation rate, except that the layer applied each year is a separate parameter, and is applied equally to all of the specified categories. For example, if annual exploitation rates were applied to males and females between 1996 and 2000, five layer names and the years that these apply to would need to be provided, e.g., 
+{\small{\begin{verbatim}
+@process AnnualExploitation
+type layer_varying_exploitation_rate
+categories male female
+selectivities One One
+years 1996 1997 1998 1999 2000
+layers impact1996 impact1997 impact1998 impact2000
+U 0.20 0.15
+U_max 0.99
+\end{verbatim}}}
+
+Note that the exploitation rate with annually varying layers process maintains the exploitation rate multiplier $U$ identical between years. This process can be used to apply an annually-varying trawling mortality for example.
 
 \subsubsection*{Event and biomass-event mortality}
 
