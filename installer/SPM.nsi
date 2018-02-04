@@ -125,10 +125,10 @@ ShowUnInstDetails show
 
 Section "Install program files" SEC01
 SectionIn RO
-  LogSet On
-  LogText "${PRODUCT_NAME} v${PRODUCT_VERSION} install log"
-  Logtext "==============================================\n"
-  LogText "Install path $INSTDIR"
+  ;LogSet On
+  ;LogText "${PRODUCT_NAME} v${PRODUCT_VERSION} install log"
+  ;Logtext "==============================================\n"
+  ;LogText "Install path $INSTDIR"
   SetOutPath "$INSTDIR"
   SetOverwrite ifnewer
   File "..\\spm.exe"
