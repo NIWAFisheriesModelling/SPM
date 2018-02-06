@@ -72,6 +72,13 @@
 \defSub{categories} {Define the categories that mortality is applied to}
 \defSub{selectivities} {Define the selectivities applied to each category}
 \defSub{layer} {Name of the multiplicative layer to be applied to $M$}
+\par\textbf{\commandlabsubarg{process}{type}{layer\_varying\_exploitation\_rate}}\par
+\defSub{u} {Define the constant exploitation rate to be applied}
+\defSub{u\_max} {Define the maximum constant exploitation rate that could be applied}
+\defSub{categories} {Define the categories that mortality is applied to}
+\defSub{selectivities} {Define the selectivities applied to each category}
+\defSub{years} {Define the years when the exploitation rates are applied}
+\defSub{layers} {Names of the layers}
 \par\textbf{\commandlabsubarg{process}{type}{event\_mortality}}\par
 \defSub{categories} {Define the categories that the event mortality is applied to}
 \defSub{years} {Define the years where the mortality even is applied}
@@ -413,7 +420,6 @@
 \defSub{upper\_bound} {Upper bound on parameter}
 \par\defComArg{estimate}{parameter\_name}{Estimate an estimable parameter}\par\par
 \defSub{same}{Names of the other parameters which are constrained to have the same value}
-\defSub{estimation\_phase}{Phase at which this parameter should be estimated, in point estimation}
 \defSub{lower\_bound}{Lower bounds on this parameter}
 \defSub{upper\_bound}{Upper bound on this parameter}
 \defSub{mcmc\_fixed}{Should this parameter be fixed during MCMC?}

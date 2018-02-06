@@ -23,6 +23,7 @@ In SPM, but not in manual
   enabled_estimates
   estimable
   estimates
+  estimation_phase
   fixed
   flagged_penalties
   function

@@ -1,4 +1,4 @@
-; TextPad syntax definitions for SPM version 1.1-2015-11-19 (rev. 1275)
+; TextPad syntax definitions for SPM version 1.1-2018-02-04 (rev. 1286)
 ; ===================================================================================
 ;
 ;
@@ -95,7 +95,6 @@ difference_scale
 e
 electivities
 error_value
-estimation_phase
 evaluations
 file_name
 from
@@ -277,6 +276,7 @@ inverse_logistic
 knife_edge
 layer
 layer_derived_view
+layer_varying_exploitation_rate
 local_bh_recruitment
 logistic
 logistic_producing

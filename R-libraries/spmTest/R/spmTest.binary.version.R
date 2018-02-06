@@ -1,4 +1,4 @@
 "spmTest.binary.version"<-
 function() {
-return("1.1-2015-11-19")
+return("1.1-2018-02-04")
 }
