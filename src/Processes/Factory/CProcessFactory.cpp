@@ -25,10 +25,11 @@
 #include "../Population/CCategoryTransitionRateProcess.h"
 #include "../Population/CConstantMortalityRateProcess.h"
 #include "../Population/CConstantExploitationRateProcess.h"
-#include "../Population/CLayerVaryingExploitationRateProcess.h"
 #include "../Population/CConstantRecruitmentProcess.h"
 #include "../Population/CEventMortalityProcess.h"
 #include "../Population/CHollingMortalityRateProcess.h"
+#include "../Population/CLayerVaryingExploitationRateProcess.h"
+#include "../Population/CLayerVaryingExploitationRateByeventProcess.h"
 #include "../Population/CLocalBHRecruitmentProcess.h"
 #include "../Population/CPreySuitabilityPredationProcess.h"
 #include "../Population/CProportionalRecruitmentProcess.h"
@@ -56,10 +57,12 @@ CProcess* CProcessFactory::buildProcess(string type, bool registerWithManager) {
     pProcess = new CConstantMortalityRateProcess();
   else if (type == PARAM_CONSTANT_EXPLOITATION_RATE)
     pProcess = new CConstantExploitationRateProcess();
+   else if (type == PARAM_ANNUAL_MORTALITY_RATE)
+    pProcess = new CAnnualMortalityRateProcess();
   else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE)
     pProcess = new CLayerVaryingExploitationRateProcess();
-  else if (type == PARAM_ANNUAL_MORTALITY_RATE)
-    pProcess = new CAnnualMortalityRateProcess();
+ else if (type == PARAM_LAYER_VARYING_EXPLOITATION_RATE_BYEVENT)
+    pProcess = new CLayerVaryingExploitationRateByeventProcess();
   else if (type == PARAM_EVENT_MORTALITY)
     pProcess = new CEventMortalityProcess();
   else if (type == PARAM_BIOMASS_EVENT_MORTALITY)

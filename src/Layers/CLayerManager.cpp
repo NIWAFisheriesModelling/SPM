@@ -11,6 +11,7 @@
 #include "CLayerManager.h"
 #include "CLayer.h"
 #include "Numeric/Base/CNumericLayer.h"
+#include "Numeric/Base/CIntLayer.h"
 #include "String/Base/CCategoricalLayer.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"
@@ -134,6 +135,48 @@ void CLayerManager::fillVector(vector<CNumericLayer*> &list, vector<string> &nam
 
   foreach(string Name, names) {
     list.push_back(getNumericLayer(Name));
+  }
+}
+
+
+//**********************************************************************
+// CIntLayer* CLayerManager::getIntLayer(string Label)
+// Return our Integer Layer
+//**********************************************************************
+CIntLayer* CLayerManager::getIntLayer(string Label) {
+  try {
+    // Loop Through Layers
+    foreach(CLayer* Layer, vLayerList) {
+       if (Layer->getLabel() == Label) {
+        // Cast and Check if is Integer
+        CIntLayer *pPtr = dynamic_cast<CIntLayer*>(Layer);
+        if (pPtr == 0)
+          throw string(ERROR_INVALID_LAYER_TYPE_INT + Label);
+
+        // Otherise, Cool as
+        return pPtr;
+      }
+    }
+
+    CError::errorUnknown(PARAM_LAYER, Label);
+
+  } catch(string &Ex) {
+    Ex = "CLayerManager.getIntLayer()->" + Ex;
+    throw Ex;
+  }
+
+  return 0;
+}
+
+//**********************************************************************
+// void CLayerManager::fillVector(vector<CIntLayer*> &list, vector<string> &names)
+// Fill Our Vector Of Labels
+//**********************************************************************
+void CLayerManager::fillVector(vector<CIntLayer*> &list, vector<string> &names) {
+  list.clear();
+
+  foreach(string Name, names) {
+    list.push_back(getIntLayer(Name));
   }
 }
 

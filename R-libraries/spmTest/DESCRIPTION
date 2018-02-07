@@ -1,7 +1,7 @@
 Package: spmTest
 Title: SPM functions for testing SPM program equations and functions
 Version: 1.1
-Date: 2018-02-04
+Date: 2018-02-06
 Author: A. Dunn
 Description: A set of R functions for assisting with the testing of SPM.
 Depends: spm

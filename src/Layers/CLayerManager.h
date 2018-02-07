@@ -34,6 +34,7 @@
 // Classes
 class CLayer;
 class CNumericLayer;
+class CIntLayer;
 class CCategoricalLayer;
 
 //**********************************************************************
@@ -50,9 +51,11 @@ public:
   CLayer*                   getLayer(int index);
   std::string               getLayerType(string Label);
   CNumericLayer*            getNumericLayer(string Label);
+  CIntLayer*                getIntLayer(string Label);
   CCategoricalLayer*        getCategoricalLayer(string Label);
   int                       getLayerCount() { return (int)vLayerList.size(); }
   void                      fillVector(vector<CNumericLayer*> &list, vector<string> &names);
+  void                      fillVector(vector<CIntLayer*> &list, vector<string> &names);
   void                      validate();
   void                      build();
 

@@ -24,6 +24,7 @@ In SPM, but not in manual
   estimable
   estimates
   estimation_phase
+  event_layers
   fixed
   flagged_penalties
   function
@@ -34,6 +35,7 @@ In SPM, but not in manual
   label
   lambda_hat
   layer_height
+  layer_varying_exploitation_rate_by_event
   layer_width
   matrix
   mean
