@@ -11,7 +11,7 @@
 #include "CLayerManager.h"
 #include "CLayer.h"
 #include "Numeric/Base/CNumericLayer.h"
-#include "Numeric/Base/CIntLayer.h"
+#include "Integer/Base/CIntLayer.h"
 #include "String/Base/CCategoricalLayer.h"
 #include "../Helpers/CError.h"
 #include "../Helpers/ForEach.h"

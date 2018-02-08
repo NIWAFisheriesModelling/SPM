@@ -27,7 +27,7 @@ CIntLayer::CIntLayer() {
 
   // Default Variables
   sType = "";
-  pGrid             = 0;
+  pGrid = 0;
 }
 
 //**********************************************************************

@@ -24,6 +24,7 @@
 #include "../Numeric/CDoubleLayer.h"
 #include "../Numeric/CLatLongDistanceLayer.h"
 #include "../Numeric/CNumericMetaLayer.h"
+#include "../Integer/CNotNegIntegerLayer.h"
 #include "../String/CStringLayer.h"
 #include "../String/CStringMetaLayer.h"
 
@@ -55,6 +56,8 @@ CLayer* CLayerFactory::buildLayer(string type, bool registerWithManager) {
     pLayer = new CDistanceLayer();
   else if (type == PARAM_DOUBLE)
     pLayer = new CDoubleLayer();
+  else if (type == PARAM_NOT_NEG_INT)
+    pLayer = new CNotNegIntegerLayer();
   else if (type == PARAM_LAT_LONG_DISTANCE)
     pLayer = new CLatLongDistanceLayer();
   else if (type == PARAM_META_NUMERIC)
