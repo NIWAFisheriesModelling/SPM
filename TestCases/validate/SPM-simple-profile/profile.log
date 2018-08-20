@@ -30,16 +30,16 @@ total_score: 3422.89
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 7.51666e-006
+value: 7.51666e-06
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.03128e+006
+value: 2.03128e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -87,16 +87,16 @@ total_score: 2860.64
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 8.34424e-006
+value: 8.34424e-06
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.07882e+006
+value: 2.07882e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -144,16 +144,16 @@ total_score: 2453.41
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 9.37795e-006
+value: 9.37795e-06
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.09533e+006
+value: 2.09533e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -201,16 +201,16 @@ total_score: 2198.27
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 1.06441e-005
+value: 1.06441e-05
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.08027e+006
+value: 2.08027e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -258,16 +258,16 @@ total_score: 2049.66
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 9.32233e-006
+value: 9.32233e-06
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.49688e+006
+value: 2.49688e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -315,16 +315,16 @@ total_score: 1995.21
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 1.07415e-005
+value: 1.07415e-05
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.39969e+006
+value: 2.39969e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -372,16 +372,16 @@ total_score: 2016.36
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 1.27525e-005
+value: 1.27525e-05
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 2.22299e+006
+value: 2.22299e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -399,46 +399,46 @@ value: 5.56065
 
 [Objective_Score]
 report.type: objective_function
-obs->caa-year-1998: 189.175
-obs->caa-year-1999: 377.222
-obs->caa-year-2000: 258.331
-obs->caa-year-2001: 250.124
-obs->caa-year-2002: 140.203
-obs->caa-year-2003: 203.259
-obs->caa-year-2004: 128.457
+obs->caa-year-1998: 189.18
+obs->caa-year-1999: 377.228
+obs->caa-year-2000: 258.33
+obs->caa-year-2001: 250.127
+obs->caa-year-2002: 140.201
+obs->caa-year-2003: 203.258
+obs->caa-year-2004: 128.456
 obs->caa-year-2005: 129.132
-obs->caa-year-2006: 205.434
-obs->caa-year-2007: 188.06
-obs->cpue-1998: 11.8878
-obs->cpue-1999: -1.51134
-obs->cpue-2000: -1.5521
-obs->cpue-2001: 3.16142
-obs->cpue-2002: 2.60136
-obs->cpue-2003: -1.13786
-obs->cpue-2004: 0.680117
-obs->cpue-2005: -0.527085
-obs->cpue-2006: 4.46716
-obs->cpue-2007: 1.29858
+obs->caa-year-2006: 205.43
+obs->caa-year-2007: 188.058
+obs->cpue-1998: 11.8903
+obs->cpue-1999: -1.51112
+obs->cpue-2000: -1.55194
+obs->cpue-2001: 3.16276
+obs->cpue-2002: 2.60017
+obs->cpue-2003: -1.13823
+obs->cpue-2004: 0.68084
+obs->cpue-2005: -0.527492
+obs->cpue-2006: 4.4664
+obs->cpue-2007: 1.2982
 prior->catchability[cpueq].q: 0
-prior->process[recruitment].r0: 13.9586
+prior->process[recruitment].r0: 13.9583
 prior->selectivity[fishingsel].a50: 0
 prior->selectivity[fishingsel].ato95: 0
-total_score: 2102.72
+total_score: 2102.73
 *end
 
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 3.04567e-005
+value: 3.04694e-05
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 1.15384e+006
+value: 1.15347e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -450,18 +450,18 @@ parameter: selectivity[fishingsel].ato95
 lower_bound: 0.01
 upper_bound: 50
 prior: uniform
-value: 6.35552
+value: 6.35538
 
 *end
 
 [Objective_Score]
 report.type: objective_function
 obs->caa-year-1998: 199.295
-obs->caa-year-1999: 416.397
+obs->caa-year-1999: 416.398
 obs->caa-year-2000: 294.535
 obs->caa-year-2001: 268.874
 obs->caa-year-2002: 145.827
-obs->caa-year-2003: 189.664
+obs->caa-year-2003: 189.663
 obs->caa-year-2004: 129.135
 obs->caa-year-2005: 126.643
 obs->caa-year-2006: 219.041
@@ -473,9 +473,9 @@ obs->cpue-2001: 3.30753
 obs->cpue-2002: 2.50875
 obs->cpue-2003: -1.15146
 obs->cpue-2004: 0.653655
-obs->cpue-2005: -0.450936
+obs->cpue-2005: -0.450937
 obs->cpue-2006: 4.77455
-obs->cpue-2007: 1.60731
+obs->cpue-2007: 1.6073
 prior->catchability[cpueq].q: 0
 prior->process[recruitment].r0: 13.8182
 prior->selectivity[fishingsel].a50: 0
@@ -486,16 +486,16 @@ total_score: 2217.03
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 3.90483e-005
+value: 3.90483e-05
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 1.00273e+006
+value: 1.00273e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -528,8 +528,8 @@ obs->cpue-1999: -1.53566
 obs->cpue-2000: -1.49236
 obs->cpue-2001: 0.85437
 obs->cpue-2002: 5.4806
-obs->cpue-2003: 0.0700062
-obs->cpue-2004: -0.778892
+obs->cpue-2003: 0.0700063
+obs->cpue-2004: -0.778893
 obs->cpue-2005: 1.0557
 obs->cpue-2006: 7.67711
 obs->cpue-2007: 3.58608
@@ -543,16 +543,16 @@ total_score: 2365.81
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
-value: 2.65515e-005
+value: 2.65515e-05
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
-value: 1.32892e+006
+value: 1.32892e+06
 
 parameter: selectivity[fishingsel].a50
 lower_bound: 1
@@ -587,9 +587,9 @@ obs->cpue-2001: 4.51569
 obs->cpue-2002: 1.81025
 obs->cpue-2003: -1.25941
 obs->cpue-2004: 0.479896
-obs->cpue-2005: 0.215981
+obs->cpue-2005: 0.215982
 obs->cpue-2006: 7.45241
-obs->cpue-2007: 4.6326
+obs->cpue-2007: 4.63261
 prior->catchability[cpueq].q: 0
 prior->process[recruitment].r0: 13.1252
 prior->selectivity[fishingsel].a50: 0
@@ -600,14 +600,14 @@ total_score: 2475.8
 [estimate-summary]
 report.type: estimate_summary
 parameter: catchability[cpueq].q
-lower_bound: 1e-010
+lower_bound: 1e-10
 upper_bound: 0.1
 prior: uniform
 value: 0.00010456
 
 parameter: process[recruitment].r0
 lower_bound: 100000
-upper_bound: 1e+010
+upper_bound: 1e+10
 prior: uniform_log
 value: 501400
 

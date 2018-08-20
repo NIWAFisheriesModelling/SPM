@@ -43,7 +43,7 @@ BOOST_FIXTURE_TEST_CASE( UniformEstimate, C1x1_Empty_Fixture) {
 
   CEstimate *estimate = CEstimateManager::Instance()->getEstimate("selectivity[FishingSel].a50");
   BOOST_ASSERT(estimate != 0);
-  BOOST_CHECK_CLOSE(estimate->getValue(), 8.9824772726060829, 1e-9);
+  BOOST_CHECK_CLOSE(estimate->getValue(), 8.9824772726060829, 1e-5);
 
   // Check results
   estimate->setValue(1.0);
