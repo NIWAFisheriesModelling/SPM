@@ -41,6 +41,7 @@ In SPM, but not in manual
   mean
   multinomial
   natural
+  non_negative_integer
   normal_log
   objective
   parabola
