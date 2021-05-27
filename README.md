@@ -1,5 +1,6 @@
 SPM
 ===
+[![CodeFactor](https://www.codefactor.io/repository/github/niwafisheriesmodelling/spm/badge)](https://www.codefactor.io/repository/github/niwafisheriesmodelling/spm)
 
 Spatial Population Model (SPM)
 
