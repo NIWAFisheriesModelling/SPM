@@ -1,7 +1,5 @@
 SPM
 ===
-[![CodeFactor](https://www.codefactor.io/repository/github/niwafisheriesmodelling/spm/badge)](https://www.codefactor.io/repository/github/niwafisheriesmodelling/spm)
-
 Spatial Population Model (SPM)
 
 SPM is an advanced software package developed by NIWA to help with fish stock assessments. The software is written in C++ and is available under an open source licence. SPM was designed to allow populations with a complex spatially structure to be easily modelled. It implements an age-structured population model with unlimited user-defined categories (for example, sex, maturity, species, or area). It can be used for a single stock for a single fishery, or for multiple stocks, areas, and/or fishing methods. The user can choose the sequence of events in a model year. The observational data that can be used include catch-at-age or catch-at-size data from commercial fishing, survey and other biomass indices, survey catch-at-age or catch-at-size data, and tag-release and tag-recapture data.
